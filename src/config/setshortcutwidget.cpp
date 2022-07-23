@@ -9,7 +9,7 @@
 #include <QLayout>
 #include <QPixmap>
 
-SetShortcutDialog::SetShortcutDialog(QDialog* parent, QString shortcutName)
+SetShortcutDialog::SetShortcutDialog(QDialog* parent, const QString &shortcutName)
   : QDialog(parent)
 {
     setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);

@@ -29,7 +29,7 @@ public slots:
 
 protected:
     void copyParams(const AbstractPathTool* from, AbstractPathTool* to);
-    void addPoint(const QPoint& point);
+    void addPoint(QPoint point);
 
     // class members
     QRect m_pathArea;

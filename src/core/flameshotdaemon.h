@@ -20,9 +20,10 @@ class FlameshotDaemon : public QObject
 public:
     static void start();
     static FlameshotDaemon* instance();
-    static void createPin(QPixmap capture, QRect geometry);
-    static void copyToClipboard(QPixmap capture);
-    static void copyToClipboard(QString text, QString notification = "");
+    static void createPin(const QPixmap& capture, QRect geometry);
+    static void copyToClipboard(const QPixmap& capture);
+    static void copyToClipboard(const QString& text,
+                                const QString& notification = "");
     static bool isThisInstanceHostingWidgets();
 
     void sendTrayNotification(
@@ -42,12 +43,13 @@ signals:
 private:
     FlameshotDaemon();
     void quitIfIdle();
-    void attachPin(QPixmap pixmap, QRect geometry);
-    void attachScreenshotToClipboard(QPixmap pixmap);
+    void attachPin(const QPixmap& pixmap, QRect geometry);
+    void attachScreenshotToClipboard(const QPixmap& pixmap);
 
     void attachPin(const QByteArray& data);
     void attachScreenshotToClipboard(const QByteArray& screenshot);
-    void attachTextToClipboard(QString text, QString notification);
+    void attachTextToClipboard(const QString& text,
+                               const QString& notification);
 
     void initTrayIcon();
     void enableTrayIcon(bool enable);
@@ -56,7 +58,7 @@ private slots:
     void handleReplyCheckUpdates(QNetworkReply* reply);
 
 private:
-    static QDBusMessage createMethodCall(QString method);
+    static QDBusMessage createMethodCall(const QString& method);
     static void checkDBusConnection(const QDBusConnection& connection);
     static void call(const QDBusMessage& m);
 

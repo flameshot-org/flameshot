@@ -26,27 +26,27 @@ public:
     bool buttonsAreInside() const;
     size_t size() const;
 
-    void setButtons(const QVector<CaptureToolButton*>);
-    bool contains(const QPoint& p) const;
+    void setButtons(const QVector<CaptureToolButton*>&);
+    bool contains(QPoint p) const;
     void updateScreenRegions(const QVector<QRect>& rects);
-    void updateScreenRegions(const QRect& rect);
+    void updateScreenRegions(QRect rect);
 
 public slots:
-    void updatePosition(const QRect& selection);
+    void updatePosition(QRect selection);
     void hide();
     void show();
 
 private:
-    QVector<QPoint> horizontalPoints(const QPoint& center,
+    QVector<QPoint> horizontalPoints(QPoint center,
                                      const int elements,
                                      const bool leftToRight) const;
-    QVector<QPoint> verticalPoints(const QPoint& center,
+    QVector<QPoint> verticalPoints(QPoint center,
                                    const int elements,
                                    const bool upToDown) const;
 
     int calculateShift(int elements, bool reverse) const;
 
-    QRect intersectWithAreas(const QRect& rect);
+    QRect intersectWithAreas(QRect rect);
 
     QVector<CaptureToolButton*> m_vectorButtons;
 

@@ -104,7 +104,7 @@ void AbstractPathTool::onSizeChanged(int size)
     m_thickness = size;
 }
 
-void AbstractPathTool::addPoint(const QPoint& point)
+void AbstractPathTool::addPoint(QPoint point)
 {
     if (m_pathArea.left() > point.x()) {
         m_pathArea.setLeft(point.x());

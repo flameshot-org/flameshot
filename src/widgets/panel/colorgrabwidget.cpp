@@ -156,7 +156,7 @@ QPoint ColorGrabWidget::cursorPos() const
 }
 
 /// @note The point is in screen coordinates.
-QColor ColorGrabWidget::getColorAtPoint(const QPoint& p) const
+QColor ColorGrabWidget::getColorAtPoint(QPoint p) const
 {
     if (m_extraZoomActive && geometry().contains(p)) {
         QPoint point = mapFromGlobal(p);

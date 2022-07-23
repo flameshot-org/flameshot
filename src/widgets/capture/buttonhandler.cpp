@@ -66,7 +66,7 @@ size_t ButtonHandler::size() const
 // selection area. Ignores the sides blocked by the end of the screen.
 // When the selection is too small it works on a virtual selection with
 // the original in the center.
-void ButtonHandler::updatePosition(const QRect& selection)
+void ButtonHandler::updatePosition(QRect selection)
 {
     resetRegionTrack();
     const int vecLength = m_vectorButtons.size();
@@ -184,7 +184,7 @@ int ButtonHandler::calculateShift(int elements, bool reverse) const
 // horizontalPoints is an auxiliary method for the button position computation.
 // starts from a known center and keeps adding elements horizontally
 // and returns the computed positions.
-QVector<QPoint> ButtonHandler::horizontalPoints(const QPoint& center,
+QVector<QPoint> ButtonHandler::horizontalPoints(QPoint center,
                                                 const int elements,
                                                 const bool leftToRight) const
 {
@@ -205,7 +205,7 @@ QVector<QPoint> ButtonHandler::horizontalPoints(const QPoint& center,
 // verticalPoints is an auxiliary method for the button position computation.
 // starts from a known center and keeps adding elements vertically
 // and returns the computed positions.
-QVector<QPoint> ButtonHandler::verticalPoints(const QPoint& center,
+QVector<QPoint> ButtonHandler::verticalPoints(QPoint center,
                                               const int elements,
                                               const bool upToDown) const
 {
@@ -223,7 +223,7 @@ QVector<QPoint> ButtonHandler::verticalPoints(const QPoint& center,
     return res;
 }
 
-QRect ButtonHandler::intersectWithAreas(const QRect& rect)
+QRect ButtonHandler::intersectWithAreas(QRect rect)
 {
     QRect res;
     for (const QRect& r : m_screenRegions) {
@@ -353,7 +353,7 @@ void ButtonHandler::adjustHorizontalCenter(QPoint& center)
 }
 
 // setButtons redefines the buttons of the button handler
-void ButtonHandler::setButtons(const QVector<CaptureToolButton*> v)
+void ButtonHandler::setButtons(const QVector<CaptureToolButton*>& v)
 {
     if (v.isEmpty()) {
         return;
@@ -367,7 +367,7 @@ void ButtonHandler::setButtons(const QVector<CaptureToolButton*> v)
     m_buttonExtendedSize = m_buttonBaseSize + m_separator;
 }
 
-bool ButtonHandler::contains(const QPoint& p) const
+bool ButtonHandler::contains(QPoint p) const
 {
     if (m_vectorButtons.isEmpty()) {
         return false;
@@ -388,7 +388,7 @@ void ButtonHandler::updateScreenRegions(const QVector<QRect>& rects)
     m_screenRegions = rects;
 }
 
-void ButtonHandler::updateScreenRegions(const QRect& rect)
+void ButtonHandler::updateScreenRegions(QRect rect)
 {
     m_screenRegions = { rect };
 }

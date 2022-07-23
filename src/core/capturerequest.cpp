@@ -78,13 +78,13 @@ void CaptureRequest::addSaveTask(const QString& path)
     m_path = path;
 }
 
-void CaptureRequest::addPinTask(const QRect& pinWindowGeometry)
+void CaptureRequest::addPinTask(QRect pinWindowGeometry)
 {
     m_tasks |= PIN;
     m_pinWindowGeometry = pinWindowGeometry;
 }
 
-void CaptureRequest::setInitialSelection(const QRect& selection)
+void CaptureRequest::setInitialSelection(QRect selection)
 {
     m_initialSelection = selection;
 }

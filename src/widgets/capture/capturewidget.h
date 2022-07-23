@@ -105,9 +105,9 @@ private:
     void pushObjectsStateToUndoStack();
     void releaseActiveTool();
     void uncheckActiveTool();
-    int selectToolItemAtPos(const QPoint& pos);
-    void showColorPicker(const QPoint& pos);
-    bool startDrawObjectTool(const QPoint& pos);
+    int selectToolItemAtPos(QPoint pos);
+    void showColorPicker(QPoint pos);
+    bool startDrawObjectTool(QPoint pos);
     QPointer<CaptureTool> activeToolObject();
     void initContext(bool fullscreen, const CaptureRequest& req);
     void initPanel();
@@ -131,8 +131,8 @@ private:
     void setToolSize(int size);
 
     QRect extendedSelection() const;
-    QRect extendedRect(const QRect& r) const;
-    QRect paddedUpdateRect(const QRect& r) const;
+    QRect extendedRect(QRect r) const;
+    QRect paddedUpdateRect(QRect r) const;
     void drawErrorMessage(const QString& msg, QPainter* painter);
     void drawInactiveRegion(QPainter* painter);
     void drawToolsData(bool drawSelection = true);

@@ -16,7 +16,7 @@ class PinWidget : public QWidget
     Q_OBJECT
 public:
     explicit PinWidget(const QPixmap& pixmap,
-                       const QRect& geometry,
+                       QRect geometry,
                        QWidget* parent = nullptr);
 
 protected:
@@ -53,7 +53,7 @@ private:
     bool m_sizeChanged{ false };
 
 private slots:
-    void showContextMenu(const QPoint& pos);
+    void showContextMenu(QPoint pos);
     void copyToClipboard();
     void saveToFile();
 };

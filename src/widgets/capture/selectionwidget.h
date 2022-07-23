@@ -27,14 +27,14 @@ public:
 
     explicit SelectionWidget(QColor c, QWidget* parent = nullptr);
 
-    SideType getMouseSide(const QPoint& mousePos) const;
+    SideType getMouseSide(QPoint mousePos) const;
     QVector<QRect> handlerAreas();
 
     void setIgnoreMouse(bool ignore);
     void setIdleCentralCursor(const QCursor& cursor);
 
-    void setGeometryAnimated(const QRect& r);
-    void setGeometry(const QRect& r);
+    void setGeometryAnimated(QRect r);
+    void setGeometry(QRect r);
     QRect geometry() const;
     QRect fullGeometry() const;
 
@@ -75,7 +75,7 @@ public slots:
 private:
     void updateAreas();
     void updateCursor();
-    void setGeometryByKeyboard(const QRect& r);
+    void setGeometryByKeyboard(QRect r);
 
     QPropertyAnimation* m_animation;
 

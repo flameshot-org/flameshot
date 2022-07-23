@@ -9,6 +9,6 @@ class QRect;
 
 QString getCachePath();
 QRect getLastRegion();
-void setLastRegion(QRect const& newRegion);
+void setLastRegion(QRect newRegion);
 
 #endif // FLAMESHOT_CACHEUTILS_H

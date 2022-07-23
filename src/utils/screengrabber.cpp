@@ -144,8 +144,8 @@ QRect ScreenGrabber::screenGeometry(QScreen* screen)
     if (m_info.waylandDetected()) {
         QPoint topLeft(0, 0);
 #ifdef Q_OS_WIN
-        for (QScreen* const screen : QGuiApplication::screens()) {
-            QPoint topLeftScreen = screen->geometry().topLeft();
+        for (QScreen* const winscreen : QGuiApplication::screens()) {
+            QPoint topLeftScreen = winscreen->geometry().topLeft();
             if (topLeft.x() > topLeftScreen.x() ||
                 topLeft.y() > topLeftScreen.y()) {
                 topLeft = topLeftScreen;

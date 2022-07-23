@@ -53,27 +53,27 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
                              bool fullScreen,
                              QWidget* parent)
   : QWidget(parent)
+  , m_toolSizeByKeyboard(0)
   , m_mouseIsClicked(false)
   , m_captureDone(false)
   , m_previewEnabled(true)
   , m_adjustmentButtonPressed(false)
   , m_configError(false)
   , m_configErrorResolved(false)
+  , m_updateNotificationWidget(nullptr)
+  , m_lastMouseWheel(0)
   , m_activeButton(nullptr)
   , m_activeTool(nullptr)
-  , m_toolWidget(nullptr)
-  , m_colorPicker(nullptr)
-  , m_lastMouseWheel(0)
-  , m_updateNotificationWidget(nullptr)
   , m_activeToolIsMoved(false)
+  , m_toolWidget(nullptr)
   , m_panel(nullptr)
   , m_sidePanel(nullptr)
+  , m_colorPicker(nullptr)
   , m_selection(nullptr)
   , m_magnifier(nullptr)
+  , m_xywhDisplay(false)
   , m_existingObjectIsChanged(false)
   , m_startMove(false)
-  , m_toolSizeByKeyboard(0)
-  , m_xywhDisplay(false)
 
 {
     m_undoStack.setUndoLimit(ConfigHandler().undoLimit());
@@ -90,7 +90,7 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
             this,
             &CaptureWidget::childLeave);
 
-    connect(&m_xywhTimer, SIGNAL(timeout()), this, SLOT(xywhTick()));
+    connect(&m_xywhTimer, &QTimer::timeout, this, &CaptureWidget::xywhTick);
     setAttribute(Qt::WA_DeleteOnClose);
     setAttribute(Qt::WA_QuitOnClose, false);
     m_opacity = m_config.contrastOpacity();
@@ -320,8 +320,8 @@ void CaptureWidget::initButtons()
                   ConfigHandler().shortcut(QVariant::fromValue(t).toString());
                 if (!shortcut.isNull()) {
                     auto shortcuts = newShortcut(shortcut, this, nullptr);
-                    for (auto* shortcut : shortcuts) {
-                        connect(shortcut, &QShortcut::activated, this, [=]() {
+                    for (auto* sc : shortcuts) {
+                        connect(sc, &QShortcut::activated, this, [=]() {
                             setState(b);
                         });
                     }
@@ -400,28 +400,26 @@ void CaptureWidget::showxywh(bool show)
 void CaptureWidget::initHelpMessage()
 {
     QList<QPair<QString, QString>> keyMap;
-    if (keyMap.isEmpty()) {
-        keyMap << QPair(tr("Mouse"), tr("Select screenshot area"));
-        using CT = CaptureTool;
-        for (auto toolType :
-             { CT::TYPE_ACCEPT, CT::TYPE_SAVE, CT::TYPE_COPY }) {
-            if (!m_tools.contains(toolType)) {
-                continue;
-            }
-            auto* tool = m_tools[toolType];
-            QString shortcut = ConfigHandler().shortcut(
-              QVariant::fromValue(toolType).toString());
-            shortcut.replace("Return", "Enter");
-            if (!shortcut.isEmpty()) {
-                keyMap << QPair(shortcut, tool->description());
-            }
+    keyMap << QPair(tr("Mouse"), tr("Select screenshot area"));
+    using CT = CaptureTool;
+    for (auto toolType : { CT::TYPE_ACCEPT, CT::TYPE_SAVE, CT::TYPE_COPY }) {
+        if (!m_tools.contains(toolType)) {
+            continue;
         }
-        keyMap << QPair(tr("Mouse Wheel"), tr("Change tool size"));
-        keyMap << QPair(tr("Right Click"), tr("Show color picker"));
-        keyMap << QPair(ConfigHandler().shortcut("TYPE_TOGGLE_PANEL"),
-                        tr("Open side panel"));
-        keyMap << QPair(tr("Esc"), tr("Exit"));
+        auto* tool = m_tools[toolType];
+        QString shortcut =
+          ConfigHandler().shortcut(QVariant::fromValue(toolType).toString());
+        shortcut.replace("Return", "Enter");
+        if (!shortcut.isEmpty()) {
+            keyMap << QPair(shortcut, tool->description());
+        }
     }
+    keyMap << QPair(tr("Mouse Wheel"), tr("Change tool size"));
+    keyMap << QPair(tr("Right Click"), tr("Show color picker"));
+    keyMap << QPair(ConfigHandler().shortcut("TYPE_TOGGLE_PANEL"),
+                    tr("Open side panel"));
+    keyMap << QPair(tr("Esc"), tr("Exit"));
+
     m_helpMessage = OverlayMessage::compileFromKeyMap(keyMap);
 }
 
@@ -622,7 +620,7 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
     }
 }
 
-void CaptureWidget::showColorPicker(const QPoint& pos)
+void CaptureWidget::showColorPicker(QPoint pos)
 {
     // Try to select new object if current pos out of active object
     auto toolItem = activeToolObject();
@@ -642,7 +640,7 @@ void CaptureWidget::showColorPicker(const QPoint& pos)
     m_colorPicker->show();
 }
 
-bool CaptureWidget::startDrawObjectTool(const QPoint& pos)
+bool CaptureWidget::startDrawObjectTool(QPoint pos)
 {
     if (activeButtonToolType() != CaptureTool::NONE &&
         activeButtonToolType() != CaptureTool::TYPE_MOVESELECTION) {
@@ -683,7 +681,7 @@ void CaptureWidget::pushObjectsStateToUndoStack()
     m_captureToolObjectsBackup.clear();
 }
 
-int CaptureWidget::selectToolItemAtPos(const QPoint& pos)
+int CaptureWidget::selectToolItemAtPos(QPoint pos)
 {
     // Try to select existing tool, "-1" - no active tool
     int activeLayerIndex = -1;
@@ -1442,15 +1440,13 @@ void CaptureWidget::removeToolObject(int index)
     --index;
     if (index >= 0 && index < m_captureToolObjects.size()) {
         // in case this tool is circle counter
-        int removedCircleCount = -1;
-
         const CaptureTool::Type currentToolType =
           m_captureToolObjects.at(index)->type();
         m_captureToolObjectsBackup = m_captureToolObjects;
         update(
           paddedUpdateRect(m_captureToolObjects.at(index)->boundingRect()));
         if (currentToolType == CaptureTool::TYPE_CIRCLECOUNT) {
-            removedCircleCount = m_captureToolObjects.at(index)->count();
+            int removedCircleCount = m_captureToolObjects.at(index)->count();
             --m_context.circleCount;
             // Decrement circle counter numbers starting from deleted circle
             for (int cnt = 0; cnt < m_captureToolObjects.size(); cnt++) {
@@ -1813,7 +1809,7 @@ QRect CaptureWidget::extendedSelection() const
     return extendedRect(r);
 }
 
-QRect CaptureWidget::extendedRect(const QRect& r) const
+QRect CaptureWidget::extendedRect(QRect r) const
 {
     auto devicePixelRatio = m_context.screenshot.devicePixelRatio();
     return { static_cast<int>(r.left() * devicePixelRatio),
@@ -1822,7 +1818,7 @@ QRect CaptureWidget::extendedRect(const QRect& r) const
              static_cast<int>(r.height() * devicePixelRatio) };
 }
 
-QRect CaptureWidget::paddedUpdateRect(const QRect& r) const
+QRect CaptureWidget::paddedUpdateRect(QRect r) const
 {
     if (r.isNull()) {
         return r;
