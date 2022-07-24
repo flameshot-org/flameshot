@@ -1227,7 +1227,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="540"/>
         <source>Imgur Application Client ID</source>
-        <translation>Imgur API 键值</translation>
+        <translation>Imgur 应用程序客户端 ID</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="571"/>
