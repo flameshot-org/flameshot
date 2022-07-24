@@ -97,9 +97,7 @@ public:
                          setShowStartupLaunchMessage,
                          bool)
     CONFIG_GETTER_SETTER(contrastOpacity, setContrastOpacity, int)
-    CONFIG_GETTER_SETTER(copyAndCloseAfterUpload,
-                         setCopyAndCloseAfterUpload,
-                         bool)
+    CONFIG_GETTER_SETTER(copyURLAfterUpload, setCopyURLAfterUpload, bool)
     CONFIG_GETTER_SETTER(historyConfirmationToDelete,
                          setHistoryConfirmationToDelete,
                          bool)

@@ -37,12 +37,10 @@ ImgUploaderBase::ImgUploaderBase(const QPixmap& capture, QWidget* parent)
     setWindowTitle(tr("Upload image"));
     setWindowIcon(QIcon(GlobalValues::iconPath()));
 
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
     QRect position = frameGeometry();
     QScreen* screen = QGuiApplication::screenAt(QCursor::pos());
     position.moveCenter(screen->availableGeometry().center());
     move(position.topLeft());
-#endif
 
     m_spinner = new LoadSpinner(this);
     m_spinner->setColor(ConfigHandler().uiColor());
