@@ -62,7 +62,8 @@ void CaptureToolButton::initButton()
     QString tooltip = m_tool->description();
     QString shortcut =
       ConfigHandler().shortcut(QVariant::fromValue(m_buttonType).toString());
-    if (m_buttonType == CaptureTool::TYPE_COPY) {
+    if (m_buttonType == CaptureTool::TYPE_COPY &&
+        ConfigHandler().copyOnDoubleClick()) {
         tooltip += QStringLiteral(" (%1Left Double-Click)")
                      .arg(shortcut.isEmpty() ? QString() : shortcut + " or ");
     } else if (!shortcut.isEmpty()) {
@@ -166,26 +167,15 @@ int CaptureToolButton::getPriorityByButton(CaptureTool::Type b)
 }
 
 QList<CaptureTool::Type> CaptureToolButton::iterableButtonTypes = {
-    CaptureTool::TYPE_PENCIL,
-    CaptureTool::TYPE_DRAWER,
-    CaptureTool::TYPE_ARROW,
-    CaptureTool::TYPE_BOLD_ARROW,
-    CaptureTool::TYPE_SELECTION,
-    CaptureTool::TYPE_RECTANGLE,
-    CaptureTool::TYPE_CIRCLE,
-    CaptureTool::TYPE_MARKER,
-    CaptureTool::TYPE_TEXT,
-    CaptureTool::TYPE_CIRCLECOUNT,
-    CaptureTool::TYPE_PIXELATE,
-    CaptureTool::TYPE_INVERT,
-    CaptureTool::TYPE_SELECTIONINDICATOR,
-    CaptureTool::TYPE_MOVESELECTION,
-    CaptureTool::TYPE_UNDO,
-    CaptureTool::TYPE_REDO,
-    CaptureTool::TYPE_COPY,
-    CaptureTool::TYPE_SAVE,
-    CaptureTool::TYPE_EXIT,
-    CaptureTool::TYPE_IMAGEUPLOADER,
+    CaptureTool::TYPE_PENCIL,        CaptureTool::TYPE_DRAWER,
+    CaptureTool::TYPE_ARROW,         CaptureTool::TYPE_SELECTION,
+    CaptureTool::TYPE_RECTANGLE,     CaptureTool::TYPE_CIRCLE,
+    CaptureTool::TYPE_MARKER,        CaptureTool::TYPE_TEXT,
+    CaptureTool::TYPE_CIRCLECOUNT,   CaptureTool::TYPE_PIXELATE,
+    CaptureTool::TYPE_MOVESELECTION, CaptureTool::TYPE_UNDO,
+    CaptureTool::TYPE_REDO,          CaptureTool::TYPE_COPY,
+    CaptureTool::TYPE_SAVE,          CaptureTool::TYPE_EXIT,
+    CaptureTool::TYPE_IMAGEUPLOADER, CaptureTool::TYPE_BOLD_ARROW,
 #if !defined(Q_OS_MACOS)
     CaptureTool::TYPE_OPEN_APP,
 #endif

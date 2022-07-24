@@ -33,6 +33,7 @@ DesktopAppData DesktopFileParser::parseDesktopFile(const QString& fileName,
     bool nameLocaleSet = false;
     bool descriptionLocaleSet = false;
     bool isApplication = false;
+    bool isService = false;
     QTextStream in(&file);
     // enter the desktop entry definition
     while (!in.atEnd() && in.readLine() != QLatin1String("[Desktop Entry]")) {
@@ -77,6 +78,9 @@ DesktopAppData DesktopFileParser::parseDesktopFile(const QString& fileName,
             if (line.contains(QLatin1String("Application"))) {
                 isApplication = true;
             }
+            if (line.contains(QLatin1String("Service"))) {
+                isService = true;
+            }
         } else if (line.startsWith(QLatin1String("Categories"))) {
             res.categories = line.mid(line.indexOf(QLatin1String("=")) + 1)
                                .split(QStringLiteral(";"));
@@ -92,7 +96,8 @@ DesktopAppData DesktopFileParser::parseDesktopFile(const QString& fileName,
         }
     }
     file.close();
-    if (res.exec.isEmpty() || res.name.isEmpty() || !isApplication) {
+    if (res.exec.isEmpty() || res.name.isEmpty() ||
+        (!isApplication && !isService)) {
         ok = false;
     }
     return res;

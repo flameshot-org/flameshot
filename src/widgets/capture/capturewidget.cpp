@@ -538,10 +538,10 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
         QFontMetrics fm = painter.fontMetrics();
 
         QString xy = QString("%1x%2+%3+%4")
-                       .arg(static_cast<int>(selection.left() * scale))
-                       .arg(static_cast<int>(selection.top() * scale))
                        .arg(static_cast<int>(selection.width() * scale))
-                       .arg(static_cast<int>(selection.height() * scale));
+                       .arg(static_cast<int>(selection.height() * scale))
+                       .arg(static_cast<int>(selection.left() * scale))
+                       .arg(static_cast<int>(selection.top() * scale));
 
         xybox = fm.boundingRect(xy);
         // the small numbers here are just margins so the text doesn't
@@ -1194,8 +1194,13 @@ void CaptureWidget::initSelection()
         }
     });
     if (!initialSelection.isNull()) {
+        const qreal scale = m_context.screenshot.devicePixelRatio();
         initialSelection.moveTopLeft(initialSelection.topLeft() -
                                      mapToGlobal({}));
+        initialSelection.setTop(initialSelection.top() / scale);
+        initialSelection.setBottom(initialSelection.bottom() / scale);
+        initialSelection.setLeft(initialSelection.left() / scale);
+        initialSelection.setRight(initialSelection.right() / scale);
     }
     m_selection->setGeometry(initialSelection);
     m_selection->setVisible(!initialSelection.isNull());
