@@ -19,8 +19,8 @@ env:
 
 jobs:
   catalina:
-    name: macOS Catalina 10.15
-    runs-on: macos-10.15
+    name: macOS Monterey 12
+    runs-on: macos-12
 
     env:
       APP_NAME: flameshot
@@ -45,7 +45,7 @@ jobs:
 
     steps:
       - name: Checkout Source code
-        uses: actions/checkout@v1
+        uses: actions/checkout@v3
 
       - name: Install Qt
         run: brew install qt@5 cmake
@@ -81,7 +81,7 @@ jobs:
           echo "=====no operation for you can see link in the log console====="
 
       - name: Artifact Upload
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: MacOS-artifact
           path: ${{ github.workspace }}/build/src/flameshot.dmg
