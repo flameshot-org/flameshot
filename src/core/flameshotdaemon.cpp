@@ -12,15 +12,18 @@
 #include <QClipboard>
 #include <QDBusConnection>
 #include <QDBusMessage>
+#include <QPixmap>
+#include <QRect>
+
+#if !defined(DISABLE_UPDATE_CHECKER)
 #include <QDesktopServices>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
-#include <QPixmap>
-#include <QRect>
 #include <QTimer>
 #include <QUrl>
+#endif
 
 #ifdef Q_OS_WIN
 #include "src/core/globalshortcutfilter.h"
@@ -57,9 +60,11 @@ FlameshotDaemon::FlameshotDaemon()
   , m_hostingClipboard(false)
   , m_clipboardSignalBlocked(false)
   , m_trayIcon(nullptr)
+#if !defined(DISABLE_UPDATE_CHECKER)
   , m_networkCheckUpdates(nullptr)
   , m_showCheckAppUpdateStatus(false)
   , m_appLatestVersion(QStringLiteral(APP_VERSION).replace("v", ""))
+#endif
 {
     connect(
       QApplication::clipboard(), &QClipboard::dataChanged, this, [this]() {
@@ -87,9 +92,12 @@ FlameshotDaemon::FlameshotDaemon()
                 m_persist = !config.autoCloseIdleDaemon();
             });
 #endif
+
+#if !defined(DISABLE_UPDATE_CHECKER)
     if (ConfigHandler().checkForUpdates()) {
         getLatestAvailableVersion();
     }
+#endif
 }
 
 void FlameshotDaemon::start()
@@ -169,6 +177,7 @@ void FlameshotDaemon::sendTrayNotification(const QString& text,
     }
 }
 
+#if !defined(DISABLE_UPDATE_CHECKER)
 void FlameshotDaemon::showUpdateNotificationIfAvailable(CaptureWidget* widget)
 {
     if (!m_appLatestUrl.isEmpty() &&
@@ -207,6 +216,7 @@ void FlameshotDaemon::checkForUpdates()
         QDesktopServices::openUrl(QUrl(m_appLatestUrl));
     }
 }
+#endif
 
 /**
  * @brief Return the daemon instance.
@@ -344,6 +354,7 @@ void FlameshotDaemon::enableTrayIcon(bool enable)
     }
 }
 
+#if !defined(DISABLE_UPDATE_CHECKER)
 void FlameshotDaemon::handleReplyCheckUpdates(QNetworkReply* reply)
 {
     if (!ConfigHandler().checkForUpdates()) {
@@ -382,6 +393,7 @@ void FlameshotDaemon::handleReplyCheckUpdates(QNetworkReply* reply)
     }
     m_showCheckAppUpdateStatus = false;
 }
+#endif
 
 QDBusMessage FlameshotDaemon::createMethodCall(QString method)
 {
