@@ -100,6 +100,7 @@ QIcon CaptureToolButton::icon() const
 void CaptureToolButton::mousePressEvent(QMouseEvent* e)
 {
     activateWindow();
+    mouseModifier = e->modifiers();
     if (e->button() == Qt::LeftButton) {
         emit pressedButtonLeftClick(this);
         emit pressed();

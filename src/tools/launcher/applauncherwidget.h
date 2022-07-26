@@ -17,10 +17,13 @@ class AppLauncherWidget : public QWidget
 {
     Q_OBJECT
 public:
-    explicit AppLauncherWidget(const QPixmap& p, QWidget* parent = nullptr);
+    explicit AppLauncherWidget(const QPixmap& p,
+                               bool alt = false,
+                               QWidget* parent = nullptr);
 
 private slots:
     void launch(const QModelIndex& index);
+    void launchCmd(QString& command, bool inTerminal);
     void checkboxClicked(const bool enabled);
     void searchChanged(const QString& text);
 
@@ -37,6 +40,7 @@ private:
     QString m_tempFile;
     bool m_keepOpen;
     QMap<QString, QVector<DesktopAppData>> m_appsMap;
+    QCheckBox* m_setAsDefaultCheckbox;
     QCheckBox* m_keepOpenCheckbox;
     QCheckBox* m_terminalCheckbox;
     QVBoxLayout* m_layout;
