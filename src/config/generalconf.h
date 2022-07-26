@@ -37,7 +37,9 @@ private slots:
     void saveLastRegion(bool checked);
     void showSidePanelButtonChanged(bool checked);
     void showDesktopNotificationChanged(bool checked);
+#if !defined(DISABLE_UPDATE_CHECKER)
     void checkForUpdatesChanged(bool checked);
+#endif
     void allowMultipleGuiInstancesChanged(bool checked);
     void autoCloseIdleDaemonChanged(bool checked);
     void autostartChanged(bool checked);
@@ -63,7 +65,9 @@ private:
     void initAntialiasingPinZoom();
     void initAutoCloseIdleDaemon();
     void initAutostart();
+#if !defined(DISABLE_UPDATE_CHECKER)
     void initCheckForUpdates();
+#endif
     void initConfigButtons();
     void initCopyAndCloseAfterUpload();
     void initCopyOnDoubleClick();
@@ -98,12 +102,14 @@ private:
     QCheckBox* m_showTray;
     QCheckBox* m_helpMessage;
     QCheckBox* m_sidePanelButton;
+#if !defined(DISABLE_UPDATE_CHECKER)
     QCheckBox* m_checkForUpdates;
+#endif
     QCheckBox* m_allowMultipleGuiInstances;
     QCheckBox* m_autoCloseIdleDaemon;
     QCheckBox* m_autostart;
     QCheckBox* m_showStartupLaunchMessage;
-    QCheckBox* m_copyAndCloseAfterUpload;
+    QCheckBox* m_copyURLAfterUpload;
     QCheckBox* m_copyPathAfterSave;
     QCheckBox* m_antialiasingPinZoom;
     QCheckBox* m_saveLastRegion;
