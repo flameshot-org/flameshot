@@ -287,6 +287,19 @@ Press Space to open the side panel.</translation>
     </message>
 </context>
 <context>
+    <name>OcrTool</name>
+    <message>
+        <location filename="../../src/tools/ocr/ocrtool.cpp" line="24"/>
+        <source>Ocr</source>
+        <translation>Ocr</translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/ocr/ocrtool.cpp" line="34"/>
+        <source>Recognize text from the capture with OCR</source>
+        <translation>Recognize text from the capture with OCR</translation>
+    </message>
+</context>
+<context>
     <name>DBusUtils</name>
     <message>
         <location filename="../../src/utils/dbusutils.cpp" line="56"/>

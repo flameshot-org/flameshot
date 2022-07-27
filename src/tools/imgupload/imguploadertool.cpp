@@ -5,7 +5,8 @@
 
 ImgUploaderTool::ImgUploaderTool(QObject* parent)
   : AbstractActionTool(parent)
-{}
+{
+}
 
 bool ImgUploaderTool::closeOnButtonPressed() const
 {

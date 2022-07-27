@@ -51,6 +51,8 @@ private slots:
     void resetConfiguration();
     void togglePathFixed();
     void uploadClientKeyEdited();
+    void ocrRecognizerClientKeyEdited();
+    void ocrRecognizerServerUrlEdited();
     void useJpgForClipboardChanged(bool checked);
     void setSaveAsFileExtension(QString extension);
     void setGeometryLocation(int index);
@@ -66,6 +68,7 @@ private:
     void initCheckForUpdates();
     void initConfigButtons();
     void initCopyAndCloseAfterUpload();
+    void initCopyAndCloseAfterRecognize();
     void initCopyOnDoubleClick();
     void initCopyPathAfterSave();
     void initHistoryConfirmationToDelete();
@@ -81,11 +84,14 @@ private:
     void initSquareMagnifier();
     void initUndoLimit();
     void initUploadWithoutConfirmation();
+    void initOcrWithoutConfirmation();
     void initUseJpgForClipboard();
     void initUploadHistoryMax();
     void initUploadClientSecret();
     void initSaveLastRegion();
     void initShowSelectionGeometry();
+    void initOcrRecognizerClientKey();
+    void initOcrRecognizerServerUrl();
 
     void _updateComponents(bool allowEmptySavePath);
 
@@ -103,16 +109,20 @@ private:
     QCheckBox* m_autostart;
     QCheckBox* m_showStartupLaunchMessage;
     QCheckBox* m_copyAndCloseAfterUpload;
+    QCheckBox* m_copyAndCloseAfterRecognize;
     QCheckBox* m_copyPathAfterSave;
     QCheckBox* m_antialiasingPinZoom;
     QCheckBox* m_saveLastRegion;
     QCheckBox* m_uploadWithoutConfirmation;
+    QCheckBox* m_ocrWithoutConfirmation;
     QPushButton* m_importButton;
     QPushButton* m_exportButton;
     QPushButton* m_resetButton;
     QCheckBox* m_saveAfterCopy;
     QLineEdit* m_savePath;
     QLineEdit* m_uploadClientKey;
+    QLineEdit* m_ocrRecognizerClientKey;
+    QLineEdit* m_ocrRecognizerServerUrl;
     QPushButton* m_changeSaveButton;
     QCheckBox* m_screenshotPathFixedCheck;
     QCheckBox* m_historyConfirmationToDelete;

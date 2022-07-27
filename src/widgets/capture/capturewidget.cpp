@@ -291,6 +291,7 @@ void CaptureWidget::initButtons()
             buttonList->removeOne(CaptureTool::TYPE_IMAGEUPLOADER);
             buttonList->removeOne(CaptureTool::TYPE_OPEN_APP);
             buttonList->removeOne(CaptureTool::TYPE_PIN);
+            buttonList->removeOne(CaptureTool::TYPE_OCR);
         }
     }
     QVector<CaptureToolButton*> vectorButtons;

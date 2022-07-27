@@ -732,6 +732,23 @@ Lütfen bunları yapılandırma dosyasında elle çözün.</translation>
     </message>
 </context>
 <context>
+    <name>OcrTool</name>
+    <message>
+        <location filename="../../src/tools/ocr/ocrtool.cpp" line="24"/>
+        <source>Ocr</source>
+        <translation>Ocr</translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/ocr/ocrtool.cpp" line="34"/>
+        <source>Recognize text from the capture with OCR</source>
+        <translation>OCR ile yakalama metnini tanıma</translation>
+    </message>
+    <message>
+        <source>Recognize text from the capture with OCR</source>
+        <translation type="vanished">OCR ile yakalama metnini tanıma</translation>
+    </message>
+</context>
+<context>
     <name>DBusUtils</name>
     <message>
         <source>Unable to connect via DBus</source>

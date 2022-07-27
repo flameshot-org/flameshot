@@ -45,7 +45,8 @@ QVariant ValueHandler::process(const QVariant& val)
 
 Bool::Bool(bool def)
   : m_def(def)
-{}
+{
+}
 
 bool Bool::check(const QVariant& val)
 {
@@ -70,7 +71,8 @@ QString Bool::expected()
 
 String::String(QString def)
   : m_def(std::move(def))
-{}
+{
+}
 
 bool String::check(const QVariant&)
 {
@@ -91,7 +93,8 @@ QString String::expected()
 
 Color::Color(QColor def)
   : m_def(std::move(def))
-{}
+{
+}
 
 bool Color::check(const QVariant& val)
 {
@@ -148,7 +151,8 @@ BoundedInt::BoundedInt(int min, int max, int def)
   : m_min(min)
   , m_max(max)
   , m_def(def)
-{}
+{
+}
 
 bool BoundedInt::check(const QVariant& val)
 {
@@ -173,7 +177,8 @@ QString BoundedInt::expected()
 LowerBoundedInt::LowerBoundedInt(int min, int def)
   : m_min(min)
   , m_def(def)
-{}
+{
+}
 
 bool LowerBoundedInt::check(const QVariant& val)
 {
@@ -197,7 +202,8 @@ QString LowerBoundedInt::expected()
 
 KeySequence::KeySequence(const QKeySequence& fallback)
   : m_fallback(fallback)
-{}
+{
+}
 
 bool KeySequence::check(const QVariant& val)
 {
@@ -384,7 +390,8 @@ bool ButtonList::normalizeButtons(QList<int>& buttons)
 UserColors::UserColors(int min, int max)
   : m_min(min)
   , m_max(max)
-{}
+{
+}
 
 bool UserColors::check(const QVariant& val)
 {

@@ -20,7 +20,8 @@
 
 SizeIncreaseTool::SizeIncreaseTool(QObject* parent)
   : AbstractActionTool(parent)
-{}
+{
+}
 
 bool SizeIncreaseTool::closeOnButtonPressed() const
 {

@@ -14,7 +14,8 @@ namespace {
 CircleCountTool::CircleCountTool(QObject* parent)
   : AbstractTwoPointTool(parent)
   , m_valid(false)
-{}
+{
+}
 
 QIcon CircleCountTool::icon(const QColor& background, bool inEditor) const
 {

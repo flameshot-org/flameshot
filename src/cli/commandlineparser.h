@@ -45,7 +45,8 @@ private:
     {
         explicit Node(const CommandArgument& arg)
           : argument(arg)
-        {}
+        {
+        }
         Node() {}
         bool operator==(const Node& n) const
         {

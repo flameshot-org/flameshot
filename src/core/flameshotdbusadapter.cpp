@@ -6,7 +6,8 @@
 
 FlameshotDBusAdapter::FlameshotDBusAdapter(QObject* parent)
   : QDBusAbstractAdaptor(parent)
-{}
+{
+}
 
 FlameshotDBusAdapter::~FlameshotDBusAdapter() = default;
 

@@ -24,6 +24,7 @@ target_sources(
         colorpickerwidget.h
         imguploaddialog.h
         capture/capturetoolobjects.h
+        ocrrecognizedialog.h
 )
 
 target_sources(
@@ -42,4 +43,5 @@ target_sources(
         colorpickerwidget.cpp
         imguploaddialog.cpp
         capture/capturetoolobjects.cpp
+        ocrrecognizedialog.cpp
 )

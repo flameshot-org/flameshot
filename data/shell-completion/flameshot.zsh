@@ -26,6 +26,7 @@ _flameshot_gui_opts=(
     {-u,--upload}'[Upload screenshot]'
     "--pin[Pin the capture to the screen]"
     {-s,--accept-on-select}'[Accept capture as soon as a selection is made]'
+    {-o,--ocr}'[Recognize with OCR]'
 )
 
 _flameshot_gui() {
@@ -45,6 +46,7 @@ _flameshot_screen_opts=(
     {-r,--raw}'[Print raw PNG capture]'
     {-u,--upload}'[Upload screenshot]'
     "--pin[Pin the capture to the screen]"
+    {-o,--ocr}'[Recognize with OCR]'
 )
 
 _flameshot_screen() {
@@ -62,6 +64,7 @@ _flameshot_full_opts=(
     "--region[Screenshot region to select <WxH+X+Y or string>]"
     {-r,--raw}'[Print raw PNG capture]'
     {-u,--upload}'[Upload screenshot]'
+    {-o,--ocr}'[Recognize with OCR]'
 )
 
 _flameshot_full() {

@@ -14,12 +14,15 @@
 #include "src/core/qguiappcurrentscreen.h"
 #include "src/tools/imgupload/imguploadermanager.h"
 #include "src/tools/imgupload/storages/imguploaderbase.h"
+#include "src/tools/ocr/ocrrecognizermanager.h"
+#include "src/tools/ocr/services/ocrrecognizerbase.h"
 #include "src/utils/confighandler.h"
 #include "src/utils/screengrabber.h"
 #include "src/widgets/capture/capturewidget.h"
 #include "src/widgets/capturelauncher.h"
 #include "src/widgets/imguploaddialog.h"
 #include "src/widgets/infowindow.h"
+#include "src/widgets/ocrrecognizedialog.h"
 #include "src/widgets/uploadhistory.h"
 #include <QApplication>
 #include <QBuffer>
@@ -380,6 +383,34 @@ void Flameshot::exportCapture(QPixmap capture,
         }
     }
 
+    if (tasks & CR::OCR) {
+        if (!ConfigHandler().ocrWithoutConfirmation()) {
+            auto* dialog = new OcrRecognizeDialog();
+            if (dialog->exec() == QDialog::Rejected) {
+                return;
+            }
+        }
+
+        OcrRecognizerBase* widget = OcrRecognizerManager().recognizer(capture);
+        widget->show();
+        widget->activateWindow();
+        CR::ExportTask exportTasks = (CR::ExportTask)tasks;
+        QObject::connect(
+          widget, &OcrRecognizerBase::recognizedOk, [=](const QString& text) {
+              if (ConfigHandler().copyAndCloseAfterRecognize()) {
+                  if (!(exportTasks & CR::COPY)) {
+                      FlameshotDaemon::copyToClipboard(
+                        text, tr("Recognized text copied to clipboard."));
+                      widget->close();
+                  } else {
+                      widget->showPostRecognizeDialog();
+                  }
+              } else {
+                  widget->showPostRecognizeDialog();
+              }
+          });
+    }
+
     if (tasks & CR::UPLOAD) {
         if (!ConfigHandler().uploadWithoutConfirmation()) {
             auto* dialog = new ImgUploadDialog();
@@ -392,7 +423,13 @@ void Flameshot::exportCapture(QPixmap capture,
         widget->show();
         widget->activateWindow();
         // NOTE: lambda can't capture 'this' because it might be destroyed later
-        CR::ExportTask tasks = tasks;
+        // CR::ExportTask tasks = tasks;
+        // Bug: `tasks` will first become a random value (which may be the same
+        // as the original value), and then assign the new value to itself, so
+        // it may lead to random failure of the logic here. Fix: allocate a new
+        // block variable to keep the `tasks` value valid, does not use a same
+        // name.
+        CR::ExportTask exportTasks = (CR::ExportTask)tasks;
         QObject::connect(
           widget, &ImgUploaderBase::uploadOk, [=](const QUrl& url) {
               if (ConfigHandler().copyAndCloseAfterUpload()) {

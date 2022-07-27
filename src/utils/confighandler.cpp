@@ -89,10 +89,12 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     OPTION("startupLaunch"               ,Bool               ( false         )),
     OPTION("showStartupLaunchMessage"    ,Bool               ( true          )),
     OPTION("copyAndCloseAfterUpload"     ,Bool               ( true          )),
+    OPTION("copyAndCloseAfterRecognize"  ,Bool               ( true          )),
     OPTION("copyPathAfterSave"           ,Bool               ( false         )),
     OPTION("antialiasingPinZoom"         ,Bool               ( true          )),
     OPTION("useJpgForClipboard"          ,Bool               ( false         )),
     OPTION("uploadWithoutConfirmation"   ,Bool               ( false         )),
+    OPTION("ocrWithoutConfirmation"      ,Bool               ( false         )),
     OPTION("saveAfterCopy"               ,Bool               ( false         )),
     OPTION("savePath"                    ,ExistingDir        (                   )),
     OPTION("savePathFixed"               ,Bool               ( false         )),
@@ -100,7 +102,7 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     OPTION("saveLastRegion"              ,Bool               (false          )),
     OPTION("uploadHistoryMax"            ,LowerBoundedInt    (0, 25               )),
     OPTION("undoLimit"                   ,BoundedInt         (0, 999, 100    )),
-  // Interface tab
+    // Interface tab
     OPTION("uiColor"                     ,Color              ( {116, 0, 150}   )),
     OPTION("contrastUiColor"             ,Color              ( {39, 0, 50}     )),
     OPTION("contrastOpacity"             ,BoundedInt         ( 0, 255, 190    )),
@@ -122,7 +124,9 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     OPTION("copyOnDoubleClick"           ,Bool               ( false         )),
     OPTION("uploadClientSecret"          ,String             ( "313baf0c7b4d3ff"            )),
     OPTION("showSelectionGeometry"  , BoundedInt               (0,5,4)),
-    OPTION("showSelectionGeometryHideTime", LowerBoundedInt       (0, 3000))
+    OPTION("showSelectionGeometryHideTime", LowerBoundedInt       (0, 3000)),
+    OPTION("ocrRecognizerClientKey"      ,String             ( "JWT fda9c8212cc249088ba680e013ed8ec8" )),
+    OPTION("ocrRecognizerServerUrl"      ,String             ( "http://127.0.0.1:8558/recognize"      )),
 };
 
 static QMap<QString, QSharedPointer<KeySequence>> recognizedShortcuts = {
@@ -171,6 +175,7 @@ static QMap<QString, QSharedPointer<KeySequence>> recognizedShortcuts = {
     SHORTCUT("TYPE_SIZEINCREASE"        ,                           ),
     SHORTCUT("TYPE_SIZEDECREASE"        ,                           ),
     SHORTCUT("TYPE_CIRCLECOUNT"         ,                           ),
+    SHORTCUT("TYPE_OCR"                 ,   "Ctrl+O"                ),
 };
 // clang-format on
 

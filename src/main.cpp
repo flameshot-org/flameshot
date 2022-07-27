@@ -229,6 +229,9 @@ int main(int argc, char* argv[])
         QObject::tr("default: screen containing the cursor"),
       QObject::tr("Screen number"),
       QStringLiteral("-1"));
+    CommandOption ocrOption(
+      { "o", "ocr" },
+      QObject::tr("recognize text from the the capture with OCR"));
 
     // Add checkers
     auto colorChecker = [](const QString& colorCode) -> bool {
@@ -308,7 +311,8 @@ int main(int argc, char* argv[])
                         selectionOption,
                         uploadOption,
                         pinOption,
-                        acceptOnSelectOption },
+                        acceptOnSelectOption,
+                        ocrOption },
                       guiArgument);
     parser.AddOptions({ screenNumberOption,
                         clipboardOption,
@@ -317,14 +321,16 @@ int main(int argc, char* argv[])
                         regionOption,
                         rawImageOption,
                         uploadOption,
-                        pinOption },
+                        pinOption,
+                        ocrOption },
                       screenArgument);
     parser.AddOptions({ pathOption,
                         clipboardOption,
                         delayOption,
                         regionOption,
                         rawImageOption,
-                        uploadOption },
+                        uploadOption,
+                        ocrOption },
                       fullArgument);
     parser.AddOptions({ autostartOption,
                         filenameOption,
@@ -380,6 +386,7 @@ int main(int argc, char* argv[])
         bool pin = parser.isSet(pinOption);
         bool upload = parser.isSet(uploadOption);
         bool acceptOnSelect = parser.isSet(acceptOnSelectOption);
+        bool ocr = parser.isSet(ocrOption);
         CaptureRequest req(CaptureRequest::GRAPHICAL_MODE, delay, path);
         if (!region.isEmpty()) {
             auto selectionRegion = Region().value(region).toRect();
@@ -405,6 +412,9 @@ int main(int argc, char* argv[])
         if (upload) {
             req.addTask(CaptureRequest::UPLOAD);
         }
+        if (ocr) {
+            req.addTask(CaptureRequest::OCR);
+        }
         if (acceptOnSelect) {
             req.addTask(CaptureRequest::ACCEPT_ON_SELECT);
             if (!clipboard && !raw && path.isEmpty() && !printGeometry &&
@@ -429,6 +439,7 @@ int main(int argc, char* argv[])
         bool clipboard = parser.isSet(clipboardOption);
         bool raw = parser.isSet(rawImageOption);
         bool upload = parser.isSet(uploadOption);
+        bool ocr = parser.isSet(ocrOption);
         // Not a valid command
 
         CaptureRequest req(CaptureRequest::FULLSCREEN_MODE, delay);
@@ -446,6 +457,9 @@ int main(int argc, char* argv[])
         }
         if (upload) {
             req.addTask(CaptureRequest::UPLOAD);
+        }
+        if (ocr) {
+            req.addTask(CaptureRequest::OCR);
         }
         if (!clipboard && path.isEmpty() && !raw && !upload) {
             req.addSaveTask();
@@ -471,6 +485,7 @@ int main(int argc, char* argv[])
         bool raw = parser.isSet(rawImageOption);
         bool pin = parser.isSet(pinOption);
         bool upload = parser.isSet(uploadOption);
+        bool ocr = parser.isSet(ocrOption);
 
         CaptureRequest req(CaptureRequest::SCREEN_MODE, delay, screenNumber);
         if (!region.isEmpty()) {
@@ -497,6 +512,9 @@ int main(int argc, char* argv[])
         }
         if (upload) {
             req.addTask(CaptureRequest::UPLOAD);
+        }
+        if (ocr) {
+            req.addTask(CaptureRequest::OCR);
         }
 
         if (!clipboard && !raw && path.isEmpty() && !pin && !upload) {

@@ -48,6 +48,7 @@ public:
         TYPE_SIZEDECREASE = 21,
         TYPE_INVERT = 22,
         TYPE_ACCEPT = 23,
+        TYPE_OCR = 24,
     };
     Q_ENUM(Type);
 
@@ -82,7 +83,8 @@ public:
       : QObject(parent)
       , m_count(0)
       , m_editMode(false)
-    {}
+    {
+    }
 
     // TODO unused
     virtual void setCapture(const QPixmap& pixmap){};

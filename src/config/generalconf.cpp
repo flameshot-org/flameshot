@@ -49,7 +49,9 @@ GeneralConf::GeneralConf(QWidget* parent)
     initSaveAfterCopy();
     initCopyPathAfterSave();
     initCopyAndCloseAfterUpload();
+    initCopyAndCloseAfterRecognize();
     initUploadWithoutConfirmation();
+    initOcrWithoutConfirmation();
     initHistoryConfirmationToDelete();
     initAntialiasingPinZoom();
     initUploadHistoryMax();
@@ -57,6 +59,8 @@ GeneralConf::GeneralConf(QWidget* parent)
     initUploadClientSecret();
     initPredefinedColorPaletteLarge();
     initShowSelectionGeometry();
+    initOcrRecognizerClientKey();
+    initOcrRecognizerServerUrl();
 
     m_layout->addStretch();
 
@@ -75,11 +79,14 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
     m_sysNotifications->setChecked(config.showDesktopNotification());
     m_autostart->setChecked(config.startupLaunch());
     m_copyAndCloseAfterUpload->setChecked(config.copyAndCloseAfterUpload());
+    m_copyAndCloseAfterRecognize->setChecked(
+      config.copyAndCloseAfterRecognize());
     m_saveAfterCopy->setChecked(config.saveAfterCopy());
     m_copyPathAfterSave->setChecked(config.copyPathAfterSave());
     m_antialiasingPinZoom->setChecked(config.antialiasingPinZoom());
     m_useJpgForClipboard->setChecked(config.useJpgForClipboard());
     m_uploadWithoutConfirmation->setChecked(config.uploadWithoutConfirmation());
+    m_ocrWithoutConfirmation->setChecked(config.ocrWithoutConfirmation());
     m_historyConfirmationToDelete->setChecked(
       config.historyConfirmationToDelete());
     m_checkForUpdates->setChecked(config.checkForUpdates());
@@ -441,6 +448,21 @@ void GeneralConf::initCopyAndCloseAfterUpload()
     });
 }
 
+void GeneralConf::initCopyAndCloseAfterRecognize()
+{
+    m_copyAndCloseAfterRecognize =
+      new QCheckBox(tr("Copy recognized text after recognize"), this);
+    m_copyAndCloseAfterRecognize->setToolTip(
+      tr("Copy recognized text and close window after recognizing was "
+         "successful"));
+    m_scrollAreaLayout->addWidget(m_copyAndCloseAfterRecognize);
+
+    connect(
+      m_copyAndCloseAfterRecognize, &QCheckBox::clicked, [](bool checked) {
+          ConfigHandler().setCopyAndCloseAfterRecognize(checked);
+      });
+}
+
 void GeneralConf::initSaveAfterCopy()
 {
     m_saveAfterCopy = new QCheckBox(tr("Save image after copy"), this);
@@ -563,6 +585,58 @@ void GeneralConf::uploadClientKeyEdited()
     ConfigHandler().setUploadClientSecret(m_uploadClientKey->text());
 }
 
+void GeneralConf::initOcrRecognizerClientKey()
+{
+    auto* box = new QGroupBox(tr("OCR Recognizer Application Client Key"));
+    box->setFlat(true);
+    m_layout->addWidget(box);
+
+    auto* vboxLayout = new QVBoxLayout();
+    box->setLayout(vboxLayout);
+
+    m_ocrRecognizerClientKey = new QLineEdit(this);
+    QString foreground = this->palette().windowText().color().name();
+    m_ocrRecognizerClientKey->setStyleSheet(
+      QStringLiteral("color: %1").arg(foreground));
+    m_ocrRecognizerClientKey->setText(ConfigHandler().ocrRecognizerClientKey());
+    connect(m_ocrRecognizerClientKey,
+            SIGNAL(editingFinished()),
+            this,
+            SLOT(ocrRecognizerClientKeyEdited()));
+    vboxLayout->addWidget(m_ocrRecognizerClientKey);
+}
+
+void GeneralConf::ocrRecognizerClientKeyEdited()
+{
+    ConfigHandler().setOcrRecognizerClientKey(m_ocrRecognizerClientKey->text());
+}
+
+void GeneralConf::initOcrRecognizerServerUrl()
+{
+    auto* box = new QGroupBox(tr("OCR Recognizer Application Server URL"));
+    box->setFlat(true);
+    m_layout->addWidget(box);
+
+    auto* vboxLayout = new QVBoxLayout();
+    box->setLayout(vboxLayout);
+
+    m_ocrRecognizerServerUrl = new QLineEdit(this);
+    QString foreground = this->palette().windowText().color().name();
+    m_ocrRecognizerServerUrl->setStyleSheet(
+      QStringLiteral("color: %1").arg(foreground));
+    m_ocrRecognizerServerUrl->setText(ConfigHandler().ocrRecognizerServerUrl());
+    connect(m_ocrRecognizerServerUrl,
+            SIGNAL(editingFinished()),
+            this,
+            SLOT(ocrRecognizerServerUrlEdited()));
+    vboxLayout->addWidget(m_ocrRecognizerServerUrl);
+}
+
+void GeneralConf::ocrRecognizerServerUrlEdited()
+{
+    ConfigHandler().setOcrRecognizerServerUrl(m_ocrRecognizerServerUrl->text());
+}
+
 void GeneralConf::uploadHistoryMaxChanged(int max)
 {
     ConfigHandler().setUploadHistoryMax(max);
@@ -659,6 +733,18 @@ void GeneralConf::initUploadWithoutConfirmation()
     m_scrollAreaLayout->addWidget(m_uploadWithoutConfirmation);
     connect(m_uploadWithoutConfirmation, &QCheckBox::clicked, [](bool checked) {
         ConfigHandler().setUploadWithoutConfirmation(checked);
+    });
+}
+
+void GeneralConf::initOcrWithoutConfirmation()
+{
+    m_ocrWithoutConfirmation =
+      new QCheckBox(tr("OCR Recognize image without confirmation"), this);
+    m_ocrWithoutConfirmation->setToolTip(
+      tr("OCR Recognize image without confirmation"));
+    m_scrollAreaLayout->addWidget(m_ocrWithoutConfirmation);
+    connect(m_ocrWithoutConfirmation, &QCheckBox::clicked, [](bool checked) {
+        ConfigHandler().setOcrWithoutConfirmation(checked);
     });
 }
 

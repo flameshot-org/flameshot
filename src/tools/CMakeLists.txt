@@ -66,3 +66,13 @@ target_sources(
           abstracttwopointtool.h
           capturetool.h
           toolfactory.h)
+
+target_sources(
+    flameshot PRIVATE ocr/services/server/serverrecognizer.h
+    ocr/services/server/serverrecognizer.cpp
+    ocr/services/ocrrecognizerbase.h
+    ocr/services/ocrrecognizerbase.cpp
+    ocr/ocrrecognizermanager.h
+    ocr/ocrrecognizermanager.cpp
+    ocr/ocrtool.h
+    ocr/ocrtool.cpp)

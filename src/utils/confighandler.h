@@ -25,7 +25,10 @@ class AbstractLogger;
  * `KEY` is the name of the generated getter function.
  */
 #define CONFIG_GETTER(KEY, TYPE)                                               \
-    TYPE KEY() { return value(QStringLiteral(#KEY)).value<TYPE>(); }
+    TYPE KEY()                                                                 \
+    {                                                                          \
+        return value(QStringLiteral(#KEY)).value<TYPE>();                      \
+    }
 
 /**
  * Declare and implement a setter for a config option. `FUNC` is the name of the
@@ -98,6 +101,9 @@ public:
     CONFIG_GETTER_SETTER(copyAndCloseAfterUpload,
                          setCopyAndCloseAfterUpload,
                          bool)
+    CONFIG_GETTER_SETTER(copyAndCloseAfterRecognize,
+                         setCopyAndCloseAfterRecognize,
+                         bool)
     CONFIG_GETTER_SETTER(historyConfirmationToDelete,
                          setHistoryConfirmationToDelete,
                          bool)
@@ -110,6 +116,9 @@ public:
     CONFIG_GETTER_SETTER(uploadWithoutConfirmation,
                          setUploadWithoutConfirmation,
                          bool)
+    CONFIG_GETTER_SETTER(ocrWithoutConfirmation,
+                         setOcrWithoutConfirmation,
+                         bool)
     CONFIG_GETTER_SETTER(ignoreUpdateToVersion,
                          setIgnoreUpdateToVersion,
                          QString)
@@ -121,6 +130,12 @@ public:
     CONFIG_GETTER_SETTER(uploadClientSecret, setUploadClientSecret, QString)
     CONFIG_GETTER_SETTER(saveLastRegion, setSaveLastRegion, bool)
     CONFIG_GETTER_SETTER(showSelectionGeometry, setShowSelectionGeometry, int)
+    CONFIG_GETTER_SETTER(ocrRecognizerClientKey,
+                         setOcrRecognizerClientKey,
+                         QString)
+    CONFIG_GETTER_SETTER(ocrRecognizerServerUrl,
+                         setOcrRecognizerServerUrl,
+                         QString)
     // SPECIAL CASES
     bool startupLaunch();
     void setStartupLaunch(const bool);

@@ -5,7 +5,8 @@
 
 AbstractActionTool::AbstractActionTool(QObject* parent)
   : CaptureTool(parent)
-{}
+{
+}
 
 bool AbstractActionTool::isValid() const
 {

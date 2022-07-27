@@ -83,6 +83,7 @@ __flameshot_complete gui -l "print-geometry"    -s "g"  -f   -d "Print geometry 
 __flameshot_complete gui -l "upload"            -s "u"  -f   -d "Upload the screenshot"
 __flameshot_complete gui -l "pin"                       -f   -d "Pin the screenshot to the screen"
 __flameshot_complete gui -l "accept-on-select"  -s "s"  -f   -d "Accept capture as soon as a selection is made"
+__flameshot_complete gui -l "ocr"               -s "o"  -f   -d "Recognize with OCR"
 
 # SCREEN subcommand
 __flameshot_complete screen                             -f
@@ -94,6 +95,7 @@ __flameshot_complete screen -l "region"                 -frk -d "Screenshot regi
 __flameshot_complete screen -l "raw"            -s "r"  -f   -d "Print raw PNG capture"
 __flameshot_complete screen -l "upload"         -s "u"  -f   -d "Upload the screenshot"
 __flameshot_complete screen -l "pin"                    -f   -d "Pin the screenshot to the screen"
+__flameshot_complete screen -l "ocr"            -s "o"  -f   -d "Recognize with OCR"
 
 # FULL command
 __flameshot_complete full                               -f
@@ -103,6 +105,7 @@ __flameshot_complete full   -l "delay"          -s "d"  -frk -d "Delay time in m
 __flameshot_complete full   -l "region"                 -frk -d "Screenshot region to select (WxH+X+Y)" -a "(__flameshot_complete_region full)"
 __flameshot_complete full   -l "raw"            -s "r"  -f   -d "Print raw PNG capture"
 __flameshot_complete full   -l "upload"         -s "u"  -f   -d "Upload the screenshot"
+__flameshot_complete full   -l "ocr"            -s "o"  -f   -d "Recognize with OCR"
 
 # LAUNCHER command doesn't have any completions specific to itself
 

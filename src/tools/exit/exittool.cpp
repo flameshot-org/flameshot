@@ -6,7 +6,8 @@
 
 ExitTool::ExitTool(QObject* parent)
   : AbstractActionTool(parent)
-{}
+{
+}
 
 bool ExitTool::closeOnButtonPressed() const
 {

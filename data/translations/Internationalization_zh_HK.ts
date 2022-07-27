@@ -720,6 +720,23 @@ Please solve them manually in the configuration file.</translation>
     </message>
 </context>
 <context>
+    <name>OcrTool</name>
+    <message>
+        <location filename="../../src/tools/ocr/ocrtool.cpp" line="24"/>
+        <source>Ocr</source>
+        <translation>Ocr</translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/ocr/ocrtool.cpp" line="34"/>
+        <source>Recognize text from the capture with OCR</source>
+        <translation>使用OCR識別選區中的文本</translation>
+    </message>
+    <message>
+        <source>Recognize text from the capture with OCR</source>
+        <translation type="vanished">使用OCR識別選區中的文本</translation>
+    </message>
+</context>
+<context>
     <name>DBusUtils</name>
     <message>
         <source>Unable to connect via DBus</source>

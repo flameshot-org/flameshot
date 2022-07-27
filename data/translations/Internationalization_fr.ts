@@ -732,6 +732,23 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     </message>
 </context>
 <context>
+    <name>OcrTool</name>
+    <message>
+        <location filename="../../src/tools/ocr/ocrtool.cpp" line="24"/>
+        <source>Ocr</source>
+        <translation>Ocr</translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/ocr/ocrtool.cpp" line="34"/>
+        <source>Recognize text from the capture with OCR</source>
+        <translation>Reconnaître le texte de la capture avec OCR</translation>
+    </message>
+    <message>
+        <source>Recognize text from the capture with OCR</source>
+        <translation type="vanished">Reconnaître le texte de la capture avec OCR</translation>
+    </message>
+</context>
+<context>
     <name>DBusUtils</name>
     <message>
         <source>Unable to connect via DBus</source>
