@@ -2,66 +2,12 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "arrowtool.h"
-#include <cmath>
+#include <QtMath>
 
-namespace {
-const int ArrowWidth = 10;
-const int ArrowHeight = 18;
-
-QPainterPath getArrowHead(QPoint p1, QPoint p2, const int thickness)
-{
-    QLineF base(p1, p2);
-    // Create the vector for the position of the base  of the arrowhead
-    QLineF temp(QPoint(0, 0), p2 - p1);
-    int val = ArrowHeight + thickness * 4;
-    if (base.length() < (val - thickness * 2)) {
-        val = static_cast<int>(base.length() + thickness * 2);
-    }
-    temp.setLength(base.length() + thickness * 2 - val);
-    // Move across the line up to the head
-    QPointF bottomTranslation(temp.p2());
-
-    // Rotate base of the arrowhead
-    base.setLength(ArrowWidth + thickness * 2);
-    base.setAngle(base.angle() + 90);
-    // Move to the correct point
-    QPointF temp2 = p1 - base.p2();
-    // Center it
-    QPointF centerTranslation((temp2.x() / 2), (temp2.y() / 2));
-
-    base.translate(bottomTranslation);
-    base.translate(centerTranslation);
-
-    QPainterPath path;
-    path.moveTo(p2);
-    path.lineTo(base.p1());
-    path.lineTo(base.p2());
-    path.lineTo(p2);
-    return path;
-}
-
-// gets a shorter line to prevent overlap in the point of the arrow
-QLine getShorterLine(QPoint p1, QPoint p2, const int thickness)
-{
-    QLineF l(p1, p2);
-    int val = ArrowHeight + thickness * 4;
-    if (l.length() < (val - thickness * 2)) {
-        // here should be 0, but then we lose "angle", so this is hack, but
-        // looks not very bad
-        val = thickness / 4;
-        l.setLength(val);
-    } else {
-        l.setLength(l.length() + thickness * 2 - val);
-    }
-    return l.toLine();
-}
-
-} // unnamed namespace
 
 ArrowTool::ArrowTool(QObject* parent)
   : AbstractTwoPointTool(parent)
 {
-    setPadding(ArrowWidth / 2);
     m_supportsOrthogonalAdj = true;
     m_supportsDiagonalAdj = true;
 }
@@ -86,53 +32,6 @@ QString ArrowTool::description() const
     return tr("Set the Arrow as the paint tool");
 }
 
-QRect ArrowTool::boundingRect() const
-{
-    if (!isValid()) {
-        return {};
-    }
-
-    int offset = size() <= 1 ? 1 : static_cast<int>(round(size() / 2 + 0.5));
-
-    // get min and max arrow pos
-    int min_x = points().first.x();
-    int min_y = points().first.y();
-    int max_x = points().first.x();
-    int max_y = points().first.y();
-    for (int i = 0; i < m_arrowPath.elementCount(); i++) {
-        QPointF pt = m_arrowPath.elementAt(i);
-        if (static_cast<int>(pt.x()) < min_x) {
-            min_x = static_cast<int>(pt.x());
-        }
-        if (static_cast<int>(pt.y()) < min_y) {
-            min_y = static_cast<int>(pt.y());
-        }
-        if (static_cast<int>(pt.x()) > max_x) {
-            max_x = static_cast<int>(pt.x());
-        }
-        if (static_cast<int>(pt.y()) > max_y) {
-            max_y = static_cast<int>(pt.y());
-        }
-    }
-
-    // get min and max line pos
-    int line_pos_min_x =
-      std::min(std::min(points().first.x(), points().second.x()), min_x);
-    int line_pos_min_y =
-      std::min(std::min(points().first.y(), points().second.y()), min_y);
-    int line_pos_max_x =
-      std::max(std::max(points().first.x(), points().second.x()), max_x);
-    int line_pos_max_y =
-      std::max(std::max(points().first.y(), points().second.y()), max_y);
-
-    QRect rect = QRect(line_pos_min_x - offset,
-                       line_pos_min_y - offset,
-                       line_pos_max_x - line_pos_min_x + offset * 2,
-                       line_pos_max_y - line_pos_min_y + offset * 2);
-
-    return rect.normalized();
-}
-
 CaptureTool* ArrowTool::copy(QObject* parent)
 {
     auto* tool = new ArrowTool(parent);
@@ -149,10 +48,94 @@ void ArrowTool::copyParams(const ArrowTool* from, ArrowTool* to)
 void ArrowTool::process(QPainter& painter, const QPixmap& pixmap)
 {
     Q_UNUSED(pixmap)
-    painter.setPen(QPen(color(), size()));
-    painter.drawLine(getShorterLine(points().first, points().second, size()));
-    m_arrowPath = getArrowHead(points().first, points().second, size());
-    painter.fillPath(m_arrowPath, QBrush(color()));
+    QPoint start = points().first;
+    QPoint end = points().second;
+    QLineF line(end , start);
+    QPainterPath path;
+
+    // 起止点线段长度
+    int lineLength = line.length();
+
+    // 随着起止点线段长度变化,动态调整箭头边长
+    double arrowHeight = 0.2 * lineLength;
+    if (arrowHeight < 12) {
+        arrowHeight = 12;
+    } else if (arrowHeight > 52) {
+        arrowHeight = 52;
+    }
+
+    // 箭头内边的高度, 即下图对应的p3, p4点,
+    // 固定为箭头高度的 0.75倍
+    double shortHeight = arrowHeight * 0.75;
+    // 固定箭头的角度为60度, 即等边三角形, 从而求出箭头的斜边的长度
+    double sideLength1 = qSqrt(arrowHeight * arrowHeight * 1.25);
+    double sideLength2 = qSqrt(shortHeight * shortHeight * 1.25);
+
+    // 下图为箭头结构图解剖
+    // s即为起点, e为结束点, 另外通过p1,p2,p3,p4四个坐标构成一个完整的箭头
+    // 
+    //            e
+    //          /   \ 
+    //        /       \
+    //      /  3     4  \   
+    //    1 -  |     |  - 2   
+    //         |     | 
+    //          |   | 
+    //          |   | 
+    //          |   | 
+    //           \ / 
+    //            s
+
+    // 计算线段的角度(相对坐标系)
+    double angle = qAtan2(end.y() - start.y(), end.x() - start.x());
+ 
+    // 2个交叉点坐标
+    QPoint x1(
+        start.x() + (lineLength - arrowHeight) * qCos(angle),
+        start.y() + (lineLength - arrowHeight) * qSin(angle)
+    );
+
+    QPoint x2(
+        start.x() + (lineLength - shortHeight) * qCos(angle),
+        start.y() + (lineLength - shortHeight) * qSin(angle)
+    );
+
+    // p1点
+    QPoint p1(
+        x1.x() + sideLength1 * qCos(angle - M_PI_2) / 2,
+        x1.y() + sideLength1 * qSin(angle - M_PI_2) / 2
+    );
+
+    // p2点
+    QPoint p2(
+        x1.x() + sideLength1 * qCos(angle + M_PI_2) / 2,
+        x1.y() + sideLength1 * qSin(angle + M_PI_2) / 2
+    );
+
+    // p3点
+    QPoint p3(
+        x2.x() + sideLength2 * qCos(angle - M_PI_2) / 4,
+        x2.y() + sideLength2 * qSin(angle - M_PI_2) / 4
+    );
+
+    // p4点
+    QPoint p4(
+        x2.x() + sideLength2 * qCos(angle + M_PI_2) / 4,
+        x2.y() + sideLength2 * qSin(angle + M_PI_2) / 4
+    );
+
+
+    // 开始画路径
+    path.moveTo(start);
+    path.lineTo(p3);
+    path.lineTo(p1);
+    path.lineTo(end);
+    path.lineTo(p2);
+    path.lineTo(p4);
+    path.lineTo(start);// 闭合路径
+
+
+    painter.fillPath(path, QBrush(color()));
 }
 
 void ArrowTool::pressed(CaptureContext& context)
