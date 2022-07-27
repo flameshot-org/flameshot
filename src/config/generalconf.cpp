@@ -445,13 +445,13 @@ void GeneralConf::initCopyOnDoubleClick()
 
 void GeneralConf::initCopyAndCloseAfterUpload()
 {
-    m_copyURLAfterUpload = new QCheckBox(tr("Copy URL after upload"), this);
-    m_copyURLAfterUpload->setToolTip(
+    m_copyAndCloseAfterUpload = new QCheckBox(tr("Copy URL after upload"), this);
+    m_copyAndCloseAfterUpload->setToolTip(
       tr("Copy URL after uploading was successful"));
-    m_scrollAreaLayout->addWidget(m_copyURLAfterUpload);
+    m_scrollAreaLayout->addWidget(m_copyAndCloseAfterUpload);
 
-    connect(m_copyURLAfterUpload, &QCheckBox::clicked, [](bool checked) {
-        ConfigHandler().setCopyURLAfterUpload(checked);
+    connect(m_copyAndCloseAfterUpload, &QCheckBox::clicked, [](bool checked) {
+        ConfigHandler().setCopyAndCloseAfterUpload(checked);
     });
 }
 
