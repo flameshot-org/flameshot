@@ -34,9 +34,9 @@ void ServerRecognizer::handleReply(QNetworkReply* reply)
         QByteArray rawData = reply->readAll();
         QJsonDocument response = QJsonDocument::fromJson(rawData);
         QJsonObject json = response.object();
-        if(!json.contains(QStringLiteral("data"))) {
-            setInfoLabelText(QStringLiteral("Error response from server: %1").
-                             arg(rawData.constData()));
+        if (!json.contains(QStringLiteral("data"))) {
+            setInfoLabelText(QStringLiteral("Error response from server: %1")
+                               .arg(rawData.constData()));
         } else {
             QString data = json[QStringLiteral("data")].toString();
             setRecognizedText(data);
@@ -46,8 +46,8 @@ void ServerRecognizer::handleReply(QNetworkReply* reply)
     } else {
         setInfoLabelText(reply->errorString());
     }
-    FINISH:
-        new QShortcut(Qt::Key_Escape, this, SLOT(close()));
+FINISH:
+    new QShortcut(Qt::Key_Escape, this, SLOT(close()));
 }
 
 void ServerRecognizer::recognize()
@@ -65,4 +65,3 @@ void ServerRecognizer::recognize()
 
     m_NetworkAM->post(request, byteArray);
 }
-

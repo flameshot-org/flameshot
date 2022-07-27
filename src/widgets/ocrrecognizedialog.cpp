@@ -19,7 +19,8 @@ OcrRecognizeDialog::OcrRecognizeDialog(QDialog* parent)
 
     layout = new QVBoxLayout(this);
 
-    m_ocrLabel = new QLabel(tr("Do you want to recognize this capture with OCR?"), this);
+    m_ocrLabel =
+      new QLabel(tr("Do you want to recognize this capture with OCR?"), this);
 
     layout->addWidget(m_ocrLabel);
 

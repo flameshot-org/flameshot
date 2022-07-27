@@ -7,7 +7,8 @@
 
 OcrTool::OcrTool(QObject* parent)
   : AbstractActionTool(parent)
-{}
+{
+}
 
 bool OcrTool::closeOnButtonPressed() const
 {

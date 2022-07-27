@@ -18,8 +18,9 @@ class OcrRecognizerBase : public QWidget
 {
     Q_OBJECT
 public:
-    explicit OcrRecognizerBase(const QPixmap& capture, QWidget* parent = nullptr);
-    
+    explicit OcrRecognizerBase(const QPixmap& capture,
+                               QWidget* parent = nullptr);
+
     LoadSpinner* spinner();
 
     const QString& recognizedText();
@@ -44,7 +45,6 @@ private slots:
     void saveScreenshotToFilesystem();
 
 private:
-
     QPixmap m_pixmap;
 
     QVBoxLayout* m_vLayout;

@@ -139,9 +139,9 @@ void OcrRecognizerBase::showPostRecognizeDialog()
     m_hLayout->addWidget(m_toClipboardButton);
     m_hLayout->addWidget(m_saveToFilesystemButton);
 
-    connect(m_copyTextButton, 
-            &QPushButton::clicked, 
-            this, 
+    connect(m_copyTextButton,
+            &QPushButton::clicked,
+            this,
             &OcrRecognizerBase::copyText);
     connect(m_toClipboardButton,
             &QPushButton::clicked,

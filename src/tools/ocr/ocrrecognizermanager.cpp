@@ -13,28 +13,33 @@ OcrRecognizerManager::OcrRecognizerManager(QObject* parent)
   : QObject(parent)
   , m_ocrRecognizerBase(nullptr)
 {
-    // TODO - implement OcrRecognizer for other recognizer services and selection among them
+    // TODO - implement OcrRecognizer for other recognizer services and
+    // selection among them
     m_ocrRecognizerPlugin = OCR_RECOGNIZER_SERVICES_DEFAULT;
     init();
 }
 
 void OcrRecognizerManager::init()
 {
-    // TODO - implement OcrRecognizer for other recognizer services and selection among them
+    // TODO - implement OcrRecognizer for other recognizer services and
+    // selection among them
 }
 
 OcrRecognizerBase* OcrRecognizerManager::recognizer(const QPixmap& capture,
-                                              QWidget* parent)
+                                                    QWidget* parent)
 {
-    // TODO - implement OcrRecognizer for other recognizer services and selection among them
-    m_ocrRecognizerBase = (OcrRecognizerBase*)(new ServerRecognizer(capture, parent));
+    // TODO - implement OcrRecognizer for other recognizer services and
+    // selection among them
+    m_ocrRecognizerBase =
+      (OcrRecognizerBase*)(new ServerRecognizer(capture, parent));
     if (m_ocrRecognizerBase && !capture.isNull()) {
         m_ocrRecognizerBase->recognize();
     }
     return m_ocrRecognizerBase;
 }
 
-OcrRecognizerBase* OcrRecognizerManager::recognizer(const QString& ocrRecognizerPlugin)
+OcrRecognizerBase* OcrRecognizerManager::recognizer(
+  const QString& ocrRecognizerPlugin)
 {
     m_ocrRecognizerPlugin = ocrRecognizerPlugin;
     init();

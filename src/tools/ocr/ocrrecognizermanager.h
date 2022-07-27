@@ -18,7 +18,7 @@ public:
     explicit OcrRecognizerManager(QObject* parent = nullptr);
 
     OcrRecognizerBase* recognizer(const QPixmap& capture,
-                              QWidget* parent = nullptr);
+                                  QWidget* parent = nullptr);
     OcrRecognizerBase* recognizer(const QString& ocrRecognizerPlugin);
 
     const QString& ocrRecognizerPlugin();

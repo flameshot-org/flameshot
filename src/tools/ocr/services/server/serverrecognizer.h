@@ -15,7 +15,8 @@ class ServerRecognizer : public OcrRecognizerBase
 {
     Q_OBJECT
 public:
-    explicit ServerRecognizer(const QPixmap& capture, QWidget* parent = nullptr);
+    explicit ServerRecognizer(const QPixmap& capture,
+                              QWidget* parent = nullptr);
 
 private slots:
     void handleReply(QNetworkReply* reply);
