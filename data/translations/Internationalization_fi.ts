@@ -47,7 +47,7 @@
     <message>
         <location filename="../../src/tools/launcher/applaunchertool.cpp" line="33"/>
         <source>Choose an app to open the capture</source>
-        <translation>Valitse millä sovelluksella kaappaus avataan</translation>
+        <translation>Valitse sovellus jossa kaappaus avataan</translation>
     </message>
 </context>
 <context>
@@ -94,7 +94,7 @@
     <message>
         <location filename="../../src/tools/arrow/arrowtool.cpp" line="86"/>
         <source>Set the Arrow as the paint tool</source>
-        <translation>Aseta nuoli maalaustyökaluksi</translation>
+        <translation>Aseta nuoli työkalu</translation>
     </message>
 </context>
 <context>
@@ -170,7 +170,7 @@
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="176"/>
         <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_capturelauncher.h" line="178"/>
         <source>Capture Launcher</source>
-        <translation>Capture Launcher</translation>
+        <translation>Kaappauksen laukaisija</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="34"/>
@@ -296,7 +296,7 @@ Paina väliyöntiä avataksesi sivupaneelin.</translation>
     <message>
         <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="86"/>
         <source>Add an autoincrementing counter bubble</source>
-        <translation>Lisää automaattisesti kasvava laskurikupla</translation>
+        <translation>Lisää laskurikupla, automaattisesti kasvava</translation>
     </message>
 </context>
 <context>
@@ -309,7 +309,7 @@ Paina väliyöntiä avataksesi sivupaneelin.</translation>
     <message>
         <location filename="../../src/tools/circle/circletool.cpp" line="30"/>
         <source>Set the Circle as the paint tool</source>
-        <translation>Aseta ympyrä maalaustyökaluksi</translation>
+        <translation>Aseta ympyrä työkalu</translation>
     </message>
 </context>
 <context>
@@ -745,7 +745,7 @@ Ratkaise ne käsin muuttamalla asetustiedostoa.</translation>
     <message>
         <location filename="../../src/tools/exit/exittool.cpp" line="33"/>
         <source>Leave the capture screen</source>
-        <translation>Jätä kaappausnäyttö</translation>
+        <translation>Poistu kaappauksesta</translation>
     </message>
 </context>
 <context>
@@ -763,7 +763,7 @@ Ratkaise ne käsin muuttamalla asetustiedostoa.</translation>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="30"/>
         <source>Preview:</source>
-        <translation>Esikatsele:</translation>
+        <translation>Esikatselu:</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="73"/>
@@ -971,12 +971,12 @@ Ratkaise ne käsin muuttamalla asetustiedostoa.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="273"/>
         <source>Show desktop notifications</source>
-        <translation>Näytä työpöytäilmoitukset</translation>
+        <translation>Näytä ilmoitukset</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="286"/>
         <source>Show tray icon</source>
-        <translation>Näytä ilmoitusalueen kuvake</translation>
+        <translation>Näytä kuvake paneelissa</translation>
     </message>
     <message>
         <source>Show the systemtray icon</source>
@@ -1010,7 +1010,7 @@ Ratkaise ne käsin muuttamalla asetustiedostoa.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="356"/>
         <source>Allow multiple flameshot GUI instances simultaneously</source>
-        <translation>Salli useita Flameshotin käyttöliittymän ilmentymiä samanaikaisesti</translation>
+        <translation>Salli useita Flameshot käyttöliittymiä samanaikaisesti</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="369"/>
@@ -1078,7 +1078,7 @@ Ratkaise ne käsin muuttamalla asetustiedostoa.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="274"/>
         <source>Enable desktop notifications</source>
-        <translation>Käytä työpöytäilmoituksia</translation>
+        <translation>Käytä ilmoituksia</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="287"/>
@@ -1153,7 +1153,7 @@ Ratkaise ne käsin muuttamalla asetustiedostoa.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="489"/>
         <source>Preferred save file extension:</source>
-        <translation>Ensisijainen tallennuksen tiedostopääte:</translation>
+        <translation>Tallennuksen tiedostopääte:</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="518"/>
@@ -1406,7 +1406,7 @@ Ratkaise ne käsin muuttamalla asetustiedostoa.</translation>
     <message>
         <location filename="../../src/tools/imgupload/imguploadertool.cpp" line="33"/>
         <source>Upload the selection</source>
-        <translation>Lähetä valinta</translation>
+        <translation>Lähetä valinta imgur.com</translation>
     </message>
 </context>
 <context>
@@ -1438,7 +1438,7 @@ Ratkaise ne käsin muuttamalla asetustiedostoa.</translation>
     <message>
         <location filename="../../src/tools/imgupload/storages/imgur/imguruploader.cpp" line="93"/>
         <source>Unable to open the URL.</source>
-        <translation>URL-osoitteen avaaminen ei onnistunut.</translation>
+        <translation>Osoitteen avaaminen ei onnistunut.</translation>
     </message>
     <message>
         <source>URL copied to clipboard.</source>
@@ -1601,7 +1601,7 @@ Ratkaise ne käsin muuttamalla asetustiedostoa.</translation>
     <message>
         <location filename="../../src/tools/invert/inverttool.cpp" line="35"/>
         <source>Set Inverter as the paint tool</source>
-        <translation>Aseta invertteri maalaustyökaluksi</translation>
+        <translation>Aseta käänteinen väri työkalu</translation>
     </message>
 </context>
 <context>
@@ -1609,12 +1609,12 @@ Ratkaise ne käsin muuttamalla asetustiedostoa.</translation>
     <message>
         <location filename="../../src/tools/line/linetool.cpp" line="22"/>
         <source>Line</source>
-        <translation>Line</translation>
+        <translation>Viiva</translation>
     </message>
     <message>
         <location filename="../../src/tools/line/linetool.cpp" line="32"/>
         <source>Set the Line as the paint tool</source>
-        <translation>Aseta viiva maalaustyökaluksi</translation>
+        <translation>Aseta viiva työkalu</translation>
     </message>
 </context>
 <context>
@@ -1622,12 +1622,12 @@ Ratkaise ne käsin muuttamalla asetustiedostoa.</translation>
     <message>
         <location filename="../../src/tools/marker/markertool.cpp" line="23"/>
         <source>Marker</source>
-        <translation>Merkki</translation>
+        <translation>Merkintäkynä</translation>
     </message>
     <message>
         <location filename="../../src/tools/marker/markertool.cpp" line="33"/>
         <source>Set the Marker as the paint tool</source>
-        <translation>Aseta Marker maalaustyökaluksi</translation>
+        <translation>Aseta merkintäkynä työkalu</translation>
     </message>
 </context>
 <context>
@@ -1653,7 +1653,7 @@ Ratkaise ne käsin muuttamalla asetustiedostoa.</translation>
     <message>
         <location filename="../../src/tools/pencil/penciltool.cpp" line="28"/>
         <source>Set the Pencil as the paint tool</source>
-        <translation>Aseta lyijykynä maalaustyökaluksi</translation>
+        <translation>Aseta kynä työkalu</translation>
     </message>
 </context>
 <context>
@@ -1666,7 +1666,7 @@ Ratkaise ne käsin muuttamalla asetustiedostoa.</translation>
     <message>
         <location filename="../../src/tools/pin/pintool.cpp" line="35"/>
         <source>Pin image on the desktop</source>
-        <translation>Pin image on the desktop</translation>
+        <translation>Kiinnitä kuva työpöydälle</translation>
     </message>
 </context>
 <context>
@@ -1674,7 +1674,7 @@ Ratkaise ne käsin muuttamalla asetustiedostoa.</translation>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="225"/>
         <source>Context menu</source>
-        <translation>Context menu</translation>
+        <translation>Pudotusvalikko</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="227"/>
@@ -1697,7 +1697,7 @@ Ratkaise ne käsin muuttamalla asetustiedostoa.</translation>
     <message>
         <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="34"/>
         <source>Set Pixelate as the paint tool</source>
-        <translation>Aseta Pixelate maalaustyökaluksi</translation>
+        <translation>Aseta pikselöinti työkalu</translation>
     </message>
 </context>
 <context>
@@ -1788,7 +1788,7 @@ Ratkaise ne käsin muuttamalla asetustiedostoa.</translation>
     <message>
         <location filename="../../src/main.cpp" line="158"/>
         <source>Open the capture launcher.</source>
-        <translation>Avaa kaappauskäynnistin.</translation>
+        <translation>Avaa laukaisija.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="161"/>
@@ -1907,7 +1907,7 @@ Ratkaise ne käsin muuttamalla asetustiedostoa.</translation>
     <message>
         <location filename="../../src/main.cpp" line="246"/>
         <source>Invalid region, use &apos;WxH+X+Y&apos; or &apos;all&apos; or &apos;screen0/screen1/...&apos;.</source>
-        <translation>Virheellinen alue, käytä &quot;LxK+X+Y&quot; tai &quot;kaikki&quot; tai &apos;screen0/screen1/...&apos;.</translation>
+        <translation>Virheellinen alue, käytä &quot;LxK+X+Y&quot; tai &quot;kaikki&quot; tai &quot;screen0/screen1/...&quot;.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="259"/>
@@ -2010,7 +2010,7 @@ Sinun on ehkä vältettävä &quot;#&quot; merkkiä kuten &quot;\#FFF&quot;</tra
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="71"/>
         <source>Hello, I&apos;m here! Click icon in the tray to take a screenshot or click with a right button to see more options.</source>
-        <translation>Hei, olen täällä! Ota kaappaus napsauttamalla paneelin kuvaketta tai hiiren oikealla nähdäksesi lisää vaihtoehtoja.</translation>
+        <translation>Hei, olen täällä! Kaappaa napsauttamalla paneelin kuvaketta tai hiiren oikea lisää vaihtoehtoja.</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="148"/>
@@ -2110,7 +2110,7 @@ Sinun on ehkä vältettävä &quot;#&quot; merkkiä kuten &quot;\#FFF&quot;</tra
     <message>
         <location filename="../../src/tools/rectangle/rectangletool.cpp" line="32"/>
         <source>Set the Rectangle as the paint tool</source>
-        <translation>Aseta suorakulmio maalaustyökaluksi</translation>
+        <translation>Aseta suorakulmio työkalu</translation>
     </message>
 </context>
 <context>
@@ -2123,7 +2123,7 @@ Sinun on ehkä vältettävä &quot;#&quot; merkkiä kuten &quot;\#FFF&quot;</tra
     <message>
         <location filename="../../src/tools/redo/redotool.cpp" line="33"/>
         <source>Redo the next modification</source>
-        <translation>Toista seuraava muutos</translation>
+        <translation>Toista muutos uudelleen</translation>
     </message>
 </context>
 <context>
@@ -2171,7 +2171,7 @@ Sinun on ehkä vältettävä &quot;#&quot; merkkiä kuten &quot;\#FFF&quot;</tra
     <message>
         <location filename="../../src/tools/selection/selectiontool.cpp" line="35"/>
         <source>Set Selection as the paint tool</source>
-        <translation>Aseta valinta maalaustyökaluksi</translation>
+        <translation>Aseta valinta työkalu</translation>
     </message>
 </context>
 <context>
@@ -2366,7 +2366,7 @@ Sinun on ehkä vältettävä &quot;#&quot; merkkiä kuten &quot;\#FFF&quot;</tra
     <message>
         <location filename="../../src/tools/sizeindicator/sizeindicatortool.cpp" line="33"/>
         <source>Show X and Y dimensions of the selection</source>
-        <translation>Näytä valinnan X- ja Y-ulottuvuudet</translation>
+        <translation>Näytä valinnan mitat X ja Y</translation>
     </message>
     <message>
         <source>Show the dimensions of the selection (X Y)</source>
@@ -2418,7 +2418,7 @@ Sinun on ehkä vältettävä &quot;#&quot; merkkiä kuten &quot;\#FFF&quot;</tra
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="50"/>
         <source>Day Name (mon)</source>
-        <translation>Day Name (mon)</translation>
+        <translation>Päivän nimi (ma)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="51"/>
@@ -2428,7 +2428,7 @@ Sinun on ehkä vältettävä &quot;#&quot; merkkiä kuten &quot;\#FFF&quot;</tra
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="53"/>
         <source>Day (01-31)</source>
-        <translation>Day (01-31)</translation>
+        <translation>Päivä (01-31)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="54"/>
@@ -2438,7 +2438,7 @@ Sinun on ehkä vältettävä &quot;#&quot; merkkiä kuten &quot;\#FFF&quot;</tra
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="55"/>
         <source>Day (001-366)</source>
-        <translation>Day (001-366)</translation>
+        <translation>Vuosipäivä (001-366)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="61"/>
@@ -2453,7 +2453,7 @@ Sinun on ehkä vältettävä &quot;#&quot; merkkiä kuten &quot;\#FFF&quot;</tra
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="63"/>
         <source>Minute (00-59)</source>
-        <translation>Minute (00-59)</translation>
+        <translation>Minuutti (00-59)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="64"/>
@@ -2463,12 +2463,12 @@ Sinun on ehkä vältettävä &quot;#&quot; merkkiä kuten &quot;\#FFF&quot;</tra
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="67"/>
         <source>Full Date (%m/%d/%y)</source>
-        <translation>Full Date (%m/%d/%y)</translation>
+        <translation>Päivämäärä (%m/%d/%y)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="69"/>
         <source>Full Date (%Y-%m-%d)</source>
-        <translation>Full Date (%Y-%m-%d)</translation>
+        <translation>Päivämäärä (%Y-%m-%d)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="58"/>
@@ -2550,7 +2550,7 @@ Sinun on ehkä vältettävä &quot;#&quot; merkkiä kuten &quot;\#FFF&quot;</tra
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="116"/>
         <source>&amp;Open Launcher</source>
-        <translation>&amp;Avaa käynnistin</translation>
+        <translation>&amp;Avaa laukaisija</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="121"/>
@@ -2714,7 +2714,7 @@ Sinun on ehkä vältettävä &quot;#&quot; merkkiä kuten &quot;\#FFF&quot;</tra
     <message>
         <location filename="../../src/widgets/uploadlineitem.cpp" line="51"/>
         <source>Are you sure you want to delete a screenshot from the latest uploads and server?</source>
-        <translation>Haluatko varmasti poistaa kaappauksen uusista lähetyksistä ja palvelimelta?</translation>
+        <translation>Haluatko varmasti poistaa kaappauksen lähetyksistä ja palvelimelta?</translation>
     </message>
 </context>
 <context>
@@ -2740,7 +2740,7 @@ Sinun on ehkä vältettävä &quot;#&quot; merkkiä kuten &quot;\#FFF&quot;</tra
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="68"/>
         <source>UI Color Editor</source>
-        <translation>Käyttöliittymän värimuokkain</translation>
+        <translation>Käyttöliittymän väri</translation>
     </message>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="74"/>
