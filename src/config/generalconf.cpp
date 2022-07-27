@@ -38,7 +38,9 @@ GeneralConf::GeneralConf(QWidget* parent)
 #endif
     initShowTrayIcon();
     initShowDesktopNotification();
+#if !defined(DISABLE_UPDATE_CHECKER)
     initCheckForUpdates();
+#endif
     initShowStartupLaunchMessage();
     initAllowMultipleGuiInstances();
     initSaveLastRegion();
@@ -89,7 +91,9 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
     m_ocrWithoutConfirmation->setChecked(config.ocrWithoutConfirmation());
     m_historyConfirmationToDelete->setChecked(
       config.historyConfirmationToDelete());
+#if !defined(DISABLE_UPDATE_CHECKER)
     m_checkForUpdates->setChecked(config.checkForUpdates());
+#endif
     m_allowMultipleGuiInstances->setChecked(config.allowMultipleGuiInstances());
     m_showMagnifier->setChecked(config.showMagnifier());
     m_squareMagnifier->setChecked(config.squareMagnifier());
@@ -139,10 +143,12 @@ void GeneralConf::showDesktopNotificationChanged(bool checked)
     ConfigHandler().setShowDesktopNotification(checked);
 }
 
+#if !defined(DISABLE_UPDATE_CHECKER)
 void GeneralConf::checkForUpdatesChanged(bool checked)
 {
     ConfigHandler().setCheckForUpdates(checked);
 }
+#endif
 
 void GeneralConf::allowMultipleGuiInstancesChanged(bool checked)
 {
@@ -346,6 +352,7 @@ void GeneralConf::initConfigButtons()
             &GeneralConf::resetConfiguration);
 }
 
+#if !defined(DISABLE_UPDATE_CHECKER)
 void GeneralConf::initCheckForUpdates()
 {
     m_checkForUpdates = new QCheckBox(tr("Automatic check for updates"), this);
@@ -357,6 +364,7 @@ void GeneralConf::initCheckForUpdates()
             this,
             &GeneralConf::checkForUpdatesChanged);
 }
+#endif
 
 void GeneralConf::initAllowMultipleGuiInstances()
 {
@@ -437,14 +445,13 @@ void GeneralConf::initCopyOnDoubleClick()
 
 void GeneralConf::initCopyAndCloseAfterUpload()
 {
-    m_copyAndCloseAfterUpload =
-      new QCheckBox(tr("Copy URL after upload"), this);
-    m_copyAndCloseAfterUpload->setToolTip(
-      tr("Copy URL and close window after uploading was successful"));
-    m_scrollAreaLayout->addWidget(m_copyAndCloseAfterUpload);
+    m_copyURLAfterUpload = new QCheckBox(tr("Copy URL after upload"), this);
+    m_copyURLAfterUpload->setToolTip(
+      tr("Copy URL after uploading was successful"));
+    m_scrollAreaLayout->addWidget(m_copyURLAfterUpload);
 
-    connect(m_copyAndCloseAfterUpload, &QCheckBox::clicked, [](bool checked) {
-        ConfigHandler().setCopyAndCloseAfterUpload(checked);
+    connect(m_copyURLAfterUpload, &QCheckBox::clicked, [](bool checked) {
+        ConfigHandler().setCopyURLAfterUpload(checked);
     });
 }
 

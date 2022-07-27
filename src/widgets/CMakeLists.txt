@@ -20,7 +20,6 @@ target_sources(
         orientablepushbutton.h
         uploadhistory.h
         uploadlineitem.h
-        updatenotificationwidget.h
         colorpickerwidget.h
         imguploaddialog.h
         capture/capturetoolobjects.h
@@ -29,7 +28,8 @@ target_sources(
 
 target_sources(
         flameshot
-        PRIVATE capturelauncher.cpp
+        PRIVATE
+        capturelauncher.cpp
         draggablewidgetmaker.cpp
         imagelabel.cpp
         trayicon.cpp
@@ -39,9 +39,17 @@ target_sources(
         orientablepushbutton.cpp
         uploadhistory.cpp
         uploadlineitem.cpp
-        updatenotificationwidget.cpp
         colorpickerwidget.cpp
         imguploaddialog.cpp
         capture/capturetoolobjects.cpp
         ocrrecognizedialog.cpp
 )
+
+if (NOT DISABLE_UPDATE_CHECKER)
+    target_sources(
+            flameshot
+            PRIVATE
+            updatenotificationwidget.h
+            updatenotificationwidget.cpp
+    )
+endif()

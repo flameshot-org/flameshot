@@ -436,11 +436,7 @@ void Flameshot::exportCapture(QPixmap capture,
                   if (!(exportTasks & CR::COPY)) {
                       FlameshotDaemon::copyToClipboard(
                         url.toString(), tr("URL copied to clipboard."));
-                      widget->close();
-                  } else {
-                      widget->showPostUploadDialog();
                   }
-              } else {
                   widget->showPostUploadDialog();
               }
           });

@@ -29,7 +29,6 @@
 #include "src/widgets/orientablepushbutton.h"
 #include "src/widgets/panel/sidepanelwidget.h"
 #include "src/widgets/panel/utilitypanel.h"
-#include "src/widgets/updatenotificationwidget.h"
 #include <QApplication>
 #include <QDateTime>
 #include <QDebug>
@@ -41,6 +40,10 @@
 #include <QScreen>
 #include <QShortcut>
 #include <draggablewidgetmaker.h>
+
+#if !defined(DISABLE_UPDATE_CHECKER)
+#include "src/widgets/updatenotificationwidget.h"
+#endif
 
 #define MOUSE_DISTANCE_TO_START_MOVING 3
 
@@ -64,7 +67,9 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
   , m_toolWidget(nullptr)
   , m_colorPicker(nullptr)
   , m_lastMouseWheel(0)
+#if !defined(DISABLE_UPDATE_CHECKER)
   , m_updateNotificationWidget(nullptr)
+#endif
   , m_activeToolIsMoved(false)
   , m_panel(nullptr)
   , m_sidePanel(nullptr)
@@ -1128,6 +1133,7 @@ void CaptureWidget::initPanel()
     m_panel->fillCaptureTools(m_captureToolObjects.captureToolObjects());
 }
 
+#if !defined(DISABLE_UPDATE_CHECKER)
 void CaptureWidget::showAppUpdateNotification(const QString& appLatestVersion,
                                               const QString& appLatestUrl)
 {
@@ -1160,6 +1166,7 @@ void CaptureWidget::showAppUpdateNotification(const QString& appLatestVersion,
     makeChild(m_updateNotificationWidget);
     m_updateNotificationWidget->show();
 }
+#endif
 
 void CaptureWidget::initSelection()
 {
