@@ -214,4 +214,18 @@ private:
     // For start moving after more than X offset
     QPoint m_startMovePos;
     bool m_startMove;
+
+    // undo mechanism for keyboard moving
+    QTimer* m_keyboardMover;
+
+    enum class Direction
+    {
+        Up,
+        Down,
+        Left,
+        Right,
+        None
+    };
+    Direction m_direction;
+    bool m_moveFast;
 };

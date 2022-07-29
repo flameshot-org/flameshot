@@ -253,6 +253,42 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
     }
 
     updateCursor();
+
+    // keyboard move undo timer
+    m_keyboardMover = new QTimer(this);
+    m_keyboardMover->setSingleShot(false);
+
+    connect(m_keyboardMover, &QTimer::timeout, this, [=]() {
+        update(paddedUpdateRect(activeToolObject()->boundingRect()));
+        QPoint move;
+        switch (m_direction) {
+            case Direction::Up:
+                move = QPoint(0, -1);
+                break;
+            case Direction::Down:
+                move = QPoint(0, 1);
+                break;
+            case Direction::Left:
+                move = QPoint(-1, 0);
+                break;
+            case Direction::Right:
+                move = QPoint(1, 0);
+                break;
+            default:
+                move = QPoint(0, 0);
+                break;
+        }
+
+        if (m_moveFast) {
+            move *= 10;
+        }
+
+        activeToolObject()->move(*activeToolObject()->pos() + move);
+        drawToolsData();
+    });
+    m_keyboardMover->setTimerType(Qt::PreciseTimer);
+
+    setFocusPolicy(Qt::StrongFocus);
 }
 
 CaptureWidget::~CaptureWidget()
@@ -278,6 +314,8 @@ CaptureWidget::~CaptureWidget()
     } else {
         emit Flameshot::instance()->captureFailed();
     }
+
+    delete m_keyboardMover;
 }
 
 void CaptureWidget::initButtons()
@@ -924,6 +962,75 @@ void CaptureWidget::setToolSize(int size)
 
 void CaptureWidget::keyPressEvent(QKeyEvent* e)
 {
+    if (activeToolObject().isNull()) {
+
+        if (e->modifiers() == Qt::ShiftModifier) {
+            switch (e->key()) {
+                case Qt::Key_Left:
+                    m_selection->resizeLeft();
+                    break;
+                case Qt::Key_Right:
+                    m_selection->resizeRight();
+                    break;
+                case Qt::Key_Up:
+                    m_selection->resizeUp();
+                    break;
+                case Qt::Key_Down:
+                    m_selection->resizeDown();
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (e->key()) {
+                case Qt::Key_Left:
+                    m_selection->moveLeft();
+                    break;
+                case Qt::Key_Right:
+                    m_selection->moveRight();
+                    break;
+                case Qt::Key_Up:
+                    m_selection->moveUp();
+                    break;
+                case Qt::Key_Down:
+                    m_selection->moveDown();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    } else {
+        if (!e->isAutoRepeat()) {
+            switch (e->key()) {
+                case Qt::Key_Left:
+                    m_direction = Direction::Left;
+                    break;
+                case Qt::Key_Right:
+                    m_direction = Direction::Right;
+                    break;
+                case Qt::Key_Up:
+                    m_direction = Direction::Up;
+                    break;
+                case Qt::Key_Down:
+                    m_direction = Direction::Down;
+                    break;
+                default:
+                    m_direction = Direction::None;
+                    break;
+            }
+
+            if (e->modifiers() == Qt::ShiftModifier) {
+                m_moveFast = true;
+            } else {
+                m_moveFast = false;
+            }
+
+            m_captureToolObjectsBackup = m_captureToolObjects;
+            m_keyboardMover->start(30);
+        }
+    }
+
     // If the key is a digit, change the tool size
     bool ok;
     int digit = e->text().toInt(&ok);
@@ -954,6 +1061,14 @@ void CaptureWidget::keyPressEvent(QKeyEvent* e)
 
 void CaptureWidget::keyReleaseEvent(QKeyEvent* e)
 {
+    if ((e->key() == Qt::Key_Left || e->key() == Qt::Key_Right ||
+         e->key() == Qt::Key_Up || e->key() == Qt::Key_Down) &&
+        !e->isAutoRepeat()) {
+        m_keyboardMover->stop();
+        m_moveFast = false;
+        pushObjectsStateToUndoStack();
+    }
+
     if (e->key() == Qt::Key_Control) {
         m_adjustmentButtonPressed = false;
         updateCursor();
@@ -1489,33 +1604,6 @@ void CaptureWidget::initShortcuts()
     newShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_TOGGLE_PANEL")),
                 this,
                 SLOT(togglePanel()));
-
-    newShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_RESIZE_LEFT")),
-                m_selection,
-                SLOT(resizeLeft()));
-    newShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_RESIZE_RIGHT")),
-                m_selection,
-                SLOT(resizeRight()));
-    newShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_RESIZE_UP")),
-                m_selection,
-                SLOT(resizeUp()));
-    newShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_RESIZE_DOWN")),
-                m_selection,
-                SLOT(resizeDown()));
-
-    newShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_MOVE_LEFT")),
-                m_selection,
-                SLOT(moveLeft()));
-    newShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_MOVE_RIGHT")),
-                m_selection,
-                SLOT(moveRight()));
-    newShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_MOVE_UP")),
-                m_selection,
-                SLOT(moveUp()));
-    newShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_MOVE_DOWN")),
-                m_selection,
-                SLOT(moveDown()));
-
     newShortcut(
       QKeySequence(ConfigHandler().shortcut("TYPE_DELETE_CURRENT_TOOL")),
       this,
