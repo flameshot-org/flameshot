@@ -132,9 +132,6 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
                 topLeft.setY(topLeftScreen.y());
             }
         }
-        show();
-        move(topLeft);
-        resize(pixmap().size());
 #elif defined(Q_OS_MACOS)
         // Emulate fullscreen mode
         //        setWindowFlags(Qt::WindowStaysOnTopHint |
@@ -254,6 +251,10 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
     }
 
     updateCursor();
+
+    show();
+    move(topLeft);
+    resize(pixmap().size());
 }
 
 CaptureWidget::~CaptureWidget()
