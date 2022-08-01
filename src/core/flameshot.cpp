@@ -116,7 +116,7 @@ CaptureWidget* Flameshot::gui(const CaptureRequest& req)
         m_captureWindow = new CaptureWidget(req);
 
 #ifdef Q_OS_WIN
-        m_captureWindow->show();
+        // m_captureWindow->show(); // No more needed
 #elif defined(Q_OS_MACOS)
         // In "Emulate fullscreen mode"
         m_captureWindow->showFullScreen();

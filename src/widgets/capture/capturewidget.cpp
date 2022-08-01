@@ -132,6 +132,7 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
                 topLeft.setY(topLeftScreen.y());
             }
         }
+        show();
         move(topLeft);
         resize(pixmap().size());
 #elif defined(Q_OS_MACOS)
