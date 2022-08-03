@@ -102,6 +102,7 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
         switch (m_info.windowManager()) {
             case DesktopInfo::GNOME:
             case DesktopInfo::KDE:
+            case DesktopInfo::QTILE:
             case DesktopInfo::SWAY: {
                 freeDesktopPortal(ok, res);
                 break;
@@ -110,7 +111,7 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
                 ok = false;
                 AbstractLogger::error()
                   << tr("Unable to detect desktop environment (GNOME? KDE? "
-                        "Sway? ...)");
+                        "Qile? Sway? ...)");
                 AbstractLogger::error()
                   << tr("Hint: try setting the XDG_CURRENT_DESKTOP environment "
                         "variable.");
