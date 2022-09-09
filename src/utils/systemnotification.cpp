@@ -14,7 +14,7 @@
 
 // work-around for snap, which cannot install icons into
 // the system folder, so instead the absolute path to the
-// icon (saved somwhere in /snap/flameshot/...) is passed
+// icon (saved somewhere in /snap/flameshot/...) is passed
 #ifndef FLAMESHOT_ICON
 #define FLAMESHOT_ICON "flameshot"
 #endif

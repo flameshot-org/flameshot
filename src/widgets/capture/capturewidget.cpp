@@ -1101,6 +1101,8 @@ void CaptureWidget::initSelection()
         m_context.selection = extendedRect(m_selection->geometry());
         emit m_selection->geometrySettled();
     }
+
+    updateSizeIndicator();
 }
 
 void CaptureWidget::setState(CaptureToolButton* b)
@@ -1200,6 +1202,7 @@ void CaptureWidget::handleToolSignal(CaptureTool::Request r)
                 w->setAttribute(Qt::WA_DeleteOnClose);
                 w->activateWindow();
                 w->show();
+                Flameshot::instance()->setExternalWidget(true);
             }
             break;
         case CaptureTool::REQ_INCREASE_TOOL_SIZE:
