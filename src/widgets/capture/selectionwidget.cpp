@@ -369,6 +369,26 @@ void SelectionWidget::resizeDown()
     setGeometryByKeyboard(geometry().adjusted(0, 0, 0, 1));
 }
 
+void SelectionWidget::symResizeLeft()
+{
+    setGeometryByKeyboard(geometry().adjusted(1, 0, -1, 0));
+}
+
+void SelectionWidget::symResizeRight()
+{
+    setGeometryByKeyboard(geometry().adjusted(-1, 0, 1, 0));
+}
+
+void SelectionWidget::symResizeUp()
+{
+    setGeometryByKeyboard(geometry().adjusted(0, -1, 0, 1));
+}
+
+void SelectionWidget::symResizeDown()
+{
+    setGeometryByKeyboard(geometry().adjusted(0, 1, 0, -1));
+}
+
 void SelectionWidget::updateAreas()
 {
     QRect r = rect();
