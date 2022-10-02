@@ -15,6 +15,7 @@ public:
         GNOME,
         KDE,
         OTHER,
+        QTILE,
         SWAY
     };
 
