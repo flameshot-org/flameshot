@@ -316,8 +316,10 @@ void SelectionWidget::parentMouseMoveEvent(QMouseEvent* e)
             if (m_activeSide) {
                 newLeft = pos.x();
                 if (preserveAspect) {
-                    /* By default bottom edge moves when dragging sides, this behavior feels natural */
-                    newBottom = oldTop + (int)(((float)(oldRight - pos.x())) / aspectRatio);
+                    /* By default bottom edge moves when dragging sides, this
+                     * behavior feels natural */
+                    newBottom = oldTop + (int)(((float)(oldRight - pos.x())) /
+                                               aspectRatio);
                 }
             }
             break;
@@ -325,7 +327,8 @@ void SelectionWidget::parentMouseMoveEvent(QMouseEvent* e)
             if (m_activeSide) {
                 newRight = pos.x();
                 if (preserveAspect) {
-                    newBottom = oldTop + (int)(((float)(pos.x() - oldLeft)) / aspectRatio);
+                    newBottom = oldTop + (int)(((float)(pos.x() - oldLeft)) /
+                                               aspectRatio);
                 }
             }
             break;
@@ -333,8 +336,11 @@ void SelectionWidget::parentMouseMoveEvent(QMouseEvent* e)
             if (m_activeSide) {
                 newTop = pos.y();
                 if (preserveAspect) {
-                    /* By default right edge moves when dragging sides, this behavior feels natural */
-                    newRight = oldLeft + (int)(((float)(oldBottom - pos.y()) * aspectRatio));
+                    /* By default right edge moves when dragging sides, this
+                     * behavior feels natural */
+                    newRight =
+                      oldLeft +
+                      (int)(((float)(oldBottom - pos.y()) * aspectRatio));
                 }
             }
             break;
@@ -342,7 +348,8 @@ void SelectionWidget::parentMouseMoveEvent(QMouseEvent* e)
             if (m_activeSide) {
                 newBottom = pos.y();
                 if (preserveAspect) {
-                    newRight = oldLeft + (int)(((float)(pos.y() - oldTop) * aspectRatio));
+                    newRight = oldLeft +
+                               (int)(((float)(pos.y() - oldTop) * aspectRatio));
                 }
             }
             break;
