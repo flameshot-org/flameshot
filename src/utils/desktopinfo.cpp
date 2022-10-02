@@ -31,6 +31,9 @@ DesktopInfo::WM DesktopInfo::windowManager()
         if (desktop.contains(QLatin1String("GNOME"), Qt::CaseInsensitive)) {
             return DesktopInfo::GNOME;
         }
+        if (desktop.contains(QLatin1String("qtile"), Qt::CaseInsensitive)) {
+            return DesktopInfo::QTILE;
+        }
         if (desktop.contains(QLatin1String("sway"), Qt::CaseInsensitive)) {
             return DesktopInfo::SWAY;
         }
