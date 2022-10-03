@@ -76,6 +76,16 @@ if (WIN32)
     endif ()
 endif ()
 
+if(MSVC)
+    OPTION(USE_MP "use multiple" ON)
+    OPTION(ProjectConfig_Global_COMPILE_FLAGS_WITH_MP
+            "Set The Global Option COMPILE_FLAGS /MP to target." ON)
+    if(ProjectConfig_Global_COMPILE_FLAGS_WITH_MP OR USE_MP)
+        set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /MP")
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /MP")
+    endif()
+endif()
+
 add_subdirectory(cli)
 add_subdirectory(config)
 add_subdirectory(core)
@@ -222,6 +232,15 @@ if (APPLE)
             qhotkey
     )
 endif ()
+
+
+set(_src_root_path ${CMAKE_CURRENT_SOURCE_DIR})
+file(GLOB_RECURSE _source_list LIST_DIRECTORIES false
+    "${_src_root_path}/*.cpp"
+    "${_src_root_path}/*.h")
+
+#  will be organized according to the actual directory structure, .h.cpp is put together
+source_group(TREE ${_src_root_path} FILES ${_source_list})
 
 if (WIN32)
     set(USE_OPENSSL FALSE)
