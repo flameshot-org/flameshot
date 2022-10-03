@@ -203,6 +203,7 @@ These shortcuts are available in GUI mode:
 | <kbd>B</kbd>                                          | Set Pixalate as the paint tool |
 | <kbd>←</kbd>, <kbd>↓</kbd>, <kbd>↑</kbd>, <kbd>→</kbd>                    | Move selection 1px                                             |
 | <kbd>Shift</kbd> + <kbd>←</kbd>, <kbd>↓</kbd>, <kbd>↑</kbd>, <kbd>→</kbd> | Resize selection 1px                                           |
+| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>←</kbd>, <kbd>↓</kbd>, <kbd>↑</kbd>, <kbd>→</kbd> | Symmetrically resize selection 2px                                           |
 | <kbd>Esc</kbd>                                                            | Quit capture                                                   |
 | <kbd>Ctrl</kbd> + <kbd>M</kbd>                                            | Move the selection area                                              |
 | <kbd>Ctrl</kbd> + <kbd>C</kbd>                                            | Copy to clipboard                                              |

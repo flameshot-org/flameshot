@@ -215,58 +215,149 @@ void SelectionWidget::parentMouseMoveEvent(QMouseEvent* e)
     }
 
     auto geom = geometry();
+    float aspectRatio = (float)geom.width() / (float)geom.height();
     bool symmetryMod = qApp->keyboardModifiers() & Qt::ShiftModifier;
+    bool preserveAspect = qApp->keyboardModifiers() & Qt::ControlModifier;
 
     QPoint newTopLeft = geom.topLeft(), newBottomRight = geom.bottomRight();
+    int oldLeft = newTopLeft.rx(), oldRight = newBottomRight.rx(),
+        oldTop = newTopLeft.ry(), oldBottom = newBottomRight.ry();
     int &newLeft = newTopLeft.rx(), &newRight = newBottomRight.rx(),
         &newTop = newTopLeft.ry(), &newBottom = newBottomRight.ry();
     switch (mouseSide) {
         case TOPLEFT_SIDE:
             if (m_activeSide) {
-                newTopLeft = pos;
+                if (preserveAspect) {
+                    if ((float)(oldRight - pos.x()) /
+                          (float)(oldBottom - pos.y()) >
+                        aspectRatio) {
+                        /* width longer than expected width, hence increase
+                         * height to compensate for the aspect ratio */
+                        newLeft = pos.x();
+                        newTop =
+                          oldBottom -
+                          (int)(((float)(oldRight - pos.x())) / aspectRatio);
+                    } else {
+                        /* height longer than expected height, hence increase
+                         * width to compensate for the aspect ratio */
+                        newTop = pos.y();
+                        newLeft =
+                          oldRight -
+                          (int)(((float)(oldBottom - pos.y())) * aspectRatio);
+                    }
+                } else {
+                    newTopLeft = pos;
+                }
             }
             break;
         case BOTTOMRIGHT_SIDE:
             if (m_activeSide) {
-                newBottomRight = pos;
+                if (preserveAspect) {
+                    if ((float)(pos.x() - oldLeft) / (float)(pos.y() - oldTop) >
+                        aspectRatio) {
+                        newRight = pos.x();
+                        newBottom =
+                          oldTop +
+                          (int)(((float)(pos.x() - oldLeft)) / aspectRatio);
+                    } else {
+                        newBottom = pos.y();
+                        newRight = oldLeft + (int)(((float)(pos.y() - oldTop)) *
+                                                   aspectRatio);
+                    }
+                } else {
+                    newBottomRight = pos;
+                }
             }
             break;
         case TOPRIGHT_SIDE:
             if (m_activeSide) {
-                newTop = pos.y();
-                newRight = pos.x();
+                if (preserveAspect) {
+                    if ((float)(pos.x() - oldLeft) /
+                          (float)(oldBottom - pos.y()) >
+                        aspectRatio) {
+                        newRight = pos.x();
+                        newTop =
+                          oldBottom -
+                          (int)(((float)(pos.x() - oldLeft)) / aspectRatio);
+                    } else {
+                        newTop = pos.y();
+                        newRight =
+                          oldLeft +
+                          (int)(((float)(oldBottom - pos.y())) * aspectRatio);
+                    }
+                } else {
+                    newTop = pos.y();
+                    newRight = pos.x();
+                }
             }
             break;
         case BOTTOMLEFT_SIDE:
             if (m_activeSide) {
-                newBottom = pos.y();
-                newLeft = pos.x();
+                if (preserveAspect) {
+                    if ((float)(oldRight - pos.x()) /
+                          (float)(pos.y() - oldTop) >
+                        aspectRatio) {
+                        newLeft = pos.x();
+                        newBottom =
+                          oldTop +
+                          (int)(((float)(oldRight - pos.x())) / aspectRatio);
+                    } else {
+                        newBottom = pos.y();
+                        newLeft = oldRight - (int)(((float)(pos.y() - oldTop)) *
+                                                   aspectRatio);
+                    }
+                } else {
+                    newBottom = pos.y();
+                    newLeft = pos.x();
+                }
             }
             break;
         case LEFT_SIDE:
             if (m_activeSide) {
                 newLeft = pos.x();
+                if (preserveAspect) {
+                    /* By default bottom edge moves when dragging sides, this
+                     * behavior feels natural */
+                    newBottom = oldTop + (int)(((float)(oldRight - pos.x())) /
+                                               aspectRatio);
+                }
             }
             break;
         case RIGHT_SIDE:
             if (m_activeSide) {
                 newRight = pos.x();
+                if (preserveAspect) {
+                    newBottom = oldTop + (int)(((float)(pos.x() - oldLeft)) /
+                                               aspectRatio);
+                }
             }
             break;
         case TOP_SIDE:
             if (m_activeSide) {
                 newTop = pos.y();
+                if (preserveAspect) {
+                    /* By default right edge moves when dragging sides, this
+                     * behavior feels natural */
+                    newRight =
+                      oldLeft +
+                      (int)(((float)(oldBottom - pos.y()) * aspectRatio));
+                }
             }
             break;
         case BOTTOM_SIDE:
             if (m_activeSide) {
                 newBottom = pos.y();
+                if (preserveAspect) {
+                    newRight = oldLeft +
+                               (int)(((float)(pos.y() - oldTop) * aspectRatio));
+                }
             }
             break;
         default:
             if (m_activeSide) {
                 move(this->pos() + pos - m_dragStartPos);
                 m_dragStartPos = pos;
+                /* do nothing special in case of preserveAspect */
             }
             return;
     }
@@ -367,6 +458,26 @@ void SelectionWidget::resizeUp()
 void SelectionWidget::resizeDown()
 {
     setGeometryByKeyboard(geometry().adjusted(0, 0, 0, 1));
+}
+
+void SelectionWidget::symResizeLeft()
+{
+    setGeometryByKeyboard(geometry().adjusted(1, 0, -1, 0));
+}
+
+void SelectionWidget::symResizeRight()
+{
+    setGeometryByKeyboard(geometry().adjusted(-1, 0, 1, 0));
+}
+
+void SelectionWidget::symResizeUp()
+{
+    setGeometryByKeyboard(geometry().adjusted(0, -1, 0, 1));
+}
+
+void SelectionWidget::symResizeDown()
+{
+    setGeometryByKeyboard(geometry().adjusted(0, 1, 0, -1));
 }
 
 void SelectionWidget::updateAreas()

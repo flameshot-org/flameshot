@@ -72,6 +72,11 @@ public slots:
     void resizeUp();
     void resizeDown();
 
+    void symResizeLeft();
+    void symResizeRight();
+    void symResizeUp();
+    void symResizeDown();
+
 private:
     void updateAreas();
     void updateCursor();
