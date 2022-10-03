@@ -176,6 +176,14 @@ void ShortcutsWidget::loadShortcuts()
     appendShortcut("TYPE_RESIZE_RIGHT", tr("Resize selection right 1px"));
     appendShortcut("TYPE_RESIZE_UP", tr("Resize selection up 1px"));
     appendShortcut("TYPE_RESIZE_DOWN", tr("Resize selection down 1px"));
+    appendShortcut("TYPE_SYM_RESIZE_LEFT",
+                   tr("Symmetrically decrease width by 2px"));
+    appendShortcut("TYPE_SYM_RESIZE_RIGHT",
+                   tr("Symmetrically increase width by 2px"));
+    appendShortcut("TYPE_SYM_RESIZE_UP",
+                   tr("Symmetrically increase height by 2px"));
+    appendShortcut("TYPE_SYM_RESIZE_DOWN",
+                   tr("Symmetrically decrease height by 2px"));
     appendShortcut("TYPE_SELECT_ALL", tr("Select entire screen"));
     appendShortcut("TYPE_MOVE_LEFT", tr("Move selection left 1px"));
     appendShortcut("TYPE_MOVE_RIGHT", tr("Move selection right 1px"));
