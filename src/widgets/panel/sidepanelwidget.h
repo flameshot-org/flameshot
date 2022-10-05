@@ -4,6 +4,7 @@
 #pragma once
 
 #include "QtColorWidgets/color_wheel.hpp"
+#include <QSpinBox>
 #include <QWidget>
 
 class QVBoxLayout;
@@ -57,6 +58,7 @@ private:
     QPixmap* m_pixmap;
     QColor m_color;
     QColor m_revertColor;
+    QSpinBox* m_toolSizeSpin;
     QSlider* m_toolSizeSlider;
     int m_toolSize{};
 };
