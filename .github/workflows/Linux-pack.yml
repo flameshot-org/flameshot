@@ -408,6 +408,7 @@ jobs:
       # Will try new tool https://github.com/probonopd/go-appimage written in golang by probonopd.
         run: |
           wget $(curl https://api.github.com/repos/probonopd/go-appimage/releases | jq -r '.[] | select(.tag_name == "continuous") | .assets[] | select((.name | endswith("x86_64.AppImage")) and (.name | contains("appimagetool"))) | .browser_download_url') -O appimagetool
+
           chmod +x appimagetool
         env:
           APPIMAGETOOL_ARCH: x86_64
