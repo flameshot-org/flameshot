@@ -2,6 +2,7 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include <QGraphicsDropShadowEffect>
+#include <QGraphicsOpacityEffect>
 #include <QPinchGesture>
 
 #include "pinwidget.h"
@@ -38,7 +39,6 @@ PinWidget::PinWidget(const QPixmap& pixmap,
     // set the bottom widget background transparent
     setAttribute(Qt::WA_TranslucentBackground);
     setAttribute(Qt::WA_DeleteOnClose);
-
     ConfigHandler conf;
     m_baseColor = conf.uiColor();
     m_hoverColor = conf.contrastUiColor();
@@ -49,6 +49,7 @@ PinWidget::PinWidget(const QPixmap& pixmap,
     m_shadowEffect->setBlurRadius(BLUR_RADIUS);
     m_shadowEffect->setOffset(0, 0);
     setGraphicsEffect(m_shadowEffect);
+    setWindowOpacity(m_opacity);
 
     m_label->setPixmap(m_pixmap);
     m_layout->addWidget(m_label);
@@ -189,6 +190,25 @@ void PinWidget::rotateRight()
     m_pixmap = m_pixmap.transformed(rotateTransform);
 }
 
+void PinWidget::increaseOpacity()
+{
+    m_opacity += 0.1;
+    if (m_opacity > 1.0) {
+        m_opacity = 1.0;
+    }
+    setWindowOpacity(m_opacity);
+}
+
+void PinWidget::decreaseOpacity()
+{
+    m_opacity -= 0.1;
+    if (m_opacity < 0.0) {
+        m_opacity = 0.0;
+    }
+
+    setWindowOpacity(m_opacity);
+}
+
 bool PinWidget::event(QEvent* event)
 {
     if (event->type() == QEvent::Gesture) {
@@ -267,6 +287,16 @@ void PinWidget::showContextMenu(const QPoint& pos)
     connect(
       &rotateLeftAction, &QAction::triggered, this, &PinWidget::rotateLeft);
     contextMenu.addAction(&rotateLeftAction);
+
+    QAction increaseOpacityAction(tr("Increase Opacity"), this);
+    connect(
+      &increaseOpacityAction, &QAction::triggered, this, &PinWidget::increaseOpacity);
+    contextMenu.addAction(&increaseOpacityAction);
+
+    QAction decreaseOpacityAction(tr("Decrease Opacity"), this);
+    connect(
+      &decreaseOpacityAction, &QAction::triggered, this, &PinWidget::decreaseOpacity);
+    contextMenu.addAction(&decreaseOpacityAction);
 
     QAction closePinAction(tr("Close"), this);
     connect(&closePinAction, &QAction::triggered, this, &PinWidget::closePin);
