@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
-
 #include <QGraphicsDropShadowEffect>
+#include <QGraphicsOpacityEffect>
 #include <QPinchGesture>
 
 #include "pinwidget.h"
@@ -35,10 +35,10 @@ PinWidget::PinWidget(const QPixmap& pixmap,
 {
     setWindowIcon(QIcon(GlobalValues::iconPath()));
     setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint);
+    setFocusPolicy(Qt::StrongFocus);
     // set the bottom widget background transparent
     setAttribute(Qt::WA_TranslucentBackground);
     setAttribute(Qt::WA_DeleteOnClose);
-
     ConfigHandler conf;
     m_baseColor = conf.uiColor();
     m_hoverColor = conf.contrastUiColor();
@@ -49,6 +49,7 @@ PinWidget::PinWidget(const QPixmap& pixmap,
     m_shadowEffect->setBlurRadius(BLUR_RADIUS);
     m_shadowEffect->setOffset(0, 0);
     setGraphicsEffect(m_shadowEffect);
+    setWindowOpacity(m_opacity);
 
     m_label->setPixmap(m_pixmap);
     m_layout->addWidget(m_label);
@@ -165,6 +166,32 @@ void PinWidget::mouseMoveEvent(QMouseEvent* e)
          m_dragStart.y() + delta.y() - offsetH);
 }
 
+void PinWidget::keyPressEvent(QKeyEvent* event)
+{
+    if (event->key() == Qt::Key_0) {
+        m_opacity = 1.0;
+    } else if (event->key() == Qt::Key_9) {
+        m_opacity = 0.9;
+    } else if (event->key() == Qt::Key_8) {
+        m_opacity = 0.8;
+    } else if (event->key() == Qt::Key_7) {
+        m_opacity = 0.7;
+    } else if (event->key() == Qt::Key_6) {
+        m_opacity = 0.6;
+    } else if (event->key() == Qt::Key_5) {
+        m_opacity = 0.5;
+    } else if (event->key() == Qt::Key_4) {
+        m_opacity = 0.4;
+    } else if (event->key() == Qt::Key_3) {
+        m_opacity = 0.3;
+    } else if (event->key() == Qt::Key_2) {
+        m_opacity = 0.2;
+    } else if (event->key() == Qt::Key_1) {
+        m_opacity = 0.1;
+    }
+
+    setWindowOpacity(m_opacity);
+}
 bool PinWidget::gestureEvent(QGestureEvent* event)
 {
     if (QGesture* pinch = event->gesture(Qt::PinchGesture)) {
@@ -187,6 +214,25 @@ void PinWidget::rotateRight()
 
     auto rotateTransform = QTransform().rotate(90);
     m_pixmap = m_pixmap.transformed(rotateTransform);
+}
+
+void PinWidget::increaseOpacity()
+{
+    m_opacity += 0.1;
+    if (m_opacity > 1.0) {
+        m_opacity = 1.0;
+    }
+    setWindowOpacity(m_opacity);
+}
+
+void PinWidget::decreaseOpacity()
+{
+    m_opacity -= 0.1;
+    if (m_opacity < 0.0) {
+        m_opacity = 0.0;
+    }
+
+    setWindowOpacity(m_opacity);
 }
 
 bool PinWidget::event(QEvent* event)
@@ -267,6 +313,20 @@ void PinWidget::showContextMenu(const QPoint& pos)
     connect(
       &rotateLeftAction, &QAction::triggered, this, &PinWidget::rotateLeft);
     contextMenu.addAction(&rotateLeftAction);
+
+    QAction increaseOpacityAction(tr("Increase Opacity"), this);
+    connect(&increaseOpacityAction,
+            &QAction::triggered,
+            this,
+            &PinWidget::increaseOpacity);
+    contextMenu.addAction(&increaseOpacityAction);
+
+    QAction decreaseOpacityAction(tr("Decrease Opacity"), this);
+    connect(&decreaseOpacityAction,
+            &QAction::triggered,
+            this,
+            &PinWidget::decreaseOpacity);
+    contextMenu.addAction(&decreaseOpacityAction);
 
     QAction closePinAction(tr("Close"), this);
     connect(&closePinAction, &QAction::triggered, this, &PinWidget::closePin);
