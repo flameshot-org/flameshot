@@ -46,6 +46,14 @@ Flameshot::Flameshot()
     QString StyleSheet = CaptureButton::globalStyleSheet();
     qApp->setStyleSheet(StyleSheet);
 
+    QObject::connect(qApp , &QGuiApplication::screenAdded, this, [this]() {
+        qDebug() << "Screen added Total Screens:" << qApp->screens().size();
+    });
+
+    QObject::connect(qApp , &QGuiApplication::screenRemoved, this, [this]() {
+        qDebug() << "Screen removed Total Screens:" << qApp->screens().size();
+    });
+
 #if defined(Q_OS_MACOS)
     // Try to take a test screenshot, MacOS will request a "Screen Recording"
     // permissions on the first run. Otherwise it will be hidden under the
