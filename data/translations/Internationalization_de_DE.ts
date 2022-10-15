@@ -1915,7 +1915,7 @@ Bitte beseitige sie manuell in der Konfigurationsdatei.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="219"/>
-        <source>Print geometry of the selection in the format W H X Y. Does nothing if raw is specified</source>
+        <source>Print geometry of the selection in the format WxH+X+Y. Does nothing if raw is specified</source>
         <translation>Geometrie der Auswahl im Format B H X Y ausgeben. Ignoriert, falls raw ausgewählt ist</translation>
     </message>
     <message>

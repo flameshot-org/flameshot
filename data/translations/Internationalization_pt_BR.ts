@@ -1954,8 +1954,8 @@ Please solve them manually in the configuration file.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="219"/>
-        <source>Print geometry of the selection in the format W H X Y. Does nothing if raw is specified</source>
-        <translation>Imprime a geometria da seleção no formato W H X Y. Não faz nada se raw for especificado</translation>
+        <source>Print geometry of the selection in the format WxH+X+Y. Does nothing if raw is specified</source>
+        <translation>Imprime a geometria da seleção no formato WxH+X+Y. Não faz nada se raw for especificado</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="223"/>

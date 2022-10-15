@@ -221,7 +221,7 @@ int main(int argc, char* argv[])
                                  QObject::tr("Print raw PNG capture"));
     CommandOption selectionOption(
       { "g", "print-geometry" },
-      QObject::tr("Print geometry of the selection in the format W H X Y. Does "
+      QObject::tr("Print geometry of the selection in the format WxH+X+Y. Does "
                   "nothing if raw is specified"));
     CommandOption screenNumberOption(
       { "n", "number" },

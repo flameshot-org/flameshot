@@ -1736,8 +1736,8 @@ Si prega di risolverli manualmente nel file di configurazione.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="219"/>
-        <source>Print geometry of the selection in the format W H X Y. Does nothing if raw is specified</source>
-        <translation>Stampa la geometria della selezione nel formato W H X Y. Non fa nulla se raw è specificato</translation>
+        <source>Print geometry of the selection in the format WxH+X+Y. Does nothing if raw is specified</source>
+        <translation>Stampa la geometria della selezione nel formato WxH+X+Y. Non fa nulla se raw è specificato</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="223"/>
