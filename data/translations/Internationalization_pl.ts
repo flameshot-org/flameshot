@@ -1922,8 +1922,8 @@ Rozwiąż błędy ręcznie w pliku konfiguracyjnym.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="219"/>
-        <source>Print geometry of the selection in the format W H X Y. Does nothing if raw is specified</source>
-        <translation>Drukuj geometrię zaznaczenia w formacie W H X Y. Brak efektu jeśli wybrano nieprzetwarzanie</translation>
+        <source>Print geometry of the selection in the format WxH+X+Y. Does nothing if raw is specified</source>
+        <translation>Drukuj geometrię zaznaczenia w formacie WxH+X+Y. Brak efektu jeśli wybrano nieprzetwarzanie</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="223"/>

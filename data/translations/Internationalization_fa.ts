@@ -1887,8 +1887,8 @@ Please solve them manually in the configuration file.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="219"/>
-        <source>Print geometry of the selection in the format W H X Y. Does nothing if raw is specified</source>
-        <translation>مختصات گزیده را در قالب «W H X Y» چاپ می‌کند. اگر چیزی مشخص نشده باشد، هیچ کاری انجام نمی‌دهد</translation>
+        <source>Print geometry of the selection in the format WxH+X+Y. Does nothing if raw is specified</source>
+        <translation>مختصات گزیده را در قالب «WxH+X+Y» چاپ می‌کند. اگر چیزی مشخص نشده باشد، هیچ کاری انجام نمی‌دهد</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="223"/>
