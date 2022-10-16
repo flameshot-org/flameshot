@@ -1914,8 +1914,8 @@ Por favor, resuélvelos manualmente en el archivo de configuración.</translatio
     </message>
     <message>
         <location filename="../../src/main.cpp" line="219"/>
-        <source>Print geometry of the selection in the format W H X Y. Does nothing if raw is specified</source>
-        <translation>Imprimir geometría de la selección en el formato W H X Y. No hace nada si se especifica que no se procese</translation>
+        <source>Print geometry of the selection in the format WxH+X+Y. Does nothing if raw is specified</source>
+        <translation>Imprimir geometría de la selección en el formato WxH+X+Y. No hace nada si se especifica que no se procese</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="223"/>

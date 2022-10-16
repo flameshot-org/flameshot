@@ -1950,8 +1950,8 @@ Please solve them manually in the configuration file.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="219"/>
-        <source>Print geometry of the selection in the format W H X Y. Does nothing if raw is specified</source>
-        <translation>Inprimatu hautapenaren geometria W H X Y formatuan (Zabalera, Altuera, X ardatza, Y ardatza). Ez du ezer egiten jatorrizkoa zehazten bada</translation>
+        <source>Print geometry of the selection in the format WxH+X+Y. Does nothing if raw is specified</source>
+        <translation>Inprimatu hautapenaren geometria WxH+X+Y formatuan (Zabalera, Altuera, X ardatza, Y ardatza). Ez du ezer egiten jatorrizkoa zehazten bada</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="223"/>

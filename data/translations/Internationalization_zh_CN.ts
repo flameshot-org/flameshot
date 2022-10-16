@@ -1959,8 +1959,8 @@ Please solve them manually in the configuration file.</source>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="219"/>
-        <source>Print geometry of the selection in the format W H X Y. Does nothing if raw is specified</source>
-        <translation>使用 W H X Y 的格式输出选区几何参数。如果指定了 raw 参数则什么也不做</translation>
+        <source>Print geometry of the selection in the format WxH+X+Y. Does nothing if raw is specified</source>
+        <translation>使用 WxH+X+Y 的格式输出选区几何参数。如果指定了 raw 参数则什么也不做</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="223"/>

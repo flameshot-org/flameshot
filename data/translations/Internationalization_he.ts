@@ -1899,8 +1899,8 @@ Please solve them manually in the configuration file.</source>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="219"/>
-        <source>Print geometry of the selection in the format W H X Y. Does nothing if raw is specified</source>
-        <translation>הדפסת גאומטרית הבחירה בתבנית W H X Y. לא עושה דבר אם צוין &apos;גלמי&apos;</translation>
+        <source>Print geometry of the selection in the format WxH+X+Y. Does nothing if raw is specified</source>
+        <translation>הדפסת גאומטרית הבחירה בתבנית WxH+X+Y. לא עושה דבר אם צוין &apos;גלמי&apos;</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="223"/>

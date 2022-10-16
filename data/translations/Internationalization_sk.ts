@@ -1908,7 +1908,7 @@ Riešte ich ručne v konfiguračnom súbore.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="219"/>
-        <source>Print geometry of the selection in the format W H X Y. Does nothing if raw is specified</source>
+        <source>Print geometry of the selection in the format WxH+X+Y. Does nothing if raw is specified</source>
         <translation>Zobraziť geometriu výberu vo formáte Š D X Y. Neurobí nič pri nastavení raw</translation>
     </message>
     <message>

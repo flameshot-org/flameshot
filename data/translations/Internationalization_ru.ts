@@ -2073,8 +2073,8 @@ Please solve them manually in the configuration file.</source>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="219"/>
-        <source>Print geometry of the selection in the format W H X Y. Does nothing if raw is specified</source>
-        <translation>Распечатать геометрию выделения в формате W H X Y. Ничего не делает, если указано raw</translation>
+        <source>Print geometry of the selection in the format WxH+X+Y. Does nothing if raw is specified</source>
+        <translation>Распечатать геометрию выделения в формате WxH+X+Y. Ничего не делает, если указано raw</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="223"/>

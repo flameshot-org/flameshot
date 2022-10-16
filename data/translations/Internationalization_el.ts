@@ -1891,8 +1891,8 @@ Please solve them manually in the configuration file.</source>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="219"/>
-        <source>Print geometry of the selection in the format W H X Y. Does nothing if raw is specified</source>
-        <translation>Εκτύπωση γεωμετρίας της επιλογής στη μορφή W H X Y. Δεν κάνει τίποτα εάν έχει καθοριστεί raw</translation>
+        <source>Print geometry of the selection in the format WxH+X+Y. Does nothing if raw is specified</source>
+        <translation>Εκτύπωση γεωμετρίας της επιλογής στη μορφή WxH+X+Y. Δεν κάνει τίποτα εάν έχει καθοριστεί raw</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="223"/>

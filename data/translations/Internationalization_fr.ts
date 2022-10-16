@@ -1906,8 +1906,8 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     </message>
     <message>
         <location filename="../../src/main.cpp" line="219"/>
-        <source>Print geometry of the selection in the format W H X Y. Does nothing if raw is specified</source>
-        <translation>Print geometry of the selection in the format W H X Y. Does nothing if raw is specified</translation>
+        <source>Print geometry of the selection in the format WxH+X+Y. Does nothing if raw is specified</source>
+        <translation>Print geometry of the selection in the format WxH+X+Y. Does nothing if raw is specified</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="223"/>

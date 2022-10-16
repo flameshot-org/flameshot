@@ -1906,8 +1906,8 @@ Lütfen bunları yapılandırma dosyasında elle çözün.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="219"/>
-        <source>Print geometry of the selection in the format W H X Y. Does nothing if raw is specified</source>
-        <translation>Seçimin geometrisini W H X Y biçiminde yazdırır. Raw belirtilirse hiçbir şey yapmaz</translation>
+        <source>Print geometry of the selection in the format WxH+X+Y. Does nothing if raw is specified</source>
+        <translation>Seçimin geometrisini WxH+X+Y biçiminde yazdırır. Raw belirtilirse hiçbir şey yapmaz</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="223"/>
