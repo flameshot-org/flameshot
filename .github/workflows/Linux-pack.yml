@@ -398,15 +398,17 @@ jobs:
             hicolor-icon-theme \
             fcitx-frontend-qt5 \
             openssl \
-            ca-certificates
+            ca-certificates \
+            jq
+
 
       - name: Get go-appimage tool
       # Will not use linuxdeployqt anymore, because it suopprts currently still-supported mainstream distribution,
       # which is glibc 2.23. For more information, please see https://github.com/probonopd/linuxdeployqt/issues/340.
       # Will try new tool https://github.com/probonopd/go-appimage written in golang by probonopd.
         run: |
-          wget -c https://github.com/$(wget -q https://github.com/probonopd/go-appimage/releases -O - \
-          | grep "appimagetool-.*-${APPIMAGETOOL_ARCH}.AppImage" | head -n 1 | cut -d '"' -f 2) -O appimagetool
+          wget $(curl https://api.github.com/repos/probonopd/go-appimage/releases | jq -r '.[] | select(.tag_name == "continuous") | .assets[] | select((.name | endswith("x86_64.AppImage")) and (.name | contains("appimagetool"))) | .browser_download_url') -O appimagetool
+
           chmod +x appimagetool
         env:
           APPIMAGETOOL_ARCH: x86_64

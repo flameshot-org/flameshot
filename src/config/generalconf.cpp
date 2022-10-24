@@ -32,30 +32,33 @@ GeneralConf::GeneralConf(QWidget* parent)
     // It must be initialized before the checkboxes.
     initScrollArea();
 
-    initShowHelp();
-    initSaveLastRegion();
-    initShowSidePanelButton();
-    initShowDesktopNotification();
-    initShowTrayIcon();
-    initHistoryConfirmationToDelete();
-    initCheckForUpdates();
     initAutostart();
-    initShowStartupLaunchMessage();
-    initCopyAndCloseAfterUpload();
-    initCopyPathAfterSave();
-    initAntialiasingPinZoom();
-    initUploadWithoutConfirmation();
-    initUseJpgForClipboard();
-    initSaveAfterCopy();
-    initUploadHistoryMax();
-    initUndoLimit();
-    initUploadClientSecret();
-    initAllowMultipleGuiInstances();
 #if !defined(Q_OS_WIN)
     initAutoCloseIdleDaemon();
 #endif
-    initPredefinedColorPaletteLarge();
+    initShowTrayIcon();
+    initShowDesktopNotification();
+#if !defined(DISABLE_UPDATE_CHECKER)
+    initCheckForUpdates();
+#endif
+    initShowStartupLaunchMessage();
+    initAllowMultipleGuiInstances();
+    initSaveLastRegion();
+    initShowHelp();
+    initShowSidePanelButton();
+    initUseJpgForClipboard();
     initCopyOnDoubleClick();
+    initSaveAfterCopy();
+    initCopyPathAfterSave();
+    initCopyAndCloseAfterUpload();
+    initUploadWithoutConfirmation();
+    initHistoryConfirmationToDelete();
+    initAntialiasingPinZoom();
+    initUploadHistoryMax();
+    initUndoLimit();
+    initUploadClientSecret();
+    initPredefinedColorPaletteLarge();
+    initShowSelectionGeometry();
 
     m_layout->addStretch();
 
@@ -73,15 +76,18 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
     m_sidePanelButton->setChecked(config.showSidePanelButton());
     m_sysNotifications->setChecked(config.showDesktopNotification());
     m_autostart->setChecked(config.startupLaunch());
-    m_copyAndCloseAfterUpload->setChecked(config.copyAndCloseAfterUpload());
+    m_copyURLAfterUpload->setChecked(config.copyURLAfterUpload());
     m_saveAfterCopy->setChecked(config.saveAfterCopy());
     m_copyPathAfterSave->setChecked(config.copyPathAfterSave());
     m_antialiasingPinZoom->setChecked(config.antialiasingPinZoom());
     m_useJpgForClipboard->setChecked(config.useJpgForClipboard());
+    m_copyOnDoubleClick->setChecked(config.copyOnDoubleClick());
     m_uploadWithoutConfirmation->setChecked(config.uploadWithoutConfirmation());
     m_historyConfirmationToDelete->setChecked(
       config.historyConfirmationToDelete());
+#if !defined(DISABLE_UPDATE_CHECKER)
     m_checkForUpdates->setChecked(config.checkForUpdates());
+#endif
     m_allowMultipleGuiInstances->setChecked(config.allowMultipleGuiInstances());
     m_showMagnifier->setChecked(config.showMagnifier());
     m_squareMagnifier->setChecked(config.squareMagnifier());
@@ -131,10 +137,12 @@ void GeneralConf::showDesktopNotificationChanged(bool checked)
     ConfigHandler().setShowDesktopNotification(checked);
 }
 
+#if !defined(DISABLE_UPDATE_CHECKER)
 void GeneralConf::checkForUpdatesChanged(bool checked)
 {
     ConfigHandler().setCheckForUpdates(checked);
 }
+#endif
 
 void GeneralConf::allowMultipleGuiInstancesChanged(bool checked)
 {
@@ -338,6 +346,7 @@ void GeneralConf::initConfigButtons()
             &GeneralConf::resetConfiguration);
 }
 
+#if !defined(DISABLE_UPDATE_CHECKER)
 void GeneralConf::initCheckForUpdates()
 {
     m_checkForUpdates = new QCheckBox(tr("Automatic check for updates"), this);
@@ -349,6 +358,7 @@ void GeneralConf::initCheckForUpdates()
             this,
             &GeneralConf::checkForUpdatesChanged);
 }
+#endif
 
 void GeneralConf::initAllowMultipleGuiInstances()
 {
@@ -366,9 +376,9 @@ void GeneralConf::initAllowMultipleGuiInstances()
 void GeneralConf::initAutoCloseIdleDaemon()
 {
     m_autoCloseIdleDaemon = new QCheckBox(
-      tr("Automatically close daemon when it is not needed"), this);
-    m_autoCloseIdleDaemon->setToolTip(
-      tr("Automatically close daemon when it is not needed"));
+      tr("Automatically unload from memory when it is not needed"), this);
+    m_autoCloseIdleDaemon->setToolTip(tr(
+      "Automatically close daemon (background process) when it is not needed"));
     m_scrollAreaLayout->addWidget(m_autoCloseIdleDaemon);
     connect(m_autoCloseIdleDaemon,
             &QCheckBox::clicked,
@@ -378,9 +388,9 @@ void GeneralConf::initAutoCloseIdleDaemon()
 
 void GeneralConf::initAutostart()
 {
-    m_autostart = new QCheckBox(tr("Launch at startup"), this);
-    m_autostart->setToolTip(
-      tr("Launch Flameshot daemon when computer is booted"));
+    m_autostart = new QCheckBox(tr("Launch in background at startup"), this);
+    m_autostart->setToolTip(tr(
+      "Launch Flameshot daemon (background process) when computer is booted"));
     m_scrollAreaLayout->addWidget(m_autostart);
 
     connect(
@@ -418,7 +428,8 @@ void GeneralConf::initPredefinedColorPaletteLarge()
 void GeneralConf::initCopyOnDoubleClick()
 {
     m_copyOnDoubleClick = new QCheckBox(tr("Copy on double click"), this);
-    m_copyOnDoubleClick->setToolTip(tr("Enable Copy on Double Click"));
+    m_copyOnDoubleClick->setToolTip(
+      tr("Enable Copy to clipboard on Double Click"));
     m_scrollAreaLayout->addWidget(m_copyOnDoubleClick);
 
     connect(m_copyOnDoubleClick, &QCheckBox::clicked, [](bool checked) {
@@ -428,14 +439,13 @@ void GeneralConf::initCopyOnDoubleClick()
 
 void GeneralConf::initCopyAndCloseAfterUpload()
 {
-    m_copyAndCloseAfterUpload =
-      new QCheckBox(tr("Copy URL after upload"), this);
-    m_copyAndCloseAfterUpload->setToolTip(
-      tr("Copy URL and close window after uploading was successful"));
-    m_scrollAreaLayout->addWidget(m_copyAndCloseAfterUpload);
+    m_copyURLAfterUpload = new QCheckBox(tr("Copy URL after upload"), this);
+    m_copyURLAfterUpload->setToolTip(
+      tr("Copy URL after uploading was successful"));
+    m_scrollAreaLayout->addWidget(m_copyURLAfterUpload);
 
-    connect(m_copyAndCloseAfterUpload, &QCheckBox::clicked, [](bool checked) {
-        ConfigHandler().setCopyAndCloseAfterUpload(checked);
+    connect(m_copyURLAfterUpload, &QCheckBox::clicked, [](bool checked) {
+        ConfigHandler().setCopyURLAfterUpload(checked);
     });
 }
 
@@ -596,7 +606,7 @@ void GeneralConf::initUseJpgForClipboard()
     m_useJpgForClipboard =
       new QCheckBox(tr("Use JPG format for clipboard (PNG default)"), this);
     m_useJpgForClipboard->setToolTip(
-      tr("Use JPG format for clipboard (PNG default)"));
+      tr("Use lossy JPG format for clipboard (lossless PNG default)"));
     m_scrollAreaLayout->addWidget(m_useJpgForClipboard);
 
 #if defined(Q_OS_MACOS)
@@ -705,6 +715,73 @@ void GeneralConf::initSquareMagnifier()
     connect(m_squareMagnifier, &QCheckBox::clicked, [](bool checked) {
         ConfigHandler().setSquareMagnifier(checked);
     });
+}
+
+void GeneralConf::initShowSelectionGeometry()
+{
+    auto* tobox = new QHBoxLayout();
+
+    int timeout =
+      ConfigHandler().value("showSelectionGeometryHideTime").toInt();
+    m_xywhTimeout = new QSpinBox();
+    m_xywhTimeout->setRange(0, INT_MAX);
+    m_xywhTimeout->setToolTip(
+      tr("Milliseconds before geometry display hides; 0 means do not hide"));
+    m_xywhTimeout->setValue(timeout);
+    tobox->addWidget(m_xywhTimeout);
+    tobox->addWidget(new QLabel(tr("Set geometry display timeout (ms)")));
+
+    m_scrollAreaLayout->addLayout(tobox);
+    connect(m_xywhTimeout,
+            SIGNAL(valueChanged(int)),
+            this,
+            SLOT(setSelGeoHideTime(int)));
+
+    auto* box = new QGroupBox(tr("Selection Geometry Display"));
+    box->setFlat(true);
+    m_layout->addWidget(box);
+
+    auto* vboxLayout = new QVBoxLayout();
+    box->setLayout(vboxLayout);
+    auto* selGeoLayout = new QHBoxLayout();
+    selGeoLayout->addWidget(new QLabel(tr("Display Location")));
+    m_selectGeometryLocation = new QComboBox(this);
+
+    m_selectGeometryLocation->addItem(tr("None"), GeneralConf::xywh_none);
+    m_selectGeometryLocation->addItem(tr("Top Left"),
+                                      GeneralConf::xywh_top_left);
+    m_selectGeometryLocation->addItem(tr("Top Right"),
+                                      GeneralConf::xywh_top_right);
+    m_selectGeometryLocation->addItem(tr("Bottom Left"),
+                                      GeneralConf::xywh_bottom_left);
+    m_selectGeometryLocation->addItem(tr("Bottom Right"),
+                                      GeneralConf::xywh_bottom_right);
+    m_selectGeometryLocation->addItem(tr("Center"), GeneralConf::xywh_center);
+
+    // pick up int from config and use findData
+    int pos = ConfigHandler().value("showSelectionGeometry").toInt();
+    m_selectGeometryLocation->setCurrentIndex(
+      m_selectGeometryLocation->findData(pos));
+
+    connect(m_selectGeometryLocation,
+            SIGNAL(currentIndexChanged(int)),
+            this,
+            SLOT(setGeometryLocation(int)));
+
+    selGeoLayout->addWidget(m_selectGeometryLocation);
+    vboxLayout->addLayout(selGeoLayout);
+    vboxLayout->addStretch();
+}
+
+void GeneralConf::setSelGeoHideTime(int v)
+{
+    ConfigHandler().setValue("showSelectionGeometryHideTime", v);
+}
+
+void GeneralConf::setGeometryLocation(int index)
+{
+    ConfigHandler().setValue("showSelectionGeometry",
+                             m_selectGeometryLocation->itemData(index));
 }
 
 void GeneralConf::togglePathFixed()

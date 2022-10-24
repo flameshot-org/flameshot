@@ -86,7 +86,9 @@ public:
     CONFIG_GETTER_SETTER(drawThickness, setDrawThickness, int)
     CONFIG_GETTER_SETTER(drawFontSize, setDrawFontSize, int)
     CONFIG_GETTER_SETTER(keepOpenAppLauncher, setKeepOpenAppLauncher, bool)
+#if !defined(DISABLE_UPDATE_CHECKER)
     CONFIG_GETTER_SETTER(checkForUpdates, setCheckForUpdates, bool)
+#endif
     CONFIG_GETTER_SETTER(allowMultipleGuiInstances,
                          setAllowMultipleGuiInstances,
                          bool)
@@ -95,9 +97,7 @@ public:
                          setShowStartupLaunchMessage,
                          bool)
     CONFIG_GETTER_SETTER(contrastOpacity, setContrastOpacity, int)
-    CONFIG_GETTER_SETTER(copyAndCloseAfterUpload,
-                         setCopyAndCloseAfterUpload,
-                         bool)
+    CONFIG_GETTER_SETTER(copyURLAfterUpload, setCopyURLAfterUpload, bool)
     CONFIG_GETTER_SETTER(historyConfirmationToDelete,
                          setHistoryConfirmationToDelete,
                          bool)
@@ -120,6 +120,7 @@ public:
     CONFIG_GETTER_SETTER(copyOnDoubleClick, setCopyOnDoubleClick, bool)
     CONFIG_GETTER_SETTER(uploadClientSecret, setUploadClientSecret, QString)
     CONFIG_GETTER_SETTER(saveLastRegion, setSaveLastRegion, bool)
+    CONFIG_GETTER_SETTER(showSelectionGeometry, setShowSelectionGeometry, int)
     // SPECIAL CASES
     bool startupLaunch();
     void setStartupLaunch(const bool);

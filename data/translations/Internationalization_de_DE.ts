@@ -122,7 +122,7 @@
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="38"/>
         <source>Full Screen (Current Display)</source>
-        <translation>Gesamter Bildschrim (aktueller Monitor)</translation>
+        <translation>Gesamter Bildschirm (aktueller Monitor)</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="41"/>
@@ -397,7 +397,7 @@ Drücke die Leertaste um das Seitenmenü zu öffnen.</translation>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="58"/>
         <source>Enter or Left Click</source>
-        <translation></translation>
+        <translation>Enter oder Linke Maustaste</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="59"/>
@@ -407,17 +407,17 @@ Drücke die Leertaste um das Seitenmenü zu öffnen.</translation>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="59"/>
         <source>Hold Left Click</source>
-        <translation></translation>
+        <translation>Linke Maustaste halten</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="60"/>
         <source>Toggle magnifier</source>
-        <translation>Lupe einschalten</translation>
+        <translation>Lupe umschalten</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="60"/>
         <source>Space or Right Click</source>
-        <translation></translation>
+        <translation>Leertaste oder Rechte Maustaste</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="61"/>
@@ -427,7 +427,7 @@ Drücke die Leertaste um das Seitenmenü zu öffnen.</translation>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="61"/>
         <source>Esc</source>
-        <translation type="unfinished">Esc</translation>
+        <translation>Esc</translation>
     </message>
 </context>
 <context>
@@ -443,22 +443,22 @@ Drücke die Leertaste um das Seitenmenü zu öffnen.</translation>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="40"/>
         <source>Edit Preset:</source>
-        <translation>Edit Preset:</translation>
+        <translation>Voreinstellung bearbeiten:</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="45"/>
         <source>Enter color to update preset</source>
-        <translation>Enter color to update preset</translation>
+        <translation>Farbe eingeben, um Voreinstellung zu aktualisieren</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="65"/>
         <source>Update</source>
-        <translation type="unfinished">Aktualisieren</translation>
+        <translation>Aktualisieren</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="67"/>
         <source>Press button to update the selected preset</source>
-        <translation>Press button to update the selected preset</translation>
+        <translation>Drücken Sie die Taste, um die ausgewählte Voreinstellung zu aktualisieren</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="74"/>
@@ -809,17 +809,17 @@ Bitte beseitige sie manuell in der Konfigurationsdatei.</translation>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="111"/>
         <source>Error</source>
-        <translation type="unfinished">Fehler</translation>
+        <translation>Fehler</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="111"/>
         <source>Unable to close active modal widgets</source>
-        <translation type="unfinished">Kann aktive Widgets nicht schließen</translation>
+        <translation>Aktive Widgets können nicht geschlossen werden</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="400"/>
         <source>URL copied to clipboard.</source>
-        <translation>URL copied to clipboard.</translation>
+        <translation>URL wurde in die Zwischenablage kopiert.</translation>
     </message>
 </context>
 <context>
@@ -827,22 +827,22 @@ Bitte beseitige sie manuell in der Konfigurationsdatei.</translation>
     <message>
         <location filename="../../src/core/flameshotdaemon.cpp" line="363"/>
         <source>New version %1 is available</source>
-        <translation type="unfinished">Neue version %1 ist verfügbar</translation>
+        <translation>Neue Version %1 ist verfügbar</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshotdaemon.cpp" line="369"/>
         <source>You have the latest version</source>
-        <translation type="unfinished">Die neueste Version ist installiert</translation>
+        <translation>Die neueste Version ist installiert</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshotdaemon.cpp" line="378"/>
         <source>Failed to get information about the latest version.</source>
-        <translation type="unfinished">Das Laden der Versionsinformationen ist fehlgeschlagen.</translation>
+        <translation>Es konnten keine Informationen über die neueste Version abgerufen werden.</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshotdaemon.cpp" line="399"/>
         <source>Unable to connect via DBus</source>
-        <translation>Kann nicht via DBus verbinden</translation>
+        <translation>Verbindung über DBus fehlgeschlagen</translation>
     </message>
 </context>
 <context>
@@ -941,7 +941,7 @@ Bitte beseitige sie manuell in der Konfigurationsdatei.</translation>
         <location filename="../../src/config/generalconf.cpp" line="171"/>
         <location filename="../../src/config/generalconf.cpp" line="195"/>
         <source>Unable to write file.</source>
-        <translation>Datei kann nicht geschrieben werden.</translation>
+        <translation>Datei konnte nicht geschrieben werden.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="182"/>
@@ -1075,12 +1075,12 @@ Bitte beseitige sie manuell in der Konfigurationsdatei.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="247"/>
         <source>Use last region</source>
-        <translation>Use last region</translation>
+        <translation>Letzte Region verwenden</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="248"/>
         <source>Uses the last region as the default selection for the next screenshot</source>
-        <translation>Uses the last region as the default selection for the next screenshot</translation>
+        <translation>Letzte Region als Standardauswahl für den nächsten Screenshot verwenden</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="262"/>
@@ -1130,12 +1130,12 @@ Bitte beseitige sie manuell in der Konfigurationsdatei.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="420"/>
         <source>Copy on double click</source>
-        <translation>Copy on double click</translation>
+        <translation>Kopiere bei Doppelklick</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="421"/>
         <source>Enable Copy on Double Click</source>
-        <translation>Enable Copy on Double Click</translation>
+        <translation>Kopieren bei Doppelklick aktivieren</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="434"/>
@@ -1175,7 +1175,7 @@ Bitte beseitige sie manuell in der Konfigurationsdatei.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="540"/>
         <source>Imgur Application Client ID</source>
-        <translation>Imgur Application Client ID</translation>
+        <translation>Imgur Applikations-Client-ID</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="571"/>
@@ -1699,12 +1699,12 @@ Bitte beseitige sie manuell in der Konfigurationsdatei.</translation>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="227"/>
         <source>Copy to clipboard</source>
-        <translation type="unfinished">In Zwischenablage kopieren</translation>
+        <translation>In Zwischenablage kopieren</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="234"/>
         <source>Save to file</source>
-        <translation>Save to file</translation>
+        <translation>In Datei speichern</translation>
     </message>
 </context>
 <context>
@@ -1861,7 +1861,7 @@ Bitte beseitige sie manuell in der Konfigurationsdatei.</translation>
     <message>
         <location filename="../../src/main.cpp" line="184"/>
         <source>Repeat screenshot with previously selected region</source>
-        <translation>Repeat screenshot with previously selected region</translation>
+        <translation>Wiederhole Screenshot mit zuvor ausgewählter Region</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="187"/>
@@ -1915,7 +1915,7 @@ Bitte beseitige sie manuell in der Konfigurationsdatei.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="219"/>
-        <source>Print geometry of the selection in the format W H X Y. Does nothing if raw is specified</source>
+        <source>Print geometry of the selection in the format WxH+X+Y. Does nothing if raw is specified</source>
         <translation>Geometrie der Auswahl im Format B H X Y ausgeben. Ignoriert, falls raw ausgewählt ist</translation>
     </message>
     <message>
@@ -1976,7 +1976,7 @@ Eventuell muss das &apos;#&apos; Zeichen als &apos;\#FFF&apos; maskiert werden</
     <message>
         <location filename="../../src/main.cpp" line="245"/>
         <source>Invalid screen number, it must be non negative</source>
-        <translation>Ungültige Bildschrimnummer, sie muss nicht-negativ sein</translation>
+        <translation>Ungültige Bildschirmnummer, sie darf nicht negativ sein</translation>
     </message>
     <message>
         <source>Invalid path, it must be a real path in the system</source>
@@ -2107,7 +2107,7 @@ Eventuell muss das &apos;#&apos; Zeichen als &apos;\#FFF&apos; maskiert werden</
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="200"/>
         <source>Capture screen</source>
-        <translation>Bildschrim aufnehmen</translation>
+        <translation>Bildschirm aufnehmen</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="207"/>
@@ -2172,7 +2172,7 @@ Eventuell muss das &apos;#&apos; Zeichen als &apos;\#FFF&apos; maskiert werden</
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="112"/>
         <source>Unable to detect desktop environment (GNOME? KDE? Sway? ...)</source>
-        <translation>Unable to detect desktop environment (GNOME? KDE? Sway? ...)</translation>
+        <translation>Desktopumgebung wurde nicht erkannt (GNOME? KDE? Sway? ...)</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="115"/>
@@ -2251,77 +2251,77 @@ Eventuell muss das &apos;#&apos; Zeichen als &apos;\#FFF&apos; maskiert werden</
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="167"/>
         <source>Left Double-click</source>
-        <translation></translation>
+        <translation>Linker Doppelklick</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="174"/>
         <source>Toggle side panel</source>
-        <translation type="unfinished">Seitenpanel umschalten</translation>
+        <translation>Seitenpanel umschalten</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="175"/>
         <source>Resize selection left 1px</source>
-        <translation type="unfinished">Auswahl links um 1 Pixel verändern</translation>
+        <translation>Auswahl links um 1 Pixel verändern</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="176"/>
         <source>Resize selection right 1px</source>
-        <translation type="unfinished">Auswahl rechts um 1 Pixel verändern</translation>
+        <translation>Auswahl rechts um 1 Pixel verändern</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="177"/>
         <source>Resize selection up 1px</source>
-        <translation type="unfinished">Auswahl oben um 1 Pixel verändern</translation>
+        <translation>Auswahl oben um 1 Pixel verändern</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="178"/>
         <source>Resize selection down 1px</source>
-        <translation type="unfinished">Auswahl unten um 1 Pixel verändern</translation>
+        <translation>Auswahl unten um 1 Pixel verändern</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="179"/>
         <source>Select entire screen</source>
-        <translation type="unfinished">Gesamten Bildschirm auswählen</translation>
+        <translation>Gesamten Bildschirm auswählen</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="180"/>
         <source>Move selection left 1px</source>
-        <translation type="unfinished">Auswahl um 1 Pixel nach Links verschieben</translation>
+        <translation>Auswahl um 1 Pixel nach Links verschieben</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="181"/>
         <source>Move selection right 1px</source>
-        <translation type="unfinished">Auswahl um 1 Pixel nach Rechts verschieben</translation>
+        <translation>Auswahl um 1 Pixel nach Rechts verschieben</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="182"/>
         <source>Move selection up 1px</source>
-        <translation type="unfinished">Auswahl um 1 Pixel nach Oben verschieben</translation>
+        <translation>Auswahl um 1 Pixel nach Oben verschieben</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="183"/>
         <source>Move selection down 1px</source>
-        <translation type="unfinished">Auswahl um 1 Pixel nach Unten verschieben</translation>
+        <translation>Auswahl um 1 Pixel nach Unten verschieben</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="184"/>
         <source>Commit text in text area</source>
-        <translation type="unfinished">Text in Textbereich übernehmen</translation>
+        <translation>Text in Textbereich übernehmen</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="185"/>
         <source>Delete current tool</source>
-        <translation type="unfinished">Aktuelles Werkzeug löschen</translation>
+        <translation>Aktuelles Werkzeug löschen</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="194"/>
         <source>Capture screen</source>
-        <translation type="unfinished">Bildschrim aufnehmen</translation>
+        <translation>Bildschirm aufnehmen</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="195"/>
         <source>Screenshot history</source>
-        <translation type="unfinished">Letzte Bildschirmaufnahmen</translation>
+        <translation>Screenshot-Verlauf</translation>
     </message>
 </context>
 <context>
@@ -2402,7 +2402,7 @@ Eventuell muss das &apos;#&apos; Zeichen als &apos;\#FFF&apos; maskiert werden</
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="37"/>
         <source>Century (00-99)</source>
-        <translation>Jarhhundert (00-99)</translation>
+        <translation>Jahrhundert (00-99)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="38"/>
@@ -2569,42 +2569,42 @@ Eventuell muss das &apos;#&apos; Zeichen als &apos;\#FFF&apos; maskiert werden</
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="98"/>
         <source>&amp;Take Screenshot</source>
-        <translation type="unfinished">&amp;Bildschirmaufnahme anfertigen</translation>
+        <translation>&amp;Bildschirmaufnahme anfertigen</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="116"/>
         <source>&amp;Open Launcher</source>
-        <translation type="unfinished">Anwendung öffnen</translation>
+        <translation>&amp;Launcher öffnen</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="121"/>
         <source>&amp;Configuration</source>
-        <translation type="unfinished">&amp;Einstellungen</translation>
+        <translation>&amp;Konfiguration</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="126"/>
         <source>&amp;About</source>
-        <translation type="unfinished">Über Fl&amp;ameshot</translation>
+        <translation>&amp;Über Flameshot</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="130"/>
         <source>Check for updates</source>
-        <translation type="unfinished">Auf Aktualisierungen überprüfen</translation>
+        <translation>Auf Aktualisierungen überprüfen</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="141"/>
         <source>New version %1 is available</source>
-        <translation type="unfinished">Neue version %1 ist verfügbar</translation>
+        <translation>Neue Version %1 ist verfügbar</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="145"/>
         <source>&amp;Quit</source>
-        <translation type="unfinished">&amp;Beenden</translation>
+        <translation>&amp;Beenden</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="149"/>
         <source>&amp;Latest Uploads</source>
-        <translation type="unfinished">&amp;Letzte Uploads</translation>
+        <translation>&amp;Letzte Uploads</translation>
     </message>
 </context>
 <context>

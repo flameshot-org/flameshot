@@ -13,6 +13,7 @@
 #include "abstractlogger.h"
 #include "copytool.h"
 #include "src/config/cacheutils.h"
+#include "src/config/generalconf.h"
 #include "src/core/flameshot.h"
 #include "src/core/qguiappcurrentscreen.h"
 #include "src/tools/toolfactory.h"
@@ -28,7 +29,6 @@
 #include "src/widgets/orientablepushbutton.h"
 #include "src/widgets/panel/sidepanelwidget.h"
 #include "src/widgets/panel/utilitypanel.h"
-#include "src/widgets/updatenotificationwidget.h"
 #include <QApplication>
 #include <QDateTime>
 #include <QDebug>
@@ -40,6 +40,10 @@
 #include <QScreen>
 #include <QShortcut>
 #include <draggablewidgetmaker.h>
+
+#if !defined(DISABLE_UPDATE_CHECKER)
+#include "src/widgets/updatenotificationwidget.h"
+#endif
 
 #define MOUSE_DISTANCE_TO_START_MOVING 3
 
@@ -63,7 +67,9 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
   , m_toolWidget(nullptr)
   , m_colorPicker(nullptr)
   , m_lastMouseWheel(0)
+#if !defined(DISABLE_UPDATE_CHECKER)
   , m_updateNotificationWidget(nullptr)
+#endif
   , m_activeToolIsMoved(false)
   , m_panel(nullptr)
   , m_sidePanel(nullptr)
@@ -72,9 +78,10 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
   , m_existingObjectIsChanged(false)
   , m_startMove(false)
   , m_toolSizeByKeyboard(0)
+  , m_xywhDisplay(false)
+
 {
     m_undoStack.setUndoLimit(ConfigHandler().undoLimit());
-
     m_context.circleCount = 1;
 
     // Base config of the widget
@@ -87,6 +94,8 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
             &HoverEventFilter::hoverOut,
             this,
             &CaptureWidget::childLeave);
+
+    connect(&m_xywhTimer, SIGNAL(timeout()), this, SLOT(xywhTick()));
     setAttribute(Qt::WA_DeleteOnClose);
     setAttribute(Qt::WA_QuitOnClose, false);
     m_opacity = m_config.contrastOpacity();
@@ -109,9 +118,12 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
         m_context.origScreenshot = m_context.screenshot;
 
 #if defined(Q_OS_WIN)
+// Call cmake with -DFLAMESHOT_DEBUG_CAPTURE=ON to enable easier debugging
+#if !defined(FLAMESHOT_DEBUG_CAPTURE)
         setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint |
                        Qt::SubWindow // Hides the taskbar icon
         );
+#endif
 
         for (QScreen* const screen : QGuiApplication::screens()) {
             QPoint topLeftScreen = screen->geometry().topLeft();
@@ -375,6 +387,24 @@ void CaptureWidget::handleButtonLeftClick(CaptureToolButton* b)
     setState(b);
 }
 
+void CaptureWidget::xywhTick()
+{
+    m_xywhDisplay = false;
+    repaint();
+}
+
+void CaptureWidget::showxywh(bool show)
+{
+    int timeout =
+      ConfigHandler().value("showSelectionGeometryHideTime").toInt();
+    m_xywhDisplay = show;
+    m_xywhTimer.stop();
+    repaint();
+    if (show && timeout != 0) {
+        m_xywhTimer.start(timeout);
+    }
+}
+
 void CaptureWidget::initHelpMessage()
 {
     QList<QPair<QString, QString>> keyMap;
@@ -488,19 +518,101 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
 {
     Q_UNUSED(paintEvent)
     QPainter painter(this);
+    GeneralConf::xywh_position position =
+      static_cast<GeneralConf::xywh_position>(
+        ConfigHandler().value("showSelectionGeometry").toInt());
+    /* QPainter::save and restore is somewhat costly so we try to guess
+       if we need to do it here. What that means is that if you add
+       anything to the paintEvent and want to save/restore you should
+       add a test to the below if statement -- also if you change
+       any of the conditions that current trigger it you'll need to change here,
+       too
+    */
+    bool save = false;
+    if (((position != GeneralConf::xywh_none &&
+          m_selection && // clause 1: xywh display
+          m_xywhDisplay)) ||
+        (m_activeTool && m_mouseIsClicked) ||      // clause 2: tool/click
+        (m_previewEnabled && activeButtonTool() && // clause 3: mouse preview
+         m_activeButton->tool()->showMousePreview())) {
+        painter.save();
+        save = true;
+    }
     painter.drawPixmap(0, 0, m_context.screenshot);
+    if (position != GeneralConf::xywh_none && m_selection && m_xywhDisplay) {
+        const QRect& selection = m_selection->geometry().normalized();
+        const qreal scale = m_context.screenshot.devicePixelRatio();
+        QRect xybox;
+        QFontMetrics fm = painter.fontMetrics();
 
-    if (m_activeTool && m_mouseIsClicked) {
-        painter.save();
-        m_activeTool->process(painter, m_context.screenshot);
-        painter.restore();
-    } else if (m_previewEnabled && activeButtonTool() &&
-               m_activeButton->tool()->showMousePreview()) {
-        painter.save();
-        m_activeButton->tool()->paintMousePreview(painter, m_context);
-        painter.restore();
+        QString xy = QString("%1x%2+%3+%4")
+                       .arg(static_cast<int>(selection.width() * scale))
+                       .arg(static_cast<int>(selection.height() * scale))
+                       .arg(static_cast<int>(selection.left() * scale))
+                       .arg(static_cast<int>(selection.top() * scale));
+
+        xybox = fm.boundingRect(xy);
+        // the small numbers here are just margins so the text doesn't
+        // smack right up to the box; they aren't critical and the box
+        // size itself is tied to the font metrics
+        xybox.adjust(0, 0, 10, 12);
+        // in anticipation of making the position adjustable
+        int x0, y0;
+        // Move these to header
+
+// adjust for small selection
+#if 0 // seems more usable not to do this
+        if (xybox.width() > selection.width())
+            xybox.setWidth(selection.width());
+        if (xybox.height() > selection.height())
+            xybox.setHeight(selection.height());
+#endif
+        switch (position) {
+            case GeneralConf::xywh_top_left:
+                x0 = selection.left();
+                y0 = selection.top();
+                break;
+            case GeneralConf::xywh_bottom_left:
+                x0 = selection.left();
+                y0 = selection.bottom() - xybox.height();
+                break;
+            case GeneralConf::xywh_top_right:
+                x0 = selection.right() - xybox.width();
+                y0 = selection.top();
+                break;
+            case GeneralConf::xywh_bottom_right:
+                x0 = selection.right() - xybox.width();
+                y0 = selection.bottom() - xybox.height();
+                break;
+            case GeneralConf::xywh_center:
+            default:
+                x0 = selection.left() + (selection.width() - xybox.width()) / 2;
+                y0 =
+                  selection.top() + (selection.height() - xybox.height()) / 2;
+        }
+
+        QColor uicolor = ConfigHandler().uiColor();
+        uicolor.setAlpha(200);
+        painter.fillRect(
+          x0, y0, xybox.width(), xybox.height(), QBrush(uicolor));
+        painter.setPen(ColorUtils::colorIsDark(uicolor) ? Qt::white
+                                                        : Qt::black);
+        painter.drawText(x0,
+                         y0,
+                         xybox.width(),
+                         xybox.height(),
+                         Qt::AlignVCenter | Qt::AlignHCenter,
+                         xy);
     }
 
+    if (m_activeTool && m_mouseIsClicked) {
+        m_activeTool->process(painter, m_context.screenshot);
+    } else if (m_previewEnabled && activeButtonTool() &&
+               m_activeButton->tool()->showMousePreview()) {
+        m_activeButton->tool()->paintMousePreview(painter, m_context);
+    }
+    if (save)
+        painter.restore();
     // draw inactive region
     drawInactiveRegion(&painter);
 
@@ -614,7 +726,6 @@ void CaptureWidget::mousePressEvent(QMouseEvent* e)
         updateCursor();
         return;
     }
-
     // reset object selection if capture area selection is active
     if (m_selection->getMouseSide(e->pos()) != SelectionWidget::CENTER) {
         m_panel->setActiveLayer(-1);
@@ -646,7 +757,6 @@ void CaptureWidget::mousePressEvent(QMouseEvent* e)
     }
 
     selectToolItemAtPos(m_mousePressedPos);
-
     updateSelectionState();
     updateCursor();
 }
@@ -1025,6 +1135,7 @@ void CaptureWidget::initPanel()
     m_panel->fillCaptureTools(m_captureToolObjects.captureToolObjects());
 }
 
+#if !defined(DISABLE_UPDATE_CHECKER)
 void CaptureWidget::showAppUpdateNotification(const QString& appLatestVersion,
                                               const QString& appLatestUrl)
 {
@@ -1057,6 +1168,7 @@ void CaptureWidget::showAppUpdateNotification(const QString& appLatestVersion,
     makeChild(m_updateNotificationWidget);
     m_updateNotificationWidget->show();
 }
+#endif
 
 void CaptureWidget::initSelection()
 {
@@ -1092,8 +1204,13 @@ void CaptureWidget::initSelection()
         }
     });
     if (!initialSelection.isNull()) {
+        const qreal scale = m_context.screenshot.devicePixelRatio();
         initialSelection.moveTopLeft(initialSelection.topLeft() -
                                      mapToGlobal({}));
+        initialSelection.setTop(initialSelection.top() / scale);
+        initialSelection.setBottom(initialSelection.bottom() / scale);
+        initialSelection.setLeft(initialSelection.left() / scale);
+        initialSelection.setRight(initialSelection.right() / scale);
     }
     m_selection->setGeometry(initialSelection);
     m_selection->setVisible(!initialSelection.isNull());
@@ -1388,6 +1505,18 @@ void CaptureWidget::initShortcuts()
     newShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_RESIZE_DOWN")),
                 m_selection,
                 SLOT(resizeDown()));
+    newShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_SYM_RESIZE_LEFT")),
+                m_selection,
+                SLOT(symResizeLeft()));
+    newShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_SYM_RESIZE_RIGHT")),
+                m_selection,
+                SLOT(symResizeRight()));
+    newShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_SYM_RESIZE_UP")),
+                m_selection,
+                SLOT(symResizeUp()));
+    newShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_SYM_RESIZE_DOWN")),
+                m_selection,
+                SLOT(symResizeDown()));
 
     newShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_MOVE_LEFT")),
                 m_selection,
@@ -1431,6 +1560,7 @@ void CaptureWidget::deleteCurrentTool()
 
 void CaptureWidget::updateSizeIndicator()
 {
+    showxywh(); // Note: even if sizeIndButton goes away, we have to keep this!
     if (m_sizeIndButton) {
         const QRect& selection = extendedSelection();
         m_sizeIndButton->setText(QStringLiteral("%1\n%2")

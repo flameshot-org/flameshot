@@ -129,7 +129,7 @@ void ImgS3Uploader::handleReplyPostUpload(QNetworkReply* reply)
         resultStatus = true;
 
         // Copy url to clipboard if required
-        if (ConfigHandler().copyAndCloseAfterUpload()) {
+        if (ConfigHandler().copyURLAfterUpload()) {
             SystemNotification().sendMessage(tr("URL copied to clipboard."));
 
             // FIXME - bring it back if required

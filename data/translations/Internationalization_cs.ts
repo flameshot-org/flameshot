@@ -1962,7 +1962,7 @@ Vyřešte je, prosím, ručně v souboru s nastavením.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="219"/>
-        <source>Print geometry of the selection in the format W H X Y. Does nothing if raw is specified</source>
+        <source>Print geometry of the selection in the format WxH+X+Y. Does nothing if raw is specified</source>
         <translation>Zobrazit natočení výběru ve formátu Š V X Y. Nedělá nic, pokud je zadáno nezpracovaný</translation>
     </message>
     <message>

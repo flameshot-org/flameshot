@@ -32,14 +32,23 @@ SidePanelWidget::SidePanelWidget(QPixmap* p, QWidget* parent)
     auto* colorLayout = new QGridLayout();
 
     // Create Active Tool Size
+    auto* toolSizeHBox = new QHBoxLayout();
     auto* activeToolSizeText = new QLabel(tr("Active tool size: "));
+
+    m_toolSizeSpin = new QSpinBox(this);
+    m_toolSizeSpin->setRange(1, maxToolSize);
+    m_toolSizeSpin->setSingleStep(1);
+    m_toolSizeSpin->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+
+    toolSizeHBox->addWidget(activeToolSizeText);
+    toolSizeHBox->addWidget(m_toolSizeSpin);
 
     m_toolSizeSlider = new QSlider(Qt::Horizontal);
     m_toolSizeSlider->setRange(1, maxToolSize);
     m_toolSizeSlider->setValue(m_toolSize);
     m_toolSizeSlider->setMinimumWidth(minSliderWidth);
 
-    colorLayout->addWidget(activeToolSizeText, 0, 0);
+    colorLayout->addLayout(toolSizeHBox, 0, 0);
     colorLayout->addWidget(m_toolSizeSlider, 1, 0);
 
     // Create Active Color
@@ -72,6 +81,10 @@ SidePanelWidget::SidePanelWidget(QPixmap* p, QWidget* parent)
     m_layout->addWidget(m_colorHex);
 
     // tool size sigslots
+    connect(m_toolSizeSpin,
+            static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged),
+            this,
+            &SidePanelWidget::toolSizeChanged);
     connect(m_toolSizeSlider,
             &QSlider::valueChanged,
             this,
@@ -112,6 +125,7 @@ void SidePanelWidget::onToolSizeChanged(int t)
 {
     m_toolSize = qBound(0, t, maxToolSize);
     m_toolSizeSlider->setValue(m_toolSize);
+    m_toolSizeSpin->setValue(m_toolSize);
 }
 
 void SidePanelWidget::startColorGrab()

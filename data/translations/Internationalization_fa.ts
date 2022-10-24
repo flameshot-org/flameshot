@@ -427,7 +427,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="61"/>
         <source>Esc</source>
-        <translation type="unfinished">گریز</translation>
+        <translation>گریز</translation>
     </message>
 </context>
 <context>
@@ -445,7 +445,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="65"/>
         <source>Update</source>
-        <translation type="unfinished">به‌روز رسانی</translation>
+        <translation>به‌روز رسانی</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="67"/>
@@ -806,7 +806,7 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="111"/>
         <source>Unable to close active modal widgets</source>
-        <translation type="unfinished">ناتوان در بستن ابزارک‌های پرکاربرد فعّال</translation>
+        <translation>ناتوان در بستن ابزارک‌های فعّال</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="400"/>
@@ -819,17 +819,17 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/core/flameshotdaemon.cpp" line="363"/>
         <source>New version %1 is available</source>
-        <translation type="unfinished">نگارش جدید %1 در دسترس است</translation>
+        <translation>نگارش جدید %1 در دسترس است</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshotdaemon.cpp" line="369"/>
         <source>You have the latest version</source>
-        <translation type="unfinished">شما آخرین نگارش را دارید</translation>
+        <translation>شما آخرین نگارش را دارید</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshotdaemon.cpp" line="378"/>
         <source>Failed to get information about the latest version.</source>
-        <translation type="unfinished">دریافت اطّلاعات درباره آخرین نگارش شکست خورد.</translation>
+        <translation>دریافت اطّلاعات درباره آخرین نگارش ناموفق بود.</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshotdaemon.cpp" line="399"/>
@@ -1675,7 +1675,7 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="227"/>
         <source>Copy to clipboard</source>
-        <translation type="unfinished">Copia al porta-retalls</translation>
+        <translation>ذخیره در بُریده‌دان</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="234"/>
@@ -1887,8 +1887,8 @@ Please solve them manually in the configuration file.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="219"/>
-        <source>Print geometry of the selection in the format W H X Y. Does nothing if raw is specified</source>
-        <translation>مختصات گزیده را در قالب «W H X Y» چاپ می‌کند. اگر چیزی مشخص نشده باشد، هیچ کاری انجام نمی‌دهد</translation>
+        <source>Print geometry of the selection in the format WxH+X+Y. Does nothing if raw is specified</source>
+        <translation>مختصات گزیده را در قالب «WxH+X+Y» چاپ می‌کند. اگر چیزی مشخص نشده باشد، هیچ کاری انجام نمی‌دهد</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="223"/>
@@ -2223,77 +2223,77 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="167"/>
         <source>Left Double-click</source>
-        <translation></translation>
+        <translation type="unfinished">دوبار کلیک</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="174"/>
         <source>Toggle side panel</source>
-        <translation type="unfinished">تغییر وضعیت تابلو کناری</translation>
+        <translation>تغییر وضعیت تابلو کناری</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="175"/>
         <source>Resize selection left 1px</source>
-        <translation type="unfinished">تغییر اندازه محوطه گزیده شده 1 پیکسل به چپ</translation>
+        <translation>تغییر اندازه محوطه گزیده شده 1 پیکسل به چپ</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="176"/>
         <source>Resize selection right 1px</source>
-        <translation type="unfinished">تغییر اندازه محوطه گزیده شده 1 پیکسل به راست</translation>
+        <translation>تغییر اندازه محوطه گزیده شده 1 پیکسل به راست</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="177"/>
         <source>Resize selection up 1px</source>
-        <translation type="unfinished">تغییر اندازه محوطه گزیده شده 1 پیکسل به بالا</translation>
+        <translation>تغییر اندازه محوطه گزیده شده 1 پیکسل به بالا</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="178"/>
         <source>Resize selection down 1px</source>
-        <translation type="unfinished">تغییر اندازه محوطه گزیده شده 1 پیکسل به پایین</translation>
+        <translation>تغییر اندازه محوطه گزیده شده 1 پیکسل به پایین</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="179"/>
         <source>Select entire screen</source>
-        <translation type="unfinished">گزینش کل صفحه</translation>
+        <translation>انتخاب تمام صفحه</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="180"/>
         <source>Move selection left 1px</source>
-        <translation type="unfinished">جابه‌جایی محوطه گزیده شده 1 پیکسل به چپ</translation>
+        <translation>جابه‌جایی محوطه گزیده شده 1 پیکسل به چپ</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="181"/>
         <source>Move selection right 1px</source>
-        <translation type="unfinished">جابه‌جایی محوطه گزیده شده 1 پیکسل به راست</translation>
+        <translation>جابه‌جایی محوطه گزیده شده 1 پیکسل به راست</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="182"/>
         <source>Move selection up 1px</source>
-        <translation type="unfinished">جابه‌جایی محوطه گزیده شده 1 پیکسل به بالا</translation>
+        <translation>جابه‌جایی محوطه گزیده شده 1 پیکسل به بالا</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="183"/>
         <source>Move selection down 1px</source>
-        <translation type="unfinished">جابه‌جایی محوطه گزیده شده 1 پیکسل به پایین</translation>
+        <translation>جابه‌جایی محوطه گزیده شده 1 پیکسل به پایین</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="184"/>
         <source>Commit text in text area</source>
-        <translation type="unfinished">متن ثبت در ناحیهٔ متنی</translation>
+        <translation>ثبت متن در ناحیهٔ متنی</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="185"/>
         <source>Delete current tool</source>
-        <translation type="unfinished">حذف ابزار فعلی</translation>
+        <translation>حذف ابزار فعلی</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="194"/>
         <source>Capture screen</source>
-        <translation type="unfinished">نماگرفت از صفحه</translation>
+        <translation>نماگرفت از صفحه</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="195"/>
         <source>Screenshot history</source>
-        <translation type="unfinished">تاریخچهٔ نماگرفت</translation>
+        <translation>تاریخچهٔ نماگرفت</translation>
     </message>
 </context>
 <context>
@@ -2541,42 +2541,42 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="98"/>
         <source>&amp;Take Screenshot</source>
-        <translation type="unfinished">&amp;گرفتن نماگرفت</translation>
+        <translation>&amp;گرفتن نماگرفت</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="116"/>
         <source>&amp;Open Launcher</source>
-        <translation type="unfinished">&amp;گشودن اجراگر</translation>
+        <translation>&amp;گشودن اجراگر</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="121"/>
         <source>&amp;Configuration</source>
-        <translation type="unfinished">&amp;پیکربندی</translation>
+        <translation>&amp;پیکربندی</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="126"/>
         <source>&amp;About</source>
-        <translation type="unfinished">&amp;درباره</translation>
+        <translation>&amp;درباره نرم‌افزار</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="130"/>
         <source>Check for updates</source>
-        <translation type="unfinished">بررسی برای به‌روز رسانی‌ها</translation>
+        <translation>بررسی برای به‌روز رسانی‌</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="141"/>
         <source>New version %1 is available</source>
-        <translation type="unfinished">نگارش جدید %1 در دسترس است</translation>
+        <translation>نگارش جدید %1 در دسترس است</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="145"/>
         <source>&amp;Quit</source>
-        <translation type="unfinished">&amp;خروج</translation>
+        <translation>&amp;خروج</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="149"/>
         <source>&amp;Latest Uploads</source>
-        <translation type="unfinished">&amp;جدیدترین بارگذاری‌ها</translation>
+        <translation>&amp;آخرین بارگذاری‌ها</translation>
     </message>
 </context>
 <context>

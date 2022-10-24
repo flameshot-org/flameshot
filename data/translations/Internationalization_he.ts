@@ -42,12 +42,12 @@
     <message>
         <location filename="../../src/tools/launcher/applaunchertool.cpp" line="23"/>
         <source>App Launcher</source>
-        <translation>משגר יישום</translation>
+        <translation>משגר יישומון</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applaunchertool.cpp" line="33"/>
         <source>Choose an app to open the capture</source>
-        <translation>נא לבחור יישום לפתיחת הלכידה</translation>
+        <translation>נא לבחור יישומון לפתיחת הלכידה</translation>
     </message>
 </context>
 <context>
@@ -392,12 +392,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="58"/>
         <source>Accept color</source>
-        <translation>קבל צבע</translation>
+        <translation>קבלת צבע</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="58"/>
         <source>Enter or Left Click</source>
-        <translation></translation>
+        <translation>מקש אנטר או הקשת לחצן עכבר שמאלי</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="59"/>
@@ -407,17 +407,17 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="59"/>
         <source>Hold Left Click</source>
-        <translation></translation>
+        <translation>החזקת והקשת לחצן עכבר שמאלי</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="60"/>
         <source>Toggle magnifier</source>
-        <translation>מיתוג זכוכית מגדלת</translation>
+        <translation>מחלף זכוכית מגדלת</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="60"/>
         <source>Space or Right Click</source>
-        <translation></translation>
+        <translation>מקש רווח או הקשת לחצן עכבר ימני</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="61"/>
@@ -427,7 +427,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="61"/>
         <source>Esc</source>
-        <translation type="unfinished">יציאה (Esc)</translation>
+        <translation>יציאה (Esc)</translation>
     </message>
 </context>
 <context>
@@ -443,22 +443,22 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="40"/>
         <source>Edit Preset:</source>
-        <translation>Edit Preset:</translation>
+        <translation>עריכת קיבוע־מראש:</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="45"/>
         <source>Enter color to update preset</source>
-        <translation>Enter color to update preset</translation>
+        <translation>נא להזין צבע כדי לעדכן קיבוע־מראש</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="65"/>
         <source>Update</source>
-        <translation type="unfinished">עדכון</translation>
+        <translation>עדכון</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="67"/>
         <source>Press button to update the selected preset</source>
-        <translation>Press button to update the selected preset</translation>
+        <translation>הקשה על הלחצן כדי לעדכן קיבוע־מראש שנבחר</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="74"/>
@@ -553,7 +553,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="716"/>
         <source>The configuration contains an error. Open configuration to resolve.</source>
-        <translation>התצורה מכילה שגיאה. נא לפתוח תצורה לתיקון.</translation>
+        <translation>התצורה מכילה שגיאה. לתיקון, נא להקיש על &apos;תצור&apos;.</translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="770"/>
@@ -814,12 +814,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="111"/>
         <source>Unable to close active modal widgets</source>
-        <translation type="unfinished">לא ניתן לסגור ווידג&apos;טים מודאליים</translation>
+        <translation>לא ניתן לסגור ווידג&apos;טים מודאליים</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="400"/>
         <source>URL copied to clipboard.</source>
-        <translation>URL copied to clipboard.</translation>
+        <translation>כתובת URL הועתקה ללוח־גזירים.</translation>
     </message>
 </context>
 <context>
@@ -827,17 +827,17 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/core/flameshotdaemon.cpp" line="363"/>
         <source>New version %1 is available</source>
-        <translation type="unfinished">גרסה חדשה %1, זמינה</translation>
+        <translation>גרסה חדשה %1, זמינה</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshotdaemon.cpp" line="369"/>
         <source>You have the latest version</source>
-        <translation type="unfinished">הגרסה העדכנית ביותר כבר מותקנת</translation>
+        <translation>הגרסה העדכנית ביותר כבר מותקנת</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshotdaemon.cpp" line="378"/>
         <source>Failed to get information about the latest version.</source>
-        <translation type="unfinished">קבלת מידע אודות הגרסה העדכנית ביותר, כשלה.</translation>
+        <translation>קבלת מידע אודות הגרסה העדכנית ביותר, כשלה.</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshotdaemon.cpp" line="399"/>
@@ -1071,12 +1071,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="247"/>
         <source>Use last region</source>
-        <translation>Use last region</translation>
+        <translation>השתמש באזור האחרון</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="248"/>
         <source>Uses the last region as the default selection for the next screenshot</source>
-        <translation>Uses the last region as the default selection for the next screenshot</translation>
+        <translation>שימוש באזור האחרון כבחירת ברירת־מחדל לצילום המסך הבא</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="262"/>
@@ -1126,12 +1126,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="420"/>
         <source>Copy on double click</source>
-        <translation>Copy on double click</translation>
+        <translation>העתק בהקשה כפולה</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="421"/>
         <source>Enable Copy on Double Click</source>
-        <translation>Enable Copy on Double Click</translation>
+        <translation>אפשר העתקה בהקשה כפולה</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="434"/>
@@ -1171,7 +1171,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="540"/>
         <source>Imgur Application Client ID</source>
-        <translation>Imgur Application Client ID</translation>
+        <translation>מזהה לקוח יישומון Imgur</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="571"/>
@@ -1687,12 +1687,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="227"/>
         <source>Copy to clipboard</source>
-        <translation type="unfinished">Copia al porta-retalls</translation>
+        <translation>העתקה ללוח־גזירים</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="234"/>
         <source>Save to file</source>
-        <translation>Save to file</translation>
+        <translation>שמירה לקובץ</translation>
     </message>
 </context>
 <context>
@@ -1845,7 +1845,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/main.cpp" line="184"/>
         <source>Repeat screenshot with previously selected region</source>
-        <translation>Repeat screenshot with previously selected region</translation>
+        <translation>חזרה על צילום־מסך עם האזור שנבחר לאחרונה</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="187"/>
@@ -1899,8 +1899,8 @@ Please solve them manually in the configuration file.</source>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="219"/>
-        <source>Print geometry of the selection in the format W H X Y. Does nothing if raw is specified</source>
-        <translation>הדפסת גאומטרית הבחירה בתבנית W H X Y. לא עושה דבר אם צוין &apos;גלמי&apos;</translation>
+        <source>Print geometry of the selection in the format WxH+X+Y. Does nothing if raw is specified</source>
+        <translation>הדפסת גאומטרית הבחירה בתבנית WxH+X+Y. לא עושה דבר אם צוין &apos;גלמי&apos;</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="223"/>
@@ -2027,7 +2027,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="148"/>
         <source>Requested screen exceeds screen count</source>
-        <translation>Requested screen exceeds screen count</translation>
+        <translation>המסך המבוקש חורג ממספר המסכים</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="378"/>
@@ -2160,12 +2160,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="112"/>
         <source>Unable to detect desktop environment (GNOME? KDE? Sway? ...)</source>
-        <translation>Unable to detect desktop environment (GNOME? KDE? Sway? ...)</translation>
+        <translation>לא ניתן לזהות סביבת שולחן עבודה (GNOME? KDE? להתנדנד? ...)</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="115"/>
         <source>Hint: try setting the XDG_CURRENT_DESKTOP environment variable.</source>
-        <translation>Hint: try setting the XDG_CURRENT_DESKTOP environment variable.</translation>
+        <translation>רמז: נא לנסות להגדיר את משתנה הסביבה XDG_CURRENT_DESKTOP.</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="120"/>
@@ -2239,77 +2239,77 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="167"/>
         <source>Left Double-click</source>
-        <translation></translation>
+        <translation>הקשת־עכבר כפולה שמאלית</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="174"/>
         <source>Toggle side panel</source>
-        <translation type="unfinished">בררת סרגל־צד</translation>
+        <translation>מחלף סרגל־צד</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="175"/>
         <source>Resize selection left 1px</source>
-        <translation type="unfinished">שינוי גודל הבחירה לשמאל פיקסל 1</translation>
+        <translation>שינוי גודל הבחירה לשמאל פיקסל 1</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="176"/>
         <source>Resize selection right 1px</source>
-        <translation type="unfinished">שינוי גודל הבחירה לימין פיקסל 1</translation>
+        <translation>שינוי גודל הבחירה לימין פיקסל 1</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="177"/>
         <source>Resize selection up 1px</source>
-        <translation type="unfinished">שינוי גודל הבחירה מעלה פיקסל 1</translation>
+        <translation>שינוי גודל הבחירה מעלה פיקסל 1</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="178"/>
         <source>Resize selection down 1px</source>
-        <translation type="unfinished">שינוי גודל הבחירה מטה פיקסל 1</translation>
+        <translation>שינוי גודל הבחירה מטה פיקסל 1</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="179"/>
         <source>Select entire screen</source>
-        <translation type="unfinished">בחירת כל המסך</translation>
+        <translation>בחירת כל המסך</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="180"/>
         <source>Move selection left 1px</source>
-        <translation type="unfinished">העברת בחירה 1px לשמאל</translation>
+        <translation>העברת בחירה 1px לשמאל</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="181"/>
         <source>Move selection right 1px</source>
-        <translation type="unfinished">העברת בחירה 1px לימין</translation>
+        <translation>העברת בחירה 1px לימין</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="182"/>
         <source>Move selection up 1px</source>
-        <translation type="unfinished">העברת בחירה 1px מעלה</translation>
+        <translation>העברת בחירה 1px מעלה</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="183"/>
         <source>Move selection down 1px</source>
-        <translation type="unfinished">העברת בחירה 1px מטה</translation>
+        <translation>העברת בחירה 1px מטה</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="184"/>
         <source>Commit text in text area</source>
-        <translation type="unfinished">קיבוע מלל באזור המלל</translation>
+        <translation>קיבוע מלל באזור מלל</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="185"/>
         <source>Delete current tool</source>
-        <translation type="unfinished">מחיקת כלי נוכחי</translation>
+        <translation>מחיקת כלי נוכחי</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="194"/>
         <source>Capture screen</source>
-        <translation type="unfinished">לכידת מסך</translation>
+        <translation>לכידת מסך</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="195"/>
         <source>Screenshot history</source>
-        <translation type="unfinished">היסטורית צילומי־מסך</translation>
+        <translation>היסטורית צילומי־מסך</translation>
     </message>
 </context>
 <context>
@@ -2557,42 +2557,42 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="98"/>
         <source>&amp;Take Screenshot</source>
-        <translation type="unfinished">&amp;צילום־מסך</translation>
+        <translation>&amp;צילום־מסך</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="116"/>
         <source>&amp;Open Launcher</source>
-        <translation type="unfinished">&amp;פתיחת משגר</translation>
+        <translation>&amp;פתיחת משגר</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="121"/>
         <source>&amp;Configuration</source>
-        <translation type="unfinished">&amp;תצור</translation>
+        <translation>&amp;תצור</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="126"/>
         <source>&amp;About</source>
-        <translation type="unfinished">&amp;על אודות</translation>
+        <translation>&amp;על אודות</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="130"/>
         <source>Check for updates</source>
-        <translation type="unfinished">בדיקת זמינות עדכונים</translation>
+        <translation>בדיקת זמינות עדכונים</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="141"/>
         <source>New version %1 is available</source>
-        <translation type="unfinished">גרסה חדשה %1, זמינה</translation>
+        <translation>גרסה חדשה %1, זמינה</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="145"/>
         <source>&amp;Quit</source>
-        <translation type="unfinished">&amp;יציאה</translation>
+        <translation>&amp;יציאה</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="149"/>
         <source>&amp;Latest Uploads</source>
-        <translation type="unfinished">&amp;העלאות אחרונות</translation>
+        <translation>&amp;העלאות אחרונות</translation>
     </message>
 </context>
 <context>

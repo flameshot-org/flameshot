@@ -12,7 +12,7 @@ body:
     value: |
       1. Please write in English, this is the language all maintainers can speak and write.
       2. Please take a moment to check that your issue doesn't already exist and not already reported.
-      3. Please make sure the solution to your problem is not already mentioned in the FAQ (https://flameshot.org/guide/faq/)
+      3. Please make sure the solution to your problem is not already mentioned in the FAQ (https://flameshot.org/docs/guide/faq/)
       4. Please provide the information for each field as complete as possible.
 - type: textarea
   id: flameshot-ver
@@ -71,7 +71,7 @@ body:
   id: screenshots
   attributes:
     label: Screenshots or screen recordings
-    description: If you think it would be beneficial for us to understand the issue, please provide a screenshots or screen recordig. For screen recording you can use [Peek](https://github.com/phw/peek)
+    description: If you think it would be beneficial for us to understand the issue, please provide a screenshots or screen recording. For screen recording you can use [Peek](https://github.com/phw/peek)
 - type: textarea
   id: systeminfo
   attributes:

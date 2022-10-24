@@ -1884,7 +1884,7 @@ Please solve them manually in the configuration file.</source>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="219"/>
-        <source>Print geometry of the selection in the format W H X Y. Does nothing if raw is specified</source>
+        <source>Print geometry of the selection in the format WxH+X+Y. Does nothing if raw is specified</source>
         <translation>Afmetingen van de selectie tonen in B H X Y. Niet van toepassing als &apos;onbewerkt&apos; is opgegeven.</translation>
     </message>
     <message>

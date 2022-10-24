@@ -79,7 +79,9 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     OPTION("showDesktopNotification"     ,Bool               ( true          )),
     OPTION("disabledTrayIcon"            ,Bool               ( false         )),
     OPTION("historyConfirmationToDelete" ,Bool               ( true          )),
+#if !defined(DISABLE_UPDATE_CHECKER)
     OPTION("checkForUpdates"             ,Bool               ( true          )),
+#endif
     OPTION("allowMultipleGuiInstances"   ,Bool               ( false         )),
     OPTION("showMagnifier"               ,Bool               ( false         )),
     OPTION("squareMagnifier"             ,Bool               ( false         )),
@@ -88,7 +90,7 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
 #endif
     OPTION("startupLaunch"               ,Bool               ( false         )),
     OPTION("showStartupLaunchMessage"    ,Bool               ( true          )),
-    OPTION("copyAndCloseAfterUpload"     ,Bool               ( true          )),
+    OPTION("copyURLAfterUpload"          ,Bool               ( true          )),
     OPTION("copyPathAfterSave"           ,Bool               ( false         )),
     OPTION("antialiasingPinZoom"         ,Bool               ( true          )),
     OPTION("useJpgForClipboard"          ,Bool               ( false         )),
@@ -121,6 +123,8 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     // drawFontSize, remember to update ConfigHandler::toolSize
     OPTION("copyOnDoubleClick"           ,Bool               ( false         )),
     OPTION("uploadClientSecret"          ,String             ( "313baf0c7b4d3ff"            )),
+    OPTION("showSelectionGeometry"  , BoundedInt               (0,5,4)),
+    OPTION("showSelectionGeometryHideTime", LowerBoundedInt       (0, 3000))
 };
 
 static QMap<QString, QSharedPointer<KeySequence>> recognizedShortcuts = {
@@ -151,6 +155,10 @@ static QMap<QString, QSharedPointer<KeySequence>> recognizedShortcuts = {
     SHORTCUT("TYPE_RESIZE_RIGHT"        ,   "Shift+Right"           ),
     SHORTCUT("TYPE_RESIZE_UP"           ,   "Shift+Up"              ),
     SHORTCUT("TYPE_RESIZE_DOWN"         ,   "Shift+Down"            ),
+    SHORTCUT("TYPE_SYM_RESIZE_LEFT"     ,   "Ctrl+Shift+Left"       ),
+    SHORTCUT("TYPE_SYM_RESIZE_RIGHT"    ,   "Ctrl+Shift+Right"      ),
+    SHORTCUT("TYPE_SYM_RESIZE_UP"       ,   "Ctrl+Shift+Up"         ),
+    SHORTCUT("TYPE_SYM_RESIZE_DOWN"     ,   "Ctrl+Shift+Down"       ),
     SHORTCUT("TYPE_SELECT_ALL"          ,   "Ctrl+A"                ),
     SHORTCUT("TYPE_MOVE_LEFT"           ,   "Left"                  ),
     SHORTCUT("TYPE_MOVE_RIGHT"          ,   "Right"                 ),

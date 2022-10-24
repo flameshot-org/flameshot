@@ -19,6 +19,15 @@ class GeneralConf : public QWidget
     Q_OBJECT
 public:
     explicit GeneralConf(QWidget* parent = nullptr);
+    enum xywh_position
+    {
+        xywh_none = 0,
+        xywh_top_left = 1,
+        xywh_bottom_left = 2,
+        xywh_top_right = 3,
+        xywh_bottom_right = 4,
+        xywh_center = 5
+    };
 
 public slots:
     void updateComponents();
@@ -28,7 +37,9 @@ private slots:
     void saveLastRegion(bool checked);
     void showSidePanelButtonChanged(bool checked);
     void showDesktopNotificationChanged(bool checked);
+#if !defined(DISABLE_UPDATE_CHECKER)
     void checkForUpdatesChanged(bool checked);
+#endif
     void allowMultipleGuiInstancesChanged(bool checked);
     void autoCloseIdleDaemonChanged(bool checked);
     void autostartChanged(bool checked);
@@ -44,6 +55,8 @@ private slots:
     void uploadClientKeyEdited();
     void useJpgForClipboardChanged(bool checked);
     void setSaveAsFileExtension(QString extension);
+    void setGeometryLocation(int index);
+    void setSelGeoHideTime(int v);
 
 private:
     const QString chooseFolder(const QString currentPath = "");
@@ -52,7 +65,9 @@ private:
     void initAntialiasingPinZoom();
     void initAutoCloseIdleDaemon();
     void initAutostart();
+#if !defined(DISABLE_UPDATE_CHECKER)
     void initCheckForUpdates();
+#endif
     void initConfigButtons();
     void initCopyAndCloseAfterUpload();
     void initCopyOnDoubleClick();
@@ -74,6 +89,7 @@ private:
     void initUploadHistoryMax();
     void initUploadClientSecret();
     void initSaveLastRegion();
+    void initShowSelectionGeometry();
 
     void _updateComponents(bool allowEmptySavePath);
 
@@ -85,12 +101,14 @@ private:
     QCheckBox* m_showTray;
     QCheckBox* m_helpMessage;
     QCheckBox* m_sidePanelButton;
+#if !defined(DISABLE_UPDATE_CHECKER)
     QCheckBox* m_checkForUpdates;
+#endif
     QCheckBox* m_allowMultipleGuiInstances;
     QCheckBox* m_autoCloseIdleDaemon;
     QCheckBox* m_autostart;
     QCheckBox* m_showStartupLaunchMessage;
-    QCheckBox* m_copyAndCloseAfterUpload;
+    QCheckBox* m_copyURLAfterUpload;
     QCheckBox* m_copyPathAfterSave;
     QCheckBox* m_antialiasingPinZoom;
     QCheckBox* m_saveLastRegion;
@@ -112,4 +130,7 @@ private:
     QCheckBox* m_showMagnifier;
     QCheckBox* m_squareMagnifier;
     QCheckBox* m_copyOnDoubleClick;
+    QCheckBox* m_showSelectionGeometry;
+    QComboBox* m_selectGeometryLocation;
+    QSpinBox* m_xywhTimeout;
 };

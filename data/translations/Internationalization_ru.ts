@@ -235,7 +235,7 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="398"/>
         <source>Right Click</source>
-        <translation>Правый щелчок</translation>
+        <translation>Правый щелчок мыши</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="398"/>
@@ -260,7 +260,7 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="509"/>
         <source>Flameshot has lost focus. Keyboard shortcuts won&apos;t work until you click somewhere.</source>
-        <translation>Flameshot потерял фокус. Сочетания клавиш не будут работать, пока вы не щёлкните где-нибудь.</translation>
+        <translation>Flameshot потерял фокус. Сочетания клавиш не будут работать, пока вы не нажмёте где-нибудь.</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="515"/>
@@ -396,7 +396,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="58"/>
         <source>Enter or Left Click</source>
-        <translation>Enter или щелчок левой кнопкой</translation>
+        <translation>Enter или нажмите левой кнопкой мыши</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="59"/>
@@ -406,7 +406,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="59"/>
         <source>Hold Left Click</source>
-        <translation>Удерживать левый щелчок</translation>
+        <translation>Удерживайте левую кнопку мыши</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="60"/>
@@ -416,7 +416,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="60"/>
         <source>Space or Right Click</source>
-        <translation>Пробел или правый щелчок</translation>
+        <translation>Пробел или нажмите правой кнопкой мыши</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="61"/>
@@ -1205,12 +1205,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="420"/>
         <source>Copy on double click</source>
-        <translation>Копировать двойным щелчком мыши</translation>
+        <translation>Скопировать двойным нажатием кнопки мыши</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="421"/>
         <source>Enable Copy on Double Click</source>
-        <translation>Включить копирование по двойному щелчку мыши</translation>
+        <translation>Включить копирование по двойному нажатию кнопки мыши</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="434"/>
@@ -2073,8 +2073,8 @@ Please solve them manually in the configuration file.</source>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="219"/>
-        <source>Print geometry of the selection in the format W H X Y. Does nothing if raw is specified</source>
-        <translation>Распечатать геометрию выделения в формате W H X Y. Ничего не делает, если указано raw</translation>
+        <source>Print geometry of the selection in the format WxH+X+Y. Does nothing if raw is specified</source>
+        <translation>Распечатать геометрию выделения в формате WxH+X+Y. Ничего не делает, если указано raw</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="223"/>
@@ -2208,7 +2208,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="71"/>
         <source>Hello, I&apos;m here! Click icon in the tray to take a screenshot or click with a right button to see more options.</source>
-        <translation>Привет! Для создания снимка щёлкните по значку в трее. Прочие функции в меню правого щелчка.</translation>
+        <translation>Привет! Для создания снимка нажмите на значок в трее. Чтобы увидеть больше функций, нажмите правой кнопки мыши.</translation>
     </message>
     <message>
         <source>Toggle side panel</source>
@@ -2415,7 +2415,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="167"/>
         <source>Left Double-click</source>
-        <translation>Левый двойной щелчок</translation>
+        <translation>Левый двойной щелчок мыши</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="174"/>
