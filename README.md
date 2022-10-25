@@ -63,7 +63,7 @@
   - [Local](#local)
   - [Global](#global)
     - [On KDE Plasma desktop](#on-kde-plasma-desktop)
-    - [On Ubuntu](#on-ubuntu-tested-on-1804-2004)
+    - [On Ubuntu](#on-ubuntu-tested-on-1804-2004-2204)
     - [On XFCE 4](#on-xfce-4)
 - [Considerations](#considerations)
 - [Installation](#installation)
