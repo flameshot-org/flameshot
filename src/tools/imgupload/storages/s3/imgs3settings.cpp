@@ -27,9 +27,9 @@
 #include <QTemporaryFile>
 
 ImgS3Settings::ImgS3Settings()
+  : m_proxy(nullptr)
+  , m_localSettings(nullptr)
 {
-    m_proxy = nullptr;
-    m_localSettings = nullptr;
     initSettings();
 
     // get remote config url
@@ -47,6 +47,40 @@ ImgS3Settings::ImgS3Settings()
     m_proxyPort = -1;
     m_proxyUser = QString();
     m_proxyPassword = QString();
+}
+
+void ImgS3Settings::initSettings()
+{
+    QString configIniPath =
+      QFile::exists(S3_CONFIG_LOCAL)
+        ? QDir::currentPath() + QDir::separator() + S3_CONFIG_LOCAL
+        : QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) +
+            QDir::separator() + "flameshot" + QDir::separator() +
+            S3_CONFIG_LOCAL;
+#if defined(Q_OS_MACOS)
+    if (!QFile::exists(configIniPath)) {
+        configIniPath =
+          QStandardPaths::writableLocation(QStandardPaths::HomeLocation) +
+          QDir::separator() + ".config" + QDir::separator() + "flameshot" +
+          QDir::separator() + S3_CONFIG_LOCAL;
+    }
+#elif defined(Q_OS_WIN)
+    if (!(QFileInfo::exists(configIniPath) &&
+          QFileInfo(configIniPath).isFile())) {
+        configIniPath =
+          QDir("C:\\Program Files\\Flameshot\\bin").filePath(S3_CONFIG_LOCAL);
+    }
+#endif
+
+    if (QFile::exists(configIniPath)) {
+        m_localSettings = new QSettings(localConfigFilePath(configIniPath),
+                                        QSettings::IniFormat);
+        updateSettingsFromRemoteConfig(m_localSettings);
+    } else {
+        m_localSettings = new QSettings();
+    }
+    m_proxySettings =
+      new QSettings(localConfigFilePath(S3_CONFIG_PROXY), QSettings::IniFormat);
 }
 
 void ImgS3Settings::initS3Creds()
@@ -131,34 +165,6 @@ const QString& ImgS3Settings::localConfigFilePath(const QString& fileName)
 #endif
     }
     return m_qstr;
-}
-
-void ImgS3Settings::initSettings()
-{
-    QString configIniPath =
-      QFile::exists(S3_CONFIG_LOCAL)
-        ? QDir::currentPath() + QDir::separator() + S3_CONFIG_LOCAL
-        : QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) +
-            QDir::separator() + "flameshot" + QDir::separator() +
-            S3_CONFIG_LOCAL;
-#if defined(Q_OS_MACOS)
-    if (!QFile::exists(configIniPath)) {
-        configIniPath =
-          QStandardPaths::writableLocation(QStandardPaths::HomeLocation) +
-          QDir::separator() + ".config" + QDir::separator() + "flameshot" +
-          QDir::separator() + S3_CONFIG_LOCAL;
-    }
-#endif
-
-    if (QFile::exists(configIniPath)) {
-        m_localSettings = new QSettings(localConfigFilePath(configIniPath),
-                                        QSettings::IniFormat);
-        updateSettingsFromRemoteConfig(m_localSettings);
-    } else {
-        m_localSettings = new QSettings();
-    }
-    m_proxySettings =
-      new QSettings(localConfigFilePath(S3_CONFIG_PROXY), QSettings::IniFormat);
 }
 
 const QString& ImgS3Settings::credsUrl()
