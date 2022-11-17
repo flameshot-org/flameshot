@@ -212,8 +212,8 @@ These shortcuts are available in GUI mode:
 | <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Z</kbd>                                            | Redo the next modification                    |
 | <kbd>Ctrl</kbd> + <kbd>Q</kbd>                                            | Leave the capture screen                                         |
 | <kbd>Ctrl</kbd> + <kbd>O</kbd>                                            | Choose an app to open the capture                                |
-| <kbd>Ctrl</kbd> + <kbd>Enter</kbd>                                            | Commit text in text area|
-| <kbd>Enter</kbd>                                             | Upload the selection to Imgur                                      |
+| <kbd>Ctrl</kbd> + <kbd>Return</kbd>                                            | Commit text in text area|
+| <kbd>Return</kbd>                                             | Upload the selection to Imgur                                      |
 | <kbd>Spacebar</kbd>                                                       | Toggle visibility of sidebar with options of the selected tool, color picker for the drawing color and history menu |
 | Right Click                                                               | Show the color wheel                                              |
 | Mouse Wheel                                                               | Change the tool's thickness                                    |
