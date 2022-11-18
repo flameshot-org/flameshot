@@ -63,7 +63,7 @@
   - [Local](#local)
   - [Global](#global)
     - [On KDE Plasma desktop](#on-kde-plasma-desktop)
-    - [On Ubuntu](#on-ubuntu-tested-on-1804-2004)
+    - [On Ubuntu](#on-ubuntu-tested-on-1804-2004-2204)
     - [On XFCE 4](#on-xfce-4)
 - [Considerations](#considerations)
 - [Installation](#installation)
@@ -177,8 +177,8 @@ You can use the graphical menu to configure Flameshot, but alternatively you can
 ### Config file
 
 You can also edit some of the settings (like overriding the default colors) in the configuration file.\
-Linux path : `~/.config/flameshot/flameshot.ini`.\
-Windows path : `C:\Users\{YOURNAME}\AppData\Roaming\flameshot\flameshot.ini`.
+Linux path: `~/.config/flameshot/flameshot.ini`.\
+Windows path: `C:\Users\{YOURNAME}\AppData\Roaming\flameshot\flameshot.ini`.
 
 When copying over the config file from Linux to Windows or vice versa,
 make sure to correct the `savePath` variable,\
@@ -200,7 +200,7 @@ These shortcuts are available in GUI mode:
 | <kbd>C</kbd>                                          | Set the Circle as paint tool |
 | <kbd>M</kbd>                                          | Set the Marker as paint tool |
 | <kbd>T</kbd>                                          | Add text to your capture |
-| <kbd>B</kbd>                                          | Set Pixalate as the paint tool |
+| <kbd>B</kbd>                                          | Set Pixelate as the paint tool |
 | <kbd>←</kbd>, <kbd>↓</kbd>, <kbd>↑</kbd>, <kbd>→</kbd>                    | Move selection 1px                                             |
 | <kbd>Shift</kbd> + <kbd>←</kbd>, <kbd>↓</kbd>, <kbd>↑</kbd>, <kbd>→</kbd> | Resize selection 1px                                           |
 | <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>←</kbd>, <kbd>↓</kbd>, <kbd>↑</kbd>, <kbd>→</kbd> | Symmetrically resize selection 2px                                           |
@@ -228,7 +228,7 @@ These shortcuts are available in GUI mode:
 
 Flameshot uses <kbd>Print screen</kbd> (Windows) and <kbd>cmd</kbd>-<kbd>shift</kbd>-<kbd>x</kbd> (macOS) as default global hotkeys.
 
-On Linux, Flameshot doesn't yet support <kbd>Pr Scr</kbd> out of the box, but with a bit of configuration you can set this up:
+On Linux, Flameshot doesn't yet support <kbd>Prt Sc</kbd> out of the box, but with a bit of configuration you can set this up:
 
 #### On KDE Plasma desktop
 
