@@ -19,8 +19,8 @@ env:
 
 jobs:
   catalina:
-    name: macOS Catalina 10.15
-    runs-on: macos-10.15
+    name: macOS Big Sur 11
+    runs-on: macos-11
 
     env:
       APP_NAME: flameshot
@@ -28,7 +28,7 @@ jobs:
       DIR_PKG: build/src
       HELPERS_SCRIPTS_PATH: ../../packaging/macos
       # Apple developer identity, example: "Developer ID Application: <user name> (code)"
-      # Note: no signing and notarization will be be proceed if this variable is not set
+      # Note: no signing and notarization will proceed if this variable is not set
       APPLE_DEV_IDENTITY: ${{ secrets.APPLE_DEV_IDENTITY }}
       # Apple ID user
       APPLE_DEV_USER: ${{ secrets.APPLE_DEV_USER }}
