@@ -82,6 +82,12 @@ jobs:
               symbol: jammy,
               arch: amd64
             }
+          - {
+            name: ubuntu-24.04,
+            os: ubuntu,
+            symbol: noble,
+            arch: amd64
+          }
 
     steps:
       - name: Enable Docker Experimental Features
