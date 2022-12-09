@@ -166,6 +166,11 @@ void ShortcutsWidget::loadShortcuts()
                 m_shortcuts << (QStringList() << "" << tool->description()
                                               << tr("Left Double-click"));
             }
+        } else if (shortcutName == "TYPE_SAVE") {
+            if (m_config.saveOnShiftDoubleClick()) {
+                m_shortcuts << (QStringList() << "" << tool->description()
+                                              << tr("Shift + Left Double-click"));
+            }
         }
         delete tool;
     }

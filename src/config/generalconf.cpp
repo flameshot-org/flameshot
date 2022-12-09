@@ -48,6 +48,7 @@ GeneralConf::GeneralConf(QWidget* parent)
     initShowSidePanelButton();
     initUseJpgForClipboard();
     initCopyOnDoubleClick();
+    initSaveOnShiftDoubleClick();
     initSaveAfterCopy();
     initCopyPathAfterSave();
     initCopyAndCloseAfterUpload();
@@ -82,6 +83,7 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
     m_antialiasingPinZoom->setChecked(config.antialiasingPinZoom());
     m_useJpgForClipboard->setChecked(config.useJpgForClipboard());
     m_copyOnDoubleClick->setChecked(config.copyOnDoubleClick());
+    m_saveOnShiftDoubleClick->setChecked(config.saveOnShiftDoubleClick());
     m_uploadWithoutConfirmation->setChecked(config.uploadWithoutConfirmation());
     m_historyConfirmationToDelete->setChecked(
       config.historyConfirmationToDelete());
@@ -425,6 +427,7 @@ void GeneralConf::initPredefinedColorPaletteLarge()
           ConfigHandler().setPredefinedColorPaletteLarge(checked);
       });
 }
+
 void GeneralConf::initCopyOnDoubleClick()
 {
     m_copyOnDoubleClick = new QCheckBox(tr("Copy on double click"), this);
@@ -434,6 +437,18 @@ void GeneralConf::initCopyOnDoubleClick()
 
     connect(m_copyOnDoubleClick, &QCheckBox::clicked, [](bool checked) {
         ConfigHandler().setCopyOnDoubleClick(checked);
+    });
+}
+
+void GeneralConf::initSaveOnShiftDoubleClick()
+{
+    m_saveOnShiftDoubleClick = new QCheckBox(tr("Save on shift double click"), this);
+    m_saveOnShiftDoubleClick->setToolTip(
+      tr("Enable Save to file on Shift + Double Click"));
+    m_scrollAreaLayout->addWidget(m_saveOnShiftDoubleClick);
+
+    connect(m_saveOnShiftDoubleClick, &QCheckBox::clicked, [](bool checked) {
+        ConfigHandler().setSaveOnShiftDoubleClick(checked);
     });
 }
 

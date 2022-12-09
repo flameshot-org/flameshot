@@ -780,6 +780,12 @@ void CaptureWidget::mouseDoubleClickEvent(QMouseEvent* event)
         }
     } else if (m_selection->geometry().contains(event->pos())) {
         if ((event->button() == Qt::LeftButton) &&
+            (event->modifiers() == Qt::ShiftModifier) && 
+            (m_config.saveOnShiftDoubleClick())) {
+            saveToFilesystemGUI(m_context.screenshot);
+            qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
+            close();
+        } else if ((event->button() == Qt::LeftButton) &&
             (m_config.copyOnDoubleClick())) {
             CopyTool copyTool;
             connect(&copyTool,

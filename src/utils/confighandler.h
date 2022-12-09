@@ -118,6 +118,7 @@ public:
     CONFIG_GETTER_SETTER(showMagnifier, setShowMagnifier, bool)
     CONFIG_GETTER_SETTER(squareMagnifier, setSquareMagnifier, bool)
     CONFIG_GETTER_SETTER(copyOnDoubleClick, setCopyOnDoubleClick, bool)
+    CONFIG_GETTER_SETTER(saveOnShiftDoubleClick, setSaveOnShiftDoubleClick, bool)
     CONFIG_GETTER_SETTER(uploadClientSecret, setUploadClientSecret, QString)
     CONFIG_GETTER_SETTER(saveLastRegion, setSaveLastRegion, bool)
     CONFIG_GETTER_SETTER(showSelectionGeometry, setShowSelectionGeometry, int)

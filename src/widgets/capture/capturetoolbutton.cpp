@@ -66,6 +66,11 @@ void CaptureToolButton::initButton()
         ConfigHandler().copyOnDoubleClick()) {
         tooltip += QStringLiteral(" (%1Left Double-Click)")
                      .arg(shortcut.isEmpty() ? QString() : shortcut + " or ");
+    } else if (m_buttonType == CaptureTool::TYPE_SAVE &&
+        ConfigHandler().saveOnShiftDoubleClick()) {
+        tooltip += QStringLiteral(" (%1Shift + Left Double-Click)")
+                     .arg(shortcut.isEmpty() ? QString() : shortcut + " or ");
+
     } else if (!shortcut.isEmpty()) {
         tooltip += QStringLiteral(" (%1)").arg(shortcut);
     }
