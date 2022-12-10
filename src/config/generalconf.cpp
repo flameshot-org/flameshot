@@ -59,6 +59,7 @@ GeneralConf::GeneralConf(QWidget* parent)
     initUploadClientSecret();
     initPredefinedColorPaletteLarge();
     initShowSelectionGeometry();
+    initUseNativeDirectoryDialog();
 
     m_layout->addStretch();
 
@@ -103,6 +104,7 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
     m_screenshotPathFixedCheck->setChecked(config.savePathFixed());
     m_uploadHistoryMax->setValue(config.uploadHistoryMax());
     m_undoLimit->setValue(config.undoLimit());
+    m_useNativeDirectoryDialog->setChecked(config.useNativeDirectoryDialog());
 
     if (allowEmptySavePath || !config.savePath().isEmpty()) {
         m_savePath->setText(config.savePath());
@@ -677,11 +679,15 @@ const QString GeneralConf::chooseFolder(const QString pathDefault)
         path =
           QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);
     }
+    QFileDialog::Options options = QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks;
+    if (!ConfigHandler().useNativeDirectoryDialog()) {
+      options = options | QFileDialog::DontUseNativeDialog;
+    }
     path = QFileDialog::getExistingDirectory(
       this,
       tr("Choose a Folder"),
       path,
-      QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
+      options);
     if (path.isEmpty()) {
         return path;
     }
@@ -771,6 +777,18 @@ void GeneralConf::initShowSelectionGeometry()
     selGeoLayout->addWidget(m_selectGeometryLocation);
     vboxLayout->addLayout(selGeoLayout);
     vboxLayout->addStretch();
+}
+
+void GeneralConf::initUseNativeDirectoryDialog()
+{
+    m_useNativeDirectoryDialog = new QCheckBox(tr("Use native dialog for the directory chooser"), this);
+    m_useNativeDirectoryDialog->setToolTip(tr("When choosing directories try not to use "
+                                   "the qt dialog, use the native dialog instead"));
+
+    m_scrollAreaLayout->addWidget(m_useNativeDirectoryDialog);
+    connect(m_useNativeDirectoryDialog, &QCheckBox::clicked, [](bool checked) {
+        ConfigHandler().setUseNativeDirectoryDialog(checked);
+    });
 }
 
 void GeneralConf::setSelGeoHideTime(int v)

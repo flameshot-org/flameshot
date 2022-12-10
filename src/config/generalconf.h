@@ -90,6 +90,7 @@ private:
     void initUploadClientSecret();
     void initSaveLastRegion();
     void initShowSelectionGeometry();
+    void initUseNativeDirectoryDialog();
 
     void _updateComponents(bool allowEmptySavePath);
 
@@ -131,6 +132,7 @@ private:
     QCheckBox* m_squareMagnifier;
     QCheckBox* m_copyOnDoubleClick;
     QCheckBox* m_showSelectionGeometry;
+    QCheckBox* m_useNativeDirectoryDialog;
     QComboBox* m_selectGeometryLocation;
     QSpinBox* m_xywhTimeout;
 };
