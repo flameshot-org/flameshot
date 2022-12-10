@@ -71,6 +71,7 @@ private:
     void initConfigButtons();
     void initCopyAndCloseAfterUpload();
     void initCopyOnDoubleClick();
+    void initSaveOnShiftDoubleClick();
     void initCopyPathAfterSave();
     void initHistoryConfirmationToDelete();
     void initPredefinedColorPaletteLarge();
@@ -130,6 +131,7 @@ private:
     QCheckBox* m_showMagnifier;
     QCheckBox* m_squareMagnifier;
     QCheckBox* m_copyOnDoubleClick;
+    QCheckBox* m_saveOnShiftDoubleClick;
     QCheckBox* m_showSelectionGeometry;
     QComboBox* m_selectGeometryLocation;
     QSpinBox* m_xywhTimeout;

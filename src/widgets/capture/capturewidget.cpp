@@ -12,6 +12,7 @@
 #include "capturewidget.h"
 #include "abstractlogger.h"
 #include "copytool.h"
+#include "savetool.h"
 #include "src/config/cacheutils.h"
 #include "src/config/generalconf.h"
 #include "src/core/flameshot.h"
@@ -780,6 +781,16 @@ void CaptureWidget::mouseDoubleClickEvent(QMouseEvent* event)
         }
     } else if (m_selection->geometry().contains(event->pos())) {
         if ((event->button() == Qt::LeftButton) &&
+            (event->modifiers() == Qt::ShiftModifier) && 
+            (m_config.saveOnShiftDoubleClick())) {
+            SaveTool saveTool;
+            connect(&saveTool,
+                    &SaveTool::requestAction,
+                    this,
+                    &CaptureWidget::handleToolSignal);
+            saveTool.pressed(m_context);
+            qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
+        } else if ((event->button() == Qt::LeftButton) &&
             (m_config.copyOnDoubleClick())) {
             CopyTool copyTool;
             connect(&copyTool,
