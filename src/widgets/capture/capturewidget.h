@@ -149,6 +149,8 @@ private:
     CaptureTool* activeButtonTool() const;
     CaptureTool::Type activeButtonToolType() const;
 
+    QPoint snapToGrid(const QPoint &point) const;
+
     ////////////////////////////////////////
     // Class members
 
