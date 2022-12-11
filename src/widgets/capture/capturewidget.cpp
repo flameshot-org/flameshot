@@ -393,6 +393,18 @@ void CaptureWidget::xywhTick()
     repaint();
 }
 
+void CaptureWidget::onDisplayGridChanged(bool display)
+{
+    m_displayGrid = display;
+    repaint();
+}
+
+void CaptureWidget::onGridSizeChanged(int size)
+{
+    m_gridSize = size;
+    repaint();
+}
+
 void CaptureWidget::showxywh(bool show)
 {
     int timeout =
@@ -591,6 +603,7 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
                   selection.top() + (selection.height() - xybox.height()) / 2;
         }
 
+
         QColor uicolor = ConfigHandler().uiColor();
         uicolor.setAlpha(200);
         painter.fillRect(
@@ -603,6 +616,31 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
                          xybox.height(),
                          Qt::AlignVCenter | Qt::AlignHCenter,
                          xy);
+    }
+
+    if (m_displayGrid)
+    {
+        painter.save();
+        QColor uicolor = ConfigHandler().uiColor();
+        uicolor.setAlpha(100);
+        painter.setPen(uicolor);
+        painter.setBrush(QBrush(uicolor));
+
+        auto topLeft = mapToGlobal(m_context.selection.topLeft());
+        topLeft.rx() -= topLeft.x() % m_gridSize;
+        topLeft.ry() -= topLeft.y() % m_gridSize;
+        topLeft = mapFromGlobal(topLeft);
+
+        const auto scale{m_context.screenshot.devicePixelRatio()};
+        const auto step{m_gridSize * scale};
+        const auto radius{1*scale};
+
+        for (int y = topLeft.y() ; y<m_context.selection.bottom() ; y+=step) {
+            for (int x = topLeft.x(); x<m_context.selection.right() ; x+=step) {
+                painter.drawEllipse(x,y, radius, radius);
+            }
+        }
+        painter.restore();
     }
 
     if (m_activeTool && m_mouseIsClicked) {
@@ -1126,6 +1164,14 @@ void CaptureWidget::initPanel()
             &SidePanelWidget::togglePanel,
             m_panel,
             &UtilityPanel::toggle);
+    connect(m_sidePanel,
+            &SidePanelWidget::displayGridChanged,
+            this,
+            &CaptureWidget::onDisplayGridChanged);
+    connect(m_sidePanel,
+            &SidePanelWidget::gridSizeChanged,
+            this,
+            &CaptureWidget::onGridSizeChanged);
     // TODO replace with a CaptureWidget signal
     emit m_sidePanel->colorChanged(m_context.color);
     emit toolSizeChanged(m_context.toolSize);

@@ -130,6 +130,10 @@ SidePanelWidget::SidePanelWidget(QPixmap* p, QWidget* parent)
         this->m_gridSizeSpin->setEnabled(b);
         emit this->displayGridChanged(b);
     });
+    connect(m_gridSizeSpin,
+            qOverload<int>(&QSpinBox::valueChanged),
+            this,
+            &SidePanelWidget::gridSizeChanged);
 }
 
 void SidePanelWidget::onColorChanged(const QColor& color)
