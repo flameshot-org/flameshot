@@ -11,6 +11,7 @@
 #include <QGuiApplication>
 #include <QPixmap>
 #include <QScreen>
+#include <QProcess>
 
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
 #include "request.h"
@@ -24,6 +25,28 @@
 ScreenGrabber::ScreenGrabber(QObject* parent)
   : QObject(parent)
 {}
+
+void ScreenGrabber::generalGrimScreenshot(bool& ok, QPixmap& res)
+{
+#ifdef USE_WAYLAND_GRIM
+#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
+    QProcess Process;
+    QString program = "grim";
+    QString tmpFileName = "/tmp/screenshot.png";
+    QStringList arguments;
+    arguments << tmpFileName;
+    Process.start(program, arguments);
+    if(Process.waitForFinished()) {
+        res.load(tmpFileName);
+        ok = true;
+    } else {
+        ok = false;
+        AbstractLogger::error() 
+            << tr("The universal wayland screen capture adapter requires Grim as the screen capture component of wayland. If the screen capture component is missing, please install it!");
+    }
+ #endif
+ #endif
+}
 
 void ScreenGrabber::freeDesktopPortal(bool& ok, QPixmap& res)
 {
@@ -103,8 +126,14 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
             case DesktopInfo::GNOME:
             case DesktopInfo::KDE:
             case DesktopInfo::QTILE:
-            case DesktopInfo::SWAY: {
+            case DesktopInfo::SWAY:
+            case DesktopInfo::HYPRLAND: 
+            case DesktopInfo::OTHER: {
+#ifndef USE_WAYLAND_GRIM
                 freeDesktopPortal(ok, res);
+#else
+                generalGrimScreenshot(ok, res);
+#endif
                 break;
             }
             default:
