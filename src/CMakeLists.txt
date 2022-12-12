@@ -221,6 +221,8 @@ if (USE_WAYLAND_CLIPBOARD)
 endif()
 if (USE_WAYLAND_GRIM)
     target_compile_definitions(flameshot PRIVATE USE_WAYLAND_GRIM=1)
+    target_compile_definitions(flameshot PRIVATE USE_WAYLAND_CLIPBOARD=1)
+    target_link_libraries(flameshot KF5::GuiAddons)
 endif()
 
 if (APPLE)
