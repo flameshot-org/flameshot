@@ -32,12 +32,11 @@ void ScreenGrabber::generalGrimScreenshot(bool& ok, QPixmap& res)
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
     QProcess Process;
     QString program = "grim";
-    QString tmpFileName = "/tmp/screenshot.png";
     QStringList arguments;
-    arguments << tmpFileName;
+    arguments << "-";
     Process.start(program, arguments);
     if(Process.waitForFinished()) {
-        res.load(tmpFileName);
+        res.loadFromData(Process.readAll());
         ok = true;
     } else {
         ok = false;
