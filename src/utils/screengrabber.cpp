@@ -10,8 +10,8 @@
 #include <QDesktopWidget>
 #include <QGuiApplication>
 #include <QPixmap>
-#include <QScreen>
 #include <QProcess>
+#include <QScreen>
 
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
 #include "request.h"
@@ -24,7 +24,8 @@
 
 ScreenGrabber::ScreenGrabber(QObject* parent)
   : QObject(parent)
-{}
+{
+}
 
 void ScreenGrabber::generalGrimScreenshot(bool& ok, QPixmap& res)
 {
@@ -35,16 +36,18 @@ void ScreenGrabber::generalGrimScreenshot(bool& ok, QPixmap& res)
     QStringList arguments;
     arguments << "-";
     Process.start(program, arguments);
-    if(Process.waitForFinished()) {
+    if (Process.waitForFinished()) {
         res.loadFromData(Process.readAll());
         ok = true;
     } else {
         ok = false;
-        AbstractLogger::error() 
-            << tr("The universal wayland screen capture adapter requires Grim as the screen capture component of wayland. If the screen capture component is missing, please install it!");
+        AbstractLogger::error()
+          << tr("The universal wayland screen capture adapter requires Grim as "
+                "the screen capture component of wayland. If the screen "
+                "capture component is missing, please install it!");
     }
- #endif
- #endif
+#endif
+#endif
 }
 
 void ScreenGrabber::freeDesktopPortal(bool& ok, QPixmap& res)
@@ -126,11 +129,15 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
             case DesktopInfo::KDE:
             case DesktopInfo::QTILE:
             case DesktopInfo::SWAY:
-            case DesktopInfo::HYPRLAND: 
+            case DesktopInfo::HYPRLAND:
             case DesktopInfo::OTHER: {
 #ifndef USE_WAYLAND_GRIM
-                AbstractLogger::warning()
-                  << tr("If the USE_WAYLAND_GRIM option is not activated, the dbus protocol will be used. It should be noted that using the dbus protocol under wayland is not recommended. It is recommended to recompile with the USE_WAYLAND_GRIM flag to activate the grim-based general wayland screenshot adapter");
+                AbstractLogger::warning() << tr(
+                  "If the USE_WAYLAND_GRIM option is not activated, the dbus "
+                  "protocol will be used. It should be noted that using the "
+                  "dbus protocol under wayland is not recommended. It is "
+                  "recommended to recompile with the USE_WAYLAND_GRIM flag to "
+                  "activate the grim-based general wayland screenshot adapter");
                 freeDesktopPortal(ok, res);
 #else
                 generalGrimScreenshot(ok, res);
