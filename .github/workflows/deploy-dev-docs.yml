@@ -40,6 +40,7 @@ jobs:
           path: 'website'
 
       - name: Safety step (TODO remove)
+        working-directory: ${{github.workspace}}/website
         run: |
           git checkout -b gh-pages-tmp
 
@@ -47,9 +48,9 @@ jobs:
         working-directory: ${{github.workspace}}/website
         run: |
           mkdir -p docs
-          mv -r \
+          mv \
               "${{github.workspace}}/flameshot/docs/dev/output" \
               "./docs/dev"
           git add docs/dev
-          HASH="$(git --git-dir="${{github.workspace}}/.git" rev-parse HEAD)"
+          HASH="$(git --git-dir="${{github.workspace}}/flameshot/.git" rev-parse HEAD)"
           git commit --message "Add developer docs from flameshot@$HASH"
