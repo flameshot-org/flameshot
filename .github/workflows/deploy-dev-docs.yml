@@ -47,10 +47,16 @@ jobs:
       - name: Add developer docs to website deployment
         working-directory: ${{github.workspace}}/website
         run: |
+          # Copy generated docs over
           mkdir -p docs
           mv \
               "${{github.workspace}}/flameshot/docs/dev/output" \
               "./docs/dev"
+          # Set git credentials
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          # Commit and push
           git add docs/dev
           HASH="$(git --git-dir="${{github.workspace}}/flameshot/.git" rev-parse HEAD)"
           git commit --message "Add developer docs from flameshot@$HASH"
+          git push origin HEAD
