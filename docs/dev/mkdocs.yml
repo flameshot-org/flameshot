@@ -3,7 +3,7 @@ site_url: https://flameshot.org/docs/dev/
 repo_url: https://github.com/flameshot-org/flameshot/
 edit_uri: tree/master/docs/dev/src
 docs_dir: src
-site_dir: dev-docs-output
+site_dir: output
 markdown_extensions:
   - admonition
   - attr_list

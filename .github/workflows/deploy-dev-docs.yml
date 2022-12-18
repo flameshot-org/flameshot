@@ -21,5 +21,31 @@ jobs:
               mkdocs-material \
               git+https://github.com/veracioux/mkdoxy@v1.0.0
 
-      - name: Checkout Source code
+      - name: Checkout flameshot source
         uses: actions/checkout@v3
+        with:
+          path: 'flameshot'
+
+      - name: Build docs
+        run: |
+          make --directory docs/dev build
+
+      - name: Checkout flameshot website
+        uses: actions/checkout@v3
+        with:
+          ref: gh-pages
+          path: 'website'
+
+      - name: Safety step (TODO remove)
+        run: |
+          git checkout -b gh-pages-tmp
+
+      - name: Add developer docs to website deployment
+        run: |
+          mkdir -p docs
+          mv -r \
+              "$GITHUB_WORKSPACE/flameshot/docs/dev/output" \
+              "./docs/dev"
+          git add docs/dev
+          HASH="$(git --git-dir="$GITHUB_WORKSPACE/.git" rev-parse HEAD)"
+          git commit --message "Add developer docs from flameshot@$HASH"

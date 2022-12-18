@@ -1,7 +1,7 @@
 # Only run this script from the Makefile
 
 shopt -s globstar
-cd dev-docs-output
+cd output
 
 # Classes backlink to the ClassList in their breadcrumbs. We use the ClassIndex
 # instead.
