@@ -53,9 +53,13 @@ jobs:
               "./docs/dev"
           # Set git credentials
           git config user.name "GitHub Actions"
-          git config user.email "github-actions-bot@users.noreply.$GITHUB_HOSTNAME"
+          git config user.email "github-actions-bot@users.noreply.github.com"
           # Commit and push
+          echo CHECKPOINT 1
           git add docs/dev
+          echo CHECKPOINT 2
           HASH="$(git --git-dir="${{github.workspace}}/flameshot/.git" rev-parse HEAD)"
+          echo CHECKPOINT 3
           git commit --message "Add developer docs from flameshot@$HASH"
-          git push "https://${{github.actor}}:${{github.token}}@github.com/flameshot-org/flameshot-org.github.io" HEAD
+          echo CHECKPOINT 4
+          git push "https://x-access-token:${{secrets.TOKEN_PUSH_TO_WEBSITE_REPO}}@github.com/flameshot-org/flameshot-org.github.io" HEAD
