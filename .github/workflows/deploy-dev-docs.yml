@@ -14,6 +14,8 @@ jobs:
     steps:
       - name: Install dependencies
         run: |
+          sudo apt-get --yes --quiet update
+          sudo apt-get --yes --no-install-recommends install doxygen
           pip install \
               mkdocs \
               mkdocs-material \
