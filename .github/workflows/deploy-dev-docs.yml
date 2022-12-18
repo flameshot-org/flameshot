@@ -35,7 +35,8 @@ jobs:
       - name: Checkout flameshot website
         uses: actions/checkout@v3
         with:
-          ref: gh-pages
+          repository: 'flameshot-org/flameshot-org.github.io'
+          ref: 'gh-pages'
           path: 'website'
 
       - name: Safety step (TODO remove)
