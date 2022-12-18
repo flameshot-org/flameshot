@@ -27,7 +27,7 @@ jobs:
           path: 'flameshot'
 
       - name: Build docs
-        working-directory: ${{github.workspace}}/docs/dev
+        working-directory: ${{github.workspace}}/flameshot/docs/dev
         run: |
           ls
           make build
