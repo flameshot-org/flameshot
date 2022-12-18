@@ -64,7 +64,8 @@ jobs:
           # Apply changes to gh-pages
           git checkout --force gh-pages
           git checkout developer-docs -- docs/dev
-          git commit --message "Add developer docs from flameshot@$HASH"
+          # Commit (we use `|| true` because the commit could be empty and thus fail)
+          git commit --message "Add developer docs from flameshot@$HASH" || true
 
       - name: Push to website repo
         working-directory: ${{github.workspace}}/website
