@@ -27,8 +27,10 @@ jobs:
           path: 'flameshot'
 
       - name: Build docs
+        working-directory: ${{github.workspace}}/docs/dev
         run: |
-          make --directory docs/dev build
+          ls
+          make build
 
       - name: Checkout flameshot website
         uses: actions/checkout@v3
@@ -41,11 +43,12 @@ jobs:
           git checkout -b gh-pages-tmp
 
       - name: Add developer docs to website deployment
+        working-directory: ${{github.workspace}}/website
         run: |
           mkdir -p docs
           mv -r \
-              "$GITHUB_WORKSPACE/flameshot/docs/dev/output" \
+              "${{github.workspace}}/flameshot/docs/dev/output" \
               "./docs/dev"
           git add docs/dev
-          HASH="$(git --git-dir="$GITHUB_WORKSPACE/.git" rev-parse HEAD)"
+          HASH="$(git --git-dir="${{github.workspace}}/.git" rev-parse HEAD)"
           git commit --message "Add developer docs from flameshot@$HASH"
