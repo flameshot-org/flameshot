@@ -11,12 +11,25 @@ of this documentation can be found [here][doc-source].
     In order to edit a page from the documentation, click the :material-pencil:
     button in the top right corner of the page.
 
+## Serving locally
+To serve the documentation locally, run the `make serve` target in the `docs`
+directory.
+
 ## Notes and conventions
 - When you add new files or rename existing files or section names, be sure to
   edit the `nav` property of [mkdocs.yml][mkdocs.yml].
 - Always insert links as [reference style
   links][markdown:reference-style-links]. This will make the docs source code
   more readable and make broken links more easily detectable and replaceable.
+
+### Post-processing
+There are some tweaks we make to the generated HTML documentation. We do that in
+the `make build` target, by running the [post-process.sh][post-process.sh]
+script. To see what post-processing we do, see that file.
+
+For this reason, the version of the documentation served locally using `make
+serve` will not match the generated HTML documentation 100%. But those
+inconsistencies are few and minor.
 
 ## Dependencies
 ```shell
@@ -54,6 +67,7 @@ the `docs/dev` subdirectory of the [gh-pages][] branch.
 
 [website]: https://flameshot.org
 [doc-source]: https://github.com/flameshot-org/flameshot/tree/master/docs
+[post-process.sh]: https://github.com/flameshot-org/flameshot/tree/master/docs/dev/post-process.sh
 [website-repo]: https://github.com/flameshot-org/flameshot-org.github.io
 [gh-pages]: https://github.com/flameshot-org/flameshot-org.github.io/tree/gh-pages
 
