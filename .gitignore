@@ -74,4 +74,4 @@ data/flatpak/.flatpak-builder
 .DS_Store
 
 # Miscellaneous
-!docs/Makefile
+!docs/dev/Makefile
