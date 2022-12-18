@@ -1,8 +1,8 @@
 site_name: Flameshot Developer Docs
 site_url: https://flameshot.org/docs/dev/
 repo_url: https://github.com/flameshot-org/flameshot/
-edit_uri: tree/master/docs/dev/
-docs_dir: dev
+edit_uri: tree/master/docs/dev/src
+docs_dir: src
 site_dir: dev-docs-output
 markdown_extensions:
   - admonition
@@ -18,7 +18,7 @@ plugins:
   - mkdoxy:
       projects:
         flameshot:
-          src-dirs: ../src/
+          src-dirs: ../../src/
           full-doc: True
           doxy-cfg:
             FILE_PATTERNS: "*.cpp *.h"
@@ -26,10 +26,6 @@ plugins:
             FULL_PATH_NAMES: "NO"
             SHOW_USED_FILES: "NO"
             RECURSIVE: True
-            CLASS_DIAGRAMS: "YES"
-            CLASS_GRAPH: "YES"
-            DOT_TRANSPARENT: "YES"
-            HAVE_DOT: "YES"
 
       save-api: mkdoxy-generated
       debug: False

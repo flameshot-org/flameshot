@@ -12,8 +12,8 @@ of this documentation can be found [here][doc-source].
     button in the top right corner of the page.
 
 ## Serving locally
-To serve the documentation locally, run the `make serve` target in the `docs`
-directory.
+To serve the documentation locally, run the `make serve` target in the
+`docs/dev` directory.
 
 ## Notes and conventions
 - When you add new files or rename existing files or section names, be sure to
@@ -66,7 +66,7 @@ the `docs/dev` subdirectory of the [gh-pages][] branch.
     Mention the post-process steps
 
 [website]: https://flameshot.org
-[doc-source]: https://github.com/flameshot-org/flameshot/tree/master/docs
+[doc-source]: https://github.com/flameshot-org/flameshot/tree/master/docs/dev
 [post-process.sh]: https://github.com/flameshot-org/flameshot/tree/master/docs/dev/post-process.sh
 [website-repo]: https://github.com/flameshot-org/flameshot-org.github.io
 [gh-pages]: https://github.com/flameshot-org/flameshot-org.github.io/tree/gh-pages
@@ -75,6 +75,6 @@ the `docs/dev` subdirectory of the [gh-pages][] branch.
 [mkdocs-material]: https://squidfunk.github.io/mkdocs-material
 [mkdoxy-original]: https://github.com/JakubAndrysek/mkdoxy
 [mkdoxy]: https://github.com/veracioux/mkdoxy
-[mkdocs.yml]: https://github.com/flameshot-org/flameshot/docs/mkdocs.yml
+[mkdocs.yml]: https://github.com/flameshot-org/flameshot/docs/dev/mkdocs.yml
 
 [markdown:reference-style-links]: https://www.markdownguide.org/basic-syntax/#reference-style-links
