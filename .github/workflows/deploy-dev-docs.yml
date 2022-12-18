@@ -29,7 +29,6 @@ jobs:
       - name: Build docs
         working-directory: ${{github.workspace}}/flameshot/docs/dev
         run: |
-          ls
           make build
 
       - name: Checkout flameshot website
@@ -53,10 +52,10 @@ jobs:
               "${{github.workspace}}/flameshot/docs/dev/output" \
               "./docs/dev"
           # Set git credentials
-          git config user.name github-actions
-          git config user.email github-actions@github.com
+          git config user.name "GitHub Actions"
+          git config user.email "github-actions-bot@users.noreply.$GITHUB_HOSTNAME"
           # Commit and push
           git add docs/dev
           HASH="$(git --git-dir="${{github.workspace}}/flameshot/.git" rev-parse HEAD)"
           git commit --message "Add developer docs from flameshot@$HASH"
-          git push origin HEAD
+          git push "https://${{github.actor}}:${{github.token}}@github.com/flameshot-org/flameshot-org.github.io" HEAD
