@@ -1,0 +1,22 @@
+name: Deploy developer docs
+
+on:
+  push:
+    branches: [ master, docs ]
+    paths:
+      - 'src/**'
+      - 'docs/dev/**'
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Install dependencies
+        run: |
+          pip install |
+              mkdocs \
+              mkdocs-material \
+              git+https://github.com/veracioux/mkdoxy@v1.0.0
+
+      - name: Checkout Source code
+        uses: actions/checkout@v3
