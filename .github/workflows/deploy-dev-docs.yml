@@ -54,12 +54,13 @@ jobs:
           # Set git credentials
           git config user.name "GitHub Actions"
           git config user.email "github-actions-bot@users.noreply.github.com"
+          git config http.https://github.com/.extraheader 'AUTHORIZATION basic ${{secrets.TOKEN_PUSH_TO_WEBSITE_REPO}}'
           # Commit and push
-          echo CHECKPOINT 1
           git add docs/dev
-          echo CHECKPOINT 2
           HASH="$(git --git-dir="${{github.workspace}}/flameshot/.git" rev-parse HEAD)"
-          echo CHECKPOINT 3
           git commit --message "Add developer docs from flameshot@$HASH"
-          echo CHECKPOINT 4
-          git push "https://x-access-token:${{secrets.TOKEN_PUSH_TO_WEBSITE_REPO}}@github.com/flameshot-org/flameshot-org.github.io" HEAD
+          git remote add destination "https://x-access-token:${{secrets.TOKEN_PUSH_TO_WEBSITE_REPO}}@github.com/flameshot-org/flameshot-org.github.io"
+          git config -l
+          git fetch destination
+          echo CHECKPOINT
+          git push destination HEAD
