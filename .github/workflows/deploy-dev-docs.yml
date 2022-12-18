@@ -13,7 +13,7 @@ jobs:
     steps:
       - name: Install dependencies
         run: |
-          pip install |
+          pip install \
               mkdocs \
               mkdocs-material \
               git+https://github.com/veracioux/mkdoxy@v1.0.0
