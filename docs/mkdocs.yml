@@ -34,16 +34,10 @@ plugins:
       save-api: mkdoxy-generated
       debug: False
       ignore-errors: False
-  - mike:
-      canonical_version: "latest"
 
 theme:
   name: material
   logo: https://flameshot.org/flameshot-icon.svg
-
-extra:
-  version:
-    provider: mike
 
 nav:
   - Overview: index.md
