@@ -140,6 +140,10 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
                   "activate the grim-based general wayland screenshot adapter");
                 freeDesktopPortal(ok, res);
 #else
+                AbstractLogger::warning()
+                  << tr("grim's screenshot component is implemented based on "
+                        "wlroots, it may not be used in GNOME or similar "
+                        "desktop environments");
                 generalGrimScreenshot(ok, res);
 #endif
                 break;
