@@ -127,6 +127,8 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
         switch (m_info.windowManager()) {
             case DesktopInfo::GNOME:
             case DesktopInfo::KDE:
+                freeDesktopPortal(ok, res);
+                break;
             case DesktopInfo::QTILE:
             case DesktopInfo::SWAY:
             case DesktopInfo::HYPRLAND:
