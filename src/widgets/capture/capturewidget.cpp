@@ -603,7 +603,6 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
                   selection.top() + (selection.height() - xybox.height()) / 2;
         }
 
-
         QColor uicolor = ConfigHandler().uiColor();
         uicolor.setAlpha(200);
         painter.fillRect(
@@ -618,8 +617,7 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
                          xy);
     }
 
-    if (m_displayGrid)
-    {
+    if (m_displayGrid) {
         painter.save();
         QColor uicolor = ConfigHandler().uiColor();
         uicolor.setAlpha(100);
@@ -631,13 +629,14 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
         topLeft.ry() -= topLeft.y() % m_gridSize;
         topLeft = mapFromGlobal(topLeft);
 
-        const auto scale{m_context.screenshot.devicePixelRatio()};
-        const auto step{m_gridSize * scale};
-        const auto radius{1*scale};
+        const auto scale{ m_context.screenshot.devicePixelRatio() };
+        const auto step{ m_gridSize * scale };
+        const auto radius{ 1 * scale };
 
-        for (int y = topLeft.y() ; y<m_context.selection.bottom() ; y+=step) {
-            for (int x = topLeft.x(); x<m_context.selection.right() ; x+=step) {
-                painter.drawEllipse(x,y, radius, radius);
+        for (int y = topLeft.y(); y < m_context.selection.bottom(); y += step) {
+            for (int x = topLeft.x(); x < m_context.selection.right();
+                 x += step) {
+                painter.drawEllipse(x, y, radius, radius);
             }
         }
         painter.restore();
@@ -886,7 +885,8 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
         if (m_adjustmentButtonPressed) {
             m_activeTool->drawMoveWithAdjustment(e->pos());
         } else {
-            m_activeTool->drawMove(m_displayGrid ? snapToGrid(e->pos()) : e->pos());
+            m_activeTool->drawMove(m_displayGrid ? snapToGrid(e->pos())
+                                                 : e->pos());
         }
         // update drawing object
         updateTool(m_activeTool);
@@ -1768,14 +1768,16 @@ CaptureTool::Type CaptureWidget::activeButtonToolType() const
     return activeTool->type();
 }
 
-QPoint CaptureWidget::snapToGrid(const QPoint &point) const
+QPoint CaptureWidget::snapToGrid(const QPoint& point) const
 {
     QPoint snapPoint = mapToGlobal(point);
 
-    const auto scale{m_context.screenshot.devicePixelRatio()};
+    const auto scale{ m_context.screenshot.devicePixelRatio() };
 
-    snapPoint.setX((qRound(snapPoint.x() / double(m_gridSize)) * m_gridSize) * scale);
-    snapPoint.setY((qRound(snapPoint.y() / double(m_gridSize)) * m_gridSize) * scale);
+    snapPoint.setX((qRound(snapPoint.x() / double(m_gridSize)) * m_gridSize) *
+                   scale);
+    snapPoint.setY((qRound(snapPoint.y() / double(m_gridSize)) * m_gridSize) *
+                   scale);
 
     return mapFromGlobal(snapPoint);
 }

@@ -64,6 +64,6 @@ private:
     QSpinBox* m_toolSizeSpin;
     QSlider* m_toolSizeSlider;
     int m_toolSize{};
-    QCheckBox* m_gridCheck{nullptr};
-    QSpinBox* m_gridSizeSpin{nullptr};
+    QCheckBox* m_gridCheck{ nullptr };
+    QSpinBox* m_gridSizeSpin{ nullptr };
 };

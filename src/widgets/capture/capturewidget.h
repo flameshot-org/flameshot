@@ -149,7 +149,7 @@ private:
     CaptureTool* activeButtonTool() const;
     CaptureTool::Type activeButtonToolType() const;
 
-    QPoint snapToGrid(const QPoint &point) const;
+    QPoint snapToGrid(const QPoint& point) const;
 
     ////////////////////////////////////////
     // Class members
@@ -219,7 +219,7 @@ private:
     QPoint m_startMovePos;
     bool m_startMove;
 
-    //Grid
-    bool m_displayGrid{false};
-    int m_gridSize{10};
+    // Grid
+    bool m_displayGrid{ false };
+    int m_gridSize{ 10 };
 };

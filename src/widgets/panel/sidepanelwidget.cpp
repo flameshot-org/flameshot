@@ -84,7 +84,7 @@ SidePanelWidget::SidePanelWidget(QPixmap* p, QWidget* parent)
     QHBoxLayout* gridHBoxLayout = new QHBoxLayout(this);
     m_gridCheck = new QCheckBox(tr("Display grid"), this);
     m_gridSizeSpin = new QSpinBox(this);
-    m_gridSizeSpin->setRange(5,50);
+    m_gridSizeSpin->setRange(5, 50);
     m_gridSizeSpin->setSingleStep(5);
     m_gridSizeSpin->setValue(10);
     m_gridSizeSpin->setDisabled(true);
@@ -125,7 +125,7 @@ SidePanelWidget::SidePanelWidget(QPixmap* p, QWidget* parent)
             &color_widgets::ColorWheel::colorSelected,
             this,
             &SidePanelWidget::colorChanged);
-    //Grid feature
+    // Grid feature
     connect(m_gridCheck, &QCheckBox::clicked, this, [=](bool b) {
         this->m_gridSizeSpin->setEnabled(b);
         emit this->displayGridChanged(b);
