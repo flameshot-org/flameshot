@@ -4,6 +4,7 @@
 #pragma once
 
 #include "src/tools/abstracttwopointtool.h"
+#include "src/utils/confighandler.h"
 
 class MarkerTool : public AbstractTwoPointTool
 {
@@ -27,4 +28,7 @@ protected:
 public slots:
     void drawStart(const CaptureContext& context) override;
     void pressed(CaptureContext& context) override;
+
+private:
+    ConfigHandler m_config;
 };

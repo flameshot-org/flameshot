@@ -59,6 +59,7 @@ GeneralConf::GeneralConf(QWidget* parent)
     initUploadClientSecret();
     initPredefinedColorPaletteLarge();
     initShowSelectionGeometry();
+    initMarkerOpacity();
 
     m_layout->addStretch();
 
@@ -717,6 +718,27 @@ void GeneralConf::initSquareMagnifier()
     });
 }
 
+void GeneralConf::initMarkerOpacity()
+{
+    auto* tobox = new QHBoxLayout();
+
+    int opacity =
+      ConfigHandler().value("markerOpacity").toInt();
+    m_xywhOpacity = new QSpinBox();
+    m_xywhOpacity->setRange(0, 100);
+    m_xywhOpacity->setToolTip(
+      tr("Percentage value of marker opacity, higher is darker"));
+    m_xywhOpacity->setValue(opacity);
+    tobox->addWidget(m_xywhOpacity);
+    tobox->addWidget(new QLabel(tr("Set marker opacity (%)")));
+
+    m_scrollAreaLayout->addLayout(tobox);
+    connect(m_xywhOpacity,
+            SIGNAL(valueChanged(int)),
+            this,
+            SLOT(setMarkOpacity(int)));
+}
+
 void GeneralConf::initShowSelectionGeometry()
 {
     auto* tobox = new QHBoxLayout();
@@ -771,6 +793,11 @@ void GeneralConf::initShowSelectionGeometry()
     selGeoLayout->addWidget(m_selectGeometryLocation);
     vboxLayout->addLayout(selGeoLayout);
     vboxLayout->addStretch();
+}
+
+void GeneralConf::setMarkOpacity(int value)
+{
+    ConfigHandler().setValue("markerOpacity", value);
 }
 
 void GeneralConf::setSelGeoHideTime(int v)

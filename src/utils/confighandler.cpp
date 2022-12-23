@@ -124,7 +124,8 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     OPTION("copyOnDoubleClick"           ,Bool               ( false         )),
     OPTION("uploadClientSecret"          ,String             ( "313baf0c7b4d3ff"            )),
     OPTION("showSelectionGeometry"  , BoundedInt               (0,5,4)),
-    OPTION("showSelectionGeometryHideTime", LowerBoundedInt       (0, 3000))
+    OPTION("showSelectionGeometryHideTime", LowerBoundedInt       (0, 3000)),
+    OPTION("markerOpacity"               ,BoundedInt         (0, 100, 35     ))
 };
 
 static QMap<QString, QSharedPointer<KeySequence>> recognizedShortcuts = {
@@ -790,6 +791,11 @@ bool ConfigHandler::isShortcut(const QString& key) const
 QString ConfigHandler::baseName(QString key) const
 {
     return QFileInfo(key).baseName();
+}
+
+float ConfigHandler::trueMarkerOpacity()
+{
+    return float(markerOpacity())/100;
 }
 
 // STATIC MEMBER DEFINITIONS

@@ -55,7 +55,7 @@ void MarkerTool::process(QPainter& painter, const QPixmap& pixmap)
     qreal opacity = painter.opacity();
     auto pen = painter.pen();
     painter.setCompositionMode(QPainter::CompositionMode_Multiply);
-    painter.setOpacity(0.35);
+    painter.setOpacity(m_config.trueMarkerOpacity());
     painter.setPen(QPen(color(), size()));
     painter.drawLine(points().first, points().second);
     painter.setPen(pen);
@@ -70,7 +70,7 @@ void MarkerTool::paintMousePreview(QPainter& painter,
     qreal opacity = painter.opacity();
     auto pen = painter.pen();
     painter.setCompositionMode(QPainter::CompositionMode_Multiply);
-    painter.setOpacity(0.35);
+    painter.setOpacity(m_config.trueMarkerOpacity());
     painter.setPen(QPen(context.color, PADDING_VALUE + context.toolSize));
     painter.drawLine(context.mousePos, context.mousePos);
     painter.setPen(pen);
