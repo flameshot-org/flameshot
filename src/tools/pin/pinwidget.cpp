@@ -24,7 +24,9 @@ constexpr qreal STEP = 0.03;
 constexpr qreal MIN_SIZE = 100.0;
 }
 
-PinWidget::PinWidget(const QPixmap& pixmap, QRect geometry, QWidget* parent)
+PinWidget::PinWidget(const QPixmap& pixmap,
+                     const QRect& geometry,
+                     QWidget* parent)
   : QWidget(parent)
   , m_pixmap(pixmap)
   , m_layout(new QVBoxLayout(this))

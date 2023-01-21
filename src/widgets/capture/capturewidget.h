@@ -131,8 +131,8 @@ private:
     void setToolSize(int size);
 
     QRect extendedSelection() const;
-    QRect extendedRect(QRect r) const;
-    QRect paddedUpdateRect(QRect r) const;
+    QRect extendedRect(const QRect& r) const;
+    QRect paddedUpdateRect(const QRect& r) const;
     void drawErrorMessage(const QString& msg, QPainter* painter);
     void drawInactiveRegion(QPainter* painter);
     void drawToolsData(bool drawSelection = true);

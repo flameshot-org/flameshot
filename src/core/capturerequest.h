@@ -47,8 +47,8 @@ public:
     void addTask(ExportTask task);
     void removeTask(ExportTask task);
     void addSaveTask(const QString& path = QString());
-    void addPinTask(QRect pinWindowGeometry);
-    void setInitialSelection(QRect selection);
+    void addPinTask(const QRect& pinWindowGeometry);
+    void setInitialSelection(const QRect& selection);
 
 private:
     CaptureMode m_mode;

@@ -9,7 +9,7 @@
 #include <QPen>
 #include <QScreen>
 
-OverlayMessage::OverlayMessage(QWidget* parent, QRect targetArea)
+OverlayMessage::OverlayMessage(QWidget* parent, const QRect& targetArea)
   : QLabel(parent)
   , m_targetArea(targetArea)
 {
@@ -35,7 +35,7 @@ OverlayMessage::OverlayMessage(QWidget* parent, QRect targetArea)
     QWidget::hide();
 }
 
-void OverlayMessage::init(QWidget* parent, QRect targetArea)
+void OverlayMessage::init(QWidget* parent, const QRect& targetArea)
 {
     new OverlayMessage(parent, targetArea);
 }

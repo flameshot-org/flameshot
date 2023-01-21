@@ -33,8 +33,8 @@ public:
     void setIgnoreMouse(bool ignore);
     void setIdleCentralCursor(const QCursor& cursor);
 
-    void setGeometryAnimated(QRect r);
-    void setGeometry(QRect r);
+    void setGeometryAnimated(const QRect& r);
+    void setGeometry(const QRect& r);
     QRect geometry() const;
     QRect fullGeometry() const;
 
@@ -75,7 +75,7 @@ public slots:
 private:
     void updateAreas();
     void updateCursor();
-    void setGeometryByKeyboard(QRect r);
+    void setGeometryByKeyboard(const QRect& r);
 
     QPropertyAnimation* m_animation;
 

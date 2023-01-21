@@ -16,7 +16,7 @@ class PinWidget : public QWidget
     Q_OBJECT
 public:
     explicit PinWidget(const QPixmap& pixmap,
-                       QRect geometry,
+                       const QRect& geometry,
                        QWidget* parent = nullptr);
 
 protected:

@@ -66,7 +66,7 @@ size_t ButtonHandler::size() const
 // selection area. Ignores the sides blocked by the end of the screen.
 // When the selection is too small it works on a virtual selection with
 // the original in the center.
-void ButtonHandler::updatePosition(QRect selection)
+void ButtonHandler::updatePosition(const QRect& selection)
 {
     resetRegionTrack();
     const int vecLength = m_vectorButtons.size();
@@ -223,7 +223,7 @@ QVector<QPoint> ButtonHandler::verticalPoints(QPoint center,
     return res;
 }
 
-QRect ButtonHandler::intersectWithAreas(QRect rect)
+QRect ButtonHandler::intersectWithAreas(const QRect& rect)
 {
     QRect res;
     for (const QRect& r : m_screenRegions) {
@@ -388,7 +388,7 @@ void ButtonHandler::updateScreenRegions(const QVector<QRect>& rects)
     m_screenRegions = rects;
 }
 
-void ButtonHandler::updateScreenRegions(QRect rect)
+void ButtonHandler::updateScreenRegions(const QRect& rect)
 {
     m_screenRegions = { rect };
 }

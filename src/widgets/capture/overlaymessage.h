@@ -22,7 +22,7 @@ class OverlayMessage : public QLabel
 public:
     OverlayMessage() = delete;
 
-    static void init(QWidget* parent, QRect targetArea);
+    static void init(QWidget* parent, const QRect& targetArea);
     static void push(const QString& msg);
     static void pop();
     static void setVisibility(bool visible);
@@ -37,7 +37,7 @@ private:
     QColor m_fillColor, m_textColor;
     static OverlayMessage* m_instance;
 
-    OverlayMessage(QWidget* parent, QRect center);
+    OverlayMessage(QWidget* parent, const QRect& center);
 
     void paintEvent(QPaintEvent*) override;
 

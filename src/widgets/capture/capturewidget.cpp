@@ -1809,7 +1809,7 @@ QRect CaptureWidget::extendedSelection() const
     return extendedRect(r);
 }
 
-QRect CaptureWidget::extendedRect(QRect r) const
+QRect CaptureWidget::extendedRect(const QRect& r) const
 {
     auto devicePixelRatio = m_context.screenshot.devicePixelRatio();
     return { static_cast<int>(r.left() * devicePixelRatio),
@@ -1818,7 +1818,7 @@ QRect CaptureWidget::extendedRect(QRect r) const
              static_cast<int>(r.height() * devicePixelRatio) };
 }
 
-QRect CaptureWidget::paddedUpdateRect(QRect r) const
+QRect CaptureWidget::paddedUpdateRect(const QRect& r) const
 {
     if (r.isNull()) {
         return r;

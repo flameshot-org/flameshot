@@ -19,7 +19,7 @@ QString getCachePath()
     return cachePath;
 }
 
-void setLastRegion(QRect newRegion)
+void setLastRegion(QRect const& newRegion)
 {
     auto cachePath = getCachePath() + "/region.txt";
 

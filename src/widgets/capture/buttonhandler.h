@@ -29,10 +29,10 @@ public:
     void setButtons(const QVector<CaptureToolButton*>&);
     bool contains(QPoint p) const;
     void updateScreenRegions(const QVector<QRect>& rects);
-    void updateScreenRegions(QRect rect);
+    void updateScreenRegions(const QRect& rect);
 
 public slots:
-    void updatePosition(QRect selection);
+    void updatePosition(const QRect& selection);
     void hide();
     void show();
 
@@ -46,7 +46,7 @@ private:
 
     int calculateShift(int elements, bool reverse) const;
 
-    QRect intersectWithAreas(QRect rect);
+    QRect intersectWithAreas(const QRect& rect);
 
     QVector<CaptureToolButton*> m_vectorButtons;
 

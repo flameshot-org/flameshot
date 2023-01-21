@@ -87,7 +87,8 @@ QVector<QRect> SelectionWidget::handlerAreas()
 }
 
 // helper function
-SelectionWidget::SideType getProperSide(SelectionWidget::SideType side, QRect r)
+SelectionWidget::SideType getProperSide(SelectionWidget::SideType side,
+                                        const QRect& r)
 {
     using SideType = SelectionWidget::SideType;
     int intSide = side;
@@ -118,7 +119,7 @@ void SelectionWidget::setIdleCentralCursor(const QCursor& cursor)
     m_idleCentralCursor = cursor;
 }
 
-void SelectionWidget::setGeometryAnimated(QRect r)
+void SelectionWidget::setGeometryAnimated(const QRect& r)
 {
     if (isVisible()) {
         m_animation->setStartValue(geometry());
@@ -127,7 +128,7 @@ void SelectionWidget::setGeometryAnimated(QRect r)
     }
 }
 
-void SelectionWidget::setGeometry(QRect r)
+void SelectionWidget::setGeometry(const QRect& r)
 {
     QWidget::setGeometry(r + QMargins(MARGIN, MARGIN, MARGIN, MARGIN));
     updateCursor();
@@ -433,7 +434,7 @@ void SelectionWidget::updateCursor()
     }
 }
 
-void SelectionWidget::setGeometryByKeyboard(QRect r)
+void SelectionWidget::setGeometryByKeyboard(const QRect& r)
 {
     static QTimer timer;
     QRect rectangle = r.intersected(parentWidget()->rect());
