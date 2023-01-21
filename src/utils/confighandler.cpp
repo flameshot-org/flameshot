@@ -382,16 +382,16 @@ bool ConfigHandler::setShortcut(const QString& actionName,
         return false;
     }
 
-    bool bError = false;
+    bool errorFlag = false;
 
     m_settings.beginGroup(CONFIG_GROUP_SHORTCUTS);
     if (shortcut.isEmpty()) {
         setValue(actionName, "");
     } else if (reservedShortcuts.contains(QKeySequence(shortcut))) {
         // do not allow to set reserved shortcuts
-        bError = true;
+        errorFlag = true;
     } else {
-        bError = false;
+        errorFlag = false;
         // Make no difference for Return and Enter keys
         QString newShortcut = KeySequence().value(shortcut).toString();
         for (auto& otherAction : m_settings.allKeys()) {
@@ -401,7 +401,7 @@ bool ConfigHandler::setShortcut(const QString& actionName,
             QString existingShortcut =
               KeySequence().value(m_settings.value(otherAction)).toString();
             if (newShortcut == existingShortcut) {
-                bError = true;
+                errorFlag = true;
                 goto done;
             }
         }
@@ -409,7 +409,7 @@ bool ConfigHandler::setShortcut(const QString& actionName,
     }
 done:
     m_settings.endGroup();
-    return !bError;
+    return !errorFlag;
 }
 
 QString ConfigHandler::shortcut(const QString& actionName)
