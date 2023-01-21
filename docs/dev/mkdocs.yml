@@ -22,13 +22,14 @@ plugins:
           full-doc: True
           doxy-cfg:
             FILE_PATTERNS: "*.cpp *.h"
-            EXCLUDE_PATTERNS: "*/capturetool.h"
+            # #TODO
+            # EXCLUDE_PATTERNS: "*/capturetool.h"
             FULL_PATH_NAMES: "NO"
             SHOW_USED_FILES: "NO"
             RECURSIVE: True
 
       save-api: mkdoxy-generated
-      debug: False
+      debug: True
       ignore-errors: False
 
 theme:

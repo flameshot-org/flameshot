@@ -101,11 +101,11 @@ named `savePath` and a setter named `setSavePath`. Before working on a new
 config setting for flameshot, please read [this FAQ
 entry][faq:add-config-setting].
 
-Within the class, we use a bit of macro magic to save ourselves some work and
-avoid boilerplate code when defining getters and setters. The best way to
-understand what is going on is to see the source code of
-[`utils/confighandler.h`][confighandler.h] and
-[`utils/confighandler.cpp`][confighandler.cpp].
+### Interesting notes
+
+- [`ConfigHandler`][ConfigHandler] is based on `QSettings`
+- The configuration uses the `ini` format
+- The configuration is automatically reloaded when the config file changes
 
 ## Conventions
 
