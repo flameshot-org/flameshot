@@ -18,7 +18,7 @@ QScreen* QGuiAppCurrentScreen::currentScreen()
     return currentScreen(QCursor::pos());
 }
 
-QScreen* QGuiAppCurrentScreen::currentScreen(QPoint pos)
+QScreen* QGuiAppCurrentScreen::currentScreen(const QPoint& pos)
 {
     m_currentScreen = screenAt(pos);
 #if defined(Q_OS_MACOS)
@@ -47,7 +47,7 @@ QScreen* QGuiAppCurrentScreen::currentScreen(QPoint pos)
     return m_currentScreen;
 }
 
-QScreen* QGuiAppCurrentScreen::screenAt(QPoint pos)
+QScreen* QGuiAppCurrentScreen::screenAt(const QPoint& pos)
 {
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
     m_currentScreen = qGuiApp->screenAt(pos);

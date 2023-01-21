@@ -53,7 +53,7 @@ private:
     bool m_sizeChanged{ false };
 
 private slots:
-    void showContextMenu(QPoint pos);
+    void showContextMenu(const QPoint& pos);
     void copyToClipboard();
     void saveToFile();
 };

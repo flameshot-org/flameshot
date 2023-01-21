@@ -18,14 +18,14 @@ public:
     void removeAt(int index);
     void clear();
     int size();
-    int find(QPoint pos, QSize captureSize);
+    int find(const QPoint& pos, QSize captureSize);
     QPointer<CaptureTool> at(int index);
     CaptureToolObjects& operator=(const CaptureToolObjects& other);
 
 private:
     int findWithRadius(QPainter& painter,
                        QPixmap& pixmap,
-                       QPoint pos,
+                       const QPoint& pos,
                        int radius = 0);
 
     // class members

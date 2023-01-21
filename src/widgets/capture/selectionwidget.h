@@ -27,7 +27,7 @@ public:
 
     explicit SelectionWidget(QColor c, QWidget* parent = nullptr);
 
-    SideType getMouseSide(QPoint mousePos) const;
+    SideType getMouseSide(const QPoint& mousePos) const;
     QVector<QRect> handlerAreas();
 
     void setIgnoreMouse(bool ignore);

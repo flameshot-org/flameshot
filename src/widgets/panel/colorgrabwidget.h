@@ -27,7 +27,7 @@ private:
     void showEvent(QShowEvent* event) override;
 
     QPoint cursorPos() const;
-    QColor getColorAtPoint(QPoint point) const;
+    QColor getColorAtPoint(const QPoint& point) const;
     void setExtraZoomActive(bool active);
     void setMagnifierActive(bool active);
     void updateWidget();

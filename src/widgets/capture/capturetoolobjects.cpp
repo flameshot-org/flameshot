@@ -61,7 +61,7 @@ void CaptureToolObjects::removeAt(int index)
     }
 }
 
-int CaptureToolObjects::find(QPoint pos, QSize captureSize)
+int CaptureToolObjects::find(const QPoint& pos, QSize captureSize)
 {
     if (m_captureToolObjects.empty()) {
         return -1;
@@ -83,7 +83,7 @@ int CaptureToolObjects::find(QPoint pos, QSize captureSize)
 
 int CaptureToolObjects::findWithRadius(QPainter& painter,
                                        QPixmap& pixmap,
-                                       QPoint pos,
+                                       const QPoint& pos,
                                        int radius)
 {
     int index = m_captureToolObjects.size() - 1;

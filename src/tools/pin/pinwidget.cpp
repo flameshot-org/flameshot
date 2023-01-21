@@ -240,7 +240,7 @@ void PinWidget::pinchTriggered(QPinchGesture* gesture)
     update();
 }
 
-void PinWidget::showContextMenu(QPoint pos)
+void PinWidget::showContextMenu(const QPoint& pos)
 {
     QMenu contextMenu(tr("Context menu"), this);
 

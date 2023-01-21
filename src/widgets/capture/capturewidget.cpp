@@ -620,7 +620,7 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
     }
 }
 
-void CaptureWidget::showColorPicker(QPoint pos)
+void CaptureWidget::showColorPicker(const QPoint& pos)
 {
     // Try to select new object if current pos out of active object
     auto toolItem = activeToolObject();
@@ -640,7 +640,7 @@ void CaptureWidget::showColorPicker(QPoint pos)
     m_colorPicker->show();
 }
 
-bool CaptureWidget::startDrawObjectTool(QPoint pos)
+bool CaptureWidget::startDrawObjectTool(const QPoint& pos)
 {
     if (activeButtonToolType() != CaptureTool::NONE &&
         activeButtonToolType() != CaptureTool::TYPE_MOVESELECTION) {
@@ -681,7 +681,7 @@ void CaptureWidget::pushObjectsStateToUndoStack()
     m_captureToolObjectsBackup.clear();
 }
 
-int CaptureWidget::selectToolItemAtPos(QPoint pos)
+int CaptureWidget::selectToolItemAtPos(const QPoint& pos)
 {
     // Try to select existing tool, "-1" - no active tool
     int activeLayerIndex = -1;

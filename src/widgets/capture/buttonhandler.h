@@ -27,7 +27,7 @@ public:
     size_t size() const;
 
     void setButtons(const QVector<CaptureToolButton*>&);
-    bool contains(QPoint p) const;
+    bool contains(const QPoint& p) const;
     void updateScreenRegions(const QVector<QRect>& rects);
     void updateScreenRegions(const QRect& rect);
 
@@ -37,10 +37,10 @@ public slots:
     void show();
 
 private:
-    QVector<QPoint> horizontalPoints(QPoint center,
+    QVector<QPoint> horizontalPoints(const QPoint& center,
                                      const int elements,
                                      const bool leftToRight) const;
-    QVector<QPoint> verticalPoints(QPoint center,
+    QVector<QPoint> verticalPoints(const QPoint& center,
                                    const int elements,
                                    const bool upToDown) const;
 

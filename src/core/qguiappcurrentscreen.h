@@ -13,10 +13,10 @@ class QGuiAppCurrentScreen
 public:
     explicit QGuiAppCurrentScreen();
     QScreen* currentScreen();
-    QScreen* currentScreen(QPoint pos);
+    QScreen* currentScreen(const QPoint& pos);
 
 private:
-    QScreen* screenAt(QPoint pos);
+    QScreen* screenAt(const QPoint& pos);
 
     // class members
 private:

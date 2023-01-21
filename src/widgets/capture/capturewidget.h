@@ -105,9 +105,9 @@ private:
     void pushObjectsStateToUndoStack();
     void releaseActiveTool();
     void uncheckActiveTool();
-    int selectToolItemAtPos(QPoint pos);
-    void showColorPicker(QPoint pos);
-    bool startDrawObjectTool(QPoint pos);
+    int selectToolItemAtPos(const QPoint& pos);
+    void showColorPicker(const QPoint& pos);
+    bool startDrawObjectTool(const QPoint& pos);
     QPointer<CaptureTool> activeToolObject();
     void initContext(bool fullscreen, const CaptureRequest& req);
     void initPanel();

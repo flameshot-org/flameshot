@@ -49,7 +49,8 @@ SelectionWidget::SelectionWidget(QColor c, QWidget* parent)
  * @brief Get the side where the mouse cursor is.
  * @param mousePos Mouse cursor position relative to the parent widget.
  */
-SelectionWidget::SideType SelectionWidget::getMouseSide(QPoint mousePos) const
+SelectionWidget::SideType SelectionWidget::getMouseSide(
+  const QPoint& mousePos) const
 {
     if (!isVisible()) {
         return NO_SIDE;

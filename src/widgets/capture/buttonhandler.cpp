@@ -184,7 +184,7 @@ int ButtonHandler::calculateShift(int elements, bool reverse) const
 // horizontalPoints is an auxiliary method for the button position computation.
 // starts from a known center and keeps adding elements horizontally
 // and returns the computed positions.
-QVector<QPoint> ButtonHandler::horizontalPoints(QPoint center,
+QVector<QPoint> ButtonHandler::horizontalPoints(const QPoint& center,
                                                 const int elements,
                                                 const bool leftToRight) const
 {
@@ -205,7 +205,7 @@ QVector<QPoint> ButtonHandler::horizontalPoints(QPoint center,
 // verticalPoints is an auxiliary method for the button position computation.
 // starts from a known center and keeps adding elements vertically
 // and returns the computed positions.
-QVector<QPoint> ButtonHandler::verticalPoints(QPoint center,
+QVector<QPoint> ButtonHandler::verticalPoints(const QPoint& center,
                                               const int elements,
                                               const bool upToDown) const
 {
@@ -367,7 +367,7 @@ void ButtonHandler::setButtons(const QVector<CaptureToolButton*>& v)
     m_buttonExtendedSize = m_buttonBaseSize + m_separator;
 }
 
-bool ButtonHandler::contains(QPoint p) const
+bool ButtonHandler::contains(const QPoint& p) const
 {
     if (m_vectorButtons.isEmpty()) {
         return false;
