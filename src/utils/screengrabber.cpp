@@ -23,7 +23,8 @@
 
 ScreenGrabber::ScreenGrabber(QObject* parent)
   : QObject(parent)
-{}
+{
+}
 
 void ScreenGrabber::freeDesktopPortal(bool& ok, QPixmap& res)
 {
@@ -173,8 +174,11 @@ QPixmap ScreenGrabber::grabScreen(QScreen* screen, bool& ok)
         }
     } else {
         ok = true;
-        return screen->grabWindow(
-          0, geometry.x(), geometry.y(), geometry.width(), geometry.height());
+        return screen->grabWindow(QApplication::desktop()->winId(),
+                                  geometry.x(),
+                                  geometry.y(),
+                                  geometry.width(),
+                                  geometry.height());
     }
     return p;
 }

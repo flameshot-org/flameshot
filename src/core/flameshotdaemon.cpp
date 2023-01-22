@@ -84,11 +84,7 @@ FlameshotDaemon::FlameshotDaemon()
             this,
             [this]() {
                 ConfigHandler config;
-                if (config.disabledTrayIcon()) {
-                    enableTrayIcon(false);
-                } else {
-                    enableTrayIcon(true);
-                }
+                enableTrayIcon(!config.disabledTrayIcon());
                 m_persist = !config.autoCloseIdleDaemon();
             });
 #endif
