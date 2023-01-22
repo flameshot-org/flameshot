@@ -210,7 +210,7 @@ bool KeySequence::check(const QVariant& val)
 
 QVariant KeySequence::fallback()
 {
-    return m_fallback;
+    return process(m_fallback);
 }
 
 QString KeySequence::expected()
@@ -232,6 +232,11 @@ QVariant KeySequence::process(const QVariant& val)
     QString str(val.toString());
     if (str == "Enter") {
         return QKeySequence(Qt::Key_Return).toString();
+    }
+    if (str.length() > 0) {
+        // Make the "main" key in sequence (last one) lower-case.
+        const QCharRef& lastChar = str[str.length() - 1];
+        str.replace(str.length() - 1, 1, lastChar.toLower());
     }
     return str;
 }

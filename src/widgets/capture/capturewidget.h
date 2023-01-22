@@ -35,7 +35,9 @@ class QNetworkReply;
 class ColorPicker;
 class NotifierBox;
 class HoverEventFilter;
+#if !defined(DISABLE_UPDATE_CHECKER)
 class UpdateNotificationWidget;
+#endif
 class UtilityPanel;
 class SidePanelWidget;
 
@@ -50,9 +52,11 @@ public:
     ~CaptureWidget();
 
     QPixmap pixmap();
+    void setCaptureToolObjects(const CaptureToolObjects& captureToolObjects);
+#if !defined(DISABLE_UPDATE_CHECKER)
     void showAppUpdateNotification(const QString& appLatestVersion,
                                    const QString& appLatestUrl);
-    void setCaptureToolObjects(const CaptureToolObjects& captureToolObjects);
+#endif
 
 public slots:
     bool commitCurrentTool();
@@ -83,6 +87,8 @@ private slots:
     void onMoveCaptureToolDown(int captureToolIndex);
     void selectAll();
     void xywhTick();
+    void onDisplayGridChanged(bool display);
+    void onGridSizeChanged(int size);
 
 public:
     void removeToolObject(int index = -1);
@@ -143,6 +149,8 @@ private:
     CaptureTool* activeButtonTool() const;
     CaptureTool::Type activeButtonToolType() const;
 
+    QPoint snapToGrid(const QPoint& point) const;
+
     ////////////////////////////////////////
     // Class members
 
@@ -168,7 +176,9 @@ private:
     bool m_configError;
     bool m_configErrorResolved;
 
+#if !defined(DISABLE_UPDATE_CHECKER)
     UpdateNotificationWidget* m_updateNotificationWidget;
+#endif
     quint64 m_lastMouseWheel;
     QPointer<CaptureToolButton> m_sizeIndButton;
     // Last pressed button
@@ -208,4 +218,8 @@ private:
     // For start moving after more than X offset
     QPoint m_startMovePos;
     bool m_startMove;
+
+    // Grid
+    bool m_displayGrid{ false };
+    int m_gridSize{ 10 };
 };

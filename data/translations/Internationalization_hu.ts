@@ -1673,7 +1673,7 @@ Lehet, hogy meg kepp adnod egy &apos;\&apos; karaktert a &apos;#&apos; karakter 
         <translation>A Flameshot alapértelmezés szerint fut a háttérben és ikont helyez el a tálcán a beállítások elérése érdekében.</translation>
     </message>
     <message>
-        <source>Print geometry of the selection in the format W H X Y. Does nothing if raw is specified</source>
+        <source>Print geometry of the selection in the format WxH+X+Y. Does nothing if raw is specified</source>
         <translation>A kijelölés geometriáját írja ki Sz M X Y (Szélesség Magasság X pozíció Y pozíció) formátumban. Nem csinál semmit, hogyha a nyers opció aktív</translation>
     </message>
     <message>

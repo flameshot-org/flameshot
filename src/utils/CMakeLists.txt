@@ -26,5 +26,12 @@ target_sources(
           colorutils.cpp
           history.cpp
           strfparse.cpp
-        request.cpp
+          request.cpp
 )
+
+IF (WIN32)
+  target_sources(
+    flameshot
+    PRIVATE winlnkfileparse.cpp
+  )
+ENDIF()

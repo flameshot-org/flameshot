@@ -4,6 +4,7 @@
 #pragma once
 
 #include "QtColorWidgets/color_wheel.hpp"
+#include <QSpinBox>
 #include <QWidget>
 
 class QVBoxLayout;
@@ -13,6 +14,7 @@ class QLineEdit;
 class ColorGrabWidget;
 class QColorPickingEventFilter;
 class QSlider;
+class QCheckBox;
 
 constexpr int maxToolSize = 50;
 constexpr int minSliderWidth = 100;
@@ -30,6 +32,8 @@ signals:
     void colorChanged(const QColor& color);
     void toolSizeChanged(int size);
     void togglePanel();
+    void displayGridChanged(bool display);
+    void gridSizeChanged(int size);
 
 public slots:
     void onToolSizeChanged(int tool);
@@ -57,6 +61,9 @@ private:
     QPixmap* m_pixmap;
     QColor m_color;
     QColor m_revertColor;
+    QSpinBox* m_toolSizeSpin;
     QSlider* m_toolSizeSlider;
     int m_toolSize{};
+    QCheckBox* m_gridCheck{ nullptr };
+    QSpinBox* m_gridSizeSpin{ nullptr };
 };

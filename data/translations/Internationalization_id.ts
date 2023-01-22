@@ -1899,8 +1899,8 @@ Mohon atasi mereka secara manual di file konfigurasi.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="219"/>
-        <source>Print geometry of the selection in the format W H X Y. Does nothing if raw is specified</source>
-        <translation>Cetak geometri pilihan dalam format W H X Y. Tidak melakukan apa pun jika raw ditentukan</translation>
+        <source>Print geometry of the selection in the format WxH+X+Y. Does nothing if raw is specified</source>
+        <translation>Cetak geometri pilihan dalam format WxH+X+Y. Tidak melakukan apa pun jika raw ditentukan</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="223"/>

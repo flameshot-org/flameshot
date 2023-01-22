@@ -25,7 +25,10 @@ class AbstractLogger;
  * `KEY` is the name of the generated getter function.
  */
 #define CONFIG_GETTER(KEY, TYPE)                                               \
-    TYPE KEY() { return value(QStringLiteral(#KEY)).value<TYPE>(); }
+    TYPE KEY()                                                                 \
+    {                                                                          \
+        return value(QStringLiteral(#KEY)).value<TYPE>();                      \
+    }
 
 /**
  * Declare and implement a setter for a config option. `FUNC` is the name of the
@@ -86,7 +89,9 @@ public:
     CONFIG_GETTER_SETTER(drawThickness, setDrawThickness, int)
     CONFIG_GETTER_SETTER(drawFontSize, setDrawFontSize, int)
     CONFIG_GETTER_SETTER(keepOpenAppLauncher, setKeepOpenAppLauncher, bool)
+#if !defined(DISABLE_UPDATE_CHECKER)
     CONFIG_GETTER_SETTER(checkForUpdates, setCheckForUpdates, bool)
+#endif
     CONFIG_GETTER_SETTER(allowMultipleGuiInstances,
                          setAllowMultipleGuiInstances,
                          bool)
@@ -95,9 +100,7 @@ public:
                          setShowStartupLaunchMessage,
                          bool)
     CONFIG_GETTER_SETTER(contrastOpacity, setContrastOpacity, int)
-    CONFIG_GETTER_SETTER(copyAndCloseAfterUpload,
-                         setCopyAndCloseAfterUpload,
-                         bool)
+    CONFIG_GETTER_SETTER(copyURLAfterUpload, setCopyURLAfterUpload, bool)
     CONFIG_GETTER_SETTER(historyConfirmationToDelete,
                          setHistoryConfirmationToDelete,
                          bool)
