@@ -24,11 +24,13 @@ class AbstractLogger;
  * as it appears in the config file, `TYPE` is the C++ type. At the same time
  * `KEY` is the name of the generated getter function.
  */
+// clang-format off
 #define CONFIG_GETTER(KEY, TYPE)                                               \
     TYPE KEY()                                                                 \
     {                                                                          \
         return value(QStringLiteral(#KEY)).value<TYPE>();                      \
     }
+// clang-format on
 
 /**
  * Declare and implement a setter for a config option. `FUNC` is the name of the
