@@ -24,8 +24,7 @@
 
 ScreenGrabber::ScreenGrabber(QObject* parent)
   : QObject(parent)
-{
-}
+{}
 
 void ScreenGrabber::generalGrimScreenshot(bool& ok, QPixmap& res)
 {
