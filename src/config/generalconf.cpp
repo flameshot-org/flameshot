@@ -56,6 +56,7 @@ GeneralConf::GeneralConf(QWidget* parent)
     initAntialiasingPinZoom();
     initUploadHistoryMax();
     initUndoLimit();
+    initTesseractPath();
     initUploadClientSecret();
     initPredefinedColorPaletteLarge();
     initShowSelectionGeometry();
@@ -543,6 +544,32 @@ void GeneralConf::initUploadHistoryMax()
             this,
             SLOT(uploadHistoryMaxChanged(int)));
     vboxLayout->addWidget(m_uploadHistoryMax);
+}
+
+void GeneralConf::initTesseractPath()
+{
+    auto* box = new QGroupBox(tr("Tesseract path (for OCR)"));
+    box->setFlat(true);
+    m_layout->addWidget(box);
+
+    auto* vboxLayout = new QVBoxLayout();
+    box->setLayout(vboxLayout);
+
+    m_tesseractPath = new QLineEdit(this);
+    QString foreground = this->palette().windowText().color().name();
+    m_tesseractPath->setStyleSheet(
+      QStringLiteral("color: %1").arg(foreground));
+    m_tesseractPath->setText(ConfigHandler().tesseractBinPath());
+    connect(m_tesseractPath,
+            SIGNAL(editingFinished()),
+            this,
+            SLOT(tesseractPathEdited()));
+    vboxLayout->addWidget(m_tesseractPath);
+}
+
+void GeneralConf::tesseractPathEdited()
+{
+    ConfigHandler().setTesseractBinPath(m_tesseractPath->text());
 }
 
 void GeneralConf::initUploadClientSecret()

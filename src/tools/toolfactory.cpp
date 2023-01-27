@@ -14,6 +14,7 @@
 #include "line/linetool.h"
 #include "marker/markertool.h"
 #include "move/movetool.h"
+#include "ocr/ocrtool.h"
 #include "pencil/penciltool.h"
 #include "pin/pintool.h"
 #include "pixelate/pixelatetool.h"
@@ -61,6 +62,7 @@ CaptureTool* ToolFactory::CreateTool(CaptureTool::Type t, QObject* parent)
         if_TYPE_return_TOOL(TYPE_SIZEINCREASE, SizeIncreaseTool);
         if_TYPE_return_TOOL(TYPE_SIZEDECREASE, SizeDecreaseTool);
         if_TYPE_return_TOOL(TYPE_INVERT, InvertTool);
+        if_TYPE_return_TOOL(TYPE_OCR, OcrTool);
         if_TYPE_return_TOOL(TYPE_ACCEPT, AcceptTool);
         default:
             return nullptr;

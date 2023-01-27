@@ -48,6 +48,7 @@ public:
         TYPE_SIZEDECREASE = 21,
         TYPE_INVERT = 22,
         TYPE_ACCEPT = 23,
+        TYPE_OCR = 24,
     };
     Q_ENUM(Type);
 
