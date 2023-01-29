@@ -7,7 +7,7 @@ ClickableLabel::ClickableLabel(QWidget* parent)
   : QLabel(parent)
 {}
 
-ClickableLabel::ClickableLabel(QString s, QWidget* parent)
+ClickableLabel::ClickableLabel(const QString& s, QWidget* parent)
   : QLabel(parent)
 {
     setText(s);
