@@ -18,7 +18,7 @@ public:
     void removeAt(int index);
     void clear();
     int size();
-    int find(const QPoint& pos, const QSize& captureSize);
+    int find(const QPoint& pos, QSize captureSize);
     QPointer<CaptureTool> at(int index);
     CaptureToolObjects& operator=(const CaptureToolObjects& other);
 

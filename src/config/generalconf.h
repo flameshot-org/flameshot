@@ -54,12 +54,12 @@ private slots:
     void togglePathFixed();
     void uploadClientKeyEdited();
     void useJpgForClipboardChanged(bool checked);
-    void setSaveAsFileExtension(QString extension);
+    void setSaveAsFileExtension(const QString& extension);
     void setGeometryLocation(int index);
     void setSelGeoHideTime(int v);
 
 private:
-    const QString chooseFolder(const QString currentPath = "");
+    const QString chooseFolder(const QString& currentPath = "");
 
     void initAllowMultipleGuiInstances();
     void initAntialiasingPinZoom();

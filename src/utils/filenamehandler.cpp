@@ -102,7 +102,7 @@ QString FileNameHandler::properScreenshotPath(QString path,
     }
 }
 
-QString FileNameHandler::autoNumerateDuplicate(QString path)
+QString FileNameHandler::autoNumerateDuplicate(const QString& path)
 {
     // add numeration in case of repeated filename in the directory
     // find unused name adding _n where n is a number
