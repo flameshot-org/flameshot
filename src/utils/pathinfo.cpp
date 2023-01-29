@@ -26,7 +26,6 @@ QStringList PathInfo::translationsPaths()
            << QStringLiteral(APP_PREFIX) + "/share/flameshot/translations"
            << trPath << QStringLiteral("/usr/share/flameshot/translations")
            << QStringLiteral("/usr/local/share/flameshot/translations");
-#elif defined(Q_OS_WIN)
-    return QStringList() << trPath;
 #endif
+    return QStringList() << trPath;
 }

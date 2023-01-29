@@ -178,6 +178,6 @@ private:
     QSharedPointer<ValueHandler> valueHandler(const QString& key) const;
     void assertKeyRecognized(const QString& key) const;
     bool isShortcut(const QString& key) const;
-    QString baseName(QString key) const;
+    QString baseName(const QString& key) const;
     void cleanUnusedKeys(const QString& group, const QSet<QString>& keys) const;
 };

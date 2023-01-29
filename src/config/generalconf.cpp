@@ -486,9 +486,9 @@ void GeneralConf::initSaveAfterCopy()
     m_screenshotPathFixedCheck =
       new QCheckBox(tr("Use fixed path for screenshots to save"), this);
     connect(m_screenshotPathFixedCheck,
-            SIGNAL(toggled(bool)),
+            &QCheckBox::toggled,
             this,
-            SLOT(togglePathFixed()));
+            &GeneralConf::togglePathFixed);
 
     vboxLayout->addLayout(pathLayout);
     vboxLayout->addWidget(m_screenshotPathFixedCheck);
@@ -510,9 +510,9 @@ void GeneralConf::initSaveAfterCopy()
     m_setSaveAsFileExtension->setCurrentIndex(currentIndex);
 
     connect(m_setSaveAsFileExtension,
-            SIGNAL(currentTextChanged(QString)),
+            &QComboBox::currentTextChanged,
             this,
-            SLOT(setSaveAsFileExtension(QString)));
+            &GeneralConf::setSaveAsFileExtension);
 
     extensionLayout->addWidget(m_setSaveAsFileExtension);
     vboxLayout->addLayout(extensionLayout);
@@ -539,9 +539,9 @@ void GeneralConf::initUploadHistoryMax()
       QStringLiteral("color: %1").arg(foreground));
 
     connect(m_uploadHistoryMax,
-            SIGNAL(valueChanged(int)),
+            static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged),
             this,
-            SLOT(uploadHistoryMaxChanged(int)));
+            &GeneralConf::uploadHistoryMaxChanged);
     vboxLayout->addWidget(m_uploadHistoryMax);
 }
 
@@ -560,9 +560,9 @@ void GeneralConf::initUploadClientSecret()
       QStringLiteral("color: %1").arg(foreground));
     m_uploadClientKey->setText(ConfigHandler().uploadClientSecret());
     connect(m_uploadClientKey,
-            SIGNAL(editingFinished()),
+            &QLineEdit::editingFinished,
             this,
-            SLOT(uploadClientKeyEdited()));
+            &GeneralConf::uploadClientKeyEdited);
     vboxLayout->addWidget(m_uploadClientKey);
 }
 
@@ -591,7 +591,10 @@ void GeneralConf::initUndoLimit()
     QString foreground = this->palette().windowText().color().name();
     m_undoLimit->setStyleSheet(QStringLiteral("color: %1").arg(foreground));
 
-    connect(m_undoLimit, SIGNAL(valueChanged(int)), this, SLOT(undoLimit(int)));
+    connect(m_undoLimit,
+            static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged),
+            this,
+            &GeneralConf::undoLimit);
 
     vboxLayout->addWidget(m_undoLimit);
 }
@@ -670,7 +673,7 @@ void GeneralConf::initUploadWithoutConfirmation()
     });
 }
 
-const QString GeneralConf::chooseFolder(const QString pathDefault)
+const QString GeneralConf::chooseFolder(const QString& pathDefault)
 {
     QString path;
     if (pathDefault.isEmpty()) {
@@ -685,13 +688,13 @@ const QString GeneralConf::chooseFolder(const QString pathDefault)
     if (path.isEmpty()) {
         return path;
     }
-    if (!path.isEmpty()) {
-        if (!QFileInfo(path).isWritable()) {
-            QMessageBox::about(
-              this, tr("Error"), tr("Unable to write to directory."));
-            return QString();
-        }
+
+    if (!QFileInfo(path).isWritable()) {
+        QMessageBox::about(
+          this, tr("Error"), tr("Unable to write to directory."));
+        return QString();
     }
+
     return path;
 }
 
@@ -733,9 +736,9 @@ void GeneralConf::initShowSelectionGeometry()
 
     m_scrollAreaLayout->addLayout(tobox);
     connect(m_xywhTimeout,
-            SIGNAL(valueChanged(int)),
+            static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged),
             this,
-            SLOT(setSelGeoHideTime(int)));
+            &GeneralConf::setSelGeoHideTime);
 
     auto* box = new QGroupBox(tr("Selection Geometry Display"));
     box->setFlat(true);
@@ -763,10 +766,11 @@ void GeneralConf::initShowSelectionGeometry()
     m_selectGeometryLocation->setCurrentIndex(
       m_selectGeometryLocation->findData(pos));
 
-    connect(m_selectGeometryLocation,
-            SIGNAL(currentIndexChanged(int)),
-            this,
-            SLOT(setGeometryLocation(int)));
+    connect(
+      m_selectGeometryLocation,
+      static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+      this,
+      &GeneralConf::setGeometryLocation);
 
     selGeoLayout->addWidget(m_selectGeometryLocation);
     vboxLayout->addLayout(selGeoLayout);
@@ -789,7 +793,7 @@ void GeneralConf::togglePathFixed()
     ConfigHandler().setSavePathFixed(m_screenshotPathFixedCheck->isChecked());
 }
 
-void GeneralConf::setSaveAsFileExtension(QString extension)
+void GeneralConf::setSaveAsFileExtension(const QString& extension)
 {
     ConfigHandler().setSaveAsFileExtension(extension);
 }

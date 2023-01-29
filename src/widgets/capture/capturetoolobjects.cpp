@@ -61,7 +61,7 @@ void CaptureToolObjects::removeAt(int index)
     }
 }
 
-int CaptureToolObjects::find(const QPoint& pos, const QSize& captureSize)
+int CaptureToolObjects::find(const QPoint& pos, QSize captureSize)
 {
     if (m_captureToolObjects.empty()) {
         return -1;

@@ -62,7 +62,7 @@ OrientablePushButton::Orientation OrientablePushButton::orientation() const
 }
 
 void OrientablePushButton::setOrientation(
-  const OrientablePushButton::Orientation& orientation)
+  OrientablePushButton::Orientation orientation)
 {
     m_orientation = orientation;
 }

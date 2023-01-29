@@ -513,7 +513,7 @@ QString SaveFileExtension::expected()
 bool Region::check(const QVariant& val)
 {
     QVariant region = process(val);
-    return process(val).isValid();
+    return region.isValid();
 }
 
 #include <QApplication> // TODO remove after FIXME (see below)

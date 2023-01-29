@@ -321,9 +321,9 @@ void ConfigHandler::setStartupLaunch(const bool start)
 
 void ConfigHandler::setAllTheButtons()
 {
-    QList<CaptureTool::Type> buttons =
+    QList<CaptureTool::Type> buttonlist =
       CaptureToolButton::getIterableButtonTypes();
-    setValue(QStringLiteral("buttons"), QVariant::fromValue(buttons));
+    setValue(QStringLiteral("buttons"), QVariant::fromValue(buttonlist));
 }
 
 void ConfigHandler::setToolSize(CaptureTool::Type toolType, int size)
@@ -388,16 +388,16 @@ bool ConfigHandler::setShortcut(const QString& actionName,
         return false;
     }
 
-    bool error = false;
+    bool errorFlag = false;
 
     m_settings.beginGroup(CONFIG_GROUP_SHORTCUTS);
     if (shortcut.isEmpty()) {
         setValue(actionName, "");
     } else if (reservedShortcuts.contains(QKeySequence(shortcut))) {
         // do not allow to set reserved shortcuts
-        error = true;
+        errorFlag = true;
     } else {
-        error = false;
+        errorFlag = false;
         // Make no difference for Return and Enter keys
         QString newShortcut = KeySequence().value(shortcut).toString();
         for (auto& otherAction : m_settings.allKeys()) {
@@ -407,7 +407,7 @@ bool ConfigHandler::setShortcut(const QString& actionName,
             QString existingShortcut =
               KeySequence().value(m_settings.value(otherAction)).toString();
             if (newShortcut == existingShortcut) {
-                error = true;
+                errorFlag = true;
                 goto done;
             }
         }
@@ -415,7 +415,7 @@ bool ConfigHandler::setShortcut(const QString& actionName,
     }
 done:
     m_settings.endGroup();
-    return !error;
+    return !errorFlag;
 }
 
 QString ConfigHandler::shortcut(const QString& actionName)
@@ -787,7 +787,7 @@ bool ConfigHandler::isShortcut(const QString& key) const
            key.startsWith(QStringLiteral(CONFIG_GROUP_SHORTCUTS "/"));
 }
 
-QString ConfigHandler::baseName(QString key) const
+QString ConfigHandler::baseName(const QString& key) const
 {
     return QFileInfo(key).baseName();
 }

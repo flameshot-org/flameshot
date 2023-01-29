@@ -12,9 +12,9 @@ History::History()
 #ifdef Q_OS_WIN
     m_historyPath = QDir::homePath() + "/AppData/Roaming/flameshot/history/";
 #else
-    QString path = QProcessEnvironment::systemEnvironment().value(
+    QString cachepath = QProcessEnvironment::systemEnvironment().value(
       "XDG_CACHE_HOME", QDir::homePath() + "/.cache");
-    m_historyPath = path + "/flameshot/history/";
+    m_historyPath = cachepath + "/flameshot/history/";
 #endif
 
     // Check if directory for history exists and create if doesn't

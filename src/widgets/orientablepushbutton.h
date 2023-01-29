@@ -28,7 +28,7 @@ public:
     QSize sizeHint() const;
 
     OrientablePushButton::Orientation orientation() const;
-    void setOrientation(const OrientablePushButton::Orientation& orientation);
+    void setOrientation(OrientablePushButton::Orientation orientation);
 
 protected:
     void paintEvent(QPaintEvent* event);

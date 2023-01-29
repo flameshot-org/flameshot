@@ -137,9 +137,9 @@ void UtilityPanel::initInternalPanel()
 
     m_captureTools = new QListWidget(this);
     connect(m_captureTools,
-            SIGNAL(currentRowChanged(int)),
+            &QListWidget::currentRowChanged,
             this,
-            SLOT(onCurrentRowChanged(int)));
+            &UtilityPanel::onCurrentRowChanged);
 
     auto* layersButtons = new QHBoxLayout();
     m_layersLayout->addLayout(layersButtons);
@@ -171,9 +171,9 @@ void UtilityPanel::initInternalPanel()
     layersButtons->addStretch();
 
     connect(m_buttonDelete,
-            SIGNAL(clicked(bool)),
+            &QPushButton::clicked,
             this,
-            SLOT(slotButtonDelete(bool)));
+            &UtilityPanel::slotButtonDelete);
 
     connect(m_buttonMoveUp,
             &QPushButton::clicked,
