@@ -6,22 +6,22 @@
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/abstract_widget_list.cpp" line="67"/>
         <source>Add New</source>
-        <translation>Add New</translation>
+        <translation>Adicionar Novo</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/abstract_widget_list.cpp" line="118"/>
         <source>Move Up</source>
-        <translation>Move Up</translation>
+        <translation>Subir</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/abstract_widget_list.cpp" line="119"/>
         <source>Move Down</source>
-        <translation>Move Down</translation>
+        <translation>Descer</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/abstract_widget_list.cpp" line="120"/>
         <source>Remove</source>
-        <translation>Remove</translation>
+        <translation>Remover</translation>
     </message>
 </context>
 <context>
@@ -29,12 +29,12 @@
     <message>
         <location filename="../../src/tools/accept/accepttool.cpp" line="31"/>
         <source>Accept</source>
-        <translation>Accept</translation>
+        <translation>Aceitar</translation>
     </message>
     <message>
         <location filename="../../src/tools/accept/accepttool.cpp" line="41"/>
         <source>Accept the capture</source>
-        <translation>Accept the capture</translation>
+        <translation>Aceitar a captura</translation>
     </message>
 </context>
 <context>
@@ -170,7 +170,7 @@
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="176"/>
         <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_capturelauncher.h" line="178"/>
         <source>Capture Launcher</source>
-        <translation>Capture Launcher</translation>
+        <translation>Tela de Captura</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="34"/>
@@ -178,7 +178,7 @@
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="177"/>
         <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_capturelauncher.h" line="179"/>
         <source>TextLabel</source>
-        <translation>TextLabel</translation>
+        <translation>Texto</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="51"/>
@@ -230,7 +230,7 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="397"/>
         <source>Change tool size</source>
-        <translation>Change tool size</translation>
+        <translation>Modificar tamanho da ferramenta</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="398"/>
@@ -245,7 +245,7 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="400"/>
         <source>Open side panel</source>
-        <translation>Open side panel</translation>
+        <translation>Abrir painel lateral</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="401"/>
@@ -319,7 +319,7 @@ Pressione espaço para abrir o painel lateral.</translation>
         <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="318"/>
         <location filename="../../cmake-build-relwithdebinfo/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="318"/>
         <source>Select Color</source>
-        <translation>Selecionar Color</translation>
+        <translation>Selecionar Cor</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="55"/>
@@ -335,7 +335,7 @@ Pressione espaço para abrir o painel lateral.</translation>
         <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="320"/>
         <location filename="../../cmake-build-relwithdebinfo/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="320"/>
         <source>Hue</source>
-        <translation>Hue</translation>
+        <translation>Tonalidade</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="79"/>
@@ -396,7 +396,7 @@ Pressione espaço para abrir o painel lateral.</translation>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="58"/>
         <source>Enter or Left Click</source>
-        <translation></translation>
+        <translation>Enter ou clique do botão esquerdo</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="59"/>
@@ -406,7 +406,7 @@ Pressione espaço para abrir o painel lateral.</translation>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="59"/>
         <source>Hold Left Click</source>
-        <translation></translation>
+        <translation>Segure o clique esquerdo</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="60"/>
@@ -416,7 +416,7 @@ Pressione espaço para abrir o painel lateral.</translation>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="60"/>
         <source>Space or Right Click</source>
-        <translation></translation>
+        <translation>Espaço ou cloque do botão direito</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="61"/>
@@ -438,12 +438,12 @@ Pressione espaço para abrir o painel lateral.</translation>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="40"/>
         <source>Edit Preset:</source>
-        <translation>Edit Preset:</translation>
+        <translation>Editar predefinição:</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="45"/>
         <source>Enter color to update preset</source>
-        <translation>Enter color to update preset</translation>
+        <translation>Insira a cor para atualizar a predefinição</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="65"/>
@@ -453,7 +453,7 @@ Pressione espaço para abrir o painel lateral.</translation>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="67"/>
         <source>Press button to update the selected preset</source>
-        <translation>Press button to update the selected preset</translation>
+        <translation>Pressione o botão para atualizar a predefinição selecionada</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="74"/>
@@ -473,7 +473,7 @@ Pressione espaço para abrir o painel lateral.</translation>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="96"/>
         <source>Enter color manually or select it using the color-wheel</source>
-        <translation>Enter color manually or select it using the color-wheel</translation>
+        <translation>Insira a cor manualmente ou selecione-a usando a roda de cores</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="106"/>
@@ -483,7 +483,7 @@ Pressione espaço para abrir o painel lateral.</translation>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="107"/>
         <source>Press button to add preset</source>
-        <translation>Press button to add preset</translation>
+        <translation>Pressione o botão para adicionar predefinição</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="130"/>
@@ -494,12 +494,12 @@ Pressione espaço para abrir o painel lateral.</translation>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="131"/>
         <source>Unable to add preset. Maximum limit reached.</source>
-        <translation>Unable to add preset. Maximum limit reached.</translation>
+        <translation>Não foi possível adicionar a predefinição. Limite máximo atingido.</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="148"/>
         <source>Unable to remove preset. Minimum limit reached.</source>
-        <translation>Unable to remove preset. Minimum limit reached.</translation>
+        <translation>Não foi possível remover a predefinição. Limite mínimo atingido.</translation>
     </message>
 </context>
 <context>
@@ -516,44 +516,44 @@ Pressione espaço para abrir o painel lateral.</translation>
         <location filename="../../src/utils/confighandler.cpp" line="552"/>
         <source>Unrecognized setting: &apos;%1&apos;
 </source>
-        <translation>Unrecognized setting: &apos;%1&apos;
+        <translation>Configuração não reconhecida: &apos;%1&apos;
 </translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="560"/>
         <source>Unrecognized shortcut name: &apos;%1&apos;.
 </source>
-        <translation>Unrecognized shortcut name: &apos;%1&apos;.
+        <translation>Nome de atalho não reconhecido: &apos;%1&apos;.
 </translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="603"/>
         <source>Shortcut conflict: &apos;%1&apos; and &apos;%2&apos; have the same shortcut: %3
 </source>
-        <translation>Shortcut conflict: &apos;%1&apos; and &apos;%2&apos; have the same shortcut: %3
+        <translation>Conflito de atalho: &apos;%1&apos; and &apos;%2&apos; tem o mesmo atalho: %3
 </translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="643"/>
         <source>Bad value in &apos;%1&apos;. Expected: %2
 </source>
-        <translation>Bad value in &apos;%1&apos;. Expected: %2
+        <translation>Valor ruim em &apos;%1&apos;. Esperado: %2
 </translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="693"/>
         <source>You have successfully resolved the configuration error.</source>
-        <translation>You have successfully resolved the configuration error.</translation>
+        <translation>Você resolveu com sucesso o erro de configuração.</translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="716"/>
         <source>The configuration contains an error. Open configuration to resolve.</source>
-        <translation>The configuration contains an error. Open configuration to resolve.</translation>
+        <translation>A configuração contém um erro. Abra a configuração para resolver.</translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="770"/>
         <source>Bad config key &apos;%1&apos; in ConfigHandler. Please report this as a bug.</source>
-        <translation>Bad config key &apos;%1&apos; in ConfigHandler. Please report this as a bug.</translation>
+        <translation>Chave de configuração inválida &apos;%1&apos; em ConfigHandler. Por favor relate isso como um bug.</translation>
     </message>
 </context>
 <context>
@@ -561,56 +561,56 @@ Pressione espaço para abrir o painel lateral.</translation>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="14"/>
         <source>Resolve configuration errors</source>
-        <translation>Resolve configuration errors</translation>
+        <translation>Resolver erros de configuração</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="50"/>
         <source>&lt;b&gt;You must resolve all errors before continuing:&lt;/b&gt;</source>
-        <translation>&lt;b&gt;You must resolve all errors before continuing:&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Você deve resolver todos os erros antes de continuar:&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="61"/>
         <source>Reset</source>
-        <translation>Reset</translation>
+        <translation>Redefinir</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="63"/>
         <source>Reset to the default value.</source>
-        <translation>Reset to the default value.</translation>
+        <translation>Redefina para o valor padrão.</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="77"/>
         <source>Remove</source>
-        <translation>Remove</translation>
+        <translation>Remover</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="79"/>
         <source>Remove this setting.</source>
-        <translation>Remove this setting.</translation>
+        <translation>Remova esta configuração.</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="90"/>
         <source>Some keyboard shortcuts have conflicts.
 This will NOT prevent flameshot from starting.
 Please solve them manually in the configuration file.</source>
-        <translation>Some keyboard shortcuts have conflicts.
-This will NOT prevent flameshot from starting.
-Please solve them manually in the configuration file.</translation>
+        <translation>Alguns atalhos de teclado apresentam conflitos.
+Isso NÃO impedirá que o Flameshot comece.
+Por favor, resolva-os manualmente no arquivo de configuração.</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="112"/>
         <source>Resolve all</source>
-        <translation>Resolve all</translation>
+        <translation>Resolva tudo</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="113"/>
         <source>Resolve all listed errors.</source>
-        <translation>Resolve all listed errors.</translation>
+        <translation>Resolva todos os erros listados.</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="125"/>
         <source>Details</source>
-        <translation>Details</translation>
+        <translation>Detalhes</translation>
     </message>
 </context>
 <context>
@@ -643,12 +643,12 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="120"/>
         <source>Resolve</source>
-        <translation>Resolve</translation>
+        <translation>Resolver</translation>
     </message>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="124"/>
         <source>&lt;b&gt;Configuration file has errors. Resolve them before continuing.&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Configuration file has errors. Resolve them before continuing.&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;O arquivo de configuração contém erros. Resolva-os antes de continuar.&lt;/b&gt;</translation>
     </message>
 </context>
 <context>
@@ -679,7 +679,7 @@ Please solve them manually in the configuration file.</translation>
     </message>
     <message>
         <source>&amp;Open Launcher</source>
-        <translation type="vanished">&amp;Abrir Launcher</translation>
+        <translation type="vanished">&amp;Abrir tela</translation>
     </message>
     <message>
         <source>&amp;Configuration</source>
@@ -720,7 +720,7 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/tools/copy/copytool.cpp" line="34"/>
         <source>Copy selection to clipboard</source>
-        <translation>Copy selection to clipboard</translation>
+        <translation>Copiar seleção para a área de transferência</translation>
     </message>
     <message>
         <source>Copy the selection into the clipboard</source>
@@ -892,7 +892,7 @@ Please solve them manually in the configuration file.</translation>
     </message>
     <message>
         <source>Show tray icon</source>
-        <translation type="vanished">Mostrar ícone de tray</translation>
+        <translation type="vanished">Mostrar ícone na bandeja de relógio</translation>
     </message>
     <message>
         <source>Show the systemtray icon</source>
@@ -1027,7 +1027,7 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="286"/>
         <source>Show tray icon</source>
-        <translation>Mostrar ícone na bandeja</translation>
+        <translation>Mostrar ícone na bandeja do sistema</translation>
     </message>
     <message>
         <source>Show the systemtray icon</source>
@@ -1061,18 +1061,18 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="356"/>
         <source>Allow multiple flameshot GUI instances simultaneously</source>
-        <translation>Allow multiple flameshot GUI instances simultaneously</translation>
+        <translation>Permitir várias instâncias da GUI do flameshot simultaneamente</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="369"/>
         <location filename="../../src/config/generalconf.cpp" line="371"/>
         <source>Automatically close daemon when it is not needed</source>
-        <translation>Automatically close daemon when it is not needed</translation>
+        <translation>Fechar automaticamente o daemon quando não for necessário</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="381"/>
         <source>Launch at startup</source>
-        <translation>Executar junto ao sistema</translation>
+        <translation>Executar com o sistema</translation>
     </message>
     <message>
         <source>Launch Flameshot</source>
@@ -1086,7 +1086,7 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="408"/>
         <source>Use large predefined color palette</source>
-        <translation>Use large predefined color palette</translation>
+        <translation>Use uma grande paleta de cores predefinida</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="432"/>
@@ -1109,82 +1109,82 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="237"/>
         <source>Show the help message at the beginning in the capture mode</source>
-        <translation>Show the help message at the beginning in the capture mode</translation>
+        <translation>Mostrar a mensagem de ajuda no início do modo de captura</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="247"/>
         <source>Use last region</source>
-        <translation>Use last region</translation>
+        <translation>Usar a última região selecionada</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="248"/>
         <source>Uses the last region as the default selection for the next screenshot</source>
-        <translation>Uses the last region as the default selection for the next screenshot</translation>
+        <translation>Usa a última região como seleção padrão para a próxima captura de tela</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="262"/>
         <source>Show the side panel toggle button in the capture mode</source>
-        <translation>Show the side panel toggle button in the capture mode</translation>
+        <translation>Mostrar o botão de alternância do painel lateral no modo de captura</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="274"/>
         <source>Enable desktop notifications</source>
-        <translation>Enable desktop notifications</translation>
+        <translation>Ativar notificações na área de trabalho</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="287"/>
         <source>Show icon in the system tray</source>
-        <translation>Show icon in the system tray</translation>
+        <translation>Mostrar ícone na bandeja do sistema</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="302"/>
         <source>Ask for confirmation to delete screenshot from the latest uploads</source>
-        <translation>Ask for confirmation to delete screenshot from the latest uploads</translation>
+        <translation>Peça confirmação para excluir a captura de tela dos últimos uploads</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="344"/>
         <source>Check for updates automatically</source>
-        <translation>Check for updates automatically</translation>
+        <translation>Verificar atualizações automaticamente</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="357"/>
         <source>This allows you to take screenshots of Flameshot itself for example</source>
-        <translation>This allows you to take screenshots of Flameshot itself for example</translation>
+        <translation>Isso permite que você tire screenshots do próprio Flameshot, por exemplo</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="383"/>
         <source>Launch Flameshot daemon when computer is booted</source>
-        <translation>Launch Flameshot daemon when computer is booted</translation>
+        <translation>Inicie o daemon do Flameshot quando o computador for inicializado</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="396"/>
         <source>Show the welcome message box in the middle of the screen while taking a screenshot</source>
-        <translation>Show the welcome message box in the middle of the screen while taking a screenshot</translation>
+        <translation>Mostre a caixa de mensagem de boas-vindas no meio da tela ao fazer uma captura de tela</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="410"/>
         <source>Use a large predefined color palette</source>
-        <translation>Use a large predefined color palette</translation>
+        <translation>Use uma grande paleta de cores predefinida</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="420"/>
         <source>Copy on double click</source>
-        <translation>Copy on double click</translation>
+        <translation>Copiar com duplo clique</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="421"/>
         <source>Enable Copy on Double Click</source>
-        <translation>Enable Copy on Double Click</translation>
+        <translation>Ativar cópia com clique duplo</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="434"/>
         <source>Copy URL and close window after uploading was successful</source>
-        <translation>Copy URL and close window after uploading was successful</translation>
+        <translation>Copie o URL e feche a janela após o upload bem-sucedido</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="446"/>
         <source>After copying the screenshot, save it to a file as well</source>
-        <translation>After copying the screenshot, save it to a file as well</translation>
+        <translation>Depois de copiar a captura de tela, também salve-a em um arquivo.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="453"/>
@@ -1204,7 +1204,7 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="489"/>
         <source>Preferred save file extension:</source>
-        <translation>Preferred save file extension:</translation>
+        <translation>Extensão de arquivo de salvamento preferida:</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="518"/>
@@ -1214,7 +1214,7 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="540"/>
         <source>Imgur Application Client ID</source>
-        <translation>Imgur Application Client ID</translation>
+        <translation>ID do cliente do aplicativo Imgur</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="571"/>
