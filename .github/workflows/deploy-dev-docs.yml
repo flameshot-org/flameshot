@@ -71,5 +71,5 @@ jobs:
         working-directory: ${{github.workspace}}/website
         run: |
           git push --force destination developer-docs
-          git push gh-pages
+          git push destination gh-pages
 
