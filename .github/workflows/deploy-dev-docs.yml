@@ -70,5 +70,6 @@ jobs:
       - name: Push to website repo
         working-directory: ${{github.workspace}}/website
         run: |
-          git push --force destination developer-docs gh-pages
+          git push --force destination developer-docs
+          git push gh-pages
 
