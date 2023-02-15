@@ -16,7 +16,8 @@ public:
         KDE,
         OTHER,
         QTILE,
-        SWAY
+        SWAY,
+        HYPRLAND
     };
 
     bool waylandDetected();
