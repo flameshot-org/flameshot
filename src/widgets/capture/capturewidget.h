@@ -87,6 +87,8 @@ private slots:
     void onMoveCaptureToolDown(int captureToolIndex);
     void selectAll();
     void xywhTick();
+    void onDisplayGridChanged(bool display);
+    void onGridSizeChanged(int size);
 
 public:
     void removeToolObject(int index = -1);
@@ -146,6 +148,8 @@ private:
 
     CaptureTool* activeButtonTool() const;
     CaptureTool::Type activeButtonToolType() const;
+
+    QPoint snapToGrid(const QPoint& point) const;
 
     ////////////////////////////////////////
     // Class members
@@ -214,4 +218,8 @@ private:
     // For start moving after more than X offset
     QPoint m_startMovePos;
     bool m_startMove;
+
+    // Grid
+    bool m_displayGrid{ false };
+    int m_gridSize{ 10 };
 };

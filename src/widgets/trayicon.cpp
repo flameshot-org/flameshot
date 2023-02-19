@@ -139,7 +139,7 @@ void TrayIcon::initMenu()
     connect(FlameshotDaemon::instance(),
             &FlameshotDaemon::newVersionAvailable,
             this,
-            [this](QVersionNumber version) {
+            [this](const QVersionNumber& version) {
                 QString newVersion =
                   tr("New version %1 is available").arg(version.toString());
                 m_appUpdates->setText(newVersion);

@@ -191,7 +191,7 @@ public slots:
     virtual void drawMoveWithAdjustment(const QPoint& p) { drawMove(p); }
     // Called when the tool is activated.
     virtual void drawStart(const CaptureContext& context) = 0;
-    // Called right after pressign the button which activates the tool.
+    // Called right after pressing the button which activates the tool.
     virtual void pressed(CaptureContext& context) = 0;
     // Called when the color is changed in the editor.
     virtual void onColorChanged(const QColor& c) = 0;

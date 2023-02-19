@@ -384,8 +384,8 @@ void SelectionWidget::paintEvent(QPaintEvent*)
     p.drawRect(rect() + QMargins(0, 0, -1, -1));
     p.setRenderHint(QPainter::Antialiasing);
     p.setBrush(m_color);
-    for (auto rect : handlerAreas()) {
-        p.drawEllipse(rect);
+    for (auto rectangle : handlerAreas()) {
+        p.drawEllipse(rectangle);
     }
 }
 
@@ -549,14 +549,14 @@ void SelectionWidget::updateCursor()
 void SelectionWidget::setGeometryByKeyboard(const QRect& r)
 {
     static QTimer timer;
-    QRect rect = r.intersected(parentWidget()->rect());
-    if (rect.width() <= 0) {
-        rect.setWidth(1);
+    QRect rectangle = r.intersected(parentWidget()->rect());
+    if (rectangle.width() <= 0) {
+        rectangle.setWidth(1);
     }
-    if (rect.height() <= 0) {
-        rect.setHeight(1);
+    if (rectangle.height() <= 0) {
+        rectangle.setHeight(1);
     }
-    setGeometry(rect);
+    setGeometry(rectangle);
     connect(&timer,
             &QTimer::timeout,
             this,
