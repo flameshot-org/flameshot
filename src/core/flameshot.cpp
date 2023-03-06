@@ -12,15 +12,11 @@
 #include "src/config/configresolver.h"
 #include "src/config/configwindow.h"
 #include "src/core/qguiappcurrentscreen.h"
-#include "src/tools/imgupload/imguploadermanager.h"
-#include "src/tools/imgupload/storages/imguploaderbase.h"
 #include "src/utils/confighandler.h"
 #include "src/utils/screengrabber.h"
 #include "src/widgets/capture/capturewidget.h"
 #include "src/widgets/capturelauncher.h"
-#include "src/widgets/imguploaddialog.h"
 #include "src/widgets/infowindow.h"
-#include "src/widgets/uploadhistory.h"
 #include <QApplication>
 #include <QBuffer>
 #include <QDebug>
@@ -238,23 +234,6 @@ void Flameshot::info()
     }
 }
 
-void Flameshot::history()
-{
-    static UploadHistory* historyWidget = nullptr;
-    if (historyWidget == nullptr) {
-        historyWidget = new UploadHistory;
-        historyWidget->loadHistory();
-        connect(historyWidget, &QObject::destroyed, this, []() {
-            historyWidget = nullptr;
-        });
-    }
-    historyWidget->show();
-
-#if defined(Q_OS_MACOS)
-    historyWidget->activateWindow();
-    historyWidget->raise();
-#endif
-}
 
 QVersionNumber Flameshot::getVersion()
 {
@@ -381,34 +360,6 @@ void Flameshot::exportCapture(const QPixmap& capture,
         }
     }
 
-    if (tasks & CR::UPLOAD) {
-        if (!ConfigHandler().uploadWithoutConfirmation()) {
-            auto* dialog = new ImgUploadDialog();
-            if (dialog->exec() == QDialog::Rejected) {
-                return;
-            }
-        }
-
-        ImgUploaderBase* widget = ImgUploaderManager().uploader(capture);
-        widget->show();
-        widget->activateWindow();
-        // NOTE: lambda can't capture 'this' because it might be destroyed later
-        CR::ExportTask tasks = tasks;
-        QObject::connect(
-          widget, &ImgUploaderBase::uploadOk, [=](const QUrl& url) {
-              if (ConfigHandler().copyURLAfterUpload()) {
-                  if (!(tasks & CR::COPY)) {
-                      FlameshotDaemon::copyToClipboard(
-                        url.toString(), tr("URL copied to clipboard."));
-                  }
-                  widget->showPostUploadDialog();
-              }
-          });
-    }
-
-    if (!(tasks & CR::UPLOAD)) {
-        emit captureTaken(capture);
-    }
 }
 
 void Flameshot::setExternalWidget(bool b)

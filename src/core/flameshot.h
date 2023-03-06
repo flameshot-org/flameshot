@@ -12,7 +12,6 @@ class CaptureWidget;
 class ConfigWindow;
 class InfoWindow;
 class CaptureLauncher;
-class UploadHistory;
 #if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
      defined(Q_OS_MACX))
 class QHotkey;
@@ -40,7 +39,6 @@ public slots:
     void config();
 
     void info();
-    void history();
 
     QVersionNumber getVersion();
 
