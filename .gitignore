@@ -70,8 +70,11 @@ data/flatpak/.flatpak-builder
 
 # End of https://www.gitignore.io/api/snapcraft
 
-#MacOS Crap
+# MacOS 
 .DS_Store
 
 # Miscellaneous
 !docs/dev/Makefile
+# Nix
+result
+.direnv/
