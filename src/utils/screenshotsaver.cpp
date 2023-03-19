@@ -200,7 +200,7 @@ bool saveToFilesystemGUI(const QPixmap& capture)
 
         if (config.copyPathAfterSave()) {
             FlameshotDaemon::copyToClipboard(
-              savePath, QObject::tr("Path copied to clipboard as ") + savePath);
+              QDir::toNativeSeparators(savePath), QObject::tr("Path copied to clipboard as ") + savePath);
         }
 
     } else {
