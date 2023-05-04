@@ -209,8 +209,8 @@ bool CommandLineParser::parse(const QStringList& args)
     ok = processIfOptionIsHelp(args, it, actualNode);
     // process the other args
     for (; it != args.cend() && ok; ++it) {
-        const QString& value = *it;
-        if (value.startsWith(QLatin1String("-"))) {
+        const QString& val = *it;
+        if (val.startsWith(QLatin1String("-"))) {
             ok = processOptions(args, it, actualNode);
 
         } else {
