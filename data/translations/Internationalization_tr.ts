@@ -1535,7 +1535,7 @@ Lütfen bunları yapılandırma dosyasında elle çözün.</translation>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="124"/>
         <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_infowindow.h" line="124"/>
         <source>Copy Info</source>
-        <translation>Bilgileri Kopyalai</translation>
+        <translation>Bilgileri Kopyala</translation>
     </message>
     <message>
         <source>Right Click</source>
