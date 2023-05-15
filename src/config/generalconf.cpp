@@ -59,6 +59,7 @@ GeneralConf::GeneralConf(QWidget* parent)
     initUploadClientSecret();
     initPredefinedColorPaletteLarge();
     initShowSelectionGeometry();
+    initFlatButtonsLayout();
 
     m_layout->addStretch();
 
@@ -645,6 +646,16 @@ void GeneralConf::initCopyPathAfterSave()
     m_scrollAreaLayout->addWidget(m_copyPathAfterSave);
     connect(m_copyPathAfterSave, &QCheckBox::clicked, [](bool checked) {
         ConfigHandler().setCopyPathAfterSave(checked);
+    });
+}
+
+void GeneralConf::initFlatButtonsLayout()
+{
+    m_useFlatButtonsLayout = new QCheckBox(tr("Use flat layout for buttons"), this);
+    m_useFlatButtonsLayout->setToolTip(tr("Force arrange tool buttons in a line"));
+    m_scrollAreaLayout->addWidget(m_useFlatButtonsLayout);
+    connect(m_useFlatButtonsLayout, &QCheckBox::clicked, [](bool checked) {
+        ConfigHandler().setUseFlatButtonsLayout(checked);
     });
 }
 

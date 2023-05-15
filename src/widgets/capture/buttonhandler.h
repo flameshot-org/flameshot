@@ -61,7 +61,7 @@ private:
     bool m_buttonsAreInside;
     bool m_blockedRight;
     bool m_blockedLeft;
-    bool m_blockedBotton;
+    bool m_blockedBottom;
     bool m_blockedTop;
     bool m_oneHorizontalBlocked;
     bool m_horizontalyBlocked;
@@ -73,7 +73,7 @@ private:
     void updateBlockedSides();
     void expandSelection();
     void positionButtonsInside(int index);
-    void ensureSelectionMinimunSize();
+    void ensureSelectionMinimumSize();
     void moveButtonsToPoints(const QVector<QPoint>& points, int& index);
     void adjustHorizontalCenter(QPoint& center);
 };

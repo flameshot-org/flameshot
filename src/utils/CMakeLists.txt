@@ -27,6 +27,7 @@ target_sources(
           history.cpp
           strfparse.cpp
           request.cpp
+          layoututils.cpp
 )
 
 IF (WIN32)
