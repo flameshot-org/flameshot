@@ -229,6 +229,14 @@ if (USE_WAYLAND_CLIPBOARD)
   target_link_libraries(flameshot KF6::GuiAddons)
 endif()
 
+if(USE_WAYLAND_GNOME)
+    target_compile_definitions(flameshot PRIVATE USE_WAYLAND_GNOME=1)
+endif()
+
+if (USE_WAYLAND_GRIM)
+    target_compile_definitions(flameshot PRIVATE USE_WAYLAND_GRIM=1)
+endif()
+
 if (APPLE)
     set_target_properties(flameshot PROPERTIES
         MACOSX_BUNDLE TRUE

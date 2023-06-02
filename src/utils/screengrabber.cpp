@@ -26,6 +26,30 @@ ScreenGrabber::ScreenGrabber(QObject* parent)
   : QObject(parent)
 {}
 
+void ScreenGrabber::generalGnomeScreenshot(bool& ok, QPixmap& res)
+{
+#ifdef USE_WAYLAND_GNOME
+#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
+    QProcess Process;
+    QString program = "gnome-screenshot";
+    QStringList arguments;
+    QString tmpFileName = "/tmp/gnome_flameshot_png";
+    arguments << "-f" << tmpFileName;
+    Process.start(program, arguments);
+    if (Process.waitForFinished()) {
+        res.load(tmpFileName);
+        ok = true;
+    } else {
+        ok = false;
+        AbstractLogger::error() << tr(
+          "The GNOME-based Universal wayland Screen Capture Adapter requires "
+          "gnome-screenshot as the screen capture component of wayland. If the "
+          "screen capture component is missing, please install it!");
+    }
+#endif
+#endif
+}
+
 void ScreenGrabber::generalGrimScreenshot(bool& ok, QPixmap& res)
 {
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
@@ -158,6 +182,17 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
         // handle screenshot based on DE
         switch (m_info.windowManager()) {
             case DesktopInfo::GNOME:
+#ifndef USE_WAYLAND_GNOME
+                AbstractLogger::warning() << tr(
+                  "If the USE_WAYLAND_GNOME option is not enabled, the default "
+                  "dbus protocol will be used directly. Note that it is not "
+                  "recommended to use the default dbus protocol under wayland "
+                  "in gnome environments. It is recommended to recompile with "
+                  "the USE_WAYLAND_GNOME flag to activate the gnome-screenshot "
+                  "based generic wayland screenshot adapter");
+#else
+                generalGnomeScreenshot(ok, res);
+#endif
             case DesktopInfo::KDE:
                 freeDesktopPortal(ok, res);
                 break;

@@ -17,6 +17,7 @@ public:
     QPixmap grabScreen(QScreen* screenNumber, bool& ok);
     void freeDesktopPortal(bool& ok, QPixmap& res);
     void generalGrimScreenshot(bool& ok, QPixmap& res);
+    void generalGnomeScreenshot(bool& ok, QPixmap& res);
     QRect desktopGeometry();
     QRect logicalDesktopGeometry();
 
