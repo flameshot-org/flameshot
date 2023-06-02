@@ -216,11 +216,18 @@ target_link_libraries(
 )
 
 if (USE_WAYLAND_CLIPBOARD)
+  if(!USE_WAYLAND_GNOME)
+    message(WARNING "You have activated the USE_WAYLAND_CLIPBOARD option, but not the USE_WAYLAND_GNOME option. flameshot will use the dbus protocol to support wayland. if you are using gnome-based wayland, it is recommended that you enable USE_WAYLAND_GNOME")
+  endif()
   if(!USE_WAYLAND_GRIM)
     message(WARNING "You activated the USE_WAYLAND_CLIPBOARD option, but did not activate the USE_WAYLAND_GRIM option. Flameshot will use the dbus protocol to support wayland. If you use wlroots-based wayland, it is recommended to enable USE_WAYLAND_GRIM")
   endif()
   target_compile_definitions(flameshot PRIVATE USE_WAYLAND_CLIPBOARD=1)
   target_link_libraries(flameshot KF5::GuiAddons)
+endif()
+
+if(USE_WAYLAND_GNOME)
+    target_compile_definitions(flameshot PRIVATE USE_WAYLAND_GNOME=1)
 endif()
 
 if (USE_WAYLAND_GRIM)
