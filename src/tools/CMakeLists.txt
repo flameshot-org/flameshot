@@ -8,7 +8,9 @@ target_sources(flameshot PRIVATE sizeincrease/sizeincreasetool.h sizeincrease/si
 target_sources(flameshot PRIVATE sizedecrease/sizedecreasetool.h sizedecrease/sizedecreasetool.cpp)
 target_sources(
   flameshot
+        PRIVATE imgupload/storages/catbox/catboxuploader.h
         PRIVATE imgupload/storages/imgur/imguruploader.h
+        imgupload/storages/catbox/catboxuploader.cpp
         imgupload/storages/imgur/imguruploader.cpp
         imgupload/storages/imguploaderbase.h
         imgupload/storages/imguploaderbase.cpp
