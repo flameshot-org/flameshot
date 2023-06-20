@@ -1012,7 +1012,7 @@ Lütfen bunları yapılandırma dosyasında elle çözün.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="343"/>
         <source>Automatic check for updates</source>
-        <translation>Otomatik güncelleme denetimi</translation>
+        <translation>Güncellemeleri otomatik denetle</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="356"/>
@@ -1535,7 +1535,7 @@ Lütfen bunları yapılandırma dosyasında elle çözün.</translation>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="124"/>
         <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_infowindow.h" line="124"/>
         <source>Copy Info</source>
-        <translation>Kopya Bilgisi</translation>
+        <translation>Bilgileri Kopyala</translation>
     </message>
     <message>
         <source>Right Click</source>
