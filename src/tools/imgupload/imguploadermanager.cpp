@@ -23,10 +23,10 @@ ImgUploaderManager::ImgUploaderManager(QObject* parent)
 void ImgUploaderManager::init()
 {
     if (uploaderPlugin().compare("catbox") == 0) {
-        m_qstrUrl = "https://catbox.moe/api.php";
+        m_urlString = "https://catbox.moe/api.php";
         m_imgUploaderPlugin = "catbox";
     } else {
-        m_qstrUrl = "https://imgur.com/";
+        m_urlString = "https://imgur.com/";
         m_imgUploaderPlugin = "imgur";
     }
 }

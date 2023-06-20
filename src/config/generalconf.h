@@ -43,6 +43,7 @@ private slots:
     void allowMultipleGuiInstancesChanged(bool checked);
     void autoCloseIdleDaemonChanged(bool checked);
     void autostartChanged(bool checked);
+    void catboxUserHashEdited();
     void historyConfirmationToDelete(bool checked);
     void uploadHistoryMaxChanged(int max);
     void undoLimit(int limit);
@@ -68,6 +69,7 @@ private:
 #if !defined(DISABLE_UPDATE_CHECKER)
     void initCheckForUpdates();
 #endif
+    void initCatboxUserHash();
     void initConfigButtons();
     void initCopyAndCloseAfterUpload();
     void initCopyOnDoubleClick();
@@ -107,6 +109,7 @@ private:
     QCheckBox* m_allowMultipleGuiInstances;
     QCheckBox* m_autoCloseIdleDaemon;
     QCheckBox* m_autostart;
+    QLineEdit* m_catboxUserHash;
     QCheckBox* m_showStartupLaunchMessage;
     QCheckBox* m_copyURLAfterUpload;
     QCheckBox* m_copyPathAfterSave;

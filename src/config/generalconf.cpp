@@ -57,6 +57,7 @@ GeneralConf::GeneralConf(QWidget* parent)
     initUploadHistoryMax();
     initUndoLimit();
     initUploadClientSecret();
+    initCatboxUserHash();
     initPredefinedColorPaletteLarge();
     initShowSelectionGeometry();
 
@@ -566,9 +567,34 @@ void GeneralConf::initUploadClientSecret()
     vboxLayout->addWidget(m_uploadClientKey);
 }
 
+void GeneralConf::initCatboxUserHash() {
+    auto* box = new QGroupBox(tr("Catbox User Hash"));
+    box->setFlat(true);
+    m_layout->addWidget(box);
+
+    auto* vboxLayout = new QVBoxLayout();
+    box->setLayout(vboxLayout);
+
+    m_catboxUserHash = new QLineEdit(this);
+    QString foreground = this->palette().windowText().color().name();
+    m_catboxUserHash->setStyleSheet(
+      QStringLiteral("color: %1").arg(foreground));
+    m_catboxUserHash->setText(ConfigHandler().catboxUserHash());
+    connect(m_catboxUserHash,
+            &QLineEdit::editingFinished,
+            this,
+            &GeneralConf::catboxUserHashEdited);
+    vboxLayout->addWidget(m_catboxUserHash);
+}
+
 void GeneralConf::uploadClientKeyEdited()
 {
     ConfigHandler().setUploadClientSecret(m_uploadClientKey->text());
+}
+
+void GeneralConf::catboxUserHashEdited()
+{
+    ConfigHandler().setCatboxUserHash(m_catboxUserHash->text());
 }
 
 void GeneralConf::uploadHistoryMaxChanged(int max)
