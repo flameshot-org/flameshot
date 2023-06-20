@@ -567,7 +567,8 @@ void GeneralConf::initUploadClientSecret()
     vboxLayout->addWidget(m_uploadClientKey);
 }
 
-void GeneralConf::initCatboxUserHash() {
+void GeneralConf::initCatboxUserHash()
+{
     auto* box = new QGroupBox(tr("Catbox User Hash"));
     box->setFlat(true);
     m_layout->addWidget(box);
