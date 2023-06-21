@@ -23,7 +23,6 @@ ImgUploaderManager::ImgUploaderManager(QObject* parent)
 
 void ImgUploaderManager::init()
 {
-    printf("UPLOADER PLUGIN: %s", uploaderPlugin().toStdString().c_str());
     if (uploaderPlugin().compare("catbox") == 0) {
         m_urlString = "https://catbox.moe/api.php";
         m_imgUploaderPlugin = "catbox";
