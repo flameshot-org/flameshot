@@ -54,6 +54,7 @@ private slots:
     void resetConfiguration();
     void togglePathFixed();
     void uploadClientKeyEdited();
+    void imgUploaderPluginChanged(const QString& storage);
     void useJpgForClipboardChanged(bool checked);
     void setSaveAsFileExtension(const QString& extension);
     void setGeometryLocation(int index);
@@ -75,6 +76,7 @@ private:
     void initCopyOnDoubleClick();
     void initCopyPathAfterSave();
     void initHistoryConfirmationToDelete();
+    void initImgUploaderPlugin();
     void initPredefinedColorPaletteLarge();
     void initSaveAfterCopy();
     void initScrollArea();
@@ -128,6 +130,7 @@ private:
     QCheckBox* m_useJpgForClipboard;
     QSpinBox* m_uploadHistoryMax;
     QSpinBox* m_undoLimit;
+    QComboBox* m_imgUploaderPlugin;
     QComboBox* m_setSaveAsFileExtension;
     QCheckBox* m_predefinedColorPaletteLarge;
     QCheckBox* m_showMagnifier;

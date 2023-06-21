@@ -19,6 +19,10 @@
 #include <QStandardPaths>
 #include <QTextCodec>
 #include <QVBoxLayout>
+#include <qcheckbox.h>
+#include <qcombobox.h>
+#include <qlabel.h>
+#include <string>
 
 GeneralConf::GeneralConf(QWidget* parent)
   : QWidget(parent)
@@ -56,6 +60,7 @@ GeneralConf::GeneralConf(QWidget* parent)
     initAntialiasingPinZoom();
     initUploadHistoryMax();
     initUndoLimit();
+    initImgUploaderPlugin();
     initUploadClientSecret();
     initCatboxUserHash();
     initPredefinedColorPaletteLarge();
@@ -104,7 +109,7 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
     m_screenshotPathFixedCheck->setChecked(config.savePathFixed());
     m_uploadHistoryMax->setValue(config.uploadHistoryMax());
     m_undoLimit->setValue(config.undoLimit());
-
+    m_imgUploaderPlugin->setCurrentText(config.imgUploaderPlugin());
     if (allowEmptySavePath || !config.savePath().isEmpty()) {
         m_savePath->setText(config.savePath());
     }
@@ -450,6 +455,35 @@ void GeneralConf::initCopyAndCloseAfterUpload()
     });
 }
 
+void GeneralConf::initImgUploaderPlugin()
+{
+    auto* box = new QGroupBox(tr("Image Upload Storage"));
+    box->setFlat(true);
+    m_layout->addWidget(box);
+
+    auto* extensionLayout = new QVBoxLayout();
+    box->setLayout(extensionLayout);
+
+    m_imgUploaderPlugin = new QComboBox(this);
+
+    QStringList storageList;
+    storageList.append("imgur");
+    storageList.append("catbox");
+    m_imgUploaderPlugin->addItems(storageList);
+
+    int currentIndex =
+      m_imgUploaderPlugin->findText(ConfigHandler().imgUploaderPlugin());
+    m_imgUploaderPlugin->setCurrentIndex(currentIndex);
+
+    connect(m_imgUploaderPlugin,
+            static_cast<void (QComboBox::*)(const QString&)>(
+              &QComboBox::currentIndexChanged),
+            this,
+            &GeneralConf::imgUploaderPluginChanged);
+
+    extensionLayout->addWidget(m_imgUploaderPlugin);
+}
+
 void GeneralConf::initSaveAfterCopy()
 {
     m_saveAfterCopy = new QCheckBox(tr("Save image after copy"), this);
@@ -601,6 +635,11 @@ void GeneralConf::catboxUserHashEdited()
 void GeneralConf::uploadHistoryMaxChanged(int max)
 {
     ConfigHandler().setUploadHistoryMax(max);
+}
+
+void GeneralConf::imgUploaderPluginChanged(const QString& storage)
+{
+    ConfigHandler().setImgUploaderPlugin(storage);
 }
 
 void GeneralConf::initUndoLimit()

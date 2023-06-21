@@ -3,25 +3,27 @@
 //
 
 #include "imguploadermanager.h"
-#include <QPixmap>
-#include <QWidget>
-
-// TODO - remove this hard-code and create plugin manager in the future, you may
-// include other storage headers here
+#include "confighandler.h"
+#include "generalconf.h"
 #include "storages/catbox/catboxuploader.h"
 #include "storages/imgur/imguruploader.h"
+#include <QPixmap>
+#include <QWidget>
+#include <cstdio>
 
 ImgUploaderManager::ImgUploaderManager(QObject* parent)
   : QObject(parent)
   , m_imgUploaderBase(nullptr)
 {
-    // TODO - implement ImgUploader for other Storages and selection among them
-    m_imgUploaderPlugin = IMG_UPLOADER_STORAGE_DEFAULT;
+    m_imgUploaderPlugin = ConfigHandler().imgUploaderPlugin();
+    if (m_imgUploaderPlugin.isEmpty())
+        m_imgUploaderPlugin = IMG_UPLOADER_STORAGE_DEFAULT;
     init();
 }
 
 void ImgUploaderManager::init()
 {
+    printf("UPLOADER PLUGIN: %s", uploaderPlugin().toStdString().c_str());
     if (uploaderPlugin().compare("catbox") == 0) {
         m_urlString = "https://catbox.moe/api.php";
         m_imgUploaderPlugin = "catbox";
