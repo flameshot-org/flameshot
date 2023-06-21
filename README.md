@@ -471,29 +471,26 @@ brew install cmake
 After installing all the dependencies, finally run the following commands in the sources root directory:
 
 ```shell
-mkdir build
-cd build
-cmake ../
-make
+cmake -S . -B build && cmake --build build
 ```
 
 NOTE: for macOS you should replace command
 
 ```shell
-cmake ../
+cmake -S . -B build
 ```
 
 to
 
 ```shell
-cmake ../ -DQt5_DIR=$(brew --prefix qt5)/lib/cmake/Qt5
+cmake -S . -B build -DQt5_DIR=$(brew --prefix qt5)/lib/cmake/Qt5
 ```
 
-When `make` command completed you can launch flameshot from `project_folder/build/src` folder
+When `cmake --build build` command completed you can launch flameshot from `project_folder/build/src` folder
 
 ### Install
 
-Simply use `make install` with privileges.
+Simply use `cmake --install build` with privileges.
 Note: If you install from source, there is no uninstaller, you will need to manually remove the files. Consider using [CMAKE_INSTALL_PREFIX](https://cmake.org/cmake/help/latest/variable/CMAKE_INSTALL_PREFIX.html) to install to a custom location for easy removal.
 
 ### FAQ
