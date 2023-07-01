@@ -6,6 +6,7 @@
 #include "src/tools/imgupload/storages/imguploaderbase.h"
 #include <QUrl>
 #include <QWidget>
+#define CATBOX_API_URL "https://catbox.moe/user/api.php"
 
 class QNetworkReply;
 class QNetworkAccessManager;

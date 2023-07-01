@@ -52,7 +52,7 @@ void CatboxUploader::handleReply(QNetworkReply* reply)
         // save image to history
         History history;
         m_currentImageName = history.packFileName(
-          "catbox", imageURL().toString(), m_currentImageName);
+          "catbox", ConfigHandler().catboxUserHash(), m_currentImageName);
         history.save(pixmap(), m_currentImageName);
 
         emit uploadOk(imageURL());
@@ -69,7 +69,7 @@ void CatboxUploader::upload()
     QBuffer buffer(&byteArray);
     pixmap().save(&buffer, "PNG");
 
-    QUrl url(QStringLiteral("https://catbox.moe/user/api.php"));
+    QUrl url(QStringLiteral(CATBOX_API_URL));
     QHttpMultiPart *http = new QHttpMultiPart(QHttpMultiPart::FormDataType);
 
     QHttpPart reqTypePart;
@@ -105,16 +105,35 @@ void CatboxUploader::deleteImage(const QString& fileName,
     Q_UNUSED(fileName)
     m_NetworkAM = new QNetworkAccessManager(this);
 
-    QNetworkRequest request(QUrl("https://catbox.moe/api.php"));
-    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+    QUrl url(QStringLiteral(CATBOX_API_URL));
+    QHttpMultiPart *http = new QHttpMultiPart(QHttpMultiPart::FormDataType);
 
-    QJsonObject postData;
-    postData.insert("reqtype", "deletefiles");
-    postData.insert("files", fileName);
-    postData.insert("userhash", deleteToken);
+    QHttpPart reqTypePart;
+    reqTypePart.setHeader(QNetworkRequest::ContentTypeHeader, QVariant("text/plain"));
+    reqTypePart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"reqtype\""));
+    reqTypePart.setBody("deletefiles");
+    http->append(reqTypePart);
 
-    QNetworkReply* reply = m_NetworkAM->post(
-      request, QJsonDocument(postData).toJson(QJsonDocument::Compact));
+    QHttpPart userPart;
+    userPart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"userhash\""));
+    userPart.setHeader(QNetworkRequest::ContentTypeHeader, QVariant("text/plain"));
+    userPart.setBody(deleteToken.toUtf8());
+    http->append(userPart);
+
+    QHttpPart filePart;
+    filePart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"files\";"));
+    filePart.setBody(fileName.toUtf8());
+    filePart.setHeader(QNetworkRequest::ContentTypeHeader, QVariant("text/plain"));
+    http->append(filePart);
+
+    QNetworkRequest request(url);
+    request.setRawHeader("Cookie",
+                         QStringLiteral("PHPSESSID %1")
+                           .arg(ConfigHandler().catboxUserHash())
+                           .toUtf8());
+
+    QNetworkReply* reply = m_NetworkAM->post(request, http);
+    http->setParent(reply);
 
     if (reply->error() != QNetworkReply::NoError) {
         notification()->showMessage(tr("Unable to delete file."));
