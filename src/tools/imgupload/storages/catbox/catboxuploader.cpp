@@ -70,22 +70,28 @@ void CatboxUploader::upload()
     pixmap().save(&buffer, "PNG");
 
     QUrl url(QStringLiteral(CATBOX_API_URL));
-    QHttpMultiPart *http = new QHttpMultiPart(QHttpMultiPart::FormDataType);
+    QHttpMultiPart* http = new QHttpMultiPart(QHttpMultiPart::FormDataType);
 
     QHttpPart reqTypePart;
-    reqTypePart.setHeader(QNetworkRequest::ContentTypeHeader, QVariant("text/plain"));
-    reqTypePart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"reqtype\""));
+    reqTypePart.setHeader(QNetworkRequest::ContentTypeHeader,
+                          QVariant("text/plain"));
+    reqTypePart.setHeader(QNetworkRequest::ContentDispositionHeader,
+                          QVariant("form-data; name=\"reqtype\""));
     reqTypePart.setBody("fileupload");
     http->append(reqTypePart);
 
     QHttpPart userPart;
-    userPart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"userhash\""));
-    userPart.setHeader(QNetworkRequest::ContentTypeHeader, QVariant("text/plain"));
+    userPart.setHeader(QNetworkRequest::ContentDispositionHeader,
+                       QVariant("form-data; name=\"userhash\""));
+    userPart.setHeader(QNetworkRequest::ContentTypeHeader,
+                       QVariant("text/plain"));
     userPart.setBody(ConfigHandler().catboxUserHash().toUtf8());
     http->append(userPart);
 
     QHttpPart filePart;
-    filePart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"fileToUpload\"; filename=\"upload.png\""));
+    filePart.setHeader(
+      QNetworkRequest::ContentDispositionHeader,
+      QVariant("form-data; name=\"fileToUpload\"; filename=\"upload.png\""));
     filePart.setBody(byteArray);
     http->append(filePart);
 
@@ -106,24 +112,30 @@ void CatboxUploader::deleteImage(const QString& fileName,
     m_NetworkAM = new QNetworkAccessManager(this);
 
     QUrl url(QStringLiteral(CATBOX_API_URL));
-    QHttpMultiPart *http = new QHttpMultiPart(QHttpMultiPart::FormDataType);
+    QHttpMultiPart* http = new QHttpMultiPart(QHttpMultiPart::FormDataType);
 
     QHttpPart reqTypePart;
-    reqTypePart.setHeader(QNetworkRequest::ContentTypeHeader, QVariant("text/plain"));
-    reqTypePart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"reqtype\""));
+    reqTypePart.setHeader(QNetworkRequest::ContentTypeHeader,
+                          QVariant("text/plain"));
+    reqTypePart.setHeader(QNetworkRequest::ContentDispositionHeader,
+                          QVariant("form-data; name=\"reqtype\""));
     reqTypePart.setBody("deletefiles");
     http->append(reqTypePart);
 
     QHttpPart userPart;
-    userPart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"userhash\""));
-    userPart.setHeader(QNetworkRequest::ContentTypeHeader, QVariant("text/plain"));
+    userPart.setHeader(QNetworkRequest::ContentDispositionHeader,
+                       QVariant("form-data; name=\"userhash\""));
+    userPart.setHeader(QNetworkRequest::ContentTypeHeader,
+                       QVariant("text/plain"));
     userPart.setBody(deleteToken.toUtf8());
     http->append(userPart);
 
     QHttpPart filePart;
-    filePart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"files\";"));
+    filePart.setHeader(QNetworkRequest::ContentDispositionHeader,
+                       QVariant("form-data; name=\"files\";"));
     filePart.setBody(fileName.toUtf8());
-    filePart.setHeader(QNetworkRequest::ContentTypeHeader, QVariant("text/plain"));
+    filePart.setHeader(QNetworkRequest::ContentTypeHeader,
+                       QVariant("text/plain"));
     http->append(filePart);
 
     QNetworkRequest request(url);
