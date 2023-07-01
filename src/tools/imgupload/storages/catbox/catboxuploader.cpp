@@ -17,6 +17,11 @@
 #include <QNetworkReply>
 #include <QNetworkRequest>
 #include <QShortcut>
+#include <cstdio>
+#include <ios>
+#include <qstringliteral.h>
+#include <qurlquery.h>
+#include <qvariant.h>
 
 CatboxUploader::CatboxUploader(const QPixmap& capture, QWidget* parent)
   : ImgUploaderBase(capture, parent)
@@ -32,6 +37,7 @@ void CatboxUploader::handleReply(QNetworkReply* reply)
 {
     spinner()->deleteLater();
     m_currentImageName.clear();
+
     if (reply->error() == QNetworkReply::NoError) {
         QString url = reply->readAll();
         setImageURL(url);
@@ -63,42 +69,34 @@ void CatboxUploader::upload()
     QBuffer buffer(&byteArray);
     pixmap().save(&buffer, "PNG");
 
-    QHttpMultiPart* multiPart =
-      new QHttpMultiPart(QHttpMultiPart::FormDataType);
+    QUrl url(QStringLiteral("https://catbox.moe/user/api.php"));
+    QHttpMultiPart *http = new QHttpMultiPart(QHttpMultiPart::FormDataType);
 
-    QHttpPart reqtypePart;
-    reqtypePart.setHeader(QNetworkRequest::ContentDispositionHeader,
-                          QVariant("form-data;name=\"reqtype\""));
-    reqtypePart.setBody("fileupload");
+    QHttpPart reqTypePart;
+    reqTypePart.setHeader(QNetworkRequest::ContentTypeHeader, QVariant("text/plain"));
+    reqTypePart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"reqtype\""));
+    reqTypePart.setBody("fileupload");
+    http->append(reqTypePart);
 
-    QHttpPart fileToUploadPart;
-    fileToUploadPart.setHeader(QNetworkRequest::ContentTypeHeader,
-                               "image/jpeg");
-    fileToUploadPart.setHeader(QNetworkRequest::ContentDispositionHeader,
-                               QVariant("form-data;name=\"fileToUpload\""));
-    fileToUploadPart.setBody(byteArray);
+    QHttpPart userPart;
+    userPart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"userhash\""));
+    userPart.setHeader(QNetworkRequest::ContentTypeHeader, QVariant("text/plain"));
+    userPart.setBody(ConfigHandler().catboxUserHash().toUtf8());
+    http->append(userPart);
 
-    QHttpPart userhashPart;
-    userhashPart.setHeader(QNetworkRequest::ContentDispositionHeader,
-                           QVariant("form-data;name=\"userhash\""));
-    userhashPart.setBody(ConfigHandler().catboxUserHash().toUtf8());
+    QHttpPart filePart;
+    filePart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"fileToUpload\"; filename=\"upload.png\""));
+    filePart.setBody(byteArray);
+    http->append(filePart);
 
-    multiPart->append(fileToUploadPart);
-    multiPart->append(userhashPart);
-    multiPart->append(fileToUploadPart);
-
-    QUrl url(QStringLiteral("https://catbox.moe/api.php"));
     QNetworkRequest request(url);
-    request.setHeader(QNetworkRequest::ContentTypeHeader,
-                      "multipart/form-data");
-
     request.setRawHeader("Cookie",
                          QStringLiteral("PHPSESSID %1")
                            .arg(ConfigHandler().catboxUserHash())
                            .toUtf8());
 
-    QNetworkReply* reply = m_NetworkAM->post(request, multiPart);
-    multiPart->setParent(reply);
+    QNetworkReply* reply = m_NetworkAM->post(request, http);
+    http->setParent(reply);
 }
 
 void CatboxUploader::deleteImage(const QString& fileName,
