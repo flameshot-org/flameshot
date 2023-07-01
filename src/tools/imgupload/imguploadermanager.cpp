@@ -24,7 +24,7 @@ ImgUploaderManager::ImgUploaderManager(QObject* parent)
 void ImgUploaderManager::init()
 {
     if (uploaderPlugin().compare("catbox") == 0) {
-        m_urlString = "https://catbox.moe/user/api.php";
+        m_urlString = "https://files.catbox.moe/";
         m_imgUploaderPlugin = "catbox";
     } else {
         m_urlString = "https://imgur.com/";
