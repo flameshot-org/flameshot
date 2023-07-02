@@ -515,7 +515,7 @@ This program will not transfer any information to other networked systems unless
 
 ## Code Signing Policy
 
-Free code signing provided by [SignPath.io](https://signpath.io/), certificate by [SignPath Foundation](https://signpath.org/).
+For Windows binaries, this program uses free code signing provided by [SignPath.io](https://signpath.io?utm_source=foundation&utm_medium=github&utm_campaign=flameshot), and a certificate by the [SignPath Foundation](https://signpath.org?utm_source=foundation&utm_medium=github&utm_campaign=flameshot).
 
 Code signing is currently a manual process so not every patch release will be signed.
 
