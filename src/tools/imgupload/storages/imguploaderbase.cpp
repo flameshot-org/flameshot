@@ -157,8 +157,6 @@ void ImgUploaderBase::showPostUploadDialog()
 
 void ImgUploaderBase::openURL()
 {
-    qDebug() << "opening image";
-    qDebug() << m_imageURL;
     bool successful = QDesktopServices::openUrl(m_imageURL);
     if (!successful) {
         m_notification->showMessage(tr("Unable to open the URL."));
@@ -167,8 +165,6 @@ void ImgUploaderBase::openURL()
 
 void ImgUploaderBase::copyURL()
 {
-    qDebug() << "Copying clipboard";
-    qDebug() << m_imageURL.toString();
     FlameshotDaemon::copyToClipboard(m_imageURL.toString());
     m_notification->showMessage(tr("URL copied to clipboard."));
 }
