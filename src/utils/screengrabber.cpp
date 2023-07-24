@@ -49,6 +49,58 @@ void ScreenGrabber::generalGrimScreenshot(bool& ok, QPixmap& res)
 #endif
 }
 
+void ScreenGrabber::generalHyprlandScreenshot(bool& ok, QPixmap& res)
+{
+    //Creates a list of all screens with it's geometry
+    QList<QRect> screens;
+    for (QScreen* const screen : QGuiApplication::screens()) {
+        QRect scrRect = screen->geometry();
+        screens.append(scrRect);
+    }
+
+    //Get the current activewindow
+    QProcess Hyprctl;
+    QString _program = "hyprctl";
+    QStringList hypr_arguments;
+    hypr_arguments << "activewindow";
+    Hyprctl.start(_program, hypr_arguments);
+
+    //A bit more convoluted than it needs to be, but would allow to gather more info about the current window
+    //To allow for example: client specific screenshots or automatically naming a screenshot to the title of said client
+    int activeScreen = 0;
+    if (Hyprctl.waitForFinished()) {
+        QRegExp regex("(\n\t)");
+        QString output = Hyprctl.readAllStandardOutput();
+        QStringList query = output.split(regex);
+        for ( const auto& i : query)
+        {
+            if(i.startsWith("monitor: "))
+            activeScreen = i.split(": ")[1].toInt();
+        }
+    }
+
+    //Actual screenshot
+    QProcess Process;
+    QString program = "grim";
+    QStringList arguments;
+
+    //In format of
+    //-g "start_x,start_y size_x,size_y"
+    //start_y is hardcoded to 0
+    arguments << "-g";
+    QRect activeScreenInfo = screens[activeScreen];
+    arguments << QString("%1,0 %2x%3").arg(activeScreenInfo.topLeft().rx()).arg(activeScreenInfo.width()).arg(activeScreenInfo.height());
+    arguments << "-";
+    Process.start(program, arguments);
+    if (Process.waitForFinished()) {
+        res.loadFromData(Process.readAll());
+        ok = true;
+    } else {
+        ok = false;
+    }
+
+}
+
 void ScreenGrabber::freeDesktopPortal(bool& ok, QPixmap& res)
 {
 
@@ -131,6 +183,8 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
             case DesktopInfo::QTILE:
             case DesktopInfo::SWAY:
             case DesktopInfo::HYPRLAND:
+                generalHyprlandScreenshot(ok, res);
+                break;
             case DesktopInfo::OTHER: {
 #ifndef USE_WAYLAND_GRIM
                 AbstractLogger::warning() << tr(

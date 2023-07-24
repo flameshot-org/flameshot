@@ -108,11 +108,15 @@ void FlameshotDaemon::start()
 
 void FlameshotDaemon::createPin(const QPixmap& capture, QRect geometry)
 {
+    #ifdef USE_WAYLAND_GRIM
+    start();
+    #endif
     if (instance()) {
         instance()->attachPin(capture, geometry);
         return;
     }
-
+    
+    #ifndef USE_WAYLAND_GRIM
     QByteArray data;
     QDataStream stream(&data, QIODevice::WriteOnly);
     stream << capture;
@@ -120,15 +124,20 @@ void FlameshotDaemon::createPin(const QPixmap& capture, QRect geometry)
     QDBusMessage m = createMethodCall(QStringLiteral("attachPin"));
     m << data;
     call(m);
+    #endif
 }
 
 void FlameshotDaemon::copyToClipboard(const QPixmap& capture)
 {
+    #ifdef USE_WAYLAND_GRIM
+    start();
+    #endif
     if (instance()) {
         instance()->attachScreenshotToClipboard(capture);
         return;
     }
 
+    #ifndef USE_WAYLAND_GRIM
     QDBusMessage m =
       createMethodCall(QStringLiteral("attachScreenshotToClipboard"));
 
@@ -138,6 +147,7 @@ void FlameshotDaemon::copyToClipboard(const QPixmap& capture)
 
     m << data;
     call(m);
+    #endif
 }
 
 void FlameshotDaemon::copyToClipboard(const QString& text,
