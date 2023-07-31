@@ -782,13 +782,12 @@ void GeneralConf::initJpegQuality()
 {
     auto* tobox = new QHBoxLayout();
 
-    int timeout =
-      ConfigHandler().value("jpegQuality").toInt();
+    int quality =  ConfigHandler().value("jpegQuality").toInt();
     m_jpegQuality = new QSpinBox();
     m_jpegQuality->setRange(0, 100);
-    m_jpegQuality->setToolTip(
-      tr("Quality range of 0-100; Higher number is better quality and larger file size"));
-    m_jpegQuality->setValue(timeout);
+    m_jpegQuality->setToolTip(tr("Quality range of 0-100; Higher number is "
+                                                             "better quality and larger file size"));
+    m_jpegQuality->setValue(quality);
     tobox->addWidget(m_jpegQuality);
     tobox->addWidget(new QLabel(tr("JPEG Quality")));
 
