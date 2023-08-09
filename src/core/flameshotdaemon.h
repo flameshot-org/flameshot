@@ -11,12 +11,6 @@ class QDBusConnection;
 class TrayIcon;
 class CaptureWidget;
 
-#if !defined(DISABLE_UPDATE_CHECKER)
-class QNetworkAccessManager;
-class QNetworkReply;
-class QVersionNumber;
-#endif
-
 class FlameshotDaemon : public QObject
 {
     Q_OBJECT
@@ -33,20 +27,6 @@ public:
       const QString& text,
       const QString& title = QStringLiteral("Flameshot Info"),
       const int timeout = 5000);
-
-#if !defined(DISABLE_UPDATE_CHECKER)
-    void showUpdateNotificationIfAvailable(CaptureWidget* widget);
-
-public slots:
-    void checkForUpdates();
-    void getLatestAvailableVersion();
-
-private slots:
-    void handleReplyCheckUpdates(QNetworkReply* reply);
-
-signals:
-    void newVersionAvailable(QVersionNumber version);
-#endif
 
 private:
     FlameshotDaemon();
@@ -72,13 +52,6 @@ private:
     bool m_clipboardSignalBlocked;
     QList<QWidget*> m_widgets;
     TrayIcon* m_trayIcon;
-
-#if !defined(DISABLE_UPDATE_CHECKER)
-    QString m_appLatestUrl;
-    QString m_appLatestVersion;
-    bool m_showCheckAppUpdateStatus;
-    QNetworkAccessManager* m_networkCheckUpdates;
-#endif
 
     static FlameshotDaemon* m_instance;
 

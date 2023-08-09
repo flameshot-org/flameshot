@@ -91,9 +91,6 @@ public:
     CONFIG_GETTER_SETTER(drawThickness, setDrawThickness, int)
     CONFIG_GETTER_SETTER(drawFontSize, setDrawFontSize, int)
     CONFIG_GETTER_SETTER(keepOpenAppLauncher, setKeepOpenAppLauncher, bool)
-#if !defined(DISABLE_UPDATE_CHECKER)
-    CONFIG_GETTER_SETTER(checkForUpdates, setCheckForUpdates, bool)
-#endif
     CONFIG_GETTER_SETTER(allowMultipleGuiInstances,
                          setAllowMultipleGuiInstances,
                          bool)

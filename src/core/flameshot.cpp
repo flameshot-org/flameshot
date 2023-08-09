@@ -228,7 +228,6 @@ void Flameshot::info()
     }
 }
 
-
 QVersionNumber Flameshot::getVersion()
 {
     return QVersionNumber::fromString(
@@ -353,7 +352,6 @@ void Flameshot::exportCapture(const QPixmap& capture,
               << QObject::tr("Full screen screenshot pinned to screen");
         }
     }
-
 }
 
 void Flameshot::setExternalWidget(bool b)

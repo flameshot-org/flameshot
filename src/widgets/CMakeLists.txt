@@ -34,12 +34,3 @@ target_sources(
         colorpickerwidget.cpp
         capture/capturetoolobjects.cpp
 )
-
-if (NOT DISABLE_UPDATE_CHECKER)
-    target_sources(
-            flameshot
-            PRIVATE
-            updatenotificationwidget.h
-            updatenotificationwidget.cpp
-    )
-endif()

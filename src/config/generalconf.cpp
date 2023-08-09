@@ -38,9 +38,6 @@ GeneralConf::GeneralConf(QWidget* parent)
 #endif
     initShowTrayIcon();
     initShowDesktopNotification();
-#if !defined(DISABLE_UPDATE_CHECKER)
-    initCheckForUpdates();
-#endif
     initShowStartupLaunchMessage();
     initAllowMultipleGuiInstances();
     initSaveLastRegion();
@@ -56,7 +53,6 @@ GeneralConf::GeneralConf(QWidget* parent)
     initAntialiasingPinZoom();
     initUploadHistoryMax();
     initUndoLimit();
-    initUploadClientSecret();
     initPredefinedColorPaletteLarge();
     initShowSelectionGeometry();
 
@@ -86,9 +82,6 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
     m_uploadWithoutConfirmation->setChecked(config.uploadWithoutConfirmation());
     m_historyConfirmationToDelete->setChecked(
       config.historyConfirmationToDelete());
-#if !defined(DISABLE_UPDATE_CHECKER)
-    m_checkForUpdates->setChecked(config.checkForUpdates());
-#endif
     m_allowMultipleGuiInstances->setChecked(config.allowMultipleGuiInstances());
     m_showMagnifier->setChecked(config.showMagnifier());
     m_squareMagnifier->setChecked(config.squareMagnifier());
@@ -137,13 +130,6 @@ void GeneralConf::showDesktopNotificationChanged(bool checked)
 {
     ConfigHandler().setShowDesktopNotification(checked);
 }
-
-#if !defined(DISABLE_UPDATE_CHECKER)
-void GeneralConf::checkForUpdatesChanged(bool checked)
-{
-    ConfigHandler().setCheckForUpdates(checked);
-}
-#endif
 
 void GeneralConf::allowMultipleGuiInstancesChanged(bool checked)
 {
@@ -348,20 +334,6 @@ void GeneralConf::initConfigButtons()
             &GeneralConf::resetConfiguration);
 }
 
-#if !defined(DISABLE_UPDATE_CHECKER)
-void GeneralConf::initCheckForUpdates()
-{
-    m_checkForUpdates = new QCheckBox(tr("Automatic check for updates"), this);
-    m_checkForUpdates->setToolTip(tr("Check for updates automatically"));
-    m_scrollAreaLayout->addWidget(m_checkForUpdates);
-
-    connect(m_checkForUpdates,
-            &QCheckBox::clicked,
-            this,
-            &GeneralConf::checkForUpdatesChanged);
-}
-#endif
-
 void GeneralConf::initAllowMultipleGuiInstances()
 {
     m_allowMultipleGuiInstances = new QCheckBox(
@@ -545,27 +517,6 @@ void GeneralConf::initUploadHistoryMax()
             this,
             &GeneralConf::uploadHistoryMaxChanged);
     vboxLayout->addWidget(m_uploadHistoryMax);
-}
-
-void GeneralConf::initUploadClientSecret()
-{
-    auto* box = new QGroupBox(tr("Imgur Application Client ID"));
-    box->setFlat(true);
-    m_layout->addWidget(box);
-
-    auto* vboxLayout = new QVBoxLayout();
-    box->setLayout(vboxLayout);
-
-    m_uploadClientKey = new QLineEdit(this);
-    QString foreground = this->palette().windowText().color().name();
-    m_uploadClientKey->setStyleSheet(
-      QStringLiteral("color: %1").arg(foreground));
-    m_uploadClientKey->setText(ConfigHandler().uploadClientSecret());
-    connect(m_uploadClientKey,
-            &QLineEdit::editingFinished,
-            this,
-            &GeneralConf::uploadClientKeyEdited);
-    vboxLayout->addWidget(m_uploadClientKey);
 }
 
 void GeneralConf::uploadClientKeyEdited()

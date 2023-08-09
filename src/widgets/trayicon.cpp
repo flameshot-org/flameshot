@@ -86,13 +86,6 @@ TrayIcon::~TrayIcon()
     delete m_menu;
 }
 
-#if !defined(DISABLE_UPDATE_CHECKER)
-QAction* TrayIcon::appUpdates()
-{
-    return m_appUpdates;
-}
-#endif
-
 void TrayIcon::initMenu()
 {
     m_menu = new QMenu();
@@ -129,23 +122,6 @@ void TrayIcon::initMenu()
     connect(
       infoAction, &QAction::triggered, Flameshot::instance(), &Flameshot::info);
 
-#if !defined(DISABLE_UPDATE_CHECKER)
-    m_appUpdates = new QAction(tr("Check for updates"), this);
-    connect(m_appUpdates,
-            &QAction::triggered,
-            FlameshotDaemon::instance(),
-            &FlameshotDaemon::checkForUpdates);
-
-    connect(FlameshotDaemon::instance(),
-            &FlameshotDaemon::newVersionAvailable,
-            this,
-            [this](const QVersionNumber& version) {
-                QString newVersion =
-                  tr("New version %1 is available").arg(version.toString());
-                m_appUpdates->setText(newVersion);
-            });
-#endif
-
     QAction* quitAction = new QAction(tr("&Quit"), this);
     connect(quitAction, &QAction::triggered, qApp, &QCoreApplication::quit);
 
@@ -154,31 +130,12 @@ void TrayIcon::initMenu()
     m_menu->addSeparator();
     m_menu->addAction(configAction);
     m_menu->addSeparator();
-#if !defined(DISABLE_UPDATE_CHECKER)
-    m_menu->addAction(m_appUpdates);
-#endif
     m_menu->addAction(infoAction);
     m_menu->addSeparator();
     m_menu->addAction(quitAction);
 }
 
-#if !defined(DISABLE_UPDATE_CHECKER)
-void TrayIcon::enableCheckUpdatesAction(bool enable)
-{
-    if (m_appUpdates != nullptr) {
-        m_appUpdates->setVisible(enable);
-        m_appUpdates->setEnabled(enable);
-    }
-    if (enable) {
-        FlameshotDaemon::instance()->getLatestAvailableVersion();
-    }
-}
-#endif
-
 void TrayIcon::startGuiCapture()
 {
     auto* widget = Flameshot::instance()->gui();
-#if !defined(DISABLE_UPDATE_CHECKER)
-    FlameshotDaemon::instance()->showUpdateNotificationIfAvailable(widget);
-#endif
 }

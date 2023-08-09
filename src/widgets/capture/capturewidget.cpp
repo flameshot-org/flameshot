@@ -41,10 +41,6 @@
 #include <QShortcut>
 #include <draggablewidgetmaker.h>
 
-#if !defined(DISABLE_UPDATE_CHECKER)
-#include "src/widgets/updatenotificationwidget.h"
-#endif
-
 #define MOUSE_DISTANCE_TO_START_MOVING 3
 
 // CaptureWidget is the main component used to capture the screen. It contains
@@ -63,9 +59,6 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
   , m_adjustmentButtonPressed(false)
   , m_configError(false)
   , m_configErrorResolved(false)
-#if !defined(DISABLE_UPDATE_CHECKER)
-  , m_updateNotificationWidget(nullptr)
-#endif
   , m_lastMouseWheel(0)
   , m_activeButton(nullptr)
   , m_activeTool(nullptr)
@@ -1165,42 +1158,6 @@ void CaptureWidget::initPanel()
     // Fill undo/redo/history list widget
     m_panel->fillCaptureTools(m_captureToolObjects.captureToolObjects());
 }
-
-#if !defined(DISABLE_UPDATE_CHECKER)
-void CaptureWidget::showAppUpdateNotification(const QString& appLatestVersion,
-                                              const QString& appLatestUrl)
-{
-    if (!ConfigHandler().checkForUpdates()) {
-        // option check for updates disabled
-        return;
-    }
-    if (nullptr == m_updateNotificationWidget) {
-        m_updateNotificationWidget =
-          new UpdateNotificationWidget(this, appLatestVersion, appLatestUrl);
-    }
-#if defined(Q_OS_MACOS)
-    int ax = (width() - m_updateNotificationWidget->width()) / 2;
-#elif (defined(Q_OS_LINUX) && QT_VERSION < QT_VERSION_CHECK(5, 10, 0))
-    QRect helpRect = QGuiApplication::primaryScreen()->geometry();
-    int ax = helpRect.left() +
-             ((helpRect.width() - m_updateNotificationWidget->width()) / 2);
-#else
-    QRect helpRect;
-    QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
-    if (currentScreen) {
-        helpRect = currentScreen->geometry();
-    } else {
-        helpRect = QGuiApplication::primaryScreen()->geometry();
-    }
-    int ax = helpRect.left() +
-             ((helpRect.width() - m_updateNotificationWidget->width()) / 2);
-#endif
-    m_updateNotificationWidget->move(ax, 0);
-    makeChild(m_updateNotificationWidget);
-    m_updateNotificationWidget->show();
-}
-#endif
-
 void CaptureWidget::initSelection()
 {
     // Be mindful of the order of statements, so that slots are called properly

@@ -68,10 +68,6 @@ option(GENERATE_TS "Regenerate translation source files" OFF)
 option(USE_EXTERNAL_SINGLEAPPLICATION "Use external QtSingleApplication library" OFF)
 option(USE_LAUNCHER_ABSOLUTE_PATH "Use absolute path for the desktop launcher" ON)
 option(USE_WAYLAND_CLIPBOARD "USE KF Gui Wayland Clipboard" OFF)
-option(DISABLE_UPDATE_CHECKER "Disable check for updates" OFF)
-if (DISABLE_UPDATE_CHECKER)
-  add_compile_definitions(DISABLE_UPDATE_CHECKER)
-endif ()
 
 include(cmake/StandardProjectSettings.cmake)
 
