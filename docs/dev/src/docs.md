@@ -107,7 +107,7 @@ secret, which can be done [here][edit-secret].
 !!! tip
 
     The currently active PAT is owned by [veracioux][] and is set to expire on July
-    29 2023. If you notice the token has expired, ask him to re-generate it.
+    31 2024. If you notice the token has expired, ask him to re-generate it.
 
 <!-- Internal links -->
 [post-processing]: #post-processing
