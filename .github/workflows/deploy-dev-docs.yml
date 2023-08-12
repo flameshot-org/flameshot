@@ -49,27 +49,27 @@ jobs:
       - name: Add developer docs to website deployment
         working-directory: ${{github.workspace}}/website
         run: |
-          # Create empty developer-docs branch
-          git checkout --orphan developer-docs
+          # Create empty dev-docs-staging branch
+          git checkout --orphan dev-docs-staging
           git rm -r --cached .
           rm -rf docs/dev
           # Copy generated docs over
           mkdir -p docs
           mv "${{github.workspace}}/flameshot/docs/dev/output" \
              "./docs/dev"
-          # Commit docs/dev to the developer-docs branch
+          # Commit docs/dev to the dev-docs-staging branch
           git add docs/dev
           HASH="$(git --git-dir="${{github.workspace}}/flameshot/.git" rev-parse HEAD)"
           git commit --message "Add developer docs from flameshot@$HASH"
           # Apply changes to gh-pages
           git checkout --force gh-pages
-          git checkout developer-docs -- docs/dev
+          git checkout dev-docs-staging -- docs/dev
           # Commit (we use `|| true` because the commit could be empty and thus fail)
           git commit --message "Add developer docs from flameshot@$HASH" || true
 
       - name: Push to website repo
         working-directory: ${{github.workspace}}/website
         run: |
-          git push --force destination developer-docs
+          git push --force destination dev-docs-staging
           git push destination gh-pages
 

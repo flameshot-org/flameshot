@@ -67,17 +67,17 @@ will build and deploy this documentation into the `docs/dev` subdirectory of the
 
 This workflow checks out the flameshot website [repo][website-repo] and does the following:
 
-- Creates a clean [developer-docs][] branch (we'll explain why, below).
+- Creates a clean [dev-docs-staging][] branch (we'll explain why, below).
 - Generates the developer docs under `docs/dev` there and makes a commit
 - Checks out the [gh-pages][] branch and makes the same commit there
-- Force-pushes the developer-docs branch to the website repo
+- Force-pushes the dev-docs-staging branch to the website repo
 - Pushes the gh-pages branch to the website repo
 
 Since the [gh-pages][] branch is re-created from scratch by the [website
 deployment workflow][website-build], the commit that added the developer
 documentation will be lost. That's why we have to re-apply the commit during the
 [website deployment workflow][website-build] as well. **That is the reason why
-we created the** [**developer-docs**][developer-docs] **branch in the first
+we created the** [**dev-docs-staging**][dev-docs-staging] **branch in the first
 place.**
 
 !!! note
@@ -119,7 +119,7 @@ secret, which can be done [here][edit-secret].
 [doc-source]: https://github.com/flameshot-org/flameshot/tree/master/docs/dev
 [website-repo]: https://github.com/flameshot-org/flameshot-org.github.io
 [gh-pages]: https://github.com/flameshot-org/flameshot-org.github.io/tree/gh-pages
-[developer-docs]: https://github.com/flameshot-org/flameshot-org.github.io/tree/developer-docs
+[dev-docs-staging]: https://github.com/flameshot-org/flameshot-org.github.io/tree/dev-docs-staging
 [action-secrets]: https://github.com/flameshot-org/flameshot/settings/secrets/actions
 [edit-secret]: https://github.com/flameshot-org/flameshot/settings/secrets/actions/TOKEN_PUSH_TO_WEBSITE_REPO
 
