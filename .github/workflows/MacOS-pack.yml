@@ -52,15 +52,12 @@ jobs:
 
       - name: Configure
         run: |
-          mkdir -p "${DIR_BULD}"
-          cd "${DIR_BULD}"
-          rm -rf ./src/flameshot.dmg ./src/flameshot.app/
-          cmake .. -DQt5_DIR=$(brew --prefix qt5)/lib/cmake/Qt5 -DUSE_MONOCHROME_ICON=True
+          rm -rf "${DIR_BULD}"/src/flameshot.dmg "${DIR_BULD}"/src/flameshot.app/
+          cmake -S . -B "${DIR_BULD}" -DQt5_DIR=$(brew --prefix qt5)/lib/cmake/Qt5 -DUSE_MONOCHROME_ICON=True
 
       - name: Compile
         run: |
-          cd "${DIR_BULD}"
-          make
+          cmake --build "${DIR_BULD}"
 
       - name: Create key-chain and import certificate
         run: |

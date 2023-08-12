@@ -67,9 +67,11 @@ QString ShowSaveFileDialog(const QString& title, const QString& directory)
     // Build string list of supported image formats
     QStringList mimeTypeList;
     foreach (auto mimeType, QImageWriter::supportedMimeTypes()) {
-        // HEIF is meant for videos and it causes a glitch on MacOS
-        // because the native dialog lumps together heic and heif
-        if (mimeType != "image/heif") {
+        // image/heif has several aliases and they cause glitch in save dialog
+        // It is necessary to keep the image/heif (otherwise HEIF plug-in from
+        // kimageformats will not work) but the aliases could be filtered out.
+        if (mimeType != "image/heic" && mimeType != "image/heic-sequence" &&
+            mimeType != "image/heif-sequence") {
             mimeTypeList.append(mimeType);
         }
     }

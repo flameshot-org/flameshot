@@ -14,6 +14,7 @@ class QLineEdit;
 class ColorGrabWidget;
 class QColorPickingEventFilter;
 class QSlider;
+class QCheckBox;
 
 constexpr int maxToolSize = 50;
 constexpr int minSliderWidth = 100;
@@ -31,6 +32,8 @@ signals:
     void colorChanged(const QColor& color);
     void toolSizeChanged(int size);
     void togglePanel();
+    void displayGridChanged(bool display);
+    void gridSizeChanged(int size);
 
 public slots:
     void onToolSizeChanged(int tool);
@@ -61,4 +64,6 @@ private:
     QSpinBox* m_toolSizeSpin;
     QSlider* m_toolSizeSlider;
     int m_toolSize{};
+    QCheckBox* m_gridCheck{ nullptr };
+    QSpinBox* m_gridSizeSpin{ nullptr };
 };

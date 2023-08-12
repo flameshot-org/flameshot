@@ -20,5 +20,5 @@ public:
     static const int MAX_CHARACTERS = 70;
 
 private:
-    QString autoNumerateDuplicate(QString path);
+    QString autoNumerateDuplicate(const QString& path);
 };

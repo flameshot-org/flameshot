@@ -56,7 +56,9 @@ signals:
 
 public slots:
     void requestCapture(const CaptureRequest& request);
-    void exportCapture(QPixmap p, QRect& selection, const CaptureRequest& req);
+    void exportCapture(const QPixmap& p,
+                       QRect& selection,
+                       const CaptureRequest& req);
 
 private:
     Flameshot();

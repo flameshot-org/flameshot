@@ -353,7 +353,7 @@ void ButtonHandler::adjustHorizontalCenter(QPoint& center)
 }
 
 // setButtons redefines the buttons of the button handler
-void ButtonHandler::setButtons(const QVector<CaptureToolButton*> v)
+void ButtonHandler::setButtons(const QVector<CaptureToolButton*>& v)
 {
     if (v.isEmpty()) {
         return;

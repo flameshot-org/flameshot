@@ -15,7 +15,7 @@ class SetShortcutDialog : public QDialog
     Q_OBJECT
 public:
     explicit SetShortcutDialog(QDialog* parent = nullptr,
-                               QString shortcutName = "");
+                               const QString& shortcutName = "");
     const QKeySequence& shortcut();
 
 public:

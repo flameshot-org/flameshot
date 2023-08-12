@@ -11,13 +11,13 @@
   </p>
   <p>
     <a href="https://github.com/flameshot-org/flameshot/actions?query=workflow%3APackaging%28Linux%29">
-      <img src="https://img.shields.io/github/workflow/status/flameshot-org/flameshot/Packaging(Linux)?label=gnu%2Flinux" alt="GNU/Linux Build Status" />
+      <img src="https://img.shields.io/github/actions/workflow/status/flameshot-org/flameshot/Linux-pack.yml?branch=master&label=gnu%2Flinux" alt="GNU/Linux Build Status" />
     </a>
     <a href="https://github.com/flameshot-org/flameshot/actions?query=workflow%3APackaging%28Windows%29">
-      <img src="https://img.shields.io/github/workflow/status/flameshot-org/flameshot/Packaging(Windows)?label=windows" alt="Windows Build Status" />
+      <img src="https://img.shields.io/github/actions/workflow/status/flameshot-org/flameshot/Windows-pack.yml?branch=master&label=windows" alt="Windows Build Status" />
     </a>
     <a href="https://github.com/flameshot-org/flameshot/actions?query=workflow%3APackaging%28MacOS%29">
-      <img src="https://img.shields.io/github/workflow/status/flameshot-org/flameshot/Packaging(MacOS)?label=macos" alt="MacOS Build Status" />
+      <img src="https://img.shields.io/github/actions/workflow/status/flameshot-org/flameshot/MacOS-pack.yml?branch=master&label=macos" alt="MacOS Build Status" />
     </a>
     <a href="https://flameshot.org/docs/installation/development-build/">
       <img src="https://img.shields.io/badge/nightly%20builds-available-%23AA00FF" alt="Nightly Build" />
@@ -177,8 +177,8 @@ You can use the graphical menu to configure Flameshot, but alternatively you can
 ### Config file
 
 You can also edit some of the settings (like overriding the default colors) in the configuration file.\
-Linux path : `~/.config/flameshot/flameshot.ini`.\
-Windows path : `C:\Users\{YOURNAME}\AppData\Roaming\flameshot\flameshot.ini`.
+Linux path: `~/.config/flameshot/flameshot.ini`.\
+Windows path: `C:\Users\{YOURNAME}\AppData\Roaming\flameshot\flameshot.ini`.
 
 When copying over the config file from Linux to Windows or vice versa,
 make sure to correct the `savePath` variable,\
@@ -200,7 +200,7 @@ These shortcuts are available in GUI mode:
 | <kbd>C</kbd>                                          | Set the Circle as paint tool |
 | <kbd>M</kbd>                                          | Set the Marker as paint tool |
 | <kbd>T</kbd>                                          | Add text to your capture |
-| <kbd>B</kbd>                                          | Set Pixalate as the paint tool |
+| <kbd>B</kbd>                                          | Set Pixelate as the paint tool |
 | <kbd>←</kbd>, <kbd>↓</kbd>, <kbd>↑</kbd>, <kbd>→</kbd>                    | Move selection 1px                                             |
 | <kbd>Shift</kbd> + <kbd>←</kbd>, <kbd>↓</kbd>, <kbd>↑</kbd>, <kbd>→</kbd> | Resize selection 1px                                           |
 | <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>←</kbd>, <kbd>↓</kbd>, <kbd>↑</kbd>, <kbd>→</kbd> | Symmetrically resize selection 2px                                           |
@@ -228,7 +228,7 @@ These shortcuts are available in GUI mode:
 
 Flameshot uses <kbd>Print screen</kbd> (Windows) and <kbd>cmd</kbd>-<kbd>shift</kbd>-<kbd>x</kbd> (macOS) as default global hotkeys.
 
-On Linux, Flameshot doesn't yet support <kbd>Pr Scr</kbd> out of the box, but with a bit of configuration you can set this up:
+On Linux, Flameshot doesn't yet support <kbd>Prt Sc</kbd> out of the box, but with a bit of configuration you can set this up:
 
 #### On KDE Plasma desktop
 
@@ -471,29 +471,26 @@ brew install cmake
 After installing all the dependencies, finally run the following commands in the sources root directory:
 
 ```shell
-mkdir build
-cd build
-cmake ../
-make
+cmake -S . -B build && cmake --build build
 ```
 
 NOTE: for macOS you should replace command
 
 ```shell
-cmake ../
+cmake -S . -B build
 ```
 
 to
 
 ```shell
-cmake ../ -DQt5_DIR=$(brew --prefix qt5)/lib/cmake/Qt5
+cmake -S . -B build -DQt5_DIR=$(brew --prefix qt5)/lib/cmake/Qt5
 ```
 
-When `make` command completed you can launch flameshot from `project_folder/build/src` folder
+When `cmake --build build` command completed you can launch flameshot from `project_folder/build/src` folder
 
 ### Install
 
-Simply use `make install` with privileges.
+Simply use `cmake --install build` with privileges.
 Note: If you install from source, there is no uninstaller, you will need to manually remove the files. Consider using [CMAKE_INSTALL_PREFIX](https://cmake.org/cmake/help/latest/variable/CMAKE_INSTALL_PREFIX.html) to install to a custom location for easy removal.
 
 ### FAQ
@@ -518,7 +515,7 @@ This program will not transfer any information to other networked systems unless
 
 ## Code Signing Policy
 
-Free code signing provided by [SignPath.io](https://signpath.io/), certificate by [SignPath Foundation](https://signpath.org/).
+For Windows binaries, this program uses free code signing provided by [SignPath.io](https://signpath.io?utm_source=foundation&utm_medium=github&utm_campaign=flameshot), and a certificate by the [SignPath Foundation](https://signpath.org?utm_source=foundation&utm_medium=github&utm_campaign=flameshot).
 
 Code signing is currently a manual process so not every patch release will be signed.
 

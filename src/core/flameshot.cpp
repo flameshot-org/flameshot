@@ -279,8 +279,9 @@ Flameshot::Origin Flameshot::origin()
 bool Flameshot::resolveAnyConfigErrors()
 {
     bool resolved = true;
-    ConfigHandler config;
-    if (!config.checkUnrecognizedSettings() || !config.checkSemantics()) {
+    ConfigHandler confighandler;
+    if (!confighandler.checkUnrecognizedSettings() ||
+        !confighandler.checkSemantics()) {
         auto* resolver = new ConfigResolver();
         QObject::connect(
           resolver, &ConfigResolver::rejected, [resolver, &resolved]() {
@@ -333,7 +334,7 @@ void Flameshot::requestCapture(const CaptureRequest& request)
     }
 }
 
-void Flameshot::exportCapture(QPixmap capture,
+void Flameshot::exportCapture(const QPixmap& capture,
                               QRect& selection,
                               const CaptureRequest& req)
 {

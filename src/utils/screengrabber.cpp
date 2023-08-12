@@ -10,6 +10,7 @@
 #include <QDesktopWidget>
 #include <QGuiApplication>
 #include <QPixmap>
+#include <QProcess>
 #include <QScreen>
 
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
@@ -24,6 +25,29 @@
 ScreenGrabber::ScreenGrabber(QObject* parent)
   : QObject(parent)
 {}
+
+void ScreenGrabber::generalGrimScreenshot(bool& ok, QPixmap& res)
+{
+#ifdef USE_WAYLAND_GRIM
+#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
+    QProcess Process;
+    QString program = "grim";
+    QStringList arguments;
+    arguments << "-";
+    Process.start(program, arguments);
+    if (Process.waitForFinished()) {
+        res.loadFromData(Process.readAll());
+        ok = true;
+    } else {
+        ok = false;
+        AbstractLogger::error()
+          << tr("The universal wayland screen capture adapter requires Grim as "
+                "the screen capture component of wayland. If the screen "
+                "capture component is missing, please install it!");
+    }
+#endif
+#endif
+}
 
 void ScreenGrabber::freeDesktopPortal(bool& ok, QPixmap& res)
 {
@@ -102,9 +126,27 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
         switch (m_info.windowManager()) {
             case DesktopInfo::GNOME:
             case DesktopInfo::KDE:
-            case DesktopInfo::QTILE:
-            case DesktopInfo::SWAY: {
                 freeDesktopPortal(ok, res);
+                break;
+            case DesktopInfo::QTILE:
+            case DesktopInfo::SWAY:
+            case DesktopInfo::HYPRLAND:
+            case DesktopInfo::OTHER: {
+#ifndef USE_WAYLAND_GRIM
+                AbstractLogger::warning() << tr(
+                  "If the USE_WAYLAND_GRIM option is not activated, the dbus "
+                  "protocol will be used. It should be noted that using the "
+                  "dbus protocol under wayland is not recommended. It is "
+                  "recommended to recompile with the USE_WAYLAND_GRIM flag to "
+                  "activate the grim-based general wayland screenshot adapter");
+                freeDesktopPortal(ok, res);
+#else
+                AbstractLogger::warning()
+                  << tr("grim's screenshot component is implemented based on "
+                        "wlroots, it may not be used in GNOME or similar "
+                        "desktop environments");
+                generalGrimScreenshot(ok, res);
+#endif
                 break;
             }
             default:
@@ -173,8 +215,11 @@ QPixmap ScreenGrabber::grabScreen(QScreen* screen, bool& ok)
         }
     } else {
         ok = true;
-        return screen->grabWindow(
-          0, geometry.x(), geometry.y(), geometry.width(), geometry.height());
+        return screen->grabWindow(QApplication::desktop()->winId(),
+                                  geometry.x(),
+                                  geometry.y(),
+                                  geometry.width(),
+                                  geometry.height());
     }
     return p;
 }

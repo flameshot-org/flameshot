@@ -56,29 +56,27 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
                              bool fullScreen,
                              QWidget* parent)
   : QWidget(parent)
+  , m_toolSizeByKeyboard(0)
   , m_mouseIsClicked(false)
   , m_captureDone(false)
   , m_previewEnabled(true)
   , m_adjustmentButtonPressed(false)
   , m_configError(false)
   , m_configErrorResolved(false)
+  , m_updateNotificationWidget(nullptr)
+  , m_lastMouseWheel(0)
   , m_activeButton(nullptr)
   , m_activeTool(nullptr)
-  , m_toolWidget(nullptr)
-  , m_colorPicker(nullptr)
-  , m_lastMouseWheel(0)
-#if !defined(DISABLE_UPDATE_CHECKER)
-  , m_updateNotificationWidget(nullptr)
-#endif
   , m_activeToolIsMoved(false)
+  , m_toolWidget(nullptr)
   , m_panel(nullptr)
   , m_sidePanel(nullptr)
+  , m_colorPicker(nullptr)
   , m_selection(nullptr)
   , m_magnifier(nullptr)
+  , m_xywhDisplay(false)
   , m_existingObjectIsChanged(false)
   , m_startMove(false)
-  , m_toolSizeByKeyboard(0)
-  , m_xywhDisplay(false)
 
 {
     m_undoStack.setUndoLimit(ConfigHandler().undoLimit());
@@ -95,7 +93,7 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
             this,
             &CaptureWidget::childLeave);
 
-    connect(&m_xywhTimer, SIGNAL(timeout()), this, SLOT(xywhTick()));
+    connect(&m_xywhTimer, &QTimer::timeout, this, &CaptureWidget::xywhTick);
     setAttribute(Qt::WA_DeleteOnClose);
     setAttribute(Qt::WA_QuitOnClose, false);
     m_opacity = m_config.contrastOpacity();
@@ -328,8 +326,8 @@ void CaptureWidget::initButtons()
                   ConfigHandler().shortcut(QVariant::fromValue(t).toString());
                 if (!shortcut.isNull()) {
                     auto shortcuts = newShortcut(shortcut, this, nullptr);
-                    for (auto* shortcut : shortcuts) {
-                        connect(shortcut, &QShortcut::activated, this, [=]() {
+                    for (auto* sc : shortcuts) {
+                        connect(sc, &QShortcut::activated, this, [=]() {
                             setState(b);
                         });
                     }
@@ -393,6 +391,18 @@ void CaptureWidget::xywhTick()
     repaint();
 }
 
+void CaptureWidget::onDisplayGridChanged(bool display)
+{
+    m_displayGrid = display;
+    repaint();
+}
+
+void CaptureWidget::onGridSizeChanged(int size)
+{
+    m_gridSize = size;
+    repaint();
+}
+
 void CaptureWidget::showxywh(bool show)
 {
     int timeout =
@@ -408,28 +418,26 @@ void CaptureWidget::showxywh(bool show)
 void CaptureWidget::initHelpMessage()
 {
     QList<QPair<QString, QString>> keyMap;
-    if (keyMap.isEmpty()) {
-        keyMap << QPair(tr("Mouse"), tr("Select screenshot area"));
-        using CT = CaptureTool;
-        for (auto toolType :
-             { CT::TYPE_ACCEPT, CT::TYPE_SAVE, CT::TYPE_COPY }) {
-            if (!m_tools.contains(toolType)) {
-                continue;
-            }
-            auto* tool = m_tools[toolType];
-            QString shortcut = ConfigHandler().shortcut(
-              QVariant::fromValue(toolType).toString());
-            shortcut.replace("Return", "Enter");
-            if (!shortcut.isEmpty()) {
-                keyMap << QPair(shortcut, tool->description());
-            }
+    keyMap << QPair(tr("Mouse"), tr("Select screenshot area"));
+    using CT = CaptureTool;
+    for (auto toolType : { CT::TYPE_ACCEPT, CT::TYPE_SAVE, CT::TYPE_COPY }) {
+        if (!m_tools.contains(toolType)) {
+            continue;
         }
-        keyMap << QPair(tr("Mouse Wheel"), tr("Change tool size"));
-        keyMap << QPair(tr("Right Click"), tr("Show color picker"));
-        keyMap << QPair(ConfigHandler().shortcut("TYPE_TOGGLE_PANEL"),
-                        tr("Open side panel"));
-        keyMap << QPair(tr("Esc"), tr("Exit"));
+        auto* tool = m_tools[toolType];
+        QString shortcut =
+          ConfigHandler().shortcut(QVariant::fromValue(toolType).toString());
+        shortcut.replace("Return", "Enter");
+        if (!shortcut.isEmpty()) {
+            keyMap << QPair(shortcut, tool->description());
+        }
     }
+    keyMap << QPair(tr("Mouse Wheel"), tr("Change tool size"));
+    keyMap << QPair(tr("Right Click"), tr("Show color picker"));
+    keyMap << QPair(ConfigHandler().shortcut("TYPE_TOGGLE_PANEL"),
+                    tr("Open side panel"));
+    keyMap << QPair(tr("Esc"), tr("Exit"));
+
     m_helpMessage = OverlayMessage::compileFromKeyMap(keyMap);
 }
 
@@ -605,6 +613,31 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
                          xy);
     }
 
+    if (m_displayGrid) {
+        painter.save();
+        QColor uicolor = ConfigHandler().uiColor();
+        uicolor.setAlpha(100);
+        painter.setPen(uicolor);
+        painter.setBrush(QBrush(uicolor));
+
+        auto topLeft = mapToGlobal(m_context.selection.topLeft());
+        topLeft.rx() -= topLeft.x() % m_gridSize;
+        topLeft.ry() -= topLeft.y() % m_gridSize;
+        topLeft = mapFromGlobal(topLeft);
+
+        const auto scale{ m_context.screenshot.devicePixelRatio() };
+        const auto step{ m_gridSize * scale };
+        const auto radius{ 1 * scale };
+
+        for (int y = topLeft.y(); y < m_context.selection.bottom(); y += step) {
+            for (int x = topLeft.x(); x < m_context.selection.right();
+                 x += step) {
+                painter.drawEllipse(x, y, radius, radius);
+            }
+        }
+        painter.restore();
+    }
+
     if (m_activeTool && m_mouseIsClicked) {
         m_activeTool->process(painter, m_context.screenshot);
     } else if (m_previewEnabled && activeButtonTool() &&
@@ -671,7 +704,8 @@ bool CaptureWidget::startDrawObjectTool(const QPoint& pos)
                 &CaptureTool::requestAction,
                 this,
                 &CaptureWidget::handleToolSignal);
-        m_context.mousePos = pos;
+
+        m_context.mousePos = m_displayGrid ? snapToGrid(pos) : pos;
         m_activeTool->drawStart(m_context);
         // TODO this is the wrong place to do this
 
@@ -847,7 +881,8 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
         if (m_adjustmentButtonPressed) {
             m_activeTool->drawMoveWithAdjustment(e->pos());
         } else {
-            m_activeTool->drawMove(e->pos());
+            m_activeTool->drawMove(m_displayGrid ? snapToGrid(e->pos())
+                                                 : e->pos());
         }
         // update drawing object
         updateTool(m_activeTool);
@@ -1126,6 +1161,14 @@ void CaptureWidget::initPanel()
             &SidePanelWidget::togglePanel,
             m_panel,
             &UtilityPanel::toggle);
+    connect(m_sidePanel,
+            &SidePanelWidget::displayGridChanged,
+            this,
+            &CaptureWidget::onDisplayGridChanged);
+    connect(m_sidePanel,
+            &SidePanelWidget::gridSizeChanged,
+            this,
+            &CaptureWidget::onGridSizeChanged);
     // TODO replace with a CaptureWidget signal
     emit m_sidePanel->colorChanged(m_context.color);
     emit toolSizeChanged(m_context.toolSize);
@@ -1452,15 +1495,13 @@ void CaptureWidget::removeToolObject(int index)
     --index;
     if (index >= 0 && index < m_captureToolObjects.size()) {
         // in case this tool is circle counter
-        int removedCircleCount = -1;
-
         const CaptureTool::Type currentToolType =
           m_captureToolObjects.at(index)->type();
         m_captureToolObjectsBackup = m_captureToolObjects;
         update(
           paddedUpdateRect(m_captureToolObjects.at(index)->boundingRect()));
         if (currentToolType == CaptureTool::TYPE_CIRCLECOUNT) {
-            removedCircleCount = m_captureToolObjects.at(index)->count();
+            int removedCircleCount = m_captureToolObjects.at(index)->count();
             --m_context.circleCount;
             // Decrement circle counter numbers starting from deleted circle
             for (int cnt = 0; cnt < m_captureToolObjects.size(); cnt++) {
@@ -1719,6 +1760,20 @@ CaptureTool::Type CaptureWidget::activeButtonToolType() const
         return CaptureTool::NONE;
     }
     return activeTool->type();
+}
+
+QPoint CaptureWidget::snapToGrid(const QPoint& point) const
+{
+    QPoint snapPoint = mapToGlobal(point);
+
+    const auto scale{ m_context.screenshot.devicePixelRatio() };
+
+    snapPoint.setX((qRound(snapPoint.x() / double(m_gridSize)) * m_gridSize) *
+                   scale);
+    snapPoint.setY((qRound(snapPoint.y() / double(m_gridSize)) * m_gridSize) *
+                   scale);
+
+    return mapFromGlobal(snapPoint);
 }
 
 QPointer<CaptureTool> CaptureWidget::activeToolObject()

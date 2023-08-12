@@ -8,6 +8,7 @@
 #include "src/utils/pathinfo.h"
 #include "utilitypanel.h"
 #include <QApplication>
+#include <QCheckBox>
 #include <QKeyEvent>
 #include <QLabel>
 #include <QLineEdit>
@@ -80,6 +81,18 @@ SidePanelWidget::SidePanelWidget(QPixmap* p, QWidget* parent)
     m_layout->addWidget(m_colorWheel);
     m_layout->addWidget(m_colorHex);
 
+    QHBoxLayout* gridHBoxLayout = new QHBoxLayout(this);
+    m_gridCheck = new QCheckBox(tr("Display grid"), this);
+    m_gridSizeSpin = new QSpinBox(this);
+    m_gridSizeSpin->setRange(5, 50);
+    m_gridSizeSpin->setSingleStep(5);
+    m_gridSizeSpin->setValue(10);
+    m_gridSizeSpin->setDisabled(true);
+    m_gridSizeSpin->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    gridHBoxLayout->addWidget(m_gridCheck);
+    gridHBoxLayout->addWidget(m_gridSizeSpin);
+    m_layout->addLayout(gridHBoxLayout);
+
     // tool size sigslots
     connect(m_toolSizeSpin,
             static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged),
@@ -112,6 +125,15 @@ SidePanelWidget::SidePanelWidget(QPixmap* p, QWidget* parent)
             &color_widgets::ColorWheel::colorSelected,
             this,
             &SidePanelWidget::colorChanged);
+    // Grid feature
+    connect(m_gridCheck, &QCheckBox::clicked, this, [=](bool b) {
+        this->m_gridSizeSpin->setEnabled(b);
+        emit this->displayGridChanged(b);
+    });
+    connect(m_gridSizeSpin,
+            qOverload<int>(&QSpinBox::valueChanged),
+            this,
+            &SidePanelWidget::gridSizeChanged);
 }
 
 void SidePanelWidget::onColorChanged(const QColor& color)

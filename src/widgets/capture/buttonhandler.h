@@ -26,7 +26,7 @@ public:
     bool buttonsAreInside() const;
     size_t size() const;
 
-    void setButtons(const QVector<CaptureToolButton*>);
+    void setButtons(const QVector<CaptureToolButton*>&);
     bool contains(const QPoint& p) const;
     void updateScreenRegions(const QVector<QRect>& rects);
     void updateScreenRegions(const QRect& rect);

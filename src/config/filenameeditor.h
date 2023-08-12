@@ -32,7 +32,7 @@ private:
     void initWidgets();
 
 public slots:
-    void addToNameEditor(QString s);
+    void addToNameEditor(const QString& s);
     void updateComponents();
 
 private slots:

@@ -106,7 +106,7 @@ void FileNameEditor::resetName()
     m_nameEditor->setText(ConfigHandler().filenamePattern());
 }
 
-void FileNameEditor::addToNameEditor(QString s)
+void FileNameEditor::addToNameEditor(const QString& s)
 {
     m_nameEditor->setText(m_nameEditor->text() + s);
     m_nameEditor->setFocus();
