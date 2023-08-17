@@ -422,7 +422,7 @@ jobs:
           cmake --build build --target install --config RelWithDebInfo -- -j$(nproc)
 
 
-          $GITHUB_WORKSPACE/appimagetool -s deploy ${APPIMAGE_DST_PATH}/usr/share/applications/org.flameshot.Flameshot.desktop
+          $GITHUB_WORKSPACE/appimagetool -s deploy ${APPIMAGE_DST_PATH}/usr/share/applications/flameshot.desktop
 
           mkdir -p ${APPIMAGE_DST_PATH}/usr/plugins/platforminputcontexts
           cp \
