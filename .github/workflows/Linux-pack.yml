@@ -23,7 +23,6 @@ env:
   PACKPACK_REPO: flameshot-org/packpack
   # available upload services: wetransfer.com, file.io, 0x0.st
   UPLOAD_SERVICE: wetransfer.com
-  APPIMAGE_PACK_ENABLE: false
 
 jobs:
   deb-pack:
@@ -328,139 +327,138 @@ jobs:
             ${{ github.workspace }}/build/${{ env.PRODUCT }}-*-lp${{ matrix.dist.symbol }}.${{ matrix.dist.arch }}.rpm
             ${{ github.workspace }}/build/${{ env.PRODUCT }}-*-lp${{ matrix.dist.symbol }}.${{ matrix.dist.arch }}.rpm.sha256sum
 
-  appimage-pack:
-    name: Build appimage on ${{ matrix.config.name }}
-    if: ${{ env.APPIMAGE_PACK_ENABLE != "false" }}
-    runs-on: ubuntu-22.04
-    strategy:
-      fail-fast: false
-      matrix:
-        config:
-          - {
-              name: ubuntu-20.04,
-              os: ubuntu,
-              symbol: focal,
-              arch: amd64,
-              image_repo: flameshotorg/ci-building-images
-            }
-    container:
-      image: ${{ matrix.config.image_repo }}:${{ matrix.config.os }}-${{ matrix.config.symbol }}
-      options: --cap-add SYS_ADMIN --device /dev/fuse --security-opt apparmor:unconfined
-    steps:
-      - name:
-        shell: bash
-        run: |
-          git config --global --add safe.directory "$GITHUB_WORKSPACE"
-
-      - name: Checkout Source code
-        if: github.event_name == 'push'
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-          ref: master
-      - name: Checkout Source code
-        if: github.event_name == 'pull_request'
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-          ref: ${{ github.event.pull_request.head.sha }}
-      - name: Set env & Print flameshot version
-        shell: bash
-        run: |
-          last_committed_tag=$(git tag -l --sort=-v:refname | head -1)
-          git_revno=$(git rev-list $(git describe --tags --abbrev=0)..HEAD --count)
-          git_hash=$(git rev-parse --short HEAD)
-          echo "=======FLAMESHOT VERSION========"
-          echo ${last_committed_tag:1}
-          echo "Details: ${last_committed_tag}+git${git_revno}.${git_hash}"
-          echo "================================"
-          echo "VERSION=${last_committed_tag:1}" >> $GITHUB_ENV
-      - name: Install Dependencies
-        run: |
-          sudo apt-get -y -qq update
-          sudo apt-get -y --no-install-recommends install \
-            python3 \
-            python3-pip \
-            fuse \
-            patchelf \
-            cmake \
-            extra-cmake-modules \
-            build-essential \
-            qt5-default \
-            qttools5-dev-tools \
-            qttools5-dev \
-            libqt5dbus5 \
-            libqt5network5 \
-            libqt5core5a \
-            libqt5widgets5 \
-            libqt5gui5 \
-            libqt5svg5-dev \
-            appstream \
-            hicolor-icon-theme \
-            fcitx-frontend-qt5 \
-            openssl \
-            ca-certificates \
-            jq
-
-      - name: Get go-appimage tool
-      # Will not use linuxdeployqt anymore, because it suopprts currently still-supported mainstream distribution,
-      # which is glibc 2.23. For more information, please see https://github.com/probonopd/linuxdeployqt/issues/340.
-      # Will try new tool https://github.com/probonopd/go-appimage written in golang by probonopd.
-        run: |
-          wget $(curl https://api.github.com/repos/probonopd/go-appimage/releases | jq -r '.[] | select(.tag_name == "continuous") | .assets[] | select((.name | endswith("x86_64.AppImage")) and (.name | contains("appimagetool"))) | .browser_download_url') -O appimagetool
-
-          chmod +x appimagetool
-        env:
-          APPIMAGETOOL_ARCH: x86_64
-      - name: Packaging appimage
-        run: |
-          set -x
-          APPIMAGE_DST_PATH="$GITHUB_WORKSPACE/${PRODUCT}.AppDir"
-          mkdir -p "${APPIMAGE_DST_PATH}"
-
-          cd $GITHUB_WORKSPACE
-          cmake -S . -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX="/usr/${APPIMAGE_DST_PATH}" -DUSE_LAUNCHER_ABSOLUTE_PATH:BOOL=OFF
-          cmake --build build --target install --config RelWithDebInfo -- -j$(nproc)
-
-
-          $GITHUB_WORKSPACE/appimagetool -s deploy "${APPIMAGE_DST_PATH}/usr/share/applications/org.flameshot.Flameshot.desktop" "${APPIMAGE_DST_PATH}"
-
-          mkdir -p "${APPIMAGE_DST_PATH}/usr/plugins/platforminputcontexts"
-          cp \
-            /usr/lib/x86_64-linux-gnu/qt5/plugins/platforminputcontexts/libfcitxplatforminputcontextplugin.so \
-            "${APPIMAGE_DST_PATH}/usr/plugins/platforminputcontexts/"
-
-          cp \
-            $GITHUB_WORKSPACE/data/img/app/org.flameshot.Flameshot.png \
-            "${APPIMAGE_DST_PATH}"/ 
-
-          if [ -f "${APPIMAGE_DST_PATH}/lib/x86_64-linux-gnu/libxcb-glx.so.0" ]; then
-            rm "${APPIMAGE_DST_PATH}/lib/x86_64-linux-gnu/libxcb-glx.so.0"
-          fi
-
-          chmod +x "${APPIMAGE_DST_PATH}/usr/lib64/ld-*.so.*"
-
-          VERSION=${VERSION} $GITHUB_WORKSPACE/appimagetool "${APPIMAGE_DST_PATH}"
-          mv $GITHUB_WORKSPACE/Flameshot-${VERSION}-x86_64.AppImage $GITHUB_WORKSPACE/Flameshot-${VERSION}.x86_64.AppImage
-      - name: SHA256Sum of appimage package(daily build)
-        run: |
-          cd "$GITHUB_WORKSPACE/" || { >&2 echo "Cannot cd to '$GITHUB_WORKSPACE/'!"; exit 11 ; }
-          sha256sum Flameshot-${VERSION}.x86_64.AppImage | tee Flameshot-${VERSION}.x86_64.AppImage.sha256sum
-          echo "================appimage sha256sum download link==============="
-          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh Flameshot-${VERSION}.x86_64.AppImage.sha256sum)
-          echo "======no operation for you can see link in the log console====="
-      - name: Upload appimage package for daily build
-        run: |
-          echo "====================appimage download link====================="
-          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/Flameshot-${VERSION}.x86_64.AppImage)
-          echo "======no operation for you can see link in the log console====="
-      - name: Artifact Upload
-        uses: actions/upload-artifact@v3
-        with:
-          name: Linux-distribution-artifact
-          path: |
-            ${{ github.workspace }}/Flameshot-*.x86_64.AppImage
-            ${{ github.workspace }}/Flameshot-*.x86_64.AppImage.sha256sum
+  #  appimage-pack:
+  #    name: Build appimage on ${{ matrix.config.name }}
+  #    runs-on: ubuntu-22.04
+  #    strategy:
+  #      fail-fast: false
+  #      matrix:
+  #        config:
+  #          - {
+  #              name: ubuntu-20.04,
+  #              os: ubuntu,
+  #              symbol: focal,
+  #              arch: amd64,
+  #              image_repo: flameshotorg/ci-building-images
+  #            }
+  #    container:
+  #      image: ${{ matrix.config.image_repo }}:${{ matrix.config.os }}-${{ matrix.config.symbol }}
+  #      options: --cap-add SYS_ADMIN --device /dev/fuse --security-opt apparmor:unconfined
+  #    steps:
+  #      - name:
+  #        shell: bash
+  #        run: |
+  #          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+  #
+  #      - name: Checkout Source code
+  #        if: github.event_name == 'push'
+  #        uses: actions/checkout@v3
+  #        with:
+  #          fetch-depth: 0
+  #          ref: master
+  #      - name: Checkout Source code
+  #        if: github.event_name == 'pull_request'
+  #        uses: actions/checkout@v3
+  #        with:
+  #          fetch-depth: 0
+  #          ref: ${{ github.event.pull_request.head.sha }}
+  #      - name: Set env & Print flameshot version
+  #        shell: bash
+  #        run: |
+  #          last_committed_tag=$(git tag -l --sort=-v:refname | head -1)
+  #          git_revno=$(git rev-list $(git describe --tags --abbrev=0)..HEAD --count)
+  #          git_hash=$(git rev-parse --short HEAD)
+  #          echo "=======FLAMESHOT VERSION========"
+  #          echo ${last_committed_tag:1}
+  #          echo "Details: ${last_committed_tag}+git${git_revno}.${git_hash}"
+  #          echo "================================"
+  #          echo "VERSION=${last_committed_tag:1}" >> $GITHUB_ENV
+  #      - name: Install Dependencies
+  #        run: |
+  #          sudo apt-get -y -qq update
+  #          sudo apt-get -y --no-install-recommends install \
+  #            python3 \
+  #            python3-pip \
+  #            fuse \
+  #            patchelf \
+  #            cmake \
+  #            extra-cmake-modules \
+  #            build-essential \
+  #            qt5-default \
+  #            qttools5-dev-tools \
+  #            qttools5-dev \
+  #            libqt5dbus5 \
+  #            libqt5network5 \
+  #            libqt5core5a \
+  #            libqt5widgets5 \
+  #            libqt5gui5 \
+  #            libqt5svg5-dev \
+  #            appstream \
+  #            hicolor-icon-theme \
+  #            fcitx-frontend-qt5 \
+  #            openssl \
+  #            ca-certificates \
+  #            jq
+  #
+  #      - name: Get go-appimage tool
+  #      # Will not use linuxdeployqt anymore, because it suopprts currently still-supported mainstream distribution,
+  #      # which is glibc 2.23. For more information, please see https://github.com/probonopd/linuxdeployqt/issues/340.
+  #      # Will try new tool https://github.com/probonopd/go-appimage written in golang by probonopd.
+  #        run: |
+  #          wget $(curl https://api.github.com/repos/probonopd/go-appimage/releases | jq -r '.[] | select(.tag_name == "continuous") | .assets[] | select((.name | endswith("x86_64.AppImage")) and (.name | contains("appimagetool"))) | .browser_download_url') -O appimagetool
+  #
+  #          chmod +x appimagetool
+  #        env:
+  #          APPIMAGETOOL_ARCH: x86_64
+  #      - name: Packaging appimage
+  #        run: |
+  #          set -x
+  #          APPIMAGE_DST_PATH="$GITHUB_WORKSPACE/${PRODUCT}.AppDir"
+  #          mkdir -p "${APPIMAGE_DST_PATH}"
+  #
+  #          cd $GITHUB_WORKSPACE
+  #          cmake -S . -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX="/usr/${APPIMAGE_DST_PATH}" -DUSE_LAUNCHER_ABSOLUTE_PATH:BOOL=OFF
+  #          cmake --build build --target install --config RelWithDebInfo -- -j$(nproc)
+  #
+  #
+  #          $GITHUB_WORKSPACE/appimagetool -s deploy "${APPIMAGE_DST_PATH}/usr/share/applications/org.flameshot.Flameshot.desktop" "${APPIMAGE_DST_PATH}"
+  #
+  #          mkdir -p "${APPIMAGE_DST_PATH}/usr/plugins/platforminputcontexts"
+  #          cp \
+  #            /usr/lib/x86_64-linux-gnu/qt5/plugins/platforminputcontexts/libfcitxplatforminputcontextplugin.so \
+  #            "${APPIMAGE_DST_PATH}/usr/plugins/platforminputcontexts/"
+  #
+  #          cp \
+  #            $GITHUB_WORKSPACE/data/img/app/org.flameshot.Flameshot.png \
+  #            "${APPIMAGE_DST_PATH}"/
+  #
+  #          if [ -f "${APPIMAGE_DST_PATH}/lib/x86_64-linux-gnu/libxcb-glx.so.0" ]; then
+  #            rm "${APPIMAGE_DST_PATH}/lib/x86_64-linux-gnu/libxcb-glx.so.0"
+  #          fi
+  #
+  #          chmod +x "${APPIMAGE_DST_PATH}/usr/lib64/ld-*.so.*"
+  #
+  #          VERSION=${VERSION} $GITHUB_WORKSPACE/appimagetool "${APPIMAGE_DST_PATH}"
+  #          mv $GITHUB_WORKSPACE/Flameshot-${VERSION}-x86_64.AppImage $GITHUB_WORKSPACE/Flameshot-${VERSION}.x86_64.AppImage
+  #      - name: SHA256Sum of appimage package(daily build)
+  #        run: |
+  #          cd "$GITHUB_WORKSPACE/" || { >&2 echo "Cannot cd to '$GITHUB_WORKSPACE/'!"; exit 11 ; }
+  #          sha256sum Flameshot-${VERSION}.x86_64.AppImage | tee Flameshot-${VERSION}.x86_64.AppImage.sha256sum
+  #          echo "================appimage sha256sum download link==============="
+  #          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh Flameshot-${VERSION}.x86_64.AppImage.sha256sum)
+  #          echo "======no operation for you can see link in the log console====="
+  #      - name: Upload appimage package for daily build
+  #        run: |
+  #          echo "====================appimage download link====================="
+  #          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/Flameshot-${VERSION}.x86_64.AppImage)
+  #          echo "======no operation for you can see link in the log console====="
+  #      - name: Artifact Upload
+  #        uses: actions/upload-artifact@v3
+  #        with:
+  #          name: Linux-distribution-artifact
+  #          path: |
+  #            ${{ github.workspace }}/Flameshot-*.x86_64.AppImage
+  #            ${{ github.workspace }}/Flameshot-*.x86_64.AppImage.sha256sum
 
   flatpak-pack:
     name: Build flatpak on ubuntu-20.04
