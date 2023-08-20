@@ -23,7 +23,6 @@ env:
   PACKPACK_REPO: flameshot-org/packpack
   # available upload services: wetransfer.com, file.io, 0x0.st
   UPLOAD_SERVICE: wetransfer.com
-  APPIMAGE_PACK_ENABLE: false
 
 jobs:
   deb-pack:
@@ -330,7 +329,6 @@ jobs:
 
   appimage-pack:
     name: Build appimage on ${{ matrix.config.name }}
-    if: ${{ APPIMAGE_PACK_ENABLE != "false" }}
     runs-on: ubuntu-22.04
     strategy:
       fail-fast: false
