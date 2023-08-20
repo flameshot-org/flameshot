@@ -330,7 +330,7 @@ jobs:
 
   appimage-pack:
     name: Build appimage on ${{ matrix.config.name }}
-    if: ${{ env.APPIMAGE_PACK_ENABLE != "false" }}
+    if: ${{ APPIMAGE_PACK_ENABLE != "false" }}
     runs-on: ubuntu-22.04
     strategy:
       fail-fast: false
