@@ -63,7 +63,9 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
   , m_adjustmentButtonPressed(false)
   , m_configError(false)
   , m_configErrorResolved(false)
+#if !defined(DISABLE_UPDATE_CHECKER)
   , m_updateNotificationWidget(nullptr)
+#endif
   , m_lastMouseWheel(0)
   , m_activeButton(nullptr)
   , m_activeTool(nullptr)
