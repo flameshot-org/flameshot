@@ -43,7 +43,7 @@ apps:
 parts:
   flameshot:
     build-snaps:
-      - kde-frameworks-5-qt-5-15-core20
+      - kde-frameworks-5-99-qt-5-15-7-core20
     source: https://github.com/flameshot-org/flameshot.git
     plugin: cmake
     cmake-parameters:

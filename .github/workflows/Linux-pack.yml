@@ -88,8 +88,7 @@ jobs:
           mkdir -p ~/.docker
           echo $'{\n  "experimental": "enabled"\n}' | sudo tee ~/.docker/config.json
           sudo service docker restart
-          docker version -f '{{.Client.Experimental}}'
-          docker version -f '{{.Server.Experimental}}'
+          docker version -f "{{ (index .Server.Components 0).Details.Experimental }}"
           docker buildx version
       - name: Support for ARM via QEMU's user-mode emulation
         # Register binfmt_misc entry for qemu-user-static
@@ -401,7 +400,6 @@ jobs:
             ca-certificates \
             jq
 
-
       - name: Get go-appimage tool
       # Will not use linuxdeployqt anymore, because it suopprts currently still-supported mainstream distribution,
       # which is glibc 2.23. For more information, please see https://github.com/probonopd/linuxdeployqt/issues/340.
@@ -414,32 +412,33 @@ jobs:
           APPIMAGETOOL_ARCH: x86_64
       - name: Packaging appimage
         run: |
-          APPIMAGE_DST_PATH=$GITHUB_WORKSPACE/${PRODUCT}.AppDir
-          mkdir -p ${APPIMAGE_DST_PATH}
+          set -x
+          APPIMAGE_DST_PATH="$GITHUB_WORKSPACE/${PRODUCT}.AppDir"
+          mkdir -p "${APPIMAGE_DST_PATH}"
 
           cd $GITHUB_WORKSPACE
-          cmake -S -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX=/usr/"${APPIMAGE_DST_PATH}" -DUSE_LAUNCHER_ABSOLUTE_PATH:BOOL=OFF
+          cmake -S . -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX="/usr/${APPIMAGE_DST_PATH}" -DUSE_LAUNCHER_ABSOLUTE_PATH:BOOL=OFF
           cmake --build build --target install --config RelWithDebInfo -- -j$(nproc)
 
 
-          $GITHUB_WORKSPACE/appimagetool -s deploy ${APPIMAGE_DST_PATH}/usr/share/applications/org.flameshot.Flameshot.desktop
+          $GITHUB_WORKSPACE/appimagetool -s deploy "${APPIMAGE_DST_PATH}/usr/share/applications/org.flameshot.Flameshot.desktop" "${APPIMAGE_DST_PATH}"
 
-          mkdir -p ${APPIMAGE_DST_PATH}/usr/plugins/platforminputcontexts
+          mkdir -p "${APPIMAGE_DST_PATH}/usr/plugins/platforminputcontexts"
           cp \
             /usr/lib/x86_64-linux-gnu/qt5/plugins/platforminputcontexts/libfcitxplatforminputcontextplugin.so \
-            ${APPIMAGE_DST_PATH}/usr/plugins/platforminputcontexts/
+            "${APPIMAGE_DST_PATH}/usr/plugins/platforminputcontexts/"
 
           cp \
             $GITHUB_WORKSPACE/data/img/app/org.flameshot.Flameshot.png \
-            ${APPIMAGE_DST_PATH}/
+            "${APPIMAGE_DST_PATH}"/ 
 
           if [ -f "${APPIMAGE_DST_PATH}/lib/x86_64-linux-gnu/libxcb-glx.so.0" ]; then
-            rm ${APPIMAGE_DST_PATH}/lib/x86_64-linux-gnu/libxcb-glx.so.0
+            rm "${APPIMAGE_DST_PATH}/lib/x86_64-linux-gnu/libxcb-glx.so.0"
           fi
 
-          chmod +x ${APPIMAGE_DST_PATH}/usr/lib64/ld-*.so.*
+          chmod +x "${APPIMAGE_DST_PATH}/usr/lib64/ld-*.so.*"
 
-          VERSION=${VERSION} $GITHUB_WORKSPACE/appimagetool ${APPIMAGE_DST_PATH}
+          VERSION=${VERSION} $GITHUB_WORKSPACE/appimagetool "${APPIMAGE_DST_PATH}"
           mv $GITHUB_WORKSPACE/Flameshot-${VERSION}-x86_64.AppImage $GITHUB_WORKSPACE/Flameshot-${VERSION}.x86_64.AppImage
       - name: SHA256Sum of appimage package(daily build)
         run: |
