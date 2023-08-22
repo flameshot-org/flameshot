@@ -1012,7 +1012,7 @@ Lütfen bunları yapılandırma dosyasında elle çözün.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="343"/>
         <source>Automatic check for updates</source>
-        <translation>Otomatik güncelleme denetimi</translation>
+        <translation>Güncellemeleri otomatik denetle</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="356"/>
