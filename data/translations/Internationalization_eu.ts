@@ -6,22 +6,22 @@
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/abstract_widget_list.cpp" line="67"/>
         <source>Add New</source>
-        <translation>Add New</translation>
+        <translation>Gehitu berria</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/abstract_widget_list.cpp" line="118"/>
         <source>Move Up</source>
-        <translation>Move Up</translation>
+        <translation>Igo</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/abstract_widget_list.cpp" line="119"/>
         <source>Move Down</source>
-        <translation>Move Down</translation>
+        <translation>Jaitsi</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/abstract_widget_list.cpp" line="120"/>
         <source>Remove</source>
-        <translation>Remove</translation>
+        <translation>Kendu</translation>
     </message>
 </context>
 <context>
@@ -29,12 +29,12 @@
     <message>
         <location filename="../../src/tools/accept/accepttool.cpp" line="31"/>
         <source>Accept</source>
-        <translation>Accept</translation>
+        <translation>Onartu</translation>
     </message>
     <message>
         <location filename="../../src/tools/accept/accepttool.cpp" line="41"/>
         <source>Accept the capture</source>
-        <translation>Accept the capture</translation>
+        <translation>Onartu argazkia</translation>
     </message>
 </context>
 <context>
@@ -170,7 +170,7 @@
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="176"/>
         <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_capturelauncher.h" line="178"/>
         <source>Capture Launcher</source>
-        <translation>Capture Launcher</translation>
+        <translation>Kapturatzailearen abiarazlea</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="34"/>
@@ -178,7 +178,7 @@
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="177"/>
         <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_capturelauncher.h" line="179"/>
         <source>TextLabel</source>
-        <translation>TextLabel</translation>
+        <translation>Testu etiketa</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="51"/>
@@ -186,7 +186,7 @@
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="178"/>
         <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_capturelauncher.h" line="180"/>
         <source>Capture Mode</source>
-        <translation>Capture Mode</translation>
+        <translation>Hartzeko modua</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="80"/>
@@ -220,7 +220,7 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="382"/>
         <source>Select screenshot area</source>
-        <translation>Select screenshot area</translation>
+        <translation>Hautatu pantaila-argazkiaren eremua</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="397"/>
@@ -230,7 +230,7 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="397"/>
         <source>Change tool size</source>
-        <translation>Change tool size</translation>
+        <translation>Aldatu tresnaren tamaina</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="398"/>
@@ -240,12 +240,12 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="398"/>
         <source>Show color picker</source>
-        <translation>Show color picker</translation>
+        <translation>Erakutsi kolore-hautatzailea</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="400"/>
         <source>Open side panel</source>
-        <translation>Open side panel</translation>
+        <translation>Ireki alboko panela</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="401"/>
@@ -260,7 +260,7 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="509"/>
         <source>Flameshot has lost focus. Keyboard shortcuts won&apos;t work until you click somewhere.</source>
-        <translation>Flameshot has lost focus. Keyboard shortcuts won&apos;t work until you click somewhere.</translation>
+        <translation>Flameshot-ek fokua galdu du. Teklatuko lasterbideek ez dute funtzionatuko nonbait klik egin arte.</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="515"/>
@@ -567,7 +567,7 @@ Sakatu Zuriunea alboko panela irekitzeko.</translation>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="61"/>
         <source>Reset</source>
-        <translation type="unfinished">Berrezarri</translation>
+        <translation>Berrezarri</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="63"/>
@@ -805,7 +805,7 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="111"/>
         <source>Unable to close active modal widgets</source>
-        <translation type="unfinished">Ezin dira itxi widget modal aktiboak</translation>
+        <translation>Ezin dira itxi trepeta modal aktiboak</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="400"/>
@@ -2300,22 +2300,22 @@ Baliteke &apos;#&apos; karakterea ihes egin behar izatea, &apos;\#FFF&apos;n bez
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="175"/>
         <source>Resize selection left 1px</source>
-        <translation type="unfinished">Aldatu hautapenaren tamaina pixel 1 ezkerrera</translation>
+        <translation>Aldatu hautapenaren tamaina pixel 1 ezkerrera</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="176"/>
         <source>Resize selection right 1px</source>
-        <translation type="unfinished">Aldatu hautapenaren tamaina pixel 1 eskuinera</translation>
+        <translation>Aldatu hautapenaren tamaina pixel 1 eskuinera</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="177"/>
         <source>Resize selection up 1px</source>
-        <translation type="unfinished">Aldatu hautapenaren tamaina pixel 1 gora</translation>
+        <translation>Aldatu hautapenaren tamaina pixel 1 gora</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="178"/>
         <source>Resize selection down 1px</source>
-        <translation type="unfinished">Aldatu hautapenaren tamaina pixel 1 behera</translation>
+        <translation>Aldatu hautapenaren tamaina pixel 1 behera</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="179"/>
@@ -2325,22 +2325,22 @@ Baliteke &apos;#&apos; karakterea ihes egin behar izatea, &apos;\#FFF&apos;n bez
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="180"/>
         <source>Move selection left 1px</source>
-        <translation type="unfinished">Mugitu hautapena pixel 1 ezkerrera</translation>
+        <translation>Mugitu hautapena pixel 1 ezkerrera</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="181"/>
         <source>Move selection right 1px</source>
-        <translation type="unfinished">Mugitu hautapena pixel 1 eskuinera</translation>
+        <translation>Mugitu hautapena pixel 1 eskuinera</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="182"/>
         <source>Move selection up 1px</source>
-        <translation type="unfinished">Mugitu hautapena pixel 1 gora</translation>
+        <translation>Mugitu hautapena pixel 1 gora</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="183"/>
         <source>Move selection down 1px</source>
-        <translation type="unfinished">Mugitu hautapena pixel 1 behera</translation>
+        <translation>Mugitu hautapena pixel 1 behera</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="184"/>
@@ -2355,7 +2355,7 @@ Baliteke &apos;#&apos; karakterea ihes egin behar izatea, &apos;\#FFF&apos;n bez
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="194"/>
         <source>Capture screen</source>
-        <translation type="unfinished">Egin pantailaren argazkia</translation>
+        <translation>Egin pantailaren argazkia</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="195"/>
@@ -2608,12 +2608,12 @@ Baliteke &apos;#&apos; karakterea ihes egin behar izatea, &apos;\#FFF&apos;n bez
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="98"/>
         <source>&amp;Take Screenshot</source>
-        <translation type="unfinished">Egin &amp;pantaila-argazkia</translation>
+        <translation>Egin &amp;pantailaren argazkia</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="116"/>
         <source>&amp;Open Launcher</source>
-        <translation type="unfinished">&amp;Abiarazlea ireki</translation>
+        <translation>&amp;Ireki abiarazlea</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="121"/>
@@ -2772,12 +2772,12 @@ Baliteke &apos;#&apos; karakterea ihes egin behar izatea, &apos;\#FFF&apos;n bez
     <message>
         <location filename="../../src/widgets/uploadlineitem.cpp" line="50"/>
         <source>Confirm to delete</source>
-        <translation type="unfinished">Berretsi ezabatzea</translation>
+        <translation>Berretsi ezabatzea</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadlineitem.cpp" line="51"/>
         <source>Are you sure you want to delete a screenshot from the latest uploads and server?</source>
-        <translation type="unfinished">Ziur pantaila-argazkia azken kargetatik eta zerbitzaritik ezabatu nahi duzula?</translation>
+        <translation>Ziur pantaila-argazkia azken kargetatik eta zerbitzaritik ezabatu nahi duzula?</translation>
     </message>
 </context>
 <context>
@@ -2803,7 +2803,7 @@ Baliteke &apos;#&apos; karakterea ihes egin behar izatea, &apos;\#FFF&apos;n bez
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="68"/>
         <source>UI Color Editor</source>
-        <translation type="unfinished">Interfazearen kolorearen editorea</translation>
+        <translation>Interfazearen kolorearen editorea</translation>
     </message>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="74"/>
