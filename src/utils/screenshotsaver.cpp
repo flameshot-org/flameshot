@@ -204,9 +204,9 @@ bool saveToFilesystemGUI(const QPixmap& capture)
     QString saveExtension;
     saveExtension = QFileInfo(savePath).suffix().toLower();
     if (saveExtension == "jpg" || saveExtension == "jpeg") {
-            okay = capture.save(&file, nullptr, ConfigHandler().jpegQuality());
+        okay = capture.save(&file, nullptr, ConfigHandler().jpegQuality());
     } else {
-            okay = capture.save(&file);
+        okay = capture.save(&file);
     }
 
     if (okay) {
