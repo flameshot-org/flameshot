@@ -805,7 +805,7 @@ void GeneralConf::setSelGeoHideTime(int v)
 
 void GeneralConf::setJpegQuality(int v)
 {
-    ConfigHandler().setValue("jpegQuality", v);
+    ConfigHandler().setJpegQuality(v);
 }
 
 void GeneralConf::setGeometryLocation(int index)
