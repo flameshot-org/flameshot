@@ -1535,7 +1535,7 @@ Por favor, resolva-os manualmente no arquivo de configuração.</translation>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="119"/>
         <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_infowindow.h" line="119"/>
         <source>License</source>
-        <translation>License</translation>
+        <translation>Licença</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="56"/>
@@ -1575,7 +1575,7 @@ Por favor, resolva-os manualmente no arquivo de configuração.</translation>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="124"/>
         <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_infowindow.h" line="124"/>
         <source>Copy Info</source>
-        <translation>Copy Info</translation>
+        <translation>Copiar informações</translation>
     </message>
     <message>
         <source>SPACEBAR</source>
