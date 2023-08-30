@@ -581,26 +581,26 @@ Pressione espaço para abrir o painel lateral.</translation>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="77"/>
         <source>Remove</source>
-        <translation>Remove</translation>
+        <translation>Remover</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="79"/>
         <source>Remove this setting.</source>
-        <translation>Remove this setting.</translation>
+        <translation>Remova esta configuração.</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="90"/>
         <source>Some keyboard shortcuts have conflicts.
 This will NOT prevent flameshot from starting.
 Please solve them manually in the configuration file.</source>
-        <translation>Some keyboard shortcuts have conflicts.
-This will NOT prevent flameshot from starting.
-Please solve them manually in the configuration file.</translation>
+        <translation>Alguns atalhos de teclado apresentam conflitos.
+Isso NÃO impedirá que o Flameshot comece.
+Por favor, resolva-os manualmente no arquivo de configuração.</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="112"/>
         <source>Resolve all</source>
-        <translation>Resolve all</translation>
+        <translation>Resolva tudo</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="113"/>
