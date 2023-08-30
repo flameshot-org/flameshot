@@ -648,7 +648,7 @@ Por favor, resolva-os manualmente no arquivo de configuração.</translation>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="124"/>
         <source>&lt;b&gt;Configuration file has errors. Resolve them before continuing.&lt;/b&gt;</source>
-        <translation>&lt;b&gt;O arquivo de configuração contém erros.  Resolva-os antes de continuar.&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;O arquivo de configuração contém erros. Resolva-os antes de continuar.&lt;/b&gt;</translation>
     </message>
 </context>
 <context>
