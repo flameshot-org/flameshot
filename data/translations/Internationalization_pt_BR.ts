@@ -1452,7 +1452,7 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/tools/imgupload/imguploadertool.cpp" line="23"/>
         <source>Image Uploader</source>
-        <translation>Carregador de imagem</translation>
+        <translation>Carregador de Imagem</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/imguploadertool.cpp" line="33"/>
