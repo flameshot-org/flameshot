@@ -11,17 +11,17 @@
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/abstract_widget_list.cpp" line="118"/>
         <source>Move Up</source>
-        <translation>Move Up</translation>
+        <translation>Mover para Cima</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/abstract_widget_list.cpp" line="119"/>
         <source>Move Down</source>
-        <translation>Move Down</translation>
+        <translation>Mover para Baixo</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/abstract_widget_list.cpp" line="120"/>
         <source>Remove</source>
-        <translation>Remove</translation>
+        <translation>Remover</translation>
     </message>
 </context>
 <context>
@@ -170,7 +170,7 @@
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="176"/>
         <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_capturelauncher.h" line="178"/>
         <source>Capture Launcher</source>
-        <translation>Capture Launcher</translation>
+        <translation>Lançador de Captura</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="34"/>
@@ -230,7 +230,7 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="397"/>
         <source>Change tool size</source>
-        <translation>Change tool size</translation>
+        <translation>Alterar o tamanho da ferramenta</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="398"/>
@@ -245,7 +245,7 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="400"/>
         <source>Open side panel</source>
-        <translation>Open side panel</translation>
+        <translation>Abrir painel lateral</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="401"/>
@@ -335,7 +335,7 @@ Pressione espaço para abrir o painel lateral.</translation>
         <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="320"/>
         <location filename="../../cmake-build-relwithdebinfo/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="320"/>
         <source>Hue</source>
-        <translation>Hue</translation>
+        <translation>Matiz</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="79"/>
@@ -396,7 +396,7 @@ Pressione espaço para abrir o painel lateral.</translation>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="58"/>
         <source>Enter or Left Click</source>
-        <translation></translation>
+        <translation>Enter ou Clique Esquerdo</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="59"/>
@@ -406,7 +406,7 @@ Pressione espaço para abrir o painel lateral.</translation>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="59"/>
         <source>Hold Left Click</source>
-        <translation></translation>
+        <translation>Segurar o Clique Esquerdo</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="60"/>
@@ -416,7 +416,7 @@ Pressione espaço para abrir o painel lateral.</translation>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="60"/>
         <source>Space or Right Click</source>
-        <translation></translation>
+        <translation>Espaço ou Clique Direito</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="61"/>
@@ -1738,7 +1738,7 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="227"/>
         <source>Copy to clipboard</source>
-        <translation type="unfinished">Copiar para área de transferência</translation>
+        <translation>Copiar para área de transferência</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="234"/>
@@ -2299,72 +2299,72 @@ Você pode ter que invalidar o sinal &apos;#&apos;, por exemplo &apos;\#FFF&apos
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="174"/>
         <source>Toggle side panel</source>
-        <translation type="unfinished">Alternar painel lateral</translation>
+        <translation>Alternar painel lateral</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="175"/>
         <source>Resize selection left 1px</source>
-        <translation type="unfinished">Redimensionar seleção para a esquerda 1px</translation>
+        <translation>Redimensionar seleção para a esquerda em 1px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="176"/>
         <source>Resize selection right 1px</source>
-        <translation type="unfinished">Redimensionar seleção para a direita 1px</translation>
+        <translation>Redimensionar seleção para a direita em 1px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="177"/>
         <source>Resize selection up 1px</source>
-        <translation type="unfinished">Redimensionar a seleção para cima 1px</translation>
+        <translation>Redimensionar a seleção para cima em 1px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="178"/>
         <source>Resize selection down 1px</source>
-        <translation type="unfinished">Redimensionar seleção para baixo 1px</translation>
+        <translation>Redimensionar seleção para baixo em 1px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="179"/>
         <source>Select entire screen</source>
-        <translation type="unfinished">Selecionar a tela inteira</translation>
+        <translation>Selecionar a tela inteira</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="180"/>
         <source>Move selection left 1px</source>
-        <translation type="unfinished">Mover seleção para a esquerda 1px</translation>
+        <translation>Mover seleção para a esquerda em 1px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="181"/>
         <source>Move selection right 1px</source>
-        <translation type="unfinished">Mover seleção para a direita 1px</translation>
+        <translation>Mover seleção para a direita em 1px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="182"/>
         <source>Move selection up 1px</source>
-        <translation type="unfinished">Mover seleção para a cima 1px</translation>
+        <translation>Mover seleção para cima em 1px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="183"/>
         <source>Move selection down 1px</source>
-        <translation type="unfinished">Mover seleção para a baixo 1px</translation>
+        <translation>Mover seleção para baixo 1px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="184"/>
         <source>Commit text in text area</source>
-        <translation type="unfinished">Confirmar texto na área de texto</translation>
+        <translation>Confirmar texto na área de texto</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="185"/>
         <source>Delete current tool</source>
-        <translation type="unfinished">Excluir ferramenta atual</translation>
+        <translation>Excluir ferramenta atual</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="194"/>
         <source>Capture screen</source>
-        <translation type="unfinished">Captura de tela</translation>
+        <translation>Tela de captura</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="195"/>
         <source>Screenshot history</source>
-        <translation type="unfinished">Histórico de captura de tela</translation>
+        <translation>Histórico de captura de tela</translation>
     </message>
 </context>
 <context>
@@ -2612,42 +2612,42 @@ Você pode ter que invalidar o sinal &apos;#&apos;, por exemplo &apos;\#FFF&apos
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="98"/>
         <source>&amp;Take Screenshot</source>
-        <translation type="unfinished">&amp;Tirar Captura de Tela</translation>
+        <translation>&amp;Tirar Captura de Tela</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="116"/>
         <source>&amp;Open Launcher</source>
-        <translation type="unfinished">&amp;Abrir Launcher</translation>
+        <translation>&amp;Abrir Lançador</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="121"/>
         <source>&amp;Configuration</source>
-        <translation type="unfinished">&amp;Configuração</translation>
+        <translation>&amp;Configuração</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="126"/>
         <source>&amp;About</source>
-        <translation type="unfinished">&amp;Sobre</translation>
+        <translation>&amp;Sobre</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="130"/>
         <source>Check for updates</source>
-        <translation type="unfinished">Verifique se há atualizações</translation>
+        <translation>Verifique se há atualizações</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="141"/>
         <source>New version %1 is available</source>
-        <translation type="unfinished">Nova versão %1 está disponível</translation>
+        <translation>Nova versão %1 está disponível</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="145"/>
         <source>&amp;Quit</source>
-        <translation type="unfinished">&amp;Sair</translation>
+        <translation>&amp;Sair</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="149"/>
         <source>&amp;Latest Uploads</source>
-        <translation type="unfinished">&amp;Últimos Envios</translation>
+        <translation>&amp;Últimos Envios</translation>
     </message>
 </context>
 <context>
