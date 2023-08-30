@@ -530,7 +530,7 @@ Pressione espaço para abrir o painel lateral.</translation>
         <location filename="../../src/utils/confighandler.cpp" line="603"/>
         <source>Shortcut conflict: &apos;%1&apos; and &apos;%2&apos; have the same shortcut: %3
 </source>
-        <translation>Shortcut conflict: &apos;%1&apos; and &apos;%2&apos; have the same shortcut: %3
+        <translation>Conflito de atalho: &apos;%1&apos; e &apos;%2&apos; têm o mesmo atalho: %3
 </translation>
     </message>
     <message>
