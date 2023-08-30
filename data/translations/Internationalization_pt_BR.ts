@@ -605,7 +605,7 @@ Por favor, resolva-os manualmente no arquivo de configuração.</translation>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="113"/>
         <source>Resolve all listed errors.</source>
-        <translation>Resolve all listed errors.</translation>
+        <translation>Resolva todos os erros listados.</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="125"/>
@@ -648,7 +648,7 @@ Por favor, resolva-os manualmente no arquivo de configuração.</translation>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="124"/>
         <source>&lt;b&gt;Configuration file has errors. Resolve them before continuing.&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Configuration file has errors. Resolve them before continuing.&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;O arquivo de configuração contém erros.  Resolva-os antes de continuar.&lt;/b&gt;</translation>
     </message>
 </context>
 <context>
