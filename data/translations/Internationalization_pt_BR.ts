@@ -643,7 +643,7 @@ Por favor, resolva-os manualmente no arquivo de configuração.</translation>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="120"/>
         <source>Resolve</source>
-        <translation>Resolve</translation>
+        <translation>Resolver</translation>
     </message>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="124"/>
