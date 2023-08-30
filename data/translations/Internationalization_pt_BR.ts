@@ -438,7 +438,7 @@ Pressione espaço para abrir o painel lateral.</translation>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="40"/>
         <source>Edit Preset:</source>
-        <translation>Editar predefinição:</translation>
+        <translation>Editar Predefinição:</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="45"/>
