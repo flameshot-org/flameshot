@@ -230,7 +230,7 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="397"/>
         <source>Change tool size</source>
-        <translation>Alterar o tamanho da ferramenta</translation>
+        <translation>Alterar tamanho da ferramenta</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="398"/>
@@ -1743,7 +1743,7 @@ Por favor, resolva-os manualmente no arquivo de configuração.</translation>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="234"/>
         <source>Save to file</source>
-        <translation>Save to file</translation>
+        <translation>Salvar em arquivo</translation>
     </message>
 </context>
 <context>
@@ -1814,7 +1814,7 @@ Por favor, resolva-os manualmente no arquivo de configuração.</translation>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="203"/>
         <source>Path copied to clipboard as </source>
-        <translation>Path copied to clipboard as </translation>
+        <translation>Caminho copiado para a área de transferência como </translation>
     </message>
     <message>
         <source>Saving canceled</source>
@@ -1875,7 +1875,7 @@ Por favor, resolva-os manualmente no arquivo de configuração.</translation>
     <message>
         <location filename="../../src/main.cpp" line="170"/>
         <source>Existing directory or new file to save to</source>
-        <translation>Existing directory or new file to save to</translation>
+        <translation>Diretório existente ou novo arquivo para salvar</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="173"/>
@@ -1885,7 +1885,7 @@ Por favor, resolva-os manualmente no arquivo de configuração.</translation>
     <message>
         <location filename="../../src/main.cpp" line="175"/>
         <source>Pin the capture to the screen</source>
-        <translation>Pin the capture to the screen</translation>
+        <translation>Fixar a captura na tela</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="177"/>
@@ -1900,12 +1900,12 @@ Por favor, resolva-os manualmente no arquivo de configuração.</translation>
     <message>
         <location filename="../../src/main.cpp" line="184"/>
         <source>Repeat screenshot with previously selected region</source>
-        <translation>Repeat screenshot with previously selected region</translation>
+        <translation>Repetir captura de tela com a região selecionada anteriormente</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="187"/>
         <source>Screenshot region to select</source>
-        <translation>Screenshot region to select</translation>
+        <translation>Região da captura de tela a ser selecionada</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="190"/>
@@ -1915,7 +1915,7 @@ Por favor, resolva-os manualmente no arquivo de configuração.</translation>
     <message>
         <location filename="../../src/main.cpp" line="194"/>
         <source>Accept capture as soon as a selection is made</source>
-        <translation>Accept capture as soon as a selection is made</translation>
+        <translation>Aceitar captura assim que uma seleção for feita</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="196"/>
@@ -1930,7 +1930,7 @@ Por favor, resolva-os manualmente no arquivo de configuração.</translation>
     <message>
         <location filename="../../src/main.cpp" line="203"/>
         <source>Check the configuration for errors</source>
-        <translation>Check the configuration for errors</translation>
+        <translation>Verifique se há erros na configuração</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="206"/>
@@ -1960,22 +1960,22 @@ Por favor, resolva-os manualmente no arquivo de configuração.</translation>
     <message>
         <location filename="../../src/main.cpp" line="223"/>
         <source>Define the screen to capture (starting from 0)</source>
-        <translation>Define the screen to capture (starting from 0)</translation>
+        <translation>Definir a tela a ser capturada (a partir de 0)</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="243"/>
         <source>Invalid delay, it must be a number greater than 0</source>
-        <translation>Invalid delay, it must be a number greater than 0</translation>
+        <translation>Atraso inválido, deve ser um número maior que 0</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="246"/>
         <source>Invalid region, use &apos;WxH+X+Y&apos; or &apos;all&apos; or &apos;screen0/screen1/...&apos;.</source>
-        <translation>Invalid region, use &apos;WxH+X+Y&apos; or &apos;all&apos; or &apos;screen0/screen1/...&apos;.</translation>
+        <translation>Região inválida, use &apos;WxH+X+Y&apos; ou &apos;all&apos; ou &apos;screen0/screen1/...&apos;.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="259"/>
         <source>Invalid path, must be an existing directory or a new file in an existing directory</source>
-        <translation>Invalid path, must be an existing directory or a new file in an existing directory</translation>
+        <translation>Caminho inválido, deve ser um diretório existente ou um novo arquivo em um diretório existente</translation>
     </message>
     <message>
         <source>Define the screen to capture</source>
@@ -2073,12 +2073,12 @@ Você pode ter que invalidar o sinal &apos;#&apos;, por exemplo &apos;\#FFF&apos
     <message>
         <location filename="../../src/core/flameshot.cpp" line="148"/>
         <source>Requested screen exceeds screen count</source>
-        <translation>Requested screen exceeds screen count</translation>
+        <translation>A tela solicitada excede a contagem de telas</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="378"/>
         <source>Full screen screenshot pinned to screen</source>
-        <translation>Full screen screenshot pinned to screen</translation>
+        <translation>Captura de tela inteira fixada na tela</translation>
     </message>
     <message>
         <source>URL copied to clipboard.</source>
@@ -2160,7 +2160,7 @@ Você pode ter que invalidar o sinal &apos;#&apos;, por exemplo &apos;\#FFF&apos
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="208"/>
         <source>Change the tool&apos;s size</source>
-        <translation>Change the tool&apos;s size</translation>
+        <translation>Alterar o tamanho da ferramenta</translation>
     </message>
     <message>
         <source>Change the tool&apos;s thickness</source>
@@ -2203,7 +2203,7 @@ Você pode ter que invalidar o sinal &apos;#&apos;, por exemplo &apos;\#FFF&apos
     <message>
         <location filename="../../src/tools/save/savetool.cpp" line="34"/>
         <source>Save screenshot to a file</source>
-        <translation>Save screenshot to a file</translation>
+        <translation>Salvar captura de tela em um arquivo</translation>
     </message>
     <message>
         <source>Save the capture</source>
@@ -2215,12 +2215,12 @@ Você pode ter que invalidar o sinal &apos;#&apos;, por exemplo &apos;\#FFF&apos
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="112"/>
         <source>Unable to detect desktop environment (GNOME? KDE? Sway? ...)</source>
-        <translation>Unable to detect desktop environment (GNOME? KDE? Sway? ...)</translation>
+        <translation>Não é possível detectar o ambiente de desktop (GNOME? KDE? Sway? ...)</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="115"/>
         <source>Hint: try setting the XDG_CURRENT_DESKTOP environment variable.</source>
-        <translation>Hint: try setting the XDG_CURRENT_DESKTOP environment variable.</translation>
+        <translation>Dica: tente definir a variável de ambiente XDG_CURRENT_DESKTOP.</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="120"/>
@@ -2266,7 +2266,7 @@ Você pode ter que invalidar o sinal &apos;#&apos;, por exemplo &apos;\#FFF&apos
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="46"/>
         <source>Flameshot must be restarted for changes to take effect.</source>
-        <translation>Flameshot must be restarted for changes to take effect.</translation>
+        <translation>O Flameshot deve ser reiniciado para que as alterações entrem em vigor.</translation>
     </message>
 </context>
 <context>
@@ -2294,7 +2294,7 @@ Você pode ter que invalidar o sinal &apos;#&apos;, por exemplo &apos;\#FFF&apos
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="167"/>
         <source>Left Double-click</source>
-        <translation></translation>
+        <translation>Clique Duplo com o Botão Esquerdo</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="174"/>
@@ -2384,7 +2384,7 @@ Você pode ter que invalidar o sinal &apos;#&apos;, por exemplo &apos;\#FFF&apos
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="35"/>
         <source>Active tool size: </source>
-        <translation>Active tool size: </translation>
+        <translation>Tamanho ativo da ferramenta: </translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="47"/>
@@ -2433,7 +2433,7 @@ Você pode ter que invalidar o sinal &apos;#&apos;, por exemplo &apos;\#FFF&apos
     <message>
         <location filename="../../src/tools/sizeindicator/sizeindicatortool.cpp" line="33"/>
         <source>Show X and Y dimensions of the selection</source>
-        <translation>Show X and Y dimensions of the selection</translation>
+        <translation>Mostrar dimensões X e Y da seleção</translation>
     </message>
     <message>
         <source>Show the dimensions of the selection (X Y)</source>
@@ -2581,17 +2581,17 @@ Você pode ter que invalidar o sinal &apos;#&apos;, por exemplo &apos;\#FFF&apos
     <message>
         <location filename="../../src/tools/text/textconfig.cpp" line="83"/>
         <source>Left Align</source>
-        <translation>Left Align</translation>
+        <translation>Alinhamento à Esquerda</translation>
     </message>
     <message>
         <location filename="../../src/tools/text/textconfig.cpp" line="92"/>
         <source>Center Align</source>
-        <translation>Center Align</translation>
+        <translation>Alinhamento Central</translation>
     </message>
     <message>
         <location filename="../../src/tools/text/textconfig.cpp" line="101"/>
         <source>Right Align</source>
-        <translation>Right Align</translation>
+        <translation>Alinhamento à Direita</translation>
     </message>
 </context>
 <context>
@@ -2731,7 +2731,7 @@ Você pode ter que invalidar o sinal &apos;#&apos;, por exemplo &apos;\#FFF&apos
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_uploadhistory.h" line="67"/>
         <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_uploadhistory.h" line="67"/>
         <source>Upload History</source>
-        <translation>Upload History</translation>
+        <translation>Histórico de Envio</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadhistory.cpp" line="62"/>
@@ -2812,7 +2812,7 @@ Você pode ter que invalidar o sinal &apos;#&apos;, por exemplo &apos;\#FFF&apos
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="74"/>
         <source>Colorpicker Editor</source>
-        <translation>Colorpicker Editor</translation>
+        <translation>Editor do Seletor de Cores</translation>
     </message>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="79"/>
@@ -2830,7 +2830,7 @@ Você pode ter que invalidar o sinal &apos;#&apos;, por exemplo &apos;\#FFF&apos
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.cpp" line="79"/>
         <source>Pick</source>
-        <translation>Pick</translation>
+        <translation>Escolher</translation>
     </message>
 </context>
 <context>
@@ -2838,7 +2838,7 @@ Você pode ter que invalidar o sinal &apos;#&apos;, por exemplo &apos;\#FFF&apos
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette.cpp" line="428"/>
         <source>Unnamed</source>
-        <translation>Unnamed</translation>
+        <translation>Sem-nome</translation>
     </message>
 </context>
 <context>
@@ -2846,12 +2846,12 @@ Você pode ter que invalidar o sinal &apos;#&apos;, por exemplo &apos;\#FFF&apos
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_model.cpp" line="70"/>
         <source>Unnamed</source>
-        <translation>Unnamed</translation>
+        <translation>Sem-nome</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_model.cpp" line="144"/>
         <source>%1 (%2 colors)</source>
-        <translation>%1 (%2 colors)</translation>
+        <translation>%1 (%2 cores)</translation>
     </message>
 </context>
 <context>
@@ -2862,7 +2862,7 @@ Você pode ter que invalidar o sinal &apos;#&apos;, por exemplo &apos;\#FFF&apos
         <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="209"/>
         <location filename="../../cmake-build-relwithdebinfo/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="209"/>
         <source>Open a new palette from file</source>
-        <translation>Open a new palette from file</translation>
+        <translation>Abrir uma nova paleta a partir do arquivo</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="71"/>
@@ -2870,7 +2870,7 @@ Você pode ter que invalidar o sinal &apos;#&apos;, por exemplo &apos;\#FFF&apos
         <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="212"/>
         <location filename="../../cmake-build-relwithdebinfo/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="212"/>
         <source>Create a new palette</source>
-        <translation>Create a new palette</translation>
+        <translation>Criar uma nova paleta</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="83"/>
@@ -2878,7 +2878,7 @@ Você pode ter que invalidar o sinal &apos;#&apos;, por exemplo &apos;\#FFF&apos
         <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="215"/>
         <location filename="../../cmake-build-relwithdebinfo/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="215"/>
         <source>Duplicate the current palette</source>
-        <translation>Duplicate the current palette</translation>
+        <translation>Duplicar a paleta atual</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="121"/>
@@ -2886,7 +2886,7 @@ Você pode ter que invalidar o sinal &apos;#&apos;, por exemplo &apos;\#FFF&apos
         <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="218"/>
         <location filename="../../cmake-build-relwithdebinfo/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="218"/>
         <source>Delete the current palette</source>
-        <translation>Delete the current palette</translation>
+        <translation>Excluir a paleta atual</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="133"/>
@@ -2894,7 +2894,7 @@ Você pode ter que invalidar o sinal &apos;#&apos;, por exemplo &apos;\#FFF&apos
         <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="221"/>
         <location filename="../../cmake-build-relwithdebinfo/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="221"/>
         <source>Revert changes to the current palette</source>
-        <translation>Revert changes to the current palette</translation>
+        <translation>Reverter alterações na paleta atual</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="145"/>
@@ -2902,7 +2902,7 @@ Você pode ter que invalidar o sinal &apos;#&apos;, por exemplo &apos;\#FFF&apos
         <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="224"/>
         <location filename="../../cmake-build-relwithdebinfo/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="224"/>
         <source>Save changes to the current palette</source>
-        <translation>Save changes to the current palette</translation>
+        <translation>Salvar alterações na paleta atual</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="170"/>
@@ -2910,7 +2910,7 @@ Você pode ter que invalidar o sinal &apos;#&apos;, por exemplo &apos;\#FFF&apos
         <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="227"/>
         <location filename="../../cmake-build-relwithdebinfo/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="227"/>
         <source>Add a color to the palette</source>
-        <translation>Add a color to the palette</translation>
+        <translation>Adicionar uma cor à paleta</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="182"/>
@@ -2918,13 +2918,13 @@ Você pode ter que invalidar o sinal &apos;#&apos;, por exemplo &apos;\#FFF&apos
         <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="230"/>
         <location filename="../../cmake-build-relwithdebinfo/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="230"/>
         <source>Remove the selected color from the palette</source>
-        <translation>Remove the selected color from the palette</translation>
+        <translation>Remover a cor selecionada da paleta</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="186"/>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="201"/>
         <source>New Palette</source>
-        <translation>New Palette</translation>
+        <translation>Nova Paleta</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="187"/>
@@ -2935,29 +2935,29 @@ Você pode ter que invalidar o sinal &apos;#&apos;, por exemplo &apos;\#FFF&apos
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="228"/>
         <source>GIMP Palettes (*.gpl)</source>
-        <translation>GIMP Palettes (*.gpl)</translation>
+        <translation>Paletas do GIMP (*.gpl)</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="229"/>
         <source>Palette Image (%1)</source>
-        <translation>Palette Image (%1)</translation>
+        <translation>Imagem da Paleta (%1)</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="230"/>
         <source>All Files (*)</source>
-        <translation>All Files (*)</translation>
+        <translation>Todos os Arquivos (*)</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="231"/>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="244"/>
         <source>Open Palette</source>
-        <translation>Open Palette</translation>
+        <translation>Abrir Paleta</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="245"/>
         <source>Failed to load the palette file
 %1</source>
-        <translation>Failed to load the palette file
+        <translation>Falha ao carregar o arquivo de paleta
 %1</translation>
     </message>
 </context>
@@ -2971,12 +2971,12 @@ Você pode ter que invalidar o sinal &apos;#&apos;, por exemplo &apos;\#FFF&apos
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/gradient_editor.cpp" line="344"/>
         <source>Remove Color</source>
-        <translation>Remove Color</translation>
+        <translation>Remover Cor</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/gradient_editor.cpp" line="352"/>
         <source>Edit Color...</source>
-        <translation>Edit Color...</translation>
+        <translation>Editar Cor...</translation>
     </message>
 </context>
 <context>
@@ -2984,7 +2984,7 @@ Você pode ter que invalidar o sinal &apos;#&apos;, por exemplo &apos;\#FFF&apos
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/gradient_list_model.cpp" line="231"/>
         <source>%1 (%2 colors)</source>
-        <translation>%1 (%2 colors)</translation>
+        <translation>%1 (%2 cores)</translation>
     </message>
 </context>
 <context>
@@ -2992,7 +2992,7 @@ Você pode ter que invalidar o sinal &apos;#&apos;, por exemplo &apos;\#FFF&apos
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/swatch.cpp" line="824"/>
         <source>Clear Color</source>
-        <translation>Clear Color</translation>
+        <translation>Limpar Cor</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/swatch.cpp" line="833"/>
