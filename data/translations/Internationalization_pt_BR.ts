@@ -1061,13 +1061,13 @@ Por favor, resolva-os manualmente no arquivo de configuração.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="356"/>
         <source>Allow multiple flameshot GUI instances simultaneously</source>
-        <translation>Allow multiple flameshot GUI instances simultaneously</translation>
+        <translation>Permitir várias instâncias GUI do flameshot simultaneamente</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="369"/>
         <location filename="../../src/config/generalconf.cpp" line="371"/>
         <source>Automatically close daemon when it is not needed</source>
-        <translation>Automatically close daemon when it is not needed</translation>
+        <translation>Feche automaticamente o daemon quando ele não for necessário</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="381"/>
@@ -1086,7 +1086,7 @@ Por favor, resolva-os manualmente no arquivo de configuração.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="408"/>
         <source>Use large predefined color palette</source>
-        <translation>Use large predefined color palette</translation>
+        <translation>Usar paleta de cores predefinida grande</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="432"/>
@@ -1109,82 +1109,82 @@ Por favor, resolva-os manualmente no arquivo de configuração.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="237"/>
         <source>Show the help message at the beginning in the capture mode</source>
-        <translation>Show the help message at the beginning in the capture mode</translation>
+        <translation>Mostrar a mensagem de ajuda no início no modo de captura</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="247"/>
         <source>Use last region</source>
-        <translation>Use last region</translation>
+        <translation>Usar a última região</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="248"/>
         <source>Uses the last region as the default selection for the next screenshot</source>
-        <translation>Uses the last region as the default selection for the next screenshot</translation>
+        <translation>Usa a última região como a seleção padrão para a próxima captura de tela</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="262"/>
         <source>Show the side panel toggle button in the capture mode</source>
-        <translation>Show the side panel toggle button in the capture mode</translation>
+        <translation>Mostrar o botão de alternância do painel lateral no modo de captura</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="274"/>
         <source>Enable desktop notifications</source>
-        <translation>Enable desktop notifications</translation>
+        <translation>Habilitar notificações da área de trabalho</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="287"/>
         <source>Show icon in the system tray</source>
-        <translation>Show icon in the system tray</translation>
+        <translation>Mostrar ícone na bandeja do sistema</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="302"/>
         <source>Ask for confirmation to delete screenshot from the latest uploads</source>
-        <translation>Ask for confirmation to delete screenshot from the latest uploads</translation>
+        <translation>Peça confirmação para excluir a captura de tela dos uploads mais recentes</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="344"/>
         <source>Check for updates automatically</source>
-        <translation>Check for updates automatically</translation>
+        <translation>Verificar se há atualizações automaticamente</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="357"/>
         <source>This allows you to take screenshots of Flameshot itself for example</source>
-        <translation>This allows you to take screenshots of Flameshot itself for example</translation>
+        <translation>Isso permite que você tire capturas de tela do próprio Flameshot, por exemplo</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="383"/>
         <source>Launch Flameshot daemon when computer is booted</source>
-        <translation>Launch Flameshot daemon when computer is booted</translation>
+        <translation>Inicie o daemon Flameshot quando o computador for inicializado</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="396"/>
         <source>Show the welcome message box in the middle of the screen while taking a screenshot</source>
-        <translation>Show the welcome message box in the middle of the screen while taking a screenshot</translation>
+        <translation>Mostrar a caixa de mensagem de boas-vindas no meio da tela enquanto faz uma captura de tela</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="410"/>
         <source>Use a large predefined color palette</source>
-        <translation>Use a large predefined color palette</translation>
+        <translation>Usar uma paleta de cores predefinida grande</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="420"/>
         <source>Copy on double click</source>
-        <translation>Copy on double click</translation>
+        <translation>Copiar com duplo clique</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="421"/>
         <source>Enable Copy on Double Click</source>
-        <translation>Enable Copy on Double Click</translation>
+        <translation>Habilitar Copiar com Duplo Clique</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="434"/>
         <source>Copy URL and close window after uploading was successful</source>
-        <translation>Copy URL and close window after uploading was successful</translation>
+        <translation>Copiar URL e fechar janela após o upload ser bem-sucedido</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="446"/>
         <source>After copying the screenshot, save it to a file as well</source>
-        <translation>After copying the screenshot, save it to a file as well</translation>
+        <translation>Depois de copiar a captura de tela, salve-a em um arquivo também</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="453"/>
@@ -1204,7 +1204,7 @@ Por favor, resolva-os manualmente no arquivo de configuração.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="489"/>
         <source>Preferred save file extension:</source>
-        <translation>Preferred save file extension:</translation>
+        <translation>Extensão de arquivo de salvamento preferida:</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="518"/>
@@ -1214,7 +1214,7 @@ Por favor, resolva-os manualmente no arquivo de configuração.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="540"/>
         <source>Imgur Application Client ID</source>
-        <translation>Imgur Application Client ID</translation>
+        <translation>ID do Cliente do Aplicativo Imgur</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="571"/>
@@ -1235,23 +1235,23 @@ Por favor, resolva-os manualmente no arquivo de configuração.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="630"/>
         <source>Copy the file path to clipboard after the file is saved</source>
-        <translation>Copy the file path to clipboard after the file is saved</translation>
+        <translation>Copie o caminho do arquivo para a área de transferência depois que o arquivo for salvo</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="641"/>
         <source>Anti-aliasing image when zoom the pinned image</source>
-        <translation>Anti-aliasing image when zoom the pinned image</translation>
+        <translation>Imagem sem serrilhado ao ampliar a imagem fixada</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="643"/>
         <source>After zooming the pinned image, should the image get smoothened or stay pixelated</source>
-        <translation>After zooming the pinned image, should the image get smoothened or stay pixelated</translation>
+        <translation>Depois de aplicar zoom na imagem fixada, a imagem deve ser suavizada ou permanecer pixelada</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="654"/>
         <location filename="../../src/config/generalconf.cpp" line="656"/>
         <source>Upload image without confirmation</source>
-        <translation>Upload image without confirmation</translation>
+        <translation>Enviar imagem sem confirmação</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="672"/>
@@ -1335,18 +1335,18 @@ Por favor, resolva-os manualmente no arquivo de configuração.</translation>
     <message>
         <location filename="../../src/widgets/imguploaddialog.cpp" line="18"/>
         <source>Upload Confirmation</source>
-        <translation>Upload Confirmation</translation>
+        <translation>Confirmação de Envio</translation>
     </message>
     <message>
         <location filename="../../src/widgets/imguploaddialog.cpp" line="22"/>
         <source>Do you want to upload this capture?</source>
-        <translation>Do you want to upload this capture?</translation>
+        <translation>Deseja fazer o envio desta captura?</translation>
     </message>
     <message>
         <location filename="../../src/widgets/imguploaddialog.cpp" line="35"/>
         <location filename="../../src/widgets/imguploaddialog.cpp" line="36"/>
         <source>Upload without confirmation</source>
-        <translation>Upload without confirmation</translation>
+        <translation>Enviar sem confirmação</translation>
     </message>
 </context>
 <context>
@@ -1394,7 +1394,7 @@ Por favor, resolva-os manualmente no arquivo de configuração.</translation>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="51"/>
         <source>Uploading Image</source>
-        <translation>Uploading Image</translation>
+        <translation>Enviando Imagem</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="130"/>
@@ -1434,7 +1434,7 @@ Por favor, resolva-os manualmente no arquivo de configuração.</translation>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="177"/>
         <source>Screenshot copied to clipboard.</source>
-        <translation>Screenshot copied to clipboard.</translation>
+        <translation>Captura de tela copiada para a área de transferência.</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="191"/>
