@@ -1457,7 +1457,7 @@ Por favor, resolva-os manualmente no arquivo de configuração.</translation>
     <message>
         <location filename="../../src/tools/imgupload/imguploadertool.cpp" line="33"/>
         <source>Upload the selection</source>
-        <translation>Carregue a seleção</translation>
+        <translation>Envie a seleção</translation>
     </message>
 </context>
 <context>
