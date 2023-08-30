@@ -548,7 +548,7 @@ Pressione espaço para abrir o painel lateral.</translation>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="716"/>
         <source>The configuration contains an error. Open configuration to resolve.</source>
-        <translation>A configuração contém um erro.  Abra a configuração para resolver.</translation>
+        <translation>A configuração contém um erro. Abra a configuração para resolver.</translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="770"/>
