@@ -720,7 +720,7 @@ Por favor, resolva-os manualmente no arquivo de configuração.</translation>
     <message>
         <location filename="../../src/tools/copy/copytool.cpp" line="34"/>
         <source>Copy selection to clipboard</source>
-        <translation>Copy selection to clipboard</translation>
+        <translation>Copiar seleção para a área de transferência</translation>
     </message>
     <message>
         <source>Copy the selection into the clipboard</source>
@@ -1419,7 +1419,7 @@ Por favor, resolva-os manualmente no arquivo de configuração.</translation>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="134"/>
         <source>Save image</source>
-        <translation>Save image</translation>
+        <translation>Salvar imagem</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="164"/>
@@ -1439,12 +1439,12 @@ Por favor, resolva-os manualmente no arquivo de configuração.</translation>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="191"/>
         <source>Unable to save the screenshot to disk.</source>
-        <translation>Unable to save the screenshot to disk.</translation>
+        <translation>Não foi possível salvar a captura de tela em disco.</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="194"/>
         <source>Screenshot saved.</source>
-        <translation>Screenshot saved.</translation>
+        <translation>Captura de tela salva.</translation>
     </message>
 </context>
 <context>
@@ -1457,7 +1457,7 @@ Por favor, resolva-os manualmente no arquivo de configuração.</translation>
     <message>
         <location filename="../../src/tools/imgupload/imguploadertool.cpp" line="33"/>
         <source>Upload the selection</source>
-        <translation>Upload the selection</translation>
+        <translation>Carregue a seleção</translation>
     </message>
 </context>
 <context>
