@@ -1575,7 +1575,7 @@ Por favor, resolva-os manualmente no arquivo de configuração.</translation>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="124"/>
         <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_infowindow.h" line="124"/>
         <source>Copy Info</source>
-        <translation>Copiar informações</translation>
+        <translation>Copiar Informações</translation>
     </message>
     <message>
         <source>SPACEBAR</source>
