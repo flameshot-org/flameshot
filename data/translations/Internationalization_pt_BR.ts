@@ -600,7 +600,7 @@ Por favor, resolva-os manualmente no arquivo de configuração.</translation>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="112"/>
         <source>Resolve all</source>
-        <translation>Resolva tudo</translation>
+        <translation>Resolver tudo</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="113"/>
