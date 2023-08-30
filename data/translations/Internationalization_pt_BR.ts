@@ -553,7 +553,7 @@ Pressione espaço para abrir o painel lateral.</translation>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="770"/>
         <source>Bad config key &apos;%1&apos; in ConfigHandler. Please report this as a bug.</source>
-        <translation>Chave de configuração inválida &apos;%1&apos; em ConfigHandler. Por favor, relate isso como um bug.</translation>
+        <translation>Chave de configuração inválida &apos;%1&apos; no ConfigHandler. Por favor, relate isso como um bug.</translation>
     </message>
 </context>
 <context>
