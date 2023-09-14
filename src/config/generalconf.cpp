@@ -782,7 +782,7 @@ void GeneralConf::initJpegQuality()
 {
     auto* tobox = new QHBoxLayout();
 
-    int quality =  ConfigHandler().value("jpegQuality").toInt();
+    int quality = ConfigHandler().value("jpegQuality").toInt();
     m_jpegQuality = new QSpinBox();
     m_jpegQuality->setRange(0, 100);
     m_jpegQuality->setToolTip(tr("Quality range of 0-100; Higher number is "
