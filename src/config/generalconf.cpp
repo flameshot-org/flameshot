@@ -19,6 +19,10 @@
 #include <QStandardPaths>
 #include <QTextCodec>
 #include <QVBoxLayout>
+#include <qcheckbox.h>
+#include <qcombobox.h>
+#include <qlabel.h>
+#include <string>
 
 GeneralConf::GeneralConf(QWidget* parent)
   : QWidget(parent)
@@ -56,7 +60,9 @@ GeneralConf::GeneralConf(QWidget* parent)
     initAntialiasingPinZoom();
     initUploadHistoryMax();
     initUndoLimit();
+    initImgUploaderPlugin();
     initUploadClientSecret();
+    initCatboxUserHash();
     initPredefinedColorPaletteLarge();
     initShowSelectionGeometry();
 
@@ -103,7 +109,7 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
     m_screenshotPathFixedCheck->setChecked(config.savePathFixed());
     m_uploadHistoryMax->setValue(config.uploadHistoryMax());
     m_undoLimit->setValue(config.undoLimit());
-
+    m_imgUploaderPlugin->setCurrentText(config.imgUploaderPlugin());
     if (allowEmptySavePath || !config.savePath().isEmpty()) {
         m_savePath->setText(config.savePath());
     }
@@ -449,6 +455,35 @@ void GeneralConf::initCopyAndCloseAfterUpload()
     });
 }
 
+void GeneralConf::initImgUploaderPlugin()
+{
+    auto* box = new QGroupBox(tr("Image Upload Storage"));
+    box->setFlat(true);
+    m_layout->addWidget(box);
+
+    auto* extensionLayout = new QVBoxLayout();
+    box->setLayout(extensionLayout);
+
+    m_imgUploaderPlugin = new QComboBox(this);
+
+    QStringList storageList;
+    storageList.append("imgur");
+    storageList.append("catbox");
+    m_imgUploaderPlugin->addItems(storageList);
+
+    int currentIndex =
+      m_imgUploaderPlugin->findText(ConfigHandler().imgUploaderPlugin());
+    m_imgUploaderPlugin->setCurrentIndex(currentIndex);
+
+    connect(m_imgUploaderPlugin,
+            static_cast<void (QComboBox::*)(const QString&)>(
+              &QComboBox::currentIndexChanged),
+            this,
+            &GeneralConf::imgUploaderPluginChanged);
+
+    extensionLayout->addWidget(m_imgUploaderPlugin);
+}
+
 void GeneralConf::initSaveAfterCopy()
 {
     m_saveAfterCopy = new QCheckBox(tr("Save image after copy"), this);
@@ -566,14 +601,45 @@ void GeneralConf::initUploadClientSecret()
     vboxLayout->addWidget(m_uploadClientKey);
 }
 
+void GeneralConf::initCatboxUserHash()
+{
+    auto* box = new QGroupBox(tr("Catbox User Hash"));
+    box->setFlat(true);
+    m_layout->addWidget(box);
+
+    auto* vboxLayout = new QVBoxLayout();
+    box->setLayout(vboxLayout);
+
+    m_catboxUserHash = new QLineEdit(this);
+    QString foreground = this->palette().windowText().color().name();
+    m_catboxUserHash->setStyleSheet(
+      QStringLiteral("color: %1").arg(foreground));
+    m_catboxUserHash->setText(ConfigHandler().catboxUserHash());
+    connect(m_catboxUserHash,
+            &QLineEdit::editingFinished,
+            this,
+            &GeneralConf::catboxUserHashEdited);
+    vboxLayout->addWidget(m_catboxUserHash);
+}
+
 void GeneralConf::uploadClientKeyEdited()
 {
     ConfigHandler().setUploadClientSecret(m_uploadClientKey->text());
 }
 
+void GeneralConf::catboxUserHashEdited()
+{
+    ConfigHandler().setCatboxUserHash(m_catboxUserHash->text());
+}
+
 void GeneralConf::uploadHistoryMaxChanged(int max)
 {
     ConfigHandler().setUploadHistoryMax(max);
+}
+
+void GeneralConf::imgUploaderPluginChanged(const QString& storage)
+{
+    ConfigHandler().setImgUploaderPlugin(storage);
 }
 
 void GeneralConf::initUndoLimit()
