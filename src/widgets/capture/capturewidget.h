@@ -92,7 +92,7 @@ private slots:
 
 public:
     void removeToolObject(int index = -1);
-    void showxywh(bool show = true);
+    void showxywh();
 
 protected:
     void paintEvent(QPaintEvent* paintEvent) override;
