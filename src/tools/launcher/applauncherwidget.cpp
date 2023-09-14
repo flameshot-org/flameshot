@@ -305,6 +305,17 @@ void AppLauncherWidget::keyPressEvent(QKeyEvent* keyEvent)
 {
     if (keyEvent->key() == Qt::Key_Escape) {
         close();
+    } else if (keyEvent->key() == Qt::Key_Return) {
+        auto* widget = (QListWidget*)m_tabWidget->currentWidget();
+        if (m_filterList->isVisible())
+            widget = m_filterList;
+        auto* item = widget->currentItem();
+        if (item == nullptr) {
+            item = widget->item(0);
+            widget->setCurrentItem(item);
+        }
+        QModelIndex const idx = widget->currentIndex();
+        AppLauncherWidget::launch(idx);
     } else {
         QWidget::keyPressEvent(keyEvent);
     }
