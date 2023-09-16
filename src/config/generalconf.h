@@ -57,6 +57,7 @@ private slots:
     void setSaveAsFileExtension(const QString& extension);
     void setGeometryLocation(int index);
     void setSelGeoHideTime(int v);
+    void setJpegQuality(int v);
 
 private:
     const QString chooseFolder(const QString& currentPath = "");
@@ -90,6 +91,7 @@ private:
     void initUploadClientSecret();
     void initSaveLastRegion();
     void initShowSelectionGeometry();
+    void initJpegQuality();
 
     void _updateComponents(bool allowEmptySavePath);
 
@@ -133,4 +135,5 @@ private:
     QCheckBox* m_showSelectionGeometry;
     QComboBox* m_selectGeometryLocation;
     QSpinBox* m_xywhTimeout;
+    QSpinBox* m_jpegQuality;
 };
