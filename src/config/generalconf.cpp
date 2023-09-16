@@ -64,6 +64,7 @@ GeneralConf::GeneralConf(QWidget* parent)
 
     initShowMagnifier();
     initSquareMagnifier();
+    initJpegQuality();
     // this has to be at the end
     initConfigButtons();
     updateComponents();
@@ -777,9 +778,34 @@ void GeneralConf::initShowSelectionGeometry()
     vboxLayout->addStretch();
 }
 
+void GeneralConf::initJpegQuality()
+{
+    auto* tobox = new QHBoxLayout();
+
+    int quality = ConfigHandler().value("jpegQuality").toInt();
+    m_jpegQuality = new QSpinBox();
+    m_jpegQuality->setRange(0, 100);
+    m_jpegQuality->setToolTip(tr("Quality range of 0-100; Higher number is "
+                                 "better quality and larger file size"));
+    m_jpegQuality->setValue(quality);
+    tobox->addWidget(m_jpegQuality);
+    tobox->addWidget(new QLabel(tr("JPEG Quality")));
+
+    m_scrollAreaLayout->addLayout(tobox);
+    connect(m_jpegQuality,
+            static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged),
+            this,
+            &GeneralConf::setJpegQuality);
+}
+
 void GeneralConf::setSelGeoHideTime(int v)
 {
     ConfigHandler().setValue("showSelectionGeometryHideTime", v);
+}
+
+void GeneralConf::setJpegQuality(int v)
+{
+    ConfigHandler().setJpegQuality(v);
 }
 
 void GeneralConf::setGeometryLocation(int index)

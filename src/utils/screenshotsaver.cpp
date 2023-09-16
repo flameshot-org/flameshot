@@ -35,7 +35,16 @@ bool saveToFilesystem(const QPixmap& capture,
       path, ConfigHandler().saveAsFileExtension());
     QFile file{ completePath };
     file.open(QIODevice::WriteOnly);
-    bool okay = capture.save(&file);
+
+    bool okay;
+    QString saveExtension;
+    saveExtension = QFileInfo(completePath).suffix().toLower();
+    if (saveExtension == "jpg" || saveExtension == "jpeg") {
+        okay = capture.save(&file, nullptr, ConfigHandler().jpegQuality());
+    } else {
+        okay = capture.save(&file);
+    }
+
     QString saveMessage = messagePrefix;
     QString notificationPath = completePath;
     if (!saveMessage.isEmpty()) {
@@ -97,6 +106,9 @@ void saveToClipboardMime(const QPixmap& capture, const QString& imageType)
     QByteArray array;
     QBuffer buffer{ &array };
     QImageWriter imageWriter{ &buffer, imageType.toUpper().toUtf8() };
+    if (imageType == "jpeg") {
+        imageWriter.setQuality(ConfigHandler().jpegQuality());
+    }
     imageWriter.write(capture.toImage());
 
     QPixmap formattedPixmap;
@@ -189,7 +201,13 @@ bool saveToFilesystemGUI(const QPixmap& capture)
     QFile file{ savePath };
     file.open(QIODevice::WriteOnly);
 
-    okay = capture.save(&file);
+    QString saveExtension;
+    saveExtension = QFileInfo(savePath).suffix().toLower();
+    if (saveExtension == "jpg" || saveExtension == "jpeg") {
+        okay = capture.save(&file, nullptr, ConfigHandler().jpegQuality());
+    } else {
+        okay = capture.save(&file);
+    }
 
     if (okay) {
         QString pathNoFile =
