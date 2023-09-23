@@ -190,7 +190,8 @@ void ShortcutsWidget::loadShortcuts()
     appendShortcut("TYPE_MOVE_UP", tr("Move selection up 1px"));
     appendShortcut("TYPE_MOVE_DOWN", tr("Move selection down 1px"));
     appendShortcut("TYPE_COMMIT_CURRENT_TOOL", tr("Commit text in text area"));
-    appendShortcut("TYPE_DELETE_CURRENT_TOOL", tr("Delete current tool"));
+    appendShortcut("TYPE_DELETE_CURRENT_TOOL",
+                   tr("Delete selected drawn object"));
 
     // non-editable shortcuts have an empty shortcut name
 
