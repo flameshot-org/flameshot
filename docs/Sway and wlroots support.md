@@ -24,6 +24,11 @@ exec hash dbus-update-activation-environment 2>/dev/null && \
      dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
 ```
 
+To ensure that Flameshot is correctly positioned on multiple outputs (monitors) add this rule to your Sway config:
+```
+for_window [app_id="flameshot"] border pixel 0, floating enable, fullscreen disable, move absolute position 0 0
+```
+
 ## Troubleshooting
 
 Q) Flameshot doesn't take a screenshot, it just hangs!
