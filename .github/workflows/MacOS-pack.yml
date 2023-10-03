@@ -45,7 +45,7 @@ jobs:
 
     steps:
       - name: Checkout Source code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Install Qt
         run: brew install qt@5 cmake
