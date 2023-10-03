@@ -6,22 +6,22 @@
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/abstract_widget_list.cpp" line="67"/>
         <source>Add New</source>
-        <translation>Add New</translation>
+        <translation>Lägg till ny</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/abstract_widget_list.cpp" line="118"/>
         <source>Move Up</source>
-        <translation>Move Up</translation>
+        <translation>Flytta upp</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/abstract_widget_list.cpp" line="119"/>
         <source>Move Down</source>
-        <translation>Move Down</translation>
+        <translation>Flytta ner</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/abstract_widget_list.cpp" line="120"/>
         <source>Remove</source>
-        <translation>Remove</translation>
+        <translation>Ta bort</translation>
     </message>
 </context>
 <context>
@@ -29,12 +29,12 @@
     <message>
         <location filename="../../src/tools/accept/accepttool.cpp" line="31"/>
         <source>Accept</source>
-        <translation>Accept</translation>
+        <translation>Acceptera</translation>
     </message>
     <message>
         <location filename="../../src/tools/accept/accepttool.cpp" line="41"/>
         <source>Accept the capture</source>
-        <translation>Accept the capture</translation>
+        <translation>Acceptera skärmklippet</translation>
     </message>
 </context>
 <context>
@@ -65,7 +65,7 @@
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="59"/>
         <source>Keep open after selection</source>
-        <translation>Håll öppen efter urval</translation>
+        <translation>Håll öppen efter markering</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="95"/>
@@ -117,27 +117,27 @@
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="32"/>
         <source>Rectangular Region</source>
-        <translation>Rectangular Region</translation>
+        <translation>Rektangulärt område</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="38"/>
         <source>Full Screen (Current Display)</source>
-        <translation>Full Screen (Current Display)</translation>
+        <translation>Helskärm (Aktuell skärm)</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="41"/>
         <source>Full Screen (All Monitors)</source>
-        <translation>Full Screen (All Monitors)</translation>
+        <translation>Helskärm (Alla skärmar)</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="44"/>
         <source>No Delay</source>
-        <translation>No Delay</translation>
+        <translation>Ingen fördröjning</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="52"/>
         <source> second</source>
-        <translation> second</translation>
+        <translation> sekund</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="100"/>
@@ -146,7 +146,7 @@
         <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_capturelauncher.h" line="185"/>
         <location filename="../../src/widgets/capturelauncher.cpp" line="52"/>
         <source> seconds</source>
-        <translation> seconds</translation>
+        <translation> sekunder</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="165"/>
@@ -154,7 +154,7 @@
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="184"/>
         <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_capturelauncher.h" line="186"/>
         <source>Take new screenshot</source>
-        <translation>Take new screenshot</translation>
+        <translation>Ta ett nytt skärmklipp</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="66"/>
@@ -162,7 +162,7 @@
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="180"/>
         <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_capturelauncher.h" line="181"/>
         <source>Area:</source>
-        <translation>Area:</translation>
+        <translation>Område:</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="14"/>
@@ -170,7 +170,7 @@
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="176"/>
         <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_capturelauncher.h" line="178"/>
         <source>Capture Launcher</source>
-        <translation>Capture Launcher</translation>
+        <translation>Klippstartare</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="34"/>
@@ -178,7 +178,7 @@
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="177"/>
         <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_capturelauncher.h" line="179"/>
         <source>TextLabel</source>
-        <translation>TextLabel</translation>
+        <translation>TextEtikett</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="51"/>
@@ -186,7 +186,7 @@
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="178"/>
         <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_capturelauncher.h" line="180"/>
         <source>Capture Mode</source>
-        <translation>Capture Mode</translation>
+        <translation>Klippläge</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="80"/>
@@ -194,7 +194,7 @@
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="181"/>
         <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_capturelauncher.h" line="183"/>
         <source>Delay:</source>
-        <translation>Delay:</translation>
+        <translation>Fördröjning:</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="93"/>
@@ -202,7 +202,7 @@
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="183"/>
         <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_capturelauncher.h" line="184"/>
         <source>WxH+x+y</source>
-        <translation>WxH+x+y</translation>
+        <translation>BxH+x+y</translation>
     </message>
 </context>
 <context>
@@ -215,37 +215,37 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="382"/>
         <source>Mouse</source>
-        <translation>Mouse</translation>
+        <translation>Mus</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="382"/>
         <source>Select screenshot area</source>
-        <translation>Select screenshot area</translation>
+        <translation>Markera skärmklippområde</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="397"/>
         <source>Mouse Wheel</source>
-        <translation type="unfinished">Scrollhjul</translation>
+        <translation>Mushjul</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="397"/>
         <source>Change tool size</source>
-        <translation>Change tool size</translation>
+        <translation>Ändra verktygsstorlek</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="398"/>
         <source>Right Click</source>
-        <translation type="unfinished">Högerklick</translation>
+        <translation>Högerklick</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="398"/>
         <source>Show color picker</source>
-        <translation>Show color picker</translation>
+        <translation>Visa färgväljare</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="400"/>
         <source>Open side panel</source>
-        <translation>Open side panel</translation>
+        <translation>Öppna sidopanel</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="401"/>
@@ -255,17 +255,17 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="401"/>
         <source>Exit</source>
-        <translation type="unfinished">Stäng</translation>
+        <translation>Avsluta</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="509"/>
         <source>Flameshot has lost focus. Keyboard shortcuts won&apos;t work until you click somewhere.</source>
-        <translation>Flameshot has lost focus. Keyboard shortcuts won&apos;t work until you click somewhere.</translation>
+        <translation>Flameshot har förlorat fokus. Kortkommandon kommer inte att fungera förrän du klickar någonstans.</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="515"/>
         <source>Configuration error resolved. Launch `flameshot gui` again to apply it.</source>
-        <translation>Configuration error resolved. Launch `flameshot gui` again to apply it.</translation>
+        <translation>Konfigurationsfel löst. Starta &quot;flameshot gui&quot; igen för att tillämpa det.</translation>
     </message>
     <message>
         <source>Select an area with the mouse, or press Esc to exit.
@@ -282,7 +282,7 @@ Tryck Space för att öppna sidopanelen.</translation>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="949"/>
         <source>Tool Settings</source>
-        <translation>Tool Settings</translation>
+        <translation>Verktygsinställningar</translation>
     </message>
 </context>
 <context>
@@ -290,12 +290,12 @@ Tryck Space för att öppna sidopanelen.</translation>
     <message>
         <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="68"/>
         <source>Circle Counter</source>
-        <translation>Circle Counter</translation>
+        <translation>Cirkelräknare</translation>
     </message>
     <message>
         <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="86"/>
         <source>Add an autoincrementing counter bubble</source>
-        <translation>Add an autoincrementing counter bubble</translation>
+        <translation>Lägg till en automatisk uppräkningsbubbla</translation>
     </message>
 </context>
 <context>
@@ -319,7 +319,7 @@ Tryck Space för att öppna sidopanelen.</translation>
         <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="318"/>
         <location filename="../../cmake-build-relwithdebinfo/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="318"/>
         <source>Select Color</source>
-        <translation>Select Color</translation>
+        <translation>Välj färg</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="55"/>
@@ -327,7 +327,7 @@ Tryck Space för att öppna sidopanelen.</translation>
         <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="319"/>
         <location filename="../../cmake-build-relwithdebinfo/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="319"/>
         <source>Saturation</source>
-        <translation>Saturation</translation>
+        <translation>Mättnad</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="62"/>
@@ -335,7 +335,7 @@ Tryck Space för att öppna sidopanelen.</translation>
         <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="320"/>
         <location filename="../../cmake-build-relwithdebinfo/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="320"/>
         <source>Hue</source>
-        <translation>Hue</translation>
+        <translation>Nyans</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="79"/>
@@ -351,7 +351,7 @@ Tryck Space för att öppna sidopanelen.</translation>
         <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="322"/>
         <location filename="../../cmake-build-relwithdebinfo/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="322"/>
         <source>Blue</source>
-        <translation>Blue</translation>
+        <translation>Blå</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="123"/>
@@ -359,7 +359,7 @@ Tryck Space för att öppna sidopanelen.</translation>
         <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="323"/>
         <location filename="../../cmake-build-relwithdebinfo/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="323"/>
         <source>Value</source>
-        <translation>Value</translation>
+        <translation>Värde</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="130"/>
@@ -367,7 +367,7 @@ Tryck Space för att öppna sidopanelen.</translation>
         <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="324"/>
         <location filename="../../cmake-build-relwithdebinfo/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="324"/>
         <source>Green</source>
-        <translation>Green</translation>
+        <translation>Grön</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="137"/>
@@ -375,7 +375,7 @@ Tryck Space för att öppna sidopanelen.</translation>
         <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="325"/>
         <location filename="../../cmake-build-relwithdebinfo/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="325"/>
         <source>Alpha</source>
-        <translation>Alpha</translation>
+        <translation>Alfa</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="144"/>
@@ -383,7 +383,7 @@ Tryck Space för att öppna sidopanelen.</translation>
         <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="326"/>
         <location filename="../../cmake-build-relwithdebinfo/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="326"/>
         <source>Red</source>
-        <translation>Red</translation>
+        <translation>Röd</translation>
     </message>
 </context>
 <context>
@@ -391,42 +391,42 @@ Tryck Space för att öppna sidopanelen.</translation>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="58"/>
         <source>Accept color</source>
-        <translation>Accept color</translation>
+        <translation>Acceptera färg</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="58"/>
         <source>Enter or Left Click</source>
-        <translation></translation>
+        <translation>Retur eller vänsterklick</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="59"/>
         <source>Precisely select color</source>
-        <translation>Precisely select color</translation>
+        <translation>Välj färg exakt</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="59"/>
         <source>Hold Left Click</source>
-        <translation></translation>
+        <translation>Håll ner vänster musknapp</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="60"/>
         <source>Toggle magnifier</source>
-        <translation>Toggle magnifier</translation>
+        <translation>Förstoringsglas på/av</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="60"/>
         <source>Space or Right Click</source>
-        <translation></translation>
+        <translation>Blanksteg eller högerklick</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="61"/>
         <source>Cancel</source>
-        <translation>Cancel</translation>
+        <translation>Avbryt</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="61"/>
         <source>Esc</source>
-        <translation type="unfinished">Esc</translation>
+        <translation>Esc</translation>
     </message>
 </context>
 <context>
@@ -434,68 +434,68 @@ Tryck Space för att öppna sidopanelen.</translation>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="40"/>
         <source>Edit Preset:</source>
-        <translation>Edit Preset:</translation>
+        <translation>Redigera förinställning:</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="45"/>
         <source>Enter color to update preset</source>
-        <translation>Enter color to update preset</translation>
+        <translation>Ange färg för att uppdatera förinställning</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="65"/>
         <source>Update</source>
-        <translation type="unfinished">Update</translation>
+        <translation>Uppdatera</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="67"/>
         <source>Press button to update the selected preset</source>
-        <translation>Press button to update the selected preset</translation>
+        <translation>Tryck på knappen för att uppdatera den valda förinställningen</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="74"/>
         <source>Delete</source>
-        <translation>Delete</translation>
+        <translation>Ta bort</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="76"/>
         <source>Press button to delete the selected preset</source>
-        <translation>Press button to delete the selected preset</translation>
+        <translation>Tryck på knappen för att ta bort den valda förinställningen</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="90"/>
         <source>Add Preset:</source>
-        <translation>Add Preset:</translation>
+        <translation>Lägg till förinställning:</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="96"/>
         <source>Enter color manually or select it using the color-wheel</source>
-        <translation>Enter color manually or select it using the color-wheel</translation>
+        <translation>Ange färg manuellt eller välj den med färghjulet</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="106"/>
         <source>Add</source>
-        <translation>Add</translation>
+        <translation>Lägg till</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="107"/>
         <source>Press button to add preset</source>
-        <translation>Press button to add preset</translation>
+        <translation>Tryck på knappen för att lägga till förinställning</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="130"/>
         <location filename="../../src/config/colorpickereditor.cpp" line="147"/>
         <source>Error</source>
-        <translation type="unfinished">Fel</translation>
+        <translation>Fel</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="131"/>
         <source>Unable to add preset. Maximum limit reached.</source>
-        <translation>Unable to add preset. Maximum limit reached.</translation>
+        <translation>Kan inte lägga till förinställning. Maxgräns uppnådd.</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="148"/>
         <source>Unable to remove preset. Minimum limit reached.</source>
-        <translation>Unable to remove preset. Minimum limit reached.</translation>
+        <translation>Kan inte ta bort förinställningen. Minimigränsen har nåtts.</translation>
     </message>
 </context>
 <context>
@@ -503,7 +503,7 @@ Tryck Space för att öppna sidopanelen.</translation>
     <message>
         <location filename="../../src/config/configerrordetails.cpp" line="20"/>
         <source>Configuration errors</source>
-        <translation>Configuration errors</translation>
+        <translation>Konfigurationsfel</translation>
     </message>
 </context>
 <context>
@@ -512,44 +512,44 @@ Tryck Space för att öppna sidopanelen.</translation>
         <location filename="../../src/utils/confighandler.cpp" line="552"/>
         <source>Unrecognized setting: &apos;%1&apos;
 </source>
-        <translation>Unrecognized setting: &apos;%1&apos;
+        <translation>Okänd inställning: &apos;%1&apos;
 </translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="560"/>
         <source>Unrecognized shortcut name: &apos;%1&apos;.
 </source>
-        <translation>Unrecognized shortcut name: &apos;%1&apos;.
+        <translation>Okänt genvägsnamn: &apos;%1&apos;.
 </translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="603"/>
         <source>Shortcut conflict: &apos;%1&apos; and &apos;%2&apos; have the same shortcut: %3
 </source>
-        <translation>Shortcut conflict: &apos;%1&apos; and &apos;%2&apos; have the same shortcut: %3
+        <translation>Genvägskonflikt: &apos;%1&apos; och &apos;%2&apos; har samma snabbtangent: %3
 </translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="643"/>
         <source>Bad value in &apos;%1&apos;. Expected: %2
 </source>
-        <translation>Bad value in &apos;%1&apos;. Expected: %2
+        <translation>Felaktigt värde i &apos;%1&apos;. Förväntat: %2
 </translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="693"/>
         <source>You have successfully resolved the configuration error.</source>
-        <translation>You have successfully resolved the configuration error.</translation>
+        <translation>Du har löst konfigurationsfelet.</translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="716"/>
         <source>The configuration contains an error. Open configuration to resolve.</source>
-        <translation>The configuration contains an error. Open configuration to resolve.</translation>
+        <translation>Konfigurationen innehåller ett fel. Öppna konfigurationen för att lösa det.</translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="770"/>
         <source>Bad config key &apos;%1&apos; in ConfigHandler. Please report this as a bug.</source>
-        <translation>Bad config key &apos;%1&apos; in ConfigHandler. Please report this as a bug.</translation>
+        <translation>Felaktig konfigurationsnyckel &quot;%1&quot; i Konfigurationshanteraren. Rapportera detta som ett fel.</translation>
     </message>
 </context>
 <context>
@@ -557,56 +557,56 @@ Tryck Space för att öppna sidopanelen.</translation>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="14"/>
         <source>Resolve configuration errors</source>
-        <translation>Resolve configuration errors</translation>
+        <translation>Lös konfigurationsfel</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="50"/>
         <source>&lt;b&gt;You must resolve all errors before continuing:&lt;/b&gt;</source>
-        <translation>&lt;b&gt;You must resolve all errors before continuing:&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Du måste lösa alla fel innan du fortsätter:&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="61"/>
         <source>Reset</source>
-        <translation type="unfinished">Återställ</translation>
+        <translation>Återställ</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="63"/>
         <source>Reset to the default value.</source>
-        <translation>Reset to the default value.</translation>
+        <translation>Återställ till standardvärde.</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="77"/>
         <source>Remove</source>
-        <translation>Remove</translation>
+        <translation>Ta bort</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="79"/>
         <source>Remove this setting.</source>
-        <translation>Remove this setting.</translation>
+        <translation>Ta bort denna inställning.</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="90"/>
         <source>Some keyboard shortcuts have conflicts.
 This will NOT prevent flameshot from starting.
 Please solve them manually in the configuration file.</source>
-        <translation>Some keyboard shortcuts have conflicts.
-This will NOT prevent flameshot from starting.
-Please solve them manually in the configuration file.</translation>
+        <translation>Vissa kortkommandon har konflikter.
+Detta förhindrar INTE att flameshot startar.
+Lös dem manuellt i konfigurationsfilen.</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="112"/>
         <source>Resolve all</source>
-        <translation>Resolve all</translation>
+        <translation>Lös alla</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="113"/>
         <source>Resolve all listed errors.</source>
-        <translation>Resolve all listed errors.</translation>
+        <translation>Lös alla listade fel.</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="125"/>
         <source>Details</source>
-        <translation>Details</translation>
+        <translation>Detaljinfo</translation>
     </message>
 </context>
 <context>
@@ -614,7 +614,7 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="40"/>
         <source>Configuration</source>
-        <translation>Konfiguration</translation>
+        <translation>Inställningar</translation>
     </message>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="59"/>
@@ -624,7 +624,7 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="69"/>
         <source>Filename Editor</source>
-        <translation>Redigera filnamn</translation>
+        <translation>Filnamnsredigerare</translation>
     </message>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="78"/>
@@ -634,17 +634,17 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="87"/>
         <source>Shortcuts</source>
-        <translation>Shortcuts</translation>
+        <translation>Kortkommandon</translation>
     </message>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="120"/>
         <source>Resolve</source>
-        <translation>Resolve</translation>
+        <translation>Lös</translation>
     </message>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="124"/>
         <source>&lt;b&gt;Configuration file has errors. Resolve them before continuing.&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Configuration file has errors. Resolve them before continuing.&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Konfigurationsfilen innehåller fel. Lös dem innan du fortsätter.&lt;/b&gt;</translation>
     </message>
 </context>
 <context>
@@ -712,7 +712,7 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/tools/copy/copytool.cpp" line="34"/>
         <source>Copy selection to clipboard</source>
-        <translation>Copy selection to clipboard</translation>
+        <translation>Kopiera markerat till urklipp</translation>
     </message>
     <message>
         <source>Copy the selection into the clipboard</source>
@@ -731,12 +731,12 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/tools/exit/exittool.cpp" line="23"/>
         <source>Exit</source>
-        <translation>Stäng</translation>
+        <translation>Avsluta</translation>
     </message>
     <message>
         <location filename="../../src/tools/exit/exittool.cpp" line="33"/>
         <source>Leave the capture screen</source>
-        <translation>Lämna skärmklippsvy</translation>
+        <translation>Lämna skärmklippsvyn</translation>
     </message>
 </context>
 <context>
@@ -769,7 +769,7 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="78"/>
         <source>Restore</source>
-        <translation>Restore</translation>
+        <translation>Återställ</translation>
     </message>
     <message>
         <source>Reset</source>
@@ -788,7 +788,7 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="89"/>
         <source>Deletes the name</source>
-        <translation>Raderar namnet</translation>
+        <translation>Tar bort namnet</translation>
     </message>
 </context>
 <context>
@@ -796,17 +796,17 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="111"/>
         <source>Error</source>
-        <translation type="unfinished">Fel</translation>
+        <translation>Fel</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="111"/>
         <source>Unable to close active modal widgets</source>
-        <translation type="unfinished">Unable to close active modal widgets</translation>
+        <translation>Kunde inte stänga aktiva modala widgetar</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="400"/>
         <source>URL copied to clipboard.</source>
-        <translation>URL copied to clipboard.</translation>
+        <translation>URL kopierad till urklipp.</translation>
     </message>
 </context>
 <context>
@@ -814,22 +814,22 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/core/flameshotdaemon.cpp" line="363"/>
         <source>New version %1 is available</source>
-        <translation type="unfinished">New version %1 is available</translation>
+        <translation>Ny version %1 är tillgänglig</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshotdaemon.cpp" line="369"/>
         <source>You have the latest version</source>
-        <translation type="unfinished">You have the latest version</translation>
+        <translation>Du har den senaste versionen</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshotdaemon.cpp" line="378"/>
         <source>Failed to get information about the latest version.</source>
-        <translation type="unfinished">Failed to get information about the latest version.</translation>
+        <translation>Kunde inte hämta info om den senaste versionen.</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshotdaemon.cpp" line="399"/>
         <source>Unable to connect via DBus</source>
-        <translation type="unfinished">Kunde inte ansluta via DBus</translation>
+        <translation>Kunde inte ansluta via DBus</translation>
     </message>
 </context>
 <context>
@@ -943,7 +943,7 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="205"/>
         <source>Are you sure you want to reset the configuration?</source>
-        <translation>Är du säker på att du vill återställa konfigurationen?</translation>
+        <translation>Vill du verkligen återställa konfigurationen?</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="236"/>
@@ -957,7 +957,7 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="260"/>
         <source>Show the side panel button</source>
-        <translation>Show the side panel button</translation>
+        <translation>Visa sidpanelknappen</translation>
     </message>
     <message>
         <source>Show the side panel toggle button in the capture mode.</source>
@@ -966,12 +966,12 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="273"/>
         <source>Show desktop notifications</source>
-        <translation>Visa skrivbordsnotifieringar</translation>
+        <translation>Visa skrivbordsavisering</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="286"/>
         <source>Show tray icon</source>
-        <translation>Visa ikon i systemfältet</translation>
+        <translation>Visa systemfältsikon</translation>
     </message>
     <message>
         <source>Show the systemtray icon</source>
@@ -980,7 +980,7 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="299"/>
         <source>Confirmation required to delete screenshot from the latest uploads</source>
-        <translation>Confirmation required to delete screenshot from the latest uploads</translation>
+        <translation>Bekräftelse krävs för att ta bort skärmklipp från tidigare uppladdningar</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="314"/>
@@ -1000,23 +1000,23 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="343"/>
         <source>Automatic check for updates</source>
-        <translation>Automatic check for updates</translation>
+        <translation>Sök automatiskt efter uppdateringar</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="356"/>
         <source>Allow multiple flameshot GUI instances simultaneously</source>
-        <translation>Allow multiple flameshot GUI instances simultaneously</translation>
+        <translation>Tillåt flera flameshot-instanser samtidigt</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="369"/>
         <location filename="../../src/config/generalconf.cpp" line="371"/>
         <source>Automatically close daemon when it is not needed</source>
-        <translation>Automatically close daemon when it is not needed</translation>
+        <translation>Avsluta tjänsten automatiskt när den inte behövs</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="381"/>
         <source>Launch at startup</source>
-        <translation>Starta vid uppstart</translation>
+        <translation>Starta vid systemstart</translation>
     </message>
     <message>
         <source>Launch Flameshot</source>
@@ -1025,17 +1025,17 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="393"/>
         <source>Show welcome message on launch</source>
-        <translation>Show welcome message on launch</translation>
+        <translation>Visa välkomstmeddelande vid uppstart</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="408"/>
         <source>Use large predefined color palette</source>
-        <translation>Use large predefined color palette</translation>
+        <translation>Använd stor fördefinierad färgpalett</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="432"/>
         <source>Copy URL after upload</source>
-        <translation>Copy URL after upload</translation>
+        <translation>Kopiera URL efter uppladdning</translation>
     </message>
     <message>
         <source>Copy URL and close window after upload</source>
@@ -1044,7 +1044,7 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="444"/>
         <source>Save image after copy</source>
-        <translation>Save image after copy</translation>
+        <translation>Spara bild efter kopiering</translation>
     </message>
     <message>
         <source>Save image file after copying it</source>
@@ -1053,179 +1053,179 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="237"/>
         <source>Show the help message at the beginning in the capture mode</source>
-        <translation>Show the help message at the beginning in the capture mode</translation>
+        <translation>Visa hjälpmeddelandet i början i klippläget</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="247"/>
         <source>Use last region</source>
-        <translation>Use last region</translation>
+        <translation>Använd senaste område</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="248"/>
         <source>Uses the last region as the default selection for the next screenshot</source>
-        <translation>Uses the last region as the default selection for the next screenshot</translation>
+        <translation>Använder det sist använda området som standardval för nästa skärmklipp</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="262"/>
         <source>Show the side panel toggle button in the capture mode</source>
-        <translation>Show the side panel toggle button in the capture mode</translation>
+        <translation>Visa växlingsknappen på sidopanelen i klippläget</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="274"/>
         <source>Enable desktop notifications</source>
-        <translation>Enable desktop notifications</translation>
+        <translation>Aktivera skrivbordsavisering</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="287"/>
         <source>Show icon in the system tray</source>
-        <translation>Show icon in the system tray</translation>
+        <translation>Visa ikon i systemfältet</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="302"/>
         <source>Ask for confirmation to delete screenshot from the latest uploads</source>
-        <translation>Ask for confirmation to delete screenshot from the latest uploads</translation>
+        <translation>Be om bekräftelse för att ta bort skärmklipp från tidigare uppladdningar</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="344"/>
         <source>Check for updates automatically</source>
-        <translation>Check for updates automatically</translation>
+        <translation>Sök efter uppdateringar automatiskt</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="357"/>
         <source>This allows you to take screenshots of Flameshot itself for example</source>
-        <translation>This allows you to take screenshots of Flameshot itself for example</translation>
+        <translation>Detta gör att du kan ta skärmklipp av Flameshot själv till exempel</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="383"/>
         <source>Launch Flameshot daemon when computer is booted</source>
-        <translation>Launch Flameshot daemon when computer is booted</translation>
+        <translation>Starta Flameshot-tjänsten när datorn startas</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="396"/>
         <source>Show the welcome message box in the middle of the screen while taking a screenshot</source>
-        <translation>Show the welcome message box in the middle of the screen while taking a screenshot</translation>
+        <translation>Visa välkomstmeddelandet mitt på skärmen medan du tar en skärmdump</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="410"/>
         <source>Use a large predefined color palette</source>
-        <translation>Use a large predefined color palette</translation>
+        <translation>Använd en stor fördefinierad färgpalett</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="420"/>
         <source>Copy on double click</source>
-        <translation>Copy on double click</translation>
+        <translation>Kopiera vid dubbelklick</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="421"/>
         <source>Enable Copy on Double Click</source>
-        <translation>Enable Copy on Double Click</translation>
+        <translation>Aktivera kopiering vid dubbelklick</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="434"/>
         <source>Copy URL and close window after uploading was successful</source>
-        <translation>Copy URL and close window after uploading was successful</translation>
+        <translation>Kopiera URL och stäng fönstret efter lyckad uppladdning</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="446"/>
         <source>After copying the screenshot, save it to a file as well</source>
-        <translation>After copying the screenshot, save it to a file as well</translation>
+        <translation>När du har kopierat skärmklippet sparas den också som en fil</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="453"/>
         <source>Save Path</source>
-        <translation>Save Path</translation>
+        <translation>Sparmapp</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="469"/>
         <source>Change...</source>
-        <translation>Change...</translation>
+        <translation>Ändra...</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="477"/>
         <source>Use fixed path for screenshots to save</source>
-        <translation>Use fixed path for screenshots to save</translation>
+        <translation>Använd en fast sökväg för att spara skärmklipp</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="489"/>
         <source>Preferred save file extension:</source>
-        <translation>Preferred save file extension:</translation>
+        <translation>Föredraget filnamnstillägg:</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="518"/>
         <source>Latest Uploads Max Size</source>
-        <translation>Latest Uploads Max Size</translation>
+        <translation>Max antal tidigare uppladdningar</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="540"/>
         <source>Imgur Application Client ID</source>
-        <translation>Imgur Application Client ID</translation>
+        <translation>Imgur klient-ID</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="571"/>
         <source>Undo limit</source>
-        <translation>Undo limit</translation>
+        <translation>Ångergräns</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="597"/>
         <location filename="../../src/config/generalconf.cpp" line="599"/>
         <source>Use JPG format for clipboard (PNG default)</source>
-        <translation>Use JPG format for clipboard (PNG default)</translation>
+        <translation>Använd JPG-format för urklipp (PNG är standard)</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="629"/>
         <source>Copy file path after save</source>
-        <translation>Copy file path after save</translation>
+        <translation>Kopiera filsökväg efter sparat</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="630"/>
         <source>Copy the file path to clipboard after the file is saved</source>
-        <translation>Copy the file path to clipboard after the file is saved</translation>
+        <translation>Kopiera filsökvägen till urklipp när filen har sparats</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="641"/>
         <source>Anti-aliasing image when zoom the pinned image</source>
-        <translation>Anti-aliasing image when zoom the pinned image</translation>
+        <translation>Kantutjämna vid inzoomning av fäst bild</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="643"/>
         <source>After zooming the pinned image, should the image get smoothened or stay pixelated</source>
-        <translation>After zooming the pinned image, should the image get smoothened or stay pixelated</translation>
+        <translation>Efter att ha zoomat in den fästa bilden, ska bilden jämnas ut eller förbli pixelerad</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="654"/>
         <location filename="../../src/config/generalconf.cpp" line="656"/>
         <source>Upload image without confirmation</source>
-        <translation>Upload image without confirmation</translation>
+        <translation>Ladda upp bild utan bekräftelse</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="672"/>
         <source>Choose a Folder</source>
-        <translation>Choose a Folder</translation>
+        <translation>Välj en mapp</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="681"/>
         <source>Unable to write to directory.</source>
-        <translation>Unable to write to directory.</translation>
+        <translation>Det går inte att skriva till katalogen.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="690"/>
         <source>Show magnifier</source>
-        <translation>Show magnifier</translation>
+        <translation>Visa förstoringsglas</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="691"/>
         <source>Enable a magnifier while selecting the screenshot area</source>
-        <translation>Enable a magnifier while selecting the screenshot area</translation>
+        <translation>Aktivera ett förstoringsglas vid markering av skärmklippområde</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="702"/>
         <source>Square shaped magnifier</source>
-        <translation>Square shaped magnifier</translation>
+        <translation>Fyrkantigt förstoringsglas</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="703"/>
         <source>Make the magnifier to be square-shaped</source>
-        <translation>Make the magnifier to be square-shaped</translation>
+        <translation>Gör förstoringsglaset fyrkantigt</translation>
     </message>
 </context>
 <context>
@@ -1279,18 +1279,18 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/widgets/imguploaddialog.cpp" line="18"/>
         <source>Upload Confirmation</source>
-        <translation>Upload Confirmation</translation>
+        <translation>Uppladdningsbekräftelse</translation>
     </message>
     <message>
         <location filename="../../src/widgets/imguploaddialog.cpp" line="22"/>
         <source>Do you want to upload this capture?</source>
-        <translation>Do you want to upload this capture?</translation>
+        <translation>Vill du ladda upp det här klippet?</translation>
     </message>
     <message>
         <location filename="../../src/widgets/imguploaddialog.cpp" line="35"/>
         <location filename="../../src/widgets/imguploaddialog.cpp" line="36"/>
         <source>Upload without confirmation</source>
-        <translation>Upload without confirmation</translation>
+        <translation>Ladda upp utan bekräftelse</translation>
     </message>
 </context>
 <context>
@@ -1333,62 +1333,62 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="37"/>
         <source>Upload image</source>
-        <translation>Upload image</translation>
+        <translation>Ladda upp bild</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="51"/>
         <source>Uploading Image</source>
-        <translation type="unfinished">Laddar upp bild</translation>
+        <translation>Laddar upp bild</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="130"/>
         <source>Copy URL</source>
-        <translation type="unfinished">Kopiera URL</translation>
+        <translation>Kopiera URL</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="131"/>
         <source>Open URL</source>
-        <translation type="unfinished">Öppna URL</translation>
+        <translation>Öppna URL</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="132"/>
         <source>Delete image</source>
-        <translation type="unfinished">Radera bild</translation>
+        <translation>Ta bort bild</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="133"/>
         <source>Image to Clipboard.</source>
-        <translation type="unfinished">Bild till klippbord.</translation>
+        <translation>Bild till urklipp.</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="134"/>
         <source>Save image</source>
-        <translation>Save image</translation>
+        <translation>Spara bild</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="164"/>
         <source>Unable to open the URL.</source>
-        <translation type="unfinished">Kunde inte öppna URL.</translation>
+        <translation>Kunde inte öppna URL:en.</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="171"/>
         <source>URL copied to clipboard.</source>
-        <translation>URL copied to clipboard.</translation>
+        <translation>URL kopierad till urklipp.</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="177"/>
         <source>Screenshot copied to clipboard.</source>
-        <translation type="unfinished">Skärmklipp kopierat till klippbord.</translation>
+        <translation>Skärmklipp kopierat till urklipp.</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="191"/>
         <source>Unable to save the screenshot to disk.</source>
-        <translation>Unable to save the screenshot to disk.</translation>
+        <translation>Kunde inte spara skärmklippet på disk.</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="194"/>
         <source>Screenshot saved.</source>
-        <translation>Screenshot saved.</translation>
+        <translation>Skärmklipp sparat.</translation>
     </message>
 </context>
 <context>
@@ -1396,12 +1396,12 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/tools/imgupload/imguploadertool.cpp" line="23"/>
         <source>Image Uploader</source>
-        <translation type="unfinished">Bilduppladdare</translation>
+        <translation>Bilduppladdare</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/imguploadertool.cpp" line="33"/>
         <source>Upload the selection</source>
-        <translation>Upload the selection</translation>
+        <translation>Ladda upp klippet</translation>
     </message>
 </context>
 <context>
@@ -1433,7 +1433,7 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/tools/imgupload/storages/imgur/imguruploader.cpp" line="93"/>
         <source>Unable to open the URL.</source>
-        <translation>Kunde inte öppna URL.</translation>
+        <translation>Kunde inte öppna URL:en.</translation>
     </message>
     <message>
         <source>URL copied to clipboard.</source>
@@ -1471,7 +1471,7 @@ Please solve them manually in the configuration file.</translation>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="118"/>
         <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_infowindow.h" line="118"/>
         <source>Icon</source>
-        <translation>Icon</translation>
+        <translation>Ikon</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="43"/>
@@ -1479,7 +1479,7 @@ Please solve them manually in the configuration file.</translation>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="119"/>
         <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_infowindow.h" line="119"/>
         <source>License</source>
-        <translation>License</translation>
+        <translation>Licens</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="56"/>
@@ -1511,7 +1511,7 @@ Please solve them manually in the configuration file.</translation>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="123"/>
         <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_infowindow.h" line="123"/>
         <source>OS Info</source>
-        <translation>OS Info</translation>
+        <translation>OS-info</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="128"/>
@@ -1519,7 +1519,7 @@ Please solve them manually in the configuration file.</translation>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="124"/>
         <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_infowindow.h" line="124"/>
         <source>Copy Info</source>
-        <translation>Copy Info</translation>
+        <translation>Kopiera info</translation>
     </message>
     <message>
         <source>Right Click</source>
@@ -1595,12 +1595,12 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/tools/invert/inverttool.cpp" line="25"/>
         <source>Invert</source>
-        <translation>Invert</translation>
+        <translation>Invertera</translation>
     </message>
     <message>
         <location filename="../../src/tools/invert/inverttool.cpp" line="35"/>
         <source>Set Inverter as the paint tool</source>
-        <translation>Set Inverter as the paint tool</translation>
+        <translation>Välj inverterare som ritverktyg</translation>
     </message>
 </context>
 <context>
@@ -1613,7 +1613,7 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/tools/line/linetool.cpp" line="32"/>
         <source>Set the Line as the paint tool</source>
-        <translation>Välj linje som ritverktyg</translation>
+        <translation>Välj Linje som ritverktyg</translation>
     </message>
 </context>
 <context>
@@ -1639,7 +1639,7 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/tools/move/movetool.cpp" line="33"/>
         <source>Move the selection area</source>
-        <translation>Flytta urvalsområde</translation>
+        <translation>Flytta markerat område</translation>
     </message>
 </context>
 <context>
@@ -1673,17 +1673,17 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="225"/>
         <source>Context menu</source>
-        <translation>Context menu</translation>
+        <translation>Kontextmeny</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="227"/>
         <source>Copy to clipboard</source>
-        <translation type="unfinished">Kopiera till klippbord</translation>
+        <translation>Kopiera till urklipp</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="234"/>
         <source>Save to file</source>
-        <translation>Save to file</translation>
+        <translation>Spara till fil</translation>
     </message>
 </context>
 <context>
@@ -1691,12 +1691,12 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="24"/>
         <source>Pixelate</source>
-        <translation>Pixelate</translation>
+        <translation>Pixla</translation>
     </message>
     <message>
         <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="34"/>
         <source>Set Pixelate as the paint tool</source>
-        <translation>Set Pixelate as the paint tool</translation>
+        <translation>Välj Pixla som ritverktyg</translation>
     </message>
 </context>
 <context>
@@ -1704,12 +1704,12 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../external/QHotkey/qhotkey.cpp" line="307"/>
         <source>Failed to register %1. Error: %2</source>
-        <translation>Failed to register %1. Error: %2</translation>
+        <translation>Kunde inte registrera %1. Fel: %2</translation>
     </message>
     <message>
         <location filename="../../external/QHotkey/qhotkey.cpp" line="329"/>
         <source>Failed to unregister %1. Error: %2</source>
-        <translation>Failed to unregister %1. Error: %2</translation>
+        <translation>Kunde inte avregistrera %1. Fel: %2</translation>
     </message>
 </context>
 <context>
@@ -1717,19 +1717,19 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="214"/>
         <source>Save Error</source>
-        <translation>Spara fel</translation>
+        <translation>Sparfel</translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="46"/>
         <location filename="../../src/utils/screenshotsaver.cpp" line="198"/>
         <source>Capture saved as </source>
-        <translation>Urval sparad som </translation>
+        <translation>Klipp sparad som </translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="136"/>
         <location filename="../../src/utils/screenshotsaver.cpp" line="138"/>
         <source>Capture saved to clipboard.</source>
-        <translation>Capture saved to clipboard.</translation>
+        <translation>Klipp sparat till urklipp.</translation>
     </message>
     <message>
         <source>Capture saved to clipboard</source>
@@ -1738,23 +1738,23 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="122"/>
         <source>Error while saving to clipboard</source>
-        <translation>Error while saving to clipboard</translation>
+        <translation>Kunde inte spara till urklipp</translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="50"/>
         <location filename="../../src/utils/screenshotsaver.cpp" line="207"/>
         <source>Error trying to save as </source>
-        <translation>Fel vid spara som </translation>
+        <translation>Kunde inte spara som </translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="181"/>
         <source>Save screenshot</source>
-        <translation>Save screenshot</translation>
+        <translation>Spara skärmklipp</translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="203"/>
         <source>Path copied to clipboard as </source>
-        <translation>Path copied to clipboard as </translation>
+        <translation>Sökväg kopierad till urklipp som </translation>
     </message>
     <message>
         <source>Saving canceled</source>
@@ -1776,37 +1776,37 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/main.cpp" line="152"/>
         <source>Powerful yet simple to use screenshot software.</source>
-        <translation>Powerful yet simple to use screenshot software.</translation>
+        <translation>Kraftfullt men ändå användarvänligt skärmklippsprogram.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="153"/>
         <source>See</source>
-        <translation>See</translation>
+        <translation>Se</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="156"/>
         <source>Capture the entire desktop.</source>
-        <translation>Capture the entire desktop.</translation>
+        <translation>Klipp ut hela skrivbordet.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="158"/>
         <source>Open the capture launcher.</source>
-        <translation>Open the capture launcher.</translation>
+        <translation>Öppna klippstartaren.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="161"/>
         <source>Start a manual capture in GUI mode.</source>
-        <translation>Start a manual capture in GUI mode.</translation>
+        <translation>Starta ett manuellt skärmklipp i grafiskt läge.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="163"/>
         <source>Configure</source>
-        <translation>Configure</translation>
+        <translation>Konfigurera</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="165"/>
         <source>Capture a single screen.</source>
-        <translation>Capture a single screen.</translation>
+        <translation>Klipp ut en enkelskärm.</translation>
     </message>
     <message>
         <source>Path where the capture will be saved</source>
@@ -1815,107 +1815,107 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/main.cpp" line="170"/>
         <source>Existing directory or new file to save to</source>
-        <translation>Existing directory or new file to save to</translation>
+        <translation>Befintlig mapp eller ny fil att spara till</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="173"/>
         <source>Save the capture to the clipboard</source>
-        <translation>Save the capture to the clipboard</translation>
+        <translation>Spara klippet till urklipp</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="175"/>
         <source>Pin the capture to the screen</source>
-        <translation>Pin the capture to the screen</translation>
+        <translation>Fäst klippet på skärmen</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="177"/>
         <source>Upload screenshot</source>
-        <translation>Upload screenshot</translation>
+        <translation>Ladda upp skärmklipp</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="179"/>
         <source>Delay time in milliseconds</source>
-        <translation>Delay time in milliseconds</translation>
+        <translation>Fördröjningstid i millisekunder</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="184"/>
         <source>Repeat screenshot with previously selected region</source>
-        <translation>Repeat screenshot with previously selected region</translation>
+        <translation>Upprepa skärmklippet från tidigare markerat område</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="187"/>
         <source>Screenshot region to select</source>
-        <translation>Screenshot region to select</translation>
+        <translation>Skärmklippsområde att välja</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="190"/>
         <source>Set the filename pattern</source>
-        <translation>Set the filename pattern</translation>
+        <translation>Ange filnamnsmönster</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="194"/>
         <source>Accept capture as soon as a selection is made</source>
-        <translation>Accept capture as soon as a selection is made</translation>
+        <translation>Acceptera klippet så fort markering är gjord</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="196"/>
         <source>Enable or disable the trayicon</source>
-        <translation>Enable or disable the trayicon</translation>
+        <translation>Aktivera/Avaktivera systemfältsikonen</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="200"/>
         <source>Enable or disable run at startup</source>
-        <translation>Enable or disable run at startup</translation>
+        <translation>Aktiva/Avaktivera starta vid systemstart</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="203"/>
         <source>Check the configuration for errors</source>
-        <translation>Check the configuration for errors</translation>
+        <translation>Kontrollera konfigurationen efter fel</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="206"/>
         <source>Show the help message in the capture mode</source>
-        <translation>Show the help message in the capture mode</translation>
+        <translation>Visa hjälpmeddelande i klippläget</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="209"/>
         <source>Define the main UI color</source>
-        <translation>Define the main UI color</translation>
+        <translation>Definiera huvudfärgen i användargränssnittet</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="213"/>
         <source>Define the contrast UI color</source>
-        <translation>Define the contrast UI color</translation>
+        <translation>Definiera kontrastfärgen i användargränssnittet</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="216"/>
         <source>Print raw PNG capture</source>
-        <translation>Print raw PNG capture</translation>
+        <translation>Skriv ut ett raw PNG-klipp</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="219"/>
         <source>Print geometry of the selection in the format WxH+X+Y. Does nothing if raw is specified</source>
-        <translation>Print geometry of the selection in the format WxH+X+Y. Does nothing if raw is specified</translation>
+        <translation>Skriv ut geometrin för markeringen i formatet BxH+X+Y. Gör ingenting om raw är specificerat</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="223"/>
         <source>Define the screen to capture (starting from 0)</source>
-        <translation>Define the screen to capture (starting from 0)</translation>
+        <translation>Definiera skärmen som skall klippas ut (från 0)</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="243"/>
         <source>Invalid delay, it must be a number greater than 0</source>
-        <translation>Invalid delay, it must be a number greater than 0</translation>
+        <translation>Ogiltig fördröjning, det måste vara ett tal som är större än 0</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="246"/>
         <source>Invalid region, use &apos;WxH+X+Y&apos; or &apos;all&apos; or &apos;screen0/screen1/...&apos;.</source>
-        <translation>Invalid region, use &apos;WxH+X+Y&apos; or &apos;all&apos; or &apos;screen0/screen1/...&apos;.</translation>
+        <translation>Ogiltigt område, använd &apos;BxH + X + Y&apos; eller &quot;alla&quot; eller &quot;screen0 / screen1 / ...&quot;.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="259"/>
         <source>Invalid path, must be an existing directory or a new file in an existing directory</source>
-        <translation>Invalid path, must be an existing directory or a new file in an existing directory</translation>
+        <translation>Ogiltig sökväg, måste vara en befintlig mapp eller en ny fil i en befintlig mapp</translation>
     </message>
     <message>
         <source>Define the screen to capture</source>
@@ -1924,12 +1924,12 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/main.cpp" line="224"/>
         <source>default: screen containing the cursor</source>
-        <translation>default: screen containing the cursor</translation>
+        <translation>Standard: Skärm som innehåller muspekaren</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="225"/>
         <source>Screen number</source>
-        <translation>Screen number</translation>
+        <translation>Skärm nummer</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="234"/>
@@ -1940,13 +1940,13 @@ Please solve them manually in the configuration file.</translation>
 - #RRRRGGGGBBBB
 - Named colors like &apos;blue&apos; or &apos;red&apos;
 You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
-        <translation>Invalid color, this flag supports the following formats:
-- #RGB (each of R, G, and B is a single hex digit)
+        <translation>Ogiltig färg, Den här flaggan stöder följande format:
+- #RGB (varje R, G, och B är en enda hex-siffra)
 - #RRGGBB
 - #RRRGGGBBB
 - #RRRRGGGGBBBB
-- Named colors like &apos;blue&apos; or &apos;red&apos;
-You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translation>
+- Färgnamnsom &quot;blå&quot; eller &quot;röd&quot;
+Du kan behöva kommentera ut tecknet &quot;#&quot; som i &quot;\#FFF&quot;</translation>
     </message>
     <message>
         <source>Invalid delay, it must be higher than 0</source>
@@ -1955,7 +1955,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/main.cpp" line="245"/>
         <source>Invalid screen number, it must be non negative</source>
-        <translation>Invalid screen number, it must be non negative</translation>
+        <translation>Ogiltigt skärmnummer, det måste vara icke-negativt</translation>
     </message>
     <message>
         <source>Invalid path, it must be a real path in the system</source>
@@ -1964,7 +1964,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/main.cpp" line="272"/>
         <source>Invalid value, it must be defined as &apos;true&apos; or &apos;false&apos;</source>
-        <translation>Invalid value, it must be defined as &apos;true&apos; or &apos;false&apos;</translation>
+        <translation>Ogiltigt värde, det måste definieras som &quot;true&quot; eller &quot;false&quot;</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/openwithprogram.cpp" line="30"/>
@@ -1979,42 +1979,42 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="54"/>
         <source>Options</source>
-        <translation>Options</translation>
+        <translation>Alternativ</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="68"/>
         <source>Arguments</source>
-        <translation>Arguments</translation>
+        <translation>Argument</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="329"/>
         <source>arguments</source>
-        <translation>arguments</translation>
+        <translation>argument</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="330"/>
         <source>Usage</source>
-        <translation>Usage</translation>
+        <translation>Användning</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="330"/>
         <source>options</source>
-        <translation>options</translation>
+        <translation>alternativ</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="337"/>
         <source>Per default runs Flameshot in the background and adds a tray icon for configuration.</source>
-        <translation>Per default runs Flameshot in the background and adds a tray icon for configuration.</translation>
+        <translation>Som standard körs Flameshot i bakgrunden och en systemfältsikon för inställningar läggs till.</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="148"/>
         <source>Requested screen exceeds screen count</source>
-        <translation>Requested screen exceeds screen count</translation>
+        <translation>Önskad skärm överskrider antalet skärmar</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="378"/>
         <source>Full screen screenshot pinned to screen</source>
-        <translation>Full screen screenshot pinned to screen</translation>
+        <translation>Helskärmsklipp fäst på skärmen</translation>
     </message>
     <message>
         <source>URL copied to clipboard.</source>
@@ -2023,7 +2023,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="71"/>
         <source>Hello, I&apos;m here! Click icon in the tray to take a screenshot or click with a right button to see more options.</source>
-        <translation>Hello, I&apos;m here! Click icon in the tray to take a screenshot or click with a right button to see more options.</translation>
+        <translation>Hej, jag är här! Klicka på ikonen i panelen för att ta ett skärmklipp eller klicka med höger knapp för att se fler alternativ.</translation>
     </message>
     <message>
         <source>Toggle side panel</source>
@@ -2076,27 +2076,27 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="189"/>
         <source>Quit capture</source>
-        <translation>Sluta fånga</translation>
+        <translation>Avsluta klipp</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="197"/>
         <source>Screenshot history</source>
-        <translation>Screenshot history</translation>
+        <translation>Skärmklippshistorik</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="200"/>
         <source>Capture screen</source>
-        <translation>Capture screen</translation>
+        <translation>Klipp ut skärm</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="207"/>
         <source>Show color picker</source>
-        <translation>Visa färgväljaren</translation>
+        <translation>Visa färgväljare</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="208"/>
         <source>Change the tool&apos;s size</source>
-        <translation>Change the tool&apos;s size</translation>
+        <translation>Ändra verktygets storlek</translation>
     </message>
     <message>
         <source>Change the tool&apos;s thickness</source>
@@ -2139,7 +2139,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/tools/save/savetool.cpp" line="34"/>
         <source>Save screenshot to a file</source>
-        <translation>Save screenshot to a file</translation>
+        <translation>Spara skärmklipp till en fil</translation>
     </message>
     <message>
         <source>Save the capture</source>
@@ -2151,12 +2151,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="112"/>
         <source>Unable to detect desktop environment (GNOME? KDE? Sway? ...)</source>
-        <translation>Unable to detect desktop environment (GNOME? KDE? Sway? ...)</translation>
+        <translation>Kan inte identifiera skrivbordsmiljön (GNOME? KDE? Sway? ...)</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="115"/>
         <source>Hint: try setting the XDG_CURRENT_DESKTOP environment variable.</source>
-        <translation>Hint: try setting the XDG_CURRENT_DESKTOP environment variable.</translation>
+        <translation>Tips: prova att ställa in XDG_CURRENT_DESKTOP miljövariabeln.</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="120"/>
@@ -2169,12 +2169,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/tools/selection/selectiontool.cpp" line="25"/>
         <source>Rectangular Selection</source>
-        <translation>Rektangulärt urval</translation>
+        <translation>Rektangulär markering</translation>
     </message>
     <message>
         <location filename="../../src/tools/selection/selectiontool.cpp" line="35"/>
         <source>Set Selection as the paint tool</source>
-        <translation>Välj Urval som ritverktyg</translation>
+        <translation>Välj Markera som ritverktyg</translation>
     </message>
 </context>
 <context>
@@ -2182,27 +2182,27 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="17"/>
         <source>Set Shortcut</source>
-        <translation>Set Shortcut</translation>
+        <translation>Ange genväg</translation>
     </message>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="23"/>
         <source>Enter new shortcut to change </source>
-        <translation>Enter new shortcut to change </translation>
+        <translation>Ange ny genväg för att ändra </translation>
     </message>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="37"/>
         <source>Press Esc to cancel or ⌘+Backspace to disable the keyboard shortcut.</source>
-        <translation>Press Esc to cancel or ⌘+Backspace to disable the keyboard shortcut.</translation>
+        <translation>Tryck på Esc för att avbryta eller ⌘+Backsteg för att inaktivera kortkommandot.</translation>
     </message>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="41"/>
         <source>Press Esc to cancel or Backspace to disable the keyboard shortcut.</source>
-        <translation>Press Esc to cancel or Backspace to disable the keyboard shortcut.</translation>
+        <translation>Tryck på Esc för att avbryta eller Backsteg för att inaktivera kortkommandot.</translation>
     </message>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="46"/>
         <source>Flameshot must be restarted for changes to take effect.</source>
-        <translation>Flameshot must be restarted for changes to take effect.</translation>
+        <translation>Flameshot måste startas om för att ändringar skall tillämpas.</translation>
     </message>
 </context>
 <context>
@@ -2210,12 +2210,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="30"/>
         <source>Hot Keys</source>
-        <translation>Hot Keys</translation>
+        <translation>Kortkommandon</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="53"/>
         <source>Available shortcuts in the screen capture mode.</source>
-        <translation>Tillgängliga genvägar i skärmklippningsläget.</translation>
+        <translation>Tillgängliga genvägar i skärmklippsläget.</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="64"/>
@@ -2230,77 +2230,77 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="167"/>
         <source>Left Double-click</source>
-        <translation></translation>
+        <translation>Vänster dubbelklick</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="174"/>
         <source>Toggle side panel</source>
-        <translation type="unfinished">Toggle side panel</translation>
+        <translation>Sidpanel på/av</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="175"/>
         <source>Resize selection left 1px</source>
-        <translation type="unfinished">Resize selection left 1px</translation>
+        <translation>Ändra storlek på markering 1px vänster</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="176"/>
         <source>Resize selection right 1px</source>
-        <translation type="unfinished">Resize selection right 1px</translation>
+        <translation>Ändra storlek på markering 1px höger</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="177"/>
         <source>Resize selection up 1px</source>
-        <translation type="unfinished">Resize selection up 1px</translation>
+        <translation>Ändra storlek på markering 1px överkant</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="178"/>
         <source>Resize selection down 1px</source>
-        <translation type="unfinished">Resize selection down 1px</translation>
+        <translation>Ändra storlek på markering 1px underkant</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="179"/>
         <source>Select entire screen</source>
-        <translation type="unfinished">Select entire screen</translation>
+        <translation>Markera hela skärmen</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="180"/>
         <source>Move selection left 1px</source>
-        <translation type="unfinished">Move selection left 1px</translation>
+        <translation>Flytta markering 1px vänster</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="181"/>
         <source>Move selection right 1px</source>
-        <translation type="unfinished">Move selection right 1px</translation>
+        <translation>Flytta markering 1px höger</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="182"/>
         <source>Move selection up 1px</source>
-        <translation type="unfinished">Move selection up 1px</translation>
+        <translation>Flytta markering 1px upp</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="183"/>
         <source>Move selection down 1px</source>
-        <translation type="unfinished">Move selection down 1px</translation>
+        <translation>Flytta markering 1px ner</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="184"/>
         <source>Commit text in text area</source>
-        <translation type="unfinished">Commit text in text area</translation>
+        <translation>Spara text i textområdet</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="185"/>
         <source>Delete current tool</source>
-        <translation type="unfinished">Delete current tool</translation>
+        <translation>Ta bort aktuellt verktyg</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="194"/>
         <source>Capture screen</source>
-        <translation type="unfinished">Capture screen</translation>
+        <translation>Klipp ut skärmen</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="195"/>
         <source>Screenshot history</source>
-        <translation type="unfinished">Screenshot history</translation>
+        <translation>Skärmklippshistorik</translation>
     </message>
 </context>
 <context>
@@ -2320,12 +2320,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="35"/>
         <source>Active tool size: </source>
-        <translation>Active tool size: </translation>
+        <translation>Aktiv verktygsstorlek: </translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="47"/>
         <source>Active Color: </source>
-        <translation>Active Color: </translation>
+        <translation>Aktiv färg: </translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="68"/>
@@ -2338,12 +2338,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/tools/sizedecrease/sizedecreasetool.cpp" line="37"/>
         <source>Decrease Tool Size</source>
-        <translation>Decrease Tool Size</translation>
+        <translation>Minska verktygsstorlek</translation>
     </message>
     <message>
         <location filename="../../src/tools/sizedecrease/sizedecreasetool.cpp" line="47"/>
         <source>Decrease the size of the other tools</source>
-        <translation>Decrease the size of the other tools</translation>
+        <translation>Minska storleken på de andra verktygen</translation>
     </message>
 </context>
 <context>
@@ -2351,12 +2351,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/tools/sizeincrease/sizeincreasetool.cpp" line="37"/>
         <source>Increase Tool Size</source>
-        <translation>Increase Tool Size</translation>
+        <translation>Öka verktygsstorlek</translation>
     </message>
     <message>
         <location filename="../../src/tools/sizeincrease/sizeincreasetool.cpp" line="47"/>
         <source>Increase the size of the other tools</source>
-        <translation>Increase the size of the other tools</translation>
+        <translation>Öka storleken på de andra verktygen</translation>
     </message>
 </context>
 <context>
@@ -2364,12 +2364,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/tools/sizeindicator/sizeindicatortool.cpp" line="23"/>
         <source>Selection Size Indicator</source>
-        <translation>Storleksindikator urval</translation>
+        <translation>Storleksindikator  för markering</translation>
     </message>
     <message>
         <location filename="../../src/tools/sizeindicator/sizeindicatortool.cpp" line="33"/>
         <source>Show X and Y dimensions of the selection</source>
-        <translation>Show X and Y dimensions of the selection</translation>
+        <translation>Visa X- och Y-dimensioner för markering</translation>
     </message>
     <message>
         <source>Show the dimensions of the selection (X Y)</source>
@@ -2476,7 +2476,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="67"/>
         <source>Full Date (%m/%d/%y)</source>
-        <translation>Fullständingt datum (%m/%d/%y)</translation>
+        <translation>Fullständigt datum (%m/%d/%y)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="69"/>
@@ -2489,7 +2489,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/utils/systemnotification.cpp" line="39"/>
         <source>Flameshot Info</source>
-        <translation>Flameshot information</translation>
+        <translation>Flameshot-information</translation>
     </message>
 </context>
 <context>
@@ -2517,17 +2517,17 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/tools/text/textconfig.cpp" line="83"/>
         <source>Left Align</source>
-        <translation>Left Align</translation>
+        <translation>Justera vänster</translation>
     </message>
     <message>
         <location filename="../../src/tools/text/textconfig.cpp" line="92"/>
         <source>Center Align</source>
-        <translation>Center Align</translation>
+        <translation>Centrera</translation>
     </message>
     <message>
         <location filename="../../src/tools/text/textconfig.cpp" line="101"/>
         <source>Right Align</source>
-        <translation>Right Align</translation>
+        <translation>Justera höger</translation>
     </message>
 </context>
 <context>
@@ -2548,42 +2548,42 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="98"/>
         <source>&amp;Take Screenshot</source>
-        <translation type="unfinished">&amp;Ta skärmdump</translation>
+        <translation>&amp;Ta ett skärmklipp</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="116"/>
         <source>&amp;Open Launcher</source>
-        <translation type="unfinished">&amp;Open Launcher</translation>
+        <translation>&amp;Öppna klippstartaren</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="121"/>
         <source>&amp;Configuration</source>
-        <translation type="unfinished">&amp;Konfiguration</translation>
+        <translation>&amp;Inställningar</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="126"/>
         <source>&amp;About</source>
-        <translation type="unfinished">&amp;About</translation>
+        <translation>&amp;Om</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="130"/>
         <source>Check for updates</source>
-        <translation type="unfinished">Check for updates</translation>
+        <translation>Sök efter uppdateringar</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="141"/>
         <source>New version %1 is available</source>
-        <translation type="unfinished">New version %1 is available</translation>
+        <translation>Ny version %1 finns tillgänglig</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="145"/>
         <source>&amp;Quit</source>
-        <translation type="unfinished">&amp;Avsluta</translation>
+        <translation>&amp;Avsluta</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="149"/>
         <source>&amp;Latest Uploads</source>
-        <translation type="unfinished">&amp;Latest Uploads</translation>
+        <translation>Tidigare &amp;uppladdningar</translation>
     </message>
 </context>
 <context>
@@ -2595,7 +2595,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="88"/>
         <source>Change the color moving the selectors and see the changes in the preview buttons.</source>
-        <translation>Ändra färgen genom att röra reglagen och se ändringarna på förhandsgranskningsknapparna.</translation>
+        <translation>Ändra färgen genom att flytta reglagen och se ändringarna på förhandsgranskningsknapparna.</translation>
     </message>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="99"/>
@@ -2641,22 +2641,22 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/widgets/updatenotificationwidget.cpp" line="70"/>
         <source>New Flameshot version %1 is available</source>
-        <translation>New Flameshot version %1 is available</translation>
+        <translation>Ny Flameshot-version %1 finns tillgänglig</translation>
     </message>
     <message>
         <location filename="../../src/widgets/updatenotificationwidget.cpp" line="123"/>
         <source>Ignore</source>
-        <translation>Ignore</translation>
+        <translation>Ignorera</translation>
     </message>
     <message>
         <location filename="../../src/widgets/updatenotificationwidget.cpp" line="131"/>
         <source>Later</source>
-        <translation>Later</translation>
+        <translation>Senare</translation>
     </message>
     <message>
         <location filename="../../src/widgets/updatenotificationwidget.cpp" line="139"/>
         <source>Update</source>
-        <translation>Update</translation>
+        <translation>Uppdatera</translation>
     </message>
 </context>
 <context>
@@ -2672,7 +2672,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/widgets/uploadhistory.cpp" line="62"/>
         <source>Screenshots history is empty</source>
-        <translation type="unfinished">Screenshots history is empty</translation>
+        <translation>Skärmklippshistoriken är tom</translation>
     </message>
 </context>
 <context>
@@ -2691,7 +2691,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_uploadlineitem.h" line="114"/>
         <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_uploadlineitem.h" line="114"/>
         <source>TextLabel</source>
-        <translation>TextLabel</translation>
+        <translation>TextEtikett</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadlineitem.ui" line="82"/>
@@ -2699,7 +2699,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_uploadlineitem.h" line="115"/>
         <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_uploadlineitem.h" line="115"/>
         <source>Copy URL</source>
-        <translation type="unfinished">Kopiera URL</translation>
+        <translation>Kopiera URL</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadlineitem.ui" line="95"/>
@@ -2707,17 +2707,17 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_uploadlineitem.h" line="116"/>
         <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_uploadlineitem.h" line="116"/>
         <source>Open In Browser</source>
-        <translation>Open In Browser</translation>
+        <translation>Öppna i webbläsaren</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadlineitem.cpp" line="50"/>
         <source>Confirm to delete</source>
-        <translation type="unfinished">Confirm to delete</translation>
+        <translation>Bekräfta borttagning</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadlineitem.cpp" line="51"/>
         <source>Are you sure you want to delete a screenshot from the latest uploads and server?</source>
-        <translation type="unfinished">Are you sure you want to delete a screenshot from the latest uploads and server?</translation>
+        <translation>Vill du verkligen ta bort en skärmdump från tidigare uppladdningar och servern?</translation>
     </message>
 </context>
 <context>
@@ -2725,12 +2725,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/widgets/panel/utilitypanel.cpp" line="190"/>
         <source>Close</source>
-        <translation>Close</translation>
+        <translation>Stäng</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/utilitypanel.cpp" line="200"/>
         <source>&lt;Empty&gt;</source>
-        <translation>&lt;Empty&gt;</translation>
+        <translation>&lt;Tom&gt;</translation>
     </message>
 </context>
 <context>
@@ -2738,17 +2738,17 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="41"/>
         <source>Opacity of area outside selection:</source>
-        <translation>Opacitet för område utanför urval:</translation>
+        <translation>Opacitet för område utanför markering:</translation>
     </message>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="68"/>
         <source>UI Color Editor</source>
-        <translation type="unfinished">UI färgeditor</translation>
+        <translation>UI-färgredigerare</translation>
     </message>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="74"/>
         <source>Colorpicker Editor</source>
-        <translation>Colorpicker Editor</translation>
+        <translation>Färgväljarredigerare</translation>
     </message>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="79"/>
@@ -2766,7 +2766,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.cpp" line="79"/>
         <source>Pick</source>
-        <translation>Pick</translation>
+        <translation>Välj</translation>
     </message>
 </context>
 <context>
@@ -2774,7 +2774,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette.cpp" line="428"/>
         <source>Unnamed</source>
-        <translation>Unnamed</translation>
+        <translation>Namnlös</translation>
     </message>
 </context>
 <context>
@@ -2782,12 +2782,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_model.cpp" line="70"/>
         <source>Unnamed</source>
-        <translation>Unnamed</translation>
+        <translation>Namnlös</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_model.cpp" line="144"/>
         <source>%1 (%2 colors)</source>
-        <translation>%1 (%2 colors)</translation>
+        <translation>%1 (%2 färger)</translation>
     </message>
 </context>
 <context>
@@ -2798,7 +2798,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
         <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="209"/>
         <location filename="../../cmake-build-relwithdebinfo/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="209"/>
         <source>Open a new palette from file</source>
-        <translation>Open a new palette from file</translation>
+        <translation>Öppna en ny palett från fil</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="71"/>
@@ -2806,7 +2806,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
         <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="212"/>
         <location filename="../../cmake-build-relwithdebinfo/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="212"/>
         <source>Create a new palette</source>
-        <translation>Create a new palette</translation>
+        <translation>Skapa en ny palett</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="83"/>
@@ -2814,7 +2814,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
         <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="215"/>
         <location filename="../../cmake-build-relwithdebinfo/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="215"/>
         <source>Duplicate the current palette</source>
-        <translation>Duplicate the current palette</translation>
+        <translation>Klona aktuell palett</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="121"/>
@@ -2822,7 +2822,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
         <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="218"/>
         <location filename="../../cmake-build-relwithdebinfo/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="218"/>
         <source>Delete the current palette</source>
-        <translation>Delete the current palette</translation>
+        <translation>Ta bort aktuell palett</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="133"/>
@@ -2830,7 +2830,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
         <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="221"/>
         <location filename="../../cmake-build-relwithdebinfo/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="221"/>
         <source>Revert changes to the current palette</source>
-        <translation>Revert changes to the current palette</translation>
+        <translation>Återställ ändringar i aktuell palett</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="145"/>
@@ -2838,7 +2838,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
         <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="224"/>
         <location filename="../../cmake-build-relwithdebinfo/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="224"/>
         <source>Save changes to the current palette</source>
-        <translation>Save changes to the current palette</translation>
+        <translation>Spara ändringar i aktuell palett</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="170"/>
@@ -2846,7 +2846,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
         <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="227"/>
         <location filename="../../cmake-build-relwithdebinfo/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="227"/>
         <source>Add a color to the palette</source>
-        <translation>Add a color to the palette</translation>
+        <translation>Lägg till en färg i paletten</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="182"/>
@@ -2854,46 +2854,46 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
         <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="230"/>
         <location filename="../../cmake-build-relwithdebinfo/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="230"/>
         <source>Remove the selected color from the palette</source>
-        <translation>Remove the selected color from the palette</translation>
+        <translation>Ta bort markerad färg från paletten</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="186"/>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="201"/>
         <source>New Palette</source>
-        <translation>New Palette</translation>
+        <translation>Ny palett</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="187"/>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="202"/>
         <source>Name</source>
-        <translation>Name</translation>
+        <translation>Namn</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="228"/>
         <source>GIMP Palettes (*.gpl)</source>
-        <translation>GIMP Palettes (*.gpl)</translation>
+        <translation>GIMP-paletter (*.gpl)</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="229"/>
         <source>Palette Image (%1)</source>
-        <translation>Palette Image (%1)</translation>
+        <translation>Palettbild (%1)</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="230"/>
         <source>All Files (*)</source>
-        <translation>All Files (*)</translation>
+        <translation>Alla filer (*)</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="231"/>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="244"/>
         <source>Open Palette</source>
-        <translation>Open Palette</translation>
+        <translation>Öppna palett</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="245"/>
         <source>Failed to load the palette file
 %1</source>
-        <translation>Failed to load the palette file
+        <translation>Kunde inte läsa in palettfilen
 %1</translation>
     </message>
 </context>
@@ -2902,17 +2902,17 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/gradient_editor.cpp" line="335"/>
         <source>Add Color</source>
-        <translation>Add Color</translation>
+        <translation>Lägg till färg</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/gradient_editor.cpp" line="344"/>
         <source>Remove Color</source>
-        <translation>Remove Color</translation>
+        <translation>Ta bort färg</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/gradient_editor.cpp" line="352"/>
         <source>Edit Color...</source>
-        <translation>Edit Color...</translation>
+        <translation>Redigera färg...</translation>
     </message>
 </context>
 <context>
@@ -2920,7 +2920,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/gradient_list_model.cpp" line="231"/>
         <source>%1 (%2 colors)</source>
-        <translation>%1 (%2 colors)</translation>
+        <translation>%1 (%2 färger)</translation>
     </message>
 </context>
 <context>
@@ -2928,7 +2928,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/swatch.cpp" line="824"/>
         <source>Clear Color</source>
-        <translation>Clear Color</translation>
+        <translation>Rensa färg</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/swatch.cpp" line="833"/>
