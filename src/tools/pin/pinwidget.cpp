@@ -58,7 +58,7 @@ PinWidget::PinWidget(const QPixmap& pixmap,
     new QShortcut(Qt::Key_Escape, this, SLOT(close()));
 
     qreal devicePixelRatio = 1;
-#if defined(Q_OS_MACOS)
+#if defined(Q_OS_MACOS) || defined(Q_OS_LINUX)
     QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
     if (currentScreen != nullptr) {
         devicePixelRatio = currentScreen->devicePixelRatio();
@@ -72,7 +72,7 @@ PinWidget::PinWidget(const QPixmap& pixmap,
     setWindowFlags(Qt::X11BypassWindowManagerHint);
 #endif
 
-#if defined(Q_OS_MACOS)
+#if defined(Q_OS_MACOS) || defined(Q_OS_LINUX)
     if (currentScreen != nullptr) {
         QPoint topLeft = currentScreen->geometry().topLeft();
         adjusted_pos.setX((adjusted_pos.x() - topLeft.x()) / devicePixelRatio +
