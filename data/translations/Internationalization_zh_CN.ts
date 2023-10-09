@@ -1126,13 +1126,13 @@ Please solve them manually in the configuration file.</source>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="247"/>
-        <source>Use last region</source>
-        <translation>使用上一次的区域</translation>
+        <source>Use last region for GUI mode</source>
+        <translation type="unfinished">使用上一次的区域</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="248"/>
-        <source>Uses the last region as the default selection for the next screenshot</source>
-        <translation>使用上一次选中的区域作为下一次截图的默认选区</translation>
+        <source>Use the last region as the default selection for the next screenshot in GUI mode</source>
+        <translation type="unfinished">使用上一次选中的区域作为下一次截图的默认选区</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="262"/>
