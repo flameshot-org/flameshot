@@ -117,7 +117,7 @@ void configureApp(bool gui)
 
 // TODO find a way so we don't have to do this
 /// Recreate the application as a QApplication
-void reinitializeAsQApplication(int argc, char* argv[])
+void reinitializeAsQApplication(int& argc, char* argv[])
 {
     delete QCoreApplication::instance();
     new QApplication(argc, argv);
