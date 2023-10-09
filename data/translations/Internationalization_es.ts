@@ -426,7 +426,7 @@ Presiona Espacio para abrir el panel lateral.</translation>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="61"/>
         <source>Esc</source>
-        <translation type="unfinished">Esc</translation>
+        <translation>Esc</translation>
     </message>
 </context>
 <context>
@@ -452,7 +452,7 @@ Presiona Espacio para abrir el panel lateral.</translation>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="65"/>
         <source>Update</source>
-        <translation type="unfinished">Actualizar</translation>
+        <translation>Actualizar</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="67"/>
@@ -812,17 +812,17 @@ Por favor, resuélvelos manualmente en el archivo de configuración.</translatio
     <message>
         <location filename="../../src/core/flameshot.cpp" line="111"/>
         <source>Error</source>
-        <translation type="unfinished">Error</translation>
+        <translation>Error</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="111"/>
         <source>Unable to close active modal widgets</source>
-        <translation type="unfinished">No se pueden cerrar los widgets modales activos</translation>
+        <translation>No es posible cerrar los widgets modales activos</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="400"/>
         <source>URL copied to clipboard.</source>
-        <translation type="unfinished">URL copiada al portapapeles.</translation>
+        <translation>URL copiada al portapapeles.</translation>
     </message>
 </context>
 <context>
@@ -830,17 +830,17 @@ Por favor, resuélvelos manualmente en el archivo de configuración.</translatio
     <message>
         <location filename="../../src/core/flameshotdaemon.cpp" line="363"/>
         <source>New version %1 is available</source>
-        <translation type="unfinished">Nueva version %1 está disponible</translation>
+        <translation>Nueva versión %1 está disponible</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshotdaemon.cpp" line="369"/>
         <source>You have the latest version</source>
-        <translation type="unfinished">Tienes la última versión</translation>
+        <translation>Tienes la última versión</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshotdaemon.cpp" line="378"/>
         <source>Failed to get information about the latest version.</source>
-        <translation type="unfinished">No se pudo obtener información sobre la última versión.</translation>
+        <translation>No se pudo obtener información sobre la última versión.</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshotdaemon.cpp" line="399"/>
@@ -1698,7 +1698,7 @@ Por favor, resuélvelos manualmente en el archivo de configuración.</translatio
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="227"/>
         <source>Copy to clipboard</source>
-        <translation type="unfinished">Copiar al portapapeles</translation>
+        <translation>Copiar al portapapeles</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="234"/>
@@ -2255,72 +2255,72 @@ Puede ser que necesites preceder el símbolo &quot;#&quot; con &quot;\&quot;, co
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="174"/>
         <source>Toggle side panel</source>
-        <translation type="unfinished">Toggle side panel</translation>
+        <translation>Alternar panel lateral</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="175"/>
         <source>Resize selection left 1px</source>
-        <translation type="unfinished">Resize selection left 1px</translation>
+        <translation>Cambiar el tamaño de la selección a la izquierda 1px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="176"/>
         <source>Resize selection right 1px</source>
-        <translation type="unfinished">Resize selection right 1px</translation>
+        <translation>Redimensionar selección hacia la derecha 1px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="177"/>
         <source>Resize selection up 1px</source>
-        <translation type="unfinished">Resize selection up 1px</translation>
+        <translation>Redimensionar selección hacia arriba 1px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="178"/>
         <source>Resize selection down 1px</source>
-        <translation type="unfinished">Resize selection down 1px</translation>
+        <translation>Redimensionar selección hacia abajo 1px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="179"/>
         <source>Select entire screen</source>
-        <translation type="unfinished">Select entire screen</translation>
+        <translation>Seleccionar toda la pantalla</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="180"/>
         <source>Move selection left 1px</source>
-        <translation type="unfinished">Move selection left 1px</translation>
+        <translation>Mover selección a la izquierda 1px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="181"/>
         <source>Move selection right 1px</source>
-        <translation type="unfinished">Move selection right 1px</translation>
+        <translation>Mover selección a la derecha 1px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="182"/>
         <source>Move selection up 1px</source>
-        <translation type="unfinished">Move selection up 1px</translation>
+        <translation>Mueve la selección 1px hacia arriba</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="183"/>
         <source>Move selection down 1px</source>
-        <translation type="unfinished">Move selection down 1px</translation>
+        <translation>Mover selección hacia abajo 1px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="184"/>
         <source>Commit text in text area</source>
-        <translation type="unfinished">Commit text in text area</translation>
+        <translation>Confirmar texto en el área de texto</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="185"/>
         <source>Delete current tool</source>
-        <translation type="unfinished">Delete current tool</translation>
+        <translation>Eliminar herramienta actual</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="194"/>
         <source>Capture screen</source>
-        <translation type="unfinished">Capturar pantalla</translation>
+        <translation>Capturar pantalla</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="195"/>
         <source>Screenshot history</source>
-        <translation type="unfinished">Historial de capturas de pantalla</translation>
+        <translation>Historial de capturas de pantalla</translation>
     </message>
 </context>
 <context>
@@ -2568,42 +2568,42 @@ Puede ser que necesites preceder el símbolo &quot;#&quot; con &quot;\&quot;, co
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="98"/>
         <source>&amp;Take Screenshot</source>
-        <translation type="unfinished">&amp;Tomar Captura de Pantalla</translation>
+        <translation>&amp;Capturar Pantalla</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="116"/>
         <source>&amp;Open Launcher</source>
-        <translation type="unfinished">&amp;Abrir Lanzador</translation>
+        <translation>&amp;Abrir Lanzador</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="121"/>
         <source>&amp;Configuration</source>
-        <translation type="unfinished">&amp;Configuración</translation>
+        <translation>&amp;Configuración</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="126"/>
         <source>&amp;About</source>
-        <translation type="unfinished">&amp;Acerca de</translation>
+        <translation>&amp;Acerca de</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="130"/>
         <source>Check for updates</source>
-        <translation type="unfinished">Buscar actualizaciones</translation>
+        <translation>Buscar actualizaciones</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="141"/>
         <source>New version %1 is available</source>
-        <translation type="unfinished">Nueva version %1 está disponible</translation>
+        <translation>Nueva versión %1 está disponible</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="145"/>
         <source>&amp;Quit</source>
-        <translation type="unfinished">&amp;Salir</translation>
+        <translation>&amp;Salir</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="149"/>
         <source>&amp;Latest Uploads</source>
-        <translation type="unfinished">&amp;Últimas Subidas</translation>
+        <translation>&amp;Últimas Cargas</translation>
     </message>
 </context>
 <context>
