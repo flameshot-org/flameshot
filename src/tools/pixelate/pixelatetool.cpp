@@ -8,6 +8,8 @@
 #include <QGraphicsScene>
 #include <QImage>
 #include <QPainter>
+#include <algorithm>
+#include <cstring>
 
 PixelateTool::PixelateTool(QObject* parent)
   : AbstractTwoPointTool(parent)
@@ -78,10 +80,21 @@ void PixelateTool::process(QPainter& painter, const QPixmap& pixmap)
         QPixmap t = pixmap.copy(selectionScaled);
         t = t.scaled(size, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
         t = t.scaled(selection.width(), selection.height());
-        painter.drawImage(selection, t.toImage());
+        QImage image = t.toImage();
+        image = randomizePixels(image);
+        painter.drawImage(selection, image);
     }
 }
 
+QImage PixelateTool::randomizePixels(const QImage& image)
+{
+    QVector<QRgb> pixels(image.height() * image.width());
+    std::memcpy(pixels.data(), image.bits(), image.byteCount());
+    std::random_shuffle(pixels.begin(), pixels.end());
+    QImage shuffledImage(image.width(), image.height(), image.format());
+    std::memcpy(shuffledImage.bits(), pixels.data(), image.byteCount());
+    return shuffledImage;
+}
 void PixelateTool::drawSearchArea(QPainter& painter, const QPixmap& pixmap)
 {
     Q_UNUSED(pixmap)
