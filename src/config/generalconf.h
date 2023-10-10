@@ -43,6 +43,7 @@ private slots:
     void allowMultipleGuiInstancesChanged(bool checked);
     void autoCloseIdleDaemonChanged(bool checked);
     void autostartChanged(bool checked);
+    void setRandomizePixelation(bool checked);
     void historyConfirmationToDelete(bool checked);
     void uploadHistoryMaxChanged(int max);
     void undoLimit(int limit);
@@ -81,6 +82,7 @@ private:
     void initShowHelp();
     void initShowMagnifier();
     void initShowSidePanelButton();
+    void initRandomizePixelation();
     void initShowStartupLaunchMessage();
     void initShowTrayIcon();
     void initSquareMagnifier();
@@ -113,6 +115,7 @@ private:
     QCheckBox* m_copyURLAfterUpload;
     QCheckBox* m_copyPathAfterSave;
     QCheckBox* m_antialiasingPinZoom;
+    QCheckBox* m_randomizePixelation;
     QCheckBox* m_saveLastRegion;
     QCheckBox* m_uploadWithoutConfirmation;
     QPushButton* m_importButton;
