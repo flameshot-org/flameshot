@@ -1149,13 +1149,13 @@ Please solve them manually in the configuration file.</source>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="247"/>
-        <source>Use last region</source>
-        <translation>Використовувати останню ділянку</translation>
+        <source>Use last region for GUI mode</source>
+        <translation type="unfinished">Використовувати останню ділянку</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="248"/>
-        <source>Uses the last region as the default selection for the next screenshot</source>
-        <translation>Використовує останню ділянку типовим виділенням для наступного знімка екрана</translation>
+        <source>Use the last region as the default selection for the next screenshot in GUI mode</source>
+        <translation type="unfinished">Використовує останню ділянку типовим виділенням для наступного знімка екрана</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="262"/>

@@ -1062,13 +1062,13 @@ Ratkaise ne käsin muuttamalla asetustiedostoa.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="247"/>
-        <source>Use last region</source>
-        <translation>Käytä viimeistä aluetta</translation>
+        <source>Use last region for GUI mode</source>
+        <translation type="unfinished">Käytä viimeistä aluetta</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="248"/>
-        <source>Uses the last region as the default selection for the next screenshot</source>
-        <translation>Käyttää viimeistä aluetta seuraavan kaappauksen oletusvalintana</translation>
+        <source>Use the last region as the default selection for the next screenshot in GUI mode</source>
+        <translation type="unfinished">Käyttää viimeistä aluetta seuraavan kaappauksen oletusvalintana</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="262"/>

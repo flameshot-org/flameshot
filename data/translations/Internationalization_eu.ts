@@ -1109,13 +1109,13 @@ Mesedez, konpon itzazu eskuz konfigurazio fitxategian.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="247"/>
-        <source>Use last region</source>
-        <translation>Erabili azken eremua</translation>
+        <source>Use last region for GUI mode</source>
+        <translation type="unfinished">Erabili azken eremua</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="248"/>
-        <source>Uses the last region as the default selection for the next screenshot</source>
-        <translation>Azken eremua erabiltzen du hurrengo pantaila-argazkirako hautaketa-eremu lehenetsi gisa</translation>
+        <source>Use the last region as the default selection for the next screenshot in GUI mode</source>
+        <translation type="unfinished">Azken eremua erabiltzen du hurrengo pantaila-argazkirako hautaketa-eremu lehenetsi gisa</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="262"/>

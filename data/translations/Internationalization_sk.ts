@@ -1121,13 +1121,13 @@ Riešte ich ručne v konfiguračnom súbore.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="247"/>
-        <source>Use last region</source>
-        <translation>Použite posledný región</translation>
+        <source>Use last region for GUI mode</source>
+        <translation type="unfinished">Použite posledný región</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="248"/>
-        <source>Uses the last region as the default selection for the next screenshot</source>
-        <translation>Používa posledný región ako predvolený výber pre ďalší snímku obrazovky</translation>
+        <source>Use the last region as the default selection for the next screenshot in GUI mode</source>
+        <translation type="unfinished">Používa posledný región ako predvolený výber pre ďalší snímku obrazovky</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="262"/>
