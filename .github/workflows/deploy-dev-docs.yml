@@ -22,7 +22,7 @@ jobs:
               git+https://github.com/veracioux/mkdoxy@v1.0.0
 
       - name: Checkout flameshot source
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           path: 'flameshot'
 
@@ -32,7 +32,7 @@ jobs:
           make build
 
       - name: Checkout flameshot website
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: 'flameshot-org/flameshot-org.github.io'
           ref: 'gh-pages'

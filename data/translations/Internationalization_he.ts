@@ -1070,13 +1070,13 @@ Please solve them manually in the configuration file.</source>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="247"/>
-        <source>Use last region</source>
-        <translation>השתמש באזור האחרון</translation>
+        <source>Use last region for GUI mode</source>
+        <translation type="unfinished">השתמש באזור האחרון</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="248"/>
-        <source>Uses the last region as the default selection for the next screenshot</source>
-        <translation>שימוש באזור האחרון כבחירת ברירת־מחדל לצילום המסך הבא</translation>
+        <source>Use the last region as the default selection for the next screenshot in GUI mode</source>
+        <translation type="unfinished">שימוש באזור האחרון כבחירת ברירת־מחדל לצילום המסך הבא</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="262"/>

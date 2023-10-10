@@ -1074,13 +1074,13 @@ Bitte beseitige sie manuell in der Konfigurationsdatei.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="247"/>
-        <source>Use last region</source>
-        <translation>Letzte Region verwenden</translation>
+        <source>Use last region for GUI mode</source>
+        <translation type="unfinished">Letzte Region verwenden</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="248"/>
-        <source>Uses the last region as the default selection for the next screenshot</source>
-        <translation>Letzte Region als Standardauswahl für den nächsten Screenshot verwenden</translation>
+        <source>Use the last region as the default selection for the next screenshot in GUI mode</source>
+        <translation type="unfinished">Letzte Region als Standardauswahl für den nächsten Screenshot verwenden</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="262"/>

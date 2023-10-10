@@ -1066,13 +1066,13 @@ Please solve them manually in the configuration file.</source>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="247"/>
-        <source>Use last region</source>
-        <translation>Χρησιμοποιήστε την τελευταία περιοχή</translation>
+        <source>Use last region for GUI mode</source>
+        <translation type="unfinished">Χρησιμοποιήστε την τελευταία περιοχή</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="248"/>
-        <source>Uses the last region as the default selection for the next screenshot</source>
-        <translation>Χρησιμοποιεί την τελευταία περιοχή ως προεπιλεγμένη επιλογή για το επόμενο στιγμιότυπο οθόνης</translation>
+        <source>Use the last region as the default selection for the next screenshot in GUI mode</source>
+        <translation type="unfinished">Χρησιμοποιεί την τελευταία περιοχή ως προεπιλεγμένη επιλογή για το επόμενο στιγμιότυπο οθόνης</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="262"/>

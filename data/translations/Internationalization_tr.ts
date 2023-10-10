@@ -1073,13 +1073,13 @@ Lütfen bunları yapılandırma dosyasında elle çözün.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="247"/>
-        <source>Use last region</source>
-        <translation>Son bölgeyi kullan</translation>
+        <source>Use last region for GUI mode</source>
+        <translation type="unfinished">Son bölgeyi kullan</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="248"/>
-        <source>Uses the last region as the default selection for the next screenshot</source>
-        <translation>Bir sonraki ekran görüntüsü için öntanımlı seçim olarak son bölgeyi kullanır</translation>
+        <source>Use the last region as the default selection for the next screenshot in GUI mode</source>
+        <translation type="unfinished">Bir sonraki ekran görüntüsü için öntanımlı seçim olarak son bölgeyi kullanır</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="262"/>
