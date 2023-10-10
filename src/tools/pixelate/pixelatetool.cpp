@@ -9,7 +9,9 @@
 #include <QImage>
 #include <QPainter>
 #include <algorithm>
+#include <chrono> // std::chrono::system_clock
 #include <cstring>
+#include <random> // std::default_random_engine
 
 PixelateTool::PixelateTool(QObject* parent)
   : AbstractTwoPointTool(parent)
@@ -89,10 +91,12 @@ void PixelateTool::process(QPainter& painter, const QPixmap& pixmap)
 QImage PixelateTool::randomizePixels(const QImage& image)
 {
     QVector<QRgb> pixels(image.height() * image.width());
-    std::memcpy(pixels.data(), image.bits(), image.byteCount());
-    std::random_shuffle(pixels.begin(), pixels.end());
+    std::memcpy(pixels.data(), image.bits(), image.sizeInBytes());
+    unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+    std::shuffle(
+      pixels.begin(), pixels.end(), std::default_random_engine(seed));
     QImage shuffledImage(image.width(), image.height(), image.format());
-    std::memcpy(shuffledImage.bits(), pixels.data(), image.byteCount());
+    std::memcpy(shuffledImage.bits(), pixels.data(), image.sizeInBytes());
     return shuffledImage;
 }
 void PixelateTool::drawSearchArea(QPainter& painter, const QPixmap& pixmap)
