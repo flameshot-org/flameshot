@@ -1113,13 +1113,13 @@ Por favor, resolva-os manualmente no arquivo de configuração.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="247"/>
-        <source>Use last region</source>
-        <translation>Usar a última região</translation>
+        <source>Use last region for GUI mode</source>
+        <translation type="unfinished">Usar a última região</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="248"/>
-        <source>Uses the last region as the default selection for the next screenshot</source>
-        <translation>Usa a última região como a seleção padrão para a próxima captura de tela</translation>
+        <source>Use the last region as the default selection for the next screenshot in GUI mode</source>
+        <translation type="unfinished">Usa a última região como a seleção padrão para a próxima captura de tela</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="262"/>

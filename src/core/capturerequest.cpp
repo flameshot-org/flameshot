@@ -21,7 +21,8 @@ CaptureRequest::CaptureRequest(CaptureRequest::CaptureMode mode,
 {
 
     ConfigHandler config;
-    if (config.saveLastRegion()) {
+    if (m_mode == CaptureRequest::CaptureMode::GRAPHICAL_MODE &&
+        config.saveLastRegion()) {
         setInitialSelection(getLastRegion());
     }
 }
