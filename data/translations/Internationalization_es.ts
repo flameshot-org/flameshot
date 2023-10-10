@@ -1083,7 +1083,7 @@ Por favor, resuélvelos manualmente en el archivo de configuración.</translatio
     <message>
         <location filename="../../src/config/generalconf.cpp" line="248"/>
         <source>Use the last region as the default selection for the next screenshot in GUI mode</source>
-        <translation>Utilizar la última región como selección por defecto para la siguiente captura de pantalla en modo GUI</translation>
+        <translation>Utilizar la última región como selección por defecto para la siguiente captura de pantalla en modo GUI.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="262"/>
