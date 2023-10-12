@@ -29,6 +29,20 @@ To ensure that Flameshot is correctly positioned on multiple outputs (monitors) 
 for_window [app_id="flameshot"] border pixel 0, floating enable, fullscreen disable, move absolute position 0 0
 ```
 
+
+
+Starting from 0.17.0 xdg-desktop-portal requires a configuration file (e.g. in ~/.config/xdg-desktop-portal/sway-portals.conf):
+
+(take from [issues#3363](https://github.com/flameshot-org/flameshot/issues/3363))
+```sh
+[preferred]
+# use xdg-desktop-portal-gtk for every portal interface
+default=gtk
+# except for the xdg-desktop-portal-wlr supplied interfaces
+org.freedesktop.impl.portal.Screencast=wlr
+org.freedesktop.impl.portal.Screenshot=wlr
+```
+
 ## Troubleshooting
 
 Q) Flameshot doesn't take a screenshot, it just hangs!
