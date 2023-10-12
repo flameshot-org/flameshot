@@ -396,7 +396,7 @@ Presiona Espacio para abrir el panel lateral.</translation>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="58"/>
         <source>Enter or Left Click</source>
-        <translation></translation>
+        <translation>Enter o click izquierdo</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="59"/>
@@ -406,7 +406,7 @@ Presiona Espacio para abrir el panel lateral.</translation>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="59"/>
         <source>Hold Left Click</source>
-        <translation></translation>
+        <translation>Mantener pulsado el botón izquierdo</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="60"/>
@@ -416,7 +416,7 @@ Presiona Espacio para abrir el panel lateral.</translation>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="60"/>
         <source>Space or Right Click</source>
-        <translation></translation>
+        <translation>Espacio o clic derecho</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="61"/>
@@ -442,12 +442,12 @@ Presiona Espacio para abrir el panel lateral.</translation>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="40"/>
         <source>Edit Preset:</source>
-        <translation>Edit Preset:</translation>
+        <translation>Editar el preajuste:</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="45"/>
         <source>Enter color to update preset</source>
-        <translation>Enter color to update preset</translation>
+        <translation>Introduce el color para actualizar el preajuste</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="65"/>
@@ -457,7 +457,7 @@ Presiona Espacio para abrir el panel lateral.</translation>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="67"/>
         <source>Press button to update the selected preset</source>
-        <translation>Press button to update the selected preset</translation>
+        <translation>Pulsa el botón para actualizar la preselección seleccionada</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="74"/>
@@ -1078,12 +1078,12 @@ Por favor, resuélvelos manualmente en el archivo de configuración.</translatio
     <message>
         <location filename="../../src/config/generalconf.cpp" line="247"/>
         <source>Use last region for GUI mode</source>
-        <translation type="unfinished">Use last region for GUI mode</translation>
+        <translation>Utilizar la última región para el modo GUI</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="248"/>
         <source>Use the last region as the default selection for the next screenshot in GUI mode</source>
-        <translation type="unfinished">Use the last region as the default selection for the next screenshot in GUI mode</translation>
+        <translation>Utilizar la última región como selección por defecto para la siguiente captura de pantalla en modo GUI</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="262"/>
@@ -1133,12 +1133,12 @@ Por favor, resuélvelos manualmente en el archivo de configuración.</translatio
     <message>
         <location filename="../../src/config/generalconf.cpp" line="420"/>
         <source>Copy on double click</source>
-        <translation>Copy on double click</translation>
+        <translation>Copiar al hacer doble clic</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="421"/>
         <source>Enable Copy on Double Click</source>
-        <translation>Enable Copy on Double Click</translation>
+        <translation>Activar la copia con el doble clic</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="434"/>
@@ -1178,7 +1178,7 @@ Por favor, resuélvelos manualmente en el archivo de configuración.</translatio
     <message>
         <location filename="../../src/config/generalconf.cpp" line="540"/>
         <source>Imgur Application Client ID</source>
-        <translation>Imgur Application Client ID</translation>
+        <translation>ID del cliente de la aplicación Imgur</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="571"/>
@@ -1703,7 +1703,7 @@ Por favor, resuélvelos manualmente en el archivo de configuración.</translatio
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="234"/>
         <source>Save to file</source>
-        <translation>Save to file</translation>
+        <translation>Guardar en un archivo</translation>
     </message>
 </context>
 <context>
@@ -1860,7 +1860,7 @@ Por favor, resuélvelos manualmente en el archivo de configuración.</translatio
     <message>
         <location filename="../../src/main.cpp" line="184"/>
         <source>Repeat screenshot with previously selected region</source>
-        <translation>Repeat screenshot with previously selected region</translation>
+        <translation>Repetir la captura de pantalla con la región previamente seleccionada</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="187"/>
@@ -1999,7 +1999,7 @@ Puede ser que necesites preceder el símbolo &quot;#&quot; con &quot;\&quot;, co
     <message>
         <location filename="../../src/core/flameshot.cpp" line="148"/>
         <source>Requested screen exceeds screen count</source>
-        <translation>Requested screen exceeds screen count</translation>
+        <translation>La pantalla solicitada supera el número de pantallas</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="378"/>
@@ -2171,12 +2171,12 @@ Puede ser que necesites preceder el símbolo &quot;#&quot; con &quot;\&quot;, co
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="112"/>
         <source>Unable to detect desktop environment (GNOME? KDE? Sway? ...)</source>
-        <translation>Unable to detect desktop environment (GNOME? KDE? Sway? ...)</translation>
+        <translation>No se puede detectar el entorno de escritorio (¿GNOME? ¿KDE? ¿Sway? ...)</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="115"/>
         <source>Hint: try setting the XDG_CURRENT_DESKTOP environment variable.</source>
-        <translation>Hint: try setting the XDG_CURRENT_DESKTOP environment variable.</translation>
+        <translation>Sugerencia: intenta configurar la variable del entorno XDG_CURRENT_DESKTOP.</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="120"/>
@@ -2250,7 +2250,7 @@ Puede ser que necesites preceder el símbolo &quot;#&quot; con &quot;\&quot;, co
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="167"/>
         <source>Left Double-click</source>
-        <translation></translation>
+        <translation>Doble clic izquierdo</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="174"/>
