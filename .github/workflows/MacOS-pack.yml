@@ -3,7 +3,7 @@ name: Packaging(MacOS)
 on:
   push:
     branches:
-      - master
+      - main
       - feature/RND-680-macos-.dmg-package-build
     paths-ignore:
       - 'README.md'
