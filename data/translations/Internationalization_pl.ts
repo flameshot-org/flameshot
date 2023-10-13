@@ -454,7 +454,7 @@ Spacja, aby pokazać panel boczny.</translation>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="74"/>
         <source>Delete</source>
-        <translation>Delete</translation>
+        <translation>Usuń</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="76"/>
@@ -474,7 +474,7 @@ Spacja, aby pokazać panel boczny.</translation>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="106"/>
         <source>Add</source>
-        <translation>Add</translation>
+        <translation>Dodaj</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="107"/>
@@ -1387,7 +1387,7 @@ Rozwiąż błędy ręcznie w pliku konfiguracyjnym.</translation>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="134"/>
         <source>Save image</source>
-        <translation>Save image</translation>
+        <translation>Zapisz obraz</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="164"/>
@@ -2739,7 +2739,7 @@ Może być konieczne opuszczenie znaku &apos;#&apos; jak np.: &apos;\#FFF&apos;<
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_uploadlineitem.h" line="116"/>
         <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_uploadlineitem.h" line="116"/>
         <source>Open In Browser</source>
-        <translation>Open In Browser</translation>
+        <translation>Otwórz w przeglądarce</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadlineitem.cpp" line="50"/>
