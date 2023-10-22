@@ -156,10 +156,17 @@ void TrayIcon::initMenu()
             Flameshot::instance(),
             &Flameshot::history);
 
+    auto* openSavePathAction = new QAction(tr("&Open Save Path"), this);
+    connect(openSavePathAction,
+            &QAction::triggered,
+            Flameshot::instance(),
+            &Flameshot::openSavePath);
+
     m_menu->addAction(captureAction);
     m_menu->addAction(launcherAction);
     m_menu->addSeparator();
     m_menu->addAction(recentAction);
+    m_menu->addAction(openSavePathAction);
     m_menu->addSeparator();
     m_menu->addAction(configAction);
     m_menu->addSeparator();
