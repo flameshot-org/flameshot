@@ -167,7 +167,7 @@ void SidePanelWidget::startColorGrab()
             this,
             &SidePanelWidget::onColorGrabAborted);
 
-    emit togglePanel();
+    emit hidePanel();
     m_colorGrabber->startGrabbing();
 }
 
@@ -192,7 +192,7 @@ void SidePanelWidget::onTemporaryColorUpdated(const QColor& color)
 
 void SidePanelWidget::finalizeGrab()
 {
-    emit togglePanel();
+    emit showPanel();
 }
 
 void SidePanelWidget::updateColorNoWheel(const QColor& c)
