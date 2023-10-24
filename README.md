@@ -339,7 +339,7 @@ Some prebuilt packages are provided on [the release page of the GitHub project r
 
 There are packages available in the repository of some Linux distributions:
 
-- [Arch](https://www.archlinux.org/packages/community/x86_64/flameshot/): `pacman -S flameshot`
+- [Arch](https://archlinux.org/packages/extra/x86_64/flameshot/): `pacman -S flameshot`
   + Snapshot also available via AUR: [flameshot-git](https://aur.archlinux.org/packages/flameshot-git).
 - [Debian 10+](https://tracker.debian.org/pkg/flameshot): `apt install flameshot`
   + Package for Debian 9 ("Stretch") also [available via stretch-backports](https://backports.debian.org/).
