@@ -38,7 +38,7 @@
 
     <!--
        captureScreen:
-       @captureMode: Desired mode of capture.
+       @captureMode: Desired mode of capture, 0 for fullscreen, 1 for graphical, 2 for screen.
 
        Allow the user to capture a screenshot over DBus.
     -->
