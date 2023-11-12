@@ -326,8 +326,7 @@ jobs:
           path: |
             ${{ github.workspace }}/build/${{ env.PRODUCT }}-*-lp${{ matrix.dist.symbol }}.${{ matrix.dist.arch }}.rpm
             ${{ github.workspace }}/build/${{ env.PRODUCT }}-*-lp${{ matrix.dist.symbol }}.${{ matrix.dist.arch }}.rpm.sha256sum
-
-  appimage-pack:
+   appimage-pack:
     name: Build appimage on ${{ matrix.config.name }}
     runs-on: ubuntu-22.04
     strategy:
@@ -413,33 +412,35 @@ jobs:
       - name: Packaging appimage
         run: |
           set -x
-          APPIMAGE_DST_PATH="$GITHUB_WORKSPACE/${PRODUCT}.AppDir"
-          mkdir -p "${APPIMAGE_DST_PATH}"
+          APPIMAGE_DST_PATH=$GITHUB_WORKSPACE/${PRODUCT}.AppDir
+          mkdir -p ${APPIMAGE_DST_PATH}
 
           cd $GITHUB_WORKSPACE
-          cmake -S . -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX="/usr/${APPIMAGE_DST_PATH}" -DUSE_LAUNCHER_ABSOLUTE_PATH:BOOL=OFF
-          cmake --build build --target install --config RelWithDebInfo -- -j$(nproc)
+          cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX=/usr -DUSE_LAUNCHER_ABSOLUTE_PATH:BOOL=OFF
+          make -j$(nproc) DESTDIR=${APPIMAGE_DST_PATH} install
 
-
-          $GITHUB_WORKSPACE/appimagetool -s deploy "${APPIMAGE_DST_PATH}/usr/share/applications/org.flameshot.Flameshot.desktop" "${APPIMAGE_DST_PATH}"
-
-          mkdir -p "${APPIMAGE_DST_PATH}/usr/plugins/platforminputcontexts"
+          $GITHUB_WORKSPACE/appimagetool -s deploy "${APPIMAGE_DST_PATH}/usr/share/applications/org.flameshot.Flameshot.desktop"
+          
+          mkdir -p ${APPIMAGE_DST_PATH}/usr/plugins/platforminputcontexts
           cp \
             /usr/lib/x86_64-linux-gnu/qt5/plugins/platforminputcontexts/libfcitxplatforminputcontextplugin.so \
-            "${APPIMAGE_DST_PATH}/usr/plugins/platforminputcontexts/"
+            ${APPIMAGE_DST_PATH}/usr/plugins/platforminputcontexts/
 
           cp \
             $GITHUB_WORKSPACE/data/img/app/org.flameshot.Flameshot.png \
-            "${APPIMAGE_DST_PATH}"/ 
+            ${APPIMAGE_DST_PATH}/
 
           if [ -f "${APPIMAGE_DST_PATH}/lib/x86_64-linux-gnu/libxcb-glx.so.0" ]; then
-            rm "${APPIMAGE_DST_PATH}/lib/x86_64-linux-gnu/libxcb-glx.so.0"
+            rm ${APPIMAGE_DST_PATH}/lib/x86_64-linux-gnu/libxcb-glx.so.0
           fi
 
-          chmod +x "${APPIMAGE_DST_PATH}/usr/lib64/ld-*.so.*"
+          chmod +x ${APPIMAGE_DST_PATH}/usr/lib64/ld-*.so.*
+
 
           VERSION=${VERSION} $GITHUB_WORKSPACE/appimagetool "${APPIMAGE_DST_PATH}"
           mv $GITHUB_WORKSPACE/Flameshot-${VERSION}-x86_64.AppImage $GITHUB_WORKSPACE/Flameshot-${VERSION}.x86_64.AppImage
+
+
       - name: SHA256Sum of appimage package(daily build)
         run: |
           cd "$GITHUB_WORKSPACE/" || { >&2 echo "Cannot cd to '$GITHUB_WORKSPACE/'!"; exit 11 ; }
