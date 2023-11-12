@@ -36,5 +36,15 @@
       <arg name="notification" type="s" direction="in"/>
     </method>
 
+    <!--
+       captureScreen:
+       @captureMode: Desired mode of capture.
+
+       Allow the user to capture a screenshot over DBus.
+    -->
+    <method name="captureScreen">
+      <arg name="captureMode" type="q" direction="in"/>
+    </method>
+
   </interface>
 </node>

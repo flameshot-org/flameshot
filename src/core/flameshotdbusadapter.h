@@ -19,4 +19,5 @@ public slots:
     Q_NOREPLY void attachTextToClipboard(const QString& text,
                                          const QString& notification);
     Q_NOREPLY void attachPin(const QByteArray& data);
+    Q_NOREPLY void captureScreen(const QString& captureMode);
 };
