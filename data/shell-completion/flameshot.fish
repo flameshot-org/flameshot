@@ -83,6 +83,7 @@ __flameshot_complete gui -l "print-geometry"    -s "g"  -f   -d "Print geometry 
 __flameshot_complete gui -l "upload"            -s "u"  -f   -d "Upload the screenshot"
 __flameshot_complete gui -l "pin"                       -f   -d "Pin the screenshot to the screen"
 __flameshot_complete gui -l "accept-on-select"  -s "s"  -f   -d "Accept capture as soon as a selection is made"
+__flameshot_complete gui -l "post"              -s "q"  -f   -d "Capture the post the mouse is hovering over"
 
 # SCREEN subcommand
 __flameshot_complete screen                             -f

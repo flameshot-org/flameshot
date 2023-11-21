@@ -56,7 +56,7 @@ void requestCaptureAndWait(const CaptureRequest& req)
             qApp->exit(0);
         }
 #else
-        // if this instance is not daemon, make sure it exit after caputre finish
+        // if this instance is not daemon, make sure it exits after capture finishes
         if (FlameshotDaemon::instance() == nullptr && !Flameshot::instance()->haveExternalWidget()) {
             qApp->exit(0);
         }
@@ -122,6 +122,11 @@ void reinitializeAsQApplication(int& argc, char* argv[])
     delete QCoreApplication::instance();
     new QApplication(argc, argv);
     configureApp(true);
+}
+
+QRect getSurroundingBox(QPoint pos)
+{
+    return QRect(pos.x()-50, pos.y()-50, 100, 100); // BUGBUG for now, a 100x100 square centered on the mouse cursor
 }
 
 int main(int argc, char* argv[])
@@ -194,6 +199,8 @@ int main(int argc, char* argv[])
       QStringLiteral("path"));
     CommandOption clipboardOption(
       { "c", "clipboard" }, QObject::tr("Save the capture to the clipboard"));
+    CommandOption postOption(
+      { "q", "post" }, QObject::tr("Capture the post the mouse is hovering over"));
     CommandOption pinOption("pin",
                             QObject::tr("Pin the capture to the screen"));
     CommandOption uploadOption({ "u", "upload" },
@@ -319,6 +326,7 @@ int main(int argc, char* argv[])
     auto versionOption = parser.addVersionOption();
     parser.AddOptions({ pathOption,
                         clipboardOption,
+                        postOption,
                         delayOption,
                         regionOption,
                         useLastRegionOption,
@@ -391,6 +399,7 @@ int main(int argc, char* argv[])
         QString region = parser.value(regionOption);
         bool useLastRegion = parser.isSet(useLastRegionOption);
         bool clipboard = parser.isSet(clipboardOption);
+        bool post = parser.isSet(postOption);
         bool raw = parser.isSet(rawImageOption);
         bool printGeometry = parser.isSet(selectionOption);
         bool pin = parser.isSet(pinOption);
@@ -427,6 +436,13 @@ int main(int argc, char* argv[])
                 !pin && !upload) {
                 req.addSaveTask();
             }
+        }
+        // If the "find a post" option is set, look for one under the mouse cursor.
+        if ( parser.isSet(postOption) ) {
+            QPoint pos = QCursor::pos();
+            QRect r;
+            r = getSurroundingBox(pos);
+            req.setInitialSelection(r);
         }
         requestCaptureAndWait(req);
     } else if (parser.isSet(fullArgument)) { // FULL
