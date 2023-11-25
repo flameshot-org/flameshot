@@ -32,15 +32,17 @@ signals:
     void colorChanged(const QColor& color);
     void toolSizeChanged(int size);
     void togglePanel();
+    void showPanel();
+    void hidePanel();
     void displayGridChanged(bool display);
     void gridSizeChanged(int size);
 
 public slots:
     void onToolSizeChanged(int tool);
     void onColorChanged(const QColor& color);
+    void startColorGrab();
 
 private slots:
-    void startColorGrab();
     void onColorGrabFinished();
     void onColorGrabAborted();
     void onTemporaryColorUpdated(const QColor& color);
