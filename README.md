@@ -287,7 +287,7 @@ To use Flameshot instead of the default screenshot application in Ubuntu we need
 
    Ubuntu 18.04: Go to _Settings_ > _Device_ > _Keyboard_ and press the '+' button at the bottom.
 
-   Ubuntu 20.04: Go to _Settings_ > _Keyboard_ and press the '+' button at the bottom.
+   Ubuntu 20.04: Go to _Settings_ > _Keyboard Shortcuts_ and press the '+' button at the bottom.
 
    Ubuntu 22.04: Go to _Settings_ > _Keyboard_ > _View and Customise Shortcuts_ > _Custom shortcuts_ and press the '+' button at the bottom.
 
