@@ -42,6 +42,8 @@ public slots:
     void info();
     void history();
 
+    void openSavePath();
+
     QVersionNumber getVersion();
 
 public:
