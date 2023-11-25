@@ -124,11 +124,6 @@ void reinitializeAsQApplication(int& argc, char* argv[])
     configureApp(true);
 }
 
-QRect getSurroundingBox(QPoint pos)
-{
-    return QRect(pos.x()-50, pos.y()-50, 100, 100); // BUGBUG for now, a 100x100 square centered on the mouse cursor
-}
-
 int main(int argc, char* argv[])
 {
 #ifdef Q_OS_LINUX
@@ -199,8 +194,8 @@ int main(int argc, char* argv[])
       QStringLiteral("path"));
     CommandOption clipboardOption(
       { "c", "clipboard" }, QObject::tr("Save the capture to the clipboard"));
-    CommandOption postOption(
-      { "q", "post" }, QObject::tr("Capture the post the mouse is hovering over"));
+    CommandOption boxOption(
+      { "q", "box" }, QObject::tr("Capture the box around the mouse cursor"));
     CommandOption pinOption("pin",
                             QObject::tr("Pin the capture to the screen"));
     CommandOption uploadOption({ "u", "upload" },
@@ -326,7 +321,7 @@ int main(int argc, char* argv[])
     auto versionOption = parser.addVersionOption();
     parser.AddOptions({ pathOption,
                         clipboardOption,
-                        postOption,
+                        boxOption,
                         delayOption,
                         regionOption,
                         useLastRegionOption,
@@ -399,7 +394,7 @@ int main(int argc, char* argv[])
         QString region = parser.value(regionOption);
         bool useLastRegion = parser.isSet(useLastRegionOption);
         bool clipboard = parser.isSet(clipboardOption);
-        bool post = parser.isSet(postOption);
+        bool box = parser.isSet(boxOption);
         bool raw = parser.isSet(rawImageOption);
         bool printGeometry = parser.isSet(selectionOption);
         bool pin = parser.isSet(pinOption);
@@ -437,12 +432,9 @@ int main(int argc, char* argv[])
                 req.addSaveTask();
             }
         }
-        // If the "find a post" option is set, look for one under the mouse cursor.
-        if ( parser.isSet(postOption) ) {
-            QPoint pos = QCursor::pos();
-            QRect r;
-            r = getSurroundingBox(pos);
-            req.setInitialSelection(r);
+        // If the "find a box" option is set, set a flag in the req to look for it later.
+        if (box) {
+            req.setCheckForBox();
         }
         requestCaptureAndWait(req);
     } else if (parser.isSet(fullArgument)) { // FULL

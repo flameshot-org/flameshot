@@ -52,6 +52,47 @@
 
 // enableSaveWindow
 
+bool isLineHorizontal(const QImage &image, int x1, int x2, int y, const QColor &pointColor) {
+    for (int x = x1; x <= x2; ++x) {
+        if (image.pixelColor(x, y) == pointColor) return false;
+    }
+    return true;
+}
+
+bool isLineVertical(const QImage &image, int y1, int y2, int x, const QColor &pointColor) {
+    for (int y = y1; y <= y2; ++y) {
+        if (image.pixelColor(x, y) == pointColor) return false;
+    }
+    return true;
+}
+
+std::pair<bool, QRect> isBoxAroundPoint(const QPoint &point, const QImage &image) {
+    QColor pointColor = image.pixelColor(point);
+    // These four variables start one pixel away from the center point.
+    int x1 = point.x()-1;
+    int x2 = point.x()+1;
+    int y1 = point.y()-1;
+    int y2 = point.y()+1;
+    // While "bounding box" described by QPoint(x1,y1) and QPoint(x2,y2) is
+    // inside the rectangle, do our checks.
+    while (image.rect().contains(QPoint(x1, y1)) && image.rect().contains(QPoint(x2, y2))) {
+        bool foundX1Line = isLineVertical(image, y1, y2, x1, pointColor);
+        bool foundX2Line = isLineVertical(image, y1, y2, x2, pointColor);
+        bool foundY1Line = isLineHorizontal(image, x1, x2, y1, pointColor);
+        bool foundY2Line = isLineHorizontal(image, x1, x2, y2, pointColor);
+        if (foundX1Line && foundX2Line && foundY1Line && foundY2Line) {
+            QRect box(x1, y1, x2 - x1, y2 - y1);
+            return std::make_pair(true, box); // A box has been found
+        }
+        // Only expand the box outwards if no line was found in this iteration
+        if (!foundX1Line) x1--;
+        if (!foundX2Line) x2++;
+        if (!foundY1Line) y1--;
+        if (!foundY2Line) y2++;
+    }
+    return std::make_pair(false, QRect()); // No box found
+}
+
 CaptureWidget::CaptureWidget(const CaptureRequest& req,
                              bool fullScreen,
                              QWidget* parent)
@@ -117,6 +158,21 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
             this->close();
         }
         m_context.origScreenshot = m_context.screenshot;
+        // Now we have saved the cursor as well as the desktop.  If the user
+        // requested to find a "box", look for one now.
+        if ( req.getCheckForBox() ) {
+            auto result = isBoxAroundPoint(m_context.mousePos, m_context.origScreenshot.toImage());
+            bool boxFound = result.first;
+            QRect box = result.second;
+            if (boxFound) {
+                // A box was found - box variable contains the QRect of the box
+                qDebug() << "Box found!  At " << box.x() << "," << box.y() << ", w=" << box.width() << ", h=" << box.height();
+                m_context.request.setInitialSelection(box);
+            } else {
+                // No box found
+                qDebug() << "No box found.";
+            }
+        }
 
 #if defined(Q_OS_WIN)
 // Call cmake with -DFLAMESHOT_DEBUG_CAPTURE=ON to enable easier debugging

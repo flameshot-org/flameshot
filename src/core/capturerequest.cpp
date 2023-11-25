@@ -86,3 +86,13 @@ void CaptureRequest::setInitialSelection(const QRect& selection)
 {
     m_initialSelection = selection;
 }
+
+void CaptureRequest::setCheckForBox()
+{
+    checkForBox = true;
+}
+
+bool CaptureRequest::getCheckForBox() const
+{
+    return checkForBox;
+}

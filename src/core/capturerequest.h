@@ -49,6 +49,8 @@ public:
     void addSaveTask(const QString& path = QString());
     void addPinTask(const QRect& pinWindowGeometry);
     void setInitialSelection(const QRect& selection);
+    void setCheckForBox();
+    bool getCheckForBox() const;
 
 private:
     CaptureMode m_mode;
@@ -57,6 +59,7 @@ private:
     ExportTask m_tasks;
     QVariant m_data;
     QRect m_pinWindowGeometry, m_initialSelection;
+    bool checkForBox = false;
 
     CaptureRequest() {}
 };
