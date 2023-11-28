@@ -412,6 +412,7 @@ Also you can open and build/debug the project in a C++ IDE. For example, in Qt C
 - Git
 - OpenSSL
 - CA Certificates
+- QT Image Formats
 
 #### Debian
 
@@ -423,7 +424,7 @@ apt install g++ cmake build-essential qtbase5-dev qttools5-dev-tools libqt5svg5-
 apt install libqt5dbus5 libqt5network5 libqt5core5a libqt5widgets5 libqt5gui5 libqt5svg5
 
 # Optional
-apt install git openssl ca-certificates
+apt install git openssl ca-certificates qt5-image-formats-plugins
 ```
 
 #### Fedora
