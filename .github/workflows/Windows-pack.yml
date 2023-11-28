@@ -13,6 +13,8 @@ on:
       - 'README.md'
       - 'LICENSE'
 
+  workflow_dispatch:
+
 env:
   PRODUCT: flameshot
 
