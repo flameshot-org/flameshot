@@ -81,7 +81,7 @@ jobs:
           echo "VERSION=$(cat CMakeLists.txt |grep 'set.*(.*FLAMESHOT_VERSION' | sed 's/[^0-9.]*//' |sed 's/)//g')" >> $GITHUB_ENV
 
       - name: Restore from cache and run vcpkg
-        uses: lukka/run-vcpkg@v4
+        uses: lukka/run-vcpkg@v11.3
         with:
           vcpkgArguments: ${{env.VCPKG_PACKAGES}}
           vcpkgDirectory: '${{ github.workspace }}\vcpkg'
