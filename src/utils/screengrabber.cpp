@@ -12,6 +12,7 @@
 #include <QPixmap>
 #include <QProcess>
 #include <QScreen>
+#include <QFile>
 
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
 #include "request.h"
@@ -20,11 +21,110 @@
 #include <QDir>
 #include <QUrl>
 #include <QUuid>
+#include <unistd.h>
+
+static QImage allocateImage(const QVariantMap &metadata)
+{
+    bool ok;
+
+    const uint width = metadata.value(QStringLiteral("width")).toUInt(&ok);
+    if (!ok) {
+        return QImage();
+    }
+
+    const uint height = metadata.value(QStringLiteral("height")).toUInt(&ok);
+    if (!ok) {
+        return QImage();
+    }
+
+    const uint format = metadata.value(QStringLiteral("format")).toUInt(&ok);
+    if (!ok) {
+        return QImage();
+    }
+
+    return QImage(width, height, QImage::Format(format));
+}
+
+static QPixmap readImage(int fileDescriptor, const QVariantMap &metadata)
+{
+    QFile file;
+    if (!file.open(fileDescriptor, QFileDevice::ReadOnly, QFileDevice::AutoCloseHandle)) {
+        close(fileDescriptor);
+        return QPixmap();
+    }
+
+    QImage result = allocateImage(metadata);
+    if (result.isNull()) {
+        return QPixmap();
+    }
+
+    QDataStream stream(&file);
+    stream.readRawData(reinterpret_cast<char *>(result.bits()), result.sizeInBytes());
+    return QPixmap::fromImage(result);
+}
+
 #endif
 
 ScreenGrabber::ScreenGrabber(QObject* parent)
   : QObject(parent)
 {}
+
+
+void ScreenGrabber::ScreenShot2Portal(bool& ok, QPixmap& res)
+{
+#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
+    static const QString s_screenShotService = QStringLiteral("org.kde.KWin.ScreenShot2");
+    static const QString s_screenShotObjectPath = QStringLiteral("/org/kde/KWin/ScreenShot2");
+    static const QString s_screenShotInterface = QStringLiteral("org.kde.KWin.ScreenShot2");
+
+
+    // Do not set the O_NONBLOCK flag. Code that reads data from the pipe assumes
+    // that read() will block if there is no any data yet.
+    int pipeFds[2];
+    pipe(pipeFds);
+
+    QDBusMessage message = QDBusMessage::createMethodCall(s_screenShotService, s_screenShotObjectPath, s_screenShotInterface, "CaptureScreen");
+    QVariantMap options;
+
+    options.insert(QStringLiteral("native-resolution"), true);
+    options.insert(QStringLiteral("include-decoration"), true);
+    options.insert(QStringLiteral("include-cursor"), true);
+
+    QVariantList dbusArguments;
+    dbusArguments << QString(qApp->primaryScreen()->name()) << options;
+
+    dbusArguments.append(QVariant::fromValue(QDBusUnixFileDescriptor(pipeFds[1])));
+    message.setArguments(dbusArguments);
+
+    QDBusPendingCall pendingCall = QDBusConnection::sessionBus().asyncCall(message);
+    close(pipeFds[1]);
+
+    QEventLoop loop;
+
+    auto watcher = new QDBusPendingCallWatcher(pendingCall, this);
+    connect(watcher, &QDBusPendingCallWatcher::finished, this, [&]() {
+        watcher->deleteLater();
+        const QDBusPendingReply<QVariantMap> reply = *watcher;
+
+        if (!reply.isError())
+        {
+            ok = true;
+            res = readImage(pipeFds[0], reply);
+            res.setDevicePixelRatio(qApp->devicePixelRatio());
+        }
+        else {
+            qWarning() << "Screenshot request failed:" << reply.error().message();
+        }
+        loop.quit();
+    });
+
+    loop.exec();
+
+    if (res.isNull()) {
+        ok = false;
+    }
+#endif
+}
 
 void ScreenGrabber::generalGrimScreenshot(bool& ok, QPixmap& res)
 {
@@ -125,8 +225,9 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
         // handle screenshot based on DE
         switch (m_info.windowManager()) {
             case DesktopInfo::GNOME:
-            case DesktopInfo::KDE:
                 freeDesktopPortal(ok, res);
+            case DesktopInfo::KDE:
+                ScreenShot2Portal(ok, res);
                 break;
             case DesktopInfo::QTILE:
             case DesktopInfo::SWAY:
