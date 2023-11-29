@@ -119,6 +119,12 @@ if (APPLE)
 endif()
 add_subdirectory(src)
 
+# -----------------------------
+# Section: Tests
+# -----------------------------
+enable_testing()
+add_subdirectory(test)
+
 # CPack
 set(CPACK_PACKAGE_VENDOR "flameshot-org")
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Powerful yet simple to use screenshot software.")
