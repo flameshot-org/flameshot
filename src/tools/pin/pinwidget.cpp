@@ -101,6 +101,7 @@ void PinWidget::closePin()
     update();
     close();
 }
+
 bool PinWidget::scrollEvent(QWheelEvent* event)
 {
     const auto phase = event->phase();
@@ -114,9 +115,11 @@ bool PinWidget::scrollEvent(QWheelEvent* event)
         if (angle.y() == 0) {
             return true;
         }
+        const qreal scaledStep =
+          m_currentStepScaleFactor * m_scaleFactor * STEP;
         m_currentStepScaleFactor = angle.y() > 0
-                                     ? m_currentStepScaleFactor + STEP
-                                     : m_currentStepScaleFactor - STEP;
+                                     ? m_currentStepScaleFactor + scaledStep
+                                     : m_currentStepScaleFactor - scaledStep;
         m_expanding = m_currentStepScaleFactor >= 1.0;
     }
 #if defined(Q_OS_MACOS)
@@ -192,6 +195,7 @@ void PinWidget::keyPressEvent(QKeyEvent* event)
 
     setWindowOpacity(m_opacity);
 }
+
 bool PinWidget::gestureEvent(QGestureEvent* event)
 {
     if (QGesture* pinch = event->gesture(Qt::PinchGesture)) {
