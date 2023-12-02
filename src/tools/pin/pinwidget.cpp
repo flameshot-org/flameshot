@@ -32,6 +32,8 @@ PinWidget::PinWidget(const QPixmap& pixmap,
   , m_layout(new QVBoxLayout(this))
   , m_label(new QLabel())
   , m_shadowEffect(new QGraphicsDropShadowEffect(this))
+  , m_minSize(std::min(std::min(MIN_SIZE, static_cast<qreal>(pixmap.width())),
+                       static_cast<qreal>(pixmap.height())))
 {
     setWindowIcon(QIcon(GlobalValues::iconPath()));
     setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint);
@@ -259,10 +261,10 @@ void PinWidget::paintEvent(QPaintEvent* event)
                                      : Qt::FastTransformation;
         const qreal iw = m_pixmap.width();
         const qreal ih = m_pixmap.height();
-        const qreal nw = qBound(MIN_SIZE,
+        const qreal nw = qBound(m_minSize,
                                 iw * m_currentStepScaleFactor * m_scaleFactor,
                                 static_cast<qreal>(maximumWidth()));
-        const qreal nh = qBound(MIN_SIZE,
+        const qreal nh = qBound(m_minSize,
                                 ih * m_currentStepScaleFactor * m_scaleFactor,
                                 static_cast<qreal>(maximumHeight()));
 
