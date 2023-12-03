@@ -117,8 +117,20 @@ bool PinWidget::scrollEvent(QWheelEvent* event)
         if (angle.y() == 0) {
             return true;
         }
+
+        const bool ctrl =
+          event->modifiers().testFlag(Qt::KeyboardModifier::ControlModifier);
+        const bool shift =
+          event->modifiers().testFlag(Qt::KeyboardModifier::ShiftModifier);
+        qreal modifiersFactor = 1.0;
+        if (ctrl && !shift) {
+            modifiersFactor = 5.0;
+        } else if (shift && !ctrl) {
+            modifiersFactor = 0.2;
+        }
+
         const qreal scaledStep =
-          m_currentStepScaleFactor * m_scaleFactor * STEP;
+          m_currentStepScaleFactor * m_scaleFactor * modifiersFactor * STEP;
         m_currentStepScaleFactor = angle.y() > 0
                                      ? m_currentStepScaleFactor + scaledStep
                                      : m_currentStepScaleFactor - scaledStep;
