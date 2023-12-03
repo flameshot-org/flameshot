@@ -280,6 +280,11 @@ void PinWidget::paintEvent(QPaintEvent* event)
                                 ih * m_currentStepScaleFactor * m_scaleFactor,
                                 static_cast<qreal>(maximumHeight()));
 
+        if (nw == m_minSize || nh == m_minSize) {
+            m_currentStepScaleFactor = 1.0;
+            m_scaleFactor = std::min(nw, nh) / std::min(iw, ih);
+        }
+
         const QPixmap pix = m_pixmap.scaled(nw, nh, aspectRatio, transformType);
 
         m_label->setPixmap(pix);
