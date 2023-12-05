@@ -49,6 +49,7 @@
         <file>img/material/black/minus.svg</file>
         <file>img/material/black/plus.svg</file>
         <file>img/material/black/shortcut.svg</file>
+        <file>img/material/black/lockpick.svg</file>
         <file>img/material/white/accept.svg</file>
         <file>img/material/white/arrow-bottom-left.svg</file>
         <file>img/material/white/centeralign.svg</file>
@@ -99,5 +100,6 @@
         <file>img/material/black/image.svg</file>
         <file>img/material/white/apps.svg</file>
         <file>img/material/white/image.svg</file>
+        <file>img/material/white/lockpick.svg</file>
     </qresource>
 </RCC>

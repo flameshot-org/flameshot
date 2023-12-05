@@ -1,47 +1,50 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
 <svg
-   viewBox="0 0 24 24"
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
    version="1.1"
-   id="svg4"
-   sodipodi:docname="lockpick.svg"
+   id="svg5"
    inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
+   sodipodi:docname="lockpick.svg"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
-  <defs
-     id="defs8" />
   <sodipodi:namedview
-     id="namedview6"
+     id="namedview7"
      pagecolor="#ffffff"
      bordercolor="#666666"
      borderopacity="1.0"
      inkscape:pageshadow="2"
      inkscape:pageopacity="0.0"
      inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
      showgrid="false"
-     inkscape:zoom="32.583333"
-     inkscape:cx="11.984655"
-     inkscape:cy="12"
+     inkscape:zoom="0.69664703"
+     inkscape:cx="675.37789"
+     inkscape:cy="601.45236"
      inkscape:window-width="1920"
      inkscape:window-height="1043"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
-     inkscape:current-layer="svg4" />
-  <path
-     d="M18.5,1.15C17.97,1.15 17.46,1.34 17.07,1.73L11.26,7.55L16.91,13.2L22.73,7.39C23.5,6.61 23.5,5.35 22.73,4.56L19.89,1.73C19.5,1.34 19,1.15 18.5,1.15M10.3,8.5L4.34,14.46C3.56,15.24 3.56,16.5 4.36,17.31C3.14,18.54 1.9,19.77 0.67,21H6.33L7.19,20.14C7.97,20.9 9.22,20.89 10,20.12L15.95,14.16"
-     id="path2" />
-  <path
-     style="fill:#ffffff;stroke:#ffffff;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-     d="M 4.36,17.31 20.574648,2.1013427 18.414202,0.22526375 2.6320732,15.561901 Z"
-     id="path97" />
-  <path
-     style="fill:#ffffff;stroke:#ffffff;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-     d="M 21.806346,2.9350224 4.9091672,18.613451 4.3742407,18.012108 20.574648,2.1013427 Z"
-     id="path198" />
-  <path
-     style="fill:#000000;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-     d="m 13.508392,12.153453 1.516304,-1.440418 1.774297,1.737732 -1.596747,1.518942 z"
-     id="path266" />
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       style="fill:#000000;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 187.18869,18.860699 68.197009,235.31143 l 11.37606,5.92244 z"
+       id="path920" />
+    <path
+       style="fill:#000000;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 72.462291,237.68506 48.49364,224.4932 l 0.843415,54.00438 z"
+       id="path990" />
+  </g>
 </svg>
