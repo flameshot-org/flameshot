@@ -65,6 +65,7 @@ GeneralConf::GeneralConf(QWidget* parent)
     initShowMagnifier();
     initSquareMagnifier();
     initJpegQuality();
+    initReverseArrow();
     // this has to be at the end
     initConfigButtons();
     updateComponents();
@@ -93,6 +94,7 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
     m_showMagnifier->setChecked(config.showMagnifier());
     m_squareMagnifier->setChecked(config.squareMagnifier());
     m_saveLastRegion->setChecked(config.saveLastRegion());
+    m_reverseArrow->setChecked(config.reverseArrow());
 
 #if !defined(Q_OS_WIN)
     m_autoCloseIdleDaemon->setChecked(config.autoCloseIdleDaemon());
@@ -799,6 +801,16 @@ void GeneralConf::initJpegQuality()
             &GeneralConf::setJpegQuality);
 }
 
+void GeneralConf::initReverseArrow()
+{
+    m_reverseArrow = new QCheckBox(tr("Reverse arrow"), this);
+    m_reverseArrow->setToolTip(tr("Draw the arrow head first"));
+    m_scrollAreaLayout->addWidget(m_reverseArrow);
+
+    connect(
+      m_reverseArrow, &QCheckBox::clicked, this, &GeneralConf::setReverseArrow);
+}
+
 void GeneralConf::setSelGeoHideTime(int v)
 {
     ConfigHandler().setValue("showSelectionGeometryHideTime", v);
@@ -828,4 +840,9 @@ void GeneralConf::setSaveAsFileExtension(const QString& extension)
 void GeneralConf::useJpgForClipboardChanged(bool checked)
 {
     ConfigHandler().setUseJpgForClipboard(checked);
+}
+
+void GeneralConf::setReverseArrow(bool checked)
+{
+    ConfigHandler().setReverseArrow(checked);
 }
