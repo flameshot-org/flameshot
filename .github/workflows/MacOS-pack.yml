@@ -28,7 +28,7 @@ jobs:
       DIR_PKG: build/src
       HELPERS_SCRIPTS_PATH: ../../packaging/macos
       # Apple developer identity, example: "Developer ID Application: <user name> (code)"
-      # Note: no signing and notarization will be be proceed if this variable is not set
+      # Note: no signing and notarization will be proceed if this variable is not set
       APPLE_DEV_IDENTITY: ${{ secrets.APPLE_DEV_IDENTITY }}
       # Apple ID user
       APPLE_DEV_USER: ${{ secrets.APPLE_DEV_USER }}
