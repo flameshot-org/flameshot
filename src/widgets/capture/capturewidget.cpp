@@ -1062,20 +1062,29 @@ void CaptureWidget::initContext(bool fullscreen, const CaptureRequest& req)
 void CaptureWidget::initPanel()
 {
     QRect panelRect = rect();
+
     if (m_context.fullscreen) {
+        QScreen* currentScreen = nullptr;
+        qreal devicePixelRatio = 0;
+
 #if (defined(Q_OS_MACOS) || defined(Q_OS_LINUX))
-        QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
+        currentScreen = QGuiAppCurrentScreen().currentScreen();
         panelRect = currentScreen->geometry();
-        auto devicePixelRatio = currentScreen->devicePixelRatio();
+        devicePixelRatio = currentScreen->devicePixelRatio();
+#else
+        currentScreen = QGuiApplication::primaryScreen();
+        panelRect = currentScreen->geometry();
+        devicePixelRatio = QGuiApplication::primaryScreen()->devicePixelRatio();
+#endif
+        QRect virtualGeometry = currentScreen->virtualGeometry();
+        QPoint screenOffset = panelRect.topLeft() - virtualGeometry.topLeft();
+
+        // Move panelRect by the offset
+        // of the primary display to the virtual display
+        panelRect.moveTo(screenOffset);
+
         panelRect.moveTo(static_cast<int>(panelRect.x() / devicePixelRatio),
                          static_cast<int>(panelRect.y() / devicePixelRatio));
-#else
-        panelRect = QGuiApplication::primaryScreen()->geometry();
-        auto devicePixelRatio =
-          QGuiApplication::primaryScreen()->devicePixelRatio();
-        panelRect.moveTo(panelRect.x() / devicePixelRatio,
-                         panelRect.y() / devicePixelRatio);
-#endif
     }
 
     if (ConfigHandler().showSidePanelButton()) {
@@ -1108,11 +1117,9 @@ void CaptureWidget::initPanel()
     makeChild(m_panel);
 #if defined(Q_OS_MACOS)
     QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
-    panelRect.moveTo(mapFromGlobal(panelRect.topLeft()));
     m_panel->setFixedWidth(static_cast<int>(m_colorPicker->width() * 1.5));
     m_panel->setFixedHeight(currentScreen->geometry().height());
 #else
-    panelRect.moveTo(mapFromGlobal(panelRect.topLeft()));
     panelRect.setWidth(m_colorPicker->width() * 1.5);
     m_panel->setGeometry(panelRect);
 #endif

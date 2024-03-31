@@ -42,7 +42,7 @@ UtilityPanel::UtilityPanel(CaptureWidget* captureWidget)
             m_internalPanel,
             &QWidget::hide);
 
-#if (defined(Q_OS_WIN) || defined(Q_OS_MACOS))
+#if (defined(Q_OS_MACOS))
     move(0, 0);
 #endif
     hide();
@@ -87,7 +87,7 @@ void UtilityPanel::show()
     m_showAnimation->setEndValue(QRect(0, 0, width(), height()));
     m_internalPanel->show();
     m_showAnimation->start();
-#if (defined(Q_OS_WIN) || defined(Q_OS_MACOS))
+#if (defined(Q_OS_MACOS))
     move(0, 0);
 #endif
     QWidget::show();

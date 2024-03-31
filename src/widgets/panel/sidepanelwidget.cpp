@@ -81,7 +81,7 @@ SidePanelWidget::SidePanelWidget(QPixmap* p, QWidget* parent)
     m_layout->addWidget(m_colorWheel);
     m_layout->addWidget(m_colorHex);
 
-    QHBoxLayout* gridHBoxLayout = new QHBoxLayout(this);
+    QHBoxLayout* gridHBoxLayout = new QHBoxLayout();
     m_gridCheck = new QCheckBox(tr("Display grid"), this);
     m_gridSizeSpin = new QSpinBox(this);
     m_gridSizeSpin->setRange(5, 50);
