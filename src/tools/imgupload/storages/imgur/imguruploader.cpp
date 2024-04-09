@@ -74,7 +74,7 @@ void ImgurUploader::upload()
     url.setQuery(urlQuery);
     QNetworkRequest request(url);
     request.setHeader(QNetworkRequest::ContentTypeHeader,
-                      "application/application/x-www-form-urlencoded");
+                      "application/x-www-form-urlencoded");
     request.setRawHeader("Authorization",
                          QStringLiteral("Client-ID %1")
                            .arg(ConfigHandler().uploadClientSecret())
