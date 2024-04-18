@@ -326,7 +326,7 @@ jobs:
           path: |
             ${{ github.workspace }}/build/${{ env.PRODUCT }}-*-lp${{ matrix.dist.symbol }}.${{ matrix.dist.arch }}.rpm
             ${{ github.workspace }}/build/${{ env.PRODUCT }}-*-lp${{ matrix.dist.symbol }}.${{ matrix.dist.arch }}.rpm.sha256sum
-   appimage-pack:
+  appimage-pack:
     name: Build appimage on ${{ matrix.config.name }}
     runs-on: ubuntu-22.04
     strategy:
