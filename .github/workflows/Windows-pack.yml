@@ -1,7 +1,6 @@
 name: Packaging(Windows)
 
 on:
-  workflow_dispatch
   push:
     branches:
       - master
@@ -13,6 +12,8 @@ on:
     paths-ignore:
       - 'README.md'
       - 'LICENSE'
+  workflow_dispatch:
+
 
 env:
   PRODUCT: flameshot
