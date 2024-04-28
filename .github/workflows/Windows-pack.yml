@@ -2,17 +2,23 @@ name: Packaging(Windows)
 
 on:
   push:
-    branches:
-      - master
-      - fix*
+    branches: [ master ]
     paths-ignore:
       - 'README.md'
       - 'LICENSE'
+      - 'CODE_OF_CONDUCT.md'
+      - 'shell.nix'
+      - 'docs/**'
 
   pull_request:
+    branches: [ master ]
     paths-ignore:
       - 'README.md'
       - 'LICENSE'
+      - 'CODE_OF_CONDUCT.md'
+      - 'shell.nix'
+      - 'docs/**'
+
   workflow_dispatch:
 
 

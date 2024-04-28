@@ -2,17 +2,24 @@ name: Packaging(MacOS)
 
 on:
   push:
-    branches:
-      - master
-      - feature/RND-680-macos-.dmg-package-build
+    branches: [ master ]
     paths-ignore:
       - 'README.md'
       - 'LICENSE'
+      - 'CODE_OF_CONDUCT.md'
+      - 'shell.nix'
+      - 'docs/**'
 
   pull_request:
+    branches: [ master ]
     paths-ignore:
       - 'README.md'
       - 'LICENSE'
+      - 'CODE_OF_CONDUCT.md'
+      - 'shell.nix'
+      - 'docs/**'
+
+  workflow_dispatch:
 
 env:
   PRODUCT: flameshot
