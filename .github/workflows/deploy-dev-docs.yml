@@ -8,6 +8,8 @@ on:
       - 'docs/dev/**'
       - '.github/workflows/deploy-dev-docs.yml'
 
+  workflow_dispatch:
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-22.04
