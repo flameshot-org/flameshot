@@ -1,9 +1,10 @@
 name: Packaging(Windows)
 
 on:
+  workflow_dispatch
   push:
     branches:
-      - master*
+      - master
     paths-ignore:
       - 'README.md'
       - 'LICENSE'
