@@ -3,7 +3,8 @@ name: Packaging(Windows)
 on:
   push:
     branches:
-      - master*
+      - master
+      - fix*
     paths-ignore:
       - 'README.md'
       - 'LICENSE'
@@ -12,6 +13,8 @@ on:
     paths-ignore:
       - 'README.md'
       - 'LICENSE'
+  workflow_dispatch:
+
 
 env:
   PRODUCT: flameshot
@@ -81,7 +84,7 @@ jobs:
           echo "VERSION=$(cat CMakeLists.txt |grep 'set.*(.*FLAMESHOT_VERSION' | sed 's/[^0-9.]*//' |sed 's/)//g')" >> $GITHUB_ENV
 
       - name: Restore from cache and run vcpkg
-        uses: lukka/run-vcpkg@v4
+        uses: lukka/run-vcpkg@v11
         with:
           vcpkgArguments: ${{env.VCPKG_PACKAGES}}
           vcpkgDirectory: '${{ github.workspace }}\vcpkg'
