@@ -563,7 +563,7 @@ jobs:
           echo "================================"
           echo "VERSION=${last_committed_tag:1}" >> $GITHUB_ENV
       - name: Packaging snap
-        uses: snapcore/action-build@v1
+        uses: snapcore/action-build@v1.2.0
         id: snapcraft
         with: 
           snapcraft-args: --enable-experimental-extensions
