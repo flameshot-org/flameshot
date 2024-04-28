@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - fix*
     paths-ignore:
       - 'README.md'
       - 'LICENSE'
