@@ -202,5 +202,5 @@ jobs:
       - name: Artifact Upload
         uses: actions/upload-artifact@v4
         with:
-          name: Windows-artifact
+          name: Windows-${{ matrix.config.arch }}-${{ matrix.type }}-${{ matrix.runs-on }}-artifact
           path: ${{ github.workspace }}/build/Package/*
