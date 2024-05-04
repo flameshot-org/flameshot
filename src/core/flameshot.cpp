@@ -51,13 +51,18 @@ LRESULT CALLBACK keyboardHook(int nCode, WPARAM wParam, LPARAM lParam) {
         KBDLLHOOKSTRUCT *kbdStruct = (KBDLLHOOKSTRUCT *)lParam;
         if (wParam == WM_SYSKEYDOWN) {
             if (kbdStruct->vkCode == VK_LMENU) {
+                // We're here no matter of order Alt and Shift
                 isAltPressed = true;
+            } else if (kbdStruct->vkCode == VK_LSHIFT) {
+                // We're here if Alt was pressed BEFORE Shift
+                isShiftPressed = true;
             } else if (isAltPressed && isShiftPressed && kbdStruct->vkCode == '3') {
                 Flameshot::instance()->gui();
                 return 1;
             }
         } else if (wParam == WM_KEYDOWN) {
             if (kbdStruct->vkCode == VK_LSHIFT) {
+                // We're here if Shift was pressed BEFORE Alt
                 isShiftPressed = true;
             }
         } else if (wParam == WM_KEYUP) {
