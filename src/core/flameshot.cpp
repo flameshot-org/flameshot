@@ -37,6 +37,41 @@
 #include <QScreen>
 #endif
 
+#if defined(Q_OS_WIN)
+#include <Windows.h>
+
+HHOOK hook;
+bool isAltPressed = false;
+bool isShiftPressed = false;
+
+// Just an example of global shortcuts on Windows.
+// This is hardcoded Alt+Shift+3 shortcut
+LRESULT CALLBACK keyboardHook(int nCode, WPARAM wParam, LPARAM lParam) {
+    if (nCode >= 0) {
+        KBDLLHOOKSTRUCT *kbdStruct = (KBDLLHOOKSTRUCT *)lParam;
+        if (wParam == WM_SYSKEYDOWN) {
+            if (kbdStruct->vkCode == VK_LMENU) {
+                isAltPressed = true;
+            } else if (isAltPressed && isShiftPressed && kbdStruct->vkCode == '3') {
+                Flameshot::instance()->gui();
+                return 1;
+            }
+        } else if (wParam == WM_KEYDOWN) {
+            if (kbdStruct->vkCode == VK_LSHIFT) {
+                isShiftPressed = true;
+            }
+        } else if (wParam == WM_KEYUP) {
+            if (kbdStruct->vkCode == VK_LMENU) {
+                isAltPressed = false;
+            } else if (kbdStruct->vkCode == VK_LSHIFT) {
+                isShiftPressed = false;
+            }
+        }
+    }
+    return CallNextHookEx(hook, nCode, wParam, lParam);
+}
+#endif
+
 Flameshot::Flameshot()
   : m_captureWindow(nullptr)
   , m_haveExternalWidget(false)
@@ -68,6 +103,9 @@ Flameshot::Flameshot()
                      &QHotkey::activated,
                      qApp,
                      [this]() { history(); });
+#endif
+#if defined(Q_OS_WIN)
+    hook = SetWindowsHookEx(WH_KEYBOARD_LL, keyboardHook, NULL, 0);
 #endif
 }
 
