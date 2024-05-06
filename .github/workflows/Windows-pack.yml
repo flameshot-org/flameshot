@@ -94,13 +94,13 @@ jobs:
 
       - name: Cache Qt
         id: cache-qt
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ./build/Qt/${{ matrix.qt_ver }}/${{ matrix.config.qt_arch_install }}
           key: ${{ runner.os }}-QtCache/${{ matrix.qt_ver }}/${{ matrix.config.qt_arch }}
 
       - name: Install Qt
-        uses: jurplel/install-qt-action@v2
+        uses: jurplel/install-qt-action@v3
         with:
           version: ${{ matrix.qt_ver }}
           target:  ${{ matrix.qt_target }}
@@ -200,7 +200,7 @@ jobs:
           echo $(python $GITHUB_WORKSPACE/scripts/upload_services/transferwee.py upload $GITHUB_WORKSPACE/build/Package/portable/flameshot-${VERSION}-${{ matrix.config.pak_arch }}.zip)
           echo "=====no operation for you can see link in the log console====="
       - name: Artifact Upload
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: Windows-artifact
+          name: Windows-${{ matrix.config.arch }}-${{ matrix.type }}-artifact
           path: ${{ github.workspace }}/build/Package/*
