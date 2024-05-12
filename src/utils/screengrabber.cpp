@@ -37,7 +37,8 @@ void ScreenGrabber::generalGrimScreenshot(bool& ok, QPixmap& res)
     if (!ConfigHandler().hideCursor()) {
         arguments << "-c";
     }
-    arguments << "-";
+
+    arguments << "-";  // This argument should come last
     Process.start(program, arguments);
     if (Process.waitForFinished()) {
         res.loadFromData(Process.readAll());
