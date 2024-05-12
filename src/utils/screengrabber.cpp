@@ -37,6 +37,8 @@ void ScreenGrabber::generalGrimScreenshot(bool& ok, QPixmap& res)
     Process.start(program, arguments);
     if (Process.waitForFinished()) {
         res.loadFromData(Process.readAll());
+        QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
+        res.setDevicePixelRatio(currentScreen->devicePixelRatio());
         ok = true;
     } else {
         ok = false;
