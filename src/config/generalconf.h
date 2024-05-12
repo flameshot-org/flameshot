@@ -40,6 +40,7 @@ private slots:
 #if !defined(DISABLE_UPDATE_CHECKER)
     void checkForUpdatesChanged(bool checked);
 #endif
+    void hideCursorChanged(bool checked);
     void allowMultipleGuiInstancesChanged(bool checked);
     void autoCloseIdleDaemonChanged(bool checked);
     void autostartChanged(bool checked);
@@ -70,6 +71,7 @@ private:
     void initCheckForUpdates();
 #endif
     void initConfigButtons();
+    void initHideCursor();
     void initCopyAndCloseAfterUpload();
     void initCopyOnDoubleClick();
     void initCopyPathAfterSave();
@@ -102,6 +104,7 @@ private:
     QCheckBox* m_sysNotifications;
     QCheckBox* m_showTray;
     QCheckBox* m_helpMessage;
+    QCheckBox* m_hideCursor;
     QCheckBox* m_sidePanelButton;
 #if !defined(DISABLE_UPDATE_CHECKER)
     QCheckBox* m_checkForUpdates;

@@ -19,6 +19,7 @@
 #include <QStandardPaths>
 #include <QTextCodec>
 #include <QVBoxLayout>
+#include <desktopinfo.h>
 
 GeneralConf::GeneralConf(QWidget* parent)
   : QWidget(parent)
@@ -42,6 +43,7 @@ GeneralConf::GeneralConf(QWidget* parent)
     initCheckForUpdates();
 #endif
     initShowStartupLaunchMessage();
+    initHideCursor();
     initAllowMultipleGuiInstances();
     initSaveLastRegion();
     initShowHelp();
@@ -160,6 +162,10 @@ void GeneralConf::autostartChanged(bool checked)
     ConfigHandler().setStartupLaunch(checked);
 }
 
+void GeneralConf::hideCursorChanged(bool checked)
+{
+    ConfigHandler().setHideCursor(checked);
+}
 void GeneralConf::importConfiguration()
 {
     QString fileName = QFileDialog::getOpenFileName(this, tr("Import"));
@@ -264,6 +270,7 @@ void GeneralConf::initSaveLastRegion()
             this,
             &GeneralConf::saveLastRegion);
 }
+
 
 void GeneralConf::initShowSidePanelButton()
 {
@@ -397,6 +404,16 @@ void GeneralConf::initAutostart()
 
     connect(
       m_autostart, &QCheckBox::clicked, this, &GeneralConf::autostartChanged);
+}
+
+void GeneralConf::initHideCursor()
+{
+    m_hideCursor = new QCheckBox(tr("Hide cursor in screenshots"), this);
+    m_hideCursor->setToolTip(tr("Don't include the cursor in screenshots"));
+    m_scrollAreaLayout->addWidget(m_hideCursor);
+
+    connect(
+      m_hideCursor, &QCheckBox::clicked, this, &GeneralConf::hideCursorChanged);
 }
 
 void GeneralConf::initShowStartupLaunchMessage()
