@@ -79,6 +79,7 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
     m_sidePanelButton->setChecked(config.showSidePanelButton());
     m_sysNotifications->setChecked(config.showDesktopNotification());
     m_autostart->setChecked(config.startupLaunch());
+    m_hideCursor->setChecked(config.hideCursor());
     m_copyURLAfterUpload->setChecked(config.copyURLAfterUpload());
     m_saveAfterCopy->setChecked(config.saveAfterCopy());
     m_copyPathAfterSave->setChecked(config.copyPathAfterSave());
@@ -409,9 +410,26 @@ void GeneralConf::initAutostart()
 void GeneralConf::initHideCursor()
 {
     m_hideCursor = new QCheckBox(tr("Hide cursor in screenshots"), this);
-    m_hideCursor->setToolTip(tr("Don't include the cursor in screenshots"));
-    m_scrollAreaLayout->addWidget(m_hideCursor);
 
+#if !defined(Q_OS_LINUX) && !defined(Q_OS_UNIX)
+    m_hideCursor->setEnabled(false);
+#else
+    if (m_info.waylandDetected()){
+        switch (m_info.windowManager()) {
+            case DesktopInfo::GNOME:
+            case DesktopInfo::KDE:
+                m_hideCursor->setEnabled(false);
+                m_hideCursor->setToolTip(tr("Cursor hiding is not supported on this "
+                                            "desktop environment"));
+                break;
+            default:
+                m_hideCursor->setEnabled(true);
+                m_hideCursor->setToolTip(tr("Don't include the cursor in screenshots"));
+                break;
+        }
+    }
+#endif
+    m_scrollAreaLayout->addWidget(m_hideCursor);
     connect(
       m_hideCursor, &QCheckBox::clicked, this, &GeneralConf::hideCursorChanged);
 }

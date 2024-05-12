@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include "src/utils/desktopinfo.h"
 #include <QScrollArea>
 #include <QWidget>
 
@@ -139,4 +140,6 @@ private:
     QComboBox* m_selectGeometryLocation;
     QSpinBox* m_xywhTimeout;
     QSpinBox* m_jpegQuality;
+
+    DesktopInfo m_info;
 };
