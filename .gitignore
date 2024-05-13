@@ -75,3 +75,7 @@ data/flatpak/.flatpak-builder
 
 # Miscellaneous
 !docs/dev/Makefile
+
+# KDevelop
+.kdev4/
+flameshot.kdev4
