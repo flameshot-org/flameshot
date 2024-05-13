@@ -271,7 +271,6 @@ void GeneralConf::initSaveLastRegion()
             &GeneralConf::saveLastRegion);
 }
 
-
 void GeneralConf::initShowSidePanelButton()
 {
     m_sidePanelButton = new QCheckBox(tr("Show the side panel button"), this);
@@ -413,17 +412,19 @@ void GeneralConf::initHideCursor()
 #if !defined(Q_OS_LINUX) && !defined(Q_OS_UNIX)
     m_hideCursor->setEnabled(false);
 #else
-    if (m_info.waylandDetected()){
+    if (m_info.waylandDetected()) {
         switch (m_info.windowManager()) {
             case DesktopInfo::GNOME:
             case DesktopInfo::KDE:
                 m_hideCursor->setEnabled(false);
-                m_hideCursor->setToolTip(tr("Cursor hiding is not supported on this "
-                                            "desktop environment"));
+                m_hideCursor->setToolTip(
+                  tr("Cursor hiding is not supported on this "
+                     "desktop environment"));
                 break;
             default:
                 m_hideCursor->setEnabled(true);
-                m_hideCursor->setToolTip(tr("Don't include the cursor in screenshots"));
+                m_hideCursor->setToolTip(
+                  tr("Don't include the cursor in screenshots"));
                 break;
         }
     }

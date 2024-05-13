@@ -3,8 +3,8 @@
 
 #include "screengrabber.h"
 #include "abstractlogger.h"
-#include "src/utils/confighandler.h"
 #include "src/core/qguiappcurrentscreen.h"
+#include "src/utils/confighandler.h"
 #include "src/utils/filenamehandler.h"
 #include "src/utils/systemnotification.h"
 #include <QApplication>
@@ -38,7 +38,7 @@ void ScreenGrabber::generalGrimScreenshot(bool& ok, QPixmap& res)
         arguments << "-c";
     }
 
-    arguments << "-";  // This argument should come last
+    arguments << "-"; // This argument should come last
     Process.start(program, arguments);
     if (Process.waitForFinished()) {
         res.loadFromData(Process.readAll());
