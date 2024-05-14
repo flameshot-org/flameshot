@@ -1,7 +1,8 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
-#include "generalconf.h"
+#include "src/config/generalconf.h"
 #include "src/core/flameshot.h"
+#include "src/utils/desktopinfo.h"
 #include "src/utils/confighandler.h"
 #include <QCheckBox>
 #include <QComboBox>
@@ -19,6 +20,8 @@
 #include <QStandardPaths>
 #include <QTextCodec>
 #include <QVBoxLayout>
+
+#define STYLESHEET_DISABLED "color: #FA2A55"
 
 GeneralConf::GeneralConf(QWidget* parent)
   : QWidget(parent)
@@ -407,31 +410,46 @@ void GeneralConf::initAutostart()
 
 void GeneralConf::initHideCursor()
 {
-    m_hideCursor = new QCheckBox(tr("Hide cursor in screenshots"), this);
+    const auto initDisabledHideCursor = [&]() -> void {
+        QLabel *disabledLabel = new QLabel(tr("Cursor hiding behavior cannot be set in this environment"), this);
+        disabledLabel->setStyleSheet(STYLESHEET_DISABLED);
+        m_hideCursor = new QCheckBox(tr("Hide cursor in screenshots (disabled)"), this);
+        m_hideCursor->setEnabled(false);
+        m_hideCursor->setToolTip(
+                  tr("Cursor hiding behaviour cannot be set on this desktop environment"
+                     "desktop environment"));
+        m_scrollAreaLayout->addWidget(disabledLabel);
+        m_scrollAreaLayout->addWidget(m_hideCursor);
+        connect(m_hideCursor, &QCheckBox::clicked, this, &GeneralConf::hideCursorChanged);
 
-#if !defined(Q_OS_LINUX) && !defined(Q_OS_UNIX)
-    m_hideCursor->setEnabled(false);
-#else
-    if (m_info.waylandDetected()) {
+    };
+
+    const auto initEnabledHideCursor = [&]() -> void {
+        m_hideCursor = new QCheckBox(tr("Hide cursor in screenshots"), this);
+        m_hideCursor->setEnabled(true);
+        m_hideCursor->setToolTip(
+                  tr("Don't include the cursor in screenshots"));
+        m_scrollAreaLayout->addWidget(m_hideCursor);
+        connect(m_hideCursor, &QCheckBox::clicked, this, &GeneralConf::hideCursorChanged);
+    };
+
+#if defined(Q_OS_LINUX)
+    if (!m_info.waylandDetected()) {
+        initDisabledHideCursor();
+    } else {
         switch (m_info.windowManager()) {
             case DesktopInfo::GNOME:
             case DesktopInfo::KDE:
-                m_hideCursor->setEnabled(false);
-                m_hideCursor->setToolTip(
-                  tr("Cursor hiding is not supported on this "
-                     "desktop environment"));
+                initDisabledHideCursor();
                 break;
             default:
-                m_hideCursor->setEnabled(true);
-                m_hideCursor->setToolTip(
-                  tr("Don't include the cursor in screenshots"));
+                initEnabledHideCursor();
                 break;
         }
     }
+#else
+    initDisabledHideCursor();
 #endif
-    m_scrollAreaLayout->addWidget(m_hideCursor);
-    connect(
-      m_hideCursor, &QCheckBox::clicked, this, &GeneralConf::hideCursorChanged);
 }
 
 void GeneralConf::initShowStartupLaunchMessage()
