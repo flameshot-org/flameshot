@@ -19,8 +19,8 @@ env:
 
 jobs:
   catalina:
-    name: macOS Big Sur 11
-    runs-on: macos-11
+    name: macOS Monterey 12
+    runs-on: macos-12
 
     env:
       APP_NAME: flameshot
