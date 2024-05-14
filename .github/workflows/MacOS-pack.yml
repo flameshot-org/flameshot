@@ -54,7 +54,8 @@ jobs:
       - name: Configure
         run: |
           rm -rf "${DIR_BULD}"/src/flameshot.dmg "${DIR_BULD}"/src/flameshot.app/
-          cp "./packaging/macos/flameshot.icns" "${DIR_BULD}/build/flameshot.icns"
+          mkdir ${DIR_BULD}
+          cp "./packaging/macos/flameshot.icns" "${DIR_BULD}/flameshot.icns"
           cmake -S . -B "${DIR_BULD}" -DQt5_DIR=$(brew --prefix qt5)/lib/cmake/Qt5 -DUSE_MONOCHROME_ICON=True
 
       - name: Compile
