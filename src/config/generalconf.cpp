@@ -2,8 +2,8 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 #include "src/config/generalconf.h"
 #include "src/core/flameshot.h"
-#include "src/utils/desktopinfo.h"
 #include "src/utils/confighandler.h"
+#include "src/utils/desktopinfo.h"
 #include <QCheckBox>
 #include <QComboBox>
 #include <QFile>
@@ -411,26 +411,33 @@ void GeneralConf::initAutostart()
 void GeneralConf::initHideCursor()
 {
     const auto initDisabledHideCursor = [&]() -> void {
-        QLabel *disabledLabel = new QLabel(tr("Cursor hiding behavior cannot be set in this environment"), this);
+        auto* disabledLabel = new QLabel(
+          tr(
+            "Cursor hiding behavior cannot be set on this desktop environment"),
+          this);
         disabledLabel->setStyleSheet(STYLESHEET_DISABLED);
-        m_hideCursor = new QCheckBox(tr("Hide cursor in screenshots (disabled)"), this);
+        m_hideCursor =
+          new QCheckBox(tr("Hide cursor in screenshots (disabled)"), this);
         m_hideCursor->setEnabled(false);
-        m_hideCursor->setToolTip(
-                  tr("Cursor hiding behaviour cannot be set on this desktop environment"
-                     "desktop environment"));
+        m_hideCursor->setToolTip(tr(
+          "Cursor hiding behaviour cannot be set on this desktop environment"));
         m_scrollAreaLayout->addWidget(disabledLabel);
         m_scrollAreaLayout->addWidget(m_hideCursor);
-        connect(m_hideCursor, &QCheckBox::clicked, this, &GeneralConf::hideCursorChanged);
-
+        connect(m_hideCursor,
+                &QCheckBox::clicked,
+                this,
+                &GeneralConf::hideCursorChanged);
     };
 
     const auto initEnabledHideCursor = [&]() -> void {
         m_hideCursor = new QCheckBox(tr("Hide cursor in screenshots"), this);
         m_hideCursor->setEnabled(true);
-        m_hideCursor->setToolTip(
-                  tr("Don't include the cursor in screenshots"));
+        m_hideCursor->setToolTip(tr("Don't include the cursor in screenshots"));
         m_scrollAreaLayout->addWidget(m_hideCursor);
-        connect(m_hideCursor, &QCheckBox::clicked, this, &GeneralConf::hideCursorChanged);
+        connect(m_hideCursor,
+                &QCheckBox::clicked,
+                this,
+                &GeneralConf::hideCursorChanged);
     };
 
 #if defined(Q_OS_LINUX)
