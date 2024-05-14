@@ -93,5 +93,9 @@ void ImgurUploader::deleteImage(const QString& fileName,
         notification()->showMessage(tr("Unable to open the URL."));
     }
 
+    History history;
+    QString fullFileName = history.path() + fileName;
+    removeCacheFile(fullFileName);
+
     emit deleteOk();
 }

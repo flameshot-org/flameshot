@@ -11,8 +11,6 @@ class UploadLineItem;
 }
 QT_END_NAMESPACE
 
-void removeCacheFile(QString const& fullFileName);
-
 class UploadLineItem : public QWidget
 {
     Q_OBJECT
