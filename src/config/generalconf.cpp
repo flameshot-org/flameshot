@@ -420,7 +420,7 @@ void GeneralConf::initHideCursor()
           new QCheckBox(tr("Hide cursor in screenshots (disabled)"), this);
         m_hideCursor->setEnabled(false);
         m_hideCursor->setToolTip(tr(
-          "Cursor hiding behaviour cannot be set on this desktop environment"));
+          "Cursor hiding behavior cannot be set on this desktop environment"));
         m_scrollAreaLayout->addWidget(disabledLabel);
         m_scrollAreaLayout->addWidget(m_hideCursor);
         connect(m_hideCursor,
