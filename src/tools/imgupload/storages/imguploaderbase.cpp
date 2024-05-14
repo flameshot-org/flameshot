@@ -191,3 +191,11 @@ void ImgUploaderBase::saveScreenshotToFilesystem()
     }
     m_notification->showMessage(tr("Screenshot saved."));
 }
+
+void ImgUploaderBase::removeCacheFile(const QString& fullFileName)
+{
+    QFile file(fullFileName);
+    if (file.exists()) {
+        file.remove();
+    }
+}

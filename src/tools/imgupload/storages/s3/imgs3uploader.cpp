@@ -163,13 +163,6 @@ void ImgS3Uploader::onUploadError(QNetworkReply* reply)
 
 void ImgS3Uploader::handleReplyDeleteResource(QNetworkReply* reply)
 {
-    // Just remove image preview on fail because it can be outdated and removed
-    // on server.
-    removeImagePreview();
-    close();
-
-    /* The following code possibly will be required later so it is just
-     * commented here */
     auto replyError = reply->error();
     if (replyError == QNetworkReply::NoError) {
         removeImagePreview();
@@ -374,14 +367,12 @@ void ImgS3Uploader::removeImagePreview()
 {
     // remove local file
     History history;
-    QString packedFileName = history.packFileName(
-      SCREENSHOT_STORAGE_TYPE_S3, m_deleteToken, m_storageImageName);
-    QString fullFileName = history.path() + packedFileName;
+    QString fullFileName =
+      history.path() + history.packFileName(SCREENSHOT_STORAGE_TYPE_S3,
+                                            m_deleteToken,
+                                            m_storageImageName);
 
-    QFile file(fullFileName);
-    if (file.exists()) {
-        file.remove();
-    }
+    removeCacheFile(fullFileName);
     m_deleteToken.clear();
     m_storageImageName.clear();
     resultStatus = true;
