@@ -4,9 +4,9 @@ cmake_minimum_required(VERSION 3.13)
 set(FLAMESHOT_VERSION 12.1.0.5)
 
 # Flameshot-org
-set(GIT_API_URL "https://api.github.com/repos/flameshot-org/flameshot/releases/latest")
+# set(GIT_API_URL "https://api.github.com/repos/flameshot-org/flameshot/releases/latest")
 # Namecheap
-# set(GIT_API_URL "https://api.github.com/repos/namecheap/flameshot/releases/latest")
+set(GIT_API_URL "https://api.github.com/repos/namecheap/flameshot/releases/latest")
 
 # TODO - fix it for all linux distros
 #find_package (Git)

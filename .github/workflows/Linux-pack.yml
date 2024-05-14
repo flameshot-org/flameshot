@@ -7,8 +7,10 @@ on:
     paths-ignore:
       - 'README.md'
       - 'LICENSE'
-
+  workflow_dispatch:
   pull_request:
+    branches:
+      - master
     paths-ignore:
       - 'README.md'
       - 'LICENSE'
