@@ -77,6 +77,7 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     OPTION("showHelp"                    ,Bool               ( true          )),
     OPTION("showSidePanelButton"         ,Bool               ( true          )),
     OPTION("showDesktopNotification"     ,Bool               ( true          )),
+    OPTION("showAbortNotification"       ,Bool               ( true          )),
     OPTION("disabledTrayIcon"            ,Bool               ( false         )),
     OPTION("historyConfirmationToDelete" ,Bool               ( true          )),
 #if !defined(DISABLE_UPDATE_CHECKER)

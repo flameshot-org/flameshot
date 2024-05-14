@@ -38,6 +38,7 @@ GeneralConf::GeneralConf(QWidget* parent)
 #endif
     initShowTrayIcon();
     initShowDesktopNotification();
+    initShowAbortNotification();
 #if !defined(DISABLE_UPDATE_CHECKER)
     initCheckForUpdates();
 #endif
@@ -76,6 +77,7 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
     m_helpMessage->setChecked(config.showHelp());
     m_sidePanelButton->setChecked(config.showSidePanelButton());
     m_sysNotifications->setChecked(config.showDesktopNotification());
+    m_abortNotifications->setChecked(config.showAbortNotification());
     m_autostart->setChecked(config.startupLaunch());
     m_copyURLAfterUpload->setChecked(config.copyURLAfterUpload());
     m_saveAfterCopy->setChecked(config.saveAfterCopy());
@@ -136,6 +138,11 @@ void GeneralConf::showSidePanelButtonChanged(bool checked)
 void GeneralConf::showDesktopNotificationChanged(bool checked)
 {
     ConfigHandler().setShowDesktopNotification(checked);
+}
+
+void GeneralConf::showAbortNotificationChanged(bool checked)
+{
+    ConfigHandler().setShowAbortNotification(checked);
 }
 
 #if !defined(DISABLE_UPDATE_CHECKER)
@@ -288,6 +295,18 @@ void GeneralConf::initShowDesktopNotification()
             &QCheckBox::clicked,
             this,
             &GeneralConf::showDesktopNotificationChanged);
+}
+
+void GeneralConf::initShowAbortNotification()
+{
+    m_abortNotifications = new QCheckBox(tr("Show abort notifications"), this);
+    m_abortNotifications->setToolTip(tr("Enable abort notifications"));
+    m_scrollAreaLayout->addWidget(m_abortNotifications);
+
+    connect(m_abortNotifications,
+            &QCheckBox::clicked,
+            this,
+            &GeneralConf::showAbortNotificationChanged);
 }
 
 void GeneralConf::initShowTrayIcon()
