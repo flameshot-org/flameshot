@@ -52,6 +52,7 @@ GeneralConf::GeneralConf(QWidget* parent)
     initCopyPathAfterSave();
     initCopyAndCloseAfterUpload();
     initUploadWithoutConfirmation();
+    initRandomizePixelation();
     initHistoryConfirmationToDelete();
     initAntialiasingPinZoom();
     initUploadHistoryMax();
