@@ -1,4 +1,4 @@
-{ pkgs ? import <nixpkgs> {} }:
+{ pkgs ? import <nixpkgs> { } }:
 
 pkgs.mkShell {
   nativeBuildInputs = with pkgs; [
@@ -7,5 +7,5 @@ pkgs.mkShell {
     qt5.qttools
     qt5.qtsvg
   ];
-  buildInputs = [ pkgs.qt5.qtbase ];
+  buildInputs = with pkgs; [ qt5.qtbase libsForQt5.kguiaddons ];
 }
