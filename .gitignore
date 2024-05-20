@@ -75,3 +75,4 @@ data/flatpak/.flatpak-builder
 
 # Miscellaneous
 !docs/dev/Makefile
+.direnv
