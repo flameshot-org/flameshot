@@ -171,6 +171,7 @@ void ShortcutsWidget::loadShortcuts()
     }
 
     // additional tools that don't have their own buttons
+    appendShortcut("TYPE_COLORGRAB", tr("Grab a color"));
     appendShortcut("TYPE_TOGGLE_PANEL", tr("Toggle side panel"));
     appendShortcut("TYPE_RESIZE_LEFT", tr("Resize selection left 1px"));
     appendShortcut("TYPE_RESIZE_RIGHT", tr("Resize selection right 1px"));
