@@ -149,7 +149,7 @@ int main(int argc, char* argv[])
         auto c = Flameshot::instance();
         FlameshotDaemon::start();
 
-        /* Register handlers for when the screen configuration changes to reinit the app */
+        /* Register handlers for when the screen configuration changes to reinit the app to fix #3505 */
         QObject::connect(qApp, &QGuiApplication::screenAdded, [](QScreen *screen){
             qDebug() << "Screen added. Reinitializing application.";
             configureApp(true);
