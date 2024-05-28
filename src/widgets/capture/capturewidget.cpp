@@ -279,6 +279,9 @@ CaptureWidget::~CaptureWidget()
         geometry.setTopLeft(geometry.topLeft() + m_context.widgetOffset);
         Flameshot::instance()->exportCapture(
           pixmap(), geometry, m_context.request);
+
+        CaptureHistoryUtils::getInstance()->saveCapture(
+          m_context.origScreenshot, geometry);
     } else {
         emit Flameshot::instance()->captureFailed();
     }
@@ -649,6 +652,9 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
         drawErrorMessage(tr("Configuration error resolved. Launch `flameshot "
                             "gui` again to apply it."),
                          &painter);
+    }
+    if (CaptureHistoryUtils::getInstance()->isNewest()) { // when current screenshot is not a history screenshot
+        saveCurrentState();
     }
 }
 
@@ -1575,6 +1581,9 @@ void CaptureWidget::initShortcuts()
                 SLOT(selectAll()));
 
     newShortcut(Qt::Key_Escape, this, SLOT(deleteToolWidgetOrClose()));
+
+    newShortcut(Qt::Key_Comma, this, SLOT(onHistoryBack()));
+    newShortcut(Qt::Key_Period, this, SLOT(onHistoryForward()));
 }
 
 void CaptureWidget::deleteCurrentTool()
@@ -1585,6 +1594,54 @@ void CaptureWidget::deleteCurrentTool()
     if (oldToolSize != m_context.toolSize) {
         emit toolSizeChanged(m_context.toolSize);
     }
+}
+
+void CaptureWidget::onHistoryBack()
+{
+    // m_context.selection.setHeight(m_context.selection.height() / 2);
+    auto cu = CaptureHistoryUtils::getInstance();
+    cu->fetchOlder();
+    if (cu->currentScreenShot()) {
+        m_context.origScreenshot = cu->currentScreenShot()->copy();
+        m_context.screenshot = m_context.origScreenshot;
+        m_selection->setVisible(true);
+        m_selection->show();
+        m_selection->setGeometry(cu->cureentSelection());
+        m_context.selection = extendedRect(m_selection->geometry());
+
+        emit m_selection->geometrySettled();
+
+        update();
+    }
+}
+void CaptureWidget::onHistoryForward()
+{
+    auto cu = CaptureHistoryUtils::getInstance();
+    cu->fetchNewer();
+    if (cu->isNewest()) {
+        m_context = m_currentContext;
+        m_selection->setGeometry(m_currentSelection);
+        m_selection->setVisible(m_selectionWidgetVisible);
+        if (!m_selectionWidgetVisible) {
+            m_selection->hide();
+        }
+    } else if (cu->currentScreenShot()) {
+        m_context.origScreenshot = cu->currentScreenShot()->copy();
+        m_context.screenshot = m_context.origScreenshot;
+        m_selection->setGeometry(cu->cureentSelection());
+        m_selection->setVisible(true);
+        m_context.selection = extendedRect(m_selection->geometry());
+        m_selection->show();
+    }
+    emit m_selection->geometrySettled();
+
+    update();
+}
+void CaptureWidget::saveCurrentState()
+{
+    m_currentContext = m_context;
+    m_selectionWidgetVisible = m_selection->isVisible();
+    m_currentSelection = m_selection->geometry();
 }
 
 void CaptureWidget::updateSizeIndicator()
