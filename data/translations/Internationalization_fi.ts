@@ -1062,13 +1062,13 @@ Ratkaise ne käsin muuttamalla asetustiedostoa.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="247"/>
-        <source>Use last region</source>
-        <translation>Käytä viimeistä aluetta</translation>
+        <source>Use last region for GUI mode</source>
+        <translation type="unfinished">Käytä viimeistä aluetta</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="248"/>
-        <source>Uses the last region as the default selection for the next screenshot</source>
-        <translation>Käyttää viimeistä aluetta seuraavan kaappauksen oletusvalintana</translation>
+        <source>Use the last region as the default selection for the next screenshot in GUI mode</source>
+        <translation type="unfinished">Käyttää viimeistä aluetta seuraavan kaappauksen oletusvalintana</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="262"/>
@@ -1892,7 +1892,7 @@ Ratkaise ne käsin muuttamalla asetustiedostoa.</translation>
     <message>
         <location filename="../../src/main.cpp" line="219"/>
         <source>Print geometry of the selection in the format WxH+X+Y. Does nothing if raw is specified</source>
-        <translation>Tulosta valinta sivuasetuksilla muodossa L K X Y. Ei tee mitään, jos raaka on määritetty</translation>
+        <translation>Tulosta valinta sivuasetuksilla muodossa LxK+X+Y. Ei tee mitään, jos raaka on määritetty</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="223"/>

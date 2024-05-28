@@ -272,7 +272,7 @@ Steps for using the configuration:
 
 #### On Ubuntu (Tested on 18.04, 20.04, 22.04)
 
-To use Flameshot instead of the default screenshot application in Ubuntu we need to remove the binding on <kbd>Prt Sc</kbd> key, and then create a new binding for `/usr/bin/flameshot gui` ([adaptated](https://askubuntu.com/posts/1039949/revisions) from [Pavel's answer on AskUbuntu](https://askubuntu.com/revisions/1036473/1)).
+To use Flameshot instead of the default screenshot application in Ubuntu we need to remove the binding on <kbd>Prt Sc</kbd> key, and then create a new binding for `/usr/bin/flameshot gui` ([adapted](https://askubuntu.com/posts/1039949/revisions) from [Pavel's answer on AskUbuntu](https://askubuntu.com/revisions/1036473/1)).
 
 1. Remove the binding on <kbd>Prt Sc</kbd>:
 
@@ -287,7 +287,7 @@ To use Flameshot instead of the default screenshot application in Ubuntu we need
 
    Ubuntu 18.04: Go to _Settings_ > _Device_ > _Keyboard_ and press the '+' button at the bottom.
 
-   Ubuntu 20.04: Go to _Settings_ > _Keyboard_ and press the '+' button at the bottom.
+   Ubuntu 20.04: Go to _Settings_ > _Keyboard Shortcuts_ and press the '+' button at the bottom.
 
    Ubuntu 22.04: Go to _Settings_ > _Keyboard_ > _View and Customise Shortcuts_ > _Custom shortcuts_ and press the '+' button at the bottom.
 
@@ -339,7 +339,7 @@ Some prebuilt packages are provided on [the release page of the GitHub project r
 
 There are packages available in the repository of some Linux distributions:
 
-- [Arch](https://www.archlinux.org/packages/community/x86_64/flameshot/): `pacman -S flameshot`
+- [Arch](https://archlinux.org/packages/extra/x86_64/flameshot/): `pacman -S flameshot`
   + Snapshot also available via AUR: [flameshot-git](https://aur.archlinux.org/packages/flameshot-git).
 - [Debian 10+](https://tracker.debian.org/pkg/flameshot): `apt install flameshot`
   + Package for Debian 9 ("Stretch") also [available via stretch-backports](https://backports.debian.org/).
@@ -471,29 +471,26 @@ brew install cmake
 After installing all the dependencies, finally run the following commands in the sources root directory:
 
 ```shell
-mkdir build
-cd build
-cmake ../
-make
+cmake -S . -B build && cmake --build build
 ```
 
 NOTE: for macOS you should replace command
 
 ```shell
-cmake ../
+cmake -S . -B build
 ```
 
 to
 
 ```shell
-cmake ../ -DQt5_DIR=$(brew --prefix qt5)/lib/cmake/Qt5
+cmake -S . -B build -DQt5_DIR=$(brew --prefix qt5)/lib/cmake/Qt5
 ```
 
-When `make` command completed you can launch flameshot from `project_folder/build/src` folder
+When `cmake --build build` command completed you can launch flameshot from `project_folder/build/src` folder
 
 ### Install
 
-Simply use `make install` with privileges.
+Simply use `cmake --install build` with privileges.
 Note: If you install from source, there is no uninstaller, you will need to manually remove the files. Consider using [CMAKE_INSTALL_PREFIX](https://cmake.org/cmake/help/latest/variable/CMAKE_INSTALL_PREFIX.html) to install to a custom location for easy removal.
 
 ### FAQ
@@ -518,7 +515,7 @@ This program will not transfer any information to other networked systems unless
 
 ## Code Signing Policy
 
-Free code signing provided by [SignPath.io](https://signpath.io/), certificate by [SignPath Foundation](https://signpath.org/).
+For Windows binaries, this program uses free code signing provided by [SignPath.io](https://signpath.io?utm_source=foundation&utm_medium=github&utm_campaign=flameshot), and a certificate by the [SignPath Foundation](https://signpath.org?utm_source=foundation&utm_medium=github&utm_campaign=flameshot).
 
 Code signing is currently a manual process so not every patch release will be signed.
 
@@ -539,4 +536,4 @@ Thanks to sponsors:
 - [Namecheap](https://www.namecheap.com/)
 - [JetBrains](https://www.jetbrains.com/)
 - [SignPath](https://signpath.io/)
-- [AnonAddy](https://anonaddy.com)
+- [addy.io](https://addy.io/)

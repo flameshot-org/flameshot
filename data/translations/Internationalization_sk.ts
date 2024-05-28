@@ -396,7 +396,7 @@ Stlačte medzerník pre otvorenie postranného panelu.</translation>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="58"/>
         <source>Enter or Left Click</source>
-        <translation></translation>
+        <translation>Zadajte alebo kliknite na tlačidlo vľavo</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="59"/>
@@ -406,7 +406,7 @@ Stlačte medzerník pre otvorenie postranného panelu.</translation>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="59"/>
         <source>Hold Left Click</source>
-        <translation></translation>
+        <translation>Držte ľavé tlačidlo</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="60"/>
@@ -416,7 +416,7 @@ Stlačte medzerník pre otvorenie postranného panelu.</translation>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="60"/>
         <source>Space or Right Click</source>
-        <translation></translation>
+        <translation>Priestor alebo pravý Click</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="61"/>
@@ -426,7 +426,7 @@ Stlačte medzerník pre otvorenie postranného panelu.</translation>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="61"/>
         <source>Esc</source>
-        <translation type="unfinished">Esc</translation>
+        <translation>Všeobecný</translation>
     </message>
 </context>
 <context>
@@ -447,17 +447,17 @@ Stlačte medzerník pre otvorenie postranného panelu.</translation>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="45"/>
         <source>Enter color to update preset</source>
-        <translation>Enter color to update preset</translation>
+        <translation>Zadajte farbu aktualizovať preset</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="65"/>
         <source>Update</source>
-        <translation type="unfinished">Aktualizovať</translation>
+        <translation>Stiahnuť</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="67"/>
         <source>Press button to update the selected preset</source>
-        <translation>Press button to update the selected preset</translation>
+        <translation>Stlačte tlačidlo na odstránenie vybranej predvoľby</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="74"/>
@@ -808,17 +808,17 @@ Riešte ich ručne v konfiguračnom súbore.</translation>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="111"/>
         <source>Error</source>
-        <translation type="unfinished">Chyba</translation>
+        <translation>Chybné</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="111"/>
         <source>Unable to close active modal widgets</source>
-        <translation type="unfinished">Nepodarilo sa zatvoriť aktívne modálne ovládacie prvky</translation>
+        <translation>Nemožno uzavrieť aktívne modal widgety</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="400"/>
         <source>URL copied to clipboard.</source>
-        <translation type="unfinished">URL skopírovaná do schránky.</translation>
+        <translation>URL skopírovaná do schránky.</translation>
     </message>
 </context>
 <context>
@@ -826,17 +826,17 @@ Riešte ich ručne v konfiguračnom súbore.</translation>
     <message>
         <location filename="../../src/core/flameshotdaemon.cpp" line="363"/>
         <source>New version %1 is available</source>
-        <translation type="unfinished">Je dostupná nová verzia: %1</translation>
+        <translation>Je dostupná nová verzia: %1</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshotdaemon.cpp" line="369"/>
         <source>You have the latest version</source>
-        <translation type="unfinished">Používate najnovšiu verziu</translation>
+        <translation>Máte najnovšiu verziu</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshotdaemon.cpp" line="378"/>
         <source>Failed to get information about the latest version.</source>
-        <translation type="unfinished">Nepodarilo sa získať informácie o najnovšej verzii.</translation>
+        <translation>Zneužívanie informácií o najnovšej verzii.</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshotdaemon.cpp" line="399"/>
@@ -1121,18 +1121,18 @@ Riešte ich ručne v konfiguračnom súbore.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="247"/>
-        <source>Use last region</source>
-        <translation>Use last region</translation>
+        <source>Use last region for GUI mode</source>
+        <translation type="unfinished">Použite posledný región</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="248"/>
-        <source>Uses the last region as the default selection for the next screenshot</source>
-        <translation>Uses the last region as the default selection for the next screenshot</translation>
+        <source>Use the last region as the default selection for the next screenshot in GUI mode</source>
+        <translation type="unfinished">Používa posledný región ako predvolený výber pre ďalší snímku obrazovky</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="262"/>
         <source>Show the side panel toggle button in the capture mode</source>
-        <translation>V režime zachytávania zobrazovať tlačidlo na postrannom paneli.</translation>
+        <translation>Zobraziť bočný panel prepnúť tlačidlo v režime zachytenia</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="274"/>
@@ -1177,12 +1177,12 @@ Riešte ich ručne v konfiguračnom súbore.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="420"/>
         <source>Copy on double click</source>
-        <translation>Copy on double click</translation>
+        <translation>Kopírovanie na dvojité kliknutie</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="421"/>
         <source>Enable Copy on Double Click</source>
-        <translation>Enable Copy on Double Click</translation>
+        <translation>Povoliť kópiu na dvojité kliknite</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="434"/>
@@ -1222,7 +1222,7 @@ Riešte ich ručne v konfiguračnom súbore.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="540"/>
         <source>Imgur Application Client ID</source>
-        <translation>Imgur Application Client ID</translation>
+        <translation>Imgur Aplikácia Klient ID</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="571"/>
@@ -1746,12 +1746,12 @@ Riešte ich ručne v konfiguračnom súbore.</translation>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="227"/>
         <source>Copy to clipboard</source>
-        <translation type="unfinished">Kopírovať do schránky</translation>
+        <translation>Kopíruje do schránky</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="234"/>
         <source>Save to file</source>
-        <translation>Save to file</translation>
+        <translation>Uložiť súbor</translation>
     </message>
 </context>
 <context>
@@ -1854,7 +1854,7 @@ Riešte ich ručne v konfiguračnom súbore.</translation>
     <message>
         <location filename="../../src/main.cpp" line="184"/>
         <source>Repeat screenshot with previously selected region</source>
-        <translation>Repeat screenshot with previously selected region</translation>
+        <translation>Opakujte screenshot s predtým vybraným regiónom</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="187"/>
@@ -2047,7 +2047,7 @@ Možno budete musieť napísať pred &apos;#&apos; opačnú lomku, teda &apos;\#
     <message>
         <location filename="../../src/core/flameshot.cpp" line="148"/>
         <source>Requested screen exceeds screen count</source>
-        <translation>Requested screen exceeds screen count</translation>
+        <translation>Požadovaná obrazovka presahuje počet obrazov</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="378"/>
@@ -2223,12 +2223,12 @@ Možno budete musieť napísať pred &apos;#&apos; opačnú lomku, teda &apos;\#
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="112"/>
         <source>Unable to detect desktop environment (GNOME? KDE? Sway? ...)</source>
-        <translation>Unable to detect desktop environment (GNOME? KDE? Sway? ...)</translation>
+        <translation>Nie je možné detekovať stolové prostredie (GNOME? KDE? Sway? ...)</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="115"/>
         <source>Hint: try setting the XDG_CURRENT_DESKTOP environment variable.</source>
-        <translation>Hint: try setting the XDG_CURRENT_DESKTOP environment variable.</translation>
+        <translation>Tip: skúste nastaviť XDG_CURRENT_DESKTOP prostredie premenné.</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="120"/>
@@ -2302,77 +2302,77 @@ Možno budete musieť napísať pred &apos;#&apos; opačnú lomku, teda &apos;\#
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="167"/>
         <source>Left Double-click</source>
-        <translation></translation>
+        <translation>dvojklik ľavým</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="174"/>
         <source>Toggle side panel</source>
-        <translation type="unfinished">Prepnúť zobrazenie postranného panelu</translation>
+        <translation>Prepnúť zobrazenie postranného panelu</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="175"/>
         <source>Resize selection left 1px</source>
-        <translation type="unfinished">Zmeniť rozmery výberu o 1 pixel vľavo</translation>
+        <translation>Zmeniť rozmery výberu o 1 pixel vľavo</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="176"/>
         <source>Resize selection right 1px</source>
-        <translation type="unfinished">Zmeniť rozmery výberu o 1 pixel vpravo</translation>
+        <translation>Zmeniť rozmery výberu o 1 pixel vpravo</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="177"/>
         <source>Resize selection up 1px</source>
-        <translation type="unfinished">Zmeniť rozmery výberu o 1 pixel nahor</translation>
+        <translation>Zmeniť rozmery výberu o 1 pixel nahor</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="178"/>
         <source>Resize selection down 1px</source>
-        <translation type="unfinished">Zmeniť rozmery výberu o 1 pixel nadol</translation>
+        <translation>Zmeniť rozmery výberu o 1 pixel nadol</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="179"/>
         <source>Select entire screen</source>
-        <translation type="unfinished">Vybrať celú obrazovku</translation>
+        <translation>Vybrať celú obrazovku</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="180"/>
         <source>Move selection left 1px</source>
-        <translation type="unfinished">Presunúť výber vľavo o 1 pixel</translation>
+        <translation>Presunúť výber vľavo o 1 pixel</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="181"/>
         <source>Move selection right 1px</source>
-        <translation type="unfinished">Presunúť výber vpravo o 1 pixel</translation>
+        <translation>Presunúť výber vpravo o 1 pixel</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="182"/>
         <source>Move selection up 1px</source>
-        <translation type="unfinished">Presunúť výber nahor o 1 pixel</translation>
+        <translation>Presunúť výber nahor o 1 pixel</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="183"/>
         <source>Move selection down 1px</source>
-        <translation type="unfinished">Presunúť výber nadol o 1 pixel</translation>
+        <translation>Presunúť výber nadol o 1 pixel</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="184"/>
         <source>Commit text in text area</source>
-        <translation type="unfinished">Potvrdiť pridanie textu</translation>
+        <translation>Potvrdiť pridanie textu</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="185"/>
         <source>Delete current tool</source>
-        <translation type="unfinished">Vymazať momentálny nástroj</translation>
+        <translation>Vymazať momentálny nástroj</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="194"/>
         <source>Capture screen</source>
-        <translation type="unfinished">Zachytiť obrazovku</translation>
+        <translation>Zachytiť obrazovku</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="195"/>
         <source>Screenshot history</source>
-        <translation type="unfinished">História snímok</translation>
+        <translation>História snímok</translation>
     </message>
 </context>
 <context>
@@ -2620,42 +2620,42 @@ Možno budete musieť napísať pred &apos;#&apos; opačnú lomku, teda &apos;\#
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="98"/>
         <source>&amp;Take Screenshot</source>
-        <translation type="unfinished">&amp;Vytvoriť snímku</translation>
+        <translation>&amp;Vytvoriť snímku</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="116"/>
         <source>&amp;Open Launcher</source>
-        <translation type="unfinished">&amp;Otvoriť Spúšťač</translation>
+        <translation>&amp;Otvoriť Spúšťač</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="121"/>
         <source>&amp;Configuration</source>
-        <translation type="unfinished">&amp;Konfigurácia</translation>
+        <translation>&amp;Konfigurácia</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="126"/>
         <source>&amp;About</source>
-        <translation type="unfinished">O &amp;programe</translation>
+        <translation>O &amp;programe</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="130"/>
         <source>Check for updates</source>
-        <translation type="unfinished">Skontrolovať aktualizácie</translation>
+        <translation>Kontrola aktualizácií</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="141"/>
         <source>New version %1 is available</source>
-        <translation type="unfinished">Je dostupná nová verzia: %1</translation>
+        <translation>Je dostupná nová verzia: %1</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="145"/>
         <source>&amp;Quit</source>
-        <translation type="unfinished">&amp;Ukončiť</translation>
+        <translation>Ukonči&amp;ť</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="149"/>
         <source>&amp;Latest Uploads</source>
-        <translation type="unfinished">&amp;Posledné nahratia</translation>
+        <translation>&amp;Posledné nahratia</translation>
     </message>
 </context>
 <context>

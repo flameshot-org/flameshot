@@ -29,7 +29,7 @@
     <message>
         <location filename="../../src/tools/accept/accepttool.cpp" line="31"/>
         <source>Accept</source>
-        <translation>Accept</translation>
+        <translation>Приемане</translation>
     </message>
     <message>
         <location filename="../../src/tools/accept/accepttool.cpp" line="41"/>
@@ -226,7 +226,7 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="397"/>
         <source>Mouse Wheel</source>
-        <translation type="unfinished">Roda del ratolí</translation>
+        <translation>Колелце на мишката</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="397"/>
@@ -236,7 +236,7 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="398"/>
         <source>Right Click</source>
-        <translation type="unfinished">Clic dret</translation>
+        <translation>Щракване с десен бутон</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="398"/>
@@ -256,7 +256,7 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="401"/>
         <source>Exit</source>
-        <translation type="unfinished">Exit</translation>
+        <translation>Изход</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="509"/>
@@ -825,12 +825,12 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/core/flameshotdaemon.cpp" line="378"/>
         <source>Failed to get information about the latest version.</source>
-        <translation type="unfinished">Failed to get information about the latest version.</translation>
+        <translation>Грешка при получаване на информация за последното издание.</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshotdaemon.cpp" line="399"/>
         <source>Unable to connect via DBus</source>
-        <translation type="unfinished">Unable to connect via DBus</translation>
+        <translation>Грешка при свързване чрез DBus</translation>
     </message>
 </context>
 <context>
@@ -1054,13 +1054,13 @@ Please solve them manually in the configuration file.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="247"/>
-        <source>Use last region</source>
-        <translation>Use last region</translation>
+        <source>Use last region for GUI mode</source>
+        <translation type="unfinished">Use last region for GUI mode</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="248"/>
-        <source>Uses the last region as the default selection for the next screenshot</source>
-        <translation>Uses the last region as the default selection for the next screenshot</translation>
+        <source>Use the last region as the default selection for the next screenshot in GUI mode</source>
+        <translation type="unfinished">Use the last region as the default selection for the next screenshot in GUI mode</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="262"/>
@@ -1393,7 +1393,7 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/tools/imgupload/imguploadertool.cpp" line="23"/>
         <source>Image Uploader</source>
-        <translation type="unfinished">Image Uploader</translation>
+        <translation>Качване на изображения</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/imguploadertool.cpp" line="33"/>
@@ -1671,7 +1671,7 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="227"/>
         <source>Copy to clipboard</source>
-        <translation type="unfinished">Copia al porta-retalls</translation>
+        <translation>Копиране в междинната памет</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="234"/>
@@ -2661,7 +2661,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/widgets/uploadhistory.cpp" line="62"/>
         <source>Screenshots history is empty</source>
-        <translation type="unfinished">Screenshots history is empty</translation>
+        <translation>Историята на екранни снимки е празна</translation>
     </message>
 </context>
 <context>
@@ -2701,7 +2701,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/widgets/uploadlineitem.cpp" line="50"/>
         <source>Confirm to delete</source>
-        <translation type="unfinished">Confirm to delete</translation>
+        <translation>Потвърждаване на изтриване</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadlineitem.cpp" line="51"/>
