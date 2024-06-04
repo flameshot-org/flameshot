@@ -49,12 +49,13 @@ void CaptureHistoryUtils::saveCapture(const QPixmap& currentScreen,
                      currentTime.toString("yyyy-MM-dd hh:mm:ss") + ".png";
     QFile file(cachePath);
 
-    file.open(QFile::Truncate | QFile::WriteOnly);
-    currentScreen.save(&file, "PNG");
-
-    m_fileList.prepend(cachePath);
-
-    deleteReduntantCache();
+    if (file.open(QFile::Truncate | QFile::WriteOnly)) {
+        currentScreen.save(&file, "PNG");
+        m_fileList.prepend(cachePath);
+        deleteReduntantCache();
+    } else {
+        AbstractLogger::error() << "Error: cannot save cache screen shots";
+    }
 }
 
 void CaptureHistoryUtils::refreshValue()
