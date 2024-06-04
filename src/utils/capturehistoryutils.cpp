@@ -2,23 +2,26 @@
 
 #include "abstractlogger.h"
 
+#include "cacheutils.h"
 #include <QPaintEvent>
 #include <QPainter>
+#include <QtCore/qchar.h>
 #include <QtCore/qdatetime.h>
 #include <QtCore/qdir.h>
 #include <QtCore/qfile.h>
-#include "cacheutils.h"
-#include <QtCore/qchar.h>
-#include <QtCore/qsharedpointer.h>
-#include <QtCore/qrect.h>
-#include <QtCore/qstringlist.h>
-#include <QtCore/qglobal.h>
 #include <QtCore/qfileinfo.h>
+#include <QtCore/qglobal.h>
+#include <QtCore/qrect.h>
+#include <QtCore/qsharedpointer.h>
+#include <QtCore/qstringlist.h>
+#include <algorithm>
+#include <confighandler.h>
 
 QSharedPointer<CaptureHistoryUtils> CaptureHistoryUtils::getInstance()
 {
     static auto singleton =
       QSharedPointer<CaptureHistoryUtils>(new CaptureHistoryUtils);
+    singleton->deleteReduntantCache();
     return singleton;
 }
 
@@ -45,16 +48,18 @@ void CaptureHistoryUtils::saveCapture(const QPixmap& currentScreen,
                                 .arg(selection.height())
                                 .arg(selection.x())
                                 .arg(selection.y());
-    auto cachePath = getCachePath() + "/cap.his." + selectionSerialize + "." +
+    auto cachePath = ConfigHandler().backtrackingCachePath() + "/cap.his." +
+                     selectionSerialize + "." +
                      currentTime.toString("yyyy-MM-dd hh:mm:ss") + ".png";
     QFile file(cachePath);
 
-    file.open(QFile::Truncate | QFile::WriteOnly);
-    currentScreen.save(&file, "PNG");
-
-    m_fileList.prepend(cachePath);
-
-    deleteReduntantCache();
+    if (file.open(QFile::Truncate | QFile::WriteOnly)) {
+        currentScreen.save(&file, "PNG");
+        m_fileList.prepend(cachePath);
+        deleteReduntantCache();
+    } else {
+        AbstractLogger::error() << "Error: cannot save cache screen shots";
+    }
 }
 
 void CaptureHistoryUtils::refreshValue()
@@ -206,8 +211,7 @@ void CaptureHistoryUtils::fetchNewer()
     if (m_fileListIndex > 0) {
         m_fileListIndex--;
         refreshValue();
-    }
-    else if (m_fileListIndex == 0) {
+    } else if (m_fileListIndex == 0) {
         m_fileListIndex--;
     }
 }
@@ -226,7 +230,7 @@ CaptureHistoryUtils::CaptureHistoryUtils()
 
 void CaptureHistoryUtils::deleteReduntantCache()
 {
-    quint32 maxHis = 100;
+    quint32 maxHis = ConfigHandler().backtrackingCacheLimits();
     if (m_fileList.length() >= maxHis) {
         auto fileDeleteNum = m_fileList.length() - maxHis;
         for (int i = 0; i < fileDeleteNum; i++) {
@@ -238,7 +242,7 @@ void CaptureHistoryUtils::deleteReduntantCache()
 void CaptureHistoryUtils::checkCache()
 {
 
-    QDir dir(getCachePath());
+    QDir dir(ConfigHandler().backtrackingCachePath());
     QStringList nameFilters;
     nameFilters.append("cap.his.*.png");
     dir.setNameFilters(nameFilters);
@@ -249,7 +253,8 @@ void CaptureHistoryUtils::checkCache()
                    m_fileList.end(),
                    m_fileList.begin(),
                    [](const auto& filename) {
-                       return getCachePath() + QDir::separator() + filename;
+                       return ConfigHandler().backtrackingCachePath() +
+                              QDir::separator() + filename;
                    });
 
     refreshValue();

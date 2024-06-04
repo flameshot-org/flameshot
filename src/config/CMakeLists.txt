@@ -1,20 +1,21 @@
 target_sources(
-  flameshot
-  PRIVATE buttonlistview.cpp
-          cacheutils.cpp
-          clickablelabel.cpp
-          colorpickereditmode.cpp
-          colorpickereditor.cpp
-          configerrordetails.cpp
-          configresolver.cpp
-          configwindow.cpp
-          extendedslider.cpp
-          filenameeditor.cpp
-          generalconf.cpp
-          setshortcutwidget.cpp
-          shortcutswidget.cpp
-          strftimechooserwidget.cpp
-          styleoverride.cpp
-          uicoloreditor.cpp
-          visualseditor.cpp
+        flameshot
+        PRIVATE buttonlistview.cpp
+        cacheutils.cpp
+        clickablelabel.cpp
+        colorpickereditmode.cpp
+        colorpickereditor.cpp
+        configerrordetails.cpp
+        configresolver.cpp
+        configwindow.cpp
+        extendedslider.cpp
+        filenameeditor.cpp
+        generalconf.cpp
+        setshortcutwidget.cpp
+        shortcutswidget.cpp
+        strftimechooserwidget.cpp
+        styleoverride.cpp
+        uicoloreditor.cpp
+        visualseditor.cpp
+        backtrackingimpl.cpp
 )

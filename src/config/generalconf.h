@@ -13,7 +13,9 @@ class QLabel;
 class QLineEdit;
 class QSpinBox;
 class QComboBox;
-
+namespace btk {
+class BackTrackerConfigGroup;
+}
 class GeneralConf : public QWidget
 {
     Q_OBJECT
@@ -93,6 +95,8 @@ private:
     void initShowSelectionGeometry();
     void initJpegQuality();
 
+    void initBackTrackerSettings();
+
     void _updateComponents(bool allowEmptySavePath);
 
     // class members
@@ -136,4 +140,6 @@ private:
     QComboBox* m_selectGeometryLocation;
     QSpinBox* m_xywhTimeout;
     QSpinBox* m_jpegQuality;
+
+    btk::BackTrackerConfigGroup* m_backTrackingConfig;
 };
