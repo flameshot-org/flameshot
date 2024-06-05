@@ -39,7 +39,6 @@
 #include <QPainter>
 #include <QScreen>
 #include <QShortcut>
-#include <QtCore/qnamespace.h>
 #include <draggablewidgetmaker.h>
 
 #if !defined(DISABLE_UPDATE_CHECKER)
