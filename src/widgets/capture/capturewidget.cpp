@@ -39,6 +39,7 @@
 #include <QPainter>
 #include <QScreen>
 #include <QShortcut>
+#include <QtCore/qnamespace.h>
 #include <draggablewidgetmaker.h>
 
 #if !defined(DISABLE_UPDATE_CHECKER)
@@ -55,7 +56,11 @@
 CaptureWidget::CaptureWidget(const CaptureRequest& req,
                              bool fullScreen,
                              QWidget* parent)
-  : QWidget(parent)
+  : QWidget(parent
+#if defined(Q_OS_MACOS)
+  , Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint
+#endif
+  )
   , m_toolSizeByKeyboard(0)
   , m_mouseIsClicked(false)
   , m_captureDone(false)
