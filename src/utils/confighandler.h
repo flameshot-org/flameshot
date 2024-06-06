@@ -130,6 +130,13 @@ public:
     CONFIG_GETTER_SETTER(showSelectionGeometryHideTime,
                          showSelectionGeometryHideTime,
                          int)
+    CONFIG_GETTER_SETTER(backtrackingEnable, setBacktrackingEnable, bool)
+    CONFIG_GETTER_SETTER(backtrackingCachePath,
+                         setBacktrackingCachePath,
+                         QString)
+    CONFIG_GETTER_SETTER(backtrackingCacheLimits,
+                         setBacktrackingCacheLimits,
+                         qint64)
 
     // SPECIAL CASES
     bool startupLaunch();

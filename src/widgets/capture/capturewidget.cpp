@@ -279,11 +279,12 @@ CaptureWidget::~CaptureWidget()
         geometry.setTopLeft(geometry.topLeft() + m_context.widgetOffset);
         Flameshot::instance()->exportCapture(
           pixmap(), geometry, m_context.request);
-
-        CaptureHistoryUtils::getInstance()->saveCapture(
-          m_context.origScreenshot, geometry);
+        if (ConfigHandler().backtrackingEnable()) {
+            CaptureHistoryUtils::getInstance()->saveCapture(
+              m_context.origScreenshot, geometry);
+        }
     } else {
-        emit Flameshot::instance()->captureFailed();
+        emit Flameshot::instance() -> captureFailed();
     }
 }
 
@@ -440,6 +441,10 @@ void CaptureWidget::initHelpMessage()
     keyMap << QPair(ConfigHandler().shortcut("TYPE_TOGGLE_PANEL"),
                     tr("Open side panel"));
     keyMap << QPair(tr("Esc"), tr("Exit"));
+    if (ConfigHandler().backtrackingEnable()) {
+        keyMap << QPair(tr("Comma"), tr("Show screen history backward"));
+        keyMap << QPair(tr("Period"), tr("Show screen history forward"));
+    }
 
     m_helpMessage = OverlayMessage::compileFromKeyMap(keyMap);
 }
@@ -653,7 +658,8 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
                             "gui` again to apply it."),
                          &painter);
     }
-    if (CaptureHistoryUtils::getInstance()->isNewest()) { // when current screenshot is not a history screenshot
+    if (CaptureHistoryUtils::getInstance()
+          ->isNewest()) { // when current screenshot is not a history screenshot
         saveCurrentState();
     }
 }
@@ -1581,9 +1587,10 @@ void CaptureWidget::initShortcuts()
                 SLOT(selectAll()));
 
     newShortcut(Qt::Key_Escape, this, SLOT(deleteToolWidgetOrClose()));
-
-    newShortcut(Qt::Key_Comma, this, SLOT(onHistoryBack()));
-    newShortcut(Qt::Key_Period, this, SLOT(onHistoryForward()));
+    if (ConfigHandler().backtrackingEnable()) {
+        newShortcut(Qt::Key_Comma, this, SLOT(onHistoryBack()));
+        newShortcut(Qt::Key_Period, this, SLOT(onHistoryForward()));
+    }
 }
 
 void CaptureWidget::deleteCurrentTool()
