@@ -284,7 +284,7 @@ CaptureWidget::~CaptureWidget()
               m_context.origScreenshot, geometry);
         }
     } else {
-        emit Flameshot::instance()->captureFailed();
+        emit Flameshot::instance() -> captureFailed();
     }
 }
 
@@ -441,6 +441,10 @@ void CaptureWidget::initHelpMessage()
     keyMap << QPair(ConfigHandler().shortcut("TYPE_TOGGLE_PANEL"),
                     tr("Open side panel"));
     keyMap << QPair(tr("Esc"), tr("Exit"));
+    if (ConfigHandler().backtrackingEnable()) {
+        keyMap << QPair(tr("Comma"), tr("Show screen history backward"));
+        keyMap << QPair(tr("Period"), tr("Show screen history forward"));
+    }
 
     m_helpMessage = OverlayMessage::compileFromKeyMap(keyMap);
 }
