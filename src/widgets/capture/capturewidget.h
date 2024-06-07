@@ -17,7 +17,7 @@
 #include "src/config/generalconf.h"
 #include "src/tools/capturecontext.h"
 #include "src/tools/capturetool.h"
-#include "src/utils/capturehistoryutils.h"
+#include "src/utils/backtrackutils.h"
 #include "src/utils/confighandler.h"
 #include "src/widgets/capture/magnifierwidget.h"
 #include "src/widgets/capture/selectionwidget.h"
@@ -75,8 +75,8 @@ private slots:
 
     void deleteCurrentTool();
 
-    void onHistoryBack();
-    void onHistoryForward();
+    void onBacktrackBackward();
+    void onBacktrackForward();
     void saveCurrentState();
 
     void setState(CaptureToolButton* b);

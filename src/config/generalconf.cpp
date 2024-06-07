@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 #include "generalconf.h"
-#include "backtrackingimpl.h"
-#include "src/core/flameshot.h"
-#include "src/utils/confighandler.h"
+#include "backtrackconf.h"
+#include "confighandler.h"
+#include "flameshot.h"
 #include <QCheckBox>
 #include <QComboBox>
 #include <QFile>
@@ -50,7 +50,7 @@ GeneralConf::GeneralConf(QWidget* parent)
     initUseJpgForClipboard();
     initCopyOnDoubleClick();
     initSaveAfterCopy();
-    initBackTrackerSettings();
+    initBacktrackConfig();
     initCopyPathAfterSave();
     initCopyAndCloseAfterUpload();
     initUploadWithoutConfirmation();
@@ -800,9 +800,9 @@ void GeneralConf::initJpegQuality()
             this,
             &GeneralConf::setJpegQuality);
 }
-void GeneralConf::initBackTrackerSettings()
+void GeneralConf::initBacktrackConfig()
 {
-    m_backTrackingConfig = new btk::BackTrackerConfigGroup(this);
+    m_backTrackingConfig = new BacktrackConfigGroup(this);
     m_layout->addWidget(m_backTrackingConfig);
 }
 

@@ -17,5 +17,5 @@ target_sources(
         styleoverride.cpp
         uicoloreditor.cpp
         visualseditor.cpp
-        backtrackingimpl.cpp
+        backtrackconf.cpp
 )
