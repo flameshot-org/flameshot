@@ -27,6 +27,9 @@ private:
     void setEmptyMessage();
     void addLine(QString const&, QString const&);
 
+protected:
+    void keyPressEvent(QKeyEvent* event);
+
     Ui::UploadHistory* ui;
 };
 #endif // UPLOADHISTORY_H
