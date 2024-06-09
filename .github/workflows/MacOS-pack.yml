@@ -48,12 +48,23 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install Qt
-        run: brew install qt@5 cmake
+        run: |
+          brew update
+          brew install qt@5 cmake
+
+      - name: Set Qt5 environment variables
+        run: |
+          echo "Qt5_DIR=$(brew --prefix qt@5)/lib/cmake/Qt5" >> $GITHUB_ENV
+          echo "CMAKE_PREFIX_PATH=$(brew --prefix qt@5)/lib/cmake/Qt5" >> $GITHUB_ENV
+        shell: bash
 
       - name: Configure
         run: |
           rm -rf "${DIR_BULD}"/src/flameshot.dmg "${DIR_BULD}"/src/flameshot.app/
-          cmake -S . -B "${DIR_BULD}" -DQt5_DIR=$(brew --prefix qt5)/lib/cmake/Qt5 -DUSE_MONOCHROME_ICON=True
+          cmake -S . -B "${DIR_BULD}" -DUSE_MONOCHROME_ICON=True
+        env:
+          Qt5_DIR: ${{ env.Qt5_DIR }}
+          CMAKE_PREFIX_PATH: ${{ env.CMAKE_PREFIX_PATH }}
 
       - name: Compile
         run: |
