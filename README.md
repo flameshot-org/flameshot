@@ -349,6 +349,7 @@ There are packages available in the repository of some Linux distributions:
 - [Solus](https://dev.getsol.us/source/flameshot/): `eopkg it flameshot`
 - [Fedora](https://src.fedoraproject.org/rpms/flameshot): `dnf install flameshot`
 - [NixOS](https://search.nixos.org/packages?query=flameshot): `nix-env -iA nixos.flameshot`
+- [ALT](https://packages.altlinux.org/en/sisyphus/srpms/flameshot/): `su - -c "apt-get install flameshot"`
 - [Snap/Flatpak/AppImage](https://github.com/flameshotapp/packages)
 - [Docker](https://github.com/ManuelLR/docker-flameshot)
 - [Windows](https://github.com/majkinetor/au-packages/tree/master/flameshot)
