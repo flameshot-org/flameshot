@@ -4,6 +4,7 @@
 #include "screengrabber.h"
 #include "abstractlogger.h"
 #include "src/core/qguiappcurrentscreen.h"
+#include "src/utils/confighandler.h"
 #include "src/utils/filenamehandler.h"
 #include "src/utils/systemnotification.h"
 #include <QApplication>
@@ -33,7 +34,11 @@ void ScreenGrabber::generalGrimScreenshot(bool& ok, QPixmap& res)
     QProcess Process;
     QString program = "grim";
     QStringList arguments;
-    arguments << "-";
+    if (!ConfigHandler().hideCursor()) {
+        arguments << "-c";
+    }
+
+    arguments << "-"; // This argument should come last
     Process.start(program, arguments);
     if (Process.waitForFinished()) {
         res.loadFromData(Process.readAll());
@@ -143,7 +148,7 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
 #else
                 AbstractLogger::warning()
                   << tr("grim's screenshot component is implemented based on "
-                        "wlroots, it may not be used in GNOME or similar "
+                        "wlroots, it may not be used in GNOME, KDE or similar "
                         "desktop environments");
                 generalGrimScreenshot(ok, res);
 #endif

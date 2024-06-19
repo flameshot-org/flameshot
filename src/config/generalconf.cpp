@@ -1,8 +1,9 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
-#include "generalconf.h"
+#include "src/config/generalconf.h"
 #include "src/core/flameshot.h"
 #include "src/utils/confighandler.h"
+#include "src/utils/desktopinfo.h"
 #include <QCheckBox>
 #include <QComboBox>
 #include <QFile>
@@ -19,6 +20,8 @@
 #include <QStandardPaths>
 #include <QTextCodec>
 #include <QVBoxLayout>
+
+#define STYLESHEET_DISABLED "color: #FA2A55"
 
 GeneralConf::GeneralConf(QWidget* parent)
   : QWidget(parent)
@@ -42,6 +45,7 @@ GeneralConf::GeneralConf(QWidget* parent)
     initCheckForUpdates();
 #endif
     initShowStartupLaunchMessage();
+    initHideCursor();
     initAllowMultipleGuiInstances();
     initSaveLastRegion();
     initShowHelp();
@@ -77,6 +81,7 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
     m_sidePanelButton->setChecked(config.showSidePanelButton());
     m_sysNotifications->setChecked(config.showDesktopNotification());
     m_autostart->setChecked(config.startupLaunch());
+    m_hideCursor->setChecked(config.hideCursor());
     m_copyURLAfterUpload->setChecked(config.copyURLAfterUpload());
     m_saveAfterCopy->setChecked(config.saveAfterCopy());
     m_copyPathAfterSave->setChecked(config.copyPathAfterSave());
@@ -160,6 +165,10 @@ void GeneralConf::autostartChanged(bool checked)
     ConfigHandler().setStartupLaunch(checked);
 }
 
+void GeneralConf::hideCursorChanged(bool checked)
+{
+    ConfigHandler().setHideCursor(checked);
+}
 void GeneralConf::importConfiguration()
 {
     QString fileName = QFileDialog::getOpenFileName(this, tr("Import"));
@@ -397,6 +406,57 @@ void GeneralConf::initAutostart()
 
     connect(
       m_autostart, &QCheckBox::clicked, this, &GeneralConf::autostartChanged);
+}
+
+void GeneralConf::initHideCursor()
+{
+    const auto initDisabledHideCursor = [&]() -> void {
+        auto* disabledLabel = new QLabel(
+          tr(
+            "Cursor hiding behavior cannot be set on this desktop environment"),
+          this);
+        disabledLabel->setStyleSheet(STYLESHEET_DISABLED);
+        m_hideCursor =
+          new QCheckBox(tr("Hide cursor in screenshots (disabled)"), this);
+        m_hideCursor->setEnabled(false);
+        m_hideCursor->setToolTip(tr(
+          "Cursor hiding behavior cannot be set on this desktop environment"));
+        m_scrollAreaLayout->addWidget(disabledLabel);
+        m_scrollAreaLayout->addWidget(m_hideCursor);
+        connect(m_hideCursor,
+                &QCheckBox::clicked,
+                this,
+                &GeneralConf::hideCursorChanged);
+    };
+
+    const auto initEnabledHideCursor = [&]() -> void {
+        m_hideCursor = new QCheckBox(tr("Hide cursor in screenshots"), this);
+        m_hideCursor->setEnabled(true);
+        m_hideCursor->setToolTip(tr("Don't include the cursor in screenshots"));
+        m_scrollAreaLayout->addWidget(m_hideCursor);
+        connect(m_hideCursor,
+                &QCheckBox::clicked,
+                this,
+                &GeneralConf::hideCursorChanged);
+    };
+
+#if defined(Q_OS_LINUX)
+    if (!m_info.waylandDetected()) {
+        initDisabledHideCursor();
+    } else {
+        switch (m_info.windowManager()) {
+            case DesktopInfo::GNOME:
+            case DesktopInfo::KDE:
+                initDisabledHideCursor();
+                break;
+            default:
+                initEnabledHideCursor();
+                break;
+        }
+    }
+#else
+    initDisabledHideCursor();
+#endif
 }
 
 void GeneralConf::initShowStartupLaunchMessage()

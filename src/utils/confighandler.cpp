@@ -90,6 +90,7 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
 #endif
     OPTION("startupLaunch"               ,Bool               ( false         )),
     OPTION("showStartupLaunchMessage"    ,Bool               ( true          )),
+    OPTION("hideCursor"                  ,Bool               ( true          )),
     OPTION("copyURLAfterUpload"          ,Bool               ( true          )),
     OPTION("copyPathAfterSave"           ,Bool               ( false         )),
     OPTION("antialiasingPinZoom"         ,Bool               ( true          )),
