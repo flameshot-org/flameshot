@@ -73,13 +73,15 @@ void ScreenGrabber::freeDesktopPortal(bool& ok, QPixmap& res)
       this);
 
     QEventLoop loop;
-    const auto gotSignal = [&res, &loop](uint status, const QVariantMap& map) {
+    const auto gotSignal = [this, &res, &loop](uint status,
+                                               const QVariantMap& map) {
         if (status == 0) {
             // Parse this as URI to handle unicode properly
             QUrl uri = map.value("uri").toString();
             QString uriString = uri.toLocalFile();
             res = QPixmap(uriString);
-            res.setDevicePixelRatio(qApp->devicePixelRatio());
+            res.setDevicePixelRatio(res.width() /
+                                    double(desktopGeometry().width()));
             QFile imgFile(uriString);
             imgFile.remove();
         }
