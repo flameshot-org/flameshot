@@ -8,7 +8,7 @@ class QPixmap;
 #include <QtCore/qrect.h>
 #include <QtCore/qsharedpointer.h>
 
-class CaptureHistoryUtils : public QObject
+class BacktrackUtils : public QObject
 {
     Q_OBJECT
 public:
@@ -16,7 +16,7 @@ public:
      * get a singleton object method
      * @return singleton object
      */
-    static QSharedPointer<CaptureHistoryUtils> getInstance();
+    static QSharedPointer<BacktrackUtils> getInstance();
     /**
      *
      * @return a screenshot
@@ -48,7 +48,7 @@ public:
     void fetchNewest();
 
 private:
-    CaptureHistoryUtils();
+    BacktrackUtils();
     void deleteReduntantCache();
     void checkCache();
     QStringList m_fileList;

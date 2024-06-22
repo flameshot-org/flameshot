@@ -279,9 +279,9 @@ CaptureWidget::~CaptureWidget()
         geometry.setTopLeft(geometry.topLeft() + m_context.widgetOffset);
         Flameshot::instance()->exportCapture(
           pixmap(), geometry, m_context.request);
-        if (ConfigHandler().backtrackingEnable()) {
-            CaptureHistoryUtils::getInstance()->saveCapture(
-              m_context.origScreenshot, geometry);
+        if (ConfigHandler().backtrackEnable()) {
+            BacktrackUtils::getInstance()->saveCapture(m_context.origScreenshot,
+                                                       geometry);
         }
     } else {
         emit Flameshot::instance() -> captureFailed();
@@ -441,9 +441,9 @@ void CaptureWidget::initHelpMessage()
     keyMap << QPair(ConfigHandler().shortcut("TYPE_TOGGLE_PANEL"),
                     tr("Open side panel"));
     keyMap << QPair(tr("Esc"), tr("Exit"));
-    if (ConfigHandler().backtrackingEnable()) {
-        keyMap << QPair(tr("Comma"), tr("Show screen history backward"));
-        keyMap << QPair(tr("Period"), tr("Show screen history forward"));
+    if (ConfigHandler().backtrackEnable()) {
+        keyMap << QPair(tr("Comma"), tr("Show screen backtrack backward"));
+        keyMap << QPair(tr("Period"), tr("Show screen backtrack forward"));
     }
 
     m_helpMessage = OverlayMessage::compileFromKeyMap(keyMap);
@@ -658,7 +658,7 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
                             "gui` again to apply it."),
                          &painter);
     }
-    if (CaptureHistoryUtils::getInstance()
+    if (BacktrackUtils::getInstance()
           ->isNewest()) { // when current screenshot is not a history screenshot
         saveCurrentState();
     }
@@ -1587,9 +1587,9 @@ void CaptureWidget::initShortcuts()
                 SLOT(selectAll()));
 
     newShortcut(Qt::Key_Escape, this, SLOT(deleteToolWidgetOrClose()));
-    if (ConfigHandler().backtrackingEnable()) {
-        newShortcut(Qt::Key_Comma, this, SLOT(onHistoryBack()));
-        newShortcut(Qt::Key_Period, this, SLOT(onHistoryForward()));
+    if (ConfigHandler().backtrackEnable()) {
+        newShortcut(Qt::Key_Comma, this, SLOT(onBacktrackBackward()));
+        newShortcut(Qt::Key_Period, this, SLOT(onBacktrackForward()));
     }
 }
 
@@ -1603,12 +1603,12 @@ void CaptureWidget::deleteCurrentTool()
     }
 }
 
-void CaptureWidget::onHistoryBack()
+void CaptureWidget::onBacktrackBackward()
 {
     // m_context.selection.setHeight(m_context.selection.height() / 2);
-    auto cu = CaptureHistoryUtils::getInstance();
+    auto cu = BacktrackUtils::getInstance();
     cu->fetchOlder();
-    if (cu->currentScreenShot()) {
+    if (cu->currentScreenShot() != nullptr) {
         m_context.origScreenshot = cu->currentScreenShot()->copy();
         m_context.screenshot = m_context.origScreenshot;
         m_selection->setVisible(true);
@@ -1621,9 +1621,9 @@ void CaptureWidget::onHistoryBack()
         update();
     }
 }
-void CaptureWidget::onHistoryForward()
+void CaptureWidget::onBacktrackForward()
 {
-    auto cu = CaptureHistoryUtils::getInstance();
+    auto cu = BacktrackUtils::getInstance();
     cu->fetchNewer();
     if (cu->isNewest()) {
         m_context = m_currentContext;

@@ -1,4 +1,4 @@
-#include "capturehistoryutils.h"
+#include "backtrackutils.h"
 
 #include "abstractlogger.h"
 
@@ -17,30 +17,29 @@
 #include <algorithm>
 #include <confighandler.h>
 
-QSharedPointer<CaptureHistoryUtils> CaptureHistoryUtils::getInstance()
+QSharedPointer<BacktrackUtils> BacktrackUtils::getInstance()
 {
-    static auto singleton =
-      QSharedPointer<CaptureHistoryUtils>(new CaptureHistoryUtils);
+    static auto singleton = QSharedPointer<BacktrackUtils>(new BacktrackUtils);
     singleton->deleteReduntantCache();
     return singleton;
 }
 
-QSharedPointer<QPixmap> CaptureHistoryUtils::currentScreenShot()
+QSharedPointer<QPixmap> BacktrackUtils::currentScreenShot()
 {
     return m_currentScreenShot;
 }
 
-QRect CaptureHistoryUtils::cureentSelection()
+QRect BacktrackUtils::cureentSelection()
 {
     return m_currentSelection;
 }
-bool CaptureHistoryUtils::isNewest() const noexcept
+bool BacktrackUtils::isNewest() const noexcept
 {
     return m_fileListIndex == -1;
 }
 
-void CaptureHistoryUtils::saveCapture(const QPixmap& currentScreen,
-                                      const QRect& selection)
+void BacktrackUtils::saveCapture(const QPixmap& currentScreen,
+                                 const QRect& selection)
 {
     auto currentTime = QDateTime::currentDateTime();
     auto selectionSerialize = QString("+%1x%2+%3+%4+")
@@ -48,7 +47,7 @@ void CaptureHistoryUtils::saveCapture(const QPixmap& currentScreen,
                                 .arg(selection.height())
                                 .arg(selection.x())
                                 .arg(selection.y());
-    auto cachePath = ConfigHandler().backtrackingCachePath() + "/cap.his." +
+    auto cachePath = ConfigHandler().backtrackCachePath() + "/cap.his." +
                      selectionSerialize + "." +
                      currentTime.toString("yyyy-MM-dd hh:mm:ss") + ".png";
     QFile file(cachePath);
@@ -62,7 +61,7 @@ void CaptureHistoryUtils::saveCapture(const QPixmap& currentScreen,
     }
 }
 
-void CaptureHistoryUtils::refreshValue()
+void BacktrackUtils::refreshValue()
 {
     if (m_fileList.empty()) {
         m_fileListIndex = -1;
@@ -189,7 +188,7 @@ void CaptureHistoryUtils::refreshValue()
         }
     }
     if (selParseState == PS_ERROR) {
-        AbstractLogger::error() << "cache pic selection parse errror";
+        AbstractLogger::error() << "cache pic selection parse error";
         return;
     }
     m_currentSelection.setX(xPos);
@@ -198,7 +197,7 @@ void CaptureHistoryUtils::refreshValue()
     m_currentSelection.setHeight(height);
 }
 
-void CaptureHistoryUtils::fetchOlder()
+void BacktrackUtils::fetchOlder()
 {
     if (m_fileListIndex < m_fileList.length() - 1) {
         m_fileListIndex++;
@@ -206,7 +205,7 @@ void CaptureHistoryUtils::fetchOlder()
     }
 }
 
-void CaptureHistoryUtils::fetchNewer()
+void BacktrackUtils::fetchNewer()
 {
     if (m_fileListIndex > 0) {
         m_fileListIndex--;
@@ -216,33 +215,33 @@ void CaptureHistoryUtils::fetchNewer()
     }
 }
 
-void CaptureHistoryUtils::fetchNewest()
+void BacktrackUtils::fetchNewest()
 {
     m_fileListIndex = 0;
     refreshValue();
 }
 
-CaptureHistoryUtils::CaptureHistoryUtils()
+BacktrackUtils::BacktrackUtils()
   : m_fileListIndex(-1)
 {
     checkCache();
 }
 
-void CaptureHistoryUtils::deleteReduntantCache()
+void BacktrackUtils::deleteReduntantCache()
 {
-    quint32 maxHis = ConfigHandler().backtrackingCacheLimits();
+    const quint32 maxHis = ConfigHandler::getInstance()->backtrackCacheLimits();
     if (m_fileList.length() >= maxHis) {
-        auto fileDeleteNum = m_fileList.length() - maxHis;
+        qint64 const fileDeleteNum = m_fileList.length() - maxHis;
         for (int i = 0; i < fileDeleteNum; i++) {
             QFile::remove(getLastCacheName());
         }
     }
 }
 
-void CaptureHistoryUtils::checkCache()
+void BacktrackUtils::checkCache()
 {
 
-    QDir dir(ConfigHandler().backtrackingCachePath());
+    QDir dir(ConfigHandler().backtrackCachePath());
     QStringList nameFilters;
     nameFilters.append("cap.his.*.png");
     dir.setNameFilters(nameFilters);
@@ -253,14 +252,14 @@ void CaptureHistoryUtils::checkCache()
                    m_fileList.end(),
                    m_fileList.begin(),
                    [](const auto& filename) {
-                       return ConfigHandler().backtrackingCachePath() +
+                       return ConfigHandler().backtrackCachePath() +
                               QDir::separator() + filename;
                    });
 
     refreshValue();
 }
 
-QString CaptureHistoryUtils::getLastCacheName()
+QString BacktrackUtils::getLastCacheName()
 {
     return m_fileList[m_fileList.length() - 1];
 }

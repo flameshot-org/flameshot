@@ -1,8 +1,7 @@
-#include "backtrackingimpl.h"
+#include "backtrackconf.h"
 
 #include "abstractlogger.h"
 
-#include <QLabel>
 #include <QVBoxLayout>
 #include <QtCore/qstandardpaths.h>
 #include <QtCore/qstring.h>
@@ -10,6 +9,7 @@
 #include <QtWidgets/qcheckbox.h>
 #include <QtWidgets/qfiledialog.h>
 #include <QtWidgets/qgroupbox.h>
+#include <QtWidgets/qlabel.h>
 #include <QtWidgets/qlayoutitem.h>
 #include <QtWidgets/qlineedit.h>
 #include <QtWidgets/qmessagebox.h>
@@ -20,58 +20,57 @@
 #include <cacheutils.h>
 #include <confighandler.h>
 
-namespace btk {
-class BackTrackerConfigPrivate
+class BacktrackConfigPrivate
 {
-    friend class BackTrackerConfigGroup;
+    friend class BacktrackConfigGroup;
     constexpr static int limits_max = 200;
     constexpr static int limits_min = 0;
 
 public:
-    QCheckBox* enableBackTrackerCheckBox;
-    QLineEdit* backTrackerPath;
+    QCheckBox* enableCheckBox;
+    QLineEdit* cachePath;
     QPushButton* choosePathBtn;
-    QPushButton* rollbackBtn;
+    QPushButton* setCachePath2DefaultBtn;
     QSpinBox* cacheNumbersSpinBox;
 };
 
-BackTrackerConfigGroup::BackTrackerConfigGroup(QWidget* parent)
+BacktrackConfigGroup::BacktrackConfigGroup(QWidget* parent)
   : QGroupBox(tr("BackTracking"), parent)
-  , p(new BackTrackerConfigPrivate)
+  , p(new BacktrackConfigPrivate)
+  , m_configHandler(ConfigHandler::getInstance())
 {
     init();
 }
-BackTrackerConfigGroup::~BackTrackerConfigGroup()
+BacktrackConfigGroup::~BacktrackConfigGroup()
 {
-    delete p;
     p = nullptr;
 }
-void BackTrackerConfigGroup::init()
+void BacktrackConfigGroup::init()
 {
-    p->enableBackTrackerCheckBox = new QCheckBox(tr("enable"), this);
-    p->enableBackTrackerCheckBox->setToolTip(tr("If enable the backtraking"));
-    p->enableBackTrackerCheckBox->setChecked(
-      ConfigHandler().backtrackingEnable());
-    connect(p->enableBackTrackerCheckBox,
+    p->enableCheckBox = new QCheckBox(tr("enable"), this);
+    p->enableCheckBox->setToolTip(tr("If enable the backtraking"));
+    p->enableCheckBox->setChecked(ConfigHandler().backtrackEnable());
+    connect(p->enableCheckBox,
             &QCheckBox::clicked,
             this,
-            &BackTrackerConfigGroup::setEnable);
+            &BacktrackConfigGroup::setEnable);
     setFlat(true);
     auto* vboxLayout = new QVBoxLayout();
     setLayout(vboxLayout);
 
     auto* firstHBoxLayout = new QHBoxLayout();
     vboxLayout->addLayout(firstHBoxLayout);
-    firstHBoxLayout->addWidget(p->enableBackTrackerCheckBox);
+    firstHBoxLayout->addWidget(p->enableCheckBox);
 
     auto* spinboxLabel = new QLabel(tr("cache size"));
     spinboxLabel->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Expanding);
 
     p->cacheNumbersSpinBox = new QSpinBox();
-    p->cacheNumbersSpinBox->setValue(ConfigHandler().backtrackingCacheLimits());
+    p->cacheNumbersSpinBox->setValue(
+      m_configHandler->backtrackCacheLimits());
     p->cacheNumbersSpinBox->setFixedWidth(50);
-    p->cacheNumbersSpinBox->setMinimum(BackTrackerConfigPrivate::limits_min);
-    p->cacheNumbersSpinBox->setMaximum(BackTrackerConfigPrivate::limits_max);
+    p->cacheNumbersSpinBox->setMinimum(BacktrackConfigPrivate::limits_min);
+    p->cacheNumbersSpinBox->setMaximum(BacktrackConfigPrivate::limits_max);
 
     connect(p->cacheNumbersSpinBox,
             &QSpinBox::textChanged,
@@ -86,24 +85,25 @@ void BackTrackerConfigGroup::init()
     auto* choosePathLayout = new QHBoxLayout();
     vboxLayout->addLayout(choosePathLayout);
 
-    p->backTrackerPath = new QLineEdit();
-    p->backTrackerPath->setReadOnly(true);
-    p->backTrackerPath->setPlaceholderText(
+    p->cachePath = new QLineEdit();
+    p->cachePath->setReadOnly(true);
+    p->cachePath->setPlaceholderText(
       tr("choose your path to save backtracking cache"));
-    p->backTrackerPath->setToolTip(
+    p->cachePath->setToolTip(
       tr("choose your path to save backtracking cache\ndefaults to: %1")
         .arg(getCachePath()));
-    p->backTrackerPath->setStyleSheet(R"(
+    p->cachePath->setStyleSheet(R"(
     border-right-width: 0px;
     )");
 
-    choosePathLayout->addWidget(p->backTrackerPath);
+    choosePathLayout->addWidget(p->cachePath);
 
-    p->rollbackBtn = new QPushButton(tr("↩️"));
-    p->rollbackBtn->setFixedWidth(20);
-    p->rollbackBtn->setToolTip(tr("set path to default"));
-    p->rollbackBtn->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Preferred);
-    p->rollbackBtn->setStyleSheet(QString(R"(
+    p->setCachePath2DefaultBtn = new QPushButton(tr("↩️"));
+    p->setCachePath2DefaultBtn->setFixedWidth(20);
+    p->setCachePath2DefaultBtn->setToolTip(tr("set path to default"));
+    p->setCachePath2DefaultBtn->setSizePolicy(QSizePolicy::Fixed,
+                                              QSizePolicy::Preferred);
+    p->setCachePath2DefaultBtn->setStyleSheet(QString(R"(
    QPushButton{
          margin-right: 14px;
         // margin-top: 0px;
@@ -111,11 +111,11 @@ void BackTrackerConfigGroup::init()
         border-width: 0px;
    }
     )"));
-    connect(p->rollbackBtn,
+    connect(p->setCachePath2DefaultBtn,
             &QPushButton::clicked,
             this,
-            &BackTrackerConfigGroup::pathRollBack);
-    choosePathLayout->addWidget(p->rollbackBtn);
+            &BacktrackConfigGroup::setPath2Default);
+    choosePathLayout->addWidget(p->setCachePath2DefaultBtn);
     choosePathLayout->setSpacing(0);
 
     p->choosePathBtn = new QPushButton(tr("Change.."));
@@ -123,14 +123,14 @@ void BackTrackerConfigGroup::init()
     connect(p->choosePathBtn,
             &QPushButton::clicked,
             this,
-            &BackTrackerConfigGroup::browseFolder);
+            &BacktrackConfigGroup::browseFolder);
 
-    if (ConfigHandler().backtrackingCachePath().isEmpty()) {
-        ConfigHandler().setBacktrackingCachePath(getCachePath());
+    if (ConfigHandler::getInstance()->backtrackCachePath().isEmpty()) {
+        ConfigHandler::getInstance()->setBacktrackCachePath(getCachePath());
     }
-    p->backTrackerPath->setText(ConfigHandler().backtrackingCachePath());
+    p->cachePath->setText(ConfigHandler::getInstance()->backtrackCachePath());
 }
-QString BackTrackerConfigGroup::chooseFolder(const QString& defaultPath)
+QString BacktrackConfigGroup::chooseFolder(const QString& defaultPath)
 {
     QString path = defaultPath;
     if (defaultPath.isEmpty()) {
@@ -153,32 +153,31 @@ QString BackTrackerConfigGroup::chooseFolder(const QString& defaultPath)
 
     return path;
 }
-void BackTrackerConfigGroup::browseFolder()
+void BacktrackConfigGroup::browseFolder()
 {
-    auto targetFolder = chooseFolder(ConfigHandler().backtrackingCachePath());
+    auto targetFolder = chooseFolder(ConfigHandler().backtrackCachePath());
     if (targetFolder.isEmpty()) {
         AbstractLogger::error()
           << "backtracking: cache folder path you choose is empty";
         return;
     }
-    p->backTrackerPath->setText(targetFolder);
-    ConfigHandler().setBacktrackingCachePath(targetFolder);
+    p->cachePath->setText(targetFolder);
+    ConfigHandler().setBacktrackCachePath(targetFolder);
 }
-void BackTrackerConfigGroup::setEnable(bool value)
+void BacktrackConfigGroup::setEnable(bool value)
 {
-    ConfigHandler().setBacktrackingEnable(value);
+    m_configHandler->setBacktrackEnable(value);
 }
-void BackTrackerConfigGroup::pathRollBack()
+void BacktrackConfigGroup::setPath2Default()
 {
-    ConfigHandler().setBacktrackingCachePath(getCachePath());
-    p->backTrackerPath->setText(getCachePath());
+    m_configHandler->setBacktrackCachePath(getCachePath());
+    p->cachePath->setText(getCachePath());
 }
-void BackTrackerConfigGroup::setCacheLimits(int val)
+void BacktrackConfigGroup::setCacheLimits(int val)
 {
-    if (val > BackTrackerConfigPrivate::limits_max ||
-        val < BackTrackerConfigPrivate::limits_min) {
+    if (val > BacktrackConfigPrivate::limits_max ||
+        val < BacktrackConfigPrivate::limits_min) {
         return;
     }
-    ConfigHandler().setBacktrackingCacheLimits(val);
+    m_configHandler->setBacktrackCacheLimits(val);
 }
-} // btk

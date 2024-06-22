@@ -17,26 +17,24 @@ class QLabel;
 class QLineEdit;
 class QSpinBox;
 class QComboBox;
-namespace btk {
 
-class BackTrackerConfigPrivate;
-class BackTrackerConfigGroup : public QGroupBox
+class BacktrackConfigGroup : public QGroupBox
 {
     Q_OBJECT
 public:
-    explicit BackTrackerConfigGroup(QWidget* parent = nullptr);
-    ~BackTrackerConfigGroup() override;
+    explicit BacktrackConfigGroup(QWidget* parent = nullptr);
+    ~BacktrackConfigGroup() override;
 
 private:
-    BackTrackerConfigPrivate* p;
+    std::unique_ptr<class BacktrackConfigPrivate> p;
     void init();
     QString chooseFolder(const QString& defaultPath);
+    class ConfigHandler* m_configHandler;
 public slots:
     void browseFolder();
     void setEnable(bool value);
-    void pathRollBack();
+    void setPath2Default();
     void setCacheLimits(int val);
 };
-} // btk
 
 #endif // BACKTRACKINGIMPL_H
