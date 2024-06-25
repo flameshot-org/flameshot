@@ -98,6 +98,7 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     OPTION("saveAfterCopy"               ,Bool               ( false         )),
     OPTION("savePath"                    ,ExistingDir        (                   )),
     OPTION("savePathFixed"               ,Bool               ( false         )),
+    OPTION("randomizePixelation"         ,Bool               ( false         )),
     OPTION("saveAsFileExtension"         ,SaveFileExtension  (                   )),
     OPTION("saveLastRegion"              ,Bool               (false          )),
     OPTION("uploadHistoryMax"            ,LowerBoundedInt    (0, 25               )),
