@@ -101,39 +101,6 @@ void PinWidget::closePin()
     update();
     close();
 }
-bool PinWidget::scrollEvent(QWheelEvent* event)
-{
-    const auto phase = event->phase();
-    if (phase == Qt::ScrollPhase::ScrollUpdate
-#if defined(Q_OS_LINUX) || defined(Q_OS_WINDOWS)
-        // Linux is getting only NoScrollPhase events.
-        || phase == Qt::ScrollPhase::NoScrollPhase
-#endif
-    ) {
-        const auto angle = event->angleDelta();
-        if (angle.y() == 0) {
-            return true;
-        }
-        m_currentStepScaleFactor = angle.y() > 0
-                                     ? m_currentStepScaleFactor + STEP
-                                     : m_currentStepScaleFactor - STEP;
-        m_expanding = m_currentStepScaleFactor >= 1.0;
-    }
-#if defined(Q_OS_MACOS)
-    // ScrollEnd is currently supported only on Mac OSX
-    if (phase == Qt::ScrollPhase::ScrollEnd) {
-#else
-    else {
-#endif
-        m_scaleFactor *= m_currentStepScaleFactor;
-        m_currentStepScaleFactor = 1.0;
-        m_expanding = false;
-    }
-
-    m_sizeChanged = true;
-    update();
-    return true;
-}
 
 void PinWidget::enterEvent(QEvent*)
 {
@@ -192,6 +159,50 @@ void PinWidget::keyPressEvent(QKeyEvent* event)
 
     setWindowOpacity(m_opacity);
 }
+
+void PinWidget::wheelEvent(QWheelEvent* event)
+{
+    // if ctrl is pressed
+    if (event->modifiers() & Qt::ControlModifier) {
+        if (event->angleDelta().y() > 0) {
+            increaseOpacity();
+        } else {
+            decreaseOpacity();
+        }
+        return;
+    }
+
+    const auto phase = event->phase();
+    if (phase == Qt::ScrollPhase::ScrollUpdate
+#if defined(Q_OS_LINUX) || defined(Q_OS_WINDOWS)
+        // Linux is getting only NoScrollPhase events.
+        || phase == Qt::ScrollPhase::NoScrollPhase
+#endif
+    ) {
+        const auto angle = event->angleDelta();
+        if (angle.y() == 0) {
+            return;
+        }
+        m_currentStepScaleFactor = angle.y() > 0
+                                     ? m_currentStepScaleFactor + STEP
+                                     : m_currentStepScaleFactor - STEP;
+        m_expanding = m_currentStepScaleFactor >= 1.0;
+    }
+#if defined(Q_OS_MACOS)
+    // ScrollEnd is currently supported only on Mac OSX
+    if (phase == Qt::ScrollPhase::ScrollEnd) {
+#else
+    else {
+#endif
+        m_scaleFactor *= m_currentStepScaleFactor;
+        m_currentStepScaleFactor = 1.0;
+        m_expanding = false;
+    }
+
+    m_sizeChanged = true;
+    update();
+}
+
 bool PinWidget::gestureEvent(QGestureEvent* event)
 {
     if (QGesture* pinch = event->gesture(Qt::PinchGesture)) {
@@ -239,8 +250,6 @@ bool PinWidget::event(QEvent* event)
 {
     if (event->type() == QEvent::Gesture) {
         return gestureEvent(static_cast<QGestureEvent*>(event));
-    } else if (event->type() == QEvent::Wheel) {
-        return scrollEvent(static_cast<QWheelEvent*>(event));
     }
     return QWidget::event(event);
 }

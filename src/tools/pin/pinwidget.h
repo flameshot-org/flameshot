@@ -24,6 +24,7 @@ protected:
     void mousePressEvent(QMouseEvent*) override;
     void mouseMoveEvent(QMouseEvent*) override;
     void keyPressEvent(QKeyEvent*) override;
+    void wheelEvent(QWheelEvent*) override;
     void enterEvent(QEvent*) override;
     void leaveEvent(QEvent*) override;
 
@@ -32,7 +33,6 @@ protected:
 
 private:
     bool gestureEvent(QGestureEvent* event);
-    bool scrollEvent(QWheelEvent* e);
     void pinchTriggered(QPinchGesture*);
     void closePin();
 
