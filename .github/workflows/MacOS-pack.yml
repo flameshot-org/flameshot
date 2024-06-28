@@ -4,15 +4,17 @@ on:
   push:
     branches:
       - master
-      - feature/RND-680-macos-.dmg-package-build
+      - fix*
     paths-ignore:
       - 'README.md'
       - 'LICENSE'
+      - 'docs/**'
 
   pull_request:
     paths-ignore:
       - 'README.md'
       - 'LICENSE'
+      - 'docs/**'
 
 env:
   PRODUCT: flameshot
