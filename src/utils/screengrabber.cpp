@@ -4,6 +4,7 @@
 #include "screengrabber.h"
 #include "abstractlogger.h"
 #include "src/core/qguiappcurrentscreen.h"
+#include "src/utils/confighandler.h"
 #include "src/utils/filenamehandler.h"
 #include "src/utils/systemnotification.h"
 #include <QApplication>
@@ -141,10 +142,12 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
                   "activate the grim-based general wayland screenshot adapter");
                 freeDesktopPortal(ok, res);
 #else
-                AbstractLogger::warning()
-                  << tr("grim's screenshot component is implemented based on "
-                        "wlroots, it may not be used in GNOME or similar "
-                        "desktop environments");
+                if (!ConfigHandler().disabledGrimWarning()) {
+                    AbstractLogger::warning() << tr(
+                      "grim's screenshot component is implemented based on "
+                      "wlroots, it may not be used in GNOME or similar "
+                      "desktop environments");
+                }
                 generalGrimScreenshot(ok, res);
 #endif
                 break;
