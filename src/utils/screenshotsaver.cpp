@@ -21,7 +21,9 @@
 #include <QMessageBox>
 #include <QMimeData>
 #include <QStandardPaths>
+#ifdef USE_PRINTER_SUPPORT
 #include <QtPrintSupport/QPrinter>
+#endif
 #include <qimagewriter.h>
 #include <qmimedatabase.h>
 #ifdef USE_PLUGIN_MANAGER
@@ -188,6 +190,7 @@ void saveToClipboard(const QPixmap& capture)
     }
 }
 
+#ifdef USE_PRINTER_SUPPORT
 bool saveToPDF(const QPixmap& capture)
 {
     bool okay = false;
@@ -235,6 +238,8 @@ bool saveToPDF(const QPixmap& capture)
 
     return okay;
 }
+
+#endif
 
 bool saveToFilesystemGUI(const QPixmap& capture)
 {

@@ -8,8 +8,11 @@ find_package(
         Network
         Svg
         DBus
-        LinguistTools
-        PrintSupport)
+        LinguistTools)
+
+if (USE_PRINTER_SUPPORT)
+    find_package(PrintSupport)
+endif()
 
 if (USE_WAYLAND_CLIPBOARD)
     find_package(KF5GuiAddons)
@@ -219,11 +222,14 @@ target_link_libraries(
         Qt5::DBus
         Qt5::Network
         Qt5::Widgets
-        Qt5::PrintSupport
         ${QTSINGLEAPPLICATION_LIBRARY}
         QtColorWidgets
 
 )
+
+if (USE_PRINTER_SUPPORT)
+    target_link_libraries(flameshot Qt5::PrintSupport)
+endif()
 
 if (USE_WAYLAND_CLIPBOARD)
   if(!USE_WAYLAND_GRIM)
@@ -235,6 +241,10 @@ endif()
 
 if (USE_WAYLAND_GRIM)
     target_compile_definitions(flameshot PRIVATE USE_WAYLAND_GRIM=1)
+endif()
+
+if (USE_PRINTER_SUPPORT)
+    target_compile_definitions(flameshot PRIVATE USE_PRINTER_SUPPORT=1)
 endif()
 
 if (APPLE)

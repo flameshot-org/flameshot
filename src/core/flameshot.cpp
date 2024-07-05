@@ -34,8 +34,11 @@
 #include <QToolBar>
 #include <QUrl>
 #include <QVersionNumber>
+
+#ifdef USE_PRINTER_SUPPORT
 #include <QtPrintSupport/QPrintPreviewDialog>
 #include <QtPrintSupport/QPrinter>
+#endif
 
 #ifdef USE_PLUGIN_MANAGER
 #include "core/pluginmanager.h"
@@ -398,12 +401,15 @@ void Flameshot::exportCapture(const QPixmap& capture,
         }
     }
 
+#ifdef USE_PRINTER_SUPPORT
+
     if (tasks & CR::SAVE_TO_PDF) {
 #ifdef USE_PLUGIN_MANAGER
         PluginManager::getInstance()->CallImageToPDFPost(PixmapOutputBuffer);
 #endif
         saveToPDF(PixmapOutputBuffer);
     }
+#endif
 
     if (tasks & CR::COPY) {
 #ifdef USE_PLUGIN_MANAGER
@@ -451,6 +457,8 @@ void Flameshot::exportCapture(const QPixmap& capture,
               }
           });
     }
+
+#ifdef USE_PRINTER_SUPPORT
 
     if (tasks & CR::PRINT_SYSTEM) {
         QPixmap pixmap = capture;
@@ -520,6 +528,7 @@ void Flameshot::exportCapture(const QPixmap& capture,
           });
         dialog.exec();
     }
+#endif
 
     if (!(tasks & CR::UPLOAD)) {
         emit captureTaken(PixmapOutputBuffer);
