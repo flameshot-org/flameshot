@@ -296,6 +296,7 @@ void CaptureWidget::initButtons()
         // Remove irrelevant buttons from both lists
         for (auto* buttonList : { &allButtonTypes, &visibleButtonTypes }) {
             buttonList->removeOne(CaptureTool::TYPE_SAVE);
+            buttonList->removeOne(CaptureTool::TYPE_SAVE_TO_PDF);
             buttonList->removeOne(CaptureTool::TYPE_COPY);
             buttonList->removeOne(CaptureTool::TYPE_IMAGEUPLOADER);
             buttonList->removeOne(CaptureTool::TYPE_OPEN_APP);

@@ -21,8 +21,12 @@
 #include <QMessageBox>
 #include <QMimeData>
 #include <QStandardPaths>
+#include <QtPrintSupport/QPrinter>
 #include <qimagewriter.h>
 #include <qmimedatabase.h>
+#ifdef USE_PLUGIN_MANAGER
+#include "core/pluginmanager.h"
+#endif
 #if defined(Q_OS_MACOS)
 #include "src/widgets/capture/capturewidget.h"
 #endif
@@ -101,6 +105,22 @@ QString ShowSaveFileDialog(const QString& title, const QString& directory)
     }
 }
 
+QString ShowSaveToPDFDialog(const QString& title, const QString& directory)
+{
+    QFileDialog dialog(nullptr, title, directory);
+    dialog.setAcceptMode(QFileDialog::AcceptSave);
+
+    // Build string list of supported image formats
+    QStringList mimeTypeList;
+    mimeTypeList.append("application/pdf");
+    dialog.setMimeTypeFilters(mimeTypeList);
+    if (dialog.exec() == QDialog::Accepted) {
+        return dialog.selectedFiles().constFirst();
+    } else {
+        return {};
+    }
+}
+
 void saveToClipboardMime(const QPixmap& capture, const QString& imageType)
 {
     QByteArray array;
@@ -166,6 +186,54 @@ void saveToClipboard(const QPixmap& capture)
         QApplication::clipboard()->setPixmap(capture);
 #endif
     }
+}
+
+bool saveToPDF(const QPixmap& capture)
+{
+    bool okay = false;
+    QString savePath;
+    ConfigHandler config;
+    savePath = QDir::toNativeSeparators(
+      ShowSaveToPDFDialog(QObject::tr("Save screenshot To PDF"), savePath));
+    if (savePath.endsWith(".pdf", Qt::CaseInsensitive)) {
+        QPrinter printer(QPrinter::HighResolution);
+        printer.setOutputFormat(QPrinter::PdfFormat);
+        printer.setPageOrientation(QPageLayout::Landscape);
+        printer.setPageSize(QPageSize::A4);
+        printer.setOutputFileName(savePath);
+        QPainter painter(&printer);
+        QPixmap new_capture = capture.scaled(printer.width(),
+                                             printer.height(),
+                                             Qt::KeepAspectRatio,
+                                             Qt::SmoothTransformation);
+        QRect rect(
+          0, 0, new_capture.size().width(), new_capture.size().height());
+        painter.drawPixmap(rect, new_capture);
+        okay = true;
+    }
+
+    if (okay) {
+        QString pathNoFile =
+          savePath.left(savePath.lastIndexOf(QDir::separator()));
+
+        ConfigHandler().setSavePath(pathNoFile);
+
+        QString msg = QObject::tr("Capture saved as ") + savePath;
+        AbstractLogger().attachNotificationPath(savePath) << msg;
+
+        if (config.copyPathAfterSave()) {
+            FlameshotDaemon::copyToClipboard(
+              savePath, QObject::tr("Path copied to clipboard as ") + savePath);
+        }
+    } else {
+        QString msg = QObject::tr("Error trying to save as ") + savePath;
+        QMessageBox saveErrBox(
+          QMessageBox::Warning, QObject::tr("Save Error"), msg);
+        saveErrBox.setWindowIcon(QIcon(GlobalValues::iconPath()));
+        saveErrBox.exec();
+    }
+
+    return okay;
 }
 
 bool saveToFilesystemGUI(const QPixmap& capture)

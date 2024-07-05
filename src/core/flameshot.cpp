@@ -27,11 +27,19 @@
 #include <QDesktopServices>
 #include <QDesktopWidget>
 #include <QFile>
+#include <QFileDialog>
 #include <QMessageBox>
 #include <QThread>
 #include <QTimer>
+#include <QToolBar>
 #include <QUrl>
 #include <QVersionNumber>
+#include <QtPrintSupport/QPrintPreviewDialog>
+#include <QtPrintSupport/QPrinter>
+
+#ifdef USE_PLUGIN_MANAGER
+#include "core/pluginmanager.h"
+#endif
 
 #if defined(Q_OS_MACOS)
 #include <QScreen>
@@ -352,7 +360,12 @@ void Flameshot::exportCapture(const QPixmap& capture,
     int tasks = req.tasks(), mode = req.captureMode();
     QString path = req.path();
 
+    QPixmap PixmapOutputBuffer(capture);
+
     if (tasks & CR::PRINT_GEOMETRY) {
+#ifdef USE_PLUGIN_MANAGER
+        PluginManager::getInstance()->CallImagePost(PixmapOutputBuffer);
+#endif
         QByteArray byteArray;
         QBuffer buffer(&byteArray);
         QTextStream(stdout)
@@ -361,9 +374,12 @@ void Flameshot::exportCapture(const QPixmap& capture,
     }
 
     if (tasks & CR::PRINT_RAW) {
+#ifdef USE_PLUGIN_MANAGER
+        PluginManager::getInstance()->CallImagePost(PixmapOutputBuffer);
+#endif
         QByteArray byteArray;
         QBuffer buffer(&byteArray);
-        capture.save(&buffer, "PNG");
+        PixmapOutputBuffer.save(&buffer, "PNG");
         QFile file;
         file.open(stdout, QIODevice::WriteOnly);
 
@@ -372,19 +388,35 @@ void Flameshot::exportCapture(const QPixmap& capture,
     }
 
     if (tasks & CR::SAVE) {
+#ifdef USE_PLUGIN_MANAGER
+        PluginManager::getInstance()->CallImagePost(PixmapOutputBuffer);
+#endif
         if (req.path().isEmpty()) {
-            saveToFilesystemGUI(capture);
+            saveToFilesystemGUI(PixmapOutputBuffer);
         } else {
-            saveToFilesystem(capture, path);
+            saveToFilesystem(PixmapOutputBuffer, path);
         }
     }
 
+    if (tasks & CR::SAVE_TO_PDF) {
+#ifdef USE_PLUGIN_MANAGER
+        PluginManager::getInstance()->CallImageToPDFPost(PixmapOutputBuffer);
+#endif
+        saveToPDF(PixmapOutputBuffer);
+    }
+
     if (tasks & CR::COPY) {
-        FlameshotDaemon::copyToClipboard(capture);
+#ifdef USE_PLUGIN_MANAGER
+        PluginManager::getInstance()->CallImagePost(PixmapOutputBuffer);
+#endif
+        FlameshotDaemon::copyToClipboard(PixmapOutputBuffer);
     }
 
     if (tasks & CR::PIN) {
-        FlameshotDaemon::createPin(capture, selection);
+#ifdef USE_PLUGIN_MANAGER
+        PluginManager::getInstance()->CallImagePost(PixmapOutputBuffer);
+#endif
+        FlameshotDaemon::createPin(PixmapOutputBuffer, selection);
         if (mode == CR::SCREEN_MODE || mode == CR::FULLSCREEN_MODE) {
             AbstractLogger::info()
               << QObject::tr("Full screen screenshot pinned to screen");
@@ -392,6 +424,9 @@ void Flameshot::exportCapture(const QPixmap& capture,
     }
 
     if (tasks & CR::UPLOAD) {
+#ifdef USE_PLUGIN_MANAGER
+        PluginManager::getInstance()->CallImagePost(PixmapOutputBuffer);
+#endif
         if (!ConfigHandler().uploadWithoutConfirmation()) {
             auto* dialog = new ImgUploadDialog();
             if (dialog->exec() == QDialog::Rejected) {
@@ -399,7 +434,8 @@ void Flameshot::exportCapture(const QPixmap& capture,
             }
         }
 
-        ImgUploaderBase* widget = ImgUploaderManager().uploader(capture);
+        ImgUploaderBase* widget =
+          ImgUploaderManager().uploader(PixmapOutputBuffer);
         widget->show();
         widget->activateWindow();
         // NOTE: lambda can't capture 'this' because it might be destroyed later
@@ -416,8 +452,77 @@ void Flameshot::exportCapture(const QPixmap& capture,
           });
     }
 
+    if (tasks & CR::PRINT_SYSTEM) {
+        QPixmap pixmap = capture;
+#ifdef USE_PLUGIN_MANAGER
+        PluginManager::getInstance()->CallPrintPre(pixmap);
+#endif
+        QPrinter printer;
+        printer.setPageOrientation(QPageLayout::Orientation::Landscape);
+
+        QPrintPreviewDialog dialog(&printer);
+        dialog.setWindowFlag(Qt::WindowMinMaxButtonsHint);
+        dialog.setWindowTitle(tr("Print Document"));
+
+#if defined(Q_OS_WIN)
+        QToolBar* PrintPreviewToolbar = dialog.findChild<QToolBar*>();
+        QList<QAction*> List = PrintPreviewToolbar->actions();
+        int index = 0;
+        QSet<int> RemoveIndex;
+        RemoveIndex.insert(0);
+        RemoveIndex.insert(1);
+        RemoveIndex.insert(16);
+        RemoveIndex.insert(17);
+        RemoveIndex.insert(18);
+        const int PrintAction = 21;
+        QSet<QAction*> RemoveList;
+        foreach (auto it, List) {
+            if (RemoveIndex.find(index) != RemoveIndex.end()) {
+                RemoveList.insert(it);
+            }
+            if (index == PrintAction) {
+                it->setIcon(QIcon(":/img/material/black/content-print.svg"));
+            }
+            index++;
+        }
+        foreach (auto it, List) {
+            if (RemoveList.find(it) != RemoveList.end()) {
+                PrintPreviewToolbar->removeAction(it);
+            }
+        }
+
+#endif
+        connect(
+          &dialog,
+          &QPrintPreviewDialog::paintRequested,
+          [&](QPrinter* printer) {
+              QPainter painter(printer);
+              if ((pixmap.size().width() >= printer->width()) ||
+                  (pixmap.size().height() >= printer->height())) {
+                  pixmap = pixmap.scaled(printer->width(),
+                                         printer->height(),
+                                         Qt::KeepAspectRatio,
+                                         Qt::SmoothTransformation);
+              } else if (pixmap.size().width() >= (printer->width() / 2)) {
+                  pixmap = pixmap.scaledToWidth(printer->width(),
+                                                Qt::SmoothTransformation);
+                  if (pixmap.size().height() >= printer->height()) {
+                      pixmap = pixmap.scaledToHeight(printer->height(),
+                                                     Qt::SmoothTransformation);
+                  }
+              }
+
+              QRect rect((printer->width() - pixmap.size().width()) / 2,
+                         (printer->height() - pixmap.size().height()) / 2,
+                         pixmap.size().width(),
+                         pixmap.size().height());
+              painter.drawPixmap(rect, pixmap);
+          });
+        dialog.exec();
+    }
+
     if (!(tasks & CR::UPLOAD)) {
-        emit captureTaken(capture);
+        emit captureTaken(PixmapOutputBuffer);
     }
 }
 

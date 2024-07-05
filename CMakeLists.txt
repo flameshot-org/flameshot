@@ -69,6 +69,12 @@ option(USE_EXTERNAL_SINGLEAPPLICATION "Use external QtSingleApplication library"
 option(USE_LAUNCHER_ABSOLUTE_PATH "Use absolute path for the desktop launcher" ON)
 option(USE_WAYLAND_CLIPBOARD "USE KF Gui Wayland Clipboard" OFF)
 option(DISABLE_UPDATE_CHECKER "Disable check for updates" OFF)
+option(USE_PLUGIN_MANAGER "Activate the Plugin Manager" ON)
+option(USE_WAYLAND_GRIM "Activate the Wayland GRIM screenshot adapter" OFF)
+
+if (USE_PLUGIN_MANAGER)
+    set(PLUGIN_DIRECTORY "app_plugins" CACHE PATH "Setting the Plugin Manager Plugin Directory")
+endif()
 if (DISABLE_UPDATE_CHECKER)
   add_compile_definitions(DISABLE_UPDATE_CHECKER)
 endif ()
