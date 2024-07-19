@@ -41,6 +41,8 @@ bool saveToFilesystem(const QPixmap& capture,
     saveExtension = QFileInfo(completePath).suffix().toLower();
     if (saveExtension == "jpg" || saveExtension == "jpeg") {
         okay = capture.save(&file, nullptr, ConfigHandler().jpegQuality());
+    } else if (saveExtension == "webp") {
+        okay = capture.save(&file, nullptr, ConfigHandler().webpQuality());
     } else {
         okay = capture.save(&file);
     }
@@ -108,6 +110,8 @@ void saveToClipboardMime(const QPixmap& capture, const QString& imageType)
     QImageWriter imageWriter{ &buffer, imageType.toUpper().toUtf8() };
     if (imageType == "jpeg") {
         imageWriter.setQuality(ConfigHandler().jpegQuality());
+    } else if (imageType == "webp") {
+        imageWriter.setQuality(ConfigHandler().webpQuality());
     }
     imageWriter.write(capture.toImage());
 
@@ -206,6 +210,8 @@ bool saveToFilesystemGUI(const QPixmap& capture)
     saveExtension = QFileInfo(savePath).suffix().toLower();
     if (saveExtension == "jpg" || saveExtension == "jpeg") {
         okay = capture.save(&file, nullptr, ConfigHandler().jpegQuality());
+    } else if (saveExtension == "webp") {
+        okay = capture.save(&file, nullptr, ConfigHandler().webpQuality());
     } else {
         okay = capture.save(&file);
     }
