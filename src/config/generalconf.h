@@ -58,6 +58,7 @@ private slots:
     void setGeometryLocation(int index);
     void setSelGeoHideTime(int v);
     void setJpegQuality(int v);
+    void setWebPQuality(int v);
 
 private:
     const QString chooseFolder(const QString& currentPath = "");
@@ -92,6 +93,7 @@ private:
     void initSaveLastRegion();
     void initShowSelectionGeometry();
     void initJpegQuality();
+    void initWebPQuality();
 
     void _updateComponents(bool allowEmptySavePath);
 
@@ -136,4 +138,5 @@ private:
     QComboBox* m_selectGeometryLocation;
     QSpinBox* m_xywhTimeout;
     QSpinBox* m_jpegQuality;
+    QSpinBox* m_webpQuality;
 };
