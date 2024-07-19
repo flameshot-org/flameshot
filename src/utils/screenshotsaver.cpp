@@ -112,6 +112,7 @@ void saveToClipboardMime(const QPixmap& capture, const QString& imageType)
         imageWriter.setQuality(ConfigHandler().jpegQuality());
     } else if (imageType == "webp") {
         imageWriter.setQuality(ConfigHandler().webpQuality());
+        imageWriter.setOptimizedWrite(true);
     }
     imageWriter.write(capture.toImage());
 
