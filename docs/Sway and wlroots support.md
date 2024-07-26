@@ -45,7 +45,7 @@ for_window [app_id="flameshot"] border pixel 0, floating enable, fullscreen disa
 and add the following on your River config:
 
 ```
-riverctl float-filter-add "flameshot"
+riverctl rule-add -app-id "flameshot" float
 ```
 
 Otherwise, flameshot will not take all of the screen and tiles its window instead like a normal application. Note however, that some clipboard stuff is broken so it might be good to save your screenshot as a file while having it copied to a clipboard in case if clipboard does some weird stuff like not pasting the overall screenshot.
