@@ -98,7 +98,7 @@ jobs:
               symbol: jammy,
               arch: amd64
             }
-           - {
+          - {
               name: ubuntu-24.04,
               os: ubuntu,
               symbol: noble,
