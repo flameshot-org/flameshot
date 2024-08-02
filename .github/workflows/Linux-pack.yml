@@ -17,9 +17,9 @@ env:
   PRODUCT: flameshot
   RELEASE: 1
   # dockerfiles, see https://github.com/flameshot-org/flameshot-dockerfiles
-  # docker images, see https://hub.docker.com/r/flameshotorg/ci-building-images
-  # flameshotorg/ci-building-images or packpack/packpack
+  # docker images, see https://quay.io/repository/flameshot-org/ci-building
   DOCKER_REPO: quay.io/flameshot-org/ci-building
+  # building tool: https://github.com/flameshot-org/packpack
   PACKPACK_REPO: flameshot-org/packpack
   # available upload services: wetransfer.com, file.io, 0x0.st
   UPLOAD_SERVICE: wetransfer.com
@@ -27,7 +27,7 @@ env:
 jobs:
   deb-pack:
     name: Build deb on ${{ matrix.dist.name }} ${{ matrix.dist.arch }}
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
@@ -172,6 +172,7 @@ jobs:
           repository: ${{ env.PACKPACK_REPO }}
           path: tools
           ref: multiarch
+          set-safe-directory: $GITHUB_WORKSPACE/tools
       - name: Packaging on ${{ matrix.dist.name }} ${{ matrix.dist.arch }}
         env:
           OS: ${{ matrix.dist.os }}
@@ -238,7 +239,7 @@ jobs:
 
   rpm-pack:
     name: Build rpm on ${{ matrix.dist.name }} ${{ matrix.dist.arch }}
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
@@ -253,6 +254,12 @@ jobs:
               name: fedora-40,
               os: fedora,
               symbol: 40,
+              arch: x86_64
+            }
+          - {
+              name: opensuse-leap-15.5,
+              os: opensuse-leap,
+              symbol: 15.5,
               arch: x86_64
             }
           - {
@@ -291,9 +298,21 @@ jobs:
           repository: ${{ env.PACKPACK_REPO }}
           path: tools
           ref: master
+          set-safe-directory: $GITHUB_WORKSPACE/tools
       - name: Packaging on ${{ matrix.dist.name }} ${{ matrix.dist.arch }}
+        if: matrix.dist.os == 'fedora'
         run: |
-          cp -r $GITHUB_WORKSPACE/packaging/rpm $GITHUB_WORKSPACE
+          mkdir $GITHUB_WORKSPACE/rpm
+          cp $GITHUB_WORKSPACE/packaging/rpm/fedora/flameshot.spec $GITHUB_WORKSPACE/rpm
+          bash $GITHUB_WORKSPACE/tools/packpack
+        env:
+          OS: ${{ matrix.dist.os }}
+          DIST: ${{ matrix.dist.symbol }}
+      - name: Packaging on ${{ matrix.dist.name }} ${{ matrix.dist.arch }}
+        if: matrix.dist.os == 'opensuse-leap'
+        run: |
+          mkdir $GITHUB_WORKSPACE/rpm
+          cp $GITHUB_WORKSPACE/packaging/rpm/opensuse/flameshot.spec $GITHUB_WORKSPACE/rpm
           bash $GITHUB_WORKSPACE/tools/packpack
         env:
           OS: ${{ matrix.dist.os }}
@@ -352,17 +371,17 @@ jobs:
             ${{ github.workspace }}/build/${{ env.PRODUCT }}-*-lp${{ matrix.dist.symbol }}.${{ matrix.dist.arch }}.rpm.sha256sum
   appimage-pack:
     name: Build appimage on ${{ matrix.config.name }}
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
         config:
           - {
-              name: ubuntu-20.04,
+              name: ubuntu-22.04,
               os: ubuntu,
-              symbol: focal,
+              symbol: jammy,
               arch: amd64,
-              image_repo: flameshotorg/ci-building-images
+              image_repo: quay.io/flameshot-org/ci-building
             }
     container:
       image: ${{ matrix.config.image_repo }}:${{ matrix.config.os }}-${{ matrix.config.symbol }}
@@ -407,7 +426,9 @@ jobs:
             cmake \
             extra-cmake-modules \
             build-essential \
-            qt5-default \
+            qt5-qmake \
+            qtbase5-dev \
+            qtbase5-dev-tools \
             qttools5-dev-tools \
             qttools5-dev \
             libqt5dbus5 \
@@ -486,8 +507,8 @@ jobs:
             ${{ github.workspace }}/Flameshot-*.x86_64.AppImage.sha256sum
 
   flatpak-pack:
-    name: Build flatpak on ubuntu-20.04
-    runs-on: ubuntu-20.04
+    name: Build flatpak on ubuntu 22.04
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout Source code
         if: github.event_name == 'push'
@@ -552,8 +573,8 @@ jobs:
             ${{ github.workspace }}/org.flameshot.Flameshot-*.x86_64.flatpak.sha256sum
 
   snap-pack:
-    name: Build snap on ubuntu-20.04
-    runs-on: ubuntu-20.04
+    name: Build snap on ubuntu 22.04
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout Source code
         if: github.event_name == 'push'
