@@ -19,7 +19,7 @@ env:
   # dockerfiles, see https://github.com/flameshot-org/flameshot-dockerfiles
   # docker images, see https://hub.docker.com/r/flameshotorg/ci-building-images
   # flameshotorg/ci-building-images or packpack/packpack
-  DOCKER_REPO: flameshotorg/ci-building-images
+  DOCKER_REPO: quay.io/flameshot-org/ci-building
   PACKPACK_REPO: flameshot-org/packpack
   # available upload services: wetransfer.com, file.io, 0x0.st
   UPLOAD_SERVICE: wetransfer.com
@@ -69,6 +69,24 @@ jobs:
               arch: armhf
             }
           - {
+              name: debian-12,
+              os: debian,
+              symbol: bookworm,
+              arch: amd64
+            }
+          - {
+              name: debian-12,
+              os: debian,
+              symbol: bookworm,
+              arch: arm64
+            }
+          - {
+              name: debian-12,
+              os: debian,
+              symbol: bookworm,
+              arch: armhf
+            }
+          - {
               name: ubuntu-20.04,
               os: ubuntu,
               symbol: focal,
@@ -80,7 +98,13 @@ jobs:
               symbol: jammy,
               arch: amd64
             }
- 
+          - {
+              name: ubuntu-24.04,
+              os: ubuntu,
+              symbol: noble,
+              arch: amd64
+            }
+
     steps:
       - name: Enable Docker Experimental Features
         run: |
@@ -220,21 +244,21 @@ jobs:
       matrix:
         dist:
           - {
-              name: fedora-35,
+              name: fedora-39,
               os: fedora,
-              symbol: 35,
+              symbol: 39,
               arch: x86_64
             }
           - {
-              name: fedora-36,
+              name: fedora-40,
               os: fedora,
-              symbol: 36,
+              symbol: 40,
               arch: x86_64
             }
           - {
-              name: opensuse-leap-15.2,
+              name: opensuse-leap-15.6,
               os: opensuse-leap,
-              symbol: 15.2,
+              symbol: 15.6,
               arch: x86_64
             }
     steps:
