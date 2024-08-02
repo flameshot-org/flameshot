@@ -37,10 +37,23 @@
 // source: https://github.com/ksnip/ksnip/issues/416
 void wayland_hacks()
 {
-    // Workaround to https://github.com/ksnip/ksnip/issues/416
+    int suffixIndex;
     DesktopInfo info;
-    if (info.windowManager() == DesktopInfo::GNOME) {
-        qputenv("QT_QPA_PLATFORM", "xcb");
+
+    const char *qt_version = qVersion();
+
+    QVersionNumber targetVersion(5, 15, 2);
+    QString string(qt_version);
+    QVersionNumber currentVersion = QVersionNumber::fromString(string, &suffixIndex);
+
+    if (currentVersion < targetVersion) {
+        if (info.windowManager() == DesktopInfo::GNOME) {
+            qWarning() << "Qt versions lower than" << targetVersion.toString() << 
+                "on GNOME using Wayland have a bug when accessing the clipboard." <<
+                "Your version is" << currentVersion.toString() << "so we're forcing QT_QPA_PLATFORM to 'xcb'." << 
+                "To use native Wayland, please upgrade your Qt version to" << targetVersion.toString() << "or higher";
+            qputenv("QT_QPA_PLATFORM", "xcb");
+        }
     }
 }
 #endif
