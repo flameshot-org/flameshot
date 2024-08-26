@@ -184,7 +184,6 @@ int main(int argc, char* argv[])
         return qApp->exec();
     }
 
-#if !defined(Q_OS_WIN)
     /*--------------|
      * CLI parsing  |
      * ------------*/
@@ -610,6 +609,5 @@ int main(int argc, char* argv[])
     }
 finish:
 
-#endif
     return 0;
 }
