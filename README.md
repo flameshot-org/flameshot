@@ -152,6 +152,14 @@ A systray icon will be in your system's panel while Flameshot is running.
 Do a right click on the tray icon and you'll see some menu items to open the configuration window and the information window.
 Check out the About window to see all available shortcuts in the graphical capture mode.
 
+### Usage on Windows
+
+On Windows, `flameshot.exe` will behave as expected for all supported command-line arguments, 
+but it will not output any text to the console. This is problematic if, for example, you are 
+running `flameshot.exe -h`.
+
+If you require console output, run `flameshot-cli.exe` instead.
+
 ### CLI configuration
 
 You can use the graphical menu to configure Flameshot, but alternatively you can use your terminal or scripts to do so.
