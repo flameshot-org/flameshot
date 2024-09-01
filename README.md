@@ -354,7 +354,7 @@ There are packages available in the repository of some Linux distributions:
 - [Docker](https://github.com/ManuelLR/docker-flameshot)
 - [Windows](https://github.com/majkinetor/au-packages/tree/master/flameshot)
 
-### MacOS
+### macOS
 
 - [MacPorts](https://www.macports.org): `sudo port selfupdate && sudo port install flameshot`
 - [Homebrew](https://brew.sh): `brew install --cask flameshot`
@@ -459,9 +459,9 @@ pacman -S openssl ca-certificates
 nix-shell
 ```
 
-#### MacOS
+#### macOS
 
-First of all you need to install [brew](https://brew.sh) and than install dependencies
+First of all you need to install [brew](https://brew.sh) and than install the dependencies
 ```shell
 brew install qt5
 brew install cmake
@@ -475,24 +475,37 @@ After installing all the dependencies, finally run the following commands in the
 cmake -S . -B build && cmake --build build
 ```
 
-NOTE: for macOS you should replace command
+NOTE: For macOS you should replace the command
 
 ```shell
 cmake -S . -B build
 ```
 
-to
+with
 
 ```shell
 cmake -S . -B build -DQt5_DIR=$(brew --prefix qt5)/lib/cmake/Qt5
 ```
 
-When `cmake --build build` command completed you can launch flameshot from `project_folder/build/src` folder
+When the `cmake --build build` command has completed you can launch flameshot from the `project_folder/build/src` folder.
 
 ### Install
 
-Simply use `cmake --install build` with privileges.
-Note: If you install from source, there is no uninstaller, you will need to manually remove the files. Consider using [CMAKE_INSTALL_PREFIX](https://cmake.org/cmake/help/latest/variable/CMAKE_INSTALL_PREFIX.html) to install to a custom location for easy removal.
+Note that if you install from source, there _is no_ uninstaller, so consider installing to a custom directory.
+
+#### To install into a custom directory
+```bash
+# Best to use an absolute path here
+INST_DIR=/opt/flameshot
+# You may need to run this with privileges
+cmake --install build --prefix "$INST_DIR"
+```
+
+#### To install to the default install directory
+```bash
+# You may need to run this with privileges
+cmake --install build
+```
 
 ### FAQ
 
