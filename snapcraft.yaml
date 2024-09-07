@@ -25,7 +25,7 @@ apps:
       - kde-neon
     environment:
       DISABLE_WAYLAND: 1
-      XDG_DATA_DIRS: $SNAP/share:$XDG_DATA_DIRS
+      XDG_DATA_DIRS: $SNAP/usr/local/share:$XDG_DATA_DIRS
       QT_QPA_PLATFORMTHEME: gtk3
     slots: [dbus-flameshot]
     plugs:
@@ -48,9 +48,9 @@ parts:
     source-tag: 'v12.1.0'
     source-depth: 1
     cmake-parameters:
-       - -DFLAMESHOT_ICON=usr/local/share/icons/hicolor/scalable/apps/flameshot.svg
-       # This cannot be enabled until the KF5 toolkit in the snap is updated
-       - -DUSE_WAYLAND_CLIPBOARD=1
+      - -DCMAKE_BUILD_TYPE=Release
+      - -DFLAMESHOT_ICON=usr/local/share/icons/hicolor/scalable/apps/flameshot.svg
+      - -DUSE_WAYLAND_CLIPBOARD=1
     override-pull: |
       craftctl default
       craftctl set version=$(git describe --tags --abbrev=0)
@@ -60,19 +60,21 @@ parts:
       sed -i 's|^Exec=/usr/local/bin/flameshot|Exec=flameshot|' ${SNAPCRAFT_PART_INSTALL}/usr/local/share/applications/org.flameshot.Flameshot.desktop
       sed -i 's|^Icon=.*|Icon=${SNAP}/usr/local/share/icons/hicolor/scalable/apps/org.flameshot.Flameshot.svg|' ${CRAFT_PART_INSTALL}/usr/local/share/applications/org.flameshot.Flameshot.desktop
       sed -i 's/^\(Name\(\[.\+\]\)\?=.*\)$/\1 (Snappy Edition)/g' ${CRAFT_PART_INSTALL}/usr/local/share/applications/org.flameshot.Flameshot.desktop
-    stage-packages:
-      - dbus-x11
-      - libgtk2.0-0
+    # Remove those seems has no effects on app behavior
+    # Significantly reduces snap package size from 76MB to 1.5MB
+    #stage-packages:
+      #- dbus-x11
+      #- libgtk2.0-0
       #- openssl
       #- ca-certificates
-      - libxkbcommon0
+      #- libxkbcommon0
       #- ttf-ubuntu-font-family
-      - dmz-cursor-theme
-      - light-themes
-      - adwaita-icon-theme
-      - gnome-themes-standard
-      - shared-mime-info
-      - libgdk-pixbuf2.0-0
+      #- dmz-cursor-theme
+      #- light-themes
+      #- adwaita-icon-theme
+      #- gnome-themes-standard
+      #- shared-mime-info
+      #- libgdk-pixbuf2.0-0
 slots:
   # Depending on in which environment we're running we either need
   # to use the system or session DBus so we also need to have one
