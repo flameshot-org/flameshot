@@ -10,6 +10,13 @@
 #include "src/utils/globalvalues.h"
 #include "utils/desktopinfo.h"
 
+#include <QTemporaryFile>
+#include <QImageWriter>
+#include <QPixmap>
+#include <QByteArray>
+#include <QProcess>
+#include <QDebug>
+
 #if USE_WAYLAND_CLIPBOARD
 #include <KSystemClipboard>
 #endif
@@ -101,6 +108,42 @@ QString ShowSaveFileDialog(const QString& title, const QString& directory)
     }
 }
 
+void saveJpegToClipboardMacOS(const QPixmap& capture) {
+    // Convert QPixmap to JPEG data
+    QByteArray jpegData;
+    QBuffer buffer(&jpegData);
+    buffer.open(QIODevice::WriteOnly);
+
+    QImageWriter imageWriter(&buffer, "jpeg");
+    imageWriter.setQuality(ConfigHandler().jpegQuality()); // Set JPEG quality to whatever is in settings
+    if (!imageWriter.write(capture.toImage())) {
+        qWarning() << "Failed to write image to JPEG format.";
+        return;
+    }
+
+    // Save JPEG data to a temporary file
+    QTemporaryFile tempFile;
+    if (!tempFile.open()) {
+        qWarning() << "Failed to open temporary file for writing.";
+        return;
+    }
+    tempFile.write(jpegData);
+    tempFile.close();
+
+    // Use osascript to copy the contents of the file to clipboard
+    QProcess process;
+    QString script = QString(
+        "set the clipboard to (read (POSIX file \"%1\") as «class PNGf»)"
+    ).arg(tempFile.fileName());
+    process.start("osascript", QStringList() << "-e" << script);
+    if (!process.waitForFinished()) {
+        qWarning() << "Failed to execute AppleScript.";
+    }
+
+    // Clean up
+    tempFile.remove();
+}
+
 void saveToClipboardMime(const QPixmap& capture, const QString& imageType)
 {
     QByteArray array;
@@ -152,8 +195,11 @@ void saveToClipboard(const QPixmap& capture)
         AbstractLogger() << QObject::tr("Capture saved to clipboard.");
     }
     if (ConfigHandler().useJpgForClipboard()) {
-        // FIXME - it doesn't work on MacOS
+#ifdef Q_OS_MAC
+        saveJpegToClipboardMacOS(capture);
+#else
         saveToClipboardMime(capture, "jpeg");
+#endif
     } else {
         // Need to send message before copying to clipboard
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
