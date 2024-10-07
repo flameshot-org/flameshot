@@ -3,8 +3,10 @@
 
 #include "circlecounttool.h"
 #include "colorutils.h"
+#include "confighandler.h"
 #include <QPainter>
 #include <QPainterPath>
+#include <qdebug.h>
 
 namespace {
 #define PADDING_VALUE 2
@@ -130,11 +132,17 @@ void CircleCountTool::process(QPainter& painter, const QPixmap& pixmap)
         path.lineTo(points().first);
         painter.drawPath(path);
     }
-
     painter.setPen(contrastColor);
     painter.setBrush(antiContrastColor);
-    painter.drawEllipse(
-      points().first, bubble_size + PADDING_VALUE, bubble_size + PADDING_VALUE);
+    if(ConfigHandler().countingCircleNoContrast())
+    {
+        if(line.length() < bubble_size)
+        {
+            painter.setBrush(color());
+            painter.setPen(color());
+        }
+    }
+    painter.drawEllipse(points().first, bubble_size + PADDING_VALUE, bubble_size + PADDING_VALUE);
     painter.setBrush(color());
     painter.drawEllipse(points().first, bubble_size, bubble_size);
     QRect textRect = QRect(points().first.x() - bubble_size / 2,
