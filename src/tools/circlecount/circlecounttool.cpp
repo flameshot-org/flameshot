@@ -134,7 +134,7 @@ void CircleCountTool::process(QPainter& painter, const QPixmap& pixmap)
     }
     painter.setPen(contrastColor);
     painter.setBrush(antiContrastColor);
-    if(ConfigHandler().countingCircleNoContrast())
+    if(ConfigHandler().disableCountingCircleContrast())
     {
         if(line.length() < bubble_size)
         {

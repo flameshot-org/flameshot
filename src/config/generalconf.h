@@ -58,7 +58,7 @@ private slots:
     void setGeometryLocation(int index);
     void setSelGeoHideTime(int v);
     void setJpegQuality(int v);
-    void setCountingCircleNoContrast(bool checked);
+    void setDisableCountingCircleContrast(bool checked);
 
 private:
     const QString chooseFolder(const QString& currentPath = "");
@@ -93,7 +93,7 @@ private:
     void initSaveLastRegion();
     void initShowSelectionGeometry();
     void initJpegQuality();
-    void initCountingCircleNoContrast();
+    void initDisableCountingCircleContrast();
 
     void _updateComponents(bool allowEmptySavePath);
 
@@ -138,5 +138,5 @@ private:
     QComboBox* m_selectGeometryLocation;
     QSpinBox* m_xywhTimeout;
     QSpinBox* m_jpegQuality;
-    QCheckBox* m_countingCircleNoContrast;
+    QCheckBox* m_disableCountingCircleContrast;
 };
