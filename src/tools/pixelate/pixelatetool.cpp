@@ -87,23 +87,32 @@ void PixelateTool::process(QPainter& painter, const QPixmap& pixmap)
     std::normal_distribution<float> noise(0, 0.1f);
 
 
+    QPoint offset_top
+        (0, selectionScaled.topLeft().y() == 0 ? 0 : -1);
+    QPoint offset_bottom
+        (0, selectionScaled.bottomLeft().y() == pixmap.rect().bottomLeft().y() ? 0 : 1);
+    QPoint offset_left
+        (selectionScaled.topLeft().x() == 0 ? 0 : -1,0);
+    QPoint offset_right
+        (selectionScaled.topRight().x() == pixmap.rect().topRight().x() ? 0 : 1,0);
+
     // only values from the fringe will be used to compute the pseudo-pixelation
     std::array<QImage, 4> fringe = {
         // top fringe
-        pixmap.copy(QRect(selectionScaled.topLeft(),
-                    selectionScaled.topRight()))
+        pixmap.copy(QRect(selectionScaled.topLeft() + offset_top,
+                    selectionScaled.topRight() + offset_top))
             .toImage(),
         // bottom fringe
-        pixmap.copy(QRect(selectionScaled.bottomLeft(),
-                    selectionScaled.bottomRight()))
+        pixmap.copy(QRect(selectionScaled.bottomLeft() + offset_bottom,
+                    selectionScaled.bottomRight() + offset_bottom))
             .toImage(),
         // left fringe
-        pixmap.copy(QRect(selectionScaled.topLeft(),
-                    selectionScaled.bottomLeft()))
+        pixmap.copy(QRect(selectionScaled.topLeft() + offset_left,
+                    selectionScaled.bottomLeft() + offset_left))
             .toImage(),
         // right fringe
-        pixmap.copy(QRect(selectionScaled.topRight(),
-                    selectionScaled.bottomRight()))
+        pixmap.copy(QRect(selectionScaled.topRight() + offset_right,
+                    selectionScaled.bottomRight() + offset_right))
             .toImage()
     };
 
