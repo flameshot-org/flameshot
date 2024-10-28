@@ -9,6 +9,7 @@
 #include <QImage>
 #include <QPainter>
 #include <random>
+#include <array>
 
 PixelateTool::PixelateTool(QObject* parent)
   : AbstractTwoPointTool(parent)
