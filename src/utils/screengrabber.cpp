@@ -80,7 +80,16 @@ void ScreenGrabber::freeDesktopPortal(bool& ok, QPixmap& res)
             QUrl uri = map.value("uri").toString();
             QString uriString = uri.toLocalFile();
             res = QPixmap(uriString);
-            res.setDevicePixelRatio(qApp->devicePixelRatio());
+            QScreen* screen = QGuiAppCurrentScreen().currentScreen();
+            if (screen)
+            {
+                const auto screenRect = screen->geometry();
+                res.setDevicePixelRatio(res.height() * 1.0f / screenRect.height());
+            }
+            else
+            {
+                res.setDevicePixelRatio(qApp->devicePixelRatio());
+            }
             QFile imgFile(uriString);
             imgFile.remove();
         }
