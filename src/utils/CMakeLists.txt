@@ -8,6 +8,7 @@ target_sources(
           valuehandler.h
           request.h
           strfparse.h
+        backtrackutils.h
 )
 
 target_sources(
@@ -27,6 +28,7 @@ target_sources(
           history.cpp
           strfparse.cpp
           request.cpp
+        backtrackutils.cpp
 )
 
 IF (WIN32)
