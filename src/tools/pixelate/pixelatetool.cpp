@@ -31,7 +31,12 @@ CaptureTool::Type PixelateTool::type() const
 
 QString PixelateTool::description() const
 {
-    return tr("Set Pixelate as the paint tool");
+    return tr("Set Pixelate as the paint tool."
+              " Warning: pixelation is not a security tool!"
+              " Secrets - especially text - can be recovered from pixelated "
+              "areas in some situations."
+              " To securely hide contents from the screenshot use a black box "
+              "instead.");
 }
 
 QRect PixelateTool::boundingRect() const
