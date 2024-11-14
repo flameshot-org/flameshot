@@ -24,6 +24,9 @@ SystemNotification::SystemNotification(QObject* parent)
   , m_interface(nullptr)
 {
 #if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
+    if (!ConfigHandler().showDesktopNotification()) {
+        return;
+    }
     m_interface =
       new QDBusInterface(QStringLiteral("org.freedesktop.Notifications"),
                          QStringLiteral("/org/freedesktop/Notifications"),
