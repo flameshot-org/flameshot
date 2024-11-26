@@ -50,7 +50,7 @@ parts:
       git_hash="$(git rev-parse --short HEAD)"
       snapcraftctl set-version "${last_committed_tag}+git${git_revno}.${git_hash}"
     override-build: |
-      snapcraftctl build
+      craftctl default
       # Correct the Icon path
       sed -i 's|^Icon=.*|Icon=${SNAP}/usr/share/icons/hicolor/scalable/apps/org.flameshot.Flameshot.svg|' ${CRAFT_PART_INSTALL}/usr/share/applications/org.flameshot.Flameshot.desktop
       sed -i 's/^\(Name\(\[.\+\]\)\?=.*\)$/\1 (Snap Edition)/g' ${CRAFT_PART_INSTALL}/usr/share/applications/org.flameshot.Flameshot.desktop
