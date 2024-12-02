@@ -45,7 +45,7 @@ void wayland_hacks()
 }
 #endif
 
-void requestCaptureAndWait(const CaptureRequest& req)
+int requestCaptureAndWait(const CaptureRequest& req)
 {
     Flameshot* flameshot = Flameshot::instance();
     flameshot->requestCapture(req);
@@ -66,7 +66,7 @@ void requestCaptureAndWait(const CaptureRequest& req)
         AbstractLogger::info() << "Screenshot aborted.";
         qApp->exit(1);
     });
-    qApp->exec();
+    return qApp->exec();
 }
 
 QSharedMemory* guiMutexLock()
@@ -428,7 +428,7 @@ int main(int argc, char* argv[])
                 req.addSaveTask();
             }
         }
-        requestCaptureAndWait(req);
+        return requestCaptureAndWait(req);
     } else if (parser.isSet(fullArgument)) { // FULL
         reinitializeAsQApplication(argc, argv);
 
@@ -463,7 +463,7 @@ int main(int argc, char* argv[])
         if (!clipboard && path.isEmpty() && !raw && !upload) {
             req.addSaveTask();
         }
-        requestCaptureAndWait(req);
+        return requestCaptureAndWait(req);
     } else if (parser.isSet(screenArgument)) { // SCREEN
         reinitializeAsQApplication(argc, argv);
 
@@ -513,7 +513,7 @@ int main(int argc, char* argv[])
             req.addSaveTask();
         }
 
-        requestCaptureAndWait(req);
+        return requestCaptureAndWait(req);
     } else if (parser.isSet(configArgument)) { // CONFIG
         bool autostart = parser.isSet(autostartOption);
         bool filename = parser.isSet(filenameOption);
