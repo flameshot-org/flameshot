@@ -25,6 +25,7 @@
 #include "sizeincrease/sizeincreasetool.h"
 #include "text/texttool.h"
 #include "undo/undotool.h"
+#include "lockpick/lockpick.h"
 
 ToolFactory::ToolFactory(QObject* parent)
   : QObject(parent)
@@ -40,6 +41,7 @@ CaptureTool* ToolFactory::CreateTool(CaptureTool::Type t, QObject* parent)
         if_TYPE_return_TOOL(TYPE_PENCIL, PencilTool);
         if_TYPE_return_TOOL(TYPE_DRAWER, LineTool);
         if_TYPE_return_TOOL(TYPE_ARROW, ArrowTool);
+        if_TYPE_return_TOOL(TYPE_LOCKPICK, LockPick);
         if_TYPE_return_TOOL(TYPE_SELECTION, SelectionTool);
         if_TYPE_return_TOOL(TYPE_RECTANGLE, RectangleTool);
         if_TYPE_return_TOOL(TYPE_CIRCLE, CircleTool);
