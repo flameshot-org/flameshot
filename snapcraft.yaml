@@ -2,7 +2,7 @@
 
 name: flameshot
 adopt-info: flameshot
-base: core20
+base: core22
 summary: Powerful yet simple to use screenshot software
 description: |
   A powerful open source screenshot and annotation tool for Linux, Flameshot
@@ -10,17 +10,16 @@ description: |
   Lines, Arrows, Boxes, Circles, Highlighting, Blur. Additionally, you can
   customise the color, size and/or thickness of many of these image annotation
   tools.
-grade: stable  # must be 'stable' to release into candidate/stable channels
-confinement: strict  # use 'strict' once you have the right plugs and slots
-#confinement: devmode  # use 'strict' once you have the right plugs and slot
+grade: stable
+confinement: strict
 compression: lzo
 architectures:
   - build-on: amd64
 
 apps:
   flameshot:
-    command: usr/local/bin/flameshot
-    desktop: usr/local/share/applications/org.flameshot.Flameshot.desktop
+    command: usr/bin/flameshot
+    desktop: usr/share/applications/org.flameshot.Flameshot.desktop
     extensions:
       - kde-neon
     environment:
@@ -33,55 +32,29 @@ apps:
       - removable-media
       - network
       - network-bind
-      - opengl
-      - x11
-      - wayland
-      - desktop
-      - desktop-legacy
-      - unity7
 
 parts:
   flameshot:
-    build-snaps:
-      - kde-frameworks-5-99-qt-5-15-7-core20
     source: https://github.com/flameshot-org/flameshot.git
     plugin: cmake
     cmake-parameters:
-       - -DFLAMESHOT_ICON=/snap/flameshot/current/usr/local/share/icons/hicolor/scalable/apps/flameshot.svg
-       # This cannot be enabled until the KF5 toolkit in the snap is updated
-       #- -DUSE_WAYLAND_CLIPBOARD=1
+       - -DFLAMESHOT_ICON=/snap/flameshot/current/usr/share/icons/hicolor/scalable/apps/flameshot.svg
+       - -DCMAKE_INSTALL_PREFIX=/usr
+       - -DUSE_WAYLAND_CLIPBOARD=1
     source-type: git
     override-pull: |
-      snapcraftctl pull
+      craftctl default
       # remove release candidates
       last_committed_tag="$(git tag -l --sort=-v:refname | grep -v rc | head -1)"
       git_revno="$(git rev-list $(git describe --tags --abbrev=0)..HEAD --count)"
       git_hash="$(git rev-parse --short HEAD)"
       snapcraftctl set-version "${last_committed_tag}+git${git_revno}.${git_hash}"
     override-build: |
-      snapcraftctl build
+      craftctl default
       # Correct the Icon path
-      sed -i 's|^Exec=flameshot|Exec=/snap/bin/org.flameshot.Flameshot|' ${SNAPCRAFT_PART_INSTALL}/usr/local/share/applications/org.flameshot.Flameshot.desktop
-      sed -i 's|^Icon=.*|Icon=${SNAP}/usr/local/share/icons/hicolor/scalable/apps/org.flameshot.Flameshot.svg|' ${SNAPCRAFT_PART_INSTALL}/usr/local/share/applications/org.flameshot.Flameshot.desktop
-      sed -i 's/^\(Name\(\[.\+\]\)\?=.*\)$/\1 (Snappy Edition)/g' ${SNAPCRAFT_PART_INSTALL}/usr/local/share/applications/org.flameshot.Flameshot.desktop
-    build-packages:
-      - g++
-      - make
-      - qt5-default
-      - git
-    stage-packages:
-      - dbus-x11
-      - libgtk2.0-0
-      - openssl
-      - ca-certificates
-      - libxkbcommon0
-      - ttf-ubuntu-font-family
-      - dmz-cursor-theme
-      - light-themes
-      - adwaita-icon-theme
-      - gnome-themes-standard
-      - shared-mime-info
-      - libgdk-pixbuf2.0-0
+      sed -i 's|^Icon=.*|Icon=${SNAP}/usr/share/icons/hicolor/scalable/apps/org.flameshot.Flameshot.svg|' ${CRAFT_PART_INSTALL}/usr/share/applications/org.flameshot.Flameshot.desktop
+      sed -i 's/^\(Name\(\[.\+\]\)\?=.*\)$/\1 (Snap Edition)/g' ${CRAFT_PART_INSTALL}/usr/share/applications/org.flameshot.Flameshot.desktop
+
 slots:
   # Depending on in which environment we're running we either need
   # to use the system or session DBus so we also need to have one
