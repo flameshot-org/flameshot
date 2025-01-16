@@ -52,6 +52,7 @@ GeneralConf::GeneralConf(QWidget* parent)
     initCopyPathAfterSave();
     initCopyAndCloseAfterUpload();
     initUploadWithoutConfirmation();
+    initShowDialogAfterUpload();
     initHistoryConfirmationToDelete();
     initAntialiasingPinZoom();
     initUploadHistoryMax();
@@ -84,6 +85,7 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
     m_useJpgForClipboard->setChecked(config.useJpgForClipboard());
     m_copyOnDoubleClick->setChecked(config.copyOnDoubleClick());
     m_uploadWithoutConfirmation->setChecked(config.uploadWithoutConfirmation());
+    m_showDialogAfterUpload->setChecked(config.showDialogAfterUpload());
     m_historyConfirmationToDelete->setChecked(
       config.historyConfirmationToDelete());
 #if !defined(DISABLE_UPDATE_CHECKER)
@@ -672,6 +674,17 @@ void GeneralConf::initUploadWithoutConfirmation()
     m_scrollAreaLayout->addWidget(m_uploadWithoutConfirmation);
     connect(m_uploadWithoutConfirmation, &QCheckBox::clicked, [](bool checked) {
         ConfigHandler().setUploadWithoutConfirmation(checked);
+    });
+}
+
+void GeneralConf::initShowDialogAfterUpload()
+{
+    m_showDialogAfterUpload =
+      new QCheckBox(tr("Show dialog after upload"), this);
+    m_showDialogAfterUpload->setToolTip(tr("Show dialog after upload"));
+    m_scrollAreaLayout->addWidget(m_showDialogAfterUpload);
+    connect(m_showDialogAfterUpload, &QCheckBox::clicked, [](bool checked) {
+        ConfigHandler().setShowDialogAfterUpload(checked);
     });
 }
 

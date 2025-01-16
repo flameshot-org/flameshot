@@ -116,6 +116,7 @@ public:
     CONFIG_GETTER_SETTER(uploadWithoutConfirmation,
                          setUploadWithoutConfirmation,
                          bool)
+    CONFIG_GETTER_SETTER(showDialogAfterUpload, setShowDialogAfterUpload, bool)
     CONFIG_GETTER_SETTER(ignoreUpdateToVersion,
                          setIgnoreUpdateToVersion,
                          QString)

@@ -280,7 +280,7 @@ CaptureWidget::~CaptureWidget()
         Flameshot::instance()->exportCapture(
           pixmap(), geometry, m_context.request);
     } else {
-        emit Flameshot::instance()->captureFailed();
+        emit Flameshot::instance() -> captureFailed();
     }
 }
 
