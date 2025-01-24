@@ -401,7 +401,7 @@ Also you can open and build/debug the project in a C++ IDE. For example, in Qt C
 - Qt >= 5.9
   + Development tools
 - GCC >= 7.4
-- CMake >= 3.21
+- CMake >= 3.29
 
 #### Run-time
 
@@ -480,18 +480,18 @@ to install flameshot.
 export BUILD_DIR=build
 
 # Directory prefix where flameshot will be installed. If you are just building and don't want to
-# install, this environment variable will not have an effect.
+# install, comment this environment variable.
 # This excludes the bin/flameshot part of the install,
-# e.g. in /opt/flameshot/bin/flameshot, the INSTALL_PREFIX is /opt/flameshot
-# This must be an absolute path. Requires CMAKE 3.21.
-export INSTALL_PREFIX=$(realpath install)
+# e.g. in /opt/flameshot/bin/flameshot, the CMAKE_INSTALL_PREFIX is /opt/flameshot
+# This must be an absolute path. Requires CMAKE 3.29.
+export CMAKE_INSTALL_PREFIX=/opt/flameshot
 
 # Linux
-cmake -S . -B "$BUILD_DIR" --install-prefix "$INSTALL_PREFIX" \
+cmake -S . -B "$BUILD_DIR" \
     && cmake --build "$BUILD_DIR"
 
 #MacOS
-cmake -S . -B "$BUILD_DIR" --install-prefix  "$INSTALL_PREFIX" \
+cmake -S . -B "$BUILD_DIR" \
     -DQt5_DIR=$(brew --prefix qt5)/lib/cmake/Qt5 \
     && cmake --build "$BUILD_DIR"
 ```
@@ -503,12 +503,16 @@ When the `cmake --build` command has completed you can launch flameshot from the
 Note that if you install from source, there _is no_ uninstaller, so consider installing to a custom directory.
 
 #### To install into a custom directory
-For translations to work when installing in a custom directory, make sure you built flameshot with
-the `$INSTALL_PREFIX` set to the installation directory.
+Make sure you are using cmake `>= 3.29` and build flameshot with `$CMAKE_INSTALL_PREFIX` set to the
+installation directory. If this is not done, the translations won't be found when using a custom directory.
+Then, run the following:
 
 ```bash
+# !Build with CMAKE_INSTALL_PREFIX and use cmake >= 3.29! Using an older cmake will cause
+# installation into the default /usr/local dir.
+
 # You may need to run this with privileges
-cmake --install "$BUILD_DIR" --prefix "$INSTALL_PREFIX"
+cmake --install "$BUILD_DIR"
 ```
 
 #### To install to the default install directory
