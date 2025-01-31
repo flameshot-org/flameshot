@@ -16,7 +16,7 @@ public:
         KDE,
         OTHER,
         QTILE,
-        SWAY,
+        WLROOTS,
         HYPRLAND
     };
 
