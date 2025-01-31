@@ -82,6 +82,7 @@ jobs:
         with:
           name: MacOS-artifact
           path: ${{ github.workspace }}/build/src/flameshot.dmg
+          overwrite: true
 
       - name: Notarization status
         shell: bash
