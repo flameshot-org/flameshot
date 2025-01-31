@@ -14,6 +14,7 @@ public:
     {
         GNOME,
         KDE,
+        COSMIC,
         OTHER,
         QTILE,
         SWAY,
