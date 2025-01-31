@@ -78,7 +78,7 @@ jobs:
           echo "=====no operation for you can see link in the log console====="
 
       - name: Artifact Upload
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: MacOS-artifact
           path: ${{ github.workspace }}/build/src/flameshot.dmg
