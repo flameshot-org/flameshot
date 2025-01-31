@@ -73,6 +73,13 @@ if(FLAMESHOT_ICON)
 endif()
 
 if (WIN32)
+    add_executable(flameshot-cli)
+    target_sources(
+        flameshot-cli
+        PRIVATE
+        windows-cli.cpp)
+    set_target_properties(flameshot-cli PROPERTIES OUTPUT_NAME "flameshot-cli")
+    target_link_options(flameshot-cli PRIVATE /SUBSYSTEM:CONSOLE)
     set_property(TARGET flameshot PROPERTY WIN32_EXECUTABLE true)
     if (MSVC)
         target_compile_options(flameshot PRIVATE /source-charset:utf-8)
@@ -328,6 +335,10 @@ install(TARGETS flameshot
         EXPORT flameshot-targets
         BUNDLE DESTINATION ${CMAKE_INSTALL_BINDIR}
         RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
+if (WIN32)
+    install(TARGETS flameshot-cli
+            RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
+endif ()
 
 if (UNIX)
     # Install desktop files, completion and dbus files
