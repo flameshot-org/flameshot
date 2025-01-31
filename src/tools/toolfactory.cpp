@@ -17,8 +17,10 @@
 #include "pencil/penciltool.h"
 #include "pin/pintool.h"
 #include "pixelate/pixelatetool.h"
+#include "print/printtool.h"
 #include "rectangle/rectangletool.h"
 #include "redo/redotool.h"
+#include "save-to-pdf/save-to-pdf.h"
 #include "save/savetool.h"
 #include "selection/selectiontool.h"
 #include "sizedecrease/sizedecreasetool.h"
@@ -48,6 +50,7 @@ CaptureTool* ToolFactory::CreateTool(CaptureTool::Type t, QObject* parent)
         if_TYPE_return_TOOL(TYPE_UNDO, UndoTool);
         if_TYPE_return_TOOL(TYPE_COPY, CopyTool);
         if_TYPE_return_TOOL(TYPE_SAVE, SaveTool);
+        if_TYPE_return_TOOL(TYPE_SAVE_TO_PDF, SaveToPDFTool);
         if_TYPE_return_TOOL(TYPE_EXIT, ExitTool);
         if_TYPE_return_TOOL(TYPE_IMAGEUPLOADER, ImgUploaderTool);
 #if !defined(Q_OS_MACOS)
@@ -55,6 +58,7 @@ CaptureTool* ToolFactory::CreateTool(CaptureTool::Type t, QObject* parent)
 #endif
         if_TYPE_return_TOOL(TYPE_PIXELATE, PixelateTool);
         if_TYPE_return_TOOL(TYPE_REDO, RedoTool);
+        if_TYPE_return_TOOL(TYPE_PRINT, PrintTool);
         if_TYPE_return_TOOL(TYPE_PIN, PinTool);
         if_TYPE_return_TOOL(TYPE_TEXT, TextTool);
         if_TYPE_return_TOOL(TYPE_CIRCLECOUNT, CircleCountTool);

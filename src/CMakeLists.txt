@@ -10,10 +10,19 @@ find_package(
         DBus
         LinguistTools)
 
+if (USE_PRINTER_SUPPORT)
+    find_package(PrintSupport)
+endif()
+
 if (USE_WAYLAND_CLIPBOARD)
     find_package(KF5GuiAddons)
 endif()
 
+if (USE_PLUGIN_MANAGER)
+    find_package(yaml-cpp)
+endif()
+
+set(USE_PLUGIN_MANAGER ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
@@ -218,6 +227,10 @@ target_link_libraries(
 
 )
 
+if (USE_PRINTER_SUPPORT)
+    target_link_libraries(flameshot Qt5::PrintSupport)
+endif()
+
 if (USE_WAYLAND_CLIPBOARD)
   if(!USE_WAYLAND_GRIM)
     message(WARNING "You activated the USE_WAYLAND_CLIPBOARD option, but did not activate the USE_WAYLAND_GRIM option. Flameshot will use the dbus protocol to support wayland. If you use wlroots-based wayland, it is recommended to enable USE_WAYLAND_GRIM")
@@ -228,6 +241,10 @@ endif()
 
 if (USE_WAYLAND_GRIM)
     target_compile_definitions(flameshot PRIVATE USE_WAYLAND_GRIM=1)
+endif()
+
+if (USE_PRINTER_SUPPORT)
+    target_compile_definitions(flameshot PRIVATE USE_PRINTER_SUPPORT=1)
 endif()
 
 if (APPLE)
