@@ -76,7 +76,7 @@ beforehand, to ascertain that the RFC may be desirable; having a consistent
 impact on the project requires concerted effort toward consensus-building.
 
 The most common preparations for writing and submitting an RFC include talking
-the idea over on our [official Slack server](flameshotworkspace.slack.com) or opening an issue on github for discussion.
+the idea over on our [official Matrix Space](https://matrix.to/#/#flameshot-org:matrix.org) in the [Developers](https://matrix.to/#/!AYbNXDGTDwApLwzkNg:feneas.org?via=kde.org&via=matrix.org&via=ryan77627.xyz), or opening an issue on [Github Discussions](https://github.com/flameshot-org/flameshot/discussions).
 
 ## What the process is
 
