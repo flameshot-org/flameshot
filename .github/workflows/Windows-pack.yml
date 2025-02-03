@@ -207,3 +207,4 @@ jobs:
         with:
           name: Windows-${{ matrix.config.arch }}-${{ matrix.type }}-artifact
           path: ${{ github.workspace }}/build/Package/*
+          overwrite: true
