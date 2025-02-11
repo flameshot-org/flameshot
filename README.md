@@ -492,7 +492,7 @@ cmake -S . -B "$BUILD_DIR" \
 
 #MacOS
 cmake -S . -B "$BUILD_DIR" \
-    -DQt5_DIR=$(brew --prefix qt5)/lib/cmake/Qt5 \
+    -DQt5_DIR="$(brew --prefix qt5)/lib/cmake/Qt5" \
     && cmake --build "$BUILD_DIR"
 ```
 
