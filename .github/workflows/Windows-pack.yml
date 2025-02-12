@@ -30,8 +30,8 @@ jobs:
       VCINSTALLDIR: C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/
       Qt5_DIR: ${{ github.workspace }}\build\Qt\${{ matrix.qt_ver }}\${{ matrix.config.qt_arch_install }}\lib\cmake\Qt5\
       QTDIR: ${{ github.workspace }}\build\Qt\${{ matrix.qt_ver }}\${{ matrix.config.qt_arch_install }}\
-      # 2022.06.15.1
-      VCPKG_VERSION: cef0b3ec767df6e83806899fe9525f6cf8d7bc91
+      # 2024.03.25
+      VCPKG_VERSION: a34c873a9717a888f58dc05268dea15592c2f0ff
       VCPKG_PACKAGES: openssl-windows
       OPENSSL_ROOT_DIR: ${{ github.workspace }}\vcpkg\installed\${{ matrix.config.vcpkg_triplet }}\
     strategy:
