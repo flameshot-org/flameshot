@@ -120,8 +120,9 @@ CaptureWidget* Flameshot::gui(const CaptureRequest& req)
 #ifdef Q_OS_WIN
         m_captureWindow->show();
 #elif defined(Q_OS_MACOS)
-        // In "Emulate fullscreen mode"
-        m_captureWindow->showFullScreen();
+        // Cannot use showFullScreen as macOS plays an animation on open and
+        // close which does not seem to be removable.
+        m_captureWindow->show();
         m_captureWindow->activateWindow();
         m_captureWindow->raise();
 #else
