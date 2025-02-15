@@ -103,6 +103,7 @@ set(FLAMESHOT_TS_FILES
       ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_cs.ts
       ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_de_DE.ts
       ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_el.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_en.ts
       ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_es.ts
       ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_eu.ts
       ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_fa.ts

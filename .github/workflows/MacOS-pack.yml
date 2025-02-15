@@ -4,15 +4,17 @@ on:
   push:
     branches:
       - master
-      - feature/RND-680-macos-.dmg-package-build
+      - fix*
     paths-ignore:
       - 'README.md'
       - 'LICENSE'
+      - 'docs/**'
 
   pull_request:
     paths-ignore:
       - 'README.md'
       - 'LICENSE'
+      - 'docs/**'
 
 env:
   PRODUCT: flameshot
@@ -78,10 +80,11 @@ jobs:
           echo "=====no operation for you can see link in the log console====="
 
       - name: Artifact Upload
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: MacOS-artifact
           path: ${{ github.workspace }}/build/src/flameshot.dmg
+          overwrite: true
 
       - name: Notarization status
         shell: bash
