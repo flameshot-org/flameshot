@@ -332,17 +332,23 @@ void ConfigHandler::setToolSize(CaptureTool::Type toolType, int size)
 {
     if (toolType == CaptureTool::TYPE_TEXT) {
         setDrawFontSize(size);
+        m_settings.setValue("ToolSize/Text", size); // Store in QSettings
     } else if (toolType != CaptureTool::NONE) {
         setDrawThickness(size);
+        m_settings.setValue("ToolSize/Draw", size); // Persist size in QSettings
     }
 }
 
 int ConfigHandler::toolSize(CaptureTool::Type toolType)
 {
     if (toolType == CaptureTool::TYPE_TEXT) {
-        return drawFontSize();
-    } else {
-        return drawThickness();
+        // Retrieve the text tool size from QSettings (fallback to default if not set)
+        int textSize = m_settings.value("ToolSize/Text", drawFontSize()).toInt();
+        return textSize;
+    } else if (toolType != CaptureTool::NONE) {
+        // Retrieve the draw tool size from QSettings (fallback to default if not set)
+        int drawSize = m_settings.value("ToolSize/Draw", drawThickness()).toInt();
+        return drawSize;
     }
 }
 
@@ -356,13 +362,21 @@ QString ConfigHandler::filenamePatternDefault()
 void ConfigHandler::setDefaultSettings()
 {
     foreach (const QString& key, m_settings.allKeys()) {
-        if (isShortcut(key)) {
+        if (isShortcut(key) || key.startsWith("ToolSize/")) {
             // Do not reset Shortcuts
             continue;
         }
         m_settings.remove(key);
     }
     m_settings.sync();
+
+    // Ensure tool sizes have default values if missing
+    if (!m_settings.contains("ToolSize/Text")) {
+        m_settings.setValue("ToolSize/Text", drawFontSize());  // Use the existing default method
+    }
+    if (!m_settings.contains("ToolSize/Draw")) {
+        m_settings.setValue("ToolSize/Draw", drawThickness());  // Use the existing default method
+    }
 }
 
 QString ConfigHandler::configFilePath() const
