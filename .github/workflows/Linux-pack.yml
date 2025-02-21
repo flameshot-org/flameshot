@@ -142,7 +142,7 @@ jobs:
           esac
           if [ -n "${QEMU_ARCH}" ]; then
             sudo apt-get -y -qq update
-            sudo apt-get -y install qemu binfmt-support qemu-user-static
+            sudo apt-get -y install binfmt-support qemu-user-static
             docker run --rm --privileged multiarch/qemu-user-static --reset --persistent yes --credential yes
             cat /proc/sys/fs/binfmt_misc/qemu-${QEMU_ARCH}
           fi
