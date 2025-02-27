@@ -14,6 +14,8 @@ class QLineEdit;
 class QSpinBox;
 class QComboBox;
 
+class BacktrackConfigGroup;
+
 class GeneralConf : public QWidget
 {
     Q_OBJECT
@@ -93,6 +95,8 @@ private:
     void initShowSelectionGeometry();
     void initJpegQuality();
 
+    void initBacktrackConfig();
+
     void _updateComponents(bool allowEmptySavePath);
 
     // class members
@@ -136,4 +140,6 @@ private:
     QComboBox* m_selectGeometryLocation;
     QSpinBox* m_xywhTimeout;
     QSpinBox* m_jpegQuality;
+
+    BacktrackConfigGroup* m_backTrackingConfig;
 };
