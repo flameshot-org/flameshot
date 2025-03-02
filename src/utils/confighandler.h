@@ -74,6 +74,7 @@ public:
     CONFIG_GETTER_SETTER(userColors, setUserColors, QVector<QColor>);
     CONFIG_GETTER_SETTER(savePath, setSavePath, QString)
     CONFIG_GETTER_SETTER(savePathFixed, setSavePathFixed, bool)
+    CONFIG_GETTER_SETTER(randomizePixelation, setRandomizePixelation, bool)
     CONFIG_GETTER_SETTER(uiColor, setUiColor, QColor)
     CONFIG_GETTER_SETTER(contrastUiColor, setContrastUiColor, QColor)
     CONFIG_GETTER_SETTER(drawColor, setDrawColor, QColor)

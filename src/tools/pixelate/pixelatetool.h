@@ -24,6 +24,7 @@ public:
 
 protected:
     CaptureTool::Type type() const override;
+    QImage randomizePixels(const QImage& image);
 
 public slots:
     void pressed(CaptureContext& context) override;
