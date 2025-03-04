@@ -614,10 +614,6 @@ void GeneralConf::initUseJpgForClipboard()
       tr("Use lossy JPG format for clipboard (lossless PNG default)"));
     m_scrollAreaLayout->addWidget(m_useJpgForClipboard);
 
-#if defined(Q_OS_MACOS)
-    // FIXME - temporary fix to disable option for MacOS
-    m_useJpgForClipboard->hide();
-#endif
     connect(m_useJpgForClipboard,
             &QCheckBox::clicked,
             this,
