@@ -32,6 +32,8 @@ PinWidget::PinWidget(const QPixmap& pixmap,
   , m_layout(new QVBoxLayout(this))
   , m_label(new QLabel())
   , m_shadowEffect(new QGraphicsDropShadowEffect(this))
+  , m_minSize(std::min(std::min(MIN_SIZE, static_cast<qreal>(pixmap.width())),
+                       static_cast<qreal>(pixmap.height())))
 {
     setWindowIcon(QIcon(GlobalValues::iconPath()));
     setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint);
@@ -102,6 +104,7 @@ void PinWidget::closePin()
     update();
     close();
 }
+
 bool PinWidget::scrollEvent(QWheelEvent* event)
 {
     const auto phase = event->phase();
@@ -115,9 +118,23 @@ bool PinWidget::scrollEvent(QWheelEvent* event)
         if (angle.y() == 0) {
             return true;
         }
+
+        const bool ctrl =
+          event->modifiers().testFlag(Qt::KeyboardModifier::ControlModifier);
+        const bool shift =
+          event->modifiers().testFlag(Qt::KeyboardModifier::ShiftModifier);
+        qreal modifiersFactor = 1.0;
+        if (ctrl && !shift) {
+            modifiersFactor = 5.0;
+        } else if (shift && !ctrl) {
+            modifiersFactor = 0.2;
+        }
+
+        const qreal scaledStep =
+          m_currentStepScaleFactor * m_scaleFactor * modifiersFactor * STEP;
         m_currentStepScaleFactor = angle.y() > 0
-                                     ? m_currentStepScaleFactor + STEP
-                                     : m_currentStepScaleFactor - STEP;
+                                     ? m_currentStepScaleFactor + scaledStep
+                                     : m_currentStepScaleFactor - scaledStep;
         m_expanding = m_currentStepScaleFactor >= 1.0;
     }
 #if defined(Q_OS_MACOS)
@@ -193,6 +210,7 @@ void PinWidget::keyPressEvent(QKeyEvent* event)
 
     setWindowOpacity(m_opacity);
 }
+
 bool PinWidget::gestureEvent(QGestureEvent* event)
 {
     if (QGesture* pinch = event->gesture(Qt::PinchGesture)) {
@@ -256,12 +274,17 @@ void PinWidget::paintEvent(QPaintEvent* event)
                                      : Qt::FastTransformation;
         const qreal iw = m_pixmap.width();
         const qreal ih = m_pixmap.height();
-        const qreal nw = qBound(MIN_SIZE,
+        const qreal nw = qBound(m_minSize,
                                 iw * m_currentStepScaleFactor * m_scaleFactor,
                                 static_cast<qreal>(maximumWidth()));
-        const qreal nh = qBound(MIN_SIZE,
+        const qreal nh = qBound(m_minSize,
                                 ih * m_currentStepScaleFactor * m_scaleFactor,
                                 static_cast<qreal>(maximumHeight()));
+
+        if (nw == m_minSize || nh == m_minSize) {
+            m_currentStepScaleFactor = 1.0;
+            m_scaleFactor = std::min(nw, nh) / std::min(iw, ih);
+        }
 
         const QPixmap pix = m_pixmap.scaled(nw, nh, aspectRatio, transformType);
 
