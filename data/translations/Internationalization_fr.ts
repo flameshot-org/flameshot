@@ -1108,7 +1108,7 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../src/config/generalconf.cpp" line="456"/>
         <source>After copying the screenshot, save it to a file as well</source>
-        <translation>Après la copie de la capture d&apos;écran, l&apos;enregistrée aussi dans un fichier</translation>
+        <translation>Après la copie de la capture d&apos;écran, l&apos;enregistrer aussi dans un fichier</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="463"/>
