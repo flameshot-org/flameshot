@@ -24,8 +24,6 @@ env:
   DOCKER_REPO: quay.io/flameshot-org/ci-building
   # building tool: https://github.com/flameshot-org/packpack
   PACKPACK_REPO: flameshot-org/packpack
-  # available upload services: wetransfer.com, file.io, 0x0.st
-  UPLOAD_SERVICE: wetransfer.com
 
 jobs:
   deb-pack:
@@ -148,22 +146,14 @@ jobs:
           cp -r $GITHUB_WORKSPACE/packaging/debian $GITHUB_WORKSPACE
           bash $GITHUB_WORKSPACE/tools/packpack
           mv $GITHUB_WORKSPACE/build/${PRODUCT}_${VERSION}-${RELEASE}_${{ matrix.dist.arch }}.deb $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.${{ matrix.dist.name }}.${{ matrix.dist.arch }}.deb
-      - name: SHA256Sum of ${{ matrix.dist.name }} ${{ matrix.dist.arch }} package(daily build)
+      - name: SHA256Sum of ${{ matrix.dist.name }} ${{ matrix.dist.arch }} package
         run: |
           cd "$GITHUB_WORKSPACE/build/" || { >&2 echo "Cannot cd to '$GITHUB_WORKSPACE/build/'!"; exit 11 ; }
           sha256sum ${PRODUCT}-${VERSION}-${RELEASE}.${{ matrix.dist.name }}.${{ matrix.dist.arch }}.deb | tee ${PRODUCT}-${VERSION}-${RELEASE}.${{ matrix.dist.name }}.${{ matrix.dist.arch }}.deb.sha256sum
-          echo "=============${{ matrix.dist.name }} ${{ matrix.dist.arch }} sha256sum download link============"
-          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh ${PRODUCT}-${VERSION}-${RELEASE}.${{ matrix.dist.name }}.${{ matrix.dist.arch }}.deb.sha256sum)
-          echo "========no operation for you can see link in the log console======="
-      - name: Upload ${{ matrix.dist.name }} ${{ matrix.dist.arch }} package(daily build)
-        run: |
-          echo "================${{ matrix.dist.name }} ${{ matrix.dist.arch }} download link==============="
-          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.${{ matrix.dist.name }}.${{ matrix.dist.arch }}.deb)
-          echo "======no operation for you can see link in the log console====="
       - name: Artifact Upload
         uses: actions/upload-artifact@v4
         with:
-          name: Linux-distribution-artifact
+          name: ${{ matrix.dist.name }}-${{ matrix.dist.arch }}-artifact
           path: |
             ${{ github.workspace }}/build/${{ env.PRODUCT }}-*-${{ env.RELEASE }}.${{ matrix.dist.name }}.${{ matrix.dist.arch }}.deb
             ${{ github.workspace }}/build/${{ env.PRODUCT }}-*-${{ env.RELEASE }}.${{ matrix.dist.name }}.${{ matrix.dist.arch }}.deb.sha256sum
@@ -250,40 +240,22 @@ jobs:
           rm -f ${{ github.workspace }}/build/${{ env.PRODUCT }}-debugsource-*.rpm
           rm -f ${{ github.workspace }}/build/${{ env.PRODUCT }}-*.src.rpm
           rm -f ${{ github.workspace }}/build/build.log
-      - name: SHA256Sum of ${{ matrix.dist.name }} ${{ matrix.dist.arch }} package(daily build)
+      - name: SHA256Sum of ${{ matrix.dist.name }} ${{ matrix.dist.arch }} package
         if: matrix.dist.os == 'fedora'
         run: |
           cd "$GITHUB_WORKSPACE/build/" || { >&2 echo "Cannot cd to '$GITHUB_WORKSPACE/build/'!"; exit 11 ; }
           sha256sum ${PRODUCT}-${VERSION}-${RELEASE}.fc*.${{ matrix.dist.arch }}.rpm | tee ${PRODUCT}-${VERSION}-${RELEASE}.fc${{ matrix.dist.symbol }}.${{ matrix.dist.arch }}.rpm.sha256sum
-          echo "============${{ matrix.dist.name }} ${{ matrix.dist.arch }} sha256sum download link============"
-          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh ${PRODUCT}-${VERSION}-${RELEASE}.fc*.${{ matrix.dist.arch }}.rpm.sha256sum)
-          echo "=======no operation for you can see link in the log console======="
-      - name: SHA256Sum of ${{ matrix.dist.name }} ${{ matrix.dist.arch }} package(daily build)
+      - name: SHA256Sum of ${{ matrix.dist.name }} ${{ matrix.dist.arch }} package
         if: matrix.dist.os == 'opensuse-leap'
         run: |
           mv $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-lp*.${{ matrix.dist.arch }}.rpm $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}-lp${{ matrix.dist.symbol }}.${{ matrix.dist.arch }}.rpm
           cd "$GITHUB_WORKSPACE/build/" || { >&2 echo "Cannot cd to '$GITHUB_WORKSPACE/build/'!"; exit 11 ; }
           sha256sum ${PRODUCT}-${VERSION}-${RELEASE}-lp${{ matrix.dist.symbol }}.${{ matrix.dist.arch }}.rpm | tee ${PRODUCT}-${VERSION}-${RELEASE}-lp${{ matrix.dist.symbol }}.${{ matrix.dist.arch }}.rpm.sha256sum
-          echo "============${{ matrix.dist.name }} ${{ matrix.dist.arch }} sha256sum download link==========="
-          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh ${PRODUCT}-${VERSION}-${RELEASE}-lp${{ matrix.dist.symbol }}.${{ matrix.dist.arch }}.rpm.sha256sum)
-          echo "=======no operation for you can see link in the log console======"
-      - name: Upload ${{ matrix.dist.name }} ${{ matrix.dist.arch }} package(daily build)
-        if: matrix.dist.os == 'fedora'
-        run: |
-          echo "================${{ matrix.dist.name }} ${{ matrix.dist.arch }} download link==============="
-          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.fc*.${{ matrix.dist.arch }}.rpm)
-          echo "======no operation for you can see link in the log console====="
-      - name: Upload ${{ matrix.dist.name }} ${{ matrix.dist.arch }} package(daily build)
-        if: matrix.dist.os == 'opensuse-leap'
-        run: |
-          echo "================${{ matrix.dist.name }} ${{ matrix.dist.arch }} download link==============="
-          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}-lp${{ matrix.dist.symbol }}.${{ matrix.dist.arch }}.rpm)
-          echo "======no operation for you can see link in the log console====="
       - name: Artifact Upload
         if: matrix.dist.os == 'fedora'
         uses: actions/upload-artifact@v4
         with:
-          name: Linux-distribution-artifact
+          name: ${{ matrix.dist.name }}-${{ matrix.dist.arch }}-artifact
           path: |
             ${{ github.workspace }}/build/
           overwrite: true
@@ -292,7 +264,7 @@ jobs:
         if: matrix.dist.os == 'opensuse-leap'
         uses: actions/upload-artifact@v4
         with:
-          name: Linux-distribution-artifact
+          name: ${{ matrix.dist.name }}-${{ matrix.dist.arch }}-artifact
           path: |
             ${{ github.workspace }}/build/${{ env.PRODUCT }}-*-lp${{ matrix.dist.symbol }}.${{ matrix.dist.arch }}.rpm
             ${{ github.workspace }}/build/${{ env.PRODUCT }}-*-lp${{ matrix.dist.symbol }}.${{ matrix.dist.arch }}.rpm.sha256sum
@@ -415,22 +387,14 @@ jobs:
           mv $GITHUB_WORKSPACE/Flameshot-${VERSION}-x86_64.AppImage $GITHUB_WORKSPACE/Flameshot-${VERSION}.x86_64.AppImage
 
 
-      - name: SHA256Sum of appimage package(daily build)
+      - name: SHA256Sum of appimage package
         run: |
           cd "$GITHUB_WORKSPACE/" || { >&2 echo "Cannot cd to '$GITHUB_WORKSPACE/'!"; exit 11 ; }
           sha256sum Flameshot-${VERSION}.x86_64.AppImage | tee Flameshot-${VERSION}.x86_64.AppImage.sha256sum
-          echo "================appimage sha256sum download link==============="
-          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh Flameshot-${VERSION}.x86_64.AppImage.sha256sum)
-          echo "======no operation for you can see link in the log console====="
-      - name: Upload appimage package for daily build
-        run: |
-          echo "====================appimage download link====================="
-          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/Flameshot-${VERSION}.x86_64.AppImage)
-          echo "======no operation for you can see link in the log console====="
       - name: Artifact Upload
         uses: actions/upload-artifact@v4
         with:
-          name: Linux-distribution-artifact
+          name: appimage-x86_64-artifact
           path: |
             ${{ github.workspace }}/Flameshot-*.x86_64.AppImage
             ${{ github.workspace }}/Flameshot-*.x86_64.AppImage.sha256sum
@@ -482,22 +446,14 @@ jobs:
           flatpak-builder --user --disable-rofiles-fuse --repo=repo --force-clean flatpak_app ${MANIFEST_PATH} --install-deps-from=flathub
           flatpak build-bundle repo ${BUNDLE} --runtime-repo=${RUNTIME_REPO} ${APP_ID} ${BRANCH}
           mv $GITHUB_WORKSPACE/org.flameshot.Flameshot_${VERSION}_x86_64.flatpak $GITHUB_WORKSPACE/org.flameshot.Flameshot-${VERSION}.x86_64.flatpak
-      - name: SHA256Sum of flatpak package(daily build)
+      - name: SHA256Sum of flatpak package
         run: |
           cd "$GITHUB_WORKSPACE/" || { >&2 echo "Cannot cd to '$GITHUB_WORKSPACE/'!"; exit 11 ; }
           sha256sum org.flameshot.Flameshot-${VERSION}.x86_64.flatpak | tee org.flameshot.Flameshot-${VERSION}.x86_64.flatpak.sha256sum
-          echo "================flatpak sha256sum download link===================="
-          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh org.flameshot.Flameshot-${VERSION}.x86_64.flatpak.sha256sum)
-          echo "========no operation for you can see link in the log console======="
-      - name: Upload flatpak package(daily build)
-        run: |
-          echo "=====================flatpak download link====================="
-          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/org.flameshot.Flameshot-${VERSION}.x86_64.flatpak)
-          echo "======no operation for you can see link in the log console====="
       - name: Artifact Upload
         uses: actions/upload-artifact@v4
         with:
-          name: Linux-distribution-artifact
+          name: flatpak-x86_64-artifact
           path: |
             ${{ github.workspace }}/org.flameshot.Flameshot-*.x86_64.flatpak
             ${{ github.workspace }}/org.flameshot.Flameshot-*.x86_64.flatpak.sha256sum
@@ -540,22 +496,14 @@ jobs:
         run: |
           mkdir -p $GITHUB_WORKSPACE/build
           cp ${{ steps.snapcraft.outputs.snap }} $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.amd64.snap
-      - name: SHA256Sum of snap package(daily build)
+      - name: SHA256Sum of snap package
         run: |
           cd "$GITHUB_WORKSPACE/build/" || { >&2 echo "Cannot cd to '$GITHUB_WORKSPACE/build/'!"; exit 11 ; }
           sha256sum ${PRODUCT}-${VERSION}-${RELEASE}.amd64.snap | tee ${PRODUCT}-${VERSION}-${RELEASE}.amd64.snap.sha256sum
-          echo "================snap sha256sum download link=================="
-          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh ${PRODUCT}-${VERSION}-${RELEASE}.amd64.snap.sha256sum)
-          echo "=====no operation for you can see link in the log console====="
-      - name: Upload snap package(daily build)
-        run: |
-          echo "=======================snap download link======================"
-          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.amd64.snap)
-          echo "======no operation for you can see link in the log console====="
       - name: Artifact Upload
         uses: actions/upload-artifact@v4
         with:
-          name: Linux-distribution-artifact
+          name: snap-x86_64-artifact
           path: |
             ${{ github.workspace }}/build/${{ env.PRODUCT }}-*-${{ env.RELEASE }}.amd64.snap
             ${{ github.workspace }}/build/${{ env.PRODUCT }}-*-${{ env.RELEASE }}.amd64.snap.sha256sum

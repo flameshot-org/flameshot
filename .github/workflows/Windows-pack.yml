@@ -30,8 +30,8 @@ jobs:
       VCINSTALLDIR: C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/
       Qt5_DIR: ${{ github.workspace }}\build\Qt\${{ matrix.qt_ver }}\${{ matrix.config.qt_arch_install }}\lib\cmake\Qt5\
       QTDIR: ${{ github.workspace }}\build\Qt\${{ matrix.qt_ver }}\${{ matrix.config.qt_arch_install }}\
-      # 2022.06.15.1
-      VCPKG_VERSION: cef0b3ec767df6e83806899fe9525f6cf8d7bc91
+      # 2025.02.14
+      VCPKG_VERSION: d5ec528843d29e3a52d745a64b469f810b2cedbf
       VCPKG_PACKAGES: openssl-windows
       OPENSSL_ROOT_DIR: ${{ github.workspace }}\vcpkg\installed\${{ matrix.config.vcpkg_triplet }}\
     strategy:
@@ -103,7 +103,7 @@ jobs:
           key: ${{ runner.os }}-QtCache/${{ matrix.qt_ver }}/${{ matrix.config.qt_arch }}
 
       - name: Install Qt
-        uses: jurplel/install-qt-action@v3
+        uses: jurplel/install-qt-action@v4
         with:
           version: ${{ matrix.qt_ver }}
           target:  ${{ matrix.qt_target }}
@@ -155,56 +155,44 @@ jobs:
         if:  matrix.type == 'installer'
         shell: pwsh
         run: |
-          Move-Item -Path $env:GITHUB_WORKSPACE/build/Package/Flameshot-*-${{ matrix.config.pak_arch }}.msi -Destination $env:GITHUB_WORKSPACE/build/Package/installer/Flameshot-$env:VERSION-${{ matrix.config.pak_arch }}.msi
+          Move-Item -Path $env:GITHUB_WORKSPACE/build/Package/Flameshot-*-${{ matrix.config.pak_arch }}.msi -Destination $env:GITHUB_WORKSPACE/build/Package/installer/Flameshot-${{ env.VERSION }}-${{ matrix.config.pak_arch }}.msi
 
       - name: Package Prepare (portable)
         if:  matrix.type == 'portable'
         shell: pwsh
         run: |
-          Move-Item -Path $env:GITHUB_WORKSPACE/build/Package/flameshot-*-${{ matrix.config.pak_arch }}.zip -Destination $env:GITHUB_WORKSPACE/build/Package/portable/flameshot-$env:VERSION-${{ matrix.config.pak_arch }}.zip
+          Move-Item -Path $env:GITHUB_WORKSPACE/build/Package/flameshot-*-${{ matrix.config.pak_arch }}.zip -Destination $env:GITHUB_WORKSPACE/build/Package/portable/flameshot-${{ env.VERSION }}-${{ matrix.config.pak_arch }}.zip
 
-      - name: SHA256Sum of Windows installer(daily build)
+      - name: SHA256Sum of Windows installer
         if:  matrix.type == 'installer'
         shell: bash
         run: |
-          sha256sum $GITHUB_WORKSPACE/build/Package/installer/Flameshot-${VERSION}-${{ matrix.config.pak_arch }}.msi
-          sha256sum $GITHUB_WORKSPACE/build/Package/installer/Flameshot-${VERSION}-${{ matrix.config.pak_arch }}.msi > $GITHUB_WORKSPACE/build/Package/installer/Flameshot-${VERSION}-${{ matrix.config.pak_arch }}.msi.sha256sum
-          python -m pip install -U -q requests
-          echo "============Windows installer sha256sum download link============"
-          echo $(python $GITHUB_WORKSPACE/scripts/upload_services/transferwee.py upload $GITHUB_WORKSPACE/build/Package/installer/Flameshot-${VERSION}-${{ matrix.config.pak_arch }}.msi.sha256sum)
-          echo "=======no operation for you can see link in the log console====="
+          sha256sum $GITHUB_WORKSPACE/build/Package/installer/Flameshot-${{ env.VERSION }}-${{ matrix.config.pak_arch }}.msi
+          sha256sum $GITHUB_WORKSPACE/build/Package/installer/Flameshot-${{ env.VERSION }}-${{ matrix.config.pak_arch }}.msi > $GITHUB_WORKSPACE/build/Package/installer/Flameshot-${{ env.VERSION }}-${{ matrix.config.pak_arch }}.msi.sha256sum
 
-      - name: SHA256Sum of Windows portable(daily build)
+      - name: SHA256Sum of Windows portable
         if:  matrix.type == 'portable'
         shell: bash
         run: |
-          sha256sum $GITHUB_WORKSPACE/build/Package/portable/flameshot-${VERSION}-${{ matrix.config.pak_arch }}.zip
-          sha256sum $GITHUB_WORKSPACE/build/Package/portable/flameshot-${VERSION}-${{ matrix.config.pak_arch }}.zip > $GITHUB_WORKSPACE/build/Package/portable/flameshot-${VERSION}-${{ matrix.config.pak_arch }}.zip.sha256sum
-          python -m pip install -U -q requests
-          echo "===========Windows portable sha256sum download link============"
-          echo $(python $GITHUB_WORKSPACE/scripts/upload_services/transferwee.py upload $GITHUB_WORKSPACE/build/Package/portable/flameshot-${VERSION}-${{ matrix.config.pak_arch }}.zip.sha256sum)
-          echo "=====no operation for you can see link in the log console====="
+          sha256sum $GITHUB_WORKSPACE/build/Package/portable/flameshot-${{ env.VERSION }}-${{ matrix.config.pak_arch }}.zip
+          sha256sum $GITHUB_WORKSPACE/build/Package/portable/flameshot-${{ env.VERSION }}-${{ matrix.config.pak_arch }}.zip > $GITHUB_WORKSPACE/build/Package/portable/flameshot-${{ env.VERSION }}-${{ matrix.config.pak_arch }}.zip.sha256sum
 
-      - name: Upload Windows installer(daily build)
-        if:  matrix.type == 'installer'
-        shell: bash
-        run: |
-          python -m pip install -U -q requests
-          echo "================Windows installer download link================"
-          echo $(python $GITHUB_WORKSPACE/scripts/upload_services/transferwee.py upload $GITHUB_WORKSPACE/build/Package/installer/Flameshot-${VERSION}-${{ matrix.config.pak_arch }}.msi)
-          echo "=====no operation for you can see link in the log console====="
-
-      - name: Upload Windows portable(daily build)
-        if:  matrix.type == 'portable'
-        shell: bash
-        run: |
-          python -m pip install -U -q requests
-          echo "=================Windows portable download link================"
-          echo $(python $GITHUB_WORKSPACE/scripts/upload_services/transferwee.py upload $GITHUB_WORKSPACE/build/Package/portable/flameshot-${VERSION}-${{ matrix.config.pak_arch }}.zip)
-          echo "=====no operation for you can see link in the log console====="
       - name: Artifact Upload
+        if:  matrix.type == 'installer'
         uses: actions/upload-artifact@v4
         with:
-          name: Windows-${{ matrix.config.arch }}-${{ matrix.type }}-artifact
-          path: ${{ github.workspace }}/build/Package/*
+          name: win-${{ matrix.config.arch }}-${{ matrix.type }}-artifact
+          path: |
+            ${{ github.workspace }}/build/Package/installer/Flameshot-${{ env.VERSION }}-${{ matrix.config.pak_arch }}.msi
+            ${{ github.workspace }}/build/Package/installer/Flameshot-${{ env.VERSION }}-${{ matrix.config.pak_arch }}.msi.sha256sum
+          overwrite: true
+
+      - name: Artifact Upload
+        if:  matrix.type == 'portable'
+        uses: actions/upload-artifact@v4
+        with:
+          name: win-${{ matrix.config.arch }}-${{ matrix.type }}-artifact
+          path: |
+            ${{ github.workspace }}/build/Package/portable/flameshot-${{ env.VERSION }}-${{ matrix.config.pak_arch }}.zip
+            ${{ github.workspace }}/build/Package/portable/flameshot-${{ env.VERSION }}-${{ matrix.config.pak_arch }}.zip.sha256sum
           overwrite: true

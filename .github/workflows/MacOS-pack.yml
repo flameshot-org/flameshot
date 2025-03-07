@@ -20,9 +20,9 @@ env:
   PRODUCT: flameshot
 
 jobs:
-  catalina:
-    name: macOS Monterey 12
-    runs-on: macos-12
+  x86_64:
+    name: macOS Sonoma 14
+    runs-on: macos-14
 
     env:
       APP_NAME: flameshot
@@ -71,18 +71,10 @@ jobs:
           cd "${DIR_PKG}"
           ${HELPERS_SCRIPTS_PATH}/sign_qtapp.sh flameshot
 
-      - name: Upload dmg package
-        shell: bash
-        run: |
-          python3 -m pip install -U -q requests
-          echo "================MacOS dmg image download link================"
-          echo $(python3 $GITHUB_WORKSPACE/scripts/upload_services/transferwee.py upload $GITHUB_WORKSPACE/build/src/flameshot.dmg)
-          echo "=====no operation for you can see link in the log console====="
-
       - name: Artifact Upload
         uses: actions/upload-artifact@v4
         with:
-          name: MacOS-artifact
+          name: macos-x86_64-artifact
           path: ${{ github.workspace }}/build/src/flameshot.dmg
           overwrite: true
 
