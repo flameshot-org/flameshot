@@ -49,6 +49,19 @@ jobs:
       - name: Checkout Source code
         uses: actions/checkout@v4
 
+      - name: Set env & Print flameshot version
+        shell: bash
+        run: |
+          last_committed_tag=$(git tag -l --sort=-v:refname | head -1)
+          git_revno=$(git rev-list $(git describe --tags --abbrev=0)..HEAD --count)
+          git_hash=$(git rev-parse --short HEAD)
+          ver_info=${last_committed_tag}+git${git_revno}.${git_hash}
+          echo "=======FLAMESHOT VERSION========"
+          echo ${last_committed_tag:1}
+          echo "Details: ${ver_info}"
+          echo "================================"
+          echo "VER_INFO=${ver_info}" >> $GITHUB_ENV
+
       - name: Install Qt
         run: brew install qt@5 cmake
 
@@ -74,7 +87,7 @@ jobs:
       - name: Artifact Upload
         uses: actions/upload-artifact@v4
         with:
-          name: macos-x86_64-artifact
+          name: ${{ env.PRODUCT }}-${{ env.VER_INFO }}-artifact-macos-x86_64
           path: ${{ github.workspace }}/build/src/flameshot.dmg
           overwrite: true
 

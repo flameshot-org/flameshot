@@ -78,13 +78,15 @@ jobs:
           last_committed_tag=$(git tag -l --sort=-v:refname | head -1)
           git_revno=$(git rev-list $(git describe --tags --abbrev=0)..HEAD --count)
           git_hash=$(git rev-parse --short HEAD)
+          ver_info=${last_committed_tag}+git${git_revno}.${git_hash}
           echo "=======FLAMESHOT VERSION========"
           echo ${last_committed_tag:1}
-          echo "Details: ${last_committed_tag}+git${git_revno}.${git_hash}"
+          echo "Details: ${ver_info}"
           echo "================================"
           # This will allow to build pre-preleases without git tag
           # echo "VERSION=${last_committed_tag:1}" >> $GITHUB_ENV
           echo "VERSION=$(cat CMakeLists.txt |grep 'set.*(.*FLAMESHOT_VERSION' | sed 's/[^0-9.]*//' |sed 's/)//g')" >> $GITHUB_ENV
+          echo "VER_INFO=${ver_info}" >> $GITHUB_ENV
 
       - name: Restore from cache and run vcpkg
         uses: lukka/run-vcpkg@v11
@@ -181,7 +183,7 @@ jobs:
         if:  matrix.type == 'installer'
         uses: actions/upload-artifact@v4
         with:
-          name: win-${{ matrix.config.arch }}-${{ matrix.type }}-artifact
+          name: ${{ env.PRODUCT }}-${{ env.VER_INFO }}-artifact-win-${{ matrix.config.arch }}-${{ matrix.type }}
           path: |
             ${{ github.workspace }}/build/Package/installer/Flameshot-${{ env.VERSION }}-${{ matrix.config.pak_arch }}.msi
             ${{ github.workspace }}/build/Package/installer/Flameshot-${{ env.VERSION }}-${{ matrix.config.pak_arch }}.msi.sha256sum
@@ -191,7 +193,7 @@ jobs:
         if:  matrix.type == 'portable'
         uses: actions/upload-artifact@v4
         with:
-          name: win-${{ matrix.config.arch }}-${{ matrix.type }}-artifact
+          name: ${{ env.PRODUCT }}-${{ env.VER_INFO }}-artifact-win-${{ matrix.config.arch }}-${{ matrix.type }}
           path: |
             ${{ github.workspace }}/build/Package/portable/flameshot-${{ env.VERSION }}-${{ matrix.config.pak_arch }}.zip
             ${{ github.workspace }}/build/Package/portable/flameshot-${{ env.VERSION }}-${{ matrix.config.pak_arch }}.zip.sha256sum

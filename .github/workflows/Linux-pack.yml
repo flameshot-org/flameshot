@@ -111,11 +111,13 @@ jobs:
           last_committed_tag=$(git tag -l --sort=-v:refname | head -1)
           git_revno=$(git rev-list $(git describe --tags --abbrev=0)..HEAD --count)
           git_hash=$(git rev-parse --short HEAD)
+          ver_info=${last_committed_tag}+git${git_revno}.${git_hash}
           echo "=======FLAMESHOT VERSION========"
           echo ${last_committed_tag:1}
-          echo "Details: ${last_committed_tag}+git${git_revno}.${git_hash}"
+          echo "Details: ${ver_info}"
           echo "================================"
           echo "VERSION=${last_committed_tag:1}" >> $GITHUB_ENV
+          echo "VER_INFO=${ver_info}" >> $GITHUB_ENV
       - name: Get packpack tool
         uses: actions/checkout@v4
         with:
@@ -153,7 +155,7 @@ jobs:
       - name: Artifact Upload
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ matrix.dist.name }}-${{ matrix.dist.arch }}-artifact
+          name: ${{ env.PRODUCT }}-${{ env.VER_INFO }}-artifact-${{ matrix.dist.name }}-${{ matrix.dist.arch }}
           path: |
             ${{ github.workspace }}/build/${{ env.PRODUCT }}-*-${{ env.RELEASE }}.${{ matrix.dist.name }}.${{ matrix.dist.arch }}.deb
             ${{ github.workspace }}/build/${{ env.PRODUCT }}-*-${{ env.RELEASE }}.${{ matrix.dist.name }}.${{ matrix.dist.arch }}.deb.sha256sum
@@ -203,11 +205,13 @@ jobs:
           last_committed_tag=$(git tag -l --sort=-v:refname | head -1)
           git_revno=$(git rev-list $(git describe --tags --abbrev=0)..HEAD --count)
           git_hash=$(git rev-parse --short HEAD)
+          ver_info=${last_committed_tag}+git${git_revno}.${git_hash}
           echo "=======FLAMESHOT VERSION========"
           echo ${last_committed_tag:1}
-          echo "Details: ${last_committed_tag}+git${git_revno}.${git_hash}"
+          echo "Details: ${ver_info}"
           echo "================================"
           echo "VERSION=${last_committed_tag:1}" >> $GITHUB_ENV
+          echo "VER_INFO=${ver_info}" >> $GITHUB_ENV
       - name: Get packpack tool
         uses: actions/checkout@v4
         with:
@@ -255,7 +259,7 @@ jobs:
         if: matrix.dist.os == 'fedora'
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ matrix.dist.name }}-${{ matrix.dist.arch }}-artifact
+          name: ${{ env.PRODUCT }}-${{ env.VER_INFO }}-artifact-${{ matrix.dist.name }}-${{ matrix.dist.arch }}
           path: |
             ${{ github.workspace }}/build/
           overwrite: true
@@ -264,7 +268,7 @@ jobs:
         if: matrix.dist.os == 'opensuse-leap'
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ matrix.dist.name }}-${{ matrix.dist.arch }}-artifact
+          name: ${{ env.PRODUCT }}-${{ env.VER_INFO }}-artifact-${{ matrix.dist.name }}-${{ matrix.dist.arch }}
           path: |
             ${{ github.workspace }}/build/${{ env.PRODUCT }}-*-lp${{ matrix.dist.symbol }}.${{ matrix.dist.arch }}.rpm
             ${{ github.workspace }}/build/${{ env.PRODUCT }}-*-lp${{ matrix.dist.symbol }}.${{ matrix.dist.arch }}.rpm.sha256sum
@@ -311,11 +315,13 @@ jobs:
           last_committed_tag=$(git tag -l --sort=-v:refname | head -1)
           git_revno=$(git rev-list $(git describe --tags --abbrev=0)..HEAD --count)
           git_hash=$(git rev-parse --short HEAD)
+          ver_info=${last_committed_tag}+git${git_revno}.${git_hash}
           echo "=======FLAMESHOT VERSION========"
           echo ${last_committed_tag:1}
-          echo "Details: ${last_committed_tag}+git${git_revno}.${git_hash}"
+          echo "Details: ${ver_info}"
           echo "================================"
           echo "VERSION=${last_committed_tag:1}" >> $GITHUB_ENV
+          echo "VER_INFO=${ver_info}" >> $GITHUB_ENV
       - name: Install Dependencies
         run: |
           sudo apt-get -y -qq update
@@ -394,7 +400,7 @@ jobs:
       - name: Artifact Upload
         uses: actions/upload-artifact@v4
         with:
-          name: appimage-x86_64-artifact
+          name: ${{ env.PRODUCT }}-${{ env.VER_INFO }}-artifact-appimage-x86_64
           path: |
             ${{ github.workspace }}/Flameshot-*.x86_64.AppImage
             ${{ github.workspace }}/Flameshot-*.x86_64.AppImage.sha256sum
@@ -422,11 +428,13 @@ jobs:
           last_committed_tag=$(git tag -l --sort=-v:refname | head -1)
           git_revno=$(git rev-list $(git describe --tags --abbrev=0)..HEAD --count)
           git_hash=$(git rev-parse --short HEAD)
+          ver_info=${last_committed_tag}+git${git_revno}.${git_hash}
           echo "=======FLAMESHOT VERSION========"
           echo ${last_committed_tag:1}
-          echo "Details: ${last_committed_tag}+git${git_revno}.${git_hash}"
+          echo "Details: ${ver_info}"
           echo "================================"
           echo "VERSION=${last_committed_tag:1}" >> $GITHUB_ENV
+          echo "VER_INFO=${ver_info}" >> $GITHUB_ENV
       - name: Setup flatpak
         run: |
           sudo apt-get -y -qq update
@@ -453,7 +461,7 @@ jobs:
       - name: Artifact Upload
         uses: actions/upload-artifact@v4
         with:
-          name: flatpak-x86_64-artifact
+          name: ${{ env.PRODUCT }}-${{ env.VER_INFO }}-artifact-flatpak-x86_64
           path: |
             ${{ github.workspace }}/org.flameshot.Flameshot-*.x86_64.flatpak
             ${{ github.workspace }}/org.flameshot.Flameshot-*.x86_64.flatpak.sha256sum
@@ -481,11 +489,13 @@ jobs:
           last_committed_tag=$(git tag -l --sort=-v:refname | head -1)
           git_revno=$(git rev-list $(git describe --tags --abbrev=0)..HEAD --count)
           git_hash=$(git rev-parse --short HEAD)
+          ver_info=${last_committed_tag}+git${git_revno}.${git_hash}
           echo "=======FLAMESHOT VERSION========"
           echo ${last_committed_tag:1}
-          echo "Details: ${last_committed_tag}+git${git_revno}.${git_hash}"
+          echo "Details: ${ver_info}"
           echo "================================"
           echo "VERSION=${last_committed_tag:1}" >> $GITHUB_ENV
+          echo "VER_INFO=${ver_info}" >> $GITHUB_ENV
       - name: Packaging snap
         uses: snapcore/action-build@v1
         id: snapcraft
@@ -503,7 +513,7 @@ jobs:
       - name: Artifact Upload
         uses: actions/upload-artifact@v4
         with:
-          name: snap-x86_64-artifact
+          name: ${{ env.PRODUCT }}-${{ env.VER_INFO }}-artifact-snap-x86_64
           path: |
             ${{ github.workspace }}/build/${{ env.PRODUCT }}-*-${{ env.RELEASE }}.amd64.snap
             ${{ github.workspace }}/build/${{ env.PRODUCT }}-*-${{ env.RELEASE }}.amd64.snap.sha256sum
