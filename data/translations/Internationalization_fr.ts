@@ -2117,7 +2117,7 @@ Vous devrez probablement remplacer le signe &apos;#&apos; par &apos;\#FFF&apos;<
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="216"/>
         <source>Change the tool&apos;s size</source>
-        <translation>Change the tool&apos;s size</translation>
+        <translation>Changer la taille de l&apos;outil</translation>
     </message>
     <message>
         <source>Change the tool&apos;s thickness</source>
