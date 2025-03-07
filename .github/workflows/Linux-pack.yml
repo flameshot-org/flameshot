@@ -36,24 +36,6 @@ jobs:
       matrix:
         dist:
           - {
-              name: debian-10,
-              os: debian,
-              symbol: buster,
-              arch: amd64
-            }
-          - {
-              name: debian-10,
-              os: debian,
-              symbol: buster,
-              arch: arm64
-            }
-          - {
-              name: debian-10,
-              os: debian,
-              symbol: buster,
-              arch: armhf
-            }
-          - {
               name: debian-11,
               os: debian,
               symbol: bullseye,
@@ -249,21 +231,15 @@ jobs:
       matrix:
         dist:
           - {
-              name: fedora-39,
-              os: fedora,
-              symbol: 39,
-              arch: x86_64
-            }
-          - {
               name: fedora-40,
               os: fedora,
               symbol: 40,
               arch: x86_64
             }
           - {
-              name: opensuse-leap-15.5,
-              os: opensuse-leap,
-              symbol: 15.5,
+              name: fedora-41,
+              os: fedora,
+              symbol: 41,
               arch: x86_64
             }
           - {
