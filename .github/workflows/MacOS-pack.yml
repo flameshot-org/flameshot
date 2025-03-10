@@ -20,10 +20,21 @@ env:
   PRODUCT: flameshot
 
 jobs:
-  x86_64:
-    name: macOS Sonoma 14
-    runs-on: macos-14
-
+  dmg-pack:
+    name: Build dmg on ${{ matrix.dist.os }} ${{ matrix.dist.arch }}
+    strategy:
+      fail-fast: false
+      matrix:
+        dist:
+          - {
+              os: macos-13,
+              arch: x86_64
+            }
+          - {
+              os: macos-14,
+              arch: arm64
+            }
+    runs-on: ${{ matrix.dist.os }}
     env:
       APP_NAME: flameshot
       DIR_BULD: build
@@ -46,6 +57,28 @@ jobs:
       NOTARIZATION_CHECK: false
 
     steps:
+      - name: Check architecture
+        if: matrix.dist.arch == 'x86_64'
+        shell: bash
+        run: |
+          platform_arch=$(uname -m)
+          if [[ $platform_arch != "x86_64" ]]; then
+            echo "$platform_arch detected. This build must be run on x86_64."
+            exit -1
+          fi
+          echo "$platform_arch detected."
+
+      - name: Check architecture
+        if: matrix.dist.arch == 'arm64'
+        shell: bash
+        run: |
+          platform_arch=$(uname -m)
+          if [[ $platform_arch != "arm64" ]]; then
+            echo "$platform_arch detected. This build must be run on arm64."
+            exit -1
+          fi
+          echo "$platform_arch detected."
+
       - name: Checkout Source code
         uses: actions/checkout@v4
 
@@ -87,7 +120,7 @@ jobs:
       - name: Artifact Upload
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ env.PRODUCT }}-${{ env.VER_INFO }}-artifact-macos-x86_64
+          name: ${{ env.PRODUCT }}-${{ env.VER_INFO }}-artifact-macos-${{ matrix.dist.arch }}
           path: ${{ github.workspace }}/build/src/flameshot.dmg
           overwrite: true
 
