@@ -3,9 +3,11 @@ target_sources(flameshot PRIVATE pixelate/pixelatetool.h pixelate/pixelatetool.c
 target_sources(flameshot PRIVATE circle/circletool.h circle/circletool.cpp)
 target_sources(flameshot PRIVATE circlecount/circlecounttool.h circlecount/circlecounttool.cpp)
 target_sources(flameshot PRIVATE copy/copytool.h copy/copytool.cpp)
+target_sources(flameshot PRIVATE print/printtool.h print/printtool.cpp)
 target_sources(flameshot PRIVATE exit/exittool.h exit/exittool.cpp)
 target_sources(flameshot PRIVATE sizeincrease/sizeincreasetool.h sizeincrease/sizeincreasetool.cpp)
 target_sources(flameshot PRIVATE sizedecrease/sizedecreasetool.h sizedecrease/sizedecreasetool.cpp)
+target_sources(flameshot PRIVATE save-to-pdf/save-to-pdf.h save-to-pdf/save-to-pdf.cpp)
 target_sources(
   flameshot
         PRIVATE imgupload/storages/imgur/imguruploader.h
