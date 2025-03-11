@@ -74,21 +74,25 @@ void ScreenGrabber::freeDesktopPortal(bool& ok, QPixmap& res)
       this);
 
     QEventLoop loop;
-    const auto gotSignal = [&res, &loop](uint status, const QVariantMap& map) {
+    const auto gotSignal = [&res, &loop, this](uint status, const QVariantMap& map) {
         if (status == 0) {
             // Parse this as URI to handle unicode properly
             QUrl uri = map.value("uri").toString();
             QString uriString = uri.toLocalFile();
             res = QPixmap(uriString);
-            QScreen* screen = QGuiAppCurrentScreen().currentScreen();
-            if (screen)
-            {
-                const auto screenRect = screen->geometry();
-                res.setDevicePixelRatio(res.height() * 1.0f / screenRect.height());
-            }
-            else
+            QRect approximatedPhysicalDesktopGeometryBasedOnDevicePixelRatio = desktopGeometry();
+            QRect accurateLogicalDesktopGeometry = logicalDesktopGeometry();
+            if (res.size() == approximatedPhysicalDesktopGeometryBasedOnDevicePixelRatio.size()) // which means the res is physcal size and the dpr is correct.
             {
                 res.setDevicePixelRatio(qApp->devicePixelRatio());
+            }
+            else if (res.size() == accurateLogicalDesktopGeometry.size()) // which means the res is logical size and we need to do nothing.
+            {
+                ;
+            }
+            else // which means the res is physical size and the dpr is not correct.
+            {
+                res.setDevicePixelRatio(res.height() * 1.0f / accurateLogicalDesktopGeometry.height());
             }
             QFile imgFile(uriString);
             imgFile.remove();
@@ -244,6 +248,18 @@ QRect ScreenGrabber::desktopGeometry()
         QRect scrRect = screen->geometry();
         scrRect.moveTo(scrRect.x() / screen->devicePixelRatio(),
                        scrRect.y() / screen->devicePixelRatio());
+        geometry = geometry.united(scrRect);
+    }
+    return geometry;
+}
+
+QRect ScreenGrabber::logicalDesktopGeometry()
+{
+    QRect geometry;
+    for (QScreen* const screen : QGuiApplication::screens()) {
+        QRect scrRect = screen->geometry();
+        scrRect.moveTo(scrRect.x(),
+                       scrRect.y());
         geometry = geometry.united(scrRect);
     }
     return geometry;
