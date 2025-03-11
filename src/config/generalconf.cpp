@@ -52,6 +52,7 @@ GeneralConf::GeneralConf(QWidget* parent)
     initCopyPathAfterSave();
     initCopyAndCloseAfterUpload();
     initUploadWithoutConfirmation();
+    initRandomizePixelation();
     initHistoryConfirmationToDelete();
     initAntialiasingPinZoom();
     initUploadHistoryMax();
@@ -81,6 +82,7 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
     m_saveAfterCopy->setChecked(config.saveAfterCopy());
     m_copyPathAfterSave->setChecked(config.copyPathAfterSave());
     m_antialiasingPinZoom->setChecked(config.antialiasingPinZoom());
+    m_randomizePixelation->setChecked(config.randomizePixelation());
     m_useJpgForClipboard->setChecked(config.useJpgForClipboard());
     m_copyOnDoubleClick->setChecked(config.copyOnDoubleClick());
     m_uploadWithoutConfirmation->setChecked(config.uploadWithoutConfirmation());
@@ -148,6 +150,11 @@ void GeneralConf::checkForUpdatesChanged(bool checked)
 void GeneralConf::allowMultipleGuiInstancesChanged(bool checked)
 {
     ConfigHandler().setAllowMultipleGuiInstances(checked);
+}
+
+void GeneralConf::setRandomizePixelation(bool checked)
+{
+    ConfigHandler().setRandomizePixelation(checked);
 }
 
 void GeneralConf::autoCloseIdleDaemonChanged(bool checked)
@@ -263,6 +270,17 @@ void GeneralConf::initSaveLastRegion()
             &QCheckBox::clicked,
             this,
             &GeneralConf::saveLastRegion);
+}
+void GeneralConf::initRandomizePixelation()
+{
+    m_randomizePixelation = new QCheckBox(tr("Randomize pixelation"), this);
+    m_randomizePixelation->setToolTip(
+      tr("Randomly shuffle pixels to make it harder to recover the contents"));
+    m_scrollAreaLayout->addWidget(m_randomizePixelation);
+    connect(m_randomizePixelation,
+            &QCheckBox::clicked,
+            this,
+            &GeneralConf::setRandomizePixelation);
 }
 
 void GeneralConf::initShowSidePanelButton()
