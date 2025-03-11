@@ -34,6 +34,9 @@ void ScreenGrabber::generalGrimScreenshot(bool& ok, QPixmap& res)
     QProcess Process;
     QString program = "grim";
     QStringList arguments;
+    // Disable PNG compression
+    arguments << "-l"
+              << "0";
     arguments << "-";
     Process.start(program, arguments);
     if (Process.waitForFinished()) {
