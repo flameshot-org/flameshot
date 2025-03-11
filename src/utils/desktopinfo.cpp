@@ -43,6 +43,9 @@ DesktopInfo::WM DesktopInfo::windowManager()
         if (desktop.contains(QLatin1String("kde-plasma"))) {
             return DesktopInfo::KDE;
         }
+        if (desktop.contains(QLatin1String("cosmic"))) {
+            return DesktopInfo::COSMIC;
+        }
     }
 
     if (!GNOME_DESKTOP_SESSION_ID.isEmpty()) {
