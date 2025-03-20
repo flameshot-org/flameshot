@@ -1,5 +1,6 @@
 #pragma once
 
+#include "pinwidget.h"
 #include <QByteArray>
 #include <QObject>
 #include <QtDBus/QDBusAbstractAdaptor>
@@ -27,6 +28,7 @@ public:
     static void copyToClipboard(const QPixmap& capture);
     static void copyToClipboard(const QString& text,
                                 const QString& notification = "");
+    static void editPin(PinWidget& pinned);
     static bool isThisInstanceHostingWidgets();
 
     void sendTrayNotification(
