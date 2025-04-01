@@ -11,9 +11,9 @@ _flameshot() {
 	prev="${COMP_WORDS[COMP_CWORD-1]}"
 	cur="${COMP_WORDS[COMP_CWORD]}"
 	cmd="gui full config launcher screen"
-	screen_opts="--number --path --delay --raw -p -d -r -n"
-	gui_opts="--path --delay --raw -p -d -r"
-	full_opts="--path --delay --clipboard --raw -p -d -c -r"
+	screen_opts="--number --path --delay --raw --last-region -p -d -r -n"
+	gui_opts="--path --delay --raw --last-region -p -d -r"
+	full_opts="--path --delay --clipboard --raw --last-region -p -d -c -r"
 	config_opts="--contrastcolor --filename --maincolor --showhelp --trayicon --autostart -k -f -m -s -t -a"
 
 	case "${prev}" in
