@@ -14,10 +14,8 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-cmake_minimum_required (VERSION 3.1 FATAL_ERROR)
-if ( ${CMAKE_VERSION} VERSION_GREATER "3.12.0")
-    cmake_policy(SET CMP0077 NEW)
-endif()
+cmake_minimum_required (VERSION 3.22 FATAL_ERROR)
+cmake_policy(SET CMP0077 NEW)
 
 set(COLORWIDGET_PROJECT_NAME QtColorWidgets)
 project(${COLORWIDGET_PROJECT_NAME} CXX)
