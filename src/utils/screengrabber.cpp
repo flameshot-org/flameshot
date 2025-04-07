@@ -34,6 +34,7 @@ void ScreenGrabber::generalGrimScreenshot(bool& ok, QPixmap& res)
     QProcess Process;
     QString program = "grim";
     QStringList arguments;
+    arguments << "-s 1.0";
     arguments << "-";
     Process.start(program, arguments);
     if (Process.waitForFinished()) {
