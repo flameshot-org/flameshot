@@ -86,6 +86,7 @@ public:
     CONFIG_GETTER_SETTER(showDesktopNotification,
                          setShowDesktopNotification,
                          bool)
+    CONFIG_GETTER_SETTER(showAbortNotification, setShowAbortNotification, bool)
     CONFIG_GETTER_SETTER(filenamePattern, setFilenamePattern, QString)
     CONFIG_GETTER_SETTER(disabledTrayIcon, setDisabledTrayIcon, bool)
     CONFIG_GETTER_SETTER(disabledGrimWarning, disabledGrimWarning, bool)
