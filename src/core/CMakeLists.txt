@@ -3,6 +3,8 @@ target_sources(flameshot PRIVATE
     flameshotdaemon.h
     flameshotdbusadapter.h
     qguiappcurrentscreen.h
+    pluginmanager.h
+    corepluginInterface.h
 )
 
 target_sources(flameshot PRIVATE
@@ -11,6 +13,7 @@ target_sources(flameshot PRIVATE
     flameshotdaemon.cpp
     flameshotdbusadapter.cpp
     qguiappcurrentscreen.cpp
+    pluginmanager.cpp
 )
 
 IF (WIN32)
