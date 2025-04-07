@@ -7,8 +7,9 @@
 #include <QMouseEvent>
 #include <QPainter>
 
-ColorPicker::ColorPicker(QWidget* parent)
+ColorPicker::ColorPicker(QPixmap* p, QWidget* parent)
   : ColorPickerWidget(parent)
+  , m_pixmap(p)
 {
     setMouseTracking(true);
 
@@ -36,6 +37,22 @@ void ColorPicker::mouseMoveEvent(QMouseEvent* e)
     }
 }
 
+void ColorPicker::startColorGrab()
+{
+    m_colorGrabber = new ColorGrabWidget(m_pixmap);
+    connect(m_colorGrabber,
+            &ColorGrabWidget::colorGrabbed,
+            this,
+            &ColorPicker::onColorGrabFinished);
+
+    m_colorGrabber->startGrabbing();
+}
+
+void ColorPicker::onColorGrabFinished()
+{
+    emit colorSelected(m_colorGrabber->color());
+}
+
 void ColorPicker::showEvent(QShowEvent* event)
 {
     grabMouse();
@@ -44,5 +61,10 @@ void ColorPicker::showEvent(QShowEvent* event)
 void ColorPicker::hideEvent(QHideEvent* event)
 {
     releaseMouse();
-    emit colorSelected(m_colorList.at(m_selectedIndex));
+
+    if (ConfigHandler().pickerOpensGrabber() && m_selectedIndex == 0) {
+        startColorGrab();
+    } else {
+        emit colorSelected(m_colorList.at(m_selectedIndex));
+    }
 }
