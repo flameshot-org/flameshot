@@ -4,7 +4,9 @@
 #include "buttonlistview.h"
 #include "src/tools/toolfactory.h"
 #include "src/utils/confighandler.h"
+#include "src/widgets/checkablestar.h"
 #include <QListWidgetItem>
+#include <QHBoxLayout>
 #include <algorithm>
 
 ButtonListView::ButtonListView(QWidget* parent)
@@ -43,6 +45,28 @@ void ButtonListView::initButtonList()
 
         m_buttonItem->setText(tool->name());
         m_buttonItem->setToolTip(tool->description());
+
+        // create the widget to contain the star
+        QWidget* widget = new QWidget();
+        QHBoxLayout* layout = new QHBoxLayout(widget);
+        CheckableStar* checkableStar = new CheckableStar();
+
+        layout->addWidget(checkableStar);
+
+        m_buttonItem->setSizeHint(widget->sizeHint());
+
+        this->setItemWidget(m_buttonItem, widget);
+
+        // Connect the starredChanged signal to update favorite buttons
+        connect(checkableStar, &CheckableStar::starredChanged, [this, t](bool starred) {
+            if (starred) {
+                m_favoriteButtons.append(t);
+            } else {
+                m_favoriteButtons.removeOne(t);
+            }
+            ConfigHandler().setFavoriteButtons(m_favoriteButtons);
+        });
+
         tool->deleteLater();
     }
 }
@@ -86,6 +110,7 @@ void ButtonListView::selectAll()
 void ButtonListView::updateComponents()
 {
     m_listButtons = ConfigHandler().buttons();
+    m_favoriteButtons = ConfigHandler().favoriteButtons();
     auto listTypes = CaptureToolButton::getIterableButtonTypes();
     for (int i = 0; i < this->count(); ++i) {
         QListWidgetItem* item = this->item(i);
@@ -95,5 +120,9 @@ void ButtonListView::updateComponents()
         } else {
             item->setCheckState(Qt::Unchecked);
         }
+
+        QWidget* widget = this->itemWidget(item);
+        CheckableStar* checkableStar = widget->findChild<CheckableStar*>();
+        checkableStar->setStarred(m_favoriteButtons.contains(elem));
     }
 }

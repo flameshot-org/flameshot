@@ -23,6 +23,7 @@ protected:
 
 private:
     QList<CaptureTool::Type> m_listButtons;
+    QList<CaptureTool::Type> m_favoriteButtons;
     QMap<QString, CaptureTool::Type> m_buttonTypeByName;
 
     void updateActiveButtons(QListWidgetItem*);

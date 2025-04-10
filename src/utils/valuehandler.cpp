@@ -298,6 +298,10 @@ QString FilenamePattern::expected()
 using BType = CaptureTool::Type;
 using BList = QList<CaptureTool::Type>;
 
+ButtonList::ButtonList(const QString& optionName)
+    : m_optionName(optionName)
+{}
+
 bool ButtonList::check(const QVariant& val)
 {
     // TODO stop using CTB
@@ -330,6 +334,10 @@ QVariant ButtonList::process(const QVariant& val)
 
 QVariant ButtonList::fallback()
 {
+    if (m_optionName == "favoriteButtons") {
+        return QVariant::fromValue(QList<CaptureTool::Type>{});
+    }
+
     auto buttons = CaptureToolButton::getIterableButtonTypes();
     buttons.removeOne(CaptureTool::TYPE_SIZEDECREASE);
     buttons.removeOne(CaptureTool::TYPE_SIZEINCREASE);
