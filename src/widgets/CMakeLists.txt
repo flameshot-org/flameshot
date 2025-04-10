@@ -11,6 +11,7 @@ target_sources(
         uploadlineitem.ui
 
         capturelauncher.h
+        checkablestar.h
         draggablewidgetmaker.h
         imagelabel.h
         trayicon.h
@@ -29,6 +30,7 @@ target_sources(
         flameshot
         PRIVATE
         capturelauncher.cpp
+        checkablestar.cpp
         draggablewidgetmaker.cpp
         imagelabel.cpp
         trayicon.cpp

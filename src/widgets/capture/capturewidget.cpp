@@ -102,6 +102,7 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
     m_opacity = m_config.contrastOpacity();
     m_uiColor = m_config.uiColor();
     m_contrastUiColor = m_config.contrastUiColor();
+    m_highlightUiColor = m_config.highlightUiColor();
     setMouseTracking(true);
     initContext(fullScreen, req);
 #if (defined(Q_OS_WIN) || defined(Q_OS_MACOS))
@@ -288,6 +289,7 @@ void CaptureWidget::initButtons()
 {
     auto allButtonTypes = CaptureToolButton::getIterableButtonTypes();
     auto visibleButtonTypes = m_config.buttons();
+    auto favoriteButtonTypes = m_config.favoriteButtons();
     if ((m_context.request.tasks() == CaptureRequest::NO_TASK) ||
         (m_context.request.tasks() == CaptureRequest::PRINT_GEOMETRY)) {
         allButtonTypes.removeOne(CaptureTool::TYPE_ACCEPT);
@@ -311,7 +313,13 @@ void CaptureWidget::initButtons()
         if (t == CaptureTool::TYPE_SELECTIONINDICATOR) {
             m_sizeIndButton = b;
         }
-        b->setColor(m_uiColor);
+
+        if (favoriteButtonTypes.contains(t)) {
+            b->setColor(m_highlightUiColor);
+        } else {
+            b->setColor(m_uiColor);
+        }
+
         b->hide();
         // must be enabled for SelectionWidget's eventFilter to work correctly
         b->setAttribute(Qt::WA_NoMousePropagation);

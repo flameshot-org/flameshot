@@ -180,6 +180,8 @@ class FilenamePattern : public ValueHandler
 class ButtonList : public ValueHandler
 {
 public:
+    explicit ButtonList(const QString& optionName = {});
+
     bool check(const QVariant& val) override;
     QVariant process(const QVariant& val) override;
     QVariant fallback() override;
@@ -190,6 +192,9 @@ public:
     static QList<CaptureTool::Type> fromIntList(const QList<int>&);
     static QList<int> toIntList(const QList<CaptureTool::Type>& l);
     static bool normalizeButtons(QList<int>& buttons);
+
+private:
+    QString m_optionName;
 };
 
 class UserColors : public ValueHandler

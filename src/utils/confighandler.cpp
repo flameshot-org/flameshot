@@ -106,8 +106,10 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
   // Interface tab
     OPTION("uiColor"                     ,Color              ( {116, 0, 150}   )),
     OPTION("contrastUiColor"             ,Color              ( {39, 0, 50}     )),
+    OPTION("highlightUiColor"              ,Color              ( {196, 0, 255} )),
     OPTION("contrastOpacity"             ,BoundedInt         ( 0, 255, 190    )),
-    OPTION("buttons"                     ,ButtonList         ( {}            )),
+    OPTION("buttons"                     ,ButtonList         ( "buttons"     )),
+    OPTION("favoriteButtons"             ,ButtonList         ( "favoriteButtons" )),
     // Filename Editor tab
     OPTION("filenamePattern"             ,FilenamePattern    ( {}            )),
     // Others

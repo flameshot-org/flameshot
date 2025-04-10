@@ -27,11 +27,13 @@ private slots:
     void changeLastButton(CaptureToolButton*);
 
 private:
-    QColor m_uiColor, m_contrastColor;
+    QColor m_uiColor, m_contrastColor, m_highlightUiColor;
     CaptureToolButton* m_buttonMainColor;
     ClickableLabel* m_labelMain;
     CaptureToolButton* m_buttonContrast;
     ClickableLabel* m_labelContrast;
+    CaptureToolButton* m_buttonHighlightColor;
+    ClickableLabel* m_labelHighlight;
     CaptureToolButton* m_lastButtonPressed;
     color_widgets::ColorWheel* m_colorWheel;
 
