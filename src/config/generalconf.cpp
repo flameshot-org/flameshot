@@ -535,7 +535,7 @@ void GeneralConf::initUploadHistoryMax()
     box->setLayout(vboxLayout);
 
     m_uploadHistoryMax = new QSpinBox(this);
-    m_uploadHistoryMax->setMaximum(50);
+    m_uploadHistoryMax->setMaximum(100); // Allow up to 100
     QString foreground = this->palette().windowText().color().name();
     m_uploadHistoryMax->setStyleSheet(
       QStringLiteral("color: %1").arg(foreground));
