@@ -58,7 +58,7 @@ const QList<QString>& History::history()
                                              QDir::Files,
                                              QDir::Time);
     int cnt = 0;
-    int max = ConfigHandler().uploadHistoryMax();
+    int max = 500; // the total amount of images stored is 500
     m_thumbs.clear();
     foreach (QString fileName, images) {
         if (++cnt <= max) {
