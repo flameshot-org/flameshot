@@ -161,6 +161,8 @@ private:
     QColor m_uiColor;
     // Secondary ui color
     QColor m_contrastUiColor;
+    // Highlight ui color
+    QColor m_highlightUiColor;
 
     // Outside selection opacity
     int m_opacity;
