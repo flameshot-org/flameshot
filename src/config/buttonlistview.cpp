@@ -5,8 +5,8 @@
 #include "src/tools/toolfactory.h"
 #include "src/utils/confighandler.h"
 #include "src/widgets/checkablestar.h"
-#include <QListWidgetItem>
 #include <QHBoxLayout>
+#include <QListWidgetItem>
 #include <algorithm>
 
 ButtonListView::ButtonListView(QWidget* parent)
@@ -58,14 +58,16 @@ void ButtonListView::initButtonList()
         this->setItemWidget(m_buttonItem, widget);
 
         // Connect the starredChanged signal to update favorite buttons
-        connect(checkableStar, &CheckableStar::starredChanged, [this, t](bool starred) {
-            if (starred) {
-                m_favoriteButtons.append(t);
-            } else {
-                m_favoriteButtons.removeOne(t);
-            }
-            ConfigHandler().setFavoriteButtons(m_favoriteButtons);
-        });
+        connect(checkableStar,
+                &CheckableStar::starredChanged,
+                [this, t](bool starred) {
+                    if (starred) {
+                        m_favoriteButtons.append(t);
+                    } else {
+                        m_favoriteButtons.removeOne(t);
+                    }
+                    ConfigHandler().setFavoriteButtons(m_favoriteButtons);
+                });
 
         tool->deleteLater();
     }

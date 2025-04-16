@@ -299,7 +299,7 @@ using BType = CaptureTool::Type;
 using BList = QList<CaptureTool::Type>;
 
 ButtonList::ButtonList(const QString& optionName)
-    : m_optionName(optionName)
+  : m_optionName(optionName)
 {}
 
 bool ButtonList::check(const QVariant& val)

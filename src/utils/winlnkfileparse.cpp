@@ -64,13 +64,8 @@ DesktopAppData WinLnkFileParser::parseLnkFile(const QFileInfo& fiLnk,
 int WinLnkFileParser::processDirectory(const QDir& dir)
 {
     QStringList sListMenuFilter;
-    sListMenuFilter << "Accessibility"
-                    << "Administrative Tools"
-                    << "Setup"
-                    << "System Tools"
-                    << "Uninstall"
-                    << "Update"
-                    << "Updater"
+    sListMenuFilter << "Accessibility" << "Administrative Tools" << "Setup"
+                    << "System Tools" << "Uninstall" << "Update" << "Updater"
                     << "Windows PowerShell";
     const QString sMenuFilter("\\b(" + sListMenuFilter.join('|') + ")\\b");
     QRegularExpression regexfilter(sMenuFilter);

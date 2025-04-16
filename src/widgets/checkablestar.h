@@ -8,7 +8,7 @@ class CheckableStar : public QToolButton
     Q_OBJECT
 
 public:
-    explicit CheckableStar(QWidget *parent = nullptr);
+    explicit CheckableStar(QWidget* parent = nullptr);
 
     void setStarred(bool starred);
     bool isStarred() const;

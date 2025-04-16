@@ -1,8 +1,9 @@
 #include "checkablestar.h"
 #include <QIcon>
 
-CheckableStar::CheckableStar(QWidget *parent)
-    : QToolButton(parent), m_starred(false)
+CheckableStar::CheckableStar(QWidget* parent)
+  : QToolButton(parent)
+  , m_starred(false)
 {
     setAutoRaise(true);
     setCursor(Qt::PointingHandCursor);

@@ -140,7 +140,7 @@ void UIcolorEditor::initButtons()
     auto* frame3 = new QGroupBox();
     m_buttonHighlightColor = new CaptureToolButton(m_buttonIconType, frame3);
     m_buttonHighlightColor->move(m_buttonHighlightColor->x() + extraSize / 2,
-                               m_buttonHighlightColor->y() + extraSize / 2);
+                                 m_buttonHighlightColor->y() + extraSize / 2);
 
     auto* h3 = new QHBoxLayout();
     h3->addWidget(frame3);
@@ -150,8 +150,9 @@ void UIcolorEditor::initButtons()
     h3->addWidget(m_labelHighlight);
     m_vLayout->addLayout(h3);
 
-    m_buttonHighlightColor->setToolTip(tr("Click on this button to set the edition"
-                                        " mode of the highlight color."));
+    m_buttonHighlightColor->setToolTip(
+      tr("Click on this button to set the edition"
+         " mode of the highlight color."));
 
     connect(m_buttonMainColor,
             &CaptureToolButton::pressedButtonLeftClick,
