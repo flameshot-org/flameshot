@@ -10,6 +10,7 @@
 #include <QPixmap>
 #include <QScrollBar>
 const int IMAGES_BATCH_SIZE = 10;
+
 void scaleThumbnail(QPixmap& pixmap)
 {
     if (pixmap.height() / HISTORYPIXMAP_MAX_PREVIEW_HEIGHT >=
@@ -61,7 +62,11 @@ void UploadHistory::loadHistory()
     if (historyFiles.isEmpty()) {
         setEmptyMessage();
     } else {
-        loadNextBatch();
+        int initialLoadCount = std::min(maxSize, historyFiles.size());
+        for (int i = 0; i < initialLoadCount; ++i) {
+            addLine(History().path(), historyFiles[i]);
+        }
+        currentBatchStartIndex = initialLoadCount;
     }
 
     if (!loadMoreButton) {
@@ -72,7 +77,11 @@ void UploadHistory::loadHistory()
         });
     }
 
-    ui->historyContainer->addWidget(loadMoreButton);
+    if (currentBatchStartIndex < historyFiles.size() || !secondaryStorage.isEmpty()) {
+        ui->historyContainer->addWidget(loadMoreButton);
+    } else {
+        loadMoreButton->hide();
+    }
 }
 
 void UploadHistory::loadNextBatch()
@@ -151,3 +160,4 @@ UploadHistory::~UploadHistory()
 {
     delete ui;
 }
+
