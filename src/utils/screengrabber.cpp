@@ -80,19 +80,23 @@ void ScreenGrabber::freeDesktopPortal(bool& ok, QPixmap& res)
             QUrl uri = map.value("uri").toString();
             QString uriString = uri.toLocalFile();
             res = QPixmap(uriString);
-            QRect approximatedPhysicalDesktopGeometryBasedOnDevicePixelRatio = desktopGeometry();
-            QRect accurateLogicalDesktopGeometry = logicalDesktopGeometry();
-            if (res.size() == approximatedPhysicalDesktopGeometryBasedOnDevicePixelRatio.size()) // which means the res is physcal size and the dpr is correct.
+
+            // we calculate an approximated physical desktop geometry based on dpr(provided by qt)
+            // we calculate the logical desktop geometry later, this is the accurate size
+            // more info: https://bugreports.qt.io/browse/QTBUG-135612
+            QRect approxPhysGeo = desktopGeometry();
+            QRect logicalGeo = logicalDesktopGeometry();
+            if (res.size() == approxPhysGeo.size()) // which means the res is physcal size and the dpr is correct.
             {
                 res.setDevicePixelRatio(qApp->devicePixelRatio());
             }
-            else if (res.size() == accurateLogicalDesktopGeometry.size()) // which means the res is logical size and we need to do nothing.
+            else if (res.size() == logicalGeo.size()) // which means the res is logical size and we need to do nothing.
             {
                 ;
             }
             else // which means the res is physical size and the dpr is not correct.
             {
-                res.setDevicePixelRatio(res.height() * 1.0f / accurateLogicalDesktopGeometry.height());
+                res.setDevicePixelRatio(res.height() * 1.0f / logicalGeo.height());
             }
             QFile imgFile(uriString);
             imgFile.remove();
