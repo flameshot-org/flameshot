@@ -70,12 +70,6 @@ jobs:
               arch: armhf
             }
           - {
-              name: ubuntu-20.04,
-              os: ubuntu,
-              symbol: focal,
-              arch: amd64
-            }
-          - {
               name: ubuntu-22.04,
               os: ubuntu,
               symbol: jammy,
