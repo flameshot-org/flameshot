@@ -106,8 +106,7 @@ bool PinWidget::scrollEvent(QWheelEvent* event)
 {
     const auto phase = event->phase();
     if (phase == Qt::ScrollPhase::ScrollUpdate
-#if defined(Q_OS_LINUX) || defined(Q_OS_WINDOWS)
-        // Linux is getting only NoScrollPhase events.
+#if defined(Q_OS_LINUX) || defined(Q_OS_WINDOWS) || defined(Q_OS_MACOS)
         || phase == Qt::ScrollPhase::NoScrollPhase
 #endif
     ) {
