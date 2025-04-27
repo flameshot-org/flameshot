@@ -31,13 +31,17 @@ void ScreenGrabber::generalGrimScreenshot(bool& ok, QPixmap& res)
 {
 #ifdef USE_WAYLAND_GRIM
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
+    QString runDir = QProcessEnvironment::systemEnvironment().value("XDG_RUNTIME_DIR");
+    QString imgPath = runDir + "/flameshot.ppm";
     QProcess Process;
     QString program = "grim";
     QStringList arguments;
-    arguments << "-";
+    arguments << "-t" << "ppm" << imgPath;
     Process.start(program, arguments);
     if (Process.waitForFinished()) {
-        res.loadFromData(Process.readAll());
+        res.load(imgPath, "ppm");
+        QFile imgFile(imgPath);
+        imgFile.remove();
         ok = true;
     } else {
         ok = false;
