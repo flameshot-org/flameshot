@@ -4,6 +4,7 @@
 #include "screengrabber.h"
 #include "abstractlogger.h"
 #include "src/core/qguiappcurrentscreen.h"
+#include "src/utils/confighandler.h"
 #include "src/utils/filenamehandler.h"
 #include "src/utils/systemnotification.h"
 #include <QApplication>
@@ -30,13 +31,19 @@ void ScreenGrabber::generalGrimScreenshot(bool& ok, QPixmap& res)
 {
 #ifdef USE_WAYLAND_GRIM
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
+    QString runDir =
+      QProcessEnvironment::systemEnvironment().value("XDG_RUNTIME_DIR");
+    QString imgPath = runDir + "/flameshot.ppm";
     QProcess Process;
     QString program = "grim";
     QStringList arguments;
-    arguments << "-";
+    arguments << "-t"
+              << "ppm" << imgPath;
     Process.start(program, arguments);
     if (Process.waitForFinished()) {
-        res.loadFromData(Process.readAll());
+        res.load(imgPath, "ppm");
+        QFile imgFile(imgPath);
+        imgFile.remove();
         ok = true;
     } else {
         ok = false;
@@ -133,18 +140,23 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
             case DesktopInfo::HYPRLAND:
             case DesktopInfo::OTHER: {
 #ifndef USE_WAYLAND_GRIM
-                AbstractLogger::warning() << tr(
-                  "If the USE_WAYLAND_GRIM option is not activated, the dbus "
-                  "protocol will be used. It should be noted that using the "
-                  "dbus protocol under wayland is not recommended. It is "
-                  "recommended to recompile with the USE_WAYLAND_GRIM flag to "
-                  "activate the grim-based general wayland screenshot adapter");
+                if (!ConfigHandler().disabledGrimWarning()) {
+                    AbstractLogger::warning() << tr(
+                      "If the USE_WAYLAND_GRIM option is not activated, the "
+                      "dbus protocol will be used. It should be noted that "
+                      "using the dbus protocol under wayland is not "
+                      "recommended. It is recommended to recompile with the "
+                      "USE_WAYLAND_GRIM flag to activate the grim-based "
+                      "general wayland screenshot adapter");
+                }
                 freeDesktopPortal(ok, res);
 #else
-                AbstractLogger::warning()
-                  << tr("grim's screenshot component is implemented based on "
-                        "wlroots, it may not be used in GNOME or similar "
-                        "desktop environments");
+                if (!ConfigHandler().disabledGrimWarning()) {
+                    AbstractLogger::warning() << tr(
+                      "grim's screenshot component is implemented based on "
+                      "wlroots, it may not be used in GNOME or similar "
+                      "desktop environments");
+                }
                 generalGrimScreenshot(ok, res);
 #endif
                 break;
