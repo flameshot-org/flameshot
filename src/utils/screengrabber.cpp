@@ -140,12 +140,15 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
             case DesktopInfo::HYPRLAND:
             case DesktopInfo::OTHER: {
 #ifndef USE_WAYLAND_GRIM
-                AbstractLogger::warning() << tr(
-                  "If the USE_WAYLAND_GRIM option is not activated, the dbus "
-                  "protocol will be used. It should be noted that using the "
-                  "dbus protocol under wayland is not recommended. It is "
-                  "recommended to recompile with the USE_WAYLAND_GRIM flag to "
-                  "activate the grim-based general wayland screenshot adapter");
+                if (!ConfigHandler().disabledGrimWarning()) {
+                    AbstractLogger::warning() << tr(
+                      "If the USE_WAYLAND_GRIM option is not activated, the "
+                      "dbus protocol will be used. It should be noted that "
+                      "using the dbus protocol under wayland is not "
+                      "recommended. It is recommended to recompile with the "
+                      "USE_WAYLAND_GRIM flag to activate the grim-based "
+                      "general wayland screenshot adapter");
+                }
                 freeDesktopPortal(ok, res);
 #else
                 if (!ConfigHandler().disabledGrimWarning()) {
