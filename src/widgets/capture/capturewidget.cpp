@@ -30,11 +30,13 @@
 #include "src/widgets/panel/sidepanelwidget.h"
 #include "src/widgets/panel/utilitypanel.h"
 #include <QApplication>
+#include <QCheckBox>
 #include <QDateTime>
 #include <QDebug>
 #include <QDesktopWidget>
 #include <QFontMetrics>
 #include <QLabel>
+#include <QMessageBox>
 #include <QPaintEvent>
 #include <QPainter>
 #include <QScreen>
@@ -256,6 +258,8 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
         OverlayMessage::push(m_helpMessage);
     }
 
+    initQuitPrompt();
+
     updateCursor();
 }
 
@@ -465,6 +469,38 @@ bool CaptureWidget::commitCurrentTool()
     return false;
 }
 
+void CaptureWidget::initQuitPrompt()
+{
+    m_quitPrompt = new QMessageBox;
+    makeChild(m_quitPrompt);
+    m_quitPrompt->hide();
+
+    QString baseSheet = "QDialog { background-color: %1; }"
+                        "QLabel, QCheckBox { color: %2 }"
+                        "QPushButton { background-color: %1; color: %2 }";
+    QColor text = ColorUtils::colorIsDark(m_uiColor) ? Qt::white : Qt::black;
+    QString styleSheet = baseSheet.arg(m_uiColor.name()).arg(text.name());
+
+    m_quitPrompt->setStyleSheet(styleSheet);
+    m_quitPrompt->setWindowTitle(tr("Quit Capture"));
+    m_quitPrompt->setText(tr("Are you sure you want to quit capture?"));
+    m_quitPrompt->setIcon(QMessageBox::Icon::Question);
+    m_quitPrompt->setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+    m_quitPrompt->setDefaultButton(QMessageBox::No);
+
+    auto* check = new QCheckBox(tr("Do not show this again"));
+    m_quitPrompt->setCheckBox(check);
+
+    QObject::connect(check, &QCheckBox::clicked, [](bool checked) {
+        ConfigHandler().setShowQuitPrompt(!checked);
+    });
+}
+
+bool CaptureWidget::promptQuit()
+{
+    return m_quitPrompt->exec() == QMessageBox::Yes;
+}
+
 void CaptureWidget::deleteToolWidgetOrClose()
 {
     if (m_activeButton != nullptr) {
@@ -484,7 +520,14 @@ void CaptureWidget::deleteToolWidgetOrClose()
         m_colorPicker->hide();
     } else {
         // close CaptureWidget
-        close();
+        if (m_config.showQuitPrompt()) {
+            // need to show prompt
+            if (m_quitPrompt->isHidden() && promptQuit()) {
+                close();
+            }
+        } else {
+            close();
+        }
     }
 }
 

@@ -42,6 +42,7 @@ GeneralConf::GeneralConf(QWidget* parent)
     initCheckForUpdates();
 #endif
     initShowStartupLaunchMessage();
+    initShowQuitPrompt();
     initAllowMultipleGuiInstances();
     initSaveLastRegion();
     initShowHelp();
@@ -101,6 +102,7 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
     m_predefinedColorPaletteLarge->setChecked(
       config.predefinedColorPaletteLarge());
     m_showStartupLaunchMessage->setChecked(config.showStartupLaunchMessage());
+    m_showQuitPrompt->setChecked(config.showQuitPrompt());
     m_screenshotPathFixedCheck->setChecked(config.savePathFixed());
     m_uploadHistoryMax->setValue(config.uploadHistoryMax());
     m_undoLimit->setValue(config.undoLimit());
@@ -411,6 +413,19 @@ void GeneralConf::initShowStartupLaunchMessage()
 
     connect(m_showStartupLaunchMessage, &QCheckBox::clicked, [](bool checked) {
         ConfigHandler().setShowStartupLaunchMessage(checked);
+    });
+}
+
+void GeneralConf::initShowQuitPrompt()
+{
+    m_showQuitPrompt = new QCheckBox(tr("Ask before quit capture"), this);
+    ConfigHandler config;
+    m_showQuitPrompt->setToolTip(
+      tr("Show the confirmation prompt before ESC quit"));
+    m_scrollAreaLayout->addWidget(m_showQuitPrompt);
+
+    connect(m_showQuitPrompt, &QCheckBox::clicked, [](bool checked) {
+        ConfigHandler().setShowQuitPrompt(checked);
     });
 }
 
