@@ -80,6 +80,7 @@ private:
     void initShowDesktopNotification();
     void initShowHelp();
     void initShowMagnifier();
+    void initShowQuitPrompt();
     void initShowSidePanelButton();
     void initShowStartupLaunchMessage();
     void initShowTrayIcon();
@@ -110,6 +111,7 @@ private:
     QCheckBox* m_autoCloseIdleDaemon;
     QCheckBox* m_autostart;
     QCheckBox* m_showStartupLaunchMessage;
+    QCheckBox* m_showQuitPrompt;
     QCheckBox* m_copyURLAfterUpload;
     QCheckBox* m_copyPathAfterSave;
     QCheckBox* m_antialiasingPinZoom;

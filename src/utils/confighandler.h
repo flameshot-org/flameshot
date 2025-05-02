@@ -102,6 +102,7 @@ public:
     CONFIG_GETTER_SETTER(showStartupLaunchMessage,
                          setShowStartupLaunchMessage,
                          bool)
+    CONFIG_GETTER_SETTER(showQuitPrompt, setShowQuitPrompt, bool)
     CONFIG_GETTER_SETTER(contrastOpacity, setContrastOpacity, int)
     CONFIG_GETTER_SETTER(copyURLAfterUpload, setCopyURLAfterUpload, bool)
     CONFIG_GETTER_SETTER(historyConfirmationToDelete,
