@@ -474,7 +474,14 @@ void CaptureWidget::initQuitPrompt()
     m_quitPrompt = new QMessageBox;
     makeChild(m_quitPrompt);
     m_quitPrompt->hide();
-    m_quitPrompt->setStyleSheet("QDialog { background: #aaa; }");
+
+    QString baseSheet = "QDialog { background-color: %1; }"
+                        "QLabel, QCheckBox { color: %2 }"
+                        "QPushButton { background-color: %1; color: %2 }";
+    QColor text = ColorUtils::colorIsDark(m_uiColor) ? Qt::white : Qt::black;
+    QString styleSheet = baseSheet.arg(m_uiColor.name()).arg(text.name());
+
+    m_quitPrompt->setStyleSheet(styleSheet);
     m_quitPrompt->setWindowTitle(tr("Quit Capture"));
     m_quitPrompt->setText(tr("Are you sure you want to quit capture?"));
     m_quitPrompt->setIcon(QMessageBox::Icon::Question);
