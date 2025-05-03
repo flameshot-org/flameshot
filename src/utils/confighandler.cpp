@@ -79,6 +79,7 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     OPTION("showDesktopNotification"     ,Bool               ( true          )),
     OPTION("showAbortNotification"       ,Bool               ( true          )),
     OPTION("disabledTrayIcon"            ,Bool               ( false         )),
+    OPTION("useGrimAdapter"              ,Bool               ( false         )),
     OPTION("disabledGrimWarning"         ,Bool               ( false         )),
     OPTION("historyConfirmationToDelete" ,Bool               ( true          )),
 #if !defined(DISABLE_UPDATE_CHECKER)
