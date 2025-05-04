@@ -135,7 +135,7 @@ void saveJpegToClipboardMacOS(const QPixmap& capture)
 
     // Use osascript to copy the contents of the file to clipboard
     QProcess process;
-    QString script = 
+    QString script =
       QString("set the clipboard to (read (POSIX file \"%1\") as «class PNGf»)")
         .arg(tempFile.fileName());
     process.start("osascript", QStringList() << "-e" << script);
