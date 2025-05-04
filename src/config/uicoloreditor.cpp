@@ -38,12 +38,16 @@ void UIcolorEditor::updateComponents()
     ConfigHandler config;
     m_uiColor = config.uiColor();
     m_contrastColor = config.contrastUiColor();
+    m_highlightUiColor = config.highlightUiColor();
     m_buttonContrast->setColor(m_contrastColor);
     m_buttonMainColor->setColor(m_uiColor);
+    m_buttonHighlightColor->setColor(m_highlightUiColor);
     if (m_lastButtonPressed == m_buttonMainColor) {
         m_colorWheel->setColor(m_uiColor);
-    } else {
+    } else if (m_lastButtonPressed == m_buttonContrast) {
         m_colorWheel->setColor(m_contrastColor);
+    } else {
+        m_colorWheel->setColor(m_highlightUiColor);
     }
 }
 
@@ -53,8 +57,10 @@ void UIcolorEditor::updateUIcolor()
     ConfigHandler config;
     if (m_lastButtonPressed == m_buttonMainColor) {
         config.setUiColor(m_uiColor);
-    } else {
+    } else if (m_lastButtonPressed == m_buttonContrast) {
         config.setContrastUiColor(m_contrastColor);
+    } else {
+        config.setHighlightUiColor(m_highlightUiColor);
     }
 }
 
@@ -63,8 +69,10 @@ void UIcolorEditor::updateLocalColor(const QColor c)
 {
     if (m_lastButtonPressed == m_buttonMainColor) {
         m_uiColor = c;
-    } else {
+    } else if (m_lastButtonPressed == m_buttonContrast) {
         m_contrastColor = c;
+    } else {
+        m_highlightUiColor = c;
     }
     m_lastButtonPressed->setColor(c);
 }
@@ -129,11 +137,32 @@ void UIcolorEditor::initButtons()
     m_buttonContrast->setToolTip(tr("Click on this button to set the edition"
                                     " mode of the contrast color."));
 
+    auto* frame3 = new QGroupBox();
+    m_buttonHighlightColor = new CaptureToolButton(m_buttonIconType, frame3);
+    m_buttonHighlightColor->move(m_buttonHighlightColor->x() + extraSize / 2,
+                                 m_buttonHighlightColor->y() + extraSize / 2);
+
+    auto* h3 = new QHBoxLayout();
+    h3->addWidget(frame3);
+    frame3->setFixedSize(frameSize, frameSize);
+    m_labelHighlight = new ClickableLabel(tr("Highlight Color"), this);
+    m_labelHighlight->setStyleSheet(QStringLiteral("color : gray"));
+    h3->addWidget(m_labelHighlight);
+    m_vLayout->addLayout(h3);
+
+    m_buttonHighlightColor->setToolTip(
+      tr("Click on this button to set the edition"
+         " mode of the highlight color."));
+
     connect(m_buttonMainColor,
             &CaptureToolButton::pressedButtonLeftClick,
             this,
             &UIcolorEditor::changeLastButton);
     connect(m_buttonContrast,
+            &CaptureToolButton::pressedButtonLeftClick,
+            this,
+            &UIcolorEditor::changeLastButton);
+    connect(m_buttonHighlightColor,
             &CaptureToolButton::pressedButtonLeftClick,
             this,
             &UIcolorEditor::changeLastButton);
@@ -143,6 +172,9 @@ void UIcolorEditor::initButtons()
     });
     connect(m_labelContrast, &ClickableLabel::clicked, this, [this] {
         changeLastButton(m_buttonContrast);
+    });
+    connect(m_labelHighlight, &ClickableLabel::clicked, this, [this] {
+        changeLastButton(m_buttonHighlightColor);
     });
     m_lastButtonPressed = m_buttonMainColor;
 }
@@ -159,10 +191,17 @@ void UIcolorEditor::changeLastButton(CaptureToolButton* b)
             m_colorWheel->setColor(m_uiColor);
             m_labelContrast->setStyleSheet(offStyle);
             m_labelMain->setStyleSheet(styleSheet());
-        } else {
+            m_labelHighlight->setStyleSheet(offStyle);
+        } else if (b == m_buttonContrast) {
             m_colorWheel->setColor(m_contrastColor);
             m_labelContrast->setStyleSheet(styleSheet());
             m_labelMain->setStyleSheet(offStyle);
+            m_labelHighlight->setStyleSheet(offStyle);
+        } else {
+            m_colorWheel->setColor(m_highlightUiColor);
+            m_labelHighlight->setStyleSheet(styleSheet());
+            m_labelMain->setStyleSheet(offStyle);
+            m_labelContrast->setStyleSheet(offStyle);
         }
         b->setIcon(b->icon());
     }

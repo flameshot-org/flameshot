@@ -107,8 +107,10 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
   // Interface tab
     OPTION("uiColor"                     ,Color              ( {116, 0, 150}   )),
     OPTION("contrastUiColor"             ,Color              ( {39, 0, 50}     )),
+    OPTION("highlightUiColor"              ,Color              ( {196, 0, 255} )),
     OPTION("contrastOpacity"             ,BoundedInt         ( 0, 255, 190    )),
-    OPTION("buttons"                     ,ButtonList         ( {}            )),
+    OPTION("buttons"                     ,ButtonList         ( "buttons"     )),
+    OPTION("favoriteButtons"             ,ButtonList         ( "favoriteButtons" )),
     // Filename Editor tab
     OPTION("filenamePattern"             ,FilenamePattern    ( {}            )),
     // Others
@@ -199,7 +201,7 @@ ConfigHandler::ConfigHandler()
         QObject::connect(m_configWatcher.data(),
                          &QFileSystemWatcher::fileChanged,
                          [](const QString& fileName) {
-                             emit getInstance()->fileChanged();
+                             emit getInstance() -> fileChanged();
 
                              if (QFile(fileName).exists()) {
                                  m_configWatcher->addPath(fileName);
@@ -694,12 +696,12 @@ void ConfigHandler::setErrorState(bool error) const
     if (!hadError && m_hasError) {
         QString msg = errorMessage();
         AbstractLogger::error() << msg;
-        emit getInstance()->error();
+        emit getInstance() -> error();
     } else if (hadError && !m_hasError) {
         auto msg =
           tr("You have successfully resolved the configuration error.");
         AbstractLogger::info() << msg;
-        emit getInstance()->errorResolved();
+        emit getInstance() -> errorResolved();
     }
 }
 

@@ -76,6 +76,7 @@ public:
     CONFIG_GETTER_SETTER(savePathFixed, setSavePathFixed, bool)
     CONFIG_GETTER_SETTER(uiColor, setUiColor, QColor)
     CONFIG_GETTER_SETTER(contrastUiColor, setContrastUiColor, QColor)
+    CONFIG_GETTER_SETTER(highlightUiColor, setHighlightUiColor, QColor)
     CONFIG_GETTER_SETTER(drawColor, setDrawColor, QColor)
     CONFIG_GETTER_SETTER(predefinedColorPaletteLarge,
                          setPredefinedColorPaletteLarge,
@@ -122,6 +123,9 @@ public:
                          QString)
     CONFIG_GETTER_SETTER(undoLimit, setUndoLimit, int)
     CONFIG_GETTER_SETTER(buttons, setButtons, QList<CaptureTool::Type>)
+    CONFIG_GETTER_SETTER(favoriteButtons,
+                         setFavoriteButtons,
+                         QList<CaptureTool::Type>)
     CONFIG_GETTER_SETTER(showMagnifier, setShowMagnifier, bool)
     CONFIG_GETTER_SETTER(squareMagnifier, setSquareMagnifier, bool)
     CONFIG_GETTER_SETTER(copyOnDoubleClick, setCopyOnDoubleClick, bool)
