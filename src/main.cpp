@@ -136,6 +136,7 @@ int main(int argc, char* argv[])
     QCoreApplication::setApplicationVersion(APP_VERSION);
     QCoreApplication::setApplicationName(QStringLiteral("flameshot"));
     QCoreApplication::setOrganizationName(QStringLiteral("flameshot"));
+    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling, true);
 
     // no arguments, just launch Flameshot
     if (argc == 1) {
