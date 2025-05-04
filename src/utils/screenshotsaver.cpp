@@ -10,12 +10,12 @@
 #include "src/utils/globalvalues.h"
 #include "utils/desktopinfo.h"
 
-#include <QTemporaryFile>
+#include <QByteArray>
+#include <QDebug>
 #include <QImageWriter>
 #include <QPixmap>
-#include <QByteArray>
 #include <QProcess>
-#include <QDebug>
+#include <QTemporaryFile>
 
 #if USE_WAYLAND_CLIPBOARD
 #include <KSystemClipboard>
@@ -108,14 +108,17 @@ QString ShowSaveFileDialog(const QString& title, const QString& directory)
     }
 }
 
-void saveJpegToClipboardMacOS(const QPixmap& capture) {
+void saveJpegToClipboardMacOS(const QPixmap& capture)
+{
     // Convert QPixmap to JPEG data
     QByteArray jpegData;
     QBuffer buffer(&jpegData);
     buffer.open(QIODevice::WriteOnly);
 
     QImageWriter imageWriter(&buffer, "jpeg");
-    imageWriter.setQuality(ConfigHandler().jpegQuality()); // Set JPEG quality to whatever is in settings
+
+    // Set JPEG quality to whatever is in settings
+    imageWriter.setQuality(ConfigHandler().jpegQuality());
     if (!imageWriter.write(capture.toImage())) {
         qWarning() << "Failed to write image to JPEG format.";
         return;
@@ -132,9 +135,9 @@ void saveJpegToClipboardMacOS(const QPixmap& capture) {
 
     // Use osascript to copy the contents of the file to clipboard
     QProcess process;
-    QString script = QString(
-        "set the clipboard to (read (POSIX file \"%1\") as «class PNGf»)"
-    ).arg(tempFile.fileName());
+    QString script = 
+      QString("set the clipboard to (read (POSIX file \"%1\") as «class PNGf»)")
+        .arg(tempFile.fileName());
     process.start("osascript", QStringList() << "-e" << script);
     if (!process.waitForFinished()) {
         qWarning() << "Failed to execute AppleScript.";
