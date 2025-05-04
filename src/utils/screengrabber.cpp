@@ -138,6 +138,7 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
             case DesktopInfo::QTILE:
             case DesktopInfo::SWAY:
             case DesktopInfo::HYPRLAND:
+            case DesktopInfo::WLROOTS:
             case DesktopInfo::OTHER: {
 #ifndef USE_WAYLAND_GRIM
                 if (!ConfigHandler().disabledGrimWarning()) {

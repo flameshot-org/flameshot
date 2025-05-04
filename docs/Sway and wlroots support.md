@@ -15,6 +15,8 @@ export XDG_SESSION_DESKTOP=sway
 exec sway
 ```
 
+Other compositors, such as labwc, use `wlroots` as the XDG_CURRENT_DESKTOP value.
+
 You will also need to ensure that systemd/dbus is aware of these environment variables; this should be done **in your sway config** so that the DISPLAY and WAYLAND_DISPLAY variables are defined.
 
 (taken from [Sway wiki](https://github.com/swaywm/sway/wiki#gtk-applications-take-20-seconds-to-start)):
