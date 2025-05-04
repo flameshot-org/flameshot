@@ -68,6 +68,7 @@ signals:
     void toolSizeChanged(int size);
 
 private slots:
+    void grabColor();
     void undo();
     void redo();
     void togglePanel();

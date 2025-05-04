@@ -38,9 +38,9 @@ signals:
 public slots:
     void onToolSizeChanged(int tool);
     void onColorChanged(const QColor& color);
+    void startColorGrab();
 
 private slots:
-    void startColorGrab();
     void onColorGrabFinished();
     void onColorGrabAborted();
     void onTemporaryColorUpdated(const QColor& color);
