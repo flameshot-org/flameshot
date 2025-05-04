@@ -27,6 +27,7 @@
 #include <QDesktopServices>
 #include <QDesktopWidget>
 #include <QFile>
+#include <QProcess>
 #include <QMessageBox>
 #include <QThread>
 #include <QTimer>
@@ -358,6 +359,29 @@ void Flameshot::exportCapture(const QPixmap& capture,
         QTextStream(stdout)
           << selection.width() << "x" << selection.height() << "+"
           << selection.x() << "+" << selection.y() << "\n";
+    }
+
+    if (tasks & CR::OCR) {
+        QProcess *tesseractProcess = new QProcess();
+
+        tesseractProcess->setProcessChannelMode(QProcess::MergedChannels);
+        tesseractProcess->start(ConfigHandler().tesseractBinPath(), QStringList() << "stdin" << "stdout");
+        
+        capture.save(tesseractProcess, "PNG");
+        tesseractProcess->closeWriteChannel();
+        
+        AbstractLogger::info() << QObject::tr("Running OCR with tesseract");
+
+        if(!tesseractProcess->waitForFinished()){
+            QMessageBox messageBox;
+            QString errorMessage = tr("Error running tesseract OCR from ") + ConfigHandler().tesseractBinPath() + "\n" + tesseractProcess->errorString();
+            messageBox.critical(0, tr("Error"), errorMessage);
+            messageBox.setFixedSize(500,200);
+        }else{
+            QString stdout = tesseractProcess->readAllStandardOutput();
+            FlameshotDaemon::copyToClipboard(stdout);
+        }
+
     }
 
     if (tasks & CR::PRINT_RAW) {
