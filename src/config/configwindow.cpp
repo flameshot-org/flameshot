@@ -77,7 +77,6 @@ ConfigWindow::ConfigWindow(QWidget* parent)
                         QIcon(modifier + "name_edition.svg"),
                         tr("Filename Editor"));
 
-
     // shortcuts
     m_shortcuts = new ShortcutsWidget();
     m_shortcutsTab = new QWidget();
