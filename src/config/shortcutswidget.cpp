@@ -192,6 +192,7 @@ void ShortcutsWidget::loadShortcuts()
     appendShortcut("TYPE_COMMIT_CURRENT_TOOL", tr("Commit text in text area"));
     appendShortcut("TYPE_DELETE_CURRENT_TOOL",
                    tr("Delete selected drawn object"));
+    appendShortcut("TYPE_CANCEL", tr("Cancel current selection"));
 
     // non-editable shortcuts have an empty shortcut name
 

@@ -146,6 +146,7 @@ static QMap<QString, QSharedPointer<KeySequence>> recognizedShortcuts = {
     SHORTCUT("TYPE_SAVE"                ,   "Ctrl+S"                ),
     SHORTCUT("TYPE_ACCEPT"              ,   "Return"                ),
     SHORTCUT("TYPE_EXIT"                ,   "Ctrl+Q"                ),
+	SHORTCUT("TYPE_CANCEL" 				,	"Ctrl+Backspace"		),
     SHORTCUT("TYPE_IMAGEUPLOADER"       ,                           ),
 #if !defined(Q_OS_MACOS)
     SHORTCUT("TYPE_OPEN_APP"            ,   "Ctrl+O"                ),
