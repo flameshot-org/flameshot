@@ -12,6 +12,7 @@ on:
       - 'LICENSE'
       - 'docs/**'
 
+  workflow_dispatch:
 
 jobs:
   build:
