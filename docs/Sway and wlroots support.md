@@ -48,7 +48,7 @@ org.freedesktop.impl.portal.Screenshot=wlr
 Q) Flameshot doesn't take a screenshot, it just hangs!
 
 A) Please ensure that the packages are installed, and that the variables are exported.
-This is usually caused by flameshot receiving no response from the desktop portal. This can be verified by running `dbus-monitor --session sender=org.freedesktop.portal.Desktop destination=org.freedesktop.portal.Desktop`.
+This is usually caused by Flameshot receiving no response from the desktop portal. This can be verified by running `dbus-monitor --session sender=org.freedesktop.portal.Desktop destination=org.freedesktop.portal.Desktop`.
 
 Q) Flameshot takes one screenshot, then won't take anymore!
 
@@ -56,7 +56,7 @@ A) There is a bug in xdg-desktop-portal-wlr and Flameshot causing calls with the
 
 # River wlroots support
 
-Like mentioned above, flameshot now works on wlroots based Wayland compositors, however, there is a weird problem with river and that is when setting `XDG_CURRENT_DESKTOP=river`, flameshot won't work. The fix is you need to trick flameshot that you are on `sway`. Hence, you need to run river like so:
+Like mentioned above, Flameshot now works on wlroots based Wayland compositors, however, there is a weird problem with river and that is when setting `XDG_CURRENT_DESKTOP=river`, Flameshot won't work. The fix is you need to trick Flameshot that you are on `sway`. Hence, you need to run river like so:
 
 ```sh
 XDG_CURRENT_DESKTOP=sway dbus-run-session river
@@ -68,7 +68,7 @@ and add the following on your config such as in `$HOME/.config/river/init`
 riverctl float-filter-add "flameshot"
 ```
 
-Otherwise, flameshot will not take all of the screen and tiles its window instead like a normal application. Note however, that some clipboard stuff is broken so it might be good to save your screenshot as a file while having it copied to a clipboard in case if clipboard does some weird stuff like not pasting the overall screenshot.
+Otherwise, Flameshot will not take all of the screen and tiles its window instead like a normal application. Note however, that some clipboard stuff is broken so it might be good to save your screenshot as a file while having it copied to a clipboard in case if clipboard does some weird stuff like not pasting the overall screenshot.
 
 #### For more information, please refer to https://github.com/emersion/xdg-desktop-portal-wlr/wiki/%22It-doesn't-work%22-Troubleshooting-Checklist
 

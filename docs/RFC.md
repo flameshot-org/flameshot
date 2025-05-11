@@ -33,7 +33,7 @@ project is evolving in.
 [When you need to follow this process]: #when-you-need-to-follow-this-process
 
 You need to follow this process if you intend to make "substantial" changes to
-flameshot or the RFC process itself. What constitutes a
+Flameshot or the RFC process itself. What constitutes a
 "substantial" change is evolving based on community norms and varies depending
 on what part of the ecosystem you are proposing to change, but may include the
 following.
@@ -178,7 +178,7 @@ as a "very minor change" is up to the development team.
 
 [Reviewing RFCs]: #reviewing-rfcs
 
-The preferred method of discussing RFC's is the github issue. However, the development team may schedule meetings with the
+The preferred method of discussing RFC's is the Github issue. However, the development team may schedule meetings with the
 author and/or relevant stakeholders to discuss the issues in greater detail. In either
 case a summary from the meeting will be posted back to the RFC pull request.
 
