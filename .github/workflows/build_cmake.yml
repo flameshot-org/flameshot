@@ -6,11 +6,15 @@ on:
     paths-ignore:
       - 'README.md'
       - 'LICENSE'
+      - 'docs/**'
   pull_request:
     branches: [ master ]
     paths-ignore:
       - 'README.md'
       - 'LICENSE'
+      - 'docs/**'
+
+  workflow_dispatch:
 
 env:
   # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
