@@ -29,8 +29,11 @@ ScreenGrabber::ScreenGrabber(QObject* parent)
 
 void ScreenGrabber::generalGrimScreenshot(bool& ok, QPixmap& res)
 {
-#ifdef USE_WAYLAND_GRIM
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
+    if (!ConfigHandler().useGrimAdapter()) {
+        return;
+    }
+
     QString runDir =
       QProcessEnvironment::systemEnvironment().value("XDG_RUNTIME_DIR");
     QString imgPath = runDir + "/flameshot.ppm";
@@ -52,7 +55,6 @@ void ScreenGrabber::generalGrimScreenshot(bool& ok, QPixmap& res)
                 "the screen capture component of wayland. If the screen "
                 "capture component is missing, please install it!");
     }
-#endif
 #endif
 }
 
@@ -162,26 +164,26 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
             case DesktopInfo::SWAY:
             case DesktopInfo::HYPRLAND:
             case DesktopInfo::OTHER: {
-#ifndef USE_WAYLAND_GRIM
-                if (!ConfigHandler().disabledGrimWarning()) {
-                    AbstractLogger::warning() << tr(
-                      "If the USE_WAYLAND_GRIM option is not activated, the "
-                      "dbus protocol will be used. It should be noted that "
-                      "using the dbus protocol under wayland is not "
-                      "recommended. It is recommended to recompile with the "
-                      "USE_WAYLAND_GRIM flag to activate the grim-based "
-                      "general wayland screenshot adapter");
+                if (!ConfigHandler().useGrimAdapter()) {
+                    if (!ConfigHandler().disabledGrimWarning()) {
+                        AbstractLogger::warning() << tr(
+                          "If the useGrimAdapter setting is not enabled, the "
+                          "dbus protocol will be used. It should be noted that "
+                          "using the dbus protocol under wayland is not "
+                          "recommended. It is recommended to enable the "
+                          "useGrimAdapter setting in flameshot.ini to activate "
+                          "the grim-based general wayland screenshot adapter");
+                    }
+                    freeDesktopPortal(ok, res);
+                } else {
+                    if (!ConfigHandler().disabledGrimWarning()) {
+                        AbstractLogger::warning() << tr(
+                          "grim's screenshot component is implemented based on "
+                          "wlroots, it may not be used in GNOME or similar "
+                          "desktop environments");
+                    }
+                    generalGrimScreenshot(ok, res);
                 }
-                freeDesktopPortal(ok, res);
-#else
-                if (!ConfigHandler().disabledGrimWarning()) {
-                    AbstractLogger::warning() << tr(
-                      "grim's screenshot component is implemented based on "
-                      "wlroots, it may not be used in GNOME or similar "
-                      "desktop environments");
-                }
-                generalGrimScreenshot(ok, res);
-#endif
                 break;
             }
             default:
