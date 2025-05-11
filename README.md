@@ -65,6 +65,7 @@
     - [On KDE Plasma desktop](#on-kde-plasma-desktop)
     - [On Ubuntu](#on-ubuntu-tested-on-1804-2004-2204)
     - [On XFCE 4](#on-xfce-4)
+    - [On Fluxbox](#on-fluxbox)
 - [Considerations](#considerations)
 - [Installation](#installation)
   - [Prebuilt Packages](#prebuilt-packages)
@@ -310,6 +311,16 @@ Now every time you press <kbd>Prt Sc</kbd>, it will start the Flameshot GUI inst
 4. Replace `xfce4-screenshooter -fd 1` with `flameshot gui`
 
 Now every time you press <kbd>Prt Sc</kbd> it will start Flameshot GUI instead of the default application.
+
+#### On Fluxbox
+
+1. Edit your `~/.fluxbox/keys` file
+2. Add a new entry. `Print` is the key name, `flameshot gui` is the shell command; for more options see [the fluxbox wiki](https://sillyslux.github.io/fluxbox-wiki/en/wiki/Keyboard-Shortcuts/).
+
+    ```text
+    Print :Exec flameshot gui
+    ````
+3. Refresh Fluxbox configuration with **Reconfigure** option from the menu.
 
 ## Considerations
 
