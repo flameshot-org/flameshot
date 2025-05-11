@@ -16,6 +16,8 @@ on:
       - 'LICENSE'
       - 'docs/**'
 
+  workflow_dispatch:
+
 env:
   PRODUCT: flameshot
 
