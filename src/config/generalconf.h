@@ -53,6 +53,7 @@ private slots:
     void exportFileConfiguration();
     void resetConfiguration();
     void togglePathFixed();
+    void tesseractPathEdited();
     void uploadClientKeyEdited();
     void useJpgForClipboardChanged(bool checked);
     void setSaveAsFileExtension(const QString& extension);
@@ -91,6 +92,7 @@ private:
     void initUploadWithoutConfirmation();
     void initUseJpgForClipboard();
     void initUploadHistoryMax();
+    void initTesseractPath();
     void initUploadClientSecret();
     void initSaveLastRegion();
     void initShowSelectionGeometry();
@@ -125,6 +127,7 @@ private:
     QPushButton* m_resetButton;
     QCheckBox* m_saveAfterCopy;
     QLineEdit* m_savePath;
+    QLineEdit* m_tesseractPath;
     QLineEdit* m_uploadClientKey;
     QPushButton* m_changeSaveButton;
     QCheckBox* m_screenshotPathFixedCheck;

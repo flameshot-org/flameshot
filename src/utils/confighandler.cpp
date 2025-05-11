@@ -126,6 +126,7 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     // drawFontSize, remember to update ConfigHandler::toolSize
     OPTION("copyOnDoubleClick"           ,Bool               ( false         )),
     OPTION("uploadClientSecret"          ,String             ( "313baf0c7b4d3ff"            )),
+    OPTION("tesseractBinPath"            ,String             ( "tesseract"   )),
     OPTION("showSelectionGeometry"  , BoundedInt               (0,5,4)),
     OPTION("showSelectionGeometryHideTime", LowerBoundedInt       (0, 3000)),
     OPTION("jpegQuality", BoundedInt     (0,100,75))
@@ -146,6 +147,7 @@ static QMap<QString, QSharedPointer<KeySequence>> recognizedShortcuts = {
     SHORTCUT("TYPE_SAVE"                ,   "Ctrl+S"                ),
     SHORTCUT("TYPE_ACCEPT"              ,   "Return"                ),
     SHORTCUT("TYPE_EXIT"                ,   "Ctrl+Q"                ),
+    SHORTCUT("TYPE_OCR"                 ,                           ),
     SHORTCUT("TYPE_IMAGEUPLOADER"       ,                           ),
 #if !defined(Q_OS_MACOS)
     SHORTCUT("TYPE_OPEN_APP"            ,   "Ctrl+O"                ),
