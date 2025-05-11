@@ -307,7 +307,7 @@ Now every time you press <kbd>Prt Sc</kbd>, it will start the Flameshot GUI inst
     ```text
     Command                        Shortcut
     xfce4-screenshooter -fd 1      Print
-    ````
+    ```
 4. Replace `xfce4-screenshooter -fd 1` with `flameshot gui`
 
 Now every time you press <kbd>Prt Sc</kbd> it will start Flameshot GUI instead of the default application.
@@ -319,7 +319,7 @@ Now every time you press <kbd>Prt Sc</kbd> it will start Flameshot GUI instead o
 
     ```text
     Print :Exec flameshot gui
-    ````
+    ```
 3. Refresh Fluxbox configuration with **Reconfigure** option from the menu.
 
 ## Considerations
