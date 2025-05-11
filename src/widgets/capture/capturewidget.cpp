@@ -796,7 +796,6 @@ void CaptureWidget::mousePressEvent(QMouseEvent* e)
     if (m_selection->getMouseSide(e->pos()) != SelectionWidget::CENTER) {
         m_panel->setActiveLayer(-1);
     }
-
     if (e->button() == Qt::RightButton) {
         if (m_activeTool && m_activeTool->editMode()) {
             return;
@@ -1603,6 +1602,10 @@ void CaptureWidget::initShortcuts()
                 m_selection,
                 SLOT(moveDown()));
 
+    newShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_CANCEL")),
+                this,
+                SLOT(cancel()));
+
     newShortcut(
       QKeySequence(ConfigHandler().shortcut("TYPE_DELETE_CURRENT_TOOL")),
       this,
@@ -1912,6 +1915,23 @@ void CaptureWidget::redo()
     updateLayersPanel();
 
     restoreCircleCountState();
+}
+
+void CaptureWidget::cancel()
+{
+    if (m_activeButton != nullptr) {
+        uncheckActiveTool();
+    }
+    if (m_panel) {
+        m_panel->setActiveLayer(-1);
+    }
+    if (m_toolWidget) {
+        m_toolWidget->hide();
+        delete m_toolWidget;
+        m_toolWidget = nullptr;
+    }
+    m_selection->hide();
+    emit m_selection->geometrySettled();
 }
 
 QRect CaptureWidget::extendedSelection() const
