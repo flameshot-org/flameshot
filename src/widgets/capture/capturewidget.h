@@ -17,6 +17,7 @@
 #include "src/config/generalconf.h"
 #include "src/tools/capturecontext.h"
 #include "src/tools/capturetool.h"
+#include "src/utils/backtrackutils.h"
 #include "src/utils/confighandler.h"
 #include "src/widgets/capture/magnifierwidget.h"
 #include "src/widgets/capture/selectionwidget.h"
@@ -25,7 +26,6 @@
 #include <QTimer>
 #include <QUndoStack>
 #include <QWidget>
-
 class QLabel;
 class QPaintEvent;
 class QResizeEvent;
@@ -76,6 +76,10 @@ private slots:
     void childLeave();
 
     void deleteCurrentTool();
+
+    void onBacktrackBackward();
+    void onBacktrackForward();
+    void saveCurrentState();
 
     void setState(CaptureToolButton* b);
     void handleToolSignal(CaptureTool::Request r);
@@ -160,6 +164,10 @@ private:
 
     // Context information
     CaptureContext m_context;
+
+    CaptureContext m_currentContext;
+    bool m_selectionWidgetVisible = false;
+    QRect m_currentSelection;
 
     // Main ui color
     QColor m_uiColor;
