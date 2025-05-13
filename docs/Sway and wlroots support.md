@@ -4,6 +4,8 @@ Flameshot currently supports Sway and other wlroots based Wayland compositors th
 ## Basic steps
 The following packages need to be installed: `xdg-desktop-portal xdg-desktop-portal-wlr grim`. Please ensure your distro packages these, or install them manually.
 
+Some users are reporting versions of `xdg-desktop-portal` above 1.15.0 makes flameshot not working again. [Downgrade](https://wiki.archlinux.org/title/Downgrading_packages) to the `1.14.6` / `1.14.6-1` version and reboot (just exiting sway doesn't work) [(reference)](https://github.com/flameshot-org/flameshot/issues/2872#issuecomment-1215839730)
+
 Ensure that environment variables are set properly. If your distro does not set them automatically, use a launch script to export `XDG_CURRENT_DESKTOP=sway` **before** Sway is launched.
 ```sh
 #!/bin/bash
