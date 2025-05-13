@@ -67,6 +67,7 @@ GeneralConf::GeneralConf(QWidget* parent)
     initShowMagnifier();
     initSquareMagnifier();
     initJpegQuality();
+    initWebPQuality();
     // this has to be at the end
     initConfigButtons();
     updateComponents();
@@ -829,6 +830,26 @@ void GeneralConf::initJpegQuality()
             &GeneralConf::setJpegQuality);
 }
 
+void GeneralConf::initWebPQuality()
+{
+    auto* tobox = new QHBoxLayout();
+
+    int quality = ConfigHandler().value("webpQuality").toInt();
+    m_webpQuality = new QSpinBox();
+    m_webpQuality->setRange(0, 100);
+    m_webpQuality->setToolTip(tr("Quality range of 0-100; Higher number is "
+                                 "better quality and larger file size"));
+    m_webpQuality->setValue(quality);
+    tobox->addWidget(m_webpQuality);
+    tobox->addWidget(new QLabel(tr("WebP Quality")));
+
+    m_scrollAreaLayout->addLayout(tobox);
+    connect(m_webpQuality,
+            static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged),
+            this,
+            &GeneralConf::setWebPQuality);
+}
+
 void GeneralConf::setSelGeoHideTime(int v)
 {
     ConfigHandler().setValue("showSelectionGeometryHideTime", v);
@@ -837,6 +858,11 @@ void GeneralConf::setSelGeoHideTime(int v)
 void GeneralConf::setJpegQuality(int v)
 {
     ConfigHandler().setJpegQuality(v);
+}
+
+void GeneralConf::setWebPQuality(int v)
+{
+    ConfigHandler().setWebPQuality(v);
 }
 
 void GeneralConf::setGeometryLocation(int index)
