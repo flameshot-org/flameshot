@@ -2,6 +2,7 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "arrowtool.h"
+#include "confighandler.h"
 #include <cmath>
 
 namespace {
@@ -148,10 +149,15 @@ void ArrowTool::copyParams(const ArrowTool* from, ArrowTool* to)
 
 void ArrowTool::process(QPainter& painter, const QPixmap& pixmap)
 {
+    bool isArrowReversed = ConfigHandler().reverseArrow();
+
+    const QPoint& head = isArrowReversed ? points().second : points().first;
+    const QPoint& tail = isArrowReversed ? points().first : points().second;
+
     Q_UNUSED(pixmap)
     painter.setPen(QPen(color(), size()));
-    painter.drawLine(getShorterLine(points().first, points().second, size()));
-    m_arrowPath = getArrowHead(points().first, points().second, size());
+    painter.drawLine(getShorterLine(head, tail, size()));
+    m_arrowPath = getArrowHead(head, tail, size());
     painter.fillPath(m_arrowPath, QBrush(color()));
 }
 
