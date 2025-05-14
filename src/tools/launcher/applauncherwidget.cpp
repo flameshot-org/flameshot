@@ -62,13 +62,14 @@ AppLauncherWidget::AppLauncherWidget(const QPixmap& p, QWidget* parent)
         m_parser.processDirectory(allUserAppsFolder);
     }
 #else
-    QString dirLocal = QDir::homePath() + "/.local/share/applications/";
-    QDir appsDirLocal(dirLocal);
-    m_parser.processDirectory(appsDirLocal);
+    QStringList appsLocations =
+      QStandardPaths::standardLocations(QStandardPaths::ApplicationsLocation);
 
-    QString dir = QStringLiteral("/usr/share/applications/");
-    QDir appsDir(dir);
-    m_parser.processDirectory(appsDir);
+    for (auto appsLocation : appsLocations) {
+        QDir appsDir(appsLocation);
+        m_parser.processDirectory(QDir(appsDir));
+    }
+
 #endif
 
     initAppMap();

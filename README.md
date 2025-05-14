@@ -65,6 +65,7 @@
     - [On KDE Plasma desktop](#on-kde-plasma-desktop)
     - [On Ubuntu](#on-ubuntu-tested-on-1804-2004-2204)
     - [On XFCE 4](#on-xfce-4)
+    - [On Fluxbox](#on-fluxbox)
 - [Considerations](#considerations)
 - [Installation](#installation)
   - [Prebuilt Packages](#prebuilt-packages)
@@ -213,6 +214,7 @@ These shortcuts are available in GUI mode:
 | <kbd>Ctrl</kbd> + <kbd>Q</kbd>                                            | Leave the capture screen                                         |
 | <kbd>Ctrl</kbd> + <kbd>O</kbd>                                            | Choose an app to open the capture                                |
 | <kbd>Ctrl</kbd> + <kbd>Return</kbd>                                            | Commit text in text area|
+| <kbd>Ctrl</kbd> + <kbd>Backspace</kbd>                                    | Cancel current selection                                       | 
 | <kbd>Return</kbd>                                             | Upload the selection to Imgur                                      |
 | <kbd>Spacebar</kbd>                                                       | Toggle visibility of sidebar with options of the selected tool, color picker for the drawing color and history menu |
 | Right Click                                                               | Show the color wheel                                              |
@@ -306,10 +308,20 @@ Now every time you press <kbd>Prt Sc</kbd>, it will start the Flameshot GUI inst
     ```text
     Command                        Shortcut
     xfce4-screenshooter -fd 1      Print
-    ````
+    ```
 4. Replace `xfce4-screenshooter -fd 1` with `flameshot gui`
 
 Now every time you press <kbd>Prt Sc</kbd> it will start Flameshot GUI instead of the default application.
+
+#### On Fluxbox
+
+1. Edit your `~/.fluxbox/keys` file
+2. Add a new entry. `Print` is the key name, `flameshot gui` is the shell command; for more options see [the fluxbox wiki](https://sillyslux.github.io/fluxbox-wiki/en/wiki/Keyboard-Shortcuts/).
+
+    ```text
+    Print :Exec flameshot gui
+    ```
+3. Refresh Fluxbox configuration with **Reconfigure** option from the menu.
 
 ## Considerations
 
@@ -349,11 +361,12 @@ There are packages available in the repository of some Linux distributions:
 - [Solus](https://dev.getsol.us/source/flameshot/): `eopkg it flameshot`
 - [Fedora](https://src.fedoraproject.org/rpms/flameshot): `dnf install flameshot`
 - [NixOS](https://search.nixos.org/packages?query=flameshot): `nix-env -iA nixos.flameshot`
+- [ALT](https://packages.altlinux.org/en/sisyphus/srpms/flameshot/): `su - -c "apt-get install flameshot"`
 - [Snap/Flatpak/AppImage](https://github.com/flameshotapp/packages)
 - [Docker](https://github.com/ManuelLR/docker-flameshot)
 - [Windows](https://github.com/majkinetor/au-packages/tree/master/flameshot)
 
-### MacOS
+### macOS
 
 - [MacPorts](https://www.macports.org): `sudo port selfupdate && sudo port install flameshot`
 - [Homebrew](https://brew.sh): `brew install --cask flameshot`
@@ -400,7 +413,7 @@ Also you can open and build/debug the project in a C++ IDE. For example, in Qt C
 - Qt >= 5.9
   + Development tools
 - GCC >= 7.4
-- CMake >= 3.13
+- CMake >= 3.29
 
 #### Run-time
 
@@ -458,9 +471,9 @@ pacman -S openssl ca-certificates
 nix-shell
 ```
 
-#### MacOS
+#### macOS
 
-First of all you need to install [brew](https://brew.sh) and than install dependencies
+First of all you need to install [brew](https://brew.sh) and then install the dependencies
 ```shell
 brew install qt5
 brew install cmake
@@ -468,30 +481,57 @@ brew install cmake
 
 ### Build
 
-After installing all the dependencies, finally run the following commands in the sources root directory:
+After installing all the dependencies, Flameshot can be built.
+
+#### Installation/build dir
+For the translations to be loaded correctly, the build process needs to be aware of where you want
+to install Flameshot.
 
 ```shell
-cmake -S . -B build && cmake --build build
+# Directory where build files will be placed, may be relative
+export BUILD_DIR=build
+
+# Directory prefix where Flameshot will be installed. If you are just building and don't want to
+# install, comment this environment variable.
+# This excludes the bin/flameshot part of the install,
+# e.g. in /opt/flameshot/bin/flameshot, the CMAKE_INSTALL_PREFIX is /opt/flameshot
+# This must be an absolute path. Requires CMAKE 3.29.
+export CMAKE_INSTALL_PREFIX=/opt/flameshot
+
+# Linux
+cmake -S . -B "$BUILD_DIR" \
+    && cmake --build "$BUILD_DIR"
+
+#MacOS
+cmake -S . -B "$BUILD_DIR" \
+    -DQt5_DIR="$(brew --prefix qt5)/lib/cmake/Qt5" \
+    && cmake --build "$BUILD_DIR"
 ```
 
-NOTE: for macOS you should replace command
-
-```shell
-cmake -S . -B build
-```
-
-to
-
-```shell
-cmake -S . -B build -DQt5_DIR=$(brew --prefix qt5)/lib/cmake/Qt5
-```
-
-When `cmake --build build` command completed you can launch flameshot from `project_folder/build/src` folder
+When the `cmake --build` command has completed you can launch Flameshot from the `project_folder/build/src` folder.
 
 ### Install
 
-Simply use `cmake --install build` with privileges.
-Note: If you install from source, there is no uninstaller, you will need to manually remove the files. Consider using [CMAKE_INSTALL_PREFIX](https://cmake.org/cmake/help/latest/variable/CMAKE_INSTALL_PREFIX.html) to install to a custom location for easy removal.
+Note that if you install from source, there _is no_ uninstaller, so consider installing to a custom directory.
+
+#### To install into a custom directory
+Make sure you are using cmake `>= 3.29` and build Flameshot with `$CMAKE_INSTALL_PREFIX` set to the
+installation directory. If this is not done, the translations won't be found when using a custom directory.
+Then, run the following:
+
+```bash
+# !Build with CMAKE_INSTALL_PREFIX and use cmake >= 3.29! Using an older cmake will cause
+# installation into the default /usr/local dir.
+
+# You may need to run this with privileges
+cmake --install "$BUILD_DIR"
+```
+
+#### To install to the default install directory
+```bash
+# You may need to run this with privileges
+cmake --install "$BUILD_DIR"
+```
 
 ### FAQ
 
