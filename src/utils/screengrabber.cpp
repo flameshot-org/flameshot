@@ -161,7 +161,7 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
                 freeDesktopPortal(ok, res);
                 break;
             case DesktopInfo::QTILE:
-            case DesktopInfo::SWAY:
+            case DesktopInfo::WLROOTS:
             case DesktopInfo::HYPRLAND:
             case DesktopInfo::OTHER: {
                 if (!ConfigHandler().useGrimAdapter()) {

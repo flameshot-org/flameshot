@@ -4,7 +4,7 @@ Flameshot currently supports Sway and other wlroots based Wayland compositors th
 ## Basic steps
 The following packages need to be installed: `xdg-desktop-portal xdg-desktop-portal-wlr grim`. Please ensure your distro packages these, or install them manually.
 
-Ensure that environment variables are set properly. If your distro does not set them automatically, use a launch script to export `XDG_CURRENT_DESKTOP=sway` **before** Sway is launched.
+Ensure that environment variables are set properly. If your distro does not set them automatically, use a launch script to export `XDG_CURRENT_DESKTOP=sway` or `XDG_CURRENT_DESKTOP=river` **before** Sway or River is launched.
 ```sh
 #!/bin/bash
 export SDL_VIDEODRIVER=wayland
@@ -15,7 +15,20 @@ export XDG_SESSION_DESKTOP=sway
 exec sway
 ```
 
-You will also need to ensure that systemd/dbus is aware of these environment variables; this should be done **in your sway config** so that the DISPLAY and WAYLAND_DISPLAY variables are defined.
+or
+
+
+```sh
+#!/bin/bash
+export SDL_VIDEODRIVER=wayland
+export _JAVA_AWT_WM_NONREPARENTING=1
+export QT_QPA_PLATFORM=wayland
+export XDG_CURRENT_DESKTOP=river
+export XDG_SESSION_DESKTOP=river
+exec river
+```
+
+You will also need to ensure that systemd/dbus is aware of these environment variables; this should be done **in your sway or river config** so that the DISPLAY and WAYLAND_DISPLAY variables are defined.
 
 (taken from [Sway wiki](https://github.com/swaywm/sway/wiki#gtk-applications-take-20-seconds-to-start)):
 ```sh
@@ -29,6 +42,13 @@ To ensure that Flameshot is correctly positioned on multiple outputs (monitors) 
 for_window [app_id="flameshot"] border pixel 0, floating enable, fullscreen disable, move absolute position 0 0
 ```
 
+and add the following on your River config:
+
+```
+riverctl rule-add -app-id "flameshot" float
+```
+
+Otherwise, flameshot will not take all of the screen and tiles its window instead like a normal application. Note however, that some clipboard stuff is broken so it might be good to save your screenshot as a file while having it copied to a clipboard in case if clipboard does some weird stuff like not pasting the overall screenshot.
 
 
 Starting from 0.17.0 xdg-desktop-portal requires a configuration file (e.g. in ~/.config/xdg-desktop-portal/sway-portals.conf):
@@ -68,7 +88,7 @@ and add the following on your config such as in `$HOME/.config/river/init`
 riverctl float-filter-add "flameshot"
 ```
 
-Otherwise, Flameshot will not take all of the screen and tiles its window instead like a normal application. Note however, that some clipboard stuff is broken so it might be good to save your screenshot as a file while having it copied to a clipboard in case if clipboard does some weird stuff like not pasting the overall screenshot.
+Otherwise, Flameshot will not take all of the screen and tiles its window instead like a normal application.
 
 #### For more information, please refer to https://github.com/emersion/xdg-desktop-portal-wlr/wiki/%22It-doesn't-work%22-Troubleshooting-Checklist
 
