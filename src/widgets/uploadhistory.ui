@@ -44,6 +44,19 @@
     </widget>
    </item>
   </layout>
+<layout class="QGridLayout" name="gridLayout">
+<item row="0" column="0">
+ <layout class="QVBoxLayout" name="historyContainer">
+  <item>
+   <widget class="QPushButton" name="loadMoreButton">
+    <property name="text">
+     <string>Load More</string>
+    </property>
+   </widget>
+  </item>
+ </layout>
+</item>
+</layout>
  </widget>
  <resources>
   <include location="../../data/graphics.qrc"/>
