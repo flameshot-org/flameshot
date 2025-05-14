@@ -17,7 +17,7 @@ public:
         COSMIC,
         OTHER,
         QTILE,
-        SWAY,
+        WLROOTS,
         HYPRLAND
     };
 
