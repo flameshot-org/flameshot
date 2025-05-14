@@ -129,7 +129,8 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     OPTION("uploadClientSecret"          ,String             ( "313baf0c7b4d3ff"            )),
     OPTION("showSelectionGeometry"  , BoundedInt               (0,5,4)),
     OPTION("showSelectionGeometryHideTime", LowerBoundedInt       (0, 3000)),
-    OPTION("jpegQuality", BoundedInt     (0,100,75))
+    OPTION("jpegQuality", BoundedInt     (0,100,75)),
+    OPTION("reverseArrow"                    ,Bool               ( false      )),
 };
 
 static QMap<QString, QSharedPointer<KeySequence>> recognizedShortcuts = {
