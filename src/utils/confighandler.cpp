@@ -81,6 +81,7 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     OPTION("disabledTrayIcon"            ,Bool               ( false         )),
     OPTION("useGrimAdapter"              ,Bool               ( false         )),
     OPTION("disabledGrimWarning"         ,Bool               ( false         )),
+    OPTION("disableCountingCircleContrast"    ,Bool               ( false         )),
     OPTION("historyConfirmationToDelete" ,Bool               ( true          )),
 #if !defined(DISABLE_UPDATE_CHECKER)
     OPTION("checkForUpdates"             ,Bool               ( true          )),

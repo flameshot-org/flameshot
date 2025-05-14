@@ -61,6 +61,7 @@ GeneralConf::GeneralConf(QWidget* parent)
     initUploadClientSecret();
     initPredefinedColorPaletteLarge();
     initShowSelectionGeometry();
+    initDisableCountingCircleContrast();
 
     m_layout->addStretch();
 
@@ -85,6 +86,7 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
     m_copyPathAfterSave->setChecked(config.copyPathAfterSave());
     m_antialiasingPinZoom->setChecked(config.antialiasingPinZoom());
     m_useJpgForClipboard->setChecked(config.useJpgForClipboard());
+    m_disableCountingCircleContrast->setChecked(config.disableCountingCircleContrast());
     m_copyOnDoubleClick->setChecked(config.copyOnDoubleClick());
     m_uploadWithoutConfirmation->setChecked(config.uploadWithoutConfirmation());
     m_historyConfirmationToDelete->setChecked(
@@ -159,6 +161,10 @@ void GeneralConf::allowMultipleGuiInstancesChanged(bool checked)
     ConfigHandler().setAllowMultipleGuiInstances(checked);
 }
 
+void GeneralConf::setDisableCountingCircleContrast(bool checked)
+{
+    ConfigHandler().setDisableCountingCircleContrast(checked);
+}
 void GeneralConf::autoCloseIdleDaemonChanged(bool checked)
 {
     ConfigHandler().setAutoCloseIdleDaemon(checked);
@@ -828,6 +834,17 @@ void GeneralConf::initJpegQuality()
             this,
             &GeneralConf::setJpegQuality);
 }
+
+void GeneralConf::initDisableCountingCircleContrast()
+{
+    m_disableCountingCircleContrast = new QCheckBox(tr("Disable contrast on the counting bubble"), this);
+    m_disableCountingCircleContrast->setToolTip(
+      tr("Disable the contrasting circle that is around the counting circle tool when it has no arrow"));
+    m_scrollAreaLayout->addWidget(m_disableCountingCircleContrast);
+    connect(m_disableCountingCircleContrast,
+            &QCheckBox::clicked,
+            this,
+            &GeneralConf::setDisableCountingCircleContrast);}
 
 void GeneralConf::setSelGeoHideTime(int v)
 {
