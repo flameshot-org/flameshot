@@ -18,6 +18,7 @@ public:
     void freeDesktopPortal(bool& ok, QPixmap& res);
     void generalGrimScreenshot(bool& ok, QPixmap& res);
     QRect desktopGeometry();
+    QRect logicalDesktopGeometry();
 
 private:
     DesktopInfo m_info;

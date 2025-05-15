@@ -4,53 +4,38 @@ on:
   push:
     branches:
       - master
+      - fix*
     paths-ignore:
       - 'README.md'
       - 'LICENSE'
+      - 'docs/**'
 
   pull_request:
     paths-ignore:
       - 'README.md'
       - 'LICENSE'
+      - 'docs/**'
+
+  workflow_dispatch:
 
 env:
   PRODUCT: flameshot
   RELEASE: 1
   # dockerfiles, see https://github.com/flameshot-org/flameshot-dockerfiles
-  # docker images, see https://hub.docker.com/r/flameshotorg/ci-building-images
-  # flameshotorg/ci-building-images or packpack/packpack
-  DOCKER_REPO: flameshotorg/ci-building-images
+  # docker images, see https://quay.io/repository/flameshot-org/ci-building
+  DOCKER_REPO: quay.io/flameshot-org/ci-building
+  # building tool: https://github.com/flameshot-org/packpack
   PACKPACK_REPO: flameshot-org/packpack
-  # available upload services: wetransfer.com, file.io, 0x0.st
-  UPLOAD_SERVICE: wetransfer.com
 
 jobs:
   deb-pack:
     name: Build deb on ${{ matrix.dist.name }} ${{ matrix.dist.arch }}
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
         dist:
           - {
-              name: debian-10,
-              os: debian,
-              symbol: buster,
-              arch: amd64
-            }
-          - {
-              name: debian-10,
-              os: debian,
-              symbol: buster,
-              arch: arm64
-            }
-          - {
-              name: debian-10,
-              os: debian,
-              symbol: buster,
-              arch: armhf
-            }
-          - {
               name: debian-11,
               os: debian,
               symbol: bullseye,
@@ -69,10 +54,22 @@ jobs:
               arch: armhf
             }
           - {
-              name: ubuntu-20.04,
-              os: ubuntu,
-              symbol: focal,
+              name: debian-12,
+              os: debian,
+              symbol: bookworm,
               arch: amd64
+            }
+          - {
+              name: debian-12,
+              os: debian,
+              symbol: bookworm,
+              arch: arm64
+            }
+          - {
+              name: debian-12,
+              os: debian,
+              symbol: bookworm,
+              arch: armhf
             }
           - {
               name: ubuntu-22.04,
@@ -80,45 +77,18 @@ jobs:
               symbol: jammy,
               arch: amd64
             }
- 
+          - {
+              name: ubuntu-24.04,
+              os: ubuntu,
+              symbol: noble,
+              arch: amd64
+            }
+
     steps:
-      - name: Enable Docker Experimental Features
-        run: |
-          echo $'{\n  "experimental": true\n}' | sudo tee /etc/docker/daemon.json
-          mkdir -p ~/.docker
-          echo $'{\n  "experimental": "enabled"\n}' | sudo tee ~/.docker/config.json
-          sudo service docker restart
-          docker version -f "{{ (index .Server.Components 0).Details.Experimental }}"
-          docker buildx version
-      - name: Support for ARM via QEMU's user-mode emulation
-        # Register binfmt_misc entry for qemu-user-static
-        # https://github.com/multiarch/qemu-user-static
-        env:
-          DOCKER_ARCH: ${{ matrix.dist.arch }}
-        run: |
-          case ${DOCKER_ARCH} in
-            amd64|i386)
-              QEMU_ARCH=
-              ;;
-            arm32*)
-              QEMU_ARCH=arm
-              ;;
-            armhf)
-              QEMU_ARCH=arm
-              ;;
-            arm64*)
-              QEMU_ARCH=aarch64
-              ;;
-            *)
-              QEMU_ARCH=${DOCKER_ARCH}
-              ;;
-          esac
-          if [ -n "${QEMU_ARCH}" ]; then
-            sudo apt-get -y -qq update
-            sudo apt-get -y install qemu binfmt-support qemu-user-static
-            docker run --rm --privileged multiarch/qemu-user-static --reset --persistent yes --credential yes
-            cat /proc/sys/fs/binfmt_misc/qemu-${QEMU_ARCH}
-          fi
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
       - name: Checkout Source code
         if: github.event_name == 'push'
         uses: actions/checkout@v4
@@ -137,17 +107,20 @@ jobs:
           last_committed_tag=$(git tag -l --sort=-v:refname | head -1)
           git_revno=$(git rev-list $(git describe --tags --abbrev=0)..HEAD --count)
           git_hash=$(git rev-parse --short HEAD)
+          ver_info=${last_committed_tag}+git${git_revno}.${git_hash}
           echo "=======FLAMESHOT VERSION========"
           echo ${last_committed_tag:1}
-          echo "Details: ${last_committed_tag}+git${git_revno}.${git_hash}"
+          echo "Details: ${ver_info}"
           echo "================================"
           echo "VERSION=${last_committed_tag:1}" >> $GITHUB_ENV
+          echo "VER_INFO=${ver_info}" >> $GITHUB_ENV
       - name: Get packpack tool
         uses: actions/checkout@v4
         with:
           repository: ${{ env.PACKPACK_REPO }}
           path: tools
           ref: multiarch
+          set-safe-directory: $GITHUB_WORKSPACE/tools
       - name: Packaging on ${{ matrix.dist.name }} ${{ matrix.dist.arch }}
         env:
           OS: ${{ matrix.dist.os }}
@@ -171,70 +144,42 @@ jobs:
           cp -r $GITHUB_WORKSPACE/packaging/debian $GITHUB_WORKSPACE
           bash $GITHUB_WORKSPACE/tools/packpack
           mv $GITHUB_WORKSPACE/build/${PRODUCT}_${VERSION}-${RELEASE}_${{ matrix.dist.arch }}.deb $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.${{ matrix.dist.name }}.${{ matrix.dist.arch }}.deb
-      - name: In order to unset the registered formats, and unload the binaries
-        env:
-          DOCKER_ARCH: ${{ matrix.dist.arch }}
-        run: |
-          case ${DOCKER_ARCH} in
-            amd64|i386)
-              QEMU_ARCH=
-              ;;
-            arm32*)
-              QEMU_ARCH=arm
-              ;;
-            arm64*)
-              QEMU_ARCH=aarch64
-              ;;
-            *)
-              QEMU_ARCH=${DOCKER_ARCH}
-              ;;
-          esac
-          if [ -n "${QEMU_ARCH}" ]; then
-            docker run --rm --privileged --volume qemu-user-static:/usr/bin:ro multiarch/qemu-user-static:register --reset
-          fi
-      - name: SHA256Sum of ${{ matrix.dist.name }} ${{ matrix.dist.arch }} package(daily build)
+      - name: SHA256Sum of ${{ matrix.dist.name }} ${{ matrix.dist.arch }} package
         run: |
           cd "$GITHUB_WORKSPACE/build/" || { >&2 echo "Cannot cd to '$GITHUB_WORKSPACE/build/'!"; exit 11 ; }
           sha256sum ${PRODUCT}-${VERSION}-${RELEASE}.${{ matrix.dist.name }}.${{ matrix.dist.arch }}.deb | tee ${PRODUCT}-${VERSION}-${RELEASE}.${{ matrix.dist.name }}.${{ matrix.dist.arch }}.deb.sha256sum
-          echo "=============${{ matrix.dist.name }} ${{ matrix.dist.arch }} sha256sum download link============"
-          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh ${PRODUCT}-${VERSION}-${RELEASE}.${{ matrix.dist.name }}.${{ matrix.dist.arch }}.deb.sha256sum)
-          echo "========no operation for you can see link in the log console======="
-      - name: Upload ${{ matrix.dist.name }} ${{ matrix.dist.arch }} package(daily build)
-        run: |
-          echo "================${{ matrix.dist.name }} ${{ matrix.dist.arch }} download link==============="
-          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.${{ matrix.dist.name }}.${{ matrix.dist.arch }}.deb)
-          echo "======no operation for you can see link in the log console====="
       - name: Artifact Upload
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: Linux-distribution-artifact
+          name: ${{ env.PRODUCT }}-${{ env.VER_INFO }}-artifact-${{ matrix.dist.name }}-${{ matrix.dist.arch }}
           path: |
             ${{ github.workspace }}/build/${{ env.PRODUCT }}-*-${{ env.RELEASE }}.${{ matrix.dist.name }}.${{ matrix.dist.arch }}.deb
             ${{ github.workspace }}/build/${{ env.PRODUCT }}-*-${{ env.RELEASE }}.${{ matrix.dist.name }}.${{ matrix.dist.arch }}.deb.sha256sum
+          overwrite: true
 
   rpm-pack:
     name: Build rpm on ${{ matrix.dist.name }} ${{ matrix.dist.arch }}
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
         dist:
           - {
-              name: fedora-35,
+              name: fedora-41,
               os: fedora,
-              symbol: 35,
+              symbol: 41,
               arch: x86_64
             }
           - {
-              name: fedora-36,
+              name: fedora-42,
               os: fedora,
-              symbol: 36,
+              symbol: 42,
               arch: x86_64
             }
           - {
-              name: opensuse-leap-15.2,
+              name: opensuse-leap-15.6,
               os: opensuse-leap,
-              symbol: 15.2,
+              symbol: 15.6,
               arch: x86_64
             }
     steps:
@@ -256,20 +201,34 @@ jobs:
           last_committed_tag=$(git tag -l --sort=-v:refname | head -1)
           git_revno=$(git rev-list $(git describe --tags --abbrev=0)..HEAD --count)
           git_hash=$(git rev-parse --short HEAD)
+          ver_info=${last_committed_tag}+git${git_revno}.${git_hash}
           echo "=======FLAMESHOT VERSION========"
           echo ${last_committed_tag:1}
-          echo "Details: ${last_committed_tag}+git${git_revno}.${git_hash}"
+          echo "Details: ${ver_info}"
           echo "================================"
           echo "VERSION=${last_committed_tag:1}" >> $GITHUB_ENV
+          echo "VER_INFO=${ver_info}" >> $GITHUB_ENV
       - name: Get packpack tool
         uses: actions/checkout@v4
         with:
           repository: ${{ env.PACKPACK_REPO }}
           path: tools
           ref: master
+          set-safe-directory: $GITHUB_WORKSPACE/tools
       - name: Packaging on ${{ matrix.dist.name }} ${{ matrix.dist.arch }}
+        if: matrix.dist.os == 'fedora'
         run: |
-          cp -r $GITHUB_WORKSPACE/packaging/rpm $GITHUB_WORKSPACE
+          mkdir $GITHUB_WORKSPACE/rpm
+          cp $GITHUB_WORKSPACE/packaging/rpm/fedora/flameshot.spec $GITHUB_WORKSPACE/rpm
+          bash $GITHUB_WORKSPACE/tools/packpack
+        env:
+          OS: ${{ matrix.dist.os }}
+          DIST: ${{ matrix.dist.symbol }}
+      - name: Packaging on ${{ matrix.dist.name }} ${{ matrix.dist.arch }}
+        if: matrix.dist.os == 'opensuse-leap'
+        run: |
+          mkdir $GITHUB_WORKSPACE/rpm
+          cp $GITHUB_WORKSPACE/packaging/rpm/opensuse/flameshot.spec $GITHUB_WORKSPACE/rpm
           bash $GITHUB_WORKSPACE/tools/packpack
         env:
           OS: ${{ matrix.dist.os }}
@@ -281,64 +240,49 @@ jobs:
           rm -f ${{ github.workspace }}/build/${{ env.PRODUCT }}-debugsource-*.rpm
           rm -f ${{ github.workspace }}/build/${{ env.PRODUCT }}-*.src.rpm
           rm -f ${{ github.workspace }}/build/build.log
-      - name: SHA256Sum of ${{ matrix.dist.name }} ${{ matrix.dist.arch }} package(daily build)
+      - name: SHA256Sum of ${{ matrix.dist.name }} ${{ matrix.dist.arch }} package
         if: matrix.dist.os == 'fedora'
         run: |
           cd "$GITHUB_WORKSPACE/build/" || { >&2 echo "Cannot cd to '$GITHUB_WORKSPACE/build/'!"; exit 11 ; }
           sha256sum ${PRODUCT}-${VERSION}-${RELEASE}.fc*.${{ matrix.dist.arch }}.rpm | tee ${PRODUCT}-${VERSION}-${RELEASE}.fc${{ matrix.dist.symbol }}.${{ matrix.dist.arch }}.rpm.sha256sum
-          echo "============${{ matrix.dist.name }} ${{ matrix.dist.arch }} sha256sum download link============"
-          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh ${PRODUCT}-${VERSION}-${RELEASE}.fc*.${{ matrix.dist.arch }}.rpm.sha256sum)
-          echo "=======no operation for you can see link in the log console======="
-      - name: SHA256Sum of ${{ matrix.dist.name }} ${{ matrix.dist.arch }} package(daily build)
+      - name: SHA256Sum of ${{ matrix.dist.name }} ${{ matrix.dist.arch }} package
         if: matrix.dist.os == 'opensuse-leap'
         run: |
           mv $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-lp*.${{ matrix.dist.arch }}.rpm $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}-lp${{ matrix.dist.symbol }}.${{ matrix.dist.arch }}.rpm
           cd "$GITHUB_WORKSPACE/build/" || { >&2 echo "Cannot cd to '$GITHUB_WORKSPACE/build/'!"; exit 11 ; }
           sha256sum ${PRODUCT}-${VERSION}-${RELEASE}-lp${{ matrix.dist.symbol }}.${{ matrix.dist.arch }}.rpm | tee ${PRODUCT}-${VERSION}-${RELEASE}-lp${{ matrix.dist.symbol }}.${{ matrix.dist.arch }}.rpm.sha256sum
-          echo "============${{ matrix.dist.name }} ${{ matrix.dist.arch }} sha256sum download link==========="
-          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh ${PRODUCT}-${VERSION}-${RELEASE}-lp${{ matrix.dist.symbol }}.${{ matrix.dist.arch }}.rpm.sha256sum)
-          echo "=======no operation for you can see link in the log console======"
-      - name: Upload ${{ matrix.dist.name }} ${{ matrix.dist.arch }} package(daily build)
-        if: matrix.dist.os == 'fedora'
-        run: |
-          echo "================${{ matrix.dist.name }} ${{ matrix.dist.arch }} download link==============="
-          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.fc*.${{ matrix.dist.arch }}.rpm)
-          echo "======no operation for you can see link in the log console====="
-      - name: Upload ${{ matrix.dist.name }} ${{ matrix.dist.arch }} package(daily build)
-        if: matrix.dist.os == 'opensuse-leap'
-        run: |
-          echo "================${{ matrix.dist.name }} ${{ matrix.dist.arch }} download link==============="
-          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}-lp${{ matrix.dist.symbol }}.${{ matrix.dist.arch }}.rpm)
-          echo "======no operation for you can see link in the log console====="
       - name: Artifact Upload
         if: matrix.dist.os == 'fedora'
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: Linux-distribution-artifact
+          name: ${{ env.PRODUCT }}-${{ env.VER_INFO }}-artifact-${{ matrix.dist.name }}-${{ matrix.dist.arch }}
           path: |
             ${{ github.workspace }}/build/
+          overwrite: true
 
       - name: Artifact Upload
         if: matrix.dist.os == 'opensuse-leap'
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: Linux-distribution-artifact
+          name: ${{ env.PRODUCT }}-${{ env.VER_INFO }}-artifact-${{ matrix.dist.name }}-${{ matrix.dist.arch }}
           path: |
             ${{ github.workspace }}/build/${{ env.PRODUCT }}-*-lp${{ matrix.dist.symbol }}.${{ matrix.dist.arch }}.rpm
             ${{ github.workspace }}/build/${{ env.PRODUCT }}-*-lp${{ matrix.dist.symbol }}.${{ matrix.dist.arch }}.rpm.sha256sum
+          overwrite: true
+  
   appimage-pack:
     name: Build appimage on ${{ matrix.config.name }}
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
         config:
           - {
-              name: ubuntu-20.04,
+              name: ubuntu-22.04,
               os: ubuntu,
-              symbol: focal,
+              symbol: jammy,
               arch: amd64,
-              image_repo: flameshotorg/ci-building-images
+              image_repo: quay.io/flameshot-org/ci-building
             }
     container:
       image: ${{ matrix.config.image_repo }}:${{ matrix.config.os }}-${{ matrix.config.symbol }}
@@ -367,11 +311,13 @@ jobs:
           last_committed_tag=$(git tag -l --sort=-v:refname | head -1)
           git_revno=$(git rev-list $(git describe --tags --abbrev=0)..HEAD --count)
           git_hash=$(git rev-parse --short HEAD)
+          ver_info=${last_committed_tag}+git${git_revno}.${git_hash}
           echo "=======FLAMESHOT VERSION========"
           echo ${last_committed_tag:1}
-          echo "Details: ${last_committed_tag}+git${git_revno}.${git_hash}"
+          echo "Details: ${ver_info}"
           echo "================================"
           echo "VERSION=${last_committed_tag:1}" >> $GITHUB_ENV
+          echo "VER_INFO=${ver_info}" >> $GITHUB_ENV
       - name: Install Dependencies
         run: |
           sudo apt-get -y -qq update
@@ -383,7 +329,9 @@ jobs:
             cmake \
             extra-cmake-modules \
             build-essential \
-            qt5-default \
+            qt5-qmake \
+            qtbase5-dev \
+            qtbase5-dev-tools \
             qttools5-dev-tools \
             qttools5-dev \
             libqt5dbus5 \
@@ -441,29 +389,22 @@ jobs:
           mv $GITHUB_WORKSPACE/Flameshot-${VERSION}-x86_64.AppImage $GITHUB_WORKSPACE/Flameshot-${VERSION}.x86_64.AppImage
 
 
-      - name: SHA256Sum of appimage package(daily build)
+      - name: SHA256Sum of appimage package
         run: |
           cd "$GITHUB_WORKSPACE/" || { >&2 echo "Cannot cd to '$GITHUB_WORKSPACE/'!"; exit 11 ; }
           sha256sum Flameshot-${VERSION}.x86_64.AppImage | tee Flameshot-${VERSION}.x86_64.AppImage.sha256sum
-          echo "================appimage sha256sum download link==============="
-          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh Flameshot-${VERSION}.x86_64.AppImage.sha256sum)
-          echo "======no operation for you can see link in the log console====="
-      - name: Upload appimage package for daily build
-        run: |
-          echo "====================appimage download link====================="
-          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/Flameshot-${VERSION}.x86_64.AppImage)
-          echo "======no operation for you can see link in the log console====="
       - name: Artifact Upload
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: Linux-distribution-artifact
+          name: ${{ env.PRODUCT }}-${{ env.VER_INFO }}-artifact-appimage-x86_64
           path: |
             ${{ github.workspace }}/Flameshot-*.x86_64.AppImage
             ${{ github.workspace }}/Flameshot-*.x86_64.AppImage.sha256sum
+          overwrite: true
 
   flatpak-pack:
-    name: Build flatpak on ubuntu-20.04
-    runs-on: ubuntu-20.04
+    name: Build flatpak on ubuntu 22.04
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout Source code
         if: github.event_name == 'push'
@@ -483,11 +424,13 @@ jobs:
           last_committed_tag=$(git tag -l --sort=-v:refname | head -1)
           git_revno=$(git rev-list $(git describe --tags --abbrev=0)..HEAD --count)
           git_hash=$(git rev-parse --short HEAD)
+          ver_info=${last_committed_tag}+git${git_revno}.${git_hash}
           echo "=======FLAMESHOT VERSION========"
           echo ${last_committed_tag:1}
-          echo "Details: ${last_committed_tag}+git${git_revno}.${git_hash}"
+          echo "Details: ${ver_info}"
           echo "================================"
           echo "VERSION=${last_committed_tag:1}" >> $GITHUB_ENV
+          echo "VER_INFO=${ver_info}" >> $GITHUB_ENV
       - name: Setup flatpak
         run: |
           sudo apt-get -y -qq update
@@ -507,29 +450,22 @@ jobs:
           flatpak-builder --user --disable-rofiles-fuse --repo=repo --force-clean flatpak_app ${MANIFEST_PATH} --install-deps-from=flathub
           flatpak build-bundle repo ${BUNDLE} --runtime-repo=${RUNTIME_REPO} ${APP_ID} ${BRANCH}
           mv $GITHUB_WORKSPACE/org.flameshot.Flameshot_${VERSION}_x86_64.flatpak $GITHUB_WORKSPACE/org.flameshot.Flameshot-${VERSION}.x86_64.flatpak
-      - name: SHA256Sum of flatpak package(daily build)
+      - name: SHA256Sum of flatpak package
         run: |
           cd "$GITHUB_WORKSPACE/" || { >&2 echo "Cannot cd to '$GITHUB_WORKSPACE/'!"; exit 11 ; }
           sha256sum org.flameshot.Flameshot-${VERSION}.x86_64.flatpak | tee org.flameshot.Flameshot-${VERSION}.x86_64.flatpak.sha256sum
-          echo "================flatpak sha256sum download link===================="
-          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh org.flameshot.Flameshot-${VERSION}.x86_64.flatpak.sha256sum)
-          echo "========no operation for you can see link in the log console======="
-      - name: Upload flatpak package(daily build)
-        run: |
-          echo "=====================flatpak download link====================="
-          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/org.flameshot.Flameshot-${VERSION}.x86_64.flatpak)
-          echo "======no operation for you can see link in the log console====="
       - name: Artifact Upload
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: Linux-distribution-artifact
+          name: ${{ env.PRODUCT }}-${{ env.VER_INFO }}-artifact-flatpak-x86_64
           path: |
             ${{ github.workspace }}/org.flameshot.Flameshot-*.x86_64.flatpak
             ${{ github.workspace }}/org.flameshot.Flameshot-*.x86_64.flatpak.sha256sum
+          overwrite: true
 
   snap-pack:
-    name: Build snap on ubuntu-20.04
-    runs-on: ubuntu-20.04
+    name: Build snap on ubuntu 22.04
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout Source code
         if: github.event_name == 'push'
@@ -549,11 +485,13 @@ jobs:
           last_committed_tag=$(git tag -l --sort=-v:refname | head -1)
           git_revno=$(git rev-list $(git describe --tags --abbrev=0)..HEAD --count)
           git_hash=$(git rev-parse --short HEAD)
+          ver_info=${last_committed_tag}+git${git_revno}.${git_hash}
           echo "=======FLAMESHOT VERSION========"
           echo ${last_committed_tag:1}
-          echo "Details: ${last_committed_tag}+git${git_revno}.${git_hash}"
+          echo "Details: ${ver_info}"
           echo "================================"
           echo "VERSION=${last_committed_tag:1}" >> $GITHUB_ENV
+          echo "VER_INFO=${ver_info}" >> $GITHUB_ENV
       - name: Packaging snap
         uses: snapcore/action-build@v1
         id: snapcraft
@@ -564,22 +502,15 @@ jobs:
         run: |
           mkdir -p $GITHUB_WORKSPACE/build
           cp ${{ steps.snapcraft.outputs.snap }} $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.amd64.snap
-      - name: SHA256Sum of snap package(daily build)
+      - name: SHA256Sum of snap package
         run: |
           cd "$GITHUB_WORKSPACE/build/" || { >&2 echo "Cannot cd to '$GITHUB_WORKSPACE/build/'!"; exit 11 ; }
           sha256sum ${PRODUCT}-${VERSION}-${RELEASE}.amd64.snap | tee ${PRODUCT}-${VERSION}-${RELEASE}.amd64.snap.sha256sum
-          echo "================snap sha256sum download link=================="
-          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh ${PRODUCT}-${VERSION}-${RELEASE}.amd64.snap.sha256sum)
-          echo "=====no operation for you can see link in the log console====="
-      - name: Upload snap package(daily build)
-        run: |
-          echo "=======================snap download link======================"
-          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.amd64.snap)
-          echo "======no operation for you can see link in the log console====="
       - name: Artifact Upload
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: Linux-distribution-artifact
+          name: ${{ env.PRODUCT }}-${{ env.VER_INFO }}-artifact-snap-x86_64
           path: |
             ${{ github.workspace }}/build/${{ env.PRODUCT }}-*-${{ env.RELEASE }}.amd64.snap
             ${{ github.workspace }}/build/${{ env.PRODUCT }}-*-${{ env.RELEASE }}.amd64.snap.sha256sum
+          overwrite: true

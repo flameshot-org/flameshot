@@ -77,7 +77,9 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     OPTION("showHelp"                    ,Bool               ( true          )),
     OPTION("showSidePanelButton"         ,Bool               ( true          )),
     OPTION("showDesktopNotification"     ,Bool               ( true          )),
+    OPTION("showAbortNotification"       ,Bool               ( true          )),
     OPTION("disabledTrayIcon"            ,Bool               ( false         )),
+    OPTION("useGrimAdapter"              ,Bool               ( false         )),
     OPTION("disabledGrimWarning"         ,Bool               ( false         )),
     OPTION("historyConfirmationToDelete" ,Bool               ( true          )),
 #if !defined(DISABLE_UPDATE_CHECKER)
@@ -91,6 +93,7 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
 #endif
     OPTION("startupLaunch"               ,Bool               ( false         )),
     OPTION("showStartupLaunchMessage"    ,Bool               ( true          )),
+    OPTION("showQuitPrompt"              ,Bool               ( false         )),
     OPTION("copyURLAfterUpload"          ,Bool               ( true          )),
     OPTION("copyPathAfterSave"           ,Bool               ( false         )),
     OPTION("antialiasingPinZoom"         ,Bool               ( true          )),
@@ -126,7 +129,8 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     OPTION("uploadClientSecret"          ,String             ( "313baf0c7b4d3ff"            )),
     OPTION("showSelectionGeometry"  , BoundedInt               (0,5,4)),
     OPTION("showSelectionGeometryHideTime", LowerBoundedInt       (0, 3000)),
-    OPTION("jpegQuality", BoundedInt     (0,100,75))
+    OPTION("jpegQuality", BoundedInt     (0,100,75)),
+    OPTION("reverseArrow"                    ,Bool               ( false      )),
 };
 
 static QMap<QString, QSharedPointer<KeySequence>> recognizedShortcuts = {
@@ -145,6 +149,7 @@ static QMap<QString, QSharedPointer<KeySequence>> recognizedShortcuts = {
     SHORTCUT("TYPE_SAVE_TO_PDF"         ,                           ),
     SHORTCUT("TYPE_ACCEPT"              ,   "Return"                ),
     SHORTCUT("TYPE_EXIT"                ,   "Ctrl+Q"                ),
+	SHORTCUT("TYPE_CANCEL" 				,	"Ctrl+Backspace"		),
     SHORTCUT("TYPE_IMAGEUPLOADER"       ,                           ),
 #if !defined(Q_OS_MACOS)
     SHORTCUT("TYPE_OPEN_APP"            ,   "Ctrl+O"                ),

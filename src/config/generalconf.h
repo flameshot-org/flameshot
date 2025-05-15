@@ -37,6 +37,7 @@ private slots:
     void saveLastRegion(bool checked);
     void showSidePanelButtonChanged(bool checked);
     void showDesktopNotificationChanged(bool checked);
+    void showAbortNotificationChanged(bool checked);
 #if !defined(DISABLE_UPDATE_CHECKER)
     void checkForUpdatesChanged(bool checked);
 #endif
@@ -58,6 +59,7 @@ private slots:
     void setGeometryLocation(int index);
     void setSelGeoHideTime(int v);
     void setJpegQuality(int v);
+    void setReverseArrow(bool checked);
 
 private:
     const QString chooseFolder(const QString& currentPath = "");
@@ -78,8 +80,10 @@ private:
     void initSaveAfterCopy();
     void initScrollArea();
     void initShowDesktopNotification();
+    void initShowAbortNotification();
     void initShowHelp();
     void initShowMagnifier();
+    void initShowQuitPrompt();
     void initShowSidePanelButton();
     void initShowStartupLaunchMessage();
     void initShowTrayIcon();
@@ -92,6 +96,7 @@ private:
     void initSaveLastRegion();
     void initShowSelectionGeometry();
     void initJpegQuality();
+    void initReverseArrow();
 
     void _updateComponents(bool allowEmptySavePath);
 
@@ -100,6 +105,7 @@ private:
     QVBoxLayout* m_scrollAreaLayout;
     QScrollArea* m_scrollArea;
     QCheckBox* m_sysNotifications;
+    QCheckBox* m_abortNotifications;
     QCheckBox* m_showTray;
     QCheckBox* m_helpMessage;
     QCheckBox* m_sidePanelButton;
@@ -110,6 +116,7 @@ private:
     QCheckBox* m_autoCloseIdleDaemon;
     QCheckBox* m_autostart;
     QCheckBox* m_showStartupLaunchMessage;
+    QCheckBox* m_showQuitPrompt;
     QCheckBox* m_copyURLAfterUpload;
     QCheckBox* m_copyPathAfterSave;
     QCheckBox* m_antialiasingPinZoom;
@@ -136,4 +143,5 @@ private:
     QComboBox* m_selectGeometryLocation;
     QSpinBox* m_xywhTimeout;
     QSpinBox* m_jpegQuality;
+    QCheckBox* m_reverseArrow;
 };

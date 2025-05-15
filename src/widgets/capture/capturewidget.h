@@ -20,6 +20,7 @@
 #include "src/utils/confighandler.h"
 #include "src/widgets/capture/magnifierwidget.h"
 #include "src/widgets/capture/selectionwidget.h"
+#include <QMessageBox>
 #include <QPointer>
 #include <QTimer>
 #include <QUndoStack>
@@ -69,6 +70,7 @@ signals:
 private slots:
     void undo();
     void redo();
+    void cancel();
     void togglePanel();
     void childEnter();
     void childLeave();
@@ -121,11 +123,13 @@ private:
     void initShortcuts();
     void initButtons();
     void initHelpMessage();
+    void initQuitPrompt();
     void updateSizeIndicator();
     void updateCursor();
     void updateSelectionState();
     void updateTool(CaptureTool* tool);
     void updateLayersPanel();
+    bool promptQuit();
     void pushToolToStack();
     void makeChild(QWidget* w);
     void restoreCircleCountState();
@@ -186,6 +190,7 @@ private:
     QPointer<CaptureTool> m_activeTool;
     bool m_activeToolIsMoved;
     QPointer<QWidget> m_toolWidget;
+    QPointer<QMessageBox> m_quitPrompt;
 
     ButtonHandler* m_buttonHandler;
     UtilityPanel* m_panel;

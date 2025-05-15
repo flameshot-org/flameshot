@@ -49,7 +49,8 @@ public:
         TYPE_SIZEDECREASE = 22,
         TYPE_INVERT = 23,
         TYPE_ACCEPT = 24,
-        TYPE_SAVE_TO_PDF = 25
+        TYPE_CANCEL = 25,
+        TYPE_SAVE_TO_PDF = 26
     };
     Q_ENUM(Type);
 

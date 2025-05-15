@@ -1,20 +1,9 @@
 #
-# spec file for package flameshot on fedora, rehl, opensuse leap 15.x
+# spec file for package flameshot on opensuse leap 15.x
 #
-
-# fedora >= 30, rhel >=7
-%define is_rhel_or_fedora (0%{?fedora} && 0%{?fedora} >= 30) || (0%{?rhel} && 0%{?rhel} >= 7)
-# openSUSE Leap >= 15.2
-%define is_suse_leap (0%{?is_opensuse} && 0%{?sle_version} >= 150200)
-
 Name: flameshot
 Version: 12.1.0
-%if %{is_rhel_or_fedora}
-Release: 1%{?dist}
-%endif
-%if %{is_suse_leap}
 Release: 1
-%endif
 License: GPLv3+ and ASL 2.0 and GPLv2 and LGPLv3 and Free Art
 Summary: Powerful yet simple to use screenshot software
 URL: https://github.com/flameshot-org/flameshot
@@ -23,20 +12,11 @@ Source0: %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
 BuildRequires: cmake >= 3.13.0
 BuildRequires: gcc-c++ >= 7
 BuildRequires: fdupes
-%if %{is_suse_leap}
 BuildRequires: update-desktop-files
 BuildRequires: appstream-glib
-%endif
-%if %{is_rhel_or_fedora}
-BuildRequires: libappstream-glib
-BuildRequires: ninja-build
-%endif
 BuildRequires: desktop-file-utils
 
 BuildRequires: cmake(Qt5Core) >= 5.9.0
-%if %{is_rhel_or_fedora}
-BuildRequires: cmake(KF5GuiAddons) >= 5.89.0
-%endif
 BuildRequires: cmake(Qt5DBus) >= 5.9.0
 BuildRequires: cmake(Qt5Gui) >= 5.9.0
 BuildRequires: cmake(Qt5LinguistTools) >= 5.9.0
@@ -46,16 +26,10 @@ BuildRequires: cmake(Qt5Widgets) >= 5.9.0
 
 
 Requires: hicolor-icon-theme
-%if %{is_rhel_or_fedora}
-Requires: qt5-qtbase >= 5.9.0
-Requires: qt5-qttools >= 5.9.0
-Requires: qt5-qtsvg%{?_isa} >= 5.9.0
-%endif
-%if %{is_suse_leap}
 Requires: libQt5Core5 >= 5.9.0
 Requires: libqt5-qttools >= 5.9.0
 Requires: libQt5Svg5 >= 5.9.0
-%endif
+
 Recommends: xdg-desktop-portal%{?_isa}
 Recommends: (xdg-desktop-portal-gnome%{?_isa} if gnome-shell%{?_isa})
 Recommends: (xdg-desktop-portal-kde%{?_isa} if plasma-workspace-wayland%{?_isa})
@@ -77,33 +51,18 @@ Features:
 %autosetup -p1
 
 %build
-%if %{is_suse_leap}
 %cmake -DCMAKE_BUILD_TYPE=Release
-%endif
-%if %{is_rhel_or_fedora}
-	
-%cmake -G Ninja \
-    -DCMAKE_BUILD_TYPE=Release \
-    -DUSE_WAYLAND_CLIPBOARD:BOOL=ON \
-%endif
 %cmake_build
 
 %install
 %cmake_install
 # https://fedoraproject.org/wiki/PackagingDrafts/find_lang
 %find_lang Internationalization --with-qt
-%if %{is_suse_leap}
 %suse_update_desktop_file -r org.flameshot.Flameshot Utility X-SuSE-DesktopUtility
-%endif
 %fdupes %{buildroot}%{_datadir}/icons
 
 %check
-%if %{is_rhel_or_fedora}
-appstream-util validate-relax --nonet %{buildroot}%{_metainfodir}/*.metainfo.xml
-%endif
-%if %{is_suse_leap}
 appstream-util validate-relax --nonet %{buildroot}%{_datadir}/metainfo/*.metainfo.xml
-%endif
 desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 
 %files -f Internationalization.lang
@@ -116,12 +75,7 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %dir %{_datadir}/zsh/site-functions
 %{_bindir}/%{name}
 %{_datadir}/applications/org.flameshot.Flameshot.desktop
-%if %{is_suse_leap}
 %{_datadir}/metainfo/org.flameshot.Flameshot.metainfo.xml
-%endif
-%if %{is_rhel_or_fedora}
-%{_metainfodir}/org.flameshot.Flameshot.metainfo.xml
-%endif
 %{_datadir}/bash-completion/completions/%{name}
 %{_datadir}/zsh/site-functions/_%{name}
 %{_datadir}/fish/vendor_completions.d/%{name}.fish
