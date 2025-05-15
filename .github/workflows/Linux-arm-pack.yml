@@ -5,6 +5,7 @@ on:
     branches:
       - master
       - fix*
+      - move-arm-ci-to-new-ci
     paths-ignore:
       - 'README.md'
       - 'LICENSE'
