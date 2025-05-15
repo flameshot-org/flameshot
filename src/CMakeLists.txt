@@ -18,11 +18,12 @@ if (USE_WAYLAND_CLIPBOARD)
     find_package(KF5GuiAddons)
 endif()
 
+set(USE_PLUGIN_MANAGER OFF)
+
 if (USE_PLUGIN_MANAGER)
     find_package(yaml-cpp)
 endif()
 
-set(USE_PLUGIN_MANAGER ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
