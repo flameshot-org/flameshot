@@ -1,4 +1,4 @@
-name: Packaging(Linux)
+name: Packaging(Linux - ARM)
 
 on:
   push:
