@@ -409,6 +409,13 @@ void CaptureWidget::onGridSizeChanged(int size)
     repaint();
 }
 
+void CaptureWidget::startColorGrab()
+{
+    if (m_sidePanel) {
+        m_sidePanel->startColorGrab();
+    }
+}
+
 void CaptureWidget::showxywh()
 {
     m_xywhDisplay = true;
@@ -1192,6 +1199,10 @@ void CaptureWidget::initPanel()
             &SidePanelWidget::togglePanel,
             m_panel,
             &UtilityPanel::toggle);
+    connect(
+      m_sidePanel, &SidePanelWidget::showPanel, m_panel, &UtilityPanel::show);
+    connect(
+      m_sidePanel, &SidePanelWidget::hidePanel, m_panel, &UtilityPanel::hide);
     connect(m_sidePanel,
             &SidePanelWidget::displayGridChanged,
             this,
@@ -1563,6 +1574,9 @@ void CaptureWidget::initShortcuts()
     newShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_TOGGLE_PANEL")),
                 this,
                 SLOT(togglePanel()));
+    newShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_GRAB_COLOR")),
+                this,
+                SLOT(startColorGrab()));
 
     newShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_RESIZE_LEFT")),
                 m_selection,
