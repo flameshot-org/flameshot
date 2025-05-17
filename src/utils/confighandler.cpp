@@ -180,7 +180,6 @@ static QMap<QString, QSharedPointer<KeySequence>> recognizedShortcuts = {
     SHORTCUT("TYPE_DELETE_CURRENT_TOOL" ,   "Delete"                ),
 #endif
     SHORTCUT("TYPE_PIN"                 ,                           ),
-    SHORTCUT("TYPE_SELECTIONINDICATOR"  ,                           ),
     SHORTCUT("TYPE_SIZEINCREASE"        ,                           ),
     SHORTCUT("TYPE_SIZEDECREASE"        ,                           ),
     SHORTCUT("TYPE_CIRCLECOUNT"         ,                           ),

@@ -312,9 +312,6 @@ void CaptureWidget::initButtons()
     // This will allow keyboard shortcuts for those buttons to work
     for (CaptureTool::Type t : allButtonTypes) {
         auto* b = new CaptureToolButton(t, this);
-        if (t == CaptureTool::TYPE_SELECTIONINDICATOR) {
-            m_sizeIndButton = b;
-        }
         b->setColor(m_uiColor);
         b->hide();
         // must be enabled for SelectionWidget's eventFilter to work correctly
