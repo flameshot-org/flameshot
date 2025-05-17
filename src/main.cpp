@@ -32,6 +32,9 @@
 #include <QDBusMessage>
 #include <desktopinfo.h>
 #endif
+#ifdef USE_PLUGIN_MANAGER
+#include "core/pluginmanager.h"
+#endif
 
 #ifdef Q_OS_LINUX
 // source: https://github.com/ksnip/ksnip/issues/416
@@ -149,6 +152,9 @@ void reinitializeAsQApplication(int& argc, char* argv[])
 
 int main(int argc, char* argv[])
 {
+#ifdef USE_PLUGIN_MANAGER
+    PluginManager::getInstance()->LoadPlugins();
+#endif
 #ifdef Q_OS_LINUX
     wayland_hacks();
 #endif

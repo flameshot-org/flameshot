@@ -40,14 +40,16 @@ public:
         TYPE_OPEN_APP = 14,
         TYPE_PIXELATE = 15,
         TYPE_REDO = 16,
-        TYPE_PIN = 17,
-        TYPE_TEXT = 18,
-        TYPE_CIRCLECOUNT = 19,
-        TYPE_SIZEINCREASE = 20,
-        TYPE_SIZEDECREASE = 21,
-        TYPE_INVERT = 22,
-        TYPE_ACCEPT = 23,
-        TYPE_CANCEL = 24,
+        TYPE_PRINT = 17,
+        TYPE_PIN = 18,
+        TYPE_TEXT = 19,
+        TYPE_CIRCLECOUNT = 20,
+        TYPE_SIZEINCREASE = 21,
+        TYPE_SIZEDECREASE = 22,
+        TYPE_INVERT = 23,
+        TYPE_ACCEPT = 24,
+        TYPE_CANCEL = 25,
+        TYPE_SAVE_TO_PDF = 26
     };
     Q_ENUM(Type);
 
