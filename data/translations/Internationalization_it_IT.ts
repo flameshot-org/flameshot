@@ -991,13 +991,13 @@ Si prega di risolverli manualmente nel file di configurazione.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="247"/>
-        <source>Use last region</source>
-        <translation>Usa l&apos;ultima regione</translation>
+        <source>Use last region for GUI mode</source>
+        <translation type="unfinished">Usa l&apos;ultima regione</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="248"/>
-        <source>Uses the last region as the default selection for the next screenshot</source>
-        <translation>Utilizza l&apos;ultima regione come selezione predefinita per lo screenshot successivo</translation>
+        <source>Use the last region as the default selection for the next screenshot in GUI mode</source>
+        <translation type="unfinished">Utilizza l&apos;ultima regione come selezione predefinita per lo screenshot successivo</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="262"/>

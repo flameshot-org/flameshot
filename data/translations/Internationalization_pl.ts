@@ -426,7 +426,7 @@ Spacja, aby pokazać panel boczny.</translation>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="61"/>
         <source>Esc</source>
-        <translation type="unfinished">Esc</translation>
+        <translation>Esc</translation>
     </message>
 </context>
 <context>
@@ -444,7 +444,7 @@ Spacja, aby pokazać panel boczny.</translation>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="65"/>
         <source>Update</source>
-        <translation type="unfinished">Aktualizuj</translation>
+        <translation>Aktualizuj</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="67"/>
@@ -454,7 +454,7 @@ Spacja, aby pokazać panel boczny.</translation>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="74"/>
         <source>Delete</source>
-        <translation>Delete</translation>
+        <translation>Usuń</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="76"/>
@@ -474,7 +474,7 @@ Spacja, aby pokazać panel boczny.</translation>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="106"/>
         <source>Add</source>
-        <translation>Add</translation>
+        <translation>Dodaj</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="107"/>
@@ -485,7 +485,7 @@ Spacja, aby pokazać panel boczny.</translation>
         <location filename="../../src/config/colorpickereditor.cpp" line="130"/>
         <location filename="../../src/config/colorpickereditor.cpp" line="147"/>
         <source>Error</source>
-        <translation type="unfinished">Błąd</translation>
+        <translation>Błąd</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="131"/>
@@ -800,17 +800,17 @@ Rozwiąż błędy ręcznie w pliku konfiguracyjnym.</translation>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="111"/>
         <source>Error</source>
-        <translation type="unfinished">Błąd</translation>
+        <translation>Błąd</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="111"/>
         <source>Unable to close active modal widgets</source>
-        <translation type="unfinished">Nie można zamknąć aktywnych widżetów modalnych</translation>
+        <translation>Nie można zamknąć aktywnych widżetów modalnych</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="400"/>
         <source>URL copied to clipboard.</source>
-        <translation type="unfinished">URL skopiowany do schowka.</translation>
+        <translation>Adres URL został skopiowany do schowka.</translation>
     </message>
 </context>
 <context>
@@ -818,17 +818,17 @@ Rozwiąż błędy ręcznie w pliku konfiguracyjnym.</translation>
     <message>
         <location filename="../../src/core/flameshotdaemon.cpp" line="363"/>
         <source>New version %1 is available</source>
-        <translation type="unfinished">Nowa wersja %1 jest dostępna</translation>
+        <translation>Dostępna jest nowa wersja %1</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshotdaemon.cpp" line="369"/>
         <source>You have the latest version</source>
-        <translation type="unfinished">Masz najnowszą wersję</translation>
+        <translation>Masz najnowszą wersję</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshotdaemon.cpp" line="378"/>
         <source>Failed to get information about the latest version.</source>
-        <translation type="unfinished">Nie udało się uzyskać informacji o najnowszej wersji.</translation>
+        <translation>Nie udało się uzyskać informacji o najnowszej wersji.</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshotdaemon.cpp" line="399"/>
@@ -1081,13 +1081,13 @@ Rozwiąż błędy ręcznie w pliku konfiguracyjnym.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="247"/>
-        <source>Use last region</source>
-        <translation>Use last region</translation>
+        <source>Use last region for GUI mode</source>
+        <translation type="unfinished">Use last region for GUI mode</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="248"/>
-        <source>Uses the last region as the default selection for the next screenshot</source>
-        <translation>Uses the last region as the default selection for the next screenshot</translation>
+        <source>Use the last region as the default selection for the next screenshot in GUI mode</source>
+        <translation type="unfinished">Use the last region as the default selection for the next screenshot in GUI mode</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="262"/>
@@ -1387,7 +1387,7 @@ Rozwiąż błędy ręcznie w pliku konfiguracyjnym.</translation>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="134"/>
         <source>Save image</source>
-        <translation>Save image</translation>
+        <translation>Zapisz obraz</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="164"/>
@@ -1706,7 +1706,7 @@ Rozwiąż błędy ręcznie w pliku konfiguracyjnym.</translation>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="227"/>
         <source>Copy to clipboard</source>
-        <translation type="unfinished">Kopiuj do schowka</translation>
+        <translation>Kopiuj do schowka</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="234"/>
@@ -2267,72 +2267,72 @@ Może być konieczne opuszczenie znaku &apos;#&apos; jak np.: &apos;\#FFF&apos;<
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="174"/>
         <source>Toggle side panel</source>
-        <translation type="unfinished">Przełącz panel boczny</translation>
+        <translation>Przełącz panel boczny</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="175"/>
         <source>Resize selection left 1px</source>
-        <translation type="unfinished">Zmień rozmiar zaznaczenia w lewo o 1 piksel</translation>
+        <translation>Zmień rozmiar zaznaczenia w lewo o 1 piksel</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="176"/>
         <source>Resize selection right 1px</source>
-        <translation type="unfinished">Zmień rozmiar zaznaczenia w prawo o 1 piksel</translation>
+        <translation>Zmień rozmiar zaznaczenia w prawo o 1 piksel</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="177"/>
         <source>Resize selection up 1px</source>
-        <translation type="unfinished">Zmień rozmiar zaznaczenia w górę o 1 piksel</translation>
+        <translation>Zmień rozmiar zaznaczenia w górę o 1 piksel</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="178"/>
         <source>Resize selection down 1px</source>
-        <translation type="unfinished">Zmień rozmiar zaznaczenia w dół o 1 piksel</translation>
+        <translation>Zmień rozmiar zaznaczenia w dół o 1 piksel</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="179"/>
         <source>Select entire screen</source>
-        <translation type="unfinished">Wybierz cały ekran</translation>
+        <translation>Wybierz cały ekran</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="180"/>
         <source>Move selection left 1px</source>
-        <translation type="unfinished">Przesuń zaznaczenie w lewo o 1 piksel</translation>
+        <translation>Przesuń zaznaczenie w lewo o 1 piksel</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="181"/>
         <source>Move selection right 1px</source>
-        <translation type="unfinished">Przesuń zaznaczenie w prawo o 1 piksel</translation>
+        <translation>Przesuń zaznaczenie w prawo o 1 piksel</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="182"/>
         <source>Move selection up 1px</source>
-        <translation type="unfinished">Przesuń zaznaczenie w górę o 1 piksel</translation>
+        <translation>Przesuń zaznaczenie w górę o 1 piksel</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="183"/>
         <source>Move selection down 1px</source>
-        <translation type="unfinished">Przesuń zaznaczenie w dół o 1 piksel</translation>
+        <translation>Przesuń zaznaczenie w dół o 1 piksel</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="184"/>
         <source>Commit text in text area</source>
-        <translation type="unfinished">Zatwierdź tekst w obszarze tekstowym</translation>
+        <translation>Zatwierdź tekst w obszarze tekstowym</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="185"/>
         <source>Delete current tool</source>
-        <translation type="unfinished">Delete current tool</translation>
+        <translation>Usuń bieżące narzędzie</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="194"/>
         <source>Capture screen</source>
-        <translation type="unfinished">Przechwyć ekran</translation>
+        <translation>Przechwyć ekran</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="195"/>
         <source>Screenshot history</source>
-        <translation type="unfinished">Historia zrzutów ekranu</translation>
+        <translation>Historia zrzutów ekranu</translation>
     </message>
 </context>
 <context>
@@ -2580,42 +2580,42 @@ Może być konieczne opuszczenie znaku &apos;#&apos; jak np.: &apos;\#FFF&apos;<
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="98"/>
         <source>&amp;Take Screenshot</source>
-        <translation type="unfinished">&amp;Zrzut ekranu</translation>
+        <translation>&amp;Zrób zrzut ekranu</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="116"/>
         <source>&amp;Open Launcher</source>
-        <translation type="unfinished">&amp;Pokaż ekran startowy</translation>
+        <translation>&amp;Pokaż okno</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="121"/>
         <source>&amp;Configuration</source>
-        <translation type="unfinished">&amp;Konfiguracja</translation>
+        <translation>&amp;Konfiguracja</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="126"/>
         <source>&amp;About</source>
-        <translation type="unfinished">&amp;O programie</translation>
+        <translation>&amp;O programie</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="130"/>
         <source>Check for updates</source>
-        <translation type="unfinished">Sprawdź aktualizacje</translation>
+        <translation>Sprawdź dostępność aktualizacji</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="141"/>
         <source>New version %1 is available</source>
-        <translation type="unfinished">Nowa wersja %1 jest dostępna</translation>
+        <translation>Dostępna jest nowa wersja %1</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="145"/>
         <source>&amp;Quit</source>
-        <translation type="unfinished">&amp;Wyjdź</translation>
+        <translation>&amp;Wyjdź</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="149"/>
         <source>&amp;Latest Uploads</source>
-        <translation type="unfinished">&amp;Ostatnio wysłane</translation>
+        <translation>&amp;Ostatnio wysłane</translation>
     </message>
 </context>
 <context>
@@ -2704,7 +2704,7 @@ Może być konieczne opuszczenie znaku &apos;#&apos; jak np.: &apos;\#FFF&apos;<
     <message>
         <location filename="../../src/widgets/uploadhistory.cpp" line="62"/>
         <source>Screenshots history is empty</source>
-        <translation type="unfinished">Historia zrzutów jest pusta</translation>
+        <translation>Historia zrzutów jest pusta</translation>
     </message>
 </context>
 <context>
@@ -2731,7 +2731,7 @@ Może być konieczne opuszczenie znaku &apos;#&apos; jak np.: &apos;\#FFF&apos;<
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_uploadlineitem.h" line="115"/>
         <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_uploadlineitem.h" line="115"/>
         <source>Copy URL</source>
-        <translation type="unfinished">Kopiuj URL</translation>
+        <translation>Kopiuj adres URL</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadlineitem.ui" line="95"/>
@@ -2739,17 +2739,17 @@ Może być konieczne opuszczenie znaku &apos;#&apos; jak np.: &apos;\#FFF&apos;<
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_uploadlineitem.h" line="116"/>
         <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_uploadlineitem.h" line="116"/>
         <source>Open In Browser</source>
-        <translation>Open In Browser</translation>
+        <translation>Otwórz w przeglądarce</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadlineitem.cpp" line="50"/>
         <source>Confirm to delete</source>
-        <translation type="unfinished">Potwierdź usunięcie</translation>
+        <translation>Potwierdź usunięcie</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadlineitem.cpp" line="51"/>
         <source>Are you sure you want to delete a screenshot from the latest uploads and server?</source>
-        <translation type="unfinished">Czy na pewno chcesz usunąć zrzut ekranu z ostatnio wysłanych i z serwera?</translation>
+        <translation>Czy na pewno chcesz usunąć zrzut ekranu z ostatnio wysłanych i z serwera?</translation>
     </message>
 </context>
 <context>
@@ -2775,7 +2775,7 @@ Może być konieczne opuszczenie znaku &apos;#&apos; jak np.: &apos;\#FFF&apos;<
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="68"/>
         <source>UI Color Editor</source>
-        <translation type="unfinished">Edytor kolorów interfejsu</translation>
+        <translation>Edytor kolorów interfejsu</translation>
     </message>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="74"/>

@@ -10,6 +10,13 @@
 #include "src/utils/globalvalues.h"
 #include "utils/desktopinfo.h"
 
+#include <QByteArray>
+#include <QDebug>
+#include <QImageWriter>
+#include <QPixmap>
+#include <QProcess>
+#include <QTemporaryFile>
+
 #if USE_WAYLAND_CLIPBOARD
 #include <KSystemClipboard>
 #endif
@@ -35,7 +42,16 @@ bool saveToFilesystem(const QPixmap& capture,
       path, ConfigHandler().saveAsFileExtension());
     QFile file{ completePath };
     file.open(QIODevice::WriteOnly);
-    bool okay = capture.save(&file);
+
+    bool okay;
+    QString saveExtension;
+    saveExtension = QFileInfo(completePath).suffix().toLower();
+    if (saveExtension == "jpg" || saveExtension == "jpeg") {
+        okay = capture.save(&file, nullptr, ConfigHandler().jpegQuality());
+    } else {
+        okay = capture.save(&file);
+    }
+
     QString saveMessage = messagePrefix;
     QString notificationPath = completePath;
     if (!saveMessage.isEmpty()) {
@@ -67,9 +83,11 @@ QString ShowSaveFileDialog(const QString& title, const QString& directory)
     // Build string list of supported image formats
     QStringList mimeTypeList;
     foreach (auto mimeType, QImageWriter::supportedMimeTypes()) {
-        // HEIF is meant for videos and it causes a glitch on MacOS
-        // because the native dialog lumps together heic and heif
-        if (mimeType != "image/heif") {
+        // image/heif has several aliases and they cause glitch in save dialog
+        // It is necessary to keep the image/heif (otherwise HEIF plug-in from
+        // kimageformats will not work) but the aliases could be filtered out.
+        if (mimeType != "image/heic" && mimeType != "image/heic-sequence" &&
+            mimeType != "image/heif-sequence") {
             mimeTypeList.append(mimeType);
         }
     }
@@ -90,11 +108,53 @@ QString ShowSaveFileDialog(const QString& title, const QString& directory)
     }
 }
 
+void saveJpegToClipboardMacOS(const QPixmap& capture)
+{
+    // Convert QPixmap to JPEG data
+    QByteArray jpegData;
+    QBuffer buffer(&jpegData);
+    buffer.open(QIODevice::WriteOnly);
+
+    QImageWriter imageWriter(&buffer, "jpeg");
+
+    // Set JPEG quality to whatever is in settings
+    imageWriter.setQuality(ConfigHandler().jpegQuality());
+    if (!imageWriter.write(capture.toImage())) {
+        qWarning() << "Failed to write image to JPEG format.";
+        return;
+    }
+
+    // Save JPEG data to a temporary file
+    QTemporaryFile tempFile;
+    if (!tempFile.open()) {
+        qWarning() << "Failed to open temporary file for writing.";
+        return;
+    }
+    tempFile.write(jpegData);
+    tempFile.close();
+
+    // Use osascript to copy the contents of the file to clipboard
+    QProcess process;
+    QString script =
+      QString("set the clipboard to (read (POSIX file \"%1\") as «class PNGf»)")
+        .arg(tempFile.fileName());
+    process.start("osascript", QStringList() << "-e" << script);
+    if (!process.waitForFinished()) {
+        qWarning() << "Failed to execute AppleScript.";
+    }
+
+    // Clean up
+    tempFile.remove();
+}
+
 void saveToClipboardMime(const QPixmap& capture, const QString& imageType)
 {
     QByteArray array;
     QBuffer buffer{ &array };
     QImageWriter imageWriter{ &buffer, imageType.toUpper().toUtf8() };
+    if (imageType == "jpeg") {
+        imageWriter.setQuality(ConfigHandler().jpegQuality());
+    }
     imageWriter.write(capture.toImage());
 
     QPixmap formattedPixmap;
@@ -138,8 +198,11 @@ void saveToClipboard(const QPixmap& capture)
         AbstractLogger() << QObject::tr("Capture saved to clipboard.");
     }
     if (ConfigHandler().useJpgForClipboard()) {
-        // FIXME - it doesn't work on MacOS
+#ifdef Q_OS_MAC
+        saveJpegToClipboardMacOS(capture);
+#else
         saveToClipboardMime(capture, "jpeg");
+#endif
     } else {
         // Need to send message before copying to clipboard
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
@@ -178,7 +241,8 @@ bool saveToFilesystemGUI(const QPixmap& capture)
     }
 #endif
     if (!config.savePathFixed()) {
-        savePath = ShowSaveFileDialog(QObject::tr("Save screenshot"), savePath);
+        savePath = QDir::toNativeSeparators(
+          ShowSaveFileDialog(QObject::tr("Save screenshot"), savePath));
     }
     if (savePath == "") {
         return okay;
@@ -187,11 +251,17 @@ bool saveToFilesystemGUI(const QPixmap& capture)
     QFile file{ savePath };
     file.open(QIODevice::WriteOnly);
 
-    okay = capture.save(&file);
+    QString saveExtension;
+    saveExtension = QFileInfo(savePath).suffix().toLower();
+    if (saveExtension == "jpg" || saveExtension == "jpeg") {
+        okay = capture.save(&file, nullptr, ConfigHandler().jpegQuality());
+    } else {
+        okay = capture.save(&file);
+    }
 
     if (okay) {
         QString pathNoFile =
-          savePath.left(savePath.lastIndexOf(QLatin1String("/")));
+          savePath.left(savePath.lastIndexOf(QDir::separator()));
 
         ConfigHandler().setSavePath(pathNoFile);
 

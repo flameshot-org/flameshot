@@ -62,13 +62,14 @@ AppLauncherWidget::AppLauncherWidget(const QPixmap& p, QWidget* parent)
         m_parser.processDirectory(allUserAppsFolder);
     }
 #else
-    QString dirLocal = QDir::homePath() + "/.local/share/applications/";
-    QDir appsDirLocal(dirLocal);
-    m_parser.processDirectory(appsDirLocal);
+    QStringList appsLocations =
+      QStandardPaths::standardLocations(QStandardPaths::ApplicationsLocation);
 
-    QString dir = QStringLiteral("/usr/share/applications/");
-    QDir appsDir(dir);
-    m_parser.processDirectory(appsDir);
+    for (auto appsLocation : appsLocations) {
+        QDir appsDir(appsLocation);
+        m_parser.processDirectory(QDir(appsDir));
+    }
+
 #endif
 
     initAppMap();
@@ -305,6 +306,17 @@ void AppLauncherWidget::keyPressEvent(QKeyEvent* keyEvent)
 {
     if (keyEvent->key() == Qt::Key_Escape) {
         close();
+    } else if (keyEvent->key() == Qt::Key_Return) {
+        auto* widget = (QListWidget*)m_tabWidget->currentWidget();
+        if (m_filterList->isVisible())
+            widget = m_filterList;
+        auto* item = widget->currentItem();
+        if (item == nullptr) {
+            item = widget->item(0);
+            widget->setCurrentItem(item);
+        }
+        QModelIndex const idx = widget->currentIndex();
+        AppLauncherWidget::launch(idx);
     } else {
         QWidget::keyPressEvent(keyEvent);
     }

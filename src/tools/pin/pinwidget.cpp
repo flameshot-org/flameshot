@@ -39,6 +39,7 @@ PinWidget::PinWidget(const QPixmap& pixmap,
     // set the bottom widget background transparent
     setAttribute(Qt::WA_TranslucentBackground);
     setAttribute(Qt::WA_DeleteOnClose);
+    setWindowTitle("flameshot-pin");
     ConfigHandler conf;
     m_baseColor = conf.uiColor();
     m_hoverColor = conf.contrastUiColor();
@@ -58,7 +59,7 @@ PinWidget::PinWidget(const QPixmap& pixmap,
     new QShortcut(Qt::Key_Escape, this, SLOT(close()));
 
     qreal devicePixelRatio = 1;
-#if defined(Q_OS_MACOS)
+#if defined(Q_OS_MACOS) || defined(Q_OS_LINUX)
     QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
     if (currentScreen != nullptr) {
         devicePixelRatio = currentScreen->devicePixelRatio();
@@ -72,7 +73,7 @@ PinWidget::PinWidget(const QPixmap& pixmap,
     setWindowFlags(Qt::X11BypassWindowManagerHint);
 #endif
 
-#if defined(Q_OS_MACOS)
+#if defined(Q_OS_MACOS) || defined(Q_OS_LINUX)
     if (currentScreen != nullptr) {
         QPoint topLeft = currentScreen->geometry().topLeft();
         adjusted_pos.setX((adjusted_pos.x() - topLeft.x()) / devicePixelRatio +
@@ -105,8 +106,7 @@ bool PinWidget::scrollEvent(QWheelEvent* event)
 {
     const auto phase = event->phase();
     if (phase == Qt::ScrollPhase::ScrollUpdate
-#if defined(Q_OS_LINUX) || defined(Q_OS_WINDOWS)
-        // Linux is getting only NoScrollPhase events.
+#if defined(Q_OS_LINUX) || defined(Q_OS_WINDOWS) || defined(Q_OS_MACOS)
         || phase == Qt::ScrollPhase::NoScrollPhase
 #endif
     ) {

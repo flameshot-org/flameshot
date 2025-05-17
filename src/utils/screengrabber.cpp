@@ -4,6 +4,7 @@
 #include "screengrabber.h"
 #include "abstractlogger.h"
 #include "src/core/qguiappcurrentscreen.h"
+#include "src/utils/confighandler.h"
 #include "src/utils/filenamehandler.h"
 #include "src/utils/systemnotification.h"
 #include <QApplication>
@@ -28,15 +29,24 @@ ScreenGrabber::ScreenGrabber(QObject* parent)
 
 void ScreenGrabber::generalGrimScreenshot(bool& ok, QPixmap& res)
 {
-#ifdef USE_WAYLAND_GRIM
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
+    if (!ConfigHandler().useGrimAdapter()) {
+        return;
+    }
+
+    QString runDir =
+      QProcessEnvironment::systemEnvironment().value("XDG_RUNTIME_DIR");
+    QString imgPath = runDir + "/flameshot.ppm";
     QProcess Process;
     QString program = "grim";
     QStringList arguments;
-    arguments << "-";
+    arguments << "-t"
+              << "ppm" << imgPath;
     Process.start(program, arguments);
     if (Process.waitForFinished()) {
-        res.loadFromData(Process.readAll());
+        res.load(imgPath, "ppm");
+        QFile imgFile(imgPath);
+        imgFile.remove();
         ok = true;
     } else {
         ok = false;
@@ -45,7 +55,6 @@ void ScreenGrabber::generalGrimScreenshot(bool& ok, QPixmap& res)
                 "the screen capture component of wayland. If the screen "
                 "capture component is missing, please install it!");
     }
-#endif
 #endif
 }
 
@@ -73,13 +82,36 @@ void ScreenGrabber::freeDesktopPortal(bool& ok, QPixmap& res)
       this);
 
     QEventLoop loop;
-    const auto gotSignal = [&res, &loop](uint status, const QVariantMap& map) {
+    const auto gotSignal = [&res, &loop, this](uint status,
+                                               const QVariantMap& map) {
         if (status == 0) {
             // Parse this as URI to handle unicode properly
             QUrl uri = map.value("uri").toString();
             QString uriString = uri.toLocalFile();
             res = QPixmap(uriString);
-            res.setDevicePixelRatio(qApp->devicePixelRatio());
+
+            // we calculate an approximated physical desktop geometry based on
+            // dpr(provided by qt), we calculate the logical desktop geometry
+            // later, this is the accurate size, more info:
+            // https://bugreports.qt.io/browse/QTBUG-135612
+            QRect approxPhysGeo = desktopGeometry();
+            QRect logicalGeo = logicalDesktopGeometry();
+            if (res.size() ==
+                approxPhysGeo.size()) // which means the res is physical size
+                                      // and the dpr is correct.
+            {
+                res.setDevicePixelRatio(qApp->devicePixelRatio());
+            } else if (res.size() ==
+                       logicalGeo.size()) // which means the res is logical size
+                                          // and we need to do nothing.
+            {
+                // No action needed
+            } else // which means the res is physical size and the dpr is not
+                   // correct.
+            {
+                res.setDevicePixelRatio(res.height() * 1.0f /
+                                        logicalGeo.height());
+            }
             QFile imgFile(uriString);
             imgFile.remove();
         }
@@ -129,24 +161,29 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
                 freeDesktopPortal(ok, res);
                 break;
             case DesktopInfo::QTILE:
-            case DesktopInfo::SWAY:
+            case DesktopInfo::WLROOTS:
             case DesktopInfo::HYPRLAND:
             case DesktopInfo::OTHER: {
-#ifndef USE_WAYLAND_GRIM
-                AbstractLogger::warning() << tr(
-                  "If the USE_WAYLAND_GRIM option is not activated, the dbus "
-                  "protocol will be used. It should be noted that using the "
-                  "dbus protocol under wayland is not recommended. It is "
-                  "recommended to recompile with the USE_WAYLAND_GRIM flag to "
-                  "activate the grim-based general wayland screenshot adapter");
-                freeDesktopPortal(ok, res);
-#else
-                AbstractLogger::warning()
-                  << tr("grim's screenshot component is implemented based on "
-                        "wlroots, it may not be used in GNOME or similar "
-                        "desktop environments");
-                generalGrimScreenshot(ok, res);
-#endif
+                if (!ConfigHandler().useGrimAdapter()) {
+                    if (!ConfigHandler().disabledGrimWarning()) {
+                        AbstractLogger::warning() << tr(
+                          "If the useGrimAdapter setting is not enabled, the "
+                          "dbus protocol will be used. It should be noted that "
+                          "using the dbus protocol under wayland is not "
+                          "recommended. It is recommended to enable the "
+                          "useGrimAdapter setting in flameshot.ini to activate "
+                          "the grim-based general wayland screenshot adapter");
+                    }
+                    freeDesktopPortal(ok, res);
+                } else {
+                    if (!ConfigHandler().disabledGrimWarning()) {
+                        AbstractLogger::warning() << tr(
+                          "grim's screenshot component is implemented based on "
+                          "wlroots, it may not be used in GNOME or similar "
+                          "desktop environments");
+                    }
+                    generalGrimScreenshot(ok, res);
+                }
                 break;
             }
             default:
@@ -232,6 +269,17 @@ QRect ScreenGrabber::desktopGeometry()
         QRect scrRect = screen->geometry();
         scrRect.moveTo(scrRect.x() / screen->devicePixelRatio(),
                        scrRect.y() / screen->devicePixelRatio());
+        geometry = geometry.united(scrRect);
+    }
+    return geometry;
+}
+
+QRect ScreenGrabber::logicalDesktopGeometry()
+{
+    QRect geometry;
+    for (QScreen* const screen : QGuiApplication::screens()) {
+        QRect scrRect = screen->geometry();
+        scrRect.moveTo(scrRect.x(), scrRect.y());
         geometry = geometry.united(scrRect);
     }
     return geometry;

@@ -1,0 +1,47 @@
+site_name: Flameshot Developer Docs
+site_url: https://flameshot.org/docs/dev/
+repo_url: https://github.com/flameshot-org/flameshot/
+edit_uri: tree/master/docs/dev/src
+docs_dir: src
+site_dir: output
+markdown_extensions:
+  - admonition
+  - attr_list
+  - toc:
+      permalink: "#"
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+
+plugins:
+  - search
+  - mkdoxy:
+      projects:
+        flameshot:
+          src-dirs: ../../src/
+          full-doc: True
+          doxy-cfg:
+            FILE_PATTERNS: "*.cpp *.h"
+            # #TODO for some reason this causes an exception
+            EXCLUDE_PATTERNS: "*/capturetool.h"
+            FULL_PATH_NAMES: "NO"
+            SHOW_USED_FILES: "NO"
+            RECURSIVE: True
+
+      save-api: mkdoxy-generated
+      debug: True
+      ignore-errors: False
+
+theme:
+  name: material
+  logo: https://flameshot.org/flameshot-icon.svg
+
+nav:
+  - Overview: index.md
+  - Debugging: debugging.md
+  - FAQ: faq.md
+  - 'Maintaining the documentation': docs.md
+  - API:
+      - Classes: flameshot/classes.md
+      - 'Class Hierarchy': flameshot/hierarchy.md
+      - Files: flameshot/files.md

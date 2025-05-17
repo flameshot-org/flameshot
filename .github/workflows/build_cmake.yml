@@ -6,11 +6,15 @@ on:
     paths-ignore:
       - 'README.md'
       - 'LICENSE'
+      - 'docs/**'
   pull_request:
     branches: [ master ]
     paths-ignore:
       - 'README.md'
       - 'LICENSE'
+      - 'docs/**'
+
+  workflow_dispatch:
 
 env:
   # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
@@ -27,11 +31,11 @@ jobs:
     steps:
       - name: Checkout Source code
         if: github.event_name == 'push'
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Checkout Source code
         if: github.event_name == 'pull_request'
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.head.sha }}
 
@@ -97,7 +101,7 @@ jobs:
           }
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: Cache Qt
         id: cache-qt
@@ -107,7 +111,7 @@ jobs:
           key: ${{ runner.os }}-QtCache
 
       - name: Install Qt
-        uses: jurplel/install-qt-action@v2
+        uses: jurplel/install-qt-action@v4
         with:
           version: 5.15.2
           target:  desktop

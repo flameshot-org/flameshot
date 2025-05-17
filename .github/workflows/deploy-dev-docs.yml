@@ -1,0 +1,75 @@
+name: Deploy developer docs
+
+on:
+  push:
+    branches: [ master, docs ]
+    paths:
+      - 'src/**'
+      - 'docs/dev/**'
+      - '.github/workflows/deploy-dev-docs.yml'
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Install dependencies
+        run: |
+          sudo apt-get --yes --quiet update
+          sudo apt-get --yes --no-install-recommends install doxygen
+          pip install \
+              mkdocs \
+              mkdocs-material \
+              git+https://github.com/veracioux/mkdoxy@v1.0.0
+
+      - name: Checkout flameshot source
+        uses: actions/checkout@v4
+        with:
+          path: 'flameshot'
+
+      - name: Build docs
+        working-directory: ${{github.workspace}}/flameshot/docs/dev
+        run: |
+          make build
+
+      - name: Checkout flameshot website
+        uses: actions/checkout@v4
+        with:
+          repository: 'flameshot-org/flameshot-org.github.io'
+          ref: 'gh-pages'
+          path: 'website'
+
+      - name: Configure git credentials for website repo
+        working-directory: ${{github.workspace}}/website
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "github-actions-bot@users.noreply.github.com"
+          git config http.https://github.com/.extraheader 'AUTHORIZATION basic ${{secrets.TOKEN_PUSH_TO_WEBSITE_REPO}}'
+          git remote add destination "https://x-access-token:${{secrets.TOKEN_PUSH_TO_WEBSITE_REPO}}@github.com/flameshot-org/flameshot-org.github.io"
+
+      - name: Add developer docs to website deployment
+        working-directory: ${{github.workspace}}/website
+        run: |
+          # Create empty dev-docs-staging branch
+          git checkout --orphan dev-docs-staging
+          git rm -r --cached .
+          rm -rf docs/dev
+          # Copy generated docs over
+          mkdir -p docs
+          mv "${{github.workspace}}/flameshot/docs/dev/output" \
+             "./docs/dev"
+          # Commit docs/dev to the dev-docs-staging branch
+          git add docs/dev
+          HASH="$(git --git-dir="${{github.workspace}}/flameshot/.git" rev-parse HEAD)"
+          git commit --message "Add developer docs from flameshot@$HASH"
+          # Apply changes to gh-pages
+          git checkout --force gh-pages
+          git checkout dev-docs-staging -- docs/dev
+          # Commit (we use `|| true` because the commit could be empty and thus fail)
+          git commit --message "Add developer docs from flameshot@$HASH" || true
+
+      - name: Push to website repo
+        working-directory: ${{github.workspace}}/website
+        run: |
+          git push --force destination dev-docs-staging
+          git push destination gh-pages
+
