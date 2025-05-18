@@ -19,7 +19,6 @@
 #include <QStandardPaths>
 #include <QTextCodec>
 #include <QVBoxLayout>
-#include <qcheckbox.h>
 
 GeneralConf::GeneralConf(QWidget* parent)
   : QWidget(parent)
