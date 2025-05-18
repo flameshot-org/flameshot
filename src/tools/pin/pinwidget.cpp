@@ -7,6 +7,7 @@
 #include "pinwidget.h"
 #include "qguiappcurrentscreen.h"
 #include "screenshotsaver.h"
+#include "src/core/flameshotdaemon.h"
 #include "src/utils/confighandler.h"
 #include "src/utils/globalvalues.h"
 
@@ -328,6 +329,10 @@ void PinWidget::showContextMenu(const QPoint& pos)
             &PinWidget::decreaseOpacity);
     contextMenu.addAction(&decreaseOpacityAction);
 
+    QAction editAction(tr("Edit Pin"), this);
+    connect(&editAction, &QAction::triggered, this, &PinWidget::edit);
+    contextMenu.addAction(&editAction);
+
     QAction closePinAction(tr("Close"), this);
     connect(&closePinAction, &QAction::triggered, this, &PinWidget::closePin);
     contextMenu.addSeparator();
@@ -340,9 +345,15 @@ void PinWidget::copyToClipboard()
 {
     saveToClipboard(m_pixmap);
 }
+
 void PinWidget::saveToFile()
 {
     hide();
     saveToFilesystemGUI(m_pixmap);
     show();
+}
+
+void PinWidget::edit()
+{
+    FlameshotDaemon::editPin(*this);
 }
