@@ -37,6 +37,7 @@ GeneralConf::GeneralConf(QWidget* parent)
     initAutoCloseIdleDaemon();
 #endif
     initShowTrayIcon();
+    initUseGrimAdapter();
     initShowDesktopNotification();
     initShowAbortNotification();
 #if !defined(DISABLE_UPDATE_CHECKER)
@@ -117,6 +118,10 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
     m_showTray->setChecked(!config.disabledTrayIcon());
 #endif
+
+#if defined(Q_OS_LINUX)
+    m_useGrimAdapter->setChecked(config.useGrimAdapter());
+#endif
 }
 
 void GeneralConf::updateComponents()
@@ -147,6 +152,11 @@ void GeneralConf::showDesktopNotificationChanged(bool checked)
 void GeneralConf::showAbortNotificationChanged(bool checked)
 {
     ConfigHandler().setShowAbortNotification(checked);
+}
+
+void GeneralConf::useGrimAdapter(bool checked)
+{
+    ConfigHandler().useGrimAdapter(checked);
 }
 
 #if !defined(DISABLE_UPDATE_CHECKER)
@@ -323,6 +333,24 @@ void GeneralConf::initShowTrayIcon()
     connect(m_showTray, &QCheckBox::clicked, this, [](bool checked) {
         ConfigHandler().setDisabledTrayIcon(!checked);
     });
+#endif
+}
+
+void GeneralConf::initUseGrimAdapter()
+{
+#if defined(Q_OS_LINUX)
+    m_useGrimAdapter =
+      new QCheckBox(tr("Use grim to capture screenshots"), this);
+    m_useGrimAdapter->setToolTip(
+      tr("Grim is a wayland only utility to capture screens based on the "
+         "screencopy protocol. Generally only enable on minimal wayland window "
+         "managers like sway, hyprland, etc."));
+    m_scrollAreaLayout->addWidget(m_useGrimAdapter);
+
+    connect(m_useGrimAdapter,
+            &QCheckBox::clicked,
+            this,
+            &GeneralConf::useGrimAdapter);
 #endif
 }
 
