@@ -39,7 +39,7 @@ include(FetchContent)
 FetchContent_Declare(
     qtColorWidgets
     GIT_REPOSITORY https://gitlab.com/mattbas/Qt-Color-Widgets.git
-    GIT_TAG v2.2.0
+    GIT_TAG 352bc8f99bf2174d5724ee70623427aa31ddc26a
 )
 FetchContent_MakeAvailable(qtColorWidgets)
 
