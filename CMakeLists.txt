@@ -116,7 +116,7 @@ else()
   FetchContent_Declare(
       singleApplication
       GIT_REPOSITORY https://github.com/itay-grudev/SingleApplication.git
-      GIT_TAG v3.1.5
+      GIT_TAG v3.5.2
   )
   FetchContent_MakeAvailable(SingleApplication)
   set(QTSINGLEAPPLICATION_LIBRARY SingleApplication::SingleApplication)
