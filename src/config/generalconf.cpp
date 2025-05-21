@@ -339,9 +339,12 @@ void GeneralConf::initShowTrayIcon()
 void GeneralConf::initUseGrimAdapter()
 {
 #if defined(Q_OS_LINUX)
-    m_useGrimAdapter = new QCheckBox(tr("Use grim adapter"), this);
+    m_useGrimAdapter =
+      new QCheckBox(tr("Use grim to capture screenshots"), this);
     m_useGrimAdapter->setToolTip(
-      tr("Use grim adapter for capturing screenshots"));
+      tr("Grim is a wayland only utility to capture screens based on the "
+         "screencopy protocol. Generally only enable on minimal wayland window "
+         "managers like sway, hyprland, etc."));
     m_scrollAreaLayout->addWidget(m_useGrimAdapter);
 
     connect(m_useGrimAdapter,
