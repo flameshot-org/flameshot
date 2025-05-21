@@ -5,8 +5,6 @@ set(FLAMESHOT_VERSION 12.1.0)
 
 # Flameshot-org
 set(GIT_API_URL "https://api.github.com/repos/flameshot-org/flameshot/releases/latest")
-# Namecheap
-# set(GIT_API_URL "https://api.github.com/repos/namecheap/flameshot/releases/latest")
 
 # TODO - fix it for all linux distros
 #find_package (Git)
@@ -35,6 +33,15 @@ project(
         VERSION ${FLAMESHOT_VERSION}
         LANGUAGES CXX)
 set(PROJECT_NAME_CAPITALIZED "Flameshot")
+
+include(FetchContent)
+
+FetchContent_Declare(
+    qtColorWidgets
+    GIT_REPOSITORY https://gitlab.com/mattbas/Qt-Color-Widgets.git
+    GIT_TAG v2.2.0
+)
+FetchContent_MakeAvailable(qtColorWidgets)
 
 # This can be read from ${PROJECT_NAME} after project() is called
 if (APPLE)
@@ -111,8 +118,6 @@ endif()
 
 option(BUILD_STATIC_LIBS ON)
 option(BUILD_SHARED_LIBS OFF)
-add_subdirectory(external/Qt-Color-Widgets EXCLUDE_FROM_ALL) 
-
 
 if (APPLE)
   add_subdirectory(external/QHotkey)
