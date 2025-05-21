@@ -43,6 +43,8 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(qtColorWidgets)
 
+
+
 # This can be read from ${PROJECT_NAME} after project() is called
 if (APPLE)
   set(CMAKE_OSX_DEPLOYMENT_TARGET "10.15" CACHE STRING "Minimum OS X deployment version")
@@ -111,7 +113,12 @@ if(USE_EXTERNAL_SINGLEAPPLICATION)
   find_library(QTSINGLEAPPLICATION_LIBRARY NAMES ${qtsingleapplication_libs})
   message(STATUS "Using external SingleApplication library")
 else()
-  add_subdirectory(external/singleapplication)
+  FetchContent_Declare(
+      singleApplication
+      GIT_REPOSITORY https://github.com/itay-grudev/SingleApplication.git
+      GIT_TAG v3.1.5
+  )
+  FetchContent_MakeAvailable(SingleApplication)
   set(QTSINGLEAPPLICATION_LIBRARY SingleApplication::SingleApplication)
 endif()
 
