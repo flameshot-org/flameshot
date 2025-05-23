@@ -127,8 +127,14 @@ option(BUILD_STATIC_LIBS ON)
 option(BUILD_SHARED_LIBS OFF)
 
 if (APPLE)
-  add_subdirectory(external/QHotkey)
+  FetchContent_Declare(
+      qHotKey
+      GIT_REPOSITORY https://github.com/flameshot-org/QHotkey
+      GIT_TAG master
+  )
+  FetchContent_MakeAvailable(QHotKey)
 endif()
+
 add_subdirectory(src)
 
 # CPack
