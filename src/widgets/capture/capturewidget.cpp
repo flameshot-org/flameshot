@@ -300,12 +300,19 @@ void CaptureWidget::initButtons()
         // Remove irrelevant buttons from both lists
         for (auto* buttonList : { &allButtonTypes, &visibleButtonTypes }) {
             buttonList->removeOne(CaptureTool::TYPE_SAVE);
+            buttonList->removeOne(CaptureTool::TYPE_SAVE_TO_PDF);
             buttonList->removeOne(CaptureTool::TYPE_COPY);
             buttonList->removeOne(CaptureTool::TYPE_IMAGEUPLOADER);
             buttonList->removeOne(CaptureTool::TYPE_OPEN_APP);
             buttonList->removeOne(CaptureTool::TYPE_PIN);
         }
     }
+
+#ifdef USE_PRINTER_SUPPORT
+    buttonList->removeOne(CaptureTool::TYPE_SAVE_TO_PDF);
+    buttonList->removeOne(CaptureTool::TYPE_PRINT);
+#endif
+
     QVector<CaptureToolButton*> vectorButtons;
 
     // Add all buttons but hide those that were disabled in the Interface config
