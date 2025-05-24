@@ -21,4 +21,6 @@ export QT_SELECT := 5
 override_dh_auto_configure:
 	# The existence of an empty .git directory triggers syncqt.
 	mkdir .git || true
-	dh_auto_configure --
+	# This is required to use Cmake FetchContent
+	dh_auto_configure -- \
+		-DFETCHCONTENT_FULLY_DISCONNECTED=OFF

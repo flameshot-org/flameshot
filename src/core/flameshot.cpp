@@ -4,7 +4,7 @@
 #include "flameshot.h"
 #include "flameshotdaemon.h"
 #if defined(Q_OS_MACOS)
-#include "external/QHotkey/QHotkey"
+#include "qhotkey.h"
 #endif
 
 #include "abstractlogger.h"
