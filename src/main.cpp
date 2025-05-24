@@ -245,6 +245,10 @@ int main(int argc, char* argv[])
       { "a", "autostart" },
       QObject::tr("Enable or disable run at startup"),
       QStringLiteral("bool"));
+    CommandOption notificationOption(
+      { "n", "notifications" },
+      QObject::tr("Enable or disable the notifications"),
+      QStringLiteral("bool"));
     CommandOption checkOption(
       "check", QObject::tr("Check the configuration for errors"));
     CommandOption showHelpOption(
@@ -329,6 +333,7 @@ int main(int argc, char* argv[])
     pathOption.addChecker(pathChecker, pathErr);
     trayOption.addChecker(booleanChecker, booleanErr);
     autostartOption.addChecker(booleanChecker, booleanErr);
+    notificationOption.addChecker(booleanChecker, booleanErr);
     showHelpOption.addChecker(booleanChecker, booleanErr);
     screenNumberOption.addChecker(numericChecker, numberErr);
 
@@ -368,6 +373,7 @@ int main(int argc, char* argv[])
                         uploadOption },
                       fullArgument);
     parser.AddOptions({ autostartOption,
+                        notificationOption,
                         filenameOption,
                         trayOption,
                         showHelpOption,
@@ -539,13 +545,14 @@ int main(int argc, char* argv[])
         return requestCaptureAndWait(req);
     } else if (parser.isSet(configArgument)) { // CONFIG
         bool autostart = parser.isSet(autostartOption);
+        bool notification = parser.isSet(notificationOption);
         bool filename = parser.isSet(filenameOption);
         bool tray = parser.isSet(trayOption);
         bool mainColor = parser.isSet(mainColorOption);
         bool contrastColor = parser.isSet(contrastColorOption);
         bool check = parser.isSet(checkOption);
-        bool someFlagSet = (autostart || filename || tray || mainColor ||
-                            contrastColor || check);
+        bool someFlagSet = (autostart || notification || filename || tray ||
+                            mainColor || contrastColor || check);
         if (check) {
             AbstractLogger err = AbstractLogger::error(AbstractLogger::Stderr);
             bool ok = ConfigHandler().checkForErrors(&err);
@@ -570,6 +577,10 @@ int main(int argc, char* argv[])
             if (autostart) {
                 config.setStartupLaunch(parser.value(autostartOption) ==
                                         "true");
+            }
+            if (notification) {
+                config.setShowDesktopNotification(
+                  parser.value(notificationOption) == "true");
             }
             if (filename) {
                 QString newFilename(parser.value(filenameOption));
