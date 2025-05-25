@@ -33,7 +33,7 @@
     </a>
   <a href="https://hosted.weblate.org/engage/flameshot/">
     <img src="https://hosted.weblate.org/widgets/flameshot/-/flameshot/svg-badge.svg" alt="Translation status" />
-  </a>
+</a>
   <a href="https://flameshot.org">
       <img src="https://img.shields.io/github/release/flameshot-org/flameshot.svg?label=docs" alt="Docs" />
     </a>
@@ -63,7 +63,7 @@
   - [Local](#local)
   - [Global](#global)
     - [On KDE Plasma desktop](#on-kde-plasma-desktop)
-    - [On Ubuntu](#on-ubuntu-tested-on-1804-2004-2204)
+    - [On Ubuntu](#on-ubuntu-tested-on-2204)
     - [On XFCE 4](#on-xfce-4)
     - [On Fluxbox](#on-fluxbox)
 - [Considerations](#considerations)
@@ -272,25 +272,16 @@ Steps for using the configuration:
     ln -s /var/lib/flatpak/exports/bin/org.flameshot.Flameshot ~/.local/bin/flameshot
     ```
 
-#### On Ubuntu (Tested on 18.04, 20.04, 22.04)
+#### On Ubuntu (Tested 22.04)
 
 To use Flameshot instead of the default screenshot application in Ubuntu we need to remove the binding on <kbd>Prt Sc</kbd> key, and then create a new binding for `/usr/bin/flameshot gui` ([adapted](https://askubuntu.com/posts/1039949/revisions) from [Pavel's answer on AskUbuntu](https://askubuntu.com/revisions/1036473/1)).
 
 1. Remove the binding on <kbd>Prt Sc</kbd>:
-
-   Ubuntu 18.04/20.04 using the following command:
-    ```shell
-    gsettings set org.gnome.settings-daemon.plugins.media-keys screenshot '[]'
-    ```
-
+  
    Ubuntu 22.04: Go to _Settings_ > _Keyboard_ > _View and Customise Shortcuts_ > _Screenshots_ > _Take a screenshot interactively_ and press `backspace`
 
 2. Add custom binding on <kbd>Prt Sc</kbd>:
-
-   Ubuntu 18.04: Go to _Settings_ > _Device_ > _Keyboard_ and press the '+' button at the bottom.
-
-   Ubuntu 20.04: Go to _Settings_ > _Keyboard Shortcuts_ and press the '+' button at the bottom.
-
+  
    Ubuntu 22.04: Go to _Settings_ > _Keyboard_ > _View and Customise Shortcuts_ > _Custom shortcuts_ and press the '+' button at the bottom.
 
 3. Name the command as you like it, e.g. `flameshot`. And in the command insert `/usr/bin/flameshot gui`.
@@ -355,7 +346,7 @@ There are packages available in the repository of some Linux distributions:
   + Snapshot also available via AUR: [flameshot-git](https://aur.archlinux.org/packages/flameshot-git).
 - [Debian 10+](https://tracker.debian.org/pkg/flameshot): `apt install flameshot`
   + Package for Debian 9 ("Stretch") also [available via stretch-backports](https://backports.debian.org/).
-- [Ubuntu 18.04+](https://launchpad.net/ubuntu/+source/flameshot): `apt install flameshot`
+- [Ubuntu](https://launchpad.net/ubuntu/+source/flameshot): `apt install flameshot`
 - [openSUSE](https://software.opensuse.org/package/flameshot): `zypper install flameshot`
 - [Void Linux](https://github.com/void-linux/void-packages/tree/master/srcpkgs/flameshot): `xbps-install flameshot`
 - [Solus](https://dev.getsol.us/source/flameshot/): `eopkg it flameshot`
@@ -402,7 +393,7 @@ Alternatively, in case you don't want to have a systray, you can always call Fla
 
 To build the application in your system, you'll need to install the dependencies needed for it and package names might be different for each distribution, see [Dependencies](#dependencies) below for more information. You can also install most of the Qt dependencies via [their installer](https://www.qt.io/download-qt-installer). If you were developing Qt apps before, you probably already have them.
 
-This project uses [CMake](https://cmake.org/) build system, so you need to install it in order to build the project (on most Linux distributions it is available in the standard repositories as a package called `cmake`). If your distribution provides too old version of CMake (e.g. Ubuntu 18.04) you can [download it on the official website](https://cmake.org/download/).
+This project uses [CMake](https://cmake.org/) build system, so you need to install it in order to build the project (on most Linux distributions it is available in the standard repositories as a package called `cmake`). If your distribution provides too old version of CMake (e.g. Ubuntu or Debian) you can [download it on the official website](https://cmake.org/download/).
 
 Also you can open and build/debug the project in a C++ IDE. For example, in Qt Creator you should be able to simply open `CMakeLists.txt` via `Open File or Project` in the menu after installing CMake into your system. [More information about CMake projects in Qt Creator](https://doc.qt.io/qtcreator/creator-project-cmake.html).
 
