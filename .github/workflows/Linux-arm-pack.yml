@@ -10,7 +10,8 @@ on:
       - 'README.md'
       - 'LICENSE'
       - 'docs/**'
-
+  pull_request:
+    
   workflow_dispatch:
 
 env:
