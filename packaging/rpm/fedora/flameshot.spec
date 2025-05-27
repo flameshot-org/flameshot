@@ -55,10 +55,15 @@ Features:
 %cmake -G Ninja \
     -DCMAKE_BUILD_TYPE=Release \
     -DUSE_WAYLAND_CLIPBOARD:BOOL=ON \
+    -DQTCOLORWIDGETS_INSTALL=OFF
 %cmake_build
 
 %install
 %cmake_install
+rm -rf %{buildroot}%{_includedir}/QtColorWidgets
+rm -rf %{buildroot}%{_libdir}/cmake/QtColorWidgets
+rm -f %{buildroot}%{_libdir}/libQtColorWidgets.*
+rm -f %{buildroot}%{_libdir}/pkgconfig/QtColorWidgets.pc
 # https://fedoraproject.org/wiki/PackagingDrafts/find_lang
 %find_lang Internationalization --with-qt
 %fdupes %{buildroot}%{_datadir}/icons
