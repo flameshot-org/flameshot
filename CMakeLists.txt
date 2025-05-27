@@ -41,8 +41,17 @@ FetchContent_Declare(
     GIT_REPOSITORY https://gitlab.com/mattbas/Qt-Color-Widgets.git
     GIT_TAG 352bc8f99bf2174d5724ee70623427aa31ddc26a
 )
-FetchContent_MakeAvailable(qtColorWidgets)
 
+#Workaround for duplicate GUID in windows WIX installer
+if (WIN32)
+    FetchContent_GetProperties(qtColorWidgets)
+    if(NOT qtcolorwidgets_POPULATED)
+        FetchContent_Populate(qtColorWidgets)
+        add_subdirectory(${qtcolorwidgets_SOURCE_DIR} ${qtcolorwidgets_BINARY_DIR} EXCLUDE_FROM_ALL)
+    endif()
+else()
+    FetchContent_MakeAvailable(qtColorWidgets)
+endif()
 
 
 # This can be read from ${PROJECT_NAME} after project() is called
