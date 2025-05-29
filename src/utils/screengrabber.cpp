@@ -219,7 +219,6 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
 
 QRect ScreenGrabber::screenGeometry(QScreen* screen)
 {
-    QPixmap p;
     QRect geometry;
     if (m_info.waylandDetected()) {
         QPoint topLeft(0, 0);
