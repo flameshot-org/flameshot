@@ -140,17 +140,18 @@ static std::map<CaptureTool::Type, int> buttonTypeOrder
       { CaptureTool::TYPE_CIRCLECOUNT, 10 },
       { CaptureTool::TYPE_MOVESELECTION, 12 }, { CaptureTool::TYPE_UNDO, 13 },
       { CaptureTool::TYPE_REDO, 14 }, { CaptureTool::TYPE_COPY, 15 },
-      { CaptureTool::TYPE_SAVE, 16 }, { CaptureTool::TYPE_IMAGEUPLOADER, 17 },
-      { CaptureTool::TYPE_ACCEPT, 18 },
+      { CaptureTool::TYPE_SAVE, 16 }, { CaptureTool::TYPE_SAVE_TO_PDF, 17 },
+      { CaptureTool::TYPE_PRINT, 18 }, { CaptureTool::TYPE_IMAGEUPLOADER, 29 },
+      { CaptureTool::TYPE_ACCEPT, 20 },
 #if !defined(Q_OS_MACOS)
-      { CaptureTool::TYPE_OPEN_APP, 19 }, { CaptureTool::TYPE_EXIT, 20 },
-      { CaptureTool::TYPE_PIN, 21 },
+      { CaptureTool::TYPE_OPEN_APP, 21 }, { CaptureTool::TYPE_EXIT, 22 },
+      { CaptureTool::TYPE_PIN, 23 },
 #else
-      { CaptureTool::TYPE_EXIT, 19 }, { CaptureTool::TYPE_PIN, 20 },
+      { CaptureTool::TYPE_EXIT, 21 }, { CaptureTool::TYPE_PIN, 22 },
 #endif
 
-      { CaptureTool::TYPE_SIZEINCREASE, 22 },
-      { CaptureTool::TYPE_SIZEDECREASE, 23 },
+      { CaptureTool::TYPE_SIZEINCREASE, 24 },
+      { CaptureTool::TYPE_SIZEDECREASE, 25 },
 };
 
 int CaptureToolButton::getPriorityByButton(CaptureTool::Type b)
@@ -169,6 +170,7 @@ QList<CaptureTool::Type> CaptureToolButton::iterableButtonTypes = {
     CaptureTool::TYPE_INVERT,       CaptureTool::TYPE_MOVESELECTION,
     CaptureTool::TYPE_UNDO,         CaptureTool::TYPE_REDO,
     CaptureTool::TYPE_COPY,         CaptureTool::TYPE_SAVE,
+    CaptureTool::TYPE_SAVE_TO_PDF,  CaptureTool::TYPE_PRINT,
     CaptureTool::TYPE_EXIT,         CaptureTool::TYPE_IMAGEUPLOADER,
 #if !defined(Q_OS_MACOS)
     CaptureTool::TYPE_OPEN_APP,

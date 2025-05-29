@@ -10,8 +10,18 @@ find_package(
         DBus
         LinguistTools)
 
+if (USE_PRINTER_SUPPORT)
+    find_package(PrintSupport)
+endif()
+
 if (USE_WAYLAND_CLIPBOARD)
     find_package(KF5GuiAddons)
+endif()
+
+set(USE_PLUGIN_MANAGER OFF)
+
+if (USE_PLUGIN_MANAGER)
+    find_package(yaml-cpp)
 endif()
 
 set(CMAKE_AUTOMOC ON)
@@ -219,9 +229,21 @@ target_link_libraries(
 
 )
 
+if (USE_PRINTER_SUPPORT)
+    target_link_libraries(flameshot Qt5::PrintSupport)
+endif()
+
 if (USE_WAYLAND_CLIPBOARD)
   target_compile_definitions(flameshot PRIVATE USE_WAYLAND_CLIPBOARD=1)
   target_link_libraries(flameshot KF5::GuiAddons)
+endif()
+
+if (USE_PLUGIN_MANAGER)
+    target_compile_definitions(flameshot PRIVATE USE_PLUGIN_MANAGER=1)
+endif()
+
+if (USE_PRINTER_SUPPORT)
+    target_compile_definitions(flameshot PRIVATE USE_PRINTER_SUPPORT=1)
 endif()
 
 if (APPLE)

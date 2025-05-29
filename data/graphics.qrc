@@ -99,5 +99,9 @@
         <file>img/material/black/image.svg</file>
         <file>img/material/white/apps.svg</file>
         <file>img/material/white/image.svg</file>
+        <file>img/material/black/content-print.svg</file>
+        <file>img/material/black/save-to-pdf.svg</file>
+        <file>img/material/white/content-print.svg</file>
+        <file>img/material/white/save-to-pdf.svg</file>
     </qresource>
 </RCC>

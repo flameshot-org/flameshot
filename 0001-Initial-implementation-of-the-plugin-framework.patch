@@ -1,0 +1,1195 @@
+From 2ffee62eb2d283825d554f1a6b94b6d36bdfd57a Mon Sep 17 00:00:00 2001
+From: Ouyang Chunhui <jack9603301@163.com>
+Date: Fri, 5 Jul 2024 17:22:46 +0800
+Subject: [PATCH] Initial implementation of the plugin framework
+
+Plugin RFC #2529
+
+Signed-off-by: Ouyang Chunhui <jack9603301@163.com>
+---
+ CMakeLists.txt                            |   6 +
+ data/graphics.qrc                         |   4 +
+ data/img/material/black/content-print.svg |  41 ++++++
+ data/img/material/black/save-to-pdf.svg   |  24 ++++
+ data/img/material/white/content-print.svg |  56 ++++++++
+ data/img/material/white/save-to-pdf.svg   |  36 +++++
+ src/CMakeLists.txt                        |   9 +-
+ src/core/CMakeLists.txt                   |   3 +
+ src/core/capturerequest.h                 |   2 +
+ src/core/corepluginInterface.h            |  20 +++
+ src/core/flameshot.cpp                    | 109 ++++++++++++++-
+ src/core/pluginmanager.cpp                | 157 ++++++++++++++++++++++
+ src/core/pluginmanager.h                  |  50 +++++++
+ src/main.cpp                              |   6 +
+ src/tools/CMakeLists.txt                  |   2 +
+ src/tools/capturetool.h                   |  16 ++-
+ src/tools/print/printtool.cpp             |  48 +++++++
+ src/tools/print/printtool.h               |  26 ++++
+ src/tools/save-to-pdf/save-to-pdf.cpp     |  48 +++++++
+ src/tools/save-to-pdf/save-to-pdf.h       |  26 ++++
+ src/tools/toolfactory.cpp                 |   4 +
+ src/utils/confighandler.cpp               |   2 +
+ src/utils/screenshotsaver.cpp             |  64 +++++++++
+ src/utils/screenshotsaver.h               |   2 +
+ src/widgets/capture/capturetoolbutton.cpp |  18 +--
+ src/widgets/capture/capturewidget.cpp     |   1 +
+ 26 files changed, 757 insertions(+), 23 deletions(-)
+ create mode 100644 data/img/material/black/content-print.svg
+ create mode 100644 data/img/material/black/save-to-pdf.svg
+ create mode 100644 data/img/material/white/content-print.svg
+ create mode 100644 data/img/material/white/save-to-pdf.svg
+ create mode 100644 src/core/corepluginInterface.h
+ create mode 100644 src/core/pluginmanager.cpp
+ create mode 100644 src/core/pluginmanager.h
+ create mode 100644 src/tools/print/printtool.cpp
+ create mode 100644 src/tools/print/printtool.h
+ create mode 100644 src/tools/save-to-pdf/save-to-pdf.cpp
+ create mode 100644 src/tools/save-to-pdf/save-to-pdf.h
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 1cadbbd2..a49d96a7 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -69,6 +69,12 @@ option(USE_EXTERNAL_SINGLEAPPLICATION "Use external QtSingleApplication library"
+ option(USE_LAUNCHER_ABSOLUTE_PATH "Use absolute path for the desktop launcher" ON)
+ option(USE_WAYLAND_CLIPBOARD "USE KF Gui Wayland Clipboard" OFF)
+ option(DISABLE_UPDATE_CHECKER "Disable check for updates" OFF)
++option(USE_PLUGIN_MANAGER "Activate the Plugin Manager" ON)
++option(USE_WAYLAND_GRIM "Activate the Wayland GRIM screenshot adapter" OFF)
++
++if (USE_PLUGIN_MANAGER)
++    set(PLUGIN_DIRECTORY "app_plugins" CACHE PATH "Setting the Plugin Manager Plugin Directory")
++endif()
+ if (DISABLE_UPDATE_CHECKER)
+   add_compile_definitions(DISABLE_UPDATE_CHECKER)
+ endif ()
+diff --git a/data/graphics.qrc b/data/graphics.qrc
+index fd1d93d1..bed91511 100644
+--- a/data/graphics.qrc
++++ b/data/graphics.qrc
+@@ -99,5 +99,9 @@
+         <file>img/material/black/image.svg</file>
+         <file>img/material/white/apps.svg</file>
+         <file>img/material/white/image.svg</file>
++        <file>img/material/black/content-print.svg</file>
++        <file>img/material/black/save-to-pdf.svg</file>
++        <file>img/material/white/content-print.svg</file>
++        <file>img/material/white/save-to-pdf.svg</file>
+     </qresource>
+ </RCC>
+diff --git a/data/img/material/black/content-print.svg b/data/img/material/black/content-print.svg
+new file mode 100644
+index 00000000..1409b5c0
+--- /dev/null
++++ b/data/img/material/black/content-print.svg
+@@ -0,0 +1,41 @@
++<?xml version="1.0" encoding="UTF-8" standalone="no"?>
++<svg
++   clip-rule="evenodd"
++   fill-rule="evenodd"
++   height="24"
++   stroke-linejoin="round"
++   stroke-miterlimit="2"
++   viewBox="0 0 1.125 1.125"
++   width="24"
++   version="1.1"
++   id="svg3"
++   sodipodi:docname="free-icon-printer-6547498.svg"
++   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
++   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
++   xmlns="http://www.w3.org/2000/svg"
++   xmlns:svg="http://www.w3.org/2000/svg">
++  <defs
++     id="defs3" />
++  <sodipodi:namedview
++     id="namedview3"
++     pagecolor="#ffffff"
++     bordercolor="#000000"
++     borderopacity="0.25"
++     inkscape:showpageshadow="2"
++     inkscape:pageopacity="0.0"
++     inkscape:pagecheckerboard="true"
++     inkscape:deskcolor="#d1d1d1" />
++  <g
++     id="Icon"
++     transform="matrix(0.04573171,0,0,0.04361277,0.01371951,0.03914681)">
++    <path
++       d="M 4.25,18.739 V 15 c 0,-0.966 0.784,-1.75 1.75,-1.75 h 12 c 0.966,0 1.75,0.784 1.75,1.75 v 3.739 c 0.638,-0.059 1.238,-0.338 1.695,-0.794 0.515,-0.516 0.805,-1.216 0.805,-1.945 0,-1.986 0,-5.014 0,-7 0,-0.729 -0.29,-1.429 -0.805,-1.945 C 20.929,6.54 20.229,6.25 19.5,6.25 H 4.5 C 3.771,6.25 3.071,6.54 2.555,7.055 2.04,7.571 1.75,8.271 1.75,9 v 7 c 0,0.729 0.29,1.429 0.805,1.945 0.457,0.456 1.057,0.735 1.695,0.794 z M 18.5,9.25 h -2 c -0.414,0 -0.75,0.336 -0.75,0.75 0,0.414 0.336,0.75 0.75,0.75 h 2 c 0.414,0 0.75,-0.336 0.75,-0.75 0,-0.414 -0.336,-0.75 -0.75,-0.75 z"
++       id="path1" />
++    <path
++       d="m 5.25,5.25 h 13.5 V 3.002 C 18.75,2.538 18.566,2.093 18.237,1.765 17.909,1.436 17.464,1.252 17,1.252 c -2.26,0 -7.74,0 -10,0 -0.464,0 -0.909,0.184 -1.237,0.513 C 5.434,2.093 5.25,2.538 5.25,3.002 Z"
++       id="path2" />
++    <path
++       d="M 18.75,20.998 V 15 c 0,-0.414 -0.336,-0.75 -0.75,-0.75 H 6 c -0.414,0 -0.75,0.336 -0.75,0.75 v 5.998 c 0,0.966 0.784,1.75 1.75,1.75 h 10 c 0.966,0 1.75,-0.784 1.75,-1.75 z"
++       id="path3" />
++  </g>
++</svg>
+diff --git a/data/img/material/black/save-to-pdf.svg b/data/img/material/black/save-to-pdf.svg
+new file mode 100644
+index 00000000..98394b00
+--- /dev/null
++++ b/data/img/material/black/save-to-pdf.svg
+@@ -0,0 +1,24 @@
++<?xml version="1.0" encoding="UTF-8" standalone="no"?>
++<svg
++   fill="none"
++   height="25"
++   viewBox="0 0 1.171875 1.171875"
++   width="25"
++   version="1.1"
++   id="svg2"
++   xmlns="http://www.w3.org/2000/svg"
++   xmlns:svg="http://www.w3.org/2000/svg">
++  <defs
++     id="defs2" />
++  <g
++     fill="#000000"
++     id="g2"
++     transform="matrix(0.06738281,0,0,0.05390625,-0.22265624,-0.0609375)">
++    <path
++       d="m 8.26702,14.6802 c -0.184,0 -0.308,0.018 -0.372,0.036 v 1.178 c 0.076,0.018 0.171,0.023 0.302,0.023 0.479,0 0.774,-0.242 0.774,-0.651 0,-0.366 -0.254,-0.586 -0.704,-0.586 z m 3.48698,0.012 c -0.2,0 -0.33,0.018 -0.407,0.036 v 2.61 c 0.077,0.018 0.201,0.018 0.313,0.018 0.817,0.006 1.349,-0.444 1.349,-1.396 0.006,-0.83 -0.479,-1.268 -1.255,-1.268 z"
++       id="path1" />
++    <path
++       d="M 14,2 H 6 C 5.46957,2 4.96086,2.21071 4.58579,2.58579 4.21071,2.96086 4,3.46957 4,4 v 16 c 0,0.5304 0.21071,1.0391 0.58579,1.4142 C 4.96086,21.7893 5.46957,22 6,22 h 12 c 0.5304,0 1.0391,-0.2107 1.4142,-0.5858 C 19.7893,21.0391 20,20.5304 20,20 V 8 Z M 9.498,16.19 C 9.189,16.48 8.733,16.61 8.202,16.61 8.09904,16.6111 7.99613,16.6051 7.894,16.592 v 1.426 H 7 V 14.082 C 7.40345,14.0218 7.81112,13.9944 8.219,14 c 0.557,0 0.953,0.106 1.22,0.319 0.254,0.202 0.426,0.533 0.426,0.923 -10e-4,0.392 -0.131,0.723 -0.367,0.948 z m 3.807,1.355 c -0.42,0.349 -1.059,0.515 -1.84,0.515 -0.468,0 -0.799,-0.03 -1.024,-0.06 v -3.917 c 0.4036,-0.0589 0.8111,-0.0867 1.219,-0.083 0.757,0 1.249,0.136 1.633,0.426 0.415,0.308 0.675,0.799 0.675,1.504 0,0.763 -0.279,1.29 -0.663,1.615 z M 17,14.77 h -1.532 v 0.911 H 16.9 v 0.734 h -1.432 v 1.604 H 14.562 V 14.03 H 17 Z M 14,9 H 13 V 4 l 5,5 z"
++       id="path2" />
++  </g>
++</svg>
+diff --git a/data/img/material/white/content-print.svg b/data/img/material/white/content-print.svg
+new file mode 100644
+index 00000000..29a0cda4
+--- /dev/null
++++ b/data/img/material/white/content-print.svg
+@@ -0,0 +1,56 @@
++<?xml version="1.0" encoding="UTF-8" standalone="no"?>
++<svg
++   clip-rule="evenodd"
++   fill-rule="evenodd"
++   height="24"
++   stroke-linejoin="round"
++   stroke-miterlimit="2"
++   viewBox="0 0 1.125 1.125"
++   width="24"
++   version="1.1"
++   id="svg3"
++   sodipodi:docname="free-icon-printer-6547498.svg"
++   inkscape:export-filename="content-print-B.svg"
++   inkscape:export-xdpi="96"
++   inkscape:export-ydpi="96"
++   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
++   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
++   xmlns="http://www.w3.org/2000/svg"
++   xmlns:svg="http://www.w3.org/2000/svg">
++  <defs
++     id="defs3" />
++  <sodipodi:namedview
++     id="namedview3"
++     pagecolor="#ffffff"
++     bordercolor="#000000"
++     borderopacity="0.25"
++     inkscape:showpageshadow="2"
++     inkscape:pageopacity="0.0"
++     inkscape:pagecheckerboard="true"
++     inkscape:deskcolor="#d1d1d1" />
++  <g
++     id="Icon"
++     transform="matrix(0.04573171,0,0,0.04361277,0.01371951,0.03914681)">
++    <path
++       d="M 4.25,18.739 V 15 c 0,-0.966 0.784,-1.75 1.75,-1.75 h 12 c 0.966,0 1.75,0.784 1.75,1.75 v 3.739 c 0.638,-0.059 1.238,-0.338 1.695,-0.794 0.515,-0.516 0.805,-1.216 0.805,-1.945 0,-1.986 0,-5.014 0,-7 0,-0.729 -0.29,-1.429 -0.805,-1.945 C 20.929,6.54 20.229,6.25 19.5,6.25 H 4.5 C 3.771,6.25 3.071,6.54 2.555,7.055 2.04,7.571 1.75,8.271 1.75,9 v 7 c 0,0.729 0.29,1.429 0.805,1.945 0.457,0.456 1.057,0.735 1.695,0.794 z M 18.5,9.25 h -2 c -0.414,0 -0.75,0.336 -0.75,0.75 0,0.414 0.336,0.75 0.75,0.75 h 2 c 0.414,0 0.75,-0.336 0.75,-0.75 0,-0.414 -0.336,-0.75 -0.75,-0.75 z"
++       id="path1" />
++    <path
++       d="m 5.25,5.25 h 13.5 V 3.002 C 18.75,2.538 18.566,2.093 18.237,1.765 17.909,1.436 17.464,1.252 17,1.252 c -2.26,0 -7.74,0 -10,0 -0.464,0 -0.909,0.184 -1.237,0.513 C 5.434,2.093 5.25,2.538 5.25,3.002 Z"
++       id="path2" />
++    <path
++       d="M 18.75,20.998 V 15 c 0,-0.414 -0.336,-0.75 -0.75,-0.75 H 6 c -0.414,0 -0.75,0.336 -0.75,0.75 v 5.998 c 0,0.966 0.784,1.75 1.75,1.75 h 10 c 0.966,0 1.75,-0.784 1.75,-1.75 z"
++       id="path3" />
++  </g>
++  <path
++     style="fill:#ffffff;stroke:#000000;stroke-width:0.00323688"
++     d="M 0.30264809,1.0225915 C 0.28468919,1.0144622 0.27184598,1.002579 0.26269989,0.98562933 0.25591911,0.97306312 0.2556834,0.9687735 0.25469608,0.83996986 0.25413657,0.76697822 0.25457067,0.701196 0.25566075,0.69378703 c 0.001211,-0.008234 0.005239,-0.0167278 0.0103601,-0.0218489 l 0.008378,-0.008378 H 0.5622886 0.85017835 l 0.009462,0.009462 0.009462,0.009462 V 0.8261378 0.96979233 l -0.008427,0.0169104 c -0.004635,0.009301 -0.0131102,0.0204826 -0.0188343,0.0248485 -0.0238216,0.01817 -0.0176572,0.017782 -0.28145845,0.017705 -0.23763571,-7.03e-5 -0.24349949,-2.203e-4 -0.25773405,-0.00666 z"
++     id="path6" />
++  <path
++     style="fill:#ffffff;stroke:#000000;stroke-width:0.00323688"
++     d="m 0.18450204,0.84999722 c -0.035025,-0.011106 -0.0628961,-0.0345709 -0.0782776,-0.0659024 L 0.09710634,0.76552162 V 0.58425647 0.40299131 l 0.0091181,-0.0185732 c 0.0121069,-0.0246612 0.0346735,-0.0466238 0.0604655,-0.0588471 l 0.021049,-0.009975 h 0.37547785 0.37547784 l 0.0215409,0.0105382 c 0.0266842,0.0130544 0.0510592,0.0386762 0.0615802,0.06473 l 0.00751,0.0186012 v 0.17479141 0.17479144 l -0.00751,0.0186012 c -0.014572,0.0360857 -0.0541325,0.0683437 -0.0920225,0.0750361 l -0.0121383,0.002144 v -0.0892648 c 0,-0.0985249 -8.5969e-4,-0.10375753 -0.0203945,-0.1241369 -0.005696,-0.005942 -0.0161822,-0.0139532 -0.0233033,-0.0178029 l -0.0129476,-0.007 -0.29106736,-8.7656e-4 c -0.32995326,-9.9422e-4 -0.3147173,-0.002042 -0.34015709,0.0233978 -0.0222274,0.0222275 -0.0242434,0.0331886 -0.0242434,0.13181822 0,0.0648146 -9.0811e-4,0.0835227 -0.004046,0.0833548 -0.002225,-1.1719e-4 -0.009872,-0.002064 -0.0169937,-0.004322 z M 0.88553512,0.4987282 c 0.0131998,-0.0131998 0.0132063,-0.0315615 1.655e-5,-0.0463234 L 0.87610667,0.4418339 H 0.8140748 0.75204309 l -0.009445,0.0105709 c -0.0131897,0.0147619 -0.0131832,0.0331237 1.655e-5,0.0463234 l 0.009462,0.009462 h 0.0619987 0.0619987 z"
++     id="path7" />
++  <path
++     style="fill:#ffffff;stroke:#000000;stroke-width:0.00323688"
++     d="m 0.25465793,0.20958785 c 9.996e-4,-0.0463723 0.002232,-0.0579322 0.007271,-0.0682025 0.008182,-0.0166761 0.0230438,-0.0309737 0.0406827,-0.0391384 0.0143196,-0.0066282 0.019134,-0.0067771 0.24869941,-0.0076893 0.1520475,-6.0422e-4 0.24053897,2.4843e-4 0.25247649,0.0024329 0.0219216,0.0040113 0.0404258,0.01612142 0.0538946,0.03527135 l 0.009801,0.0139351 0.001066,0.0596135 0.001066,0.0596135 H 0.56153531 0.25345452 Z"
++     id="path8" />
++</svg>
+diff --git a/data/img/material/white/save-to-pdf.svg b/data/img/material/white/save-to-pdf.svg
+new file mode 100644
+index 00000000..45434f48
+--- /dev/null
++++ b/data/img/material/white/save-to-pdf.svg
+@@ -0,0 +1,36 @@
++<?xml version="1.0" encoding="UTF-8" standalone="no"?>
++<svg
++   fill="none"
++   height="25"
++   viewBox="0 0 1.171875 1.171875"
++   width="25"
++   version="1.1"
++   id="svg2"
++   xmlns="http://www.w3.org/2000/svg"
++   xmlns:svg="http://www.w3.org/2000/svg">
++  <defs
++     id="defs2" />
++  <g
++     fill="#000000"
++     id="g2"
++     transform="matrix(0.06738281,0,0,0.05390625,-0.22265624,-0.0609375)">
++    <path
++       d="m 8.26702,14.6802 c -0.184,0 -0.308,0.018 -0.372,0.036 v 1.178 c 0.076,0.018 0.171,0.023 0.302,0.023 0.479,0 0.774,-0.242 0.774,-0.651 0,-0.366 -0.254,-0.586 -0.704,-0.586 z m 3.48698,0.012 c -0.2,0 -0.33,0.018 -0.407,0.036 v 2.61 c 0.077,0.018 0.201,0.018 0.313,0.018 0.817,0.006 1.349,-0.444 1.349,-1.396 0.006,-0.83 -0.479,-1.268 -1.255,-1.268 z"
++       id="path1" />
++    <path
++       d="M 14,2 H 6 C 5.46957,2 4.96086,2.21071 4.58579,2.58579 4.21071,2.96086 4,3.46957 4,4 v 16 c 0,0.5304 0.21071,1.0391 0.58579,1.4142 C 4.96086,21.7893 5.46957,22 6,22 h 12 c 0.5304,0 1.0391,-0.2107 1.4142,-0.5858 C 19.7893,21.0391 20,20.5304 20,20 V 8 Z M 9.498,16.19 C 9.189,16.48 8.733,16.61 8.202,16.61 8.09904,16.6111 7.99613,16.6051 7.894,16.592 v 1.426 H 7 V 14.082 C 7.40345,14.0218 7.81112,13.9944 8.219,14 c 0.557,0 0.953,0.106 1.22,0.319 0.254,0.202 0.426,0.533 0.426,0.923 -10e-4,0.392 -0.131,0.723 -0.367,0.948 z m 3.807,1.355 c -0.42,0.349 -1.059,0.515 -1.84,0.515 -0.468,0 -0.799,-0.03 -1.024,-0.06 v -3.917 c 0.4036,-0.0589 0.8111,-0.0867 1.219,-0.083 0.757,0 1.249,0.136 1.633,0.426 0.415,0.308 0.675,0.799 0.675,1.504 0,0.763 -0.279,1.29 -0.663,1.615 z M 17,14.77 h -1.532 v 0.911 H 16.9 v 0.734 h -1.432 v 1.604 H 14.562 V 14.03 H 17 Z M 14,9 H 13 V 4 l 5,5 z"
++       id="path2" />
++  </g>
++  <path
++     style="fill:#ffffff;stroke:#000000;stroke-width:0.00414365"
++     d="M 0.13219439,1.1144908 C 0.10270887,1.1050972 0.07255621,1.0806687 0.05887373,1.0550893 l -0.00915,-0.017106 V 0.58632595 c 0,-0.4369726 2.5875e-4,-0.45217828 0.0079515,-0.46767663 C 0.06881541,0.0962064 0.09136852,0.0752872 0.11809392,0.06260787 L 0.14088402,0.05179558 0.43027127,0.05065068 0.71965851,0.04950578 0.92246995,0.21173272 1.1252813,0.37395966 1.1241013,0.7038997 c -0.0011,0.307247 -0.00169,0.33108 -0.00863,0.3465146 -0.0108,0.024017 -0.033446,0.045301 -0.062466,0.058711 l -0.025384,0.011731 -0.43508287,8.419e-4 C 0.17193211,1.122512 0.15661807,1.122272 0.13219434,1.114491 Z M 0.62983425,0.90537286 c 0.0350292,-0.009137 0.0596347,-0.0254891 0.0744761,-0.0494942 0.0105258,-0.0170248 0.0127727,-0.0253925 0.0139862,-0.0520838 0.001177,-0.0258917 -1.4532e-4,-0.0349157 -0.007108,-0.0485678 -0.0114945,-0.022531 -0.0373053,-0.043845 -0.0637601,-0.0526517 -0.0253103,-0.008426 -0.10065821,-0.0130844 -0.14127324,-0.008735 l -0.0275635,0.002952 v 0.10716675 0.1071667 l 0.0176105,0.001874 c 0.0316637,0.00337 0.10822603,-9.9985e-4 0.13363204,-0.007627 z M 0.31284531,0.87492356 v -0.0366787 l 0.0340143,-0.002623 c 0.0406909,-0.003138 0.0744428,-0.0176407 0.0862541,-0.0370629 0.0214927,-0.0353419 0.009986,-0.0750097 -0.027161,-0.0936326 -0.0172581,-0.008652 -0.0281003,-0.0106186 -0.0669402,-0.0121419 -0.0254906,-9.9984e-4 -0.0567234,-5.2125e-4 -0.0694061,0.001064 l -0.0230595,0.002881 v 0.10743665 0.10743666 h 0.0331492 0.0331492 z m 0.50966849,-0.00683 v -0.0435083 h 0.047652 0.047652 v -0.0207182 -0.0207182 h -0.047652 -0.047652 v -0.02279 -0.0227901 H 0.8743094 0.926105 V 0.71477902 0.69198895 H 0.8411602 0.75621548 v 0.10980661 0.10980666 h 0.0331492 0.0331492 z M 0.99240333,0.42477741 c 0,-0.00198 -0.32444245,-0.26262065 -0.33459947,-0.26880029 -0.004103,-0.002496 -0.00518,0.0253274 -0.00518,0.13383358 V 0.42679558 H 0.8225138 c 0.0934393,0 0.16988953,-9.0815e-4 0.16988953,-0.002018 z"
++     id="path3" />
++  <path
++     style="fill:#ffffff;stroke:#000000;stroke-width:0.00414365"
++     d="m 0.54784027,0.87173531 c -0.001623,-0.001623 -0.002951,-0.0336518 -0.002951,-0.0711753 v -0.0682244 l 0.030614,0.001965 c 0.0514929,0.003305 0.0749109,0.0235095 0.0749109,0.0646325 0,0.0307473 -0.0105787,0.0491961 -0.0352095,0.0614044 -0.0189637,0.009399 -0.0620699,0.0166929 -0.0673644,0.0113978 z"
++     id="path4" />
++  <path
++     style="fill:#ffffff;stroke:#000000;stroke-width:0.00414365"
++     d="m 0.31284531,0.76453191 v -0.0321025 l 0.0247066,0.001787 c 0.0299134,0.002164 0.0426038,0.0114004 0.0407569,0.0296648 -0.00168,0.0166102 -0.0184954,0.0282401 -0.0444366,0.0307328 l -0.0210269,0.00202 z"
++     id="path5" />
++</svg>
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+index c29349a5..74bc2b45 100644
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -8,12 +8,18 @@ find_package(
+         Network
+         Svg
+         DBus
+-        LinguistTools)
++        LinguistTools
++        PrintSupport)
+ 
+ if (USE_WAYLAND_CLIPBOARD)
+     find_package(KF5GuiAddons)
+ endif()
+ 
++if (USE_PLUGIN_MANAGER)
++    find_package(yaml-cpp)
++endif()
++
++set(USE_PLUGIN_MANAGER ON)
+ set(CMAKE_AUTOMOC ON)
+ set(CMAKE_AUTORCC ON)
+ set(CMAKE_AUTOUIC ON)
+@@ -213,6 +219,7 @@ target_link_libraries(
+         Qt5::DBus
+         Qt5::Network
+         Qt5::Widgets
++        Qt5::PrintSupport
+         ${QTSINGLEAPPLICATION_LIBRARY}
+         QtColorWidgets
+ 
+diff --git a/src/core/CMakeLists.txt b/src/core/CMakeLists.txt
+index c933bdd6..5bb3cd53 100644
+--- a/src/core/CMakeLists.txt
++++ b/src/core/CMakeLists.txt
+@@ -3,6 +3,8 @@ target_sources(flameshot PRIVATE
+     flameshotdaemon.h
+     flameshotdbusadapter.h
+     qguiappcurrentscreen.h
++    pluginmanager.h
++    corepluginInterface.h
+ )
+ 
+ target_sources(flameshot PRIVATE
+@@ -11,6 +13,7 @@ target_sources(flameshot PRIVATE
+     flameshotdaemon.cpp
+     flameshotdbusadapter.cpp
+     qguiappcurrentscreen.cpp
++    pluginmanager.cpp
+ )
+ 
+ IF (WIN32)
+diff --git a/src/core/capturerequest.h b/src/core/capturerequest.h
+index ac8f885c..ed90cc6a 100644
+--- a/src/core/capturerequest.h
++++ b/src/core/capturerequest.h
+@@ -27,6 +27,8 @@ public:
+         PIN = 16,
+         UPLOAD = 32,
+         ACCEPT_ON_SELECT = 64,
++        PRINT_SYSTEM = 128,
++        SAVE_TO_PDF = 256
+     };
+ 
+     CaptureRequest(CaptureMode mode,
+diff --git a/src/core/corepluginInterface.h b/src/core/corepluginInterface.h
+new file mode 100644
+index 00000000..54f48672
+--- /dev/null
++++ b/src/core/corepluginInterface.h
+@@ -0,0 +1,20 @@
++#ifndef COREPLUGININTERFACE_H
++#define COREPLUGININTERFACE_H
++
++#include <QtPlugin>
++
++class CorePluginInterface {
++public:
++    virtual ~CorePluginInterface() = 0;
++    virtual bool load(std::map<std::string, std::string> &PluginConfig) = 0;
++    virtual void unload() = 0;
++    virtual bool ImagePost(QPixmap &pixmap) = 0;
++    virtual bool ImageToPDFPost(QPixmap &pixmap) = 0;
++    virtual bool PrintPre(QPixmap &pixmap) = 0;
++};
++
++#define FlameshotPlugin_iid "FlameshotPlugin.CorePluginInterface"
++
++Q_DECLARE_INTERFACE(CorePluginInterface, FlameshotPlugin_iid)
++
++#endif // COREPLUGININTERFACE_H
+diff --git a/src/core/flameshot.cpp b/src/core/flameshot.cpp
+index c7eadcad..af564b17 100644
+--- a/src/core/flameshot.cpp
++++ b/src/core/flameshot.cpp
+@@ -31,7 +31,15 @@
+ #include <QThread>
+ #include <QTimer>
+ #include <QUrl>
++#include <QToolBar>
+ #include <QVersionNumber>
++#include <QtPrintSupport/QPrinter>
++#include <QtPrintSupport/QPrintPreviewDialog>
++#include <QFileDialog>
++
++#ifdef USE_PLUGIN_MANAGER
++#include "core/pluginmanager.h"
++#endif
+ 
+ #if defined(Q_OS_MACOS)
+ #include <QScreen>
+@@ -352,7 +360,12 @@ void Flameshot::exportCapture(const QPixmap& capture,
+     int tasks = req.tasks(), mode = req.captureMode();
+     QString path = req.path();
+ 
++    QPixmap PixmapOutputBuffer(capture);
++
+     if (tasks & CR::PRINT_GEOMETRY) {
++#ifdef USE_PLUGIN_MANAGER
++        PluginManager::getInstance()->CallImagePost(PixmapOutputBuffer);
++#endif
+         QByteArray byteArray;
+         QBuffer buffer(&byteArray);
+         QTextStream(stdout)
+@@ -361,9 +374,12 @@ void Flameshot::exportCapture(const QPixmap& capture,
+     }
+ 
+     if (tasks & CR::PRINT_RAW) {
++#ifdef USE_PLUGIN_MANAGER
++        PluginManager::getInstance()->CallImagePost(PixmapOutputBuffer);
++#endif
+         QByteArray byteArray;
+         QBuffer buffer(&byteArray);
+-        capture.save(&buffer, "PNG");
++        PixmapOutputBuffer.save(&buffer, "PNG");
+         QFile file;
+         file.open(stdout, QIODevice::WriteOnly);
+ 
+@@ -372,19 +388,35 @@ void Flameshot::exportCapture(const QPixmap& capture,
+     }
+ 
+     if (tasks & CR::SAVE) {
++#ifdef USE_PLUGIN_MANAGER
++        PluginManager::getInstance()->CallImagePost(PixmapOutputBuffer);
++#endif
+         if (req.path().isEmpty()) {
+-            saveToFilesystemGUI(capture);
++            saveToFilesystemGUI(PixmapOutputBuffer);
+         } else {
+-            saveToFilesystem(capture, path);
++            saveToFilesystem(PixmapOutputBuffer, path);
+         }
+     }
+ 
++    if (tasks & CR::SAVE_TO_PDF) {
++#ifdef USE_PLUGIN_MANAGER
++        PluginManager::getInstance()->CallImageToPDFPost(PixmapOutputBuffer);
++#endif
++        saveToPDF(PixmapOutputBuffer);
++    }
++
+     if (tasks & CR::COPY) {
+-        FlameshotDaemon::copyToClipboard(capture);
++#ifdef USE_PLUGIN_MANAGER
++        PluginManager::getInstance()->CallImagePost(PixmapOutputBuffer);
++#endif
++        FlameshotDaemon::copyToClipboard(PixmapOutputBuffer);
+     }
+ 
+     if (tasks & CR::PIN) {
+-        FlameshotDaemon::createPin(capture, selection);
++#ifdef USE_PLUGIN_MANAGER
++        PluginManager::getInstance()->CallImagePost(PixmapOutputBuffer);
++#endif
++        FlameshotDaemon::createPin(PixmapOutputBuffer, selection);
+         if (mode == CR::SCREEN_MODE || mode == CR::FULLSCREEN_MODE) {
+             AbstractLogger::info()
+               << QObject::tr("Full screen screenshot pinned to screen");
+@@ -392,6 +424,9 @@ void Flameshot::exportCapture(const QPixmap& capture,
+     }
+ 
+     if (tasks & CR::UPLOAD) {
++#ifdef USE_PLUGIN_MANAGER
++        PluginManager::getInstance()->CallImagePost(PixmapOutputBuffer);
++#endif
+         if (!ConfigHandler().uploadWithoutConfirmation()) {
+             auto* dialog = new ImgUploadDialog();
+             if (dialog->exec() == QDialog::Rejected) {
+@@ -399,7 +434,7 @@ void Flameshot::exportCapture(const QPixmap& capture,
+             }
+         }
+ 
+-        ImgUploaderBase* widget = ImgUploaderManager().uploader(capture);
++        ImgUploaderBase* widget = ImgUploaderManager().uploader(PixmapOutputBuffer);
+         widget->show();
+         widget->activateWindow();
+         // NOTE: lambda can't capture 'this' because it might be destroyed later
+@@ -416,8 +451,68 @@ void Flameshot::exportCapture(const QPixmap& capture,
+           });
+     }
+ 
++    if(tasks & CR::PRINT_SYSTEM) {
++        QPixmap pixmap = capture;
++#ifdef USE_PLUGIN_MANAGER
++        PluginManager::getInstance()->CallPrintPre(pixmap);
++#endif
++        QPrinter printer;
++        printer.setPageOrientation(QPageLayout::Orientation::Landscape);
++
++        QPrintPreviewDialog dialog(&printer);
++        dialog.setWindowFlag(Qt::WindowMinMaxButtonsHint);
++        dialog.setWindowTitle(tr("Print Document"));
++
++#if defined(Q_OS_WIN)
++        QToolBar *PrintPreviewToolbar = dialog.findChild<QToolBar*>();
++        QList<QAction*> List = PrintPreviewToolbar->actions();
++        int index = 0;
++        QSet<int> RemoveIndex;
++        RemoveIndex.insert(0);
++        RemoveIndex.insert(1);
++        RemoveIndex.insert(16);
++        RemoveIndex.insert(17);
++        RemoveIndex.insert(18);
++        const int PrintAction = 21;
++        QSet<QAction*> RemoveList;
++        foreach(auto it, List) {
++            if(RemoveIndex.find(index) != RemoveIndex.end()) {
++                RemoveList.insert(it);
++            }
++            if(index == PrintAction) {
++                it->setIcon(QIcon(":/img/material/black/content-print.svg"));
++            }
++            index++;
++        }
++        foreach(auto it, List) {
++            if(RemoveList.find(it) != RemoveList.end()) {
++                PrintPreviewToolbar->removeAction(it);
++            }
++        }
++
++#endif
++        connect(&dialog, &QPrintPreviewDialog::paintRequested, [&](QPrinter *printer) {
++            QPainter painter(printer);
++            if((pixmap.size().width() >= printer->width()) ||
++                (pixmap.size().height() >= printer->height())) {
++                pixmap = pixmap.scaled(printer->width(), printer->height(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
++            } else if(pixmap.size().width() >= (printer->width()/2)) {
++                pixmap = pixmap.scaledToWidth(printer->width(), Qt::SmoothTransformation);
++                if(pixmap.size().height() >= printer->height()) {
++                    pixmap = pixmap.scaledToHeight(printer->height(), Qt::SmoothTransformation);
++                }
++            }
++
++            QRect rect((printer->width() - pixmap.size().width()) /2,
++                       (printer->height() - pixmap.size().height()) /2,
++                       pixmap.size().width(), pixmap.size().height());
++            painter.drawPixmap(rect, pixmap);
++        });
++        dialog.exec();
++    }
++
+     if (!(tasks & CR::UPLOAD)) {
+-        emit captureTaken(capture);
++        emit captureTaken(PixmapOutputBuffer);
+     }
+ }
+ 
+diff --git a/src/core/pluginmanager.cpp b/src/core/pluginmanager.cpp
+new file mode 100644
+index 00000000..22aaf2e4
+--- /dev/null
++++ b/src/core/pluginmanager.cpp
+@@ -0,0 +1,157 @@
++#ifdef USE_PLUGIN_MANAGER
++
++#include "pluginmanager.h"
++#include <QObject>
++#include <QDir>
++#include <yaml-cpp/yaml.h>
++#include "corepluginInterface.h"
++
++PluginManager::PluginManager() {
++
++}
++
++PluginManager *PluginManager::getInstance() {
++    static PluginManager pluginManager;
++    qDebug() << QObject::tr("Get the plugin manager interface: ").toStdString().c_str() << &pluginManager;
++    return &pluginManager;
++}
++
++void PluginManager::LoopDirsPlugins(QString Base, std::function<CallbackPluginLoads> Callback) {
++    QDir dirs(Base);
++    if(dirs.exists()) {
++        dirs.setFilter(QDir::AllEntries | QDir::NoDotAndDotDot);
++        QFileInfoList fileList = dirs.entryInfoList();
++        foreach(QFileInfo fileInfo, fileList) {
++            if (Base != pluginDir && fileInfo.isDir()) {
++                QFileInfo infocheck(fileInfo.absolutePath() + PluginDefineYaml);
++                if(!infocheck.exists()) {
++                    LoopDirsPlugins(fileInfo.absoluteFilePath(), Callback);
++                }
++            } else if(Base == pluginDir && fileInfo.isDir()) {
++                LoopDirsPlugins(fileInfo.absoluteFilePath(), Callback);
++            } else if(fileInfo.isFile()) {
++                if(fileInfo.fileName() == PluginDefineYaml) {
++                    Callback(fileInfo.absoluteFilePath());
++                }
++            }
++        }
++    }
++}
++
++int PluginManager::LoadPlugins() {
++    int count = 0;
++    LoopDirsPlugins(pluginDir, [&](QString PluginInfoDefaultYaml) {
++        qDebug() << QObject::tr("Get Plugin Definde: ").toStdString().c_str() << PluginInfoDefaultYaml;
++        YAML::Node config;
++        try {
++            config = YAML::LoadFile(PluginInfoDefaultYaml.toStdString());
++        } catch(std::exception &e) {
++            qDebug() << QObject::tr("Get Plugin Error: ").toStdString().c_str() << e.what() << PluginInfoDefaultYaml;
++            return;
++        }
++
++        PluginInfo Info;
++        Info.PluginInfoFullPath = PluginInfoDefaultYaml;
++        Info.PluginName = QString::fromStdString(config["plugin"]["name"].as<std::string>());
++        if (config["plugin"]["type"].as<std::string>() == "qt") {
++            Info.PluginType = PluginInfo::QTPlugin;
++        }
++
++        QString plugin = QFileInfo(PluginInfoDefaultYaml).absolutePath() + "/" + QString::fromStdString(config["plugin"]["file"].as<std::string>());
++        Info.Pluginfile = plugin;
++
++        std::map<std::string, std::string> PluginConfig = config["plugin"]["config"].as<std::map<std::string, std::string>>();
++
++        QPluginLoader *Loader = new QPluginLoader(Info.Pluginfile);
++        if(Loader) {
++            if(Loader->load()) {
++                CorePluginInterface *Interface = qobject_cast<CorePluginInterface*>(Loader->instance());
++                if(Interface->load(PluginConfig)) {
++                    Info.PluginLoader = Loader;
++                }
++            }
++
++            this->PluginLists.append(Info);
++
++            count++;
++        }
++
++    });
++    qDebug() << QObject::tr("Get Plugin Count: ").toStdString().c_str() << count;
++    return count;
++}
++
++bool PluginManager::UnLoadPlugins() {
++    foreach(auto Info, this->PluginLists) {
++        if(Info.PluginType == PluginInfo::QTPlugin) {
++            QPluginLoader *Loader = reinterpret_cast<QPluginLoader *>(Info.PluginLoader);
++            if(Loader) {
++                delete Loader;
++                Info.PluginLoader = nullptr;
++            }
++        }
++    }
++    this->PluginLists.clear();
++    return false;
++}
++
++bool PluginManager::CallImagePost(QPixmap &pixmap) {
++    bool Result = false;
++    foreach(auto Info, this->PluginLists) {
++        if(Info.PluginType == PluginInfo::QTPlugin) {
++            qDebug() << QObject::tr("Call Plugin(ImagePost): ").toStdString().c_str() << Info.PluginName;
++            qDebug() << QObject::tr("Call Plugin(ImagePost) YAML FileName: ").toStdString().c_str() << Info.PluginInfoFullPath;
++            qDebug() << QObject::tr("Call Plugin(ImagePost) Qt Plugin: ").toStdString().c_str() << Info.Pluginfile;
++            if (Info.PluginType == PluginInfo::QTPlugin) {
++                QPluginLoader *Loader = reinterpret_cast<QPluginLoader *>(Info.PluginLoader);
++                if(Loader) {
++                    CorePluginInterface *Interface = qobject_cast<CorePluginInterface*>(Loader->instance());
++                    Interface->ImagePost(pixmap);
++                    Result = true;
++                }
++            }
++        }
++    }
++    return Result;
++}
++
++bool PluginManager::CallImageToPDFPost(QPixmap &pixmap) {
++    bool Result = false;
++    foreach(auto Info, this->PluginLists) {
++        if(Info.PluginType == PluginInfo::QTPlugin) {
++            qDebug() << QObject::tr("Call Plugin(ImageToPDFPost): ").toStdString().c_str() << Info.PluginName;
++            qDebug() << QObject::tr("Call Plugin(ImageToPDFPost) YAML FileName: ").toStdString().c_str() << Info.PluginInfoFullPath;
++            qDebug() << QObject::tr("Call Plugin(ImageToPDFPost) Qt Plugin: ").toStdString().c_str() << Info.Pluginfile;
++            if (Info.PluginType == PluginInfo::QTPlugin) {
++                QPluginLoader *Loader = reinterpret_cast<QPluginLoader *>(Info.PluginLoader);
++                if(Loader) {
++                    CorePluginInterface *Interface = qobject_cast<CorePluginInterface*>(Loader->instance());
++                    Interface->ImageToPDFPost(pixmap);
++                    Result = true;
++                }
++            }
++        }
++    }
++    return Result;
++}
++
++bool PluginManager::CallPrintPre(QPixmap &pixmap) {
++    bool Result = false;
++    foreach(auto Info, this->PluginLists) {
++        if(Info.PluginType == PluginInfo::QTPlugin) {
++            qDebug() << QObject::tr("Call Plugin(PrintPre): ").toStdString().c_str() << Info.PluginName;
++            qDebug() << QObject::tr("Call Plugin(PrintPre) YAML FileName: ").toStdString().c_str() << Info.PluginInfoFullPath;
++            qDebug() << QObject::tr("Call Plugin(PrintPre) Qt Plugin: ").toStdString().c_str() << Info.Pluginfile;
++            if (Info.PluginType == PluginInfo::QTPlugin) {
++                QPluginLoader *Loader = reinterpret_cast<QPluginLoader *>(Info.PluginLoader);
++                if(Loader) {
++                    CorePluginInterface *Interface = qobject_cast<CorePluginInterface*>(Loader->instance());
++                    Interface->PrintPre(pixmap);
++                    Result = true;
++                }
++            }
++        }
++    }
++    return Result;
++}
++#endif //USE_PLUGIN_MANAGER
+diff --git a/src/core/pluginmanager.h b/src/core/pluginmanager.h
+new file mode 100644
+index 00000000..4b32c21e
+--- /dev/null
++++ b/src/core/pluginmanager.h
+@@ -0,0 +1,50 @@
++#ifndef PLUGINMANAGER_H
++#define PLUGINMANAGER_H
++
++#ifdef USE_PLUGIN_MANAGER
++
++#define GET_BUILD_SET(x) #x
++#define BUILD_DEFINE_CONV_C_STRING(x) GET_BUILD_SET(x)
++
++#include <QPluginLoader>
++#include <QList>
++#include <any>
++#include <functional>
++
++const QString pluginDir = BUILD_DEFINE_CONV_C_STRING(PLUGIN_DIRECTORY);
++
++const QString PluginDefineYaml = "plugin.yaml";
++
++typedef struct _PluginInfo {
++    QString PluginName;
++    QString PluginInfoFullPath;
++    enum Type {
++        QTPlugin,
++        PyPlugin,  /*no used*/
++        LuaPlugin /*no used*/
++    }PluginType;
++    QString Pluginfile;
++    void *PluginLoader;
++}PluginInfo;
++
++class PluginManager
++{
++    typedef void CallbackPluginLoads(QString PluginInfoDefaultYaml);
++private:
++    PluginManager();
++public:
++    static PluginManager *getInstance();
++    int LoadPlugins();
++    bool UnLoadPlugins();
++    bool CallImagePost(QPixmap &pixmap);
++    bool CallImageToPDFPost(QPixmap &pixmap);
++    bool CallPrintPre(QPixmap &pixmap);
++private:
++    static void LoopDirsPlugins(QString Base, std::function<CallbackPluginLoads> Callback);
++private:
++    QList<PluginInfo> PluginLists;
++};
++
++#endif //USE_PLUGIN_MANAGER
++
++#endif // PLUGINMANAGER_H
+diff --git a/src/main.cpp b/src/main.cpp
+index 23d3157e..b5517313 100644
+--- a/src/main.cpp
++++ b/src/main.cpp
+@@ -32,6 +32,9 @@
+ #include <QDBusMessage>
+ #include <desktopinfo.h>
+ #endif
++#ifdef USE_PLUGIN_MANAGER
++#include "core/pluginmanager.h"
++#endif
+ 
+ #ifdef Q_OS_LINUX
+ // source: https://github.com/ksnip/ksnip/issues/416
+@@ -126,6 +129,9 @@ void reinitializeAsQApplication(int& argc, char* argv[])
+ 
+ int main(int argc, char* argv[])
+ {
++#ifdef USE_PLUGIN_MANAGER
++    PluginManager::getInstance()->LoadPlugins();
++#endif
+ #ifdef Q_OS_LINUX
+     wayland_hacks();
+ #endif
+diff --git a/src/tools/CMakeLists.txt b/src/tools/CMakeLists.txt
+index d2a62924..6712ca6a 100644
+--- a/src/tools/CMakeLists.txt
++++ b/src/tools/CMakeLists.txt
+@@ -3,9 +3,11 @@ target_sources(flameshot PRIVATE pixelate/pixelatetool.h pixelate/pixelatetool.c
+ target_sources(flameshot PRIVATE circle/circletool.h circle/circletool.cpp)
+ target_sources(flameshot PRIVATE circlecount/circlecounttool.h circlecount/circlecounttool.cpp)
+ target_sources(flameshot PRIVATE copy/copytool.h copy/copytool.cpp)
++target_sources(flameshot PRIVATE print/printtool.h print/printtool.cpp)
+ target_sources(flameshot PRIVATE exit/exittool.h exit/exittool.cpp)
+ target_sources(flameshot PRIVATE sizeincrease/sizeincreasetool.h sizeincrease/sizeincreasetool.cpp)
+ target_sources(flameshot PRIVATE sizedecrease/sizedecreasetool.h sizedecrease/sizedecreasetool.cpp)
++target_sources(flameshot PRIVATE save-to-pdf/save-to-pdf.h save-to-pdf/save-to-pdf.cpp)
+ target_sources(
+   flameshot
+         PRIVATE imgupload/storages/imgur/imguruploader.h
+diff --git a/src/tools/capturetool.h b/src/tools/capturetool.h
+index a095d618..0783e394 100644
+--- a/src/tools/capturetool.h
++++ b/src/tools/capturetool.h
+@@ -41,13 +41,15 @@ public:
+         TYPE_OPEN_APP = 14,
+         TYPE_PIXELATE = 15,
+         TYPE_REDO = 16,
+-        TYPE_PIN = 17,
+-        TYPE_TEXT = 18,
+-        TYPE_CIRCLECOUNT = 19,
+-        TYPE_SIZEINCREASE = 20,
+-        TYPE_SIZEDECREASE = 21,
+-        TYPE_INVERT = 22,
+-        TYPE_ACCEPT = 23,
++        TYPE_PRINT = 17,
++        TYPE_PIN = 18,
++        TYPE_TEXT = 19,
++        TYPE_CIRCLECOUNT = 20,
++        TYPE_SIZEINCREASE = 21,
++        TYPE_SIZEDECREASE = 22,
++        TYPE_INVERT = 23,
++        TYPE_ACCEPT = 24,
++        TYPE_SAVE_TO_PDF = 25
+     };
+     Q_ENUM(Type);
+ 
+diff --git a/src/tools/print/printtool.cpp b/src/tools/print/printtool.cpp
+new file mode 100644
+index 00000000..b73cb23a
+--- /dev/null
++++ b/src/tools/print/printtool.cpp
+@@ -0,0 +1,48 @@
++// SPDX-License-Identifier: GPL-3.0-or-later
++// SPDX-FileCopyrightText: 2017-2019 Ouyang Chunhui & Contributor
++
++#include "printtool.h"
++#include "src/utils/screenshotsaver.h"
++#include <QPainter>
++
++PrintTool::PrintTool(QObject* parent)
++  : AbstractActionTool(parent)
++{}
++
++bool PrintTool::closeOnButtonPressed() const
++{
++    return true;
++}
++
++QIcon PrintTool::icon(const QColor& background, bool inEditor) const
++{
++    Q_UNUSED(inEditor)
++    return QIcon(iconPath(background) + "content-print.svg");
++}
++QString PrintTool::name() const
++{
++    return tr("Print");
++}
++
++CaptureTool::Type PrintTool::type() const
++{
++    return CaptureTool::TYPE_PRINT;
++}
++
++QString PrintTool::description() const
++{
++    return tr("Print");
++}
++
++CaptureTool* PrintTool::copy(QObject* parent)
++{
++    return new PrintTool(parent);
++}
++
++void PrintTool::pressed(CaptureContext& context)
++{
++    emit requestAction(REQ_CLEAR_SELECTION);
++    context.request.addTask(CaptureRequest::PRINT_SYSTEM);
++    emit requestAction(REQ_CAPTURE_DONE_OK);
++    emit requestAction(REQ_CLOSE_GUI);
++}
+diff --git a/src/tools/print/printtool.h b/src/tools/print/printtool.h
+new file mode 100644
+index 00000000..42ae384e
+--- /dev/null
++++ b/src/tools/print/printtool.h
+@@ -0,0 +1,26 @@
++// SPDX-License-Identifier: GPL-3.0-or-later
++// SPDX-FileCopyrightText: 2017-2019 Ouyang Chunhui & Contributor
++
++#pragma once
++
++#include "src/tools/abstractactiontool.h"
++
++class PrintTool : public AbstractActionTool
++{
++    Q_OBJECT
++public:
++    explicit PrintTool(QObject* parent = nullptr);
++    bool closeOnButtonPressed() const override;
++
++    QIcon icon(const QColor& background, bool inEditor) const override;
++    QString name() const override;
++    QString description() const override;
++
++    CaptureTool* copy(QObject* parent = nullptr) override;
++
++protected:
++    CaptureTool::Type type() const override;
++
++public slots:
++    void pressed(CaptureContext& context) override;
++};
+diff --git a/src/tools/save-to-pdf/save-to-pdf.cpp b/src/tools/save-to-pdf/save-to-pdf.cpp
+new file mode 100644
+index 00000000..46fbc7e6
+--- /dev/null
++++ b/src/tools/save-to-pdf/save-to-pdf.cpp
+@@ -0,0 +1,48 @@
++// SPDX-License-Identifier: GPL-3.0-or-later
++// SPDX-FileCopyrightText: 2017-2019 Ouyang Chunhui & Contributor
++
++#include "save-to-pdf.h"
++#include "src/utils/screenshotsaver.h"
++#include <QPainter>
++
++SaveToPDFTool::SaveToPDFTool(QObject* parent)
++  : AbstractActionTool(parent)
++{}
++
++bool SaveToPDFTool::closeOnButtonPressed() const
++{
++    return true;
++}
++
++QIcon SaveToPDFTool::icon(const QColor& background, bool inEditor) const
++{
++    Q_UNUSED(inEditor)
++    return QIcon(iconPath(background) + "save-to-pdf.svg");
++}
++QString SaveToPDFTool::name() const
++{
++    return tr("Save To PDF");
++}
++
++CaptureTool::Type SaveToPDFTool::type() const
++{
++    return CaptureTool::TYPE_PRINT;
++}
++
++QString SaveToPDFTool::description() const
++{
++    return tr("Save To PDF");
++}
++
++CaptureTool* SaveToPDFTool::copy(QObject* parent)
++{
++    return new SaveToPDFTool(parent);
++}
++
++void SaveToPDFTool::pressed(CaptureContext& context)
++{
++    emit requestAction(REQ_CLEAR_SELECTION);
++    context.request.addTask(CaptureRequest::SAVE_TO_PDF);
++    emit requestAction(REQ_CAPTURE_DONE_OK);
++    emit requestAction(REQ_CLOSE_GUI);
++}
+diff --git a/src/tools/save-to-pdf/save-to-pdf.h b/src/tools/save-to-pdf/save-to-pdf.h
+new file mode 100644
+index 00000000..97c35f53
+--- /dev/null
++++ b/src/tools/save-to-pdf/save-to-pdf.h
+@@ -0,0 +1,26 @@
++// SPDX-License-Identifier: GPL-3.0-or-later
++// SPDX-FileCopyrightText: 2017-2019 Ouyang Chunhui & Contributor
++
++#pragma once
++
++#include "src/tools/abstractactiontool.h"
++
++class SaveToPDFTool : public AbstractActionTool
++{
++    Q_OBJECT
++public:
++    explicit SaveToPDFTool(QObject* parent = nullptr);
++    bool closeOnButtonPressed() const override;
++
++    QIcon icon(const QColor& background, bool inEditor) const override;
++    QString name() const override;
++    QString description() const override;
++
++    CaptureTool* copy(QObject* parent = nullptr) override;
++
++protected:
++    CaptureTool::Type type() const override;
++
++public slots:
++    void pressed(CaptureContext& context) override;
++};
+diff --git a/src/tools/toolfactory.cpp b/src/tools/toolfactory.cpp
+index 98ed0ab3..5910fd82 100644
+--- a/src/tools/toolfactory.cpp
++++ b/src/tools/toolfactory.cpp
+@@ -20,9 +20,11 @@
+ #include "rectangle/rectangletool.h"
+ #include "redo/redotool.h"
+ #include "save/savetool.h"
++#include "save-to-pdf/save-to-pdf.h"
+ #include "selection/selectiontool.h"
+ #include "sizedecrease/sizedecreasetool.h"
+ #include "sizeincrease/sizeincreasetool.h"
++#include "print/printtool.h"
+ #include "text/texttool.h"
+ #include "undo/undotool.h"
+ 
+@@ -48,6 +50,7 @@ CaptureTool* ToolFactory::CreateTool(CaptureTool::Type t, QObject* parent)
+         if_TYPE_return_TOOL(TYPE_UNDO, UndoTool);
+         if_TYPE_return_TOOL(TYPE_COPY, CopyTool);
+         if_TYPE_return_TOOL(TYPE_SAVE, SaveTool);
++        if_TYPE_return_TOOL(TYPE_SAVE_TO_PDF, SaveToPDFTool);
+         if_TYPE_return_TOOL(TYPE_EXIT, ExitTool);
+         if_TYPE_return_TOOL(TYPE_IMAGEUPLOADER, ImgUploaderTool);
+ #if !defined(Q_OS_MACOS)
+@@ -55,6 +58,7 @@ CaptureTool* ToolFactory::CreateTool(CaptureTool::Type t, QObject* parent)
+ #endif
+         if_TYPE_return_TOOL(TYPE_PIXELATE, PixelateTool);
+         if_TYPE_return_TOOL(TYPE_REDO, RedoTool);
++        if_TYPE_return_TOOL(TYPE_PRINT, PrintTool);
+         if_TYPE_return_TOOL(TYPE_PIN, PinTool);
+         if_TYPE_return_TOOL(TYPE_TEXT, TextTool);
+         if_TYPE_return_TOOL(TYPE_CIRCLECOUNT, CircleCountTool);
+diff --git a/src/utils/confighandler.cpp b/src/utils/confighandler.cpp
+index 485fb265..91a87007 100644
+--- a/src/utils/confighandler.cpp
++++ b/src/utils/confighandler.cpp
+@@ -142,6 +142,7 @@ static QMap<QString, QSharedPointer<KeySequence>> recognizedShortcuts = {
+     SHORTCUT("TYPE_UNDO"                ,   "Ctrl+Z"                ),
+     SHORTCUT("TYPE_COPY"                ,   "Ctrl+C"                ),
+     SHORTCUT("TYPE_SAVE"                ,   "Ctrl+S"                ),
++    SHORTCUT("TYPE_SAVE_TO_PDF"         ,                           ),
+     SHORTCUT("TYPE_ACCEPT"              ,   "Return"                ),
+     SHORTCUT("TYPE_EXIT"                ,   "Ctrl+Q"                ),
+     SHORTCUT("TYPE_IMAGEUPLOADER"       ,                           ),
+@@ -179,6 +180,7 @@ static QMap<QString, QSharedPointer<KeySequence>> recognizedShortcuts = {
+     SHORTCUT("TYPE_SIZEINCREASE"        ,                           ),
+     SHORTCUT("TYPE_SIZEDECREASE"        ,                           ),
+     SHORTCUT("TYPE_CIRCLECOUNT"         ,                           ),
++    SHORTCUT("TYPE_PRINT", )
+ };
+ // clang-format on
+ 
+diff --git a/src/utils/screenshotsaver.cpp b/src/utils/screenshotsaver.cpp
+index f7f5a710..59326815 100644
+--- a/src/utils/screenshotsaver.cpp
++++ b/src/utils/screenshotsaver.cpp
+@@ -23,6 +23,10 @@
+ #include <QStandardPaths>
+ #include <qimagewriter.h>
+ #include <qmimedatabase.h>
++#include <QtPrintSupport/QPrinter>
++#ifdef USE_PLUGIN_MANAGER
++#include "core/pluginmanager.h"
++#endif
+ #if defined(Q_OS_MACOS)
+ #include "src/widgets/capture/capturewidget.h"
+ #endif
+@@ -101,6 +105,23 @@ QString ShowSaveFileDialog(const QString& title, const QString& directory)
+     }
+ }
+ 
++QString ShowSaveToPDFDialog(const QString& title, const QString& directory)
++{
++    QFileDialog dialog(nullptr, title, directory);
++    dialog.setAcceptMode(QFileDialog::AcceptSave);
++
++           // Build string list of supported image formats
++    QStringList mimeTypeList;
++    mimeTypeList.append("application/pdf");
++    dialog.setMimeTypeFilters(mimeTypeList);
++    if (dialog.exec() == QDialog::Accepted) {
++        return dialog.selectedFiles().constFirst();
++    } else {
++        return {};
++    }
++}
++
++
+ void saveToClipboardMime(const QPixmap& capture, const QString& imageType)
+ {
+     QByteArray array;
+@@ -168,6 +189,49 @@ void saveToClipboard(const QPixmap& capture)
+     }
+ }
+ 
++bool saveToPDF(const QPixmap& capture) {
++    bool okay = false;
++    QString savePath;
++    ConfigHandler config;
++    savePath = QDir::toNativeSeparators(
++      ShowSaveToPDFDialog(QObject::tr("Save screenshot To PDF"), savePath));
++    if(savePath.endsWith(".pdf", Qt::CaseInsensitive)) {
++        QPrinter printer(QPrinter::HighResolution);
++        printer.setOutputFormat(QPrinter::PdfFormat);
++        printer.setPageOrientation(QPageLayout::Landscape);
++        printer.setPageSize(QPageSize::A4);
++        printer.setOutputFileName(savePath);
++        QPainter painter(&printer);
++        QPixmap new_capture = capture.scaled(printer.width(), printer.height(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
++        QRect rect(0, 0, new_capture.size().width(), new_capture.size().height());
++        painter.drawPixmap(rect, new_capture);
++        okay = true;
++    }
++
++    if(okay) {
++        QString pathNoFile =
++          savePath.left(savePath.lastIndexOf(QDir::separator()));
++
++        ConfigHandler().setSavePath(pathNoFile);
++
++        QString msg = QObject::tr("Capture saved as ") + savePath;
++        AbstractLogger().attachNotificationPath(savePath) << msg;
++
++        if (config.copyPathAfterSave()) {
++            FlameshotDaemon::copyToClipboard(
++              savePath, QObject::tr("Path copied to clipboard as ") + savePath);
++        }
++    } else {
++        QString msg = QObject::tr("Error trying to save as ") + savePath;
++        QMessageBox saveErrBox(
++          QMessageBox::Warning, QObject::tr("Save Error"), msg);
++        saveErrBox.setWindowIcon(QIcon(GlobalValues::iconPath()));
++        saveErrBox.exec();
++    }
++
++    return okay;
++}
++
+ bool saveToFilesystemGUI(const QPixmap& capture)
+ {
+     bool okay = false;
+diff --git a/src/utils/screenshotsaver.h b/src/utils/screenshotsaver.h
+index 9face346..a1675ead 100644
+--- a/src/utils/screenshotsaver.h
++++ b/src/utils/screenshotsaver.h
+@@ -11,6 +11,8 @@ bool saveToFilesystem(const QPixmap& capture,
+                       const QString& path,
+                       const QString& messagePrefix = "");
+ QString ShowSaveFileDialog(const QString& title, const QString& directory);
++QString ShowSaveToPDFDialog(const QString& title, const QString& directory);
+ void saveToClipboardMime(const QPixmap& capture, const QString& imageType);
+ void saveToClipboard(const QPixmap& capture);
+ bool saveToFilesystemGUI(const QPixmap& capture);
++bool saveToPDF(const QPixmap& capture);
+diff --git a/src/widgets/capture/capturetoolbutton.cpp b/src/widgets/capture/capturetoolbutton.cpp
+index bc51eb72..be211d1d 100644
+--- a/src/widgets/capture/capturetoolbutton.cpp
++++ b/src/widgets/capture/capturetoolbutton.cpp
+@@ -146,17 +146,18 @@ static std::map<CaptureTool::Type, int> buttonTypeOrder
+       { CaptureTool::TYPE_SELECTIONINDICATOR, 11 },
+       { CaptureTool::TYPE_MOVESELECTION, 12 }, { CaptureTool::TYPE_UNDO, 13 },
+       { CaptureTool::TYPE_REDO, 14 }, { CaptureTool::TYPE_COPY, 15 },
+-      { CaptureTool::TYPE_SAVE, 16 }, { CaptureTool::TYPE_IMAGEUPLOADER, 17 },
+-      { CaptureTool::TYPE_ACCEPT, 18 },
++      { CaptureTool::TYPE_SAVE, 16 }, { CaptureTool::TYPE_SAVE_TO_PDF, 17},
++      { CaptureTool::TYPE_PRINT, 18}, { CaptureTool::TYPE_IMAGEUPLOADER, 29 },
++      { CaptureTool::TYPE_ACCEPT, 20 },
+ #if !defined(Q_OS_MACOS)
+-      { CaptureTool::TYPE_OPEN_APP, 19 }, { CaptureTool::TYPE_EXIT, 20 },
+-      { CaptureTool::TYPE_PIN, 21 },
++      { CaptureTool::TYPE_OPEN_APP, 21 }, { CaptureTool::TYPE_EXIT, 22 },
++      { CaptureTool::TYPE_PIN, 23 },
+ #else
+-      { CaptureTool::TYPE_EXIT, 19 }, { CaptureTool::TYPE_PIN, 20 },
++      { CaptureTool::TYPE_EXIT, 21 }, { CaptureTool::TYPE_PIN, 22 },
+ #endif
+ 
+-      { CaptureTool::TYPE_SIZEINCREASE, 22 },
+-      { CaptureTool::TYPE_SIZEDECREASE, 23 },
++      { CaptureTool::TYPE_SIZEINCREASE, 24 },
++      { CaptureTool::TYPE_SIZEDECREASE, 25 },
+ };
+ 
+ int CaptureToolButton::getPriorityByButton(CaptureTool::Type b)
+@@ -174,7 +175,8 @@ QList<CaptureTool::Type> CaptureToolButton::iterableButtonTypes = {
+     CaptureTool::TYPE_CIRCLECOUNT,   CaptureTool::TYPE_PIXELATE,
+     CaptureTool::TYPE_MOVESELECTION, CaptureTool::TYPE_UNDO,
+     CaptureTool::TYPE_REDO,          CaptureTool::TYPE_COPY,
+-    CaptureTool::TYPE_SAVE,          CaptureTool::TYPE_EXIT,
++    CaptureTool::TYPE_SAVE,          CaptureTool::TYPE_SAVE_TO_PDF,
++    CaptureTool::TYPE_PRINT,         CaptureTool::TYPE_EXIT,
+     CaptureTool::TYPE_IMAGEUPLOADER,
+ #if !defined(Q_OS_MACOS)
+     CaptureTool::TYPE_OPEN_APP,
+diff --git a/src/widgets/capture/capturewidget.cpp b/src/widgets/capture/capturewidget.cpp
+index 49ebff97..92456946 100644
+--- a/src/widgets/capture/capturewidget.cpp
++++ b/src/widgets/capture/capturewidget.cpp
+@@ -296,6 +296,7 @@ void CaptureWidget::initButtons()
+         // Remove irrelevant buttons from both lists
+         for (auto* buttonList : { &allButtonTypes, &visibleButtonTypes }) {
+             buttonList->removeOne(CaptureTool::TYPE_SAVE);
++            buttonList->removeOne(CaptureTool::TYPE_SAVE_TO_PDF);
+             buttonList->removeOne(CaptureTool::TYPE_COPY);
+             buttonList->removeOne(CaptureTool::TYPE_IMAGEUPLOADER);
+             buttonList->removeOne(CaptureTool::TYPE_OPEN_APP);
+-- 
+2.42.0
+

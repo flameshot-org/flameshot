@@ -27,6 +27,8 @@ public:
         PIN = 16,
         UPLOAD = 32,
         ACCEPT_ON_SELECT = 64,
+        PRINT_SYSTEM = 128,
+        SAVE_TO_PDF = 256
     };
 
     CaptureRequest(CaptureMode mode,
