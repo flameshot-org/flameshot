@@ -23,8 +23,8 @@ void CallFlameshot(const std::wstring args, bool wait)
     // Find the last backslash to isolate the filename
     size_t lastBackslash = pathstring.find_last_of(L'\\');
     std::wstring directory = (lastBackslash != std::wstring::npos)
-        ? pathstring.substr(0, lastBackslash + 1)
-        : L"";
+                               ? pathstring.substr(0, lastBackslash + 1)
+                               : L"";
 
     // generate command string
     // note: binary path placed within quotes in case of spaces in path
