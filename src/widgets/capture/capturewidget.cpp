@@ -476,7 +476,7 @@ void CaptureWidget::initQuitPrompt()
                         "QLabel, QCheckBox { color: %2 }"
                         "QPushButton { background-color: %1; color: %2 }";
     QColor text = ColorUtils::colorIsDark(m_uiColor) ? Qt::white : Qt::black;
-    QString styleSheet = baseSheet.arg(m_uiColor.name()).arg(text.name());
+    QString styleSheet = baseSheet.arg(m_uiColor.name(), text.name());
 
     m_quitPrompt->setStyleSheet(styleSheet);
     m_quitPrompt->setWindowTitle(tr("Quit Capture"));
@@ -591,11 +591,12 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
         QRect xybox;
         QFontMetrics fm = painter.fontMetrics();
 
-        QString xy = QString("%1x%2+%3+%4")
-                       .arg(static_cast<int>(selection.width() * scale))
-                       .arg(static_cast<int>(selection.height() * scale))
-                       .arg(static_cast<int>(selection.left() * scale))
-                       .arg(static_cast<int>(selection.top() * scale));
+        QString xy =
+          QString("%1x%2+%3+%4")
+            .arg(QString::number(static_cast<int>(selection.width() * scale)),
+                 QString::number(static_cast<int>(selection.height() * scale)),
+                 QString::number(static_cast<int>(selection.left() * scale)),
+                 QString::number(static_cast<int>(selection.top() * scale)));
 
         xybox = fm.boundingRect(xy);
         // the small numbers here are just margins so the text doesn't
@@ -1637,9 +1638,8 @@ void CaptureWidget::updateSizeIndicator()
     }
     if (m_sizeIndButton) {
         const QRect& selection = extendedSelection();
-        m_sizeIndButton->setText(QStringLiteral("%1\n%2")
-                                   .arg(selection.width())
-                                   .arg(selection.height()));
+        m_sizeIndButton->setText(
+          QStringLiteral("%1\n%2").arg(selection.width(), selection.height()));
     }
 }
 
