@@ -251,7 +251,7 @@ QVariant KeySequence::process(const QVariant& val)
 
 bool ExistingDir::check(const QVariant& val)
 {
-    if (!val.canConvert(QVariant::String) || val.toString().isEmpty()) {
+    if (!val.canConvert<QString>() || val.toString().isEmpty()) {
         return false;
     }
     QFileInfo info(val.toString());
@@ -402,7 +402,7 @@ bool UserColors::check(const QVariant& val)
     if (!val.isValid()) {
         return false;
     }
-    if (!val.canConvert(QVariant::StringList)) {
+    if (!val.canConvert<QStringList>()) {
         return false;
     }
     for (const QString& str : val.toStringList()) {
@@ -481,7 +481,7 @@ QVariant UserColors::representation(const QVariant& val)
 
 bool SaveFileExtension::check(const QVariant& val)
 {
-    if (!val.canConvert(QVariant::String) || val.toString().isEmpty()) {
+    if (!val.canConvert<QString>() || val.toString().isEmpty()) {
         return false;
     }
 
