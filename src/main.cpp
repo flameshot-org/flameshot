@@ -37,15 +37,33 @@
 // source: https://github.com/ksnip/ksnip/issues/416
 void wayland_hacks()
 {
-    // Workaround to https://github.com/ksnip/ksnip/issues/416
+    int suffixIndex;
     DesktopInfo info;
-    if (info.windowManager() == DesktopInfo::GNOME) {
-        qputenv("QT_QPA_PLATFORM", "xcb");
+
+    const char* qt_version = qVersion();
+
+    QVersionNumber targetVersion(5, 15, 2);
+    QString string(qt_version);
+    QVersionNumber currentVersion =
+      QVersionNumber::fromString(string, &suffixIndex);
+
+    if (currentVersion < targetVersion) {
+        if (info.windowManager() == DesktopInfo::GNOME) {
+            qWarning()
+              << "Qt versions lower than" << targetVersion.toString()
+              << "on GNOME using Wayland have a bug when accessing the "
+                 "clipboard."
+              << "Your version is" << currentVersion.toString()
+              << "so we're forcing QT_QPA_PLATFORM to 'xcb'."
+              << "To use native Wayland, please upgrade your Qt version to"
+              << targetVersion.toString() << "or higher";
+            qputenv("QT_QPA_PLATFORM", "xcb");
+        }
     }
 }
 #endif
 
-void requestCaptureAndWait(const CaptureRequest& req)
+int requestCaptureAndWait(const CaptureRequest& req)
 {
     Flameshot* flameshot = Flameshot::instance();
     flameshot->requestCapture(req);
@@ -63,10 +81,15 @@ void requestCaptureAndWait(const CaptureRequest& req)
 #endif
     });
     QObject::connect(flameshot, &Flameshot::captureFailed, []() {
-        AbstractLogger::info() << "Screenshot aborted.";
+        AbstractLogger::Target logTarget = static_cast<AbstractLogger::Target>(
+          ConfigHandler().showAbortNotification()
+            ? AbstractLogger::Target::Default
+            : AbstractLogger::Target::Default &
+                ~AbstractLogger::Target::Notification);
+        AbstractLogger::info(logTarget) << "Screenshot aborted.";
         qApp->exit(1);
     });
-    qApp->exec();
+    return qApp->exec();
 }
 
 QSharedMemory* guiMutexLock()
@@ -222,6 +245,10 @@ int main(int argc, char* argv[])
       { "a", "autostart" },
       QObject::tr("Enable or disable run at startup"),
       QStringLiteral("bool"));
+    CommandOption notificationOption(
+      { "n", "notifications" },
+      QObject::tr("Enable or disable the notifications"),
+      QStringLiteral("bool"));
     CommandOption checkOption(
       "check", QObject::tr("Check the configuration for errors"));
     CommandOption showHelpOption(
@@ -306,6 +333,7 @@ int main(int argc, char* argv[])
     pathOption.addChecker(pathChecker, pathErr);
     trayOption.addChecker(booleanChecker, booleanErr);
     autostartOption.addChecker(booleanChecker, booleanErr);
+    notificationOption.addChecker(booleanChecker, booleanErr);
     showHelpOption.addChecker(booleanChecker, booleanErr);
     screenNumberOption.addChecker(numericChecker, numberErr);
 
@@ -345,6 +373,7 @@ int main(int argc, char* argv[])
                         uploadOption },
                       fullArgument);
     parser.AddOptions({ autostartOption,
+                        notificationOption,
                         filenameOption,
                         trayOption,
                         showHelpOption,
@@ -428,7 +457,7 @@ int main(int argc, char* argv[])
                 req.addSaveTask();
             }
         }
-        requestCaptureAndWait(req);
+        return requestCaptureAndWait(req);
     } else if (parser.isSet(fullArgument)) { // FULL
         reinitializeAsQApplication(argc, argv);
 
@@ -463,7 +492,7 @@ int main(int argc, char* argv[])
         if (!clipboard && path.isEmpty() && !raw && !upload) {
             req.addSaveTask();
         }
-        requestCaptureAndWait(req);
+        return requestCaptureAndWait(req);
     } else if (parser.isSet(screenArgument)) { // SCREEN
         reinitializeAsQApplication(argc, argv);
 
@@ -513,16 +542,17 @@ int main(int argc, char* argv[])
             req.addSaveTask();
         }
 
-        requestCaptureAndWait(req);
+        return requestCaptureAndWait(req);
     } else if (parser.isSet(configArgument)) { // CONFIG
         bool autostart = parser.isSet(autostartOption);
+        bool notification = parser.isSet(notificationOption);
         bool filename = parser.isSet(filenameOption);
         bool tray = parser.isSet(trayOption);
         bool mainColor = parser.isSet(mainColorOption);
         bool contrastColor = parser.isSet(contrastColorOption);
         bool check = parser.isSet(checkOption);
-        bool someFlagSet =
-          (filename || tray || mainColor || contrastColor || check);
+        bool someFlagSet = (autostart || notification || filename || tray ||
+                            mainColor || contrastColor || check);
         if (check) {
             AbstractLogger err = AbstractLogger::error(AbstractLogger::Stderr);
             bool ok = ConfigHandler().checkForErrors(&err);
@@ -547,6 +577,10 @@ int main(int argc, char* argv[])
             if (autostart) {
                 config.setStartupLaunch(parser.value(autostartOption) ==
                                         "true");
+            }
+            if (notification) {
+                config.setShowDesktopNotification(
+                  parser.value(notificationOption) == "true");
             }
             if (filename) {
                 QString newFilename(parser.value(filenameOption));

@@ -31,7 +31,6 @@ public:
         TYPE_RECTANGLE = 4,
         TYPE_CIRCLE = 5,
         TYPE_MARKER = 6,
-        TYPE_SELECTIONINDICATOR = 7,
         TYPE_MOVESELECTION = 8,
         TYPE_UNDO = 9,
         TYPE_COPY = 10,
@@ -48,6 +47,7 @@ public:
         TYPE_SIZEDECREASE = 21,
         TYPE_INVERT = 22,
         TYPE_ACCEPT = 23,
+        TYPE_CANCEL = 24,
     };
     Q_ENUM(Type);
 

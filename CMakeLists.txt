@@ -5,8 +5,6 @@ set(FLAMESHOT_VERSION 12.1.0)
 
 # Flameshot-org
 set(GIT_API_URL "https://api.github.com/repos/flameshot-org/flameshot/releases/latest")
-# Namecheap
-# set(GIT_API_URL "https://api.github.com/repos/namecheap/flameshot/releases/latest")
 
 # TODO - fix it for all linux distros
 #find_package (Git)
@@ -35,6 +33,26 @@ project(
         VERSION ${FLAMESHOT_VERSION}
         LANGUAGES CXX)
 set(PROJECT_NAME_CAPITALIZED "Flameshot")
+
+include(FetchContent)
+
+FetchContent_Declare(
+    qtColorWidgets
+    GIT_REPOSITORY https://gitlab.com/mattbas/Qt-Color-Widgets.git
+    GIT_TAG 352bc8f99bf2174d5724ee70623427aa31ddc26a
+)
+
+#Workaround for duplicate GUID in windows WIX installer
+if (WIN32)
+    FetchContent_GetProperties(qtColorWidgets)
+    if(NOT qtcolorwidgets_POPULATED)
+        FetchContent_Populate(qtColorWidgets)
+        add_subdirectory(${qtcolorwidgets_SOURCE_DIR} ${qtcolorwidgets_BINARY_DIR} EXCLUDE_FROM_ALL)
+    endif()
+else()
+    FetchContent_MakeAvailable(qtColorWidgets)
+endif()
+
 
 # This can be read from ${PROJECT_NAME} after project() is called
 if (APPLE)
@@ -104,19 +122,28 @@ if(USE_EXTERNAL_SINGLEAPPLICATION)
   find_library(QTSINGLEAPPLICATION_LIBRARY NAMES ${qtsingleapplication_libs})
   message(STATUS "Using external SingleApplication library")
 else()
-  add_subdirectory(external/singleapplication)
+  FetchContent_Declare(
+      singleApplication
+      GIT_REPOSITORY https://github.com/itay-grudev/SingleApplication.git
+      GIT_TAG v3.5.2
+  )
+  FetchContent_MakeAvailable(SingleApplication)
   set(QTSINGLEAPPLICATION_LIBRARY SingleApplication::SingleApplication)
 endif()
 
 
 option(BUILD_STATIC_LIBS ON)
 option(BUILD_SHARED_LIBS OFF)
-add_subdirectory(external/Qt-Color-Widgets EXCLUDE_FROM_ALL) 
-
 
 if (APPLE)
-  add_subdirectory(external/QHotkey)
+  FetchContent_Declare(
+      qHotKey
+      GIT_REPOSITORY https://github.com/flameshot-org/QHotkey
+      GIT_TAG master
+  )
+  FetchContent_MakeAvailable(QHotKey)
 endif()
+
 add_subdirectory(src)
 
 # CPack

@@ -42,7 +42,16 @@ if (APPLE)
             COMMAND bash "-c" "sips -z 512 512   \"${CMAKE_SOURCE_DIR}\"/data/img/app/flameshot.monochrome-1024.png --out \"${FLAMESHOT_ICONSET}\"/icon_512x512.png"
             COMMAND bash "-c" "sips -z 1024 1024 \"${CMAKE_SOURCE_DIR}\"/data/img/app/flameshot.monochrome-1024.png --out \"${FLAMESHOT_ICONSET}\"/icon_512x512@2x.png"
 
-            COMMAND bash "-c" "iconutil -o \"${FLAMESHOT_ICNS}\" -c icns ${FLAMESHOT_ICONSET}"
+            COMMAND bash "-c" "iconutil -o \"${FLAMESHOT_ICNS}\" -c icns \"${FLAMESHOT_ICONSET}\""
+    )
+
+    execute_process(
+        COMMAND bash "-c" "rm -R \"${FLAMESHOT_ICONSET}\""
+    )
+
+    execute_process(
+        # copy icon from cache generated on the localhost if generation on CI failed
+        COMMAND bash "-c" "[[ -r '\"${FLAMESHOT_ICNS}\"' ]] || cp \"${CMAKE_SOURCE_DIR}\"/packaging/macos/flameshot.icns \"${FLAMESHOT_ICNS}\""
     )
 
     # Set application icon
@@ -94,6 +103,7 @@ set(FLAMESHOT_TS_FILES
       ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_cs.ts
       ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_de_DE.ts
       ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_el.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_en.ts
       ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_es.ts
       ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_eu.ts
       ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_fa.ts
@@ -210,15 +220,8 @@ target_link_libraries(
 )
 
 if (USE_WAYLAND_CLIPBOARD)
-  if(!USE_WAYLAND_GRIM)
-    message(WARNING "You activated the USE_WAYLAND_CLIPBOARD option, but did not activate the USE_WAYLAND_GRIM option. Flameshot will use the dbus protocol to support wayland. If you use wlroots-based wayland, it is recommended to enable USE_WAYLAND_GRIM")
-  endif()
   target_compile_definitions(flameshot PRIVATE USE_WAYLAND_CLIPBOARD=1)
   target_link_libraries(flameshot KF5::GuiAddons)
-endif()
-
-if (USE_WAYLAND_GRIM)
-    target_compile_definitions(flameshot PRIVATE USE_WAYLAND_GRIM=1)
 endif()
 
 if (APPLE)

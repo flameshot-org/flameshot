@@ -4,7 +4,7 @@
 #include "flameshot.h"
 #include "flameshotdaemon.h"
 #if defined(Q_OS_MACOS)
-#include "external/QHotkey/QHotkey"
+#include "qhotkey.h"
 #endif
 
 #include "abstractlogger.h"
@@ -24,11 +24,13 @@
 #include <QApplication>
 #include <QBuffer>
 #include <QDebug>
+#include <QDesktopServices>
 #include <QDesktopWidget>
 #include <QFile>
 #include <QMessageBox>
 #include <QThread>
 #include <QTimer>
+#include <QUrl>
 #include <QVersionNumber>
 
 #if defined(Q_OS_MACOS)
@@ -254,6 +256,14 @@ void Flameshot::history()
     historyWidget->activateWindow();
     historyWidget->raise();
 #endif
+}
+
+void Flameshot::openSavePath()
+{
+    QString savePath = ConfigHandler().savePath();
+    if (!savePath.isEmpty()) {
+        QDesktopServices::openUrl(QUrl::fromLocalFile(savePath));
+    }
 }
 
 QVersionNumber Flameshot::getVersion()

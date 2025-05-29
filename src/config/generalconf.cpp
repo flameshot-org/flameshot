@@ -37,11 +37,14 @@ GeneralConf::GeneralConf(QWidget* parent)
     initAutoCloseIdleDaemon();
 #endif
     initShowTrayIcon();
+    initUseGrimAdapter();
     initShowDesktopNotification();
+    initShowAbortNotification();
 #if !defined(DISABLE_UPDATE_CHECKER)
     initCheckForUpdates();
 #endif
     initShowStartupLaunchMessage();
+    initShowQuitPrompt();
     initAllowMultipleGuiInstances();
     initSaveLastRegion();
     initShowHelp();
@@ -65,6 +68,7 @@ GeneralConf::GeneralConf(QWidget* parent)
     initShowMagnifier();
     initSquareMagnifier();
     initJpegQuality();
+    initReverseArrow();
     // this has to be at the end
     initConfigButtons();
     updateComponents();
@@ -76,6 +80,7 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
     m_helpMessage->setChecked(config.showHelp());
     m_sidePanelButton->setChecked(config.showSidePanelButton());
     m_sysNotifications->setChecked(config.showDesktopNotification());
+    m_abortNotifications->setChecked(config.showAbortNotification());
     m_autostart->setChecked(config.startupLaunch());
     m_copyURLAfterUpload->setChecked(config.copyURLAfterUpload());
     m_saveAfterCopy->setChecked(config.saveAfterCopy());
@@ -93,6 +98,7 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
     m_showMagnifier->setChecked(config.showMagnifier());
     m_squareMagnifier->setChecked(config.squareMagnifier());
     m_saveLastRegion->setChecked(config.saveLastRegion());
+    m_reverseArrow->setChecked(config.reverseArrow());
 
 #if !defined(Q_OS_WIN)
     m_autoCloseIdleDaemon->setChecked(config.autoCloseIdleDaemon());
@@ -101,6 +107,7 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
     m_predefinedColorPaletteLarge->setChecked(
       config.predefinedColorPaletteLarge());
     m_showStartupLaunchMessage->setChecked(config.showStartupLaunchMessage());
+    m_showQuitPrompt->setChecked(config.showQuitPrompt());
     m_screenshotPathFixedCheck->setChecked(config.savePathFixed());
     m_uploadHistoryMax->setValue(config.uploadHistoryMax());
     m_undoLimit->setValue(config.undoLimit());
@@ -110,6 +117,10 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
     }
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
     m_showTray->setChecked(!config.disabledTrayIcon());
+#endif
+
+#if defined(Q_OS_LINUX)
+    m_useGrimAdapter->setChecked(config.useGrimAdapter());
 #endif
 }
 
@@ -136,6 +147,16 @@ void GeneralConf::showSidePanelButtonChanged(bool checked)
 void GeneralConf::showDesktopNotificationChanged(bool checked)
 {
     ConfigHandler().setShowDesktopNotification(checked);
+}
+
+void GeneralConf::showAbortNotificationChanged(bool checked)
+{
+    ConfigHandler().setShowAbortNotification(checked);
+}
+
+void GeneralConf::useGrimAdapter(bool checked)
+{
+    ConfigHandler().useGrimAdapter(checked);
 }
 
 #if !defined(DISABLE_UPDATE_CHECKER)
@@ -290,6 +311,18 @@ void GeneralConf::initShowDesktopNotification()
             &GeneralConf::showDesktopNotificationChanged);
 }
 
+void GeneralConf::initShowAbortNotification()
+{
+    m_abortNotifications = new QCheckBox(tr("Show abort notifications"), this);
+    m_abortNotifications->setToolTip(tr("Enable abort notifications"));
+    m_scrollAreaLayout->addWidget(m_abortNotifications);
+
+    connect(m_abortNotifications,
+            &QCheckBox::clicked,
+            this,
+            &GeneralConf::showAbortNotificationChanged);
+}
+
 void GeneralConf::initShowTrayIcon()
 {
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
@@ -300,6 +333,24 @@ void GeneralConf::initShowTrayIcon()
     connect(m_showTray, &QCheckBox::clicked, this, [](bool checked) {
         ConfigHandler().setDisabledTrayIcon(!checked);
     });
+#endif
+}
+
+void GeneralConf::initUseGrimAdapter()
+{
+#if defined(Q_OS_LINUX)
+    m_useGrimAdapter =
+      new QCheckBox(tr("Use grim to capture screenshots"), this);
+    m_useGrimAdapter->setToolTip(
+      tr("Grim is a wayland only utility to capture screens based on the "
+         "screencopy protocol. Generally only enable on minimal wayland window "
+         "managers like sway, hyprland, etc."));
+    m_scrollAreaLayout->addWidget(m_useGrimAdapter);
+
+    connect(m_useGrimAdapter,
+            &QCheckBox::clicked,
+            this,
+            &GeneralConf::useGrimAdapter);
 #endif
 }
 
@@ -411,6 +462,19 @@ void GeneralConf::initShowStartupLaunchMessage()
 
     connect(m_showStartupLaunchMessage, &QCheckBox::clicked, [](bool checked) {
         ConfigHandler().setShowStartupLaunchMessage(checked);
+    });
+}
+
+void GeneralConf::initShowQuitPrompt()
+{
+    m_showQuitPrompt = new QCheckBox(tr("Ask before quit capture"), this);
+    ConfigHandler config;
+    m_showQuitPrompt->setToolTip(
+      tr("Show the confirmation prompt before ESC quit"));
+    m_scrollAreaLayout->addWidget(m_showQuitPrompt);
+
+    connect(m_showQuitPrompt, &QCheckBox::clicked, [](bool checked) {
+        ConfigHandler().setShowQuitPrompt(checked);
     });
 }
 
@@ -614,10 +678,6 @@ void GeneralConf::initUseJpgForClipboard()
       tr("Use lossy JPG format for clipboard (lossless PNG default)"));
     m_scrollAreaLayout->addWidget(m_useJpgForClipboard);
 
-#if defined(Q_OS_MACOS)
-    // FIXME - temporary fix to disable option for MacOS
-    m_useJpgForClipboard->hide();
-#endif
     connect(m_useJpgForClipboard,
             &QCheckBox::clicked,
             this,
@@ -799,6 +859,16 @@ void GeneralConf::initJpegQuality()
             &GeneralConf::setJpegQuality);
 }
 
+void GeneralConf::initReverseArrow()
+{
+    m_reverseArrow = new QCheckBox(tr("Reverse arrow"), this);
+    m_reverseArrow->setToolTip(tr("Draw the arrow head first"));
+    m_scrollAreaLayout->addWidget(m_reverseArrow);
+
+    connect(
+      m_reverseArrow, &QCheckBox::clicked, this, &GeneralConf::setReverseArrow);
+}
+
 void GeneralConf::setSelGeoHideTime(int v)
 {
     ConfigHandler().setValue("showSelectionGeometryHideTime", v);
@@ -828,4 +898,9 @@ void GeneralConf::setSaveAsFileExtension(const QString& extension)
 void GeneralConf::useJpgForClipboardChanged(bool checked)
 {
     ConfigHandler().setUseJpgForClipboard(checked);
+}
+
+void GeneralConf::setReverseArrow(bool checked)
+{
+    ConfigHandler().setReverseArrow(checked);
 }

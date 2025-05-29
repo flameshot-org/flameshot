@@ -30,11 +30,13 @@
 #include "src/widgets/panel/sidepanelwidget.h"
 #include "src/widgets/panel/utilitypanel.h"
 #include <QApplication>
+#include <QCheckBox>
 #include <QDateTime>
 #include <QDebug>
 #include <QDesktopWidget>
 #include <QFontMetrics>
 #include <QLabel>
+#include <QMessageBox>
 #include <QPaintEvent>
 #include <QPainter>
 #include <QScreen>
@@ -256,6 +258,8 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
         OverlayMessage::push(m_helpMessage);
     }
 
+    initQuitPrompt();
+
     updateCursor();
 }
 
@@ -308,9 +312,6 @@ void CaptureWidget::initButtons()
     // This will allow keyboard shortcuts for those buttons to work
     for (CaptureTool::Type t : allButtonTypes) {
         auto* b = new CaptureToolButton(t, this);
-        if (t == CaptureTool::TYPE_SELECTIONINDICATOR) {
-            m_sizeIndButton = b;
-        }
         b->setColor(m_uiColor);
         b->hide();
         // must be enabled for SelectionWidget's eventFilter to work correctly
@@ -465,6 +466,38 @@ bool CaptureWidget::commitCurrentTool()
     return false;
 }
 
+void CaptureWidget::initQuitPrompt()
+{
+    m_quitPrompt = new QMessageBox;
+    makeChild(m_quitPrompt);
+    m_quitPrompt->hide();
+
+    QString baseSheet = "QDialog { background-color: %1; }"
+                        "QLabel, QCheckBox { color: %2 }"
+                        "QPushButton { background-color: %1; color: %2 }";
+    QColor text = ColorUtils::colorIsDark(m_uiColor) ? Qt::white : Qt::black;
+    QString styleSheet = baseSheet.arg(m_uiColor.name()).arg(text.name());
+
+    m_quitPrompt->setStyleSheet(styleSheet);
+    m_quitPrompt->setWindowTitle(tr("Quit Capture"));
+    m_quitPrompt->setText(tr("Are you sure you want to quit capture?"));
+    m_quitPrompt->setIcon(QMessageBox::Icon::Question);
+    m_quitPrompt->setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+    m_quitPrompt->setDefaultButton(QMessageBox::No);
+
+    auto* check = new QCheckBox(tr("Do not show this again"));
+    m_quitPrompt->setCheckBox(check);
+
+    QObject::connect(check, &QCheckBox::clicked, [](bool checked) {
+        ConfigHandler().setShowQuitPrompt(!checked);
+    });
+}
+
+bool CaptureWidget::promptQuit()
+{
+    return m_quitPrompt->exec() == QMessageBox::Yes;
+}
+
 void CaptureWidget::deleteToolWidgetOrClose()
 {
     if (m_activeButton != nullptr) {
@@ -484,7 +517,14 @@ void CaptureWidget::deleteToolWidgetOrClose()
         m_colorPicker->hide();
     } else {
         // close CaptureWidget
-        close();
+        if (m_config.showQuitPrompt()) {
+            // need to show prompt
+            if (m_quitPrompt->isHidden() && promptQuit()) {
+                close();
+            }
+        } else {
+            close();
+        }
     }
 }
 
@@ -753,7 +793,6 @@ void CaptureWidget::mousePressEvent(QMouseEvent* e)
     if (m_selection->getMouseSide(e->pos()) != SelectionWidget::CENTER) {
         m_panel->setActiveLayer(-1);
     }
-
     if (e->button() == Qt::RightButton) {
         if (m_activeTool && m_activeTool->editMode()) {
             return;
@@ -1560,6 +1599,10 @@ void CaptureWidget::initShortcuts()
                 m_selection,
                 SLOT(moveDown()));
 
+    newShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_CANCEL")),
+                this,
+                SLOT(cancel()));
+
     newShortcut(
       QKeySequence(ConfigHandler().shortcut("TYPE_DELETE_CURRENT_TOOL")),
       this,
@@ -1869,6 +1912,23 @@ void CaptureWidget::redo()
     updateLayersPanel();
 
     restoreCircleCountState();
+}
+
+void CaptureWidget::cancel()
+{
+    if (m_activeButton != nullptr) {
+        uncheckActiveTool();
+    }
+    if (m_panel) {
+        m_panel->setActiveLayer(-1);
+    }
+    if (m_toolWidget) {
+        m_toolWidget->hide();
+        delete m_toolWidget;
+        m_toolWidget = nullptr;
+    }
+    m_selection->hide();
+    emit m_selection->geometrySettled();
 }
 
 QRect CaptureWidget::extendedSelection() const
