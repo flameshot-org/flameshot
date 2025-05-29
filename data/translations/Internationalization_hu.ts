@@ -226,6 +226,18 @@ Nyomd meg a Space billentyűt, hogy megnyisd az oldalsó panelt.</translation>
         <source>Configuration error resolved. Launch `flameshot gui` again to apply it.</source>
         <translation>Konfigurációs hiba megoldva. Indítsa el újra a `flameshot gui-t` az alkalmazáshoz.</translation>
     </message>
+    <message>
+        <source>Quit Capture</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Are you sure you want to quit capture?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do not show this again</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CircleCountTool</name>
@@ -840,7 +852,7 @@ Please solve them manually in the configuration file.</translation>
     </message>
     <message>
         <source>Launch at startup</source>
-        <translation>Indítás rendszerinduláskor</translation>
+        <translation type="vanished">Indítás rendszerinduláskor</translation>
     </message>
     <message>
         <source>Launch Flameshot</source>
@@ -908,7 +920,7 @@ Please solve them manually in the configuration file.</translation>
     </message>
     <message>
         <source>Automatically close daemon when it is not needed</source>
-        <translation>Automatically close daemon when it is not needed</translation>
+        <translation type="vanished">Automatically close daemon when it is not needed</translation>
     </message>
     <message>
         <source>Use large predefined color palette</source>
@@ -960,7 +972,7 @@ Please solve them manually in the configuration file.</translation>
     </message>
     <message>
         <source>Launch Flameshot daemon when computer is booted</source>
-        <translation>Launch Flameshot daemon when computer is booted</translation>
+        <translation type="vanished">Launch Flameshot daemon when computer is booted</translation>
     </message>
     <message>
         <source>Show the welcome message box in the middle of the screen while taking a screenshot</source>
@@ -972,7 +984,7 @@ Please solve them manually in the configuration file.</translation>
     </message>
     <message>
         <source>Copy URL and close window after uploading was successful</source>
-        <translation>Copy URL and close window after uploading was successful</translation>
+        <translation type="vanished">Copy URL and close window after uploading was successful</translation>
     </message>
     <message>
         <source>After copying the screenshot, save it to a file as well</source>
@@ -1012,11 +1024,119 @@ Please solve them manually in the configuration file.</translation>
     </message>
     <message>
         <source>Enable Copy on Double Click</source>
-        <translation>Enable Copy on Double Click</translation>
+        <translation type="vanished">Enable Copy on Double Click</translation>
     </message>
     <message>
         <source>Imgur Application Client ID</source>
         <translation>Imgur Application Client ID</translation>
+    </message>
+    <message>
+        <source>Show abort notifications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable abort notifications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use grim to capture screenshots</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Grim is a wayland only utility to capture screens based on the screencopy protocol. Generally only enable on minimal wayland window managers like sway, hyprland, etc.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Automatically unload from memory when it is not needed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Automatically close daemon (background process) when it is not needed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Launch in background at startup</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Launch Flameshot daemon (background process) when computer is booted</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ask before quit capture</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show the confirmation prompt before ESC quit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable Copy to clipboard on Double Click</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy URL after uploading was successful</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use lossy JPG format for clipboard (lossless PNG default)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Milliseconds before geometry display hides; 0 means do not hide</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set geometry display timeout (ms)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Selection Geometry Display</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Display Location</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Top Left</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Top Right</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bottom Left</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bottom Right</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Center</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Quality range of 0-100; Higher number is better quality and larger file size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>JPEG Quality</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reverse arrow</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Draw the arrow head first</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1406,6 +1526,26 @@ Please solve them manually in the configuration file.</translation>
         <source>Save to file</source>
         <translation>Save to file</translation>
     </message>
+    <message>
+        <source>Rotate Right</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rotate Left</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Increase Opacity</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Decrease Opacity</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished">Bezárás</translation>
+    </message>
 </context>
 <context>
     <name>PixelateTool</name>
@@ -1415,18 +1555,22 @@ Please solve them manually in the configuration file.</translation>
     </message>
     <message>
         <source>Set Pixelate as the paint tool</source>
-        <translation>Homályosító festőeszköz kiválasztása</translation>
+        <translation type="vanished">Homályosító festőeszköz kiválasztása</translation>
+    </message>
+    <message>
+        <source>Set Pixelate as the paint tool.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>QHotkey</name>
     <message>
         <source>Failed to register %1. Error: %2</source>
-        <translation>Nem sikerült %1 rögzítése. %2 Hiba</translation>
+        <translation type="vanished">Nem sikerült %1 rögzítése. %2 Hiba</translation>
     </message>
     <message>
         <source>Failed to unregister %1. Error: %2</source>
-        <translation>Sikertelen rögzítés törlés %1 -nél. %2 Hiba</translation>
+        <translation type="vanished">Sikertelen rögzítés törlés %1 -nél. %2 Hiba</translation>
     </message>
 </context>
 <context>
@@ -1470,11 +1614,11 @@ Please solve them manually in the configuration file.</translation>
     </message>
     <message>
         <source>Arguments</source>
-        <translation>Feltételek</translation>
+        <translation type="vanished">Feltételek</translation>
     </message>
     <message>
         <source>arguments</source>
-        <translation>feltételek</translation>
+        <translation type="vanished">feltételek</translation>
     </message>
     <message>
         <source>Usage</source>
@@ -1494,7 +1638,7 @@ Please solve them manually in the configuration file.</translation>
     </message>
     <message>
         <source>Capture the entire desktop.</source>
-        <translation>Teljes kijelző rögzítése.</translation>
+        <translation type="vanished">Teljes kijelző rögzítése.</translation>
     </message>
     <message>
         <source>Open the capture launcher.</source>
@@ -1510,7 +1654,7 @@ Please solve them manually in the configuration file.</translation>
     </message>
     <message>
         <source>Capture a single screen.</source>
-        <translation>Egy kijelző rögzítése.</translation>
+        <translation type="vanished">Egy kijelző rögzítése.</translation>
     </message>
     <message>
         <source>Path where the capture will be saved</source>
@@ -1760,6 +1904,26 @@ Lehet, hogy meg kepp adnod egy &apos;\&apos; karaktert a &apos;#&apos; karakter 
         <source>Repeat screenshot with previously selected region</source>
         <translation>Repeat screenshot with previously selected region</translation>
     </message>
+    <message>
+        <source>Subcommands</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>subcommands</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Capture screenshot of all monitors at the same time.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Capture a screenshot of the specified monitor.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable or disable the notifications</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RectangleTool</name>
@@ -1806,11 +1970,27 @@ Lehet, hogy meg kepp adnod egy &apos;\&apos; karaktert a &apos;#&apos; karakter 
     </message>
     <message>
         <source>Unable to detect desktop environment (GNOME? KDE? Sway? ...)</source>
-        <translation>Unable to detect desktop environment (GNOME? KDE? Sway? ...)</translation>
+        <translation type="vanished">Unable to detect desktop environment (GNOME? KDE? Sway? ...)</translation>
     </message>
     <message>
         <source>Hint: try setting the XDG_CURRENT_DESKTOP environment variable.</source>
         <translation>Hint: try setting the XDG_CURRENT_DESKTOP environment variable.</translation>
+    </message>
+    <message>
+        <source>The universal wayland screen capture adapter requires Grim as the screen capture component of wayland. If the screen capture component is missing, please install it!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>If the useGrimAdapter setting is not enabled, the dbus protocol will be used. It should be noted that using the dbus protocol under wayland is not recommended. It is recommended to enable the useGrimAdapter setting in flameshot.ini to activate the grim-based general wayland screenshot adapter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>grim&apos;s screenshot component is implemented based on wlroots, it may not be used in GNOME or similar desktop environments</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to detect desktop environment (GNOME? KDE? Qile? Sway? ...)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1915,7 +2095,7 @@ Lehet, hogy meg kepp adnod egy &apos;\&apos; karaktert a &apos;#&apos; karakter 
     </message>
     <message>
         <source>Delete current tool</source>
-        <translation type="unfinished">Delete current tool</translation>
+        <translation type="obsolete">Delete current tool</translation>
     </message>
     <message>
         <source>Capture screen</source>
@@ -1924,6 +2104,30 @@ Lehet, hogy meg kepp adnod egy &apos;\&apos; karaktert a &apos;#&apos; karakter 
     <message>
         <source>Screenshot history</source>
         <translation type="unfinished">Képernyőmentési előzmények</translation>
+    </message>
+    <message>
+        <source>Symmetrically decrease width by 2px</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Symmetrically increase width by 2px</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Symmetrically increase height by 2px</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Symmetrically decrease height by 2px</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete selected drawn object</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel current selection</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1952,6 +2156,10 @@ Lehet, hogy meg kepp adnod egy &apos;\&apos; karaktert a &apos;#&apos; karakter 
         <source>Active Color: </source>
         <translation>Active Color: </translation>
     </message>
+    <message>
+        <source>Display grid</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SizeDecreaseTool</name>
@@ -1979,7 +2187,7 @@ Lehet, hogy meg kepp adnod egy &apos;\&apos; karaktert a &apos;#&apos; karakter 
     <name>SizeIndicatorTool</name>
     <message>
         <source>Selection Size Indicator</source>
-        <translation>Kiválaszás Méretének Jelzése</translation>
+        <translation type="vanished">Kiválaszás Méretének Jelzése</translation>
     </message>
     <message>
         <source>Show the dimensions of the selection (X Y)</source>
@@ -1987,7 +2195,7 @@ Lehet, hogy meg kepp adnod egy &apos;\&apos; karaktert a &apos;#&apos; karakter 
     </message>
     <message>
         <source>Show X and Y dimensions of the selection</source>
-        <translation>Show X and Y dimensions of the selection</translation>
+        <translation type="vanished">Show X and Y dimensions of the selection</translation>
     </message>
 </context>
 <context>
@@ -2167,6 +2375,10 @@ Lehet, hogy meg kepp adnod egy &apos;\&apos; karaktert a &apos;#&apos; karakter 
     <message>
         <source>&amp;Latest Uploads</source>
         <translation type="unfinished">&amp;Eddigi Feltöltések</translation>
+    </message>
+    <message>
+        <source>&amp;Open Save Path</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
