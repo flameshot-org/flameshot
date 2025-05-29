@@ -241,8 +241,7 @@ QVariant KeySequence::process(const QVariant& val)
     }
     if (str.length() > 0) {
         // Make the "main" key in sequence (last one) lower-case.
-        const QCharRef& lastChar = str[str.length() - 1];
-        str.replace(str.length() - 1, 1, lastChar.toLower());
+        str[str.length() - 1] = str[str.length() - 1].toLower();
     }
     return str;
 }
@@ -544,7 +543,7 @@ QVariant Region::process(const QVariant& val)
         return ScreenGrabber().desktopGeometry();
     } else if (str.startsWith("screen")) {
         bool ok;
-        int number = str.midRef(6).toInt(&ok);
+        int number = str.mid(6).toInt(&ok);
         if (!ok || number < 0) {
             return {};
         }
