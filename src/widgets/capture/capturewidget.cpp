@@ -1744,7 +1744,7 @@ void CaptureWidget::drawToolsData(bool drawSelection)
     // TODO refactor this for performance. The objects should not all be updated
     // at once every time
     QPixmap pixmapItem = m_context.origScreenshot;
-    for (auto toolItem : m_captureToolObjects.captureToolObjects()) {
+    for (const auto& toolItem : m_captureToolObjects.captureToolObjects()) {
         processPixmapWithTool(&pixmapItem, toolItem);
         update(paddedUpdateRect(toolItem->boundingRect()));
     }
