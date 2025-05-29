@@ -482,7 +482,7 @@ bool SaveFileExtension::check(const QVariant& val)
     }
 
     QStringList imageFormatList;
-    foreach (auto imageFormat, QImageWriter::supportedImageFormats())
+    for (const auto& imageFormat : QImageWriter::supportedImageFormats())
         imageFormatList.append(imageFormat);
 
     if (!imageFormatList.contains(extension)) {

@@ -50,7 +50,7 @@ void UploadHistory::loadHistory()
     if (historyFiles.isEmpty()) {
         setEmptyMessage();
     } else {
-        foreach (QString fileName, historyFiles) {
+        for (const auto& fileName : historyFiles) {
             addLine(history.path(), fileName);
         }
     }

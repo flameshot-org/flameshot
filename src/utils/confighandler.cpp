@@ -359,7 +359,7 @@ QString ConfigHandler::filenamePatternDefault()
 
 void ConfigHandler::setDefaultSettings()
 {
-    foreach (const QString& key, m_settings.allKeys()) {
+    for (const auto& key : m_settings.allKeys()) {
         if (isShortcut(key)) {
             // Do not reset Shortcuts
             continue;

@@ -566,7 +566,7 @@ void GeneralConf::initSaveAfterCopy()
     m_setSaveAsFileExtension = new QComboBox(this);
 
     QStringList imageFormatList;
-    foreach (auto mimeType, QImageWriter::supportedImageFormats())
+    for (const auto& mimeType : QImageWriter::supportedImageFormats())
         imageFormatList.append(mimeType);
 
     m_setSaveAsFileExtension->addItems(imageFormatList);
