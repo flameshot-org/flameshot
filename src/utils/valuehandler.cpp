@@ -97,8 +97,13 @@ Color::Color(QColor def)
 bool Color::check(const QVariant& val)
 {
     QString str = val.toString();
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+    bool validColor = QColor::isValidColor(str);
+#else
+    bool validColor = QColor::isValidColorName(str);
+#endif
     // Disable #RGB, #RRRGGGBBB and #RRRRGGGGBBBB formats that QColor supports
-    return QColor::isValidColor(str) &&
+    return validColor &&
            (str[0] != '#' ||
             (str.length() != 4 && str.length() != 10 && str.length() != 13));
 }
@@ -401,7 +406,11 @@ bool UserColors::check(const QVariant& val)
         return false;
     }
     for (const QString& str : val.toStringList()) {
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
         if (!QColor::isValidColor(str) && str != "picker") {
+#else
+        if (!QColor::isValidColorName(str) && str != "picker") {
+#endif
             return false;
         }
     }
