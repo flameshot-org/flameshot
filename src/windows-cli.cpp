@@ -18,15 +18,22 @@ void CallFlameshot(const std::wstring args, bool wait)
     // generate full path for flameshot executable
     wchar_t path[MAX_PATH];
     int pathLength = GetModuleFileNameW(NULL, path, MAX_PATH);
-    std::wstring moduleDir = std::wstring(path, pathLength - 18);
+    std::wstring pathstring(path);
+
+    // Find the last backslash to isolate the filename
+    size_t lastBackslash = pathstring.find_last_of(L'\\');
+    std::wstring directory = (lastBackslash != std::wstring::npos)
+        ? pathstring.substr(0, lastBackslash + 1)
+        : L"";
+
     // generate command string
     // note: binary path placed within quotes in case of spaces in path
-    int cmdSize = 32 + sizeof(moduleDir) + sizeof(args);
+    int cmdSize = 32 + sizeof(directory) + sizeof(args);
     wchar_t* cmd = (wchar_t*)malloc(sizeof(wchar_t) * cmdSize);
     swprintf(cmd,
              cmdSize,
              L"\"%s\\flameshot.exe\" %s",
-             moduleDir.c_str(),
+             directory.c_str(),
              args.c_str());
     // call subprocess
     FILE* stream = _wpopen(cmd, L"r");
