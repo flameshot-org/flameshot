@@ -1,34 +1,36 @@
 #include <iostream>
 #include <windows.h>
 
-std::string joinArgs(int argc, char* argv[])
+std::wstring joinArgs(int argc, wchar_t* argv[])
 {
-    std::string result;
+    std::wstring result;
     for (int i = 1; i < argc; ++i) {
         if (i > 1) {
-            result += " ";
+            result += L" ";
         }
         result += argv[i];
     }
     return result;
 }
 
-bool setDirectory()
+void CallFlameshot(const std::wstring args, bool wait)
 {
-    char path[MAX_PATH];
-    int pathLength = GetModuleFileName(NULL, path, MAX_PATH);
-    // fullpath - length of 'flameshot-cli.exe'
-    std::string moduleDir = std::string(path, pathLength - 18);
-    return SetCurrentDirectory(moduleDir.c_str());
-}
-
-void CallFlameshot(const std::string args, bool wait)
-{
-    // _popen doesn't handle spaces in filepath,
-    // so make sure we are in right directory before calling
-    setDirectory();
-    std::string cmd = "flameshot.exe " + args;
-    FILE* stream = _popen(cmd.c_str(), "r");
+    // generate full path for flameshot executable
+    wchar_t path[MAX_PATH];
+    int pathLength = GetModuleFileNameW(NULL, path, MAX_PATH);
+    std::wstring moduleDir = std::wstring(path, pathLength - 18);
+    // generate command string
+    // note: binary path placed within quotes in case of spaces in path
+    int cmdSize = 32 + sizeof(moduleDir) + sizeof(args);
+    wchar_t* cmd = (wchar_t*)malloc(sizeof(wchar_t) * cmdSize);
+    swprintf(cmd,
+             cmdSize,
+             L"\"%s\\flameshot.exe\" %s",
+             moduleDir.c_str(),
+             args.c_str());
+    // call subprocess
+    FILE* stream = _wpopen(cmd, L"r");
+    free(cmd);
     if (wait) {
         if (stream) {
             const int MAX_BUFFER = 2048;
@@ -45,13 +47,14 @@ void CallFlameshot(const std::string args, bool wait)
 }
 
 // Console 'wrapper' for flameshot on windows
-int main(int argc, char* argv[])
+int wmain(int argc, wchar_t* argv[])
 {
+    // if no args, do not wait for stdout
     if (argc == 1) {
-        std::cout << "Starting flameshot in daemon mode";
-        CallFlameshot("", false);
+        std::cout << "Starting flameshot in daemon mode" << std::endl;
+        CallFlameshot(L"", false);
     } else {
-        std::string argString = joinArgs(argc, argv);
+        std::wstring argString = joinArgs(argc, argv);
         CallFlameshot(argString, true);
     }
     std::cout.flush();

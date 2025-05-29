@@ -159,7 +159,7 @@ On Windows, `flameshot.exe` will behave as expected for all supported command-li
 but it will not output any text to the console. This is problematic if, for example, you are 
 running `flameshot.exe -h`.
 
-If you require console output, run `flameshot-cli.exe` instead.
+If you require console output, run `flameshot-cli.exe` instead. `flameshot-cli.exe` is a minimal wrapper around `flameshot.exe` that ensures all stdout is captured and output to the console.
 
 ### CLI configuration
 
