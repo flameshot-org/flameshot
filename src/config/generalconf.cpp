@@ -17,7 +17,7 @@
 #include <QSizePolicy>
 #include <QSpinBox>
 #include <QStandardPaths>
-#include <QTextCodec>
+#include <QTextCodec> // TODO: Qt 6 - Replace QTextCodec with Qt 6 solution; temporary include Core5Compat
 #include <QVBoxLayout>
 
 GeneralConf::GeneralConf(QWidget* parent)
@@ -188,6 +188,8 @@ void GeneralConf::importConfiguration()
         return;
     }
     QFile file(fileName);
+    // TODO: Qt 6 - Replace QTextCodec with Qt 6 solution
+    // Temporary: Include Core5Compat when compiling with Qt 6
     QTextCodec* codec = QTextCodec::codecForLocale();
     if (!file.open(QFile::ReadOnly)) {
         QMessageBox::about(this, tr("Error"), tr("Unable to read file."));
