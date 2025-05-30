@@ -33,7 +33,6 @@
 #include <QCheckBox>
 #include <QDateTime>
 #include <QDebug>
-#include <QDesktopWidget>
 #include <QFontMetrics>
 #include <QLabel>
 #include <QMessageBox>

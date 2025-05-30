@@ -6,7 +6,7 @@
 #include "uploadlineitem.h"
 
 #include <QDateTime>
-#include <QDesktopWidget>
+#include <QDesktopWidget> // TODO: Qt 6 - QApplication::desktop() not avialable
 #include <QFileInfo>
 #include <QPixmap>
 
@@ -37,6 +37,7 @@ UploadHistory::UploadHistory(QWidget* parent)
     setAttribute(Qt::WA_DeleteOnClose);
 
     setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
+    // TODO: Qt 6 - QApplication::desktop() not avialable
     resize(QDesktopWidget().availableGeometry(this).size() * 0.5);
 }
 

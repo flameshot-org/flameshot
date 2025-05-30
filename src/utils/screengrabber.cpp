@@ -8,7 +8,7 @@
 #include "src/utils/filenamehandler.h"
 #include "src/utils/systemnotification.h"
 #include <QApplication>
-#include <QDesktopWidget>
+#include <QDesktopWidget> // TODO: Qt 6 - QApplication::desktop() not avialable
 #include <QGuiApplication>
 #include <QPixmap>
 #include <QProcess>
@@ -143,6 +143,7 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
     ok = true;
 #if defined(Q_OS_MACOS)
     QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
+    // TODO: Qt 6 - QApplication::desktop() not avialable
     QPixmap screenPixmap(
       currentScreen->grabWindow(QApplication::desktop()->winId(),
                                 currentScreen->geometry().x(),
@@ -204,12 +205,14 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
 #endif
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX) || defined(Q_OS_WIN)
     QRect geometry = desktopGeometry();
+    // TODO: Qt 6 - QApplication::desktop() not avialable
     QPixmap p(QApplication::primaryScreen()->grabWindow(
       QApplication::desktop()->winId(),
       geometry.x(),
       geometry.y(),
       geometry.width(),
       geometry.height()));
+    // TODO: Qt 6 - QApplication::desktop() not avialable
     auto screenNumber = QApplication::desktop()->screenNumber();
     QScreen* screen = QApplication::screens()[screenNumber];
     p.setDevicePixelRatio(screen->devicePixelRatio());
@@ -252,6 +255,7 @@ QPixmap ScreenGrabber::grabScreen(QScreen* screen, bool& ok)
         }
     } else {
         ok = true;
+        // TODO: Qt 6 - QApplication::desktop() not avialable
         return screen->grabWindow(QApplication::desktop()->winId(),
                                   geometry.x(),
                                   geometry.y(),
