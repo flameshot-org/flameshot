@@ -135,7 +135,11 @@ bool PinWidget::scrollEvent(QWheelEvent* event)
     return true;
 }
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 void PinWidget::enterEvent(QEvent*)
+#else
+void PinWidget::enterEvent(QEnterEvent*)
+#endif
 {
     m_shadowEffect->setColor(m_hoverColor);
 }

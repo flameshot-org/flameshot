@@ -14,7 +14,11 @@ public:
     explicit NotifierBox(QWidget* parent = nullptr);
 
 protected:
-    virtual void enterEvent(QEvent*) override;
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+    void enterEvent(QEvent*) override;
+#else
+    void enterEvent(QEnterEvent*) override;
+#endif
     virtual void paintEvent(QPaintEvent*) override;
 
 signals:
