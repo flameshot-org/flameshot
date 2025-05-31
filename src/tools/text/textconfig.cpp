@@ -78,7 +78,7 @@ TextConfig::TextConfig(QWidget* parent)
     m_leftAlignButton->setCheckable(true);
     m_leftAlignButton->setAutoExclusive(true);
     connect(m_leftAlignButton, &QPushButton::clicked, this, [this] {
-        alignmentChanged(Qt::AlignLeft);
+        emit alignmentChanged(Qt::AlignLeft);
     });
     m_leftAlignButton->setToolTip(tr("Left Align"));
 
@@ -87,7 +87,7 @@ TextConfig::TextConfig(QWidget* parent)
     m_centerAlignButton->setCheckable(true);
     m_centerAlignButton->setAutoExclusive(true);
     connect(m_centerAlignButton, &QPushButton::clicked, this, [this] {
-        alignmentChanged(Qt::AlignCenter);
+        emit alignmentChanged(Qt::AlignCenter);
     });
     m_centerAlignButton->setToolTip(tr("Center Align"));
 
@@ -96,7 +96,7 @@ TextConfig::TextConfig(QWidget* parent)
     m_rightAlignButton->setCheckable(true);
     m_rightAlignButton->setAutoExclusive(true);
     connect(m_rightAlignButton, &QPushButton::clicked, this, [this] {
-        alignmentChanged(Qt::AlignRight);
+        emit alignmentChanged(Qt::AlignRight);
     });
     m_rightAlignButton->setToolTip(tr("Right Align"));
 
