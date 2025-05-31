@@ -153,11 +153,6 @@ int main(int argc, char* argv[])
     wayland_hacks();
 #endif
 
-    // required for the button serialization
-    // TODO: change to QVector in v1.0
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    qRegisterMetaTypeStreamOperators<QList<int>>("QList<int>");
-#endif
     QCoreApplication::setApplicationVersion(APP_VERSION);
     QCoreApplication::setApplicationName(QStringLiteral("flameshot"));
     QCoreApplication::setOrganizationName(QStringLiteral("flameshot"));

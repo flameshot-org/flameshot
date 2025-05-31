@@ -3,17 +3,15 @@ find_package(
         CONFIG
         REQUIRED
         Core
+        Core5Compat
         Gui
         Widgets
         Network
         Svg
         DBus
-        LinguistTools)
-
-#To be removed once QTextCodec has been replaced with the equivalent in Qt 6
-if(USE_QT6)
-  find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core5Compat)
-endif()
+        LinguistTools
+        Core5Compat  #To be removed once QTextCodec has been replaced with the equivalent in Qt 6
+)
 
 if (USE_WAYLAND_CLIPBOARD)
     find_package(KF5GuiAddons)
@@ -141,17 +139,9 @@ set(FLAMESHOT_TS_FILES
          )
 
 if (GENERATE_TS)
-  if(USE_QT6)
-      qt6_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${FLAMESHOT_TS_FILES})
-  else()
-      qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${FLAMESHOT_TS_FILES})
-  endif()
+  qt6_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${FLAMESHOT_TS_FILES})
 else ()
-  if(USE_QT6)
-    qt6_add_translation(QM_FILES ${FLAMESHOT_TS_FILES})
-  else()
-    qt5_add_translation(QM_FILES ${FLAMESHOT_TS_FILES})
-  endif()
+  qt6_add_translation(QM_FILES ${FLAMESHOT_TS_FILES})
 endif ()
 
 target_sources(
@@ -227,14 +217,10 @@ target_link_libraries(
         Qt${QT_VERSION_MAJOR}::DBus
         Qt${QT_VERSION_MAJOR}::Network
         Qt${QT_VERSION_MAJOR}::Widgets
+        Qt${QT_VERSION_MAJOR}::Core5Compat  #To be removed once QTextCodec has been replaced with the equivalent in Qt 6
         ${QTSINGLEAPPLICATION_LIBRARY}
         QtColorWidgets
 )
-
-#To be removed once QTextCodec has been replaced with the equivalent in Qt 6
-if(USE_QT6)
-    target_link_libraries(flameshot Qt${QT_VERSION_MAJOR}::Core5Compat)
-endif()
 
 if (USE_WAYLAND_CLIPBOARD)
   target_compile_definitions(flameshot PRIVATE USE_WAYLAND_CLIPBOARD=1)

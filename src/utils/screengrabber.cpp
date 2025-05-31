@@ -8,9 +8,6 @@
 #include "src/utils/filenamehandler.h"
 #include "src/utils/systemnotification.h"
 #include <QApplication>
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-#include <QDesktopWidget>
-#endif
 #include <QGuiApplication>
 #include <QPixmap>
 #include <QProcess>
@@ -143,11 +140,7 @@ void ScreenGrabber::freeDesktopPortal(bool& ok, QPixmap& res)
 QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
 {
     ok = true;
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    WId wid = QApplication::desktop()->winId();
-#else
     int wid = 0;
-#endif
 
 #if defined(Q_OS_MACOS)
     QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
@@ -254,13 +247,8 @@ QPixmap ScreenGrabber::grabScreen(QScreen* screen, bool& ok)
         }
     } else {
         ok = true;
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-        WId wid = QApplication::desktop()->winId();
-#else
-        int wid = 0;
-#endif
         return screen->grabWindow(
-          wid, geometry.x(), geometry.y(), geometry.width(), geometry.height());
+          0, geometry.x(), geometry.y(), geometry.width(), geometry.height());
     }
     return p;
 }

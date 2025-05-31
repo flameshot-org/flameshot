@@ -25,9 +25,6 @@
 #include <QBuffer>
 #include <QDebug>
 #include <QDesktopServices>
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-#include <QDesktopWidget>
-#endif
 #include <QFile>
 #include <QMessageBox>
 #include <QThread>
