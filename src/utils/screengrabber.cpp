@@ -8,7 +8,9 @@
 #include "src/utils/filenamehandler.h"
 #include "src/utils/systemnotification.h"
 #include <QApplication>
-#include <QDesktopWidget> // TODO: Qt 6 - QApplication::desktop() not avialable
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+#include <QDesktopWidget>
+#endif
 #include <QGuiApplication>
 #include <QPixmap>
 #include <QProcess>
@@ -141,11 +143,16 @@ void ScreenGrabber::freeDesktopPortal(bool& ok, QPixmap& res)
 QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
 {
     ok = true;
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+    WId wid = QApplication::desktop()->winId();
+#else
+    int wid = 0;
+#endif
+
 #if defined(Q_OS_MACOS)
     QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
-    // TODO: Qt 6 - QApplication::desktop() not avialable
     QPixmap screenPixmap(
-      currentScreen->grabWindow(QApplication::desktop()->winId(),
+      currentScreen->grabWindow(wid,
                                 currentScreen->geometry().x(),
                                 currentScreen->geometry().y(),
                                 currentScreen->geometry().width(),
@@ -205,16 +212,9 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
 #endif
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX) || defined(Q_OS_WIN)
     QRect geometry = desktopGeometry();
-    // TODO: Qt 6 - QApplication::desktop() not avialable
     QPixmap p(QApplication::primaryScreen()->grabWindow(
-      QApplication::desktop()->winId(),
-      geometry.x(),
-      geometry.y(),
-      geometry.width(),
-      geometry.height()));
-    // TODO: Qt 6 - QApplication::desktop() not avialable
-    auto screenNumber = QApplication::desktop()->screenNumber();
-    QScreen* screen = QApplication::screens()[screenNumber];
+      wid, geometry.x(), geometry.y(), geometry.width(), geometry.height()));
+    QScreen* screen = qApp->screenAt(QCursor::pos());
     p.setDevicePixelRatio(screen->devicePixelRatio());
     return p;
 #endif
@@ -254,12 +254,13 @@ QPixmap ScreenGrabber::grabScreen(QScreen* screen, bool& ok)
         }
     } else {
         ok = true;
-        // TODO: Qt 6 - QApplication::desktop() not avialable
-        return screen->grabWindow(QApplication::desktop()->winId(),
-                                  geometry.x(),
-                                  geometry.y(),
-                                  geometry.width(),
-                                  geometry.height());
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+        WId wid = QApplication::desktop()->winId();
+#else
+        int wid = 0;
+#endif
+        return screen->grabWindow(
+          wid, geometry.x(), geometry.y(), geometry.width(), geometry.height());
     }
     return p;
 }

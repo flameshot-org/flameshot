@@ -36,6 +36,22 @@ set(PROJECT_NAME_CAPITALIZED "Flameshot")
 
 include(FetchContent)
 
+#Must be set before fetching external content
+option(USE_QT6 "Enable building aginst Qt6" OFF)
+#QT_DEFAULT_MAJOR_VERSION used by "SingleApplication"
+#QT_VERSION_MAJOR used by Flameshot and "QtColorWidgets"
+if (USE_QT6)
+  set(QT_DEFAULT_MAJOR_VERSION 6 CACHE STRING "")
+  set(QT_VERSION_MAJOR 6 CACHE STRING "")
+  message(WARNING "Attention: The Qt 6 build is still in development, so a properly functioning application cannot be guaranteed!")
+
+  #Needed due to linker error with QtColorWidget
+  set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+else()
+  set(QT_DEFAULT_MAJOR_VERSION 5 CACHE STRING "")
+  set(QT_VERSION_MAJOR 5 CACHE STRING "")
+endif()
+
 FetchContent_Declare(
     qtColorWidgets
     GIT_REPOSITORY https://gitlab.com/mattbas/Qt-Color-Widgets.git
@@ -115,13 +131,18 @@ set(QAPPLICATION_CLASS
         QApplication
         CACHE STRING "Inheritance class for SingleApplication")
 
-if(USE_EXTERNAL_SINGLEAPPLICATION)
+if(USE_EXTERNAL_SINGLEAPPLICATION AND NOT USE_QT6)
   # look for external QtSingleApplication
   # package dev-qt/qtsingleapplication provides no symlink to current version
   set(qtsingleapplication_libs libQt5Solutions_SingleApplication-2.6 Qt5Solutions_SingleApplication-2.6)
   find_library(QTSINGLEAPPLICATION_LIBRARY NAMES ${qtsingleapplication_libs})
-  message(STATUS "Using external SingleApplication library")
+  message(STATUS "Using external QtSingleApplication library")
 else()
+  if(USE_EXTERNAL_SINGLEAPPLICATION AND USE_QT6)
+    message(WARNING "External QtSingleApplication library is not available for Qt 6, switching alternative SingleApplication")
+    set(USE_EXTERNAL_SINGLEAPPLICATION OFF)
+  endif()
+
   FetchContent_Declare(
       singleApplication
       GIT_REPOSITORY https://github.com/itay-grudev/SingleApplication.git

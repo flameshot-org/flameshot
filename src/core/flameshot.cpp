@@ -25,7 +25,9 @@
 #include <QBuffer>
 #include <QDebug>
 #include <QDesktopServices>
-#include <QDesktopWidget> // TODO: Qt 6 - QApplication::desktop() not avialable
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+#include <QDesktopWidget>
+#endif
 #include <QFile>
 #include <QMessageBox>
 #include <QThread>
