@@ -108,7 +108,11 @@ SidePanelWidget::SidePanelWidget(QPixmap* p, QWidget* parent)
             &SidePanelWidget::onToolSizeChanged);
     // color hex editor sigslots
     connect(m_colorHex, &QLineEdit::editingFinished, this, [=]() {
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
         if (!QColor::isValidColor(m_colorHex->text())) {
+#else
+        if (!QColor::isValidColorName(m_colorHex->text())) {
+#endif
             m_colorHex->setText(m_color.name(QColor::HexRgb));
         } else {
             emit colorChanged(m_colorHex->text());

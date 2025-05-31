@@ -33,7 +33,6 @@
 #include <QCheckBox>
 #include <QDateTime>
 #include <QDebug>
-#include <QDesktopWidget>
 #include <QFontMetrics>
 #include <QLabel>
 #include <QMessageBox>
@@ -1221,10 +1220,6 @@ void CaptureWidget::showAppUpdateNotification(const QString& appLatestVersion,
     }
 #if defined(Q_OS_MACOS)
     int ax = (width() - m_updateNotificationWidget->width()) / 2;
-#elif (defined(Q_OS_LINUX) && QT_VERSION < QT_VERSION_CHECK(5, 10, 0))
-    QRect helpRect = QGuiApplication::primaryScreen()->geometry();
-    int ax = helpRect.left() +
-             ((helpRect.width() - m_updateNotificationWidget->width()) / 2);
 #else
     QRect helpRect;
     QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
@@ -1279,7 +1274,7 @@ void CaptureWidget::initSelection()
     if (!initialSelection.isNull()) {
         const qreal scale = m_context.screenshot.devicePixelRatio();
         initialSelection.moveTopLeft(initialSelection.topLeft() -
-                                     mapToGlobal({}));
+                                     mapToGlobal(QPoint(0, 0)));
         initialSelection.setTop(initialSelection.top() / scale);
         initialSelection.setBottom(initialSelection.bottom() / scale);
         initialSelection.setLeft(initialSelection.left() / scale);

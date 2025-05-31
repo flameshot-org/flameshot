@@ -359,7 +359,7 @@ QString ConfigHandler::filenamePatternDefault()
 
 void ConfigHandler::setDefaultSettings()
 {
-    foreach (const QString& key, m_settings.allKeys()) {
+    for (const auto& key : m_settings.allKeys()) {
         if (isShortcut(key)) {
             // Do not reset Shortcuts
             continue;
@@ -486,25 +486,15 @@ void ConfigHandler::resetValue(const QString& key)
 
 QSet<QString>& ConfigHandler::recognizedGeneralOptions()
 {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
     auto keys = ::recognizedGeneralOptions.keys();
     static QSet<QString> options = QSet<QString>(keys.begin(), keys.end());
-#else
-    static QSet<QString> options =
-      QSet<QString>::fromList(::recognizedGeneralOptions.keys());
-#endif
     return options;
 }
 
 QSet<QString>& ConfigHandler::recognizedShortcutNames()
 {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
     auto keys = recognizedShortcuts.keys();
     static QSet<QString> names = QSet<QString>(keys.begin(), keys.end());
-#else
-    static QSet<QString> names =
-      QSet<QString>::fromList(recognizedShortcuts.keys());
-#endif
     return names;
 }
 
