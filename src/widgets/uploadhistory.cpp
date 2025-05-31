@@ -4,11 +4,12 @@
 #include "src/utils/confighandler.h"
 #include "src/utils/history.h"
 #include "uploadlineitem.h"
-
 #include <QDateTime>
 #include <QDesktopWidget>
 #include <QFileInfo>
 #include <QPixmap>
+#include <QScrollBar>
+const int IMAGES_BATCH_SIZE = 10;
 
 void scaleThumbnail(QPixmap& pixmap)
 {
@@ -32,10 +33,10 @@ void clearHistoryLayout(QLayout* layout)
 UploadHistory::UploadHistory(QWidget* parent)
   : QWidget(parent)
   , ui(new Ui::UploadHistory)
+  , loadMoreButton(nullptr) // Initialize the button as nullptr
 {
     ui->setupUi(this);
     setAttribute(Qt::WA_DeleteOnClose);
-
     setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
     resize(QDesktopWidget().availableGeometry(this).size() * 0.5);
 }
@@ -45,14 +46,75 @@ void UploadHistory::loadHistory()
     clearHistoryLayout(ui->historyContainer);
 
     History history = History();
-    QList<QString> historyFiles = history.history();
+    QList<QString> allHistoryFiles = history.history();
+
+    int maxSize = ConfigHandler().uploadHistoryMax();
+    if (allHistoryFiles.size() > maxSize) {
+        int excessCount = allHistoryFiles.size() - maxSize;
+        secondaryStorage.append(allHistoryFiles.mid(0, excessCount));
+        historyFiles = allHistoryFiles.mid(excessCount);
+    } else {
+        historyFiles = allHistoryFiles;
+    }
+
+    currentBatchStartIndex = 0;
 
     if (historyFiles.isEmpty()) {
         setEmptyMessage();
     } else {
-        foreach (QString fileName, historyFiles) {
-            addLine(history.path(), fileName);
+        int initialLoadCount = std::min(maxSize, historyFiles.size());
+        for (int i = 0; i < initialLoadCount; ++i) {
+            addLine(History().path(), historyFiles[i]);
         }
+        currentBatchStartIndex = initialLoadCount;
+    }
+
+    if (!loadMoreButton) {
+        loadMoreButton = new QPushButton(tr("Load More"), this);
+        loadMoreButton->setObjectName("loadMoreButton");
+        connect(loadMoreButton, &QPushButton::clicked, this, [=]() {
+            loadNextBatch();
+        });
+    }
+
+    if (currentBatchStartIndex < historyFiles.size() || !secondaryStorage.isEmpty()) {
+        ui->historyContainer->addWidget(loadMoreButton);
+    } else {
+        loadMoreButton->hide();
+    }
+}
+
+void UploadHistory::loadNextBatch()
+{
+    int batchEndIndex =
+      std::min(currentBatchStartIndex + IMAGES_BATCH_SIZE, historyFiles.size());
+
+    for (int i = currentBatchStartIndex; i < batchEndIndex; ++i) {
+        addLine(History().path(), historyFiles[i]);
+    }
+
+    currentBatchStartIndex = batchEndIndex;
+
+    if (currentBatchStartIndex >= historyFiles.size() &&
+        !secondaryStorage.isEmpty()) {
+        int itemsToMove = std::min(IMAGES_BATCH_SIZE, secondaryStorage.size());
+        auto itemsToAdd = secondaryStorage.mid(0, itemsToMove);
+        secondaryStorage = secondaryStorage.mid(itemsToMove);
+
+        for (const QString& fileName : itemsToAdd) {
+            addLine(History().path(), fileName);
+        }
+    }
+    // to make sure the button is at the bottom of the scroll
+    if (loadMoreButton) {
+        ui->historyContainer->removeWidget(loadMoreButton);
+        ui->historyContainer->addWidget(loadMoreButton);
+    }
+
+    // Hide the loadMore button once everything is loaded
+    if (currentBatchStartIndex >= historyFiles.size() &&
+        secondaryStorage.isEmpty()) {
+        loadMoreButton->hide();
     }
 }
 
@@ -64,7 +126,6 @@ void UploadHistory::setEmptyMessage()
     connect(buttonEmpty, &QPushButton::clicked, this, [=]() { this->close(); });
     ui->historyContainer->addWidget(buttonEmpty);
 }
-
 void UploadHistory::addLine(const QString& path, const QString& fileName)
 {
     QString fullFileName = path + fileName;
@@ -73,12 +134,10 @@ void UploadHistory::addLine(const QString& path, const QString& fileName)
     HistoryFileName unpackFileName = history.unpackFileName(fileName);
 
     QString url = ImgUploaderManager(this).url() + unpackFileName.file;
-
     // load pixmap
     QPixmap pixmap;
     pixmap.load(fullFileName, "png");
     scaleThumbnail(pixmap);
-
     // get file info
     auto fileInfo = QFileInfo(fullFileName);
     QString lastModified =
@@ -101,3 +160,4 @@ UploadHistory::~UploadHistory()
 {
     delete ui;
 }
+
