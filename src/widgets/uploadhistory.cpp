@@ -6,7 +6,6 @@
 #include "uploadlineitem.h"
 
 #include <QDateTime>
-#include <QDesktopWidget>
 #include <QFileInfo>
 #include <QPixmap>
 
@@ -37,7 +36,6 @@ UploadHistory::UploadHistory(QWidget* parent)
     setAttribute(Qt::WA_DeleteOnClose);
 
     setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
-    resize(QDesktopWidget().availableGeometry(this).size() * 0.5);
 }
 
 void UploadHistory::loadHistory()
@@ -50,7 +48,7 @@ void UploadHistory::loadHistory()
     if (historyFiles.isEmpty()) {
         setEmptyMessage();
     } else {
-        foreach (QString fileName, historyFiles) {
+        for (const auto& fileName : historyFiles) {
             addLine(history.path(), fileName);
         }
     }

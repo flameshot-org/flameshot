@@ -3,7 +3,6 @@
 
 #include "qguiappcurrentscreen.h"
 #include <QCursor>
-#include <QDesktopWidget>
 #include <QGuiApplication>
 #include <QPoint>
 #include <QScreen>
@@ -49,15 +48,6 @@ QScreen* QGuiAppCurrentScreen::currentScreen(const QPoint& pos)
 
 QScreen* QGuiAppCurrentScreen::screenAt(const QPoint& pos)
 {
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
     m_currentScreen = qGuiApp->screenAt(pos);
-#else
-    for (QScreen* const screen : QGuiApplication::screens()) {
-        m_currentScreen = screen;
-        if (screen->geometry().contains(pos)) {
-            break;
-        }
-    }
-#endif
     return m_currentScreen;
 }
