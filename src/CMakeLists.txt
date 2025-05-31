@@ -14,7 +14,7 @@ find_package(
 )
 
 if (USE_WAYLAND_CLIPBOARD)
-    find_package(KF5GuiAddons)
+    find_package(KF6GuiAddons)
 endif()
 
 set(CMAKE_AUTOMOC ON)
@@ -224,7 +224,7 @@ target_link_libraries(
 
 if (USE_WAYLAND_CLIPBOARD)
   target_compile_definitions(flameshot PRIVATE USE_WAYLAND_CLIPBOARD=1)
-  target_link_libraries(flameshot KF5::GuiAddons)
+  target_link_libraries(flameshot KF6::GuiAddons)
 endif()
 
 if (APPLE)
