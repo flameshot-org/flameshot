@@ -66,7 +66,7 @@ AppLauncherWidget::AppLauncherWidget(const QPixmap& p, QWidget* parent)
     QStringList appsLocations =
       QStandardPaths::standardLocations(QStandardPaths::ApplicationsLocation);
 
-    for (auto appsLocation : appsLocations) {
+    for (const auto& appsLocation : appsLocations) {
         QDir appsDir(appsLocation);
         m_parser.processDirectory(QDir(appsDir));
     }

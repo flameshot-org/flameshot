@@ -209,7 +209,7 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="436"/>
         <source>Mouse Wheel</source>
-        <translation type="unfinished">Scrollhjul</translation>
+        <translation>Mushjul</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="436"/>
@@ -219,7 +219,7 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="437"/>
         <source>Right Click</source>
-        <translation type="unfinished">Högerklick</translation>
+        <translation>Högerklick</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="437"/>
@@ -239,22 +239,22 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="440"/>
         <source>Exit</source>
-        <translation type="unfinished">Stäng</translation>
+        <translation>Avsluta</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="482"/>
         <source>Quit Capture</source>
-        <translation type="unfinished"></translation>
+        <translation>Avsluta inspelning</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="483"/>
         <source>Are you sure you want to quit capture?</source>
-        <translation type="unfinished"></translation>
+        <translation>Vill du verkligen sluta spela in?</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="488"/>
         <source>Do not show this again</source>
-        <translation type="unfinished"></translation>
+        <translation>Visa inte detta igen</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="683"/>
@@ -416,7 +416,7 @@ Tryck Space för att öppna sidopanelen.</translation>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="61"/>
         <source>Esc</source>
-        <translation type="unfinished">Esc</translation>
+        <translation>Esc</translation>
     </message>
 </context>
 <context>
@@ -434,7 +434,7 @@ Tryck Space för att öppna sidopanelen.</translation>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="65"/>
         <source>Update</source>
-        <translation type="unfinished">Update</translation>
+        <translation>Uppdatera</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="67"/>
@@ -557,7 +557,7 @@ Tryck Space för att öppna sidopanelen.</translation>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="61"/>
         <source>Reset</source>
-        <translation type="unfinished">Återställ</translation>
+        <translation>Återställ</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="63"/>
@@ -786,12 +786,12 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="114"/>
         <source>Error</source>
-        <translation type="unfinished">Fel</translation>
+        <translation>Fel</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="114"/>
         <source>Unable to close active modal widgets</source>
-        <translation type="unfinished">Unable to close active modal widgets</translation>
+        <translation>Kan stänga aktiva modalwidgetar</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="412"/>
@@ -804,22 +804,22 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/core/flameshotdaemon.cpp" line="374"/>
         <source>New version %1 is available</source>
-        <translation type="unfinished">New version %1 is available</translation>
+        <translation>Ny version %1 är tillgänglig</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshotdaemon.cpp" line="380"/>
         <source>You have the latest version</source>
-        <translation type="unfinished">You have the latest version</translation>
+        <translation>Du har den senaste versionen</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshotdaemon.cpp" line="389"/>
         <source>Failed to get information about the latest version.</source>
-        <translation type="unfinished">Failed to get information about the latest version.</translation>
+        <translation>Kunde inte hämta information om den senaste versionen.</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshotdaemon.cpp" line="411"/>
         <source>Unable to connect via DBus</source>
-        <translation type="unfinished">Kunde inte ansluta via DBus</translation>
+        <translation>Kunde inte ansluta via DBus</translation>
     </message>
 </context>
 <context>
@@ -1045,7 +1045,7 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="277"/>
         <source>Use last region for GUI mode</source>
-        <translation type="unfinished">Use last region for GUI mode</translation>
+        <translation>Använd senaste region för GUI-läge</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="279"/>

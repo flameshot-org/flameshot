@@ -612,9 +612,7 @@ bool ConfigHandler::checkShortcutConflicts(AbstractLogger* log) const
                     reportedInLog.append(*key2);
                     *log << tr("Shortcut conflict: '%1' and '%2' "
                                "have the same shortcut: %3\n")
-                              .arg(*key1)
-                              .arg(*key2)
-                              .arg(value1);
+                              .arg(*key1, *key2, value1);
                 }
             }
         }
@@ -651,8 +649,7 @@ bool ConfigHandler::checkSemantics(AbstractLogger* log,
             }
             if (log != nullptr) {
                 *log << tr("Bad value in '%1'. Expected: %2\n")
-                          .arg(key)
-                          .arg(valueHandler->expected());
+                          .arg(key, valueHandler->expected());
             }
             if (offenders != nullptr) {
                 offenders->append(key);

@@ -171,7 +171,7 @@ QVariant BoundedInt::fallback()
 
 QString BoundedInt::expected()
 {
-    return QStringLiteral("number between %1 and %2").arg(m_min).arg(m_max);
+    return QStringLiteral("number between %1 and %2").arg(m_min, m_max);
 }
 
 // LOWER BOUNDED INT
@@ -455,8 +455,7 @@ QString UserColors::expected()
 {
     return QStringLiteral(
              "list of colors(min %1 and max %2) separated by comma")
-      .arg(m_min - 1)
-      .arg(m_max - 1);
+      .arg(m_min - 1, m_max - 1);
 }
 
 QVariant UserColors::representation(const QVariant& val)
