@@ -589,8 +589,7 @@ int main(int argc, char* argv[])
                 QTextStream(stdout)
                   << QStringLiteral("The new pattern is '%1'\n"
                                     "Parsed pattern example: %2\n")
-                       .arg(newFilename)
-                       .arg(fh.parsedPattern());
+                       .arg(newFilename, fh.parsedPattern());
             }
             if (tray) {
                 config.setDisabledTrayIcon(parser.value(trayOption) == "false");

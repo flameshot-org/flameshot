@@ -20,6 +20,9 @@ InfoWindow::InfoWindow(QWidget* parent)
     ui->VersionDetails->setText(GlobalValues::versionInfo());
     ui->OperatingSystemDetails->setText(generateKernelString());
 
+    connect(
+      ui->CopyInfoButton, &QPushButton::clicked, this, &InfoWindow::copyInfo);
+
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
     QRect position = frameGeometry();
     QScreen* screen = QGuiAppCurrentScreen().currentScreen();
@@ -50,7 +53,7 @@ QString generateKernelString()
     return kernelVersion;
 }
 
-void InfoWindow::on_CopyInfoButton_clicked()
+void InfoWindow::copyInfo()
 {
     FlameshotDaemon::copyToClipboard(GlobalValues::versionInfo() + "\n" +
                                      generateKernelString());

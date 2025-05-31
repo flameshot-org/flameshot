@@ -26,7 +26,7 @@ protected:
     void keyPressEvent(QKeyEvent* event);
 
 private slots:
-    void on_CopyInfoButton_clicked();
+    void copyInfo();
 };
 
 QString generateKernelString();

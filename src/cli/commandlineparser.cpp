@@ -56,9 +56,9 @@ QString optionsToString(const QList<CommandOption>& options,
           QStringLiteral(" ").repeated(size + 4).prepend("\n");
         for (int i = 0; i < options.length(); ++i) {
             result += QStringLiteral("  %1  %2\n")
-                        .arg(dashedOptionList.at(i).leftJustified(size, ' '))
-                        .arg(options.at(i).description().replace(
-                          QLatin1String("\n"), linePadding));
+                        .arg(dashedOptionList.at(i).leftJustified(size, ' '),
+                             options.at(i).description().replace(
+                               QLatin1String("\n"), linePadding));
         }
         if (!subcommands.isEmpty()) {
             result += QLatin1String("\n");
@@ -69,8 +69,8 @@ QString optionsToString(const QList<CommandOption>& options,
     }
     for (const auto& subcommand : subcommands) {
         result += QStringLiteral("  %1  %2\n")
-                    .arg(subcommand.name().leftJustified(size, ' '))
-                    .arg(subcommand.description());
+                    .arg(subcommand.name().leftJustified(size, ' '),
+                         subcommand.description());
     }
     return result;
 }
@@ -142,8 +142,7 @@ bool CommandLineParser::processOptions(const QStringList& args,
         }
         err << QStringLiteral("the option '%1' is not a valid option "
                               "for the argument '%2'.")
-                 .arg(arg)
-                 .arg(argName);
+                 .arg(arg, argName);
         ok = false;
         return ok;
     }
@@ -329,9 +328,7 @@ void CommandLineParser::printHelp(QStringList args, const Node* node)
       node->subNodes.isEmpty() ? "" : "[" + QObject::tr("subcommands") + "]";
     helpText += (QObject::tr("Usage") + ": %1 [%2-" + QObject::tr("options") +
                  QStringLiteral("] %3\n\n"))
-                  .arg(args.join(QStringLiteral(" ")))
-                  .arg(argName)
-                  .arg(argText);
+                  .arg(args.join(QStringLiteral(" ")), argName, argText);
 
     // short section about default behavior
     helpText += QObject::tr("Per default runs Flameshot in the background and "
