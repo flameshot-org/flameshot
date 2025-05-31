@@ -14,6 +14,7 @@
 #include <QDBusMessage>
 #include <QPixmap>
 #include <QRect>
+#include <QIODevice>
 
 #if !defined(DISABLE_UPDATE_CHECKER)
 #include <QDesktopServices>
