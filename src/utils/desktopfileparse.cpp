@@ -127,7 +127,7 @@ QVector<DesktopAppData> DesktopFileParser::getAppsByCategory(
   const QString& category)
 {
     QVector<DesktopAppData> res;
-    for (const DesktopAppData& app : qAsConst(m_appList)) {
+    for (const DesktopAppData& app : std::as_const(m_appList)) {
         if (app.categories.contains(category)) {
             res.append(app);
         }
@@ -139,7 +139,7 @@ QMap<QString, QVector<DesktopAppData>> DesktopFileParser::getAppsByCategory(
   const QStringList& categories)
 {
     QMap<QString, QVector<DesktopAppData>> res;
-    for (const DesktopAppData& app : qAsConst(m_appList)) {
+    for (const DesktopAppData& app : std::as_const(m_appList)) {
         for (const QString& category : categories) {
             if (app.categories.contains(category)) {
                 res[category].append(app);
