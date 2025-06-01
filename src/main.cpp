@@ -159,11 +159,12 @@ int main(int argc, char* argv[])
 
     // no arguments, just launch Flameshot
     if (argc == 1) {
-#ifndef USE_EXTERNAL_SINGLEAPPLICATION
-        SingleApplication app(argc, argv);
-#else
-        QtSingleApplication app(argc, argv);
-#endif
+//  #ifndef USE_EXTERNAL_SINGLEAPPLICATION
+//          SingleApplication app(argc, argv);
+//  #else
+//          QtSingleApplication app(argc, argv);
+//  #endif
+        QApplication app(argc, argv);
         configureApp(true);
         auto c = Flameshot::instance();
         FlameshotDaemon::start();
