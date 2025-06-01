@@ -8,6 +8,10 @@
 #include "src/utils/pathinfo.h"
 #include <QIcon>
 #include <QPainter>
+#include <qgraphicseffect.h>
+#include <qgraphicsitem.h>
+#include <qgraphicsscene.h>
+#include <qpainterpath.h>
 
 class CaptureTool : public QObject
 {
@@ -138,8 +142,20 @@ public:
     virtual void setCount(int count) { m_count = count; };
     virtual int count() const { return m_count; };
 
+    virtual void setDropShadowEnabled(bool enabled) { m_dropShadowEnabled = enabled; }
+    virtual bool dropShadowEnabled() const { return m_dropShadowEnabled; }
+
+    virtual void doProcess(QPainter& painter, const QPixmap& pixmap) = 0;
+
     // Called every time the tool has to draw
-    virtual void process(QPainter& painter, const QPixmap& pixmap) = 0;
+    void process(QPainter& painter, const QPixmap& pixmap)
+    {
+        if (dropShadowEnabled()) {
+            drawDropShadow(painter, pixmap, [this](QPainter& p, const QPixmap m) { this->doProcess(p, m); });
+        } else {
+            doProcess(painter, pixmap);
+        }
+    }
     virtual void drawSearchArea(QPainter& painter, const QPixmap& pixmap)
     {
         process(painter, pixmap);
@@ -163,6 +179,7 @@ protected:
     void copyParams(const CaptureTool* from, CaptureTool* to)
     {
         to->m_count = from->m_count;
+        to->m_dropShadowEnabled = from->m_dropShadowEnabled;
     }
 
     QString iconPath(const QColor& c) const
@@ -181,6 +198,42 @@ protected:
         painter.setPen(orig_pen);
     }
 
+    void drawDropShadow(QPainter& painter,
+                          const QPixmap& pixmap,
+                          std::function<void(QPainter&, const QPixmap&)> drawFunc,
+                          int offset = 3,
+                          QColor shadowColor = QColor(0, 0, 0, 128),
+                          qreal blurRadius = 10.0)
+    {
+        QSize size(painter.device()->width(), painter.device()->height());
+        QPixmap shapePixmap(size);
+        shapePixmap.fill(Qt::transparent);
+
+        // Draw the shape into an offscreen pixmap
+        QPainter shapePainter(&shapePixmap);
+        shapePainter.setRenderHint(QPainter::Antialiasing);
+        drawFunc(shapePainter, pixmap);
+        shapePainter.end();
+
+        // Create a pixmap item and apply the drop shadow effect
+        QGraphicsPixmapItem* item = new QGraphicsPixmapItem(shapePixmap);
+        QGraphicsDropShadowEffect* shadowEffect = new QGraphicsDropShadowEffect;
+        shadowEffect->setBlurRadius(blurRadius);
+        shadowEffect->setOffset(offset, offset);
+        shadowEffect->setColor(shadowColor);
+        item->setGraphicsEffect(shadowEffect);
+
+        // Render the item with shadow onto a new pixmap via QGraphicsScene
+        QGraphicsScene scene;
+        scene.addItem(item);
+        QImage finalImage(size, QImage::Format_ARGB32_Premultiplied);
+        finalImage.fill(Qt::transparent);
+
+        QPainter scenePainter(&finalImage);
+        scene.render(&scenePainter);
+        painter.drawImage(0, 0, finalImage);
+    }
+
 public slots:
     // On mouse release.
     virtual void drawEnd(const QPoint& p) = 0;
@@ -195,6 +248,8 @@ public slots:
     virtual void pressed(CaptureContext& context) = 0;
     // Called when the color is changed in the editor.
     virtual void onColorChanged(const QColor& c) = 0;
+    // Called when the drop shadow is changed in the editor.
+    virtual void onDropShadowChanged(bool enabled) { m_dropShadowEnabled = enabled; }
     // Called when the size the tool size is changed by the user.
     virtual void onSizeChanged(int size) = 0;
     virtual int size() const { return -1; };
@@ -202,4 +257,5 @@ public slots:
 private:
     unsigned int m_count;
     bool m_editMode;
+    bool m_dropShadowEnabled = false;
 };

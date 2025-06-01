@@ -39,7 +39,7 @@ CaptureTool* RectangleTool::copy(QObject* parent)
     return tool;
 }
 
-void RectangleTool::process(QPainter& painter, const QPixmap& pixmap)
+void RectangleTool::doProcess(QPainter& painter, const QPixmap& pixmap)
 {
     Q_UNUSED(pixmap)
     QPen orig_pen = painter.pen();

@@ -13,6 +13,7 @@ AbstractPathTool::AbstractPathTool(QObject* parent)
 void AbstractPathTool::copyParams(const AbstractPathTool* from,
                                   AbstractPathTool* to)
 {
+    CaptureTool::copyParams(from, to);
     to->m_color = from->m_color;
     to->m_thickness = from->m_thickness;
     to->m_padding = from->m_padding;

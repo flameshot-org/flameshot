@@ -214,6 +214,12 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
                 setDrawColor(c);
             });
     m_colorPicker->hide();
+    
+    // Init drop shadow sigslots
+    connect(this,
+            &CaptureWidget::dropShadowChanged,
+            this,
+            &CaptureWidget::setDropShadow);
 
     // Init tool size sigslots
     connect(this,
@@ -726,6 +732,10 @@ bool CaptureWidget::startDrawObjectTool(const QPoint& pos)
                 m_activeTool,
                 &CaptureTool::onColorChanged);
         connect(this,
+                &CaptureWidget::dropShadowChanged,
+                m_activeTool,
+                &CaptureTool::onDropShadowChanged);
+        connect(this,
                 &CaptureWidget::toolSizeChanged,
                 m_activeTool,
                 &CaptureTool::onSizeChanged);
@@ -1089,6 +1099,7 @@ void CaptureWidget::changeEvent(QEvent* e)
 void CaptureWidget::initContext(bool fullscreen, const CaptureRequest& req)
 {
     m_context.color = m_config.drawColor();
+    m_context.dropShadow = m_config.dropShadow();
     m_context.widgetOffset = mapToGlobal(QPoint(0, 0));
     m_context.mousePos = mapFromGlobal(QCursor::pos());
     m_context.toolSize = m_config.drawThickness();
@@ -1174,6 +1185,10 @@ void CaptureWidget::initPanel()
             this,
             &CaptureWidget::setDrawColor);
     connect(m_sidePanel,
+            &SidePanelWidget::dropShadowChanged,
+            this,
+            &CaptureWidget::setDropShadow);
+    connect(m_sidePanel,
             &SidePanelWidget::toolSizeChanged,
             this,
             &CaptureWidget::onToolSizeChanged);
@@ -1181,6 +1196,10 @@ void CaptureWidget::initPanel()
             &CaptureWidget::colorChanged,
             m_sidePanel,
             &SidePanelWidget::onColorChanged);
+    connect(this,
+            &CaptureWidget::dropShadowChanged,
+            m_sidePanel,
+            &SidePanelWidget::onDropShadowChanged);
     connect(this,
             &CaptureWidget::toolSizeChanged,
             m_sidePanel,
@@ -1197,8 +1216,8 @@ void CaptureWidget::initPanel()
             &SidePanelWidget::gridSizeChanged,
             this,
             &CaptureWidget::onGridSizeChanged);
-    // TODO replace with a CaptureWidget signal
-    emit m_sidePanel->colorChanged(m_context.color);
+    emit colorChanged(m_context.color);
+    emit dropShadowChanged(m_context.dropShadow);
     emit toolSizeChanged(m_context.toolSize);
     m_panel->pushWidget(m_sidePanel);
 
@@ -1464,6 +1483,21 @@ void CaptureWidget::setDrawColor(const QColor& c)
     }
 }
 
+void CaptureWidget::setDropShadow(bool enabled)
+{
+    m_context.dropShadow = enabled;
+    ConfigHandler().setDropShadow(enabled);
+    // Update mouse preview
+    updateTool(activeButtonTool());
+    // change drop shadow for the active tool
+    auto toolItem = activeToolObject();
+    if (toolItem) {
+        // Change drop shadow
+        toolItem->onDropShadowChanged(enabled);
+        drawToolsData();
+    }
+}
+
 void CaptureWidget::updateActiveLayer(int layer)
 {
     // TODO - refactor this part, make all objects to work with
@@ -1715,6 +1749,10 @@ void CaptureWidget::pushToolToStack()
                    &CaptureWidget::colorChanged,
                    m_activeTool,
                    &CaptureTool::onColorChanged);
+        disconnect(this,
+                   &CaptureWidget::dropShadowChanged,
+                   m_activeTool,
+                   &CaptureTool::onDropShadowChanged);
         disconnect(this,
                    &CaptureWidget::toolSizeChanged,
                    m_activeTool,

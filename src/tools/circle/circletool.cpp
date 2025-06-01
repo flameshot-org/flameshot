@@ -37,7 +37,7 @@ CaptureTool* CircleTool::copy(QObject* parent)
     return tool;
 }
 
-void CircleTool::process(QPainter& painter, const QPixmap& pixmap)
+void CircleTool::doProcess(QPainter& painter, const QPixmap& pixmap)
 {
     Q_UNUSED(pixmap)
     painter.setPen(QPen(color(), size()));
