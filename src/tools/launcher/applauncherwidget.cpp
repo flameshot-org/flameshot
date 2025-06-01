@@ -257,7 +257,7 @@ void AppLauncherWidget::initAppMap()
     QStringList multimediaNames;
     multimediaNames << QStringLiteral("AudioVideo") << QStringLiteral("Audio")
                     << QStringLiteral("Video");
-    for (const QString& name : qAsConst(multimediaNames)) {
+    for (const QString& name : std::as_const(multimediaNames)) {
         if (!m_appsMap.contains(name)) {
             continue;
         }
