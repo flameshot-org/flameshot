@@ -55,7 +55,7 @@ PinWidget::PinWidget(const QPixmap& pixmap,
     m_label->setPixmap(m_pixmap);
     m_layout->addWidget(m_label);
 
-    new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_Q), this, SLOT(close()));
+    new QShortcut(QKeySequence(Qt::CTRL | Qt::Key_Q), this, SLOT(close()));
     new QShortcut(Qt::Key_Escape, this, SLOT(close()));
 
     qreal devicePixelRatio = 1;
