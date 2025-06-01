@@ -35,7 +35,6 @@ project(
 set(PROJECT_NAME_CAPITALIZED "Flameshot")
 
 include(FetchContent)
-
 #Must be set before fetching external content
 #QT_DEFAULT_MAJOR_VERSION used by "SingleApplication"
 #QT_VERSION_MAJOR used by Flameshot and "QtColorWidgets"
@@ -103,7 +102,7 @@ endif ()
 include(cmake/StandardProjectSettings.cmake)
 
 add_library(project_options INTERFACE)
-target_compile_features(project_options INTERFACE cxx_std_17)
+target_compile_features(project_options INTERFACE cxx_std_20)
 
 add_library(project_warnings INTERFACE)
 
