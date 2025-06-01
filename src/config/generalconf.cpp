@@ -17,7 +17,6 @@
 #include <QSizePolicy>
 #include <QSpinBox>
 #include <QStandardPaths>
-#include <QTextCodec> // TODO: Qt 6 - Replace QTextCodec with Qt 6 solution; temporary include Core5Compat
 #include <QVBoxLayout>
 
 GeneralConf::GeneralConf(QWidget* parent)
@@ -188,14 +187,12 @@ void GeneralConf::importConfiguration()
         return;
     }
     QFile file(fileName);
-    // TODO: Qt 6 - Replace QTextCodec with Qt 6 solution
-    // Temporary: Include Core5Compat when compiling with Qt 6
-    QTextCodec* codec = QTextCodec::codecForLocale();
     if (!file.open(QFile::ReadOnly)) {
         QMessageBox::about(this, tr("Error"), tr("Unable to read file."));
         return;
     }
-    QString text = codec->toUnicode(file.readAll());
+    QStringDecoder decoder(QStringDecoder::System);
+    QString text = decoder(file.readAll());
     file.close();
 
     QFile config(ConfigHandler().configFilePath());
@@ -203,7 +200,8 @@ void GeneralConf::importConfiguration()
         QMessageBox::about(this, tr("Error"), tr("Unable to write file."));
         return;
     }
-    config.write(codec->fromUnicode(text));
+    QStringEncoder encoder(QStringEncoder::System);
+    config.write(encoder(text));
     config.close();
 }
 
