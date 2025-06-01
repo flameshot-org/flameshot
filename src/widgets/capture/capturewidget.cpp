@@ -205,6 +205,13 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
 
     // Init color picker
     m_colorPicker = new ColorPicker(this);
+    // Init notification widget
+    m_notifierBox = new NotifierBox(this);
+    initPanel();
+
+    // TODO: Make it more clear why this has moved. In Qt6 some timing related to 
+    // constructors / connect signals has changed so if initPanel is called 
+    // after the connect a SEGFAULT occurs
     connect(m_colorPicker,
             &ColorPicker::colorSelected,
             this,
@@ -220,8 +227,7 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
             this,
             &CaptureWidget::onToolSizeChanged);
 
-    // Init notification widget
-    m_notifierBox = new NotifierBox(this);
+
     m_notifierBox->hide();
     connect(m_notifierBox, &NotifierBox::hidden, this, [this]() {
         // Show cursor if it was hidden while adjusting tool size
@@ -231,7 +237,8 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
         onToolSizeSettled(m_context.toolSize);
     });
 
-    initPanel();
+
+
 
     m_config.checkAndHandleError();
     if (m_config.hasError()) {
