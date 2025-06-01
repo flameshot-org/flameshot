@@ -99,7 +99,7 @@ QVector<DesktopAppData> WinLnkFileParser::getAppsByCategory(
   const QString& category)
 {
     QVector<DesktopAppData> res;
-    for (const DesktopAppData& app : qAsConst(m_appList)) {
+    for (const DesktopAppData& app : std::as_const(m_appList)) {
         if (app.categories.contains(category)) {
             res.append(app);
         }
@@ -118,7 +118,7 @@ QMap<QString, QVector<DesktopAppData>> WinLnkFileParser::getAppsByCategory(
     QVector<DesktopAppData> tmpAppList;
     for (const QString& category : categories) {
         tmpAppList = getAppsByCategory(category);
-        for (const DesktopAppData& app : qAsConst(tmpAppList)) {
+        for (const DesktopAppData& app : std::as_const(tmpAppList)) {
             res[category].append(app);
         }
     }
@@ -144,7 +144,7 @@ void WinLnkFileParser::getImageFileExtAssociates(const QStringList& sListImgExt)
     const QString sReg("HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\"
                        "CurrentVersion\\Explorer\\FileExts\\.%1\\OpenWithList");
 
-    for (const auto& sExt : qAsConst(sListImgExt)) {
+    for (const auto& sExt : std::as_const(sListImgExt)) {
         QString sPath(sReg.arg(sExt));
         QSettings registry(sPath, QSettings::NativeFormat);
         for (const auto& key : registry.allKeys()) {
