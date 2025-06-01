@@ -100,7 +100,7 @@ void configureApp(bool gui)
     qtTranslator.load(QLocale::system(),
                       "qt",
                       "_",
-                      QLibraryInfo::location(QLibraryInfo::TranslationsPath));
+                      QLibraryInfo::path(QLibraryInfo::TranslationsPath));
 
     auto app = QCoreApplication::instance();
     app->installTranslator(&translator);
