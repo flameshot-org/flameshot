@@ -3,14 +3,12 @@ find_package(
         CONFIG
         REQUIRED
         Core
-        Core5Compat
         Gui
         Widgets
         Network
         Svg
         DBus
         LinguistTools
-        Core5Compat  #To be removed once QTextCodec has been replaced with the equivalent in Qt 6
 )
 
 if (USE_WAYLAND_CLIPBOARD)
@@ -217,7 +215,6 @@ target_link_libraries(
         Qt${QT_VERSION_MAJOR}::DBus
         Qt${QT_VERSION_MAJOR}::Network
         Qt${QT_VERSION_MAJOR}::Widgets
-        Qt${QT_VERSION_MAJOR}::Core5Compat  #To be removed once QTextCodec has been replaced with the equivalent in Qt 6
         ${QTSINGLEAPPLICATION_LIBRARY}
         QtColorWidgets
 )
