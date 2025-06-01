@@ -233,12 +233,12 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="482"/>
         <source>Quit Capture</source>
-        <translation type="unfinished"></translation>
+        <translation>Esci da Cattura</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="483"/>
         <source>Are you sure you want to quit capture?</source>
-        <translation type="unfinished"></translation>
+        <translation>Vuoi davvero uscire dall&apos;acquisizione?</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="488"/>
@@ -999,12 +999,12 @@ Si prega di risolverli manualmente nel file di configurazione.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="316"/>
         <source>Show abort notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra notifiche di interruzione</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="317"/>
         <source>Enable abort notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Abilita notifiche di interruzione</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="330"/>
@@ -1014,12 +1014,12 @@ Si prega di risolverli manualmente nel file di configurazione.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="343"/>
         <source>Use grim to capture screenshots</source>
-        <translation type="unfinished"></translation>
+        <translation>Usa Grim per catturare screenshot</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="345"/>
         <source>Grim is a wayland only utility to capture screens based on the screencopy protocol. Generally only enable on minimal wayland window managers like sway, hyprland, etc.</source>
-        <translation type="unfinished"></translation>
+        <translation>Grim è un&apos;utilità esclusiva di Wayland per catturare schermate basata sul protocollo Screencopy. Generalmente è abilitata solo su window manager Wayland minimali come Sway, Hyprland, ecc.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="363"/>
@@ -1066,12 +1066,12 @@ Si prega di risolverli manualmente nel file di configurazione.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="432"/>
         <source>Automatically unload from memory when it is not needed</source>
-        <translation type="unfinished"></translation>
+        <translation>Scarica automaticamente dalla memoria quando non è necessario</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="433"/>
         <source>Automatically close daemon (background process) when it is not needed</source>
-        <translation type="unfinished"></translation>
+        <translation>Chiudere automaticamente il demone (processo in background) quando non è necessario</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="444"/>
@@ -1151,7 +1151,7 @@ Si prega di risolverli manualmente nel file di configurazione.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="678"/>
         <source>Use lossy JPG format for clipboard (lossless PNG default)</source>
-        <translation type="unfinished"></translation>
+        <translation>Utilizza il formato JPG con perdita di dati per gli appunti (il formato predefinito è PNG senza perdita di dati)</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="704"/>
@@ -1212,72 +1212,72 @@ Si prega di risolverli manualmente nel file di configurazione.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="794"/>
         <source>Milliseconds before geometry display hides; 0 means do not hide</source>
-        <translation type="unfinished"></translation>
+        <translation>Millisecondi prima che la visualizzazione della geometria venga nascosta; 0 significa non nascondere</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="797"/>
         <source>Set geometry display timeout (ms)</source>
-        <translation type="unfinished"></translation>
+        <translation>Imposta il timeout di visualizzazione della geometria (ms)</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="805"/>
         <source>Selection Geometry Display</source>
-        <translation type="unfinished"></translation>
+        <translation>Visualizzazione della geometria di selezione</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="812"/>
         <source>Display Location</source>
-        <translation type="unfinished"></translation>
+        <translation>Posizione di visualizzazione</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="815"/>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Nessuna</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="816"/>
         <source>Top Left</source>
-        <translation type="unfinished"></translation>
+        <translation>In alto a sinistra</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="818"/>
         <source>Top Right</source>
-        <translation type="unfinished"></translation>
+        <translation>In alto a destra</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="820"/>
         <source>Bottom Left</source>
-        <translation type="unfinished"></translation>
+        <translation>In basso a sinistra</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="822"/>
         <source>Bottom Right</source>
-        <translation type="unfinished"></translation>
+        <translation>In basso a destra</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="824"/>
         <source>Center</source>
-        <translation type="unfinished"></translation>
+        <translation>Centro</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="849"/>
         <source>Quality range of 0-100; Higher number is better quality and larger file size</source>
-        <translation type="unfinished"></translation>
+        <translation>Gamma di qualità da 0 a 100; un numero più alto indica una qualità migliore e una dimensione del file maggiore</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="853"/>
         <source>JPEG Quality</source>
-        <translation type="unfinished"></translation>
+        <translation>Qualità JPEG</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="864"/>
         <source>Reverse arrow</source>
-        <translation type="unfinished"></translation>
+        <translation>Freccia inversa</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="865"/>
         <source>Draw the arrow head first</source>
-        <translation type="unfinished"></translation>
+        <translation>Disegna prima la punta della freccia</translation>
     </message>
 </context>
 <context>
@@ -1656,27 +1656,27 @@ Si prega di risolverli manualmente nel file di configurazione.</translation>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="307"/>
         <source>Rotate Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Ruota a destra</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="312"/>
         <source>Rotate Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Ruota a sinistra</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="317"/>
         <source>Increase Opacity</source>
-        <translation type="unfinished"></translation>
+        <translation>Aumenta l&apos;opacità</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="324"/>
         <source>Decrease Opacity</source>
-        <translation type="unfinished"></translation>
+        <translation>Diminuisci l&apos;opacità</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="331"/>
         <source>Close</source>
-        <translation type="unfinished">Chiudi</translation>
+        <translation>Chiudi</translation>
     </message>
 </context>
 <context>
@@ -1689,7 +1689,7 @@ Si prega di risolverli manualmente nel file di configurazione.</translation>
     <message>
         <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="36"/>
         <source>Set Pixelate as the paint tool.</source>
-        <translation type="unfinished"></translation>
+        <translation>Imposta Pixelate come strumento di disegno.</translation>
     </message>
     <message>
         <source>Set Pixelate as the paint tool</source>
@@ -1725,7 +1725,7 @@ Si prega di risolverli manualmente nel file di configurazione.</translation>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="68"/>
         <source>Subcommands</source>
-        <translation type="unfinished"></translation>
+        <translation>Sottocomandi</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="329"/>
@@ -1792,12 +1792,12 @@ Si prega di risolverli manualmente nel file di configurazione.</translation>
     <message>
         <location filename="../../src/main.cpp" line="201"/>
         <source>Capture screenshot of all monitors at the same time.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cattura screenshot di tutti i monitor contemporaneamente.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="211"/>
         <source>Capture a screenshot of the specified monitor.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cattura uno screenshot del monitor specificato.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="216"/>
@@ -1857,7 +1857,7 @@ Si prega di risolverli manualmente nel file di configurazione.</translation>
     <message>
         <location filename="../../src/main.cpp" line="250"/>
         <source>Enable or disable the notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Abilitare o disabilitare le notifiche</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="253"/>
@@ -2171,22 +2171,22 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="54"/>
         <source>The universal wayland screen capture adapter requires Grim as the screen capture component of wayland. If the screen capture component is missing, please install it!</source>
-        <translation type="unfinished"></translation>
+        <translation>L&apos;adattatore universale per la cattura dello schermo Wayland richiede Grim come componente di cattura dello schermo di Wayland. Se il componente di cattura dello schermo è mancante, installalo!</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="169"/>
         <source>If the useGrimAdapter setting is not enabled, the dbus protocol will be used. It should be noted that using the dbus protocol under wayland is not recommended. It is recommended to enable the useGrimAdapter setting in flameshot.ini to activate the grim-based general wayland screenshot adapter</source>
-        <translation type="unfinished"></translation>
+        <translation>Se l&apos;impostazione useGrimAdapter non è abilitata, verrà utilizzato il protocollo dbus. Si prega di notare che l&apos;utilizzo del protocollo dbus in Wayland non è raccomandato. Si consiglia di abilitare l&apos;impostazione useGrimAdapter in flameshot.ini per attivare l&apos;adattatore generico per screenshot Wayland basato su Grim</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="180"/>
         <source>grim&apos;s screenshot component is implemented based on wlroots, it may not be used in GNOME or similar desktop environments</source>
-        <translation type="unfinished"></translation>
+        <translation>Il componente screenshot di grim è implementato in base a wlroots, non può essere utilizzato in GNOME o ambienti desktop simili</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="192"/>
         <source>Unable to detect desktop environment (GNOME? KDE? Qile? Sway? ...)</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile rilevare l&apos;ambiente desktop (GNOME? KDE? Qile? Sway? ...)</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="195"/>
@@ -2295,22 +2295,22 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="180"/>
         <source>Symmetrically decrease width by 2px</source>
-        <translation type="unfinished"></translation>
+        <translation>Ridurre simmetricamente la larghezza di 2px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="182"/>
         <source>Symmetrically increase width by 2px</source>
-        <translation type="unfinished"></translation>
+        <translation>Aumentare simmetricamente la larghezza di 2px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="184"/>
         <source>Symmetrically increase height by 2px</source>
-        <translation type="unfinished"></translation>
+        <translation>Aumentare simmetricamente l&apos;altezza di 2px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="186"/>
         <source>Symmetrically decrease height by 2px</source>
-        <translation type="unfinished"></translation>
+        <translation>Ridurre simmetricamente l&apos;altezza di 2px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="187"/>
@@ -2345,12 +2345,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="194"/>
         <source>Delete selected drawn object</source>
-        <translation type="unfinished"></translation>
+        <translation>Elimina l&apos;oggetto disegnato selezionato</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="195"/>
         <source>Cancel current selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Annulla la selezione corrente</translation>
     </message>
     <message>
         <source>Delete current tool</source>
@@ -2399,7 +2399,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="85"/>
         <source>Display grid</source>
-        <translation type="unfinished"></translation>
+        <translation>Griglia di visualizzazione</translation>
     </message>
 </context>
 <context>
@@ -2655,7 +2655,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="159"/>
         <source>&amp;Open Save Path</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Apri percorso di salvataggio</translation>
     </message>
 </context>
 <context>
