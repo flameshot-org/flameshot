@@ -52,8 +52,7 @@ Flameshot::Flameshot()
     // permissions on the first run. Otherwise it will be hidden under the
     // CaptureWidget
     QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
-    // TODO: Qt 6 - QApplication::desktop() not avialable
-    currentScreen->grabWindow(QApplication::desktop()->winId(), 0, 0, 1, 1);
+    currentScreen->grabWindow(0, 0, 0, 1, 1);
 
     // set global shortcuts for MacOS
     m_HotkeyScreenshotCapture = new QHotkey(

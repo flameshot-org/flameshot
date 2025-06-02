@@ -73,7 +73,7 @@ int WinLnkFileParser::processDirectory(const QDir& dir)
                     << "Updater"
                     << "Windows PowerShell";
     const QString sMenuFilter("\\b(" + sListMenuFilter.join('|') + ")\\b");
-    QRegularExpression regexfilter(sMenuFilter);
+    static const QRegularExpression regexfilter(sMenuFilter);
 
     bool ok;
     int length = m_appList.length();
