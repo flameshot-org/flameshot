@@ -25,6 +25,9 @@ finish-args:
 modules:
   - name: flameshot
     buildsystem: cmake-ninja
+    build-options:
+      build-args:
+        - --share=network
     config-opts:
       - -DCMAKE_BUILD_TYPE=Release 
       - -DUSE_WAYLAND_CLIPBOARD=1
