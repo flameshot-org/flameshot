@@ -24,10 +24,10 @@ env:
 
 jobs:
   windows-pack:
-    name: VS 2019 ${{ matrix.config.arch }}-${{ matrix.type }}
-    runs-on: windows-2019
+    name: VS 2025 ${{ matrix.config.arch }}-${{ matrix.type }}
+    runs-on: windows-2025
     env:
-      VCINSTALLDIR: C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/
+      VCINSTALLDIR: C:/Program Files (x86)/Microsoft Visual Studio/2022/Enterprise/VC/
       Qt5_DIR: ${{ github.workspace }}\build\Qt\${{ matrix.qt_ver }}\${{ matrix.config.qt_arch_install }}\lib\cmake\Qt5\
       QTDIR: ${{ github.workspace }}\build\Qt\${{ matrix.qt_ver }}\${{ matrix.config.qt_arch_install }}\
       # 2025.02.14
@@ -103,6 +103,12 @@ jobs:
         with:
           path: ./build/Qt/${{ matrix.qt_ver }}/${{ matrix.config.qt_arch_install }}
           key: ${{ runner.os }}-QtCache/${{ matrix.qt_ver }}/${{ matrix.config.qt_arch }}
+        
+      # Remove stub to windows store Python executable     
+      - name: Fix Python path
+        shell: pwsh
+        run: |
+          Remove-Item "$env:LOCALAPPDATA\Microsoft\WindowsApps\python*.exe" -Force -ErrorAction SilentlyContinue
 
       - name: Install Qt
         uses: jurplel/install-qt-action@v4
@@ -112,7 +118,6 @@ jobs:
           arch: ${{ matrix.config.qt_arch }}
           dir: '${{ github.workspace }}/build/'
           modules: 'qtscript'
-          cached: ${{ steps.cache-qt.outputs.cache-hit }}
 
       - name: Configure
         working-directory: build
