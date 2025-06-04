@@ -17,6 +17,7 @@
 #include <QSizePolicy>
 #include <QSpinBox>
 #include <QStandardPaths>
+#include <QStringDecoder>
 #include <QVBoxLayout>
 
 GeneralConf::GeneralConf(QWidget* parent)
