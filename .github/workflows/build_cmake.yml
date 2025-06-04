@@ -39,6 +39,12 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
 
+      - name: Checkout Source code
+        if: github.event_name == 'workflow_dispatch'
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+
       - name: Install Dependencies
         run: |
           sudo apt-get -y -qq update
