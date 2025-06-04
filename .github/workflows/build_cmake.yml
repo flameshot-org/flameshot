@@ -86,46 +86,46 @@ jobs:
         # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
         run: ctest -C $BUILD_TYPE
 
-#   windows-build:
-#     runs-on: ${{ matrix.config.os }}
-#     strategy:
-#       fail-fast: false
-#       matrix:
-#         config:
-#         - {
-#             name: "Windows 2019 MSVC",
-#             artifact: "Windows-MSVC.tar.xz",
-#             os: windows-2019,
-#             cc: "cl", cxx: "cl",
-#             environment_script: "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars64.bat"
-#           }
-# 
-#     steps:
-#       - uses: actions/checkout@v4
-# 
-#       - name: Cache Qt
-#         id: cache-qt
-#         uses: actions/cache@v3
-#         with:
-#           path: ./build/Qt
-#           key: ${{ runner.os }}-QtCache
-# 
-#       - name: Install Qt
-#         uses: jurplel/install-qt-action@v4
-#         with:
-#           version: 5.15.2
-#           target:  desktop
-#           dir: '${{ github.workspace }}/build/'
-# 
-#       - name: Configure
-#         working-directory: build
-#         shell: powershell
-#         run: |
-#           cmake -DCMAKE_BUILD_TYPE=$env:BUILD_TYPE ../
-# 
-#       - name: Build
-#         working-directory: build
-#         shell: powershell
-#         run: |
-#           cmake --build . --config $env:BUILD_TYPE
-# 
+   windows-build:
+     runs-on: ${{ matrix.config.os }}
+     strategy:
+       fail-fast: false
+       matrix:
+         config:
+         - {
+             name: "Windows 2022 MSVC",
+             artifact: "Windows-MSVC.tar.xz",
+             os: windows-2025,
+             cc: "cl", cxx: "cl",
+             environment_script: "C:/Program Files/Microsoft Visual Studio/2022/Enterprise/VC/Auxiliary/Build/vcvars64.bat"
+           }
+ 
+     steps:
+       - uses: actions/checkout@v4
+ 
+       - name: Cache Qt
+         id: cache-qt
+         uses: actions/cache@v3
+         with:
+           path: ./build/Qt
+           key: ${{ runner.os }}-QtCache
+ 
+       - name: Install Qt
+         uses: jurplel/install-qt-action@v4
+         with:
+           version: 6.8.*
+           target:  desktop
+           dir: '${{ github.workspace }}/build/'
+ 
+       - name: Configure
+         working-directory: build
+         shell: powershell
+         run: |
+           cmake -DCMAKE_BUILD_TYPE=$env:BUILD_TYPE ../
+ 
+       - name: Build
+         working-directory: build
+         shell: powershell
+         run: |
+           cmake --build . --config $env:BUILD_TYPE
+ 
