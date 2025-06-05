@@ -14,7 +14,7 @@ if [[ "${APPLE_DEV_IDENTITY}" == "" ]]; then
   echo "WARNING: No credentials for signing found"
   echo "WARNING: dmg package won't be signed and notarized"
   echo "--> Start packaging process"
-  "$(brew --prefix qt5)/bin/macdeployqt" "${APP_NAME}.app" -dmg
+  "$(brew --prefix qt6)/bin/macdeployqt" "${APP_NAME}.app" -dmg
   echo "--> Update dmg package links"
   "./${HELPERS_SCRIPTS_PATH}/update_package.sh"
   exit 0
@@ -24,7 +24,7 @@ echo "--> Start application signing process"
 codesign --sign "${APPLE_DEV_IDENTITY}" --verbose --deep "${APP_NAME}.app"
 
 echo "--> Start packaging process"
-"$(brew --prefix qt5)/bin/macdeployqt" "${APP_NAME}.app" -dmg -sign-for-notarization="${APPLE_DEV_IDENTITY}"
+"$(brew --prefix qt6)/bin/macdeployqt" "${APP_NAME}.app" -dmg -sign-for-notarization="${APPLE_DEV_IDENTITY}"
 
 echo "--> Update dmg package links"
 "./${HELPERS_SCRIPTS_PATH}/update_package.sh"
