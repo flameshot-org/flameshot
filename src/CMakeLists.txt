@@ -82,9 +82,10 @@ if (WIN32)
     set_target_properties(flameshot-cli PROPERTIES OUTPUT_NAME "flameshot-cli")
     target_link_options(flameshot-cli PRIVATE /SUBSYSTEM:CONSOLE)
     set_property(TARGET flameshot PROPERTY WIN32_EXECUTABLE true)
-    if (MSVC)
-        target_compile_options(flameshot PRIVATE /source-charset:utf-8)
-    endif ()
+    # Getting error D8016 - /utf-8 automatically set by current cmake/msvc ?
+    #if (MSVC)
+    #    target_compile_options(flameshot PRIVATE /source-charset:utf-8)
+    #endif ()
 endif ()
 
 if(MSVC)
