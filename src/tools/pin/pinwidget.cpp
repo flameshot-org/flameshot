@@ -43,13 +43,16 @@ PinWidget::PinWidget(const QPixmap& pixmap,
     ConfigHandler conf;
     m_baseColor = conf.uiColor();
     m_hoverColor = conf.contrastUiColor();
+    const bool hideDropShadow = conf.pinHideDropShadow();
 
     m_layout->setContentsMargins(MARGIN, MARGIN, MARGIN, MARGIN);
 
     m_shadowEffect->setColor(m_baseColor);
     m_shadowEffect->setBlurRadius(BLUR_RADIUS);
     m_shadowEffect->setOffset(0, 0);
-    setGraphicsEffect(m_shadowEffect);
+    if (!hideDropShadow) {
+        setGraphicsEffect(m_shadowEffect);
+    }
     setWindowOpacity(m_opacity);
 
     m_label->setPixmap(m_pixmap);
