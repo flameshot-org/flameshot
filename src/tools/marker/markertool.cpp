@@ -48,7 +48,7 @@ CaptureTool* MarkerTool::copy(QObject* parent)
     return tool;
 }
 
-void MarkerTool::process(QPainter& painter, const QPixmap& pixmap)
+void MarkerTool::doProcess(QPainter& painter, const QPixmap& pixmap)
 {
     Q_UNUSED(pixmap)
     auto compositionMode = painter.compositionMode();

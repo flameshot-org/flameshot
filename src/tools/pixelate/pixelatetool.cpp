@@ -58,7 +58,7 @@ CaptureTool* PixelateTool::copy(QObject* parent)
  * as an input at all and hence can not be recovered.
  *
  */
-void PixelateTool::process(QPainter& painter, const QPixmap& pixmap)
+void PixelateTool::doProcess(QPainter& painter, const QPixmap& pixmap)
 {
     QRect selection = boundingRect().intersected(pixmap.rect());
     auto pixelRatio = pixmap.devicePixelRatio();

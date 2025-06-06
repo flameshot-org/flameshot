@@ -63,6 +63,11 @@ SidePanelWidget::SidePanelWidget(QPixmap* p, QWidget* parent)
     colorHBox->addWidget(m_colorLabel);
     colorLayout->addLayout(colorHBox, 2, 0);
 
+    // Create Add Drop Shadow
+    m_dropShadowCheck = new QCheckBox(tr("Add Drop Shadow"), this);
+    m_dropShadowCheck->setChecked(m_dropShadow);
+    colorLayout->addWidget(m_dropShadowCheck, 3, 0);
+
     m_layout->addLayout(colorLayout);
 
     m_colorWheel = new color_widgets::ColorWheel(this);
@@ -125,6 +130,8 @@ SidePanelWidget::SidePanelWidget(QPixmap* p, QWidget* parent)
             &color_widgets::ColorWheel::colorSelected,
             this,
             &SidePanelWidget::colorChanged);
+    // drop shadow sigslots
+    connect(m_dropShadowCheck, &QCheckBox::clicked, this, &SidePanelWidget::dropShadowChanged);
     // Grid feature
     connect(m_gridCheck, &QCheckBox::clicked, this, [=](bool b) {
         this->m_gridSizeSpin->setEnabled(b);
@@ -141,6 +148,12 @@ void SidePanelWidget::onColorChanged(const QColor& color)
     m_color = color;
     updateColorNoWheel(color);
     m_colorWheel->setColor(color);
+}
+
+void SidePanelWidget::onDropShadowChanged(bool enabled)
+{
+    m_dropShadow = enabled;
+    m_dropShadowCheck->setChecked(enabled);
 }
 
 void SidePanelWidget::onToolSizeChanged(int t)

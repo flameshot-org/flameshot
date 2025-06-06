@@ -39,7 +39,7 @@ CaptureTool* LineTool::copy(QObject* parent)
     return tool;
 }
 
-void LineTool::process(QPainter& painter, const QPixmap& pixmap)
+void LineTool::doProcess(QPainter& painter, const QPixmap& pixmap)
 {
     Q_UNUSED(pixmap)
     painter.setPen(QPen(color(), size()));

@@ -126,6 +126,7 @@ void AbstractTwoPointTool::paintMousePreview(QPainter& painter,
 void AbstractTwoPointTool::drawStart(const CaptureContext& context)
 {
     onColorChanged(context.color);
+    onDropShadowChanged(context.dropShadow);
     m_points.first = context.mousePos;
     m_points.second = context.mousePos;
     onSizeChanged(context.toolSize);
