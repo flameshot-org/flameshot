@@ -41,16 +41,8 @@ jobs:
         qt_target: [desktop]
         config:
           - {
-            arch: x86,
-            generator: "-G'Visual Studio 16 2022' -A Win32",
-            vcpkg_triplet: x86-windows,
-            qt_arch: win32_msvc2022,
-            qt_arch_install: msvc2022,
-            pak_arch: win32
-          }
-          - {
             arch: x64,
-            generator: "-G'Visual Studio 16 2022' -A x64",
+            generator: "-G'Visual Studio 17 2022' -A x64",
             vcpkg_triplet: x64-windows,
             qt_arch: win64_msvc2022_64,
             qt_arch_install: msvc2022_64,
