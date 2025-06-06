@@ -152,14 +152,14 @@ void PinWidget::mouseDoubleClickEvent(QMouseEvent*)
 
 void PinWidget::mousePressEvent(QMouseEvent* e)
 {
-    m_dragStart = e->globalPos();
-    m_offsetX = e->localPos().x() / width();
-    m_offsetY = e->localPos().y() / height();
+    m_dragStart = e->globalPosition();
+    m_offsetX = e->position().x() / width();
+    m_offsetY = e->position().y() / height();
 }
 
 void PinWidget::mouseMoveEvent(QMouseEvent* e)
 {
-    const QPoint delta = e->globalPos() - m_dragStart;
+    const QPointF delta = e->globalPosition() - m_dragStart;
     const int offsetW = width() * m_offsetX;
     const int offsetH = height() * m_offsetY;
     move(m_dragStart.x() + delta.x() - offsetW,
