@@ -240,17 +240,20 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
     if (m_config.hasError()) {
         m_configError = true;
     }
-    connect(ConfigHandler::getInstance(), &ConfigHandler::error, this, [=]() {
-        m_configError = true;
-        m_configErrorResolved = false;
-        OverlayMessage::instance()->update();
-    });
     connect(
-      ConfigHandler::getInstance(), &ConfigHandler::errorResolved, this, [=]() {
-          m_configError = false;
-          m_configErrorResolved = true;
+      ConfigHandler::getInstance(), &ConfigHandler::error, this, [=, this]() {
+          m_configError = true;
+          m_configErrorResolved = false;
           OverlayMessage::instance()->update();
       });
+    connect(ConfigHandler::getInstance(),
+            &ConfigHandler::errorResolved,
+            this,
+            [=, this]() {
+                m_configError = false;
+                m_configErrorResolved = true;
+                OverlayMessage::instance()->update();
+            });
 
     OverlayMessage::init(this,
                          QGuiAppCurrentScreen().currentScreen()->geometry());
@@ -333,7 +336,7 @@ void CaptureWidget::initButtons()
                 if (!shortcut.isNull()) {
                     auto shortcuts = newShortcut(shortcut, this, nullptr);
                     for (auto* sc : shortcuts) {
-                        connect(sc, &QShortcut::activated, this, [=]() {
+                        connect(sc, &QShortcut::activated, this, [=, this]() {
                             setState(b);
                         });
                     }

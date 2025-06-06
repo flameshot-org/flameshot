@@ -59,7 +59,8 @@ void UploadHistory::setEmptyMessage()
     auto* buttonEmpty = new QPushButton;
     buttonEmpty->setText(tr("Screenshots history is empty"));
     buttonEmpty->setMinimumSize(1, HISTORYPIXMAP_MAX_PREVIEW_HEIGHT);
-    connect(buttonEmpty, &QPushButton::clicked, this, [=]() { this->close(); });
+    connect(
+      buttonEmpty, &QPushButton::clicked, this, [=, this]() { this->close(); });
     ui->historyContainer->addWidget(buttonEmpty);
 }
 
@@ -85,7 +86,7 @@ void UploadHistory::addLine(const QString& path, const QString& fileName)
     auto* line = new UploadLineItem(
       this, pixmap, lastModified, url, fullFileName, unpackFileName);
 
-    connect(line, &UploadLineItem::requestedDeletion, this, [=]() {
+    connect(line, &UploadLineItem::requestedDeletion, this, [=, this]() {
         if (ui->historyContainer->count() <= 1) {
             setEmptyMessage();
         }

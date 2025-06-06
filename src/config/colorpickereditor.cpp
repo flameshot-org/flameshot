@@ -97,7 +97,7 @@ ColorPickerEditor::ColorPickerEditor(QWidget* parent)
     connect(m_colorWheel,
             &color_widgets::ColorWheel::colorSelected,
             this,
-            [=](QColor c) {
+            [=, this](QColor c) {
                 m_color = c;
                 m_colorInput->setText(m_color.name(QColor::HexRgb));
             });
