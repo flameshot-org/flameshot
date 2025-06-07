@@ -177,7 +177,7 @@ void AppLauncherWidget::searchChanged(const QString& text)
         m_filterList->show();
         m_filterList->clear();
         const QRegularExpression regexp(
-          QRegularExpression::wildcardToRegularExpression(text),
+          QRegularExpression::wildcardToRegularExpression("*" + text + "*"),
           QRegularExpression::CaseInsensitiveOption);
         QVector<DesktopAppData> apps;
 
