@@ -1067,7 +1067,7 @@ Bitte beseitige sie manuell in der Konfigurationsdatei.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="279"/>
         <source>Use the last region as the default selection for the next screenshot in GUI mode</source>
-        <translation>Letzte Region als Standardauswahl für den nächsten Screenshot im GUI-Modus verwenden</translation>
+        <translation>Letzte Region als Standardauswahl für den nächsten Screenshot verwenden</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="293"/>
