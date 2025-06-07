@@ -9,6 +9,7 @@
 #include "src/widgets/notificationwidget.h"
 #include <QBuffer>
 #include <QDesktopServices>
+#include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QNetworkAccessManager>
@@ -31,9 +32,9 @@ void ImgurUploader::handleReply(QNetworkReply* reply)
 {
     spinner()->deleteLater();
     m_currentImageName.clear();
+    QJsonDocument response = QJsonDocument::fromJson(reply->readAll());
+    QJsonObject json = response.object();
     if (reply->error() == QNetworkReply::NoError) {
-        QJsonDocument response = QJsonDocument::fromJson(reply->readAll());
-        QJsonObject json = response.object();
         QJsonObject data = json[QStringLiteral("data")].toObject();
         setImageURL(data[QStringLiteral("link")].toString());
 
@@ -54,7 +55,20 @@ void ImgurUploader::handleReply(QNetworkReply* reply)
 
         emit uploadOk(imageURL());
     } else {
-        setInfoLabelText(reply->errorString());
+        QString status;
+        if (json.contains(QStringLiteral("errors")) &&
+            json.value(QStringLiteral("errors")).isArray()) {
+            QJsonArray errorsArray =
+              json.value(QStringLiteral("errors")).toArray();
+            if (!errorsArray.isEmpty() && errorsArray.at(0).isObject()) {
+                QJsonObject errorObj = errorsArray.at(0).toObject();
+                status = errorObj.value(QStringLiteral("code")).toString() +
+                         " - " +
+                         errorObj.value(QStringLiteral("status")).toString();
+            }
+        }
+
+        setInfoLabelText(reply->errorString() + "\n" + status);
     }
     new QShortcut(Qt::Key_Escape, this, SLOT(close()));
 }
