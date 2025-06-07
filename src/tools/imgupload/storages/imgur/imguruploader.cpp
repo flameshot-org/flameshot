@@ -56,12 +56,15 @@ void ImgurUploader::handleReply(QNetworkReply* reply)
         emit uploadOk(imageURL());
     } else {
         QString status;
-        if (json.contains("errors") && json.value("errors").isArray()) {
-            QJsonArray errorsArray = json.value("errors").toArray();
+        if (json.contains(QStringLiteral("errors")) &&
+            json.value(QStringLiteral("errors")).isArray()) {
+            QJsonArray errorsArray =
+              json.value(QStringLiteral("errors")).toArray();
             if (!errorsArray.isEmpty() && errorsArray.at(0).isObject()) {
                 QJsonObject errorObj = errorsArray.at(0).toObject();
-                status = errorObj.value("code").toString() + " - " +
-                         errorObj.value("status").toString();
+                status = errorObj.value(QStringLiteral("code")).toString() +
+                         " - " +
+                         errorObj.value(QStringLiteral("status")).toString();
             }
         }
 
