@@ -1211,7 +1211,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="496"/>
         <source>Copy on double click</source>
-        <translation>Скопировать двойным нажатием кнопки мыши</translation>
+        <translation>Копировать двойным щелчком кнопки мыши</translation>
     </message>
     <message>
         <source>Enable Copy on Double Click</source>
@@ -1314,7 +1314,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="704"/>
         <source>Copy file path after save</source>
-        <translation>Скопировать путь к файлу после сохранения</translation>
+        <translation>Копировать путь к файлу после сохранения</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="705"/>
@@ -1370,22 +1370,22 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="794"/>
         <source>Milliseconds before geometry display hides; 0 means do not hide</source>
-        <translation>Время в миллисекундах до скрытия отображения геометрии; 0 — не скрывать</translation>
+        <translation>Время в миллисекундах до скрытия панели геометрии; 0 — не скрывать</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="797"/>
         <source>Set geometry display timeout (ms)</source>
-        <translation>Задать время отображения геометрии (мс)</translation>
+        <translation>Задать время показа панели геометрии (мс)</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="805"/>
         <source>Selection Geometry Display</source>
-        <translation>Отображение геометрии выделения</translation>
+        <translation>Панель геометрии выделения</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="812"/>
         <source>Display Location</source>
-        <translation>Расположение отображения</translation>
+        <translation>Расположение панели</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="815"/>
@@ -1430,7 +1430,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="864"/>
         <source>Reverse arrow</source>
-        <translation>Обратить стрелу</translation>
+        <translation>Обратить стрелку</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="865"/>
@@ -1876,7 +1876,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/invert/inverttool.cpp" line="25"/>
         <source>Invert</source>
-        <translation>Инвертировать</translation>
+        <translation>Инвертор</translation>
     </message>
     <message>
         <location filename="../../src/tools/invert/inverttool.cpp" line="35"/>
@@ -2002,7 +2002,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="36"/>
         <source>Set Pixelate as the paint tool.</source>
-        <translation>Сделать Pixelate инструментом рисования.</translation>
+        <translation>Сделать размытие инструментом рисования</translation>
     </message>
     <message>
         <source>Set Pixelate as the paint tool</source>
@@ -2098,7 +2098,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/main.cpp" line="203"/>
         <source>Open the capture launcher.</source>
-        <translation>Открыть программу запуска захвата.</translation>
+        <translation>Открыть средство запуска захвата.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="206"/>
@@ -2536,22 +2536,22 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="18"/>
         <source>Set Shortcut</source>
-        <translation>Установить горячую клавишу</translation>
+        <translation>Назначение сочетания клавиш</translation>
     </message>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="24"/>
         <source>Enter new shortcut to change </source>
-        <translation>Введите новую горячую клавишу </translation>
+        <translation>Введите новое сочетание для замены </translation>
     </message>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="38"/>
         <source>Press Esc to cancel or ⌘+Backspace to disable the keyboard shortcut.</source>
-        <translation>Нажмите Esc, чтобы отменить, или ⌘+Backspace, чтобы отключить сочетание клавиш.</translation>
+        <translation>Нажмите Esc для отмены или ⌘+Backspace для отключения сочетание клавиш.</translation>
     </message>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="42"/>
         <source>Press Esc to cancel or Backspace to disable the keyboard shortcut.</source>
-        <translation>Нажмите Esc, чтобы отменить, или Backspace, чтобы отключить сочетание клавиш.</translation>
+        <translation>Нажмите Esc для отмены или Backspace для отключения сочетание клавиш.</translation>
     </message>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="47"/>
@@ -2614,22 +2614,22 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="180"/>
         <source>Symmetrically decrease width by 2px</source>
-        <translation>Симметрично уменьшить ширину на 2 пикселя</translation>
+        <translation>Симметрично уменьшить ширину на 2 пикс</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="182"/>
         <source>Symmetrically increase width by 2px</source>
-        <translation>Симметрично увеличить ширину на 2 пикселя</translation>
+        <translation>Симметрично увеличить ширину на 2 пикс</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="184"/>
         <source>Symmetrically increase height by 2px</source>
-        <translation>Симметрично увеличить высоту на 2 пикселя</translation>
+        <translation>Симметрично увеличить высоту на 2 пикс</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="186"/>
         <source>Symmetrically decrease height by 2px</source>
-        <translation>Симметрично уменьшить высоту на 2 пикселя</translation>
+        <translation>Симметрично уменьшить высоту на 2 пикс</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="187"/>
@@ -2718,7 +2718,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="85"/>
         <source>Display grid</source>
-        <translation>Сетка экрана</translation>
+        <translation>Сетка дисплея</translation>
     </message>
 </context>
 <context>
@@ -2954,7 +2954,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="133"/>
         <source>Check for updates</source>
-        <translation>Проверка обновлений</translation>
+        <translation>Проверить обновления</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="144"/>
