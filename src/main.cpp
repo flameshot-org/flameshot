@@ -83,7 +83,11 @@ QTranslator translator, qtTranslator;
 void configureApp(bool gui)
 {
     if (gui) {
+#if defined(Q_OS_WIN) && QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
+        QApplication::setStyle("Fusion"); // Supports dark scheme on Win 10/11
+#else
         QApplication::setStyle(new StyleOverride);
+#endif
     }
 
     // Configure translations
