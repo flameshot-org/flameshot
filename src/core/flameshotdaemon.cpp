@@ -12,6 +12,7 @@
 #include <QClipboard>
 #include <QDBusConnection>
 #include <QDBusMessage>
+#include <QLayout>
 #include <QPixmap>
 #include <QRect>
 
@@ -267,6 +268,59 @@ void FlameshotDaemon::attachPin(const QPixmap& pixmap, QRect geometry)
 
     pinWidget->show();
     pinWidget->activateWindow();
+}
+
+/**
+ * @brief Initiate a new pin capture to replace `existing`.
+ *
+ * Starts a new screenshot capture with the selection region initialized to be
+ * the same as `existing`. When it is completed the selection will be pinned and
+ * the previous pin (the `existing` argument) will be closed.
+ */
+void FlameshotDaemon::editPin(PinWidget& existing)
+{
+    CaptureRequest req(CaptureRequest::GRAPHICAL_MODE);
+    req.addTask(CaptureRequest::PIN);
+    QRect contentsRect =
+      existing.geometry() - existing.layout()->contentsMargins();
+    req.setInitialSelection(contentsRect);
+
+    Flameshot* flameshot = Flameshot::instance();
+    flameshot->gui(req);
+
+    // Connect to signals emitted when a capture (hopefully the one we just
+    // initiated!) is finished, both when it succeeds and when it is aborted.
+    auto successConn = std::make_shared<QMetaObject::Connection>();
+    auto failureConn = std::make_shared<QMetaObject::Connection>();
+    auto destroyedConn = std::make_shared<QMetaObject::Connection>();
+    auto closePinConn = std::make_shared<QMetaObject::Connection>();
+
+    auto disconnectAll =
+      [successConn, failureConn, destroyedConn, closePinConn]() {
+          QObject::disconnect(*successConn);
+          QObject::disconnect(*failureConn);
+          QObject::disconnect(*destroyedConn);
+          QObject::disconnect(*closePinConn);
+      };
+
+    // Close the existing pin on success ...
+    *closePinConn = QObject::connect(
+      flameshot, &Flameshot::captureTaken, [&existing]() { existing.close(); });
+
+    // ... except if it already got closed somehow.
+    *destroyedConn =
+      QObject::connect(&existing, &PinWidget::destroyed, [closePinConn]() {
+          QObject::disconnect(*closePinConn);
+      });
+
+    // And disconnect all the signals on either success or failure so we don't
+    // try to do something when the next screenshot is taken.
+    // It's important successConn is connected after closePinConn, because we
+    // want the pin to be closed before we clean up the signals.
+    *successConn =
+      QObject::connect(flameshot, &Flameshot::captureTaken, disconnectAll);
+    *failureConn =
+      QObject::connect(flameshot, &Flameshot::captureFailed, disconnectAll);
 }
 
 void FlameshotDaemon::attachScreenshotToClipboard(const QPixmap& pixmap)
