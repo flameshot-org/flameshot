@@ -4,7 +4,7 @@
 #include "winlnkfileparse.h"
 #include <QDir>
 #include <QDirIterator>
-#include <QFileSystemModel>
+#include <QFileIconProvider>
 #include <QImageWriter>
 #include <QRegularExpression>
 #include <QSettings>
@@ -36,11 +36,8 @@ DesktopAppData WinLnkFileParser::parseLnkFile(const QFileInfo& fiLnk,
 
     res.name = fiLnk.baseName();
     res.exec = fiSymlink.absoluteFilePath();
-
-    // Get icon from exe
-    QFileSystemModel* model = new QFileSystemModel;
-    model->setRootPath(fiSymlink.path());
-    res.icon = model->fileIcon(model->index(fiSymlink.filePath()));
+    static QFileIconProvider provider;
+    res.icon = provider.icon(QFileInfo(fiSymlink.filePath()));
 
     if (m_GraphicAppsList.contains(fiSymlink.fileName())) {
         res.categories = QStringList() << "Graphics";
