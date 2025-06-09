@@ -47,7 +47,7 @@ CaptureTool* InvertTool::copy(QObject* parent)
     return tool;
 }
 
-void InvertTool::doProcess(QPainter& painter, const QPixmap& pixmap)
+void InvertTool::process(QPainter& painter, const QPixmap& pixmap)
 {
     QRect selection = boundingRect().intersected(pixmap.rect());
     auto pixelRatio = pixmap.devicePixelRatio();

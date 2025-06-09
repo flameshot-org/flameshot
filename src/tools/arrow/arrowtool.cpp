@@ -147,7 +147,7 @@ void ArrowTool::copyParams(const ArrowTool* from, ArrowTool* to)
     to->m_arrowPath = this->m_arrowPath;
 }
 
-void ArrowTool::doProcess(QPainter& painter, const QPixmap& pixmap)
+void ArrowTool::process(QPainter& painter, const QPixmap& pixmap)
 {
     bool isArrowReversed = ConfigHandler().reverseArrow();
 

@@ -674,7 +674,7 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
     }
 
     if (m_activeTool && m_mouseIsClicked) {
-        m_activeTool->process(painter, m_context.screenshot);
+        m_activeTool->doProcess(painter, m_context.screenshot);
     } else if (m_previewEnabled && activeButtonTool() &&
                m_activeButton->tool()->showMousePreview()) {
         m_activeButton->tool()->paintMousePreview(painter, m_context);
@@ -1813,7 +1813,7 @@ void CaptureWidget::processPixmapWithTool(QPixmap* pixmap, CaptureTool* tool)
 {
     QPainter painter(pixmap);
     painter.setRenderHint(QPainter::Antialiasing);
-    tool->process(painter, *pixmap);
+    tool->doProcess(painter, *pixmap);
 }
 
 CaptureTool* CaptureWidget::activeButtonTool() const

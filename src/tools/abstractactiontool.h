@@ -16,7 +16,7 @@ public:
     bool showMousePreview() const override;
     QRect boundingRect() const override;
 
-    void doProcess(QPainter& painter, const QPixmap& pixmap) override;
+    void process(QPainter& painter, const QPixmap& pixmap) override;
     void paintMousePreview(QPainter& painter,
                            const CaptureContext& context) override;
 

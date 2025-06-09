@@ -35,7 +35,7 @@ CaptureTool* PencilTool::copy(QObject* parent)
     return tool;
 }
 
-void PencilTool::doProcess(QPainter& painter, const QPixmap& pixmap)
+void PencilTool::process(QPainter& painter, const QPixmap& pixmap)
 {
     Q_UNUSED(pixmap)
     painter.setPen(QPen(m_color, size()));
@@ -52,7 +52,6 @@ void PencilTool::paintMousePreview(QPainter& painter,
 void PencilTool::drawStart(const CaptureContext& context)
 {
     m_color = context.color;
-    onDropShadowChanged(context.dropShadow);
     onSizeChanged(context.toolSize);
     m_points.append(context.mousePos);
     m_pathArea.setTopLeft(context.mousePos);

@@ -42,7 +42,7 @@ CaptureTool* SelectionTool::copy(QObject* parent)
     return tool;
 }
 
-void SelectionTool::doProcess(QPainter& painter, const QPixmap& pixmap)
+void SelectionTool::process(QPainter& painter, const QPixmap& pixmap)
 {
     Q_UNUSED(pixmap)
     painter.setPen(

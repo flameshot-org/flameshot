@@ -106,15 +106,6 @@ QWidget* TextTool::widget()
     m_widget->setFont(m_font);
     m_widget->setAlignment(m_alignment);
     m_widget->setText(m_text);
-
-    if (dropShadowEnabled()) {
-        QGraphicsDropShadowEffect* shadowEffect = new QGraphicsDropShadowEffect;
-        shadowEffect->setBlurRadius(10.0);
-        shadowEffect->setOffset(3, 3);
-        shadowEffect->setColor(QColor(0, 0, 0, 128));
-        m_widget->setGraphicsEffect(shadowEffect);
-    }
-
     m_widget->selectAll();
     connect(m_widget, &TextWidget::textUpdated, this, &TextTool::updateText);
     return m_widget;
@@ -202,7 +193,7 @@ CaptureTool* TextTool::copy(QObject* parent)
     return textTool;
 }
 
-void TextTool::doProcess(QPainter& painter, const QPixmap& pixmap)
+void TextTool::process(QPainter& painter, const QPixmap& pixmap)
 {
     Q_UNUSED(pixmap)
     if (m_text.isEmpty()) {
@@ -260,7 +251,6 @@ void TextTool::drawStart(const CaptureContext& context)
 {
     m_color = context.color;
     m_size = context.toolSize;
-    onDropShadowChanged(context.dropShadow);
     emit requestAction(REQ_ADD_CHILD_WIDGET);
 }
 

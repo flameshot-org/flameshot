@@ -145,15 +145,15 @@ public:
     virtual void setDropShadowEnabled(bool enabled) { m_dropShadowEnabled = enabled; }
     virtual bool dropShadowEnabled() const { return m_dropShadowEnabled; }
 
-    virtual void doProcess(QPainter& painter, const QPixmap& pixmap) = 0;
+    virtual void process(QPainter& painter, const QPixmap& pixmap) = 0;
 
     // Called every time the tool has to draw
-    void process(QPainter& painter, const QPixmap& pixmap)
+    void doProcess(QPainter& painter, const QPixmap& pixmap)
     {
         if (dropShadowEnabled()) {
-            drawDropShadow(painter, pixmap, [this](QPainter& p, const QPixmap m) { this->doProcess(p, m); });
+            drawDropShadow(painter, pixmap, [this](QPainter& p, const QPixmap m) { this->process(p, m); });
         } else {
-            doProcess(painter, pixmap);
+            process(painter, pixmap);
         }
     }
     virtual void drawSearchArea(QPainter& painter, const QPixmap& pixmap)

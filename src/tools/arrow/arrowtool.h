@@ -19,7 +19,7 @@ public:
     QRect boundingRect() const override;
 
     CaptureTool* copy(QObject* parent = nullptr) override;
-    void doProcess(QPainter& painter, const QPixmap& pixmap) override;
+    void process(QPainter& painter, const QPixmap& pixmap) override;
 
 protected:
     void copyParams(const ArrowTool* from, ArrowTool* to);

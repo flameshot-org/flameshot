@@ -93,7 +93,7 @@ CaptureTool* CircleCountTool::copy(QObject* parent)
     return tool;
 }
 
-void CircleCountTool::doProcess(QPainter& painter, const QPixmap& pixmap)
+void CircleCountTool::process(QPainter& painter, const QPixmap& pixmap)
 {
     Q_UNUSED(pixmap)
     // save current pen, brush, and font state
