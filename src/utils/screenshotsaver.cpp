@@ -260,8 +260,8 @@ bool saveToFilesystemGUI(const QPixmap& capture)
     }
 
     if (okay) {
-        QString pathNoFile =
-          savePath.left(savePath.lastIndexOf(QDir::separator()));
+        // Don't use QDir::separator() here, as Qt internally always uses '/'
+        QString pathNoFile = savePath.left(savePath.lastIndexOf('/'));
 
         ConfigHandler().setSavePath(pathNoFile);
 
