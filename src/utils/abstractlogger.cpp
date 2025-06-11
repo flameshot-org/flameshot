@@ -52,7 +52,7 @@ AbstractLogger& AbstractLogger::sendMessage(const QString& msg, Channel channel)
           msg, messageHeader(channel, Notification), m_notificationPath);
     }
     if (!m_textStreams.isEmpty()) {
-        foreach (auto* stream, m_textStreams) {
+        for (auto* stream : m_textStreams) {
             *stream << messageHeader(channel, String) << msg << "\n";
         }
     }

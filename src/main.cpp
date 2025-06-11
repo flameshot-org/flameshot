@@ -33,36 +33,6 @@
 #include <desktopinfo.h>
 #endif
 
-#ifdef Q_OS_LINUX
-// source: https://github.com/ksnip/ksnip/issues/416
-void wayland_hacks()
-{
-    int suffixIndex;
-    DesktopInfo info;
-
-    const char* qt_version = qVersion();
-
-    QVersionNumber targetVersion(5, 15, 2);
-    QString string(qt_version);
-    QVersionNumber currentVersion =
-      QVersionNumber::fromString(string, &suffixIndex);
-
-    if (currentVersion < targetVersion) {
-        if (info.windowManager() == DesktopInfo::GNOME) {
-            qWarning()
-              << "Qt versions lower than" << targetVersion.toString()
-              << "on GNOME using Wayland have a bug when accessing the "
-                 "clipboard."
-              << "Your version is" << currentVersion.toString()
-              << "so we're forcing QT_QPA_PLATFORM to 'xcb'."
-              << "To use native Wayland, please upgrade your Qt version to"
-              << targetVersion.toString() << "or higher";
-            qputenv("QT_QPA_PLATFORM", "xcb");
-        }
-    }
-}
-#endif
-
 int requestCaptureAndWait(const CaptureRequest& req)
 {
     Flameshot* flameshot = Flameshot::instance();
@@ -113,7 +83,11 @@ QTranslator translator, qtTranslator;
 void configureApp(bool gui)
 {
     if (gui) {
+#if defined(Q_OS_WIN) && QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
+        QApplication::setStyle("Fusion"); // Supports dark scheme on Win 10/11
+#else
         QApplication::setStyle(new StyleOverride);
+#endif
     }
 
     // Configure translations
@@ -130,7 +104,7 @@ void configureApp(bool gui)
     qtTranslator.load(QLocale::system(),
                       "qt",
                       "_",
-                      QLibraryInfo::location(QLibraryInfo::TranslationsPath));
+                      QLibraryInfo::path(QLibraryInfo::TranslationsPath));
 
     auto app = QCoreApplication::instance();
     app->installTranslator(&translator);
@@ -149,24 +123,18 @@ void reinitializeAsQApplication(int& argc, char* argv[])
 
 int main(int argc, char* argv[])
 {
-#ifdef Q_OS_LINUX
-    wayland_hacks();
-#endif
-
-    // required for the button serialization
-    // TODO: change to QVector in v1.0
-    qRegisterMetaTypeStreamOperators<QList<int>>("QList<int>");
     QCoreApplication::setApplicationVersion(APP_VERSION);
     QCoreApplication::setApplicationName(QStringLiteral("flameshot"));
     QCoreApplication::setOrganizationName(QStringLiteral("flameshot"));
 
     // no arguments, just launch Flameshot
     if (argc == 1) {
-#ifndef USE_EXTERNAL_SINGLEAPPLICATION
-        SingleApplication app(argc, argv);
-#else
-        QtSingleApplication app(argc, argv);
-#endif
+        //  #ifndef USE_EXTERNAL_SINGLEAPPLICATION
+        //          SingleApplication app(argc, argv);
+        //  #else
+        //          QtSingleApplication app(argc, argv);
+        //  #endif
+        QApplication app(argc, argv);
         configureApp(true);
         auto c = Flameshot::instance();
         FlameshotDaemon::start();

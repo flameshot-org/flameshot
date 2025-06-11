@@ -60,7 +60,7 @@ const QList<QString>& History::history()
     int cnt = 0;
     int max = ConfigHandler().uploadHistoryMax();
     m_thumbs.clear();
-    foreach (QString fileName, images) {
+    for (const auto& fileName : images) {
         if (++cnt <= max) {
             m_thumbs.append(fileName);
         } else {
