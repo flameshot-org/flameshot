@@ -16,7 +16,7 @@ public:
 
     bool nativeEventFilter(const QByteArray& eventType,
                            void* message,
-                           long* result);
+                           qintptr* result);
 
 signals:
     void printPressed();

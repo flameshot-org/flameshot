@@ -25,7 +25,7 @@ struct WinLnkFileParser
     WinLnkFileParser();
     DesktopAppData parseLnkFile(const QFileInfo& fiLnk, bool& ok) const;
     int processDirectory(const QDir& dir);
-    QString getAllUsersStartMenuPath();
+    static QString getAllUsersStartMenuPath();
 
     QVector<DesktopAppData> getAppsByCategory(const QString& category);
     QMap<QString, QVector<DesktopAppData>> getAppsByCategory(

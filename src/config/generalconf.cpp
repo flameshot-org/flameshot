@@ -17,7 +17,7 @@
 #include <QSizePolicy>
 #include <QSpinBox>
 #include <QStandardPaths>
-#include <QTextCodec>
+#include <QStringDecoder>
 #include <QVBoxLayout>
 
 GeneralConf::GeneralConf(QWidget* parent)
@@ -188,12 +188,12 @@ void GeneralConf::importConfiguration()
         return;
     }
     QFile file(fileName);
-    QTextCodec* codec = QTextCodec::codecForLocale();
     if (!file.open(QFile::ReadOnly)) {
         QMessageBox::about(this, tr("Error"), tr("Unable to read file."));
         return;
     }
-    QString text = codec->toUnicode(file.readAll());
+    QStringDecoder decoder(QStringDecoder::System);
+    QString text = decoder(file.readAll());
     file.close();
 
     QFile config(ConfigHandler().configFilePath());
@@ -201,7 +201,8 @@ void GeneralConf::importConfiguration()
         QMessageBox::about(this, tr("Error"), tr("Unable to write file."));
         return;
     }
-    config.write(codec->fromUnicode(text));
+    QStringEncoder encoder(QStringEncoder::System);
+    config.write(encoder(text));
     config.close();
 }
 
@@ -566,7 +567,7 @@ void GeneralConf::initSaveAfterCopy()
     m_setSaveAsFileExtension = new QComboBox(this);
 
     QStringList imageFormatList;
-    foreach (auto mimeType, QImageWriter::supportedImageFormats())
+    for (const auto& mimeType : QImageWriter::supportedImageFormats())
         imageFormatList.append(mimeType);
 
     m_setSaveAsFileExtension->addItems(imageFormatList);

@@ -7,7 +7,7 @@
 
 int GlobalValues::buttonBaseSize()
 {
-    return QApplication::fontMetrics().lineSpacing() * 2.2;
+    return QFontMetrics(qApp->font()).lineSpacing() * 2.2;
 }
 
 QString GlobalValues::versionInfo()

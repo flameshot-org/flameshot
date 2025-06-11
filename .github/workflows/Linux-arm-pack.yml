@@ -1,15 +1,15 @@
 name: Packaging(Linux - ARM)
 
 on:
-  push:
-    branches:
-      - master
-      - fix*
-      - move-arm-ci-to-new-ci
-    paths-ignore:
-      - 'README.md'
-      - 'LICENSE'
-      - 'docs/**'
+  #push:
+  #  branches:
+  #    - master
+  #    - fix*
+  #    - move-arm-ci-to-new-ci
+  #  paths-ignore:
+  #    - 'README.md'
+  #    - 'LICENSE'
+  #    - 'docs/**'
   
   workflow_dispatch:
 

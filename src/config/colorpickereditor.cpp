@@ -97,7 +97,7 @@ ColorPickerEditor::ColorPickerEditor(QWidget* parent)
     connect(m_colorWheel,
             &color_widgets::ColorWheel::colorSelected,
             this,
-            [=](QColor c) {
+            [=, this](QColor c) {
                 m_color = c;
                 m_colorInput->setText(m_color.name(QColor::HexRgb));
             });
@@ -170,7 +170,11 @@ void ColorPickerEditor::updatePreset()
 
 void ColorPickerEditor::onAddPreset()
 {
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
     if (QColor::isValidColor(m_colorInput->text())) {
+#else
+    if (QColor::isValidColorName(m_colorInput->text())) {
+#endif
         m_color = QColor(m_colorInput->text());
         m_colorInput->setText(m_color.name(QColor::HexRgb));
     } else {
@@ -196,7 +200,11 @@ void ColorPickerEditor::onDeletePreset()
 
 void ColorPickerEditor::onUpdatePreset()
 {
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
     if (QColor::isValidColor(m_colorEdit->text())) {
+#else
+    if (QColor::isValidColorName(m_colorEdit->text())) {
+#endif
         QColor c = QColor(m_colorEdit->text());
         m_colorEdit->setText(c.name(QColor::HexRgb));
     } else {

@@ -19,7 +19,7 @@ UIcolorEditor::UIcolorEditor(QWidget* parent)
     m_hLayout = new QHBoxLayout;
     m_vLayout = new QVBoxLayout;
 
-    const int space = QApplication::fontMetrics().lineSpacing();
+    const int space = QFontMetrics(qApp->font()).lineSpacing();
     m_hLayout->addItem(new QSpacerItem(space, space, QSizePolicy::Expanding));
     m_vLayout->setAlignment(Qt::AlignVCenter);
 

@@ -12,6 +12,7 @@
 #include <QClipboard>
 #include <QDBusConnection>
 #include <QDBusMessage>
+#include <QIODevice>
 #include <QPixmap>
 #include <QRect>
 
@@ -260,7 +261,7 @@ void FlameshotDaemon::attachPin(const QPixmap& pixmap, QRect geometry)
 {
     auto* pinWidget = new PinWidget(pixmap, geometry);
     m_widgets.append(pinWidget);
-    connect(pinWidget, &QObject::destroyed, this, [=]() {
+    connect(pinWidget, &QObject::destroyed, this, [=, this]() {
         m_widgets.removeOne(pinWidget);
         quitIfIdle();
     });

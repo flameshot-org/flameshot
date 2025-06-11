@@ -22,6 +22,6 @@ protected:
 private:
     bool m_isPressing = false;
     bool m_isDragging = false;
-    QPoint m_mouseMovePos;
-    QPoint m_mousePressPos;
+    QPointF m_mouseMovePos;
+    QPointF m_mousePressPos;
 };

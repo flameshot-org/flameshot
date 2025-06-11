@@ -6,7 +6,6 @@
 #include "uploadlineitem.h"
 
 #include <QDateTime>
-#include <QDesktopWidget>
 #include <QFileInfo>
 #include <QPixmap>
 
@@ -37,7 +36,6 @@ UploadHistory::UploadHistory(QWidget* parent)
     setAttribute(Qt::WA_DeleteOnClose);
 
     setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
-    resize(QDesktopWidget().availableGeometry(this).size() * 0.5);
 }
 
 void UploadHistory::loadHistory()
@@ -50,7 +48,7 @@ void UploadHistory::loadHistory()
     if (historyFiles.isEmpty()) {
         setEmptyMessage();
     } else {
-        foreach (QString fileName, historyFiles) {
+        for (const auto& fileName : historyFiles) {
             addLine(history.path(), fileName);
         }
     }
@@ -61,7 +59,8 @@ void UploadHistory::setEmptyMessage()
     auto* buttonEmpty = new QPushButton;
     buttonEmpty->setText(tr("Screenshots history is empty"));
     buttonEmpty->setMinimumSize(1, HISTORYPIXMAP_MAX_PREVIEW_HEIGHT);
-    connect(buttonEmpty, &QPushButton::clicked, this, [=]() { this->close(); });
+    connect(
+      buttonEmpty, &QPushButton::clicked, this, [=, this]() { this->close(); });
     ui->historyContainer->addWidget(buttonEmpty);
 }
 
@@ -87,7 +86,7 @@ void UploadHistory::addLine(const QString& path, const QString& fileName)
     auto* line = new UploadLineItem(
       this, pixmap, lastModified, url, fullFileName, unpackFileName);
 
-    connect(line, &UploadLineItem::requestedDeletion, this, [=]() {
+    connect(line, &UploadLineItem::requestedDeletion, this, [=, this]() {
         if (ui->historyContainer->count() <= 1) {
             setEmptyMessage();
         }

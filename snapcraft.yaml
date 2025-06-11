@@ -2,7 +2,7 @@
 
 name: flameshot
 adopt-info: flameshot
-base: core22
+base: core24
 summary: Powerful yet simple to use screenshot software
 description: |
   A powerful open source screenshot and annotation tool for Linux, Flameshot
@@ -13,34 +13,43 @@ description: |
 grade: stable
 confinement: strict
 compression: lzo
-architectures:
-  - build-on: amd64
+platforms:
+  amd64:
+    build-on: amd64
+    build-for: amd64
+
 
 apps:
   flameshot:
     command: usr/bin/flameshot
     desktop: usr/share/applications/org.flameshot.Flameshot.desktop
     extensions:
-      - kde-neon
+      - kde-neon-6
     environment:
-      DISABLE_WAYLAND: 1
       XDG_DATA_DIRS: $SNAP/share:$XDG_DATA_DIRS
+      QT_QPA_PLATFORM: wayland
       QT_QPA_PLATFORMTHEME: gtk3
     slots: [dbus-flameshot]
     plugs:
       - home
+      - desktop
+      - wayland
+      - gsettings
       - removable-media
       - network
       - network-bind
 
 parts:
   flameshot:
+    #source: ./
     source: https://github.com/flameshot-org/flameshot.git
     plugin: cmake
+    build-packages:
+      - git
     cmake-parameters:
-       - -DFLAMESHOT_ICON=/snap/flameshot/current/usr/share/icons/hicolor/scalable/apps/flameshot.svg
-       - -DCMAKE_INSTALL_PREFIX=/usr
-       - -DUSE_WAYLAND_CLIPBOARD=1
+      - -DFLAMESHOT_ICON=/snap/flameshot/current/usr/share/icons/hicolor/scalable/apps/flameshot.svg
+      - -DCMAKE_INSTALL_PREFIX=/usr
+      - -DUSE_WAYLAND_CLIPBOARD=1
     source-type: git
     override-pull: |
       craftctl default
