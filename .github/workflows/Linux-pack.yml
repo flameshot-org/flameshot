@@ -428,8 +428,8 @@ jobs:
           overwrite: true
 
   snap-pack:
-    name: Build snap on ubuntu 24.04
-    runs-on: ubuntu-24.04
+    name: Build snap on ubuntu latest
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout Source code
         if: github.event_name == 'push'
