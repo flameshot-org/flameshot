@@ -459,8 +459,7 @@ jobs:
       - name: Packaging snap
         uses: snapcore/action-build@v1
         id: snapcraft
-        with: 
-          snapcraft-args: --enable-experimental-extensions
+
       - name: Rename snap name
         shell: bash
         run: |
