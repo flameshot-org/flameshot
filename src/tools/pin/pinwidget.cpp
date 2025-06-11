@@ -3,6 +3,7 @@
 #include <QGraphicsDropShadowEffect>
 #include <QGraphicsOpacityEffect>
 #include <QPinchGesture>
+#include <QWindow>
 
 #include "pinwidget.h"
 #include "qguiappcurrentscreen.h"
@@ -34,12 +35,11 @@ PinWidget::PinWidget(const QPixmap& pixmap,
   , m_shadowEffect(new QGraphicsDropShadowEffect(this))
 {
     setWindowIcon(QIcon(GlobalValues::iconPath()));
-    setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint);
+    setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint |
+                   Qt::Dialog);
     setFocusPolicy(Qt::StrongFocus);
-    // set the bottom widget background transparent
     setAttribute(Qt::WA_TranslucentBackground);
     setAttribute(Qt::WA_DeleteOnClose);
-    setWindowTitle("flameshot-pin");
     ConfigHandler conf;
     m_baseColor = conf.uiColor();
     m_hoverColor = conf.contrastUiColor();
@@ -69,10 +69,6 @@ PinWidget::PinWidget(const QPixmap& pixmap,
       static_cast<int>(static_cast<double>(MARGIN) * devicePixelRatio);
     QRect adjusted_pos = geometry + QMargins(margin, margin, margin, margin);
     setGeometry(adjusted_pos);
-#if defined(Q_OS_LINUX)
-    setWindowFlags(Qt::X11BypassWindowManagerHint);
-#endif
-
 #if defined(Q_OS_MACOS) || defined(Q_OS_LINUX)
     if (currentScreen != nullptr) {
         QPoint topLeft = currentScreen->geometry().topLeft();
@@ -155,16 +151,13 @@ void PinWidget::mousePressEvent(QMouseEvent* e)
     m_dragStart = e->globalPosition();
     m_offsetX = e->position().x() / width();
     m_offsetY = e->position().y() / height();
+    if (QWindow* window = windowHandle(); window != nullptr) {
+        window->startSystemMove();
+        return;
+    }
 }
 
-void PinWidget::mouseMoveEvent(QMouseEvent* e)
-{
-    const QPointF delta = e->globalPosition() - m_dragStart;
-    const int offsetW = width() * m_offsetX;
-    const int offsetH = height() * m_offsetY;
-    move(m_dragStart.x() + delta.x() - offsetW,
-         m_dragStart.y() + delta.y() - offsetH);
-}
+void PinWidget::mouseMoveEvent(QMouseEvent* e) {}
 
 void PinWidget::keyPressEvent(QKeyEvent* event)
 {
