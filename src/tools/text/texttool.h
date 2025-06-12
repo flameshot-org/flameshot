@@ -67,6 +67,7 @@ private slots:
 
 private:
     void closeEditor();
+    void drawDropShadow(QPainter& painter, const QPixmap& pixmap) override;
 
     QFont m_font;
     Qt::AlignmentFlag m_alignment;

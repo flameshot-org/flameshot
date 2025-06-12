@@ -109,8 +109,8 @@ QWidget* TextTool::widget()
     m_widget->setText(m_text);
     if (dropShadowEnabled()) {
         QGraphicsDropShadowEffect* shadowEffect = new QGraphicsDropShadowEffect;
-        shadowEffect->setBlurRadius(10.0);
-        shadowEffect->setOffset(3, 3);
+        shadowEffect->setBlurRadius(3.0);
+        shadowEffect->setOffset(2, 2);
         shadowEffect->setColor(QColor(0, 0, 0, 128));
         m_widget->setGraphicsEffect(shadowEffect);
     }
@@ -363,4 +363,22 @@ void TextTool::setEditMode(bool editMode)
 bool TextTool::isChanged()
 {
     return QString::compare(m_text, m_textOld, Qt::CaseInsensitive) != 0;
+}
+
+void TextTool::drawDropShadow(QPainter& painter, const QPixmap& pixmap)
+{
+    const QColor originalColor = m_color;
+    const QColor shadowColor = QColor(0, 0, 0, 80);
+    onColorChanged(shadowColor);
+
+    qreal start = 0.5;
+    qreal step = size() < 10 ? 0.2 : 0.4;
+    qreal end  = size() < 10 ? 1.0 : 2.0;
+    for (qreal var = start; var < end; var += step) {
+        painter.translate(var, var);
+        process(painter, pixmap);
+    }
+
+    painter.resetTransform();
+    onColorChanged(originalColor);
 }

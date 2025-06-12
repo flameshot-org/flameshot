@@ -30,6 +30,7 @@ public slots:
 protected:
     void copyParams(const AbstractPathTool* from, AbstractPathTool* to);
     void addPoint(const QPoint& point);
+    void drawDropShadow(QPainter& painter, const QPixmap& pixmap) override;
 
     // class members
     QRect m_pathArea;

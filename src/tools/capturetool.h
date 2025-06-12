@@ -8,10 +8,6 @@
 #include "src/utils/pathinfo.h"
 #include <QIcon>
 #include <QPainter>
-#include <qgraphicseffect.h>
-#include <qgraphicsitem.h>
-#include <qgraphicsscene.h>
-#include <qpainterpath.h>
 
 class CaptureTool : public QObject
 {
@@ -151,11 +147,10 @@ public:
     void doProcess(QPainter& painter, const QPixmap& pixmap)
     {
         if (dropShadowEnabled()) {
-            drawDropShadow(painter, pixmap, [this](QPainter& p, const QPixmap m) { this->process(p, m); });
-        } else {
-            process(painter, pixmap);
+            drawDropShadow(painter, pixmap);
         }
-    }
+        process(painter, pixmap);
+    };
     virtual void drawSearchArea(QPainter& painter, const QPixmap& pixmap)
     {
         process(painter, pixmap);
@@ -197,42 +192,7 @@ protected:
         painter.drawRect(rect);
         painter.setPen(orig_pen);
     }
-
-    void drawDropShadow(QPainter& painter,
-                          const QPixmap& pixmap,
-                          std::function<void(QPainter&, const QPixmap&)> drawFunc,
-                          int offset = 3,
-                          QColor shadowColor = QColor(0, 0, 0, 128),
-                          qreal blurRadius = 10.0)
-    {
-        QSize size(painter.device()->width(), painter.device()->height());
-        QPixmap shapePixmap(size);
-        shapePixmap.fill(Qt::transparent);
-
-        // Draw the shape into an offscreen pixmap
-        QPainter shapePainter(&shapePixmap);
-        shapePainter.setRenderHint(QPainter::Antialiasing);
-        drawFunc(shapePainter, pixmap);
-        shapePainter.end();
-
-        // Create a pixmap item and apply the drop shadow effect
-        QGraphicsPixmapItem* item = new QGraphicsPixmapItem(shapePixmap);
-        QGraphicsDropShadowEffect* shadowEffect = new QGraphicsDropShadowEffect;
-        shadowEffect->setBlurRadius(blurRadius);
-        shadowEffect->setOffset(offset, offset);
-        shadowEffect->setColor(shadowColor);
-        item->setGraphicsEffect(shadowEffect);
-
-        // Render the item with shadow onto a new pixmap via QGraphicsScene
-        QGraphicsScene scene;
-        scene.addItem(item);
-        QImage finalImage(size, QImage::Format_ARGB32_Premultiplied);
-        finalImage.fill(Qt::transparent);
-
-        QPainter scenePainter(&finalImage);
-        scene.render(&scenePainter);
-        painter.drawImage(0, 0, finalImage);
-    }
+    virtual void drawDropShadow(QPainter& painter, const QPixmap& pixmap) = 0;
 
 public slots:
     // On mouse release.
