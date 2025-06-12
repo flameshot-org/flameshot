@@ -6,11 +6,13 @@ on:
       - 'README.md'
       - 'LICENSE'
       - 'docs/**'
+      - 'data/translations/*.ts'
   pull_request:
     paths-ignore:
       - 'README.md'
       - 'LICENSE'
       - 'docs/**'
+      - 'data/translations/*.ts'
 
   workflow_dispatch:
 
