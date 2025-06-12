@@ -95,7 +95,7 @@ jobs:
         - {
             name: "Windows 2022 MSVC",
             artifact: "Windows-MSVC.tar.xz",
-            os: windows-2025,
+            os: windows-2022,
             cc: "cl", cxx: "cl",
             environment_script: "C:/Program Files/Microsoft Visual Studio/2022/Enterprise/VC/Auxiliary/Build/vcvars64.bat"
           }
@@ -103,19 +103,25 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Fix Python path
+        shell: pwsh
+        run: |
+          Remove-Item "$env:LOCALAPPDATA\Microsoft\WindowsApps\python*.exe" -Force -ErrorAction SilentlyContinue
+
       - name: Cache Qt
         id: cache-qt
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
-          path: ./build/Qt
-          key: ${{ runner.os }}-QtCache
+          path: ./build/Qt/6.9.1
+          key: ${{ runner.os }}-QtCache-6.9.1
 
       - name: Install Qt
         uses: jurplel/install-qt-action@v4
         with:
-          version: 6.8.*
+          version: 6.9.1
           target:  desktop
           dir: '${{ github.workspace }}/build/'
+          cached: ${{ steps.cache-qt.outputs.cache-hit }}
 
       - name: Configure
         working-directory: build
