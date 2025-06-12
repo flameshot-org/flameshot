@@ -1,21 +1,21 @@
 image:
-  - Visual Studio 2019
+  - Visual Studio 2022
 clone_folder: c:\projects\source
 
 environment:
-  Qt5_INSTALL_DIR: 'C:\Qt\5.15.2\msvc2019_64'
-  PATH: '%Qt5_INSTALL_DIR%\bin;%PATH%'
+  Qt6_INSTALL_DIR: 'C:\Qt\6.8.1\msvc2022_64'
+  PATH: '%Qt6_INSTALL_DIR%\bin;%PATH%'
 
 build_script:
 - cmd: >-
 
-    set QTDIR=%Qt5_INSTALL_DIR%
+    set QTDIR=%Qt6_INSTALL_DIR%
 
-    set "VCINSTALLDIR=C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC"
+    set "VCINSTALLDIR=C:\Program Files (x86)\Microsoft Visual Studio\2022\Community\VC"
 
     set "OPENSSL_ROOT_DIR=C:/OpenSSL-v111-Win64"
 
-    cmake -S c:\projects\source -B build -G "Visual Studio 16 2019" -DCMAKE_BUILD_TYPE:STRING=Release -DENABLE_OPENSSL=ON -DRUN_IN_PLACE=OFF
+    cmake -S c:\projects\source -B build -G "Visual Studio 17 2022" -DCMAKE_BUILD_TYPE:STRING=Release -DENABLE_OPENSSL=ON -DRUN_IN_PLACE=OFF
 
     cmake --build build --parallel 2 --config "Release"
 
