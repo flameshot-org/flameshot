@@ -45,8 +45,6 @@ private:
     QPixmap m_pixmap;
     QVBoxLayout* m_layout;
     QLabel* m_label;
-    QPointF m_dragStart;
-    qreal m_offsetX{}, m_offsetY{};
     QGraphicsDropShadowEffect* m_shadowEffect;
     QColor m_baseColor, m_hoverColor;
 
