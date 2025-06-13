@@ -148,9 +148,6 @@ void PinWidget::mouseDoubleClickEvent(QMouseEvent*)
 
 void PinWidget::mousePressEvent(QMouseEvent* e)
 {
-    m_dragStart = e->globalPosition();
-    m_offsetX = e->position().x() / width();
-    m_offsetY = e->position().y() / height();
     if (QWindow* window = windowHandle(); window != nullptr) {
         window->startSystemMove();
         return;
