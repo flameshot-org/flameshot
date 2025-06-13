@@ -21,6 +21,7 @@
 #include <QApplication>
 #include <QDir>
 #include <QLibraryInfo>
+#include <QScreen>
 #include <QSharedMemory>
 #include <QTimer>
 #include <QTranslator>
@@ -138,6 +139,17 @@ int main(int argc, char* argv[])
         configureApp(true);
         auto c = Flameshot::instance();
         FlameshotDaemon::start();
+
+        /* Register handlers for when the screen configuration changes to reinit the app to fix #3505 */
+        QObject::connect(qApp, &QGuiApplication::screenAdded, [](QScreen *screen){
+            qDebug() << "Screen added. Reinitializing application.";
+            configureApp(true);
+        });
+        QObject::connect(qApp, &QGuiApplication::screenRemoved, [](QScreen *screen){
+            // Code to handle screen removed
+            qDebug() << "Screen removed. Reinitializing application.";
+            configureApp(true);
+        });
 
 #if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
         new FlameshotDBusAdapter(c);
