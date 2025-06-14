@@ -19,6 +19,8 @@ struct CaptureContext
     QRect selection;
     // Selected tool color
     QColor color;
+    // Add drop shadow
+    bool dropShadow;
     // Path where the content has to be saved
     QString savePath;
     // Offset of the capture widget based on the system's screen (top-left)

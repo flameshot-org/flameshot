@@ -138,8 +138,19 @@ public:
     virtual void setCount(int count) { m_count = count; };
     virtual int count() const { return m_count; };
 
-    // Called every time the tool has to draw
+    virtual void setDropShadowEnabled(bool enabled) { m_dropShadowEnabled = enabled; }
+    virtual bool dropShadowEnabled() const { return m_dropShadowEnabled; }
+
     virtual void process(QPainter& painter, const QPixmap& pixmap) = 0;
+
+    // Called every time the tool has to draw
+    void doProcess(QPainter& painter, const QPixmap& pixmap)
+    {
+        if (dropShadowEnabled()) {
+            drawDropShadow(painter, pixmap);
+        }
+        process(painter, pixmap);
+    };
     virtual void drawSearchArea(QPainter& painter, const QPixmap& pixmap)
     {
         process(painter, pixmap);
@@ -163,6 +174,7 @@ protected:
     void copyParams(const CaptureTool* from, CaptureTool* to)
     {
         to->m_count = from->m_count;
+        to->m_dropShadowEnabled = from->m_dropShadowEnabled;
     }
 
     QString iconPath(const QColor& c) const
@@ -180,6 +192,7 @@ protected:
         painter.drawRect(rect);
         painter.setPen(orig_pen);
     }
+    virtual void drawDropShadow(QPainter& painter, const QPixmap& pixmap) = 0;
 
 public slots:
     // On mouse release.
@@ -195,6 +208,8 @@ public slots:
     virtual void pressed(CaptureContext& context) = 0;
     // Called when the color is changed in the editor.
     virtual void onColorChanged(const QColor& c) = 0;
+    // Called when the drop shadow is changed in the editor.
+    virtual void onDropShadowChanged(bool enabled) { m_dropShadowEnabled = enabled; }
     // Called when the size the tool size is changed by the user.
     virtual void onSizeChanged(int size) = 0;
     virtual int size() const { return -1; };
@@ -202,4 +217,5 @@ public slots:
 private:
     unsigned int m_count;
     bool m_editMode;
+    bool m_dropShadowEnabled = false;
 };
