@@ -2285,7 +2285,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/main.cpp" line="322"/>
         <source>Invalid value, it must be defined as &apos;true&apos; or &apos;false&apos;</source>
-        <translation>Недействительное значение, оно должно быть определено как &quot;true&quot; или &quot;false&quot;</translation>
+        <translation>Недействительное значение, оно должно быть определено как «true» или «false»</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/openwithprogram.cpp" line="30"/>
@@ -2495,7 +2495,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="169"/>
         <source>If the useGrimAdapter setting is not enabled, the dbus protocol will be used. It should be noted that using the dbus protocol under wayland is not recommended. It is recommended to enable the useGrimAdapter setting in flameshot.ini to activate the grim-based general wayland screenshot adapter</source>
-        <translation>Если настройка useGrimAdapter не включена, будет использоваться протокол DBus. Следует отметить, что использование протокола dbus в Wayland не рекомендуется. Рекомендуется включить настройку useGrimAdapter в файле flameshot.ini, чтобы активировать общий адаптер снимков экрана Wayland на основе Grim</translation>
+        <translation>Если настройка useGrimAdapter не включена, будет использоваться протокол DBus. Следует отметить, что использование протокола DBus в Wayland не рекомендуется. Рекомендуется включить настройку useGrimAdapter в файле flameshot.ini, чтобы активировать общий адаптер снимков экрана Wayland на основе Grim</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="180"/>
