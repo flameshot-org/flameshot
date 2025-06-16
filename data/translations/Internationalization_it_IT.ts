@@ -1730,7 +1730,7 @@ Si prega di risolverli manualmente nel file di configurazione.</translation>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="329"/>
         <source>subcommands</source>
-        <translation type="unfinished"></translation>
+        <translation>Sottocomandi</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="330"/>
