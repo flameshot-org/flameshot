@@ -202,3 +202,27 @@ void CircleCountTool::pressed(CaptureContext& context)
 {
     Q_UNUSED(context)
 }
+
+void CircleCountTool::drawDropShadow(QPainter& painter, const QPixmap& pixmap)
+{
+    const QColor shadowColor = QColor(0, 0, 0, 80);
+    int bubble_size = size() + THICKNESS_OFFSET;
+    auto orig_brush = painter.brush();
+    auto orig_pen = painter.pen();
+
+    painter.setBrush(shadowColor);
+    painter.setPen(shadowColor);
+
+    qreal start = 0.5;
+    qreal step = size() < 10 ? 0.2 : 0.4;
+    qreal end  = size() < 10 ? 1.0 : 2.0;
+    for (qreal var = start; var < end; var += step) {
+        painter.translate(var, var);
+        painter.drawEllipse(
+          points().first, bubble_size + PADDING_VALUE, bubble_size + PADDING_VALUE);
+    }
+
+    painter.resetTransform();
+    painter.setBrush(orig_brush);
+    painter.setPen(orig_pen);
+}
