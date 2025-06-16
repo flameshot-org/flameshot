@@ -100,24 +100,29 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     OPTION("useJpgForClipboard"          ,Bool               ( false         )),
     OPTION("uploadWithoutConfirmation"   ,Bool               ( false         )),
     OPTION("saveAfterCopy"               ,Bool               ( false         )),
-    OPTION("savePath"                    ,ExistingDir        (                   )),
+    OPTION("savePath"                    ,ExistingDir        (               )),
     OPTION("savePathFixed"               ,Bool               ( false         )),
-    OPTION("saveAsFileExtension"         ,SaveFileExtension  (                   )),
-    OPTION("saveLastRegion"              ,Bool               (false          )),
-    OPTION("uploadHistoryMax"            ,LowerBoundedInt    (0, 25               )),
-    OPTION("undoLimit"                   ,BoundedInt         (0, 999, 100    )),
-  // Interface tab
-    OPTION("uiColor"                     ,Color              ( {116, 0, 150}   )),
-    OPTION("contrastUiColor"             ,Color              ( {39, 0, 50}     )),
-    OPTION("contrastOpacity"             ,BoundedInt         ( 0, 255, 190    )),
+    OPTION("saveAsFileExtension"         ,SaveFileExtension  (               )),
+    OPTION("saveLastRegion"              ,Bool               ( false         )),
+    OPTION("uploadHistoryMax"            ,LowerBoundedInt    ( 0, 25         )),
+    OPTION("undoLimit"                   ,BoundedInt         ( 0, 999, 100   )),
+    // Interface tab
+    OPTION("uiColor"                     ,Color              ( {116, 0, 150} )),
+    OPTION("contrastUiColor"             ,Color              ( {39, 0, 50}   )),
+    OPTION("contrastOpacity"             ,BoundedInt         ( 0, 255, 190   )),
     OPTION("buttons"                     ,ButtonList         ( {}            )),
     // Filename Editor tab
     OPTION("filenamePattern"             ,FilenamePattern    ( {}            )),
     // Others
-    OPTION("drawThickness"               ,LowerBoundedInt    (1  , 3             )),
-    OPTION("drawFontSize"                ,LowerBoundedInt    (1  , 8             )),
+    // drawThickness shared by Pencil, Line, Arrow, Rectangular Selection, Circle
+    OPTION("drawThickness"               ,LowerBoundedInt    ( 1, 3          )),
+    OPTION("drawFontSize"                ,LowerBoundedInt    ( 1, 8          )),
+    OPTION("drawCircleCounterSize"       ,LowerBoundedInt    ( 1, 1          )),
+    OPTION("drawPixelateSize"            ,LowerBoundedInt    ( 1, 2          )),
+    OPTION("drawRectangleSize"           ,LowerBoundedInt    ( 1, 1          )),
+    OPTION("drawMarkerSize"              ,LowerBoundedInt    ( 1, 5          )),
     OPTION("drawColor"                   ,Color              ( Qt::red       )),
-    OPTION("userColors"                  ,UserColors(3,        17            )),
+    OPTION("userColors"                  ,UserColors         ( 3, 17         )),
     OPTION("ignoreUpdateToVersion"       ,String             ( ""            )),
     OPTION("keepOpenAppLauncher"         ,Bool               ( false         )),
     OPTION("fontFamily"                  ,String             ( ""            )),
@@ -126,11 +131,11 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     // NOTE: If another tool size is added besides drawThickness and
     // drawFontSize, remember to update ConfigHandler::toolSize
     OPTION("copyOnDoubleClick"           ,Bool               ( false         )),
-    OPTION("uploadClientSecret"          ,String             ( "313baf0c7b4d3ff"            )),
-    OPTION("showSelectionGeometry"  , BoundedInt               (0,5,4)),
-    OPTION("showSelectionGeometryHideTime", LowerBoundedInt       (0, 3000)),
-    OPTION("jpegQuality", BoundedInt     (0,100,75)),
-    OPTION("reverseArrow"                    ,Bool               ( false      )),
+    OPTION("uploadClientSecret"          ,String             ( "313baf0c7b4d3ff" )),
+    OPTION("showSelectionGeometry"       , BoundedInt        ( 0, 5, 4       )),
+    OPTION("showSelectionGeometryHideTime", LowerBoundedInt  ( 0, 3000       )),
+    OPTION("jpegQuality"                 , BoundedInt        ( 0,100,75      )),
+    OPTION("reverseArrow"                ,Bool               ( false         )),
 };
 
 static QMap<QString, QSharedPointer<KeySequence>> recognizedShortcuts = {
@@ -148,7 +153,7 @@ static QMap<QString, QSharedPointer<KeySequence>> recognizedShortcuts = {
     SHORTCUT("TYPE_SAVE"                ,   "Ctrl+S"                ),
     SHORTCUT("TYPE_ACCEPT"              ,   "Return"                ),
     SHORTCUT("TYPE_EXIT"                ,   "Ctrl+Q"                ),
-	SHORTCUT("TYPE_CANCEL" 				,	"Ctrl+Backspace"		),
+    SHORTCUT("TYPE_CANCEL"              ,   "Ctrl+Backspace"        ),
     SHORTCUT("TYPE_IMAGEUPLOADER"       ,                           ),
 #if !defined(Q_OS_MACOS)
     SHORTCUT("TYPE_OPEN_APP"            ,   "Ctrl+O"                ),
@@ -336,7 +341,16 @@ void ConfigHandler::setToolSize(CaptureTool::Type toolType, int size)
 {
     if (toolType == CaptureTool::TYPE_TEXT) {
         setDrawFontSize(size);
+    } else if (toolType == CaptureTool::TYPE_RECTANGLE) {
+        setDrawRectangleSize(size);
+    } else if (toolType == CaptureTool::TYPE_MARKER) {
+        setDrawMarkerSize(size);
+    } else if (toolType == CaptureTool::TYPE_PIXELATE) {
+        setDrawPixelateSize(size);
+    } else if (toolType == CaptureTool::TYPE_CIRCLECOUNT) {
+        setDrawCircleCounterSize(size);
     } else if (toolType != CaptureTool::NONE) {
+        // All other tools are sharing the same size
         setDrawThickness(size);
     }
 }
@@ -345,7 +359,16 @@ int ConfigHandler::toolSize(CaptureTool::Type toolType)
 {
     if (toolType == CaptureTool::TYPE_TEXT) {
         return drawFontSize();
+    } else if (toolType == CaptureTool::TYPE_RECTANGLE) {
+        return drawRectangleSize();
+    } else if (toolType == CaptureTool::TYPE_MARKER) {
+        return drawMarkerSize();
+    } else if (toolType == CaptureTool::TYPE_PIXELATE) {
+        return drawPixelateSize();
+    } else if (toolType == CaptureTool::TYPE_CIRCLECOUNT) {
+        return drawCircleCounterSize();
     } else {
+        // All other tools are sharing the same size
         return drawThickness();
     }
 }
