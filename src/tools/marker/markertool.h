@@ -23,6 +23,7 @@ public:
 
 protected:
     CaptureTool::Type type() const override;
+    void drawDropShadow(QPainter& painter, const QPixmap& pixmap) override;
 
 public slots:
     void drawStart(const CaptureContext& context) override;
