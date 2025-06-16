@@ -145,11 +145,12 @@ void ConfigWindow::initErrorIndicator(QWidget* tab, QWidget* widget)
     }
 
     // Sigslots
-    connect(ConfigHandler::getInstance(), &ConfigHandler::error, widget, [=]() {
-        widget->setEnabled(false);
-        label->show();
-        btnResolve->show();
-    });
+    connect(
+      ConfigHandler::getInstance(), &ConfigHandler::error, widget, [=, this]() {
+          widget->setEnabled(false);
+          label->show();
+          btnResolve->show();
+      });
     connect(ConfigHandler::getInstance(),
             &ConfigHandler::errorResolved,
             widget,

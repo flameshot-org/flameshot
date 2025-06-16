@@ -26,7 +26,7 @@ void ImageLabel::setScreenshot(const QPixmap& pixmap)
 {
     m_pixmap = pixmap;
     const QString tooltip =
-      QStringLiteral("%1x%2 px").arg(m_pixmap.width()).arg(m_pixmap.height());
+      QStringLiteral("%1x%2 px").arg(m_pixmap.width(), m_pixmap.height());
     setToolTip(tooltip);
     setScaledPixmap();
 }

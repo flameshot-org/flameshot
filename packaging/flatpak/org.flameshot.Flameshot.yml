@@ -1,6 +1,6 @@
 app-id: org.flameshot.Flameshot
 runtime: org.kde.Platform
-runtime-version: '5.15-21.08'
+runtime-version: '6.9'
 sdk: org.kde.Sdk
 command: flameshot
 finish-args:
@@ -25,10 +25,17 @@ finish-args:
 modules:
   - name: flameshot
     buildsystem: cmake-ninja
+    build-options:
+      build-args:
+        - --share=network
     config-opts:
       - -DCMAKE_BUILD_TYPE=Release 
       - -DUSE_WAYLAND_CLIPBOARD=1
     sources:
+    # Keep this in until qt6 is merged to master branch. Makes it easy to test flatpak dev builds
+    # Change the path to the location of the cloned flameshot repo
+      #- type: dir 
+      #  path: /path/to/repo
       - type: git
         url: https://github.com/flameshot-org/flameshot.git
         branch: master

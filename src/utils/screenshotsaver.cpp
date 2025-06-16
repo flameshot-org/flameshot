@@ -82,7 +82,7 @@ QString ShowSaveFileDialog(const QString& title, const QString& directory)
 
     // Build string list of supported image formats
     QStringList mimeTypeList;
-    foreach (auto mimeType, QImageWriter::supportedMimeTypes()) {
+    for (const auto& mimeType : QImageWriter::supportedMimeTypes()) {
         // image/heif has several aliases and they cause glitch in save dialog
         // It is necessary to keep the image/heif (otherwise HEIF plug-in from
         // kimageformats will not work) but the aliases could be filtered out.
@@ -260,8 +260,8 @@ bool saveToFilesystemGUI(const QPixmap& capture)
     }
 
     if (okay) {
-        QString pathNoFile =
-          savePath.left(savePath.lastIndexOf(QDir::separator()));
+        // Don't use QDir::separator() here, as Qt internally always uses '/'
+        QString pathNoFile = savePath.left(savePath.lastIndexOf('/'));
 
         ConfigHandler().setSavePath(pathNoFile);
 

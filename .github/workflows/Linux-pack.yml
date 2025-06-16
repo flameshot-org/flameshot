@@ -15,6 +15,7 @@ on:
       - 'README.md'
       - 'LICENSE'
       - 'docs/**'
+      - 'data/translations/*.ts'
 
   workflow_dispatch:
 
@@ -28,347 +29,347 @@ env:
   PACKPACK_REPO: flameshot-org/packpack
 
 jobs:
-  deb-pack:
-    name: Build deb on ${{ matrix.dist.name }} ${{ matrix.dist.arch }}
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        dist:
-          - {
-              name: debian-11,
-              os: debian,
-              symbol: bullseye,
-              arch: amd64
-            }
-          - {
-              name: debian-12,
-              os: debian,
-              symbol: bookworm,
-              arch: amd64
-            }
-          - {
-              name: ubuntu-22.04,
-              os: ubuntu,
-              symbol: jammy,
-              arch: amd64
-            }
-          - {
-              name: ubuntu-24.04,
-              os: ubuntu,
-              symbol: noble,
-              arch: amd64
-            }
-
-    steps:
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
-      - name: Checkout Source code
-        if: github.event_name == 'push'
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          ref: master
-      - name: Checkout Source code
-        if: github.event_name == 'pull_request'
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          ref: ${{ github.event.pull_request.head.sha }}
-      - name: Set env & Print flameshot version
-        shell: bash
-        run: |
-          last_committed_tag=$(git tag -l --sort=-v:refname | head -1)
-          git_revno=$(git rev-list $(git describe --tags --abbrev=0)..HEAD --count)
-          git_hash=$(git rev-parse --short HEAD)
-          ver_info=${last_committed_tag}+git${git_revno}.${git_hash}
-          echo "=======FLAMESHOT VERSION========"
-          echo ${last_committed_tag:1}
-          echo "Details: ${ver_info}"
-          echo "================================"
-          echo "VERSION=${last_committed_tag:1}" >> $GITHUB_ENV
-          echo "VER_INFO=${ver_info}" >> $GITHUB_ENV
-      - name: Get packpack tool
-        uses: actions/checkout@v4
-        with:
-          repository: ${{ env.PACKPACK_REPO }}
-          path: tools
-          ref: multiarch
-          set-safe-directory: $GITHUB_WORKSPACE/tools
-      - name: Packaging on ${{ matrix.dist.name }} ${{ matrix.dist.arch }}
-        env:
-          OS: ${{ matrix.dist.os }}
-          DIST: ${{ matrix.dist.symbol }}
-          #DOCKER_ARCH: ${{ matrix.dist.arch }}
-          ## I cannot see if ARCH is used anywhere. Should we remove it?
-          #ARCH: ${{ matrix.dist.arch }}
-        run: |
-          cp -r $GITHUB_WORKSPACE/packaging/debian $GITHUB_WORKSPACE
-          bash $GITHUB_WORKSPACE/tools/packpack
-          mv $GITHUB_WORKSPACE/build/${PRODUCT}_${VERSION}-${RELEASE}_${{ matrix.dist.arch }}.deb $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.${{ matrix.dist.name }}.${{ matrix.dist.arch }}.deb
-      - name: SHA256Sum of ${{ matrix.dist.name }} ${{ matrix.dist.arch }} package
-        run: |
-          cd "$GITHUB_WORKSPACE/build/" || { >&2 echo "Cannot cd to '$GITHUB_WORKSPACE/build/'!"; exit 11 ; }
-          sha256sum ${PRODUCT}-${VERSION}-${RELEASE}.${{ matrix.dist.name }}.${{ matrix.dist.arch }}.deb | tee ${PRODUCT}-${VERSION}-${RELEASE}.${{ matrix.dist.name }}.${{ matrix.dist.arch }}.deb.sha256sum
-      - name: Artifact Upload
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ env.PRODUCT }}-${{ env.VER_INFO }}-artifact-${{ matrix.dist.name }}-${{ matrix.dist.arch }}
-          path: |
-            ${{ github.workspace }}/build/${{ env.PRODUCT }}-*-${{ env.RELEASE }}.${{ matrix.dist.name }}.${{ matrix.dist.arch }}.deb
-            ${{ github.workspace }}/build/${{ env.PRODUCT }}-*-${{ env.RELEASE }}.${{ matrix.dist.name }}.${{ matrix.dist.arch }}.deb.sha256sum
-          overwrite: true
-
-  rpm-pack:
-    name: Build rpm on ${{ matrix.dist.name }} ${{ matrix.dist.arch }}
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        dist:
-          - {
-              name: fedora-41,
-              os: fedora,
-              symbol: 41,
-              arch: x86_64
-            }
-          - {
-              name: fedora-42,
-              os: fedora,
-              symbol: 42,
-              arch: x86_64
-            }
-          - {
-              name: opensuse-leap-15.6,
-              os: opensuse-leap,
-              symbol: 15.6,
-              arch: x86_64
-            }
-    steps:
-      - name: Checkout Source code
-        if: github.event_name == 'push'
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          ref: master
-      - name: Checkout Source code
-        if: github.event_name == 'pull_request'
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          ref: ${{ github.event.pull_request.head.sha }}
-      - name: Set env & Print flameshot version
-        shell: bash
-        run: |
-          last_committed_tag=$(git tag -l --sort=-v:refname | head -1)
-          git_revno=$(git rev-list $(git describe --tags --abbrev=0)..HEAD --count)
-          git_hash=$(git rev-parse --short HEAD)
-          ver_info=${last_committed_tag}+git${git_revno}.${git_hash}
-          echo "=======FLAMESHOT VERSION========"
-          echo ${last_committed_tag:1}
-          echo "Details: ${ver_info}"
-          echo "================================"
-          echo "VERSION=${last_committed_tag:1}" >> $GITHUB_ENV
-          echo "VER_INFO=${ver_info}" >> $GITHUB_ENV
-      - name: Get packpack tool
-        uses: actions/checkout@v4
-        with:
-          repository: ${{ env.PACKPACK_REPO }}
-          path: tools
-          ref: master
-          set-safe-directory: $GITHUB_WORKSPACE/tools
-      - name: Packaging on ${{ matrix.dist.name }} ${{ matrix.dist.arch }}
-        if: matrix.dist.os == 'fedora'
-        run: |
-          mkdir $GITHUB_WORKSPACE/rpm
-          cp $GITHUB_WORKSPACE/packaging/rpm/fedora/flameshot.spec $GITHUB_WORKSPACE/rpm
-          bash $GITHUB_WORKSPACE/tools/packpack
-        env:
-          OS: ${{ matrix.dist.os }}
-          DIST: ${{ matrix.dist.symbol }}
-      - name: Packaging on ${{ matrix.dist.name }} ${{ matrix.dist.arch }}
-        if: matrix.dist.os == 'opensuse-leap'
-        run: |
-          mkdir $GITHUB_WORKSPACE/rpm
-          cp $GITHUB_WORKSPACE/packaging/rpm/opensuse/flameshot.spec $GITHUB_WORKSPACE/rpm
-          bash $GITHUB_WORKSPACE/tools/packpack
-        env:
-          OS: ${{ matrix.dist.os }}
-          DIST: ${{ matrix.dist.symbol }}
-      - name: Package Clean
-        if: matrix.dist.os == 'fedora'
-        run: |
-          rm -f ${{ github.workspace }}/build/${{ env.PRODUCT }}-debuginfo-*.rpm
-          rm -f ${{ github.workspace }}/build/${{ env.PRODUCT }}-debugsource-*.rpm
-          rm -f ${{ github.workspace }}/build/${{ env.PRODUCT }}-*.src.rpm
-          rm -f ${{ github.workspace }}/build/build.log
-      - name: SHA256Sum of ${{ matrix.dist.name }} ${{ matrix.dist.arch }} package
-        if: matrix.dist.os == 'fedora'
-        run: |
-          cd "$GITHUB_WORKSPACE/build/" || { >&2 echo "Cannot cd to '$GITHUB_WORKSPACE/build/'!"; exit 11 ; }
-          sha256sum ${PRODUCT}-${VERSION}-${RELEASE}.fc*.${{ matrix.dist.arch }}.rpm | tee ${PRODUCT}-${VERSION}-${RELEASE}.fc${{ matrix.dist.symbol }}.${{ matrix.dist.arch }}.rpm.sha256sum
-      - name: SHA256Sum of ${{ matrix.dist.name }} ${{ matrix.dist.arch }} package
-        if: matrix.dist.os == 'opensuse-leap'
-        run: |
-          mv $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-lp*.${{ matrix.dist.arch }}.rpm $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}-lp${{ matrix.dist.symbol }}.${{ matrix.dist.arch }}.rpm
-          cd "$GITHUB_WORKSPACE/build/" || { >&2 echo "Cannot cd to '$GITHUB_WORKSPACE/build/'!"; exit 11 ; }
-          sha256sum ${PRODUCT}-${VERSION}-${RELEASE}-lp${{ matrix.dist.symbol }}.${{ matrix.dist.arch }}.rpm | tee ${PRODUCT}-${VERSION}-${RELEASE}-lp${{ matrix.dist.symbol }}.${{ matrix.dist.arch }}.rpm.sha256sum
-      - name: Artifact Upload
-        if: matrix.dist.os == 'fedora'
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ env.PRODUCT }}-${{ env.VER_INFO }}-artifact-${{ matrix.dist.name }}-${{ matrix.dist.arch }}
-          path: |
-            ${{ github.workspace }}/build/
-          overwrite: true
-
-      - name: Artifact Upload
-        if: matrix.dist.os == 'opensuse-leap'
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ env.PRODUCT }}-${{ env.VER_INFO }}-artifact-${{ matrix.dist.name }}-${{ matrix.dist.arch }}
-          path: |
-            ${{ github.workspace }}/build/${{ env.PRODUCT }}-*-lp${{ matrix.dist.symbol }}.${{ matrix.dist.arch }}.rpm
-            ${{ github.workspace }}/build/${{ env.PRODUCT }}-*-lp${{ matrix.dist.symbol }}.${{ matrix.dist.arch }}.rpm.sha256sum
-          overwrite: true
-  
-  appimage-pack:
-    name: Build appimage on ${{ matrix.config.name }}
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        config:
-          - {
-              name: ubuntu-22.04,
-              os: ubuntu,
-              symbol: jammy,
-              arch: amd64,
-              image_repo: quay.io/flameshot-org/ci-building
-            }
-    container:
-      image: ${{ matrix.config.image_repo }}:${{ matrix.config.os }}-${{ matrix.config.symbol }}
-      options: --cap-add SYS_ADMIN --device /dev/fuse --security-opt apparmor:unconfined
-    steps:
-      - name:
-        shell: bash
-        run: |
-          git config --global --add safe.directory "$GITHUB_WORKSPACE"
-
-      - name: Checkout Source code
-        if: github.event_name == 'push'
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          ref: master
-      - name: Checkout Source code
-        if: github.event_name == 'pull_request'
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          ref: ${{ github.event.pull_request.head.sha }}
-      - name: Set env & Print flameshot version
-        shell: bash
-        run: |
-          last_committed_tag=$(git tag -l --sort=-v:refname | head -1)
-          git_revno=$(git rev-list $(git describe --tags --abbrev=0)..HEAD --count)
-          git_hash=$(git rev-parse --short HEAD)
-          ver_info=${last_committed_tag}+git${git_revno}.${git_hash}
-          echo "=======FLAMESHOT VERSION========"
-          echo ${last_committed_tag:1}
-          echo "Details: ${ver_info}"
-          echo "================================"
-          echo "VERSION=${last_committed_tag:1}" >> $GITHUB_ENV
-          echo "VER_INFO=${ver_info}" >> $GITHUB_ENV
-      - name: Install Dependencies
-        run: |
-          sudo apt-get -y -qq update
-          sudo apt-get -y --no-install-recommends install \
-            python3 \
-            python3-pip \
-            fuse \
-            patchelf \
-            cmake \
-            extra-cmake-modules \
-            build-essential \
-            qt5-qmake \
-            qtbase5-dev \
-            qtbase5-dev-tools \
-            qttools5-dev-tools \
-            qttools5-dev \
-            libqt5dbus5 \
-            libqt5network5 \
-            libqt5core5a \
-            libqt5widgets5 \
-            libqt5gui5 \
-            libqt5svg5-dev \
-            appstream \
-            hicolor-icon-theme \
-            fcitx-frontend-qt5 \
-            openssl \
-            ca-certificates \
-            jq
-
-      - name: Get go-appimage tool
-      # Will not use linuxdeployqt anymore, because it suopprts currently still-supported mainstream distribution,
-      # which is glibc 2.23. For more information, please see https://github.com/probonopd/linuxdeployqt/issues/340.
-      # Will try new tool https://github.com/probonopd/go-appimage written in golang by probonopd.
-        run: |
-          wget $(curl https://api.github.com/repos/probonopd/go-appimage/releases | jq -r '.[] | select(.tag_name == "continuous") | .assets[] | select((.name | endswith("x86_64.AppImage")) and (.name | contains("appimagetool"))) | .browser_download_url') -O appimagetool
-
-          chmod +x appimagetool
-        env:
-          APPIMAGETOOL_ARCH: x86_64
-      - name: Packaging appimage
-        run: |
-          set -x
-          APPIMAGE_DST_PATH=$GITHUB_WORKSPACE/${PRODUCT}.AppDir
-          mkdir -p ${APPIMAGE_DST_PATH}
-
-          cd $GITHUB_WORKSPACE
-          cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX=/usr -DUSE_LAUNCHER_ABSOLUTE_PATH:BOOL=OFF
-          make -j$(nproc) DESTDIR=${APPIMAGE_DST_PATH} install
-
-          $GITHUB_WORKSPACE/appimagetool -s deploy "${APPIMAGE_DST_PATH}/usr/share/applications/org.flameshot.Flameshot.desktop"
-          
-          mkdir -p ${APPIMAGE_DST_PATH}/usr/plugins/platforminputcontexts
-          cp \
-            /usr/lib/x86_64-linux-gnu/qt5/plugins/platforminputcontexts/libfcitxplatforminputcontextplugin.so \
-            ${APPIMAGE_DST_PATH}/usr/plugins/platforminputcontexts/
-
-          cp \
-            $GITHUB_WORKSPACE/data/img/app/org.flameshot.Flameshot.png \
-            ${APPIMAGE_DST_PATH}/
-
-          if [ -f "${APPIMAGE_DST_PATH}/lib/x86_64-linux-gnu/libxcb-glx.so.0" ]; then
-            rm ${APPIMAGE_DST_PATH}/lib/x86_64-linux-gnu/libxcb-glx.so.0
-          fi
-
-          chmod +x ${APPIMAGE_DST_PATH}/usr/lib64/ld-*.so.*
-
-
-          VERSION=${VERSION} $GITHUB_WORKSPACE/appimagetool "${APPIMAGE_DST_PATH}"
-          mv $GITHUB_WORKSPACE/Flameshot-${VERSION}-x86_64.AppImage $GITHUB_WORKSPACE/Flameshot-${VERSION}.x86_64.AppImage
-
-
-      - name: SHA256Sum of appimage package
-        run: |
-          cd "$GITHUB_WORKSPACE/" || { >&2 echo "Cannot cd to '$GITHUB_WORKSPACE/'!"; exit 11 ; }
-          sha256sum Flameshot-${VERSION}.x86_64.AppImage | tee Flameshot-${VERSION}.x86_64.AppImage.sha256sum
-      - name: Artifact Upload
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ env.PRODUCT }}-${{ env.VER_INFO }}-artifact-appimage-x86_64
-          path: |
-            ${{ github.workspace }}/Flameshot-*.x86_64.AppImage
-            ${{ github.workspace }}/Flameshot-*.x86_64.AppImage.sha256sum
-          overwrite: true
-
+#   deb-pack:
+#     name: Build deb on ${{ matrix.dist.name }} ${{ matrix.dist.arch }}
+#     runs-on: ubuntu-latest
+#     strategy:
+#       fail-fast: false
+#       matrix:
+#         dist:
+#           - {
+#               name: debian-11,
+#               os: debian,
+#               symbol: bullseye,
+#               arch: amd64
+#             }
+#           - {
+#               name: debian-12,
+#               os: debian,
+#               symbol: bookworm,
+#               arch: amd64
+#             }
+#           - {
+#               name: ubuntu-22.04,
+#               os: ubuntu,
+#               symbol: jammy,
+#               arch: amd64
+#             }
+#           - {
+#               name: ubuntu-24.04,
+#               os: ubuntu,
+#               symbol: noble,
+#               arch: amd64
+#             }
+#
+#     steps:
+#       - name: Set up Docker Buildx
+#         uses: docker/setup-buildx-action@v3
+#       - name: Set up QEMU
+#         uses: docker/setup-qemu-action@v3
+#       - name: Checkout Source code
+#         if: github.event_name == 'push'
+#         uses: actions/checkout@v4
+#         with:
+#           fetch-depth: 0
+#           ref: master
+#       - name: Checkout Source code
+#         if: github.event_name == 'pull_request'
+#         uses: actions/checkout@v4
+#         with:
+#           fetch-depth: 0
+#           ref: ${{ github.event.pull_request.head.sha }}
+#       - name: Set env & Print flameshot version
+#         shell: bash
+#         run: |
+#           last_committed_tag=$(git tag -l --sort=-v:refname | head -1)
+#           git_revno=$(git rev-list $(git describe --tags --abbrev=0)..HEAD --count)
+#           git_hash=$(git rev-parse --short HEAD)
+#           ver_info=${last_committed_tag}+git${git_revno}.${git_hash}
+#           echo "=======FLAMESHOT VERSION========"
+#           echo ${last_committed_tag:1}
+#           echo "Details: ${ver_info}"
+#           echo "================================"
+#           echo "VERSION=${last_committed_tag:1}" >> $GITHUB_ENV
+#           echo "VER_INFO=${ver_info}" >> $GITHUB_ENV
+#       - name: Get packpack tool
+#         uses: actions/checkout@v4
+#         with:
+#           repository: ${{ env.PACKPACK_REPO }}
+#           path: tools
+#           ref: multiarch
+#           set-safe-directory: $GITHUB_WORKSPACE/tools
+#       - name: Packaging on ${{ matrix.dist.name }} ${{ matrix.dist.arch }}
+#         env:
+#           OS: ${{ matrix.dist.os }}
+#           DIST: ${{ matrix.dist.symbol }}
+#           #DOCKER_ARCH: ${{ matrix.dist.arch }}
+#           ## I cannot see if ARCH is used anywhere. Should we remove it?
+#           #ARCH: ${{ matrix.dist.arch }}
+#         run: |
+#           cp -r $GITHUB_WORKSPACE/packaging/debian $GITHUB_WORKSPACE
+#           bash $GITHUB_WORKSPACE/tools/packpack
+#           mv $GITHUB_WORKSPACE/build/${PRODUCT}_${VERSION}-${RELEASE}_${{ matrix.dist.arch }}.deb $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.${{ matrix.dist.name }}.${{ matrix.dist.arch }}.deb
+#       - name: SHA256Sum of ${{ matrix.dist.name }} ${{ matrix.dist.arch }} package
+#         run: |
+#           cd "$GITHUB_WORKSPACE/build/" || { >&2 echo "Cannot cd to '$GITHUB_WORKSPACE/build/'!"; exit 11 ; }
+#           sha256sum ${PRODUCT}-${VERSION}-${RELEASE}.${{ matrix.dist.name }}.${{ matrix.dist.arch }}.deb | tee ${PRODUCT}-${VERSION}-${RELEASE}.${{ matrix.dist.name }}.${{ matrix.dist.arch }}.deb.sha256sum
+#       - name: Artifact Upload
+#         uses: actions/upload-artifact@v4
+#         with:
+#           name: ${{ env.PRODUCT }}-${{ env.VER_INFO }}-artifact-${{ matrix.dist.name }}-${{ matrix.dist.arch }}
+#           path: |
+#             ${{ github.workspace }}/build/${{ env.PRODUCT }}-*-${{ env.RELEASE }}.${{ matrix.dist.name }}.${{ matrix.dist.arch }}.deb
+#             ${{ github.workspace }}/build/${{ env.PRODUCT }}-*-${{ env.RELEASE }}.${{ matrix.dist.name }}.${{ matrix.dist.arch }}.deb.sha256sum
+#           overwrite: true
+#
+#   rpm-pack:
+#     name: Build rpm on ${{ matrix.dist.name }} ${{ matrix.dist.arch }}
+#     runs-on: ubuntu-latest
+#     strategy:
+#       fail-fast: false
+#       matrix:
+#         dist:
+#           - {
+#               name: fedora-41,
+#               os: fedora,
+#               symbol: 41,
+#               arch: x86_64
+#             }
+#           - {
+#               name: fedora-42,
+#               os: fedora,
+#               symbol: 42,
+#               arch: x86_64
+#             }
+#           - {
+#               name: opensuse-leap-15.6,
+#               os: opensuse-leap,
+#               symbol: 15.6,
+#               arch: x86_64
+#             }
+#     steps:
+#       - name: Checkout Source code
+#         if: github.event_name == 'push'
+#         uses: actions/checkout@v4
+#         with:
+#           fetch-depth: 0
+#           ref: master
+#       - name: Checkout Source code
+#         if: github.event_name == 'pull_request'
+#         uses: actions/checkout@v4
+#         with:
+#           fetch-depth: 0
+#           ref: ${{ github.event.pull_request.head.sha }}
+#       - name: Set env & Print flameshot version
+#         shell: bash
+#         run: |
+#           last_committed_tag=$(git tag -l --sort=-v:refname | head -1)
+#           git_revno=$(git rev-list $(git describe --tags --abbrev=0)..HEAD --count)
+#           git_hash=$(git rev-parse --short HEAD)
+#           ver_info=${last_committed_tag}+git${git_revno}.${git_hash}
+#           echo "=======FLAMESHOT VERSION========"
+#           echo ${last_committed_tag:1}
+#           echo "Details: ${ver_info}"
+#           echo "================================"
+#           echo "VERSION=${last_committed_tag:1}" >> $GITHUB_ENV
+#           echo "VER_INFO=${ver_info}" >> $GITHUB_ENV
+#       - name: Get packpack tool
+#         uses: actions/checkout@v4
+#         with:
+#           repository: ${{ env.PACKPACK_REPO }}
+#           path: tools
+#           ref: master
+#           set-safe-directory: $GITHUB_WORKSPACE/tools
+#       - name: Packaging on ${{ matrix.dist.name }} ${{ matrix.dist.arch }}
+#         if: matrix.dist.os == 'fedora'
+#         run: |
+#           mkdir $GITHUB_WORKSPACE/rpm
+#           cp $GITHUB_WORKSPACE/packaging/rpm/fedora/flameshot.spec $GITHUB_WORKSPACE/rpm
+#           bash $GITHUB_WORKSPACE/tools/packpack
+#         env:
+#           OS: ${{ matrix.dist.os }}
+#           DIST: ${{ matrix.dist.symbol }}
+#       - name: Packaging on ${{ matrix.dist.name }} ${{ matrix.dist.arch }}
+#         if: matrix.dist.os == 'opensuse-leap'
+#         run: |
+#           mkdir $GITHUB_WORKSPACE/rpm
+#           cp $GITHUB_WORKSPACE/packaging/rpm/opensuse/flameshot.spec $GITHUB_WORKSPACE/rpm
+#           bash $GITHUB_WORKSPACE/tools/packpack
+#         env:
+#           OS: ${{ matrix.dist.os }}
+#           DIST: ${{ matrix.dist.symbol }}
+#       - name: Package Clean
+#         if: matrix.dist.os == 'fedora'
+#         run: |
+#           rm -f ${{ github.workspace }}/build/${{ env.PRODUCT }}-debuginfo-*.rpm
+#           rm -f ${{ github.workspace }}/build/${{ env.PRODUCT }}-debugsource-*.rpm
+#           rm -f ${{ github.workspace }}/build/${{ env.PRODUCT }}-*.src.rpm
+#           rm -f ${{ github.workspace }}/build/build.log
+#       - name: SHA256Sum of ${{ matrix.dist.name }} ${{ matrix.dist.arch }} package
+#         if: matrix.dist.os == 'fedora'
+#         run: |
+#           cd "$GITHUB_WORKSPACE/build/" || { >&2 echo "Cannot cd to '$GITHUB_WORKSPACE/build/'!"; exit 11 ; }
+#           sha256sum ${PRODUCT}-${VERSION}-${RELEASE}.fc*.${{ matrix.dist.arch }}.rpm | tee ${PRODUCT}-${VERSION}-${RELEASE}.fc${{ matrix.dist.symbol }}.${{ matrix.dist.arch }}.rpm.sha256sum
+#       - name: SHA256Sum of ${{ matrix.dist.name }} ${{ matrix.dist.arch }} package
+#         if: matrix.dist.os == 'opensuse-leap'
+#         run: |
+#           mv $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-lp*.${{ matrix.dist.arch }}.rpm $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}-lp${{ matrix.dist.symbol }}.${{ matrix.dist.arch }}.rpm
+#           cd "$GITHUB_WORKSPACE/build/" || { >&2 echo "Cannot cd to '$GITHUB_WORKSPACE/build/'!"; exit 11 ; }
+#           sha256sum ${PRODUCT}-${VERSION}-${RELEASE}-lp${{ matrix.dist.symbol }}.${{ matrix.dist.arch }}.rpm | tee ${PRODUCT}-${VERSION}-${RELEASE}-lp${{ matrix.dist.symbol }}.${{ matrix.dist.arch }}.rpm.sha256sum
+#       - name: Artifact Upload
+#         if: matrix.dist.os == 'fedora'
+#         uses: actions/upload-artifact@v4
+#         with:
+#           name: ${{ env.PRODUCT }}-${{ env.VER_INFO }}-artifact-${{ matrix.dist.name }}-${{ matrix.dist.arch }}
+#           path: |
+#             ${{ github.workspace }}/build/
+#           overwrite: true
+#
+#       - name: Artifact Upload
+#         if: matrix.dist.os == 'opensuse-leap'
+#         uses: actions/upload-artifact@v4
+#         with:
+#           name: ${{ env.PRODUCT }}-${{ env.VER_INFO }}-artifact-${{ matrix.dist.name }}-${{ matrix.dist.arch }}
+#           path: |
+#             ${{ github.workspace }}/build/${{ env.PRODUCT }}-*-lp${{ matrix.dist.symbol }}.${{ matrix.dist.arch }}.rpm
+#             ${{ github.workspace }}/build/${{ env.PRODUCT }}-*-lp${{ matrix.dist.symbol }}.${{ matrix.dist.arch }}.rpm.sha256sum
+#           overwrite: true
+#
+#   appimage-pack:
+#     name: Build appimage on ${{ matrix.config.name }}
+#     runs-on: ubuntu-latest
+#     strategy:
+#       fail-fast: false
+#       matrix:
+#         config:
+#           - {
+#               name: ubuntu-22.04,
+#               os: ubuntu,
+#               symbol: jammy,
+#               arch: amd64,
+#               image_repo: quay.io/flameshot-org/ci-building
+#             }
+#     container:
+#       image: ${{ matrix.config.image_repo }}:${{ matrix.config.os }}-${{ matrix.config.symbol }}
+#       options: --cap-add SYS_ADMIN --device /dev/fuse --security-opt apparmor:unconfined
+#     steps:
+#       - name:
+#         shell: bash
+#         run: |
+#           git config --global --add safe.directory "$GITHUB_WORKSPACE"
+#
+#       - name: Checkout Source code
+#         if: github.event_name == 'push'
+#         uses: actions/checkout@v4
+#         with:
+#           fetch-depth: 0
+#           ref: master
+#       - name: Checkout Source code
+#         if: github.event_name == 'pull_request'
+#         uses: actions/checkout@v4
+#         with:
+#           fetch-depth: 0
+#           ref: ${{ github.event.pull_request.head.sha }}
+#       - name: Set env & Print flameshot version
+#         shell: bash
+#         run: |
+#           last_committed_tag=$(git tag -l --sort=-v:refname | head -1)
+#           git_revno=$(git rev-list $(git describe --tags --abbrev=0)..HEAD --count)
+#           git_hash=$(git rev-parse --short HEAD)
+#           ver_info=${last_committed_tag}+git${git_revno}.${git_hash}
+#           echo "=======FLAMESHOT VERSION========"
+#           echo ${last_committed_tag:1}
+#           echo "Details: ${ver_info}"
+#           echo "================================"
+#           echo "VERSION=${last_committed_tag:1}" >> $GITHUB_ENV
+#           echo "VER_INFO=${ver_info}" >> $GITHUB_ENV
+#       - name: Install Dependencies
+#         run: |
+#           sudo apt-get -y -qq update
+#           sudo apt-get -y --no-install-recommends install \
+#             python3 \
+#             python3-pip \
+#             fuse \
+#             patchelf \
+#             cmake \
+#             extra-cmake-modules \
+#             build-essential \
+#             qt5-qmake \
+#             qtbase5-dev \
+#             qtbase5-dev-tools \
+#             qttools5-dev-tools \
+#             qttools5-dev \
+#             libqt5dbus5 \
+#             libqt5network5 \
+#             libqt5core5a \
+#             libqt5widgets5 \
+#             libqt5gui5 \
+#             libqt5svg5-dev \
+#             appstream \
+#             hicolor-icon-theme \
+#             fcitx-frontend-qt5 \
+#             openssl \
+#             ca-certificates \
+#             jq
+#
+#       - name: Get go-appimage tool
+#       # Will not use linuxdeployqt anymore, because it suopprts currently still-supported mainstream distribution,
+#       # which is glibc 2.23. For more information, please see https://github.com/probonopd/linuxdeployqt/issues/340.
+#       # Will try new tool https://github.com/probonopd/go-appimage written in golang by probonopd.
+#         run: |
+#           wget $(curl https://api.github.com/repos/probonopd/go-appimage/releases | jq -r '.[] | select(.tag_name == "continuous") | .assets[] | select((.name | endswith("x86_64.AppImage")) and (.name | contains("appimagetool"))) | .browser_download_url') -O appimagetool
+#
+#           chmod +x appimagetool
+#         env:
+#           APPIMAGETOOL_ARCH: x86_64
+#       - name: Packaging appimage
+#         run: |
+#           set -x
+#           APPIMAGE_DST_PATH=$GITHUB_WORKSPACE/${PRODUCT}.AppDir
+#           mkdir -p ${APPIMAGE_DST_PATH}
+#
+#           cd $GITHUB_WORKSPACE
+#           cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX=/usr -DUSE_LAUNCHER_ABSOLUTE_PATH:BOOL=OFF
+#           make -j$(nproc) DESTDIR=${APPIMAGE_DST_PATH} install
+#
+#           $GITHUB_WORKSPACE/appimagetool -s deploy "${APPIMAGE_DST_PATH}/usr/share/applications/org.flameshot.Flameshot.desktop"
+#
+#           mkdir -p ${APPIMAGE_DST_PATH}/usr/plugins/platforminputcontexts
+#           cp \
+#             /usr/lib/x86_64-linux-gnu/qt5/plugins/platforminputcontexts/libfcitxplatforminputcontextplugin.so \
+#             ${APPIMAGE_DST_PATH}/usr/plugins/platforminputcontexts/
+#
+#           cp \
+#             $GITHUB_WORKSPACE/data/img/app/org.flameshot.Flameshot.png \
+#             ${APPIMAGE_DST_PATH}/
+#
+#           if [ -f "${APPIMAGE_DST_PATH}/lib/x86_64-linux-gnu/libxcb-glx.so.0" ]; then
+#             rm ${APPIMAGE_DST_PATH}/lib/x86_64-linux-gnu/libxcb-glx.so.0
+#           fi
+#
+#           chmod +x ${APPIMAGE_DST_PATH}/usr/lib64/ld-*.so.*
+#
+#
+#           VERSION=${VERSION} $GITHUB_WORKSPACE/appimagetool "${APPIMAGE_DST_PATH}"
+#           mv $GITHUB_WORKSPACE/Flameshot-${VERSION}-x86_64.AppImage $GITHUB_WORKSPACE/Flameshot-${VERSION}.x86_64.AppImage
+#
+#
+#       - name: SHA256Sum of appimage package
+#         run: |
+#           cd "$GITHUB_WORKSPACE/" || { >&2 echo "Cannot cd to '$GITHUB_WORKSPACE/'!"; exit 11 ; }
+#           sha256sum Flameshot-${VERSION}.x86_64.AppImage | tee Flameshot-${VERSION}.x86_64.AppImage.sha256sum
+#       - name: Artifact Upload
+#         uses: actions/upload-artifact@v4
+#         with:
+#           name: ${{ env.PRODUCT }}-${{ env.VER_INFO }}-artifact-appimage-x86_64
+#           path: |
+#             ${{ github.workspace }}/Flameshot-*.x86_64.AppImage
+#             ${{ github.workspace }}/Flameshot-*.x86_64.AppImage.sha256sum
+#           overwrite: true
+#
   flatpak-pack:
-    name: Build flatpak on ubuntu 22.04
-    runs-on: ubuntu-22.04
+    name: Build flatpak on ubuntu 24.04
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout Source code
         if: github.event_name == 'push'
@@ -428,8 +429,8 @@ jobs:
           overwrite: true
 
   snap-pack:
-    name: Build snap on ubuntu 22.04
-    runs-on: ubuntu-22.04
+    name: Build snap on ubuntu latest
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout Source code
         if: github.event_name == 'push'
@@ -459,8 +460,7 @@ jobs:
       - name: Packaging snap
         uses: snapcore/action-build@v1
         id: snapcraft
-        with: 
-          snapcraft-args: --enable-experimental-extensions
+
       - name: Rename snap name
         shell: bash
         run: |
