@@ -4,22 +4,22 @@
 <context>
     <name>AbstractWidgetList</name>
     <message>
-        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/abstract_widget_list.cpp" line="67"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="52"/>
         <source>Add New</source>
         <translation>Pridať nové</translation>
     </message>
     <message>
-        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/abstract_widget_list.cpp" line="118"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="103"/>
         <source>Move Up</source>
         <translation>Posunúť sa nahor</translation>
     </message>
     <message>
-        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/abstract_widget_list.cpp" line="119"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="104"/>
         <source>Move Down</source>
         <translation>Presun nadol</translation>
     </message>
     <message>
-        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/abstract_widget_list.cpp" line="120"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="105"/>
         <source>Remove</source>
         <translation>Odstrániť</translation>
     </message>
@@ -53,33 +53,33 @@
 <context>
     <name>AppLauncherWidget</name>
     <message>
-        <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="43"/>
+        <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="49"/>
         <source>Open With</source>
         <translation>Otvoriť s</translation>
     </message>
     <message>
-        <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="58"/>
+        <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="78"/>
         <source>Launch in terminal</source>
         <translation>Otvoriť v termináli</translation>
     </message>
     <message>
-        <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="59"/>
+        <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="79"/>
         <source>Keep open after selection</source>
         <translation>Nechať otvorené po výbere</translation>
     </message>
     <message>
-        <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="95"/>
-        <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="110"/>
+        <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="115"/>
+        <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="148"/>
         <source>Error</source>
         <translation>Chyba</translation>
     </message>
     <message>
-        <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="95"/>
+        <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="115"/>
         <source>Unable to write in</source>
         <translation>Zlyhal zápis do</translation>
     </message>
     <message>
-        <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="110"/>
+        <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="148"/>
         <source>Unable to launch in terminal.</source>
         <translation>Nepodarilo sa spustiť v termináli.</translation>
     </message>
@@ -87,12 +87,12 @@
 <context>
     <name>ArrowTool</name>
     <message>
-        <location filename="../../src/tools/arrow/arrowtool.cpp" line="76"/>
+        <location filename="../../src/tools/arrow/arrowtool.cpp" line="77"/>
         <source>Arrow</source>
         <translation>Šípka</translation>
     </message>
     <message>
-        <location filename="../../src/tools/arrow/arrowtool.cpp" line="86"/>
+        <location filename="../../src/tools/arrow/arrowtool.cpp" line="87"/>
         <source>Set the Arrow as the paint tool</source>
         <translation>Nastaviť Šípku ako nástroj pre úpravy</translation>
     </message>
@@ -142,8 +142,6 @@
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="100"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="185"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="179"/>
-        <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_capturelauncher.h" line="185"/>
         <location filename="../../src/widgets/capturelauncher.cpp" line="52"/>
         <source> seconds</source>
         <translation> sekundy</translation>
@@ -151,56 +149,42 @@
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="165"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="186"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="184"/>
-        <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_capturelauncher.h" line="186"/>
         <source>Take new screenshot</source>
         <translation>Zachytiť novú snímku</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="66"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="181"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="180"/>
-        <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_capturelauncher.h" line="181"/>
         <source>Area:</source>
         <translation>Oblasť:</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="14"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="178"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="176"/>
-        <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_capturelauncher.h" line="178"/>
         <source>Capture Launcher</source>
         <translation>Spustenie zachytávania</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="34"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="179"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="177"/>
-        <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_capturelauncher.h" line="179"/>
         <source>TextLabel</source>
         <translation>TextovýPopis</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="51"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="180"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="178"/>
-        <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_capturelauncher.h" line="180"/>
         <source>Capture Mode</source>
         <translation>Režim zachytávania</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="80"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="183"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="181"/>
-        <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_capturelauncher.h" line="183"/>
         <source>Delay:</source>
         <translation>Oneskorenie:</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="93"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="184"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="183"/>
-        <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_capturelauncher.h" line="184"/>
         <source>WxH+x+y</source>
         <translation>WxH+x+y</translation>
     </message>
@@ -208,62 +192,77 @@
 <context>
     <name>CaptureWidget</name>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="106"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="118"/>
         <source>Unable to capture screen</source>
         <translation>Nepodarilo sa zachytiť obrazovku</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="382"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="422"/>
         <source>Mouse</source>
         <translation>Mouse</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="382"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="422"/>
         <source>Select screenshot area</source>
         <translation>Výber oblasti snímky obrazovky</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="397"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="436"/>
         <source>Mouse Wheel</source>
         <translation>Kolečko myši</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="397"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="436"/>
         <source>Change tool size</source>
         <translation>Zmena veľkosti nástroja</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="398"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="437"/>
         <source>Right Click</source>
         <translation>Kliknutie pravým tlačidlom</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="398"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="437"/>
         <source>Show color picker</source>
         <translation>Zobraziť dialóg na výber farby</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="400"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="439"/>
         <source>Open side panel</source>
         <translation>Otvorený bočný panel</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="401"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="440"/>
         <source>Esc</source>
         <translation>Esc</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="401"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="440"/>
         <source>Exit</source>
         <translation>Ukončiť</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="509"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="482"/>
+        <source>Quit Capture</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="483"/>
+        <source>Are you sure you want to quit capture?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="488"/>
+        <source>Do not show this again</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="683"/>
         <source>Flameshot has lost focus. Keyboard shortcuts won&apos;t work until you click somewhere.</source>
         <translation>Flameshot stratil pozornosť. Klávesové skratky nebudú fungovať, kým niekam nekliknete.</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="515"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="689"/>
         <source>Configuration error resolved. Launch `flameshot gui` again to apply it.</source>
         <translation>Chyba konfigurácie vyriešená. Spustite znova `flameshot gui`, aby ste ju použili.</translation>
     </message>
@@ -280,7 +279,7 @@ Použite kolečko myši pre zmenu hrúbky vybraného nástroja.
 Stlačte medzerník pre otvorenie postranného panelu.</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="949"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="1122"/>
         <source>Tool Settings</source>
         <translation>Nastavenia nástrojov</translation>
     </message>
@@ -314,74 +313,65 @@ Stlačte medzerník pre otvorenie postranného panelu.</translation>
 <context>
     <name>ColorDialog</name>
     <message>
-        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="14"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="19"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="311"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="318"/>
-        <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="318"/>
-        <location filename="../../cmake-build-relwithdebinfo/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="318"/>
         <source>Select Color</source>
         <translation>Vybrať farbu</translation>
     </message>
     <message>
-        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="55"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="60"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="312"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="319"/>
-        <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="319"/>
-        <location filename="../../cmake-build-relwithdebinfo/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="319"/>
         <source>Saturation</source>
         <translation>Nasýtenie</translation>
     </message>
     <message>
-        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="62"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="67"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="313"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="320"/>
-        <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="320"/>
-        <location filename="../../cmake-build-relwithdebinfo/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="320"/>
         <source>Hue</source>
         <translation>Odtieň</translation>
     </message>
     <message>
-        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="79"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="84"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="314"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="321"/>
-        <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="321"/>
-        <location filename="../../cmake-build-relwithdebinfo/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="321"/>
         <source>Hex</source>
         <translation>Hex</translation>
     </message>
     <message>
-        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="86"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="91"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="315"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="322"/>
-        <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="322"/>
-        <location filename="../../cmake-build-relwithdebinfo/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="322"/>
         <source>Blue</source>
         <translation>Blue</translation>
     </message>
     <message>
-        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="123"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="128"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="316"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="323"/>
-        <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="323"/>
-        <location filename="../../cmake-build-relwithdebinfo/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="323"/>
         <source>Value</source>
         <translation>Hodnota</translation>
     </message>
     <message>
-        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="130"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="135"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="317"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="324"/>
-        <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="324"/>
-        <location filename="../../cmake-build-relwithdebinfo/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="324"/>
         <source>Green</source>
         <translation>Green</translation>
     </message>
     <message>
-        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="137"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="142"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="318"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="325"/>
-        <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="325"/>
-        <location filename="../../cmake-build-relwithdebinfo/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="325"/>
         <source>Alpha</source>
         <translation>Alpha</translation>
     </message>
     <message>
-        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="144"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="149"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="319"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="326"/>
-        <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="326"/>
-        <location filename="../../cmake-build-relwithdebinfo/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="326"/>
         <source>Red</source>
         <translation>Red</translation>
     </message>
@@ -517,45 +507,45 @@ Stlačte medzerník pre otvorenie postranného panelu.</translation>
 <context>
     <name>ConfigHandler</name>
     <message>
-        <location filename="../../src/utils/confighandler.cpp" line="552"/>
+        <location filename="../../src/utils/confighandler.cpp" line="562"/>
         <source>Unrecognized setting: &apos;%1&apos;
 </source>
         <translation>Nerozpoznané nastavenie: &apos;%1&apos;
 </translation>
     </message>
     <message>
-        <location filename="../../src/utils/confighandler.cpp" line="560"/>
+        <location filename="../../src/utils/confighandler.cpp" line="570"/>
         <source>Unrecognized shortcut name: &apos;%1&apos;.
 </source>
         <translation>Nerozpoznaný názov skratky: &apos;%1&apos;.
 </translation>
     </message>
     <message>
-        <location filename="../../src/utils/confighandler.cpp" line="603"/>
+        <location filename="../../src/utils/confighandler.cpp" line="613"/>
         <source>Shortcut conflict: &apos;%1&apos; and &apos;%2&apos; have the same shortcut: %3
 </source>
         <translation>Konflikt skratiek: &apos;%1&apos; a &apos;%2&apos; majú rovnakú skratku: %3
 </translation>
     </message>
     <message>
-        <location filename="../../src/utils/confighandler.cpp" line="643"/>
+        <location filename="../../src/utils/confighandler.cpp" line="653"/>
         <source>Bad value in &apos;%1&apos;. Expected: %2
 </source>
         <translation>Zlá hodnota v &apos;%1&apos;. Očakávaná hodnota: %2
 </translation>
     </message>
     <message>
-        <location filename="../../src/utils/confighandler.cpp" line="693"/>
+        <location filename="../../src/utils/confighandler.cpp" line="703"/>
         <source>You have successfully resolved the configuration error.</source>
         <translation>Chybu konfigurácie ste úspešne vyriešili.</translation>
     </message>
     <message>
-        <location filename="../../src/utils/confighandler.cpp" line="716"/>
+        <location filename="../../src/utils/confighandler.cpp" line="726"/>
         <source>The configuration contains an error. Open configuration to resolve.</source>
         <translation>Konfigurácia obsahuje chybu. Otvorte konfiguráciu a vyriešte ju.</translation>
     </message>
     <message>
-        <location filename="../../src/utils/confighandler.cpp" line="770"/>
+        <location filename="../../src/utils/confighandler.cpp" line="780"/>
         <source>Bad config key &apos;%1&apos; in ConfigHandler. Please report this as a bug.</source>
         <translation>Zlý konfiguračný kľúč &apos;%1&apos; v ConfigHandler. Nahláste to ako chybu.</translation>
     </message>
@@ -625,17 +615,17 @@ Riešte ich ručne v konfiguračnom súbore.</translation>
         <translation>Konfigurácia</translation>
     </message>
     <message>
-        <location filename="../../src/config/configwindow.cpp" line="59"/>
+        <location filename="../../src/config/configwindow.cpp" line="68"/>
         <source>Interface</source>
         <translation>Používateľské rozhranie</translation>
     </message>
     <message>
-        <location filename="../../src/config/configwindow.cpp" line="69"/>
+        <location filename="../../src/config/configwindow.cpp" line="78"/>
         <source>Filename Editor</source>
         <translation>Editor názvov súborov</translation>
     </message>
     <message>
-        <location filename="../../src/config/configwindow.cpp" line="78"/>
+        <location filename="../../src/config/configwindow.cpp" line="59"/>
         <source>General</source>
         <translation>Všeobecné</translation>
     </message>
@@ -806,17 +796,17 @@ Riešte ich ručne v konfiguračnom súbore.</translation>
 <context>
     <name>Flameshot</name>
     <message>
-        <location filename="../../src/core/flameshot.cpp" line="111"/>
+        <location filename="../../src/core/flameshot.cpp" line="114"/>
         <source>Error</source>
         <translation>Chybné</translation>
     </message>
     <message>
-        <location filename="../../src/core/flameshot.cpp" line="111"/>
+        <location filename="../../src/core/flameshot.cpp" line="114"/>
         <source>Unable to close active modal widgets</source>
         <translation>Nemožno uzavrieť aktívne modal widgety</translation>
     </message>
     <message>
-        <location filename="../../src/core/flameshot.cpp" line="400"/>
+        <location filename="../../src/core/flameshot.cpp" line="412"/>
         <source>URL copied to clipboard.</source>
         <translation>URL skopírovaná do schránky.</translation>
     </message>
@@ -824,22 +814,22 @@ Riešte ich ručne v konfiguračnom súbore.</translation>
 <context>
     <name>FlameshotDaemon</name>
     <message>
-        <location filename="../../src/core/flameshotdaemon.cpp" line="363"/>
+        <location filename="../../src/core/flameshotdaemon.cpp" line="374"/>
         <source>New version %1 is available</source>
         <translation>Je dostupná nová verzia: %1</translation>
     </message>
     <message>
-        <location filename="../../src/core/flameshotdaemon.cpp" line="369"/>
+        <location filename="../../src/core/flameshotdaemon.cpp" line="380"/>
         <source>You have the latest version</source>
         <translation>Máte najnovšiu verziu</translation>
     </message>
     <message>
-        <location filename="../../src/core/flameshotdaemon.cpp" line="378"/>
+        <location filename="../../src/core/flameshotdaemon.cpp" line="389"/>
         <source>Failed to get information about the latest version.</source>
         <translation>Zneužívanie informácií o najnovšej verzii.</translation>
     </message>
     <message>
-        <location filename="../../src/core/flameshotdaemon.cpp" line="399"/>
+        <location filename="../../src/core/flameshotdaemon.cpp" line="411"/>
         <source>Unable to connect via DBus</source>
         <translation>Nie je možné pripojiť sa prostredníctvom DBus</translation>
     </message>
@@ -966,47 +956,47 @@ Riešte ich ručne v konfiguračnom súbore.</translation>
 <context>
     <name>GeneralConf</name>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="156"/>
-        <location filename="../../src/config/generalconf.cpp" line="326"/>
+        <location filename="../../src/config/generalconf.cpp" line="186"/>
+        <location filename="../../src/config/generalconf.cpp" line="387"/>
         <source>Import</source>
         <translation>Importovať</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="163"/>
-        <location filename="../../src/config/generalconf.cpp" line="171"/>
-        <location filename="../../src/config/generalconf.cpp" line="195"/>
-        <location filename="../../src/config/generalconf.cpp" line="681"/>
+        <location filename="../../src/config/generalconf.cpp" line="193"/>
+        <location filename="../../src/config/generalconf.cpp" line="201"/>
+        <location filename="../../src/config/generalconf.cpp" line="225"/>
+        <location filename="../../src/config/generalconf.cpp" line="756"/>
         <source>Error</source>
         <translation>Chyba</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="163"/>
+        <location filename="../../src/config/generalconf.cpp" line="193"/>
         <source>Unable to read file.</source>
         <translation>Zlyhalo čítanie súboru.</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="171"/>
-        <location filename="../../src/config/generalconf.cpp" line="195"/>
+        <location filename="../../src/config/generalconf.cpp" line="201"/>
+        <location filename="../../src/config/generalconf.cpp" line="225"/>
         <source>Unable to write file.</source>
         <translation>Zlyhal zápis do súboru.</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="182"/>
+        <location filename="../../src/config/generalconf.cpp" line="212"/>
         <source>Save File</source>
         <translation>Uložiť súbor</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="204"/>
+        <location filename="../../src/config/generalconf.cpp" line="234"/>
         <source>Confirm Reset</source>
         <translation>Potvrdiť Reset</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="205"/>
+        <location filename="../../src/config/generalconf.cpp" line="235"/>
         <source>Are you sure you want to reset the configuration?</source>
         <translation>Naozaj si želáte resetovať aktuálnu konfiguráciu?</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="236"/>
+        <location filename="../../src/config/generalconf.cpp" line="266"/>
         <source>Show help message</source>
         <translation>Zobraziť nápovedu</translation>
     </message>
@@ -1015,7 +1005,7 @@ Riešte ich ručne v konfiguračnom súbore.</translation>
         <translation type="vanished">Zobraziť nápovedu na začiatku počas režimu zachytávania obrazovky.</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="260"/>
+        <location filename="../../src/config/generalconf.cpp" line="291"/>
         <source>Show the side panel button</source>
         <translation>Zobraziť tlačidlo na postrannom paneli</translation>
     </message>
@@ -1024,12 +1014,12 @@ Riešte ich ručne v konfiguračnom súbore.</translation>
         <translation type="vanished">V režime zachytávania zobrazovať tlačidlo na postrannom paneli.</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="273"/>
+        <location filename="../../src/config/generalconf.cpp" line="304"/>
         <source>Show desktop notifications</source>
         <translation>Zobraziť systémové upozornenia</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="286"/>
+        <location filename="../../src/config/generalconf.cpp" line="329"/>
         <source>Show tray icon</source>
         <translation>Zobraziť stavovú ikonu</translation>
     </message>
@@ -1038,32 +1028,32 @@ Riešte ich ručne v konfiguračnom súbore.</translation>
         <translation type="vanished">Zobraziť ikonu v stavovej oblasti</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="299"/>
+        <location filename="../../src/config/generalconf.cpp" line="360"/>
         <source>Confirmation required to delete screenshot from the latest uploads</source>
         <translation>Odstránenie snímky z posledných nahraní je vyžadované potvrdenie</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="314"/>
+        <location filename="../../src/config/generalconf.cpp" line="375"/>
         <source>Configuration File</source>
         <translation>Súbor s konfiguráciou</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="319"/>
+        <location filename="../../src/config/generalconf.cpp" line="380"/>
         <source>Export</source>
         <translation>Exportovať</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="333"/>
+        <location filename="../../src/config/generalconf.cpp" line="394"/>
         <source>Reset</source>
         <translation>Resetovať</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="343"/>
+        <location filename="../../src/config/generalconf.cpp" line="405"/>
         <source>Automatic check for updates</source>
         <translation>Automatická kontrola aktualizácií</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="356"/>
+        <location filename="../../src/config/generalconf.cpp" line="419"/>
         <source>Allow multiple flameshot GUI instances simultaneously</source>
         <translation>Povolenie viacerých inštancií grafického rozhrania Flameshot súčasne</translation>
     </message>
@@ -1072,32 +1062,29 @@ Riešte ich ručne v konfiguračnom súbore.</translation>
         <translation type="vanished">To vám umožní robiť napríklad snímky obrazovky samotného Flameshotu.</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="369"/>
-        <location filename="../../src/config/generalconf.cpp" line="371"/>
         <source>Automatically close daemon when it is not needed</source>
-        <translation>Automatické zatvorenie démona, keď nie je potrebný</translation>
+        <translation type="vanished">Automatické zatvorenie démona, keď nie je potrebný</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="381"/>
         <source>Launch at startup</source>
-        <translation>Spustiť pri štarte</translation>
+        <translation type="vanished">Spustiť pri štarte</translation>
     </message>
     <message>
         <source>Launch Flameshot</source>
         <translation type="vanished">Spustiť Flameshot</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="393"/>
+        <location filename="../../src/config/generalconf.cpp" line="456"/>
         <source>Show welcome message on launch</source>
         <translation>Pri spustení zobraziť uvítaciu správu</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="408"/>
+        <location filename="../../src/config/generalconf.cpp" line="484"/>
         <source>Use large predefined color palette</source>
         <translation>Používanie veľkej preddefinovanej palety farieb</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="432"/>
+        <location filename="../../src/config/generalconf.cpp" line="508"/>
         <source>Copy URL after upload</source>
         <translation>Kopírovať URL po nahratí</translation>
     </message>
@@ -1106,7 +1093,7 @@ Riešte ich ručne v konfiguračnom súbore.</translation>
         <translation type="vanished">Po nahratí skopírovať URL a zavrieť okno</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="444"/>
+        <location filename="../../src/config/generalconf.cpp" line="520"/>
         <source>Save image after copy</source>
         <translation>Uložiť obrázok po kopírovaní</translation>
     </message>
@@ -1115,181 +1102,312 @@ Riešte ich ručne v konfiguračnom súbore.</translation>
         <translation type="vanished">Uložiť obrázok so súborom po jeho skopírovaní</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="237"/>
+        <location filename="../../src/config/generalconf.cpp" line="267"/>
         <source>Show the help message at the beginning in the capture mode</source>
         <translation>V režime zachytávania zobraziť text pomocníka na začiatku</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="247"/>
+        <location filename="../../src/config/generalconf.cpp" line="277"/>
         <source>Use last region for GUI mode</source>
         <translation type="unfinished">Použite posledný región</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="248"/>
+        <location filename="../../src/config/generalconf.cpp" line="279"/>
         <source>Use the last region as the default selection for the next screenshot in GUI mode</source>
         <translation type="unfinished">Používa posledný región ako predvolený výber pre ďalší snímku obrazovky</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="262"/>
+        <location filename="../../src/config/generalconf.cpp" line="293"/>
         <source>Show the side panel toggle button in the capture mode</source>
         <translation>Zobraziť bočný panel prepnúť tlačidlo v režime zachytenia</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="274"/>
+        <location filename="../../src/config/generalconf.cpp" line="305"/>
         <source>Enable desktop notifications</source>
         <translation>Povoliť systémové upozornenia</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="287"/>
+        <location filename="../../src/config/generalconf.cpp" line="316"/>
+        <source>Show abort notifications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="317"/>
+        <source>Enable abort notifications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="330"/>
         <source>Show icon in the system tray</source>
         <translation>Zobraziť ikonu v systémovej lište</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="302"/>
+        <location filename="../../src/config/generalconf.cpp" line="343"/>
+        <source>Use grim to capture screenshots</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="345"/>
+        <source>Grim is a wayland only utility to capture screens based on the screencopy protocol. Generally only enable on minimal wayland window managers like sway, hyprland, etc.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="363"/>
         <source>Ask for confirmation to delete screenshot from the latest uploads</source>
         <translation>Pred odstránením snímky z posledného nahrania sa opýtať</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="344"/>
+        <location filename="../../src/config/generalconf.cpp" line="406"/>
         <source>Check for updates automatically</source>
         <translation>Kontrolovať aktualizácie automaticky</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="357"/>
+        <location filename="../../src/config/generalconf.cpp" line="420"/>
         <source>This allows you to take screenshots of Flameshot itself for example</source>
         <translation>Toto vám umožní urobiť snímku obrazovky samotného Flameshot-u</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="383"/>
         <source>Launch Flameshot daemon when computer is booted</source>
-        <translation>Pri štarte počítača spúštať Flameshot démona</translation>
+        <translation type="vanished">Pri štarte počítača spúštať Flameshot démona</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="396"/>
+        <location filename="../../src/config/generalconf.cpp" line="459"/>
         <source>Show the welcome message box in the middle of the screen while taking a screenshot</source>
         <translation>Pri vytváraní snímky zobraziť okno s privítaním v strede obrazovky</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="410"/>
+        <location filename="../../src/config/generalconf.cpp" line="486"/>
         <source>Use a large predefined color palette</source>
         <translation>Použiť veľkú paletu s preddefinovanými farbami</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="420"/>
+        <location filename="../../src/config/generalconf.cpp" line="496"/>
         <source>Copy on double click</source>
         <translation>Kopírovanie na dvojité kliknutie</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="421"/>
         <source>Enable Copy on Double Click</source>
-        <translation>Povoliť kópiu na dvojité kliknite</translation>
+        <translation type="vanished">Povoliť kópiu na dvojité kliknite</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="434"/>
         <source>Copy URL and close window after uploading was successful</source>
-        <translation>Po úspešnom nahratí skopírovať adresu URL a zavrieť okno</translation>
+        <translation type="vanished">Po úspešnom nahratí skopírovať adresu URL a zavrieť okno</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="446"/>
+        <location filename="../../src/config/generalconf.cpp" line="432"/>
+        <source>Automatically unload from memory when it is not needed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="433"/>
+        <source>Automatically close daemon (background process) when it is not needed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="444"/>
+        <source>Launch in background at startup</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="445"/>
+        <source>Launch Flameshot daemon (background process) when computer is booted</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="470"/>
+        <source>Ask before quit capture</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="473"/>
+        <source>Show the confirmation prompt before ESC quit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="498"/>
+        <source>Enable Copy to clipboard on Double Click</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="510"/>
+        <source>Copy URL after uploading was successful</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="522"/>
         <source>After copying the screenshot, save it to a file as well</source>
         <translation>Po skopírovaní snímky ho tiež uložiť do súboru</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="453"/>
+        <location filename="../../src/config/generalconf.cpp" line="529"/>
         <source>Save Path</source>
         <translation>Cesta pre ukladanie</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="469"/>
+        <location filename="../../src/config/generalconf.cpp" line="545"/>
         <source>Change...</source>
         <translation>Zmeniť...</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="477"/>
+        <location filename="../../src/config/generalconf.cpp" line="553"/>
         <source>Use fixed path for screenshots to save</source>
         <translation>Pre ukladanie snímok obrazovky používať rovnakú cestu</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="489"/>
+        <location filename="../../src/config/generalconf.cpp" line="565"/>
         <source>Preferred save file extension:</source>
         <translation>Uprednostňovaná prípona uloženého súboru:</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="518"/>
+        <location filename="../../src/config/generalconf.cpp" line="594"/>
         <source>Latest Uploads Max Size</source>
         <translation>Maximálna Veľkosť Posledných Uploadov</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="540"/>
+        <location filename="../../src/config/generalconf.cpp" line="616"/>
         <source>Imgur Application Client ID</source>
         <translation>Imgur Aplikácia Klient ID</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="571"/>
+        <location filename="../../src/config/generalconf.cpp" line="647"/>
         <source>Undo limit</source>
         <translation>Vrátiť limiť</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="597"/>
-        <location filename="../../src/config/generalconf.cpp" line="599"/>
+        <location filename="../../src/config/generalconf.cpp" line="676"/>
         <source>Use JPG format for clipboard (PNG default)</source>
         <translation>Pre schránku používať JPG (štandardne PNG)</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="629"/>
+        <location filename="../../src/config/generalconf.cpp" line="678"/>
+        <source>Use lossy JPG format for clipboard (lossless PNG default)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="704"/>
         <source>Copy file path after save</source>
         <translation>Po uložení skopírovať cestu k súboru</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="630"/>
+        <location filename="../../src/config/generalconf.cpp" line="705"/>
         <source>Copy the file path to clipboard after the file is saved</source>
         <translation>Skopírovať cestu k súboru do schránky po tom, ako je súbor uložený</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="641"/>
+        <location filename="../../src/config/generalconf.cpp" line="716"/>
         <source>Anti-aliasing image when zoom the pinned image</source>
         <translation>Vyhladzovanie obrazu pri zväčšení pripnutého obrázka</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="643"/>
+        <location filename="../../src/config/generalconf.cpp" line="718"/>
         <source>After zooming the pinned image, should the image get smoothened or stay pixelated</source>
         <translation>Po priblížení pripnutého obrázka sa má obrázok vyhladiť alebo zostať pixelový</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="654"/>
-        <location filename="../../src/config/generalconf.cpp" line="656"/>
+        <location filename="../../src/config/generalconf.cpp" line="729"/>
+        <location filename="../../src/config/generalconf.cpp" line="731"/>
         <source>Upload image without confirmation</source>
         <translation>Nahrávanie obrázku bez potvrdenia</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="672"/>
+        <location filename="../../src/config/generalconf.cpp" line="747"/>
         <source>Choose a Folder</source>
         <translation>Vyberte priečinok</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="681"/>
+        <location filename="../../src/config/generalconf.cpp" line="756"/>
         <source>Unable to write to directory.</source>
         <translation>Zápis do adresára nie je možný.</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="690"/>
+        <location filename="../../src/config/generalconf.cpp" line="765"/>
         <source>Show magnifier</source>
         <translation>Zobraziť lupu</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="691"/>
+        <location filename="../../src/config/generalconf.cpp" line="766"/>
         <source>Enable a magnifier while selecting the screenshot area</source>
         <translation>Zapnúť lupu počas výberu oblasti na zosnímanie</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="702"/>
+        <location filename="../../src/config/generalconf.cpp" line="777"/>
         <source>Square shaped magnifier</source>
         <translation>Hranatá lupa</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="703"/>
+        <location filename="../../src/config/generalconf.cpp" line="778"/>
         <source>Make the magnifier to be square-shaped</source>
         <translation>Lupa bude v tvare štvorca</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="794"/>
+        <source>Milliseconds before geometry display hides; 0 means do not hide</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="797"/>
+        <source>Set geometry display timeout (ms)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="805"/>
+        <source>Selection Geometry Display</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="812"/>
+        <source>Display Location</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="815"/>
+        <source>None</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="816"/>
+        <source>Top Left</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="818"/>
+        <source>Top Right</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="820"/>
+        <source>Bottom Left</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="822"/>
+        <source>Bottom Right</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="824"/>
+        <source>Center</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="849"/>
+        <source>Quality range of 0-100; Higher number is better quality and larger file size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="853"/>
+        <source>JPEG Quality</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="864"/>
+        <source>Reverse arrow</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="865"/>
+        <source>Draw the arrow head first</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1400,57 +1518,57 @@ Riešte ich ručne v konfiguračnom súbore.</translation>
         <translation>Upload image</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="51"/>
+        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="49"/>
         <source>Uploading Image</source>
         <translation>Nahrávam obrázok</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="130"/>
+        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="128"/>
         <source>Copy URL</source>
         <translation>Kopírovať URL</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="131"/>
+        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="129"/>
         <source>Open URL</source>
         <translation>Otvoriť URL</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="132"/>
+        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="130"/>
         <source>Delete image</source>
         <translation>Vymazať obrázok</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="133"/>
+        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="131"/>
         <source>Image to Clipboard.</source>
         <translation>Obrázok do schránky.</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="134"/>
+        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="132"/>
         <source>Save image</source>
         <translation>Uložiť obrázok</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="164"/>
+        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="162"/>
         <source>Unable to open the URL.</source>
         <translation>Nepodarilo sa otvoriť URL.</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="171"/>
+        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="169"/>
         <source>URL copied to clipboard.</source>
         <translation>URL skopírovaná do schránky.</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="177"/>
+        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="175"/>
         <source>Screenshot copied to clipboard.</source>
         <translation>Snímka obrazovky bola skopírovaná do schránky.</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="191"/>
+        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="189"/>
         <source>Unable to save the screenshot to disk.</source>
         <translation>Nepodarilo sa uložiť snímku na disk.</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="194"/>
+        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="192"/>
         <source>Screenshot saved.</source>
         <translation>Snímka bola uložená.</translation>
     </message>
@@ -1524,64 +1642,48 @@ Riešte ich ručne v konfiguračnom súbore.</translation>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="14"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="117"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="117"/>
-        <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_infowindow.h" line="117"/>
         <source>About</source>
         <translation>O programe</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="26"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="118"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="118"/>
-        <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_infowindow.h" line="118"/>
         <source>Icon</source>
         <translation>Ikona</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="43"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="119"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="119"/>
-        <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_infowindow.h" line="119"/>
         <source>License</source>
         <translation>Licencia</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="56"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="120"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="120"/>
-        <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_infowindow.h" line="120"/>
         <source>GPLv3+</source>
         <translation>GPLv3+</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="89"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="121"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="121"/>
-        <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_infowindow.h" line="121"/>
         <source>Version</source>
         <translation>Verzia</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="102"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="122"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="122"/>
-        <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_infowindow.h" line="122"/>
         <source>Flameshot v</source>
         <translation>Flameshot v</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="115"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="123"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="123"/>
-        <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_infowindow.h" line="123"/>
         <source>OS Info</source>
         <translation>Informácie o OS</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="128"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="124"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="124"/>
-        <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_infowindow.h" line="124"/>
         <source>Copy Info</source>
         <translation>Kopírovať informácie</translation>
     </message>
@@ -1739,195 +1841,235 @@ Riešte ich ručne v konfiguračnom súbore.</translation>
 <context>
     <name>PinWidget</name>
     <message>
-        <location filename="../../src/tools/pin/pinwidget.cpp" line="225"/>
+        <location filename="../../src/tools/pin/pinwidget.cpp" line="291"/>
         <source>Context menu</source>
         <translation>Context menu</translation>
     </message>
     <message>
-        <location filename="../../src/tools/pin/pinwidget.cpp" line="227"/>
+        <location filename="../../src/tools/pin/pinwidget.cpp" line="293"/>
         <source>Copy to clipboard</source>
         <translation>Kopíruje do schránky</translation>
     </message>
     <message>
-        <location filename="../../src/tools/pin/pinwidget.cpp" line="234"/>
+        <location filename="../../src/tools/pin/pinwidget.cpp" line="300"/>
         <source>Save to file</source>
         <translation>Uložiť súbor</translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/pin/pinwidget.cpp" line="307"/>
+        <source>Rotate Right</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/pin/pinwidget.cpp" line="312"/>
+        <source>Rotate Left</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/pin/pinwidget.cpp" line="317"/>
+        <source>Increase Opacity</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/pin/pinwidget.cpp" line="324"/>
+        <source>Decrease Opacity</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/pin/pinwidget.cpp" line="331"/>
+        <source>Close</source>
+        <translation type="unfinished">Zavrieť</translation>
     </message>
 </context>
 <context>
     <name>PixelateTool</name>
     <message>
-        <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="24"/>
+        <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="26"/>
         <source>Pixelate</source>
         <translation>Rozštvorčekovanie</translation>
     </message>
     <message>
-        <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="34"/>
+        <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="36"/>
+        <source>Set Pixelate as the paint tool.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Set Pixelate as the paint tool</source>
-        <translation>Nastaviť Rozštvorčekovanie ako nástroj pre úpravy</translation>
+        <translation type="vanished">Nastaviť Rozštvorčekovanie ako nástroj pre úpravy</translation>
     </message>
 </context>
 <context>
     <name>QHotkey</name>
     <message>
-        <location filename="../../external/QHotkey/qhotkey.cpp" line="307"/>
         <source>Failed to register %1. Error: %2</source>
-        <translation>Nepodarilo sa zaregistrovať %1. Chyba: %2</translation>
+        <translation type="vanished">Nepodarilo sa zaregistrovať %1. Chyba: %2</translation>
     </message>
     <message>
-        <location filename="../../external/QHotkey/qhotkey.cpp" line="329"/>
         <source>Failed to unregister %1. Error: %2</source>
-        <translation>Nepodarilo sa odregistrovať %1. Chyba: %2</translation>
+        <translation type="vanished">Nepodarilo sa odregistrovať %1. Chyba: %2</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../src/main.cpp" line="136"/>
+        <location filename="../../src/main.cpp" line="179"/>
         <source>Unable to connect via DBus</source>
         <translation>Nie je možné pripojiť sa prostredníctvom DBus</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="152"/>
+        <location filename="../../src/main.cpp" line="196"/>
         <source>Powerful yet simple to use screenshot software.</source>
         <translation>Mocný, no zároveň jednoduchý softvér na zachytávanie obrazovky.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="153"/>
+        <location filename="../../src/main.cpp" line="197"/>
         <source>See</source>
         <translation>Pozrite</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="156"/>
         <source>Capture the entire desktop.</source>
-        <translation>Zachytiť celú plochu.</translation>
+        <translation type="vanished">Zachytiť celú plochu.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="158"/>
+        <location filename="../../src/main.cpp" line="203"/>
         <source>Open the capture launcher.</source>
         <translation>Otvoriť spúšťač zachytávania.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="161"/>
+        <location filename="../../src/main.cpp" line="206"/>
         <source>Start a manual capture in GUI mode.</source>
         <translation>Spustiť manuálne zachytávanie v GUI režime.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="163"/>
+        <location filename="../../src/main.cpp" line="208"/>
         <source>Configure</source>
         <translation>Konfigurovať</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="165"/>
         <source>Capture a single screen.</source>
-        <translation>Zachytiť jeden monitor.</translation>
+        <translation type="vanished">Zachytiť jeden monitor.</translation>
     </message>
     <message>
         <source>Path where the capture will be saved</source>
         <translation type="vanished">Cesta, kam bude snímka uložená</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="170"/>
+        <location filename="../../src/main.cpp" line="201"/>
+        <source>Capture screenshot of all monitors at the same time.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/main.cpp" line="211"/>
+        <source>Capture a screenshot of the specified monitor.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/main.cpp" line="216"/>
         <source>Existing directory or new file to save to</source>
         <translation>Existujúci adresár alebo nový súbor na uloženie</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="173"/>
+        <location filename="../../src/main.cpp" line="219"/>
         <source>Save the capture to the clipboard</source>
         <translation>Uložiť snímku do schránky</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="175"/>
+        <location filename="../../src/main.cpp" line="221"/>
         <source>Pin the capture to the screen</source>
         <translation>Pripnutie snímky k obrazovke</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="177"/>
+        <location filename="../../src/main.cpp" line="223"/>
         <source>Upload screenshot</source>
         <translation>Upload screenshot</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="179"/>
+        <location filename="../../src/main.cpp" line="225"/>
         <source>Delay time in milliseconds</source>
         <translation>Oneskorenie času v milisekundách</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="184"/>
+        <location filename="../../src/main.cpp" line="230"/>
         <source>Repeat screenshot with previously selected region</source>
         <translation>Opakujte screenshot s predtým vybraným regiónom</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="187"/>
+        <location filename="../../src/main.cpp" line="233"/>
         <source>Screenshot region to select</source>
         <translation>Oblasť obrazovky na výber</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="190"/>
+        <location filename="../../src/main.cpp" line="236"/>
         <source>Set the filename pattern</source>
         <translation>Nastaviť masku pre pomenovanie súborov</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="194"/>
+        <location filename="../../src/main.cpp" line="240"/>
         <source>Accept capture as soon as a selection is made</source>
         <translation>Akceptovať zachytenie hneď po výbere</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="196"/>
+        <location filename="../../src/main.cpp" line="242"/>
         <source>Enable or disable the trayicon</source>
         <translation>Povoliť alebo zakázať ikonu v lište</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="200"/>
+        <location filename="../../src/main.cpp" line="246"/>
         <source>Enable or disable run at startup</source>
         <translation>Povoliť alebo zakázáť spustenie pri štarte systému</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="203"/>
+        <location filename="../../src/main.cpp" line="250"/>
+        <source>Enable or disable the notifications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/main.cpp" line="253"/>
         <source>Check the configuration for errors</source>
         <translation>Kontrola konfigurácie na chyby</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="206"/>
+        <location filename="../../src/main.cpp" line="256"/>
         <source>Show the help message in the capture mode</source>
         <translation>Ukazovať nápovedu v režime zachytávania</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="209"/>
+        <location filename="../../src/main.cpp" line="259"/>
         <source>Define the main UI color</source>
         <translation>Nastaviť farbu hlavného používateľského rozhrania</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="213"/>
+        <location filename="../../src/main.cpp" line="263"/>
         <source>Define the contrast UI color</source>
         <translation>Nastaviť kontrastnú farbu používateľského rozhrania</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="216"/>
+        <location filename="../../src/main.cpp" line="266"/>
         <source>Print raw PNG capture</source>
         <translation>Zobraziť surovú PNG snímku</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="219"/>
+        <location filename="../../src/main.cpp" line="269"/>
         <source>Print geometry of the selection in the format WxH+X+Y. Does nothing if raw is specified</source>
         <translation>Zobraziť geometriu výberu vo formáte Š D X Y. Neurobí nič pri nastavení raw</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="223"/>
+        <location filename="../../src/main.cpp" line="273"/>
         <source>Define the screen to capture (starting from 0)</source>
         <translation>Definujte obrazovku, ktorú chcete zachytiť (od 0)</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="243"/>
+        <location filename="../../src/main.cpp" line="293"/>
         <source>Invalid delay, it must be a number greater than 0</source>
         <translation>Neplatné oneskorenie, musí to byť číslo väčšie ako 0</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="246"/>
+        <location filename="../../src/main.cpp" line="296"/>
         <source>Invalid region, use &apos;WxH+X+Y&apos; or &apos;all&apos; or &apos;screen0/screen1/...&apos;.</source>
         <translation>Neplatná oblasť, použite &apos;WxH+X+Y&apos; alebo &apos;all&apos; alebo &apos;screen0/screen1/...&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="259"/>
+        <location filename="../../src/main.cpp" line="309"/>
         <source>Invalid path, must be an existing directory or a new file in an existing directory</source>
         <translation>Nesprávna cesta, musí to byť existujúci adresár alebo nový súbor v existujúcom adresári</translation>
     </message>
@@ -1936,17 +2078,17 @@ Riešte ich ručne v konfiguračnom súbore.</translation>
         <translation type="vanished">Nastaviť monitor, ktorý bude zachytávaný</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="224"/>
+        <location filename="../../src/main.cpp" line="274"/>
         <source>default: screen containing the cursor</source>
         <translation>predvolené: monitor, na ktorom je kurzor myši</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="225"/>
+        <location filename="../../src/main.cpp" line="275"/>
         <source>Screen number</source>
         <translation>Číslo monitora</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="234"/>
+        <location filename="../../src/main.cpp" line="284"/>
         <source>Invalid color, this flag supports the following formats:
 - #RGB (each of R, G, and B is a single hex digit)
 - #RRGGBB
@@ -1967,7 +2109,7 @@ Možno budete musieť napísať pred &apos;#&apos; opačnú lomku, teda &apos;\#
         <translation type="vanished">Neplatné oneskorenie, musí byť vyššie ako 0</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="245"/>
+        <location filename="../../src/main.cpp" line="295"/>
         <source>Invalid screen number, it must be non negative</source>
         <translation>Neplatné číslo monitora, môže byť len kladné</translation>
     </message>
@@ -1976,7 +2118,7 @@ Možno budete musieť napísať pred &apos;#&apos; opačnú lomku, teda &apos;\#
         <translation type="vanished">Neplatná cesta, musí sa jednať o skutočnú cestu na systéme</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="272"/>
+        <location filename="../../src/main.cpp" line="322"/>
         <source>Invalid value, it must be defined as &apos;true&apos; or &apos;false&apos;</source>
         <translation>Neplatná hodnota, musí byť definovaná ako &apos;pravda&apos; alebo &apos;nepravda&apos;</translation>
     </message>
@@ -1991,8 +2133,8 @@ Možno budete musieť napísať pred &apos;#&apos; opačnú lomku, teda &apos;\#
         <translation>Zlyhal zápis do</translation>
     </message>
     <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="136"/>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="138"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="196"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="198"/>
         <source>Capture saved to clipboard.</source>
         <translation>Snímka uložená do schránky.</translation>
     </message>
@@ -2001,29 +2143,29 @@ Možno budete musieť napísať pred &apos;#&apos; opačnú lomku, teda &apos;\#
         <translation type="vanished">Snímka uložená do schránky</translation>
     </message>
     <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="122"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="182"/>
         <source>Error while saving to clipboard</source>
         <translation>Chyba pri ukladaní do schránky</translation>
     </message>
     <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="46"/>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="198"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="62"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="268"/>
         <source>Capture saved as </source>
         <translation>Snímka uložená ako </translation>
     </message>
     <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="50"/>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="207"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="66"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="277"/>
         <source>Error trying to save as </source>
         <translation>Chyba pri ukladaní do </translation>
     </message>
     <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="181"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="245"/>
         <source>Save screenshot</source>
         <translation>Uložiť snímku</translation>
     </message>
     <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="203"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="273"/>
         <source>Path copied to clipboard as </source>
         <translation>Incorrect path, must be an existing directory or a new file in an existing directory </translation>
     </message>
@@ -2040,17 +2182,17 @@ Možno budete musieť napísať pred &apos;#&apos; opačnú lomku, teda &apos;\#
         <translation type="vanished">Snímka je uložená a skopírovaná do schránky ako </translation>
     </message>
     <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="214"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="284"/>
         <source>Save Error</source>
         <translation>Chyba pri ukladaní</translation>
     </message>
     <message>
-        <location filename="../../src/core/flameshot.cpp" line="148"/>
+        <location filename="../../src/core/flameshot.cpp" line="151"/>
         <source>Requested screen exceeds screen count</source>
         <translation>Požadovaná obrazovka presahuje počet obrazov</translation>
     </message>
     <message>
-        <location filename="../../src/core/flameshot.cpp" line="378"/>
+        <location filename="../../src/core/flameshot.cpp" line="390"/>
         <source>Full screen screenshot pinned to screen</source>
         <translation>Snímka celej obrazovky pripnutá na obrazovku</translation>
     </message>
@@ -2064,14 +2206,22 @@ Možno budete musieť napísať pred &apos;#&apos; opačnú lomku, teda &apos;\#
         <translation>Voľby</translation>
     </message>
     <message>
-        <location filename="../../src/cli/commandlineparser.cpp" line="68"/>
         <source>Arguments</source>
-        <translation>Argumenty</translation>
+        <translation type="vanished">Argumenty</translation>
+    </message>
+    <message>
+        <source>arguments</source>
+        <translation type="vanished">argumenty</translation>
+    </message>
+    <message>
+        <location filename="../../src/cli/commandlineparser.cpp" line="68"/>
+        <source>Subcommands</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="329"/>
-        <source>arguments</source>
-        <translation>argumenty</translation>
+        <source>subcommands</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="330"/>
@@ -2146,27 +2296,27 @@ Možno budete musieť napísať pred &apos;#&apos; opačnú lomku, teda &apos;\#
         <translation type="vanished">Vymazať momentálny nástroj</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="189"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="199"/>
         <source>Quit capture</source>
         <translation>Ukončiť zachytávanie</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="197"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="207"/>
         <source>Screenshot history</source>
         <translation>História snímok</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="200"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="210"/>
         <source>Capture screen</source>
         <translation>Zachytiť obrazovku</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="207"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="217"/>
         <source>Show color picker</source>
         <translation>Zobraziť dialóg na výber farby</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="208"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="218"/>
         <source>Change the tool&apos;s size</source>
         <translation>Zmena veľkosti nástroja</translation>
     </message>
@@ -2221,17 +2371,36 @@ Možno budete musieť napísať pred &apos;#&apos; opačnú lomku, teda &apos;\#
 <context>
     <name>ScreenGrabber</name>
     <message>
-        <location filename="../../src/utils/screengrabber.cpp" line="112"/>
         <source>Unable to detect desktop environment (GNOME? KDE? Sway? ...)</source>
-        <translation>Nie je možné detekovať stolové prostredie (GNOME? KDE? Sway? ...)</translation>
+        <translation type="vanished">Nie je možné detekovať stolové prostredie (GNOME? KDE? Sway? ...)</translation>
     </message>
     <message>
-        <location filename="../../src/utils/screengrabber.cpp" line="115"/>
+        <location filename="../../src/utils/screengrabber.cpp" line="54"/>
+        <source>The universal wayland screen capture adapter requires Grim as the screen capture component of wayland. If the screen capture component is missing, please install it!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/screengrabber.cpp" line="169"/>
+        <source>If the useGrimAdapter setting is not enabled, the dbus protocol will be used. It should be noted that using the dbus protocol under wayland is not recommended. It is recommended to enable the useGrimAdapter setting in flameshot.ini to activate the grim-based general wayland screenshot adapter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/screengrabber.cpp" line="180"/>
+        <source>grim&apos;s screenshot component is implemented based on wlroots, it may not be used in GNOME or similar desktop environments</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/screengrabber.cpp" line="192"/>
+        <source>Unable to detect desktop environment (GNOME? KDE? Qile? Sway? ...)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/screengrabber.cpp" line="195"/>
         <source>Hint: try setting the XDG_CURRENT_DESKTOP environment variable.</source>
         <translation>Tip: skúste nastaviť XDG_CURRENT_DESKTOP prostredie premenné.</translation>
     </message>
     <message>
-        <location filename="../../src/utils/screengrabber.cpp" line="120"/>
+        <location filename="../../src/utils/screengrabber.cpp" line="200"/>
         <source>Unable to capture screen</source>
         <translation>Nepodarilo sa zachytiť obrazovku</translation>
     </message>
@@ -2252,27 +2421,27 @@ Možno budete musieť napísať pred &apos;#&apos; opačnú lomku, teda &apos;\#
 <context>
     <name>SetShortcutDialog</name>
     <message>
-        <location filename="../../src/config/setshortcutwidget.cpp" line="17"/>
+        <location filename="../../src/config/setshortcutwidget.cpp" line="18"/>
         <source>Set Shortcut</source>
         <translation>Nastaviť klávesovú skratku</translation>
     </message>
     <message>
-        <location filename="../../src/config/setshortcutwidget.cpp" line="23"/>
+        <location filename="../../src/config/setshortcutwidget.cpp" line="24"/>
         <source>Enter new shortcut to change </source>
         <translation>Pre zmenu zadajte novú klávesovú skratku </translation>
     </message>
     <message>
-        <location filename="../../src/config/setshortcutwidget.cpp" line="37"/>
+        <location filename="../../src/config/setshortcutwidget.cpp" line="38"/>
         <source>Press Esc to cancel or ⌘+Backspace to disable the keyboard shortcut.</source>
         <translation>Stlačte Esc pre zrušenie alebo ⌘+Backspace pre vypnutie klávesovej skratky.</translation>
     </message>
     <message>
-        <location filename="../../src/config/setshortcutwidget.cpp" line="41"/>
+        <location filename="../../src/config/setshortcutwidget.cpp" line="42"/>
         <source>Press Esc to cancel or Backspace to disable the keyboard shortcut.</source>
         <translation>Ak chcete zrušiť klávesovú skratku stlačte Esc alebo Backspace.</translation>
     </message>
     <message>
-        <location filename="../../src/config/setshortcutwidget.cpp" line="46"/>
+        <location filename="../../src/config/setshortcutwidget.cpp" line="47"/>
         <source>Flameshot must be restarted for changes to take effect.</source>
         <translation>Aby sa zmeny prejavili, musí sa Flameshot reštartovať.</translation>
     </message>
@@ -2330,47 +2499,76 @@ Možno budete musieť napísať pred &apos;#&apos; opačnú lomku, teda &apos;\#
         <translation>Zmeniť rozmery výberu o 1 pixel nadol</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="179"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="180"/>
+        <source>Symmetrically decrease width by 2px</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="182"/>
+        <source>Symmetrically increase width by 2px</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="184"/>
+        <source>Symmetrically increase height by 2px</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="186"/>
+        <source>Symmetrically decrease height by 2px</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="187"/>
         <source>Select entire screen</source>
         <translation>Vybrať celú obrazovku</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="180"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="188"/>
         <source>Move selection left 1px</source>
         <translation>Presunúť výber vľavo o 1 pixel</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="181"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="189"/>
         <source>Move selection right 1px</source>
         <translation>Presunúť výber vpravo o 1 pixel</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="182"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="190"/>
         <source>Move selection up 1px</source>
         <translation>Presunúť výber nahor o 1 pixel</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="183"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="191"/>
         <source>Move selection down 1px</source>
         <translation>Presunúť výber nadol o 1 pixel</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="184"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="192"/>
         <source>Commit text in text area</source>
         <translation>Potvrdiť pridanie textu</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="185"/>
-        <source>Delete current tool</source>
-        <translation>Vymazať momentálny nástroj</translation>
+        <location filename="../../src/config/shortcutswidget.cpp" line="194"/>
+        <source>Delete selected drawn object</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="194"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="195"/>
+        <source>Cancel current selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete current tool</source>
+        <translation type="vanished">Vymazať momentálny nástroj</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="204"/>
         <source>Capture screen</source>
         <translation>Zachytiť obrazovku</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="195"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="205"/>
         <source>Screenshot history</source>
         <translation>História snímok</translation>
     </message>
@@ -2390,19 +2588,24 @@ Možno budete musieť napísať pred &apos;#&apos; opačnú lomku, teda &apos;\#
         <translation type="vanished">Stlačte ESC pre zrušenie</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="35"/>
+        <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="37"/>
         <source>Active tool size: </source>
         <translation>Aktívna veľkosť nástroja: </translation>
     </message>
     <message>
-        <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="47"/>
+        <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="57"/>
         <source>Active Color: </source>
         <translation>Active Color: </translation>
     </message>
     <message>
-        <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="68"/>
+        <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="78"/>
         <source>Grab Color</source>
         <translation>Snímať farbu</translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="85"/>
+        <source>Display grid</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2434,14 +2637,12 @@ Možno budete musieť napísať pred &apos;#&apos; opačnú lomku, teda &apos;\#
 <context>
     <name>SizeIndicatorTool</name>
     <message>
-        <location filename="../../src/tools/sizeindicator/sizeindicatortool.cpp" line="23"/>
         <source>Selection Size Indicator</source>
-        <translation>Ukazovateľ veľkosti výberu</translation>
+        <translation type="vanished">Ukazovateľ veľkosti výberu</translation>
     </message>
     <message>
-        <location filename="../../src/tools/sizeindicator/sizeindicatortool.cpp" line="33"/>
         <source>Show X and Y dimensions of the selection</source>
-        <translation>Zobrazenie rozmerov X a Y výberu</translation>
+        <translation type="vanished">Zobrazenie rozmerov X a Y výberu</translation>
     </message>
     <message>
         <source>Show the dimensions of the selection (X Y)</source>
@@ -2559,7 +2760,7 @@ Možno budete musieť napísať pred &apos;#&apos; opačnú lomku, teda &apos;\#
 <context>
     <name>SystemNotification</name>
     <message>
-        <location filename="../../src/utils/systemnotification.cpp" line="39"/>
+        <location filename="../../src/utils/systemnotification.cpp" line="42"/>
         <source>Flameshot Info</source>
         <translation>Informácie o programe Flameshot</translation>
     </message>
@@ -2618,44 +2819,49 @@ Možno budete musieť napísať pred &apos;#&apos; opačnú lomku, teda &apos;\#
 <context>
     <name>TrayIcon</name>
     <message>
-        <location filename="../../src/widgets/trayicon.cpp" line="98"/>
+        <location filename="../../src/widgets/trayicon.cpp" line="100"/>
         <source>&amp;Take Screenshot</source>
         <translation>&amp;Vytvoriť snímku</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/trayicon.cpp" line="116"/>
+        <location filename="../../src/widgets/trayicon.cpp" line="118"/>
         <source>&amp;Open Launcher</source>
         <translation>&amp;Otvoriť Spúšťač</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/trayicon.cpp" line="121"/>
+        <location filename="../../src/widgets/trayicon.cpp" line="123"/>
         <source>&amp;Configuration</source>
         <translation>&amp;Konfigurácia</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/trayicon.cpp" line="126"/>
+        <location filename="../../src/widgets/trayicon.cpp" line="128"/>
         <source>&amp;About</source>
         <translation>O &amp;programe</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/trayicon.cpp" line="130"/>
+        <location filename="../../src/widgets/trayicon.cpp" line="133"/>
         <source>Check for updates</source>
         <translation>Kontrola aktualizácií</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/trayicon.cpp" line="141"/>
+        <location filename="../../src/widgets/trayicon.cpp" line="144"/>
         <source>New version %1 is available</source>
         <translation>Je dostupná nová verzia: %1</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/trayicon.cpp" line="145"/>
+        <location filename="../../src/widgets/trayicon.cpp" line="149"/>
         <source>&amp;Quit</source>
         <translation>Ukonči&amp;ť</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/trayicon.cpp" line="149"/>
+        <location filename="../../src/widgets/trayicon.cpp" line="153"/>
         <source>&amp;Latest Uploads</source>
         <translation>&amp;Posledné nahratia</translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/trayicon.cpp" line="159"/>
+        <source>&amp;Open Save Path</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2736,8 +2942,6 @@ Možno budete musieť napísať pred &apos;#&apos; opačnú lomku, teda &apos;\#
     <message>
         <location filename="../../src/widgets/uploadhistory.ui" line="14"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_uploadhistory.h" line="67"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_uploadhistory.h" line="67"/>
-        <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_uploadhistory.h" line="67"/>
         <source>Upload History</source>
         <translation>História nahratí</translation>
     </message>
@@ -2752,32 +2956,24 @@ Možno budete musieť napísať pred &apos;#&apos; opačnú lomku, teda &apos;\#
     <message>
         <location filename="../../src/widgets/uploadlineitem.ui" line="20"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_uploadlineitem.h" line="113"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_uploadlineitem.h" line="113"/>
-        <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_uploadlineitem.h" line="113"/>
         <source>Form</source>
         <translation>Formulár</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadlineitem.ui" line="49"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_uploadlineitem.h" line="114"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_uploadlineitem.h" line="114"/>
-        <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_uploadlineitem.h" line="114"/>
         <source>TextLabel</source>
         <translation>TextovýPopis</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadlineitem.ui" line="82"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_uploadlineitem.h" line="115"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_uploadlineitem.h" line="115"/>
-        <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_uploadlineitem.h" line="115"/>
         <source>Copy URL</source>
         <translation>Kopírovať URL</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadlineitem.ui" line="95"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_uploadlineitem.h" line="116"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_uploadlineitem.h" line="116"/>
-        <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_uploadlineitem.h" line="116"/>
         <source>Open In Browser</source>
         <translation>Otvoriť v prehliadači</translation>
     </message>
@@ -2836,7 +3032,7 @@ Možno budete musieť napísať pred &apos;#&apos; opačnú lomku, teda &apos;\#
 <context>
     <name>color_widgets::ColorDialog</name>
     <message>
-        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.cpp" line="79"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.cpp" line="63"/>
         <source>Pick</source>
         <translation>Vyberte si</translation>
     </message>
@@ -2844,7 +3040,7 @@ Možno budete musieť napísať pred &apos;#&apos; opačnú lomku, teda &apos;\#
 <context>
     <name>color_widgets::ColorPalette</name>
     <message>
-        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette.cpp" line="428"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette.cpp" line="417"/>
         <source>Unnamed</source>
         <translation>Neuvedené</translation>
     </message>
@@ -2852,12 +3048,12 @@ Možno budete musieť napísať pred &apos;#&apos; opačnú lomku, teda &apos;\#
 <context>
     <name>color_widgets::ColorPaletteModel</name>
     <message>
-        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_model.cpp" line="70"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_model.cpp" line="55"/>
         <source>Unnamed</source>
         <translation>Neuvedené</translation>
     </message>
     <message>
-        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_model.cpp" line="144"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_model.cpp" line="130"/>
         <source>%1 (%2 colors)</source>
         <translation>%1 (%2 farby)</translation>
     </message>
@@ -2865,104 +3061,96 @@ Možno budete musieť napísať pred &apos;#&apos; opačnú lomku, teda &apos;\#
 <context>
     <name>color_widgets::ColorPaletteWidget</name>
     <message>
-        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="59"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="64"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="231"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="209"/>
-        <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="209"/>
-        <location filename="../../cmake-build-relwithdebinfo/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="209"/>
         <source>Open a new palette from file</source>
         <translation>Otvoriť novú paletu zo súboru</translation>
     </message>
     <message>
-        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="71"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="75"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="234"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="212"/>
-        <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="212"/>
-        <location filename="../../cmake-build-relwithdebinfo/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="212"/>
         <source>Create a new palette</source>
         <translation>Vytvorenie novej palety</translation>
     </message>
     <message>
-        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="83"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="86"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="237"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="215"/>
-        <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="215"/>
-        <location filename="../../cmake-build-relwithdebinfo/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="215"/>
         <source>Duplicate the current palette</source>
         <translation>Duplikovať aktuálnu paletu</translation>
     </message>
     <message>
-        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="121"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="170"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="240"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="218"/>
-        <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="218"/>
-        <location filename="../../cmake-build-relwithdebinfo/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="218"/>
         <source>Delete the current palette</source>
         <translation>Odstránenie aktuálnej palety</translation>
     </message>
     <message>
-        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="133"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="181"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="243"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="221"/>
-        <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="221"/>
-        <location filename="../../cmake-build-relwithdebinfo/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="221"/>
         <source>Revert changes to the current palette</source>
         <translation>Vrátenie zmien na aktuálnu paletu</translation>
     </message>
     <message>
-        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="145"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="192"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="246"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="224"/>
-        <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="224"/>
-        <location filename="../../cmake-build-relwithdebinfo/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="224"/>
         <source>Save changes to the current palette</source>
         <translation>Uloženie zmien na aktuálnu paletu</translation>
     </message>
     <message>
-        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="170"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="216"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="249"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="227"/>
-        <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="227"/>
-        <location filename="../../cmake-build-relwithdebinfo/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="227"/>
         <source>Add a color to the palette</source>
         <translation>Pridanie farby do palety</translation>
     </message>
     <message>
-        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="182"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="227"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="252"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="230"/>
-        <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="230"/>
-        <location filename="../../cmake-build-relwithdebinfo/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="230"/>
         <source>Remove the selected color from the palette</source>
         <translation>Odstránenie vybranej farby z palety</translation>
     </message>
     <message>
-        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="186"/>
-        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="201"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="181"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="196"/>
         <source>New Palette</source>
         <translation>Nová paleta</translation>
     </message>
     <message>
-        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="187"/>
-        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="202"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="182"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="197"/>
         <source>Name</source>
         <translation>Name</translation>
     </message>
     <message>
-        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="228"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="223"/>
         <source>GIMP Palettes (*.gpl)</source>
         <translation>Palety GIMP (*.gpl)</translation>
     </message>
     <message>
-        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="229"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="224"/>
         <source>Palette Image (%1)</source>
         <translation>Obrázok palety (%1)</translation>
     </message>
     <message>
-        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="230"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="225"/>
         <source>All Files (*)</source>
         <translation>Všetky súbory (*)</translation>
     </message>
     <message>
-        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="231"/>
-        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="244"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="226"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="239"/>
         <source>Open Palette</source>
         <translation>Otvoriť paletu</translation>
     </message>
     <message>
-        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="245"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="240"/>
         <source>Failed to load the palette file
 %1</source>
         <translation>Nepodarilo sa načítať súbor palety
@@ -2972,17 +3160,17 @@ Možno budete musieť napísať pred &apos;#&apos; opačnú lomku, teda &apos;\#
 <context>
     <name>color_widgets::GradientEditor</name>
     <message>
-        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/gradient_editor.cpp" line="335"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_editor.cpp" line="321"/>
         <source>Add Color</source>
         <translation>Add Color</translation>
     </message>
     <message>
-        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/gradient_editor.cpp" line="344"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_editor.cpp" line="330"/>
         <source>Remove Color</source>
         <translation>Odstrániť farbu</translation>
     </message>
     <message>
-        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/gradient_editor.cpp" line="352"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_editor.cpp" line="338"/>
         <source>Edit Color...</source>
         <translation>Upraviť farbu...</translation>
     </message>
@@ -2990,7 +3178,7 @@ Možno budete musieť napísať pred &apos;#&apos; opačnú lomku, teda &apos;\#
 <context>
     <name>color_widgets::GradientListModel</name>
     <message>
-        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/gradient_list_model.cpp" line="231"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_list_model.cpp" line="215"/>
         <source>%1 (%2 colors)</source>
         <translation>%1 (%2 farby)</translation>
     </message>
@@ -2998,12 +3186,12 @@ Možno budete musieť napísať pred &apos;#&apos; opačnú lomku, teda &apos;\#
 <context>
     <name>color_widgets::Swatch</name>
     <message>
-        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/swatch.cpp" line="824"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/swatch.cpp" line="855"/>
         <source>Clear Color</source>
         <translation>Číra farba</translation>
     </message>
     <message>
-        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/swatch.cpp" line="833"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/swatch.cpp" line="864"/>
         <source>%1 (%2)</source>
         <translation>%1 (%2)</translation>
     </message>

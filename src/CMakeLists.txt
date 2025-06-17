@@ -1,5 +1,5 @@
 find_package(
-        Qt5
+        Qt${QT_VERSION_MAJOR}
         CONFIG
         REQUIRED
         Core
@@ -8,10 +8,11 @@ find_package(
         Network
         Svg
         DBus
-        LinguistTools)
+        LinguistTools
+)
 
 if (USE_WAYLAND_CLIPBOARD)
-    find_package(KF5GuiAddons)
+    find_package(KF6GuiAddons)
 endif()
 
 set(CMAKE_AUTOMOC ON)
@@ -73,10 +74,18 @@ if(FLAMESHOT_ICON)
 endif()
 
 if (WIN32)
+    add_executable(flameshot-cli)
+    target_sources(
+        flameshot-cli
+        PRIVATE
+        windows-cli.cpp)
+    set_target_properties(flameshot-cli PROPERTIES OUTPUT_NAME "flameshot-cli")
+    target_link_options(flameshot-cli PRIVATE /SUBSYSTEM:CONSOLE)
     set_property(TARGET flameshot PROPERTY WIN32_EXECUTABLE true)
-    if (MSVC)
-        target_compile_options(flameshot PRIVATE /source-charset:utf-8)
-    endif ()
+    # Getting error D8016 - /utf-8 automatically set by current cmake/msvc ?
+    #if (MSVC)
+    #    target_compile_options(flameshot PRIVATE /source-charset:utf-8)
+    #endif ()
 endif ()
 
 if(MSVC)
@@ -103,6 +112,7 @@ set(FLAMESHOT_TS_FILES
       ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_cs.ts
       ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_de_DE.ts
       ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_el.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_en.ts
       ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_es.ts
       ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_eu.ts
       ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_fa.ts
@@ -135,9 +145,9 @@ set(FLAMESHOT_TS_FILES
          )
 
 if (GENERATE_TS)
-    qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${FLAMESHOT_TS_FILES})
+  qt6_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${FLAMESHOT_TS_FILES})
 else ()
-    qt5_add_translation(QM_FILES ${FLAMESHOT_TS_FILES})
+  qt6_add_translation(QM_FILES ${FLAMESHOT_TS_FILES})
 endif ()
 
 target_sources(
@@ -209,25 +219,17 @@ target_link_libraries(
         flameshot
         project_warnings
         project_options
-        Qt5::Svg
-        Qt5::DBus
-        Qt5::Network
-        Qt5::Widgets
+        Qt${QT_VERSION_MAJOR}::Svg
+        Qt${QT_VERSION_MAJOR}::DBus
+        Qt${QT_VERSION_MAJOR}::Network
+        Qt${QT_VERSION_MAJOR}::Widgets
         ${QTSINGLEAPPLICATION_LIBRARY}
         QtColorWidgets
-
 )
 
 if (USE_WAYLAND_CLIPBOARD)
-  if(!USE_WAYLAND_GRIM)
-    message(WARNING "You activated the USE_WAYLAND_CLIPBOARD option, but did not activate the USE_WAYLAND_GRIM option. Flameshot will use the dbus protocol to support wayland. If you use wlroots-based wayland, it is recommended to enable USE_WAYLAND_GRIM")
-  endif()
   target_compile_definitions(flameshot PRIVATE USE_WAYLAND_CLIPBOARD=1)
-  target_link_libraries(flameshot KF5::GuiAddons)
-endif()
-
-if (USE_WAYLAND_GRIM)
-    target_compile_definitions(flameshot PRIVATE USE_WAYLAND_GRIM=1)
+  target_link_libraries(flameshot KF6::GuiAddons)
 endif()
 
 if (APPLE)
@@ -328,6 +330,10 @@ install(TARGETS flameshot
         EXPORT flameshot-targets
         BUNDLE DESTINATION ${CMAKE_INSTALL_BINDIR}
         RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
+if (WIN32)
+    install(TARGETS flameshot-cli
+            RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
+endif ()
 
 if (UNIX)
     # Install desktop files, completion and dbus files
@@ -398,7 +404,7 @@ if (WIN32)
                 COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_BINARY_DIR}/windeployqt_stuff
                 COMMAND
                 $ENV{QTDIR}/bin/windeployqt.exe ${BINARIES_TYPE} --no-translations --compiler-runtime --no-system-d3d-compiler
-                --no-angle --no-webkit2 --no-quick-import --dir ${CMAKE_BINARY_DIR}/windeployqt_stuff $<TARGET_FILE:flameshot>
+                --no-quick-import --dir ${CMAKE_BINARY_DIR}/windeployqt_stuff $<TARGET_FILE:flameshot>
                 # copy translations manually QM_FILES
                 COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/windeployqt_stuff/translations
                 COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_BINARY_DIR}/src/translations

@@ -4,24 +4,36 @@ on:
   push:
     branches:
       - master
-      - feature/RND-680-macos-.dmg-package-build
+      - fix*
     paths-ignore:
       - 'README.md'
       - 'LICENSE'
+      - 'docs/**'
 
   pull_request:
     paths-ignore:
       - 'README.md'
       - 'LICENSE'
+      - 'docs/**'
+      - 'data/translations/*.ts'
+
+  workflow_dispatch:
 
 env:
   PRODUCT: flameshot
 
 jobs:
-  catalina:
-    name: macOS Monterey 12
-    runs-on: macos-12
-
+  dmg-pack:
+    name: Build dmg on ${{ matrix.dist.os }} ${{ matrix.dist.arch }}
+    strategy:
+      fail-fast: false
+      matrix:
+        dist:
+          - {
+              os: macos-14,
+              arch: arm64
+            }
+    runs-on: ${{ matrix.dist.os }}
     env:
       APP_NAME: flameshot
       DIR_BULD: build
@@ -45,15 +57,41 @@ jobs:
 
     steps:
       - name: Checkout Source code
+        if: github.event_name == 'push'
         uses: actions/checkout@v4
 
+      - name: Checkout Source code
+        if: github.event_name == 'pull_request'
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      - name: Checkout Source code
+        if: github.event_name == 'workflow_dispatch'
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+
+      - name: Set env & Print flameshot version
+        shell: bash
+        run: |
+          last_committed_tag=$(git tag -l --sort=-v:refname | head -1)
+          git_revno=$(git rev-list $(git describe --tags --abbrev=0)..HEAD --count)
+          git_hash=$(git rev-parse --short HEAD)
+          ver_info=${last_committed_tag}+git${git_revno}.${git_hash}
+          echo "=======FLAMESHOT VERSION========"
+          echo ${last_committed_tag:1}
+          echo "Details: ${ver_info}"
+          echo "================================"
+          echo "VER_INFO=${ver_info}" >> $GITHUB_ENV
+
       - name: Install Qt
-        run: brew install qt@5 cmake
+        run: brew install qt@6 cmake
 
       - name: Configure
         run: |
           rm -rf "${DIR_BULD}"/src/flameshot.dmg "${DIR_BULD}"/src/flameshot.app/
-          cmake -S . -B "${DIR_BULD}" -DQt5_DIR=$(brew --prefix qt5)/lib/cmake/Qt5 -DUSE_MONOCHROME_ICON=True
+          cmake -S . -B "${DIR_BULD}" -DQt6_DIR=$(brew --prefix qt6)/lib/cmake/Qt6 -DUSE_MONOCHROME_ICON=True
 
       - name: Compile
         run: |
@@ -69,19 +107,12 @@ jobs:
           cd "${DIR_PKG}"
           ${HELPERS_SCRIPTS_PATH}/sign_qtapp.sh flameshot
 
-      - name: Upload dmg package
-        shell: bash
-        run: |
-          python3 -m pip install -U -q requests
-          echo "================MacOS dmg image download link================"
-          echo $(python3 $GITHUB_WORKSPACE/scripts/upload_services/transferwee.py upload $GITHUB_WORKSPACE/build/src/flameshot.dmg)
-          echo "=====no operation for you can see link in the log console====="
-
       - name: Artifact Upload
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: MacOS-artifact
+          name: ${{ env.PRODUCT }}-${{ env.VER_INFO }}-artifact-macos-${{ matrix.dist.arch }}
           path: ${{ github.workspace }}/build/src/flameshot.dmg
+          overwrite: true
 
       - name: Notarization status
         shell: bash

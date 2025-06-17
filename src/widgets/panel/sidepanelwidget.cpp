@@ -107,8 +107,12 @@ SidePanelWidget::SidePanelWidget(QPixmap* p, QWidget* parent)
             this,
             &SidePanelWidget::onToolSizeChanged);
     // color hex editor sigslots
-    connect(m_colorHex, &QLineEdit::editingFinished, this, [=]() {
+    connect(m_colorHex, &QLineEdit::editingFinished, this, [=, this]() {
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
         if (!QColor::isValidColor(m_colorHex->text())) {
+#else
+        if (!QColor::isValidColorName(m_colorHex->text())) {
+#endif
             m_colorHex->setText(m_color.name(QColor::HexRgb));
         } else {
             emit colorChanged(m_colorHex->text());
@@ -126,7 +130,7 @@ SidePanelWidget::SidePanelWidget(QPixmap* p, QWidget* parent)
             this,
             &SidePanelWidget::colorChanged);
     // Grid feature
-    connect(m_gridCheck, &QCheckBox::clicked, this, [=](bool b) {
+    connect(m_gridCheck, &QCheckBox::clicked, this, [=, this](bool b) {
         this->m_gridSizeSpin->setEnabled(b);
         emit this->displayGridChanged(b);
     });

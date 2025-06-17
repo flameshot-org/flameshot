@@ -26,7 +26,7 @@ NotifierBox::NotifierBox(QWidget* parent)
     setFixedSize(QSize(size, size));
 }
 
-void NotifierBox::enterEvent(QEvent*)
+void NotifierBox::enterEvent(QEnterEvent*)
 {
     hide();
 }

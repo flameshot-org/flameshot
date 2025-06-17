@@ -1,0 +1,130 @@
+name: Packaging(Linux - ARM)
+
+on:
+  #push:
+  #  branches:
+  #    - master
+  #    - fix*
+  #    - move-arm-ci-to-new-ci
+  #  paths-ignore:
+  #    - 'README.md'
+  #    - 'LICENSE'
+  #    - 'docs/**'
+  
+  workflow_dispatch:
+
+env:
+  PRODUCT: flameshot
+  RELEASE: 1
+  # dockerfiles, see https://github.com/flameshot-org/flameshot-dockerfiles
+  # docker images, see https://quay.io/repository/flameshot-org/ci-building
+  DOCKER_REPO: quay.io/flameshot-org/ci-building
+  # building tool: https://github.com/flameshot-org/packpack
+  PACKPACK_REPO: flameshot-org/packpack
+
+jobs:
+  deb-pack:
+    name: Build deb on ${{ matrix.dist.name }} ${{ matrix.dist.arch }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        dist:
+          - {
+              name: debian-11,
+              os: debian,
+              symbol: bullseye,
+              arch: armhf
+            }
+          - {
+              name: debian-12,
+              os: debian,
+              symbol: bookworm,
+              arch: arm64
+            }
+          - {
+              name: debian-12,
+              os: debian,
+              symbol: bookworm,
+              arch: armhf
+            }
+          - {
+              name: ubuntu-22.04,
+              os: ubuntu,
+              symbol: jammy,
+              arch: amd64
+            }
+    steps:
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+      - name: Checkout Source code
+        if: github.event_name == 'push'
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: master
+      - name: Checkout Source code
+        if: github.event_name == 'pull_request'
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha }}
+      - name: Set env & Print flameshot version
+        shell: bash
+        run: |
+          last_committed_tag=$(git tag -l --sort=-v:refname | head -1)
+          git_revno=$(git rev-list $(git describe --tags --abbrev=0)..HEAD --count)
+          git_hash=$(git rev-parse --short HEAD)
+          ver_info=${last_committed_tag}+git${git_revno}.${git_hash}
+          echo "=======FLAMESHOT VERSION========"
+          echo ${last_committed_tag:1}
+          echo "Details: ${ver_info}"
+          echo "================================"
+          echo "VERSION=${last_committed_tag:1}" >> $GITHUB_ENV
+          echo "VER_INFO=${ver_info}" >> $GITHUB_ENV
+      - name: Get packpack tool
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ env.PACKPACK_REPO }}
+          path: tools
+          ref: multiarch
+          set-safe-directory: $GITHUB_WORKSPACE/tools
+      - name: Packaging on ${{ matrix.dist.name }} ${{ matrix.dist.arch }}
+        env:
+          OS: ${{ matrix.dist.os }}
+          DIST: ${{ matrix.dist.symbol }}
+          DOCKER_ARCH: ${{ matrix.dist.arch }}
+        run: |
+          case ${DOCKER_ARCH} in
+            arm32v7)
+              export ARCH=arm/v7
+              ;;
+            armhf)
+              export ARCH=arm/v7
+              ;;
+            arm64*)
+              export ARCH=arm64
+              ;;
+            *)
+              export ARCH=${DOCKER_ARCH}
+              ;;
+          esac
+          cp -r $GITHUB_WORKSPACE/packaging/debian $GITHUB_WORKSPACE
+          bash $GITHUB_WORKSPACE/tools/packpack
+          mv $GITHUB_WORKSPACE/build/${PRODUCT}_${VERSION}-${RELEASE}_${{ matrix.dist.arch }}.deb $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.${{ matrix.dist.name }}.${{ matrix.dist.arch }}.deb
+      - name: SHA256Sum of ${{ matrix.dist.name }} ${{ matrix.dist.arch }} package
+        run: |
+          cd "$GITHUB_WORKSPACE/build/" || { >&2 echo "Cannot cd to '$GITHUB_WORKSPACE/build/'!"; exit 11 ; }
+          sha256sum ${PRODUCT}-${VERSION}-${RELEASE}.${{ matrix.dist.name }}.${{ matrix.dist.arch }}.deb | tee ${PRODUCT}-${VERSION}-${RELEASE}.${{ matrix.dist.name }}.${{ matrix.dist.arch }}.deb.sha256sum
+      - name: Artifact Upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.PRODUCT }}-${{ env.VER_INFO }}-artifact-${{ matrix.dist.name }}-${{ matrix.dist.arch }}
+          path: |
+            ${{ github.workspace }}/build/${{ env.PRODUCT }}-*-${{ env.RELEASE }}.${{ matrix.dist.name }}.${{ matrix.dist.arch }}.deb
+            ${{ github.workspace }}/build/${{ env.PRODUCT }}-*-${{ env.RELEASE }}.${{ matrix.dist.name }}.${{ matrix.dist.arch }}.deb.sha256sum
+          overwrite: true
+
+  

@@ -86,10 +86,17 @@ public:
     CONFIG_GETTER_SETTER(showDesktopNotification,
                          setShowDesktopNotification,
                          bool)
+    CONFIG_GETTER_SETTER(showAbortNotification, setShowAbortNotification, bool)
     CONFIG_GETTER_SETTER(filenamePattern, setFilenamePattern, QString)
     CONFIG_GETTER_SETTER(disabledTrayIcon, setDisabledTrayIcon, bool)
+    CONFIG_GETTER_SETTER(useGrimAdapter, useGrimAdapter, bool)
+    CONFIG_GETTER_SETTER(disabledGrimWarning, disabledGrimWarning, bool)
     CONFIG_GETTER_SETTER(drawThickness, setDrawThickness, int)
     CONFIG_GETTER_SETTER(drawFontSize, setDrawFontSize, int)
+    CONFIG_GETTER_SETTER(drawCircleCounterSize, setDrawCircleCounterSize, int)
+    CONFIG_GETTER_SETTER(drawPixelateSize, setDrawPixelateSize, int)
+    CONFIG_GETTER_SETTER(drawRectangleSize, setDrawRectangleSize, int)
+    CONFIG_GETTER_SETTER(drawMarkerSize, setDrawMarkerSize, int)
     CONFIG_GETTER_SETTER(keepOpenAppLauncher, setKeepOpenAppLauncher, bool)
 #if !defined(DISABLE_UPDATE_CHECKER)
     CONFIG_GETTER_SETTER(checkForUpdates, setCheckForUpdates, bool)
@@ -101,6 +108,7 @@ public:
     CONFIG_GETTER_SETTER(showStartupLaunchMessage,
                          setShowStartupLaunchMessage,
                          bool)
+    CONFIG_GETTER_SETTER(showQuitPrompt, setShowQuitPrompt, bool)
     CONFIG_GETTER_SETTER(contrastOpacity, setContrastOpacity, int)
     CONFIG_GETTER_SETTER(copyURLAfterUpload, setCopyURLAfterUpload, bool)
     CONFIG_GETTER_SETTER(historyConfirmationToDelete,
@@ -127,6 +135,7 @@ public:
     CONFIG_GETTER_SETTER(saveLastRegion, setSaveLastRegion, bool)
     CONFIG_GETTER_SETTER(showSelectionGeometry, setShowSelectionGeometry, int)
     CONFIG_GETTER_SETTER(jpegQuality, setJpegQuality, int)
+    CONFIG_GETTER_SETTER(reverseArrow, setReverseArrow, bool)
     CONFIG_GETTER_SETTER(showSelectionGeometryHideTime,
                          showSelectionGeometryHideTime,
                          int)

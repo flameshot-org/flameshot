@@ -20,7 +20,7 @@ GlobalShortcutFilter::GlobalShortcutFilter(QObject* parent)
 
 bool GlobalShortcutFilter::nativeEventFilter(const QByteArray& eventType,
                                              void* message,
-                                             long* result)
+                                             qintptr* result)
 {
     Q_UNUSED(eventType)
     Q_UNUSED(result)

@@ -7,20 +7,17 @@
 #include "src/core/qguiappcurrentscreen.h"
 #include "src/utils/globalvalues.h"
 #include "toolfactory.h"
+#include <QCursor>
 #include <QHeaderView>
 #include <QIcon>
 #include <QKeyEvent>
 #include <QLabel>
+#include <QRect>
+#include <QScreen>
 #include <QStringList>
 #include <QTableWidget>
 #include <QVBoxLayout>
 #include <QVector>
-
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
-#include <QCursor>
-#include <QRect>
-#include <QScreen>
-#endif
 
 ShortcutsWidget::ShortcutsWidget(QWidget* parent)
   : QWidget(parent)
@@ -29,12 +26,10 @@ ShortcutsWidget::ShortcutsWidget(QWidget* parent)
     setWindowIcon(QIcon(GlobalValues::iconPath()));
     setWindowTitle(tr("Hot Keys"));
 
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
     QRect position = frameGeometry();
     QScreen* screen = QGuiAppCurrentScreen().currentScreen();
     position.moveCenter(screen->availableGeometry().center());
     move(position.topLeft());
-#endif
 
     m_layout = new QVBoxLayout(this);
     m_layout->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
@@ -190,7 +185,9 @@ void ShortcutsWidget::loadShortcuts()
     appendShortcut("TYPE_MOVE_UP", tr("Move selection up 1px"));
     appendShortcut("TYPE_MOVE_DOWN", tr("Move selection down 1px"));
     appendShortcut("TYPE_COMMIT_CURRENT_TOOL", tr("Commit text in text area"));
-    appendShortcut("TYPE_DELETE_CURRENT_TOOL", tr("Delete current tool"));
+    appendShortcut("TYPE_DELETE_CURRENT_TOOL",
+                   tr("Delete selected drawn object"));
+    appendShortcut("TYPE_CANCEL", tr("Cancel current selection"));
 
     // non-editable shortcuts have an empty shortcut name
 

@@ -8,11 +8,15 @@ on:
     paths-ignore:
       - 'README.md'
       - 'LICENSE'
+      - 'docs/**'
 
   pull_request:
     paths-ignore:
       - 'README.md'
       - 'LICENSE'
+      - 'docs/**'
+      - 'data/translations/*.ts'
+  
   workflow_dispatch:
 
 
@@ -21,36 +25,26 @@ env:
 
 jobs:
   windows-pack:
-    name: VS 2019 ${{ matrix.config.arch }}-${{ matrix.type }}
-    runs-on: windows-2019
+    name: VS 2022 ${{ matrix.config.arch }}-${{ matrix.type }}
+    runs-on: windows-2025
     env:
-      VCINSTALLDIR: C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/
-      Qt5_DIR: ${{ github.workspace }}\build\Qt\${{ matrix.qt_ver }}\${{ matrix.config.qt_arch_install }}\lib\cmake\Qt5\
-      QTDIR: ${{ github.workspace }}\build\Qt\${{ matrix.qt_ver }}\${{ matrix.config.qt_arch_install }}\
-      # 2022.06.15.1
-      VCPKG_VERSION: cef0b3ec767df6e83806899fe9525f6cf8d7bc91
+      VCINSTALLDIR: C:/Program Files/Microsoft Visual Studio/2022/Enterprise/VC
+      # 2025.02.14
+      VCPKG_VERSION: d5ec528843d29e3a52d745a64b469f810b2cedbf
       VCPKG_PACKAGES: openssl-windows
       OPENSSL_ROOT_DIR: ${{ github.workspace }}\vcpkg\installed\${{ matrix.config.vcpkg_triplet }}\
     strategy:
       fail-fast: false
       matrix:
-        qt_ver: [5.15.2]
+        qt_ver: [6.9.1]
         qt_target: [desktop]
         config:
           - {
-            arch: x86,
-            generator: "-G'Visual Studio 16 2019' -A Win32",
-            vcpkg_triplet: x86-windows,
-            qt_arch: win32_msvc2019,
-            qt_arch_install: msvc2019,
-            pak_arch: win32
-          }
-          - {
             arch: x64,
-            generator: "-G'Visual Studio 16 2019' -A x64",
+            generator: "-G'Visual Studio 17 2022' -A x64",
             vcpkg_triplet: x64-windows,
-            qt_arch: win64_msvc2019_64,
-            qt_arch_install: msvc2019_64,
+            qt_arch: win64_msvc2022_64,
+            qt_arch_install: msvc2022_64,
             pak_arch: win64
           }
         type: [portable, installer]
@@ -69,19 +63,32 @@ jobs:
           fetch-depth: 0
           ref: ${{ github.event.pull_request.head.sha }}
 
+      - name: Checkout Source code
+        if: github.event_name == 'workflow_dispatch'
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+
+      - name: Fix Python path
+        shell: pwsh
+        run: |
+          Remove-Item "$env:LOCALAPPDATA\Microsoft\WindowsApps\python*.exe" -Force -ErrorAction SilentlyContinue
+
       - name: Set env & Print flameshot version
         shell: bash
         run: |
           last_committed_tag=$(git tag -l --sort=-v:refname | head -1)
           git_revno=$(git rev-list $(git describe --tags --abbrev=0)..HEAD --count)
           git_hash=$(git rev-parse --short HEAD)
+          ver_info=${last_committed_tag}+git${git_revno}.${git_hash}
           echo "=======FLAMESHOT VERSION========"
           echo ${last_committed_tag:1}
-          echo "Details: ${last_committed_tag}+git${git_revno}.${git_hash}"
+          echo "Details: ${ver_info}"
           echo "================================"
           # This will allow to build pre-preleases without git tag
           # echo "VERSION=${last_committed_tag:1}" >> $GITHUB_ENV
           echo "VERSION=$(cat CMakeLists.txt |grep 'set.*(.*FLAMESHOT_VERSION' | sed 's/[^0-9.]*//' |sed 's/)//g')" >> $GITHUB_ENV
+          echo "VER_INFO=${ver_info}" >> $GITHUB_ENV
 
       - name: Restore from cache and run vcpkg
         uses: lukka/run-vcpkg@v11
@@ -92,22 +99,15 @@ jobs:
           vcpkgGitCommitId: ${{ env.VCPKG_VERSION }}
           vcpkgTriplet: ${{ matrix.config.vcpkg_triplet }}
 
-      - name: Cache Qt
-        id: cache-qt
-        uses: actions/cache@v4
-        with:
-          path: ./build/Qt/${{ matrix.qt_ver }}/${{ matrix.config.qt_arch_install }}
-          key: ${{ runner.os }}-QtCache/${{ matrix.qt_ver }}/${{ matrix.config.qt_arch }}
-
       - name: Install Qt
-        uses: jurplel/install-qt-action@v3
+        uses: jurplel/install-qt-action@v4
         with:
           version: ${{ matrix.qt_ver }}
+          cache: 'true'
+          cache-key-prefix: install-qt-action-${{ matrix.qt_ver }}
           target:  ${{ matrix.qt_target }}
           arch: ${{ matrix.config.qt_arch }}
           dir: '${{ github.workspace }}/build/'
-          modules: 'qtscript'
-          cached: ${{ steps.cache-qt.outputs.cache-hit }}
 
       - name: Configure
         working-directory: build
@@ -152,55 +152,44 @@ jobs:
         if:  matrix.type == 'installer'
         shell: pwsh
         run: |
-          Move-Item -Path $env:GITHUB_WORKSPACE/build/Package/Flameshot-*-${{ matrix.config.pak_arch }}.msi -Destination $env:GITHUB_WORKSPACE/build/Package/installer/Flameshot-$env:VERSION-${{ matrix.config.pak_arch }}.msi
+          Move-Item -Path $env:GITHUB_WORKSPACE/build/Package/Flameshot-*-${{ matrix.config.pak_arch }}.msi -Destination $env:GITHUB_WORKSPACE/build/Package/installer/Flameshot-${{ env.VERSION }}-${{ matrix.config.pak_arch }}.msi
 
       - name: Package Prepare (portable)
         if:  matrix.type == 'portable'
         shell: pwsh
         run: |
-          Move-Item -Path $env:GITHUB_WORKSPACE/build/Package/flameshot-*-${{ matrix.config.pak_arch }}.zip -Destination $env:GITHUB_WORKSPACE/build/Package/portable/flameshot-$env:VERSION-${{ matrix.config.pak_arch }}.zip
+          Move-Item -Path $env:GITHUB_WORKSPACE/build/Package/flameshot-*-${{ matrix.config.pak_arch }}.zip -Destination $env:GITHUB_WORKSPACE/build/Package/portable/flameshot-${{ env.VERSION }}-${{ matrix.config.pak_arch }}.zip
 
-      - name: SHA256Sum of Windows installer(daily build)
+      - name: SHA256Sum of Windows installer
         if:  matrix.type == 'installer'
         shell: bash
         run: |
-          sha256sum $GITHUB_WORKSPACE/build/Package/installer/Flameshot-${VERSION}-${{ matrix.config.pak_arch }}.msi
-          sha256sum $GITHUB_WORKSPACE/build/Package/installer/Flameshot-${VERSION}-${{ matrix.config.pak_arch }}.msi > $GITHUB_WORKSPACE/build/Package/installer/Flameshot-${VERSION}-${{ matrix.config.pak_arch }}.msi.sha256sum
-          python -m pip install -U -q requests
-          echo "============Windows installer sha256sum download link============"
-          echo $(python $GITHUB_WORKSPACE/scripts/upload_services/transferwee.py upload $GITHUB_WORKSPACE/build/Package/installer/Flameshot-${VERSION}-${{ matrix.config.pak_arch }}.msi.sha256sum)
-          echo "=======no operation for you can see link in the log console====="
+          sha256sum $GITHUB_WORKSPACE/build/Package/installer/Flameshot-${{ env.VERSION }}-${{ matrix.config.pak_arch }}.msi
+          sha256sum $GITHUB_WORKSPACE/build/Package/installer/Flameshot-${{ env.VERSION }}-${{ matrix.config.pak_arch }}.msi > $GITHUB_WORKSPACE/build/Package/installer/Flameshot-${{ env.VERSION }}-${{ matrix.config.pak_arch }}.msi.sha256sum
 
-      - name: SHA256Sum of Windows portable(daily build)
+      - name: SHA256Sum of Windows portable
         if:  matrix.type == 'portable'
         shell: bash
         run: |
-          sha256sum $GITHUB_WORKSPACE/build/Package/portable/flameshot-${VERSION}-${{ matrix.config.pak_arch }}.zip
-          sha256sum $GITHUB_WORKSPACE/build/Package/portable/flameshot-${VERSION}-${{ matrix.config.pak_arch }}.zip > $GITHUB_WORKSPACE/build/Package/portable/flameshot-${VERSION}-${{ matrix.config.pak_arch }}.zip.sha256sum
-          python -m pip install -U -q requests
-          echo "===========Windows portable sha256sum download link============"
-          echo $(python $GITHUB_WORKSPACE/scripts/upload_services/transferwee.py upload $GITHUB_WORKSPACE/build/Package/portable/flameshot-${VERSION}-${{ matrix.config.pak_arch }}.zip.sha256sum)
-          echo "=====no operation for you can see link in the log console====="
+          sha256sum $GITHUB_WORKSPACE/build/Package/portable/flameshot-${{ env.VERSION }}-${{ matrix.config.pak_arch }}.zip
+          sha256sum $GITHUB_WORKSPACE/build/Package/portable/flameshot-${{ env.VERSION }}-${{ matrix.config.pak_arch }}.zip > $GITHUB_WORKSPACE/build/Package/portable/flameshot-${{ env.VERSION }}-${{ matrix.config.pak_arch }}.zip.sha256sum
 
-      - name: Upload Windows installer(daily build)
-        if:  matrix.type == 'installer'
-        shell: bash
-        run: |
-          python -m pip install -U -q requests
-          echo "================Windows installer download link================"
-          echo $(python $GITHUB_WORKSPACE/scripts/upload_services/transferwee.py upload $GITHUB_WORKSPACE/build/Package/installer/Flameshot-${VERSION}-${{ matrix.config.pak_arch }}.msi)
-          echo "=====no operation for you can see link in the log console====="
-
-      - name: Upload Windows portable(daily build)
-        if:  matrix.type == 'portable'
-        shell: bash
-        run: |
-          python -m pip install -U -q requests
-          echo "=================Windows portable download link================"
-          echo $(python $GITHUB_WORKSPACE/scripts/upload_services/transferwee.py upload $GITHUB_WORKSPACE/build/Package/portable/flameshot-${VERSION}-${{ matrix.config.pak_arch }}.zip)
-          echo "=====no operation for you can see link in the log console====="
       - name: Artifact Upload
+        if:  matrix.type == 'installer'
         uses: actions/upload-artifact@v4
         with:
-          name: Windows-${{ matrix.config.arch }}-${{ matrix.type }}-artifact
-          path: ${{ github.workspace }}/build/Package/*
+          name: ${{ env.PRODUCT }}-${{ env.VER_INFO }}-artifact-win-${{ matrix.config.arch }}-${{ matrix.type }}
+          path: |
+            ${{ github.workspace }}/build/Package/installer/Flameshot-${{ env.VERSION }}-${{ matrix.config.pak_arch }}.msi
+            ${{ github.workspace }}/build/Package/installer/Flameshot-${{ env.VERSION }}-${{ matrix.config.pak_arch }}.msi.sha256sum
+          overwrite: true
+
+      - name: Artifact Upload
+        if:  matrix.type == 'portable'
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.PRODUCT }}-${{ env.VER_INFO }}-artifact-win-${{ matrix.config.arch }}-${{ matrix.type }}
+          path: |
+            ${{ github.workspace }}/build/Package/portable/flameshot-${{ env.VERSION }}-${{ matrix.config.pak_arch }}.zip
+            ${{ github.workspace }}/build/Package/portable/flameshot-${{ env.VERSION }}-${{ matrix.config.pak_arch }}.zip.sha256sum
+          overwrite: true

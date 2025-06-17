@@ -5,8 +5,6 @@ set(FLAMESHOT_VERSION 12.1.0)
 
 # Flameshot-org
 set(GIT_API_URL "https://api.github.com/repos/flameshot-org/flameshot/releases/latest")
-# Namecheap
-# set(GIT_API_URL "https://api.github.com/repos/namecheap/flameshot/releases/latest")
 
 # TODO - fix it for all linux distros
 #find_package (Git)
@@ -36,6 +34,34 @@ project(
         LANGUAGES CXX)
 set(PROJECT_NAME_CAPITALIZED "Flameshot")
 
+include(FetchContent)
+#Must be set before fetching external content
+#QT_DEFAULT_MAJOR_VERSION used by "SingleApplication"
+#QT_VERSION_MAJOR used by Flameshot and "QtColorWidgets"
+set(QT_DEFAULT_MAJOR_VERSION 6 CACHE STRING "")
+set(QT_VERSION_MAJOR 6 CACHE STRING "")
+
+#Needed due to linker error with QtColorWidget
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+
+FetchContent_Declare(
+    qtColorWidgets
+    GIT_REPOSITORY https://gitlab.com/mattbas/Qt-Color-Widgets.git
+    GIT_TAG 352bc8f99bf2174d5724ee70623427aa31ddc26a
+)
+
+#Workaround for duplicate GUID in windows WIX installer
+if (WIN32)
+    FetchContent_GetProperties(qtColorWidgets)
+    if(NOT qtcolorwidgets_POPULATED)
+        FetchContent_Populate(qtColorWidgets)
+        add_subdirectory(${qtcolorwidgets_SOURCE_DIR} ${qtcolorwidgets_BINARY_DIR} EXCLUDE_FROM_ALL)
+    endif()
+else()
+    FetchContent_MakeAvailable(qtColorWidgets)
+endif()
+
+
 # This can be read from ${PROJECT_NAME} after project() is called
 if (APPLE)
   set(CMAKE_OSX_DEPLOYMENT_TARGET "10.15" CACHE STRING "Minimum OS X deployment version")
@@ -53,7 +79,7 @@ if(WIN32)
   add_definitions(-DFLAMESHOT_VERSION_BUILD=1)
   add_definitions(-DFLAMESHOT_VERSION_STRING="${PROJECT_VERSION}")
 elseif(APPLE)
-  set(Qt5_DIR "$(brew --prefix qt5)/lib/cmake/Qt5/" CACHE PATH "directory where Qt5Config.cmake exists.")
+  set(Qt6_DIR "$(brew --prefix qt6)/lib/cmake/Qt6/" CACHE PATH "directory where Qt6Config.cmake exists.")
   set(CMAKE_MACOSX_BUNDLE ON)
   set(CMAKE_MACOSX_RPATH ON)
 endif()
@@ -76,7 +102,7 @@ endif ()
 include(cmake/StandardProjectSettings.cmake)
 
 add_library(project_options INTERFACE)
-target_compile_features(project_options INTERFACE cxx_std_17)
+target_compile_features(project_options INTERFACE cxx_std_20)
 
 add_library(project_warnings INTERFACE)
 
@@ -102,21 +128,30 @@ if(USE_EXTERNAL_SINGLEAPPLICATION)
   # package dev-qt/qtsingleapplication provides no symlink to current version
   set(qtsingleapplication_libs libQt5Solutions_SingleApplication-2.6 Qt5Solutions_SingleApplication-2.6)
   find_library(QTSINGLEAPPLICATION_LIBRARY NAMES ${qtsingleapplication_libs})
-  message(STATUS "Using external SingleApplication library")
+  message(STATUS "Using external QtSingleApplication library")
 else()
-  add_subdirectory(external/singleapplication)
+  FetchContent_Declare(
+      singleApplication
+      GIT_REPOSITORY https://github.com/itay-grudev/SingleApplication.git
+      GIT_TAG v3.5.2
+  )
+  FetchContent_MakeAvailable(SingleApplication)
   set(QTSINGLEAPPLICATION_LIBRARY SingleApplication::SingleApplication)
 endif()
 
 
 option(BUILD_STATIC_LIBS ON)
 option(BUILD_SHARED_LIBS OFF)
-add_subdirectory(external/Qt-Color-Widgets EXCLUDE_FROM_ALL) 
-
 
 if (APPLE)
-  add_subdirectory(external/QHotkey)
+  FetchContent_Declare(
+      qHotKey
+      GIT_REPOSITORY https://github.com/flameshot-org/QHotkey
+      GIT_TAG master
+  )
+  FetchContent_MakeAvailable(QHotKey)
 endif()
+
 add_subdirectory(src)
 
 # CPack

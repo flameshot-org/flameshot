@@ -30,11 +30,12 @@
 #include "src/widgets/panel/sidepanelwidget.h"
 #include "src/widgets/panel/utilitypanel.h"
 #include <QApplication>
+#include <QCheckBox>
 #include <QDateTime>
 #include <QDebug>
-#include <QDesktopWidget>
 #include <QFontMetrics>
 #include <QLabel>
+#include <QMessageBox>
 #include <QPaintEvent>
 #include <QPainter>
 #include <QScreen>
@@ -204,6 +205,13 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
 
     // Init color picker
     m_colorPicker = new ColorPicker(this);
+    // Init notification widget
+    m_notifierBox = new NotifierBox(this);
+    initPanel();
+
+    // TODO: Make it more clear why this has moved. In Qt6 some timing related
+    // to constructors / connect signals has changed so if initPanel is called
+    // after the connect a SEGFAULT occurs
     connect(m_colorPicker,
             &ColorPicker::colorSelected,
             this,
@@ -219,8 +227,6 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
             this,
             &CaptureWidget::onToolSizeChanged);
 
-    // Init notification widget
-    m_notifierBox = new NotifierBox(this);
     m_notifierBox->hide();
     connect(m_notifierBox, &NotifierBox::hidden, this, [this]() {
         // Show cursor if it was hidden while adjusting tool size
@@ -230,23 +236,24 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
         onToolSizeSettled(m_context.toolSize);
     });
 
-    initPanel();
-
     m_config.checkAndHandleError();
     if (m_config.hasError()) {
         m_configError = true;
     }
-    connect(ConfigHandler::getInstance(), &ConfigHandler::error, this, [=]() {
-        m_configError = true;
-        m_configErrorResolved = false;
-        OverlayMessage::instance()->update();
-    });
     connect(
-      ConfigHandler::getInstance(), &ConfigHandler::errorResolved, this, [=]() {
-          m_configError = false;
-          m_configErrorResolved = true;
+      ConfigHandler::getInstance(), &ConfigHandler::error, this, [=, this]() {
+          m_configError = true;
+          m_configErrorResolved = false;
           OverlayMessage::instance()->update();
       });
+    connect(ConfigHandler::getInstance(),
+            &ConfigHandler::errorResolved,
+            this,
+            [=, this]() {
+                m_configError = false;
+                m_configErrorResolved = true;
+                OverlayMessage::instance()->update();
+            });
 
     OverlayMessage::init(this,
                          QGuiAppCurrentScreen().currentScreen()->geometry());
@@ -255,6 +262,8 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
         initHelpMessage();
         OverlayMessage::push(m_helpMessage);
     }
+
+    initQuitPrompt();
 
     updateCursor();
 }
@@ -312,9 +321,6 @@ void CaptureWidget::initButtons()
     // This will allow keyboard shortcuts for those buttons to work
     for (CaptureTool::Type t : allButtonTypes) {
         auto* b = new CaptureToolButton(t, this);
-        if (t == CaptureTool::TYPE_SELECTIONINDICATOR) {
-            m_sizeIndButton = b;
-        }
         b->setColor(m_uiColor);
         b->hide();
         // must be enabled for SelectionWidget's eventFilter to work correctly
@@ -334,7 +340,7 @@ void CaptureWidget::initButtons()
                 if (!shortcut.isNull()) {
                     auto shortcuts = newShortcut(shortcut, this, nullptr);
                     for (auto* sc : shortcuts) {
-                        connect(sc, &QShortcut::activated, this, [=]() {
+                        connect(sc, &QShortcut::activated, this, [=, this]() {
                             setState(b);
                         });
                     }
@@ -422,7 +428,7 @@ void CaptureWidget::showxywh()
 void CaptureWidget::initHelpMessage()
 {
     QList<QPair<QString, QString>> keyMap;
-    keyMap << QPair(tr("Mouse"), tr("Select screenshot area"));
+    keyMap << std::pair(tr("Mouse"), tr("Select screenshot area"));
     using CT = CaptureTool;
     for (auto toolType : { CT::TYPE_ACCEPT, CT::TYPE_SAVE, CT::TYPE_COPY }) {
         if (!m_tools.contains(toolType)) {
@@ -433,18 +439,22 @@ void CaptureWidget::initHelpMessage()
           ConfigHandler().shortcut(QVariant::fromValue(toolType).toString());
         shortcut.replace("Return", "Enter");
         if (!shortcut.isEmpty()) {
-            keyMap << QPair(shortcut, tool->description());
+            keyMap << std::pair(shortcut, tool->description());
         }
     }
-    keyMap << QPair(tr("Mouse Wheel"), tr("Change tool size"));
-    keyMap << QPair(tr("Right Click"), tr("Show color picker"));
-    keyMap << QPair(ConfigHandler().shortcut("TYPE_TOGGLE_PANEL"),
-                    tr("Open side panel"));
-    keyMap << QPair(tr("Esc"), tr("Exit"));
+
+
     if (ConfigHandler().backtrackEnable()) {
         keyMap << QPair(tr("Comma"), tr("Show screen backtrack backward"));
         keyMap << QPair(tr("Period"), tr("Show screen backtrack forward"));
     }
+
+    keyMap << std::pair(tr("Mouse Wheel"), tr("Change tool size"));
+    keyMap << std::pair(tr("Right Click"), tr("Show color picker"));
+    keyMap << std::pair(ConfigHandler().shortcut("TYPE_TOGGLE_PANEL"),
+                        tr("Open side panel"));
+    keyMap << std::pair(tr("Esc"), tr("Exit"));
+
 
     m_helpMessage = OverlayMessage::compileFromKeyMap(keyMap);
 }
@@ -473,6 +483,38 @@ bool CaptureWidget::commitCurrentTool()
     return false;
 }
 
+void CaptureWidget::initQuitPrompt()
+{
+    m_quitPrompt = new QMessageBox;
+    makeChild(m_quitPrompt);
+    m_quitPrompt->hide();
+
+    QString baseSheet = "QDialog { background-color: %1; }"
+                        "QLabel, QCheckBox { color: %2 }"
+                        "QPushButton { background-color: %1; color: %2 }";
+    QColor text = ColorUtils::colorIsDark(m_uiColor) ? Qt::white : Qt::black;
+    QString styleSheet = baseSheet.arg(m_uiColor.name(), text.name());
+
+    m_quitPrompt->setStyleSheet(styleSheet);
+    m_quitPrompt->setWindowTitle(tr("Quit Capture"));
+    m_quitPrompt->setText(tr("Are you sure you want to quit capture?"));
+    m_quitPrompt->setIcon(QMessageBox::Icon::Question);
+    m_quitPrompt->setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+    m_quitPrompt->setDefaultButton(QMessageBox::No);
+
+    auto* check = new QCheckBox(tr("Do not show this again"));
+    m_quitPrompt->setCheckBox(check);
+
+    QObject::connect(check, &QCheckBox::clicked, [](bool checked) {
+        ConfigHandler().setShowQuitPrompt(!checked);
+    });
+}
+
+bool CaptureWidget::promptQuit()
+{
+    return m_quitPrompt->exec() == QMessageBox::Yes;
+}
+
 void CaptureWidget::deleteToolWidgetOrClose()
 {
     if (m_activeButton != nullptr) {
@@ -492,7 +534,14 @@ void CaptureWidget::deleteToolWidgetOrClose()
         m_colorPicker->hide();
     } else {
         // close CaptureWidget
-        close();
+        if (m_config.showQuitPrompt()) {
+            // need to show prompt
+            if (m_quitPrompt->isHidden() && promptQuit()) {
+                close();
+            }
+        } else {
+            close();
+        }
     }
 }
 
@@ -559,11 +608,12 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
         QRect xybox;
         QFontMetrics fm = painter.fontMetrics();
 
-        QString xy = QString("%1x%2+%3+%4")
-                       .arg(static_cast<int>(selection.width() * scale))
-                       .arg(static_cast<int>(selection.height() * scale))
-                       .arg(static_cast<int>(selection.left() * scale))
-                       .arg(static_cast<int>(selection.top() * scale));
+        QString xy =
+          QString("%1x%2+%3+%4")
+            .arg(QString::number(static_cast<int>(selection.width() * scale)),
+                 QString::number(static_cast<int>(selection.height() * scale)),
+                 QString::number(static_cast<int>(selection.left() * scale)),
+                 QString::number(static_cast<int>(selection.top() * scale)));
 
         xybox = fm.boundingRect(xy);
         // the small numbers here are just margins so the text doesn't
@@ -765,7 +815,6 @@ void CaptureWidget::mousePressEvent(QMouseEvent* e)
     if (m_selection->getMouseSide(e->pos()) != SelectionWidget::CENTER) {
         m_panel->setActiveLayer(-1);
     }
-
     if (e->button() == Qt::RightButton) {
         if (m_activeTool && m_activeTool->editMode()) {
             return;
@@ -1193,10 +1242,6 @@ void CaptureWidget::showAppUpdateNotification(const QString& appLatestVersion,
     }
 #if defined(Q_OS_MACOS)
     int ax = (width() - m_updateNotificationWidget->width()) / 2;
-#elif (defined(Q_OS_LINUX) && QT_VERSION < QT_VERSION_CHECK(5, 10, 0))
-    QRect helpRect = QGuiApplication::primaryScreen()->geometry();
-    int ax = helpRect.left() +
-             ((helpRect.width() - m_updateNotificationWidget->width()) / 2);
 #else
     QRect helpRect;
     QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
@@ -1251,7 +1296,7 @@ void CaptureWidget::initSelection()
     if (!initialSelection.isNull()) {
         const qreal scale = m_context.screenshot.devicePixelRatio();
         initialSelection.moveTopLeft(initialSelection.topLeft() -
-                                     mapToGlobal({}));
+                                     mapToGlobal(QPoint(0, 0)));
         initialSelection.setTop(initialSelection.top() / scale);
         initialSelection.setBottom(initialSelection.bottom() / scale);
         initialSelection.setLeft(initialSelection.left() / scale);
@@ -1572,6 +1617,10 @@ void CaptureWidget::initShortcuts()
                 m_selection,
                 SLOT(moveDown()));
 
+    newShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_CANCEL")),
+                this,
+                SLOT(cancel()));
+
     newShortcut(
       QKeySequence(ConfigHandler().shortcut("TYPE_DELETE_CURRENT_TOOL")),
       this,
@@ -1658,9 +1707,8 @@ void CaptureWidget::updateSizeIndicator()
     }
     if (m_sizeIndButton) {
         const QRect& selection = extendedSelection();
-        m_sizeIndButton->setText(QStringLiteral("%1\n%2")
-                                   .arg(selection.width())
-                                   .arg(selection.height()));
+        m_sizeIndButton->setText(
+          QStringLiteral("%1\n%2").arg(selection.width(), selection.height()));
     }
 }
 
@@ -1765,7 +1813,7 @@ void CaptureWidget::drawToolsData(bool drawSelection)
     // TODO refactor this for performance. The objects should not all be updated
     // at once every time
     QPixmap pixmapItem = m_context.origScreenshot;
-    for (auto toolItem : m_captureToolObjects.captureToolObjects()) {
+    for (const auto& toolItem : m_captureToolObjects.captureToolObjects()) {
         processPixmapWithTool(&pixmapItem, toolItem);
         update(paddedUpdateRect(toolItem->boundingRect()));
     }
@@ -1933,6 +1981,23 @@ void CaptureWidget::redo()
     updateLayersPanel();
 
     restoreCircleCountState();
+}
+
+void CaptureWidget::cancel()
+{
+    if (m_activeButton != nullptr) {
+        uncheckActiveTool();
+    }
+    if (m_panel) {
+        m_panel->setActiveLayer(-1);
+    }
+    if (m_toolWidget) {
+        m_toolWidget->hide();
+        delete m_toolWidget;
+        m_toolWidget = nullptr;
+    }
+    m_selection->hide();
+    emit m_selection->geometrySettled();
 }
 
 QRect CaptureWidget::extendedSelection() const

@@ -1,6 +1,20 @@
 name: test-clang-format
 
-on: [push, pull_request]
+on:
+  push:
+    paths-ignore:
+      - 'README.md'
+      - 'LICENSE'
+      - 'docs/**'
+      - 'data/translations/*.ts'
+  pull_request:
+    paths-ignore:
+      - 'README.md'
+      - 'LICENSE'
+      - 'docs/**'
+      - 'data/translations/*.ts'
+
+  workflow_dispatch:
 
 jobs:
   build:

@@ -33,7 +33,7 @@ project is evolving in.
 [When you need to follow this process]: #when-you-need-to-follow-this-process
 
 You need to follow this process if you intend to make "substantial" changes to
-flameshot or the RFC process itself. What constitutes a
+Flameshot or the RFC process itself. What constitutes a
 "substantial" change is evolving based on community norms and varies depending
 on what part of the ecosystem you are proposing to change, but may include the
 following.
@@ -76,7 +76,7 @@ beforehand, to ascertain that the RFC may be desirable; having a consistent
 impact on the project requires concerted effort toward consensus-building.
 
 The most common preparations for writing and submitting an RFC include talking
-the idea over on our [official Slack server](flameshotworkspace.slack.com) or opening an issue on github for discussion.
+the idea over on our [official Matrix Space](https://matrix.to/#/#flameshot-org:matrix.org) in the [Developers](https://matrix.to/#/!AYbNXDGTDwApLwzkNg:feneas.org?via=kde.org&via=matrix.org&via=ryan77627.xyz), or opening an issue on [Github Discussions](https://github.com/flameshot-org/flameshot/discussions).
 
 ## What the process is
 
@@ -178,7 +178,7 @@ as a "very minor change" is up to the development team.
 
 [Reviewing RFCs]: #reviewing-rfcs
 
-The preferred method of discussing RFC's is the github issue. However, the development team may schedule meetings with the
+The preferred method of discussing RFC's is the Github issue. However, the development team may schedule meetings with the
 author and/or relevant stakeholders to discuss the issues in greater detail. In either
 case a summary from the meeting will be posted back to the RFC pull request.
 

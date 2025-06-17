@@ -6,11 +6,16 @@ on:
     paths-ignore:
       - 'README.md'
       - 'LICENSE'
+      - 'docs/**'
   pull_request:
     branches: [ master ]
     paths-ignore:
       - 'README.md'
       - 'LICENSE'
+      - 'docs/**'
+      - 'data/translations/*.ts'
+
+  workflow_dispatch:
 
 env:
   # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
@@ -22,7 +27,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-22.04]
+        os: [ubuntu-24.04]
 
     steps:
       - name: Checkout Source code
@@ -35,6 +40,12 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
 
+      - name: Checkout Source code
+        if: github.event_name == 'workflow_dispatch'
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+
       - name: Install Dependencies
         run: |
           sudo apt-get -y -qq update
@@ -42,15 +53,9 @@ jobs:
             cmake \
             extra-cmake-modules \
             build-essential \
-            qtbase5-dev \
-            qttools5-dev-tools \
-            qttools5-dev \
-            libqt5dbus5 \
-            libqt5network5 \
-            libqt5core5a \
-            libqt5widgets5 \
-            libqt5gui5 \
-            libqt5svg5-dev
+            qt6-base-dev \
+            qt6-svg-dev \
+            qt6-tools-dev \
 
       - name: Create Build Environment
         # Some projects don't allow in-source building, so create a separate build directory
@@ -89,27 +94,28 @@ jobs:
       matrix:
         config:
         - {
-            name: "Windows 2019 MSVC",
+            name: "Windows 2022 MSVC",
             artifact: "Windows-MSVC.tar.xz",
-            os: windows-2019,
+            os: windows-2022,
             cc: "cl", cxx: "cl",
-            environment_script: "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars64.bat"
+            environment_script: "C:/Program Files/Microsoft Visual Studio/2022/Enterprise/VC/Auxiliary/Build/vcvars64.bat",
+            qt_ver: '6.9.1'
           }
 
     steps:
       - uses: actions/checkout@v4
 
-      - name: Cache Qt
-        id: cache-qt
-        uses: actions/cache@v3
-        with:
-          path: ./build/Qt
-          key: ${{ runner.os }}-QtCache
+      - name: Fix Python path
+        shell: pwsh
+        run: |
+          Remove-Item "$env:LOCALAPPDATA\Microsoft\WindowsApps\python*.exe" -Force -ErrorAction SilentlyContinue
 
       - name: Install Qt
-        uses: jurplel/install-qt-action@v2
+        uses: jurplel/install-qt-action@v4
         with:
-          version: 5.15.2
+          version: ${{ matrix.config.qt_ver }}
+          cache: 'true'
+          cache-key-prefix: install-qt-action-${{ matrix.config.qt_ver }}
           target:  desktop
           dir: '${{ github.workspace }}/build/'
 

@@ -4,7 +4,7 @@
 #include "flameshot.h"
 #include "flameshotdaemon.h"
 #if defined(Q_OS_MACOS)
-#include "external/QHotkey/QHotkey"
+#include "qhotkey.h"
 #endif
 
 #include "abstractlogger.h"
@@ -25,7 +25,6 @@
 #include <QBuffer>
 #include <QDebug>
 #include <QDesktopServices>
-#include <QDesktopWidget>
 #include <QFile>
 #include <QMessageBox>
 #include <QThread>
@@ -53,7 +52,7 @@ Flameshot::Flameshot()
     // permissions on the first run. Otherwise it will be hidden under the
     // CaptureWidget
     QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
-    currentScreen->grabWindow(QApplication::desktop()->winId(), 0, 0, 1, 1);
+    currentScreen->grabWindow(0, 0, 0, 1, 1);
 
     // set global shortcuts for MacOS
     m_HotkeyScreenshotCapture = new QHotkey(
@@ -353,8 +352,6 @@ void Flameshot::exportCapture(const QPixmap& capture,
     QString path = req.path();
 
     if (tasks & CR::PRINT_GEOMETRY) {
-        QByteArray byteArray;
-        QBuffer buffer(&byteArray);
         QTextStream(stdout)
           << selection.width() << "x" << selection.height() << "+"
           << selection.x() << "+" << selection.y() << "\n";
@@ -405,7 +402,7 @@ void Flameshot::exportCapture(const QPixmap& capture,
         // NOTE: lambda can't capture 'this' because it might be destroyed later
         CR::ExportTask tasks = tasks;
         QObject::connect(
-          widget, &ImgUploaderBase::uploadOk, [=](const QUrl& url) {
+          widget, &ImgUploaderBase::uploadOk, [=, this](const QUrl& url) {
               if (ConfigHandler().copyURLAfterUpload()) {
                   if (!(tasks & CR::COPY)) {
                       FlameshotDaemon::copyToClipboard(
