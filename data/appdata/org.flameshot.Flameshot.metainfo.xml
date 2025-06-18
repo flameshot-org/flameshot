@@ -17,13 +17,15 @@ SPDX-License-Identifier: CC0-1.0
   <developer id="org.flameshot">
     <name>Flameshot Developers</name>
   </developer>
-  <summary>Powerful and simple to use screenshot software</summary>
 
   <supports>
 	<control>pointing</control>
 	<control>keyboard</control>
 	<control>touch</control>
   </supports>
+
+  <summary>Take and annotate screenshots</summary>
+
   <description>
     <p>
       Powerful and simple to use screenshot software with built-in
