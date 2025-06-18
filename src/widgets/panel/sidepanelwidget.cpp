@@ -135,7 +135,10 @@ SidePanelWidget::SidePanelWidget(QPixmap* p, QWidget* parent)
             this,
             &SidePanelWidget::colorChanged);
     // drop shadow sigslots
-    connect(m_dropShadowCheck, &QCheckBox::clicked, this, &SidePanelWidget::dropShadowChanged);
+    connect(m_dropShadowCheck,
+            &QCheckBox::clicked,
+            this,
+            &SidePanelWidget::dropShadowChanged);
     // Grid feature
     connect(m_gridCheck, &QCheckBox::clicked, this, [=, this](bool b) {
         this->m_gridSizeSpin->setEnabled(b);

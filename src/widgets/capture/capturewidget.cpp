@@ -220,7 +220,7 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
                 setDrawColor(c);
             });
     m_colorPicker->hide();
-    
+
     // Init drop shadow sigslots
     connect(this,
             &CaptureWidget::dropShadowChanged,

@@ -161,7 +161,7 @@ void AbstractPathTool::drawDropShadow(QPainter& painter, const QPixmap& pixmap)
 
     qreal start = 0.5;
     qreal step = size() < 10 ? 0.2 : 0.4;
-    qreal end  = size() < 10 ? 1.0 : 2.0;
+    qreal end = size() < 10 ? 1.0 : 2.0;
     for (qreal var = start; var < end; var += step) {
         painter.translate(var, var);
         process(painter, pixmap);
