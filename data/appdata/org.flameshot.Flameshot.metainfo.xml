@@ -43,7 +43,12 @@ SPDX-License-Identifier: CC0-1.0
       <caption>Animated Flameshot Usage</caption>
     </screenshot>
   </screenshots>
+
   <url type="homepage">https://github.com/flameshot-org/flameshot</url>
+  <url type="bugtracker">https://github.com/flameshot-org/flameshot/issues</url>
+  <url type="translate">https://hosted.weblate.org/projects/flameshot/</url>
+  <url type="contribute">https://github.com/flameshot-org/flameshot/blob/master/docs/CONTRIBUTING.md</url>
+  <url type="vcs-browser">https://github.com/flameshot-org/flameshot/</url>
 
   <update_contact>https://github.com/flameshot-org/flameshot/issues/new</update_contact>
 
@@ -53,6 +58,12 @@ SPDX-License-Identifier: CC0-1.0
     <color type="primary" scheme_preference="light">#d6a8e3</color>
     <color type="primary" scheme_preference="dark">#5c0075</color>
   </branding>
+
+  <categories>
+    <!-- the list can be found in https://specifications.freedesktop.org/menu-spec/latest/category-registry.html -->
+    <category>Utility</category>
+    <category>Graphics</category>
+  </categories>
 
   <releases>
     <release version="12.1.0" date="2022-07-03"/>
