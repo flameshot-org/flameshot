@@ -36,6 +36,14 @@ SPDX-License-Identifier: CC0-1.0
       Powerful and simple to use screenshot software with built-in
       editor with advanced features.
     </p>
+    <p><strong>Features:</strong></p>
+    <ul>
+      <li>Customizable appearance</li>
+      <li>Very easy to use<li>
+      <li>In-app screenshot editing and annotation<li>
+      <li>DBus interface<li>
+      <li>Upload to Imgur<li>
+    </ul>
   </description>
 
   <content_rating type="oars-1.1" />
