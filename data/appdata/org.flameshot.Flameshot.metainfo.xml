@@ -23,6 +23,11 @@ SPDX-License-Identifier: CC0-1.0
 	<control>keyboard</control>
 	<control>touch</control>
   </supports>
+  
+  <recommends>
+    <control>keyboard</control>
+    <control>pointing</control>
+  </recommends>
 
   <summary>Take and annotate screenshots</summary>
 
