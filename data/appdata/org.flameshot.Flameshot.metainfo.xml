@@ -5,14 +5,20 @@ SPDX-License-Identifier: CC0-1.0
 -->
 <component type="desktop-application">
   <id>org.flameshot.Flameshot</id>
+  
   <metadata_license>CC0-1.0</metadata_license>
+
   <project_license>GPL-3.0-or-later</project_license>
+
   <name>Flameshot</name>
+  
   <translation type="qt">flameshot</translation>
+
   <developer id="org.flameshot">
     <name>Flameshot Developers</name>
   </developer>
   <summary>Powerful and simple to use screenshot software</summary>
+
   <supports>
 	<control>pointing</control>
 	<control>keyboard</control>
@@ -24,7 +30,9 @@ SPDX-License-Identifier: CC0-1.0
       editor with advanced features.
     </p>
   </description>
+
   <content_rating type="oars-1.1" />
+
   <screenshots>
     <screenshot type="default">
       <image>https://raw.githubusercontent.com/flameshot-org/flameshot/master/data/img/preview/usageStatic.png</image>
@@ -36,12 +44,16 @@ SPDX-License-Identifier: CC0-1.0
     </screenshot>
   </screenshots>
   <url type="homepage">https://github.com/flameshot-org/flameshot</url>
+
   <update_contact>https://github.com/flameshot-org/flameshot/issues/new</update_contact>
+
   <launchable type="desktop-id">org.flameshot.Flameshot.desktop</launchable>
+
   <branding>
     <color type="primary" scheme_preference="light">#d6a8e3</color>
     <color type="primary" scheme_preference="dark">#5c0075</color>
   </branding>
+
   <releases>
     <release version="12.1.0" date="2022-07-03"/>
     <release version="12.0.0" date="2022-06-21"/>
