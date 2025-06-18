@@ -24,6 +24,7 @@ public:
 
 protected:
     CaptureTool::Type type() const override;
+    void drawDropShadow(QPainter& painter, const QPixmap& pixmap) override;
 
 public slots:
     void pressed(CaptureContext& context) override;
