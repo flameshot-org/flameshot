@@ -11,19 +11,6 @@ SPDX-License-Identifier: CC0-1.0
   <developer id="org.flameshot">
     <name>Flameshot Developers</name>
   </developer>
-  <releases>
-    <release version="12.1.0" date="2022-07-03"/>
-    <release version="12.0.0" date="2022-06-21"/>
-    <release version="11.0.0" date="2022-01-14"/>
-    <release version="0.10.1" date="2021-07-25"/>
-    <release version="0.10.0" date="2021-05-16"/>
-    <release version="0.9.0" date="2021-02-27"/>
-    <release version="0.8.5" date="2020-10-14"/>
-    <release version="0.8.4" date="2020-10-10"/>
-    <release version="0.8.3" date="2020-09-28"/>
-    <release version="0.8.1" date="2020-09-23"/>
-    <release version="0.8.0" date="2020-09-19"/>
-  </releases>
   <summary>Powerful and simple to use screenshot software</summary>
   <description>
     <p>
@@ -46,4 +33,17 @@ SPDX-License-Identifier: CC0-1.0
   <url type="homepage">https://github.com/flameshot-org/flameshot</url>
   <update_contact>https://github.com/flameshot-org/flameshot/issues/new</update_contact>
   <launchable type="desktop-id">org.flameshot.Flameshot.desktop</launchable>
+  <releases>
+    <release version="12.1.0" date="2022-07-03"/>
+    <release version="12.0.0" date="2022-06-21"/>
+    <release version="11.0.0" date="2022-01-14"/>
+    <release version="0.10.1" date="2021-07-25"/>
+    <release version="0.10.0" date="2021-05-16"/>
+    <release version="0.9.0" date="2021-02-27"/>
+    <release version="0.8.5" date="2020-10-14"/>
+    <release version="0.8.4" date="2020-10-10"/>
+    <release version="0.8.3" date="2020-09-28"/>
+    <release version="0.8.1" date="2020-09-23"/>
+    <release version="0.8.0" date="2020-09-19"/>
+  </releases>
 </component>
