@@ -37,12 +37,24 @@ SPDX-License-Identifier: CC0-1.0
 
   <screenshots>
     <screenshot type="default">
-      <image>https://raw.githubusercontent.com/flameshot-org/flameshot/master/data/img/preview/usageStatic.png</image>
+      <image>https://raw.githubusercontent.com/flameshot-org/flameshot/master/data/img/preview/large_demo.png</image>
       <caption>Flameshot Usage</caption>
     </screenshot>
     <screenshot>
-      <image>https://raw.githubusercontent.com/flameshot-org/flameshot/master/data/img/preview/animatedUsage.gif</image>
-      <caption>Animated Flameshot Usage</caption>
+      <image>https://raw.githubusercontent.com/flameshot-org/flameshot/master/data/img/preview/small_demo.png</image>
+      <caption>Demo of Pixelation, Arrow, Box, And Counter Bubble</caption>
+    </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/flameshot-org/flameshot/master/data/img/preview/launcher.png</image>
+      <caption>The Launcher Window</caption>
+    </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/flameshot-org/flameshot/master/data/img/preview/config_interface.png</image>
+      <caption>Configuration Window - Interface tab</caption>
+    </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/flameshot-org/flameshot/master/data/img/preview/config_shortcuts.png</image>
+      <caption>Configuration Window - Shortcuts tab</caption>
     </screenshot>
   </screenshots>
 
