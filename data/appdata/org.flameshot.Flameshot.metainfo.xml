@@ -8,6 +8,7 @@ SPDX-License-Identifier: CC0-1.0
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-3.0-or-later</project_license>
   <name>Flameshot</name>
+  <translation type="qt">flameshot</translation>
   <developer id="org.flameshot">
     <name>Flameshot Developers</name>
   </developer>
@@ -24,7 +25,6 @@ SPDX-License-Identifier: CC0-1.0
     </p>
   </description>
   <content_rating type="oars-1.1" />
-  <translation type="qt">flameshot</translation>
   <screenshots>
     <screenshot type="default">
       <image>https://raw.githubusercontent.com/flameshot-org/flameshot/master/data/img/preview/usageStatic.png</image>
