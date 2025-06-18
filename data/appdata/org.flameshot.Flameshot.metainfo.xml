@@ -33,6 +33,10 @@ SPDX-License-Identifier: CC0-1.0
   <url type="homepage">https://github.com/flameshot-org/flameshot</url>
   <update_contact>https://github.com/flameshot-org/flameshot/issues/new</update_contact>
   <launchable type="desktop-id">org.flameshot.Flameshot.desktop</launchable>
+  <branding>
+    <color type="primary" scheme_preference="light">#d6a8e3</color>
+    <color type="primary" scheme_preference="dark">#5c0075</color>
+  </branding>
   <releases>
     <release version="12.1.0" date="2022-07-03"/>
     <release version="12.0.0" date="2022-06-21"/>
@@ -47,3 +51,4 @@ SPDX-License-Identifier: CC0-1.0
     <release version="0.8.0" date="2020-09-19"/>
   </releases>
 </component>
+
