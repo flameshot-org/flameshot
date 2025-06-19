@@ -80,8 +80,6 @@ if(WIN32)
   add_definitions(-DFLAMESHOT_VERSION_STRING="${PROJECT_VERSION}")
 elseif(APPLE)
   set(Qt6_DIR "$(brew --prefix qt6)/lib/cmake/Qt6/" CACHE PATH "directory where Qt6Config.cmake exists.")
-  set(CMAKE_MACOSX_BUNDLE ON)
-  set(CMAKE_MACOSX_RPATH ON)
 endif()
 set(RUN_IN_PLACE
         ${DEFAULT_RUN_IN_PLACE}
