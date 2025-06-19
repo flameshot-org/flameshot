@@ -5,6 +5,7 @@
 #include "./ui_capturelauncher.h"
 #include "src/config/cacheutils.h"
 #include "src/core/flameshot.h"
+#include "src/core/qguiappcurrentscreen.h"
 #include "src/utils/globalvalues.h"
 #include "src/utils/screengrabber.h"
 #include "src/utils/screenshotsaver.h"
@@ -84,7 +85,14 @@ CaptureLauncher::CaptureLauncher(QDialog* parent)
     ui->screenshotY->setText(QString::number(lastRegion.y()));
     ui->screenshotWidth->setText(QString::number(lastRegion.width()));
     ui->screenshotHeight->setText(QString::number(lastRegion.height()));
+
     show();
+    // Call show() first, otherwise the correct geometry cannot be fetched
+    // for centering the window on the screen
+    QRect position = frameGeometry();
+    QScreen* screen = QGuiAppCurrentScreen().currentScreen();
+    position.moveCenter(screen->availableGeometry().center());
+    move(position.topLeft());
 }
 
 // HACK:

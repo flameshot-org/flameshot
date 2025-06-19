@@ -37,8 +37,8 @@
 #endif
 
 Flameshot::Flameshot()
-  : m_captureWindow(nullptr)
-  , m_haveExternalWidget(false)
+  : m_haveExternalWidget(false)
+  , m_captureWindow(nullptr)
 #if defined(Q_OS_MACOS)
   , m_HotkeyScreenshotCapture(nullptr)
   , m_HotkeyScreenshotHistory(nullptr)
@@ -221,6 +221,12 @@ void Flameshot::config()
     if (m_configWindow == nullptr) {
         m_configWindow = new ConfigWindow();
         m_configWindow->show();
+        // Call show() first, otherwise the correct geometry cannot be fetched
+        // for centering the window on the screen
+        QRect position = m_configWindow->frameGeometry();
+        QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
+        position.moveCenter(currentScreen->availableGeometry().center());
+        m_configWindow->move(position.topLeft());
 #if defined(Q_OS_MACOS)
         m_configWindow->activateWindow();
         m_configWindow->raise();
@@ -249,7 +255,14 @@ void Flameshot::history()
             historyWidget = nullptr;
         });
     }
+
     historyWidget->show();
+    // Call show() first, otherwise the correct geometry cannot be fetched
+    // for centering the window on the screen
+    QRect position = historyWidget->frameGeometry();
+    QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
+    position.moveCenter(currentScreen->availableGeometry().center());
+    historyWidget->move(position.topLeft());
 
 #if defined(Q_OS_MACOS)
     historyWidget->activateWindow();
