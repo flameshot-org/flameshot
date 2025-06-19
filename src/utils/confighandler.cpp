@@ -405,7 +405,7 @@ bool ConfigHandler::setShortcut(const QString& actionName,
     qDebug() << actionName;
     static QVector<QKeySequence> reservedShortcuts = {
 #if defined(Q_OS_MACOS)
-        Qt::CTRL + Qt::Key_Backspace,
+        Qt::CTRL | Qt::Key_Backspace,
         Qt::Key_Escape,
 #else
         Qt::Key_Backspace,
