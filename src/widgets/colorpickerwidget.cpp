@@ -73,11 +73,11 @@ void ColorPickerWidget::repaint(int i, QPainter& painter)
         int nSteps = lastRect.height() / nStep;
         // 0.02 - start rainbow color, 0.33 - end rainbow color from range:
         // 0.0 - 1.0
-        float h = 0.02;
+        float h = 0.02f;
         for (int radius = nSteps; radius > 0; radius -= nStep * 2) {
             // calculate color
             float fHStep = (0.33 - h) / (nSteps / nStep / 2);
-            QColor color = QColor::fromHslF(h, 0.95, 0.5);
+            QColor color = QColor::fromHslF(h, 0.95f, 0.5f);
 
             // set color and draw circle
             painter.setPen(color);
