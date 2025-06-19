@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - master
-      - fix*
     paths-ignore:
       - 'README.md'
       - 'LICENSE'
@@ -36,25 +35,7 @@ jobs:
     runs-on: ${{ matrix.dist.os }}
     env:
       APP_NAME: flameshot
-      DIR_BULD: build
-      DIR_PKG: build/src
-      HELPERS_SCRIPTS_PATH: ../../packaging/macos
-      # Apple developer identity, example: "Developer ID Application: <user name> (code)"
-      # Note: no signing and notarization will be proceed if this variable is not set
-      APPLE_DEV_IDENTITY: ${{ secrets.APPLE_DEV_IDENTITY }}
-      # Apple ID user
-      APPLE_DEV_USER: ${{ secrets.APPLE_DEV_USER }}
-      # Apple ID user password
-      APPLE_DEV_PASS: ${{ secrets.APPLE_DEV_PASS }}
-      # Apple certificate with private and public keys in base64 format
-      APPLE_DEVELOPER_ID_APPLICATION_CERT_DATA: ${{ secrets.APPLE_DEVELOPER_ID_APPLICATION_CERT_DATA }}
-      # Apple certificate password
-      APPLE_DEVELOPER_ID_APPLICATION_CERT_PASS: ${{ secrets.APPLE_DEVELOPER_ID_APPLICATION_CERT_PASS }}
-      # Any temporary password for keychain, which will be created on github actions CI
-      APPLE_TEMP_CI_KEYCHAIN_PASS: ${{ secrets.APPLE_TEMP_CI_KEYCHAIN_PASS }}
-      # Temporary variable for internal use, it will be set on the "Build dmg" step
-      NOTARIZATION_CHECK: false
-
+      DIR_BUILD: build
     steps:
       - name: Checkout Source code
         if: github.event_name == 'push'
@@ -90,36 +71,21 @@ jobs:
 
       - name: Configure
         run: |
-          rm -rf "${DIR_BULD}"/src/flameshot.dmg "${DIR_BULD}"/src/flameshot.app/
-          cmake -S . -B "${DIR_BULD}" -DQt6_DIR=$(brew --prefix qt6)/lib/cmake/Qt6 -DUSE_MONOCHROME_ICON=True
+          rm -rf "${DIR_BUILD}"/src/flameshot.dmg "${DIR_BUILD}"/src/flameshot.app/
+          cmake -GNinja -S . -B "${DIR_BUILD}" -DQt6_DIR=$(brew --prefix qt6)/lib/cmake/Qt6 -DUSE_MONOCHROME_ICON=True
 
       - name: Compile
         run: |
-          cmake --build "${DIR_BULD}"
-
-      - name: Create key-chain and import certificate
-        run: |
-          cd "${DIR_PKG}"
-          ${HELPERS_SCRIPTS_PATH}/create_keychain.sh flameshot
+          cmake --build "${DIR_BUILD}"
 
       - name: Build dmg package
         run: |
-          cd "${DIR_PKG}"
-          ${HELPERS_SCRIPTS_PATH}/sign_qtapp.sh flameshot
+          cd "${DIR_BUILD}"
+          ninja create_dmg
 
       - name: Artifact Upload
         uses: actions/upload-artifact@v4
         with:
           name: ${{ env.PRODUCT }}-${{ env.VER_INFO }}-artifact-macos-${{ matrix.dist.arch }}
-          path: ${{ github.workspace }}/build/src/flameshot.dmg
+          path: ${{ github.workspace }}/build/src/Flameshot-12.1.0.dmg
           overwrite: true
-
-      - name: Notarization status
-        shell: bash
-        run: |
-          if [[ "${NOTARIZATION_CHECK}" == "true" ]]; then
-            echo "Notarization check succeed"
-          else
-            echo "::warning Notarization check failed"
-            # exit 1
-          fi
