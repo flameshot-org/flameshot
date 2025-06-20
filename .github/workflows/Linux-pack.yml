@@ -89,7 +89,9 @@ jobs:
           echo ${last_committed_tag:1}
           echo "Details: ${ver_info}"
           echo "================================"
-          echo "VERSION=${last_committed_tag:1}" >> $GITHUB_ENV
+          # This will allow to build pre-preleases without git tag
+          # echo "VERSION=${last_committed_tag:1}" >> $GITHUB_ENV
+          echo "VERSION=$(cat CMakeLists.txt |grep 'set.*(.*FLAMESHOT_VERSION' | sed 's/[^0-9.]*//' |sed 's/)//g')" >> $GITHUB_ENV
           echo "VER_INFO=${ver_info}" >> $GITHUB_ENV
       - name: Get packpack tool
         uses: actions/checkout@v4
