@@ -443,13 +443,13 @@ apt install git openssl ca-certificates qt6-image-formats-plugins
 
 ```shell
 # Compile-time
-dnf install gcc-c++ cmake qt5-qtbase-devel qt5-linguist
+dnf install gcc-c++ cmake qt6-qtbase-devel qt6-qtsvg-devel qt6-qttools qt6-linguist
 
 # Run-time
-dnf install qt5-qtbase qt5-qtsvg-devel
+dnf install qt6-qtbase qt6-qtsvg
 
 # Optional
-dnf install git openssl ca-certificates
+dnf install git openssl ca-certificates qt6-qtimageformats
 ```
 
 #### Arch

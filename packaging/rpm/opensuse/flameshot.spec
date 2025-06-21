@@ -16,20 +16,21 @@ BuildRequires: update-desktop-files
 BuildRequires: appstream-glib
 BuildRequires: desktop-file-utils
 
-BuildRequires: cmake(Qt5Core) >= 5.9.0
-BuildRequires: cmake(Qt5DBus) >= 5.9.0
-BuildRequires: cmake(Qt5Gui) >= 5.9.0
-BuildRequires: cmake(Qt5LinguistTools) >= 5.9.0
-BuildRequires: cmake(Qt5Network) >= 5.9.0
-BuildRequires: cmake(Qt5Svg) >= 5.9.0
-BuildRequires: cmake(Qt5Widgets) >= 5.9.0
+BuildRequires: cmake(Qt6Core) >= 6.0.0
+BuildRequires: cmake(Qt6DBus) >= 6.0.0
+BuildRequires: cmake(Qt6Gui) >= 6.0.0
+BuildRequires: cmake(Qt6LinguistTools) >= 6.0.0
+BuildRequires: cmake(Qt6Network) >= 6.0.0
+BuildRequires: cmake(Qt6Svg) >= 6.0.0
+BuildRequires: cmake(Qt6Widgets) >= 6.0.0
 
 
 Requires: hicolor-icon-theme
-Requires: libQt5Core5 >= 5.9.0
-Requires: libqt5-qttools >= 5.9.0
-Requires: libQt5Svg5 >= 5.9.0
+Requires: qt6-base >= 6.0.0
+Requires: qt6-tools >= 6.0.0
+Requires: qt6-svg >= 6.0.0
 
+Recommends: qt6-imageformats
 Recommends: xdg-desktop-portal%{?_isa}
 Recommends: (xdg-desktop-portal-gnome%{?_isa} if gnome-shell%{?_isa})
 Recommends: (xdg-desktop-portal-kde%{?_isa} if plasma-workspace-wayland%{?_isa})
