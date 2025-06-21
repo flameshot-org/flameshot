@@ -57,6 +57,7 @@ GeneralConf::GeneralConf(QWidget* parent)
     initUploadWithoutConfirmation();
     initHistoryConfirmationToDelete();
     initAntialiasingPinZoom();
+    initPinHideDropShadow();
     initUploadHistoryMax();
     initUndoLimit();
     initUploadClientSecret();
@@ -86,6 +87,7 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
     m_saveAfterCopy->setChecked(config.saveAfterCopy());
     m_copyPathAfterSave->setChecked(config.copyPathAfterSave());
     m_antialiasingPinZoom->setChecked(config.antialiasingPinZoom());
+    m_pinHideDropShadow->setChecked(config.pinHideDropShadow());
     m_useJpgForClipboard->setChecked(config.useJpgForClipboard());
     m_copyOnDoubleClick->setChecked(config.copyOnDoubleClick());
     m_uploadWithoutConfirmation->setChecked(config.uploadWithoutConfirmation());
@@ -492,6 +494,7 @@ void GeneralConf::initPredefinedColorPaletteLarge()
           ConfigHandler().setPredefinedColorPaletteLarge(checked);
       });
 }
+
 void GeneralConf::initCopyOnDoubleClick()
 {
     m_copyOnDoubleClick = new QCheckBox(tr("Copy on double click"), this);
@@ -721,6 +724,19 @@ void GeneralConf::initAntialiasingPinZoom()
     m_scrollAreaLayout->addWidget(m_antialiasingPinZoom);
     connect(m_antialiasingPinZoom, &QCheckBox::clicked, [](bool checked) {
         ConfigHandler().setAntialiasingPinZoom(checked);
+    });
+}
+
+void GeneralConf::initPinHideDropShadow()
+{
+    m_pinHideDropShadow =
+      new QCheckBox(tr("Hide border effect around the pinned image"), this);
+    m_pinHideDropShadow->setToolTip(
+      tr("Remove the drop shadow which lets the pinned image stand out"
+         "visually"));
+    m_scrollAreaLayout->addWidget(m_pinHideDropShadow);
+    connect(m_pinHideDropShadow, &QCheckBox::clicked, [](bool checked) {
+        ConfigHandler().setPinHideDropShadow(checked);
     });
 }
 

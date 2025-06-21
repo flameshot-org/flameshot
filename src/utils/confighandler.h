@@ -119,6 +119,7 @@ public:
     CONFIG_GETTER_SETTER(copyPathAfterSave, setCopyPathAfterSave, bool)
     CONFIG_GETTER_SETTER(saveAsFileExtension, setSaveAsFileExtension, QString)
     CONFIG_GETTER_SETTER(antialiasingPinZoom, setAntialiasingPinZoom, bool)
+    CONFIG_GETTER_SETTER(pinHideDropShadow, setPinHideDropShadow, bool)
     CONFIG_GETTER_SETTER(useJpgForClipboard, setUseJpgForClipboard, bool)
     CONFIG_GETTER_SETTER(uploadWithoutConfirmation,
                          setUploadWithoutConfirmation,

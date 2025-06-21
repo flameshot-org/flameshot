@@ -97,6 +97,7 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     OPTION("copyURLAfterUpload"          ,Bool               ( true          )),
     OPTION("copyPathAfterSave"           ,Bool               ( false         )),
     OPTION("antialiasingPinZoom"         ,Bool               ( true          )),
+    OPTION("pinHideDropShadow"           ,Bool               ( false         )),
     OPTION("useJpgForClipboard"          ,Bool               ( false         )),
     OPTION("uploadWithoutConfirmation"   ,Bool               ( false         )),
     OPTION("saveAfterCopy"               ,Bool               ( false         )),

@@ -77,6 +77,7 @@ private:
     void initCopyOnDoubleClick();
     void initCopyPathAfterSave();
     void initHistoryConfirmationToDelete();
+    void initPinHideDropShadow();
     void initPredefinedColorPaletteLarge();
     void initSaveAfterCopy();
     void initScrollArea();
@@ -123,6 +124,7 @@ private:
     QCheckBox* m_copyURLAfterUpload;
     QCheckBox* m_copyPathAfterSave;
     QCheckBox* m_antialiasingPinZoom;
+    QCheckBox* m_pinHideDropShadow;
     QCheckBox* m_saveLastRegion;
     QCheckBox* m_uploadWithoutConfirmation;
     QPushButton* m_importButton;
