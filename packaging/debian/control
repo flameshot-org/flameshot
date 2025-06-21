@@ -27,6 +27,7 @@ Recommends:
 Suggests:
  ca-certificates,
  openssl,
+ qt6-image-formats-plugins,
 Description: Powerful yet simple-to-use screenshot software
  Flameshot is a powerful yet simple-to-use screenshot software.
  Notable features include customizable appearance, in-app screenshot editing,
