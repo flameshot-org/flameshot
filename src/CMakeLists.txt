@@ -206,9 +206,7 @@ target_include_directories(
          )
 
 
-if (USE_EXTERNAL_SINGLEAPPLICATION)
-    add_compile_definitions(USE_EXTERNAL_SINGLEAPPLICATION=1)
-else ()
+if (USE_SINGLEAPPLICATION)
     target_include_directories(
         flameshot
         PUBLIC
@@ -223,9 +221,15 @@ target_link_libraries(
         Qt${QT_VERSION_MAJOR}::DBus
         Qt${QT_VERSION_MAJOR}::Network
         Qt${QT_VERSION_MAJOR}::Widgets
-        ${QTSINGLEAPPLICATION_LIBRARY}
         QtColorWidgets
 )
+
+if (USE_SINGLEAPPLICATION)
+  target_link_libraries(
+          flameshot
+          SingleApplication::SingleApplication
+  )
+endif()
 
 if (USE_WAYLAND_CLIPBOARD)
   target_compile_definitions(flameshot PRIVATE USE_WAYLAND_CLIPBOARD=1)
