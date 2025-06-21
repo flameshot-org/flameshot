@@ -1553,6 +1553,10 @@ void CaptureWidget::removeToolObject(int index)
 
 void CaptureWidget::initShortcuts()
 {
+    newShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_COLORGRAB")),
+                this,
+                SLOT(grabColor()));
+
     newShortcut(
       QKeySequence(ConfigHandler().shortcut("TYPE_UNDO")), this, SLOT(undo()));
 
@@ -1854,6 +1858,11 @@ QList<QShortcut*> CaptureWidget::newShortcut(const QKeySequence& key,
         shortcuts << new QShortcut(key, parent, slot);
     }
     return shortcuts;
+}
+
+void CaptureWidget::grabColor()
+{
+    m_sidePanel->startColorGrab();
 }
 
 void CaptureWidget::togglePanel()
