@@ -207,10 +207,12 @@ target_include_directories(
 
 
 if (USE_SINGLEAPPLICATION)
-    target_include_directories(
-        flameshot
-        PUBLIC
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../external/singleapplication>)
+  message(STATUS "SingleApplication is used!")
+  add_compile_definitions(USE_SINGLEAPPLICATION=1)
+  target_include_directories(
+      flameshot
+      PUBLIC
+      $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../external/singleapplication>)
 endif()
 
 target_link_libraries(
