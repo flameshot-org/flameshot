@@ -107,6 +107,7 @@ jobs:
           cache-key-prefix: install-qt-action-${{ matrix.qt_ver }}
           target:  ${{ matrix.qt_target }}
           arch: ${{ matrix.config.qt_arch }}
+          modules: 'qtimageformats'
           dir: '${{ github.workspace }}/build/'
 
       - name: Configure
