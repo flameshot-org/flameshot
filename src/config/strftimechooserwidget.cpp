@@ -67,4 +67,6 @@ QMap<QString, QString> StrftimeChooserWidget::m_buttonData{
     { QT_TR_NOOP("Full Date (%m/%d/%y)"), "%D" },
 #endif
     { QT_TR_NOOP("Full Date (%Y-%m-%d)"), "%F" },
+    { QT_TR_NOOP("Full Date (%d-%m-%Y)"), "%d-%m-%Y" },
+
 };
