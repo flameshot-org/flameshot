@@ -1787,7 +1787,7 @@ void CaptureWidget::drawToolsData(bool drawSelection)
 
         // skip cache only for the active tool, and the for the rest use the
         // cache
-        if (toolItem == m_activeTool) {
+        if (toolItem == activeToolObject()) {
             processPixmapWithTool(&pixmapItem, toolItem, true);
         } else {
             processPixmapWithTool(&pixmapItem, toolItem, false);
