@@ -149,13 +149,14 @@ void TrayIcon::initMenu()
     QAction* quitAction = new QAction(tr("&Quit"), this);
     connect(quitAction, &QAction::triggered, qApp, &QCoreApplication::quit);
 
+#ifdef ENABLE_IMGUR
     // recent screenshots
     QAction* recentAction = new QAction(tr("&Latest Uploads"), this);
     connect(recentAction,
             &QAction::triggered,
             Flameshot::instance(),
             &Flameshot::history);
-
+#endif
     auto* openSavePathAction = new QAction(tr("&Open Save Path"), this);
     connect(openSavePathAction,
             &QAction::triggered,
@@ -165,7 +166,9 @@ void TrayIcon::initMenu()
     m_menu->addAction(captureAction);
     m_menu->addAction(launcherAction);
     m_menu->addSeparator();
+#ifdef ENABLE_IMGUR
     m_menu->addAction(recentAction);
+#endif
     m_menu->addAction(openSavePathAction);
     m_menu->addSeparator();
     m_menu->addAction(configAction);
