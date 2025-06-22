@@ -395,7 +395,19 @@ endif ()
 
 # windeployqt
 if (WIN32)
-    if (EXISTS $ENV{QTDIR}/bin/windeployqt.exe)
+    # Add CMAKE_PREFIX_PATH to search paths
+    foreach(prefix ${CMAKE_PREFIX_PATH})
+        list(APPEND WINDEPLOYQT_SEARCH_PATHS "${prefix}/bin")
+    endforeach()
+    list(APPEND WINDEPLOYQT_SEARCH_PATHS "$ENV{QTDIR}/bin")
+    
+    find_program(WINDEPLOYQT_EXE windeployqt.exe
+        PATHS ${WINDEPLOYQT_SEARCH_PATHS}
+    )
+
+    if(WINDEPLOYQT_EXE)
+        message(STATUS "windeployqt found: ${WINDEPLOYQT_EXE}")
+
         if (CMAKE_BUILD_TYPE MATCHES Release)
             set(BINARIES_TYPE --release)
         else ()
@@ -407,7 +419,7 @@ if (WIN32)
                 POST_BUILD
                 COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_BINARY_DIR}/windeployqt_stuff
                 COMMAND
-                $ENV{QTDIR}/bin/windeployqt.exe ${BINARIES_TYPE} --no-translations --compiler-runtime --no-system-d3d-compiler
+                ${WINDEPLOYQT_EXE} ${BINARIES_TYPE} --no-translations --compiler-runtime --no-system-d3d-compiler
                 --no-quick-import --dir ${CMAKE_BINARY_DIR}/windeployqt_stuff $<TARGET_FILE:flameshot>
                 # copy translations manually QM_FILES
                 COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/windeployqt_stuff/translations
@@ -433,7 +445,7 @@ if (WIN32)
         endif ()
 
     else ()
-        message("Unable to find executable QTDIR/bin/windeployqt.")
+        message(WARNING "Unable to find executable windeployqt.")
     endif ()
 endif ()
 
