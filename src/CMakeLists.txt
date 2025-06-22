@@ -153,9 +153,6 @@ endif ()
 target_sources(
         flameshot
         PRIVATE
-        # ${CMAKE_CURRENT_SOURCE_DIR}/../external/Qt-Color-Widgets/src/QtColorWidgets/color_utils.cpp
-        # ${CMAKE_CURRENT_SOURCE_DIR}/../external/Qt-Color-Widgets/src/QtColorWidgets/color_wheel.cpp
-        # ${CMAKE_CURRENT_SOURCE_DIR}/../external/Qt-Color-Widgets/include/QtColorWidgets/color_wheel.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../data/graphics.qrc
         ${CMAKE_CURRENT_SOURCE_DIR}/../data/flameshot.rc # windows binary icon resource file
         ${QM_FILES}
@@ -165,7 +162,6 @@ target_include_directories(
   flameshot
   PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../>
          $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/>
-         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../external/Qt-Color-Widgets/include>
          $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../dbus/>
          $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/cli>
          $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/config>
@@ -205,16 +201,6 @@ target_include_directories(
          $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/>
          )
 
-
-if (USE_SINGLEAPPLICATION)
-  message(STATUS "SingleApplication is used!")
-  add_compile_definitions(USE_SINGLEAPPLICATION=1)
-  target_include_directories(
-      flameshot
-      PUBLIC
-      $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../external/singleapplication>)
-endif()
-
 target_link_libraries(
         flameshot
         project_warnings
@@ -227,6 +213,8 @@ target_link_libraries(
 )
 
 if (USE_SINGLEAPPLICATION)
+  message(STATUS "SingleApplication is used!")
+  add_compile_definitions(USE_SINGLEAPPLICATION=1)
   target_link_libraries(
           flameshot
           SingleApplication::SingleApplication
