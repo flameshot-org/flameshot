@@ -109,8 +109,8 @@ QWidget* TextTool::widget()
     m_widget->setText(m_text);
     if (dropShadowEnabled()) {
         QGraphicsDropShadowEffect* shadowEffect = new QGraphicsDropShadowEffect;
-        shadowEffect->setBlurRadius(3.0);
-        shadowEffect->setOffset(2, 2);
+        shadowEffect->setBlurRadius(10.0);
+        shadowEffect->setOffset(3, 3);
         shadowEffect->setColor(QColor(0, 0, 0, 128));
         m_widget->setGraphicsEffect(shadowEffect);
     }
