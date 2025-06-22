@@ -247,38 +247,45 @@ protected:
         QPainter scenePainter(&finalImage);
         scene.render(&scenePainter);
 
-        return QPixmap::fromImage(trimImage(finalImage));
+        // Trim the image, noting the position
+        m_pixmapPosition = findContentBounds(finalImage);
+        if (m_pixmapPosition.isEmpty()) {
+            return { QPixmap() };
+        }
+        return QPixmap::fromImage(finalImage.copy(m_pixmapPosition));
     }
 
-    QImage trimImage(const QImage& image) {
-        int left = image.width();
-        int top = image.height();
-        int right = 0;
-        int bottom = 0;
+    QRect findContentBounds(const QImage& image) {
+        const int width = image.width();
+        const int height = image.height();
+        if (width == 0 || height == 0) return QRect();
 
-        for (int y = 0; y < image.height(); ++y) {
-            for (int x = 0; x < image.width(); ++x) {
-                if (qAlpha(image.pixel(x, y)) != 0) {
-                    if (x < left) left = x;
-                    if (x > right) right = x;
-                    if (y < top) top = y;
-                    if (y > bottom) bottom = y;
-                }
+        int top = 0, bottom = height - 1, left = 0, right = width - 1;
+
+        auto hasAlphaInRow = [&](int y) -> bool {
+            const QRgb* line = reinterpret_cast<const QRgb*>(image.scanLine(y));
+            for (int x = 0; x < width; ++x)
+                if (qAlpha(line[x]) != 0) return true;
+            return false;
+        };
+
+        auto hasAlphaInColumn = [&](int x) -> bool {
+            for (int y = top; y <= bottom; ++y) {
+                const QRgb* line = reinterpret_cast<const QRgb*>(image.scanLine(y));
+                if (qAlpha(line[x]) != 0) return true;
             }
-        }
+            return false;
+        };
 
-        QRect trimmedRect;
+        while (top <= bottom && !hasAlphaInRow(top))    ++top;
+        while (bottom >= top && !hasAlphaInRow(bottom)) --bottom;
+        while (left <= right && !hasAlphaInColumn(left)) ++left;
+        while (right >= left && !hasAlphaInColumn(right)) --right;
 
-        if (right < left || bottom < top) {
-            // Entire image is transparent
-            trimmedRect.setRect(0,0,0,0);
-            m_pixmapPosition = trimmedRect;
-            return QImage();
-        }
+        if (right < left || bottom < top)
+            return QRect(); // Fully transparent
 
-        trimmedRect.setRect(left, top, right - left + 1, bottom - top + 1);
-        m_pixmapPosition = trimmedRect;
-        return image.copy(trimmedRect);
+        return QRect(left, top, right - left + 1, bottom - top + 1);
     }
 
 public slots:
