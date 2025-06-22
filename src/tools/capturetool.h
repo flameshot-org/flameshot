@@ -154,20 +154,19 @@ public:
     // Called every time the tool has to draw
     void doProcess(QPainter& painter, const QPixmap& pixmap, bool skipCache)
     {
-        QPixmap shapePixmap;
-        if (skipCache && m_pixmapCacheKey.isValid()) {
-            QPixmapCache::remove(m_pixmapCacheKey);
-        }
-        if (!QPixmapCache::find(m_pixmapCacheKey, &shapePixmap)) {
-
-            if (dropShadowEnabled()) {
-                shapePixmap = drawShapeWithShadow(painter, pixmap);
-            } else {
-                process(painter, shapePixmap);
+        if (dropShadowEnabled()) {
+            QPixmap renderedPixmap;
+            if (skipCache || !m_pixmapCacheKey.isValid()) {
+                QPixmapCache::remove(m_pixmapCacheKey);
             }
-            m_pixmapCacheKey = QPixmapCache::insert(shapePixmap);
+            if (!QPixmapCache::find(m_pixmapCacheKey, &renderedPixmap)) {
+                renderedPixmap = renderShapeWithShadow(pixmap.size());
+                m_pixmapCacheKey = QPixmapCache::insert(renderedPixmap);
+            }
+            painter.drawPixmap(m_pixmapCachePosition, renderedPixmap);
+        } else {
+            process(painter, pixmap);
         }
-        painter.drawPixmap(m_pixmapPosition, shapePixmap);
     };
 
     virtual void drawSearchArea(QPainter& painter, const QPixmap& pixmap)
@@ -195,7 +194,7 @@ protected:
         to->m_count = from->m_count;
         to->m_dropShadowEnabled = from->m_dropShadowEnabled;
         to->m_pixmapCacheKey = from->m_pixmapCacheKey;
-        to->m_pixmapPosition = from->m_pixmapPosition;
+        to->m_pixmapCachePosition = from->m_pixmapCachePosition;
     }
 
     QString iconPath(const QColor& c) const
@@ -215,19 +214,18 @@ protected:
     }
     virtual void drawDropShadow(QPainter& painter, const QPixmap& pixmap) = 0;
 
-    QPixmap drawShapeWithShadow(QPainter& painter, const QPixmap& pixmap)
+    QPixmap renderShapeWithShadow(QSize pixmapSize)
     {
         int offset = 3;
         QColor shadowColor = QColor(0, 0, 0, 128);
         qreal blurRadius = 10.0;
-        QSize size(painter.device()->width(), painter.device()->height());
-        QPixmap shapePixmap(size);
+        QPixmap shapePixmap(pixmapSize);
         shapePixmap.fill(Qt::transparent);
 
         // Draw the shape into an offscreen pixmap
         QPainter shapePainter(&shapePixmap);
         shapePainter.setRenderHint(QPainter::Antialiasing);
-        process(shapePainter, pixmap);
+        process(shapePainter, shapePixmap);
         shapePainter.end();
 
         // Create a pixmap item and apply the drop shadow effect
@@ -241,18 +239,18 @@ protected:
         // Render the item with shadow onto a new pixmap via QGraphicsScene
         QGraphicsScene scene;
         scene.addItem(item);
-        QImage finalImage(size, QImage::Format_ARGB32_Premultiplied);
-        finalImage.fill(Qt::transparent);
+        QImage finalRender(pixmapSize, QImage::Format_ARGB32_Premultiplied);
+        finalRender.fill(Qt::transparent);
 
-        QPainter scenePainter(&finalImage);
+        QPainter scenePainter(&finalRender);
         scene.render(&scenePainter);
 
-        // Trim the image, noting the position
-        m_pixmapPosition = findContentBounds(finalImage);
-        if (m_pixmapPosition.isEmpty()) {
+        // Trim the image render, noting the position bounds
+        m_pixmapCachePosition = findContentBounds(finalRender);
+        if (m_pixmapCachePosition.isEmpty()) {
             return { QPixmap() };
         }
-        return QPixmap::fromImage(finalImage.copy(m_pixmapPosition));
+        return QPixmap::fromImage(finalRender.copy(m_pixmapCachePosition));
     }
 
     QRect findContentBounds(const QImage& image) {
@@ -316,5 +314,5 @@ private:
     bool m_editMode;
     bool m_dropShadowEnabled = false;
     QPixmapCache::Key m_pixmapCacheKey;
-    QRect m_pixmapPosition;
+    QRect m_pixmapCachePosition;
 };
