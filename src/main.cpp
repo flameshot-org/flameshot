@@ -104,9 +104,8 @@ void configureApp(bool gui)
     }
     if (!foundTranslation) {
         QLocale l;
-        AbstractLogger::warning()
-          << QStringLiteral("No Flameshot translation found for %1")
-               .arg(l.uiLanguages().join(", "));
+        qWarning() << QStringLiteral("No Flameshot translation found for %1")
+                        .arg(l.uiLanguages().join(", "));
     }
 
     foundTranslation =
@@ -115,9 +114,9 @@ void configureApp(bool gui)
                         "_",
                         QLibraryInfo::path(QLibraryInfo::TranslationsPath));
     if (!foundTranslation) {
-        AbstractLogger::warning()
-          << QStringLiteral("No Qt translation found for %1")
-               .arg(QLocale::languageToString(QLocale::system().language()));
+        qWarning() << QStringLiteral("No Qt translation found for %1")
+                        .arg(QLocale::languageToString(
+                          QLocale::system().language()));
     }
 
     auto app = QCoreApplication::instance();
