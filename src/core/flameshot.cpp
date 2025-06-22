@@ -65,12 +65,14 @@ Flameshot::Flameshot()
                      &QHotkey::activated,
                      qApp,
                      [this]() { gui(); });
+#ifdef ENABLE_IMGUR
     m_HotkeyScreenshotHistory = new QHotkey(
       QKeySequence(ConfigHandler().shortcut("SCREENSHOT_HISTORY")), true, this);
     QObject::connect(m_HotkeyScreenshotHistory,
                      &QHotkey::activated,
                      qApp,
                      [this]() { history(); });
+#endif
 #endif
 }
 
