@@ -150,7 +150,9 @@ private:
     void drawToolsData(bool drawSelection = true);
     void drawObjectSelection();
 
-    void processPixmapWithTool(QPixmap* pixmap, CaptureTool* tool);
+    void processPixmapWithTool(QPixmap* pixmap,
+                               CaptureTool* tool,
+                               bool useCache);
 
     CaptureTool* activeButtonTool() const;
     CaptureTool::Type activeButtonToolType() const;

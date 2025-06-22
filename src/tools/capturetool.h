@@ -8,6 +8,11 @@
 #include "src/utils/pathinfo.h"
 #include <QIcon>
 #include <QPainter>
+#include <qgraphicseffect.h>
+#include <qgraphicsitem.h>
+#include <qgraphicsscene.h>
+#include <qpainterpath.h>
+#include <qpixmapcache.h>
 
 class CaptureTool : public QObject
 {
@@ -147,13 +152,24 @@ public:
     virtual void process(QPainter& painter, const QPixmap& pixmap) = 0;
 
     // Called every time the tool has to draw
-    void doProcess(QPainter& painter, const QPixmap& pixmap)
+    void doProcess(QPainter& painter, const QPixmap& pixmap, bool skipCache)
     {
-        if (dropShadowEnabled()) {
-            drawDropShadow(painter, pixmap);
+        QPixmap shapePixmap;
+        if (skipCache && m_pixmapCacheKey.isValid()) {
+            QPixmapCache::remove(m_pixmapCacheKey);
         }
-        process(painter, pixmap);
+        if (!QPixmapCache::find(m_pixmapCacheKey, &shapePixmap)) {
+
+            if (dropShadowEnabled()) {
+                shapePixmap = drawShapeWithShadow(painter, pixmap);
+            } else {
+                process(painter, shapePixmap);
+            }
+            m_pixmapCacheKey = QPixmapCache::insert(shapePixmap);
+        }
+        painter.drawPixmap(m_pixmapPosition, shapePixmap);
     };
+
     virtual void drawSearchArea(QPainter& painter, const QPixmap& pixmap)
     {
         process(painter, pixmap);
@@ -178,6 +194,8 @@ protected:
     {
         to->m_count = from->m_count;
         to->m_dropShadowEnabled = from->m_dropShadowEnabled;
+        to->m_pixmapCacheKey = from->m_pixmapCacheKey;
+        to->m_pixmapPosition = from->m_pixmapPosition;
     }
 
     QString iconPath(const QColor& c) const
@@ -196,6 +214,72 @@ protected:
         painter.setPen(orig_pen);
     }
     virtual void drawDropShadow(QPainter& painter, const QPixmap& pixmap) = 0;
+
+    QPixmap drawShapeWithShadow(QPainter& painter, const QPixmap& pixmap)
+    {
+        int offset = 3;
+        QColor shadowColor = QColor(0, 0, 0, 128);
+        qreal blurRadius = 10.0;
+        QSize size(painter.device()->width(), painter.device()->height());
+        QPixmap shapePixmap(size);
+        shapePixmap.fill(Qt::transparent);
+
+        // Draw the shape into an offscreen pixmap
+        QPainter shapePainter(&shapePixmap);
+        shapePainter.setRenderHint(QPainter::Antialiasing);
+        process(shapePainter, pixmap);
+        shapePainter.end();
+
+        // Create a pixmap item and apply the drop shadow effect
+        QGraphicsPixmapItem* item = new QGraphicsPixmapItem(shapePixmap);
+        QGraphicsDropShadowEffect* shadowEffect = new QGraphicsDropShadowEffect;
+        shadowEffect->setBlurRadius(blurRadius);
+        shadowEffect->setOffset(offset, offset);
+        shadowEffect->setColor(shadowColor);
+        item->setGraphicsEffect(shadowEffect);
+
+        // Render the item with shadow onto a new pixmap via QGraphicsScene
+        QGraphicsScene scene;
+        scene.addItem(item);
+        QImage finalImage(size, QImage::Format_ARGB32_Premultiplied);
+        finalImage.fill(Qt::transparent);
+
+        QPainter scenePainter(&finalImage);
+        scene.render(&scenePainter);
+
+        return QPixmap::fromImage(trimImage(finalImage));
+    }
+
+    QImage trimImage(const QImage& image) {
+        int left = image.width();
+        int top = image.height();
+        int right = 0;
+        int bottom = 0;
+
+        for (int y = 0; y < image.height(); ++y) {
+            for (int x = 0; x < image.width(); ++x) {
+                if (qAlpha(image.pixel(x, y)) != 0) {
+                    if (x < left) left = x;
+                    if (x > right) right = x;
+                    if (y < top) top = y;
+                    if (y > bottom) bottom = y;
+                }
+            }
+        }
+
+        QRect trimmedRect;
+
+        if (right < left || bottom < top) {
+            // Entire image is transparent
+            trimmedRect.setRect(0,0,0,0);
+            m_pixmapPosition = trimmedRect;
+            return QImage();
+        }
+
+        trimmedRect.setRect(left, top, right - left + 1, bottom - top + 1);
+        m_pixmapPosition = trimmedRect;
+        return image.copy(trimmedRect);
+    }
 
 public slots:
     // On mouse release.
@@ -224,4 +308,6 @@ private:
     unsigned int m_count;
     bool m_editMode;
     bool m_dropShadowEnabled = false;
+    QPixmapCache::Key m_pixmapCacheKey;
+    QRect m_pixmapPosition;
 };

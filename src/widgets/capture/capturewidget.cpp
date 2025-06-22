@@ -463,7 +463,7 @@ QPixmap CaptureWidget::pixmap()
 bool CaptureWidget::commitCurrentTool()
 {
     if (m_activeTool) {
-        processPixmapWithTool(&m_context.screenshot, m_activeTool);
+        processPixmapWithTool(&m_context.screenshot, m_activeTool, true);
         if (m_activeTool->isValid() && !m_activeTool->editMode() &&
             m_toolWidget) {
             pushToolToStack();
@@ -680,7 +680,7 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
     }
 
     if (m_activeTool && m_mouseIsClicked) {
-        m_activeTool->doProcess(painter, m_context.screenshot);
+        m_activeTool->doProcess(painter, m_context.screenshot, true);
     } else if (m_previewEnabled && activeButtonTool() &&
                m_activeButton->tool()->showMousePreview()) {
         m_activeButton->tool()->paintMousePreview(painter, m_context);
@@ -1784,7 +1784,15 @@ void CaptureWidget::drawToolsData(bool drawSelection)
     // at once every time
     QPixmap pixmapItem = m_context.origScreenshot;
     for (const auto& toolItem : m_captureToolObjects.captureToolObjects()) {
-        processPixmapWithTool(&pixmapItem, toolItem);
+
+        // skip cache only for the active tool, and the for the rest use the
+        // cache
+        if (toolItem == m_activeTool) {
+            processPixmapWithTool(&pixmapItem, toolItem, true);
+        } else {
+            processPixmapWithTool(&pixmapItem, toolItem, false);
+        }
+
         update(paddedUpdateRect(toolItem->boundingRect()));
     }
 
@@ -1810,11 +1818,13 @@ void CaptureWidget::drawObjectSelection()
     }
 }
 
-void CaptureWidget::processPixmapWithTool(QPixmap* pixmap, CaptureTool* tool)
+void CaptureWidget::processPixmapWithTool(QPixmap* pixmap,
+                                          CaptureTool* tool,
+                                          bool skipCache)
 {
     QPainter painter(pixmap);
     painter.setRenderHint(QPainter::Antialiasing);
-    tool->doProcess(painter, *pixmap);
+    tool->doProcess(painter, *pixmap, skipCache);
 }
 
 CaptureTool* CaptureWidget::activeButtonTool() const
