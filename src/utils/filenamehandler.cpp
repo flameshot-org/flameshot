@@ -16,7 +16,7 @@ FileNameHandler::FileNameHandler(QObject* parent)
     auto err = AbstractLogger::error(AbstractLogger::Stderr);
     try {
         std::locale::global(std::locale());
-    } catch (std::exception& e) {
+    } catch (std::exception&) {
         err << "Locales on your system are not properly configured. Falling "
                "back to defaults";
 
