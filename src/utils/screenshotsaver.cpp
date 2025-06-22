@@ -241,8 +241,7 @@ bool saveToFilesystemGUI(const QPixmap& capture)
     }
 #endif
     if (!config.savePathFixed()) {
-        savePath = QDir::toNativeSeparators(
-          ShowSaveFileDialog(QObject::tr("Save screenshot"), savePath));
+        savePath = ShowSaveFileDialog(QObject::tr("Save screenshot"), savePath);
     }
     if (savePath == "") {
         return okay;
