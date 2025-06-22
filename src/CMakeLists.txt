@@ -233,6 +233,16 @@ if (USE_SINGLEAPPLICATION)
   )
 endif()
 
+if (USE_KDSINGLEAPPLICATION)
+  message(STATUS "KDSingleApplication is used!")
+  add_compile_definitions(USE_KDSINGLEAPPLICATION=1)
+
+  target_link_libraries(
+          flameshot
+          kdsingleapplication
+  )
+endif()
+
 if (USE_WAYLAND_CLIPBOARD)
   target_compile_definitions(flameshot PRIVATE USE_WAYLAND_CLIPBOARD=1)
   target_link_libraries(flameshot KF6::GuiAddons)

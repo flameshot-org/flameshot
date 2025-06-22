@@ -4,6 +4,9 @@
 #ifdef USE_SINGLEAPPLICATION
 #include "singleapplication.h"
 #endif
+#ifdef USE_KDSINGLEAPPLICATION
+#include "kdsingleapplication.h"
+#endif
 
 #include "abstractlogger.h"
 #include "src/cli/commandlineparser.h"
@@ -131,6 +134,15 @@ int main(int argc, char* argv[])
         SingleApplication app(argc, argv);
 #else
         QApplication app(argc, argv);
+#endif
+#ifdef USE_KDSINGLEAPPLICATION
+        KDSingleApplication kdsa(QStringLiteral("flameshot"));
+
+        if (!kdsa.isPrimaryInstance()) {
+            // AbstractLogger::warning()
+            //  << QStringLiteral("Closing second Flameshot instance!");
+            return 0; // Quit
+        }
 #endif
 
         configureApp(true);
