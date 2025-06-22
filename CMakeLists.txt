@@ -119,11 +119,11 @@ enable_sanitizers(project_options)
 
 # allow for static analysis options include(cmake/StaticAnalyzers.cmake)
 
-set(QAPPLICATION_CLASS
-        QApplication
-        CACHE STRING "Inheritance class for SingleApplication")
-
 if(USE_SINGLEAPPLICATION)
+  set(QAPPLICATION_CLASS
+          QApplication
+          CACHE STRING "Inheritance class for SingleApplication")
+
   FetchContent_Declare(
       singleApplication
       GIT_REPOSITORY https://github.com/itay-grudev/SingleApplication.git
