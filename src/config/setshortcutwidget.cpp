@@ -46,12 +46,12 @@ SetShortcutDialog::SetShortcutDialog(QDialog* parent,
     if (shortcutName == "TAKE_SCREENSHOT" && restartMessageAdded == false) {
         msg +=
           "\n" + tr("Flameshot must be restarted for changes to take effect.");
-	restartMessageAdded = true;
+        restartMessageAdded = true;
     }
     if (shortcutName == "SCREENSHOT_HISTORY" && restartMessageAdded == false) {
         msg +=
           "\n" + tr("Flameshot must be restarted for changes to take effect.");
-	restartMessageAdded = true;
+        restartMessageAdded = true;
     }
 
     auto* infoBottom = new QLabel(msg);
