@@ -918,7 +918,7 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
             // ensure selection outline is updated too
             update(paddedUpdateRect(activeTool->boundingRect()));
             activeTool->move(e->pos() - m_activeToolOffsetToMouseOnStart);
-            drawToolsData();
+            drawToolsData(true, true);
         }
     } else if (m_activeTool) {
         // drawing with a tool
@@ -1453,7 +1453,7 @@ void CaptureWidget::onToolSizeChanged(int t)
             m_captureToolObjectsBackup = m_captureToolObjects;
             m_existingObjectIsChanged = true;
         }
-        drawToolsData();
+        drawToolsData(true, true);
         updateTool(toolItem);
     }
 
@@ -1480,7 +1480,7 @@ void CaptureWidget::setDrawColor(const QColor& c)
         if (toolItem) {
             // Change color
             toolItem->onColorChanged(c);
-            drawToolsData();
+            drawToolsData(true, true);
         }
     }
 }
@@ -1496,7 +1496,7 @@ void CaptureWidget::setDropShadow(bool enabled)
     if (toolItem) {
         // Change drop shadow
         toolItem->onDropShadowChanged(enabled);
-        drawToolsData();
+        drawToolsData(true, true);
     }
 }
 
@@ -1778,21 +1778,18 @@ void CaptureWidget::pushToolToStack()
     }
 }
 
-void CaptureWidget::drawToolsData(bool drawSelection)
+void CaptureWidget::drawToolsData(bool drawSelection, bool needCacheUpdate)
 {
     // TODO refactor this for performance. The objects should not all be updated
     // at once every time
     QPixmap pixmapItem = m_context.origScreenshot;
     for (const auto& toolItem : m_captureToolObjects.captureToolObjects()) {
-
-        // skip cache only for the active tool, and the for the rest use the
-        // cache
-        if (toolItem == activeToolObject()) {
+        // update cache only for the active tool
+        if (toolItem == activeToolObject() && needCacheUpdate) {
             processPixmapWithTool(&pixmapItem, toolItem, true);
         } else {
             processPixmapWithTool(&pixmapItem, toolItem, false);
         }
-
         update(paddedUpdateRect(toolItem->boundingRect()));
     }
 
@@ -1820,11 +1817,11 @@ void CaptureWidget::drawObjectSelection()
 
 void CaptureWidget::processPixmapWithTool(QPixmap* pixmap,
                                           CaptureTool* tool,
-                                          bool skipCache)
+                                          bool needCacheUpdate)
 {
     QPainter painter(pixmap);
     painter.setRenderHint(QPainter::Antialiasing);
-    tool->doProcess(painter, *pixmap, skipCache);
+    tool->doProcess(painter, *pixmap, needCacheUpdate);
 }
 
 CaptureTool* CaptureWidget::activeButtonTool() const

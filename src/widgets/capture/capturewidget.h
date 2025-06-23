@@ -147,12 +147,12 @@ private:
     QRect paddedUpdateRect(const QRect& r) const;
     void drawErrorMessage(const QString& msg, QPainter* painter);
     void drawInactiveRegion(QPainter* painter);
-    void drawToolsData(bool drawSelection = true);
+    void drawToolsData(bool drawSelection = true, bool needCacheUpdate = false);
     void drawObjectSelection();
 
     void processPixmapWithTool(QPixmap* pixmap,
                                CaptureTool* tool,
-                               bool useCache);
+                               bool needCacheUpdate);
 
     CaptureTool* activeButtonTool() const;
     CaptureTool::Type activeButtonToolType() const;

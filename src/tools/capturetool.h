@@ -146,21 +146,25 @@ public:
     virtual void setDropShadowEnabled(bool enabled)
     {
         m_dropShadowEnabled = enabled;
+        if (!enabled) {
+            clearPixmapCache();
+        }
     }
     virtual bool dropShadowEnabled() const { return m_dropShadowEnabled; }
 
     virtual void process(QPainter& painter, const QPixmap& pixmap) = 0;
 
     // Called every time the tool has to draw
-    void doProcess(QPainter& painter, const QPixmap& pixmap, bool skipCache)
+    void doProcess(QPainter& painter,
+                   const QPixmap& pixmap,
+                   bool needCacheUpdate)
     {
         if (dropShadowEnabled()) {
             QPixmap renderedPixmap;
-            if (skipCache || !m_pixmapCacheKey.isValid()) {
-                QPixmapCache::remove(m_pixmapCacheKey);
-            }
-            if (!QPixmapCache::find(m_pixmapCacheKey, &renderedPixmap)) {
-                renderedPixmap = renderShapeWithShadow(pixmap.size());
+            if (needCacheUpdate ||
+                !QPixmapCache::find(m_pixmapCacheKey, &renderedPixmap)) {
+                clearPixmapCache();
+                renderedPixmap = processWithShadow(pixmap.size());
                 m_pixmapCacheKey = QPixmapCache::insert(renderedPixmap);
             }
             painter.drawPixmap(m_pixmapCachePosition, renderedPixmap);
@@ -214,7 +218,7 @@ protected:
     }
     virtual void drawDropShadow(QPainter& painter, const QPixmap& pixmap) = 0;
 
-    QPixmap renderShapeWithShadow(QSize pixmapSize)
+    QPixmap processWithShadow(QSize pixmapSize)
     {
         int offset = 3;
         QColor shadowColor = QColor(0, 0, 0, 128);
@@ -253,36 +257,55 @@ protected:
         return QPixmap::fromImage(finalRender.copy(m_pixmapCachePosition));
     }
 
-    QRect findContentBounds(const QImage& image) {
+    void clearPixmapCache()
+    {
+        QPixmapCache::remove(m_pixmapCacheKey);
+        m_pixmapCachePosition = QRect();
+        m_pixmapCacheKey = QPixmapCache::Key();
+    }
+
+    QRect findContentBounds(const QImage& image)
+    {
         const int width = image.width();
         const int height = image.height();
-        if (width == 0 || height == 0) return QRect();
-
+        if (width == 0 || height == 0) {
+            return QRect();
+        }
         int top = 0, bottom = height - 1, left = 0, right = width - 1;
-
         auto hasAlphaInRow = [&](int y) -> bool {
             const QRgb* line = reinterpret_cast<const QRgb*>(image.scanLine(y));
-            for (int x = 0; x < width; ++x)
-                if (qAlpha(line[x]) != 0) return true;
-            return false;
-        };
-
-        auto hasAlphaInColumn = [&](int x) -> bool {
-            for (int y = top; y <= bottom; ++y) {
-                const QRgb* line = reinterpret_cast<const QRgb*>(image.scanLine(y));
-                if (qAlpha(line[x]) != 0) return true;
+            for (int x = 0; x < width; ++x) {
+                if (qAlpha(line[x]) != 0) {
+                    return true;
+                }
             }
             return false;
         };
-
-        while (top <= bottom && !hasAlphaInRow(top))    ++top;
-        while (bottom >= top && !hasAlphaInRow(bottom)) --bottom;
-        while (left <= right && !hasAlphaInColumn(left)) ++left;
-        while (right >= left && !hasAlphaInColumn(right)) --right;
-
-        if (right < left || bottom < top)
+        auto hasAlphaInColumn = [&](int x) -> bool {
+            for (int y = top; y <= bottom; ++y) {
+                const QRgb* line =
+                  reinterpret_cast<const QRgb*>(image.scanLine(y));
+                if (qAlpha(line[x]) != 0) {
+                    return true;
+                }
+            }
+            return false;
+        };
+        while (top <= bottom && !hasAlphaInRow(top)) {
+            ++top;
+        }
+        while (bottom >= top && !hasAlphaInRow(bottom)) {
+            --bottom;
+        }
+        while (left <= right && !hasAlphaInColumn(left)) {
+            ++left;
+        }
+        while (right >= left && !hasAlphaInColumn(right)) {
+            --right;
+        }
+        if (right < left || bottom < top) {
             return QRect(); // Fully transparent
-
+        }
         return QRect(left, top, right - left + 1, bottom - top + 1);
     }
 
