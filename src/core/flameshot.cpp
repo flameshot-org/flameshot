@@ -12,15 +12,19 @@
 #include "src/config/configresolver.h"
 #include "src/config/configwindow.h"
 #include "src/core/qguiappcurrentscreen.h"
+
+#ifdef ENABLE_IMGUR
 #include "src/tools/imgupload/imguploadermanager.h"
 #include "src/tools/imgupload/storages/imguploaderbase.h"
+#include "src/widgets/imguploaddialog.h"
+#include "src/widgets/uploadhistory.h"
+#endif
+
 #include "src/utils/confighandler.h"
 #include "src/utils/screengrabber.h"
 #include "src/widgets/capture/capturewidget.h"
 #include "src/widgets/capturelauncher.h"
-#include "src/widgets/imguploaddialog.h"
 #include "src/widgets/infowindow.h"
-#include "src/widgets/uploadhistory.h"
 #include <QApplication>
 #include <QBuffer>
 #include <QDebug>
@@ -61,12 +65,14 @@ Flameshot::Flameshot()
                      &QHotkey::activated,
                      qApp,
                      [this]() { gui(); });
+#ifdef ENABLE_IMGUR
     m_HotkeyScreenshotHistory = new QHotkey(
       QKeySequence(ConfigHandler().shortcut("SCREENSHOT_HISTORY")), true, this);
     QObject::connect(m_HotkeyScreenshotHistory,
                      &QHotkey::activated,
                      qApp,
                      [this]() { history(); });
+#endif
 #endif
 }
 
@@ -245,6 +251,7 @@ void Flameshot::info()
     }
 }
 
+#ifdef ENABLE_IMGUR
 void Flameshot::history()
 {
     static UploadHistory* historyWidget = nullptr;
@@ -269,6 +276,7 @@ void Flameshot::history()
     historyWidget->raise();
 #endif
 }
+#endif
 
 void Flameshot::openSavePath()
 {
@@ -401,6 +409,7 @@ void Flameshot::exportCapture(const QPixmap& capture,
         }
     }
 
+#ifdef ENABLE_IMGUR
     if (tasks & CR::UPLOAD) {
         if (!ConfigHandler().uploadWithoutConfirmation()) {
             auto* dialog = new ImgUploadDialog();
@@ -425,6 +434,7 @@ void Flameshot::exportCapture(const QPixmap& capture,
               }
           });
     }
+#endif
 
     if (!(tasks & CR::UPLOAD)) {
         emit captureTaken(capture);

@@ -197,10 +197,15 @@ void ShortcutsWidget::loadShortcuts()
     // Global hotkeys
 #if defined(Q_OS_MACOS)
     appendShortcut("TAKE_SCREENSHOT", tr("Capture screen"));
+#ifdef ENABLE_IMGUR
     appendShortcut("SCREENSHOT_HISTORY", tr("Screenshot history"));
+#endif
 #elif defined(Q_OS_WIN)
+
+#ifdef ENABLE_IMGUR
     m_shortcuts << (QStringList() << "" << QObject::tr("Screenshot history")
                                   << "Shift+Print Screen");
+#endif
     m_shortcuts << (QStringList()
                     << "" << QObject::tr("Capture screen") << "Print Screen");
 #else
