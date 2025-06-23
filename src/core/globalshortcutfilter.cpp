@@ -31,12 +31,12 @@ bool GlobalShortcutFilter::nativeEventFilter(const QByteArray& eventType,
         // support would need custom shortcuts defined by the user.
         const quint32 keycode = HIWORD(msg->lParam);
         const quint32 modifiers = LOWORD(msg->lParam);
-
+#ifdef ENABLE_IMGUR
         // Show screenshots history
         if (VK_SNAPSHOT == keycode && MOD_SHIFT == modifiers) {
             Flameshot::instance()->history();
         }
-
+#endif
         // Capture screen
         if (VK_SNAPSHOT == keycode && 0 == modifiers) {
             Flameshot::instance()->requestCapture(
