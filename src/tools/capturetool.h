@@ -143,13 +143,6 @@ public:
     virtual void setCount(int count) { m_count = count; };
     virtual int count() const { return m_count; };
 
-    virtual void setDropShadowEnabled(bool enabled)
-    {
-        m_dropShadowEnabled = enabled;
-        if (!enabled) {
-            clearPixmapCache();
-        }
-    }
     virtual bool dropShadowEnabled() const { return m_dropShadowEnabled; }
 
     virtual void process(QPainter& painter, const QPixmap& pixmap) = 0;
@@ -327,6 +320,9 @@ public slots:
     virtual void onDropShadowChanged(bool enabled)
     {
         m_dropShadowEnabled = enabled;
+        if (!enabled) {
+            clearPixmapCache();
+        }
     }
     // Called when the size the tool size is changed by the user.
     virtual void onSizeChanged(int size) = 0;
