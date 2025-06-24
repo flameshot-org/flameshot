@@ -82,7 +82,6 @@ QTranslator translator, qtTranslator;
 
 void configureApp(bool gui)
 {
-
     QPixmapCache::setCacheLimit(1000000); // 1 GB
     if (gui) {
 #if defined(Q_OS_WIN) && QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
