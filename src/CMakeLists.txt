@@ -229,12 +229,14 @@ if (USE_WAYLAND_CLIPBOARD)
 endif()
 
 if (APPLE)
-    set(MACOSX_BUNDLE_IDENTIFIER "org.flameshot")
-    set_target_properties(
-            flameshot
-            PROPERTIES
-            XCODE_ATTRIBUTE_PRODUCT_BUNDLE_IDENTIFIER ${MACOSX_BUNDLE_IDENTIFIER}
-    )
+    set_target_properties(flameshot PROPERTIES
+        MACOSX_BUNDLE TRUE
+        MACOSX_BUNDLE_BUNDLE_NAME "Flameshot"
+        MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
+        MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION}
+        MACOSX_BUNDLE_IDENTIFIER "org.flameshot.Flameshot"
+        MACOSX_BUNDLE_GUI_IDENTIFIER "org.flameshot.Flameshot" 
+    ) 
     target_link_libraries(
             flameshot
             qhotkey
@@ -443,18 +445,62 @@ endif ()
 
 # macdeployqt
 if (APPLE)
-    set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
-    execute_process(COMMAND brew --prefix qt5 OUTPUT_VARIABLE QTDIR)
-    string(REGEX REPLACE "\n$" "" QTDIR "${QTDIR}")
-    set(MAC_DEPLOY_QT ${QTDIR}/bin/macdeployqt)
-    if (EXISTS ${MAC_DEPLOY_QT})
-        set_source_files_properties(resources/icon.icns PROPERTIES
-                MACOSX_PACKAGE_LOCATION Resources)
+# Code signing settings - optional, set to empty string to skip signing
+    set(CODE_SIGN_IDENTITY "" CACHE STRING "Code signing identity (leave empty to skip signing)")
+    set(DMG_SIGN_IDENTITY "" CACHE STRING "DMG signing identity (leave empty to skip signing)")
+    # Custom target to create DMG (signed or unsigned)
+    add_custom_target(create_dmg
+    COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/../packaging/macos/create_dmg.sh 
+            "${CMAKE_CURRENT_BINARY_DIR}/Flameshot.app"
+            "${CMAKE_CURRENT_BINARY_DIR}/Flameshot-${PROJECT_VERSION}.dmg"
+            "${CODE_SIGN_IDENTITY}"
+            "${DMG_SIGN_IDENTITY}"
+    DEPENDS flameshot
+    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+    COMMENT "Creating DMG"
+    VERBATIM
+    )
 
-        set_target_properties(${target} PROPERTIES
-                MACOSX_BUNDLE TRUE
-                )
-    else ()
-        message("Unable to find executable ${MAC_DEPLOY_QT}.")
-    endif ()
+# Always sign the app bundle (either with identity or ad hoc)
+    if(CODE_SIGN_IDENTITY AND NOT CODE_SIGN_IDENTITY STREQUAL "")
+        # Identity-based signing (requires Developer ID)
+        add_custom_command(TARGET flameshot POST_BUILD
+            COMMAND codesign --force --deep --sign "${CODE_SIGN_IDENTITY}" 
+                    --options runtime --timestamp "$<TARGET_BUNDLE_DIR:flameshot>"
+            COMMENT "Code signing app bundle with ${CODE_SIGN_IDENTITY}"
+        )
+    else()
+        # Ad hoc signing 
+        add_custom_command(TARGET flameshot POST_BUILD
+            COMMAND codesign --force --deep --sign - "$<TARGET_BUNDLE_DIR:flameshot>"
+            COMMENT "Ad hoc code signing app bundle (no identity required)"
+        )
+    endif()
+   # Deploy Qt libraries and dependencies
+   find_program(MACDEPLOYQT_EXECUTABLE macdeployqt HINTS ${Qt6_DIR}/../../../bin)
+    
+   if(MACDEPLOYQT_EXECUTABLE)
+       add_custom_command(TARGET flameshot POST_BUILD
+           COMMAND ${MACDEPLOYQT_EXECUTABLE} "$<TARGET_BUNDLE_DIR:flameshot>" -verbose=2
+           COMMENT "Deploying Qt libraries"
+       )
+       
+       # Re-sign after macdeployqt (it modifies the bundle)
+       if(CODE_SIGN_IDENTITY AND NOT CODE_SIGN_IDENTITY STREQUAL "")
+           add_custom_command(TARGET flameshot POST_BUILD
+               COMMAND codesign --force --deep --sign "${CODE_SIGN_IDENTITY}" 
+                       --options runtime --timestamp "$<TARGET_BUNDLE_DIR:flameshot>"
+               COMMENT "Re-signing app bundle after Qt deployment"
+           )
+       else()
+           add_custom_command(TARGET flameshot POST_BUILD
+               COMMAND codesign --force --deep --sign - "$<TARGET_BUNDLE_DIR:flameshot>"
+               COMMENT "Re-signing app bundle after Qt deployment (ad hoc)"
+           )
+       endif()
+   else()
+       message(WARNING "macdeployqt not found. App may not run on systems without Qt installed.")
+   endif()
+
+
 endif ()
