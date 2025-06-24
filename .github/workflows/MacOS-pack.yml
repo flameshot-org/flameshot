@@ -64,6 +64,9 @@ jobs:
           echo ${last_committed_tag:1}
           echo "Details: ${ver_info}"
           echo "================================"
+          # This will allow to build pre-preleases without git tag
+          # echo "VERSION=${last_committed_tag:1}" >> $GITHUB_ENV
+          echo "VERSION=$(cat CMakeLists.txt |grep 'set.*(.*FLAMESHOT_VERSION' | sed 's/[^0-9.]*//' |sed 's/)//g')" >> $GITHUB_ENV
           echo "VER_INFO=${ver_info}" >> $GITHUB_ENV
 
       - name: Install Qt
@@ -87,5 +90,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ${{ env.PRODUCT }}-${{ env.VER_INFO }}-artifact-macos-${{ matrix.dist.arch }}
-          path: ${{ github.workspace }}/build/src/Flameshot-12.1.0.dmg
+          path: ${{ github.workspace }}/build/src/Flameshot-${{ env.VERSION }}.dmg
           overwrite: true
