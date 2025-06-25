@@ -34,7 +34,7 @@
     <message>
         <location filename="../../src/tools/accept/accepttool.cpp" line="41"/>
         <source>Accept the capture</source>
-        <translation>Accept the capture</translation>
+        <translation>Приемане на заснетото</translation>
     </message>
 </context>
 <context>
@@ -60,12 +60,12 @@
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="78"/>
         <source>Launch in terminal</source>
-        <translation>Launch in terminal</translation>
+        <translation>Отваряне в терминал</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="79"/>
         <source>Keep open after selection</source>
-        <translation>Keep open after selection</translation>
+        <translation>Оставяне работещо след избиране</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="115"/>
@@ -76,12 +76,12 @@
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="148"/>
         <source>Unable to launch in terminal.</source>
-        <translation>Unable to launch in terminal.</translation>
+        <translation>Грешка при отваряне на терминал.</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="115"/>
         <source>Unable to write in</source>
-        <translation>Unable to write in</translation>
+        <translation>Грешка при записване</translation>
     </message>
 </context>
 <context>
@@ -94,7 +94,7 @@
     <message>
         <location filename="../../src/tools/arrow/arrowtool.cpp" line="87"/>
         <source>Set the Arrow as the paint tool</source>
-        <translation>Set the Arrow as the paint tool</translation>
+        <translation>Избиране на инструмент „Стрелка“</translation>
     </message>
 </context>
 <context>
@@ -117,7 +117,7 @@
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="32"/>
         <source>Rectangular Region</source>
-        <translation>Rectangular Region</translation>
+        <translation>Правоъгълна област</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="38"/>
@@ -132,37 +132,37 @@
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="44"/>
         <source>No Delay</source>
-        <translation>No Delay</translation>
+        <translation>Без изчакване</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="52"/>
         <source> second</source>
-        <translation> second</translation>
+        <translation> секунда</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="100"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="185"/>
         <location filename="../../src/widgets/capturelauncher.cpp" line="52"/>
         <source> seconds</source>
-        <translation> seconds</translation>
+        <translation> секунди</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="165"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="186"/>
         <source>Take new screenshot</source>
-        <translation>Take new screenshot</translation>
+        <translation>Ново заснемане</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="66"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="181"/>
         <source>Area:</source>
-        <translation>Area:</translation>
+        <translation>Област:</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="14"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="178"/>
         <source>Capture Launcher</source>
-        <translation>Capture Launcher</translation>
+        <translation>Започване на заснемане</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="34"/>
@@ -174,13 +174,13 @@
         <location filename="../../src/widgets/capturelauncher.ui" line="51"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="180"/>
         <source>Capture Mode</source>
-        <translation>Capture Mode</translation>
+        <translation>Режим на заснемане</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="80"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="183"/>
         <source>Delay:</source>
-        <translation>Delay:</translation>
+        <translation>Изчакване:</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="93"/>
@@ -195,17 +195,17 @@
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="118"/>
         <source>Unable to capture screen</source>
         <translatorcomment>Impossible capturar la pantalla</translatorcomment>
-        <translation>Unable to capture screen</translation>
+        <translation>Грешка при заснемане на екрана</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="422"/>
         <source>Mouse</source>
-        <translation>Mouse</translation>
+        <translation>Мишка</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="422"/>
         <source>Select screenshot area</source>
-        <translation>Select screenshot area</translation>
+        <translation>Избиране на заснемана област</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="436"/>
@@ -215,7 +215,7 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="436"/>
         <source>Change tool size</source>
-        <translation>Change tool size</translation>
+        <translation>Променяне размера на инструмента</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="437"/>
@@ -245,12 +245,12 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="482"/>
         <source>Quit Capture</source>
-        <translation type="unfinished"></translation>
+        <translation>Изход от заснемане</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="483"/>
         <source>Are you sure you want to quit capture?</source>
-        <translation type="unfinished"></translation>
+        <translation>Желаете ли да напуснете заснемането?</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="488"/>
