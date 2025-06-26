@@ -312,7 +312,9 @@ void CaptureWidget::initButtons()
         for (auto* buttonList : { &allButtonTypes, &visibleButtonTypes }) {
             buttonList->removeOne(CaptureTool::TYPE_SAVE);
             buttonList->removeOne(CaptureTool::TYPE_COPY);
+#ifdef ENABLE_IMGUR
             buttonList->removeOne(CaptureTool::TYPE_IMAGEUPLOADER);
+#endif
             buttonList->removeOne(CaptureTool::TYPE_OPEN_APP);
             buttonList->removeOne(CaptureTool::TYPE_PIN);
         }
@@ -481,7 +483,6 @@ void CaptureWidget::initQuitPrompt()
 {
     m_quitPrompt = new QMessageBox;
     makeChild(m_quitPrompt);
-    m_quitPrompt->hide();
 
     QString baseSheet = "QDialog { background-color: %1; }"
                         "QLabel, QCheckBox { color: %2 }"
@@ -498,6 +499,15 @@ void CaptureWidget::initQuitPrompt()
 
     auto* check = new QCheckBox(tr("Do not show this again"));
     m_quitPrompt->setCheckBox(check);
+
+    // Call show() first, otherwise the correct geometry cannot be fetched
+    // for centering the window on the screen
+    m_quitPrompt->show();
+    QRect position = m_quitPrompt->frameGeometry();
+    QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
+    position.moveCenter(currentScreen->availableGeometry().center());
+    m_quitPrompt->move(position.topLeft());
+    m_quitPrompt->hide();
 
     QObject::connect(check, &QCheckBox::clicked, [](bool checked) {
         ConfigHandler().setShowQuitPrompt(!checked);

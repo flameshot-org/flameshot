@@ -80,8 +80,6 @@ if(WIN32)
   add_definitions(-DFLAMESHOT_VERSION_STRING="${PROJECT_VERSION}")
 elseif(APPLE)
   set(Qt6_DIR "$(brew --prefix qt6)/lib/cmake/Qt6/" CACHE PATH "directory where Qt6Config.cmake exists.")
-  set(CMAKE_MACOSX_BUNDLE ON)
-  set(CMAKE_MACOSX_RPATH ON)
 endif()
 set(RUN_IN_PLACE
         ${DEFAULT_RUN_IN_PLACE}
@@ -91,10 +89,16 @@ set(RUN_IN_PLACE
 option(FLAMESHOT_DEBUG_CAPTURE "Enable mode to make debugging easier" OFF)
 option(USE_MONOCHROME_ICON "Build using monochrome icon as default" OFF)
 option(GENERATE_TS "Regenerate translation source files" OFF)
-option(USE_EXTERNAL_SINGLEAPPLICATION "Use external QtSingleApplication library" OFF)
+option(USE_SINGLEAPPLICATION "Use SingleApplication library" ON)
 option(USE_LAUNCHER_ABSOLUTE_PATH "Use absolute path for the desktop launcher" ON)
 option(USE_WAYLAND_CLIPBOARD "USE KF Gui Wayland Clipboard" OFF)
 option(DISABLE_UPDATE_CHECKER "Disable check for updates" OFF)
+option(ENABLE_IMGUR "Enable Imgur Uploader" OFF)
+
+if (ENABLE_IMGUR)
+  add_compile_definitions(ENABLE_IMGUR)
+endif()
+
 if (DISABLE_UPDATE_CHECKER)
   add_compile_definitions(DISABLE_UPDATE_CHECKER)
 endif ()
@@ -119,24 +123,17 @@ enable_sanitizers(project_options)
 
 # allow for static analysis options include(cmake/StaticAnalyzers.cmake)
 
-set(QAPPLICATION_CLASS
-        QApplication
-        CACHE STRING "Inheritance class for SingleApplication")
+if(USE_SINGLEAPPLICATION)
+  set(QAPPLICATION_CLASS
+          QApplication
+          CACHE STRING "Inheritance class for SingleApplication")
 
-if(USE_EXTERNAL_SINGLEAPPLICATION)
-  # look for external QtSingleApplication
-  # package dev-qt/qtsingleapplication provides no symlink to current version
-  set(qtsingleapplication_libs libQt5Solutions_SingleApplication-2.6 Qt5Solutions_SingleApplication-2.6)
-  find_library(QTSINGLEAPPLICATION_LIBRARY NAMES ${qtsingleapplication_libs})
-  message(STATUS "Using external QtSingleApplication library")
-else()
   FetchContent_Declare(
       singleApplication
       GIT_REPOSITORY https://github.com/itay-grudev/SingleApplication.git
       GIT_TAG v3.5.2
   )
   FetchContent_MakeAvailable(SingleApplication)
-  set(QTSINGLEAPPLICATION_LIBRARY SingleApplication::SingleApplication)
 endif()
 
 

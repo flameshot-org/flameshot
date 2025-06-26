@@ -7,8 +7,6 @@ target_sources(
         PRIVATE
         infowindow.ui
         capturelauncher.ui
-        uploadhistory.ui
-        uploadlineitem.ui
 
         capturelauncher.h
         draggablewidgetmaker.h
@@ -18,12 +16,22 @@ target_sources(
         loadspinner.h
         notificationwidget.h
         orientablepushbutton.h
-        uploadhistory.h
-        uploadlineitem.h
+
         colorpickerwidget.h
-        imguploaddialog.h
         capture/capturetoolobjects.h
 )
+
+if (ENABLE_IMGUR)
+target_sources(
+    flameshot
+    PRIVATE
+        uploadhistory.ui
+        uploadlineitem.ui
+        uploadhistory.h
+        uploadlineitem.h
+        imguploaddialog.h
+)
+endif()
 
 target_sources(
         flameshot
@@ -36,12 +44,19 @@ target_sources(
         loadspinner.cpp
         notificationwidget.cpp
         orientablepushbutton.cpp
-        uploadhistory.cpp
-        uploadlineitem.cpp
         colorpickerwidget.cpp
-        imguploaddialog.cpp
         capture/capturetoolobjects.cpp
 )
+
+if (ENABLE_IMGUR)
+target_sources(
+    flameshot
+    PRIVATE
+        uploadhistory.cpp
+        uploadlineitem.cpp
+        imguploaddialog.cpp
+)
+endif()
 
 if (NOT DISABLE_UPDATE_CHECKER)
     target_sources(

@@ -155,7 +155,9 @@ static QMap<QString, QSharedPointer<KeySequence>> recognizedShortcuts = {
     SHORTCUT("TYPE_ACCEPT"              ,   "Return"                ),
     SHORTCUT("TYPE_EXIT"                ,   "Ctrl+Q"                ),
     SHORTCUT("TYPE_CANCEL"              ,   "Ctrl+Backspace"        ),
+#ifdef ENABLE_IMGUR
     SHORTCUT("TYPE_IMAGEUPLOADER"       ,                           ),
+#endif
 #if !defined(Q_OS_MACOS)
     SHORTCUT("TYPE_OPEN_APP"            ,   "Ctrl+O"                ),
 #endif
@@ -406,7 +408,7 @@ bool ConfigHandler::setShortcut(const QString& actionName,
     qDebug() << actionName;
     static QVector<QKeySequence> reservedShortcuts = {
 #if defined(Q_OS_MACOS)
-        Qt::CTRL + Qt::Key_Backspace,
+        Qt::CTRL | Qt::Key_Backspace,
         Qt::Key_Escape,
 #else
         Qt::Key_Backspace,

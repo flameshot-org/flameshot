@@ -12,7 +12,9 @@ class CaptureWidget;
 class ConfigWindow;
 class InfoWindow;
 class CaptureLauncher;
+#ifdef ENABLE_IMGUR
 class UploadHistory;
+#endif
 #if (defined(Q_OS_MAC) || defined(Q_OS_MACOS))
 class QHotkey;
 #endif
@@ -39,7 +41,10 @@ public slots:
     void config();
 
     void info();
+
+#ifdef ENABLE_IMGUR
     void history();
+#endif
 
     void openSavePath();
 
