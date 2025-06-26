@@ -1766,6 +1766,7 @@ void CaptureWidget::pushToolToStack()
         // function again on text objects
         m_panel->blockSignals(true);
 
+        m_activeTool->finishShape(); // signal to finish shape rendering if needed
         m_captureToolObjectsBackup = m_captureToolObjects;
         m_captureToolObjects.append(m_activeTool);
         pushObjectsStateToUndoStack();

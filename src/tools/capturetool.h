@@ -144,6 +144,7 @@ public:
     virtual int count() const { return m_count; };
 
     virtual bool dropShadowEnabled() const { return m_dropShadowEnabled; }
+    virtual void finishShape() { m_shapeFinished = true; }
 
     virtual void process(QPainter& painter, const QPixmap& pixmap) = 0;
 
@@ -153,14 +154,19 @@ public:
                    bool needCacheUpdate)
     {
         if (dropShadowEnabled()) {
-            QPixmap renderedPixmap;
-            if (needCacheUpdate ||
-                !QPixmapCache::find(m_pixmapCacheKey, &renderedPixmap)) {
-                clearPixmapCache();
-                renderedPixmap = processWithShadow(pixmap.size());
-                m_pixmapCacheKey = QPixmapCache::insert(renderedPixmap);
+            if (m_shapeFinished) {
+                QPixmap renderedPixmap;
+                if (needCacheUpdate ||
+                    !QPixmapCache::find(m_pixmapCacheKey, &renderedPixmap)) {
+                    clearPixmapCache();
+                    renderedPixmap = processWithShadow(pixmap.size());
+                    m_pixmapCacheKey = QPixmapCache::insert(renderedPixmap);
+                }
+                painter.drawPixmap(m_pixmapCachePosition, renderedPixmap);
+            } else {
+                drawDropShadow(painter, pixmap);
+                process(painter, pixmap);
             }
-            painter.drawPixmap(m_pixmapCachePosition, renderedPixmap);
         } else {
             process(painter, pixmap);
         }
@@ -192,6 +198,7 @@ protected:
         to->m_dropShadowEnabled = from->m_dropShadowEnabled;
         to->m_pixmapCacheKey = from->m_pixmapCacheKey;
         to->m_pixmapCachePosition = from->m_pixmapCachePosition;
+        to->m_shapeFinished = from->m_shapeFinished;
     }
 
     QString iconPath(const QColor& c) const
@@ -332,6 +339,7 @@ private:
     unsigned int m_count;
     bool m_editMode;
     bool m_dropShadowEnabled = false;
+    bool m_shapeFinished = false;
     QPixmapCache::Key m_pixmapCacheKey;
     QRect m_pixmapCachePosition;
 };
