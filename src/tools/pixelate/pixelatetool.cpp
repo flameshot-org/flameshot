@@ -202,6 +202,8 @@ void PixelateTool::paintMousePreview(QPainter& painter,
     Q_UNUSED(painter)
 }
 
+void PixelateTool::finishShape() {}
+
 void PixelateTool::pressed(CaptureContext& context)
 {
     Q_UNUSED(context)

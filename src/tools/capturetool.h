@@ -192,6 +192,8 @@ signals:
     void requestAction(Request r);
 
 protected:
+    bool m_shapeFinished = false;
+
     void copyParams(const CaptureTool* from, CaptureTool* to)
     {
         to->m_count = from->m_count;
@@ -339,7 +341,6 @@ private:
     unsigned int m_count;
     bool m_editMode;
     bool m_dropShadowEnabled = false;
-    bool m_shapeFinished = false;
     QPixmapCache::Key m_pixmapCacheKey;
     QRect m_pixmapCachePosition;
 };

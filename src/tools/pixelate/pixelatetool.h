@@ -21,6 +21,7 @@ public:
     void drawSearchArea(QPainter& painter, const QPixmap& pixmap) override;
     void paintMousePreview(QPainter& painter,
                            const CaptureContext& context) override;
+    virtual void finishShape() override;
 
 protected:
     CaptureTool::Type type() const override;

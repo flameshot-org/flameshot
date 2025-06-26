@@ -75,6 +75,8 @@ void InvertTool::paintMousePreview(QPainter& painter,
     Q_UNUSED(painter)
 }
 
+void InvertTool::finishShape() {}
+
 void InvertTool::pressed(CaptureContext& context)
 {
     Q_UNUSED(context)
