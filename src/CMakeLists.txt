@@ -212,15 +212,6 @@ target_link_libraries(
         QtColorWidgets
 )
 
-if (USE_SINGLEAPPLICATION)
-  message(STATUS "SingleApplication is used!")
-  add_compile_definitions(USE_SINGLEAPPLICATION=1)
-  target_link_libraries(
-          flameshot
-          SingleApplication::SingleApplication
-  )
-endif()
-
 if (USE_KDSINGLEAPPLICATION)
   message(STATUS "KDSingleApplication is used!")
   add_compile_definitions(USE_KDSINGLEAPPLICATION=1)

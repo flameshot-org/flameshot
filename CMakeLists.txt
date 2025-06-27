@@ -91,15 +91,10 @@ set(RUN_IN_PLACE
 option(FLAMESHOT_DEBUG_CAPTURE "Enable mode to make debugging easier" OFF)
 option(USE_MONOCHROME_ICON "Build using monochrome icon as default" OFF)
 option(GENERATE_TS "Regenerate translation source files" OFF)
-option(USE_SINGLEAPPLICATION "Use SingleApplication library" ON)
-option(USE_KDSINGLEAPPLICATION "Use KDSingleApplication library" OFF)
+option(USE_KDSINGLEAPPLICATION "Use KDSingleApplication library" ON)
 option(USE_LAUNCHER_ABSOLUTE_PATH "Use absolute path for the desktop launcher" ON)
 option(USE_WAYLAND_CLIPBOARD "USE KF Gui Wayland Clipboard" OFF)
 option(DISABLE_UPDATE_CHECKER "Disable check for updates" OFF)
-
-if (USE_SINGLEAPPLICATION AND USE_KDSINGLEAPPLICATION)
-  message(FATAL_ERROR "Only either USE_SINGLEAPPLICATION or USE_KDSINGLEAPPLICATION is allowed!")
-endif()
 
 if (DISABLE_UPDATE_CHECKER)
   add_compile_definitions(DISABLE_UPDATE_CHECKER)
@@ -124,19 +119,6 @@ include(cmake/Sanitizers.cmake)
 enable_sanitizers(project_options)
 
 # allow for static analysis options include(cmake/StaticAnalyzers.cmake)
-
-if(USE_SINGLEAPPLICATION)
-  set(QAPPLICATION_CLASS
-          QApplication
-          CACHE STRING "Inheritance class for SingleApplication")
-
-  FetchContent_Declare(
-      singleApplication
-      GIT_REPOSITORY https://github.com/itay-grudev/SingleApplication.git
-      GIT_TAG v3.5.2
-  )
-  FetchContent_MakeAvailable(SingleApplication)
-endif()
 
 if (USE_KDSINGLEAPPLICATION)
   set(KDSingleApplication_EXAMPLES OFF CACHE BOOL "Don't build the examples")
