@@ -80,8 +80,6 @@ if(WIN32)
   add_definitions(-DFLAMESHOT_VERSION_STRING="${PROJECT_VERSION}")
 elseif(APPLE)
   set(Qt6_DIR "$(brew --prefix qt6)/lib/cmake/Qt6/" CACHE PATH "directory where Qt6Config.cmake exists.")
-  set(CMAKE_MACOSX_BUNDLE ON)
-  set(CMAKE_MACOSX_RPATH ON)
 endif()
 set(RUN_IN_PLACE
         ${DEFAULT_RUN_IN_PLACE}
@@ -95,6 +93,11 @@ option(USE_KDSINGLEAPPLICATION "Use KDSingleApplication library" ON)
 option(USE_LAUNCHER_ABSOLUTE_PATH "Use absolute path for the desktop launcher" ON)
 option(USE_WAYLAND_CLIPBOARD "USE KF Gui Wayland Clipboard" OFF)
 option(DISABLE_UPDATE_CHECKER "Disable check for updates" OFF)
+option(ENABLE_IMGUR "Enable Imgur Uploader" OFF)
+
+if (ENABLE_IMGUR)
+  add_compile_definitions(ENABLE_IMGUR)
+endif()
 
 if (DISABLE_UPDATE_CHECKER)
   add_compile_definitions(DISABLE_UPDATE_CHECKER)

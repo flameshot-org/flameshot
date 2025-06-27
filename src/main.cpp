@@ -88,21 +88,34 @@ void configureApp(bool gui)
 #endif
     }
 
+    bool foundTranslation;
     // Configure translations
     for (const QString& path : PathInfo::translationsPaths()) {
-        bool match = translator.load(QLocale(),
-                                     QStringLiteral("Internationalization"),
-                                     QStringLiteral("_"),
-                                     path);
-        if (match) {
+        foundTranslation =
+          translator.load(QLocale(),
+                          QStringLiteral("Internationalization"),
+                          QStringLiteral("_"),
+                          path);
+        if (foundTranslation) {
             break;
         }
     }
+    if (!foundTranslation) {
+        QLocale l;
+        qWarning() << QStringLiteral("No Flameshot translation found for %1")
+                        .arg(l.uiLanguages().join(", "));
+    }
 
-    qtTranslator.load(QLocale::system(),
-                      "qt",
-                      "_",
-                      QLibraryInfo::path(QLibraryInfo::TranslationsPath));
+    foundTranslation =
+      qtTranslator.load(QLocale::system(),
+                        "qt",
+                        "_",
+                        QLibraryInfo::path(QLibraryInfo::TranslationsPath));
+    if (!foundTranslation) {
+        qWarning() << QStringLiteral("No Qt translation found for %1")
+                        .arg(QLocale::languageToString(
+                          QLocale::system().language()));
+    }
 
     auto app = QCoreApplication::instance();
     app->installTranslator(&translator);
