@@ -55,7 +55,8 @@ Features:
 %build
 %cmake -G Ninja \
     -DCMAKE_BUILD_TYPE=Release \
-    -DUSE_WAYLAND_CLIPBOARD:BOOL=ON
+    -DUSE_WAYLAND_CLIPBOARD:BOOL=ON \
+    -DBUILD_SHARED_LIBS:BOOL=OFF
 %cmake_build
 
 %install

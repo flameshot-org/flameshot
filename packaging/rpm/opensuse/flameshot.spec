@@ -52,7 +52,7 @@ Features:
 %autosetup -p1
 
 %build
-%cmake -DCMAKE_BUILD_TYPE=Release -DQTCOLORWIDGETS_INSTALL=OFF
+%cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS:BOOL=OFF
 
 %cmake_build
 
