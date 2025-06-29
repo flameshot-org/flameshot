@@ -58,10 +58,6 @@ Features:
 
 %install
 %cmake_install
-rm -rf %{buildroot}%{_includedir}/QtColorWidgets
-rm -rf %{buildroot}%{_libdir}/cmake/QtColorWidgets
-rm -f %{buildroot}%{_libdir}/libQtColorWidgets.*
-rm -f %{buildroot}%{_libdir}/pkgconfig/QtColorWidgets.pc
 # https://fedoraproject.org/wiki/PackagingDrafts/find_lang
 %find_lang Internationalization --with-qt
 %suse_update_desktop_file -r org.flameshot.Flameshot Utility X-SuSE-DesktopUtility
@@ -92,6 +88,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_mandir}/man1/%{name}.1*
 
 %changelog
+* Sun Jul 03 2022 Jeremy Borgman <borgman.jeremy@pm.me> - 12.1.0-1
+- Update for 12.1 release.
+
 * Wed Jun 21 2022 Jeremy Borgman <borgman.jeremy@pm.me> - 12.0.0-1
 - Update for 12.0 release.
 
