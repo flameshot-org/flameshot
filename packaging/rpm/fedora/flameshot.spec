@@ -16,21 +16,22 @@ BuildRequires: libappstream-glib
 BuildRequires: ninja-build
 BuildRequires: desktop-file-utils
 
-BuildRequires: cmake(Qt5Core) >= 5.9.0
-BuildRequires: cmake(KF5GuiAddons) >= 5.89.0
-BuildRequires: cmake(Qt5DBus) >= 5.9.0
-BuildRequires: cmake(Qt5Gui) >= 5.9.0
-BuildRequires: cmake(Qt5LinguistTools) >= 5.9.0
-BuildRequires: cmake(Qt5Network) >= 5.9.0
-BuildRequires: cmake(Qt5Svg) >= 5.9.0
-BuildRequires: cmake(Qt5Widgets) >= 5.9.0
+BuildRequires: cmake(Qt6Core) >= 6.0.0
+BuildRequires: cmake(KF6GuiAddons) >= 6.7.0
+BuildRequires: cmake(Qt6DBus) >= 6.0.0
+BuildRequires: cmake(Qt6Gui) >= 6.0.0
+BuildRequires: cmake(Qt6LinguistTools) >= 6.0.0
+BuildRequires: cmake(Qt6Network) >= 6.0.0
+BuildRequires: cmake(Qt6Svg) >= 6.0.0
+BuildRequires: cmake(Qt6Widgets) >= 6.0.0
 
 
 Requires: hicolor-icon-theme
-Requires: qt5-qtbase >= 5.9.0
-Requires: qt5-qttools >= 5.9.0
-Requires: qt5-qtsvg%{?_isa} >= 5.9.0
+Requires: qt6-qtbase >= 6.0.0
+Requires: qt6-qttools >= 6.0.0
+Requires: qt6-qtsvg >= 6.0.0
 
+Recommends: qt6-qtimageformats
 Recommends: xdg-desktop-portal%{?_isa}
 Recommends: (xdg-desktop-portal-gnome%{?_isa} if gnome-shell%{?_isa})
 Recommends: (xdg-desktop-portal-kde%{?_isa} if plasma-workspace-wayland%{?_isa})
@@ -55,7 +56,7 @@ Features:
 %cmake -G Ninja \
     -DCMAKE_BUILD_TYPE=Release \
     -DUSE_WAYLAND_CLIPBOARD:BOOL=ON \
-    -DQTCOLORWIDGETS_INSTALL=OFF
+    -DBUILD_SHARED_LIBS:BOOL=OFF
 %cmake_build
 
 %install
@@ -93,6 +94,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_mandir}/man1/%{name}.1*
 
 %changelog
+* Sun Jul 03 2022 Jeremy Borgman <borgman.jeremy@pm.me> - 12.1.0-1
+- Update for 12.1 release.
+
 * Wed Jun 21 2022 Jeremy Borgman <borgman.jeremy@pm.me> - 12.0.0-1
 - Update for 12.0 release.
 
