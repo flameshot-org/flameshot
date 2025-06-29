@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
-#ifdef USE_SINGLEAPPLICATION
-#include "singleapplication.h"
+#ifdef USE_KDSINGLEAPPLICATION
+#include "kdsingleapplication.h"
 #endif
 
 #include "abstractlogger.h"
@@ -140,10 +140,16 @@ int main(int argc, char* argv[])
 
     // no arguments, just launch Flameshot
     if (argc == 1) {
-#ifdef USE_SINGLEAPPLICATION
-        SingleApplication app(argc, argv);
-#else
         QApplication app(argc, argv);
+
+#ifdef USE_KDSINGLEAPPLICATION
+        KDSingleApplication kdsa(QStringLiteral("flameshot"));
+
+        if (!kdsa.isPrimaryInstance()) {
+            // AbstractLogger::warning()
+            //  << QStringLiteral("Closing second Flameshot instance!");
+            return 0; // Quit
+        }
 #endif
 
         configureApp(true);
