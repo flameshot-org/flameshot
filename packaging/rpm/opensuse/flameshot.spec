@@ -58,6 +58,10 @@ Features:
 
 %install
 %cmake_install
+rm -rf %{buildroot}%{_includedir}/QtColorWidgets
+rm -rf %{buildroot}%{_libdir}/cmake/QtColorWidgets
+rm -f %{buildroot}%{_libdir}/libQtColorWidgets.*
+rm -f %{buildroot}%{_libdir}/pkgconfig/QtColorWidgets.pc
 # https://fedoraproject.org/wiki/PackagingDrafts/find_lang
 %find_lang Internationalization --with-qt
 %suse_update_desktop_file -r org.flameshot.Flameshot Utility X-SuSE-DesktopUtility
