@@ -244,17 +244,17 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="482"/>
         <source>Quit Capture</source>
-        <translation>Argazki bizkorra</translation>
+        <translation>Utzi argazkia</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="483"/>
         <source>Are you sure you want to quit capture?</source>
-        <translation type="unfinished"></translation>
+        <translation>Seguru zaude argazkia utzi nahi duzula?</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="488"/>
         <source>Do not show this again</source>
-        <translation type="unfinished"></translation>
+        <translation>Ez erakutsi hau berriro</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="683"/>
@@ -1117,12 +1117,12 @@ Mesedez, konpon itzazu eskuz konfigurazio fitxategian.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="316"/>
         <source>Show abort notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Erakutsi uzteko jakinarazpenak</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="317"/>
         <source>Enable abort notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Gaitu uzteko jakinarazpenak</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="330"/>
@@ -1132,7 +1132,7 @@ Mesedez, konpon itzazu eskuz konfigurazio fitxategian.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="343"/>
         <source>Use grim to capture screenshots</source>
-        <translation type="unfinished"></translation>
+        <translation>Erabili iluntasuna pantaila argazkietan</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="345"/>
