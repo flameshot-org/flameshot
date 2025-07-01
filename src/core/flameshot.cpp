@@ -12,15 +12,19 @@
 #include "src/config/configresolver.h"
 #include "src/config/configwindow.h"
 #include "src/core/qguiappcurrentscreen.h"
+
+#ifdef ENABLE_IMGUR
 #include "src/tools/imgupload/imguploadermanager.h"
 #include "src/tools/imgupload/storages/imguploaderbase.h"
+#include "src/widgets/imguploaddialog.h"
+#include "src/widgets/uploadhistory.h"
+#endif
+
 #include "src/utils/confighandler.h"
 #include "src/utils/screengrabber.h"
 #include "src/widgets/capture/capturewidget.h"
 #include "src/widgets/capturelauncher.h"
-#include "src/widgets/imguploaddialog.h"
 #include "src/widgets/infowindow.h"
-#include "src/widgets/uploadhistory.h"
 #include <QApplication>
 #include <QBuffer>
 #include <QDebug>
@@ -37,8 +41,8 @@
 #endif
 
 Flameshot::Flameshot()
-  : m_captureWindow(nullptr)
-  , m_haveExternalWidget(false)
+  : m_haveExternalWidget(false)
+  , m_captureWindow(nullptr)
 #if defined(Q_OS_MACOS)
   , m_HotkeyScreenshotCapture(nullptr)
   , m_HotkeyScreenshotHistory(nullptr)
@@ -61,12 +65,14 @@ Flameshot::Flameshot()
                      &QHotkey::activated,
                      qApp,
                      [this]() { gui(); });
+#ifdef ENABLE_IMGUR
     m_HotkeyScreenshotHistory = new QHotkey(
       QKeySequence(ConfigHandler().shortcut("SCREENSHOT_HISTORY")), true, this);
     QObject::connect(m_HotkeyScreenshotHistory,
                      &QHotkey::activated,
                      qApp,
                      [this]() { history(); });
+#endif
 #endif
 }
 
@@ -221,6 +227,12 @@ void Flameshot::config()
     if (m_configWindow == nullptr) {
         m_configWindow = new ConfigWindow();
         m_configWindow->show();
+        // Call show() first, otherwise the correct geometry cannot be fetched
+        // for centering the window on the screen
+        QRect position = m_configWindow->frameGeometry();
+        QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
+        position.moveCenter(currentScreen->availableGeometry().center());
+        m_configWindow->move(position.topLeft());
 #if defined(Q_OS_MACOS)
         m_configWindow->activateWindow();
         m_configWindow->raise();
@@ -239,6 +251,7 @@ void Flameshot::info()
     }
 }
 
+#ifdef ENABLE_IMGUR
 void Flameshot::history()
 {
     static UploadHistory* historyWidget = nullptr;
@@ -249,13 +262,21 @@ void Flameshot::history()
             historyWidget = nullptr;
         });
     }
+
     historyWidget->show();
+    // Call show() first, otherwise the correct geometry cannot be fetched
+    // for centering the window on the screen
+    QRect position = historyWidget->frameGeometry();
+    QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
+    position.moveCenter(currentScreen->availableGeometry().center());
+    historyWidget->move(position.topLeft());
 
 #if defined(Q_OS_MACOS)
     historyWidget->activateWindow();
     historyWidget->raise();
 #endif
 }
+#endif
 
 void Flameshot::openSavePath()
 {
@@ -388,6 +409,7 @@ void Flameshot::exportCapture(const QPixmap& capture,
         }
     }
 
+#ifdef ENABLE_IMGUR
     if (tasks & CR::UPLOAD) {
         if (!ConfigHandler().uploadWithoutConfirmation()) {
             auto* dialog = new ImgUploadDialog();
@@ -412,6 +434,7 @@ void Flameshot::exportCapture(const QPixmap& capture,
               }
           });
     }
+#endif
 
     if (!(tasks & CR::UPLOAD)) {
         emit captureTaken(capture);

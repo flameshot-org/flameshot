@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="tr_TR">
+<TS version="2.1" language="pt">
 <context>
     <name>AbstractWidgetList</name>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="52"/>
         <source>Add New</source>
-        <translation>Yeni Ekle</translation>
+        <translation>Adicionar novo</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="103"/>
         <source>Move Up</source>
-        <translation>Yukarı Taşı</translation>
+        <translation>Mover para cima</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="104"/>
         <source>Move Down</source>
-        <translation>Aşağı Taşı</translation>
+        <translation>Mover para baixo</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="105"/>
         <source>Remove</source>
-        <translation>Kaldır</translation>
+        <translation>Remover</translation>
     </message>
 </context>
 <context>
@@ -29,12 +29,12 @@
     <message>
         <location filename="../../src/tools/accept/accepttool.cpp" line="31"/>
         <source>Accept</source>
-        <translation>Kabul Et</translation>
+        <translation>Aceitar</translation>
     </message>
     <message>
         <location filename="../../src/tools/accept/accepttool.cpp" line="41"/>
         <source>Accept the capture</source>
-        <translation>Yakalamayı kabul et</translation>
+        <translation>Aceitar a captura</translation>
     </message>
 </context>
 <context>
@@ -42,12 +42,12 @@
     <message>
         <location filename="../../src/tools/launcher/applaunchertool.cpp" line="23"/>
         <source>App Launcher</source>
-        <translation>Uygulama Başlatıcı</translation>
+        <translation>Iniciar aplicação</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applaunchertool.cpp" line="33"/>
         <source>Choose an app to open the capture</source>
-        <translation>Yakalamayı açmak için bir uygulama seçin</translation>
+        <translation>Escolha uma aplicação para abrir a captura</translation>
     </message>
 </context>
 <context>
@@ -55,33 +55,33 @@
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="49"/>
         <source>Open With</source>
-        <translation>Birlikte aç</translation>
+        <translation>Abrir com</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="78"/>
         <source>Launch in terminal</source>
-        <translation>Terminalde aç</translation>
+        <translation>Abrir no terminal</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="79"/>
         <source>Keep open after selection</source>
-        <translation>Seçimden sonra açık tut</translation>
+        <translation>Manter aberto após seleção</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="115"/>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="148"/>
         <source>Error</source>
-        <translation>Hata</translation>
-    </message>
-    <message>
-        <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="115"/>
-        <source>Unable to write in</source>
-        <translation>Yazılamadı</translation>
+        <translation>Erro</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="148"/>
         <source>Unable to launch in terminal.</source>
-        <translation>Terminalde başlatılamadı.</translation>
+        <translation>Não foi possível abrir no terminal.</translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="115"/>
+        <source>Unable to write in</source>
+        <translation>Não foi possível gravar em</translation>
     </message>
 </context>
 <context>
@@ -89,80 +89,80 @@
     <message>
         <location filename="../../src/tools/arrow/arrowtool.cpp" line="77"/>
         <source>Arrow</source>
-        <translation>Ok</translation>
+        <translation>Seta</translation>
     </message>
     <message>
         <location filename="../../src/tools/arrow/arrowtool.cpp" line="87"/>
         <source>Set the Arrow as the paint tool</source>
-        <translation>Oku boyama aracı olarak ayarla</translation>
+        <translation>Usar a Seta como ferramenta de desenho</translation>
     </message>
 </context>
 <context>
     <name>BlurTool</name>
     <message>
         <source>Blur</source>
-        <translation type="vanished">Bulanıklık</translation>
+        <translation type="vanished">Desenfocament</translation>
     </message>
     <message>
         <source>Set Blur as the paint tool</source>
-        <translation type="vanished">Bulnıklığı boyama aracı olarak ayarlar</translation>
+        <translation type="vanished">Estableix el desenfocament com a eina de dibuix</translation>
     </message>
 </context>
 <context>
     <name>CaptureLauncher</name>
     <message>
         <source>&lt;b&gt;Capture Mode&lt;/b&gt;</source>
-        <translation type="vanished">&lt;b&gt;Yakalama Modu&lt;/b&gt;</translation>
+        <translation type="vanished">&lt;b&gt;Mode de captura&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="32"/>
         <source>Rectangular Region</source>
-        <translation>Dikdörtgen Bölge</translation>
+        <translation>Região retangular</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="38"/>
         <source>Full Screen (Current Display)</source>
-        <translation>Tam Ekran (Geçerli Ekran)</translation>
+        <translation>Ecrã Inteiro (Monitor atual)</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="41"/>
         <source>Full Screen (All Monitors)</source>
-        <translation>Tam Ekran (Tüm Monitörler)</translation>
+        <translation>Ecrã inteiro (Todos os monitores)</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="44"/>
         <source>No Delay</source>
-        <translation>Gecikme yok</translation>
+        <translation>Sem atraso</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="52"/>
         <source> second</source>
-        <translation> saniye</translation>
+        <translation> segundo</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="100"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="185"/>
         <location filename="../../src/widgets/capturelauncher.cpp" line="52"/>
         <source> seconds</source>
-        <translation> saniye</translation>
+        <translation> segundos</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="165"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="186"/>
         <source>Take new screenshot</source>
-        <translation>Yeni ekran görüntüsü al</translation>
+        <translation>Tirar nova captura de ecrã</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="66"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="181"/>
         <source>Area:</source>
-        <translation>Alan:</translation>
+        <translation>Área:</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="14"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="178"/>
         <source>Capture Launcher</source>
-        <translation>Yakalama Başlatıcı</translation>
+        <translation>Lançador de captura</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="34"/>
@@ -174,13 +174,13 @@
         <location filename="../../src/widgets/capturelauncher.ui" line="51"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="180"/>
         <source>Capture Mode</source>
-        <translation>Yakalama Modu</translation>
+        <translation>Modo de Captura</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="80"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="183"/>
         <source>Delay:</source>
-        <translation>Gecikme:</translation>
+        <translation>Atraso:</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="93"/>
@@ -194,42 +194,43 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="118"/>
         <source>Unable to capture screen</source>
-        <translation>Ekran resmi alınamadı</translation>
+        <translatorcomment>Impossible capturar la pantalla</translatorcomment>
+        <translation>Não foi possível capturar o ecrã</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="422"/>
         <source>Mouse</source>
-        <translation>Fare</translation>
+        <translation>Rato</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="422"/>
         <source>Select screenshot area</source>
-        <translation>Ekran görüntüsü alanı seç</translation>
+        <translation>Área de seleção</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="436"/>
         <source>Mouse Wheel</source>
-        <translation>Fare Tekerleği</translation>
+        <translation>Roda do rato</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="436"/>
         <source>Change tool size</source>
-        <translation>Araç boyutunu değiştir</translation>
+        <translation>Alterar tamanho da ferramenta</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="437"/>
         <source>Right Click</source>
-        <translation>Sağ Tık</translation>
+        <translation>Clique direito</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="437"/>
         <source>Show color picker</source>
-        <translation>Renk seçici göster</translation>
+        <translation>Mostrar seletor de cores</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="439"/>
         <source>Open side panel</source>
-        <translation>Yan paneli aç</translation>
+        <translation>Abrir painel lateral</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="440"/>
@@ -239,32 +240,32 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="440"/>
         <source>Exit</source>
-        <translation>Çıkış</translation>
+        <translation>Sair</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="482"/>
         <source>Quit Capture</source>
-        <translation>Yakalamayı bırak</translation>
+        <translation>Sair de captura</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="483"/>
         <source>Are you sure you want to quit capture?</source>
-        <translation>Yakalamayı bırakmak istediğinden emin misin?</translation>
+        <translation>Pretende sair da captura?</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="488"/>
         <source>Do not show this again</source>
-        <translation>Bir daha gösterme</translation>
+        <translation>Não mostrar isto novamente</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="683"/>
         <source>Flameshot has lost focus. Keyboard shortcuts won&apos;t work until you click somewhere.</source>
-        <translation>Flameshot odağı kaybetti. Klavye kısayolları, siz bir yere tıklayana kadar çalışmayacaktır.</translation>
+        <translation>Flameshot perdeu o foco. As teclas de atalho não funcionarão até que clique em algum lugar.</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="689"/>
         <source>Configuration error resolved. Launch `flameshot gui` again to apply it.</source>
-        <translation>Yapılandırma hatası çözüldü. Uygulamak için `flameshot gui` yeniden başlatın.</translation>
+        <translation>Erro de configuração resolvido. Inicie o “flameshot gui” novamente para aplicá-lo.</translation>
     </message>
     <message>
         <source>Select an area with the mouse, or press Esc to exit.
@@ -272,16 +273,16 @@ Press Enter to capture the screen.
 Press Right Click to show the color picker.
 Use the Mouse Wheel to change the thickness of your tool.
 Press Space to open the side panel.</source>
-        <translation type="vanished">Fareyle bir alan seçin veya çıkmak için Esc tuşuna basın.
-Ekranı yakalamak için Enter tuşuna basın.
-Renk seçiciyi göstermek için farenin sağ tuşuna tıklayın.
-Aracınızın kalınlığını değiştirmek için Fare Tekerleğini kullanın.
-Yan paneli açmak için Boşluk tuşuna basın.</translation>
+        <translation type="vanished">Escolliu una àrea amb el ratolí, o premeu Esc per sortir.
+Premeu Entrar per capturar la pantalla.
+Premeu clic dret per mostrar l&apos;eina de selecció de color.
+Gireu la rodeta del ratolí per canviar el gruix de l&apos;eina de dibuix.
+Premeu Espai per obrir el calaix lateral.</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="1122"/>
         <source>Tool Settings</source>
-        <translation>Araç Ayarları</translation>
+        <translation>Definições das ferramentas</translation>
     </message>
 </context>
 <context>
@@ -289,12 +290,12 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
     <message>
         <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="68"/>
         <source>Circle Counter</source>
-        <translation>Daire Sayacı</translation>
+        <translation>Contorno do círculo</translation>
     </message>
     <message>
         <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="86"/>
         <source>Add an autoincrementing counter bubble</source>
-        <translation>Otomatik artan bir sayaç balonu ekleyin</translation>
+        <translation>Adicionar um balão de contorno de incremento automático</translation>
     </message>
 </context>
 <context>
@@ -302,12 +303,12 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
     <message>
         <location filename="../../src/tools/circle/circletool.cpp" line="20"/>
         <source>Circle</source>
-        <translation>Çember</translation>
+        <translation>Círculo</translation>
     </message>
     <message>
         <location filename="../../src/tools/circle/circletool.cpp" line="30"/>
         <source>Set the Circle as the paint tool</source>
-        <translation>Çemberi boyama aracı olarak ayarla</translation>
+        <translation>Definir o Círculo como ferramenta de desenho</translation>
     </message>
 </context>
 <context>
@@ -317,21 +318,21 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
         <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="311"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="318"/>
         <source>Select Color</source>
-        <translation>Renk Seç</translation>
+        <translation>Selecionar cor</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="60"/>
         <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="312"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="319"/>
         <source>Saturation</source>
-        <translation>Doygunluk</translation>
+        <translation>Saturação</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="67"/>
         <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="313"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="320"/>
         <source>Hue</source>
-        <translation>Ton</translation>
+        <translation>Matiz</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="84"/>
@@ -345,35 +346,35 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
         <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="315"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="322"/>
         <source>Blue</source>
-        <translation>Mavi</translation>
+        <translation>Azul</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="128"/>
         <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="316"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="323"/>
         <source>Value</source>
-        <translation>Değer</translation>
+        <translation>Valor</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="135"/>
         <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="317"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="324"/>
         <source>Green</source>
-        <translation>Yeşil</translation>
+        <translation>Verde</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="142"/>
         <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="318"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="325"/>
         <source>Alpha</source>
-        <translation>Alpha</translation>
+        <translation>Alfa</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="149"/>
         <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="319"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="326"/>
         <source>Red</source>
-        <translation>Kırmızı</translation>
+        <translation>Vermelho</translation>
     </message>
 </context>
 <context>
@@ -381,37 +382,37 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="58"/>
         <source>Accept color</source>
-        <translation>Rengi kabul et</translation>
+        <translation>Aceitar cor</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="58"/>
         <source>Enter or Left Click</source>
-        <translation>Enter veya Sol Tık</translation>
+        <translation>Enter ou Clique Esquerdo</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="59"/>
         <source>Precisely select color</source>
-        <translation>Rengi tam olarak seç</translation>
+        <translation>Selecione a cor com precisão</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="59"/>
         <source>Hold Left Click</source>
-        <translation>Sol Tık Basılı Tut</translation>
+        <translation>Segurar o Clique Esquerdo</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="60"/>
         <source>Toggle magnifier</source>
-        <translation>Büyüteci aç/kapat</translation>
+        <translation>Habilitar/Desabilitar a lupa</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="60"/>
         <source>Space or Right Click</source>
-        <translation>Boşluk Tuşu veya Sağ Tık</translation>
+        <translation>Espaço ou Clique Direito</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="61"/>
         <source>Cancel</source>
-        <translation>İptal</translation>
+        <translation>Cancelar</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="61"/>
@@ -422,78 +423,70 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
 <context>
     <name>ColorPickerEditor</name>
     <message>
-        <source>Select Preset:</source>
-        <translation type="vanished">ÖnAyar Seçin:</translation>
-    </message>
-    <message>
-        <source>Select preset using the spinbox</source>
-        <translation type="vanished">Döndürme kutusunu kullanarak ön ayarı seçin</translation>
-    </message>
-    <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="40"/>
         <source>Edit Preset:</source>
-        <translation>Ön Ayarı Düzenle:</translation>
+        <translation>Editar predefinição:</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="45"/>
         <source>Enter color to update preset</source>
-        <translation>Ön ayarı güncellemek için renk girin</translation>
+        <translation>Insira a cor para atualizar a predefinição</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="65"/>
         <source>Update</source>
-        <translation>Güncelle</translation>
+        <translation>Atualizar</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="67"/>
         <source>Press button to update the selected preset</source>
-        <translation>Seçilen ön ayarı güncellemek için düğmeye basın</translation>
+        <translation>Prima o botão para atualizar a predefinição selecionada</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="74"/>
         <source>Delete</source>
-        <translation>Sil</translation>
+        <translation>Eliminar</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="76"/>
         <source>Press button to delete the selected preset</source>
-        <translation>Seçilen ön ayarı silmek için butona basın</translation>
+        <translation>Prima o botão para eliminar a predefinição selecionada</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="90"/>
         <source>Add Preset:</source>
-        <translation>Ön Ayar Ekle:</translation>
+        <translation>Adicionar predefinição:</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="96"/>
         <source>Enter color manually or select it using the color-wheel</source>
-        <translation>Rengi elle girin veya renk tekerleğini kullanarak seçin</translation>
+        <translation>Insira a cor manualmente ou selecione-a usando a roda de cores</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="106"/>
         <source>Add</source>
-        <translation>Ekle</translation>
+        <translation>Adicionar</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="107"/>
         <source>Press button to add preset</source>
-        <translation>Ön ayar eklemek için düğmeye basın</translation>
+        <translation>Prima o botão para adicionar predefinição</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="130"/>
         <location filename="../../src/config/colorpickereditor.cpp" line="147"/>
         <source>Error</source>
-        <translation>Hata</translation>
+        <translation>Erro</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="131"/>
         <source>Unable to add preset. Maximum limit reached.</source>
-        <translation>Ön ayar eklenemiyor. Azami sınıra ulaşıldı.</translation>
+        <translation>Não foi possível adicionar a predefinição. Limite máximo atingido.</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="148"/>
         <source>Unable to remove preset. Minimum limit reached.</source>
-        <translation>Ön ayar kaldırılamıyor. Asgari sınıra ulaşıldı.</translation>
+        <translation>Não foi possível remover a predefinição. Limite mínimo atingido.</translation>
     </message>
 </context>
 <context>
@@ -501,7 +494,7 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
     <message>
         <location filename="../../src/config/configerrordetails.cpp" line="20"/>
         <source>Configuration errors</source>
-        <translation>Yapılandırma hataları</translation>
+        <translation>Erros de configuração</translation>
     </message>
 </context>
 <context>
@@ -510,44 +503,44 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
         <location filename="../../src/utils/confighandler.cpp" line="562"/>
         <source>Unrecognized setting: &apos;%1&apos;
 </source>
-        <translation>Tanınmayan ayar: &apos;%1&apos;
+        <translation>Definição não reconhecida: &apos;%1&apos;
 </translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="570"/>
         <source>Unrecognized shortcut name: &apos;%1&apos;.
 </source>
-        <translation>Tanınmayan kısayol adı: &apos;%1&apos;.
+        <translation>Nome de atalho não reconhecido: &apos;%1&apos;.
 </translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="613"/>
         <source>Shortcut conflict: &apos;%1&apos; and &apos;%2&apos; have the same shortcut: %3
 </source>
-        <translation>Kısayol çakışması: &apos;%1&apos; ve &apos;%2&apos; aynı kısayola sahip: %3
+        <translation>Conflito de atalho: &apos;%1&apos; e &apos;%2&apos; têm o mesmo atalho: %3
 </translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="653"/>
         <source>Bad value in &apos;%1&apos;. Expected: %2
 </source>
-        <translation>&apos;%1&apos; içinde hatalı değer. Beklenen: %2
+        <translation>Valor incorreto em &apos;%1&apos;. Esperado: %2
 </translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="703"/>
         <source>You have successfully resolved the configuration error.</source>
-        <translation>Yapılandırma hatasını başarıyla çözdünüz.</translation>
+        <translation>Resolveu com sucesso o erro de configuração.</translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="726"/>
         <source>The configuration contains an error. Open configuration to resolve.</source>
-        <translation>Yapılandırma bir hata içeriyor. Çözümlemek için yapılandırmayı açın.</translation>
+        <translation>A configuração contém um erro. Abra a configuração para resolver.</translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="780"/>
         <source>Bad config key &apos;%1&apos; in ConfigHandler. Please report this as a bug.</source>
-        <translation>ConfigHandler&apos;da hatalı yapılandırma anahtarı &apos;%1&apos;. Lütfen bunu bir hata olarak bildirin.</translation>
+        <translation>Chave de configuração inválida &apos;%1&apos; no ConfigHandler. Por favor, relate isso como um bug.</translation>
     </message>
 </context>
 <context>
@@ -555,56 +548,56 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="14"/>
         <source>Resolve configuration errors</source>
-        <translation>Yapılandırma hatalarını çöz</translation>
+        <translation>Resolver erros de configuração</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="50"/>
         <source>&lt;b&gt;You must resolve all errors before continuing:&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Devam etmeden önce tüm hataları çözmelisiniz:&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Deve resolver todos os erros antes de continuar:&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="61"/>
         <source>Reset</source>
-        <translation>Sıfırla</translation>
+        <translation>Repor</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="63"/>
         <source>Reset to the default value.</source>
-        <translation>Öntanımlı değere sıfırla.</translation>
+        <translation>Repor para o valor predefinido.</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="77"/>
         <source>Remove</source>
-        <translation>Kaldır</translation>
+        <translation>Remover</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="79"/>
         <source>Remove this setting.</source>
-        <translation>Bu ayarı kaldır.</translation>
+        <translation>Remova esta definição.</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="90"/>
         <source>Some keyboard shortcuts have conflicts.
 This will NOT prevent flameshot from starting.
 Please solve them manually in the configuration file.</source>
-        <translation>Bazı klavye kısayollarında çakışmalar var.
-Bu, flameshot&apos;ın başlamasını ENGELLEMEYECEKTİR.
-Lütfen bunları yapılandırma dosyasında elle çözün.</translation>
+        <translation>Algumas teclas de atalho apresentam conflitos.
+Isto NÃO impedirá o Flameshot de iniciar.
+Resolva-as manualmente no ficheiro de configuração.</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="112"/>
         <source>Resolve all</source>
-        <translation>Tümünü çöz</translation>
+        <translation>Resolver tudo</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="113"/>
         <source>Resolve all listed errors.</source>
-        <translation>Listelenen tüm hataları çöz.</translation>
+        <translation>Resolva todos os erros listados.</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="125"/>
         <source>Details</source>
-        <translation>Ayrıntılar</translation>
+        <translation>Details</translation>
     </message>
 </context>
 <context>
@@ -612,96 +605,96 @@ Lütfen bunları yapılandırma dosyasında elle çözün.</translation>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="40"/>
         <source>Configuration</source>
-        <translation>Ayarlar</translation>
+        <translation>Configuração</translation>
     </message>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="68"/>
         <source>Interface</source>
-        <translation>Arayüz</translation>
+        <translation>Interface</translation>
     </message>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="78"/>
         <source>Filename Editor</source>
-        <translation>Dosya Adı Düzenleyici</translation>
+        <translation>Editor de nome de ficheiro</translation>
     </message>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="59"/>
         <source>General</source>
-        <translation>Genel</translation>
+        <translation>Geral</translation>
     </message>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="87"/>
         <source>Shortcuts</source>
-        <translation>Kısayollar</translation>
+        <translation>Atalhos</translation>
     </message>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="120"/>
         <source>Resolve</source>
-        <translation>Çöz</translation>
+        <translation>Resolver</translation>
     </message>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="124"/>
         <source>&lt;b&gt;Configuration file has errors. Resolve them before continuing.&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Yapılandırma dosyasında hatalar var. Devam etmeden önce bunları çözün.&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;O ficheiro de configuração contém erros. Resolva-os antes de continuar.&lt;/b&gt;</translation>
     </message>
 </context>
 <context>
     <name>Controller</name>
     <message>
         <source>New version %1 is available</source>
-        <translation type="vanished">Yeni %1 sürümü mevcut</translation>
+        <translation type="vanished">La nova versió %1 ja és disponible</translation>
     </message>
     <message>
         <source>You have the latest version</source>
-        <translation type="vanished">En son sürüme sahipsiniz</translation>
+        <translation type="vanished">Teniu la versió més recent</translation>
     </message>
     <message>
         <source>Failed to get information about the latest version.</source>
-        <translation type="vanished">En son sürüm hakkında bilgi alınamadı.</translation>
+        <translation type="vanished">Error a l&apos;intentar obtenir informació sobre actualitzacions.</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="vanished">Hata</translation>
+        <translation type="obsolete">Error</translation>
     </message>
     <message>
         <source>Unable to close active modal widgets</source>
-        <translation type="vanished">Etkin modal widget&apos;lar kapatılamıyor</translation>
-    </message>
-    <message>
-        <source>&amp;Take Screenshot</source>
-        <translation type="vanished">&amp;Ekran Resmi Al</translation>
+        <translation type="vanished">No s&apos;han pogut tancar els widgets modals actius</translation>
     </message>
     <message>
         <source>&amp;Open Launcher</source>
-        <translation type="vanished">&amp;Başlatıcı Aç</translation>
+        <translation type="vanished">&amp;Obre el llançador d&apos;aplicacions</translation>
     </message>
     <message>
         <source>&amp;Configuration</source>
-        <translation type="vanished">&amp;Ayarlar</translation>
+        <translation type="vanished">&amp;Ajustaments</translation>
     </message>
     <message>
         <source>&amp;About</source>
-        <translation type="vanished">&amp;Hakkında</translation>
+        <translation type="vanished">&amp;Quant a</translation>
     </message>
     <message>
         <source>Check for updates</source>
-        <translation type="vanished">Güncellemeleri denetle</translation>
+        <translation type="vanished">Comprova si hi ha actualitzacions disponibles</translation>
     </message>
     <message>
         <source>&amp;Latest Uploads</source>
-        <translation type="vanished">&amp;Son Yüklenenler</translation>
+        <translation type="vanished">&amp;Últimes càrregues</translation>
     </message>
     <message>
         <source>URL copied to clipboard.</source>
-        <translation type="vanished">URL panoya kopyalandı.</translation>
+        <translation type="obsolete">L&apos;URL s&apos;ha copiat al porta-retalls.</translation>
     </message>
     <message>
         <source>&amp;Information</source>
-        <translation type="vanished">&amp;Bilgi</translation>
+        <translation type="vanished">&amp;Informació</translation>
     </message>
     <message>
         <source>&amp;Quit</source>
-        <translation type="vanished">&amp;Çıkış</translation>
+        <translation type="vanished">&amp;Surt</translation>
+    </message>
+    <message>
+        <source>&amp;Take Screenshot</source>
+        <translation type="vanished">&amp;Captura</translation>
     </message>
 </context>
 <context>
@@ -709,23 +702,23 @@ Lütfen bunları yapılandırma dosyasında elle çözün.</translation>
     <message>
         <location filename="../../src/tools/copy/copytool.cpp" line="24"/>
         <source>Copy</source>
-        <translation>Kopyala</translation>
+        <translation>Copiar</translation>
     </message>
     <message>
         <location filename="../../src/tools/copy/copytool.cpp" line="34"/>
         <source>Copy selection to clipboard</source>
-        <translation>Seçimi panoya kopyala</translation>
+        <translation>Copiar seleção para a área de transferência</translation>
     </message>
     <message>
         <source>Copy the selection into the clipboard</source>
-        <translation type="vanished">Seçimi panoya kopyala</translation>
+        <translation type="vanished">Copia la selecció al porta-retalls</translation>
     </message>
 </context>
 <context>
     <name>DBusUtils</name>
     <message>
         <source>Unable to connect via DBus</source>
-        <translation type="vanished">DBus ile bağlanılamadı</translation>
+        <translation type="vanished">No s&apos;ha pogut connectar mitjançant DBus</translation>
     </message>
 </context>
 <context>
@@ -733,12 +726,12 @@ Lütfen bunları yapılandırma dosyasında elle çözün.</translation>
     <message>
         <location filename="../../src/tools/exit/exittool.cpp" line="23"/>
         <source>Exit</source>
-        <translation>Çıkış</translation>
+        <translation>Sair</translation>
     </message>
     <message>
         <location filename="../../src/tools/exit/exittool.cpp" line="33"/>
         <source>Leave the capture screen</source>
-        <translation>Yakalama ekranından ayrıl</translation>
+        <translation>Sair da ferramenta de captura</translation>
     </message>
 </context>
 <context>
@@ -746,51 +739,51 @@ Lütfen bunları yapılandırma dosyasında elle çözün.</translation>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="24"/>
         <source>Edit the name of your captures:</source>
-        <translation>Çekimlerinizin adını düzenleyin:</translation>
+        <translation>Edite o nome das suas capturas:</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="28"/>
         <source>Edit:</source>
-        <translation>Düzenle:</translation>
+        <translation>Editar:</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="30"/>
         <source>Preview:</source>
-        <translation>Ön izleme:</translation>
+        <translation>Pré-visualização:</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="73"/>
         <source>Save</source>
-        <translation>Kaydet</translation>
+        <translation>Guardar</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="76"/>
         <source>Saves the pattern</source>
-        <translation>Desenini kaydeder</translation>
+        <translation>Guarda o padrão</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="78"/>
         <source>Restore</source>
-        <translation>Geri yükle</translation>
+        <translation>Restaurar</translation>
     </message>
     <message>
         <source>Reset</source>
-        <translation type="vanished">Sıfırla</translation>
+        <translation type="vanished">Reinicialitza</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="81"/>
         <source>Restores the saved pattern</source>
-        <translation>Kaydedilen deseni geri yükler</translation>
+        <translation>Restaura o padrão guardado</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="83"/>
         <source>Clear</source>
-        <translation>Temizle</translation>
+        <translation>Limpar</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="89"/>
         <source>Deletes the name</source>
-        <translation>İsmi siler</translation>
+        <translation>Elimina o nome</translation>
     </message>
 </context>
 <context>
@@ -798,17 +791,17 @@ Lütfen bunları yapılandırma dosyasında elle çözün.</translation>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="114"/>
         <source>Error</source>
-        <translation>Hata</translation>
+        <translation>Erro</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="114"/>
         <source>Unable to close active modal widgets</source>
-        <translation>Etkin modal widget&apos;lar kapatılamıyor</translation>
+        <translation>Incapaz de fechar widgets modais ativos</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="412"/>
         <source>URL copied to clipboard.</source>
-        <translation>URL panoya kopyalandı.</translation>
+        <translation>URL copiada para a área de transferência.</translation>
     </message>
 </context>
 <context>
@@ -816,93 +809,89 @@ Lütfen bunları yapılandırma dosyasında elle çözün.</translation>
     <message>
         <location filename="../../src/core/flameshotdaemon.cpp" line="374"/>
         <source>New version %1 is available</source>
-        <translation>Yeni %1 sürümü var</translation>
+        <translation>Nova versão %1 está disponível</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshotdaemon.cpp" line="380"/>
         <source>You have the latest version</source>
-        <translation>En son sürümü kullanıyorsunuz</translation>
+        <translation>Você está com a versão mais recente</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshotdaemon.cpp" line="389"/>
         <source>Failed to get information about the latest version.</source>
-        <translation>En son sürüm hakkında bilgi alınamadı.</translation>
+        <translation>Não foi possível obter informações sobre a versão mais recente.</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshotdaemon.cpp" line="411"/>
         <source>Unable to connect via DBus</source>
-        <translation>DBus ile bağlanılamıyor</translation>
+        <translation>Não foi possível conectar via DBus</translation>
     </message>
 </context>
 <context>
     <name>GeneneralConf</name>
     <message>
-        <source>Import</source>
-        <translation type="vanished">Dışa aktar</translation>
-    </message>
-    <message>
-        <source>Error</source>
-        <translation type="vanished">Hata</translation>
-    </message>
-    <message>
-        <source>Unable to read file.</source>
-        <translation type="vanished">Dosya okunamıyor.</translation>
-    </message>
-    <message>
-        <source>Unable to write file.</source>
-        <translation type="vanished">Dosya yazılamıyor.</translation>
-    </message>
-    <message>
-        <source>Save File</source>
-        <translation type="vanished">Dosyayı Kaydet</translation>
-    </message>
-    <message>
-        <source>Confirm Reset</source>
-        <translation type="vanished">Sıfırlamayı Onayla</translation>
-    </message>
-    <message>
-        <source>Are you sure you want to reset the configuration?</source>
-        <translation type="vanished">Ayarları sıfırlamak istediğinizden emin misiniz?</translation>
-    </message>
-    <message>
         <source>Show help message</source>
-        <translation type="vanished">Yardım mesajını göster</translation>
+        <translation type="vanished">Mostra el missatge d&apos;ajuda</translation>
     </message>
     <message>
         <source>Show the help message at the beginning in the capture mode.</source>
-        <translation type="vanished">Yakalama modunda başında yardım mesajını gösterin.</translation>
+        <translation type="vanished">Mostra el missatge d&apos;ajuda en iniciar el mode de captura.</translation>
     </message>
     <message>
         <source>Show desktop notifications</source>
-        <translation type="vanished">Masaüstü bildirimlerini göster</translation>
+        <translation type="vanished">Mostra les notificacions d&apos;escriptori</translation>
     </message>
     <message>
         <source>Show tray icon</source>
-        <translation type="vanished">Tepsi simgesini göster</translation>
+        <translation type="vanished">Mostra la icona en la barra de tasques</translation>
     </message>
     <message>
         <source>Show the systemtray icon</source>
-        <translation type="vanished">Sistem tepsisi simgesini göster</translation>
+        <translation type="vanished">Mostra la icona en la barra de tasques</translation>
+    </message>
+    <message>
+        <source>Import</source>
+        <translation type="vanished">Importar</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="vanished">Error</translation>
+    </message>
+    <message>
+        <source>Unable to read file.</source>
+        <translation type="vanished">Impossible llegir el fitxer.</translation>
+    </message>
+    <message>
+        <source>Unable to write file.</source>
+        <translation type="vanished">Impossible escriure al fitxer.</translation>
+    </message>
+    <message>
+        <source>Save File</source>
+        <translation type="vanished">Guardar Arxiu</translation>
+    </message>
+    <message>
+        <source>Confirm Reset</source>
+        <translation type="vanished">Confirmar Reset</translation>
+    </message>
+    <message>
+        <source>Are you sure you want to reset the configuration?</source>
+        <translation type="vanished">Esteu segur que voleu reiniciar la configuració?</translation>
     </message>
     <message>
         <source>Configuration File</source>
-        <translation type="vanished">Yapılandırma Dosyası</translation>
+        <translation type="vanished">Fitxer de Configuració</translation>
     </message>
     <message>
         <source>Export</source>
-        <translation type="vanished">Dışa aktar</translation>
+        <translation type="vanished">Exportar</translation>
     </message>
     <message>
         <source>Reset</source>
-        <translation type="vanished">Sıfırla</translation>
+        <translation type="vanished">Reset</translation>
     </message>
     <message>
         <source>Launch at startup</source>
-        <translation type="vanished">Başlangıçta başlatın</translation>
-    </message>
-    <message>
-        <source>Launch Flameshot</source>
-        <translation type="vanished">Flameshot&apos;ı başlat</translation>
+        <translation type="vanished">Llançament a l&apos;inici</translation>
     </message>
 </context>
 <context>
@@ -911,7 +900,7 @@ Lütfen bunları yapılandırma dosyasında elle çözün.</translation>
         <location filename="../../src/config/generalconf.cpp" line="186"/>
         <location filename="../../src/config/generalconf.cpp" line="387"/>
         <source>Import</source>
-        <translation>İçe aktar</translation>
+        <translation>Importar</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="193"/>
@@ -919,184 +908,184 @@ Lütfen bunları yapılandırma dosyasında elle çözün.</translation>
         <location filename="../../src/config/generalconf.cpp" line="225"/>
         <location filename="../../src/config/generalconf.cpp" line="756"/>
         <source>Error</source>
-        <translation>Hata</translation>
+        <translation>Erro</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="193"/>
         <source>Unable to read file.</source>
-        <translation>Dosya okunamıyor.</translation>
+        <translation>Incapaz de ler o ficheiro.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="201"/>
         <location filename="../../src/config/generalconf.cpp" line="225"/>
         <source>Unable to write file.</source>
-        <translation>Dosya yazılamıyor.</translation>
+        <translation>Incapaz de gravar o ficheiro.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="212"/>
         <source>Save File</source>
-        <translation>Dosyayı Kaydet</translation>
+        <translation>Guardar Ficheiro</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="234"/>
         <source>Confirm Reset</source>
-        <translation>Sıfırlamayı Onayla</translation>
+        <translation>Confirmar reposição</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="235"/>
         <source>Are you sure you want to reset the configuration?</source>
-        <translation>Ayarları sıfırlamak istediğinizden emin misiniz?</translation>
+        <translation>Tem a certeza que pretende repor a configuração?</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="266"/>
         <source>Show help message</source>
-        <translation>Yardım mesajını göster</translation>
+        <translation>Mostrar mensagem de ajuda</translation>
     </message>
     <message>
         <source>Show the help message at the beginning in the capture mode.</source>
-        <translation type="vanished">Yakalama modunda başlangıçta yardım mesajını göster.</translation>
+        <translation type="obsolete">Mostra el missatge d&apos;ajuda en iniciar el mode de captura.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="291"/>
         <source>Show the side panel button</source>
-        <translation>Yan panel düğmesini göster</translation>
+        <translation>Mostrar botão no painel lateral</translation>
     </message>
     <message>
         <source>Show the side panel toggle button in the capture mode.</source>
-        <translation type="vanished">Çekim modunda yan panel geçiş düğmesini göster.</translation>
+        <translation type="vanished">Mostra el botó del calaix lateral en el mode de captura.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="304"/>
         <source>Show desktop notifications</source>
-        <translation>Masaüstü bildirimlerini göster</translation>
+        <translation>Mostrar notificações na área de trabalho</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="329"/>
         <source>Show tray icon</source>
-        <translation>Tepsi simgesini göster</translation>
+        <translation>Mostrar ícone na bandeja</translation>
     </message>
     <message>
         <source>Show the systemtray icon</source>
-        <translation type="vanished">Sistem tepsisi simgesini göster</translation>
+        <translation type="vanished">Mostra la icona a la barra de tasques del sistema</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="360"/>
         <source>Confirmation required to delete screenshot from the latest uploads</source>
-        <translation>Son yüklenenlerden ekran görüntüsünü silmek için onay gerekli</translation>
+        <translation>Confirmação necessária para excluir a captura de ecrã dos uploads mais recentes</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="375"/>
         <source>Configuration File</source>
-        <translation>Yapılandırma Dosyası</translation>
+        <translation>Ficheiro de configuração</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="380"/>
         <source>Export</source>
-        <translation>Dışa aktar</translation>
+        <translation>Exportar</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="394"/>
         <source>Reset</source>
-        <translation>Sıfırla</translation>
+        <translation>Repor</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="405"/>
         <source>Automatic check for updates</source>
-        <translation>Güncellemeleri otomatik denetle</translation>
+        <translation>Verificação automática de atualizações</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="419"/>
         <source>Allow multiple flameshot GUI instances simultaneously</source>
-        <translation>Aynı anda birden fazla flameshot grafiksel arayüz örneğine izin ver</translation>
+        <translation>Permitir várias instâncias GUI do flameshot simultaneamente</translation>
     </message>
     <message>
         <source>This allows you to take screenshots of flameshot itself for example.</source>
-        <translation type="vanished">Bu, örneğin flameshot&apos;ın kendisinin ekran görüntülerini almanıza olanak tanır.</translation>
+        <translation type="vanished">This allows you to take screenshots of flameshot itself for example.</translation>
     </message>
     <message>
         <source>Automatically close daemon when it is not needed</source>
-        <translation type="vanished">Gerekli olmadığında arka plan programını otomatik olarak kapat</translation>
+        <translation type="vanished">Automatically close daemon when it is not needed</translation>
     </message>
     <message>
         <source>Launch at startup</source>
-        <translation type="vanished">Başlangıçta başlat</translation>
+        <translation type="vanished">Llança a l&apos;inici</translation>
     </message>
     <message>
         <source>Launch Flameshot</source>
-        <translation type="vanished">Flameshot&apos;ı başlat</translation>
+        <translation type="vanished">Inicia el Flameshot</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="456"/>
         <source>Show welcome message on launch</source>
-        <translation>Açılışta karşılama mesajını göster</translation>
+        <translation>Mostrar mensagem de boas-vindas na inicialização</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="484"/>
         <source>Use large predefined color palette</source>
-        <translation>Önceden tanımlanmış büyük renk paleti kullan</translation>
+        <translation>Usar paleta de cores predefinida grande</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="508"/>
         <source>Copy URL after upload</source>
-        <translation>Yüklemeden sonra URL&apos;yi kopyala</translation>
+        <translation>Copiar URL após upload</translation>
     </message>
     <message>
         <source>Copy URL and close window after upload</source>
-        <translation type="vanished">URL&apos;yi kopyalayın ve yüklemeden sonra pencereyi kapatın</translation>
+        <translation type="vanished">Copia la URL i tanca la finestra després de la càrrega</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="520"/>
         <source>Save image after copy</source>
-        <translation>Kopyaladıktan sonra resmi kaydet</translation>
+        <translation>Guardar imagem após copiar</translation>
     </message>
     <message>
         <source>Save image file after copying it</source>
-        <translation type="vanished">Resim dosyasını kopyaladıktan sonra kaydedin</translation>
+        <translation type="vanished">Desa el fitxer d&apos;imatge després d&apos;haver-lo copiat</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="267"/>
         <source>Show the help message at the beginning in the capture mode</source>
-        <translation>Yakalama modu başlangıcında ipucu göster</translation>
+        <translation>Mostrar a mensagem de ajuda no início no modo de captura</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="277"/>
         <source>Use last region for GUI mode</source>
-        <translation type="unfinished">Son bölgeyi kullan</translation>
+        <translation>Usar a última região para modo GUI</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="279"/>
         <source>Use the last region as the default selection for the next screenshot in GUI mode</source>
-        <translation type="unfinished">Bir sonraki ekran görüntüsü için öntanımlı seçim olarak son bölgeyi kullanır</translation>
+        <translation>Usa a última região como a seleção predefinida para a próxima captura de ecrã em modo GUI</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="293"/>
         <source>Show the side panel toggle button in the capture mode</source>
-        <translation>Yakalama modunda yan panelde geçiş düğmesi göster</translation>
+        <translation>Mostrar o botão de alternância do painel lateral no modo de captura</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="305"/>
         <source>Enable desktop notifications</source>
-        <translation>Masaüstü bildirimlerini etkinleştir</translation>
+        <translation>Habilitar notificações da área de trabalho</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="316"/>
         <source>Show abort notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar notificações de abortar</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="317"/>
         <source>Enable abort notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Ativar as notificações de abortar</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="330"/>
         <source>Show icon in the system tray</source>
-        <translation>Simgeyi sistem tepsisinde göster</translation>
+        <translation>Mostrar ícone na bandeja do sistema</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="343"/>
         <source>Use grim to capture screenshots</source>
-        <translation type="unfinished"></translation>
+        <translation>Utilizar o grim para capturar imagens de ecrã</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="345"/>
@@ -1106,44 +1095,44 @@ Lütfen bunları yapılandırma dosyasında elle çözün.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="363"/>
         <source>Ask for confirmation to delete screenshot from the latest uploads</source>
-        <translation>En son yüklemelerdeki ekran görüntüsünü silmek için onay iste</translation>
+        <translation>Peça confirmação para eliminar a captura de ecrã dos envios mais recentes</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="406"/>
         <source>Check for updates automatically</source>
-        <translation>Güncellemeleri otomatik olarak kontrol et</translation>
+        <translation>Procurar por atualizações automaticamente</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="420"/>
         <source>This allows you to take screenshots of Flameshot itself for example</source>
-        <translation>Bu, Flameshot&apos;ın kendi ekran görüntülerini almanıza olanak tanır</translation>
+        <translation>Isto permite que tire capturas de ecrã do próprio Flameshot, por exemplo</translation>
     </message>
     <message>
         <source>Launch Flameshot daemon when computer is booted</source>
-        <translation type="vanished">Bilgisayar başlatıldığında Flameshot arka plan uygulamasını başlat</translation>
+        <translation type="vanished">Launch Flameshot daemon when computer is booted</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="459"/>
         <source>Show the welcome message box in the middle of the screen while taking a screenshot</source>
-        <translation>Ekran görüntüsü alırken ekranın ortasında karşılama mesajı kutusunu göster</translation>
+        <translation>Mostrar a caixa de mensagem de boas-vindas no meio do ecrã enquanto faz uma captura de ecrã</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="486"/>
         <source>Use a large predefined color palette</source>
-        <translation>Ön tanımlı geniş renk paletini kullan</translation>
+        <translation>Usar uma paleta de cores predefinida grande</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="496"/>
         <source>Copy on double click</source>
-        <translation>Çift tıklandığında kopyala</translation>
+        <translation>Copiar com duplo clique</translation>
     </message>
     <message>
         <source>Enable Copy on Double Click</source>
-        <translation type="vanished">Çift Tıklamada Kopyalamayı Etkinleştir</translation>
+        <translation type="vanished">Enable Copy on Double Click</translation>
     </message>
     <message>
         <source>Copy URL and close window after uploading was successful</source>
-        <translation type="vanished">Yükleme başarılı olduktan sonra URL&apos;yi kopyala ve pencereyi kapat</translation>
+        <translation type="vanished">Copy URL and close window after uploading was successful</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="432"/>
@@ -1188,47 +1177,47 @@ Lütfen bunları yapılandırma dosyasında elle çözün.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="522"/>
         <source>After copying the screenshot, save it to a file as well</source>
-        <translation>Ekran görüntüsünü kopyaladıktan sonra ayrıca bir resim olarak kaydedilsin</translation>
+        <translation>Depois de copiar a captura de ecrã, guarde-a num ficheiro também</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="529"/>
         <source>Save Path</source>
-        <translation>Kaydetme Yolu</translation>
+        <translation>Guardar Caminho</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="545"/>
         <source>Change...</source>
-        <translation>Değiştir...</translation>
+        <translation>Alterar...</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="553"/>
         <source>Use fixed path for screenshots to save</source>
-        <translation>Kaydedilecek ekran görüntüleri için sabit yol kullan</translation>
+        <translation>Use o caminho fixo para guardar captura de ecrã</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="565"/>
         <source>Preferred save file extension:</source>
-        <translation>Tercih edilen kaydetme dosyası uzantısı:</translation>
+        <translation>Extensão de ficheiro preferida para guardar:</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="594"/>
         <source>Latest Uploads Max Size</source>
-        <translation>Son Yüklenenler Azami Boyutu</translation>
+        <translation>Tamanho máximo dos envios mais recentes</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="616"/>
         <source>Imgur Application Client ID</source>
-        <translation>Imgur API Anahtarı</translation>
+        <translation>ID do Cliente do Aplicativo Imgur</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="647"/>
         <source>Undo limit</source>
-        <translation>Geri alma sınırı</translation>
+        <translation>Limite de desfazer</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="676"/>
         <source>Use JPG format for clipboard (PNG default)</source>
-        <translation>Pano için JPG biçimini kullan (öntanımlı: PNG)</translation>
+        <translation>Use o formato JPG para a área de transferência (PNG padrão)</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="678"/>
@@ -1238,58 +1227,58 @@ Lütfen bunları yapılandırma dosyasında elle çözün.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="704"/>
         <source>Copy file path after save</source>
-        <translation>Kaydettikten sonra dosya yolunu kopyala</translation>
+        <translation>Copiar o caminho do ficheiro após guardar</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="705"/>
         <source>Copy the file path to clipboard after the file is saved</source>
-        <translation>Dosya kaydedildikten sonra dosya yolunu panoya kopyala</translation>
+        <translation>Copie o caminho do ficheiro para a área de transferência depois que o ficheiro for guardado</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="716"/>
         <source>Anti-aliasing image when zoom the pinned image</source>
-        <translation>Sabitlenmiş görüntüye yakınlaştırırken kenar yumuşatma</translation>
+        <translation>Imagem sem serrilhado ao ampliar a imagem fixada</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="718"/>
         <source>After zooming the pinned image, should the image get smoothened or stay pixelated</source>
-        <translation>Sabitlenmiş görüntüye yakınlaştırdıktan sonra, görüntü düzleştirilmeli veya pikselli kalmalı mı?</translation>
+        <translation>Depois de aplicar zoom na imagem fixada, a imagem deve ser suavizada ou permanecer pixelada</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="729"/>
         <location filename="../../src/config/generalconf.cpp" line="731"/>
         <source>Upload image without confirmation</source>
-        <translation>Onay almadan resimleri yükle</translation>
+        <translation>Enviar imagem sem confirmação</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="747"/>
         <source>Choose a Folder</source>
-        <translation>Bir Klasör Seçin</translation>
+        <translation>Escolha uma pasta</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="756"/>
         <source>Unable to write to directory.</source>
-        <translation>Dizine yazılamıyor.</translation>
+        <translation>Incapaz de escrever no diretório.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="765"/>
         <source>Show magnifier</source>
-        <translation>Büyüteci göster</translation>
+        <translation>Mostrar lupa</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="766"/>
         <source>Enable a magnifier while selecting the screenshot area</source>
-        <translation>Ekran görüntüsü alanını seçerken büyüteci etkinleştir</translation>
+        <translation>Ativar uma lupa ao selecionar a área de captura de ecrã</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="777"/>
         <source>Square shaped magnifier</source>
-        <translation>Kare şekilli büyüteç</translation>
+        <translation>Lupa de forma quadrada</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="778"/>
         <source>Make the magnifier to be square-shaped</source>
-        <translation>Büyüteç kare şeklinde olsun</translation>
+        <translation>Alterar a lupa para um formato quadrado</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="794"/>
@@ -1366,46 +1355,46 @@ Lütfen bunları yapılandırma dosyasında elle çözün.</translation>
     <name>HistoryWidget</name>
     <message>
         <source>Latest Uploads</source>
-        <translation type="vanished">Son Yüklenenler</translation>
+        <translation type="vanished">Últimes càrregues</translation>
     </message>
     <message>
         <source>Screenshots history is empty</source>
-        <translation type="vanished">Ekran görüntüsü geçmişi boş</translation>
+        <translation type="vanished">L&apos;historial de captures de pantalla és buit</translation>
     </message>
     <message>
         <source>Copy URL</source>
-        <translation type="vanished">URL Kopyala</translation>
+        <translation type="obsolete">Copia l&apos;URL</translation>
     </message>
     <message>
         <source>URL copied to clipboard.</source>
-        <translation type="vanished">URL panoya kopyalandı.</translation>
+        <translation type="obsolete">L&apos;URL s&apos;ha copiat al porta-retalls.</translation>
     </message>
     <message>
         <source>Open in browser</source>
-        <translation type="vanished">Tarayıcıda aç</translation>
+        <translation type="vanished">Obre al navegador</translation>
     </message>
     <message>
         <source>Confirm to delete</source>
-        <translation type="vanished">Silmeyi onayla</translation>
+        <translation type="vanished">Confirmeu per esborrar</translation>
     </message>
     <message>
         <source>Are you sure you want to delete a screenshot from the latest uploads and server?</source>
-        <translation type="vanished">En son yüklemelerden ve sunucudan bir ekran görüntüsünü silmek istediğinizden emin misiniz?</translation>
+        <translation type="vanished">Esteu segur de voler esborrar la captura de les últimes càrregues i del servidor?</translation>
     </message>
 </context>
 <context>
     <name>ImgS3Uploader</name>
     <message>
         <source>Uploading Image</source>
-        <translation type="obsolete">Resim Yükleniyor</translation>
+        <translation type="obsolete">S&apos;està pujant la imatge</translation>
     </message>
     <message>
         <source>URL copied to clipboard.</source>
-        <translation type="obsolete">URL panoya kopyalandı.</translation>
+        <translation type="obsolete">L&apos;URL s&apos;ha copiat al porta-retalls.</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="obsolete">Hata</translation>
+        <translation type="obsolete">Error</translation>
     </message>
 </context>
 <context>
@@ -1413,53 +1402,53 @@ Lütfen bunları yapılandırma dosyasında elle çözün.</translation>
     <message>
         <location filename="../../src/widgets/imguploaddialog.cpp" line="18"/>
         <source>Upload Confirmation</source>
-        <translation>Yükleme Onayı</translation>
+        <translation>Confirmação de Envio</translation>
     </message>
     <message>
         <location filename="../../src/widgets/imguploaddialog.cpp" line="22"/>
         <source>Do you want to upload this capture?</source>
-        <translation>Bu yakalamayı yüklemek istiyor musunuz?</translation>
+        <translation>Deseja fazer o envio desta captura?</translation>
     </message>
     <message>
         <location filename="../../src/widgets/imguploaddialog.cpp" line="35"/>
         <location filename="../../src/widgets/imguploaddialog.cpp" line="36"/>
         <source>Upload without confirmation</source>
-        <translation>Onay almadan yükle</translation>
+        <translation>Enviar sem confirmação</translation>
     </message>
 </context>
 <context>
     <name>ImgUploader</name>
     <message>
         <source>Uploading Image</source>
-        <translation type="obsolete">Resim Yükleniyor</translation>
-    </message>
-    <message>
-        <source>Unable to open the URL.</source>
-        <translation type="obsolete">URL açılamıyor.</translation>
-    </message>
-    <message>
-        <source>URL copied to clipboard.</source>
-        <translation type="obsolete">URL panoya kopyalandı.</translation>
-    </message>
-    <message>
-        <source>Screenshot copied to clipboard.</source>
-        <translation type="obsolete">Ekran görüntüsü panoya kopyalandı.</translation>
-    </message>
-    <message>
-        <source>Copy URL</source>
-        <translation type="obsolete">URL Kopyala</translation>
-    </message>
-    <message>
-        <source>Open URL</source>
-        <translation type="obsolete">URL Aç</translation>
+        <translation type="obsolete">S&apos;està pujant la imatge</translation>
     </message>
     <message>
         <source>Delete image</source>
-        <translation type="obsolete">Resmi sil</translation>
+        <translation type="obsolete">Esborra la imatge</translation>
+    </message>
+    <message>
+        <source>Unable to open the URL.</source>
+        <translation type="obsolete">No es pot obrir l&apos;URL.</translation>
+    </message>
+    <message>
+        <source>URL copied to clipboard.</source>
+        <translation type="obsolete">L&apos;URL s&apos;ha copiat al porta-retalls.</translation>
+    </message>
+    <message>
+        <source>Screenshot copied to clipboard.</source>
+        <translation type="obsolete">La captura s&apos;ha copiat al porta-retalls.</translation>
+    </message>
+    <message>
+        <source>Copy URL</source>
+        <translation type="obsolete">Copia l&apos;URL</translation>
+    </message>
+    <message>
+        <source>Open URL</source>
+        <translation type="obsolete">Obri l&apos;URL</translation>
     </message>
     <message>
         <source>Image to Clipboard.</source>
-        <translation type="obsolete">Resim Pano&apos;ya.</translation>
+        <translation type="obsolete">Imatge al porta-retalls.</translation>
     </message>
 </context>
 <context>
@@ -1472,57 +1461,57 @@ Lütfen bunları yapılandırma dosyasında elle çözün.</translation>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="49"/>
         <source>Uploading Image</source>
-        <translation>Resim Karşıya Yükleniyor</translation>
+        <translation>Enviando Imagem</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="128"/>
         <source>Copy URL</source>
-        <translation>URL Kopyala</translation>
+        <translation>Copiar URL</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="129"/>
         <source>Open URL</source>
-        <translation>URL Aç</translation>
+        <translation>Abrir URL</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="130"/>
         <source>Delete image</source>
-        <translation>Resmi sil</translation>
+        <translation>Deletar imagem</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="131"/>
         <source>Image to Clipboard.</source>
-        <translation>Resim Pano&apos;ya.</translation>
+        <translation>Imagem para a Área de Transferência.</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="132"/>
         <source>Save image</source>
-        <translation>Resmi Kaydet</translation>
+        <translation>Guardar imagem</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="162"/>
         <source>Unable to open the URL.</source>
-        <translation>URL açılamıyor.</translation>
+        <translation>Não foi possível abrir o URL.</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="169"/>
         <source>URL copied to clipboard.</source>
-        <translation>URL panoya kopyalandı.</translation>
+        <translation>URL copiada para a área de transferência.</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="175"/>
         <source>Screenshot copied to clipboard.</source>
-        <translation>Ekran görüntüsü panoya kopyalandı.</translation>
+        <translation>Captura de acrã copiada para a área de transferência.</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="189"/>
         <source>Unable to save the screenshot to disk.</source>
-        <translation>Ekran görüntüsü diske kaydedilemiyor.</translation>
+        <translation>Não foi possível guardar a captura de ecrã no disco.</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="192"/>
         <source>Screenshot saved.</source>
-        <translation>Ekran görüntüsü kaydedildi.</translation>
+        <translation>Captura de ecrã guardada.</translation>
     </message>
 </context>
 <context>
@@ -1530,63 +1519,63 @@ Lütfen bunları yapılandırma dosyasında elle çözün.</translation>
     <message>
         <location filename="../../src/tools/imgupload/imguploadertool.cpp" line="23"/>
         <source>Image Uploader</source>
-        <translation>Resim Karşıya Yükleme Aracı</translation>
+        <translation>Carregador de Imagem</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/imguploadertool.cpp" line="33"/>
         <source>Upload the selection</source>
-        <translation>Seçimi yükle</translation>
+        <translation>Envie a seleção</translation>
     </message>
 </context>
 <context>
     <name>ImgurUploader</name>
     <message>
         <source>Upload to Imgur</source>
-        <translation type="vanished">Imgur&apos;a yükle</translation>
+        <translation type="vanished">Puja a Imgur</translation>
     </message>
     <message>
         <source>Uploading Image</source>
-        <translation type="vanished">Resim Yükleniyor</translation>
+        <translation type="vanished">S&apos;està pujant la imatge</translation>
     </message>
     <message>
         <source>Copy URL</source>
-        <translation type="vanished">URL Kopyala</translation>
+        <translation type="vanished">Copia l&apos;URL</translation>
     </message>
     <message>
         <source>Open URL</source>
-        <translation type="vanished">URL Aç</translation>
+        <translation type="vanished">Obre l&apos;URL</translation>
     </message>
     <message>
         <source>Delete image</source>
-        <translation type="vanished">Resmi sil</translation>
+        <translation type="vanished">Esborra la imatge</translation>
     </message>
     <message>
         <source>Image to Clipboard.</source>
-        <translation type="vanished">Resim Pano&apos;ya.</translation>
+        <translation type="vanished">Imatge al porta-retalls.</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imgur/imguruploader.cpp" line="93"/>
         <source>Unable to open the URL.</source>
-        <translation>URL açılamıyor.</translation>
+        <translation>Não foi possível abrir a URL.</translation>
     </message>
     <message>
         <source>URL copied to clipboard.</source>
-        <translation type="vanished">URL panoya kopyalandı.</translation>
+        <translation type="vanished">L&apos;URL s&apos;ha copiat al porta-retalls.</translation>
     </message>
     <message>
         <source>Screenshot copied to clipboard.</source>
-        <translation type="vanished">Ekran görüntüsü panoya kopyalandı.</translation>
+        <translation type="vanished">La captura s&apos;ha copiat al porta-retalls.</translation>
     </message>
 </context>
 <context>
     <name>ImgurUploaderTool</name>
     <message>
         <source>Image Uploader</source>
-        <translation type="vanished">Resim Yükleme Aracı</translation>
+        <translation type="vanished">Puja la imatge</translation>
     </message>
     <message>
         <source>Upload the selection to Imgur</source>
-        <translation type="vanished">Seçimi Imgur&apos;a yükle</translation>
+        <translation type="vanished">Puja la selecció a Imgur</translation>
     </message>
 </context>
 <context>
@@ -1595,19 +1584,19 @@ Lütfen bunları yapılandırma dosyasında elle çözün.</translation>
         <location filename="../../src/widgets/infowindow.ui" line="14"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="117"/>
         <source>About</source>
-        <translation>Hakkında</translation>
+        <translation>Sobre</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="26"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="118"/>
         <source>Icon</source>
-        <translation>Simge</translation>
+        <translation>Icon</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="43"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="119"/>
         <source>License</source>
-        <translation>Lisans</translation>
+        <translation>Licença</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="56"/>
@@ -1619,7 +1608,7 @@ Lütfen bunları yapılandırma dosyasında elle çözün.</translation>
         <location filename="../../src/widgets/infowindow.ui" line="89"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="121"/>
         <source>Version</source>
-        <translation>Sürüm</translation>
+        <translation>Version</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="102"/>
@@ -1631,77 +1620,77 @@ Lütfen bunları yapılandırma dosyasında elle çözün.</translation>
         <location filename="../../src/widgets/infowindow.ui" line="115"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="123"/>
         <source>OS Info</source>
-        <translation>İşletim Sistemi</translation>
+        <translation>OS Info</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="128"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="124"/>
         <source>Copy Info</source>
-        <translation>Bilgileri Kopyala</translation>
+        <translation>Copiar Informações</translation>
     </message>
     <message>
         <source>Right Click</source>
-        <translation type="vanished">Sağ Tık</translation>
+        <translation type="vanished">Clic dret</translation>
     </message>
     <message>
         <source>Mouse Wheel</source>
-        <translation type="vanished">Fare Tekerleği</translation>
+        <translation type="vanished">Roda del ratolí</translation>
     </message>
     <message>
         <source>Move selection 1px</source>
-        <translation type="vanished">1px seçimini hareket ettir</translation>
+        <translation type="vanished">Mou la selecció 1 px</translation>
     </message>
     <message>
         <source>Resize selection 1px</source>
-        <translation type="vanished">1px seçimini yeniden boyutlandır</translation>
+        <translation type="vanished">Redimensiona la selecció 1 px</translation>
     </message>
     <message>
         <source>Quit capture</source>
-        <translation type="vanished">Çıkış</translation>
+        <translation type="vanished">Ix de la captura</translation>
     </message>
     <message>
         <source>Copy to clipboard</source>
-        <translation type="vanished">Panoya kopyala</translation>
+        <translation type="vanished">Copia al porta-retalls</translation>
     </message>
     <message>
         <source>Save selection as a file</source>
-        <translation type="vanished">Seçimi dosya olarak kaydet</translation>
+        <translation type="vanished">Guarda la selecció com a fitxer</translation>
     </message>
     <message>
         <source>Undo the last modification</source>
-        <translation type="vanished">Son değişikliği geri al</translation>
+        <translation type="vanished">Desfés l&apos;última modificació</translation>
     </message>
     <message>
         <source>Show color picker</source>
-        <translation type="vanished">Renk seçici göster</translation>
+        <translation type="vanished">Mostra el selector de color</translation>
     </message>
     <message>
         <source>Change the tool&apos;s thickness</source>
-        <translation type="vanished">Araç  kalınlığını değiştirin</translation>
-    </message>
-    <message>
-        <source>Available shortcuts in the screen capture mode.</source>
-        <translation type="vanished">Ekran yakalama modunda kullanılabilir kısayollar.</translation>
+        <translation type="vanished">Canvia el gruix de l&apos;eina</translation>
     </message>
     <message>
         <source>Key</source>
-        <translation type="vanished">Anahtar</translation>
+        <translation type="vanished">Tecla</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation type="vanished">Tanım</translation>
+        <translation type="vanished">Descripció</translation>
     </message>
     <message>
         <source>&lt;u&gt;&lt;b&gt;License&lt;/b&gt;&lt;/u&gt;</source>
-        <translation type="vanished">&lt;u&gt;&lt;b&gt;Lisans&lt;/b&gt;&lt;/u&gt;</translation>
+        <translation type="vanished">&lt;u&gt;&lt;b&gt;Llicència&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
     <message>
         <source>&lt;u&gt;&lt;b&gt;Version&lt;/b&gt;&lt;/u&gt;</source>
-        <translation type="vanished">&lt;u&gt;&lt;b&gt;Sürüm&lt;/b&gt;&lt;/u&gt;</translation>
+        <translation type="vanished">&lt;u&gt;&lt;b&gt;Versió&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
     <message>
         <source>&lt;u&gt;&lt;b&gt;Shortcuts&lt;/b&gt;&lt;/u&gt;</source>
-        <translation type="vanished">&lt;u&gt;&lt;b&gt;Kısayollar&lt;/b&gt;&lt;/u&gt;</translation>
+        <translation type="vanished">&lt;u&gt;&lt;b&gt;Dreceres&lt;/b&gt;&lt;/u&gt;</translation>
+    </message>
+    <message>
+        <source>Available shortcuts in the screen capture mode.</source>
+        <translation type="vanished">Dreceres disponibles en el mode de captura de pantalla.</translation>
     </message>
 </context>
 <context>
@@ -1709,12 +1698,12 @@ Lütfen bunları yapılandırma dosyasında elle çözün.</translation>
     <message>
         <location filename="../../src/tools/invert/inverttool.cpp" line="25"/>
         <source>Invert</source>
-        <translation>Ters çevir</translation>
+        <translation>Inverter</translation>
     </message>
     <message>
         <location filename="../../src/tools/invert/inverttool.cpp" line="35"/>
         <source>Set Inverter as the paint tool</source>
-        <translation>Boya aracı olarak Inverter&apos;ı ayarla</translation>
+        <translation>Defina o Inversor como a ferramenta de pintura</translation>
     </message>
 </context>
 <context>
@@ -1722,12 +1711,12 @@ Lütfen bunları yapılandırma dosyasında elle çözün.</translation>
     <message>
         <location filename="../../src/tools/line/linetool.cpp" line="22"/>
         <source>Line</source>
-        <translation>Çizgi</translation>
+        <translation>Linha</translation>
     </message>
     <message>
         <location filename="../../src/tools/line/linetool.cpp" line="32"/>
         <source>Set the Line as the paint tool</source>
-        <translation>Çizgiyi boyama aracı olarak ayarla</translation>
+        <translation>Usar a Linha como ferramenta de desenho</translation>
     </message>
 </context>
 <context>
@@ -1735,12 +1724,12 @@ Lütfen bunları yapılandırma dosyasında elle çözün.</translation>
     <message>
         <location filename="../../src/tools/marker/markertool.cpp" line="23"/>
         <source>Marker</source>
-        <translation>İşaretleyici</translation>
+        <translation>Marcador</translation>
     </message>
     <message>
         <location filename="../../src/tools/marker/markertool.cpp" line="33"/>
         <source>Set the Marker as the paint tool</source>
-        <translation>İşaretleyiciyi boyama aracı olarak ayarla</translation>
+        <translation>Usar o marcador como ferramenta de desenho</translation>
     </message>
 </context>
 <context>
@@ -1748,12 +1737,12 @@ Lütfen bunları yapılandırma dosyasında elle çözün.</translation>
     <message>
         <location filename="../../src/tools/move/movetool.cpp" line="23"/>
         <source>Move</source>
-        <translation>Oynat</translation>
+        <translation>Mover</translation>
     </message>
     <message>
         <location filename="../../src/tools/move/movetool.cpp" line="33"/>
         <source>Move the selection area</source>
-        <translation>Seçim alanını hareket ettir</translation>
+        <translation>Mover a área de seleção</translation>
     </message>
 </context>
 <context>
@@ -1761,12 +1750,12 @@ Lütfen bunları yapılandırma dosyasında elle çözün.</translation>
     <message>
         <location filename="../../src/tools/pencil/penciltool.cpp" line="18"/>
         <source>Pencil</source>
-        <translation>Kurşun Kalem</translation>
+        <translation>Pincel</translation>
     </message>
     <message>
         <location filename="../../src/tools/pencil/penciltool.cpp" line="28"/>
         <source>Set the Pencil as the paint tool</source>
-        <translation>Kurşun Kalemi çizim aracı olarak ayarla</translation>
+        <translation>Usar o Lápis como ferramenta de desenho</translation>
     </message>
 </context>
 <context>
@@ -1774,12 +1763,12 @@ Lütfen bunları yapılandırma dosyasında elle çözün.</translation>
     <message>
         <location filename="../../src/tools/pin/pintool.cpp" line="25"/>
         <source>Pin Tool</source>
-        <translation>Sabitleme Aracı</translation>
+        <translation>Ferramenta de fixação</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pintool.cpp" line="35"/>
         <source>Pin image on the desktop</source>
-        <translation>Resmi masaüstüne sabitle</translation>
+        <translation>Fixar imagem na área de trabalho</translation>
     </message>
 </context>
 <context>
@@ -1792,12 +1781,12 @@ Lütfen bunları yapılandırma dosyasında elle çözün.</translation>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="293"/>
         <source>Copy to clipboard</source>
-        <translation>Panoya kopyala</translation>
+        <translation>Copiar para área de transferência</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="300"/>
         <source>Save to file</source>
-        <translation>Dosyaya kaydet</translation>
+        <translation>Guardar no ficheiro</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="307"/>
@@ -1822,7 +1811,7 @@ Lütfen bunları yapılandırma dosyasında elle çözün.</translation>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="331"/>
         <source>Close</source>
-        <translation type="unfinished">Kapat</translation>
+        <translation>Fechar</translation>
     </message>
 </context>
 <context>
@@ -1830,7 +1819,7 @@ Lütfen bunları yapılandırma dosyasında elle çözün.</translation>
     <message>
         <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="26"/>
         <source>Pixelate</source>
-        <translation>Pikselleştir</translation>
+        <translation>Pixelador</translation>
     </message>
     <message>
         <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="36"/>
@@ -1839,117 +1828,113 @@ Lütfen bunları yapılandırma dosyasında elle çözün.</translation>
     </message>
     <message>
         <source>Set Pixelate as the paint tool</source>
-        <translation type="vanished">Piksellleştirmeyi boyama aracı olarak ayarla</translation>
+        <translation type="vanished">Estableix l&apos;eina de pixel·lament com a eina de dibuix</translation>
     </message>
 </context>
 <context>
     <name>QHotkey</name>
     <message>
         <source>Failed to register %1. Error: %2</source>
-        <translation type="vanished">%1 kaydedilemedi. Hata:%2</translation>
+        <translation type="vanished">No s&apos;ha pogut registrar %1. Error: %2</translation>
     </message>
     <message>
         <source>Failed to unregister %1. Error: %2</source>
-        <translation type="vanished">%1 kaydı silinemedi. Hata:%2</translation>
+        <translation type="vanished">No s&apos;ha pogut desregistrar %1. Error: %2</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="196"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="198"/>
+        <source>Capture saved to clipboard.</source>
+        <translation>Captura guardada na área de transferência.</translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="182"/>
+        <source>Error while saving to clipboard</source>
+        <translation>Erro ao guardar na área de transferência</translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="245"/>
+        <source>Save screenshot</source>
+        <translation>Guardar captura de ecrã</translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="273"/>
+        <source>Path copied to clipboard as </source>
+        <translation>Caminho copiado para a área de transferência como </translation>
+    </message>
+    <message>
+        <source>Saving canceled</source>
+        <translation type="vanished">Saving canceled</translation>
+    </message>
+    <message>
+        <source>Save canceled</source>
+        <translation type="vanished">Save canceled</translation>
+    </message>
+    <message>
+        <source>Capture is saved and copied to the clipboard as </source>
+        <translation type="vanished">La captura serà desada i copiada al porta-retalls com a </translation>
+    </message>
+    <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="284"/>
         <source>Save Error</source>
-        <translation>Kaydetme Hatası</translation>
+        <translation>Erro ao guardar</translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="62"/>
         <location filename="../../src/utils/screenshotsaver.cpp" line="268"/>
         <source>Capture saved as </source>
-        <translation>Yakalama farklı kaydedildi </translation>
-    </message>
-    <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="196"/>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="198"/>
-        <source>Capture saved to clipboard.</source>
-        <translation>Yakalama, panoya kaydedildi.</translation>
-    </message>
-    <message>
-        <source>Capture saved to clipboard</source>
-        <translation type="vanished">Yakalama panoya kaydedildi</translation>
-    </message>
-    <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="182"/>
-        <source>Error while saving to clipboard</source>
-        <translation>Panoya kaydederken hata oluştu</translation>
+        <translation>Captura guardada como </translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="66"/>
         <location filename="../../src/utils/screenshotsaver.cpp" line="277"/>
         <source>Error trying to save as </source>
-        <translation>Farklı kaydetmeye çalışılırken hata oluştu </translation>
-    </message>
-    <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="245"/>
-        <source>Save screenshot</source>
-        <translation>Ekran görüntüsünü kaydet</translation>
-    </message>
-    <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="273"/>
-        <source>Path copied to clipboard as </source>
-        <translation>Dosya yolu, panoya şu şekilde kopyalandı: </translation>
-    </message>
-    <message>
-        <source>Saving canceled</source>
-        <translation type="vanished">Kaydetme iptal edildi</translation>
-    </message>
-    <message>
-        <source>Save canceled</source>
-        <translation type="vanished">Kaydetme iptal edildi</translation>
-    </message>
-    <message>
-        <source>Capture is saved and copied to the clipboard as </source>
-        <translation type="vanished">Yakalama kaydedilir ve panoya şu adla kopyalanır </translation>
+        <translation>Erro ao tentar guardar como </translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="179"/>
         <source>Unable to connect via DBus</source>
-        <translation>DBus ile bağlanılamıyor</translation>
+        <translation>Não foi possível ligar via DBus</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="196"/>
         <source>Powerful yet simple to use screenshot software.</source>
-        <translation>Güçlü ve kullanımı kolay ekran görüntüsü yazılımı.</translation>
+        <translation>Software de captura de ecrã poderoso, mas simples de usar.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="197"/>
         <source>See</source>
-        <translation>Bak</translation>
+        <translation>Ver</translation>
     </message>
     <message>
         <source>Capture the entire desktop.</source>
-        <translation type="vanished">Masaüstünün tamamını yakalayın.</translation>
+        <translation type="vanished">Captureu l&apos;escriptori sencer.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="203"/>
         <source>Open the capture launcher.</source>
-        <translation>Yakalama başlatıcısını açın.</translation>
+        <translation>Abrir a ferramente de captura.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="206"/>
         <source>Start a manual capture in GUI mode.</source>
-        <translation>GUI modunda elle yakalama başlatın.</translation>
+        <translation>Iniciar uma captura manual no modo GUI.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="208"/>
         <source>Configure</source>
-        <translation>Yapılandır</translation>
+        <translation>Configurar</translation>
     </message>
     <message>
         <source>Capture a single screen.</source>
-        <translation type="vanished">Tek bir ekran yakalayın.</translation>
+        <translation type="vanished">Captura una sola pantalla.</translation>
     </message>
     <message>
         <source>Path where the capture will be saved</source>
-        <translation type="vanished">Yakalamanın kaydedileceği yol</translation>
+        <translation type="vanished">Camí on es desarà la captura</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="201"/>
@@ -1964,57 +1949,57 @@ Lütfen bunları yapılandırma dosyasında elle çözün.</translation>
     <message>
         <location filename="../../src/main.cpp" line="216"/>
         <source>Existing directory or new file to save to</source>
-        <translation>Kaydedilecek mevcut dizin veya yeni dosya</translation>
+        <translation>Diretório existente ou novo ficheiro para guardar</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="219"/>
         <source>Save the capture to the clipboard</source>
-        <translation>Yakalamayı panoya kaydedin</translation>
+        <translation>Guardar a captura na Área de Transferência</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="221"/>
         <source>Pin the capture to the screen</source>
-        <translation>Yakalamayı ekrana sabitleyin</translation>
+        <translation>Fixar a captura no ecrã</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="223"/>
         <source>Upload screenshot</source>
-        <translation>Upload screenshot</translation>
+        <translation>Enviar captura de ecrã</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="225"/>
         <source>Delay time in milliseconds</source>
-        <translation>Milisaniye cinsinden gecikme süresi</translation>
+        <translation>Tempo do atraso em milissegundos</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="230"/>
         <source>Repeat screenshot with previously selected region</source>
-        <translation>Ekran görüntüsünü önceden seçilen bölge ile tekrarlayın</translation>
+        <translation>Repetir captura de ecrã com a região selecionada anteriormente</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="233"/>
         <source>Screenshot region to select</source>
-        <translation>Seçilecek ekran görüntüsü bölgesi</translation>
+        <translation>Região da captura de ecrã a ser selecionada</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="236"/>
         <source>Set the filename pattern</source>
-        <translation>Dosya adı desenini ayarlayın</translation>
+        <translation>Defina o padrão do nome do ficheiro</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="240"/>
         <source>Accept capture as soon as a selection is made</source>
-        <translation>Seçim yapılır yapılmaz yakalamayı kabul et</translation>
+        <translation>Aceitar captura assim que uma seleção for feita</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="242"/>
         <source>Enable or disable the trayicon</source>
-        <translation>Tepsi simgesini etkinleştirin veya devre dışı bırakın</translation>
+        <translation>Ativar ou desativar o ícone de bandeja</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="246"/>
         <source>Enable or disable run at startup</source>
-        <translation>Başlangıçta çalışmayı etkinleştirin veya devre dışı bırakın</translation>
+        <translation>Ativar ou desativar a execução na inicialização</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="250"/>
@@ -2024,66 +2009,66 @@ Lütfen bunları yapılandırma dosyasında elle çözün.</translation>
     <message>
         <location filename="../../src/main.cpp" line="253"/>
         <source>Check the configuration for errors</source>
-        <translation>Yapılandırma hatalarını kontrol et</translation>
+        <translation>Verifique se há erros na configuração</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="256"/>
         <source>Show the help message in the capture mode</source>
-        <translation>Çekim modunda yardım mesajını göster</translation>
+        <translation>Mostrar a mensagem de ajuda no modo captura</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="259"/>
         <source>Define the main UI color</source>
-        <translation>Ana kullanıcı arayüzü rengini tanımlayın</translation>
+        <translation>Defina a cor principal da IU</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="263"/>
         <source>Define the contrast UI color</source>
-        <translation>Kontrast kullanıcı arayüzü rengini tanımlayın</translation>
+        <translation>Defina a cor de contraste da IU</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="266"/>
         <source>Print raw PNG capture</source>
-        <translation>Ham PNG yakalamayı yazdırın</translation>
+        <translation>Imprimir captura PNG bruta</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="269"/>
         <source>Print geometry of the selection in the format WxH+X+Y. Does nothing if raw is specified</source>
-        <translation>Seçimin geometrisini WxH+X+Y biçiminde yazdırır. Raw belirtilirse hiçbir şey yapmaz</translation>
+        <translation>Imprime a geometria da seleção no formato WxH+X+Y. Não faz nada se raw for especificado</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="273"/>
         <source>Define the screen to capture (starting from 0)</source>
-        <translation>Yakalanacak ekranı tanımla (0&apos;dan başlayarak)</translation>
+        <translation>Definir o ecrã a ser capturado (a partir de 0)</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="293"/>
         <source>Invalid delay, it must be a number greater than 0</source>
-        <translation>Geçersiz gecikme, 0&apos;dan büyük bir sayı olmalıdır</translation>
+        <translation>Atraso inválido, deve ser um número maior que 0</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="296"/>
         <source>Invalid region, use &apos;WxH+X+Y&apos; or &apos;all&apos; or &apos;screen0/screen1/...&apos;.</source>
-        <translation>Geçersiz bölge, &apos;WxH+X+Y&apos; veya &apos;tümü&apos; veya &apos;screen0/screen1/...&apos; kullanın.</translation>
+        <translation>Região inválida, use &apos;WxH+X+Y&apos; ou &apos;all&apos; ou &apos;screen0/screen1/...&apos;.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="309"/>
         <source>Invalid path, must be an existing directory or a new file in an existing directory</source>
-        <translation>Geçersiz yol, mevcut bir dizin veya mevcut bir dizinde yeni bir dosya olmalıdır</translation>
+        <translation>Caminho inválido, deve ser um diretório existente ou um novo ficheiro em um diretório existente</translation>
     </message>
     <message>
         <source>Define the screen to capture</source>
-        <translation type="vanished">Yakalanacak ekranı tanımlayın</translation>
+        <translation type="vanished">Define the screen to capture</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="274"/>
         <source>default: screen containing the cursor</source>
-        <translation>öntanımlı: imleci içeren ekran</translation>
+        <translation>padrão: ecrã contendo o cursor</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="275"/>
         <source>Screen number</source>
-        <translation>Ekran numarası</translation>
+        <translation>Número do ecrã</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="284"/>
@@ -2094,68 +2079,68 @@ Lütfen bunları yapılandırma dosyasında elle çözün.</translation>
 - #RRRRGGGGBBBB
 - Named colors like &apos;blue&apos; or &apos;red&apos;
 You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
-        <translation>Geçersiz renk, bu seçenek aşağıdaki biçimleri destekler:
-- #RGB (R, G, ve B onaltılık tabanda rakamlardır)
+        <translation>Cor inválida, esta bandeira suporta os seguintes formatos:
+- #RGB (sendo R, G, e B simbolos hexadecimal simples)
 - #RRGGBB
 - #RRRGGGBBB
 - #RRRRGGGGBBBB
-- &apos;blue&apos; veya &apos;red&apos; gibi adlandırılmış renkler
-&apos;#&apos; işaretini &apos;\#FFF&apos; şeklinde kaçırmanız gerekebilir</translation>
+- Nome de cores como &apos;azul&apos; ou &apos;vermelho&apos;
+Você pode ter que invalidar o sinal &apos;#&apos;, por exemplo &apos;\#FFF&apos;</translation>
     </message>
     <message>
         <source>Invalid delay, it must be higher than 0</source>
-        <translation type="vanished">Geçersiz gecikme, 0&apos;dan yüksek olmalıdır</translation>
+        <translation type="vanished">Invalid delay, it must be higher than 0</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="295"/>
         <source>Invalid screen number, it must be non negative</source>
-        <translation>Geçersiz ekran numarası, negatif olmamalıdır</translation>
+        <translation>Número de ecrã inválido, deve ser maior que zero</translation>
     </message>
     <message>
         <source>Invalid path, it must be a real path in the system</source>
-        <translation type="vanished">Geçersiz yol, sistemde gerçek bir yol olmalıdır</translation>
+        <translation type="vanished">Invalid path, it must be a real path in the system</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="322"/>
         <source>Invalid value, it must be defined as &apos;true&apos; or &apos;false&apos;</source>
-        <translation>Geçersiz değer, &apos;true&apos; veya &apos;false&apos; olarak tanımlanmalıdır</translation>
+        <translation>Valor inválido, deve ser definido como &apos;verdadeiro&apos; ou &apos;falso&apos;</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/openwithprogram.cpp" line="30"/>
         <source>Error</source>
-        <translation>Hata</translation>
+        <translation>Erro</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/openwithprogram.cpp" line="31"/>
         <source>Unable to write in</source>
-        <translation>Yazılamadı</translation>
+        <translation>Não foi possível escrever em</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="151"/>
         <source>Requested screen exceeds screen count</source>
-        <translation>İstenen ekran, ekran sayısını aşıyor</translation>
+        <translation>O ecrã solicitado excede a contagem de ecrãs</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="390"/>
         <source>Full screen screenshot pinned to screen</source>
-        <translation>Ekrana sabitlenmiş tam ekran ekran görüntüsü</translation>
+        <translation>Captura de ecrã inteiro fixado no ecrã</translation>
     </message>
     <message>
         <source>URL copied to clipboard.</source>
-        <translation type="vanished">URL panoya kopyalandı.</translation>
+        <translation type="obsolete">L&apos;URL s&apos;ha copiat al porta-retalls.</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="54"/>
         <source>Options</source>
-        <translation>Seçenekler</translation>
+        <translation>Opções</translation>
     </message>
     <message>
         <source>Arguments</source>
-        <translation type="vanished">Argümanlar</translation>
+        <translation type="vanished">Arguments</translation>
     </message>
     <message>
         <source>arguments</source>
-        <translation type="vanished">argümanlar</translation>
+        <translation type="vanished">arguments</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="68"/>
@@ -2170,99 +2155,99 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="330"/>
         <source>Usage</source>
-        <translation>Kullanım</translation>
+        <translation>Uso</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="330"/>
         <source>options</source>
-        <translation>seçenekler</translation>
+        <translation>opções</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="337"/>
         <source>Per default runs Flameshot in the background and adds a tray icon for configuration.</source>
-        <translation>Öntanımlı olarak arka planda Flameshot çalıştırır ve yapılandırma için bir tepsi simgesi ekler.</translation>
+        <translation>Por padrão, o Flameshot é executado em segundo plano e adiciona um ícone de bandeja para configuração.</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="71"/>
         <source>Hello, I&apos;m here! Click icon in the tray to take a screenshot or click with a right button to see more options.</source>
-        <translation>Merhaba ben burdayım! Ekran görüntüsü almak için tepsideki simgeye tıklayın veya daha fazla seçenek görmek için sağ düğmeyle tıklayın.</translation>
+        <translation>Ola, eu estou aqui! Clique no ícone na áre de notificação para fazer uma captura de ecrã ou clique com o botão direito para ver mais opções.</translation>
     </message>
     <message>
         <source>Toggle side panel</source>
-        <translation type="vanished">Yan paneli aç / kapat</translation>
+        <translation type="vanished">Toggle side panel</translation>
     </message>
     <message>
         <source>Resize selection left 1px</source>
-        <translation type="vanished">Seçimi sola 1 piksel yeniden boyutlandır</translation>
+        <translation type="vanished">Resize selection left 1px</translation>
     </message>
     <message>
         <source>Resize selection right 1px</source>
-        <translation type="vanished">Seçimi sağa 1 piksel yeniden boyutlandır</translation>
+        <translation type="vanished">Resize selection right 1px</translation>
     </message>
     <message>
         <source>Resize selection up 1px</source>
-        <translation type="vanished">Seçimi yukarı 1 piksel yeniden boyutlandır</translation>
+        <translation type="vanished">Resize selection up 1px</translation>
     </message>
     <message>
         <source>Resize selection down 1px</source>
-        <translation type="vanished">Seçimi aşağı 1 piksel yeniden boyutlandır</translation>
+        <translation type="vanished">Resize selection down 1px</translation>
     </message>
     <message>
         <source>Select entire screen</source>
-        <translation type="vanished">Tüm ekranı seçin</translation>
+        <translation type="vanished">Select entire screen</translation>
     </message>
     <message>
         <source>Move selection left 1px</source>
-        <translation type="vanished">Seçimi 1 piksel sola taşı</translation>
+        <translation type="vanished">Move selection left 1px</translation>
     </message>
     <message>
         <source>Move selection right 1px</source>
-        <translation type="vanished">Seçimi 1 piksel sağa taşı</translation>
+        <translation type="vanished">Move selection right 1px</translation>
     </message>
     <message>
         <source>Move selection up 1px</source>
-        <translation type="vanished">Seçimi 1 piksel yukarı taşı</translation>
+        <translation type="vanished">Move selection up 1px</translation>
     </message>
     <message>
         <source>Move selection down 1px</source>
-        <translation type="vanished">Seçimi 1 piksel aşağı taşı</translation>
+        <translation type="vanished">Move selection down 1px</translation>
     </message>
     <message>
         <source>Commit text in text area</source>
-        <translation type="vanished">Metin alanındaki metni kaydet</translation>
+        <translation type="vanished">Commit text in text area</translation>
     </message>
     <message>
         <source>Delete current tool</source>
-        <translation type="vanished">Geçerli aracı sil</translation>
+        <translation type="vanished">Delete current tool</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="199"/>
         <source>Quit capture</source>
-        <translation>Çıkış</translation>
+        <translation>Sair da captura</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="207"/>
         <source>Screenshot history</source>
-        <translation>Ekran görüntüsü geçmişi</translation>
+        <translation>Histórico de captura de ecrã</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="210"/>
         <source>Capture screen</source>
-        <translation>Ekran görüntüsü al</translation>
+        <translation>Captura de ecrã</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="217"/>
         <source>Show color picker</source>
-        <translation>Renk seçici göster</translation>
+        <translation>Mostrar seletor de cores</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="218"/>
         <source>Change the tool&apos;s size</source>
-        <translation>Aracın boyutunu değiştir</translation>
+        <translation>Alterar o tamanho da ferramenta</translation>
     </message>
     <message>
         <source>Change the tool&apos;s thickness</source>
-        <translation type="vanished">Araç kalınlığını değiştir</translation>
+        <translation type="obsolete">Canvia el gruix de l&apos;eina</translation>
     </message>
 </context>
 <context>
@@ -2270,12 +2255,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/rectangle/rectangletool.cpp" line="22"/>
         <source>Rectangle</source>
-        <translation>Dikdörtgen</translation>
+        <translation>Retângulo</translation>
     </message>
     <message>
         <location filename="../../src/tools/rectangle/rectangletool.cpp" line="32"/>
         <source>Set the Rectangle as the paint tool</source>
-        <translation>Dikdörtgeni boyama aracı olarak ayarla</translation>
+        <translation>Usar o Retângulo como ferramenta de desenho</translation>
     </message>
 </context>
 <context>
@@ -2283,12 +2268,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/redo/redotool.cpp" line="23"/>
         <source>Redo</source>
-        <translation>Tekrarla</translation>
+        <translation>Refazer</translation>
     </message>
     <message>
         <location filename="../../src/tools/redo/redotool.cpp" line="33"/>
         <source>Redo the next modification</source>
-        <translation>Sonraki değişikliği tekrarla</translation>
+        <translation>Refazer última modificação</translation>
     </message>
 </context>
 <context>
@@ -2296,23 +2281,23 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/save/savetool.cpp" line="24"/>
         <source>Save</source>
-        <translation>Kaydet</translation>
+        <translation>Guardar</translation>
     </message>
     <message>
         <location filename="../../src/tools/save/savetool.cpp" line="34"/>
         <source>Save screenshot to a file</source>
-        <translation>Ekran görüntüsünü bir dosyaya kaydet</translation>
+        <translation>Guardar captura de ecrã num ficheiro</translation>
     </message>
     <message>
         <source>Save the capture</source>
-        <translation type="vanished">Yakalamayı kaydet</translation>
+        <translation type="vanished">Guarda la captura</translation>
     </message>
 </context>
 <context>
     <name>ScreenGrabber</name>
     <message>
         <source>Unable to detect desktop environment (GNOME? KDE? Sway? ...)</source>
-        <translation type="vanished">Masaüstü ortamı algılanamıyor (GNOME? KDE? Sway? ...)</translation>
+        <translation type="vanished">Unable to detect desktop environment (GNOME? KDE? Sway? ...)</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="54"/>
@@ -2337,12 +2322,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="195"/>
         <source>Hint: try setting the XDG_CURRENT_DESKTOP environment variable.</source>
-        <translation>İpucu: XDG_CURRENT_DESKTOP ortam değişkenini ayarlamayı deneyin.</translation>
+        <translation>Dica: tente definir a variável de ambiente XDG_CURRENT_DESKTOP.</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="200"/>
         <source>Unable to capture screen</source>
-        <translation>Ekran resmi alınamadı</translation>
+        <translation>Não foi possível capturar o ecrã</translation>
     </message>
 </context>
 <context>
@@ -2350,12 +2335,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/selection/selectiontool.cpp" line="25"/>
         <source>Rectangular Selection</source>
-        <translation>Dikdörtgen Seçim</translation>
+        <translation>Seleção Retangular</translation>
     </message>
     <message>
         <location filename="../../src/tools/selection/selectiontool.cpp" line="35"/>
         <source>Set Selection as the paint tool</source>
-        <translation>Seçimi boyama aracı olarak ayarla</translation>
+        <translation>Usar o Selecionador como ferramenta de desenho</translation>
     </message>
 </context>
 <context>
@@ -2363,27 +2348,27 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="18"/>
         <source>Set Shortcut</source>
-        <translation>Kısayol Ayarla</translation>
+        <translation>Definir atalho</translation>
     </message>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="24"/>
         <source>Enter new shortcut to change </source>
-        <translation>Değiştirmek için yeni kısayolu girin </translation>
+        <translation>Insira um novo atalho para definir </translation>
     </message>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="38"/>
         <source>Press Esc to cancel or ⌘+Backspace to disable the keyboard shortcut.</source>
-        <translation>İptal etmek için Esc tuşuna veya klavye kısayolunu devre dışı bırakmak için ⌘+Backspace tuşuna basın.</translation>
+        <translation>Pressione Esc para cancelar ou ⌘+Backspace para desativar o atalho de teclado.</translation>
     </message>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="42"/>
         <source>Press Esc to cancel or Backspace to disable the keyboard shortcut.</source>
-        <translation>İptal etmek için Esc tuşuna veya klavye kısayolunu devre dışı bırakmak için Geri tuşuna basın.</translation>
+        <translation>Pressione Esc para cancelar ou Backspace para desabilitar o atalho de teclado.</translation>
     </message>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="47"/>
         <source>Flameshot must be restarted for changes to take effect.</source>
-        <translation>Değişikliklerin etkili olması için Flameshot yeniden başlatılmalıdır.</translation>
+        <translation>O Flameshot deve ser reiniciado para que as alterações entrem em vigor.</translation>
     </message>
 </context>
 <context>
@@ -2391,52 +2376,52 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="30"/>
         <source>Hot Keys</source>
-        <translation>Kısayol Tuşları</translation>
+        <translation>Teclas de atalho</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="53"/>
         <source>Available shortcuts in the screen capture mode.</source>
-        <translation>Ekran yakalama modunda kullanılabilir kısayollar.</translation>
+        <translation>Atalhos disponíveis no modo de captura de ecrã.</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="64"/>
         <source>Description</source>
-        <translation>Açıklama</translation>
+        <translation>Descrição</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="64"/>
         <source>Key</source>
-        <translation>Tuş</translation>
+        <translation>Tecla</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="167"/>
         <source>Left Double-click</source>
-        <translation>Sol çift tıklama</translation>
+        <translation>Clique Duplo com o Botão Esquerdo</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="174"/>
         <source>Toggle side panel</source>
-        <translation>Yan paneli aç/kapat</translation>
+        <translation>Alternar painel lateral</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="175"/>
         <source>Resize selection left 1px</source>
-        <translation>Seçimi sola 1 piksel yeniden boyutlandır</translation>
+        <translation>Redimensionar seleção para a esquerda em 1px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="176"/>
         <source>Resize selection right 1px</source>
-        <translation>Seçimi sağa 1 piksel yeniden boyutlandır</translation>
+        <translation>Redimensionar seleção para a direita em 1px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="177"/>
         <source>Resize selection up 1px</source>
-        <translation>Seçimi yukarı 1 piksel yeniden boyutlandır</translation>
+        <translation>Redimensionar a seleção para cima em 1px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="178"/>
         <source>Resize selection down 1px</source>
-        <translation>Seçimi aşağı 1 piksel yeniden boyutlandır</translation>
+        <translation>Redimensionar seleção para baixo em 1px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="180"/>
@@ -2461,32 +2446,32 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="187"/>
         <source>Select entire screen</source>
-        <translation>Tüm ekranı seç</translation>
+        <translation>Selecionar o ecrã inteiro</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="188"/>
         <source>Move selection left 1px</source>
-        <translation>Seçimi 1 piksel sola taşı</translation>
+        <translation>Mover seleção para a esquerda em 1px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="189"/>
         <source>Move selection right 1px</source>
-        <translation>Seçimi 1 piksel sağa taşı</translation>
+        <translation>Mover seleção para a direita em 1px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="190"/>
         <source>Move selection up 1px</source>
-        <translation>Seçimi 1 piksel yukarı taşı</translation>
+        <translation>Mover seleção para cima em 1px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="191"/>
         <source>Move selection down 1px</source>
-        <translation>Seçimi 1 piksel aşağı taşı</translation>
+        <translation>Mover seleção para baixo 1px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="192"/>
         <source>Commit text in text area</source>
-        <translation>Metin alanındaki metni kaydet</translation>
+        <translation>Confirmar texto na área de texto</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="194"/>
@@ -2500,37 +2485,37 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     </message>
     <message>
         <source>Delete current tool</source>
-        <translation type="vanished">Geçerli aracı sil</translation>
+        <translation type="obsolete">Delete current tool</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="204"/>
         <source>Capture screen</source>
-        <translation>Ekran görüntüsü al</translation>
+        <translation>Ecrã de captura</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="205"/>
         <source>Screenshot history</source>
-        <translation>Ekran görüntüsü geçmişi</translation>
+        <translation>Histórico de captura de ecrã</translation>
     </message>
 </context>
 <context>
     <name>SidePanelWidget</name>
     <message>
         <source>Active thickness:</source>
-        <translation type="vanished">Etkin kalınlık:</translation>
+        <translation type="vanished">Active thickness:</translation>
     </message>
     <message>
         <source>Active color:</source>
-        <translation type="vanished">Etkin renk:</translation>
+        <translation type="vanished">Active color:</translation>
     </message>
     <message>
         <source>Press ESC to cancel</source>
-        <translation type="vanished">İptal etmek için ESC&apos;ye basın</translation>
+        <translation type="vanished">Press ESC to cancel</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="37"/>
         <source>Active tool size: </source>
-        <translation>Etkin araç boyutu: </translation>
+        <translation>Tamanho ativo da ferramenta: </translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="57"/>
@@ -2540,7 +2525,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="78"/>
         <source>Grab Color</source>
-        <translation>Rengi Yakala</translation>
+        <translation>Pegar Cor</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="85"/>
@@ -2553,12 +2538,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/sizedecrease/sizedecreasetool.cpp" line="37"/>
         <source>Decrease Tool Size</source>
-        <translation>Araç Boyutunu Küçült</translation>
+        <translation>Diminuir tamanho da ferramenta</translation>
     </message>
     <message>
         <location filename="../../src/tools/sizedecrease/sizedecreasetool.cpp" line="47"/>
         <source>Decrease the size of the other tools</source>
-        <translation>Diğer araçların boyutunu küçült</translation>
+        <translation>Diminui o tamanho das outras ferramentas</translation>
     </message>
 </context>
 <context>
@@ -2566,27 +2551,27 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/sizeincrease/sizeincreasetool.cpp" line="37"/>
         <source>Increase Tool Size</source>
-        <translation>Araç Boyutunu Büyüt</translation>
+        <translation>Aumentar tamanho da ferramenta</translation>
     </message>
     <message>
         <location filename="../../src/tools/sizeincrease/sizeincreasetool.cpp" line="47"/>
         <source>Increase the size of the other tools</source>
-        <translation>Diğer araçların boyutunu büyüt</translation>
+        <translation>Aumenta o tamanho das outras ferramentas</translation>
     </message>
 </context>
 <context>
     <name>SizeIndicatorTool</name>
     <message>
         <source>Selection Size Indicator</source>
-        <translation type="vanished">Seçim Boyutu Göstergesi</translation>
+        <translation type="vanished">Indicador de mida de selecció</translation>
     </message>
     <message>
         <source>Show X and Y dimensions of the selection</source>
-        <translation type="vanished">Seçimin X ve Y boyutlarını göster</translation>
+        <translation type="vanished">Show X and Y dimensions of the selection</translation>
     </message>
     <message>
         <source>Show the dimensions of the selection (X Y)</source>
-        <translation type="vanished">Seçimin boyutlarını gösterir (X Y)</translation>
+        <translation type="vanished">Mostra les mides de la selecció (X Y)</translation>
     </message>
 </context>
 <context>
@@ -2594,107 +2579,107 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="37"/>
         <source>Century (00-99)</source>
-        <translation>Yüzyıl (00-99)</translation>
+        <translation>Século (00-99)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="38"/>
         <source>Year (00-99)</source>
-        <translation>Yıl (00-99)</translation>
+        <translation>Ano (00-99)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="39"/>
         <source>Year (2000)</source>
-        <translation>Yıl (2000)</translation>
+        <translation>Ano (2000)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="42"/>
         <source>Month Name (jan)</source>
-        <translation>Ay Adı (oca)</translation>
+        <translation>Nome do mês (jan)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="43"/>
         <source>Month Name (january)</source>
-        <translation>Ay Adı (ocak)</translation>
+        <translation>Nome do mês (janeiro)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="45"/>
         <source>Month (01-12)</source>
-        <translation>Ay (01-12)</translation>
+        <translation>Mês (01-12)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="46"/>
         <source>Week Day (1-7)</source>
-        <translation>Haftanın Günü (1-7)</translation>
+        <translation>Dia da semana (1-7)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="47"/>
         <source>Week (01-53)</source>
-        <translation>Hafta (01-53)</translation>
+        <translation>Semana (01-53)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="50"/>
         <source>Day Name (mon)</source>
-        <translation>Gün Adı (pzt)</translation>
+        <translation>Nome do dia (seg)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="51"/>
         <source>Day Name (monday)</source>
-        <translation>Gün Adı (pazartesi)</translation>
+        <translation>Nome do dia (segunda)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="53"/>
         <source>Day (01-31)</source>
-        <translation>Gün (01-31)</translation>
+        <translation>Dia (01-31)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="54"/>
         <source>Day of Month (1-31)</source>
-        <translation>Ayın Günü (1-31)</translation>
+        <translation>Dia do Mês (1-31)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="55"/>
         <source>Day (001-366)</source>
-        <translation>Gün (001-366)</translation>
-    </message>
-    <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="58"/>
-        <source>Time (%H-%M-%S)</source>
-        <translation>Zaman (%H-%M-%S)</translation>
-    </message>
-    <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="59"/>
-        <source>Time (%H-%M)</source>
-        <translation>Zaman (%H-%M)</translation>
+        <translation>Dia (001-366)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="61"/>
         <source>Hour (00-23)</source>
-        <translation>Saat (00-23)</translation>
+        <translation>Hora (00-23)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="62"/>
         <source>Hour (01-12)</source>
-        <translation>Saat (01-12)</translation>
+        <translation>Hora (01-12)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="63"/>
         <source>Minute (00-59)</source>
-        <translation>Dakika (00-59)</translation>
+        <translation>Minuto (00-59)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="64"/>
         <source>Second (00-59)</source>
-        <translation>Saniye (00-59)</translation>
+        <translation>Segundos (00-59)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="67"/>
         <source>Full Date (%m/%d/%y)</source>
-        <translation>Tam Tarih (%d/%m/%y)</translation>
+        <translation>Data Completa (%m/%d/%y)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="69"/>
         <source>Full Date (%Y-%m-%d)</source>
-        <translation>Tam Tarih (%d-%m-%Y)</translation>
+        <translation>Data Completa (%Y-%m-%d)</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/strftimechooserwidget.cpp" line="58"/>
+        <source>Time (%H-%M-%S)</source>
+        <translation>Tempo (%H-%M-%S)</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/strftimechooserwidget.cpp" line="59"/>
+        <source>Time (%H-%M)</source>
+        <translation>Tempo (%H-%M)</translation>
     </message>
 </context>
 <context>
@@ -2702,7 +2687,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/utils/systemnotification.cpp" line="42"/>
         <source>Flameshot Info</source>
-        <translation>Flameshot Hakkında</translation>
+        <translation>Informações do Flameshot</translation>
     </message>
 </context>
 <context>
@@ -2710,37 +2695,37 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/text/textconfig.cpp" line="46"/>
         <source>StrikeOut</source>
-        <translation>Üstçizgi</translation>
+        <translation>Sobrescrito</translation>
     </message>
     <message>
         <location filename="../../src/tools/text/textconfig.cpp" line="55"/>
         <source>Underline</source>
-        <translation>Altçizgi</translation>
+        <translation>Sublinhado</translation>
     </message>
     <message>
         <location filename="../../src/tools/text/textconfig.cpp" line="64"/>
         <source>Bold</source>
-        <translation>Kalın</translation>
+        <translation>Negrito</translation>
     </message>
     <message>
         <location filename="../../src/tools/text/textconfig.cpp" line="73"/>
         <source>Italic</source>
-        <translation>Eğik</translation>
+        <translation>Itálico</translation>
     </message>
     <message>
         <location filename="../../src/tools/text/textconfig.cpp" line="83"/>
         <source>Left Align</source>
-        <translation>Sola Hizala</translation>
+        <translation>Alinhamento à Esquerda</translation>
     </message>
     <message>
         <location filename="../../src/tools/text/textconfig.cpp" line="92"/>
         <source>Center Align</source>
-        <translation>Ortaya Hizala</translation>
+        <translation>Alinhamento Central</translation>
     </message>
     <message>
         <location filename="../../src/tools/text/textconfig.cpp" line="101"/>
         <source>Right Align</source>
-        <translation>Sağa Hizala</translation>
+        <translation>Alinhamento à Direita</translation>
     </message>
 </context>
 <context>
@@ -2748,12 +2733,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/text/texttool.cpp" line="73"/>
         <source>Text</source>
-        <translation>Metin</translation>
+        <translation>Texto</translation>
     </message>
     <message>
         <location filename="../../src/tools/text/texttool.cpp" line="97"/>
         <source>Add text to your capture</source>
-        <translation>Bilgisayardan yazı ekle</translation>
+        <translation>Adicionar texto à captura</translation>
     </message>
 </context>
 <context>
@@ -2761,42 +2746,42 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="100"/>
         <source>&amp;Take Screenshot</source>
-        <translation>&amp;Ekran Görüntüsü Al</translation>
+        <translation>&amp;Tirar Captura de Ecrã</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="118"/>
         <source>&amp;Open Launcher</source>
-        <translation>&amp;Başlatıcıyı Aç</translation>
+        <translation>&amp;Abrir Lançador</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="123"/>
         <source>&amp;Configuration</source>
-        <translation>&amp;Ayarlar</translation>
+        <translation>&amp;Configuração</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="128"/>
         <source>&amp;About</source>
-        <translation>&amp;Hakkında</translation>
+        <translation>&amp;Sobre</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="133"/>
         <source>Check for updates</source>
-        <translation>Güncellemeleri denetle</translation>
+        <translation>Verifique se há atualizações</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="144"/>
         <source>New version %1 is available</source>
-        <translation>Yeni %1 sürümü var</translation>
+        <translation>Nova versão %1 está disponível</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="149"/>
         <source>&amp;Quit</source>
-        <translation>&amp;Çıkış</translation>
+        <translation>&amp;Sair</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="153"/>
         <source>&amp;Latest Uploads</source>
-        <translation>&amp;Son Yüklenenler</translation>
+        <translation>&amp;Últimos Envios</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="159"/>
@@ -2808,37 +2793,37 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <name>UIcolorEditor</name>
     <message>
         <source>UI Color Editor</source>
-        <translation type="vanished">Kullanıcı Arayüzü Renk Düzenleyicisi</translation>
+        <translation type="vanished">Editor de color de la interfície</translation>
     </message>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="88"/>
         <source>Change the color moving the selectors and see the changes in the preview buttons.</source>
-        <translation>Seçicileri hareket ettiren rengi değiştirin ve ön izleme düğmelerindeki değişiklikleri görün.</translation>
+        <translation>Modifique a cor movendo os seletores e veja as mudanças nos botões de preview.</translation>
     </message>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="99"/>
         <source>Select a Button to modify it</source>
-        <translation>Değiştirmek için bir düğme seçin</translation>
+        <translation>Selecione um botão para modificá-lo</translation>
     </message>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="109"/>
         <source>Main Color</source>
-        <translation>Ana Renk</translation>
+        <translation>Cor Principal</translation>
     </message>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="113"/>
         <source>Click on this button to set the edition mode of the main color.</source>
-        <translation>Ana rengin düzenleme modunu ayarlamak için bu düğmeye tıklayın.</translation>
+        <translation>Clique neste botão para setar o modo de edição da cor principal.</translation>
     </message>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="124"/>
         <source>Contrast Color</source>
-        <translation>Kontrast Renk</translation>
+        <translation>Cor de Contraste</translation>
     </message>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="129"/>
         <source>Click on this button to set the edition mode of the contrast color.</source>
-        <translation>Kontrast renginin düzenleme modunu ayarlamak için bu düğmeye tıklayın.</translation>
+        <translation>Clique neste botão para setar o modo de edição da cor de contraste.</translation>
     </message>
 </context>
 <context>
@@ -2846,12 +2831,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/undo/undotool.cpp" line="23"/>
         <source>Undo</source>
-        <translation>Geri al</translation>
+        <translation>Desfazer</translation>
     </message>
     <message>
         <location filename="../../src/tools/undo/undotool.cpp" line="33"/>
         <source>Undo the last modification</source>
-        <translation>Son değişikliği geri al</translation>
+        <translation>Desfazer a última modificação</translation>
     </message>
 </context>
 <context>
@@ -2859,22 +2844,22 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/widgets/updatenotificationwidget.cpp" line="70"/>
         <source>New Flameshot version %1 is available</source>
-        <translation>Yeni Flameshot %1 sürümü mevcut</translation>
+        <translation>Nova versão Flameshot %1 está disponível</translation>
     </message>
     <message>
         <location filename="../../src/widgets/updatenotificationwidget.cpp" line="123"/>
         <source>Ignore</source>
-        <translation>Yok say</translation>
+        <translation>Ignorar</translation>
     </message>
     <message>
         <location filename="../../src/widgets/updatenotificationwidget.cpp" line="131"/>
         <source>Later</source>
-        <translation>Sonra</translation>
+        <translation>Depois</translation>
     </message>
     <message>
         <location filename="../../src/widgets/updatenotificationwidget.cpp" line="139"/>
         <source>Update</source>
-        <translation>Güncelle</translation>
+        <translation>Atualizar</translation>
     </message>
 </context>
 <context>
@@ -2883,12 +2868,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <location filename="../../src/widgets/uploadhistory.ui" line="14"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_uploadhistory.h" line="67"/>
         <source>Upload History</source>
-        <translation>Yükleme Geçmişi</translation>
+        <translation>Histórico de Envio</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadhistory.cpp" line="62"/>
         <source>Screenshots history is empty</source>
-        <translation>Ekran görüntüsü geçmişi boş</translation>
+        <translation>O histórico de capturas de ecrã está vazio</translation>
     </message>
 </context>
 <context>
@@ -2909,23 +2894,23 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <location filename="../../src/widgets/uploadlineitem.ui" line="82"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_uploadlineitem.h" line="115"/>
         <source>Copy URL</source>
-        <translation>URL Kopyala</translation>
+        <translation>Copiar URL</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadlineitem.ui" line="95"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_uploadlineitem.h" line="116"/>
         <source>Open In Browser</source>
-        <translation>Tarayıcıda aç</translation>
+        <translation>Open In Browser</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadlineitem.cpp" line="50"/>
         <source>Confirm to delete</source>
-        <translation>Silmeyi onayla</translation>
+        <translation>Confirme para deletar</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadlineitem.cpp" line="51"/>
         <source>Are you sure you want to delete a screenshot from the latest uploads and server?</source>
-        <translation>En son yüklemelerden ve sunucudan bir ekran görüntüsünü silmek istediğinizden emin misiniz?</translation>
+        <translation>Tem a certeza que pretende eliminar uma captura de ecrã dos últimos envios e do servidor?</translation>
     </message>
 </context>
 <context>
@@ -2933,12 +2918,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/widgets/panel/utilitypanel.cpp" line="190"/>
         <source>Close</source>
-        <translation>Kapat</translation>
+        <translation>Fechar</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/utilitypanel.cpp" line="200"/>
         <source>&lt;Empty&gt;</source>
-        <translation>&lt;Boş&gt;</translation>
+        <translation>&lt;Vazio&gt;</translation>
     </message>
 </context>
 <context>
@@ -2946,27 +2931,27 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="41"/>
         <source>Opacity of area outside selection:</source>
-        <translation>Seçimin dışındaki alanın opaklığı:</translation>
+        <translation>Opacidade da área fora da seleção:</translation>
     </message>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="68"/>
         <source>UI Color Editor</source>
-        <translation>Kullanıcı Arayüzü Renk Düzenleyicisi</translation>
+        <translation>Interface de Edição de Cores</translation>
     </message>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="74"/>
         <source>Colorpicker Editor</source>
-        <translation>Renk Seçici Düzenleyici</translation>
+        <translation>Editor do Seletor de Cores</translation>
     </message>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="79"/>
         <source>Button Selection</source>
-        <translation>Düğme Seçimi</translation>
+        <translation>Botão de seleção</translation>
     </message>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="85"/>
         <source>Select All</source>
-        <translation>Tümünü Seç</translation>
+        <translation>Selecionar Todos</translation>
     </message>
 </context>
 <context>
@@ -2974,7 +2959,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.cpp" line="63"/>
         <source>Pick</source>
-        <translation>Seç</translation>
+        <translation>Escolher</translation>
     </message>
 </context>
 <context>
@@ -2982,7 +2967,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette.cpp" line="417"/>
         <source>Unnamed</source>
-        <translation>Adsız</translation>
+        <translation>Sem-nome</translation>
     </message>
 </context>
 <context>
@@ -2990,12 +2975,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_model.cpp" line="55"/>
         <source>Unnamed</source>
-        <translation>Adsız</translation>
+        <translation>Sem-nome</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_model.cpp" line="130"/>
         <source>%1 (%2 colors)</source>
-        <translation>%1 (%2 renk)</translation>
+        <translation>%1 (%2 cores)</translation>
     </message>
 </context>
 <context>
@@ -3005,62 +2990,62 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="231"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="209"/>
         <source>Open a new palette from file</source>
-        <translation>Dosyadan yeni bir palet aç</translation>
+        <translation>Abrir uma nova paleta a partir do ficheiro</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="75"/>
         <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="234"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="212"/>
         <source>Create a new palette</source>
-        <translation>Yeni bir palet oluştur</translation>
+        <translation>Criar uma nova paleta</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="86"/>
         <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="237"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="215"/>
         <source>Duplicate the current palette</source>
-        <translation>Geçerli paleti kopyala</translation>
+        <translation>Duplicar a paleta atual</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="170"/>
         <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="240"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="218"/>
         <source>Delete the current palette</source>
-        <translation>Geçerli paleti sil</translation>
+        <translation>Excluir a paleta atual</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="181"/>
         <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="243"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="221"/>
         <source>Revert changes to the current palette</source>
-        <translation>Geçerli palete yapılan değişiklikleri geri al</translation>
+        <translation>Reverter alterações na paleta atual</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="192"/>
         <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="246"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="224"/>
         <source>Save changes to the current palette</source>
-        <translation>Değişiklikleri geçerli palete kaydet</translation>
+        <translation>Guardar alterações na paleta atual</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="216"/>
         <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="249"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="227"/>
         <source>Add a color to the palette</source>
-        <translation>Palete bir renk ekle</translation>
+        <translation>Adicionar uma cor à paleta</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="227"/>
         <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="252"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="230"/>
         <source>Remove the selected color from the palette</source>
-        <translation>Seçilen rengi paletten kaldır</translation>
+        <translation>Remover a cor selecionada da paleta</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="181"/>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="196"/>
         <source>New Palette</source>
-        <translation>Yeni Palet</translation>
+        <translation>Nova Paleta</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="182"/>
@@ -3071,29 +3056,29 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="223"/>
         <source>GIMP Palettes (*.gpl)</source>
-        <translation>GIMP Paletleri (*.gpl)</translation>
+        <translation>Paletas do GIMP (*.gpl)</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="224"/>
         <source>Palette Image (%1)</source>
-        <translation>Palet Resmi (%1)</translation>
+        <translation>Imagem da Paleta (%1)</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="225"/>
         <source>All Files (*)</source>
-        <translation>Tüm Dosyalar (*)</translation>
+        <translation>Todos os Ficheiros (*)</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="226"/>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="239"/>
         <source>Open Palette</source>
-        <translation>Paleti Aç</translation>
+        <translation>Abrir Paleta</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="240"/>
         <source>Failed to load the palette file
 %1</source>
-        <translation>Palet dosyası yüklenemedi
+        <translation>Falha ao carregar o ficheiro de paleta
 %1</translation>
     </message>
 </context>
@@ -3102,17 +3087,17 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_editor.cpp" line="321"/>
         <source>Add Color</source>
-        <translation>Renk Ekle</translation>
+        <translation>Add Color</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_editor.cpp" line="330"/>
         <source>Remove Color</source>
-        <translation>Renk Kaldır</translation>
+        <translation>Remover Cor</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_editor.cpp" line="338"/>
         <source>Edit Color...</source>
-        <translation>Rengi Düzenle...</translation>
+        <translation>Editar Cor...</translation>
     </message>
 </context>
 <context>
@@ -3120,7 +3105,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_list_model.cpp" line="215"/>
         <source>%1 (%2 colors)</source>
-        <translation>%1 (%2 renk)</translation>
+        <translation>%1 (%2 cores)</translation>
     </message>
 </context>
 <context>
@@ -3128,7 +3113,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/swatch.cpp" line="855"/>
         <source>Clear Color</source>
-        <translation>Rengi Temizle</translation>
+        <translation>Limpar Cor</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/swatch.cpp" line="864"/>

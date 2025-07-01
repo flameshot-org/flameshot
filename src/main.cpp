@@ -1,10 +1,8 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
-#ifndef USE_EXTERNAL_SINGLEAPPLICATION
-#include "singleapplication.h"
-#else
-#include "QtSolutions/qtsingleapplication.h"
+#ifdef USE_KDSINGLEAPPLICATION
+#include "kdsingleapplication.h"
 #endif
 
 #include "abstractlogger.h"
@@ -90,21 +88,34 @@ void configureApp(bool gui)
 #endif
     }
 
+    bool foundTranslation;
     // Configure translations
     for (const QString& path : PathInfo::translationsPaths()) {
-        bool match = translator.load(QLocale(),
-                                     QStringLiteral("Internationalization"),
-                                     QStringLiteral("_"),
-                                     path);
-        if (match) {
+        foundTranslation =
+          translator.load(QLocale(),
+                          QStringLiteral("Internationalization"),
+                          QStringLiteral("_"),
+                          path);
+        if (foundTranslation) {
             break;
         }
     }
+    if (!foundTranslation) {
+        QLocale l;
+        qWarning() << QStringLiteral("No Flameshot translation found for %1")
+                        .arg(l.uiLanguages().join(", "));
+    }
 
-    qtTranslator.load(QLocale::system(),
-                      "qt",
-                      "_",
-                      QLibraryInfo::path(QLibraryInfo::TranslationsPath));
+    foundTranslation =
+      qtTranslator.load(QLocale::system(),
+                        "qt",
+                        "_",
+                        QLibraryInfo::path(QLibraryInfo::TranslationsPath));
+    if (!foundTranslation) {
+        qWarning() << QStringLiteral("No Qt translation found for %1")
+                        .arg(QLocale::languageToString(
+                          QLocale::system().language()));
+    }
 
     auto app = QCoreApplication::instance();
     app->installTranslator(&translator);
@@ -129,12 +140,18 @@ int main(int argc, char* argv[])
 
     // no arguments, just launch Flameshot
     if (argc == 1) {
-        //  #ifndef USE_EXTERNAL_SINGLEAPPLICATION
-        //          SingleApplication app(argc, argv);
-        //  #else
-        //          QtSingleApplication app(argc, argv);
-        //  #endif
         QApplication app(argc, argv);
+
+#ifdef USE_KDSINGLEAPPLICATION
+        KDSingleApplication kdsa(QStringLiteral("flameshot"));
+
+        if (!kdsa.isPrimaryInstance()) {
+            // AbstractLogger::warning()
+            //  << QStringLiteral("Closing second Flameshot instance!");
+            return 0; // Quit
+        }
+#endif
+
         configureApp(true);
         auto c = Flameshot::instance();
         FlameshotDaemon::start();

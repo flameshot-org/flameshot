@@ -36,7 +36,9 @@ public:
         TYPE_COPY = 10,
         TYPE_SAVE = 11,
         TYPE_EXIT = 12,
+#ifdef ENABLE_IMGUR
         TYPE_IMAGEUPLOADER = 13,
+#endif
         TYPE_OPEN_APP = 14,
         TYPE_PIXELATE = 15,
         TYPE_REDO = 16,
