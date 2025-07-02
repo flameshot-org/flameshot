@@ -121,9 +121,6 @@ jobs:
           #ARCH: ${{ matrix.dist.arch }}
         run: |
           cp -r $GITHUB_WORKSPACE/packaging/debian $GITHUB_WORKSPACE
-          if [ "$(lsb_release -cs)" = "jammy" ]; then
-          patch -p0 < $GITHUB_WORKSPACE/debian/jammy.patch
-          fi
           bash $GITHUB_WORKSPACE/tools/packpack
           mv $GITHUB_WORKSPACE/build/${PRODUCT}_${VERSION}-${RELEASE}_${{ matrix.dist.arch }}.deb $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.${{ matrix.dist.name }}.${{ matrix.dist.arch }}.deb
 
