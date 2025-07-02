@@ -49,7 +49,6 @@ parts:
     cmake-parameters:
       - -DFLAMESHOT_ICON=/snap/flameshot/current/usr/share/icons/hicolor/scalable/apps/flameshot.svg
       - -DCMAKE_INSTALL_PREFIX=/usr
-      - -DUSE_WAYLAND_CLIPBOARD=1
     source-type: git
     override-pull: |
       craftctl default
