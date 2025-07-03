@@ -22,3 +22,14 @@ override_dh_auto_configure:
 	# This is required to use Cmake FetchContent
 	dh_auto_configure -- \
 		-DFETCHCONTENT_FULLY_DISCONNECTED=OFF
+
+override_dh_auto_install:
+	dh_auto_install
+	# Remove not required headers, etc.
+	rm -rf debian/flameshot/usr/include/QtColorWidgets
+	rm -rf debian/flameshot/usr/lib/*/cmake/QtColorWidgets
+	rm -f debian/flameshot/usr/lib/*/libQtColorWidgets.*
+	rm -f debian/flameshot/usr/lib/*/pkgconfig/QtColorWidgets.pc
+	rm -rf debian/flameshot/usr/include/kdsingleapplication-qt6
+	rm -rf debian/flameshot/usr/lib/*/cmake/KDSingleApplication-qt6
+	rm -f debian/flameshot/usr/lib/*/libkdsingleapplication-qt6.*
