@@ -35,5 +35,4 @@ override_dh_auto_install:
 	rm -f debian/flameshot/usr/lib/*/libkdsingleapplication-qt6.*
 	# Delete folders
 	rm -rf debian/flameshot/usr/include
-	rm -rf debian/flameshot/usr/lib/*/cmake
-	rm -rf debian/flameshot/usr/lib/*/pkgconfig
+	rm -rf debian/flameshot/usr/lib/*
