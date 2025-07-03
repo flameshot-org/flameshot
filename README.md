@@ -443,10 +443,10 @@ apt install git openssl ca-certificates qt6-image-formats-plugins
 
 ```shell
 # Compile-time
-dnf install gcc-c++ cmake qt6-qtbase-devel qt6-qtsvg-devel qt6-qttools qt6-linguist
+dnf install gcc-c++ cmake qt6-qtbase-devel qt6-qtsvg-devel qt6-qttools qt6-linguist kf6-kguiaddons-devel
 
 # Run-time
-dnf install qt6-qtbase qt6-qtsvg
+dnf install qt6-qtbase qt6-qtsvg kf6-kguiaddons
 
 # Optional
 dnf install git openssl ca-certificates qt6-qtimageformats
@@ -456,7 +456,7 @@ dnf install git openssl ca-certificates qt6-qtimageformats
 
 ```shell
 # Compile-time
-pacman -S cmake base-devel git qt6-base qt6-tools
+pacman -S cmake base-devel git qt6-base qt6-tools kguiaddons
 
 # Run-time
 pacman -S qt6-svg
