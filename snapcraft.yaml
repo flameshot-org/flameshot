@@ -27,8 +27,6 @@ apps:
       - kde-neon-6
     environment:
       XDG_DATA_DIRS: $SNAP/share:$XDG_DATA_DIRS
-      QT_QPA_PLATFORM: wayland
-      QT_QPA_PLATFORMTHEME: gtk3
     slots: [dbus-flameshot]
     plugs:
       - home
