@@ -35,11 +35,13 @@ project(
 set(PROJECT_NAME_CAPITALIZED "Flameshot")
 
 include(FetchContent)
-#Must be set before fetching external content
-#QT_DEFAULT_MAJOR_VERSION used by "SingleApplication"
-#QT_VERSION_MAJOR used by Flameshot and "QtColorWidgets"
+#Must be set before fetching external content!
+#QT_DEFAULT_MAJOR_VERSION used by QHotkey
 set(QT_DEFAULT_MAJOR_VERSION 6 CACHE STRING "")
+#QT_VERSION_MAJOR used by Flameshot and QtColorWidgets
 set(QT_VERSION_MAJOR 6 CACHE STRING "")
+#BUILD_SHARED_LIBS used by QHotkey and QtColorWidgets
+option(BUILD_SHARED_LIBS OFF)
 
 #Needed due to linker error with QtColorWidget
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
@@ -135,8 +137,8 @@ if (USE_KDSINGLEAPPLICATION)
   FetchContent_MakeAvailable(KDSingleApplication)
 endif()
 
+# ToDo: Check if this is used anywhere
 option(BUILD_STATIC_LIBS ON)
-option(BUILD_SHARED_LIBS OFF)
 
 if (APPLE)
   FetchContent_Declare(

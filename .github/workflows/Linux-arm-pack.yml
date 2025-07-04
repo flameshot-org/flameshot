@@ -30,12 +30,12 @@ jobs:
       fail-fast: false
       matrix:
         dist:
-          - {
-              name: debian-11,
-              os: debian,
-              symbol: bullseye,
-              arch: armhf
-            }
+#          - {
+#              name: debian-11,
+#              os: debian,
+#              symbol: bullseye,
+#              arch: armhf
+#            }
           - {
               name: debian-12,
               os: debian,
@@ -52,25 +52,42 @@ jobs:
               name: ubuntu-22.04,
               os: ubuntu,
               symbol: jammy,
-              arch: amd64
+              arch: arm64
             }
+          - {
+              name: ubuntu-24.04,
+              os: ubuntu,
+              symbol: noble,
+              arch: arm64
+            }
+
     steps:
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
       - name: Checkout Source code
         if: github.event_name == 'push'
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          ref: master
+#          ref: master
+
       - name: Checkout Source code
         if: github.event_name == 'pull_request'
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
           ref: ${{ github.event.pull_request.head.sha }}
+
+      - name: Checkout Source code
+        if: github.event_name == 'workflow_dispatch'
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+
       - name: Set env & Print flameshot version
         shell: bash
         run: |
@@ -82,8 +99,11 @@ jobs:
           echo ${last_committed_tag:1}
           echo "Details: ${ver_info}"
           echo "================================"
-          echo "VERSION=${last_committed_tag:1}" >> $GITHUB_ENV
+          # This will allow to build pre-preleases without git tag
+          # echo "VERSION=${last_committed_tag:1}" >> $GITHUB_ENV
+          echo "VERSION=$(cat CMakeLists.txt |grep 'set.*(.*FLAMESHOT_VERSION' | sed 's/[^0-9.]*//' |sed 's/)//g')" >> $GITHUB_ENV
           echo "VER_INFO=${ver_info}" >> $GITHUB_ENV
+
       - name: Get packpack tool
         uses: actions/checkout@v4
         with:
@@ -91,6 +111,7 @@ jobs:
           path: tools
           ref: multiarch
           set-safe-directory: $GITHUB_WORKSPACE/tools
+
       - name: Packaging on ${{ matrix.dist.name }} ${{ matrix.dist.arch }}
         env:
           OS: ${{ matrix.dist.os }}
@@ -114,10 +135,12 @@ jobs:
           cp -r $GITHUB_WORKSPACE/packaging/debian $GITHUB_WORKSPACE
           bash $GITHUB_WORKSPACE/tools/packpack
           mv $GITHUB_WORKSPACE/build/${PRODUCT}_${VERSION}-${RELEASE}_${{ matrix.dist.arch }}.deb $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.${{ matrix.dist.name }}.${{ matrix.dist.arch }}.deb
+
       - name: SHA256Sum of ${{ matrix.dist.name }} ${{ matrix.dist.arch }} package
         run: |
           cd "$GITHUB_WORKSPACE/build/" || { >&2 echo "Cannot cd to '$GITHUB_WORKSPACE/build/'!"; exit 11 ; }
           sha256sum ${PRODUCT}-${VERSION}-${RELEASE}.${{ matrix.dist.name }}.${{ matrix.dist.arch }}.deb | tee ${PRODUCT}-${VERSION}-${RELEASE}.${{ matrix.dist.name }}.${{ matrix.dist.arch }}.deb.sha256sum
+
       - name: Artifact Upload
         uses: actions/upload-artifact@v4
         with:
@@ -126,5 +149,3 @@ jobs:
             ${{ github.workspace }}/build/${{ env.PRODUCT }}-*-${{ env.RELEASE }}.${{ matrix.dist.name }}.${{ matrix.dist.arch }}.deb
             ${{ github.workspace }}/build/${{ env.PRODUCT }}-*-${{ env.RELEASE }}.${{ matrix.dist.name }}.${{ matrix.dist.arch }}.deb.sha256sum
           overwrite: true
-
-  

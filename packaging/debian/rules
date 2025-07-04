@@ -13,8 +13,6 @@ export DEB_BUILD_MAINT_OPTIONS = hardening=+all
 # package maintainers to append LDFLAGS
 export DEB_LDFLAGS_MAINT_APPEND = -Wl,--as-needed
 
-export QT_SELECT := 5
-
 %:
 	dh $@ 
 
@@ -24,3 +22,9 @@ override_dh_auto_configure:
 	# This is required to use Cmake FetchContent
 	dh_auto_configure -- \
 		-DFETCHCONTENT_FULLY_DISCONNECTED=OFF
+
+override_dh_auto_install:
+	dh_auto_install
+	# Remove not required headers, etc.
+	rm -rf debian/flameshot/usr/include
+	rm -rf debian/flameshot/usr/lib
