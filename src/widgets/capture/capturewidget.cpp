@@ -706,6 +706,8 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
                             "gui` again to apply it."),
                          &painter);
     }
+    this->setGeometry(
+      0, 0, m_context.screenshot.width(), m_context.screenshot.height());
 }
 
 void CaptureWidget::showColorPicker(const QPoint& pos)
