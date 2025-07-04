@@ -91,7 +91,7 @@ option(USE_MONOCHROME_ICON "Build using monochrome icon as default" OFF)
 option(GENERATE_TS "Regenerate translation source files" OFF)
 option(USE_KDSINGLEAPPLICATION "Use KDSingleApplication library" ON)
 option(USE_LAUNCHER_ABSOLUTE_PATH "Use absolute path for the desktop launcher" ON)
-option(USE_WAYLAND_CLIPBOARD "USE KF Gui Wayland Clipboard" OFF)
+option(USE_WAYLAND_CLIPBOARD "USE KF Gui Wayland Clipboard" ON)
 option(DISABLE_UPDATE_CHECKER "Disable check for updates" OFF)
 option(ENABLE_IMGUR "Enable Imgur Uploader" OFF)
 
