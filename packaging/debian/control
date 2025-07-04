@@ -21,6 +21,7 @@ Architecture: any
 Depends:
  hicolor-icon-theme,
  libqt6svg6 (>= 6.2.0~),
+ qt6-qpa-plugins (>= 6.2.0~),
  ${shlibs:Depends},
  ${misc:Depends},
 Recommends:

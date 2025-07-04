@@ -433,7 +433,7 @@ Also you can open and build/debug the project in a C++ IDE. For example, in Qt C
 apt install g++ cmake build-essential qt6-base-dev qt6-tools-dev-tools qt6-svg-dev qt6-tools-dev
 
 # Run-time
-apt install libqt6dbus6 libqt6network6 libqt6core6 libqt6widgets6 libqt6gui6 libqt6svg6
+apt install libqt6dbus6 libqt6network6 libqt6core6 libqt6widgets6 libqt6gui6 libqt6svg6 qt6-qpa-plugins
 
 # Optional
 apt install git openssl ca-certificates qt6-image-formats-plugins
@@ -443,7 +443,7 @@ apt install git openssl ca-certificates qt6-image-formats-plugins
 
 ```shell
 # Compile-time
-dnf install gcc-c++ cmake qt6-qtbase-devel qt6-qtsvg-devel qt6-qttools qt6-linguist kf6-kguiaddons-devel
+dnf install gcc-c++ cmake qt6-qtbase-devel qt6-qtsvg-devel qt6-qttools qt6-linguist qt6-qttools-devel kf6-kguiaddons-devel
 
 # Run-time
 dnf install qt6-qtbase qt6-qtsvg kf6-kguiaddons
