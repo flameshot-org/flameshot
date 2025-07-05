@@ -47,11 +47,11 @@ Comment:
  Copyright 2007 Luca Gugelmann <lucag@student.ethz.ch>
  released under the GNU LGPL  <http://www.gnu.org/licenses/old-licenses/library.txt>
 
-Files: external/singleapplication/*
-Copyright: 2015 - 2016 Itay Grudev
+Files: build/_deps/kdsingleapplication-src/*
+Copyright: 2019 Klarälvdalens Datakonsult AB
 License: Expat
 
-Files: external/Qt-Color-Widgets/*
+Files: build/_deps/qtcolorwidgets-src/*
 Copyright: 2013-2017 Mattia Basaglia <mattia.basaglia@gmail.com>
 License: LGPL-3+
 Comment:
