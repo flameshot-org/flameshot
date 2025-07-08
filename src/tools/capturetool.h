@@ -159,6 +159,7 @@ public:
             if (m_shapeFinished) {
                 QPixmap renderedPixmap;
                 if (needCacheUpdate ||
+                    m_editMode ||
                     !QPixmapCache::find(m_pixmapCacheKey, &renderedPixmap)) {
                     clearPixmapCache();
                     renderedPixmap = processWithShadow(pixmap.size());
