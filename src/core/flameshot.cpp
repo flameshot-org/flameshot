@@ -131,7 +131,7 @@ CaptureWidget* Flameshot::gui(const CaptureRequest& req)
         m_captureWindow->raise();
 #else
         m_captureWindow->showFullScreen();
-//        m_captureWindow->show(); // For CaptureWidget Debugging under Linux
+        // m_captureWindow->show(); // For CaptureWidget Debugging under Linux
 #endif
         return m_captureWindow;
     } else {
