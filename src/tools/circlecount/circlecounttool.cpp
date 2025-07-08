@@ -218,6 +218,25 @@ void CircleCountTool::drawDropShadow(QPainter& painter, const QPixmap& pixmap)
     qreal end = size() < 10 ? 1.0 : 2.0;
     for (qreal var = start; var < end; var += step) {
         painter.translate(var, var);
+        QLineF line(points().first, points().second);
+        // if the mouse is outside of the bubble, draw the pointer
+        if (line.length() > bubble_size) {
+            int middleX = points().first.x();
+            int middleY = points().first.y();
+
+            QLineF normal = line.normalVector();
+            normal.setLength(bubble_size);
+            QPoint p1 = normal.p2().toPoint();
+            QPoint p2(middleX - (p1.x() - middleX), middleY - (p1.y() - middleY));
+
+            QPainterPath path;
+            path.moveTo(points().first);
+            path.lineTo(p1);
+            path.lineTo(points().second);
+            path.lineTo(p2);
+            path.lineTo(points().first);
+            painter.drawPath(path);
+        }
         painter.drawEllipse(points().first,
                             bubble_size + PADDING_VALUE,
                             bubble_size + PADDING_VALUE);
