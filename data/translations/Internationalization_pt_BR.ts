@@ -1233,7 +1233,7 @@ Por favor, resolva-os manualmente no arquivo de configuração.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="529"/>
         <source>Save Path</source>
-        <translation>Caminho de salvamento</translation>
+        <translation>Local de salvamento</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="545"/>
@@ -1278,12 +1278,12 @@ Por favor, resolva-os manualmente no arquivo de configuração.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="704"/>
         <source>Copy file path after save</source>
-        <translation>Copiar o caminho do arquivo após salvar</translation>
+        <translation>Copiar a localização do arquivo após salvar</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="705"/>
         <source>Copy the file path to clipboard after the file is saved</source>
-        <translation>Copie o caminho do arquivo para a área de transferência depois que o arquivo for salvo</translation>
+        <translation>Copiar a localização do arquivo para a área de transferência depois que o arquivo for salvo</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="716"/>
@@ -1943,7 +1943,7 @@ Por favor, resolva-os manualmente no arquivo de configuração.</translation>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="273"/>
         <source>Path copied to clipboard as </source>
-        <translation>Caminho copiado para a área de transferência como </translation>
+        <translation>Localização copiada para a área de transferência como </translation>
     </message>
     <message>
         <source>Saving canceled</source>
