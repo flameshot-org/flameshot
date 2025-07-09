@@ -1090,7 +1090,7 @@ Resolva-as manualmente no ficheiro de configuração.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="345"/>
         <source>Grim is a wayland only utility to capture screens based on the screencopy protocol. Generally only enable on minimal wayland window managers like sway, hyprland, etc.</source>
-        <translation type="unfinished"></translation>
+        <translation>Grim é um utilitário exclusivo do Wayland para captura de tela com base no protocolo screencopy. Geralmente só é habilitado em gerenciadores de janelas Wayland minimalistas, como Sway, Hyprland, etc.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="363"/>
@@ -1137,7 +1137,7 @@ Resolva-as manualmente no ficheiro de configuração.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="432"/>
         <source>Automatically unload from memory when it is not needed</source>
-        <translation type="unfinished"></translation>
+        <translation>Liberar automaticamente da memória quando não for necessário.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="433"/>
