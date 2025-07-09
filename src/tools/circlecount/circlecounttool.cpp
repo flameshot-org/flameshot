@@ -227,7 +227,8 @@ void CircleCountTool::drawDropShadow(QPainter& painter, const QPixmap& pixmap)
             QLineF normal = line.normalVector();
             normal.setLength(bubble_size);
             QPoint p1 = normal.p2().toPoint();
-            QPoint p2(middleX - (p1.x() - middleX), middleY - (p1.y() - middleY));
+            QPoint p2(middleX - (p1.x() - middleX),
+                      middleY - (p1.y() - middleY));
 
             QPainterPath path;
             path.moveTo(points().first);

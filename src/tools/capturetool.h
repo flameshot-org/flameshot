@@ -92,7 +92,7 @@ public:
     {}
 
     // TODO unused
-    virtual void setCapture(const QPixmap& pixmap){};
+    virtual void setCapture(const QPixmap& pixmap) {};
 
     // Returns false when the tool is in an inconsistent state and shouldn't
     // be included in the tool undo/redo stack.
@@ -158,8 +158,7 @@ public:
         if (dropShadowEnabled()) {
             if (m_shapeFinished) {
                 QPixmap renderedPixmap;
-                if (needCacheUpdate ||
-                    m_editMode ||
+                if (needCacheUpdate || m_editMode ||
                     !QPixmapCache::find(m_pixmapCacheKey, &renderedPixmap)) {
                     clearPixmapCache();
                     renderedPixmap = processWithShadow(pixmap.size());
