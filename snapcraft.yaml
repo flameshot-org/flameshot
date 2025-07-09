@@ -70,3 +70,7 @@ slots:
     interface: dbus
     bus: session
     name: org.flameshot.Flameshot
+
+layout:
+  /usr/share/flameshot/translations:
+    symlink: $SNAP/usr/share/flameshot/translations
