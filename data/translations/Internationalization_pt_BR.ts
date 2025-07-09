@@ -1233,7 +1233,7 @@ Por favor, resolva-os manualmente no arquivo de configuração.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="529"/>
         <source>Save Path</source>
-        <translation>Salvar Caminho</translation>
+        <translation>Caminho de salvamento</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="545"/>
@@ -1243,7 +1243,7 @@ Por favor, resolva-os manualmente no arquivo de configuração.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="553"/>
         <source>Use fixed path for screenshots to save</source>
-        <translation>Use o caminho fixo para salvar captura de tela</translation>
+        <translation>Salvar automaticamente nesse local</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="565"/>
@@ -2374,17 +2374,17 @@ Você pode ter que invalidar o sinal &apos;#&apos;, por exemplo &apos;\#FFF&apos
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="169"/>
         <source>If the useGrimAdapter setting is not enabled, the dbus protocol will be used. It should be noted that using the dbus protocol under wayland is not recommended. It is recommended to enable the useGrimAdapter setting in flameshot.ini to activate the grim-based general wayland screenshot adapter</source>
-        <translation>Se a configuração useGrimAdapter não estiver habilitada, o protocolo dbus será usado. Observe que o uso do protocolo dbus no Wayland não é recomendado. Recomenda-se habilitar a configuração useGrimAdapter no flameshot.ini para ativar o adaptador de captura de tela geral do Wayland baseado em Grim.</translation>
+        <translation>Se a configuração useGrimAdapter não estiver habilitada, o protocolo dbus será usado. Observe que o uso do protocolo dbus no Wayland não é recomendado. Recomenda-se habilitar a configuração useGrimAdapter no flameshot.ini para ativar o adaptador de captura de tela geral do Wayland baseado em Grim</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="180"/>
         <source>grim&apos;s screenshot component is implemented based on wlroots, it may not be used in GNOME or similar desktop environments</source>
-        <translation type="unfinished"></translation>
+        <translation>O componente de captura de tela do grim é implementado com base no wlroots, não pode ser usado no GNOME ou em ambientes de desktop semelhantes</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="192"/>
         <source>Unable to detect desktop environment (GNOME? KDE? Qile? Sway? ...)</source>
-        <translation type="unfinished"></translation>
+        <translation>Não foi possível detectar o ambiente de trabalho (GNOME? KDE? Qile? Sway? ...)</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="195"/>
@@ -2543,12 +2543,12 @@ Você pode ter que invalidar o sinal &apos;#&apos;, por exemplo &apos;\#FFF&apos
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="194"/>
         <source>Delete selected drawn object</source>
-        <translation type="unfinished"></translation>
+        <translation>Excluir o objeto desenhado selecionado</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="195"/>
         <source>Cancel current selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Cancelar seleção atual</translation>
     </message>
     <message>
         <source>Delete current tool</source>
@@ -2853,7 +2853,7 @@ Você pode ter que invalidar o sinal &apos;#&apos;, por exemplo &apos;\#FFF&apos
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="159"/>
         <source>&amp;Open Save Path</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Abrir local de salvamento</translation>
     </message>
 </context>
 <context>
