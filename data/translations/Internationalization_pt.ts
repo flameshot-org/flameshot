@@ -1162,7 +1162,7 @@ Resolva-as manualmente no ficheiro de configuração.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="473"/>
         <source>Show the confirmation prompt before ESC quit</source>
-        <translation>Mostrar uma janela de confirmação antes de sair do menu de captura de tela</translation>
+        <translation>Mostrar uma janela de confirmação antes de sair da ferramenta de captura</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="498"/>
@@ -1776,7 +1776,7 @@ Resolva-as manualmente no ficheiro de configuração.</translation>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="291"/>
         <source>Context menu</source>
-        <translation>Context menu</translation>
+        <translation>Menu de contexto</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="293"/>
