@@ -53,10 +53,8 @@ void History::save(const QPixmap& pixmap, const QString& fileName)
 const QList<QString>& History::history()
 {
     QDir directory(path());
-    QStringList images = directory.entryList(QStringList() << "*.png"
-                                                           << "*.PNG",
-                                             QDir::Files,
-                                             QDir::Time);
+    QStringList images = directory.entryList(
+      QStringList() << "*.png" << "*.PNG", QDir::Files, QDir::Time);
     int cnt = 0;
     int max = ConfigHandler().uploadHistoryMax();
     m_thumbs.clear();

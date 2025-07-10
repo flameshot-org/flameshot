@@ -55,12 +55,15 @@ bool verifyLaunchFile()
  *             misbehave.
  */
 #define OPTION(KEY, TYPE)                                                      \
-    { QStringLiteral(KEY), QSharedPointer<ValueHandler>(new TYPE) }
+    {                                                                          \
+        QStringLiteral(KEY), QSharedPointer<ValueHandler>(new TYPE)            \
+    }
 
 #define SHORTCUT(NAME, DEFAULT_VALUE)                                          \
-    { QStringLiteral(NAME),                                                    \
-      QSharedPointer<KeySequence>(                                             \
-        new KeySequence(QKeySequence(QLatin1String(DEFAULT_VALUE)))) }
+    {                                                                          \
+        QStringLiteral(NAME), QSharedPointer<KeySequence>(new KeySequence(     \
+                                QKeySequence(QLatin1String(DEFAULT_VALUE))))   \
+    }
 
 /**
  * This map contains all the information that is needed to parse, verify and
