@@ -92,7 +92,7 @@ public:
     {}
 
     // TODO unused
-    virtual void setCapture(const QPixmap& pixmap) {};
+    virtual void setCapture(const QPixmap& pixmap){};
 
     // Returns false when the tool is in an inconsistent state and shouldn't
     // be included in the tool undo/redo stack.
@@ -122,31 +122,61 @@ public:
     // Short description of the tool.
     virtual QString description() const = 0;
     // Short tool item info
-    virtual QString info() { return name(); };
+    virtual QString info()
+    {
+        return name();
+    };
 
     // if the type is TYPE_WIDGET the widget is loaded in the main widget.
     // If the type is TYPE_EXTERNAL_WIDGET it is created outside as an
     // individual widget.
-    virtual QWidget* widget() { return nullptr; }
+    virtual QWidget* widget()
+    {
+        return nullptr;
+    }
     // When the tool is selected this method is called and the widget is added
     // to the configuration panel inside the main widget.
-    virtual QWidget* configurationWidget() { return nullptr; }
+    virtual QWidget* configurationWidget()
+    {
+        return nullptr;
+    }
     // Return a copy of the tool
     virtual CaptureTool* copy(QObject* parent = nullptr) = 0;
 
-    virtual void setEditMode(bool b) { m_editMode = b; };
-    virtual bool editMode() { return m_editMode; };
+    virtual void setEditMode(bool b)
+    {
+        m_editMode = b;
+    };
+    virtual bool editMode()
+    {
+        return m_editMode;
+    };
 
     // return true if object was change after editMode
-    virtual bool isChanged() { return true; };
+    virtual bool isChanged()
+    {
+        return true;
+    };
 
     // Counter for all object types (currently is used for the CircleCounter
     // only)
-    virtual void setCount(int count) { m_count = count; };
-    virtual int count() const { return m_count; };
+    virtual void setCount(int count)
+    {
+        m_count = count;
+    };
+    virtual int count() const
+    {
+        return m_count;
+    };
 
-    virtual bool dropShadowEnabled() const { return m_dropShadowEnabled; }
-    virtual void finishShape() { m_shapeFinished = true; }
+    virtual bool dropShadowEnabled() const
+    {
+        return m_dropShadowEnabled;
+    }
+    virtual void finishShape()
+    {
+        m_shapeFinished = true;
+    }
 
     virtual void process(QPainter& painter, const QPixmap& pixmap) = 0;
 
@@ -187,8 +217,14 @@ public:
                                    const CaptureContext& context) = 0;
 
     // Move tool objects
-    virtual void move(const QPoint& pos) { Q_UNUSED(pos) };
-    virtual const QPoint* pos() { return nullptr; };
+    virtual void move(const QPoint& pos)
+    {
+        Q_UNUSED(pos)
+    };
+    virtual const QPoint* pos()
+    {
+        return nullptr;
+    };
 
 signals:
     void requestAction(Request r);
@@ -320,7 +356,10 @@ public slots:
     virtual void drawMove(const QPoint& p) = 0;
     // Called when drawMove is needed with an adjustment;
     // should be overridden in case an adjustment is applicable.
-    virtual void drawMoveWithAdjustment(const QPoint& p) { drawMove(p); }
+    virtual void drawMoveWithAdjustment(const QPoint& p)
+    {
+        drawMove(p);
+    }
     // Called when the tool is activated.
     virtual void drawStart(const CaptureContext& context) = 0;
     // Called right after pressing the button which activates the tool.
@@ -337,7 +376,10 @@ public slots:
     }
     // Called when the size the tool size is changed by the user.
     virtual void onSizeChanged(int size) = 0;
-    virtual int size() const { return -1; };
+    virtual int size() const
+    {
+        return -1;
+    };
 
 private:
     unsigned int m_count;

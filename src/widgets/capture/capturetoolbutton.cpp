@@ -130,38 +130,30 @@ void CaptureToolButton::setColor(const QColor& c)
 
 QColor CaptureToolButton::m_mainColor;
 
-static std::map<CaptureTool::Type, int> buttonTypeOrder{
-    { CaptureTool::TYPE_PENCIL, 0 },
-    { CaptureTool::TYPE_DRAWER, 1 },
-    { CaptureTool::TYPE_ARROW, 2 },
-    { CaptureTool::TYPE_SELECTION, 3 },
-    { CaptureTool::TYPE_RECTANGLE, 4 },
-    { CaptureTool::TYPE_CIRCLE, 5 },
-    { CaptureTool::TYPE_MARKER, 6 },
-    { CaptureTool::TYPE_TEXT, 7 },
-    { CaptureTool::TYPE_PIXELATE, 8 },
-    { CaptureTool::TYPE_INVERT, 9 },
-    { CaptureTool::TYPE_CIRCLECOUNT, 10 },
-    { CaptureTool::TYPE_MOVESELECTION, 12 },
-    { CaptureTool::TYPE_UNDO, 13 },
-    { CaptureTool::TYPE_REDO, 14 },
-    { CaptureTool::TYPE_COPY, 15 },
-    { CaptureTool::TYPE_SAVE, 16 },
+static std::map<CaptureTool::Type, int> buttonTypeOrder
+{
+    { CaptureTool::TYPE_PENCIL, 0 }, { CaptureTool::TYPE_DRAWER, 1 },
+      { CaptureTool::TYPE_ARROW, 2 }, { CaptureTool::TYPE_SELECTION, 3 },
+      { CaptureTool::TYPE_RECTANGLE, 4 }, { CaptureTool::TYPE_CIRCLE, 5 },
+      { CaptureTool::TYPE_MARKER, 6 }, { CaptureTool::TYPE_TEXT, 7 },
+      { CaptureTool::TYPE_PIXELATE, 8 }, { CaptureTool::TYPE_INVERT, 9 },
+      { CaptureTool::TYPE_CIRCLECOUNT, 10 },
+      { CaptureTool::TYPE_MOVESELECTION, 12 }, { CaptureTool::TYPE_UNDO, 13 },
+      { CaptureTool::TYPE_REDO, 14 }, { CaptureTool::TYPE_COPY, 15 },
+      { CaptureTool::TYPE_SAVE, 16 },
 #ifdef ENABLE_IMGUR
-    { CaptureTool::TYPE_IMAGEUPLOADER, 17 },
+      { CaptureTool::TYPE_IMAGEUPLOADER, 17 },
 #endif
-    { CaptureTool::TYPE_ACCEPT, 18 },
+      { CaptureTool::TYPE_ACCEPT, 18 },
 #if !defined(Q_OS_MACOS)
-    { CaptureTool::TYPE_OPEN_APP, 19 },
-    { CaptureTool::TYPE_EXIT, 20 },
-    { CaptureTool::TYPE_PIN, 21 },
+      { CaptureTool::TYPE_OPEN_APP, 19 }, { CaptureTool::TYPE_EXIT, 20 },
+      { CaptureTool::TYPE_PIN, 21 },
 #else
-    { CaptureTool::TYPE_EXIT, 19 },
-    { CaptureTool::TYPE_PIN, 20 },
+      { CaptureTool::TYPE_EXIT, 19 }, { CaptureTool::TYPE_PIN, 20 },
 #endif
 
-    { CaptureTool::TYPE_SIZEINCREASE, 22 },
-    { CaptureTool::TYPE_SIZEDECREASE, 23 },
+      { CaptureTool::TYPE_SIZEINCREASE, 22 },
+      { CaptureTool::TYPE_SIZEDECREASE, 23 },
 };
 
 int CaptureToolButton::getPriorityByButton(CaptureTool::Type b)
