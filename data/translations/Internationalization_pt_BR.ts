@@ -249,12 +249,12 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="483"/>
         <source>Are you sure you want to quit capture?</source>
-        <translation type="unfinished"></translation>
+        <translation>Tem certeza de que deseja sair da captura?</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="488"/>
         <source>Do not show this again</source>
-        <translation type="unfinished"></translation>
+        <translation>Não mostre isso novamente</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="683"/>
@@ -1136,12 +1136,12 @@ Por favor, resolva-os manualmente no arquivo de configuração.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="343"/>
         <source>Use grim to capture screenshots</source>
-        <translation type="unfinished"></translation>
+        <translation>Usar o grim para capturar a tela</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="345"/>
         <source>Grim is a wayland only utility to capture screens based on the screencopy protocol. Generally only enable on minimal wayland window managers like sway, hyprland, etc.</source>
-        <translation type="unfinished"></translation>
+        <translation>Grim é um utilitário exclusivo do Wayland para captura de tela com base no protocolo screencopy. Geralmente só é habilitado em gerenciadores de janelas Wayland minimalistas, como Sway, Hyprland, etc.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="363"/>
@@ -1188,42 +1188,42 @@ Por favor, resolva-os manualmente no arquivo de configuração.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="432"/>
         <source>Automatically unload from memory when it is not needed</source>
-        <translation type="unfinished"></translation>
+        <translation>Liberar automaticamente da memória quando não for necessário</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="433"/>
         <source>Automatically close daemon (background process) when it is not needed</source>
-        <translation type="unfinished"></translation>
+        <translation>Fechar automaticamente o daemon (processo em segundo plano) quando não for necessário</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="444"/>
         <source>Launch in background at startup</source>
-        <translation type="unfinished"></translation>
+        <translation>Iniciar em segundo plano na inicialização</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="445"/>
         <source>Launch Flameshot daemon (background process) when computer is booted</source>
-        <translation type="unfinished"></translation>
+        <translation>Iniciar o daemon Flameshot (processo em segundo plano) quando o computador for inicializado</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="470"/>
         <source>Ask before quit capture</source>
-        <translation type="unfinished"></translation>
+        <translation>Confirmar antes de sair da ferramenta de captura</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="473"/>
         <source>Show the confirmation prompt before ESC quit</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar uma janela de confirmação antes de sair da ferramenta de captura</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="498"/>
         <source>Enable Copy to clipboard on Double Click</source>
-        <translation type="unfinished"></translation>
+        <translation>Habilitar cópia para a área de transferência com duplo clique</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="510"/>
         <source>Copy URL after uploading was successful</source>
-        <translation type="unfinished"></translation>
+        <translation>Copiar URL após o upload ser bem-sucedido</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="522"/>
@@ -1233,7 +1233,7 @@ Por favor, resolva-os manualmente no arquivo de configuração.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="529"/>
         <source>Save Path</source>
-        <translation>Salvar Caminho</translation>
+        <translation>Local de salvamento</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="545"/>
@@ -1243,7 +1243,7 @@ Por favor, resolva-os manualmente no arquivo de configuração.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="553"/>
         <source>Use fixed path for screenshots to save</source>
-        <translation>Use o caminho fixo para salvar captura de tela</translation>
+        <translation>Salvar automaticamente nesse local</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="565"/>
@@ -1273,17 +1273,17 @@ Por favor, resolva-os manualmente no arquivo de configuração.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="678"/>
         <source>Use lossy JPG format for clipboard (lossless PNG default)</source>
-        <translation type="unfinished"></translation>
+        <translation>Use o formato JPG com perdas para a área de transferência (PNG sem perdas é o padrão)</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="704"/>
         <source>Copy file path after save</source>
-        <translation>Copiar o caminho do arquivo após salvar</translation>
+        <translation>Copiar a localização do arquivo após salvar</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="705"/>
         <source>Copy the file path to clipboard after the file is saved</source>
-        <translation>Copie o caminho do arquivo para a área de transferência depois que o arquivo for salvo</translation>
+        <translation>Copiar a localização do arquivo para a área de transferência depois que o arquivo for salvo</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="716"/>
@@ -1389,17 +1389,17 @@ Por favor, resolva-os manualmente no arquivo de configuração.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="853"/>
         <source>JPEG Quality</source>
-        <translation type="unfinished"></translation>
+        <translation>Qualidade do JPEG</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="864"/>
         <source>Reverse arrow</source>
-        <translation type="unfinished"></translation>
+        <translation>Seta reversa</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="865"/>
         <source>Draw the arrow head first</source>
-        <translation type="unfinished"></translation>
+        <translation>Desenhar primeiro a ponta da seta</translation>
     </message>
 </context>
 <context>
@@ -1860,12 +1860,12 @@ Por favor, resolva-os manualmente no arquivo de configuração.</translation>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="317"/>
         <source>Increase Opacity</source>
-        <translation type="unfinished"></translation>
+        <translation>Aumentar a opacidade</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="324"/>
         <source>Decrease Opacity</source>
-        <translation type="unfinished"></translation>
+        <translation>Diminuir a opacidade</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="331"/>
@@ -1883,7 +1883,7 @@ Por favor, resolva-os manualmente no arquivo de configuração.</translation>
     <message>
         <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="36"/>
         <source>Set Pixelate as the paint tool.</source>
-        <translation type="unfinished"></translation>
+        <translation>Definir pixelizar como a ferramenta de pintura.</translation>
     </message>
     <message>
         <source>Set Pixelate as the paint tool</source>
@@ -1943,7 +1943,7 @@ Por favor, resolva-os manualmente no arquivo de configuração.</translation>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="273"/>
         <source>Path copied to clipboard as </source>
-        <translation>Caminho copiado para a área de transferência como </translation>
+        <translation>Localização copiada para a área de transferência como </translation>
     </message>
     <message>
         <source>Saving canceled</source>
@@ -2002,7 +2002,7 @@ Por favor, resolva-os manualmente no arquivo de configuração.</translation>
     <message>
         <location filename="../../src/main.cpp" line="201"/>
         <source>Capture screenshot of all monitors at the same time.</source>
-        <translation type="unfinished"></translation>
+        <translation>Capturar a tela de todos os monitores ao mesmo tempo.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="211"/>
@@ -2067,7 +2067,7 @@ Por favor, resolva-os manualmente no arquivo de configuração.</translation>
     <message>
         <location filename="../../src/main.cpp" line="250"/>
         <source>Enable or disable the notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Habilitar ou desabilitar as notificações</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="253"/>
@@ -2369,22 +2369,22 @@ Você pode ter que invalidar o sinal &apos;#&apos;, por exemplo &apos;\#FFF&apos
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="54"/>
         <source>The universal wayland screen capture adapter requires Grim as the screen capture component of wayland. If the screen capture component is missing, please install it!</source>
-        <translation type="unfinished"></translation>
+        <translation>O adaptador universal de captura de tela do Wayland requer o Grim como componente de captura de tela do Wayland. Se o componente de captura de tela estiver ausente, instale-o!</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="169"/>
         <source>If the useGrimAdapter setting is not enabled, the dbus protocol will be used. It should be noted that using the dbus protocol under wayland is not recommended. It is recommended to enable the useGrimAdapter setting in flameshot.ini to activate the grim-based general wayland screenshot adapter</source>
-        <translation type="unfinished"></translation>
+        <translation>Se a configuração useGrimAdapter não estiver habilitada, o protocolo dbus será usado. Observe que o uso do protocolo dbus no Wayland não é recomendado. Recomenda-se habilitar a configuração useGrimAdapter no flameshot.ini para ativar o adaptador de captura de tela geral do Wayland baseado em Grim</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="180"/>
         <source>grim&apos;s screenshot component is implemented based on wlroots, it may not be used in GNOME or similar desktop environments</source>
-        <translation type="unfinished"></translation>
+        <translation>O componente de captura de tela do grim é implementado com base no wlroots, não pode ser usado no GNOME ou em ambientes de desktop semelhantes</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="192"/>
         <source>Unable to detect desktop environment (GNOME? KDE? Qile? Sway? ...)</source>
-        <translation type="unfinished"></translation>
+        <translation>Não foi possível detectar o ambiente de trabalho (GNOME? KDE? Qile? Sway? ...)</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="195"/>
@@ -2543,12 +2543,12 @@ Você pode ter que invalidar o sinal &apos;#&apos;, por exemplo &apos;\#FFF&apos
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="194"/>
         <source>Delete selected drawn object</source>
-        <translation type="unfinished"></translation>
+        <translation>Excluir o objeto desenhado selecionado</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="195"/>
         <source>Cancel current selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Cancelar seleção atual</translation>
     </message>
     <message>
         <source>Delete current tool</source>
@@ -2853,7 +2853,7 @@ Você pode ter que invalidar o sinal &apos;#&apos;, por exemplo &apos;\#FFF&apos
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="159"/>
         <source>&amp;Open Save Path</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Abrir local de salvamento</translation>
     </message>
 </context>
 <context>
