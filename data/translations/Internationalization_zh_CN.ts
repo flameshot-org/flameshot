@@ -55,7 +55,7 @@
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="49"/>
         <source>Open With</source>
-        <translation>打开</translation>
+        <translation>用...打开</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="78"/>
@@ -1114,12 +1114,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="277"/>
         <source>Use last region for GUI mode</source>
-        <translation type="unfinished">使用上一次的区域</translation>
+        <translation>在图形用户界面模式下使用最后一个区域</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="279"/>
         <source>Use the last region as the default selection for the next screenshot in GUI mode</source>
-        <translation type="unfinished">使用上一次选中的区域作为下一次截图的默认选区</translation>
+        <translation>在图形界面模式下，将最后一个区域作为下次截图的默认选择</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="293"/>
@@ -1347,17 +1347,17 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="794"/>
         <source>Milliseconds before geometry display hides; 0 means do not hide</source>
-        <translation>选区信息隐藏前的毫秒数；设为0则不隐藏</translation>
+        <translation>几何显示隐藏前的毫秒数；设为0则不隐藏</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="797"/>
         <source>Set geometry display timeout (ms)</source>
-        <translation>设置选区信息显示时间(毫秒）</translation>
+        <translation>设置几何显示时间(毫秒）</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="805"/>
         <source>Selection Geometry Display</source>
-        <translation>选区信息</translation>
+        <translation>选取几何显示</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="812"/>
@@ -1875,7 +1875,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="331"/>
         <source>Close</source>
-        <translation type="unfinished">关闭</translation>
+        <translation>关闭</translation>
     </message>
 </context>
 <context>
@@ -2498,12 +2498,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="180"/>
         <source>Symmetrically decrease width by 2px</source>
-        <translation>对称地将宽度减少2像素</translation>
+        <translation>对称地将宽度减少2px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="182"/>
         <source>Symmetrically increase width by 2px</source>
-        <translation>对称地增加宽度 2 像素</translation>
+        <translation>对称地增加宽度 2 px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="184"/>
@@ -2548,12 +2548,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="194"/>
         <source>Delete selected drawn object</source>
-        <translation type="unfinished"></translation>
+        <translation>删除选定的绘制对象</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="195"/>
         <source>Cancel current selection</source>
-        <translation type="unfinished"></translation>
+        <translation>取消当前选择</translation>
     </message>
     <message>
         <source>Delete current tool</source>
@@ -2602,7 +2602,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="85"/>
         <source>Display grid</source>
-        <translation type="unfinished"></translation>
+        <translation>显示网格</translation>
     </message>
 </context>
 <context>
@@ -2858,7 +2858,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="159"/>
         <source>&amp;Open Save Path</source>
-        <translation type="unfinished"></translation>
+        <translation>打开保存路径(&amp;O)</translation>
     </message>
 </context>
 <context>
