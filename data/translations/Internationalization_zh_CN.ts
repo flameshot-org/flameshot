@@ -1347,72 +1347,72 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="794"/>
         <source>Milliseconds before geometry display hides; 0 means do not hide</source>
-        <translation>选区信息隐藏前的毫秒数；设为0则不隐藏。</translation>
+        <translation>选区信息隐藏前的毫秒数；设为0则不隐藏</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="797"/>
         <source>Set geometry display timeout (ms)</source>
-        <translation type="unfinished"></translation>
+        <translation>设置选区信息显示时间(毫秒）</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="805"/>
         <source>Selection Geometry Display</source>
-        <translation type="unfinished"></translation>
+        <translation>选区信息</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="812"/>
         <source>Display Location</source>
-        <translation type="unfinished"></translation>
+        <translation>显示位置</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="815"/>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>无</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="816"/>
         <source>Top Left</source>
-        <translation type="unfinished"></translation>
+        <translation>左上</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="818"/>
         <source>Top Right</source>
-        <translation type="unfinished"></translation>
+        <translation>右上</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="820"/>
         <source>Bottom Left</source>
-        <translation type="unfinished"></translation>
+        <translation>左下</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="822"/>
         <source>Bottom Right</source>
-        <translation type="unfinished"></translation>
+        <translation>右下</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="824"/>
         <source>Center</source>
-        <translation type="unfinished"></translation>
+        <translation>中心</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="849"/>
         <source>Quality range of 0-100; Higher number is better quality and larger file size</source>
-        <translation type="unfinished"></translation>
+        <translation>质量范围为0-100；数字越大，质量越好，文件大小也越大</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="853"/>
         <source>JPEG Quality</source>
-        <translation type="unfinished"></translation>
+        <translation>JPEG质量</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="864"/>
         <source>Reverse arrow</source>
-        <translation type="unfinished"></translation>
+        <translation>反向箭头</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="865"/>
         <source>Draw the arrow head first</source>
-        <translation type="unfinished"></translation>
+        <translation>先画箭头</translation>
     </message>
 </context>
 <context>
@@ -1855,22 +1855,22 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="307"/>
         <source>Rotate Right</source>
-        <translation type="unfinished"></translation>
+        <translation>向右旋转</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="312"/>
         <source>Rotate Left</source>
-        <translation type="unfinished"></translation>
+        <translation>向左旋转</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="317"/>
         <source>Increase Opacity</source>
-        <translation type="unfinished"></translation>
+        <translation>增加不透明度</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="324"/>
         <source>Decrease Opacity</source>
-        <translation type="unfinished"></translation>
+        <translation>降低不透明度</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="331"/>
@@ -1888,7 +1888,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="36"/>
         <source>Set Pixelate as the paint tool.</source>
-        <translation type="unfinished"></translation>
+        <translation>将像素化设置为绘画工具。</translation>
     </message>
     <message>
         <source>Set Pixelate as the paint tool</source>
@@ -2007,12 +2007,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/main.cpp" line="201"/>
         <source>Capture screenshot of all monitors at the same time.</source>
-        <translation type="unfinished"></translation>
+        <translation>同时截取所有显示器的屏幕截图。</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="211"/>
         <source>Capture a screenshot of the specified monitor.</source>
-        <translation type="unfinished"></translation>
+        <translation>截取指定显示器的屏幕截图。</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="216"/>
@@ -2072,7 +2072,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/main.cpp" line="250"/>
         <source>Enable or disable the notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>启用或禁用通知</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="253"/>
@@ -2213,12 +2213,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="68"/>
         <source>Subcommands</source>
-        <translation type="unfinished"></translation>
+        <translation>子命令</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="329"/>
         <source>subcommands</source>
-        <translation type="unfinished"></translation>
+        <translation>子命令</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="330"/>
@@ -2374,17 +2374,17 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="54"/>
         <source>The universal wayland screen capture adapter requires Grim as the screen capture component of wayland. If the screen capture component is missing, please install it!</source>
-        <translation type="unfinished"></translation>
+        <translation>通用的 Wayland 屏幕捕获适配器需要 Grim 作为 Wayland 的屏幕捕获组件。如果缺少屏幕捕获组件，请安装它！</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="169"/>
         <source>If the useGrimAdapter setting is not enabled, the dbus protocol will be used. It should be noted that using the dbus protocol under wayland is not recommended. It is recommended to enable the useGrimAdapter setting in flameshot.ini to activate the grim-based general wayland screenshot adapter</source>
-        <translation type="unfinished"></translation>
+        <translation>如果未启用 useGrimAdapter 设置，将使用 dbus 协议。需要注意的是，在 wayland 下使用 dbus 协议并不推荐。建议在 flameshot.ini 中启用 useGrimAdapter 设置，以激活基于 grim 的通用 wayland 屏幕截图适配器</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="180"/>
         <source>grim&apos;s screenshot component is implemented based on wlroots, it may not be used in GNOME or similar desktop environments</source>
-        <translation type="unfinished"></translation>
+        <translation>grim 的截图组件是基于 wlroots 实现的，可能无法在 GNOME 或类似的桌面环境中使用。</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="192"/>
