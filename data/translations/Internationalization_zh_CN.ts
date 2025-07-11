@@ -245,17 +245,17 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="482"/>
         <source>Quit Capture</source>
-        <translation type="unfinished"></translation>
+        <translation>退出截图</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="483"/>
         <source>Are you sure you want to quit capture?</source>
-        <translation type="unfinished"></translation>
+        <translation>确定要退出截屏吗？</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="488"/>
         <source>Do not show this again</source>
-        <translation type="unfinished"></translation>
+        <translation>不再显示</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="683"/>
@@ -1134,12 +1134,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="316"/>
         <source>Show abort notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>显示中断提示</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="317"/>
         <source>Enable abort notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>启用中断通知</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="330"/>
@@ -1149,12 +1149,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="343"/>
         <source>Use grim to capture screenshots</source>
-        <translation type="unfinished"></translation>
+        <translation>用grim 截屏</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="345"/>
         <source>Grim is a wayland only utility to capture screens based on the screencopy protocol. Generally only enable on minimal wayland window managers like sway, hyprland, etc.</source>
-        <translation type="unfinished"></translation>
+        <translation>Grim是一个只用于wayland的截图工具,基于screencopy protocol, 通常仅在最小化的wayland合成器中启用,如sway,hyprland等</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="363"/>
