@@ -666,17 +666,18 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
         painter.setPen(uicolor);
         painter.setBrush(QBrush(uicolor));
 
-        auto topLeft = mapToGlobal(m_context.selection.topLeft());
+        const auto scale{ m_context.screenshot.devicePixelRatio() };
+        auto topLeft = mapToGlobal(m_context.selection.topLeft() / scale);
         topLeft.rx() -= topLeft.x() % m_gridSize;
         topLeft.ry() -= topLeft.y() % m_gridSize;
         topLeft = mapFromGlobal(topLeft);
 
-        const auto scale{ m_context.screenshot.devicePixelRatio() };
-        const auto step{ m_gridSize * scale };
+        const auto step{ m_gridSize / scale };
         const auto radius{ 1 * scale };
 
-        for (int y = topLeft.y(); y < m_context.selection.bottom(); y += step) {
-            for (int x = topLeft.x(); x < m_context.selection.right();
+        for (int y = topLeft.y(); y < m_context.selection.bottom() / scale;
+             y += step) {
+            for (int x = topLeft.x(); x < m_context.selection.right() / scale;
                  x += step) {
                 painter.drawEllipse(x, y, radius, radius);
             }
@@ -1812,10 +1813,8 @@ QPoint CaptureWidget::snapToGrid(const QPoint& point) const
 
     const auto scale{ m_context.screenshot.devicePixelRatio() };
 
-    snapPoint.setX((qRound(snapPoint.x() / double(m_gridSize)) * m_gridSize) *
-                   scale);
-    snapPoint.setY((qRound(snapPoint.y() / double(m_gridSize)) * m_gridSize) *
-                   scale);
+    snapPoint.setX((qRound(snapPoint.x() / double(m_gridSize)) * m_gridSize));
+    snapPoint.setY((qRound(snapPoint.y() / double(m_gridSize)) * m_gridSize));
 
     return mapFromGlobal(snapPoint);
 }
