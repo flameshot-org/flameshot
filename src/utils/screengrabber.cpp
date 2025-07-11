@@ -164,6 +164,7 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
             case DesktopInfo::QTILE:
             case DesktopInfo::WLROOTS:
             case DesktopInfo::HYPRLAND:
+            case DesktopInfo::NIRI:
             case DesktopInfo::OTHER: {
                 if (!ConfigHandler().useGrimAdapter()) {
                     if (!ConfigHandler().disabledGrimWarning()) {

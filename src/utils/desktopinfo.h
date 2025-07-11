@@ -15,6 +15,7 @@ public:
         GNOME,
         KDE,
         COSMIC,
+        NIRI,
         OTHER,
         QTILE,
         WLROOTS,
