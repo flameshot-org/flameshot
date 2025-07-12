@@ -5,6 +5,7 @@
 #include "src/utils/confighandler.h"
 #include "textconfig.h"
 #include "textwidget.h"
+#include <qgraphicseffect.h>
 
 #define BASE_POINT_SIZE 8
 #define MAX_INFO_LENGTH 24
@@ -106,6 +107,13 @@ QWidget* TextTool::widget()
     m_widget->setFont(m_font);
     m_widget->setAlignment(m_alignment);
     m_widget->setText(m_text);
+    if (dropShadowEnabled()) {
+        QGraphicsDropShadowEffect* shadowEffect = new QGraphicsDropShadowEffect;
+        shadowEffect->setBlurRadius(10.0);
+        shadowEffect->setOffset(3, 3);
+        shadowEffect->setColor(QColor(0, 0, 0, 128));
+        m_widget->setGraphicsEffect(shadowEffect);
+    }
     m_widget->selectAll();
     connect(m_widget, &TextWidget::textUpdated, this, &TextTool::updateText);
     return m_widget;
@@ -251,6 +259,7 @@ void TextTool::drawStart(const CaptureContext& context)
 {
     m_color = context.color;
     m_size = context.toolSize;
+    onDropShadowChanged(context.dropShadow);
     emit requestAction(REQ_ADD_CHILD_WIDGET);
 }
 
@@ -354,4 +363,22 @@ void TextTool::setEditMode(bool editMode)
 bool TextTool::isChanged()
 {
     return QString::compare(m_text, m_textOld, Qt::CaseInsensitive) != 0;
+}
+
+void TextTool::drawDropShadow(QPainter& painter, const QPixmap& pixmap)
+{
+    const QColor originalColor = m_color;
+    const QColor shadowColor = QColor(0, 0, 0, 80);
+    onColorChanged(shadowColor);
+
+    qreal start = 0.5;
+    qreal step = size() < 20 ? 0.2 : 0.4;
+    qreal end = size() < 20 ? 1.0 : 2.0;
+    for (qreal var = start; var < end; var += step) {
+        painter.translate(var, var);
+        process(painter, pixmap);
+    }
+
+    painter.resetTransform();
+    onColorChanged(originalColor);
 }
