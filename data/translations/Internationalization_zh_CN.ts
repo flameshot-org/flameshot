@@ -55,7 +55,7 @@
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="49"/>
         <source>Open With</source>
-        <translation>打开</translation>
+        <translation>用...打开</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="78"/>
@@ -245,17 +245,17 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="482"/>
         <source>Quit Capture</source>
-        <translation type="unfinished"></translation>
+        <translation>退出截图</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="483"/>
         <source>Are you sure you want to quit capture?</source>
-        <translation type="unfinished"></translation>
+        <translation>确定要退出截屏吗？</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="488"/>
         <source>Do not show this again</source>
-        <translation type="unfinished"></translation>
+        <translation>不再显示</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="683"/>
@@ -1114,12 +1114,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="277"/>
         <source>Use last region for GUI mode</source>
-        <translation type="unfinished">使用上一次的区域</translation>
+        <translation>在图形用户界面模式下使用最后一个区域</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="279"/>
         <source>Use the last region as the default selection for the next screenshot in GUI mode</source>
-        <translation type="unfinished">使用上一次选中的区域作为下一次截图的默认选区</translation>
+        <translation>在图形界面模式下，将最后一个区域作为下次截图的默认选择</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="293"/>
@@ -1134,12 +1134,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="316"/>
         <source>Show abort notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>显示中断提示</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="317"/>
         <source>Enable abort notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>启用中断通知</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="330"/>
@@ -1149,12 +1149,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="343"/>
         <source>Use grim to capture screenshots</source>
-        <translation type="unfinished"></translation>
+        <translation>用grim 截图</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="345"/>
         <source>Grim is a wayland only utility to capture screens based on the screencopy protocol. Generally only enable on minimal wayland window managers like sway, hyprland, etc.</source>
-        <translation type="unfinished"></translation>
+        <translation>Grim是一个只用于wayland的截图工具,基于screencopy protocol, 通常仅在最小化的wayland合成器中启用,如sway,hyprland等.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="363"/>
@@ -1201,42 +1201,42 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="432"/>
         <source>Automatically unload from memory when it is not needed</source>
-        <translation type="unfinished"></translation>
+        <translation>在不需要时自动从内存中卸载</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="433"/>
         <source>Automatically close daemon (background process) when it is not needed</source>
-        <translation type="unfinished"></translation>
+        <translation>在不需要时自动关闭守护程序（后台进程）</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="444"/>
         <source>Launch in background at startup</source>
-        <translation type="unfinished"></translation>
+        <translation>在启动时在后台启动</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="445"/>
         <source>Launch Flameshot daemon (background process) when computer is booted</source>
-        <translation type="unfinished"></translation>
+        <translation>当计算机启动时启动 Flameshot 守护进程（后台进程）</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="470"/>
         <source>Ask before quit capture</source>
-        <translation type="unfinished"></translation>
+        <translation>退出截图前请询问</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="473"/>
         <source>Show the confirmation prompt before ESC quit</source>
-        <translation type="unfinished"></translation>
+        <translation>在退出时显示确认提示</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="498"/>
         <source>Enable Copy to clipboard on Double Click</source>
-        <translation type="unfinished"></translation>
+        <translation>在双击时启用复制到剪贴板</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="510"/>
         <source>Copy URL after uploading was successful</source>
-        <translation type="unfinished"></translation>
+        <translation>上传成功后复制网址</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="522"/>
@@ -1286,7 +1286,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="678"/>
         <source>Use lossy JPG format for clipboard (lossless PNG default)</source>
-        <translation type="unfinished"></translation>
+        <translation>对剪贴板使用有损JPG格式（默认无损PNG）</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="704"/>
@@ -1347,72 +1347,72 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="794"/>
         <source>Milliseconds before geometry display hides; 0 means do not hide</source>
-        <translation type="unfinished"></translation>
+        <translation>几何显示隐藏前的毫秒数；设为0则不隐藏</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="797"/>
         <source>Set geometry display timeout (ms)</source>
-        <translation type="unfinished"></translation>
+        <translation>设置几何显示时间(毫秒）</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="805"/>
         <source>Selection Geometry Display</source>
-        <translation type="unfinished"></translation>
+        <translation>选取几何显示</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="812"/>
         <source>Display Location</source>
-        <translation type="unfinished"></translation>
+        <translation>显示位置</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="815"/>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>无</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="816"/>
         <source>Top Left</source>
-        <translation type="unfinished"></translation>
+        <translation>左上</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="818"/>
         <source>Top Right</source>
-        <translation type="unfinished"></translation>
+        <translation>右上</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="820"/>
         <source>Bottom Left</source>
-        <translation type="unfinished"></translation>
+        <translation>左下</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="822"/>
         <source>Bottom Right</source>
-        <translation type="unfinished"></translation>
+        <translation>右下</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="824"/>
         <source>Center</source>
-        <translation type="unfinished"></translation>
+        <translation>中心</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="849"/>
         <source>Quality range of 0-100; Higher number is better quality and larger file size</source>
-        <translation type="unfinished"></translation>
+        <translation>质量范围为0-100；数字越大，质量越好，文件大小也越大</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="853"/>
         <source>JPEG Quality</source>
-        <translation type="unfinished"></translation>
+        <translation>JPEG质量</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="864"/>
         <source>Reverse arrow</source>
-        <translation type="unfinished"></translation>
+        <translation>反向箭头</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="865"/>
         <source>Draw the arrow head first</source>
-        <translation type="unfinished"></translation>
+        <translation>先画箭头</translation>
     </message>
 </context>
 <context>
@@ -1855,27 +1855,27 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="307"/>
         <source>Rotate Right</source>
-        <translation type="unfinished"></translation>
+        <translation>向右旋转</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="312"/>
         <source>Rotate Left</source>
-        <translation type="unfinished"></translation>
+        <translation>向左旋转</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="317"/>
         <source>Increase Opacity</source>
-        <translation type="unfinished"></translation>
+        <translation>增加不透明度</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="324"/>
         <source>Decrease Opacity</source>
-        <translation type="unfinished"></translation>
+        <translation>降低不透明度</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="331"/>
         <source>Close</source>
-        <translation type="unfinished">关闭</translation>
+        <translation>关闭</translation>
     </message>
 </context>
 <context>
@@ -1888,7 +1888,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="36"/>
         <source>Set Pixelate as the paint tool.</source>
-        <translation type="unfinished"></translation>
+        <translation>将像素化设置为绘画工具。</translation>
     </message>
     <message>
         <source>Set Pixelate as the paint tool</source>
@@ -2007,12 +2007,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/main.cpp" line="201"/>
         <source>Capture screenshot of all monitors at the same time.</source>
-        <translation type="unfinished"></translation>
+        <translation>同时截取所有显示器的屏幕截图。</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="211"/>
         <source>Capture a screenshot of the specified monitor.</source>
-        <translation type="unfinished"></translation>
+        <translation>截取指定显示器的屏幕截图。</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="216"/>
@@ -2072,7 +2072,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/main.cpp" line="250"/>
         <source>Enable or disable the notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>启用或禁用通知</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="253"/>
@@ -2213,12 +2213,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="68"/>
         <source>Subcommands</source>
-        <translation type="unfinished"></translation>
+        <translation>子命令</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="329"/>
         <source>subcommands</source>
-        <translation type="unfinished"></translation>
+        <translation>子命令</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="330"/>
@@ -2374,22 +2374,22 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="54"/>
         <source>The universal wayland screen capture adapter requires Grim as the screen capture component of wayland. If the screen capture component is missing, please install it!</source>
-        <translation type="unfinished"></translation>
+        <translation>通用的 Wayland 屏幕捕获适配器需要 Grim 作为 Wayland 的屏幕捕获组件。如果缺少屏幕捕获组件，请安装它！</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="169"/>
         <source>If the useGrimAdapter setting is not enabled, the dbus protocol will be used. It should be noted that using the dbus protocol under wayland is not recommended. It is recommended to enable the useGrimAdapter setting in flameshot.ini to activate the grim-based general wayland screenshot adapter</source>
-        <translation type="unfinished"></translation>
+        <translation>如果未启用 useGrimAdapter 设置，将使用 dbus 协议。需要注意的是，在 wayland 下使用 dbus 协议并不推荐。建议在 flameshot.ini 中启用 useGrimAdapter 设置，以激活基于 grim 的通用 wayland 屏幕截图适配器</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="180"/>
         <source>grim&apos;s screenshot component is implemented based on wlroots, it may not be used in GNOME or similar desktop environments</source>
-        <translation type="unfinished"></translation>
+        <translation>grim 的截图组件是基于 wlroots 实现的，可能无法在 GNOME 或类似的桌面环境中使用</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="192"/>
         <source>Unable to detect desktop environment (GNOME? KDE? Qile? Sway? ...)</source>
-        <translation type="unfinished"></translation>
+        <translation>无法检测桌面环境（GNOME? KDE? Qile? Sway? …）</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="195"/>
@@ -2498,22 +2498,22 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="180"/>
         <source>Symmetrically decrease width by 2px</source>
-        <translation type="unfinished"></translation>
+        <translation>对称地将宽度减少2px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="182"/>
         <source>Symmetrically increase width by 2px</source>
-        <translation type="unfinished"></translation>
+        <translation>对称地增加宽度 2 px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="184"/>
         <source>Symmetrically increase height by 2px</source>
-        <translation type="unfinished"></translation>
+        <translation>对称地增加高度 2 px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="186"/>
         <source>Symmetrically decrease height by 2px</source>
-        <translation type="unfinished"></translation>
+        <translation>对称地减少高度 2 px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="187"/>
@@ -2548,12 +2548,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="194"/>
         <source>Delete selected drawn object</source>
-        <translation type="unfinished"></translation>
+        <translation>删除选定的绘制对象</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="195"/>
         <source>Cancel current selection</source>
-        <translation type="unfinished"></translation>
+        <translation>取消当前选择</translation>
     </message>
     <message>
         <source>Delete current tool</source>
@@ -2602,7 +2602,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="85"/>
         <source>Display grid</source>
-        <translation type="unfinished"></translation>
+        <translation>显示网格</translation>
     </message>
 </context>
 <context>
@@ -2858,7 +2858,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="159"/>
         <source>&amp;Open Save Path</source>
-        <translation type="unfinished"></translation>
+        <translation>打开保存路径(&amp;O)</translation>
     </message>
 </context>
 <context>
