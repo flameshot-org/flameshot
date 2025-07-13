@@ -2,7 +2,7 @@
 # spec file for package flameshot on opensuse leap 15.x
 #
 Name: flameshot
-Version: 12.1.0
+Version: 13.0.rc1
 Release: 1
 License: GPLv3+ and ASL 2.0 and GPLv2 and LGPLv3 and Free Art
 Summary: Powerful yet simple to use screenshot software
@@ -95,6 +95,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_mandir}/man1/%{name}.1*
 
 %changelog
+* Sun Jul 12 2025 Jeremy Borgman <borgman.jeremy@pm.me> - 13.0.rc1
+- Beta for 13 release.
+
 * Sun Jul 03 2022 Jeremy Borgman <borgman.jeremy@pm.me> - 12.1.0-1
 - Update for 12.1 release.
 
