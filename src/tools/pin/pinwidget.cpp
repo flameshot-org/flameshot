@@ -40,6 +40,7 @@ PinWidget::PinWidget(const QPixmap& pixmap,
     setFocusPolicy(Qt::StrongFocus);
     setAttribute(Qt::WA_TranslucentBackground);
     setAttribute(Qt::WA_DeleteOnClose);
+    setWindowTitle("flameshot-pin");
     ConfigHandler conf;
     m_baseColor = conf.uiColor();
     m_hoverColor = conf.contrastUiColor();
