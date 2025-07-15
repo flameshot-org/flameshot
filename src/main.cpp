@@ -31,6 +31,9 @@
 #include <desktopinfo.h>
 #endif
 
+// Required for saving button list QList<CaptureTool::Type>
+Q_DECLARE_METATYPE(QList<int>)
+
 int requestCaptureAndWait(const CaptureRequest& req)
 {
     Flameshot* flameshot = Flameshot::instance();
@@ -134,6 +137,9 @@ void reinitializeAsQApplication(int& argc, char* argv[])
 
 int main(int argc, char* argv[])
 {
+    // Required for saving button list QList<CaptureTool::Type>
+    qRegisterMetaType<QList<int>>();
+
     QCoreApplication::setApplicationVersion(APP_VERSION);
     QCoreApplication::setApplicationName(QStringLiteral("flameshot"));
     QCoreApplication::setOrganizationName(QStringLiteral("flameshot"));
