@@ -288,8 +288,12 @@ CaptureWidget::~CaptureWidget()
         geometry.setTopLeft(geometry.topLeft() + m_context.widgetOffset);
         Flameshot::instance()->exportCapture(
           pixmap(), geometry, m_context.request);
+        if (ConfigHandler().backtrackEnable()) {
+            BacktrackUtils::getInstance()->saveCapture(m_context.origScreenshot,
+                                                       geometry);
+        }
     } else {
-        emit Flameshot::instance()->captureFailed();
+        emit Flameshot::instance() -> captureFailed();
     }
 }
 
@@ -440,11 +444,19 @@ void CaptureWidget::initHelpMessage()
             keyMap << std::pair(shortcut, tool->description());
         }
     }
+
+
+    if (ConfigHandler().backtrackEnable()) {
+        keyMap << QPair(tr("Comma"), tr("Show screen backtrack backward"));
+        keyMap << QPair(tr("Period"), tr("Show screen backtrack forward"));
+    }
+
     keyMap << std::pair(tr("Mouse Wheel"), tr("Change tool size"));
     keyMap << std::pair(tr("Right Click"), tr("Show color picker"));
     keyMap << std::pair(ConfigHandler().shortcut("TYPE_TOGGLE_PANEL"),
                         tr("Open side panel"));
     keyMap << std::pair(tr("Esc"), tr("Exit"));
+
 
     m_helpMessage = OverlayMessage::compileFromKeyMap(keyMap);
 }
@@ -706,6 +718,10 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
         drawErrorMessage(tr("Configuration error resolved. Launch `flameshot "
                             "gui` again to apply it."),
                          &painter);
+    }
+    if (BacktrackUtils::getInstance()
+          ->isNewest()) { // when current screenshot is not a history screenshot
+        saveCurrentState();
     }
 }
 
@@ -1631,6 +1647,10 @@ void CaptureWidget::initShortcuts()
                 SLOT(selectAll()));
 
     newShortcut(Qt::Key_Escape, this, SLOT(deleteToolWidgetOrClose()));
+    if (ConfigHandler().backtrackEnable()) {
+        newShortcut(Qt::Key_Comma, this, SLOT(onBacktrackBackward()));
+        newShortcut(Qt::Key_Period, this, SLOT(onBacktrackForward()));
+    }
 }
 
 void CaptureWidget::deleteCurrentTool()
@@ -1641,6 +1661,54 @@ void CaptureWidget::deleteCurrentTool()
     if (oldToolSize != m_context.toolSize) {
         emit toolSizeChanged(m_context.toolSize);
     }
+}
+
+void CaptureWidget::onBacktrackBackward()
+{
+    // m_context.selection.setHeight(m_context.selection.height() / 2);
+    auto cu = BacktrackUtils::getInstance();
+    cu->fetchOlder();
+    if (cu->currentScreenShot() != nullptr) {
+        m_context.origScreenshot = cu->currentScreenShot()->copy();
+        m_context.screenshot = m_context.origScreenshot;
+        m_selection->setVisible(true);
+        m_selection->show();
+        m_selection->setGeometry(cu->cureentSelection());
+        m_context.selection = extendedRect(m_selection->geometry());
+
+        emit m_selection->geometrySettled();
+
+        update();
+    }
+}
+void CaptureWidget::onBacktrackForward()
+{
+    auto cu = BacktrackUtils::getInstance();
+    cu->fetchNewer();
+    if (cu->isNewest()) {
+        m_context = m_currentContext;
+        m_selection->setGeometry(m_currentSelection);
+        m_selection->setVisible(m_selectionWidgetVisible);
+        if (!m_selectionWidgetVisible) {
+            m_selection->hide();
+        }
+    } else if (cu->currentScreenShot()) {
+        m_context.origScreenshot = cu->currentScreenShot()->copy();
+        m_context.screenshot = m_context.origScreenshot;
+        m_selection->setGeometry(cu->cureentSelection());
+        m_selection->setVisible(true);
+        m_context.selection = extendedRect(m_selection->geometry());
+        m_selection->show();
+    }
+    emit m_selection->geometrySettled();
+
+    update();
+}
+void CaptureWidget::saveCurrentState()
+{
+    m_currentContext = m_context;
+    m_selectionWidgetVisible = m_selection->isVisible();
+    m_currentSelection = m_selection->geometry();
 }
 
 void CaptureWidget::updateSizeIndicator()

@@ -1,4 +1,5 @@
 #include "valuehandler.h"
+#include "cacheutils.h"
 #include "capturetool.h"
 #include "colorpickerwidget.h"
 #include "confighandler.h"
@@ -271,6 +272,22 @@ QVariant ExistingDir::fallback()
 }
 
 QString ExistingDir::expected()
+{
+    return QStringLiteral("existing directory");
+}
+bool ExistingCacheDir::check(const QVariant& val)
+{
+    if (!val.canConvert(QVariant::String) || val.toString().isEmpty()) {
+        return false;
+    }
+    QFileInfo info(val.toString());
+    return info.isDir() && info.exists();
+}
+QVariant ExistingCacheDir::fallback()
+{
+    return getCachePath();
+}
+QString ExistingCacheDir::expected()
 {
     return QStringLiteral("existing directory");
 }

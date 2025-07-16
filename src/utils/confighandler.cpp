@@ -16,6 +16,7 @@
 #include <QStandardPaths>
 #include <QVector>
 #include <algorithm>
+#include <cacheutils.h>
 #include <stdexcept>
 
 #if defined(Q_OS_MACOS)
@@ -55,15 +56,12 @@ bool verifyLaunchFile()
  *             misbehave.
  */
 #define OPTION(KEY, TYPE)                                                      \
-    {                                                                          \
-        QStringLiteral(KEY), QSharedPointer<ValueHandler>(new TYPE)            \
-    }
+    { QStringLiteral(KEY), QSharedPointer<ValueHandler>(new TYPE) }
 
 #define SHORTCUT(NAME, DEFAULT_VALUE)                                          \
-    {                                                                          \
-        QStringLiteral(NAME), QSharedPointer<KeySequence>(new KeySequence(     \
-                                QKeySequence(QLatin1String(DEFAULT_VALUE))))   \
-    }
+    { QStringLiteral(NAME),                                                    \
+      QSharedPointer<KeySequence>(                                             \
+        new KeySequence(QKeySequence(QLatin1String(DEFAULT_VALUE)))) }
 
 /**
  * This map contains all the information that is needed to parse, verify and
@@ -131,11 +129,18 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     // NOTE: If another tool size is added besides drawThickness and
     // drawFontSize, remember to update ConfigHandler::toolSize
     OPTION("copyOnDoubleClick"           ,Bool               ( false         )),
+
+
+    OPTION("backtrackEnable", Bool (false)),
+    OPTION("backtrackCachePath", ExistingCacheDir        (                )),
+    OPTION("backtrackCacheLimits", BoundedInt        (0, 200, 5 ))
+
     OPTION("uploadClientSecret"          ,String             ( "313baf0c7b4d3ff" )),
     OPTION("showSelectionGeometry"       , BoundedInt        ( 0, 5, 4       )),
     OPTION("showSelectionGeometryHideTime", LowerBoundedInt  ( 0, 3000       )),
     OPTION("jpegQuality"                 , BoundedInt        ( 0,100,75      )),
     OPTION("reverseArrow"                ,Bool               ( false         )),
+
 };
 
 static QMap<QString, QSharedPointer<KeySequence>> recognizedShortcuts = {
@@ -209,7 +214,7 @@ ConfigHandler::ConfigHandler()
         QObject::connect(m_configWatcher.data(),
                          &QFileSystemWatcher::fileChanged,
                          [](const QString& fileName) {
-                             emit getInstance()->fileChanged();
+                             emit getInstance() -> fileChanged();
 
                              if (QFile(fileName).exists()) {
                                  m_configWatcher->addPath(fileName);
@@ -709,12 +714,12 @@ void ConfigHandler::setErrorState(bool error) const
     if (!hadError && m_hasError) {
         QString msg = errorMessage();
         AbstractLogger::error() << msg;
-        emit getInstance()->error();
+        emit getInstance() -> error();
     } else if (hadError && !m_hasError) {
         auto msg =
           tr("You have successfully resolved the configuration error.");
         AbstractLogger::info() << msg;
-        emit getInstance()->errorResolved();
+        emit getInstance() -> errorResolved();
     }
 }
 
