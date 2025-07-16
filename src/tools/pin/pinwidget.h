@@ -49,6 +49,7 @@ private:
     QColor m_baseColor, m_hoverColor;
 
     bool m_expanding{ false };
+    qreal m_minSize;
     qreal m_scaleFactor{ 1 };
     qreal m_opacity{ 1 };
     unsigned int m_rotateFactor{ 0 };
