@@ -320,15 +320,15 @@ Nyomd meg a Space billentyűt, hogy megnyisd az oldalsó panelt.</translation>
     </message>
     <message>
         <source>Enter or Left Click</source>
-        <translation></translation>
+        <translation>Enter or Left Click</translation>
     </message>
     <message>
         <source>Hold Left Click</source>
-        <translation></translation>
+        <translation>Hold Left Click</translation>
     </message>
     <message>
         <source>Space or Right Click</source>
-        <translation></translation>
+        <translation>Space or Right Click</translation>
     </message>
     <message>
         <source>Esc</source>
@@ -2047,7 +2047,7 @@ Lehet, hogy meg kepp adnod egy &apos;\&apos; karaktert a &apos;#&apos; karakter 
     </message>
     <message>
         <source>Left Double-click</source>
-        <translation></translation>
+        <translation>Left Double-click</translation>
     </message>
     <message>
         <source>Toggle side panel</source>
