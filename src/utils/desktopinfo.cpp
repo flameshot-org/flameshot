@@ -47,6 +47,9 @@ DesktopInfo::WM DesktopInfo::windowManager()
         if (desktop.contains(QLatin1String("cosmic"))) {
             return DesktopInfo::COSMIC;
         }
+        if (desktop.contains(QLatin1String("niri"))) {
+            return DesktopInfo::NIRI;
+        }
     }
 
     if (!GNOME_DESKTOP_SESSION_ID.isEmpty()) {
