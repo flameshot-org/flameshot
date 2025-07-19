@@ -75,7 +75,15 @@ void InvertTool::paintMousePreview(QPainter& painter,
     Q_UNUSED(painter)
 }
 
+void InvertTool::finishShape() {}
+
 void InvertTool::pressed(CaptureContext& context)
 {
     Q_UNUSED(context)
+}
+
+void InvertTool::drawDropShadow(QPainter& painter, const QPixmap& pixmap)
+{
+    Q_UNUSED(painter)
+    Q_UNUSED(pixmap)
 }
