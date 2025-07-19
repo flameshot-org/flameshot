@@ -21,7 +21,7 @@
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="105"/>
         <source>Remove</source>
-        <translation>Удалить</translation>
+        <translation>Убрать</translation>
     </message>
 </context>
 <context>
@@ -579,7 +579,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="77"/>
         <source>Remove</source>
-        <translation>Удалить</translation>
+        <translation>Убрать</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="79"/>
