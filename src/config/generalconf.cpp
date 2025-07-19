@@ -55,6 +55,7 @@ GeneralConf::GeneralConf(QWidget* parent)
     initCopyPathAfterSave();
     initAntialiasingPinZoom();
     initUndoLimit();
+    initInsecurePixelate();
 #ifdef ENABLE_IMGUR
     initCopyAndCloseAfterUpload();
     initUploadWithoutConfirmation();
@@ -875,6 +876,20 @@ void GeneralConf::initReverseArrow()
       m_reverseArrow, &QCheckBox::clicked, this, &GeneralConf::setReverseArrow);
 }
 
+void GeneralConf::initInsecurePixelate()
+{
+    m_insecurePixelate = new QCheckBox(tr("Insecure Pixelate"), this);
+    m_insecurePixelate->setToolTip(
+      tr("Draw the pixelation effect in an insecure but more asethetic way."));
+    m_insecurePixelate->setChecked(ConfigHandler().insecurePixelate());
+    m_scrollAreaLayout->addWidget(m_insecurePixelate);
+
+    connect(m_insecurePixelate,
+            &QCheckBox::clicked,
+            this,
+            &GeneralConf::setInsecurePixelate);
+}
+
 void GeneralConf::setSelGeoHideTime(int v)
 {
     ConfigHandler().setValue("showSelectionGeometryHideTime", v);
@@ -909,4 +924,9 @@ void GeneralConf::useJpgForClipboardChanged(bool checked)
 void GeneralConf::setReverseArrow(bool checked)
 {
     ConfigHandler().setReverseArrow(checked);
+}
+
+void GeneralConf::setInsecurePixelate(bool checked)
+{
+    ConfigHandler().setInsecurePixelate(checked);
 }

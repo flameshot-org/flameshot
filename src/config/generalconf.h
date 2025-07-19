@@ -61,6 +61,7 @@ private slots:
     void setSelGeoHideTime(int v);
     void setJpegQuality(int v);
     void setReverseArrow(bool checked);
+    void setInsecurePixelate(bool checked);
 
 private:
     const QString chooseFolder(const QString& currentPath = "");
@@ -99,6 +100,7 @@ private:
     void initShowSelectionGeometry();
     void initJpegQuality();
     void initReverseArrow();
+    void initInsecurePixelate();
 
     void _updateComponents(bool allowEmptySavePath);
 
@@ -147,4 +149,5 @@ private:
     QSpinBox* m_xywhTimeout;
     QSpinBox* m_jpegQuality;
     QCheckBox* m_reverseArrow;
+    QCheckBox* m_insecurePixelate;
 };
