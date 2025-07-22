@@ -285,7 +285,7 @@ CaptureWidget::~CaptureWidget()
         auto lastRegion = m_selection->geometry();
         setLastRegion(lastRegion);
         QRect geometry(m_context.selection);
-        geometry.setTopLeft(geometry.topLeft() + m_context.widgetOffset);
+        geometry.moveTo(geometry.topLeft() + m_context.widgetOffset);
         Flameshot::instance()->exportCapture(
           pixmap(), geometry, m_context.request);
     } else {
