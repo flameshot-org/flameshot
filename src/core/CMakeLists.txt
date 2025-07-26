@@ -13,6 +13,13 @@ target_sources(flameshot PRIVATE
     qguiappcurrentscreen.cpp
 )
 
+IF (USE_KDSINGLEAPPLICATION)
+target_sources(flameshot PRIVATE
+    signaldaemon.h
+    signaldaemon.cpp
+)
+ENDIF ()
+
 IF (WIN32)
     target_sources(flameshot PRIVATE globalshortcutfilter.h globalshortcutfilter.cpp)
 ENDIF ()
