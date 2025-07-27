@@ -6,22 +6,22 @@
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="52"/>
         <source>Add New</source>
-        <translation type="unfinished"></translation>
+        <translation>Lisa uus</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="103"/>
         <source>Move Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Liiguta ülespoole</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="104"/>
         <source>Move Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Liiguta allapoole</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="105"/>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Eemalda</translation>
     </message>
 </context>
 <context>
@@ -29,7 +29,7 @@
     <message>
         <location filename="../../src/tools/accept/accepttool.cpp" line="31"/>
         <source>Accept</source>
-        <translation type="unfinished"></translation>
+        <translation>Nõustu</translation>
     </message>
     <message>
         <location filename="../../src/tools/accept/accepttool.cpp" line="41"/>
@@ -205,7 +205,7 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="422"/>
         <source>Select screenshot area</source>
-        <translation type="unfinished"></translation>
+        <translation>Vali ekraanitõmmise ala</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="436"/>
@@ -2211,7 +2211,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="199"/>
         <source>Quit capture</source>
-        <translation type="unfinished">Ix de la captura</translation>
+        <translation>Lõpeta ekraanitõmmistamine</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="207"/>
@@ -2226,7 +2226,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="217"/>
         <source>Show color picker</source>
-        <translation type="unfinished">Mostra el selector de color</translation>
+        <translation>Näita värvivalijat</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="218"/>
@@ -2315,7 +2315,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="200"/>
         <source>Unable to capture screen</source>
-        <translation type="unfinished">Imposible capturar la pantalla</translation>
+        <translation>Ekraanitõmmise tegemine ei õnnestu</translation>
     </message>
 </context>
 <context>
@@ -2369,17 +2369,17 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="53"/>
         <source>Available shortcuts in the screen capture mode.</source>
-        <translation type="unfinished">Dreceres disponibles en el mode de captura de pantalla.</translation>
+        <translation>Ekraanitõmmise vaates kasutatavad kiirklahvid.</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="64"/>
         <source>Description</source>
-        <translation type="unfinished">Descripció</translation>
+        <translation>Kirjeldus</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="64"/>
         <source>Key</source>
-        <translation type="unfinished">Tecla</translation>
+        <translation>Klahv</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="167"/>
@@ -2389,27 +2389,27 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="174"/>
         <source>Toggle side panel</source>
-        <translation type="unfinished">Toggle side panel</translation>
+        <translation>Lülita külgriba sisse/välja</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="175"/>
         <source>Resize selection left 1px</source>
-        <translation type="unfinished">Resize selection left 1px</translation>
+        <translation>Suurenda valikut vasakul 1 piksli võrra</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="176"/>
         <source>Resize selection right 1px</source>
-        <translation type="unfinished">Resize selection right 1px</translation>
+        <translation>Suurenda valikut paremal 1 piksli võrra</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="177"/>
         <source>Resize selection up 1px</source>
-        <translation type="unfinished">Resize selection up 1px</translation>
+        <translation>Suurenda valikut üleval 1 piksli võrra</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="178"/>
         <source>Resize selection down 1px</source>
-        <translation type="unfinished">Resize selection down 1px</translation>
+        <translation>Suurenda valikut all 1 piksli võrra</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="180"/>
@@ -2434,32 +2434,32 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="187"/>
         <source>Select entire screen</source>
-        <translation type="unfinished">Select entire screen</translation>
+        <translation>Vali kogu ekraan</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="188"/>
         <source>Move selection left 1px</source>
-        <translation type="unfinished">Move selection left 1px</translation>
+        <translation>Liiguta valikut vasakule 1 piksli võrra</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="189"/>
         <source>Move selection right 1px</source>
-        <translation type="unfinished">Move selection right 1px</translation>
+        <translation>Liiguta valikut paremale 1 piksli võrra</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="190"/>
         <source>Move selection up 1px</source>
-        <translation type="unfinished">Move selection up 1px</translation>
+        <translation>Liiguta valikut üles 1 piksli võrra</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="191"/>
         <source>Move selection down 1px</source>
-        <translation type="unfinished">Move selection down 1px</translation>
+        <translation>Liiguta valikut alla 1 piksli võrra</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="192"/>
         <source>Commit text in text area</source>
-        <translation type="unfinished">Commit text in text area</translation>
+        <translation>Lisa tekst tekstialale</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="194"/>
@@ -2478,12 +2478,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="204"/>
         <source>Capture screen</source>
-        <translation type="unfinished">Capture screen</translation>
+        <translation>Tee ekraanitõmmis</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="205"/>
         <source>Screenshot history</source>
-        <translation type="unfinished">Screenshot history</translation>
+        <translation>Ekraanitõmmiste ajalugu</translation>
     </message>
 </context>
 <context>
@@ -2734,42 +2734,42 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="100"/>
         <source>&amp;Take Screenshot</source>
-        <translation type="unfinished">&amp;Captura</translation>
+        <translation>&amp;Tee ekraanitõmmis</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="118"/>
         <source>&amp;Open Launcher</source>
-        <translation type="unfinished">&amp;Obre el llançador d&apos;aplicacions</translation>
+        <translation>&amp;Ava käivitaja</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="123"/>
         <source>&amp;Configuration</source>
-        <translation type="unfinished">&amp;Ajustaments</translation>
+        <translation>&amp;Seadistused</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="128"/>
         <source>&amp;About</source>
-        <translation type="unfinished">&amp;Quant a</translation>
+        <translation>&amp;Rakenduse teave</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="133"/>
         <source>Check for updates</source>
-        <translation type="unfinished">Comprova si hi ha actualitzacions disponibles</translation>
+        <translation>Kontrolli uuendusi</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="144"/>
         <source>New version %1 is available</source>
-        <translation type="unfinished">La nova versió %1 ja és disponible</translation>
+        <translation>Uus versioon %1 on saadaval</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="149"/>
         <source>&amp;Quit</source>
-        <translation type="unfinished">&amp;Surt</translation>
+        <translation>&amp;Välju</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="153"/>
         <source>&amp;Latest Uploads</source>
-        <translation type="unfinished">&amp;Últimes càrregues</translation>
+        <translation>&amp;Viimased üleslaadimised</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="159"/>
@@ -2861,7 +2861,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/widgets/uploadhistory.cpp" line="62"/>
         <source>Screenshots history is empty</source>
-        <translation type="unfinished">L&apos;historial de captures de pantalla és buit</translation>
+        <translation>Ekraanitõmmiste ajalugu on tühi</translation>
     </message>
 </context>
 <context>
@@ -2882,7 +2882,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <location filename="../../src/widgets/uploadlineitem.ui" line="82"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_uploadlineitem.h" line="115"/>
         <source>Copy URL</source>
-        <translation type="unfinished">Copia l&apos;URL</translation>
+        <translation>Kopeeri võrguaadress</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadlineitem.ui" line="95"/>
@@ -2893,12 +2893,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/widgets/uploadlineitem.cpp" line="50"/>
         <source>Confirm to delete</source>
-        <translation type="unfinished">Confirmeu per esborrar</translation>
+        <translation>Kinnita kustutamine</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadlineitem.cpp" line="51"/>
         <source>Are you sure you want to delete a screenshot from the latest uploads and server?</source>
-        <translation type="unfinished">Esteu segur de voler esborrar la captura de les últimes càrregues i del servidor?</translation>
+        <translation>Kas oled kindel, et soovid kustutada ekraanitõmmise viimaste üleslaadimiste loendist ja serverist?</translation>
     </message>
 </context>
 <context>
@@ -2924,7 +2924,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="68"/>
         <source>UI Color Editor</source>
-        <translation type="unfinished">Editor de color de la interfície</translation>
+        <translation>Kasutajaliidese värvihaldus</translation>
     </message>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="74"/>
