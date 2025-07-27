@@ -460,7 +460,7 @@ Premeu Espai per obrir el calaix lateral.</translation>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="96"/>
         <source>Enter color manually or select it using the color-wheel</source>
-        <translation type="unfinished"></translation>
+        <translation>Sisesta värvi number käsitsi või vali ta värvirattast</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="106"/>
@@ -624,12 +624,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="120"/>
         <source>Resolve</source>
-        <translation type="unfinished"></translation>
+        <translation>Lahenda</translation>
     </message>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="124"/>
         <source>&lt;b&gt;Configuration file has errors. Resolve them before continuing.&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Seadistuste failis on vigu. Enne jätkamist palun lahenda nad.&lt;/b&gt;</translation>
     </message>
 </context>
 <context>
@@ -733,32 +733,32 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="24"/>
         <source>Edit the name of your captures:</source>
-        <translation type="unfinished"></translation>
+        <translation>Määratle ekraanitõmmiste nimi:</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="28"/>
         <source>Edit:</source>
-        <translation type="unfinished"></translation>
+        <translation>Muuda:</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="30"/>
         <source>Preview:</source>
-        <translation type="unfinished"></translation>
+        <translation>Eelvaade:</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="73"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Salvesta</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="76"/>
         <source>Saves the pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>Salvestab valitud mustri</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="78"/>
         <source>Restore</source>
-        <translation type="unfinished"></translation>
+        <translation>Taasta</translation>
     </message>
     <message>
         <source>Reset</source>
@@ -767,17 +767,17 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="81"/>
         <source>Restores the saved pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>Taastab valitud mustri</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="83"/>
         <source>Clear</source>
-        <translation type="unfinished"></translation>
+        <translation>Tühjenda</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="89"/>
         <source>Deletes the name</source>
-        <translation type="unfinished"></translation>
+        <translation>Kustutab antud nimemustri</translation>
     </message>
 </context>
 <context>
@@ -2364,7 +2364,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="30"/>
         <source>Hot Keys</source>
-        <translation type="unfinished"></translation>
+        <translation>Kiirklahvid</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="53"/>
@@ -2384,7 +2384,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="167"/>
         <source>Left Double-click</source>
-        <translation type="unfinished"></translation>
+        <translation>Vasak topeltklõps</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="174"/>
@@ -2414,22 +2414,22 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="180"/>
         <source>Symmetrically decrease width by 2px</source>
-        <translation type="unfinished"></translation>
+        <translation>Vähenda laiust sümmeetriliselt 2 piksli võrra</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="182"/>
         <source>Symmetrically increase width by 2px</source>
-        <translation type="unfinished"></translation>
+        <translation>Suurenda laiust sümmeetriliselt 2 piksli võrra</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="184"/>
         <source>Symmetrically increase height by 2px</source>
-        <translation type="unfinished"></translation>
+        <translation>Suurenda kõrgust sümmeetriliselt 2 piksli võrra</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="186"/>
         <source>Symmetrically decrease height by 2px</source>
-        <translation type="unfinished"></translation>
+        <translation>Vähenda kõrgust sümmeetriliselt 2 piksli võrra</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="187"/>
@@ -2464,12 +2464,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="194"/>
         <source>Delete selected drawn object</source>
-        <translation type="unfinished"></translation>
+        <translation>Kustuta valitud joonistatud objekt</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="195"/>
         <source>Cancel current selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Tühista praegune valik</translation>
     </message>
     <message>
         <source>Delete current tool</source>
@@ -2919,7 +2919,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="41"/>
         <source>Opacity of area outside selection:</source>
-        <translation type="unfinished"></translation>
+        <translation>Väljaspool valikut asuva ala läbipaistvus:</translation>
     </message>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="68"/>
@@ -2929,17 +2929,17 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="74"/>
         <source>Colorpicker Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Värvivalija</translation>
     </message>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="79"/>
         <source>Button Selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Nuppude valik</translation>
     </message>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="85"/>
         <source>Select All</source>
-        <translation type="unfinished"></translation>
+        <translation>Vali kõik</translation>
     </message>
 </context>
 <context>
