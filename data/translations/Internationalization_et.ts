@@ -210,7 +210,7 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="436"/>
         <source>Mouse Wheel</source>
-        <translation type="unfinished">Roda del ratolí</translation>
+        <translation>Hiire ratas</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="436"/>
@@ -220,12 +220,12 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="437"/>
         <source>Right Click</source>
-        <translation type="unfinished">Clic dret</translation>
+        <translation>Parem hiireklõps</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="437"/>
         <source>Show color picker</source>
-        <translation type="unfinished">Mostra el selector de color</translation>
+        <translation>Näita värvivalijat</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="439"/>
@@ -240,7 +240,7 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="440"/>
         <source>Exit</source>
-        <translation type="unfinished">Surt</translation>
+        <translation>Välju</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="482"/>
@@ -417,7 +417,7 @@ Premeu Espai per obrir el calaix lateral.</translation>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="61"/>
         <source>Esc</source>
-        <translation type="unfinished">Esc</translation>
+        <translation>Esc</translation>
     </message>
 </context>
 <context>
@@ -435,7 +435,7 @@ Premeu Espai per obrir el calaix lateral.</translation>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="65"/>
         <source>Update</source>
-        <translation type="unfinished">Update</translation>
+        <translation>Uuenda</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="67"/>
@@ -476,7 +476,7 @@ Premeu Espai per obrir el calaix lateral.</translation>
         <location filename="../../src/config/colorpickereditor.cpp" line="130"/>
         <location filename="../../src/config/colorpickereditor.cpp" line="147"/>
         <source>Error</source>
-        <translation type="unfinished">Error</translation>
+        <translation>Viga</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="131"/>
@@ -785,17 +785,17 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="114"/>
         <source>Error</source>
-        <translation type="unfinished">Error</translation>
+        <translation>Viga</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="114"/>
         <source>Unable to close active modal widgets</source>
-        <translation type="unfinished">No s&apos;han pogut tancar els widgets modals actius</translation>
+        <translation>Aktiivseid modaalseid vidinaid ei õnnestu sulgeda</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="412"/>
         <source>URL copied to clipboard.</source>
-        <translation type="unfinished">L&apos;URL s&apos;ha copiat al porta-retalls.</translation>
+        <translation>Võrguaadress on kopeeritud lõikelauale.</translation>
     </message>
 </context>
 <context>
@@ -803,17 +803,17 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/core/flameshotdaemon.cpp" line="374"/>
         <source>New version %1 is available</source>
-        <translation type="unfinished">La nova versió %1 ja és disponible</translation>
+        <translation>Uus versioon %1 on saadaval</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshotdaemon.cpp" line="380"/>
         <source>You have the latest version</source>
-        <translation type="unfinished">Teniu la versió més recent</translation>
+        <translation>Sul on kasutusel viimane versioon</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshotdaemon.cpp" line="389"/>
         <source>Failed to get information about the latest version.</source>
-        <translation type="unfinished">Error a l&apos;intentar obtenir informació sobre actualitzacions.</translation>
+        <translation>Viimase versiooni teabe laadimine ei õnnestunud.</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshotdaemon.cpp" line="411"/>
@@ -902,7 +902,7 @@ Please solve them manually in the configuration file.</source>
         <location filename="../../src/config/generalconf.cpp" line="225"/>
         <location filename="../../src/config/generalconf.cpp" line="756"/>
         <source>Error</source>
-        <translation type="unfinished">Error</translation>
+        <translation>Viga</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="193"/>
@@ -933,7 +933,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="266"/>
         <source>Show help message</source>
-        <translation type="unfinished">Mostra el missatge d&apos;ajuda</translation>
+        <translation>Näita abiteavet</translation>
     </message>
     <message>
         <source>Show the help message at the beginning in the capture mode.</source>
@@ -951,7 +951,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="304"/>
         <source>Show desktop notifications</source>
-        <translation type="unfinished">Mostra les notificacions d&apos;escriptori</translation>
+        <translation>Näita töölaua teavitusi</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="329"/>
@@ -1044,12 +1044,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="277"/>
         <source>Use last region for GUI mode</source>
-        <translation type="unfinished">Use last region for GUI mode</translation>
+        <translation>Graafilise kasutajaliidese režiimis kasuta viimast valitud ala</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="279"/>
         <source>Use the last region as the default selection for the next screenshot in GUI mode</source>
-        <translation type="unfinished">Use the last region as the default selection for the next screenshot in GUI mode</translation>
+        <translation>Graafilise kasutajaliidese režiimis kasuta järgmise ekraanitõmmise jaoks vaikimisi valikuna viimast valitud ala</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="293"/>
@@ -1455,12 +1455,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="49"/>
         <source>Uploading Image</source>
-        <translation type="unfinished">S&apos;està pujant la imatge</translation>
+        <translation>Pilt on üleslaadimisel</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="128"/>
         <source>Copy URL</source>
-        <translation type="unfinished">Copia l&apos;URL</translation>
+        <translation>Kopeeri võrguaadress</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="129"/>
@@ -1470,12 +1470,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="130"/>
         <source>Delete image</source>
-        <translation type="unfinished">Esborra la imatge</translation>
+        <translation>Kustuta pilt</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="131"/>
         <source>Image to Clipboard.</source>
-        <translation type="unfinished">Imatge al porta-retalls.</translation>
+        <translation>Pilt lõikelauale.</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="132"/>
@@ -1490,12 +1490,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="169"/>
         <source>URL copied to clipboard.</source>
-        <translation type="unfinished">L&apos;URL s&apos;ha copiat al porta-retalls.</translation>
+        <translation>Võrguaadress on kopeeritud lõikelauale.</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="175"/>
         <source>Screenshot copied to clipboard.</source>
-        <translation type="unfinished">La captura s&apos;ha copiat al porta-retalls.</translation>
+        <translation>Ekraanitõmmis on kopeeritud lõikelauale.</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="189"/>
@@ -1513,7 +1513,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/imgupload/imguploadertool.cpp" line="23"/>
         <source>Image Uploader</source>
-        <translation type="unfinished">Puja la imatge</translation>
+        <translation>Piltide üleslaadija</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/imguploadertool.cpp" line="33"/>
@@ -1775,7 +1775,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="293"/>
         <source>Copy to clipboard</source>
-        <translation type="unfinished">Copia al porta-retalls</translation>
+        <translation>Kopeeri lõikelauale</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="300"/>
@@ -1805,7 +1805,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="331"/>
         <source>Close</source>
-        <translation type="unfinished">Close</translation>
+        <translation>Sulge</translation>
     </message>
 </context>
 <context>
@@ -2096,12 +2096,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/launcher/openwithprogram.cpp" line="30"/>
         <source>Error</source>
-        <translation type="unfinished">Error</translation>
+        <translation>Viga</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/openwithprogram.cpp" line="31"/>
         <source>Unable to write in</source>
-        <translation type="unfinished">No es pot escriure a</translation>
+        <translation>Faili kirjutamine ei õnnestu</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="151"/>
