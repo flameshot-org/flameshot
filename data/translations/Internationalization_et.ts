@@ -1176,57 +1176,57 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="529"/>
         <source>Save Path</source>
-        <translation>Salvesta asukoht</translation>
+        <translation>Salvestuse asukoht</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="545"/>
         <source>Change...</source>
-        <translation type="unfinished"></translation>
+        <translation>Muuda...</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="553"/>
         <source>Use fixed path for screenshots to save</source>
-        <translation type="unfinished"></translation>
+        <translation>Kasuta ekraanitõmmiste salvestamiseks määratud asukohta</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="565"/>
         <source>Preferred save file extension:</source>
-        <translation type="unfinished"></translation>
+        <translation>Salvestatava faili eelistatud laiend:</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="594"/>
         <source>Latest Uploads Max Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Viimaste üleslaadimiste loendi pikkuse ülempiir</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="616"/>
         <source>Imgur Application Client ID</source>
-        <translation type="unfinished"></translation>
+        <translation>Imgur&apos;i rakenduse klienditunnus</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="647"/>
         <source>Undo limit</source>
-        <translation type="unfinished"></translation>
+        <translation>Tagasivõtmissammude ülempiir</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="676"/>
         <source>Use JPG format for clipboard (PNG default)</source>
-        <translation type="unfinished"></translation>
+        <translation>Kasuta lõikelaua jaoks JPG-vormingut (vaikimisi on kasutusel PNG-vorming)</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="678"/>
         <source>Use lossy JPG format for clipboard (lossless PNG default)</source>
-        <translation type="unfinished"></translation>
+        <translation>Kasuta lõikelaua jaoks kadudega JPG-vormingut (vaikimisi on kasutusel kadudeta PNG-vorming)</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="704"/>
         <source>Copy file path after save</source>
-        <translation type="unfinished"></translation>
+        <translation>Peale salvestamist kopeeri faili asukoht</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="705"/>
         <source>Copy the file path to clipboard after the file is saved</source>
-        <translation type="unfinished"></translation>
+        <translation>Peale faili salvestamist kopeeri tema asukoht lõikelauale</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="716"/>
@@ -1396,18 +1396,18 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/widgets/imguploaddialog.cpp" line="18"/>
         <source>Upload Confirmation</source>
-        <translation type="unfinished"></translation>
+        <translation>Üleslaadimise kinnitus</translation>
     </message>
     <message>
         <location filename="../../src/widgets/imguploaddialog.cpp" line="22"/>
         <source>Do you want to upload this capture?</source>
-        <translation type="unfinished"></translation>
+        <translation>Kas sa soovid selle ekraanitõmmise üles laadida?</translation>
     </message>
     <message>
         <location filename="../../src/widgets/imguploaddialog.cpp" line="35"/>
         <location filename="../../src/widgets/imguploaddialog.cpp" line="36"/>
         <source>Upload without confirmation</source>
-        <translation type="unfinished"></translation>
+        <translation>Laadi üles ilma kinnitust küsimata</translation>
     </message>
 </context>
 <context>
@@ -1450,7 +1450,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="37"/>
         <source>Upload image</source>
-        <translation type="unfinished"></translation>
+        <translation>Laadi pilt üles</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="49"/>
@@ -1465,7 +1465,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="129"/>
         <source>Open URL</source>
-        <translation type="unfinished"></translation>
+        <translation>Ava võrguaadress</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="130"/>
@@ -1485,7 +1485,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="162"/>
         <source>Unable to open the URL.</source>
-        <translation type="unfinished"></translation>
+        <translation>Võrguaadressi avamine ei õnnestu.</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="169"/>
@@ -1500,12 +1500,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="189"/>
         <source>Unable to save the screenshot to disk.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ekraanitõmmise salvestamine andmekandjale ei õnnestunud.</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="192"/>
         <source>Screenshot saved.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ekraanitõmmis on salvestatud.</translation>
     </message>
 </context>
 <context>
@@ -1518,7 +1518,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/imgupload/imguploadertool.cpp" line="33"/>
         <source>Upload the selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Laadi valik imgur.com teenusesse</translation>
     </message>
 </context>
 <context>
@@ -1550,7 +1550,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/imgupload/storages/imgur/imguruploader.cpp" line="93"/>
         <source>Unable to open the URL.</source>
-        <translation type="unfinished"></translation>
+        <translation>Võrguaadressi avamine ei õnnestu.</translation>
     </message>
     <message>
         <source>URL copied to clipboard.</source>
@@ -1847,7 +1847,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="182"/>
         <source>Error while saving to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Viga lõikelauale salvestamisel</translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="245"/>
@@ -1857,7 +1857,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="273"/>
         <source>Path copied to clipboard as </source>
-        <translation type="unfinished"></translation>
+        <translation>Asukoht on kopeeritud lõikelauale kui </translation>
     </message>
     <message>
         <source>Saving canceled</source>
