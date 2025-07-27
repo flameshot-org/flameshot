@@ -599,27 +599,27 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="40"/>
         <source>Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Seadistused</translation>
     </message>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="68"/>
         <source>Interface</source>
-        <translation type="unfinished"></translation>
+        <translation>Kasutajaliides</translation>
     </message>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="78"/>
         <source>Filename Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Failinimede muster</translation>
     </message>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="59"/>
         <source>General</source>
-        <translation type="unfinished"></translation>
+        <translation>Üldseadistused</translation>
     </message>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="87"/>
         <source>Shortcuts</source>
-        <translation type="unfinished"></translation>
+        <translation>Kiirklahvid</translation>
     </message>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="120"/>
