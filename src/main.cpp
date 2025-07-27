@@ -38,10 +38,7 @@
 // Required for saving button list QList<CaptureTool::Type>
 Q_DECLARE_METATYPE(QList<int>)
 
-#ifdef USE_KDSINGLEAPPLICATION
-std::unique_ptr<KDSingleApplication> kdsa = nullptr;
-
-#ifdef Q_OS_UNIX
+#if defined(USE_KDSINGLEAPPLICATION) && defined(Q_OS_UNIX)
 static int setup_unix_signal_handlers()
 {
     struct sigaction sint, term;
@@ -64,7 +61,6 @@ static int setup_unix_signal_handlers()
 
     return 0;
 }
-#endif
 #endif
 
 int requestCaptureAndWait(const CaptureRequest& req)
@@ -186,10 +182,9 @@ int main(int argc, char* argv[])
         setup_unix_signal_handlers();
         auto signalDaemon = SignalDaemon();
 #endif
-        kdsa =
-          std::make_unique<KDSingleApplication>(QStringLiteral("flameshot"));
+        auto kdsa = KDSingleApplication(QStringLiteral("flameshot"));
 
-        if (!kdsa->isPrimaryInstance()) {
+        if (!kdsa.isPrimaryInstance()) {
             return 0; // Quit
         }
 #endif

@@ -29,20 +29,20 @@ SignalDaemon::SignalDaemon(QObject* parent)
 
 void SignalDaemon::intSignalHandler(int)
 {
-    char a = 1;
-    ::write(sigintFd[0], &a, sizeof(a));
+    char msg = 1;
+    ::write(sigintFd[0], &msg, sizeof(msg));
 }
 
 void SignalDaemon::termSignalHandler(int)
 {
-    char a = 1;
-    ::write(sigtermFd[0], &a, sizeof(a));
+    char msg = 1;
+    ::write(sigtermFd[0], &msg, sizeof(msg));
 }
 
 void SignalDaemon::handleSigTerm()
 {
     snTerm->setEnabled(false);
-    char tmp;
+    char tmp = 0;
     ::read(sigtermFd[1], &tmp, sizeof(tmp));
 
     QApplication::quit();
@@ -53,7 +53,7 @@ void SignalDaemon::handleSigInt()
 {
     snInt->setEnabled(false);
 
-    char tmp;
+    char tmp = 0;
     ::read(sigintFd[1], &tmp, sizeof(tmp));
 
     QApplication::quit();
