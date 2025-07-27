@@ -97,6 +97,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_mandir}/man1/%{name}.1*
 
 %changelog
+* Sun Jul 17 2025 Jeremy Borgman <borgman.jeremy@pm.me> - 13.0.rc2
+- Beta for 13 release.
+
 * Sun Jul 12 2025 Jeremy Borgman <borgman.jeremy@pm.me> - 13.0.rc1
 - Beta for 13 release.
 
