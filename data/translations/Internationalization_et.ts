@@ -481,12 +481,12 @@ Premeu Espai per obrir el calaix lateral.</translation>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="131"/>
         <source>Unable to add preset. Maximum limit reached.</source>
-        <translation type="unfinished"></translation>
+        <translation>Eelseadistuse lisamine ei õnnestu. Variantide arvu ülempiir on käes.</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="148"/>
         <source>Unable to remove preset. Minimum limit reached.</source>
-        <translation type="unfinished"></translation>
+        <translation>Eelseadistuse eemaldamine ei õnnestu. Variantide arvu alampiir on käes.</translation>
     </message>
 </context>
 <context>
@@ -494,7 +494,7 @@ Premeu Espai per obrir el calaix lateral.</translation>
     <message>
         <location filename="../../src/config/configerrordetails.cpp" line="20"/>
         <source>Configuration errors</source>
-        <translation type="unfinished"></translation>
+        <translation>Seadistusvead</translation>
     </message>
 </context>
 <context>
@@ -591,7 +591,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="125"/>
         <source>Details</source>
-        <translation type="unfinished"></translation>
+        <translation>Üksikasjad</translation>
     </message>
 </context>
 <context>
@@ -696,12 +696,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/copy/copytool.cpp" line="24"/>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopeeri</translation>
     </message>
     <message>
         <location filename="../../src/tools/copy/copytool.cpp" line="34"/>
         <source>Copy selection to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopeeri valik lõikelauale</translation>
     </message>
     <message>
         <source>Copy the selection into the clipboard</source>
@@ -894,7 +894,7 @@ Please solve them manually in the configuration file.</source>
         <location filename="../../src/config/generalconf.cpp" line="186"/>
         <location filename="../../src/config/generalconf.cpp" line="387"/>
         <source>Import</source>
-        <translation type="unfinished"></translation>
+        <translation>Impordi</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="193"/>
@@ -907,13 +907,13 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="193"/>
         <source>Unable to read file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Faili lugemine ei õnnestu.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="201"/>
         <location filename="../../src/config/generalconf.cpp" line="225"/>
         <source>Unable to write file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Faili salvestamine ei õnnestu.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="212"/>
@@ -942,7 +942,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="291"/>
         <source>Show the side panel button</source>
-        <translation type="unfinished"></translation>
+        <translation>Näita külgriba nuppu</translation>
     </message>
     <message>
         <source>Show the side panel toggle button in the capture mode.</source>
@@ -956,7 +956,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="329"/>
         <source>Show tray icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Näita süsteemisalve ikooni</translation>
     </message>
     <message>
         <source>Show the systemtray icon</source>
