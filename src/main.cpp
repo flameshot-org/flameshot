@@ -2,9 +2,11 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #ifdef USE_KDSINGLEAPPLICATION
+#include "kdsingleapplication.h"
+#ifdef Q_OS_UNIX
 #include "core/signaldaemon.h"
 #include "csignal"
-#include "kdsingleapplication.h"
+#endif
 #endif
 
 #include "abstractlogger.h"
@@ -38,6 +40,8 @@ Q_DECLARE_METATYPE(QList<int>)
 
 #ifdef USE_KDSINGLEAPPLICATION
 std::unique_ptr<KDSingleApplication> kdsa = nullptr;
+
+#ifdef Q_OS_UNIX
 static int setup_unix_signal_handlers()
 {
     struct sigaction sint, term;
@@ -60,6 +64,7 @@ static int setup_unix_signal_handlers()
 
     return 0;
 }
+#endif
 #endif
 
 int requestCaptureAndWait(const CaptureRequest& req)
@@ -177,8 +182,10 @@ int main(int argc, char* argv[])
         QApplication app(argc, argv);
 
 #ifdef USE_KDSINGLEAPPLICATION
+#ifdef Q_OS_UNIX
         setup_unix_signal_handlers();
         auto signalDaemon = SignalDaemon();
+#endif
         kdsa =
           std::make_unique<KDSingleApplication>(QStringLiteral("flameshot"));
 
