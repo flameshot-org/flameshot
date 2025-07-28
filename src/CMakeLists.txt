@@ -238,6 +238,9 @@ if (APPLE)
         MACOSX_BUNDLE_IDENTIFIER "org.flameshot.Flameshot"
         MACOSX_BUNDLE_GUI_IDENTIFIER "org.flameshot.Flameshot" 
     ) 
+    set_property(TARGET flameshot PROPERTY
+        MACOSX_BUNDLE_INFO_PLIST ${CMAKE_SOURCE_DIR}/packaging/macos/Info.plist.in
+    )
     target_link_libraries(
             flameshot
             qhotkey
