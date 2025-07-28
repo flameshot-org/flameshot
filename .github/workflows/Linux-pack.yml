@@ -36,12 +36,6 @@ jobs:
       fail-fast: false
       matrix:
         dist:
-#          - {
-#              name: debian-11,
-#              os: debian,
-#              symbol: bullseye,
-#              arch: amd64
-#            }
           - {
               name: debian-12,
               os: debian,
@@ -62,9 +56,6 @@ jobs:
             }
 
     steps:
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
-
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
@@ -410,6 +401,13 @@ jobs:
         with:
           fetch-depth: 0
           ref: ${{ github.event.pull_request.head.sha }}
+
+      - name: Checkout Source code
+        if: github.event_name == 'workflow_dispatch'
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+
       - name: Set env & Print flameshot version
         shell: bash
         run: |
@@ -421,8 +419,11 @@ jobs:
           echo ${last_committed_tag:1}
           echo "Details: ${ver_info}"
           echo "================================"
-          echo "VERSION=${last_committed_tag:1}" >> $GITHUB_ENV
+          # This will allow to build pre-preleases without git tag
+          # echo "VERSION=${last_committed_tag:1}" >> $GITHUB_ENV
+          echo "VERSION=$(cat CMakeLists.txt |grep 'set.*(.*FLAMESHOT_VERSION' | sed 's/[^0-9.]*//' |sed 's/)//g')" >> $GITHUB_ENV
           echo "VER_INFO=${ver_info}" >> $GITHUB_ENV
+
       - name: Setup flatpak
         run: |
           sudo apt-get -y -qq update
@@ -471,6 +472,14 @@ jobs:
         with:
           fetch-depth: 0
           ref: ${{ github.event.pull_request.head.sha }}
+
+
+      - name: Checkout Source code
+        if: github.event_name == 'workflow_dispatch'
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+
       - name: Set env & Print flameshot version
         shell: bash
         run: |
@@ -482,8 +491,11 @@ jobs:
           echo ${last_committed_tag:1}
           echo "Details: ${ver_info}"
           echo "================================"
-          echo "VERSION=${last_committed_tag:1}" >> $GITHUB_ENV
+          # This will allow to build pre-preleases without git tag
+          # echo "VERSION=${last_committed_tag:1}" >> $GITHUB_ENV
+          echo "VERSION=$(cat CMakeLists.txt |grep 'set.*(.*FLAMESHOT_VERSION' | sed 's/[^0-9.]*//' |sed 's/)//g')" >> $GITHUB_ENV
           echo "VER_INFO=${ver_info}" >> $GITHUB_ENV
+
       - name: Packaging snap
         uses: snapcore/action-build@v1
         id: snapcraft
