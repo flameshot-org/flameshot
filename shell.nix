@@ -3,9 +3,8 @@
 pkgs.mkShell {
   nativeBuildInputs = with pkgs; [
     cmake
-    qt5.full
-    qt5.qttools
-    qt5.qtsvg
+    kdePackages.qtsvg
+    kdePackages.qttools
   ];
-  buildInputs = with pkgs; [ qt5.qtbase libsForQt5.kguiaddons ];
+  buildInputs = with pkgs; [ kdePackages.qtbase kdePackages.kguiaddons ];
 }
