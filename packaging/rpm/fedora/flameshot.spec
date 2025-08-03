@@ -2,7 +2,7 @@
 # spec file for package flameshot on fedora, rehl
 #
 Name: flameshot
-Version: 13.0.rc1
+Version: 13.0.0
 Release: 1%{?dist}
 License: GPLv3+ and ASL 2.0 and GPLv2 and LGPLv3 and Free Art
 Summary: Powerful yet simple to use screenshot software
@@ -97,6 +97,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_mandir}/man1/%{name}.1*
 
 %changelog
+* Sun Aug 03 2025 Jeremy Borgman <borgman.jeremy@pm.me> - 13.0.0
+- Update for v13 release
+
 * Sun Jul 17 2025 Jeremy Borgman <borgman.jeremy@pm.me> - 13.0.rc2
 - Beta for 13 release.
 
