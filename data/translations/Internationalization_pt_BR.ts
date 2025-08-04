@@ -1101,12 +1101,12 @@ Por favor, resolva-os manualmente no arquivo de configuração.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="277"/>
         <source>Use last region for GUI mode</source>
-        <translation type="unfinished">Usar a última região</translation>
+        <translation>Usar a última região para modo de interface</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="279"/>
         <source>Use the last region as the default selection for the next screenshot in GUI mode</source>
-        <translation type="unfinished">Usa a última região como a seleção padrão para a próxima captura de tela</translation>
+        <translation>Usa a última região como a seleção padrão para a próxima captura de tela na modo de interface</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="293"/>
@@ -1334,17 +1334,17 @@ Por favor, resolva-os manualmente no arquivo de configuração.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="794"/>
         <source>Milliseconds before geometry display hides; 0 means do not hide</source>
-        <translation type="unfinished"></translation>
+        <translation>Milissegundos antes que a exibição da geometria seja ocultada; 0 significa não ocultar</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="797"/>
         <source>Set geometry display timeout (ms)</source>
-        <translation type="unfinished"></translation>
+        <translation>Definir tempo limite de exibição da geometria (ms)</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="805"/>
         <source>Selection Geometry Display</source>
-        <translation type="unfinished"></translation>
+        <translation>Exibição de Geometria de Seleção</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="812"/>
@@ -1870,7 +1870,7 @@ Por favor, resolva-os manualmente no arquivo de configuração.</translation>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="331"/>
         <source>Close</source>
-        <translation type="unfinished">Fechar</translation>
+        <translation>Fechar</translation>
     </message>
 </context>
 <context>
