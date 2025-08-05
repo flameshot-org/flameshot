@@ -33,7 +33,7 @@ jobs:
               arch: arm64
             }
           - {
-              os: macos-14-large,
+              os: macos-13,
               arch: intel
             }
     runs-on: ${{ matrix.dist.os }}
