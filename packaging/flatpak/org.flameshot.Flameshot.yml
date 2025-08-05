@@ -6,7 +6,7 @@ command: flameshot
 finish-args:
   # X11 + XShm access
   - --share=ipc
-  - --socket=x11
+  - --socket=fallback-x11
   # Wayland access
   - --socket=wayland
   - --device=dri
@@ -15,27 +15,34 @@ finish-args:
   # QtSingleApplication, allow other instances to see log files
   - --env=TMPDIR=/var/tmp
   # Allow loading/saving files from anywhere
-  - --filesystem=host
+  - --filesystem=xdg-pictures
   # Notification access
   - --talk-name=org.freedesktop.Notifications
   # System Tray Icon
   - --talk-name=org.kde.StatusNotifierWatcher
-  - --own-name=org.kde.*
-  - --own-name=org.flameshot.Flameshot
 modules:
   - name: flameshot
     buildsystem: cmake-ninja
-    build-options:
-      build-args:
-        - --share=network
     config-opts:
       - -DCMAKE_BUILD_TYPE=Release 
       - -DUSE_WAYLAND_CLIPBOARD=1
     sources:
-    # Keep this in until qt6 is merged to master branch. Makes it easy to test flatpak dev builds
-    # Change the path to the location of the cloned flameshot repo
-      #- type: dir 
-      #  path: /path/to/repo
+      - type: git
+        url: https://gitlab.com/mattbas/Qt-Color-Widgets.git
+        commit: 352bc8f99bf2174d5724ee70623427aa31ddc26a
+        dest: external/Qt-Color-Widgets
+
+      - type: git
+        url: https://github.com/KDAB/KDSingleApplication.git
+        tag: v1.2.0
+        dest: external/KDSingleApplication
+
       - type: git
         url: https://github.com/flameshot-org/flameshot.git
         branch: master
+        #tag: v13.0.0
+
+    cleanup:
+      - /share/bash-completion
+      - /share/man
+      - /share/zsh
