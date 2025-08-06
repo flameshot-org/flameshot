@@ -1042,12 +1042,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="277"/>
         <source>Use last region for GUI mode</source>
-        <translation>استفاده از ناحیه ی قبلی برای حالت GUI</translation>
+        <translation>استفاده از آخرین ناحیه برای حالت گرافیکی</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="279"/>
         <source>Use the last region as the default selection for the next screenshot in GUI mode</source>
-        <translation type="unfinished">Use the last region as the default selection for the next screenshot in GUI mode</translation>
+        <translation>استفاده از آخرین ناحیه به عنوان پیش‌گزیده برای نماگرفت بعدی در حالت گرافیکی</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="293"/>
