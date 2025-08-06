@@ -245,17 +245,17 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="482"/>
         <source>Quit Capture</source>
-        <translation type="unfinished"></translation>
+        <translation>دست کشیدن از نماگرفت</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="483"/>
         <source>Are you sure you want to quit capture?</source>
-        <translation type="unfinished"></translation>
+        <translation>مطمئنید که می‌خواهید از نماگرفت دست بکشید؟</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="488"/>
         <source>Do not show this again</source>
-        <translation type="unfinished"></translation>
+        <translation>این را دیگر نشان نده</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="683"/>
@@ -578,7 +578,9 @@ Press Space to open the side panel.</source>
         <source>Some keyboard shortcuts have conflicts.
 This will NOT prevent flameshot from starting.
 Please solve them manually in the configuration file.</source>
-        <translation></translation>
+        <translation>برخی از میانبرهای صفحه کلید تداخل دارند.
+این مانع از شروع flameshot نمی‌شود.
+لطفاً آنها را به صورت دستی در فایل پیکربندی حل کنید.</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="112"/>
@@ -787,7 +789,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="114"/>
         <source>Error</source>
-        <translation>Error</translation>
+        <translation>خطا</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="114"/>
@@ -797,7 +799,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="412"/>
         <source>URL copied to clipboard.</source>
-        <translation></translation>
+        <translation>نشانی در بُریده‌دان ذخیره شد.</translation>
     </message>
 </context>
 <context>
@@ -992,7 +994,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="419"/>
         <source>Allow multiple flameshot GUI instances simultaneously</source>
-        <translation></translation>
+        <translation>اجازه دهید چندین نمونه flameshot gui به طور همزمان فعال شوند</translation>
     </message>
     <message>
         <source>Automatically close daemon when it is not needed</source>
@@ -1037,12 +1039,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="267"/>
         <source>Show the help message at the beginning in the capture mode</source>
-        <translation></translation>
+        <translation>نمایش پیام راهنما در ابتدا در حالت نماگرفت</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="277"/>
         <source>Use last region for GUI mode</source>
-        <translation>استفاده از آخرین ناحیه برای حالت گرافیکی</translation>
+        <translation>استفاده از آخرین ناحیه برای حالت GUI</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="279"/>
@@ -1052,7 +1054,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="293"/>
         <source>Show the side panel toggle button in the capture mode</source>
-        <translation>Show the side panel toggle button in the capture mode</translation>
+        <translation>دکمه‌ی تغییر وضعیت تابلو کناری را در حالت نماگرفت نمایش دهید</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="305"/>
@@ -1062,12 +1064,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="316"/>
         <source>Show abort notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>نمایش اعلان‌های لغو</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="317"/>
         <source>Enable abort notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>فعال کردن لغو اعلان‌ها</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="330"/>
@@ -1077,17 +1079,17 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="343"/>
         <source>Use grim to capture screenshots</source>
-        <translation type="unfinished"></translation>
+        <translation>استفاده از grim برای نماگرفت</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="345"/>
         <source>Grim is a wayland only utility to capture screens based on the screencopy protocol. Generally only enable on minimal wayland window managers like sway, hyprland, etc.</source>
-        <translation type="unfinished"></translation>
+        <translation>Grim یک ابزار فقط برای Wayland است که بر اساس پروتکل کپی صفحه نمایش، از صفحه نمایش عکس می‌گیرد. معمولاً فقط روی مدیران پنجره‌های مینیمال Wayland مانند sway، hyprland و غیره فعال می‌شود.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="363"/>
         <source>Ask for confirmation to delete screenshot from the latest uploads</source>
-        <translation>Ask for confirmation to delete screenshot from the latest uploads</translation>
+        <translation>درخواست تأیید برای حذف نماگرفت از آخرین آپلودها</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="406"/>
@@ -1097,7 +1099,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="420"/>
         <source>This allows you to take screenshots of Flameshot itself for example</source>
-        <translation>This allows you to take screenshots of Flameshot itself for example</translation>
+        <translation>این به شما امکان می‌دهد برای مثال از خود Flameshot نماگرفت بگیرید</translation>
     </message>
     <message>
         <source>Launch Flameshot daemon when computer is booted</source>
@@ -1106,17 +1108,17 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="459"/>
         <source>Show the welcome message box in the middle of the screen while taking a screenshot</source>
-        <translation>Show the welcome message box in the middle of the screen while taking a screenshot</translation>
+        <translation>نمایش کادر پیام خوشامدگویی در وسط صفحه هنگام گرفتن نماگرفت</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="486"/>
         <source>Use a large predefined color palette</source>
-        <translation>Use a large predefined color palette</translation>
+        <translation>از پالت رنگ بزرگ پیشفرض استفاده کنید</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="496"/>
         <source>Copy on double click</source>
-        <translation>Copy on double click</translation>
+        <translation>کپی کردن با دوبار کلیک</translation>
     </message>
     <message>
         <source>Enable Copy on Double Click</source>
@@ -1129,47 +1131,47 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="432"/>
         <source>Automatically unload from memory when it is not needed</source>
-        <translation type="unfinished"></translation>
+        <translation>تخلیه خودکار از حافظه در صورت عدم نیاز به حظور در حافظه</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="433"/>
         <source>Automatically close daemon (background process) when it is not needed</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">بستن خودکار دیمن (فرآیند پس‌زمینه) در صورت عدم نیاز</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="444"/>
         <source>Launch in background at startup</source>
-        <translation type="unfinished"></translation>
+        <translation>اجرا در پس‌زمینه در زمان شروع برنامه</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="445"/>
         <source>Launch Flameshot daemon (background process) when computer is booted</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">اجرای دیمن Flameshot (فرایند پس‌زمینه) هنگام بوت شدن کامپیوتر</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="470"/>
         <source>Ask before quit capture</source>
-        <translation type="unfinished"></translation>
+        <translation>گرفتن تایید قبل از خروج از نماگرفت</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="473"/>
         <source>Show the confirmation prompt before ESC quit</source>
-        <translation type="unfinished"></translation>
+        <translation>نمایش اعلان تأیید قبل از خروج</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="498"/>
         <source>Enable Copy to clipboard on Double Click</source>
-        <translation type="unfinished"></translation>
+        <translation>فعال کردن کپی در بُریده‌دان با دوبار کلیک</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="510"/>
         <source>Copy URL after uploading was successful</source>
-        <translation type="unfinished"></translation>
+        <translation>پس از آپلود موفقیت‌آمیز، نشانی اینترنتی (URL) را کپی کنید</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="522"/>
         <source>After copying the screenshot, save it to a file as well</source>
-        <translation>After copying the screenshot, save it to a file as well</translation>
+        <translation>پس از کپی کردن نماگرفت، آن را در یک فایل نیز ذخیره کن</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="529"/>
@@ -1199,7 +1201,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="616"/>
         <source>Imgur Application Client ID</source>
-        <translation>Imgur Application Client ID</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="647"/>
@@ -1224,17 +1226,17 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="705"/>
         <source>Copy the file path to clipboard after the file is saved</source>
-        <translation>Copy the file path to clipboard after the file is saved</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="716"/>
         <source>Anti-aliasing image when zoom the pinned image</source>
-        <translation>Anti-aliasing image when zoom the pinned image</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="718"/>
         <source>After zooming the pinned image, should the image get smoothened or stay pixelated</source>
-        <translation>After zooming the pinned image, should the image get smoothened or stay pixelated</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="729"/>
@@ -1260,17 +1262,17 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="766"/>
         <source>Enable a magnifier while selecting the screenshot area</source>
-        <translation>Enable a magnifier while selecting the screenshot area</translation>
+        <translation>فعال کردن ذره‌بین زمانی که ناحیه ی نماگرفت انتخاب میشود</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="777"/>
         <source>Square shaped magnifier</source>
-        <translation>Square shaped magnifier</translation>
+        <translation>ذره‌بین مربع شکل</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="778"/>
         <source>Make the magnifier to be square-shaped</source>
-        <translation>Make the magnifier to be square-shaped</translation>
+        <translation>تبدیل ذره‌بین به مربعی شکل</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="794"/>
@@ -1290,37 +1292,37 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="812"/>
         <source>Display Location</source>
-        <translation type="unfinished"></translation>
+        <translation>مکان نمایش</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="815"/>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>هیچ کجا</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="816"/>
         <source>Top Left</source>
-        <translation type="unfinished"></translation>
+        <translation>بالا چپ</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="818"/>
         <source>Top Right</source>
-        <translation type="unfinished"></translation>
+        <translation>بالا راست</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="820"/>
         <source>Bottom Left</source>
-        <translation type="unfinished"></translation>
+        <translation>پایین چپ</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="822"/>
         <source>Bottom Right</source>
-        <translation type="unfinished"></translation>
+        <translation>پایین راست</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="824"/>
         <source>Center</source>
-        <translation type="unfinished"></translation>
+        <translation>مرکز</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="849"/>
@@ -1330,17 +1332,17 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="853"/>
         <source>JPEG Quality</source>
-        <translation type="unfinished"></translation>
+        <translation>کیفیت JPEG</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="864"/>
         <source>Reverse arrow</source>
-        <translation type="unfinished"></translation>
+        <translation>پیکان معکوس</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="865"/>
         <source>Draw the arrow head first</source>
-        <translation type="unfinished"></translation>
+        <translation>کشیدن سر پیکان در ابتدا</translation>
     </message>
 </context>
 <context>
@@ -1783,22 +1785,22 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="307"/>
         <source>Rotate Right</source>
-        <translation type="unfinished"></translation>
+        <translation>چرخش به راست</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="312"/>
         <source>Rotate Left</source>
-        <translation type="unfinished"></translation>
+        <translation>چرخش به چپ</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="317"/>
         <source>Increase Opacity</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">کاهش شفافیت</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="324"/>
         <source>Decrease Opacity</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">افزایش شفافیت</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="331"/>
@@ -2157,7 +2159,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="151"/>
         <source>Requested screen exceeds screen count</source>
-        <translation>Requested screen exceeds screen count</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="390"/>
@@ -2294,27 +2296,27 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="54"/>
         <source>The universal wayland screen capture adapter requires Grim as the screen capture component of wayland. If the screen capture component is missing, please install it!</source>
-        <translation type="unfinished"></translation>
+        <translation>آداپتور ضبط صفحه نمایش جهانی wayland به Grim به عنوان کامپوننت ضبط صفحه wayland نیاز دارد. اگر کامپوننت ضبط صفحه نمایش وجود ندارد، لطفاً آن را نصب کنید!</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="169"/>
         <source>If the useGrimAdapter setting is not enabled, the dbus protocol will be used. It should be noted that using the dbus protocol under wayland is not recommended. It is recommended to enable the useGrimAdapter setting in flameshot.ini to activate the grim-based general wayland screenshot adapter</source>
-        <translation type="unfinished"></translation>
+        <translation>اگر تنظیم useGrimAdapter فعال نباشد، از پروتکل DBus استفاده خواهد شد. لازم به ذکر است که استفاده از پروتکل DBus در Wayland توصیه نمی‌شود. توصیه می‌شود تنظیم useGrimAdapter را در flameshot.ini فعال کنید تا آداپتور تصویر عمومی Wayland مبتنی بر grim فعال شود</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="180"/>
         <source>grim&apos;s screenshot component is implemented based on wlroots, it may not be used in GNOME or similar desktop environments</source>
-        <translation type="unfinished"></translation>
+        <translation>کامپوننت اسکرین‌شات گریم بر اساس wlroots پیاده‌سازی شده است، ممکن است در گنوم یا محیط‌های دسکتاپ مشابه استفاده نشود</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="192"/>
         <source>Unable to detect desktop environment (GNOME? KDE? Qile? Sway? ...)</source>
-        <translation type="unfinished"></translation>
+        <translation>قادر به شناسایی محیط دسکتاپ (GNOME؟ KDE؟ Qile؟ Sway؟ ...) نیست</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="195"/>
         <source>Hint: try setting the XDG_CURRENT_DESKTOP environment variable.</source>
-        <translation>Hint: try setting the XDG_CURRENT_DESKTOP environment variable.</translation>
+        <translation>نکته: سعی کنید متغیر محیطی XDG_CURRENT_DESKTOP را تنظیم کنید.</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="200"/>
@@ -2468,12 +2470,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="194"/>
         <source>Delete selected drawn object</source>
-        <translation type="unfinished"></translation>
+        <translation>شیء ترسیم شده انتخاب شده را حذف کنید</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="195"/>
         <source>Cancel current selection</source>
-        <translation type="unfinished"></translation>
+        <translation>لغو انتخاب فعلی</translation>
     </message>
     <message>
         <source>Delete current tool</source>
@@ -2522,7 +2524,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="85"/>
         <source>Display grid</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">نمایش grid</translation>
     </message>
 </context>
 <context>
