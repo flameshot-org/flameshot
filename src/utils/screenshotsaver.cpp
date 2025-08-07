@@ -268,6 +268,9 @@ bool saveToFilesystemGUI(const QPixmap& capture)
         AbstractLogger().attachNotificationPath(savePath) << msg;
 
         if (config.copyPathAfterSave()) {
+#ifdef Q_OS_WIN
+            savePath.replace('/', '\\');
+#endif
             FlameshotDaemon::copyToClipboard(
               savePath, QObject::tr("Path copied to clipboard as ") + savePath);
         }
