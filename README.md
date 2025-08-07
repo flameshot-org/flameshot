@@ -225,6 +225,7 @@ These shortcuts are available in GUI mode:
 | <kbd>Ctrl</kbd> + <kbd>Backspace</kbd>                                    | Cancel current selection                                       | 
 | <kbd>Return</kbd>                                             | Upload the selection to Imgur                                      |
 | <kbd>Spacebar</kbd>                                                       | Toggle visibility of sidebar with options of the selected tool, color picker for the drawing color and history menu |
+| <kbd>G</kbd>                                                       | Starts the color picker |
 | Right Click                                                               | Show the color wheel                                              |
 | Mouse Wheel                                                               | Change the tool's thickness                                    |
 | <kbd>Print screen</kbd>                                          | Capture Screen |
