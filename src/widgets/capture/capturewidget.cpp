@@ -155,7 +155,11 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
 #if !defined(FLAMESHOT_DEBUG_CAPTURE)
         setWindowFlags(Qt::BypassWindowManagerHint | Qt::WindowStaysOnTopHint |
                        Qt::FramelessWindowHint | Qt::Tool);
-        resize(pixmap().size());
+        // Fix for Qt6 dual monitor offset: position widget to cover entire
+        // desktop
+        QRect desktopGeom = ScreenGrabber().desktopGeometry();
+        move(desktopGeom.topLeft());
+        resize(desktopGeom.size());
 #endif
 #endif
     }
@@ -289,7 +293,7 @@ CaptureWidget::~CaptureWidget()
         Flameshot::instance()->exportCapture(
           pixmap(), geometry, m_context.request);
     } else {
-        emit Flameshot::instance()->captureFailed();
+        emit Flameshot::instance() -> captureFailed();
     }
 }
 
