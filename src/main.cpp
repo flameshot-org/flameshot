@@ -2,7 +2,7 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #ifdef USE_KDSINGLEAPPLICATION
-#include "kdsingleapplication.h"
+#include <kdsingleapplication.h>
 #ifdef Q_OS_UNIX
 #include "core/signaldaemon.h"
 #include "csignal"

@@ -74,6 +74,7 @@ option(FLAMESHOT_DEBUG_CAPTURE "Enable mode to make debugging easier" OFF)
 option(USE_MONOCHROME_ICON "Build using monochrome icon as default" OFF)
 option(GENERATE_TS "Regenerate translation source files" OFF)
 option(USE_KDSINGLEAPPLICATION "Use KDSingleApplication library" ON)
+option(USE_BUNDLED_KDSINGLEAPPLICATION "Use a bundled version of the KDSingleApplication library" ${USE_KDSINGLEAPPLICATION})
 option(USE_LAUNCHER_ABSOLUTE_PATH "Use absolute path for the desktop launcher" ON)
 option(USE_WAYLAND_CLIPBOARD "USE KF Gui Wayland Clipboard" OFF)
 option(DISABLE_UPDATE_CHECKER "Disable check for updates" OFF)
@@ -108,19 +109,23 @@ enable_sanitizers(project_options)
 # allow for static analysis options include(cmake/StaticAnalyzers.cmake)
 
 if (USE_KDSINGLEAPPLICATION)
-  set(KDSingleApplication_EXAMPLES OFF CACHE BOOL "Don't build the examples")
-  set(KDSingleApplication_STATIC ON CACHE BOOL "Build static versions of the libraries")
+  if (USE_BUNDLED_KDSINGLEAPPLICATION)
+    set(KDSingleApplication_EXAMPLES OFF CACHE BOOL "Don't build the examples")
+    set(KDSingleApplication_STATIC ON CACHE BOOL "Build static versions of the libraries")
 
-  # Check if KDSingleApplication is available locally
-  if(EXISTS "${CMAKE_SOURCE_DIR}/external/KDSingleApplication/CMakeLists.txt")
-    add_subdirectory("${CMAKE_SOURCE_DIR}/external/KDSingleApplication")
+    # Check if KDSingleApplication is available locally
+    if(EXISTS "${CMAKE_SOURCE_DIR}/external/KDSingleApplication/CMakeLists.txt")
+      add_subdirectory("${CMAKE_SOURCE_DIR}/external/KDSingleApplication")
+    else()
+      FetchContent_Declare(
+          kdsingleApplication
+          GIT_REPOSITORY https://github.com/KDAB/KDSingleApplication.git
+          GIT_TAG v1.2.0
+      )
+      FetchContent_MakeAvailable(kdsingleApplication)
+    endif()
   else()
-    FetchContent_Declare(
-        kdsingleApplication
-        GIT_REPOSITORY https://github.com/KDAB/KDSingleApplication.git
-        GIT_TAG v1.2.0
-    )
-    FetchContent_MakeAvailable(KDSingleApplication)
+    find_package(KDSingleApplication-qt6 REQUIRED)
   endif()
 endif()
 

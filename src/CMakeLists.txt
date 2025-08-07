@@ -218,9 +218,13 @@ if (USE_KDSINGLEAPPLICATION)
   message(STATUS "KDSingleApplication is used!")
   add_compile_definitions(USE_KDSINGLEAPPLICATION=1)
 
+  if (USE_BUNDLED_KDSINGLEAPPLICATION)
+    target_include_directories(flameshot PRIVATE ${kdsingleapplication_SOURCE_DIR} ${kdsingleapplication_BINARY_DIR})
+  endif()
+
   target_link_libraries(
           flameshot
-          kdsingleapplication
+          KDAB::kdsingleapplication
   )
 endif()
 
