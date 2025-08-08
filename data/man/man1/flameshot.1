@@ -83,6 +83,14 @@ If no argument is provided, it will open the config window, otherwise it can cha
 Here we list all the arguments available for all subcommands. The subcommands that accept each argument are listed after each argument. Alternatively, you can use the \fBflameshot [subcommand] --help\fR to know the list of available arguments for each subcommand.
 .
 .PP
+\-s, \-\-accept-on-select
+.RS 4
+Accept capture as soon as a selection is made
+.br
+Valid for subcommands: gui
+.RE
+.
+.PP
 \-a, \-\-autostart <bool>
 .RS 4
 Enable or disable run at startup
@@ -107,6 +115,14 @@ Valid for subcommands: full, gui, screen
 .RE
 .
 .PP
+\-k, \-\-contrastcolor <color-code>
+.RS 4
+Define the contrast UI color
+.br
+Valid for subcommands: config
+.RE
+.
+.PP
 \-d, \-\-delay <milliseconds>
 .RS 4
 How many milliseconds should Flameshot wait before taking the screenshot
@@ -123,14 +139,6 @@ Valid for subcommands: config
 .RE
 .
 .PP
-\-g, \-\-print-geometry
-.RS 4
-Print geometry of the selection in the format WxH+X+Y. Does nothing if raw is specified
-.br
-Valid for subcommands: gui
-.RE
-.
-.PP
 \-h, \-\-help
 .RS 4
 Show a brief help message and list the arguments the valid arguments for that subcommand
@@ -139,25 +147,25 @@ Valid for subcommands: config, full, gui, launcher, screen
 .RE
 .
 .PP
-\-k, \-\-contrastcolor <color-code>
-.RS 4
-Define the contrast UI color
-.br
-Valid for subcommands: config
-.RE
-.
-.PP
 \-\-last-region
 .RS 4
 Repeat screenshot with previously selected region
 .br
-Valid for subcommands: full, gui, screen
+Valid for subcommands: gui
 .RE
 .
 .PP
 \-m, \-\-maincolor <color-code>
 .RS 4
 Define the main UI color
+.br
+Valid for subcommands: config
+.RE
+.
+.PP
+\-n, \-\-notifications
+.RS 4
+Enable or disable the notifications
 .br
 Valid for subcommands: config
 .RE
@@ -187,6 +195,14 @@ Valid for subcommands: gui, screen
 .RE
 .
 .PP
+\-g, \-\-print-geometry
+.RS 4
+Print geometry of the selection in the format WxH+X+Y. Does nothing if raw is specified
+.br
+Valid for subcommands: gui
+.RE
+.
+.PP
 \-r, \-\-raw
 .RS 4
 Send raw PNG to stdout
@@ -200,14 +216,6 @@ Valid for subcommands: full, gui, screen
 Screenshot region to select
 .br
 Valid for subcommands: full, gui, screen
-.RE
-.
-.PP
-\-s, \-\-accept-on-select
-.RS 4
-Accept capture as soon as a selection is made
-.br
-Valid for subcommands: gui
 .RE
 .
 .PP
