@@ -244,17 +244,17 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="482"/>
         <source>Quit Capture</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukončiť snímanie</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="483"/>
         <source>Are you sure you want to quit capture?</source>
-        <translation type="unfinished"></translation>
+        <translation>Naozaj chcete ukončiť snímanie?</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="488"/>
         <source>Do not show this again</source>
-        <translation type="unfinished"></translation>
+        <translation>Ďalej už nezobrazovať</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="683"/>
@@ -1055,7 +1055,7 @@ Riešte ich ručne v konfiguračnom súbore.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="419"/>
         <source>Allow multiple flameshot GUI instances simultaneously</source>
-        <translation>Povolenie viacerých inštancií grafického rozhrania Flameshot súčasne</translation>
+        <translation>Povoliť viacero inštancií Flameshot GUI súčasne</translation>
     </message>
     <message>
         <source>This allows you to take screenshots of flameshot itself for example.</source>
@@ -1109,12 +1109,12 @@ Riešte ich ručne v konfiguračnom súbore.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="277"/>
         <source>Use last region for GUI mode</source>
-        <translation type="unfinished">Použite posledný región</translation>
+        <translation>Použiť poslednú oblasť v režime GUI</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="279"/>
         <source>Use the last region as the default selection for the next screenshot in GUI mode</source>
-        <translation type="unfinished">Používa posledný región ako predvolený výber pre ďalší snímku obrazovky</translation>
+        <translation>Použiť poslednú oblasť ako predvolený výber pre ďalší snímku obrazovky v režime GUI</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="293"/>
@@ -1129,12 +1129,12 @@ Riešte ich ručne v konfiguračnom súbore.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="316"/>
         <source>Show abort notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobrazovať notifikácie o zrušení</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="317"/>
         <source>Enable abort notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Povoliť notifikácie o zrušení</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="330"/>
@@ -1144,12 +1144,12 @@ Riešte ich ručne v konfiguračnom súbore.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="343"/>
         <source>Use grim to capture screenshots</source>
-        <translation type="unfinished"></translation>
+        <translation>Použiť grim na zachytávanie obrazovky</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="345"/>
         <source>Grim is a wayland only utility to capture screens based on the screencopy protocol. Generally only enable on minimal wayland window managers like sway, hyprland, etc.</source>
-        <translation type="unfinished"></translation>
+        <translation>Grim je nástroj pre Wayland (výhradne) na vytváranie snímok obrazovky založený na protokole screencopy. Vo všeobecnosti povoľte pre minimalistických správcov okien ako je sway, hyprland, atď.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="363"/>
@@ -1196,42 +1196,42 @@ Riešte ich ručne v konfiguračnom súbore.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="432"/>
         <source>Automatically unload from memory when it is not needed</source>
-        <translation type="unfinished"></translation>
+        <translation>Automaticky uvoľniť z pamäte, ak nie je potrebný</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="433"/>
         <source>Automatically close daemon (background process) when it is not needed</source>
-        <translation type="unfinished"></translation>
+        <translation>Automaticky ukončiť démona (proces na pozadí), keď nie je potrebný</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="444"/>
         <source>Launch in background at startup</source>
-        <translation type="unfinished"></translation>
+        <translation>Spustiť na pozadí pri štarte</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="445"/>
         <source>Launch Flameshot daemon (background process) when computer is booted</source>
-        <translation type="unfinished"></translation>
+        <translation>Spustiť démona Flameshot (proces na pozadí) pri spustení počítača</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="470"/>
         <source>Ask before quit capture</source>
-        <translation type="unfinished"></translation>
+        <translation>Pred ukončením snímania sa spýtať</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="473"/>
         <source>Show the confirmation prompt before ESC quit</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobraziť dialógové okno s potvrdením pred ukončením pomocou ESC</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="498"/>
         <source>Enable Copy to clipboard on Double Click</source>
-        <translation type="unfinished"></translation>
+        <translation>Povoliť Kopírovanie do schránky pri dvojitom kliknutí</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="510"/>
         <source>Copy URL after uploading was successful</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopírovať adresu URL po úspešnom nahratí</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="522"/>
@@ -1281,7 +1281,7 @@ Riešte ich ručne v konfiguračnom súbore.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="678"/>
         <source>Use lossy JPG format for clipboard (lossless PNG default)</source>
-        <translation type="unfinished"></translation>
+        <translation>Používať stratový formát JPG pre schránku (predvolene bezstratový PNG)</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="704"/>
@@ -1342,72 +1342,72 @@ Riešte ich ručne v konfiguračnom súbore.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="794"/>
         <source>Milliseconds before geometry display hides; 0 means do not hide</source>
-        <translation type="unfinished"></translation>
+        <translation>Počet milisekúnd, kým sa zobrazenie geometrie ukryje; 0 znamená, že sa ukrývať nebude</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="797"/>
         <source>Set geometry display timeout (ms)</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastaviť časové obmedzenie zobrazenie geometrie (ms)</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="805"/>
         <source>Selection Geometry Display</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobrazenie geometrie výberu</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="812"/>
         <source>Display Location</source>
-        <translation type="unfinished"></translation>
+        <translation>Umiestnenie displeja</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="815"/>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Žiadne</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="816"/>
         <source>Top Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Vľavo hore</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="818"/>
         <source>Top Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Vpravo hore</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="820"/>
         <source>Bottom Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Vľavo dole</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="822"/>
         <source>Bottom Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Vpravo dole</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="824"/>
         <source>Center</source>
-        <translation type="unfinished"></translation>
+        <translation>Stred</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="849"/>
         <source>Quality range of 0-100; Higher number is better quality and larger file size</source>
-        <translation type="unfinished"></translation>
+        <translation>Kvalita v rozsahu 0-100; vyššie číslo znamená lepšiu kvalitu a väčšiu veľkosť súboru</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="853"/>
         <source>JPEG Quality</source>
-        <translation type="unfinished"></translation>
+        <translation>Kvalita JPEG</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="864"/>
         <source>Reverse arrow</source>
-        <translation type="unfinished"></translation>
+        <translation>Otočiť šípku</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="865"/>
         <source>Draw the arrow head first</source>
-        <translation type="unfinished"></translation>
+        <translation>Najprv nakresliť hrot šípky</translation>
     </message>
 </context>
 <context>
@@ -1858,27 +1858,27 @@ Riešte ich ručne v konfiguračnom súbore.</translation>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="307"/>
         <source>Rotate Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Otočiť doprava</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="312"/>
         <source>Rotate Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Otočiť doľava</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="317"/>
         <source>Increase Opacity</source>
-        <translation type="unfinished"></translation>
+        <translation>Zvýšiť nepriehľadnosť</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="324"/>
         <source>Decrease Opacity</source>
-        <translation type="unfinished"></translation>
+        <translation>Znížiť nepriehľadnosť</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="331"/>
         <source>Close</source>
-        <translation type="unfinished">Zavrieť</translation>
+        <translation>Zavrieť</translation>
     </message>
 </context>
 <context>
@@ -1891,7 +1891,7 @@ Riešte ich ručne v konfiguračnom súbore.</translation>
     <message>
         <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="36"/>
         <source>Set Pixelate as the paint tool.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastaviť Pixelate ako kresliaci nástroj.</translation>
     </message>
     <message>
         <source>Set Pixelate as the paint tool</source>
@@ -1938,7 +1938,7 @@ Riešte ich ručne v konfiguračnom súbore.</translation>
     <message>
         <location filename="../../src/main.cpp" line="206"/>
         <source>Start a manual capture in GUI mode.</source>
-        <translation>Spustiť manuálne zachytávanie v GUI režime.</translation>
+        <translation>Spustiť manuálne zachytávanie v režime GUI.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="208"/>
@@ -1956,12 +1956,12 @@ Riešte ich ručne v konfiguračnom súbore.</translation>
     <message>
         <location filename="../../src/main.cpp" line="201"/>
         <source>Capture screenshot of all monitors at the same time.</source>
-        <translation type="unfinished"></translation>
+        <translation>Urobiť naraz snímku obrazovky všetkých monitorov.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="211"/>
         <source>Capture a screenshot of the specified monitor.</source>
-        <translation type="unfinished"></translation>
+        <translation>Urobiť snímku obrazovky konkrétneho monitora.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="216"/>
@@ -2021,7 +2021,7 @@ Riešte ich ručne v konfiguračnom súbore.</translation>
     <message>
         <location filename="../../src/main.cpp" line="250"/>
         <source>Enable or disable the notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Povoliť alebo zakázať notifikácie</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="253"/>
@@ -2216,12 +2216,12 @@ Možno budete musieť napísať pred &apos;#&apos; opačnú lomku, teda &apos;\#
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="68"/>
         <source>Subcommands</source>
-        <translation type="unfinished"></translation>
+        <translation>Podpríkazy</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="329"/>
         <source>subcommands</source>
-        <translation type="unfinished"></translation>
+        <translation>podpríkazy</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="330"/>
@@ -2377,22 +2377,22 @@ Možno budete musieť napísať pred &apos;#&apos; opačnú lomku, teda &apos;\#
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="54"/>
         <source>The universal wayland screen capture adapter requires Grim as the screen capture component of wayland. If the screen capture component is missing, please install it!</source>
-        <translation type="unfinished"></translation>
+        <translation>Univerzálny adaptér Wayland na snímanie obrazovky vyžaduje Grim ako komponent Waylandu na snímanie obrazovky. Ak tento komponent chýba, nainštalujte ho!</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="169"/>
         <source>If the useGrimAdapter setting is not enabled, the dbus protocol will be used. It should be noted that using the dbus protocol under wayland is not recommended. It is recommended to enable the useGrimAdapter setting in flameshot.ini to activate the grim-based general wayland screenshot adapter</source>
-        <translation type="unfinished"></translation>
+        <translation>Ak nie je nastavenie useGrimAdapter povolené, použije sa protokol dbus. Treba poznamenať, že používanie protokolu dbus pod Waylandom sa neodporúča. Odporúča sa povoliť nastavenie useGrimAdapter v súbore flameshot.ini, aby sa aktivoval všeobecný adaptér na snímanie obrazovky Wayland založený na grime</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="180"/>
         <source>grim&apos;s screenshot component is implemented based on wlroots, it may not be used in GNOME or similar desktop environments</source>
-        <translation type="unfinished"></translation>
+        <translation>komponent programu Grim na tvorbu snímok je postavený na wlroots, nedá sa použiť v prostredí GNOME ani v podobných prostrediach</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="192"/>
         <source>Unable to detect desktop environment (GNOME? KDE? Qile? Sway? ...)</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepodarilo za zistiť pracovné prostredie (GNOME? KDE? Qile? Sway? ...)</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="195"/>
@@ -2501,22 +2501,22 @@ Možno budete musieť napísať pred &apos;#&apos; opačnú lomku, teda &apos;\#
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="180"/>
         <source>Symmetrically decrease width by 2px</source>
-        <translation type="unfinished"></translation>
+        <translation>Symetricky znížiť šírku o 2 pixely</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="182"/>
         <source>Symmetrically increase width by 2px</source>
-        <translation type="unfinished"></translation>
+        <translation>Symetricky zvýšiť šírku o 2 pixely</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="184"/>
         <source>Symmetrically increase height by 2px</source>
-        <translation type="unfinished"></translation>
+        <translation>Symetricky zvýšiť výšku o 2 pixely</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="186"/>
         <source>Symmetrically decrease height by 2px</source>
-        <translation type="unfinished"></translation>
+        <translation>Symetricky znížiť výšku o 2 pixely</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="187"/>
@@ -2551,12 +2551,12 @@ Možno budete musieť napísať pred &apos;#&apos; opačnú lomku, teda &apos;\#
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="194"/>
         <source>Delete selected drawn object</source>
-        <translation type="unfinished"></translation>
+        <translation>Odstrániť vybraný nakreslený objekt</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="195"/>
         <source>Cancel current selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Zrušiť aktuálny výber</translation>
     </message>
     <message>
         <source>Delete current tool</source>
@@ -2605,7 +2605,7 @@ Možno budete musieť napísať pred &apos;#&apos; opačnú lomku, teda &apos;\#
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="85"/>
         <source>Display grid</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobraziť mriežku</translation>
     </message>
 </context>
 <context>
@@ -2861,7 +2861,7 @@ Možno budete musieť napísať pred &apos;#&apos; opačnú lomku, teda &apos;\#
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="159"/>
         <source>&amp;Open Save Path</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Otvoriť cestu na ukladanie</translation>
     </message>
 </context>
 <context>
