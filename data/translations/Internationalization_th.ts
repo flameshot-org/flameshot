@@ -397,7 +397,7 @@ Premeu Espai per obrir el calaix lateral.</translation>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="58"/>
         <source>Enter or Left Click</source>
-        <translation>Enter or Left Click</translation>
+        <translation>เข้าหรือคลิกซ้าย</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="59"/>
@@ -407,7 +407,7 @@ Premeu Espai per obrir el calaix lateral.</translation>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="59"/>
         <source>Hold Left Click</source>
-        <translation>Hold Left Click</translation>
+        <translation>คลิกซ้ายค้างไว้</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="60"/>
@@ -417,7 +417,7 @@ Premeu Espai per obrir el calaix lateral.</translation>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="60"/>
         <source>Space or Right Click</source>
-        <translation>Space or Right Click</translation>
+        <translation>วรรคหรือคลิกขวา</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="61"/>
@@ -590,7 +590,7 @@ Premeu Espai per obrir el calaix lateral.</translation>
         <source>Some keyboard shortcuts have conflicts.
 This will NOT prevent flameshot from starting.
 Please solve them manually in the configuration file.</source>
-        <translation>แป้นลัดบางอันอาจขัดแย้งกัน การดำเนินการนี้จะไม่ป้องกันไม่ให้ Flameshot เริ่มทำงาน โปรดแก้ไขปัญหาด้วยตนเองในไฟล์กำหนดค่า</translation>
+        <translation>แป้นลัดบางปุ่มอาจมีปัญหาขัดแย้งกัน การดำเนินการนี้จะไม่ป้องกันไม่ให้ Flameshot เริ่มทำงาน แก้ไขปัญหาในไฟล์กำหนดค่า</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="112"/>
@@ -2225,7 +2225,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="167"/>
         <source>Left Double-click</source>
-        <translation>Left Double-click</translation>
+        <translation>ดับเบิลคลิกซ้ายสองครั้ง</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="174"/>
