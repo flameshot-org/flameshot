@@ -271,7 +271,7 @@ jobs:
       image: ${{ matrix.config.image_repo }}:${{ matrix.config.os }}-${{ matrix.config.symbol }}
       options: --cap-add SYS_ADMIN --device /dev/fuse --security-opt apparmor:unconfined
     steps:
-      - name:
+      - name: Configure git safe directory
         shell: bash
         run: |
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
@@ -317,21 +317,21 @@ jobs:
           sudo apt-get -y -qq update
           sudo apt-get -y --no-install-recommends install fuse cmake extra-cmake-modules build-essential qt6-base-dev qt6-tools-dev qt6-tools-dev-tools libqt6svg6-dev qt6-l10n-tools qt6-wayland libgl-dev appstream hicolor-icon-theme openssl ca-certificates jq
 
-    - name: Download linuxdeploy
-      run: |
-       wget -c -nv "https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage"
-       chmod a+x linuxdeploy-x86_64.AppImage
-       LINUXDEPLOY_BIN=${PWD}/linuxdeploy-x86_64.AppImage
+      - name: Download linuxdeploy
+        run: |
+         wget -c -nv "https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage"
+         chmod a+x linuxdeploy-x86_64.AppImage
+         LINUXDEPLOY_BIN=${PWD}/linuxdeploy-x86_64.AppImage
 
-    - name: Download linuxdeployqt-plugin-appimage
-      run: |
-       wget -c -nv "https://github.com/linuxdeploy/linuxdeploy-plugin-appimage/releases/download/continuous/linuxdeploy-plugin-appimage-x86_64.AppImage"
-       chmod a+x linuxdeploy-plugin-appimage-x86_64.AppImage
+      - name: Download linuxdeployqt-plugin-appimage
+        run: |
+         wget -c -nv "https://github.com/linuxdeploy/linuxdeploy-plugin-appimage/releases/download/continuous/linuxdeploy-plugin-appimage-x86_64.AppImage"
+         chmod a+x linuxdeploy-plugin-appimage-x86_64.AppImage
 
-    - name: Download linuxdeployqt-plugin-qt
-      run: |
-       wget -c -nv "https://github.com/linuxdeploy/linuxdeploy-plugin-qt/releases/download/continuous/linuxdeploy-plugin-qt-x86_64.AppImage"
-       chmod a+x linuxdeploy-plugin-qt-x86_64.AppImage
+      - name: Download linuxdeployqt-plugin-qt
+        run: |
+         wget -c -nv "https://github.com/linuxdeploy/linuxdeploy-plugin-qt/releases/download/continuous/linuxdeploy-plugin-qt-x86_64.AppImage"
+         chmod a+x linuxdeploy-plugin-qt-x86_64.AppImage
 
       - name: Packaging appimage
         run: |
@@ -342,6 +342,8 @@ jobs:
           cd $GITHUB_WORKSPACE
           cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX=/usr -DUSE_LAUNCHER_ABSOLUTE_PATH:BOOL=OFF
           make -j$(nproc) DESTDIR=${APPIMAGE_DST_PATH} install
+          rm -rf ${APPIMAGE_DST_PATH}/usr/include
+          rm -rf ${APPIMAGE_DST_PATH}/usr/lib
 
           export EXTRA_PLATFORM_PLUGINS="libqwayland-generic.so"
           export EXTRA_QT_MODULES="waylandcompositor"
