@@ -486,7 +486,7 @@ Press Space to open the side panel.</translation>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="148"/>
         <source>Unable to remove preset. Minimum limit reached.</source>
-        <translation>Không thể xóa bỏ màu vì đã đạt đến giới hạn tối thiếu</translation>
+        <translation>Không thể xóa bỏ màu vì đã đạt đến giới hạn tối thiếu.</translation>
     </message>
 </context>
 <context>
