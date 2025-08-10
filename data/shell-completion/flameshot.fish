@@ -1,4 +1,3 @@
-set -l SUBCOMMANDS gui screen full launcher config
 
 ####################
 # HELPER FUNCTIONS #
@@ -67,48 +66,61 @@ end
 # COMPLETIONS #
 ###############
 
+# define the subcommands
+set -l SUBCOMMANDS gui screen full launcher config
+
 # No subcommand
-complete -c flameshot -n __flameshot_no_positional_args -f -a "$SUBCOMMANDS"
-complete -c flameshot -l "help"                 -s "h"  -f   -d "Display help message"
-complete -c flameshot -l "version"              -s "v"  -f   -d "Display version information" -n __flameshot_no_positional_args
+complete -c flameshot                                                                                        --no-files --arguments "$SUBCOMMANDS" --condition __flameshot_no_positional_args 
+complete -c flameshot --long-option "help"    --short-option "h" --description "Display help message"        --no-files
+complete -c flameshot --long-option "version" --short-option "v" --description "Display version information" --no-files                            --condition __flameshot_no_positional_args
 
 # GUI subcommand
-__flameshot_complete gui                                -f
-__flameshot_complete gui -l "path"              -s "p"  -rk  -d "Output file or directory"
-__flameshot_complete gui -l "clipboard"         -s "c"  -f   -d "Copy screenshot to the clipboard"
-__flameshot_complete gui -l "delay"             -s "d"  -frk -d "Delay time in milliseconds"
-__flameshot_complete gui -l "region"                    -frk -d "Screenshot region to select (WxH+X+Y)" -a "(__flameshot_complete_region gui)"
-__flameshot_complete gui -l "last-region"               -f   -d "Repeat screenshot with previously selected region"
-__flameshot_complete gui -l "raw"               -s "r"  -f   -d "Print raw PNG capture"
-__flameshot_complete gui -l "print-geometry"    -s "g"  -f   -d "Print geometry of the selection"
-__flameshot_complete gui -l "upload"            -s "u"  -f   -d "Upload the screenshot"
-__flameshot_complete gui -l "pin"                       -f   -d "Pin the screenshot to the screen"
-__flameshot_complete gui -l "accept-on-select"  -s "s"  -f   -d "Accept capture as soon as a selection is made"
+__flameshot_complete gui --no-files
+__flameshot_complete gui --long-option "path"             --short-option "p" --description "Output file or directory"                          --require-parameter
+__flameshot_complete gui --long-option "clipboard"        --short-option "c" --description "Copy screenshot to the clipboard"                                      --no-files
+__flameshot_complete gui --long-option "delay"            --short-option "d" --description "Delay time in milliseconds"                        --require-parameter --no-files
+__flameshot_complete gui --long-option "region"                              --description "Screenshot region to select (WxH+X+Y)"             --require-parameter            --arguments "(__flameshot_complete_region gui)"
+__flameshot_complete gui --long-option "last-region"                         --description "Repeat screenshot with previously selected region"                     --no-files
+__flameshot_complete gui --long-option "raw"              --short-option "r" --description "Print raw PNG capture"                                                 --no-files
+__flameshot_complete gui --long-option "print-geometry"   --short-option "g" --description "Print geometry of the selection"                                       --no-files
+__flameshot_complete gui --long-option "upload"           --short-option "u" --description "Upload the screenshot"                                                 --no-files
+__flameshot_complete gui --long-option "pin"                                 --description "Pin the screenshot to the screen"                                      --no-files
+__flameshot_complete gui --long-option "accept-on-select" --short-option "s" --description "Accept capture as soon as a selection is made"                         --no-files
+__flameshot_complete gui --long-option "help"             --short-option "h" --description "Show the available arguments"                                          --no-files
 
 # SCREEN subcommand
-__flameshot_complete screen                             -f
-__flameshot_complete screen -l "number"         -s "n"  -frk -d "Screen number (starting from 0)" -a "(__flameshot_complete_screen_number)"
-__flameshot_complete screen -l "path"           -s "p"  -rk  -d "Output file or directory"
-__flameshot_complete screen -l "clipboard"      -s "c"  -f   -d "Copy screenshot to the clipboard"
-__flameshot_complete screen -l "delay"          -s "d"  -frk -d "Delay time in milliseconds"
-__flameshot_complete screen -l "region"                 -frk -d "Screenshot region to select (WxH+X+Y)" -a "(__flameshot_complete_region screen)"
-__flameshot_complete screen -l "last-region"            -f   -d "Repeat screenshot with previously selected region"
-__flameshot_complete screen -l "raw"            -s "r"  -f   -d "Print raw PNG capture"
-__flameshot_complete screen -l "upload"         -s "u"  -f   -d "Upload the screenshot"
-__flameshot_complete screen -l "pin"                    -f   -d "Pin the screenshot to the screen"
+__flameshot_complete screen --no-files
+__flameshot_complete screen --long-option "number"      --short-option "n" --description "Screen number (starting from 0)"                    --require-parameter --no-files --arguments "(__flameshot_complete_screen_number)"
+__flameshot_complete screen --long-option "path"        --short-option "p" --description "Output file or directory"                           --require-parameter
+__flameshot_complete screen --long-option "clipboard"   --short-option "c" --description "Copy screenshot to the clipboard"                                       --no-files
+__flameshot_complete screen --long-option "delay"       --short-option "d" --description "Delay time in milliseconds"                         --require-parameter --no-files
+__flameshot_complete screen --long-option "region"                          --description "Screenshot region to select (WxH+X+Y)"             --require-parameter --no-files --arguments "(__flameshot_complete_region screen)"
+__flameshot_complete screen --long-option "raw"         --short-option "r" --description "Print raw PNG capture"                                                 --no-files
+__flameshot_complete screen --long-option "upload"      --short-option "u" --description "Upload the screenshot"                                                 --no-files
+__flameshot_complete screen --long-option "pin"                            --description "Pin the screenshot to the screen"                                      --no-files
+__flameshot_complete screen --long-option "help"        --short-option "h" --description "Show the available arguments"                                          --no-files
 
 # FULL command
-__flameshot_complete full                               -f
-__flameshot_complete full   -l "path"           -s "p"  -rk  -d "Output file or directory"
-__flameshot_complete full   -l "clipboard"      -s "c"  -f   -d "Copy screenshot to the clipboard"
-__flameshot_complete full   -l "delay"          -s "d"  -frk -d "Delay time in milliseconds"
-__flameshot_complete full   -l "region"                 -frk -d "Screenshot region to select (WxH+X+Y)" -a "(__flameshot_complete_region full)"
-__flameshot_complete full   -l "last-region"            -f   -d "Repeat screenshot with previously selected region"
-__flameshot_complete full   -l "raw"            -s "r"  -f   -d "Print raw PNG capture"
-__flameshot_complete full   -l "upload"         -s "u"  -f   -d "Upload the screenshot"
+__flameshot_complete full --no-files
+__flameshot_complete full --long-option "path"        --short-option "p" --description "Output file or directory"                          --require-parameter
+__flameshot_complete full --long-option "clipboard"   --short-option "c" --description "Copy screenshot to the clipboard"                                      --no-files
+__flameshot_complete full --long-option "delay"       --short-option "d" --description "Delay time in milliseconds"                        --require-parameter --no-files
+__flameshot_complete full --long-option "region"                         --description "Screenshot region to select (WxH+X+Y)"             --require-parameter --no-files --arguments "(__flameshot_complete_region full)" --keep-order
+__flameshot_complete full --long-option "raw"         --short-option "r" --description "Print raw PNG capture"                                                 --no-files
+__flameshot_complete full --long-option "upload"      --short-option "u" --description "Upload the screenshot"                                                 --no-files
+__flameshot_complete full --long-option "help"        --short-option "h" --description "Show the available arguments"                                          --no-files
 
-# LAUNCHER command doesn't have any completions specific to itself
+# LAUNCHER command
+__flameshot_complete launcher --no-files
 
-# CONFIG command -- TODO will be completed in a future version
-__flameshot_complete config                             -f
-__flameshot_complete config -l "check"                  -f   -d "Check the configuration for errors"
+# CONFIG command
+__flameshot_complete config --no-files
+__flameshot_complete config --long-option "autostart"      --short-option "a" --description "Enable or disable run at startup"           --require-parameter --no-files --arguments "true false"
+__flameshot_complete config --long-option "filename"       --short-option "f" --description "Set the filename pattern"                   --require-parameter --no-files 
+__flameshot_complete config --long-option "notification"   --short-option "n" --description "Enable or disable the notification"         --require-parameter --no-files --arguments "true false"
+__flameshot_complete config --long-option "trayicon"       --short-option "t" --description "Enable or disable the tray icon"            --require-parameter --no-files --arguments "true false"
+__flameshot_complete config --long-option "showhelp"       --short-option "s" --description "Show the help message in the capture mode"  --require-parameter --no-files --arguments "true false"
+__flameshot_complete config --long-option "maincolor"      --short-option "m" --description "Define the main UI color (hexadecimal)"     --require-parameter --no-files 
+__flameshot_complete config --long-option "contrastcolor"  --short-option "k" --description "Define the contrast UI color (hexadecimal)" --require-parameter --no-files 
+__flameshot_complete config --long-option "check"                             --description "Check the configuration for errors"                             --no-files
+__flameshot_complete config --long-option "help"           --short-option "h" --description "Show the available arguments"                                   --no-files

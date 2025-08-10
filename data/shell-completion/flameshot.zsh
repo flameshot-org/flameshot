@@ -27,6 +27,7 @@ _flameshot_gui_opts=(
     {-u,--upload}'[Upload screenshot]'
     "--pin[Pin the capture to the screen]"
     {-s,--accept-on-select}'[Accept capture as soon as a selection is made]'
+    {-h,--help}'[Show the available arguments]'
 )
 
 _flameshot_gui() {
@@ -43,10 +44,10 @@ _flameshot_screen_opts=(
     {-c,--clipboard}'[Save the capture to the clipboard]'
     {-d,--delay}'[Delay time in milliseconds]'
     "--region[Screenshot region to select <WxH+X+Y or string>]"
-    "--last-region[Repeat screenshot with previously selected region]"
     {-r,--raw}'[Print raw PNG capture]'
     {-u,--upload}'[Upload screenshot]'
     "--pin[Pin the capture to the screen]"
+    {-h,--help}'[Show the available arguments]'
 )
 
 _flameshot_screen() {
@@ -62,9 +63,9 @@ _flameshot_full_opts=(
     {-c,--clipboard}'[Save the capture to the clipboard]'
     {-d,--delay}'[Delay time in milliseconds]'
     "--region[Screenshot region to select <WxH+X+Y or string>]"
-    "--last-region[Repeat screenshot with previously selected region]"
     {-r,--raw}'[Print raw PNG capture]'
     {-u,--upload}'[Upload screenshot]'
+    {-h,--help}'[Show the available arguments]'
 )
 
 _flameshot_full() {
@@ -76,13 +77,15 @@ _flameshot_full() {
 # config
 
 _flameshot_config_opts=(
-    {-a,--autostart}'[Enable or disable run at startup]'
+    {-a,--autostart}'[Enable or disable run at startup (true/false)]'
     {-f,--filename}'[Set the filename pattern]'
-    {-t,--trayicon}'[Enable or disable the tray icon]'
-    {-s,--showhelp}'[Define the main UI color]'
-    {-m,--maincolor}'[Show the help message in the capture mode]'
-    {-k,--contrastcolor}'[Define the contrast UI color]'
+    {-n,--notification}'[Enable or disable the notification (true/false)]'
+    {-t,--trayicon}'[Enable or disable the tray icon (true/false)]'
+    {-s,--showhelp}'[Show the help message in the capture mode (true/false)]'
+    {-m,--maincolor}'[Define the main UI color (hexadecimal)]'
+    {-k,--contrastcolor}'[Define the contrast UI color (hexadecimal)]'
     "--check[Check the configuration for errors]"
+    {-h,--help}'[Show the available arguments]'
 )
 
 _flameshot_config() {
@@ -97,7 +100,7 @@ _flameshot() {
     local -a state line commands
 
     commands=(
-        "gui:Start a manual capture in GUI mode"
+        "gui:Start the manual capture in GUI mode"
         "screen:Capture a single screen (one monitor)"
         "full:Capture the entire desktop (all monitors)"
         "launcher:Open the capture launcher"
