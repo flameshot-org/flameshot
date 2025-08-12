@@ -381,8 +381,6 @@ On MacOs 15 and above, you will have to go to system settings -> privacy and sec
 
 ```sudo xattr -rd com.apple.quarantine /Applications/flameshot.app```
 
-
-
 After following all those steps above, `flameshot` will open without problems in your Mac.
 
 ### Windows
