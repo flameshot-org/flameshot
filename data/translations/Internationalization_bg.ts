@@ -205,7 +205,7 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="422"/>
         <source>Select screenshot area</source>
-        <translation>Избиране на заснемана област</translation>
+        <translation>Избиране на заснеманата област</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="436"/>
@@ -215,7 +215,7 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="436"/>
         <source>Change tool size</source>
-        <translation>Променяне размера на инструмента</translation>
+        <translation>Промяна на размера на инструмента</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="437"/>
@@ -225,12 +225,12 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="437"/>
         <source>Show color picker</source>
-        <translation>Show color picker</translation>
+        <translation>Показване на палитра</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="439"/>
         <source>Open side panel</source>
-        <translation>Open side panel</translation>
+        <translation>Отваряне на страничен панел</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="440"/>
@@ -255,7 +255,7 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="488"/>
         <source>Do not show this again</source>
-        <translation type="unfinished"></translation>
+        <translation>Без повторно показване</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="683"/>
@@ -282,7 +282,7 @@ Press Space to open the side panel.</translation>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="1122"/>
         <source>Tool Settings</source>
-        <translation>Tool Settings</translation>
+        <translation>Настройки на инструмента</translation>
     </message>
 </context>
 <context>
@@ -290,12 +290,12 @@ Press Space to open the side panel.</translation>
     <message>
         <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="68"/>
         <source>Circle Counter</source>
-        <translation>Circle Counter</translation>
+        <translation>Номериране</translation>
     </message>
     <message>
         <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="86"/>
         <source>Add an autoincrementing counter bubble</source>
-        <translation>Add an autoincrementing counter bubble</translation>
+        <translation>Добавяне на последователни числа в балонче</translation>
     </message>
 </context>
 <context>
@@ -303,12 +303,12 @@ Press Space to open the side panel.</translation>
     <message>
         <location filename="../../src/tools/circle/circletool.cpp" line="20"/>
         <source>Circle</source>
-        <translation>Circle</translation>
+        <translation>Окръжност</translation>
     </message>
     <message>
         <location filename="../../src/tools/circle/circletool.cpp" line="30"/>
         <source>Set the Circle as the paint tool</source>
-        <translation>Set the Circle as the paint tool</translation>
+        <translation>Избиране на инструмент „Окръжност“</translation>
     </message>
 </context>
 <context>
@@ -382,7 +382,7 @@ Press Space to open the side panel.</translation>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="58"/>
         <source>Accept color</source>
-        <translation>Accept color</translation>
+        <translation>Приемане на цвета</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="58"/>
@@ -392,7 +392,7 @@ Press Space to open the side panel.</translation>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="59"/>
         <source>Precisely select color</source>
-        <translation>Precisely select color</translation>
+        <translation>Избиране на точен цвят</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="59"/>
@@ -1695,7 +1695,7 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/tools/invert/inverttool.cpp" line="35"/>
         <source>Set Inverter as the paint tool</source>
-        <translation>Set Inverter as the paint tool</translation>
+        <translation>Избиране на инструмент „Негатив“</translation>
     </message>
 </context>
 <context>
@@ -1708,7 +1708,7 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/tools/line/linetool.cpp" line="32"/>
         <source>Set the Line as the paint tool</source>
-        <translation>Set the Line as the paint tool</translation>
+        <translation>Избиране на инструмент „Линия“</translation>
     </message>
 </context>
 <context>
@@ -1721,7 +1721,7 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/tools/marker/markertool.cpp" line="33"/>
         <source>Set the Marker as the paint tool</source>
-        <translation>Set the Marker as the paint tool</translation>
+        <translation>Избиране на инструмент „Маркер“</translation>
     </message>
 </context>
 <context>
@@ -1747,7 +1747,7 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/tools/pencil/penciltool.cpp" line="28"/>
         <source>Set the Pencil as the paint tool</source>
-        <translation>Set the Pencil as the paint tool</translation>
+        <translation>Избиране на инструмент „Молив“</translation>
     </message>
 </context>
 <context>
@@ -1816,7 +1816,7 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="36"/>
         <source>Set Pixelate as the paint tool.</source>
-        <translation type="unfinished"></translation>
+        <translation>Избиране на инструмент „Размиване“</translation>
     </message>
     <message>
         <source>Set Pixelate as the paint tool</source>
@@ -1976,7 +1976,7 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/main.cpp" line="236"/>
         <source>Set the filename pattern</source>
-        <translation>Set the filename pattern</translation>
+        <translation>Избиране на шаблон за име на файла</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="240"/>
@@ -2252,7 +2252,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/tools/rectangle/rectangletool.cpp" line="32"/>
         <source>Set the Rectangle as the paint tool</source>
-        <translation>Set the Rectangle as the paint tool</translation>
+        <translation>Избиране на инструмент „Правоъгълник“</translation>
     </message>
 </context>
 <context>
@@ -2332,7 +2332,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/tools/selection/selectiontool.cpp" line="35"/>
         <source>Set Selection as the paint tool</source>
-        <translation>Set Selection as the paint tool</translation>
+        <translation>Избиране на инструмент „Правоъгълна рамка“</translation>
     </message>
 </context>
 <context>
@@ -2350,12 +2350,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="38"/>
         <source>Press Esc to cancel or ⌘+Backspace to disable the keyboard shortcut.</source>
-        <translation>Press Esc to cancel or ⌘+Backspace to disable the keyboard shortcut.</translation>
+        <translation>Натиснете Esc за отказ или ⌘+Backspace за отмяна на клавишната комбинация.</translation>
     </message>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="42"/>
         <source>Press Esc to cancel or Backspace to disable the keyboard shortcut.</source>
-        <translation>Press Esc to cancel or Backspace to disable the keyboard shortcut.</translation>
+        <translation>Натиснете Esc за отказ или Backspace за отмяна на клавишната комбинация.</translation>
     </message>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="47"/>

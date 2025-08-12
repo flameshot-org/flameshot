@@ -2,7 +2,11 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #ifdef USE_KDSINGLEAPPLICATION
-#include "kdsingleapplication.h"
+#include <kdsingleapplication.h>
+#ifdef Q_OS_UNIX
+#include "core/signaldaemon.h"
+#include "csignal"
+#endif
 #endif
 
 #include "abstractlogger.h"
@@ -29,6 +33,34 @@
 #include <QDBusConnection>
 #include <QDBusMessage>
 #include <desktopinfo.h>
+#endif
+
+// Required for saving button list QList<CaptureTool::Type>
+Q_DECLARE_METATYPE(QList<int>)
+
+#if defined(USE_KDSINGLEAPPLICATION) && defined(Q_OS_UNIX)
+static int setup_unix_signal_handlers()
+{
+    struct sigaction sint, term;
+
+    sint.sa_handler = SignalDaemon::intSignalHandler;
+    sigemptyset(&sint.sa_mask);
+    sint.sa_flags = 0;
+    sint.sa_flags |= SA_RESTART;
+
+    if (sigaction(SIGINT, &sint, 0))
+        return 1;
+
+    term.sa_handler = SignalDaemon::termSignalHandler;
+    sigemptyset(&term.sa_mask);
+    term.sa_flags = 0;
+    term.sa_flags |= SA_RESTART;
+
+    if (sigaction(SIGTERM, &term, 0))
+        return 2;
+
+    return 0;
+}
 #endif
 
 int requestCaptureAndWait(const CaptureRequest& req)
@@ -135,6 +167,9 @@ void reinitializeAsQApplication(int& argc, char* argv[])
 
 int main(int argc, char* argv[])
 {
+    // Required for saving button list QList<CaptureTool::Type>
+    qRegisterMetaType<QList<int>>();
+
     QCoreApplication::setApplicationVersion(APP_VERSION);
     QCoreApplication::setApplicationName(QStringLiteral("flameshot"));
     QCoreApplication::setOrganizationName(QStringLiteral("flameshot"));
@@ -144,11 +179,13 @@ int main(int argc, char* argv[])
         QApplication app(argc, argv);
 
 #ifdef USE_KDSINGLEAPPLICATION
-        KDSingleApplication kdsa(QStringLiteral("flameshot"));
+#ifdef Q_OS_UNIX
+        setup_unix_signal_handlers();
+        auto signalDaemon = SignalDaemon();
+#endif
+        auto kdsa = KDSingleApplication(QStringLiteral("flameshot"));
 
         if (!kdsa.isPrimaryInstance()) {
-            // AbstractLogger::warning()
-            //  << QStringLiteral("Closing second Flameshot instance!");
             return 0; // Quit
         }
 #endif

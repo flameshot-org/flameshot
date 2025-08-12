@@ -1,32 +1,10 @@
 cmake_minimum_required(VERSION 3.13)
 # cmake_policy(SET CMP0076 OLD)
 
-set(FLAMESHOT_VERSION 13.0.0)
+set(FLAMESHOT_VERSION 13.0.1)
 
 # Flameshot-org
 set(GIT_API_URL "https://api.github.com/repos/flameshot-org/flameshot/releases/latest")
-
-# TODO - fix it for all linux distros
-#find_package (Git)
-#if (GIT_FOUND)
-#  message("git found: ${GIT_EXECUTABLE} in version     ${GIT_VERSION_STRING}")
-#
-#  # set flameshot updates url
-#  execute_process(COMMAND ${GIT_EXECUTABLE} ls-remote --get-url OUTPUT_VARIABLE GIT_ORIGIN_REMOTE)
-#  message("GIT_ORIGIN_REMOTE: ${GIT_ORIGIN_REMOTE}")
-#  string(REGEX REPLACE ".git\r*\n*$" "/releases/latest" GIT_API_URL ${GIT_ORIGIN_REMOTE})
-#  string(REGEX REPLACE "^.*:" "https://api.github.com/repos/" GIT_API_URL ${GIT_API_URL})
-#  message("GIT_API_URL: '${GIT_API_URL}'")
-#
-#  # get application version
-#  execute_process(COMMAND ${GIT_EXECUTABLE} describe --tags --abbrev=0 --match v[0-9]* OUTPUT_VARIABLE FLAMESHOT_VERSION)
-#  string(REGEX REPLACE "\r" "" FLAMESHOT_VERSION ${FLAMESHOT_VERSION})
-#  string(REGEX REPLACE "\n" "" FLAMESHOT_VERSION ${FLAMESHOT_VERSION})
-#  string(REGEX REPLACE "^v" "" FLAMESHOT_VERSION ${FLAMESHOT_VERSION})
-#  message("FLAMESHOT_VERSION: '${FLAMESHOT_VERSION}'")
-#else()
-#  message("git command is not found")
-#endif ()
 
 project(
         flameshot
@@ -46,23 +24,27 @@ option(BUILD_SHARED_LIBS OFF)
 #Needed due to linker error with QtColorWidget
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
-FetchContent_Declare(
-    qtColorWidgets
-    GIT_REPOSITORY https://gitlab.com/mattbas/Qt-Color-Widgets.git
-    GIT_TAG 352bc8f99bf2174d5724ee70623427aa31ddc26a
-)
 
-#Workaround for duplicate GUID in windows WIX installer
-if (WIN32)
-    FetchContent_GetProperties(qtColorWidgets)
-    if(NOT qtcolorwidgets_POPULATED)
-        FetchContent_Populate(qtColorWidgets)
-        add_subdirectory(${qtcolorwidgets_SOURCE_DIR} ${qtcolorwidgets_BINARY_DIR} EXCLUDE_FROM_ALL)
-    endif()
+# Dependency can be fetched via flatpak builder
+if(EXISTS "${CMAKE_SOURCE_DIR}/external/Qt-Color-Widgets/CMakeLists.txt")
+    add_subdirectory("${CMAKE_SOURCE_DIR}/external/Qt-Color-Widgets" EXCLUDE_FROM_ALL)
 else()
-    FetchContent_MakeAvailable(qtColorWidgets)
+    FetchContent_Declare(
+        qtColorWidgets
+        GIT_REPOSITORY https://gitlab.com/mattbas/Qt-Color-Widgets.git
+        GIT_TAG 352bc8f99bf2174d5724ee70623427aa31ddc26a
+    )
+  #Workaround for duplicate GUID in windows WIX installer
+  if (WIN32)
+      FetchContent_GetProperties(qtColorWidgets)
+      if(NOT qtcolorwidgets_POPULATED)
+          FetchContent_Populate(qtColorWidgets)
+          add_subdirectory(${qtcolorwidgets_SOURCE_DIR} ${qtcolorwidgets_BINARY_DIR} EXCLUDE_FROM_ALL)
+      endif()
+  else()
+      FetchContent_MakeAvailable(qtColorWidgets)
+  endif()
 endif()
-
 
 # This can be read from ${PROJECT_NAME} after project() is called
 if (APPLE)
@@ -92,6 +74,7 @@ option(FLAMESHOT_DEBUG_CAPTURE "Enable mode to make debugging easier" OFF)
 option(USE_MONOCHROME_ICON "Build using monochrome icon as default" OFF)
 option(GENERATE_TS "Regenerate translation source files" OFF)
 option(USE_KDSINGLEAPPLICATION "Use KDSingleApplication library" ON)
+option(USE_BUNDLED_KDSINGLEAPPLICATION "Use a bundled version of the KDSingleApplication library" ${USE_KDSINGLEAPPLICATION})
 option(USE_LAUNCHER_ABSOLUTE_PATH "Use absolute path for the desktop launcher" ON)
 option(USE_WAYLAND_CLIPBOARD "USE KF Gui Wayland Clipboard" OFF)
 option(DISABLE_UPDATE_CHECKER "Disable check for updates" OFF)
@@ -126,15 +109,24 @@ enable_sanitizers(project_options)
 # allow for static analysis options include(cmake/StaticAnalyzers.cmake)
 
 if (USE_KDSINGLEAPPLICATION)
-  set(KDSingleApplication_EXAMPLES OFF CACHE BOOL "Don't build the examples")
-  set(KDSingleApplication_STATIC ON CACHE BOOL "Build static versions of the libraries")
+  if (USE_BUNDLED_KDSINGLEAPPLICATION)
+    set(KDSingleApplication_EXAMPLES OFF CACHE BOOL "Don't build the examples")
+    set(KDSingleApplication_STATIC ON CACHE BOOL "Build static versions of the libraries")
 
-  FetchContent_Declare(
-      kdsingleApplication
-      GIT_REPOSITORY https://github.com/KDAB/KDSingleApplication.git
-      GIT_TAG v1.2.0
-  )
-  FetchContent_MakeAvailable(KDSingleApplication)
+    # Check if KDSingleApplication is available locally
+    if(EXISTS "${CMAKE_SOURCE_DIR}/external/KDSingleApplication/CMakeLists.txt")
+      add_subdirectory("${CMAKE_SOURCE_DIR}/external/KDSingleApplication")
+    else()
+      FetchContent_Declare(
+          kdsingleApplication
+          GIT_REPOSITORY https://github.com/KDAB/KDSingleApplication.git
+          GIT_TAG v1.2.0
+      )
+      FetchContent_MakeAvailable(kdsingleApplication)
+    endif()
+  else()
+    find_package(KDSingleApplication-qt6 REQUIRED)
+  endif()
 endif()
 
 # ToDo: Check if this is used anywhere
