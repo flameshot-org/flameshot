@@ -377,6 +377,10 @@ follow the steps below:
 1. Right-Click on "flameshot.app" and choose "Open" from the context menu
 2. In the dialog click "Open"
 
+On MacOs 15 and above, above steps do not work. but you can open flameshot first time with the following command.
+
+```sudo xattr -rd com.apple.quarantine /Applications/flameshot.app```
+
 After following all those steps above, `flameshot` will open without problems in your Mac.
 
 ### Windows
