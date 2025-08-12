@@ -205,11 +205,30 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
 #endif
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX) || defined(Q_OS_WIN)
     QRect geometry = desktopGeometry();
-    QPixmap p(QApplication::primaryScreen()->grabWindow(
-      wid, geometry.x(), geometry.y(), geometry.width(), geometry.height()));
-    QScreen* screen = qApp->screenAt(QCursor::pos());
-    p.setDevicePixelRatio(screen->devicePixelRatio());
-    return p;
+
+    // Qt6 fix: Create a composite image from all screens to handle
+    // multi-monitor setups where screens have different positions/heights.
+    // This fixes the dual monitor offset bug and handles edge cases where
+    // the desktop bounding box includes virtual space.
+    QPixmap desktop(geometry.size());
+    desktop.fill(Qt::black); // Fill with black background
+
+    QPainter painter(&desktop);
+    for (QScreen* screen : QGuiApplication::screens()) {
+        QRect screenGeom = screen->geometry();
+        QPixmap screenCapture = screen->grabWindow(
+          wid, 0, 0, screenGeom.width(), screenGeom.height());
+
+        // Calculate position relative to desktop top-left
+        QPoint relativePos = screenGeom.topLeft() - geometry.topLeft();
+        painter.drawPixmap(relativePos, screenCapture);
+    }
+    painter.end();
+
+    // Set device pixel ratio based on the primary screen
+    desktop.setDevicePixelRatio(
+      QApplication::primaryScreen()->devicePixelRatio());
+    return desktop;
 #endif
 }
 
@@ -259,8 +278,9 @@ QRect ScreenGrabber::desktopGeometry()
 
     for (QScreen* const screen : QGuiApplication::screens()) {
         QRect scrRect = screen->geometry();
-        scrRect.moveTo(scrRect.x() / screen->devicePixelRatio(),
-                       scrRect.y() / screen->devicePixelRatio());
+        // Qt6 fix: Don't divide by devicePixelRatio for multi-monitor setups
+        // This was causing coordinate offset issues in dual monitor
+        // configurations
         geometry = geometry.united(scrRect);
     }
     return geometry;
