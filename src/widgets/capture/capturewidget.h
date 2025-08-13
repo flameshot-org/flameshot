@@ -91,6 +91,7 @@ private slots:
     void xywhTick();
     void onDisplayGridChanged(bool display);
     void onGridSizeChanged(int size);
+    void grabColorFromMousePosition();
 
 public:
     void removeToolObject(int index = -1);

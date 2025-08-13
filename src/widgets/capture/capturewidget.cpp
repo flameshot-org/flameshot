@@ -293,7 +293,7 @@ CaptureWidget::~CaptureWidget()
         Flameshot::instance()->exportCapture(
           pixmap(), geometry, m_context.request);
     } else {
-        emit Flameshot::instance()->captureFailed();
+        emit Flameshot::instance() -> captureFailed();
     }
 }
 
@@ -415,6 +415,23 @@ void CaptureWidget::onGridSizeChanged(int size)
 {
     m_gridSize = size;
     repaint();
+}
+
+void CaptureWidget::grabColorFromMousePosition()
+{
+    const QRect& screenshotRect = m_context.selection;
+    if (screenshotRect.width() == 0 || screenshotRect.height() == 0)
+        return;
+    QPoint localMousePos = mapFromGlobal(QCursor::pos());
+    qreal scaleFactor = m_context.screenshot.devicePixelRatio();
+    QPoint scaledPos(localMousePos.x() * scaleFactor,
+                     localMousePos.y() * scaleFactor);
+    if (!screenshotRect.contains(scaledPos))
+        return; // Mouse position exceeds the screenshot range, unable to pick
+                // color
+    QImage screenshotImage = m_context.screenshot.toImage();
+    QColor pickedColor = screenshotImage.pixel(scaledPos);
+    setDrawColor(pickedColor);
 }
 
 void CaptureWidget::showxywh()
@@ -1619,6 +1636,10 @@ void CaptureWidget::initShortcuts()
     newShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_CANCEL")),
                 this,
                 SLOT(cancel()));
+
+    newShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_GRAB_COLOR")),
+                this,
+                SLOT(grabColorFromMousePosition()));
 
     newShortcut(
       QKeySequence(ConfigHandler().shortcut("TYPE_DELETE_CURRENT_TOOL")),
