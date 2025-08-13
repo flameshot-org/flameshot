@@ -151,10 +151,7 @@ void FlameshotDaemon::copyToClipboard(const QString& text,
     auto m = createMethodCall(QStringLiteral("attachTextToClipboard"));
 
     m << text << notification;
-
-    QDBusConnection sessionBus = QDBusConnection::sessionBus();
-    checkDBusConnection(sessionBus);
-    sessionBus.call(m);
+    call(m);
 }
 
 /**
