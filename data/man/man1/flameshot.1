@@ -284,6 +284,10 @@ cursor by default.
 Shows help for \fBflameshot screen\fR subcommand.
 .
 .\"----------------------------------------------------------------------------
+.SH RETURN VALUE
+Returns 0 on normal exit, 2 on screenshot aborted, 3 on dbus connection lost, 130 on SIGINT received, 143 on SIGTERM received.
+.
+.\"----------------------------------------------------------------------------
 .SH SEE ALSO
 .PP
 You may also find more detailed online documentation on upstream project homepage.
