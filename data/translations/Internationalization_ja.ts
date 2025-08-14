@@ -386,7 +386,7 @@ Enter を押すと画面をキャプチャー。
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="58"/>
         <source>Enter or Left Click</source>
-        <translation></translation>
+        <translation>Enter or Left Click</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="59"/>
@@ -396,7 +396,7 @@ Enter を押すと画面をキャプチャー。
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="59"/>
         <source>Hold Left Click</source>
-        <translation></translation>
+        <translation>Hold Left Click</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="60"/>
@@ -406,7 +406,7 @@ Enter を押すと画面をキャプチャー。
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="60"/>
         <source>Space or Right Click</source>
-        <translation></translation>
+        <translation>Space or Right Click</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="61"/>
@@ -2395,7 +2395,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="167"/>
         <source>Left Double-click</source>
-        <translation></translation>
+        <translation>Left Double-click</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="174"/>
