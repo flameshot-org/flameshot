@@ -19,8 +19,6 @@ SPDX-License-Identifier: CC0-1.0
   </developer>
 
   <supports>
-	<control>pointing</control>
-	<control>keyboard</control>
 	<control>touch</control>
   </supports>
   
