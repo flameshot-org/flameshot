@@ -95,6 +95,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_mandir}/man1/%{name}.1*
 
 %changelog
+* Sun Aug 15 2025 Jeremy Borgman <borgman.jeremy@pm.me> - 13.1.0
+- Update for v13.1.0 release
+
 * Sun Aug 06 2025 Jeremy Borgman <borgman.jeremy@pm.me> - 13.0.1
 - Update for v13.0.1 release
 
