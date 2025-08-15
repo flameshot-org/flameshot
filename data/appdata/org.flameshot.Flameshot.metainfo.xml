@@ -19,8 +19,6 @@ SPDX-License-Identifier: CC0-1.0
   </developer>
 
   <supports>
-	<control>pointing</control>
-	<control>keyboard</control>
 	<control>touch</control>
   </supports>
   
@@ -50,23 +48,23 @@ SPDX-License-Identifier: CC0-1.0
 
   <screenshots>
     <screenshot type="default">
-      <image>https://raw.githubusercontent.com/flameshot-org/flameshot/master/data/img/preview/large_demo.png</image>
+      <image>https://raw.githubusercontent.com/flameshot-org/flameshot/master/docs/images/large_demo.png</image>
       <caption>Flameshot Usage</caption>
     </screenshot>
     <screenshot>
-      <image>https://raw.githubusercontent.com/flameshot-org/flameshot/master/data/img/preview/small_demo.png</image>
+      <image>https://raw.githubusercontent.com/flameshot-org/flameshot/master/docs/images/small_demo.png</image>
       <caption>Demo of Pixelation, Arrow, Box, And Counter Bubble</caption>
     </screenshot>
     <screenshot>
-      <image>https://raw.githubusercontent.com/flameshot-org/flameshot/master/data/img/preview/launcher.png</image>
+      <image>https://raw.githubusercontent.com/flameshot-org/flameshot/master/docs/images/launcher.png</image>
       <caption>The Launcher Window</caption>
     </screenshot>
     <screenshot>
-      <image>https://raw.githubusercontent.com/flameshot-org/flameshot/master/data/img/preview/config_interface.png</image>
+      <image>https://raw.githubusercontent.com/flameshot-org/flameshot/master/docs/images/config_interface.png</image>
       <caption>Configuration Window - Interface tab</caption>
     </screenshot>
     <screenshot>
-      <image>https://raw.githubusercontent.com/flameshot-org/flameshot/master/data/img/preview/config_shortcuts.png</image>
+      <image>https://raw.githubusercontent.com/flameshot-org/flameshot/master/docs/images/config_shortcuts.png</image>
       <caption>Configuration Window - Shortcuts tab</caption>
     </screenshot>
   </screenshots>
