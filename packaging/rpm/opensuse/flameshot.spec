@@ -1,13 +1,14 @@
 #
 # spec file for package flameshot on opensuse leap 15.x
 #
-Name: flameshot
+Name:    flameshot
 Version: 13.1.0
 Release: 2
 License: GPLv3+ and ASL 2.0 and GPLv2 and LGPLv3 and Free Art
 Summary: Powerful yet simple to use screenshot software
-URL: https://github.com/flameshot-org/flameshot
+URL:     https://github.com/flameshot-org/flameshot
 Source0: %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
+Vendor:  Flameshot
 
 BuildRequires: cmake >= 3.13.0
 BuildRequires: gcc-c++ >= 7
