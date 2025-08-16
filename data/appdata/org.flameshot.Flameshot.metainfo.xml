@@ -91,6 +91,7 @@ SPDX-License-Identifier: CC0-1.0
   </categories>
 
   <releases>
+    <release version="13.1.0" date="2025-08-15"/>
     <release version="13.0.1" date="2025-08-06"/>
     <release version="13.0.0" date="2025-08-03"/>
     <release version="12.1.0" date="2022-07-03"/>
