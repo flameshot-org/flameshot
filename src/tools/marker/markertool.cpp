@@ -78,6 +78,8 @@ void MarkerTool::paintMousePreview(QPainter& painter,
     painter.setCompositionMode(compositionMode);
 }
 
+void MarkerTool::finishShape() {}
+
 void MarkerTool::drawStart(const CaptureContext& context)
 {
     AbstractTwoPointTool::drawStart(context);
@@ -87,4 +89,10 @@ void MarkerTool::drawStart(const CaptureContext& context)
 void MarkerTool::pressed(CaptureContext& context)
 {
     Q_UNUSED(context)
+}
+
+void MarkerTool::drawDropShadow(QPainter& painter, const QPixmap& pixmap)
+{
+    Q_UNUSED(painter)
+    Q_UNUSED(pixmap)
 }

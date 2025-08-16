@@ -13,6 +13,7 @@ AbstractPathTool::AbstractPathTool(QObject* parent)
 void AbstractPathTool::copyParams(const AbstractPathTool* from,
                                   AbstractPathTool* to)
 {
+    CaptureTool::copyParams(from, to);
     to->m_color = from->m_color;
     to->m_thickness = from->m_thickness;
     to->m_padding = from->m_padding;
@@ -150,4 +151,22 @@ const QPoint* AbstractPathTool::pos()
     m_pos.setX(x);
     m_pos.setY(y);
     return &m_pos;
+}
+
+void AbstractPathTool::drawDropShadow(QPainter& painter, const QPixmap& pixmap)
+{
+    const QColor originalColor = m_color;
+    const QColor shadowColor = QColor(0, 0, 0, 80);
+    onColorChanged(shadowColor);
+
+    qreal start = 0.5;
+    qreal step = size() < 10 ? 0.2 : 0.4;
+    qreal end = size() < 10 ? 1.0 : 2.0;
+    for (qreal var = start; var < end; var += step) {
+        painter.translate(var, var);
+        process(painter, pixmap);
+    }
+
+    painter.resetTransform();
+    onColorChanged(originalColor);
 }

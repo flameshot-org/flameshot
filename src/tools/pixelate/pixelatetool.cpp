@@ -234,7 +234,15 @@ void PixelateTool::paintMousePreview(QPainter& painter,
     Q_UNUSED(painter)
 }
 
+void PixelateTool::finishShape() {}
+
 void PixelateTool::pressed(CaptureContext& context)
 {
     Q_UNUSED(context)
+}
+
+void PixelateTool::drawDropShadow(QPainter& painter, const QPixmap& pixmap)
+{
+    Q_UNUSED(painter)
+    Q_UNUSED(pixmap)
 }

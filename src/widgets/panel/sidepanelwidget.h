@@ -30,6 +30,7 @@ public:
 
 signals:
     void colorChanged(const QColor& color);
+    void dropShadowChanged(bool enabled);
     void toolSizeChanged(int size);
     void togglePanel();
     void displayGridChanged(bool display);
@@ -38,6 +39,7 @@ signals:
 public slots:
     void onToolSizeChanged(int tool);
     void onColorChanged(const QColor& color);
+    void onDropShadowChanged(bool enabled);
 
 private slots:
     void startColorGrab();
@@ -60,9 +62,11 @@ private:
     QLineEdit* m_colorHex;
     QPixmap* m_pixmap;
     QColor m_color;
+    bool m_dropShadow;
     QColor m_revertColor;
     QSpinBox* m_toolSizeSpin;
     QSlider* m_toolSizeSlider;
+    QCheckBox* m_dropShadowCheck{ nullptr };
     int m_toolSize{};
     QCheckBox* m_gridCheck{ nullptr };
     QSpinBox* m_gridSizeSpin{ nullptr };

@@ -225,6 +225,12 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
             });
     m_colorPicker->hide();
 
+    // Init drop shadow sigslots
+    connect(this,
+            &CaptureWidget::dropShadowChanged,
+            this,
+            &CaptureWidget::setDropShadow);
+
     // Init tool size sigslots
     connect(this,
             &CaptureWidget::toolSizeChanged,
@@ -463,7 +469,7 @@ QPixmap CaptureWidget::pixmap()
 bool CaptureWidget::commitCurrentTool()
 {
     if (m_activeTool) {
-        processPixmapWithTool(&m_context.screenshot, m_activeTool);
+        processPixmapWithTool(&m_context.screenshot, m_activeTool, true);
         if (m_activeTool->isValid() && !m_activeTool->editMode() &&
             m_toolWidget) {
             pushToolToStack();
@@ -689,7 +695,7 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
     }
 
     if (m_activeTool && m_mouseIsClicked) {
-        m_activeTool->process(painter, m_context.screenshot);
+        m_activeTool->doProcess(painter, m_context.screenshot, true);
     } else if (m_previewEnabled && activeButtonTool() &&
                m_activeButton->tool()->showMousePreview()) {
         m_activeButton->tool()->paintMousePreview(painter, m_context);
@@ -746,6 +752,10 @@ bool CaptureWidget::startDrawObjectTool(const QPoint& pos)
                 &CaptureWidget::colorChanged,
                 m_activeTool,
                 &CaptureTool::onColorChanged);
+        connect(this,
+                &CaptureWidget::dropShadowChanged,
+                m_activeTool,
+                &CaptureTool::onDropShadowChanged);
         connect(this,
                 &CaptureWidget::toolSizeChanged,
                 m_activeTool,
@@ -923,7 +933,7 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
             // ensure selection outline is updated too
             update(paddedUpdateRect(activeTool->boundingRect()));
             activeTool->move(e->pos() - m_activeToolOffsetToMouseOnStart);
-            drawToolsData();
+            drawToolsData(true, true);
         }
     } else if (m_activeTool) {
         // drawing with a tool
@@ -1110,6 +1120,7 @@ void CaptureWidget::changeEvent(QEvent* e)
 void CaptureWidget::initContext(bool fullscreen, const CaptureRequest& req)
 {
     m_context.color = m_config.drawColor();
+    m_context.dropShadow = m_config.dropShadow();
     m_context.widgetOffset = mapToGlobal(QPoint(0, 0));
     m_context.mousePos = mapFromGlobal(QCursor::pos());
     m_context.toolSize = m_config.drawThickness();
@@ -1195,6 +1206,10 @@ void CaptureWidget::initPanel()
             this,
             &CaptureWidget::setDrawColor);
     connect(m_sidePanel,
+            &SidePanelWidget::dropShadowChanged,
+            this,
+            &CaptureWidget::setDropShadow);
+    connect(m_sidePanel,
             &SidePanelWidget::toolSizeChanged,
             this,
             &CaptureWidget::onToolSizeChanged);
@@ -1202,6 +1217,10 @@ void CaptureWidget::initPanel()
             &CaptureWidget::colorChanged,
             m_sidePanel,
             &SidePanelWidget::onColorChanged);
+    connect(this,
+            &CaptureWidget::dropShadowChanged,
+            m_sidePanel,
+            &SidePanelWidget::onDropShadowChanged);
     connect(this,
             &CaptureWidget::toolSizeChanged,
             m_sidePanel,
@@ -1218,8 +1237,8 @@ void CaptureWidget::initPanel()
             &SidePanelWidget::gridSizeChanged,
             this,
             &CaptureWidget::onGridSizeChanged);
-    // TODO replace with a CaptureWidget signal
-    emit m_sidePanel->colorChanged(m_context.color);
+    emit colorChanged(m_context.color);
+    emit dropShadowChanged(m_context.dropShadow);
     emit toolSizeChanged(m_context.toolSize);
     m_panel->pushWidget(m_sidePanel);
 
@@ -1449,7 +1468,7 @@ void CaptureWidget::onToolSizeChanged(int t)
             m_captureToolObjectsBackup = m_captureToolObjects;
             m_existingObjectIsChanged = true;
         }
-        drawToolsData();
+        drawToolsData(true, true);
         updateTool(toolItem);
     }
 
@@ -1476,8 +1495,23 @@ void CaptureWidget::setDrawColor(const QColor& c)
         if (toolItem) {
             // Change color
             toolItem->onColorChanged(c);
-            drawToolsData();
+            drawToolsData(true, true);
         }
+    }
+}
+
+void CaptureWidget::setDropShadow(bool enabled)
+{
+    m_context.dropShadow = enabled;
+    ConfigHandler().setDropShadow(enabled);
+    // Update mouse preview
+    updateTool(activeButtonTool());
+    // change drop shadow for the active tool
+    auto toolItem = activeToolObject();
+    if (toolItem) {
+        // Change drop shadow
+        toolItem->onDropShadowChanged(enabled);
+        drawToolsData(true, true);
     }
 }
 
@@ -1732,6 +1766,10 @@ void CaptureWidget::pushToolToStack()
                    m_activeTool,
                    &CaptureTool::onColorChanged);
         disconnect(this,
+                   &CaptureWidget::dropShadowChanged,
+                   m_activeTool,
+                   &CaptureTool::onDropShadowChanged);
+        disconnect(this,
                    &CaptureWidget::toolSizeChanged,
                    m_activeTool,
                    &CaptureTool::onSizeChanged);
@@ -1743,6 +1781,8 @@ void CaptureWidget::pushToolToStack()
         // function again on text objects
         m_panel->blockSignals(true);
 
+        // signal to finish shape rendering if needed
+        m_activeTool->finishShape();
         m_captureToolObjectsBackup = m_captureToolObjects;
         m_captureToolObjects.append(m_activeTool);
         pushObjectsStateToUndoStack();
@@ -1755,13 +1795,18 @@ void CaptureWidget::pushToolToStack()
     }
 }
 
-void CaptureWidget::drawToolsData(bool drawSelection)
+void CaptureWidget::drawToolsData(bool drawSelection, bool needCacheUpdate)
 {
     // TODO refactor this for performance. The objects should not all be updated
     // at once every time
     QPixmap pixmapItem = m_context.origScreenshot;
     for (const auto& toolItem : m_captureToolObjects.captureToolObjects()) {
-        processPixmapWithTool(&pixmapItem, toolItem);
+        // update cache only for the active tool
+        if (toolItem == activeToolObject() && needCacheUpdate) {
+            processPixmapWithTool(&pixmapItem, toolItem, true);
+        } else {
+            processPixmapWithTool(&pixmapItem, toolItem, false);
+        }
         update(paddedUpdateRect(toolItem->boundingRect()));
     }
 
@@ -1787,11 +1832,13 @@ void CaptureWidget::drawObjectSelection()
     }
 }
 
-void CaptureWidget::processPixmapWithTool(QPixmap* pixmap, CaptureTool* tool)
+void CaptureWidget::processPixmapWithTool(QPixmap* pixmap,
+                                          CaptureTool* tool,
+                                          bool needCacheUpdate)
 {
     QPainter painter(pixmap);
     painter.setRenderHint(QPainter::Antialiasing);
-    tool->process(painter, *pixmap);
+    tool->doProcess(painter, *pixmap, needCacheUpdate);
 }
 
 CaptureTool* CaptureWidget::activeButtonTool() const

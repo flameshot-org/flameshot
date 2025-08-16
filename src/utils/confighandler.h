@@ -77,6 +77,7 @@ public:
     CONFIG_GETTER_SETTER(uiColor, setUiColor, QColor)
     CONFIG_GETTER_SETTER(contrastUiColor, setContrastUiColor, QColor)
     CONFIG_GETTER_SETTER(drawColor, setDrawColor, QColor)
+    CONFIG_GETTER_SETTER(dropShadow, setDropShadow, bool)
     CONFIG_GETTER_SETTER(predefinedColorPaletteLarge,
                          setPredefinedColorPaletteLarge,
                          bool)

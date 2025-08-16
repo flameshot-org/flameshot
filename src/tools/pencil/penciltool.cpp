@@ -52,6 +52,7 @@ void PencilTool::paintMousePreview(QPainter& painter,
 void PencilTool::drawStart(const CaptureContext& context)
 {
     m_color = context.color;
+    onDropShadowChanged(context.dropShadow);
     onSizeChanged(context.toolSize);
     m_points.append(context.mousePos);
     m_pathArea.setTopLeft(context.mousePos);

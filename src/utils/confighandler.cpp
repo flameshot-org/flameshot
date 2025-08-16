@@ -122,6 +122,7 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     OPTION("drawRectangleSize"           ,LowerBoundedInt    ( 1, 1          )),
     OPTION("drawMarkerSize"              ,LowerBoundedInt    ( 1, 5          )),
     OPTION("drawColor"                   ,Color              ( Qt::red       )),
+    OPTION("dropShadow"                  ,Bool               ( false         )),
     OPTION("userColors"                  ,UserColors         ( 3, 17         )),
     OPTION("ignoreUpdateToVersion"       ,String             ( ""            )),
     OPTION("keepOpenAppLauncher"         ,Bool               ( false         )),

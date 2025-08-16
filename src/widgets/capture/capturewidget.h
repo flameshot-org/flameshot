@@ -65,6 +65,7 @@ public slots:
 
 signals:
     void colorChanged(const QColor& c);
+    void dropShadowChanged(bool enabled);
     void toolSizeChanged(int size);
 
 private slots:
@@ -82,6 +83,7 @@ private slots:
     void handleButtonLeftClick(CaptureToolButton* b);
     void handleButtonRightClick(CaptureToolButton* b);
     void setDrawColor(const QColor& c);
+    void setDropShadow(bool enabled);
     void onToolSizeChanged(int size);
     void onToolSizeSettled(int size);
     void updateActiveLayer(int layer);
@@ -145,10 +147,12 @@ private:
     QRect paddedUpdateRect(const QRect& r) const;
     void drawErrorMessage(const QString& msg, QPainter* painter);
     void drawInactiveRegion(QPainter* painter);
-    void drawToolsData(bool drawSelection = true);
+    void drawToolsData(bool drawSelection = true, bool needCacheUpdate = false);
     void drawObjectSelection();
 
-    void processPixmapWithTool(QPixmap* pixmap, CaptureTool* tool);
+    void processPixmapWithTool(QPixmap* pixmap,
+                               CaptureTool* tool,
+                               bool needCacheUpdate);
 
     CaptureTool* activeButtonTool() const;
     CaptureTool::Type activeButtonToolType() const;
