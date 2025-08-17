@@ -82,6 +82,9 @@ void UtilityPanel::pushWidget(QWidget* widget)
 
 void UtilityPanel::show()
 {
+    if (!m_internalPanel->isHidden()) {
+        return;
+    }
     setAttribute(Qt::WA_TransparentForMouseEvents, false);
     m_showAnimation->setStartValue(QRect(-width(), 0, 0, height()));
     m_showAnimation->setEndValue(QRect(0, 0, width(), height()));
@@ -95,6 +98,9 @@ void UtilityPanel::show()
 
 void UtilityPanel::hide()
 {
+    if (m_internalPanel->isHidden()) {
+        return;
+    }
     setAttribute(Qt::WA_TransparentForMouseEvents);
     m_hideAnimation->setStartValue(QRect(0, 0, width(), height()));
     m_hideAnimation->setEndValue(QRect(-width(), 0, 0, height()));
