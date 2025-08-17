@@ -211,23 +211,16 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
     // multi-monitor setups where screens have different positions/heights.
     // This fixes the dual monitor offset bug and handles edge cases where
     // the desktop bounding box includes virtual space.
+    QScreen* primaryScreen = QGuiApplication::primaryScreen();
+    QRect r = primaryScreen->geometry();
     QPixmap desktop(geometry.size());
     desktop.fill(Qt::black); // Fill with black background
-
-    QPainter painter(&desktop);
-    for (QScreen* screen : QGuiApplication::screens()) {
-        QRect screenGeom = screen->geometry();
-        QPixmap screenCapture = screen->grabWindow(wid);
-
-        // Qt6 provides a screen position in real pixels, not logical ones
-        qreal dpr = screen->devicePixelRatio();
-        screenGeom.moveTo(
-          QPointF(screenGeom.x() / dpr, screenGeom.y() / dpr).toPoint());
-
-        painter.drawPixmap(screenGeom.topLeft(), screenCapture);
-    }
-    painter.end();
-
+    desktop =
+      primaryScreen->grabWindow(wid,
+                                -r.x() / primaryScreen->devicePixelRatio(),
+                                -r.y() / primaryScreen->devicePixelRatio(),
+                                geometry.width(),
+                                geometry.height());
     return desktop;
 #endif
 }
