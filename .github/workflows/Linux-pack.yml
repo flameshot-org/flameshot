@@ -94,6 +94,7 @@ jobs:
           # echo "VERSION=${last_committed_tag:1}" >> $GITHUB_ENV
           echo "VERSION=$(cat CMakeLists.txt |grep 'set.*(.*FLAMESHOT_VERSION' | sed 's/[^0-9.]*//' |sed 's/)//g')" >> $GITHUB_ENV
           echo "VER_INFO=${ver_info}" >> $GITHUB_ENV
+          echo "GIT_HASH=${git_hash}" >> $GITHUB_ENV
 
       - name: Get packpack tool
         uses: actions/checkout@v4
@@ -184,6 +185,7 @@ jobs:
           # echo "VERSION=${last_committed_tag:1}" >> $GITHUB_ENV
           echo "VERSION=$(cat CMakeLists.txt |grep 'set.*(.*FLAMESHOT_VERSION' | sed 's/[^0-9.]*//' |sed 's/)//g')" >> $GITHUB_ENV
           echo "VER_INFO=${ver_info}" >> $GITHUB_ENV
+          echo "GIT_HASH=${git_hash}" >> $GITHUB_ENV
 
       - name: Get packpack tool
         uses: actions/checkout@v4
@@ -311,6 +313,7 @@ jobs:
           # echo "VERSION=${last_committed_tag:1}" >> $GITHUB_ENV
           echo "VERSION=$(cat CMakeLists.txt |grep 'set.*(.*FLAMESHOT_VERSION' | sed 's/[^0-9.]*//' |sed 's/)//g')" >> $GITHUB_ENV
           echo "VER_INFO=${ver_info}" >> $GITHUB_ENV
+          echo "GIT_HASH=${git_hash}" >> $GITHUB_ENV
 
       - name: Install Dependencies
         run: |
@@ -404,6 +407,7 @@ jobs:
           # echo "VERSION=${last_committed_tag:1}" >> $GITHUB_ENV
           echo "VERSION=$(cat CMakeLists.txt |grep 'set.*(.*FLAMESHOT_VERSION' | sed 's/[^0-9.]*//' |sed 's/)//g')" >> $GITHUB_ENV
           echo "VER_INFO=${ver_info}" >> $GITHUB_ENV
+          echo "GIT_HASH=${git_hash}" >> $GITHUB_ENV
 
       - name: Setup flatpak
         run: |
@@ -476,6 +480,7 @@ jobs:
           # echo "VERSION=${last_committed_tag:1}" >> $GITHUB_ENV
           echo "VERSION=$(cat CMakeLists.txt |grep 'set.*(.*FLAMESHOT_VERSION' | sed 's/[^0-9.]*//' |sed 's/)//g')" >> $GITHUB_ENV
           echo "VER_INFO=${ver_info}" >> $GITHUB_ENV
+          echo "GIT_HASH=${git_hash}" >> $GITHUB_ENV
 
       - name: Packaging snap
         uses: snapcore/action-build@v1
