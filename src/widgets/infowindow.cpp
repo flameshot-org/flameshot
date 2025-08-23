@@ -20,14 +20,16 @@ InfoWindow::InfoWindow(QWidget* parent)
     ui->VersionDetails->setText(GlobalValues::versionInfo());
     ui->OperatingSystemDetails->setText(generateKernelString());
 
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
+    connect(
+      ui->CopyInfoButton, &QPushButton::clicked, this, &InfoWindow::copyInfo);
+
+    show();
+    // Call show() first, otherwise the correct geometry cannot be fetched for
+    // centering the window on the screen
     QRect position = frameGeometry();
     QScreen* screen = QGuiAppCurrentScreen().currentScreen();
     position.moveCenter(screen->availableGeometry().center());
     move(position.topLeft());
-#endif
-
-    show();
 }
 
 InfoWindow::~InfoWindow()
@@ -50,7 +52,7 @@ QString generateKernelString()
     return kernelVersion;
 }
 
-void InfoWindow::on_CopyInfoButton_clicked()
+void InfoWindow::copyInfo()
 {
     FlameshotDaemon::copyToClipboard(GlobalValues::versionInfo() + "\n" +
                                      generateKernelString());

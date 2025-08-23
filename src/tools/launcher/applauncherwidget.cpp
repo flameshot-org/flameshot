@@ -18,6 +18,7 @@
 #include <QMessageBox>
 #include <QPixmap>
 #include <QProcess>
+#include <QRegularExpression>
 #include <QStandardPaths>
 #include <QTabWidget>
 
@@ -62,13 +63,14 @@ AppLauncherWidget::AppLauncherWidget(const QPixmap& p, QWidget* parent)
         m_parser.processDirectory(allUserAppsFolder);
     }
 #else
-    QString dirLocal = QDir::homePath() + "/.local/share/applications/";
-    QDir appsDirLocal(dirLocal);
-    m_parser.processDirectory(appsDirLocal);
+    QStringList appsLocations =
+      QStandardPaths::standardLocations(QStandardPaths::ApplicationsLocation);
 
-    QString dir = QStringLiteral("/usr/share/applications/");
-    QDir appsDir(dir);
-    m_parser.processDirectory(appsDir);
+    for (const auto& appsLocation : appsLocations) {
+        QDir appsDir(appsLocation);
+        m_parser.processDirectory(QDir(appsDir));
+    }
+
 #endif
 
     initAppMap();
@@ -127,11 +129,12 @@ void AppLauncherWidget::launch(const QModelIndex& index)
     QStringList prog_args = command.split(" ");
 #endif
     // no quotes because it is going in an array!
+    static const QRegularExpression regexp("(\\%.)");
     if (command.contains("%")) {
         // but that means we need to substitute IN the array not the string!
         for (auto& i : prog_args) {
             if (i.contains("%"))
-                i.replace(QRegExp("(\\%.)"), m_tempFile);
+                i.replace(regexp, m_tempFile);
         }
     } else {
         // we really should append the file name if there
@@ -173,7 +176,9 @@ void AppLauncherWidget::searchChanged(const QString& text)
         m_tabWidget->hide();
         m_filterList->show();
         m_filterList->clear();
-        QRegExp regexp(text, Qt::CaseInsensitive, QRegExp::Wildcard);
+        const QRegularExpression regexp(
+          QRegularExpression::wildcardToRegularExpression("*" + text + "*"),
+          QRegularExpression::CaseInsensitiveOption);
         QVector<DesktopAppData> apps;
 
         for (auto const& i : catIconNames.toStdMap()) {
@@ -252,7 +257,7 @@ void AppLauncherWidget::initAppMap()
     QStringList multimediaNames;
     multimediaNames << QStringLiteral("AudioVideo") << QStringLiteral("Audio")
                     << QStringLiteral("Video");
-    for (const QString& name : qAsConst(multimediaNames)) {
+    for (const QString& name : std::as_const(multimediaNames)) {
         if (!m_appsMap.contains(name)) {
             continue;
         }

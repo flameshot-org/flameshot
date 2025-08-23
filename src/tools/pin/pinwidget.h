@@ -24,7 +24,7 @@ protected:
     void mousePressEvent(QMouseEvent*) override;
     void mouseMoveEvent(QMouseEvent*) override;
     void keyPressEvent(QKeyEvent*) override;
-    void enterEvent(QEvent*) override;
+    void enterEvent(QEnterEvent*) override;
     void leaveEvent(QEvent*) override;
 
     bool event(QEvent* event) override;
@@ -45,8 +45,6 @@ private:
     QPixmap m_pixmap;
     QVBoxLayout* m_layout;
     QLabel* m_label;
-    QPoint m_dragStart;
-    qreal m_offsetX{}, m_offsetY{};
     QGraphicsDropShadowEffect* m_shadowEffect;
     QColor m_baseColor, m_hoverColor;
 

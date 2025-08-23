@@ -31,13 +31,14 @@ public:
         TYPE_RECTANGLE = 4,
         TYPE_CIRCLE = 5,
         TYPE_MARKER = 6,
-        TYPE_SELECTIONINDICATOR = 7,
         TYPE_MOVESELECTION = 8,
         TYPE_UNDO = 9,
         TYPE_COPY = 10,
         TYPE_SAVE = 11,
         TYPE_EXIT = 12,
+#ifdef ENABLE_IMGUR
         TYPE_IMAGEUPLOADER = 13,
+#endif
         TYPE_OPEN_APP = 14,
         TYPE_PIXELATE = 15,
         TYPE_REDO = 16,
@@ -48,6 +49,7 @@ public:
         TYPE_SIZEDECREASE = 21,
         TYPE_INVERT = 22,
         TYPE_ACCEPT = 23,
+        TYPE_CANCEL = 24,
     };
     Q_ENUM(Type);
 

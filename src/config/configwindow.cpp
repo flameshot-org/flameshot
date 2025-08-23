@@ -49,6 +49,15 @@ ConfigWindow::ConfigWindow(QWidget* parent)
     QString modifier =
       isDark ? PathInfo::whiteIconPath() : PathInfo::blackIconPath();
 
+    // general
+    m_generalConfig = new GeneralConf();
+    m_generalConfigTab = new QWidget();
+    auto* generalConfigLayout = new QVBoxLayout(m_generalConfigTab);
+    m_generalConfigTab->setLayout(generalConfigLayout);
+    generalConfigLayout->addWidget(m_generalConfig);
+    m_tabWidget->addTab(
+      m_generalConfigTab, QIcon(modifier + "config.svg"), tr("General"));
+
     // visuals
     m_visuals = new VisualsEditor();
     m_visualsTab = new QWidget();
@@ -67,15 +76,6 @@ ConfigWindow::ConfigWindow(QWidget* parent)
     m_tabWidget->addTab(m_filenameEditorTab,
                         QIcon(modifier + "name_edition.svg"),
                         tr("Filename Editor"));
-
-    // general
-    m_generalConfig = new GeneralConf();
-    m_generalConfigTab = new QWidget();
-    auto* generalConfigLayout = new QVBoxLayout(m_generalConfigTab);
-    m_generalConfigTab->setLayout(generalConfigLayout);
-    generalConfigLayout->addWidget(m_generalConfig);
-    m_tabWidget->addTab(
-      m_generalConfigTab, QIcon(modifier + "config.svg"), tr("General"));
 
     // shortcuts
     m_shortcuts = new ShortcutsWidget();
@@ -145,11 +145,12 @@ void ConfigWindow::initErrorIndicator(QWidget* tab, QWidget* widget)
     }
 
     // Sigslots
-    connect(ConfigHandler::getInstance(), &ConfigHandler::error, widget, [=]() {
-        widget->setEnabled(false);
-        label->show();
-        btnResolve->show();
-    });
+    connect(
+      ConfigHandler::getInstance(), &ConfigHandler::error, widget, [=, this]() {
+          widget->setEnabled(false);
+          label->show();
+          btnResolve->show();
+      });
     connect(ConfigHandler::getInstance(),
             &ConfigHandler::errorResolved,
             widget,

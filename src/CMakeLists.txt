@@ -1,5 +1,5 @@
 find_package(
-        Qt5
+        Qt${QT_VERSION_MAJOR}
         CONFIG
         REQUIRED
         Core
@@ -8,10 +8,11 @@ find_package(
         Network
         Svg
         DBus
-        LinguistTools)
+        LinguistTools
+)
 
 if (USE_WAYLAND_CLIPBOARD)
-    find_package(KF5GuiAddons)
+    find_package(KF6GuiAddons)
 endif()
 
 set(CMAKE_AUTOMOC ON)
@@ -73,10 +74,18 @@ if(FLAMESHOT_ICON)
 endif()
 
 if (WIN32)
+    add_executable(flameshot-cli)
+    target_sources(
+        flameshot-cli
+        PRIVATE
+        windows-cli.cpp)
+    set_target_properties(flameshot-cli PROPERTIES OUTPUT_NAME "flameshot-cli")
+    target_link_options(flameshot-cli PRIVATE /SUBSYSTEM:CONSOLE)
     set_property(TARGET flameshot PROPERTY WIN32_EXECUTABLE true)
-    if (MSVC)
-        target_compile_options(flameshot PRIVATE /source-charset:utf-8)
-    endif ()
+    # Getting error D8016 - /utf-8 automatically set by current cmake/msvc ?
+    #if (MSVC)
+    #    target_compile_options(flameshot PRIVATE /source-charset:utf-8)
+    #endif ()
 endif ()
 
 if(MSVC)
@@ -103,6 +112,7 @@ set(FLAMESHOT_TS_FILES
       ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_cs.ts
       ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_de_DE.ts
       ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_el.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_en.ts
       ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_es.ts
       ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_eu.ts
       ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_fa.ts
@@ -135,17 +145,14 @@ set(FLAMESHOT_TS_FILES
          )
 
 if (GENERATE_TS)
-    qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${FLAMESHOT_TS_FILES})
+  qt6_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${FLAMESHOT_TS_FILES})
 else ()
-    qt5_add_translation(QM_FILES ${FLAMESHOT_TS_FILES})
+  qt6_add_translation(QM_FILES ${FLAMESHOT_TS_FILES})
 endif ()
 
 target_sources(
         flameshot
         PRIVATE
-        # ${CMAKE_CURRENT_SOURCE_DIR}/../external/Qt-Color-Widgets/src/QtColorWidgets/color_utils.cpp
-        # ${CMAKE_CURRENT_SOURCE_DIR}/../external/Qt-Color-Widgets/src/QtColorWidgets/color_wheel.cpp
-        # ${CMAKE_CURRENT_SOURCE_DIR}/../external/Qt-Color-Widgets/include/QtColorWidgets/color_wheel.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../data/graphics.qrc
         ${CMAKE_CURRENT_SOURCE_DIR}/../data/flameshot.rc # windows binary icon resource file
         ${QM_FILES}
@@ -155,7 +162,6 @@ target_include_directories(
   flameshot
   PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../>
          $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/>
-         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../external/Qt-Color-Widgets/include>
          $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../dbus/>
          $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/cli>
          $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/config>
@@ -167,7 +173,9 @@ target_include_directories(
          $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/tools/circlecount>
          $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/tools/copy>
          $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/tools/exit>
+        if(ENABLE_IMGUR)
          $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/tools/imgur>
+        endif()
          $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/tools/launcher>
          $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/tools/line>
          $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/tools/marker>
@@ -195,47 +203,47 @@ target_include_directories(
          $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/>
          )
 
-
-if (USE_EXTERNAL_SINGLEAPPLICATION)
-    add_compile_definitions(USE_EXTERNAL_SINGLEAPPLICATION=1)
-else ()
-    target_include_directories(
-        flameshot
-        PUBLIC
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../external/singleapplication>)
-endif()
-
 target_link_libraries(
         flameshot
         project_warnings
         project_options
-        Qt5::Svg
-        Qt5::DBus
-        Qt5::Network
-        Qt5::Widgets
-        ${QTSINGLEAPPLICATION_LIBRARY}
+        Qt${QT_VERSION_MAJOR}::Svg
+        Qt${QT_VERSION_MAJOR}::DBus
+        Qt${QT_VERSION_MAJOR}::Network
+        Qt${QT_VERSION_MAJOR}::Widgets
         QtColorWidgets
-
 )
 
-if (USE_WAYLAND_CLIPBOARD)
-  if(!USE_WAYLAND_GRIM)
-    message(WARNING "You activated the USE_WAYLAND_CLIPBOARD option, but did not activate the USE_WAYLAND_GRIM option. Flameshot will use the dbus protocol to support wayland. If you use wlroots-based wayland, it is recommended to enable USE_WAYLAND_GRIM")
+if (USE_KDSINGLEAPPLICATION)
+  message(STATUS "KDSingleApplication is used!")
+  add_compile_definitions(USE_KDSINGLEAPPLICATION=1)
+
+  if (USE_BUNDLED_KDSINGLEAPPLICATION)
+    target_include_directories(flameshot PRIVATE ${kdsingleapplication_SOURCE_DIR} ${kdsingleapplication_BINARY_DIR})
   endif()
-  target_compile_definitions(flameshot PRIVATE USE_WAYLAND_CLIPBOARD=1)
-  target_link_libraries(flameshot KF5::GuiAddons)
+
+  target_link_libraries(
+          flameshot
+          KDAB::kdsingleapplication
+  )
 endif()
 
-if (USE_WAYLAND_GRIM)
-    target_compile_definitions(flameshot PRIVATE USE_WAYLAND_GRIM=1)
+if (USE_WAYLAND_CLIPBOARD)
+  target_compile_definitions(flameshot PRIVATE USE_WAYLAND_CLIPBOARD=1)
+  target_link_libraries(flameshot KF6::GuiAddons)
 endif()
 
 if (APPLE)
-    set(MACOSX_BUNDLE_IDENTIFIER "org.flameshot")
-    set_target_properties(
-            flameshot
-            PROPERTIES
-            XCODE_ATTRIBUTE_PRODUCT_BUNDLE_IDENTIFIER ${MACOSX_BUNDLE_IDENTIFIER}
+    set_target_properties(flameshot PROPERTIES
+        MACOSX_BUNDLE TRUE
+        MACOSX_BUNDLE_BUNDLE_NAME "Flameshot"
+        MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
+        MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION}
+        MACOSX_BUNDLE_IDENTIFIER "org.flameshot.Flameshot"
+        MACOSX_BUNDLE_GUI_IDENTIFIER "org.flameshot.Flameshot" 
+    ) 
+    set_property(TARGET flameshot PROPERTY
+        MACOSX_BUNDLE_INFO_PLIST ${CMAKE_SOURCE_DIR}/packaging/macos/Info.plist.in
     )
     target_link_libraries(
             flameshot
@@ -278,16 +286,22 @@ endif()
 message("Flameshot predefined color palette large: " ${FLAMESHOT_PREDEFINED_COLOR_PALETTE_LARGE})
 target_compile_definitions(flameshot PRIVATE PREDEFINED_COLOR_PALETTE_LARGE=${FLAMESHOT_PREDEFINED_COLOR_PALETTE_LARGE})
 
-find_package (Git)
-if (GIT_FOUND)
-    message("git found: ${GIT_EXECUTABLE} in version     ${GIT_VERSION_STRING}")
-    execute_process(COMMAND ${GIT_EXECUTABLE} rev-parse --short HEAD OUTPUT_VARIABLE FLAMESHOT_GIT_HASH)
-    string(REGEX REPLACE "\r*\n$" "" FLAMESHOT_GIT_HASH "${FLAMESHOT_GIT_HASH}")
+if( DEFINED ENV{GIT_HASH})
+    message("Using provided git_commit_hash: $ENV{GIT_HASH}")
+    set(FLAMESHOT_GIT_HASH $ENV{GIT_HASH})
     target_compile_definitions(flameshot PRIVATE FLAMESHOT_GIT_HASH="${FLAMESHOT_GIT_HASH}")
-    message("FLAMESHOT_GIT_HASH: ${FLAMESHOT_GIT_HASH}")
 else()
-    target_compile_definitions(flameshot PRIVATE FLAMESHOT_GIT_HASH="-")
-    message("git command is not found")
+    find_package (Git)
+    if (GIT_FOUND)
+        message("git found: ${GIT_EXECUTABLE} in version     ${GIT_VERSION_STRING}")
+        execute_process(COMMAND ${GIT_EXECUTABLE} rev-parse --short HEAD OUTPUT_VARIABLE FLAMESHOT_GIT_HASH)
+        string(REGEX REPLACE "\r*\n$" "" FLAMESHOT_GIT_HASH "${FLAMESHOT_GIT_HASH}")
+        target_compile_definitions(flameshot PRIVATE FLAMESHOT_GIT_HASH="${FLAMESHOT_GIT_HASH}")
+        message("FLAMESHOT_GIT_HASH: ${FLAMESHOT_GIT_HASH}")
+    else()
+        target_compile_definitions(flameshot PRIVATE FLAMESHOT_GIT_HASH="-")
+        message("git command is not found")
+    endif ()
 endif ()
 target_compile_definitions(flameshot PRIVATE APP_PREFIX="${CMAKE_INSTALL_PREFIX}")
 target_compile_definitions(flameshot PRIVATE APP_VERSION="v${PROJECT_VERSION}")
@@ -328,6 +342,10 @@ install(TARGETS flameshot
         EXPORT flameshot-targets
         BUNDLE DESTINATION ${CMAKE_INSTALL_BINDIR}
         RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
+if (WIN32)
+    install(TARGETS flameshot-cli
+            RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
+endif ()
 
 if (UNIX)
     # Install desktop files, completion and dbus files
@@ -385,7 +403,19 @@ endif ()
 
 # windeployqt
 if (WIN32)
-    if (EXISTS $ENV{QTDIR}/bin/windeployqt.exe)
+    # Add CMAKE_PREFIX_PATH to search paths
+    foreach(prefix ${CMAKE_PREFIX_PATH})
+        list(APPEND WINDEPLOYQT_SEARCH_PATHS "${prefix}/bin")
+    endforeach()
+    list(APPEND WINDEPLOYQT_SEARCH_PATHS "$ENV{QTDIR}/bin")
+    
+    find_program(WINDEPLOYQT_EXE windeployqt.exe
+        PATHS ${WINDEPLOYQT_SEARCH_PATHS}
+    )
+
+    if(WINDEPLOYQT_EXE)
+        message(STATUS "windeployqt found: ${WINDEPLOYQT_EXE}")
+
         if (CMAKE_BUILD_TYPE MATCHES Release)
             set(BINARIES_TYPE --release)
         else ()
@@ -397,8 +427,8 @@ if (WIN32)
                 POST_BUILD
                 COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_BINARY_DIR}/windeployqt_stuff
                 COMMAND
-                $ENV{QTDIR}/bin/windeployqt.exe ${BINARIES_TYPE} --no-translations --compiler-runtime --no-system-d3d-compiler
-                --no-angle --no-webkit2 --no-quick-import --dir ${CMAKE_BINARY_DIR}/windeployqt_stuff $<TARGET_FILE:flameshot>
+                ${WINDEPLOYQT_EXE} ${BINARIES_TYPE} --no-translations --compiler-runtime --no-system-d3d-compiler
+                --no-quick-import --dir ${CMAKE_BINARY_DIR}/windeployqt_stuff $<TARGET_FILE:flameshot>
                 # copy translations manually QM_FILES
                 COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/windeployqt_stuff/translations
                 COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_BINARY_DIR}/src/translations
@@ -423,24 +453,68 @@ if (WIN32)
         endif ()
 
     else ()
-        message("Unable to find executable QTDIR/bin/windeployqt.")
+        message(WARNING "Unable to find executable windeployqt.")
     endif ()
 endif ()
 
 # macdeployqt
 if (APPLE)
-    set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
-    execute_process(COMMAND brew --prefix qt5 OUTPUT_VARIABLE QTDIR)
-    string(REGEX REPLACE "\n$" "" QTDIR "${QTDIR}")
-    set(MAC_DEPLOY_QT ${QTDIR}/bin/macdeployqt)
-    if (EXISTS ${MAC_DEPLOY_QT})
-        set_source_files_properties(resources/icon.icns PROPERTIES
-                MACOSX_PACKAGE_LOCATION Resources)
+# Code signing settings - optional, set to empty string to skip signing
+    set(CODE_SIGN_IDENTITY "" CACHE STRING "Code signing identity (leave empty to skip signing)")
+    set(DMG_SIGN_IDENTITY "" CACHE STRING "DMG signing identity (leave empty to skip signing)")
+    # Custom target to create DMG (signed or unsigned)
+    add_custom_target(create_dmg
+    COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/../packaging/macos/create_dmg.sh 
+            "${CMAKE_CURRENT_BINARY_DIR}/Flameshot.app"
+            "${CMAKE_CURRENT_BINARY_DIR}/Flameshot-${PROJECT_VERSION}.dmg"
+            "${CODE_SIGN_IDENTITY}"
+            "${DMG_SIGN_IDENTITY}"
+    DEPENDS flameshot
+    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+    COMMENT "Creating DMG"
+    VERBATIM
+    )
 
-        set_target_properties(${target} PROPERTIES
-                MACOSX_BUNDLE TRUE
-                )
-    else ()
-        message("Unable to find executable ${MAC_DEPLOY_QT}.")
-    endif ()
+# Always sign the app bundle (either with identity or ad hoc)
+    if(CODE_SIGN_IDENTITY AND NOT CODE_SIGN_IDENTITY STREQUAL "")
+        # Identity-based signing (requires Developer ID)
+        add_custom_command(TARGET flameshot POST_BUILD
+            COMMAND codesign --force --deep --sign "${CODE_SIGN_IDENTITY}" 
+                    --options runtime --timestamp "$<TARGET_BUNDLE_DIR:flameshot>"
+            COMMENT "Code signing app bundle with ${CODE_SIGN_IDENTITY}"
+        )
+    else()
+        # Ad hoc signing 
+        add_custom_command(TARGET flameshot POST_BUILD
+            COMMAND codesign --force --deep --sign - "$<TARGET_BUNDLE_DIR:flameshot>"
+            COMMENT "Ad hoc code signing app bundle (no identity required)"
+        )
+    endif()
+   # Deploy Qt libraries and dependencies
+   find_program(MACDEPLOYQT_EXECUTABLE macdeployqt HINTS ${Qt6_DIR}/../../../bin)
+    
+   if(MACDEPLOYQT_EXECUTABLE)
+       add_custom_command(TARGET flameshot POST_BUILD
+           COMMAND ${MACDEPLOYQT_EXECUTABLE} "$<TARGET_BUNDLE_DIR:flameshot>" -verbose=2
+           COMMENT "Deploying Qt libraries"
+       )
+       
+       # Re-sign after macdeployqt (it modifies the bundle)
+       if(CODE_SIGN_IDENTITY AND NOT CODE_SIGN_IDENTITY STREQUAL "")
+           add_custom_command(TARGET flameshot POST_BUILD
+               COMMAND codesign --force --deep --sign "${CODE_SIGN_IDENTITY}" 
+                       --options runtime --timestamp "$<TARGET_BUNDLE_DIR:flameshot>"
+               COMMENT "Re-signing app bundle after Qt deployment"
+           )
+       else()
+           add_custom_command(TARGET flameshot POST_BUILD
+               COMMAND codesign --force --deep --sign - "$<TARGET_BUNDLE_DIR:flameshot>"
+               COMMENT "Re-signing app bundle after Qt deployment (ad hoc)"
+           )
+       endif()
+   else()
+       message(WARNING "macdeployqt not found. App may not run on systems without Qt installed.")
+   endif()
+
+
 endif ()

@@ -14,9 +14,10 @@ public:
     {
         GNOME,
         KDE,
+        COSMIC,
         OTHER,
         QTILE,
-        SWAY,
+        WLROOTS,
         HYPRLAND
     };
 

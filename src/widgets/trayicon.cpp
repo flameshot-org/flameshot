@@ -26,7 +26,7 @@ TrayIcon::TrayIcon(QObject* parent)
     // https://bugreports.qt.io/browse/QTBUG-86393
     // https://developer.apple.com/forums/thread/126072
     auto currentMacOsVersion = QOperatingSystemVersion::current();
-    if (currentMacOsVersion >= currentMacOsVersion.MacOSBigSur) {
+    if (currentMacOsVersion >= QOperatingSystemVersion::MacOSBigSur) {
         setContextMenu(m_menu);
     }
 #else
@@ -37,7 +37,7 @@ TrayIcon::TrayIcon(QObject* parent)
     setIcon(icon);
 
 #if defined(Q_OS_MACOS)
-    if (currentMacOsVersion < currentMacOsVersion.MacOSBigSur) {
+    if (currentMacOsVersion < QOperatingSystemVersion::MacOSBigSur) {
         // Because of the following issues on MacOS "Catalina":
         // https://bugreports.qt.io/browse/QTBUG-86393
         // https://developer.apple.com/forums/thread/126072
@@ -101,7 +101,7 @@ void TrayIcon::initMenu()
     connect(captureAction, &QAction::triggered, this, [this]() {
 #if defined(Q_OS_MACOS)
         auto currentMacOsVersion = QOperatingSystemVersion::current();
-        if (currentMacOsVersion >= currentMacOsVersion.MacOSBigSur) {
+        if (currentMacOsVersion >= QOperatingSystemVersion::MacOSBigSur) {
             startGuiCapture();
         } else {
             // It seems it is not relevant for MacOS BigSur (Wait 400 ms to hide
@@ -149,13 +149,14 @@ void TrayIcon::initMenu()
     QAction* quitAction = new QAction(tr("&Quit"), this);
     connect(quitAction, &QAction::triggered, qApp, &QCoreApplication::quit);
 
+#ifdef ENABLE_IMGUR
     // recent screenshots
     QAction* recentAction = new QAction(tr("&Latest Uploads"), this);
     connect(recentAction,
             &QAction::triggered,
             Flameshot::instance(),
             &Flameshot::history);
-
+#endif
     auto* openSavePathAction = new QAction(tr("&Open Save Path"), this);
     connect(openSavePathAction,
             &QAction::triggered,
@@ -165,7 +166,9 @@ void TrayIcon::initMenu()
     m_menu->addAction(captureAction);
     m_menu->addAction(launcherAction);
     m_menu->addSeparator();
+#ifdef ENABLE_IMGUR
     m_menu->addAction(recentAction);
+#endif
     m_menu->addAction(openSavePathAction);
     m_menu->addSeparator();
     m_menu->addAction(configAction);

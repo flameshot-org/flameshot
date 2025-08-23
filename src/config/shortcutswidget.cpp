@@ -7,20 +7,17 @@
 #include "src/core/qguiappcurrentscreen.h"
 #include "src/utils/globalvalues.h"
 #include "toolfactory.h"
+#include <QCursor>
 #include <QHeaderView>
 #include <QIcon>
 #include <QKeyEvent>
 #include <QLabel>
+#include <QRect>
+#include <QScreen>
 #include <QStringList>
 #include <QTableWidget>
 #include <QVBoxLayout>
 #include <QVector>
-
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
-#include <QCursor>
-#include <QRect>
-#include <QScreen>
-#endif
 
 ShortcutsWidget::ShortcutsWidget(QWidget* parent)
   : QWidget(parent)
@@ -29,12 +26,10 @@ ShortcutsWidget::ShortcutsWidget(QWidget* parent)
     setWindowIcon(QIcon(GlobalValues::iconPath()));
     setWindowTitle(tr("Hot Keys"));
 
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
     QRect position = frameGeometry();
     QScreen* screen = QGuiAppCurrentScreen().currentScreen();
     position.moveCenter(screen->availableGeometry().center());
     move(position.topLeft());
-#endif
 
     m_layout = new QVBoxLayout(this);
     m_layout->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
@@ -135,7 +130,7 @@ void ShortcutsWidget::onShortcutCellClicked(int row, int col)
 
             // set no shortcut is Backspace
 #if defined(Q_OS_MACOS)
-            if (shortcutValue == QKeySequence(Qt::CTRL + Qt::Key_Backspace)) {
+            if (shortcutValue == QKeySequence(Qt::CTRL | Qt::Key_Backspace)) {
                 shortcutValue = QKeySequence("");
             }
 #else
@@ -172,6 +167,7 @@ void ShortcutsWidget::loadShortcuts()
 
     // additional tools that don't have their own buttons
     appendShortcut("TYPE_TOGGLE_PANEL", tr("Toggle side panel"));
+    appendShortcut("TYPE_GRAB_COLOR", tr("Grab a color from the screen"));
     appendShortcut("TYPE_RESIZE_LEFT", tr("Resize selection left 1px"));
     appendShortcut("TYPE_RESIZE_RIGHT", tr("Resize selection right 1px"));
     appendShortcut("TYPE_RESIZE_UP", tr("Resize selection up 1px"));
@@ -190,7 +186,9 @@ void ShortcutsWidget::loadShortcuts()
     appendShortcut("TYPE_MOVE_UP", tr("Move selection up 1px"));
     appendShortcut("TYPE_MOVE_DOWN", tr("Move selection down 1px"));
     appendShortcut("TYPE_COMMIT_CURRENT_TOOL", tr("Commit text in text area"));
-    appendShortcut("TYPE_DELETE_CURRENT_TOOL", tr("Delete current tool"));
+    appendShortcut("TYPE_DELETE_CURRENT_TOOL",
+                   tr("Delete selected drawn object"));
+    appendShortcut("TYPE_CANCEL", tr("Cancel current selection"));
 
     // non-editable shortcuts have an empty shortcut name
 
@@ -200,10 +198,15 @@ void ShortcutsWidget::loadShortcuts()
     // Global hotkeys
 #if defined(Q_OS_MACOS)
     appendShortcut("TAKE_SCREENSHOT", tr("Capture screen"));
+#ifdef ENABLE_IMGUR
     appendShortcut("SCREENSHOT_HISTORY", tr("Screenshot history"));
+#endif
 #elif defined(Q_OS_WIN)
+
+#ifdef ENABLE_IMGUR
     m_shortcuts << (QStringList() << "" << QObject::tr("Screenshot history")
                                   << "Shift+Print Screen");
+#endif
     m_shortcuts << (QStringList()
                     << "" << QObject::tr("Capture screen") << "Print Screen");
 #else

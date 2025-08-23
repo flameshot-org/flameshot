@@ -1,11 +1,10 @@
-{ pkgs ? import <nixpkgs> {} }:
+{ pkgs ? import <nixpkgs> { } }:
 
 pkgs.mkShell {
   nativeBuildInputs = with pkgs; [
     cmake
-    qt5.full
-    qt5.qttools
-    qt5.qtsvg
+    kdePackages.qtsvg
+    kdePackages.qttools
   ];
-  buildInputs = [ pkgs.qt5.qtbase ];
+  buildInputs = with pkgs; [ kdePackages.qtbase kdePackages.kguiaddons ];
 }
