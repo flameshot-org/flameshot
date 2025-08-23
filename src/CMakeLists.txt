@@ -233,7 +233,7 @@ if (USE_WAYLAND_CLIPBOARD)
   target_link_libraries(flameshot KF6::GuiAddons)
 endif()
 
-if (APPLE)
+if (APPLE OR WIN32)
     set_target_properties(flameshot PROPERTIES
         MACOSX_BUNDLE TRUE
         MACOSX_BUNDLE_BUNDLE_NAME "Flameshot"

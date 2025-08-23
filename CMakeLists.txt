@@ -132,7 +132,7 @@ endif()
 # ToDo: Check if this is used anywhere
 option(BUILD_STATIC_LIBS ON)
 
-if (APPLE)
+if (APPLE OR WIN32)
   FetchContent_Declare(
       qHotKey
       GIT_REPOSITORY https://github.com/flameshot-org/QHotkey

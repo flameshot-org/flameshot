@@ -333,11 +333,15 @@ void FlameshotDaemon::initTrayIcon()
 #elif defined(Q_OS_WIN)
     enableTrayIcon(true);
 
+    // Note: Global shortcuts on Windows are now handled by QHotkey in Flameshot class
+    // instead of the custom GlobalShortcutFilter
+    /*
     GlobalShortcutFilter* nativeFilter = new GlobalShortcutFilter(this);
     qApp->installNativeEventFilter(nativeFilter);
     connect(nativeFilter, &GlobalShortcutFilter::printPressed, this, [this]() {
         Flameshot::instance()->gui();
     });
+    */
 #endif
 }
 

@@ -3,10 +3,6 @@
 
 #include "flameshot.h"
 #include "flameshotdaemon.h"
-#if defined(Q_OS_MACOS)
-#include "qhotkey.h"
-#endif
-
 #include "abstractlogger.h"
 #include "screenshotsaver.h"
 #include "src/config/configresolver.h"
@@ -51,14 +47,17 @@ Flameshot::Flameshot()
     QString StyleSheet = CaptureButton::globalStyleSheet();
     qApp->setStyleSheet(StyleSheet);
 
-#if defined(Q_OS_MACOS)
+#if (defined(Q_OS_MACOS) || defined(Q_OS_WIN))
+
+#ifdef Q_OS_MACOS
     // Try to take a test screenshot, MacOS will request a "Screen Recording"
     // permissions on the first run. Otherwise it will be hidden under the
     // CaptureWidget
     QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
     currentScreen->grabWindow(0, 0, 0, 1, 1);
+#endif
 
-    // set global shortcuts for MacOS
+    // set global shortcuts for MacOS and Windows
     m_HotkeyScreenshotCapture = new QHotkey(
       QKeySequence(ConfigHandler().shortcut("TAKE_SCREENSHOT")), true, this);
     QObject::connect(m_HotkeyScreenshotCapture,

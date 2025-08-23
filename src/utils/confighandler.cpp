@@ -186,6 +186,10 @@ static QMap<QString, QSharedPointer<KeySequence>> recognizedShortcuts = {
     SHORTCUT("TAKE_SCREENSHOT"          ,   "Ctrl+Shift+X"          ),
     SHORTCUT("SCREENSHOT_HISTORY"       ,   "Alt+Shift+X"           ),
 #else
+#ifdef Q_OS_WIN
+    // windows hotkey support
+    SHORTCUT("TAKE_SCREENSHOT"          ,   "Alt+Z"                 ),
+#endif
     SHORTCUT("TYPE_DELETE_CURRENT_TOOL" ,   "Delete"                ),
 #endif
     SHORTCUT("TYPE_PIN"                 ,                           ),

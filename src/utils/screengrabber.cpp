@@ -215,19 +215,32 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
 
     QPainter painter(&desktop);
     for (QScreen* screen : QGuiApplication::screens()) {
+        qreal dpr = screen->devicePixelRatio();
         QRect screenGeom = screen->geometry();
-        QPixmap screenCapture = screen->grabWindow(
-          wid, 0, 0, screenGeom.width(), screenGeom.height());
+        QPixmap screenCapture = screen->grabWindow(wid);
 
-        // Calculate position relative to desktop top-left
-        QPoint relativePos = screenGeom.topLeft() - geometry.topLeft();
-        painter.drawPixmap(relativePos, screenCapture);
+        // // Calculate position relative to desktop top-left
+        // QPoint relativePos = screenGeom.topLeft() - geometry.topLeft();
+        // painter.drawPixmap(relativePos, screenCapture);
+
+        // Get physical pixels
+        QImage img = screenCapture.toImage();
+        if (dpr != 1.0)
+        {
+            img = img.scaled(img.width() * dpr,
+                             img.height() * dpr,
+                             Qt::IgnoreAspectRatio,
+                             Qt::SmoothTransformation);
+        }
+        QPoint relativePos(screenGeom.x() * dpr - geometry.x(),
+                           screenGeom.y() * dpr - geometry.y());
+        painter.drawImage(relativePos, img);
     }
     painter.end();
 
     // Set device pixel ratio based on the primary screen
-    desktop.setDevicePixelRatio(
-      QApplication::primaryScreen()->devicePixelRatio());
+    auto dpr2 = QApplication::primaryScreen()->devicePixelRatio();
+    desktop.setDevicePixelRatio(dpr2);
     return desktop;
 #endif
 }
@@ -281,7 +294,13 @@ QRect ScreenGrabber::desktopGeometry()
         // Qt6 fix: Don't divide by devicePixelRatio for multi-monitor setups
         // This was causing coordinate offset issues in dual monitor
         // configurations
-        geometry = geometry.united(scrRect);
+        qreal dpr = screen->devicePixelRatio();
+        QRect physRect(scrRect.x() * dpr,
+                       scrRect.y() * dpr,
+                       scrRect.width() * dpr,
+                       scrRect.height() * dpr);
+
+        geometry = geometry.united(physRect);
     }
     return geometry;
 }

@@ -76,3 +76,5 @@ data/flatpak/.flatpak-builder
 # Miscellaneous
 !docs/dev/Makefile
 .direnv
+build_x64_release
+.vscode

@@ -7,6 +7,8 @@
 #include <QObject>
 #include <QPointer>
 #include <QVersionNumber>
+// for windows hotkey
+#include "qhotkey.h"
 
 class CaptureWidget;
 class ConfigWindow;
@@ -79,7 +81,7 @@ private:
     QPointer<CaptureLauncher> m_launcherWindow;
     QPointer<ConfigWindow> m_configWindow;
 
-#if (defined(Q_OS_MAC) || defined(Q_OS_MACOS))
+#if (defined(Q_OS_MAC) || defined(Q_OS_MACOS) || defined(Q_OS_WIN))
     QHotkey* m_HotkeyScreenshotCapture;
     QHotkey* m_HotkeyScreenshotHistory;
 #endif

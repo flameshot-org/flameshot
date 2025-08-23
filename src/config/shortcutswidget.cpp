@@ -202,13 +202,14 @@ void ShortcutsWidget::loadShortcuts()
     appendShortcut("SCREENSHOT_HISTORY", tr("Screenshot history"));
 #endif
 #elif defined(Q_OS_WIN)
-
+    
 #ifdef ENABLE_IMGUR
     m_shortcuts << (QStringList() << "" << QObject::tr("Screenshot history")
                                   << "Shift+Print Screen");
 #endif
-    m_shortcuts << (QStringList()
-                    << "" << QObject::tr("Capture screen") << "Print Screen");
+    // m_shortcuts << (QStringList() << "" << QObject::tr("Capture screen") << "Print Screen");
+    // windows hotkey support
+    appendShortcut("TAKE_SCREENSHOT", tr("Capture screen"));
 #else
     // TODO - Linux doesn't support global shortcuts for (XServer and Wayland),
     // possibly it will be solved in the QHotKey library later. So it is
