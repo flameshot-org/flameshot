@@ -13,7 +13,7 @@
 #include <QProcess>
 #include <QScreen>
 
-#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
+#if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
 #include "request.h"
 #include <QDBusInterface>
 #include <QDBusReply>
@@ -60,7 +60,7 @@ void ScreenGrabber::generalGrimScreenshot(bool& ok, QPixmap& res)
 void ScreenGrabber::freeDesktopPortal(bool& ok, QPixmap& res)
 {
 
-#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
+#if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
     QDBusInterface screenshotInterface(
       QStringLiteral("org.freedesktop.portal.Desktop"),
       QStringLiteral("/org/freedesktop/portal/desktop"),
