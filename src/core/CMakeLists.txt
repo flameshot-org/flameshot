@@ -11,7 +11,7 @@ target_sources(flameshot PRIVATE
     qguiappcurrentscreen.cpp
 )
 
-if (UNIX)
+if (UNIX AND NOT APPLE)
 target_sources(flameshot PRIVATE
     flameshotdbusadapter.h
     flameshotdbusadapter.cpp

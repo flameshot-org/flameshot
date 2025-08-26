@@ -27,7 +27,7 @@ target_sources(
           strfparse.cpp
 )
 
-IF (UNIX)
+IF (UNIX AND NOT APPLE)
 target_sources(
   flameshot
   PRIVATE request.h

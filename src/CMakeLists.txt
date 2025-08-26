@@ -10,7 +10,7 @@ find_package(
         LinguistTools
 )
 
-if (UNIX)
+if (UNIX AND NOT APPLE)
 find_package(
         Qt${QT_VERSION_MAJOR}
         CONFIG
@@ -220,7 +220,7 @@ target_link_libraries(
         Qt${QT_VERSION_MAJOR}::Widgets
         QtColorWidgets
 )
-if (UNIX)
+if (UNIX AND NOT APPLE)
 target_link_libraries(
         flameshot
         Qt${QT_VERSION_MAJOR}::DBus
