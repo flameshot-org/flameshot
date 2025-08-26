@@ -7,9 +7,17 @@ find_package(
         Widgets
         Network
         Svg
-        DBus
         LinguistTools
 )
+
+if (UNIX)
+find_package(
+        Qt${QT_VERSION_MAJOR}
+        CONFIG
+        REQUIRED
+        DBus
+)
+endif()
 
 if (USE_WAYLAND_CLIPBOARD)
     find_package(KF6GuiAddons)
@@ -208,11 +216,16 @@ target_link_libraries(
         project_warnings
         project_options
         Qt${QT_VERSION_MAJOR}::Svg
-        Qt${QT_VERSION_MAJOR}::DBus
         Qt${QT_VERSION_MAJOR}::Network
         Qt${QT_VERSION_MAJOR}::Widgets
         QtColorWidgets
 )
+if (UNIX)
+target_link_libraries(
+        flameshot
+        Qt${QT_VERSION_MAJOR}::DBus
+)
+endif()
 
 if (USE_KDSINGLEAPPLICATION)
   message(STATUS "KDSingleApplication is used!")
