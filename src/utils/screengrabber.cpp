@@ -28,7 +28,7 @@ ScreenGrabber::ScreenGrabber(QObject* parent)
 
 void ScreenGrabber::generalGrimScreenshot(bool& ok, QPixmap& res)
 {
-#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
+#if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
     if (!ConfigHandler().useGrimAdapter()) {
         return;
     }
