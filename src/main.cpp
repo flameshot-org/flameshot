@@ -26,10 +26,8 @@
 #include <QSharedMemory>
 #include <QTimer>
 #include <QTranslator>
-#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
-#include "abstractlogger.h"
+#if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
 #include "src/core/flameshotdbusadapter.h"
-#include <QApplication>
 #include <QDBusConnection>
 #include <QDBusMessage>
 #include <desktopinfo.h>
