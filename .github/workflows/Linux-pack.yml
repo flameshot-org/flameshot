@@ -108,9 +108,7 @@ jobs:
         env:
           OS: ${{ matrix.dist.os }}
           DIST: ${{ matrix.dist.symbol }}
-          #DOCKER_ARCH: ${{ matrix.dist.arch }}
-          ## I cannot see if ARCH is used anywhere. Should we remove it?
-          #ARCH: ${{ matrix.dist.arch }}
+          PRESERVE_ENVVARS: "GIT_HASH"
         run: |
           cp -r $GITHUB_WORKSPACE/packaging/debian $GITHUB_WORKSPACE
           bash $GITHUB_WORKSPACE/tools/packpack
@@ -204,6 +202,7 @@ jobs:
         env:
           OS: ${{ matrix.dist.os }}
           DIST: ${{ matrix.dist.symbol }}
+          PRESERVE_ENVVARS: "GIT_HASH"
 
       - name: Packaging on ${{ matrix.dist.name }} ${{ matrix.dist.arch }}
         if: matrix.dist.os == 'opensuse-leap'
