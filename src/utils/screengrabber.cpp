@@ -204,41 +204,24 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
     }
 #endif
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX) || defined(Q_OS_WIN)
-    QRect geometry = desktopGeometry();
-
     // Qt6 fix: Create a composite image from all screens to handle
     // multi-monitor setups where screens have different positions/heights.
     // This fixes the dual monitor offset bug and handles edge cases where
     // the desktop bounding box includes virtual space.
+    QRect geometry = desktopGeometry();
     QPixmap desktop(geometry.size());
-    desktop.fill(Qt::black); // Fill with black background
+    desktop.fill(Qt::black);
 
     QPainter painter(&desktop);
     for (QScreen* screen : QGuiApplication::screens()) {
+        QRect geo = screen->geometry();
+        auto shot = screen->grabWindow(0);
         qreal dpr = screen->devicePixelRatio();
-        QRect screenGeom = screen->geometry();
-        QPixmap screenCapture = screen->grabWindow(wid);
-
-        // // Calculate position relative to desktop top-left
-        // QPoint relativePos = screenGeom.topLeft() - geometry.topLeft();
-        // painter.drawPixmap(relativePos, screenCapture);
-
-        // Get physical pixels
-        QImage img = screenCapture.toImage();
-        if (dpr != 1.0)
-        {
-            img = img.scaled(img.width() * dpr,
-                             img.height() * dpr,
-                             Qt::IgnoreAspectRatio,
-                             Qt::SmoothTransformation);
-        }
-        QPoint relativePos(screenGeom.x() * dpr - geometry.x(),
-                           screenGeom.y() * dpr - geometry.y());
-        painter.drawImage(relativePos, img);
+        QRectF targetRect = QRect(geo.topLeft(), geo.size() * dpr);
+        QRectF sourceRect(QPointF(0, 0), QSizeF(shot.size()));
+        painter.drawPixmap(targetRect, shot, sourceRect);
     }
     painter.end();
-
-    // Set device pixel ratio based on the primary screen
     auto dpr2 = QApplication::primaryScreen()->devicePixelRatio();
     desktop.setDevicePixelRatio(dpr2);
     return desktop;
