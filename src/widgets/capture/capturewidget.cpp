@@ -176,7 +176,9 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
         QPoint topLeftOffset = QPoint(0, 0);
 #if defined(Q_OS_WIN)
         topLeftOffset = topLeft;
-#elif defined(Q_OS_MACOS)
+#endif
+
+#if defined(Q_OS_MACOS)
         // MacOS works just with one active display, so we need to append
         // just one current display and keep multiple displays logic for
         // other OS
@@ -188,7 +190,7 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
         r.moveTo(0, 0);
         areas.append(r);
 #else
-        // LINUX
+        // LINUX & WINDOWS
         for (QScreen* const screen : QGuiApplication::screens()) {
             QRect r = screen->geometry();
             r.moveTo(r.x() / screen->devicePixelRatio(),
