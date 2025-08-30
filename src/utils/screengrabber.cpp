@@ -137,6 +137,7 @@ void ScreenGrabber::freeDesktopPortal(bool& ok, QPixmap& res)
     }
 #endif
 }
+
 QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
 {
     ok = true;
@@ -210,24 +211,16 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
     // multi-monitor setups where screens have different positions/heights.
     // This fixes the dual monitor offset bug and handles edge cases where
     // the desktop bounding box includes virtual space.
+    QScreen* primaryScreen = QGuiApplication::primaryScreen();
+    QRect r = primaryScreen->geometry();
     QPixmap desktop(geometry.size());
     desktop.fill(Qt::black); // Fill with black background
-
-    QPainter painter(&desktop);
-    for (QScreen* screen : QGuiApplication::screens()) {
-        QRect screenGeom = screen->geometry();
-        QPixmap screenCapture = screen->grabWindow(
-          wid, 0, 0, screenGeom.width(), screenGeom.height());
-
-        // Calculate position relative to desktop top-left
-        QPoint relativePos = screenGeom.topLeft() - geometry.topLeft();
-        painter.drawPixmap(relativePos, screenCapture);
-    }
-    painter.end();
-
-    // Set device pixel ratio based on the primary screen
-    desktop.setDevicePixelRatio(
-      QApplication::primaryScreen()->devicePixelRatio());
+    desktop =
+      primaryScreen->grabWindow(wid,
+                                -r.x() / primaryScreen->devicePixelRatio(),
+                                -r.y() / primaryScreen->devicePixelRatio(),
+                                geometry.width(),
+                                geometry.height());
     return desktop;
 #endif
 }
@@ -281,6 +274,9 @@ QRect ScreenGrabber::desktopGeometry()
         // Qt6 fix: Don't divide by devicePixelRatio for multi-monitor setups
         // This was causing coordinate offset issues in dual monitor
         // configurations
+        // But it still has a screen position in real pixels, not logical ones
+        qreal dpr = screen->devicePixelRatio();
+        scrRect.moveTo(QPointF(scrRect.x() / dpr, scrRect.y() / dpr).toPoint());
         geometry = geometry.united(scrRect);
     }
     return geometry;

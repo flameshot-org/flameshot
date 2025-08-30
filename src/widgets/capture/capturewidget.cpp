@@ -13,11 +13,8 @@
 #include "abstractlogger.h"
 #include "copytool.h"
 #include "src/config/cacheutils.h"
-#include "src/config/generalconf.h"
 #include "src/core/flameshot.h"
 #include "src/core/qguiappcurrentscreen.h"
-#include "src/tools/toolfactory.h"
-#include "src/utils/colorutils.h"
 #include "src/utils/screengrabber.h"
 #include "src/utils/screenshotsaver.h"
 #include "src/utils/systemnotification.h"
@@ -32,9 +29,7 @@
 #include <QApplication>
 #include <QCheckBox>
 #include <QDateTime>
-#include <QDebug>
 #include <QFontMetrics>
-#include <QLabel>
 #include <QMessageBox>
 #include <QPaintEvent>
 #include <QPainter>
@@ -150,6 +145,7 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
         QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
         move(currentScreen->geometry().x(), currentScreen->geometry().y());
         resize(currentScreen->size());
+// LINUX
 #else
 // Call cmake with -DFLAMESHOT_DEBUG_CAPTURE=ON to enable easier debugging
 #if !defined(FLAMESHOT_DEBUG_CAPTURE)
@@ -161,6 +157,18 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
         move(desktopGeom.topLeft());
         resize(desktopGeom.size());
 #endif
+        // Need to move to the top left screen
+        QPoint topLeft(0, INT_MAX);
+        for (QScreen* const screen : QGuiApplication::screens()) {
+            qreal dpr = screen->devicePixelRatio();
+            QPoint topLeftScreen = screen->geometry().topLeft() / dpr;
+            if (topLeftScreen.x() == 0) {
+                if (topLeftScreen.y() < topLeft.y()) {
+                    topLeft.setY(topLeftScreen.y());
+                }
+            }
+        }
+        move(topLeft);
 #endif
     }
     QVector<QRect> areas;
@@ -182,6 +190,7 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
         r.moveTo(0, 0);
         areas.append(r);
 #else
+        // LINUX & WINDOWS
         for (QScreen* const screen : QGuiApplication::screens()) {
             QRect r = screen->geometry();
             r.moveTo(r.x() / screen->devicePixelRatio(),
@@ -259,8 +268,15 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
                 OverlayMessage::instance()->update();
             });
 
-    OverlayMessage::init(this,
-                         QGuiAppCurrentScreen().currentScreen()->geometry());
+    // Qt6 has only sizes in logical values, position is in physical values.
+    // Move Help message to the logical pixel with devicePixelRatio.
+    QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
+    QRect currentScreenGeometry = currentScreen->geometry();
+    qreal currentScreenDpr = currentScreen->devicePixelRatio();
+    currentScreenGeometry.moveTo(
+      int(currentScreenGeometry.x() / currentScreenDpr),
+      int(currentScreenGeometry.y() / currentScreenDpr));
+    OverlayMessage::init(this, currentScreenGeometry);
 
     if (m_config.showHelp()) {
         initHelpMessage();
