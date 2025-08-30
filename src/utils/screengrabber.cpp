@@ -221,6 +221,12 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
                                 -r.y() / primaryScreen->devicePixelRatio(),
                                 geometry.width(),
                                 geometry.height());
+
+    QString downloadsPath = QStandardPaths::writableLocation(QStandardPaths::DownloadLocation);
+    QString filePath = downloadsPath + "/screenshot.png";
+    desktop.save(filePath, "PNG");
+
+
     return desktop;
 #endif
 }
@@ -269,9 +275,12 @@ QRect ScreenGrabber::desktopGeometry()
 {
     QRect geometry;
 
+    qreal dpr = 1.0;
+#ifdef Q_OS_WIN
     QScreen *primaryScreen = QGuiApplication::primaryScreen();
-    qreal primaryScreenDpr = primaryScreen->devicePixelRatio();
-    qWarning() << "ScreenGrabber::desktopGeometry() - primaryScreenDpr =" << primaryScreenDpr;
+    dpr = primaryScreen->devicePixelRatio();
+    qWarning() << "ScreenGrabber::desktopGeometry() - (primaryScreen) dpr =" << dpr;
+#endif
 
     for (QScreen* const screen : QGuiApplication::screens()) {
         QRect scrRect = screen->geometry();
@@ -280,15 +289,12 @@ QRect ScreenGrabber::desktopGeometry()
         // This was causing coordinate offset issues in dual monitor
         // configurations
         // But it still has a screen position in real pixels, not logical ones
+#ifdef Q_OS_LINUX
+        dpr = screen->devicePixelRatio();
+#endif
 
-        //qreal dpr = screen->devicePixelRatio();
-        // qreal dpr = primaryScreenDpr;
-        // qWarning() << "ScreenGrabber::desktopGeometry() - dpr =" << dpr;
-
-        qWarning() << "ScreenGrabber::desktopGeometry() - primaryScreenDpr =" << primaryScreenDpr;
-        // scrRect.moveTo(QPointF(scrRect.x() / dpr, scrRect.y() / dpr).toPoint());
-        scrRect.moveTo(QPointF(scrRect.x() / primaryScreenDpr, scrRect.y() / primaryScreenDpr).toPoint());
-        qWarning() << "ScreenGrabber::desktopGeometry() - scrRect (scaled) =" << scrRect;
+        scrRect.moveTo(QPointF(scrRect.x() / dpr, scrRect.y() / dpr).toPoint());
+        qWarning() << "ScreenGrabber::desktopGeometry() - scrRect (scaled = "<< dpr << ") =" << scrRect;
         geometry = geometry.united(scrRect);
     }
     qWarning() << "ScreenGrabber::desktopGeometry() - geometry =" << geometry;
