@@ -269,6 +269,10 @@ QRect ScreenGrabber::desktopGeometry()
 {
     QRect geometry;
 
+    QScreen *primaryScreen = QGuiApplication::primaryScreen();
+    qreal primaryScreenDpr = primaryScreen->devicePixelRatio();
+    qWarning() << "ScreenGrabber::desktopGeometry() - primaryScreenDpr =" << primaryScreenDpr;
+
     for (QScreen* const screen : QGuiApplication::screens()) {
         QRect scrRect = screen->geometry();
         qWarning() << "ScreenGrabber::desktopGeometry() - scrRect =" << scrRect;
@@ -276,9 +280,14 @@ QRect ScreenGrabber::desktopGeometry()
         // This was causing coordinate offset issues in dual monitor
         // configurations
         // But it still has a screen position in real pixels, not logical ones
-        qreal dpr = screen->devicePixelRatio();
-        qWarning() << "ScreenGrabber::desktopGeometry() - dpr =" << dpr;
-        scrRect.moveTo(QPointF(scrRect.x() / dpr, scrRect.y() / dpr).toPoint());
+
+        //qreal dpr = screen->devicePixelRatio();
+        // qreal dpr = primaryScreenDpr;
+        // qWarning() << "ScreenGrabber::desktopGeometry() - dpr =" << dpr;
+
+        qWarning() << "ScreenGrabber::desktopGeometry() - primaryScreenDpr =" << primaryScreenDpr;
+        // scrRect.moveTo(QPointF(scrRect.x() / dpr, scrRect.y() / dpr).toPoint());
+        scrRect.moveTo(QPointF(scrRect.x() / primaryScreenDpr, scrRect.y() / primaryScreenDpr).toPoint());
         qWarning() << "ScreenGrabber::desktopGeometry() - scrRect (scaled) =" << scrRect;
         geometry = geometry.united(scrRect);
     }
