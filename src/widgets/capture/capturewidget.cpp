@@ -193,11 +193,14 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
         // LINUX & WINDOWS
         for (QScreen* const screen : QGuiApplication::screens()) {
             QRect r = screen->geometry();
+            qWarning() << "CaptureWidget::CaptureWidget; r =" << r;
             r.moveTo(r.x() / screen->devicePixelRatio(),
                      r.y() / screen->devicePixelRatio());
             r.moveTo(r.topLeft() - topLeftOffset);
+            qWarning() << "CaptureWidget::CaptureWidget - scaled; r =" << r;
             areas.append(r);
         }
+
 #endif
     } else {
         areas.append(rect());

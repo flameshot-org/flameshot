@@ -271,6 +271,7 @@ QRect ScreenGrabber::desktopGeometry()
 
     for (QScreen* const screen : QGuiApplication::screens()) {
         QRect scrRect = screen->geometry();
+        qWarning() << "ScreenGrabber::desktopGeometry() - scrRect =" << scrRect;
         // Qt6 fix: Don't divide by devicePixelRatio for multi-monitor setups
         // This was causing coordinate offset issues in dual monitor
         // configurations
@@ -279,6 +280,7 @@ QRect ScreenGrabber::desktopGeometry()
         scrRect.moveTo(QPointF(scrRect.x() / dpr, scrRect.y() / dpr).toPoint());
         geometry = geometry.united(scrRect);
     }
+    qWarning() << "ScreenGrabber::desktopGeometry() - geometry =" << geometry;
     return geometry;
 }
 
