@@ -277,6 +277,7 @@ QRect ScreenGrabber::desktopGeometry()
         // configurations
         // But it still has a screen position in real pixels, not logical ones
         qreal dpr = screen->devicePixelRatio();
+        qWarning() << "ScreenGrabber::desktopGeometry() - dpr =" << dpr;
         scrRect.moveTo(QPointF(scrRect.x() / dpr, scrRect.y() / dpr).toPoint());
         qWarning() << "ScreenGrabber::desktopGeometry() - scrRect (scaled) =" << scrRect;
         geometry = geometry.united(scrRect);
