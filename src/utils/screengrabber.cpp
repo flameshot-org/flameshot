@@ -276,10 +276,8 @@ QRect ScreenGrabber::desktopGeometry()
         // This was causing coordinate offset issues in dual monitor
         // configurations
         // But it still has a screen position in real pixels, not logical ones
-#if Q_OS_LINUX
         qreal dpr = screen->devicePixelRatio();
         scrRect.moveTo(QPointF(scrRect.x() / dpr, scrRect.y() / dpr).toPoint());
-#endif
         qWarning() << "ScreenGrabber::desktopGeometry() - scrRect (scaled) =" << scrRect;
         geometry = geometry.united(scrRect);
     }
