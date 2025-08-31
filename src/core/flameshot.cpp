@@ -160,6 +160,9 @@ void Flameshot::screen(CaptureRequest req, const int screenNumber)
     } else {
         screen = qApp->screens()[screenNumber];
     }
+
+    // TODO: Switch to the DesktopCapture, ScreenGrabber is deprecated
+    // It is still used her, but does not properly work
     QPixmap p(ScreenGrabber().grabScreen(screen, ok));
     if (ok) {
         QRect geometry = ScreenGrabber().screenGeometry(screen);

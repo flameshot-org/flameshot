@@ -37,6 +37,8 @@
 #include <QShortcut>
 #include <draggablewidgetmaker.h>
 
+#include "src/utils/DesktopCapturer.h"
+
 #if !defined(DISABLE_UPDATE_CHECKER)
 #include "src/widgets/updatenotificationwidget.h"
 #endif
@@ -100,84 +102,66 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
     m_contrastUiColor = m_config.contrastUiColor();
     setMouseTracking(true);
     initContext(fullScreen, req);
-#if (defined(Q_OS_WIN) || defined(Q_OS_MACOS))
-    // Top left of the whole set of screens
-    QPoint topLeft(0, 0);
-#endif
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Capture Desktop Screen(s)
+    DesktopCapturer desktopCapturer;
+    m_context.screenshot = desktopCapturer.captureDesktop();
+
     if (fullScreen) {
         // Grab Screenshot
         bool ok = true;
-        m_context.screenshot = ScreenGrabber().grabEntireDesktop(ok);
+        // m_context.screenshot = ScreenGrabber().grabEntireDesktop(ok);
+
+
+#if defined(FLAMESHOT_DEBUG_CAPTURE)
+        m_context.screenshot.save("screenshot.png", "PNG");
+#endif
+
+
         if (!ok) {
             AbstractLogger::error() << tr("Unable to capture screen");
             this->close();
         }
         m_context.origScreenshot = m_context.screenshot;
 
+        ////////////////////////////////////////
+        // Set CaptureWidget properties
 #if defined(Q_OS_WIN)
-// Call cmake with -DFLAMESHOT_DEBUG_CAPTURE=ON to enable easier debugging
-#if !defined(FLAMESHOT_DEBUG_CAPTURE)
+    // Call cmake with -DFLAMESHOT_DEBUG_CAPTURE=ON to enable easier debugging
+    #if !defined(FLAMESHOT_DEBUG_CAPTURE)
         setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint |
                        Qt::SubWindow // Hides the taskbar icon
         );
-#endif
-
-        for (QScreen* const screen : QGuiApplication::screens()) {
-            QPoint topLeftScreen = screen->geometry().topLeft();
-
-            if (topLeftScreen.x() < topLeft.x()) {
-                topLeft.setX(topLeftScreen.x());
-            }
-            if (topLeftScreen.y() < topLeft.y()) {
-                topLeft.setY(topLeftScreen.y());
-            }
-        }
-        move(topLeft);
-        resize(pixmap().size());
+    #endif
 #elif defined(Q_OS_MACOS)
-        // Emulate fullscreen mode
-        //        setWindowFlags(Qt::WindowStaysOnTopHint |
-        //        Qt::BypassWindowManagerHint |
-        //                       Qt::FramelessWindowHint |
-        //                       Qt::NoDropShadowWindowHint | Qt::ToolTip |
-        //                       Qt::Popup
-        //                       );
         QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
         move(currentScreen->geometry().x(), currentScreen->geometry().y());
         resize(currentScreen->size());
 // LINUX
 #else
-// Call cmake with -DFLAMESHOT_DEBUG_CAPTURE=ON to enable easier debugging
-#if !defined(FLAMESHOT_DEBUG_CAPTURE)
+    // Call cmake with -DFLAMESHOT_DEBUG_CAPTURE=ON to enable easier debugging
+    #if !defined(FLAMESHOT_DEBUG_CAPTURE)
         setWindowFlags(Qt::BypassWindowManagerHint | Qt::WindowStaysOnTopHint |
                        Qt::FramelessWindowHint | Qt::Tool);
-        // Fix for Qt6 dual monitor offset: position widget to cover entire
-        // desktop
-        QRect desktopGeom = ScreenGrabber().desktopGeometry();
-        move(desktopGeom.topLeft());
-        resize(desktopGeom.size());
+    #endif
 #endif
-        // Need to move to the top left screen
-        QPoint topLeft(0, INT_MAX);
-        for (QScreen* const screen : QGuiApplication::screens()) {
-            qreal dpr = screen->devicePixelRatio();
-            QPoint topLeftScreen = screen->geometry().topLeft() / dpr;
-            if (topLeftScreen.x() == 0) {
-                if (topLeftScreen.y() < topLeft.y()) {
-                    topLeft.setY(topLeftScreen.y());
-                }
-            }
-        }
-        move(topLeft);
-#endif
+        // Set CaptureWidget properties ^^^
+        //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+        ////////////////////////////////////////
+        // Resize and move CaptureWidget
+        resize(desktopCapturer.screenSize());
+        move(desktopCapturer.topLeftScaledToScreen());
+        //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     }
+    // Capture Desktop Screen(s) ^^^
+    // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+    ////////////////////////////////////////
+    // Set Capture Area (drawing and tool buttons area)
     QVector<QRect> areas;
     if (m_context.fullscreen) {
-        QPoint topLeftOffset = QPoint(0, 0);
-#if defined(Q_OS_WIN)
-        topLeftOffset = topLeft;
-#endif
-
 #if defined(Q_OS_MACOS)
         // MacOS works just with one active display, so we need to append
         // just one current display and keep multiple displays logic for
@@ -190,22 +174,16 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
         r.moveTo(0, 0);
         areas.append(r);
 #else
-        // LINUX & WINDOWS
-        for (QScreen* const screen : QGuiApplication::screens()) {
-            QRect r = screen->geometry();
-            qWarning() << "CaptureWidget::CaptureWidget; r =" << r;
-            r.moveTo(r.x() / screen->devicePixelRatio(),
-                     r.y() / screen->devicePixelRatio());
-            r.moveTo(r.topLeft() - topLeftOffset);
-            qWarning() << "CaptureWidget::CaptureWidget - scaled; r =" << r;
-            areas.append(r);
-        }
-
+        areas.append(desktopCapturer.geometry());
 #endif
     } else {
         areas.append(rect());
     }
+    // Set Capture Area (drawing and tool buttons area) ^^^
+    //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+    ////////////////////////////////////////
+    // Init Controls
     m_buttonHandler = new ButtonHandler(this);
     m_buttonHandler->updateScreenRegions(areas);
     m_buttonHandler->hide();
