@@ -13,6 +13,7 @@
 #include <QProcess>
 #include <QScreen>
 
+#include <QStandardPaths>
 #if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
 #include "request.h"
 #include <QDBusInterface>
