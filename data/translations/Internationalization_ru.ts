@@ -4,30 +4,22 @@
 <context>
     <name>AbstractWidgetList</name>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="55"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="55"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="55"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="52"/>
         <source>Add New</source>
         <translation>Добавить новый</translation>
     </message>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="104"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="104"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="104"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="103"/>
         <source>Move Up</source>
         <translation>Поднять</translation>
     </message>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="106"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="106"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="106"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="104"/>
         <source>Move Down</source>
         <translation>Опустить</translation>
     </message>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="108"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="108"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="108"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="105"/>
         <source>Remove</source>
         <translation>Убрать</translation>
     </message>
@@ -149,66 +141,50 @@
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="100"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="198"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="198"/>
-        <location filename="../../src/flameshot_autogen/include/ui_capturelauncher.h" line="194"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="184"/>
         <location filename="../../src/widgets/capturelauncher.cpp" line="53"/>
         <source> seconds</source>
         <translation> секунд(ы)</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="165"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="199"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="199"/>
-        <location filename="../../src/flameshot_autogen/include/ui_capturelauncher.h" line="195"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="185"/>
         <source>Take new screenshot</source>
         <translation>Сделать новый снимок</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="66"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="191"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="191"/>
-        <location filename="../../src/flameshot_autogen/include/ui_capturelauncher.h" line="187"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="180"/>
         <source>Area:</source>
         <translation>Область:</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="14"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="184"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="184"/>
-        <location filename="../../src/flameshot_autogen/include/ui_capturelauncher.h" line="180"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="177"/>
         <source>Capture Launcher</source>
         <translation>Запуск захвата</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="34"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="187"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="187"/>
-        <location filename="../../src/flameshot_autogen/include/ui_capturelauncher.h" line="183"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="178"/>
         <source>TextLabel</source>
         <translation>TextLabel</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="51"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="188"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="188"/>
-        <location filename="../../src/flameshot_autogen/include/ui_capturelauncher.h" line="184"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="179"/>
         <source>Capture Mode</source>
         <translation>Режим захвата</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="80"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="194"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="194"/>
-        <location filename="../../src/flameshot_autogen/include/ui_capturelauncher.h" line="190"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="182"/>
         <source>Delay:</source>
         <translation>Задержка:</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="93"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="196"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="196"/>
-        <location filename="../../src/flameshot_autogen/include/ui_capturelauncher.h" line="192"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="183"/>
         <source>WxH+x+y</source>
         <translation>Ш×В+x+y</translation>
     </message>
@@ -338,82 +314,55 @@ Press Space to open the side panel.</source>
     <name>ColorDialog</name>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="19"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="19"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="19"/>
-        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="352"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="352"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="312"/>
         <source>Select Color</source>
         <translation>Выбрать цвет</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="60"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="60"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="60"/>
-        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="354"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="354"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="313"/>
         <source>Saturation</source>
         <translation>Насыщенность</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="67"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="67"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="67"/>
-        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="356"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="356"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="314"/>
         <source>Hue</source>
         <translation>Оттенок</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="84"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="84"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="84"/>
-        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="358"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="358"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="315"/>
         <source>Hex</source>
         <translation>Шестнадцатеричный</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="91"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="91"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="91"/>
-        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="360"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="360"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="316"/>
         <source>Blue</source>
         <translation>Синий</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="128"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="128"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="128"/>
-        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="362"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="362"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="317"/>
         <source>Value</source>
         <translation>Значение</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="135"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="135"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="135"/>
-        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="364"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="364"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="318"/>
         <source>Green</source>
         <translation>Зелёный</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="142"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="142"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="142"/>
-        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="366"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="366"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="319"/>
         <source>Alpha</source>
         <translation>Альфа</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="149"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="149"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="149"/>
-        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="368"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="368"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="320"/>
         <source>Red</source>
         <translation>Красный</translation>
     </message>
@@ -1219,7 +1168,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="352"/>
         <source>Grim is a wayland only utility to capture screens based on the screencopy protocol. Generally only enable on minimal wayland window managers like sway, hyprland, etc.</source>
-        <translation>Grim — это утилита, предназначенная исключительно для Wayland, которая позволяет делать снимки экрана на основе протокола screencopy. Обычно её включают только в минимальных оконных менеджерах Wayland, таких как sway, hyprland и т. д.</translation>
+        <translation>Grim — инструмент для снимков экрана исключительно в Wayland через протокол Screencopy. Предназначен для минималистичных оконных менеджеров, таких как Sway или Hyprland.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="370"/>
@@ -1804,65 +1753,49 @@ Please solve them manually in the configuration file.</source>
     <name>InfoWindow</name>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="14"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="124"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="124"/>
-        <location filename="../../src/flameshot_autogen/include/ui_infowindow.h" line="124"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="116"/>
         <source>About</source>
         <translation>О программе</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="26"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="126"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="126"/>
-        <location filename="../../src/flameshot_autogen/include/ui_infowindow.h" line="126"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="117"/>
         <source>Icon</source>
         <translation>Значок</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="43"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="128"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="128"/>
-        <location filename="../../src/flameshot_autogen/include/ui_infowindow.h" line="128"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="118"/>
         <source>License</source>
         <translation>Лицензия</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="56"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="130"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="130"/>
-        <location filename="../../src/flameshot_autogen/include/ui_infowindow.h" line="130"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="119"/>
         <source>GPLv3+</source>
         <translation>GPLv3+</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="89"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="132"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="132"/>
-        <location filename="../../src/flameshot_autogen/include/ui_infowindow.h" line="132"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="120"/>
         <source>Version</source>
         <translation>Версия</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="102"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="134"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="134"/>
-        <location filename="../../src/flameshot_autogen/include/ui_infowindow.h" line="134"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="121"/>
         <source>Flameshot v</source>
         <translation>Flameshot v</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="115"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="136"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="136"/>
-        <location filename="../../src/flameshot_autogen/include/ui_infowindow.h" line="136"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="122"/>
         <source>OS Info</source>
         <translation>Сведения об ОС</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="128"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="138"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="138"/>
-        <location filename="../../src/flameshot_autogen/include/ui_infowindow.h" line="138"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="123"/>
         <source>Copy Info</source>
         <translation>Копировать сведения</translation>
     </message>
@@ -2081,15 +2014,11 @@ Please solve them manually in the configuration file.</source>
     <name>PrimaryInstanceWidget</name>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/primaryinstancewidget.cpp" line="21"/>
-        <location filename="../../cmake-build-debug/_deps/kdsingleapplication-src/examples/widgetsingleapplication/primaryinstancewidget.cpp" line="21"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/kdsingleapplication-src/examples/widgetsingleapplication/primaryinstancewidget.cpp" line="21"/>
         <source>Primary instance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/primaryinstancewidget.cpp" line="22"/>
-        <location filename="../../cmake-build-debug/_deps/kdsingleapplication-src/examples/widgetsingleapplication/primaryinstancewidget.cpp" line="22"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/kdsingleapplication-src/examples/widgetsingleapplication/primaryinstancewidget.cpp" line="22"/>
         <source>&lt;b&gt;Primary instance.&lt;/b&gt; Messages received from secondaries:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2162,17 +2091,17 @@ Please solve them manually in the configuration file.</source>
         <translation type="vanished">Снимок сохранён на диск и скопирован в буфер обмена как </translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="201"/>
+        <location filename="../../src/main.cpp" line="210"/>
         <source>Unable to connect via DBus</source>
         <translation>Не удалось подключиться по DBus</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="217"/>
+        <location filename="../../src/main.cpp" line="227"/>
         <source>Powerful yet simple to use screenshot software.</source>
         <translation>Продвинутый, но простой инструмент для создания снимков экрана.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="218"/>
+        <location filename="../../src/main.cpp" line="228"/>
         <source>See</source>
         <translation>Посмотреть</translation>
     </message>
@@ -2181,17 +2110,17 @@ Please solve them manually in the configuration file.</source>
         <translation type="vanished">Захватить весь рабочий стол.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="224"/>
+        <location filename="../../src/main.cpp" line="234"/>
         <source>Open the capture launcher.</source>
         <translation>Открыть средство запуска захвата.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="227"/>
+        <location filename="../../src/main.cpp" line="237"/>
         <source>Start a manual capture in GUI mode.</source>
         <translation>Запустить ручной захват в режиме графического интерфейса.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="229"/>
+        <location filename="../../src/main.cpp" line="239"/>
         <source>Configure</source>
         <translation>Настроить</translation>
     </message>
@@ -2204,122 +2133,122 @@ Please solve them manually in the configuration file.</source>
         <translation type="vanished">Путь сохранения снимка</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="222"/>
+        <location filename="../../src/main.cpp" line="232"/>
         <source>Capture screenshot of all monitors at the same time.</source>
         <translation>Захватить снимок со всех мониторов одновременно.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="232"/>
+        <location filename="../../src/main.cpp" line="242"/>
         <source>Capture a screenshot of the specified monitor.</source>
         <translation>Захватить снимок с указанного монитора.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="237"/>
+        <location filename="../../src/main.cpp" line="247"/>
         <source>Existing directory or new file to save to</source>
         <translation>Существующая директория или новый файл для сохранения</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="240"/>
+        <location filename="../../src/main.cpp" line="250"/>
         <source>Save the capture to the clipboard</source>
         <translation>Сохранить снимок в буфер обмена</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="242"/>
+        <location filename="../../src/main.cpp" line="252"/>
         <source>Pin the capture to the screen</source>
         <translation>Закрепить захват на экране</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="244"/>
+        <location filename="../../src/main.cpp" line="254"/>
         <source>Upload screenshot</source>
         <translation>Отправить снимок экрана</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="246"/>
+        <location filename="../../src/main.cpp" line="256"/>
         <source>Delay time in milliseconds</source>
         <translation>Задержка в миллисекундах</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="251"/>
+        <location filename="../../src/main.cpp" line="261"/>
         <source>Repeat screenshot with previously selected region</source>
         <translation>Повторить снимок экрана с ранее выбранной областью</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="254"/>
+        <location filename="../../src/main.cpp" line="264"/>
         <source>Screenshot region to select</source>
         <translation>Выбор области снимка экрана</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="257"/>
+        <location filename="../../src/main.cpp" line="267"/>
         <source>Set the filename pattern</source>
         <translation>Установить шаблон имени файла</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="261"/>
+        <location filename="../../src/main.cpp" line="271"/>
         <source>Accept capture as soon as a selection is made</source>
         <translation>Принять захват, как только будет сделан выбор</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="263"/>
+        <location filename="../../src/main.cpp" line="273"/>
         <source>Enable or disable the trayicon</source>
         <translation>Включить или отключить значок в трее</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="267"/>
+        <location filename="../../src/main.cpp" line="277"/>
         <source>Enable or disable run at startup</source>
         <translation>Включение или отключение запуска при старте</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="271"/>
+        <location filename="../../src/main.cpp" line="281"/>
         <source>Enable or disable the notifications</source>
         <translation>Включить или отключить уведомления</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="274"/>
+        <location filename="../../src/main.cpp" line="284"/>
         <source>Check the configuration for errors</source>
         <translation>Проверить конфигурацию на наличие ошибок</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="277"/>
+        <location filename="../../src/main.cpp" line="287"/>
         <source>Show the help message in the capture mode</source>
         <translation>Показывать справочный сообщения в режиме захвата</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="280"/>
+        <location filename="../../src/main.cpp" line="290"/>
         <source>Define the main UI color</source>
         <translation>Задать основной цвет пользовательского интерфейса</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="284"/>
+        <location filename="../../src/main.cpp" line="294"/>
         <source>Define the contrast UI color</source>
         <translation>Определить цвет контраста пользовательского интерфейса</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="287"/>
+        <location filename="../../src/main.cpp" line="297"/>
         <source>Print raw PNG capture</source>
         <translation>Необработанное изображения PNG</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="290"/>
+        <location filename="../../src/main.cpp" line="300"/>
         <source>Print geometry of the selection in the format WxH+X+Y. Does nothing if raw is specified</source>
         <translation>Распечатать геометрию выделения в формате WxH+X+Y. Ничего не делает, если указано raw</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="294"/>
+        <location filename="../../src/main.cpp" line="304"/>
         <source>Define the screen to capture (starting from 0)</source>
         <translation>Укажите экран для захвата (начиная с 0)</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="314"/>
+        <location filename="../../src/main.cpp" line="324"/>
         <source>Invalid delay, it must be a number greater than 0</source>
         <translation>Недопустимая задержка, должно быть больше 0</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="317"/>
+        <location filename="../../src/main.cpp" line="327"/>
         <source>Invalid region, use &apos;WxH+X+Y&apos; or &apos;all&apos; or &apos;screen0/screen1/...&apos;.</source>
         <translation>Недопустимая область, используйте «WxH+X+Y» или «all» или «screen0/screen1/...».</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="330"/>
+        <location filename="../../src/main.cpp" line="340"/>
         <source>Invalid path, must be an existing directory or a new file in an existing directory</source>
         <translation>Недопустимый путь, укажите существующий каталог или новый файл в имеющемся каталоге</translation>
     </message>
@@ -2328,17 +2257,17 @@ Please solve them manually in the configuration file.</source>
         <translation type="vanished">Выберите экран для захвата</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="295"/>
+        <location filename="../../src/main.cpp" line="305"/>
         <source>default: screen containing the cursor</source>
         <translation>по умолчанию: экран, содержащий курсор мыши</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="296"/>
+        <location filename="../../src/main.cpp" line="306"/>
         <source>Screen number</source>
         <translation>Номер экрана</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="305"/>
+        <location filename="../../src/main.cpp" line="315"/>
         <source>Invalid color, this flag supports the following formats:
 - #RGB (each of R, G, and B is a single hex digit)
 - #RRGGBB
@@ -2359,7 +2288,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <translation type="vanished">Недействительная задержка, она должна быть больше 0</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="316"/>
+        <location filename="../../src/main.cpp" line="326"/>
         <source>Invalid screen number, it must be non negative</source>
         <translation>Недействительный номер экрана, он должен быть неотрицательным</translation>
     </message>
@@ -2368,7 +2297,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <translation type="vanished">Неверный путь, это должен быть реальный путь в системе</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="343"/>
+        <location filename="../../src/main.cpp" line="353"/>
         <source>Invalid value, it must be defined as &apos;true&apos; or &apos;false&apos;</source>
         <translation>Недействительное значение, оно должно быть определено как «true» или «false»</translation>
     </message>
@@ -2607,43 +2536,31 @@ You can find me in the system tray.</source>
     <name>SecondaryInstanceWidget</name>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="26"/>
-        <location filename="../../cmake-build-debug/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="26"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="26"/>
         <source>Secondary instance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="27"/>
-        <location filename="../../cmake-build-debug/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="27"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="27"/>
         <source>&lt;b&gt;Secondary instance.&lt;/b&gt; Send message to primary:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="29"/>
-        <location filename="../../cmake-build-debug/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="29"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="29"/>
         <source>Type something here...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="31"/>
-        <location filename="../../cmake-build-debug/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="31"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="31"/>
         <source>&amp;Send</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="54"/>
-        <location filename="../../cmake-build-debug/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="54"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="54"/>
         <source>Error sending message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="55"/>
-        <location filename="../../cmake-build-debug/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="55"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="55"/>
         <source>The message &apos;%1&apos; could not be sent to the primary.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3195,8 +3112,6 @@ You can find me in the system tray.</source>
     <name>UploadHistory</name>
     <message>
         <location filename="../../src/widgets/uploadhistory.ui" line="14"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_uploadhistory.h" line="69"/>
-        <location filename="../../src/flameshot_autogen/include/ui_uploadhistory.h" line="69"/>
         <source>Upload History</source>
         <translation>История отправок</translation>
     </message>
@@ -3210,29 +3125,21 @@ You can find me in the system tray.</source>
     <name>UploadLineItem</name>
     <message>
         <location filename="../../src/widgets/uploadlineitem.ui" line="20"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_uploadlineitem.h" line="123"/>
-        <location filename="../../src/flameshot_autogen/include/ui_uploadlineitem.h" line="122"/>
         <source>Form</source>
         <translation>Форма</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadlineitem.ui" line="49"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_uploadlineitem.h" line="125"/>
-        <location filename="../../src/flameshot_autogen/include/ui_uploadlineitem.h" line="124"/>
         <source>TextLabel</source>
         <translation>TextLabel</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadlineitem.ui" line="82"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_uploadlineitem.h" line="127"/>
-        <location filename="../../src/flameshot_autogen/include/ui_uploadlineitem.h" line="126"/>
         <source>Copy URL</source>
         <translation>Копировать ссылку</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadlineitem.ui" line="95"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_uploadlineitem.h" line="128"/>
-        <location filename="../../src/flameshot_autogen/include/ui_uploadlineitem.h" line="127"/>
         <source>Open In Browser</source>
         <translation>Открыть в браузере</translation>
     </message>
@@ -3310,9 +3217,7 @@ You can find me in the system tray.</source>
 <context>
     <name>color_widgets::ColorDialog</name>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.cpp" line="65"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.cpp" line="65"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.cpp" line="65"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.cpp" line="63"/>
         <source>Pick</source>
         <translation>Выбрать</translation>
     </message>
@@ -3320,9 +3225,7 @@ You can find me in the system tray.</source>
 <context>
     <name>color_widgets::ColorPalette</name>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette.cpp" line="403"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette.cpp" line="403"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette.cpp" line="403"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette.cpp" line="417"/>
         <source>Unnamed</source>
         <translation>Безымянный</translation>
     </message>
@@ -3330,16 +3233,12 @@ You can find me in the system tray.</source>
 <context>
     <name>color_widgets::ColorPaletteModel</name>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_model.cpp" line="56"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_model.cpp" line="56"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_model.cpp" line="56"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_model.cpp" line="55"/>
         <source>Unnamed</source>
         <translation>Безымянный</translation>
     </message>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_model.cpp" line="134"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_model.cpp" line="134"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_model.cpp" line="134"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_model.cpp" line="130"/>
         <source>%1 (%2 colors)</source>
         <translation>%1 (%2 цвета)</translation>
     </message>
@@ -3348,131 +3247,87 @@ You can find me in the system tray.</source>
     <name>color_widgets::ColorPaletteWidget</name>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="64"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="64"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="64"/>
-        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="257"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="257"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="231"/>
         <source>Open a new palette from file</source>
         <translation>Открыть новую палитру из файла</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="75"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="75"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="75"/>
-        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="263"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="263"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="234"/>
         <source>Create a new palette</source>
         <translation>Создать новую палитру</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="86"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="86"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="86"/>
-        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="269"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="269"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="237"/>
         <source>Duplicate the current palette</source>
         <translation>Дублировать текущую палитру</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="170"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="170"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="170"/>
-        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="275"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="275"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="240"/>
         <source>Delete the current palette</source>
         <translation>Удалить текущую палитру</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="181"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="181"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="181"/>
-        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="281"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="281"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="243"/>
         <source>Revert changes to the current palette</source>
         <translation>Вернуть изменения к текущей палитре</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="192"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="192"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="192"/>
-        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="287"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="287"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="246"/>
         <source>Save changes to the current palette</source>
         <translation>Сохранить изменения в текущей палитре</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="216"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="216"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="216"/>
-        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="293"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="293"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="249"/>
         <source>Add a color to the palette</source>
         <translation>Добавить цвет в палитру</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="227"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="227"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="227"/>
-        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="298"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="298"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="252"/>
         <source>Remove the selected color from the palette</source>
         <translation>Удалить выбранный цвет из палитры</translation>
     </message>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="207"/>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="224"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="207"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="224"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="207"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="224"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="181"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="196"/>
         <source>New Palette</source>
         <translation>Новая палитра</translation>
     </message>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="208"/>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="225"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="208"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="225"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="208"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="225"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="182"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="197"/>
         <source>Name</source>
         <translation>Имя</translation>
     </message>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="254"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="254"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="254"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="223"/>
         <source>GIMP Palettes (*.gpl)</source>
         <translation>Палитры GIMP (*.gpl)</translation>
     </message>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="255"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="255"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="255"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="224"/>
         <source>Palette Image (%1)</source>
         <translation>Изображение палитры (%1)</translation>
     </message>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="256"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="256"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="256"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="225"/>
         <source>All Files (*)</source>
         <translation>Все файлы (*)</translation>
     </message>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="257"/>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="271"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="257"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="271"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="257"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="271"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="226"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="239"/>
         <source>Open Palette</source>
         <translation>Открыть палитру</translation>
     </message>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="272"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="272"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="272"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="240"/>
         <source>Failed to load the palette file
 %1</source>
         <translation>Не удалось загрузить файл палитры
@@ -3482,23 +3337,17 @@ You can find me in the system tray.</source>
 <context>
     <name>color_widgets::GradientEditor</name>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_editor.cpp" line="300"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_editor.cpp" line="300"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_editor.cpp" line="300"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_editor.cpp" line="321"/>
         <source>Add Color</source>
         <translation>Добавить цвет</translation>
     </message>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_editor.cpp" line="312"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_editor.cpp" line="312"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_editor.cpp" line="312"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_editor.cpp" line="330"/>
         <source>Remove Color</source>
         <translation>Удалить цвет</translation>
     </message>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_editor.cpp" line="323"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_editor.cpp" line="323"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_editor.cpp" line="323"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_editor.cpp" line="338"/>
         <source>Edit Color...</source>
         <translation>Изменить цвет...</translation>
     </message>
@@ -3506,9 +3355,7 @@ You can find me in the system tray.</source>
 <context>
     <name>color_widgets::GradientListModel</name>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_list_model.cpp" line="216"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_list_model.cpp" line="216"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_list_model.cpp" line="216"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_list_model.cpp" line="215"/>
         <source>%1 (%2 colors)</source>
         <translation>%1 (%2 цвета)</translation>
     </message>
@@ -3516,16 +3363,12 @@ You can find me in the system tray.</source>
 <context>
     <name>color_widgets::Swatch</name>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/swatch.cpp" line="829"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/swatch.cpp" line="829"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/swatch.cpp" line="829"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/swatch.cpp" line="855"/>
         <source>Clear Color</source>
         <translation>Очистить цвет</translation>
     </message>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/swatch.cpp" line="838"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/swatch.cpp" line="838"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/swatch.cpp" line="838"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/swatch.cpp" line="864"/>
         <source>%1 (%2)</source>
         <translation>%1 (%2)</translation>
     </message>

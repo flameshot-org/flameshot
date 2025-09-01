@@ -4,30 +4,22 @@
 <context>
     <name>AbstractWidgetList</name>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="55"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="55"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="55"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="52"/>
         <source>Add New</source>
         <translation>Přidat nový</translation>
     </message>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="104"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="104"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="104"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="103"/>
         <source>Move Up</source>
         <translation>Posunout nahoru</translation>
     </message>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="106"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="106"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="106"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="104"/>
         <source>Move Down</source>
         <translation>Posunout dolů</translation>
     </message>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="108"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="108"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="108"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="105"/>
         <source>Remove</source>
         <translation>Odstranit</translation>
     </message>
@@ -149,66 +141,50 @@
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="100"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="198"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="198"/>
-        <location filename="../../src/flameshot_autogen/include/ui_capturelauncher.h" line="194"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="184"/>
         <location filename="../../src/widgets/capturelauncher.cpp" line="53"/>
         <source> seconds</source>
         <translation> sekund</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="165"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="199"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="199"/>
-        <location filename="../../src/flameshot_autogen/include/ui_capturelauncher.h" line="195"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="185"/>
         <source>Take new screenshot</source>
         <translation>Zachytit nový snímek</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="66"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="191"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="191"/>
-        <location filename="../../src/flameshot_autogen/include/ui_capturelauncher.h" line="187"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="180"/>
         <source>Area:</source>
         <translation>Oblast:</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="14"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="184"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="184"/>
-        <location filename="../../src/flameshot_autogen/include/ui_capturelauncher.h" line="180"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="177"/>
         <source>Capture Launcher</source>
         <translation>Spouštěč zachytávání obrazovky</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="34"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="187"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="187"/>
-        <location filename="../../src/flameshot_autogen/include/ui_capturelauncher.h" line="183"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="178"/>
         <source>TextLabel</source>
         <translation>Textový štítek</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="51"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="188"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="188"/>
-        <location filename="../../src/flameshot_autogen/include/ui_capturelauncher.h" line="184"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="179"/>
         <source>Capture Mode</source>
         <translation>Režim zachytávání obrazovky</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="80"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="194"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="194"/>
-        <location filename="../../src/flameshot_autogen/include/ui_capturelauncher.h" line="190"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="182"/>
         <source>Delay:</source>
         <translation>Zpoždění:</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="93"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="196"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="196"/>
-        <location filename="../../src/flameshot_autogen/include/ui_capturelauncher.h" line="192"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="183"/>
         <source>WxH+x+y</source>
         <translation>WxH+x+y</translation>
     </message>
@@ -338,82 +314,55 @@ Stiskněte mezerník pro otevření postranního panelu.</translation>
     <name>ColorDialog</name>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="19"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="19"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="19"/>
-        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="352"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="352"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="312"/>
         <source>Select Color</source>
         <translation>Vybrat barvu</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="60"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="60"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="60"/>
-        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="354"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="354"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="313"/>
         <source>Saturation</source>
         <translation>Sytost</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="67"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="67"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="67"/>
-        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="356"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="356"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="314"/>
         <source>Hue</source>
         <translation>Odstín</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="84"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="84"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="84"/>
-        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="358"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="358"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="315"/>
         <source>Hex</source>
         <translation>Hex</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="91"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="91"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="91"/>
-        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="360"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="360"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="316"/>
         <source>Blue</source>
         <translation>Modrá</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="128"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="128"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="128"/>
-        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="362"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="362"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="317"/>
         <source>Value</source>
         <translation>Hodnota</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="135"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="135"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="135"/>
-        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="364"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="364"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="318"/>
         <source>Green</source>
         <translation>Zelená</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="142"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="142"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="142"/>
-        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="366"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="366"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="319"/>
         <source>Alpha</source>
         <translation>Alfa</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="149"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="149"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="149"/>
-        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="368"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="368"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="320"/>
         <source>Red</source>
         <translation>Červená</translation>
     </message>
@@ -1693,65 +1642,49 @@ Vyřešte je, prosím, ručně v souboru s nastavením.</translation>
     <name>InfoWindow</name>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="14"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="124"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="124"/>
-        <location filename="../../src/flameshot_autogen/include/ui_infowindow.h" line="124"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="116"/>
         <source>About</source>
         <translation>O programu</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="26"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="126"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="126"/>
-        <location filename="../../src/flameshot_autogen/include/ui_infowindow.h" line="126"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="117"/>
         <source>Icon</source>
         <translation>Ikona</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="43"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="128"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="128"/>
-        <location filename="../../src/flameshot_autogen/include/ui_infowindow.h" line="128"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="118"/>
         <source>License</source>
         <translation>Povolení</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="56"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="130"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="130"/>
-        <location filename="../../src/flameshot_autogen/include/ui_infowindow.h" line="130"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="119"/>
         <source>GPLv3+</source>
         <translation>GPLv3+</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="89"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="132"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="132"/>
-        <location filename="../../src/flameshot_autogen/include/ui_infowindow.h" line="132"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="120"/>
         <source>Version</source>
         <translation>Verze</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="102"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="134"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="134"/>
-        <location filename="../../src/flameshot_autogen/include/ui_infowindow.h" line="134"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="121"/>
         <source>Flameshot v</source>
         <translation>Flameshot v</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="115"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="136"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="136"/>
-        <location filename="../../src/flameshot_autogen/include/ui_infowindow.h" line="136"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="122"/>
         <source>OS Info</source>
         <translation>Informace o operačním systému</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="128"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="138"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="138"/>
-        <location filename="../../src/flameshot_autogen/include/ui_infowindow.h" line="138"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="123"/>
         <source>Copy Info</source>
         <translation>Informace o kopírování</translation>
     </message>
@@ -1970,15 +1903,11 @@ Vyřešte je, prosím, ručně v souboru s nastavením.</translation>
     <name>PrimaryInstanceWidget</name>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/primaryinstancewidget.cpp" line="21"/>
-        <location filename="../../cmake-build-debug/_deps/kdsingleapplication-src/examples/widgetsingleapplication/primaryinstancewidget.cpp" line="21"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/kdsingleapplication-src/examples/widgetsingleapplication/primaryinstancewidget.cpp" line="21"/>
         <source>Primary instance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/primaryinstancewidget.cpp" line="22"/>
-        <location filename="../../cmake-build-debug/_deps/kdsingleapplication-src/examples/widgetsingleapplication/primaryinstancewidget.cpp" line="22"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/kdsingleapplication-src/examples/widgetsingleapplication/primaryinstancewidget.cpp" line="22"/>
         <source>&lt;b&gt;Primary instance.&lt;/b&gt; Messages received from secondaries:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2051,17 +1980,17 @@ Vyřešte je, prosím, ručně v souboru s nastavením.</translation>
         <translation type="vanished">Capture is saved and copied to the clipboard as </translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="201"/>
+        <location filename="../../src/main.cpp" line="210"/>
         <source>Unable to connect via DBus</source>
         <translation>Nelze se spojit přes DBus</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="217"/>
+        <location filename="../../src/main.cpp" line="227"/>
         <source>Powerful yet simple to use screenshot software.</source>
         <translation>Silný, ale zároveň též jednoduchý program na zachytávání obrazovky.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="218"/>
+        <location filename="../../src/main.cpp" line="228"/>
         <source>See</source>
         <translation>Podívejte se</translation>
     </message>
@@ -2070,17 +1999,17 @@ Vyřešte je, prosím, ručně v souboru s nastavením.</translation>
         <translation type="vanished">Zachytit celou plochu.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="224"/>
+        <location filename="../../src/main.cpp" line="234"/>
         <source>Open the capture launcher.</source>
         <translation>Otevřít spouštěč zachytávání.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="227"/>
+        <location filename="../../src/main.cpp" line="237"/>
         <source>Start a manual capture in GUI mode.</source>
         <translation>Spustit ruční zachytávání v režimu uživatelského rozhraní.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="229"/>
+        <location filename="../../src/main.cpp" line="239"/>
         <source>Configure</source>
         <translation>Nastavit</translation>
     </message>
@@ -2093,122 +2022,122 @@ Vyřešte je, prosím, ručně v souboru s nastavením.</translation>
         <translation type="vanished">Cesta, kam bude snímek uložen</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="222"/>
+        <location filename="../../src/main.cpp" line="232"/>
         <source>Capture screenshot of all monitors at the same time.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="232"/>
+        <location filename="../../src/main.cpp" line="242"/>
         <source>Capture a screenshot of the specified monitor.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="237"/>
+        <location filename="../../src/main.cpp" line="247"/>
         <source>Existing directory or new file to save to</source>
         <translation>Stávající adresář nebo nový soubor k uložení</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="240"/>
+        <location filename="../../src/main.cpp" line="250"/>
         <source>Save the capture to the clipboard</source>
         <translation>Uložit snímek do schránky</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="242"/>
+        <location filename="../../src/main.cpp" line="252"/>
         <source>Pin the capture to the screen</source>
         <translation>Připnout záběr se zachycenou obrazovkou k obrazovce</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="244"/>
+        <location filename="../../src/main.cpp" line="254"/>
         <source>Upload screenshot</source>
         <translation>Nahrát snímek obrazovky</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="246"/>
+        <location filename="../../src/main.cpp" line="256"/>
         <source>Delay time in milliseconds</source>
         <translation>Čas zpoždění v milisekundách</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="251"/>
+        <location filename="../../src/main.cpp" line="261"/>
         <source>Repeat screenshot with previously selected region</source>
         <translation>Repeat screenshot with previously selected region</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="254"/>
+        <location filename="../../src/main.cpp" line="264"/>
         <source>Screenshot region to select</source>
         <translation>Oblast snímku obrazovky k vybrání</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="257"/>
+        <location filename="../../src/main.cpp" line="267"/>
         <source>Set the filename pattern</source>
         <translation>Nastavit vzor pro pojmenování souborů</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="261"/>
+        <location filename="../../src/main.cpp" line="271"/>
         <source>Accept capture as soon as a selection is made</source>
         <translation>Přijmout zachycení obrazovky, jakmile se provede výběr</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="263"/>
+        <location filename="../../src/main.cpp" line="273"/>
         <source>Enable or disable the trayicon</source>
         <translation>Povolit nebo zakázat ikonu v oznamovací oblasti panelu</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="267"/>
+        <location filename="../../src/main.cpp" line="277"/>
         <source>Enable or disable run at startup</source>
         <translation>Povolit nebo zakázat spuštění při spuštění systému</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="271"/>
+        <location filename="../../src/main.cpp" line="281"/>
         <source>Enable or disable the notifications</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="274"/>
+        <location filename="../../src/main.cpp" line="284"/>
         <source>Check the configuration for errors</source>
         <translation>Zkontrolovat nastavení, zda neobsahuje chyby</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="277"/>
+        <location filename="../../src/main.cpp" line="287"/>
         <source>Show the help message in the capture mode</source>
         <translation>Ukazovat nápovědu v režimu zachytávání</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="280"/>
+        <location filename="../../src/main.cpp" line="290"/>
         <source>Define the main UI color</source>
         <translation>Nastavit barvu hlavního uživatelského rozhraní</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="284"/>
+        <location filename="../../src/main.cpp" line="294"/>
         <source>Define the contrast UI color</source>
         <translation>Nastavit kontrastní barvu uživatelského rozhraní</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="287"/>
+        <location filename="../../src/main.cpp" line="297"/>
         <source>Print raw PNG capture</source>
         <translation>Zobrazit nezpracovaný PNG snímek</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="290"/>
+        <location filename="../../src/main.cpp" line="300"/>
         <source>Print geometry of the selection in the format WxH+X+Y. Does nothing if raw is specified</source>
         <translation>Zobrazit natočení výběru ve formátu Š V X Y. Nedělá nic, pokud je zadáno nezpracovaný</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="294"/>
+        <location filename="../../src/main.cpp" line="304"/>
         <source>Define the screen to capture (starting from 0)</source>
         <translation>Stanovit obrazovku, která bude zachytávána (od 0)</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="314"/>
+        <location filename="../../src/main.cpp" line="324"/>
         <source>Invalid delay, it must be a number greater than 0</source>
         <translation>Neplatné zpoždění, musí to být číslo větší než 0</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="317"/>
+        <location filename="../../src/main.cpp" line="327"/>
         <source>Invalid region, use &apos;WxH+X+Y&apos; or &apos;all&apos; or &apos;screen0/screen1/...&apos;.</source>
         <translation>Neplatná oblast, použijte „ŠxV+X+Y“ nebo „vše“ nebo „screen0/screen1/...“.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="330"/>
+        <location filename="../../src/main.cpp" line="340"/>
         <source>Invalid path, must be an existing directory or a new file in an existing directory</source>
         <translation>Neplatná cesta, musí se jednat o stávající adresář nebo nový soubor v existujícím adresáři</translation>
     </message>
@@ -2217,17 +2146,17 @@ Vyřešte je, prosím, ručně v souboru s nastavením.</translation>
         <translation type="vanished">Nastavit monitor, který bude zachytáván</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="295"/>
+        <location filename="../../src/main.cpp" line="305"/>
         <source>default: screen containing the cursor</source>
         <translation>výchozí: obrazovka, na které je ukazovátko myši</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="296"/>
+        <location filename="../../src/main.cpp" line="306"/>
         <source>Screen number</source>
         <translation>Číslo obrazovky</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="305"/>
+        <location filename="../../src/main.cpp" line="315"/>
         <source>Invalid color, this flag supports the following formats:
 - #RGB (each of R, G, and B is a single hex digit)
 - #RRGGBB
@@ -2248,7 +2177,7 @@ Možná budete muset napsat před &apos;#&apos; opačné (obrácené) lomítko, 
         <translation type="vanished">Neplatné zpoždění, musí být vyšší než 0</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="316"/>
+        <location filename="../../src/main.cpp" line="326"/>
         <source>Invalid screen number, it must be non negative</source>
         <translation>Neplatné číslo obrazovky, může být jen kladné</translation>
     </message>
@@ -2257,7 +2186,7 @@ Možná budete muset napsat před &apos;#&apos; opačné (obrácené) lomítko, 
         <translation type="vanished">Neplatná cesta, musí se jednat o skutečnou cestu v systému</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="343"/>
+        <location filename="../../src/main.cpp" line="353"/>
         <source>Invalid value, it must be defined as &apos;true&apos; or &apos;false&apos;</source>
         <translation>Neplatná hodnota, musí být vymezenná jako &apos;pravda&apos; nebo &apos;nepravda&apos;</translation>
     </message>
@@ -2494,43 +2423,31 @@ Možná budete muset napsat před &apos;#&apos; opačné (obrácené) lomítko, 
     <name>SecondaryInstanceWidget</name>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="26"/>
-        <location filename="../../cmake-build-debug/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="26"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="26"/>
         <source>Secondary instance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="27"/>
-        <location filename="../../cmake-build-debug/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="27"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="27"/>
         <source>&lt;b&gt;Secondary instance.&lt;/b&gt; Send message to primary:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="29"/>
-        <location filename="../../cmake-build-debug/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="29"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="29"/>
         <source>Type something here...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="31"/>
-        <location filename="../../cmake-build-debug/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="31"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="31"/>
         <source>&amp;Send</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="54"/>
-        <location filename="../../cmake-build-debug/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="54"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="54"/>
         <source>Error sending message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="55"/>
-        <location filename="../../cmake-build-debug/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="55"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="55"/>
         <source>The message &apos;%1&apos; could not be sent to the primary.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3082,8 +2999,6 @@ Možná budete muset napsat před &apos;#&apos; opačné (obrácené) lomítko, 
     <name>UploadHistory</name>
     <message>
         <location filename="../../src/widgets/uploadhistory.ui" line="14"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_uploadhistory.h" line="69"/>
-        <location filename="../../src/flameshot_autogen/include/ui_uploadhistory.h" line="69"/>
         <source>Upload History</source>
         <translation>Historie nahrávání</translation>
     </message>
@@ -3097,29 +3012,21 @@ Možná budete muset napsat před &apos;#&apos; opačné (obrácené) lomítko, 
     <name>UploadLineItem</name>
     <message>
         <location filename="../../src/widgets/uploadlineitem.ui" line="20"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_uploadlineitem.h" line="123"/>
-        <location filename="../../src/flameshot_autogen/include/ui_uploadlineitem.h" line="122"/>
         <source>Form</source>
         <translation>Formulář</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadlineitem.ui" line="49"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_uploadlineitem.h" line="125"/>
-        <location filename="../../src/flameshot_autogen/include/ui_uploadlineitem.h" line="124"/>
         <source>TextLabel</source>
         <translation>Textový štítek</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadlineitem.ui" line="82"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_uploadlineitem.h" line="127"/>
-        <location filename="../../src/flameshot_autogen/include/ui_uploadlineitem.h" line="126"/>
         <source>Copy URL</source>
         <translation>Kopírovat adresu (URL)</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadlineitem.ui" line="95"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_uploadlineitem.h" line="128"/>
-        <location filename="../../src/flameshot_autogen/include/ui_uploadlineitem.h" line="127"/>
         <source>Open In Browser</source>
         <translation>Otevřít v prohlížeči</translation>
     </message>
@@ -3178,9 +3085,7 @@ Možná budete muset napsat před &apos;#&apos; opačné (obrácené) lomítko, 
 <context>
     <name>color_widgets::ColorDialog</name>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.cpp" line="65"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.cpp" line="65"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.cpp" line="65"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.cpp" line="63"/>
         <source>Pick</source>
         <translation>Zvolit</translation>
     </message>
@@ -3188,9 +3093,7 @@ Možná budete muset napsat před &apos;#&apos; opačné (obrácené) lomítko, 
 <context>
     <name>color_widgets::ColorPalette</name>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette.cpp" line="403"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette.cpp" line="403"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette.cpp" line="403"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette.cpp" line="417"/>
         <source>Unnamed</source>
         <translation>Nepojmenovaná</translation>
     </message>
@@ -3198,16 +3101,12 @@ Možná budete muset napsat před &apos;#&apos; opačné (obrácené) lomítko, 
 <context>
     <name>color_widgets::ColorPaletteModel</name>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_model.cpp" line="56"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_model.cpp" line="56"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_model.cpp" line="56"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_model.cpp" line="55"/>
         <source>Unnamed</source>
         <translation>Nepojmenovaná</translation>
     </message>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_model.cpp" line="134"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_model.cpp" line="134"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_model.cpp" line="134"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_model.cpp" line="130"/>
         <source>%1 (%2 colors)</source>
         <translation>%1 (%2 barev)</translation>
     </message>
@@ -3216,131 +3115,87 @@ Možná budete muset napsat před &apos;#&apos; opačné (obrácené) lomítko, 
     <name>color_widgets::ColorPaletteWidget</name>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="64"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="64"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="64"/>
-        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="257"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="257"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="231"/>
         <source>Open a new palette from file</source>
         <translation>Otevřít novou paletu ze souboru</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="75"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="75"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="75"/>
-        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="263"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="263"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="234"/>
         <source>Create a new palette</source>
         <translation>Vytvořit novou paletu</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="86"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="86"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="86"/>
-        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="269"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="269"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="237"/>
         <source>Duplicate the current palette</source>
         <translation>Zdvojit nynější paletu</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="170"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="170"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="170"/>
-        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="275"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="275"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="240"/>
         <source>Delete the current palette</source>
         <translation>Smazat nynější paletu</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="181"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="181"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="181"/>
-        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="281"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="281"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="243"/>
         <source>Revert changes to the current palette</source>
         <translation>Vrátit změny v nynější paletě</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="192"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="192"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="192"/>
-        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="287"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="287"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="246"/>
         <source>Save changes to the current palette</source>
         <translation>Uložit změny v nynější paletě</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="216"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="216"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="216"/>
-        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="293"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="293"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="249"/>
         <source>Add a color to the palette</source>
         <translation>Přidat barvu do palety</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="227"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="227"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="227"/>
-        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="298"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="298"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="252"/>
         <source>Remove the selected color from the palette</source>
         <translation>Odstranit vybranou barvu z palety</translation>
     </message>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="207"/>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="224"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="207"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="224"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="207"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="224"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="181"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="196"/>
         <source>New Palette</source>
         <translation>Nová paleta</translation>
     </message>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="208"/>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="225"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="208"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="225"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="208"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="225"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="182"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="197"/>
         <source>Name</source>
         <translation>Název</translation>
     </message>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="254"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="254"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="254"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="223"/>
         <source>GIMP Palettes (*.gpl)</source>
         <translation>Palety GIMP (*.gpl)</translation>
     </message>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="255"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="255"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="255"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="224"/>
         <source>Palette Image (%1)</source>
         <translation>Obrázek palety (%1)</translation>
     </message>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="256"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="256"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="256"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="225"/>
         <source>All Files (*)</source>
         <translation>Všechny soubory (*)</translation>
     </message>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="257"/>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="271"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="257"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="271"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="257"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="271"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="226"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="239"/>
         <source>Open Palette</source>
         <translation>Otevřít paletu</translation>
     </message>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="272"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="272"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="272"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="240"/>
         <source>Failed to load the palette file
 %1</source>
         <translation>Nepodařilo se nahrát soubor palety
@@ -3350,23 +3205,17 @@ Možná budete muset napsat před &apos;#&apos; opačné (obrácené) lomítko, 
 <context>
     <name>color_widgets::GradientEditor</name>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_editor.cpp" line="300"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_editor.cpp" line="300"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_editor.cpp" line="300"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_editor.cpp" line="321"/>
         <source>Add Color</source>
         <translation>Přidat barvu</translation>
     </message>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_editor.cpp" line="312"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_editor.cpp" line="312"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_editor.cpp" line="312"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_editor.cpp" line="330"/>
         <source>Remove Color</source>
         <translation>Odstranit barvu</translation>
     </message>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_editor.cpp" line="323"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_editor.cpp" line="323"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_editor.cpp" line="323"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_editor.cpp" line="338"/>
         <source>Edit Color...</source>
         <translation>Upravit barvu...</translation>
     </message>
@@ -3374,9 +3223,7 @@ Možná budete muset napsat před &apos;#&apos; opačné (obrácené) lomítko, 
 <context>
     <name>color_widgets::GradientListModel</name>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_list_model.cpp" line="216"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_list_model.cpp" line="216"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_list_model.cpp" line="216"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_list_model.cpp" line="215"/>
         <source>%1 (%2 colors)</source>
         <translation>%1 (%2 barev)</translation>
     </message>
@@ -3384,16 +3231,12 @@ Možná budete muset napsat před &apos;#&apos; opačné (obrácené) lomítko, 
 <context>
     <name>color_widgets::Swatch</name>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/swatch.cpp" line="829"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/swatch.cpp" line="829"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/swatch.cpp" line="829"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/swatch.cpp" line="855"/>
         <source>Clear Color</source>
         <translation>Smazat barvu</translation>
     </message>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/swatch.cpp" line="838"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/swatch.cpp" line="838"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/swatch.cpp" line="838"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/swatch.cpp" line="864"/>
         <source>%1 (%2)</source>
         <translation>%1 (%2)</translation>
     </message>

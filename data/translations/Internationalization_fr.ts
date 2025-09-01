@@ -4,30 +4,22 @@
 <context>
     <name>AbstractWidgetList</name>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="55"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="55"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="55"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="52"/>
         <source>Add New</source>
         <translation>Ajouter nouveau</translation>
     </message>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="104"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="104"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="104"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="103"/>
         <source>Move Up</source>
         <translation>Déplacer vers le haut</translation>
     </message>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="106"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="106"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="106"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="104"/>
         <source>Move Down</source>
         <translation>Déplacer vers le bas</translation>
     </message>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="108"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="108"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="108"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="105"/>
         <source>Remove</source>
         <translation>Enlever</translation>
     </message>
@@ -149,66 +141,50 @@
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="100"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="198"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="198"/>
-        <location filename="../../src/flameshot_autogen/include/ui_capturelauncher.h" line="194"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="184"/>
         <location filename="../../src/widgets/capturelauncher.cpp" line="53"/>
         <source> seconds</source>
         <translation> secondes</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="165"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="199"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="199"/>
-        <location filename="../../src/flameshot_autogen/include/ui_capturelauncher.h" line="195"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="185"/>
         <source>Take new screenshot</source>
         <translation>Prendre une nouvelle capture</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="66"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="191"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="191"/>
-        <location filename="../../src/flameshot_autogen/include/ui_capturelauncher.h" line="187"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="180"/>
         <source>Area:</source>
         <translation>Zone&#xa0;:</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="14"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="184"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="184"/>
-        <location filename="../../src/flameshot_autogen/include/ui_capturelauncher.h" line="180"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="177"/>
         <source>Capture Launcher</source>
         <translation>Lanceur de capture</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="34"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="187"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="187"/>
-        <location filename="../../src/flameshot_autogen/include/ui_capturelauncher.h" line="183"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="178"/>
         <source>TextLabel</source>
         <translation>Étiquette de texte</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="51"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="188"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="188"/>
-        <location filename="../../src/flameshot_autogen/include/ui_capturelauncher.h" line="184"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="179"/>
         <source>Capture Mode</source>
         <translation>Mode de capture</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="80"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="194"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="194"/>
-        <location filename="../../src/flameshot_autogen/include/ui_capturelauncher.h" line="190"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="182"/>
         <source>Delay:</source>
         <translation>Retard&#xa0;:</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="93"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="196"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="196"/>
-        <location filename="../../src/flameshot_autogen/include/ui_capturelauncher.h" line="192"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="183"/>
         <source>WxH+x+y</source>
         <translation>WxH+x+y</translation>
     </message>
@@ -268,22 +244,22 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="499"/>
         <source>Quit Capture</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Annuler la capture</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="500"/>
         <source>Are you sure you want to quit capture?</source>
-        <translation type="unfinished"></translation>
+        <translation>Êtes-vous sûr de vouloir annuler la capture&#x202f;?</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="505"/>
         <source>Do not show this again</source>
-        <translation type="unfinished"></translation>
+        <translation>Ne plus afficher ceci</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="711"/>
         <source>Flameshot has lost focus. Keyboard shortcuts won&apos;t work until you click somewhere.</source>
-        <translation>Flameshot a perdu focus. Les raccourcis clavier ne fonctionneront pas sans avoir cliquer quelque part.</translation>
+        <translation>Flameshot a perdu le focus. Les raccourcis clavier ne fonctionneront pas sans avoir cliqué ailleurs.</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="717"/>
@@ -338,82 +314,55 @@ Appuyer sur Espace pour ouvrir le panneau latéral.</translation>
     <name>ColorDialog</name>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="19"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="19"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="19"/>
-        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="352"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="352"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="312"/>
         <source>Select Color</source>
         <translation>Sélectionner Couleur</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="60"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="60"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="60"/>
-        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="354"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="354"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="313"/>
         <source>Saturation</source>
         <translation>Saturation</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="67"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="67"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="67"/>
-        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="356"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="356"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="314"/>
         <source>Hue</source>
         <translation>Teinte</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="84"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="84"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="84"/>
-        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="358"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="358"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="315"/>
         <source>Hex</source>
         <translation>Hex</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="91"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="91"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="91"/>
-        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="360"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="360"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="316"/>
         <source>Blue</source>
         <translation>Bleu</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="128"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="128"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="128"/>
-        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="362"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="362"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="317"/>
         <source>Value</source>
         <translation>Valeur</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="135"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="135"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="135"/>
-        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="364"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="364"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="318"/>
         <source>Green</source>
         <translation>Vert</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="142"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="142"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="142"/>
-        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="366"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="366"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="319"/>
         <source>Alpha</source>
         <translation>Alpha</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="149"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="149"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="149"/>
-        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="368"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="368"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="320"/>
         <source>Red</source>
         <translation>Rouge</translation>
     </message>
@@ -479,7 +428,7 @@ Appuyer sur Espace pour ouvrir le panneau latéral.</translation>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="45"/>
         <source>Enter color to update preset</source>
-        <translation>Enter color to update preset</translation>
+        <translation>Entrer la couleur pour mettre à jour le préréglage</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="65"/>
@@ -589,7 +538,7 @@ Appuyer sur Espace pour ouvrir le panneau latéral.</translation>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="794"/>
         <source>Bad config key &apos;%1&apos; in ConfigHandler. Please report this as a bug.</source>
-        <translation>Bad config key &apos;%1&apos; in ConfigHandler. Please report this as a bug.</translation>
+        <translation>Mauvaise clef de configuration&apos;%1&apos; dans ConfigHandler. Signaler le en tant que bug SVP.</translation>
     </message>
 </context>
 <context>
@@ -850,7 +799,7 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../src/core/flameshot.cpp" line="431"/>
         <source>URL copied to clipboard.</source>
-        <translation>URL copied to clipboard.</translation>
+        <translation>URL copiée dans le presse-papiers.</translation>
     </message>
 </context>
 <context>
@@ -1107,7 +1056,7 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../src/config/generalconf.cpp" line="284"/>
         <source>Use last region for GUI mode</source>
-        <translation type="unfinished">Use last region for GUI mode</translation>
+        <translation type="unfinished">Utiliser la dernière région pour le mode GUI</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="286"/>
@@ -1127,12 +1076,12 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../src/config/generalconf.cpp" line="323"/>
         <source>Show abort notifications</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Afficher les notifications d&apos;annulation</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="324"/>
         <source>Enable abort notifications</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Permettre les notifications d&apos;annulation</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="337"/>
@@ -1142,7 +1091,7 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../src/config/generalconf.cpp" line="350"/>
         <source>Use grim to capture screenshots</source>
-        <translation type="unfinished"></translation>
+        <translation>Utiliser grim pour prendre des captures d&apos;écran</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="352"/>
@@ -1181,7 +1130,7 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../src/config/generalconf.cpp" line="503"/>
         <source>Copy on double click</source>
-        <translation>Copy on double click</translation>
+        <translation>Copier en double-cliquant</translation>
     </message>
     <message>
         <source>Enable Copy on Double Click</source>
@@ -1194,42 +1143,42 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../src/config/generalconf.cpp" line="439"/>
         <source>Automatically unload from memory when it is not needed</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Déchargement automatique de la mémoire quand ce n&apos;est pas nécessaire</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="440"/>
         <source>Automatically close daemon (background process) when it is not needed</source>
-        <translation type="unfinished"></translation>
+        <translation>Extinction automatique du Démon (processus en arrière-plan) quand il n&apos;est plus utile</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="451"/>
         <source>Launch in background at startup</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Démarrage en arrière-plan</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="452"/>
         <source>Launch Flameshot daemon (background process) when computer is booted</source>
-        <translation type="unfinished"></translation>
+        <translation>Démarrer le démon de Flameshot (processus en arrière-plan) lors de la mise en route de l&apos;ordinateur</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="477"/>
         <source>Ask before quit capture</source>
-        <translation type="unfinished"></translation>
+        <translation>Demander avant de quitter la capture d&apos;écran</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="480"/>
         <source>Show the confirmation prompt before ESC quit</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Afficher la demande de confirmation avant d&apos;annuler via ESC</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="505"/>
         <source>Enable Copy to clipboard on Double Click</source>
-        <translation type="unfinished"></translation>
+        <translation>Activer la copie vers le presse-papier par double-clic</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="517"/>
         <source>Copy URL after uploading was successful</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Copier l&apos;URL suite à un téléchargement fructueux</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="529"/>
@@ -1264,7 +1213,7 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../src/config/generalconf.cpp" line="623"/>
         <source>Imgur Application Client ID</source>
-        <translation>Imgur Application Client ID</translation>
+        <translation>Client ID pour l&apos;application Imgur</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="654"/>
@@ -1279,7 +1228,7 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../src/config/generalconf.cpp" line="685"/>
         <source>Use lossy JPG format for clipboard (lossless PNG default)</source>
-        <translation type="unfinished"></translation>
+        <translation>Utiliser un format JPG avec perte pour le presse-papier (PNG sans perte par défaut)</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="711"/>
@@ -1299,13 +1248,13 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../src/config/generalconf.cpp" line="725"/>
         <source>After zooming the pinned image, should the image get smoothened or stay pixelated</source>
-        <translation>Après avoir zoomé sur l&apos;image épinglée, l&apos;image doit-elle être lissée ou rester pixelisée ?</translation>
+        <translation>Après avoir zoomé sur l&apos;image épinglée, l&apos;image doit-elle être lissée ou rester pixelisée&#x202f;?</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="736"/>
         <location filename="../../src/config/generalconf.cpp" line="738"/>
         <source>Upload image without confirmation</source>
-        <translation>Uploader image sans confirmation</translation>
+        <translation>Télécharger l&apos;image sans confirmation</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="754"/>
@@ -1340,72 +1289,72 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../src/config/generalconf.cpp" line="801"/>
         <source>Milliseconds before geometry display hides; 0 means do not hide</source>
-        <translation type="unfinished"></translation>
+        <translation>Millisecondes avant que l&apos;affichage géométrique ne se cache&#x202f;; 0 indique &quot;ne se cache jamais&quot;</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="804"/>
         <source>Set geometry display timeout (ms)</source>
-        <translation type="unfinished"></translation>
+        <translation>Définir l&apos;arrêt de l&apos;affichage géométrique (ms)</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="812"/>
         <source>Selection Geometry Display</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionner l&apos;affichage géométrique</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="819"/>
         <source>Display Location</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher la location</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="822"/>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Aucun</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="823"/>
         <source>Top Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Haut gauche</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="825"/>
         <source>Top Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Haut droit</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="827"/>
         <source>Bottom Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Bas gauche</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="829"/>
         <source>Bottom Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Bas droit</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="831"/>
         <source>Center</source>
-        <translation type="unfinished"></translation>
+        <translation>Centre</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="856"/>
         <source>Quality range of 0-100; Higher number is better quality and larger file size</source>
-        <translation type="unfinished"></translation>
+        <translation>Variation de la qualité de 0 à 100. Un nombre plus grand indique une meilleure qualité et un fichier plus volumineux</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="860"/>
         <source>JPEG Quality</source>
-        <translation type="unfinished"></translation>
+        <translation>Qualité JPEG</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="871"/>
         <source>Reverse arrow</source>
-        <translation type="unfinished"></translation>
+        <translation>Flèche inversée</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="872"/>
         <source>Draw the arrow head first</source>
-        <translation type="unfinished"></translation>
+        <translation>Dessiner la pointe de la flèche en premier</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="881"/>
@@ -1474,7 +1423,7 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../src/widgets/imguploaddialog.cpp" line="22"/>
         <source>Do you want to upload this capture?</source>
-        <translation>Voulez-vous téléverser cette capture ?</translation>
+        <translation>Voulez-vous téléverser cette capture&#x202f;?</translation>
     </message>
     <message>
         <location filename="../../src/widgets/imguploaddialog.cpp" line="35"/>
@@ -1519,12 +1468,12 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="37"/>
         <source>Upload image</source>
-        <translation>Upload image</translation>
+        <translation>Téléverser l&apos;image</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="49"/>
         <source>Uploading Image</source>
-        <translation>Envoi de l&apos;image</translation>
+        <translation>Envoyer l&apos;image</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="128"/>
@@ -1645,65 +1594,49 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <name>InfoWindow</name>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="14"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="124"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="124"/>
-        <location filename="../../src/flameshot_autogen/include/ui_infowindow.h" line="124"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="116"/>
         <source>About</source>
         <translation>À propos</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="26"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="126"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="126"/>
-        <location filename="../../src/flameshot_autogen/include/ui_infowindow.h" line="126"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="117"/>
         <source>Icon</source>
         <translation>Icône</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="43"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="128"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="128"/>
-        <location filename="../../src/flameshot_autogen/include/ui_infowindow.h" line="128"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="118"/>
         <source>License</source>
         <translation>Licence</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="56"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="130"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="130"/>
-        <location filename="../../src/flameshot_autogen/include/ui_infowindow.h" line="130"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="119"/>
         <source>GPLv3+</source>
         <translation>GPLv3+</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="89"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="132"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="132"/>
-        <location filename="../../src/flameshot_autogen/include/ui_infowindow.h" line="132"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="120"/>
         <source>Version</source>
         <translation>Version</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="102"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="134"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="134"/>
-        <location filename="../../src/flameshot_autogen/include/ui_infowindow.h" line="134"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="121"/>
         <source>Flameshot v</source>
         <translation>Flameshot v</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="115"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="136"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="136"/>
-        <location filename="../../src/flameshot_autogen/include/ui_infowindow.h" line="136"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="122"/>
         <source>OS Info</source>
         <translation>Infos SE</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="128"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="138"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="138"/>
-        <location filename="../../src/flameshot_autogen/include/ui_infowindow.h" line="138"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="123"/>
         <source>Copy Info</source>
         <translation>Copier infos</translation>
     </message>
@@ -1782,7 +1715,7 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../src/tools/invert/inverttool.cpp" line="35"/>
         <source>Set Inverter as the paint tool</source>
-        <translation>Set Inverter as the paint tool</translation>
+        <translation>Sélectionner Inverseur comme outil de peinture</translation>
     </message>
 </context>
 <context>
@@ -1865,7 +1798,7 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="291"/>
         <source>Save to file</source>
-        <translation>Save to file</translation>
+        <translation>Sauvegarder dans un fichier</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="298"/>
@@ -1903,7 +1836,7 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="37"/>
         <source>Set Pixelate as the paint tool.</source>
-        <translation type="unfinished"></translation>
+        <translation>Utiliser Pixeliser comme outil de peinture.</translation>
     </message>
     <message>
         <source>Set Pixelate as the paint tool</source>
@@ -1914,15 +1847,11 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <name>PrimaryInstanceWidget</name>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/primaryinstancewidget.cpp" line="21"/>
-        <location filename="../../cmake-build-debug/_deps/kdsingleapplication-src/examples/widgetsingleapplication/primaryinstancewidget.cpp" line="21"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/kdsingleapplication-src/examples/widgetsingleapplication/primaryinstancewidget.cpp" line="21"/>
         <source>Primary instance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/primaryinstancewidget.cpp" line="22"/>
-        <location filename="../../cmake-build-debug/_deps/kdsingleapplication-src/examples/widgetsingleapplication/primaryinstancewidget.cpp" line="22"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/kdsingleapplication-src/examples/widgetsingleapplication/primaryinstancewidget.cpp" line="22"/>
         <source>&lt;b&gt;Primary instance.&lt;/b&gt; Messages received from secondaries:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1995,17 +1924,17 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
         <translation type="vanished">Capture enregistrée et copiée dans le presse-papier </translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="201"/>
+        <location filename="../../src/main.cpp" line="210"/>
         <source>Unable to connect via DBus</source>
         <translation>Impossible de se connecter via DBus</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="217"/>
+        <location filename="../../src/main.cpp" line="227"/>
         <source>Powerful yet simple to use screenshot software.</source>
         <translation>Logiciel de capture d&apos;écran puissant mais simple à utiliser.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="218"/>
+        <location filename="../../src/main.cpp" line="228"/>
         <source>See</source>
         <translation>Voir</translation>
     </message>
@@ -2014,17 +1943,17 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
         <translation type="vanished">Capturer l&apos;écran entier.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="224"/>
+        <location filename="../../src/main.cpp" line="234"/>
         <source>Open the capture launcher.</source>
         <translation>Ouvrir le menu de capture.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="227"/>
+        <location filename="../../src/main.cpp" line="237"/>
         <source>Start a manual capture in GUI mode.</source>
         <translation>Démarre une capture manuelle en mode graphique.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="229"/>
+        <location filename="../../src/main.cpp" line="239"/>
         <source>Configure</source>
         <translation>Configurer</translation>
     </message>
@@ -2037,122 +1966,122 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
         <translation type="vanished">Chemin où la capture sera enregistrée</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="222"/>
-        <source>Capture screenshot of all monitors at the same time.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../../src/main.cpp" line="232"/>
-        <source>Capture a screenshot of the specified monitor.</source>
-        <translation type="unfinished"></translation>
+        <source>Capture screenshot of all monitors at the same time.</source>
+        <translation>Capture d&apos;écran de tous les moniteurs en même temps.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="237"/>
+        <location filename="../../src/main.cpp" line="242"/>
+        <source>Capture a screenshot of the specified monitor.</source>
+        <translation>Effectuer une capture d&apos;écran du moniteur spécifié.</translation>
+    </message>
+    <message>
+        <location filename="../../src/main.cpp" line="247"/>
         <source>Existing directory or new file to save to</source>
         <translation>Dossier existant ou nouveau fichier à sauvegarder dans</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="240"/>
+        <location filename="../../src/main.cpp" line="250"/>
         <source>Save the capture to the clipboard</source>
         <translation>Enregistrer la capture dans le presse-papier</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="242"/>
+        <location filename="../../src/main.cpp" line="252"/>
         <source>Pin the capture to the screen</source>
         <translation>Pin the capture to the screen</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="244"/>
+        <location filename="../../src/main.cpp" line="254"/>
         <source>Upload screenshot</source>
         <translation>Upload screenshot</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="246"/>
+        <location filename="../../src/main.cpp" line="256"/>
         <source>Delay time in milliseconds</source>
         <translation>Délai en millisecondes</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="251"/>
+        <location filename="../../src/main.cpp" line="261"/>
         <source>Repeat screenshot with previously selected region</source>
         <translation>Repeat screenshot with previously selected region</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="254"/>
+        <location filename="../../src/main.cpp" line="264"/>
         <source>Screenshot region to select</source>
         <translation>Zone de capture d&apos;écran à sélectionner</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="257"/>
+        <location filename="../../src/main.cpp" line="267"/>
         <source>Set the filename pattern</source>
         <translation>Définir le modèle de nom de fichier</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="261"/>
+        <location filename="../../src/main.cpp" line="271"/>
         <source>Accept capture as soon as a selection is made</source>
         <translation>Accepter la capture d&apos;écran dès qu&apos;une sélection est faite</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="263"/>
+        <location filename="../../src/main.cpp" line="273"/>
         <source>Enable or disable the trayicon</source>
         <translation>Activer ou désactiver l&apos;icone de la barre des tâches</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="267"/>
+        <location filename="../../src/main.cpp" line="277"/>
         <source>Enable or disable run at startup</source>
         <translation>Activer ou désactiver le lancement au démarrage</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="271"/>
+        <location filename="../../src/main.cpp" line="281"/>
         <source>Enable or disable the notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Activer ou désactiver les notifications</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="274"/>
+        <location filename="../../src/main.cpp" line="284"/>
         <source>Check the configuration for errors</source>
         <translation>Vérifiez l&apos;absence d&apos;erreurs dans la configuration</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="277"/>
+        <location filename="../../src/main.cpp" line="287"/>
         <source>Show the help message in the capture mode</source>
         <translation>Afficher le message d&apos;aide dans le mode capture</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="280"/>
+        <location filename="../../src/main.cpp" line="290"/>
         <source>Define the main UI color</source>
         <translation>Définir la couleur de base de l&apos;interface</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="284"/>
+        <location filename="../../src/main.cpp" line="294"/>
         <source>Define the contrast UI color</source>
         <translation>Définir le contraste de l&apos;interface utilisateur</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="287"/>
+        <location filename="../../src/main.cpp" line="297"/>
         <source>Print raw PNG capture</source>
         <translation>Print raw PNG capture</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="290"/>
+        <location filename="../../src/main.cpp" line="300"/>
         <source>Print geometry of the selection in the format WxH+X+Y. Does nothing if raw is specified</source>
         <translation>Print geometry of the selection in the format WxH+X+Y. Does nothing if raw is specified</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="294"/>
+        <location filename="../../src/main.cpp" line="304"/>
         <source>Define the screen to capture (starting from 0)</source>
         <translation>Define the screen to capture (starting from 0)</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="314"/>
+        <location filename="../../src/main.cpp" line="324"/>
         <source>Invalid delay, it must be a number greater than 0</source>
         <translation>Délai invalide, il doit être supérieur à 0</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="317"/>
+        <location filename="../../src/main.cpp" line="327"/>
         <source>Invalid region, use &apos;WxH+X+Y&apos; or &apos;all&apos; or &apos;screen0/screen1/...&apos;.</source>
         <translation>Invalid region, use &apos;WxH+X+Y&apos; or &apos;all&apos; or &apos;screen0/screen1/...&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="330"/>
+        <location filename="../../src/main.cpp" line="340"/>
         <source>Invalid path, must be an existing directory or a new file in an existing directory</source>
         <translation>Invalid path, must be an existing directory or a new file in an existing directory</translation>
     </message>
@@ -2161,17 +2090,17 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
         <translation type="vanished">Définir l&apos;écran à capturer</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="295"/>
+        <location filename="../../src/main.cpp" line="305"/>
         <source>default: screen containing the cursor</source>
         <translation>Par défaut : Ecran contenant le curseur</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="296"/>
+        <location filename="../../src/main.cpp" line="306"/>
         <source>Screen number</source>
         <translation>Numéro d&apos;écran</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="305"/>
+        <location filename="../../src/main.cpp" line="315"/>
         <source>Invalid color, this flag supports the following formats:
 - #RGB (each of R, G, and B is a single hex digit)
 - #RRGGBB
@@ -2192,7 +2121,7 @@ Vous devrez probablement remplacer le signe &apos;#&apos; par &apos;\#FFF&apos;<
         <translation type="vanished">Délai non valable, il doit être plus élevé que 0</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="316"/>
+        <location filename="../../src/main.cpp" line="326"/>
         <source>Invalid screen number, it must be non negative</source>
         <translation>Numéro d&apos;écran non-valable, il ne doit pas être négatif</translation>
     </message>
@@ -2201,7 +2130,7 @@ Vous devrez probablement remplacer le signe &apos;#&apos; par &apos;\#FFF&apos;<
         <translation type="vanished">Chemin non-valable, il doit indiquer un chemin existant du système</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="343"/>
+        <location filename="../../src/main.cpp" line="353"/>
         <source>Invalid value, it must be defined as &apos;true&apos; or &apos;false&apos;</source>
         <translation>Valeur non-valable, elle doit être définie comme &apos;true&apos; ou &apos;false&apos;</translation>
     </message>
@@ -2245,12 +2174,12 @@ Vous devrez probablement remplacer le signe &apos;#&apos; par &apos;\#FFF&apos;<
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="68"/>
         <source>Subcommands</source>
-        <translation type="unfinished"></translation>
+        <translation>Sous-commandes</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="328"/>
         <source>subcommands</source>
-        <translation type="unfinished"></translation>
+        <translation>sous-commandes</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="329"/>
@@ -2430,43 +2359,31 @@ Vous devrez probablement remplacer le signe &apos;#&apos; par &apos;\#FFF&apos;<
     <name>SecondaryInstanceWidget</name>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="26"/>
-        <location filename="../../cmake-build-debug/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="26"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="26"/>
         <source>Secondary instance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="27"/>
-        <location filename="../../cmake-build-debug/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="27"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="27"/>
         <source>&lt;b&gt;Secondary instance.&lt;/b&gt; Send message to primary:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="29"/>
-        <location filename="../../cmake-build-debug/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="29"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="29"/>
         <source>Type something here...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="31"/>
-        <location filename="../../cmake-build-debug/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="31"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="31"/>
         <source>&amp;Send</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="54"/>
-        <location filename="../../cmake-build-debug/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="54"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="54"/>
         <source>Error sending message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="55"/>
-        <location filename="../../cmake-build-debug/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="55"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="55"/>
         <source>The message &apos;%1&apos; could not be sent to the primary.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2623,12 +2540,12 @@ Vous devrez probablement remplacer le signe &apos;#&apos; par &apos;\#FFF&apos;<
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="190"/>
         <source>Delete selected drawn object</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Supprimer l&apos;objet sélectionné peint</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="191"/>
         <source>Cancel current selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Effacer la sélection actuelle</translation>
     </message>
     <message>
         <source>Delete current tool</source>
@@ -2867,17 +2784,17 @@ Vous devrez probablement remplacer le signe &apos;#&apos; par &apos;\#FFF&apos;<
     <message>
         <location filename="../../src/tools/text/textconfig.cpp" line="81"/>
         <source>Left Align</source>
-        <translation>Left Align</translation>
+        <translation>Aligner à gauche</translation>
     </message>
     <message>
         <location filename="../../src/tools/text/textconfig.cpp" line="90"/>
         <source>Center Align</source>
-        <translation>Center Align</translation>
+        <translation>Aligner au centre</translation>
     </message>
     <message>
         <location filename="../../src/tools/text/textconfig.cpp" line="99"/>
         <source>Right Align</source>
-        <translation>Right Align</translation>
+        <translation>Aligner à droite</translation>
     </message>
 </context>
 <context>
@@ -2938,7 +2855,7 @@ Vous devrez probablement remplacer le signe &apos;#&apos; par &apos;\#FFF&apos;<
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="160"/>
         <source>&amp;Open Save Path</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Répertoire d&apos;&amp;Ouverture et de Sauvegarde</translation>
     </message>
 </context>
 <context>
@@ -3018,8 +2935,6 @@ Vous devrez probablement remplacer le signe &apos;#&apos; par &apos;\#FFF&apos;<
     <name>UploadHistory</name>
     <message>
         <location filename="../../src/widgets/uploadhistory.ui" line="14"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_uploadhistory.h" line="69"/>
-        <location filename="../../src/flameshot_autogen/include/ui_uploadhistory.h" line="69"/>
         <source>Upload History</source>
         <translation>Historique d&apos;envois</translation>
     </message>
@@ -3033,29 +2948,21 @@ Vous devrez probablement remplacer le signe &apos;#&apos; par &apos;\#FFF&apos;<
     <name>UploadLineItem</name>
     <message>
         <location filename="../../src/widgets/uploadlineitem.ui" line="20"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_uploadlineitem.h" line="123"/>
-        <location filename="../../src/flameshot_autogen/include/ui_uploadlineitem.h" line="122"/>
         <source>Form</source>
         <translation>Formulaire</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadlineitem.ui" line="49"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_uploadlineitem.h" line="125"/>
-        <location filename="../../src/flameshot_autogen/include/ui_uploadlineitem.h" line="124"/>
         <source>TextLabel</source>
         <translation>étiquette de texte</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadlineitem.ui" line="82"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_uploadlineitem.h" line="127"/>
-        <location filename="../../src/flameshot_autogen/include/ui_uploadlineitem.h" line="126"/>
         <source>Copy URL</source>
         <translation>Copier l&apos;URL</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadlineitem.ui" line="95"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_uploadlineitem.h" line="128"/>
-        <location filename="../../src/flameshot_autogen/include/ui_uploadlineitem.h" line="127"/>
         <source>Open In Browser</source>
         <translation>Ouvrir dans le navigateur</translation>
     </message>
@@ -3114,9 +3021,7 @@ Vous devrez probablement remplacer le signe &apos;#&apos; par &apos;\#FFF&apos;<
 <context>
     <name>color_widgets::ColorDialog</name>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.cpp" line="65"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.cpp" line="65"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.cpp" line="65"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.cpp" line="63"/>
         <source>Pick</source>
         <translation>Pick</translation>
     </message>
@@ -3124,9 +3029,7 @@ Vous devrez probablement remplacer le signe &apos;#&apos; par &apos;\#FFF&apos;<
 <context>
     <name>color_widgets::ColorPalette</name>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette.cpp" line="403"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette.cpp" line="403"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette.cpp" line="403"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette.cpp" line="417"/>
         <source>Unnamed</source>
         <translation>Unnamed</translation>
     </message>
@@ -3134,202 +3037,142 @@ Vous devrez probablement remplacer le signe &apos;#&apos; par &apos;\#FFF&apos;<
 <context>
     <name>color_widgets::ColorPaletteModel</name>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_model.cpp" line="56"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_model.cpp" line="56"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_model.cpp" line="56"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_model.cpp" line="55"/>
         <source>Unnamed</source>
         <translation>Unnamed</translation>
     </message>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_model.cpp" line="134"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_model.cpp" line="134"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_model.cpp" line="134"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_model.cpp" line="130"/>
         <source>%1 (%2 colors)</source>
-        <translation>%1 (%2 colors)</translation>
+        <translation>%1 (%2 couleurs)</translation>
     </message>
 </context>
 <context>
     <name>color_widgets::ColorPaletteWidget</name>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="64"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="64"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="64"/>
-        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="257"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="257"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="231"/>
         <source>Open a new palette from file</source>
-        <translation>Open a new palette from file</translation>
+        <translation>Ouvrir une nouvelle palette depuis un fichier</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="75"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="75"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="75"/>
-        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="263"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="263"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="234"/>
         <source>Create a new palette</source>
-        <translation>Create a new palette</translation>
+        <translation>Ouvrir une nouvelle palette</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="86"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="86"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="86"/>
-        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="269"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="269"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="237"/>
         <source>Duplicate the current palette</source>
-        <translation>Duplicate the current palette</translation>
+        <translation>Dupliquer la palette actuelle</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="170"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="170"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="170"/>
-        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="275"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="275"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="240"/>
         <source>Delete the current palette</source>
-        <translation>Delete the current palette</translation>
+        <translation>Supprimer la palette actuelle</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="181"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="181"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="181"/>
-        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="281"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="281"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="243"/>
         <source>Revert changes to the current palette</source>
-        <translation>Revert changes to the current palette</translation>
+        <translation>Rétablir les modifications de la palette actuelle</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="192"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="192"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="192"/>
-        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="287"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="287"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="246"/>
         <source>Save changes to the current palette</source>
-        <translation>Save changes to the current palette</translation>
+        <translation>Sauvegarder les modifications de la palette actuelle</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="216"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="216"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="216"/>
-        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="293"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="293"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="249"/>
         <source>Add a color to the palette</source>
-        <translation>Add a color to the palette</translation>
+        <translation>Ajouter une couleur à la palette</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="227"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="227"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="227"/>
-        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="298"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="298"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="252"/>
         <source>Remove the selected color from the palette</source>
-        <translation>Remove the selected color from the palette</translation>
+        <translation>Retirer la couleur sélectionnée de la palette</translation>
     </message>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="207"/>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="224"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="207"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="224"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="207"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="224"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="181"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="196"/>
         <source>New Palette</source>
-        <translation>New Palette</translation>
+        <translation>Nouvelle palette</translation>
     </message>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="208"/>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="225"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="208"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="225"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="208"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="225"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="182"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="197"/>
         <source>Name</source>
-        <translation>Name</translation>
+        <translation>Nom</translation>
     </message>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="254"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="254"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="254"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="223"/>
         <source>GIMP Palettes (*.gpl)</source>
-        <translation>GIMP Palettes (*.gpl)</translation>
+        <translation>Palettes GIMP (*.gpl)</translation>
     </message>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="255"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="255"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="255"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="224"/>
         <source>Palette Image (%1)</source>
-        <translation>Palette Image (%1)</translation>
+        <translation>Image palette (%1)</translation>
     </message>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="256"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="256"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="256"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="225"/>
         <source>All Files (*)</source>
-        <translation>All Files (*)</translation>
+        <translation>Tous les fichiers (*)</translation>
     </message>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="257"/>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="271"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="257"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="271"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="257"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="271"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="226"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="239"/>
         <source>Open Palette</source>
-        <translation>Open Palette</translation>
+        <translation>Ouvrir la palette</translation>
     </message>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="272"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="272"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="272"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="240"/>
         <source>Failed to load the palette file
 %1</source>
-        <translation>Failed to load the palette file
+        <translation>Impossible d&apos;ouvrir le fichier de palette
 %1</translation>
     </message>
 </context>
 <context>
     <name>color_widgets::GradientEditor</name>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_editor.cpp" line="300"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_editor.cpp" line="300"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_editor.cpp" line="300"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_editor.cpp" line="321"/>
         <source>Add Color</source>
-        <translation>Add Color</translation>
+        <translation>Ajouter la couleur</translation>
     </message>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_editor.cpp" line="312"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_editor.cpp" line="312"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_editor.cpp" line="312"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_editor.cpp" line="330"/>
         <source>Remove Color</source>
-        <translation>Remove Color</translation>
+        <translation>Retirer la couleur</translation>
     </message>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_editor.cpp" line="323"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_editor.cpp" line="323"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_editor.cpp" line="323"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_editor.cpp" line="338"/>
         <source>Edit Color...</source>
-        <translation>Edit Color...</translation>
+        <translation>Modification de la couleur...</translation>
     </message>
 </context>
 <context>
     <name>color_widgets::GradientListModel</name>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_list_model.cpp" line="216"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_list_model.cpp" line="216"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_list_model.cpp" line="216"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_list_model.cpp" line="215"/>
         <source>%1 (%2 colors)</source>
-        <translation>%1 (%2 colors)</translation>
+        <translation>%1 (%2 couleurs)</translation>
     </message>
 </context>
 <context>
     <name>color_widgets::Swatch</name>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/swatch.cpp" line="829"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/swatch.cpp" line="829"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/swatch.cpp" line="829"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/swatch.cpp" line="855"/>
         <source>Clear Color</source>
-        <translation>Clear Color</translation>
+        <translation>Réinitialiser la couleur</translation>
     </message>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/swatch.cpp" line="838"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/swatch.cpp" line="838"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/swatch.cpp" line="838"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/swatch.cpp" line="864"/>
         <source>%1 (%2)</source>
         <translation>%1 (%2)</translation>
     </message>
