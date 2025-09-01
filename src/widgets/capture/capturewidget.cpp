@@ -106,7 +106,8 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
     ///////////////////////////////////////////////////////////////////////////
     // Capture Desktop Screen(s)
     DesktopCapturer desktopCapturer;
-    m_context.screenshot = desktopCapturer.captureDesktop();
+    bool compositeDesktop = true;
+    m_context.screenshot = desktopCapturer.captureDesktop(compositeDesktop);
 
     if (fullScreen) {
         // Grab Screenshot
@@ -151,8 +152,23 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
 
         ////////////////////////////////////////
         // Resize and move CaptureWidget
-        resize(desktopCapturer.screenSize());
-        move(desktopCapturer.topLeftScaledToScreen());
+        qWarning() << "desktopCapturer.screenSize()" << desktopCapturer.screenSize();
+        qWarning() << "desktopCapturer.screenToDraw()" << desktopCapturer.screenToDraw()->name();
+        qWarning() << "desktopCapturer.screenToDraw()" << desktopCapturer.screenToDraw()->geometry();
+        if (!compositeDesktop) {
+            resize(desktopCapturer.screenSize() / desktopCapturer.screenToDraw()->devicePixelRatio());
+            move(desktopCapturer.screenToDraw()->geometry().topLeft());
+        }
+        else {
+            resize(desktopCapturer.screenSize());
+#ifdef Q_OS_WIN
+            move(0, 0);
+#elif (defined(Q_OS_LINUX) || defined(Q_OS_UNIX))
+            move(desktopCapturer.topLeftScaledToScreen());
+#else
+            // MACOS - no need, is resolved below
+#endif
+        }
         //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     }
     // Capture Desktop Screen(s) ^^^
