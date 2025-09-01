@@ -78,6 +78,7 @@ QRect DesktopCapturer::geometry()
 QPixmap DesktopCapturer::captureDesktopComposite()
 {
     m_screenToDraw = QGuiApplication::primaryScreen();
+    qreal screenToDrawDpr = screenToDraw()->devicePixelRatio();
 
     // Calculate screen geometry
     geometry();
@@ -104,10 +105,13 @@ QPixmap DesktopCapturer::captureDesktopComposite()
         painter.drawPixmap(geo.x(), geo.y(), pix);
 
         // Prepare areas
-        // (everything, including location, should be in logical pixels)
-        QRect areaRect = geo;
-        areaRect.moveLeft(geo.x() / screen->devicePixelRatio());
-        areaRect.moveTop(geo.y() / screen->devicePixelRatio());
+        // Everything, including location, should be in logical pixels
+        // of the screen to draw a grabbed area (primary screen)
+        QRect areaRect =
+          QRect(static_cast<int>(geo.x() / screenToDrawDpr),
+                static_cast<int>(geo.y() / screenToDrawDpr),
+                static_cast<int>(pix.width() / screenToDrawDpr),
+                static_cast<int>(pix.height() / screenToDrawDpr));
         m_areas.append(areaRect);
     }
     painter.end();
