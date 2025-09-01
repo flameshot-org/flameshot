@@ -268,17 +268,17 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="499"/>
         <source>Quit Capture</source>
-        <translation type="unfinished"></translation>
+        <translation>Вийти з режиму захоплення</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="500"/>
         <source>Are you sure you want to quit capture?</source>
-        <translation type="unfinished"></translation>
+        <translation>Ви впевнені, що хочете припинити захоплення?</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="505"/>
         <source>Do not show this again</source>
-        <translation type="unfinished"></translation>
+        <translation>Не показувати це знову</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="711"/>
@@ -1179,12 +1179,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="284"/>
         <source>Use last region for GUI mode</source>
-        <translation type="unfinished">Використовувати останню ділянку</translation>
+        <translation>Використовувати останню ділянку для графічного режиму</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="286"/>
         <source>Use the last region as the default selection for the next screenshot in GUI mode</source>
-        <translation type="unfinished">Використовує останню ділянку типовим виділенням для наступного знімка екрана</translation>
+        <translation>Використовувати останню ділянку у якості стандартної для наступного знімка екрана у графічному режимі</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="300"/>
@@ -1199,12 +1199,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="323"/>
         <source>Show abort notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Показувати сповіщення про переривання</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="324"/>
         <source>Enable abort notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Увімкнути сповіщення про переривання</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="337"/>
@@ -1214,12 +1214,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="350"/>
         <source>Use grim to capture screenshots</source>
-        <translation type="unfinished"></translation>
+        <translation>Використовувати Grim для захоплення знімків</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="352"/>
         <source>Grim is a wayland only utility to capture screens based on the screencopy protocol. Generally only enable on minimal wayland window managers like sway, hyprland, etc.</source>
-        <translation type="unfinished"></translation>
+        <translation>Grim — це утиліта, доступна лише в Wayland для захоплення скріншотів на основі протоколу screencopy. Зазвичай її вмикають лише на мінімальних віконних менеджерах Wayland, таких як Sway, Hyprland тощо.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="370"/>
@@ -1266,42 +1266,42 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="439"/>
         <source>Automatically unload from memory when it is not needed</source>
-        <translation type="unfinished"></translation>
+        <translation>Автоматично вивантажувати із пам&apos;яті, коли не потрібне</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="440"/>
         <source>Automatically close daemon (background process) when it is not needed</source>
-        <translation type="unfinished"></translation>
+        <translation>Автоматично закривати демон (фоновий процес), коли він не потрібен</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="451"/>
         <source>Launch in background at startup</source>
-        <translation type="unfinished"></translation>
+        <translation>Запуск у фоновому режимі при старті</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="452"/>
         <source>Launch Flameshot daemon (background process) when computer is booted</source>
-        <translation type="unfinished"></translation>
+        <translation>Запуск демона Flameshot (фонового процесу) при старті комп&apos;ютера</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="477"/>
         <source>Ask before quit capture</source>
-        <translation type="unfinished"></translation>
+        <translation>Запитувати при виході із захоплення</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="480"/>
         <source>Show the confirmation prompt before ESC quit</source>
-        <translation type="unfinished"></translation>
+        <translation>Показувати запит на підтвердження перед виходом за допомогою ESC</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="505"/>
         <source>Enable Copy to clipboard on Double Click</source>
-        <translation type="unfinished"></translation>
+        <translation>Увімкнути копіювання в буфер обміну подвійним клацанням</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="517"/>
         <source>Copy URL after uploading was successful</source>
-        <translation type="unfinished"></translation>
+        <translation>Копіювати URL-адресу після успішного завантаження</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="529"/>
@@ -1351,7 +1351,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="685"/>
         <source>Use lossy JPG format for clipboard (lossless PNG default)</source>
-        <translation type="unfinished"></translation>
+        <translation>Використовувати формат JPG з втратами для буфера обміну (за замовчуванням - PNG без втрат)</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="711"/>
@@ -1412,72 +1412,72 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="801"/>
         <source>Milliseconds before geometry display hides; 0 means do not hide</source>
-        <translation type="unfinished"></translation>
+        <translation>Мілісекунд до приховування відображення геометрії; 0 означає не приховувати</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="804"/>
         <source>Set geometry display timeout (ms)</source>
-        <translation type="unfinished"></translation>
+        <translation>Встановити час очікування відображення геометрії (мс)</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="812"/>
         <source>Selection Geometry Display</source>
-        <translation type="unfinished"></translation>
+        <translation>Відображення геометрії вибору</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="819"/>
         <source>Display Location</source>
-        <translation type="unfinished"></translation>
+        <translation>Розташування відображення</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="822"/>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Ні</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="823"/>
         <source>Top Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Зверху ліворуч</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="825"/>
         <source>Top Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Зверху праворуч</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="827"/>
         <source>Bottom Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Внизу ліворуч</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="829"/>
         <source>Bottom Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Внизу праворуч</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="831"/>
         <source>Center</source>
-        <translation type="unfinished"></translation>
+        <translation>У центрі</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="856"/>
         <source>Quality range of 0-100; Higher number is better quality and larger file size</source>
-        <translation type="unfinished"></translation>
+        <translation>Діапазон якості від 0 до 100; вище число означає кращу якість і більший розмір файлу</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="860"/>
         <source>JPEG Quality</source>
-        <translation type="unfinished"></translation>
+        <translation>Якість JPEG</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="871"/>
         <source>Reverse arrow</source>
-        <translation type="unfinished"></translation>
+        <translation>Зворотна стрілка</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="872"/>
         <source>Draw the arrow head first</source>
-        <translation type="unfinished"></translation>
+        <translation>Спочатку малювати головку стрілки</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="881"/>
@@ -2037,27 +2037,27 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="298"/>
         <source>Rotate Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Повернути вправо</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="303"/>
         <source>Rotate Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Повернути вліво</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="308"/>
         <source>Increase Opacity</source>
-        <translation type="unfinished"></translation>
+        <translation>Збільшити непрозорість</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="315"/>
         <source>Decrease Opacity</source>
-        <translation type="unfinished"></translation>
+        <translation>Зменшити непрозорість</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="322"/>
         <source>Close</source>
-        <translation type="unfinished">Закрити</translation>
+        <translation>Закрити</translation>
     </message>
 </context>
 <context>
@@ -2070,7 +2070,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="37"/>
         <source>Set Pixelate as the paint tool.</source>
-        <translation type="unfinished"></translation>
+        <translation>Встановити розмивання як інструмент малювання.</translation>
     </message>
     <message>
         <source>Set Pixelate as the paint tool</source>
@@ -2206,12 +2206,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/main.cpp" line="222"/>
         <source>Capture screenshot of all monitors at the same time.</source>
-        <translation type="unfinished"></translation>
+        <translation>Зробити знімок екрана зі всіх моніторів одночасно.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="232"/>
         <source>Capture a screenshot of the specified monitor.</source>
-        <translation type="unfinished"></translation>
+        <translation>Зробити знімок екрана зазначеного монітора.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="237"/>
@@ -2271,7 +2271,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/main.cpp" line="271"/>
         <source>Enable or disable the notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Увімкнути або вимкнути сповіщення</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="274"/>
@@ -2412,12 +2412,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="68"/>
         <source>Subcommands</source>
-        <translation type="unfinished"></translation>
+        <translation>Підкоманди</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="328"/>
         <source>subcommands</source>
-        <translation type="unfinished"></translation>
+        <translation>підкоманди</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="329"/>
@@ -2575,22 +2575,22 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="53"/>
         <source>The universal wayland screen capture adapter requires Grim as the screen capture component of wayland. If the screen capture component is missing, please install it!</source>
-        <translation type="unfinished"></translation>
+        <translation>Універсальний адаптер захоплення екрана Wayland вимагає Grim як компонент захоплення екрана Wayland. Якщо компонент захоплення екрана відсутній, будь ласка, встановіть його!</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="170"/>
         <source>If the useGrimAdapter setting is not enabled, the dbus protocol will be used. It should be noted that using the dbus protocol under wayland is not recommended. It is recommended to enable the useGrimAdapter setting in flameshot.ini to activate the grim-based general wayland screenshot adapter</source>
-        <translation type="unfinished"></translation>
+        <translation>Якщо параметр useGrimAdapter не ввімкнено, буде використано протокол DBus. Слід зазначити, що використання протоколу DBus під керуванням Wayland не рекомендується. Рекомендується ввімкнути параметр useGrimAdapter у flameshot.ini, щоб активувати загальний адаптер скріншотів Wayland на основі Grim</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="181"/>
         <source>grim&apos;s screenshot component is implemented based on wlroots, it may not be used in GNOME or similar desktop environments</source>
-        <translation type="unfinished"></translation>
+        <translation>Компонент скріншотів Grim реалізовано на основі Wlroots, його не можна використовувати в GNOME або подібних середовищах робочого столу</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="193"/>
         <source>Unable to detect desktop environment (GNOME? KDE? Qile? Sway? ...)</source>
-        <translation type="unfinished"></translation>
+        <translation>Не вдається визначити середовище робочого столу (GNOME? KDE? Qile? Sway? ...)</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="196"/>
@@ -2750,22 +2750,22 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="176"/>
         <source>Symmetrically decrease width by 2px</source>
-        <translation type="unfinished"></translation>
+        <translation>Симетрично зменшити ширину на 2 пікселі</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="178"/>
         <source>Symmetrically increase width by 2px</source>
-        <translation type="unfinished"></translation>
+        <translation>Симетрично збільшити ширину на 2 пікселі</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="180"/>
         <source>Symmetrically increase height by 2px</source>
-        <translation type="unfinished"></translation>
+        <translation>Симетрично збільшити висоту на 2 пікселі</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="182"/>
         <source>Symmetrically decrease height by 2px</source>
-        <translation type="unfinished"></translation>
+        <translation>Симетрично зменшити висоту на 2 пікселі</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="183"/>
@@ -2800,12 +2800,12 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="190"/>
         <source>Delete selected drawn object</source>
-        <translation type="unfinished"></translation>
+        <translation>Видалити вибраний намальований об&apos;єкт</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="191"/>
         <source>Cancel current selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Скасувати поточний вибір</translation>
     </message>
     <message>
         <source>Delete current tool</source>
@@ -2854,7 +2854,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="85"/>
         <source>Display grid</source>
-        <translation type="unfinished"></translation>
+        <translation>Сітка відображення</translation>
     </message>
 </context>
 <context>
@@ -3115,7 +3115,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="160"/>
         <source>&amp;Open Save Path</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Відкрити шлях для збереження</translation>
     </message>
 </context>
 <context>
