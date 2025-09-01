@@ -5,8 +5,8 @@
 #include <QPixmap>
 #include <QPoint>
 #include <QRect>
-#include <QSize>
 #include <QScreen>
+#include <QSize>
 
 /**
  * @class DesktopCapturer
@@ -15,7 +15,8 @@
  * This class can capture either a composite screenshot of all screens
  * or a screenshot of the single screen where the mouse cursor is located.
  */
-class DesktopCapturer : public QObject {
+class DesktopCapturer : public QObject
+{
     Q_OBJECT
 
 public:
@@ -54,14 +55,16 @@ public:
     QPixmap captureDesktopComposite();
 
     /**
-     * @brief Captures a screenshot of the desktop at the mouse cursor's position.
+     * @brief Captures a screenshot of the desktop at the mouse cursor's
+     * position.
      * @return A QPixmap of the screen where the cursor is located.
      */
     QPixmap captureDesktopAtCursorPos();
 
     /**
      * @brief Main function to capture the desktop based on the composite flag.
-     * @param composite If true, captures a composite screenshot; otherwise, captures the screen at the cursor.
+     * @param composite If true, captures a composite screenshot; otherwise,
+     * captures the screen at the cursor.
      * @return The captured QPixmap.
      */
     QPixmap captureDesktop(bool composite = true);
@@ -72,14 +75,15 @@ public:
 
 private:
     /**
-     * @brief Finds the QScreen instance where the mouse cursor is currently located.
+     * @brief Finds the QScreen instance where the mouse cursor is currently
+     * located.
      * @return A pointer to the QScreen object.
      */
     QScreen* screenAtCursorPos();
 
-    QRect           m_geometry;
-    QScreen*        m_screenToDraw;
-    QVector<QRect>  m_areas;
+    QRect m_geometry;
+    QScreen* m_screenToDraw;
+    QVector<QRect> m_areas;
 };
 
 #endif // DESKTOP_CAPTURER_H

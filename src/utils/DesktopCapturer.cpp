@@ -8,12 +8,13 @@
 #include <QScreen>
 
 DesktopCapturer::DesktopCapturer()
-    : m_screenToDraw(nullptr)
+  : m_screenToDraw(nullptr)
 {
     reset();
 }
 
-void DesktopCapturer::reset() {
+void DesktopCapturer::reset()
+{
     m_geometry = QRect(0, 0, 0, 0);
     m_areas.clear();
 }
@@ -28,18 +29,23 @@ QPoint DesktopCapturer::topLeft() const
     return m_geometry.topLeft();
 }
 
-QPoint DesktopCapturer::topLeftScaledToScreen()  const{
-    return screenToDraw()->geometry().topLeft() / screenToDraw()->devicePixelRatio();
+QPoint DesktopCapturer::topLeftScaledToScreen() const
+{
+    return screenToDraw()->geometry().topLeft() /
+           screenToDraw()->devicePixelRatio();
 }
 
-QRect DesktopCapturer::geometry() {
+QRect DesktopCapturer::geometry()
+{
     // Get Top Left and Bottom Right
     QPoint maxPoint(INT_MIN, INT_MIN);
     QPoint topLeft = QPoint(INT_MAX, INT_MAX);
-    for (QScreen  const* screen : QGuiApplication::screens()) {
+    for (QScreen const* screen : QGuiApplication::screens()) {
         QRect geo = screen->geometry();
-        int const width = static_cast<int>(geo.width() * screen->devicePixelRatio());
-        int const height= static_cast<int>(geo.height() * screen->devicePixelRatio());
+        int const width =
+          static_cast<int>(geo.width() * screen->devicePixelRatio());
+        int const height =
+          static_cast<int>(geo.height() * screen->devicePixelRatio());
         int const maxX = width + geo.x();
         int const maxY = height + geo.y();
 
@@ -69,7 +75,8 @@ QRect DesktopCapturer::geometry() {
     return m_geometry;
 }
 
-QPixmap DesktopCapturer::captureDesktopComposite() {
+QPixmap DesktopCapturer::captureDesktopComposite()
+{
     m_screenToDraw = QGuiApplication::primaryScreen();
 
     // Calculate screen geometry
@@ -81,11 +88,12 @@ QPixmap DesktopCapturer::captureDesktopComposite() {
 
     // Draw composite screenshot
     QPainter painter(&desktop);
-    for (QScreen *screen : QGuiApplication::screens()) {
+    for (QScreen* screen : QGuiApplication::screens()) {
         QRect geo = screen->geometry();
         QPixmap pix = screen->grabWindow(0);
 
-        // Composite screenshot should have pixel ratio 1 to draw all screen with different ratios.
+        // Composite screenshot should have pixel ratio 1 to draw all screen
+        // with different ratios.
         pix.setDevicePixelRatio(1);
 
         // Calculate the offset of the current screen
@@ -104,16 +112,16 @@ QPixmap DesktopCapturer::captureDesktopComposite() {
     }
     painter.end();
 
-
     // Set pixmap DevicePixelRatio of the screen where it should be drawn.
     desktop.setDevicePixelRatio(screenToDraw()->devicePixelRatio());
 
     return desktop;
 }
 
-QPixmap DesktopCapturer::captureDesktopAtCursorPos() {
+QPixmap DesktopCapturer::captureDesktopAtCursorPos()
+{
     // Active is where the mouse cursor is, it can be not an active screen
-    QScreen *screen = screenAtCursorPos();
+    QScreen* screen = screenAtCursorPos();
     QPixmap pix;
     if (screen == nullptr) {
         return pix;
@@ -123,16 +131,17 @@ QPixmap DesktopCapturer::captureDesktopAtCursorPos() {
     m_geometry.setWidth(
       static_cast<int>(m_geometry.width() * screen->devicePixelRatio()));
     m_geometry.setHeight(
-        static_cast<int>(m_geometry.height() * screen->devicePixelRatio()));
+      static_cast<int>(m_geometry.height() * screen->devicePixelRatio()));
     return pix;
 }
 
-QScreen* DesktopCapturer::screenAtCursorPos() {
+QScreen* DesktopCapturer::screenAtCursorPos()
+{
     // Get the current global position of the mouse cursor.
-    // This position is in the virtual desktop coordinate system, which spans all screens.
+    // This position is in the virtual desktop coordinate system, which spans
+    // all screens.
     const QPoint mousePos = QCursor::pos();
     m_screenToDraw = QGuiApplication::primaryScreen();
-
 
     // Iterate through all screens available to the application.
     for (QScreen* screen : QGuiApplication::screens()) {
@@ -150,7 +159,8 @@ QScreen* DesktopCapturer::screenAtCursorPos() {
     return m_screenToDraw;
 }
 
-QPixmap DesktopCapturer::captureDesktop(bool composite) {
+QPixmap DesktopCapturer::captureDesktop(bool composite)
+{
     QPixmap desktop;
     reset();
 #ifdef Q_OS_MAC
@@ -161,17 +171,18 @@ QPixmap DesktopCapturer::captureDesktop(bool composite) {
 #endif
     if (composite) {
         desktop = captureDesktopComposite();
-    }
-    else {
+    } else {
         desktop = captureDesktopAtCursorPos();
     }
     return desktop;
 }
 
-QScreen* DesktopCapturer::screenToDraw() const {
+QScreen* DesktopCapturer::screenToDraw() const
+{
     return m_screenToDraw;
 }
 
-const QList<QRect>& DesktopCapturer::areas() const {
+const QList<QRect>& DesktopCapturer::areas() const
+{
     return m_areas;
 }

@@ -114,11 +114,9 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
         bool ok = true;
         // m_context.screenshot = ScreenGrabber().grabEntireDesktop(ok);
 
-
 #if defined(FLAMESHOT_DEBUG_CAPTURE)
         m_context.screenshot.save("screenshot.png", "PNG");
 #endif
-
 
         if (!ok) {
             AbstractLogger::error() << tr("Unable to capture screen");
@@ -129,23 +127,23 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
         ////////////////////////////////////////
         // Set CaptureWidget properties
 #if defined(Q_OS_WIN)
-    // Call cmake with -DFLAMESHOT_DEBUG_CAPTURE=ON to enable easier debugging
-    #if !defined(FLAMESHOT_DEBUG_CAPTURE)
+// Call cmake with -DFLAMESHOT_DEBUG_CAPTURE=ON to enable easier debugging
+#if !defined(FLAMESHOT_DEBUG_CAPTURE)
         setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint |
                        Qt::SubWindow // Hides the taskbar icon
         );
-    #endif
+#endif
 #elif defined(Q_OS_MACOS)
         QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
         move(currentScreen->geometry().x(), currentScreen->geometry().y());
         resize(currentScreen->size());
 // LINUX
 #else
-    // Call cmake with -DFLAMESHOT_DEBUG_CAPTURE=ON to enable easier debugging
-    #if !defined(FLAMESHOT_DEBUG_CAPTURE)
+// Call cmake with -DFLAMESHOT_DEBUG_CAPTURE=ON to enable easier debugging
+#if !defined(FLAMESHOT_DEBUG_CAPTURE)
         setWindowFlags(Qt::BypassWindowManagerHint | Qt::WindowStaysOnTopHint |
                        Qt::FramelessWindowHint | Qt::Tool);
-    #endif
+#endif
 #endif
         // Set CaptureWidget properties ^^^
         //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -153,13 +151,14 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
         ////////////////////////////////////////
         // Resize and move CaptureWidget
         if (!compositeDesktop) {
-            resize(desktopCapturer.screenSize() / desktopCapturer.screenToDraw()->devicePixelRatio());
+            resize(desktopCapturer.screenSize() /
+                   desktopCapturer.screenToDraw()->devicePixelRatio());
             move(desktopCapturer.screenToDraw()->geometry().topLeft());
-        }
-        else {
+        } else {
             resize(desktopCapturer.screenSize());
 #ifdef Q_OS_WIN
-            move(desktopCapturer.topLeft() / desktopCapturer.screenToDraw()->devicePixelRatio());
+            move(desktopCapturer.topLeft() /
+                 desktopCapturer.screenToDraw()->devicePixelRatio());
 #elif (defined(Q_OS_LINUX) || defined(Q_OS_UNIX))
             move(desktopCapturer.topLeftScaledToScreen());
 #else
