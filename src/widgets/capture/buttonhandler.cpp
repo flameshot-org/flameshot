@@ -76,7 +76,7 @@ void ButtonHandler::updatePosition(const QRect& selection)
     // Copy of the selection area for internal modifications
     m_selection = intersectWithAreas(selection);
     updateBlockedSides();
-    ensureSelectionMinimunSize();
+    ensureSelectionMinimumSize();
     // Indicates the actual button to be moved
     int elemIndicator = 0;
 
@@ -290,8 +290,8 @@ void ButtonHandler::expandSelection()
 
 void ButtonHandler::positionButtonsInside(int index)
 {
-    // Position the buttons in the botton-center of the main but inside of the
-    // selection.
+    // Position the buttons at the bottom center of the main area,
+    // but inside the selection.
     QRect mainArea = m_selection;
     mainArea = intersectWithAreas(mainArea);
     const int buttonsPerRow = (mainArea.width()) / (m_buttonExtendedSize);
@@ -312,7 +312,7 @@ void ButtonHandler::positionButtonsInside(int index)
     m_buttonsAreInside = true;
 }
 
-void ButtonHandler::ensureSelectionMinimunSize()
+void ButtonHandler::ensureSelectionMinimumSize()
 {
     // Detect if a side is smaller than a button in order to prevent collision
     // and redimension the base area the the base size of a single button per

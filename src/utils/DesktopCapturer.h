@@ -68,6 +68,8 @@ public:
 
     QScreen* screenToDraw() const;
 
+    const QList<QRect>& areas() const;
+
 private:
     /**
      * @brief Finds the QScreen instance where the mouse cursor is currently located.
@@ -75,8 +77,9 @@ private:
      */
     QScreen* screenAtCursorPos();
 
-    QRect m_geometry;
-    QScreen* m_screenToDraw;
+    QRect           m_geometry;
+    QScreen*        m_screenToDraw;
+    QVector<QRect>  m_areas;
 };
 
 #endif // DESKTOP_CAPTURER_H

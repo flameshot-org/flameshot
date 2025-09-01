@@ -152,9 +152,6 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
 
         ////////////////////////////////////////
         // Resize and move CaptureWidget
-        qWarning() << "desktopCapturer.screenSize()" << desktopCapturer.screenSize();
-        qWarning() << "desktopCapturer.screenToDraw()" << desktopCapturer.screenToDraw()->name();
-        qWarning() << "desktopCapturer.screenToDraw()" << desktopCapturer.screenToDraw()->geometry();
         if (!compositeDesktop) {
             resize(desktopCapturer.screenSize() / desktopCapturer.screenToDraw()->devicePixelRatio());
             move(desktopCapturer.screenToDraw()->geometry().topLeft());
@@ -190,7 +187,7 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
         r.moveTo(0, 0);
         areas.append(r);
 #else
-        areas.append(desktopCapturer.geometry());
+        areas = desktopCapturer.areas();
 #endif
     } else {
         areas.append(rect());

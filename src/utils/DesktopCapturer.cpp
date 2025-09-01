@@ -15,6 +15,7 @@ DesktopCapturer::DesktopCapturer()
 
 void DesktopCapturer::reset() {
     m_geometry = QRect(0, 0, 0, 0);
+    m_areas.clear();
 }
 
 QSize DesktopCapturer::screenSize() const
@@ -36,7 +37,7 @@ QRect DesktopCapturer::geometry() {
     QPoint maxPoint(INT_MIN, INT_MIN);
     QPoint topLeft = QPoint(INT_MAX, INT_MAX);
     for (QScreen  const* screen : QGuiApplication::screens()) {
-        QRect const geo = screen->geometry();
+        QRect geo = screen->geometry();
         int const width = static_cast<int>(geo.width() * screen->devicePixelRatio());
         int const height= static_cast<int>(geo.height() * screen->devicePixelRatio());
         int const maxX = width + geo.x();
@@ -81,17 +82,22 @@ QPixmap DesktopCapturer::captureDesktopComposite() {
     // Draw composite screenshot
     QPainter painter(&desktop);
     for (QScreen *screen : QGuiApplication::screens()) {
-        QRect const geo = screen->geometry();
+        QRect geo = screen->geometry();
         QPixmap pix = screen->grabWindow(0);
 
         // Composite screenshot should have pixel ratio 1 to draw all screen with different ratios.
         pix.setDevicePixelRatio(1);
 
         // Calculate offset
-        int const xPos = geo.x() - topLeft().x();
-        int const yPos = geo.y() - topLeft().y();
+        geo.setX(geo.x() - topLeft().x());
+        geo.setY(geo.y() - topLeft().y());
 
-        painter.drawPixmap(xPos, yPos, pix);
+        painter.drawPixmap(geo.x(), geo.y(), pix);
+
+        // Prepare areas
+        geo.setX(geo.x() / screen->devicePixelRatio());
+        geo.setY(geo.y() / screen->devicePixelRatio());
+        m_areas.append(geo);
     }
     painter.end();
 
@@ -159,7 +165,10 @@ QPixmap DesktopCapturer::captureDesktop(bool composite) {
     return desktop;
 }
 
-QScreen* DesktopCapturer::screenToDraw() const
-{
+QScreen* DesktopCapturer::screenToDraw() const {
     return m_screenToDraw;
+}
+
+const QList<QRect>& DesktopCapturer::areas() const {
+    return m_areas;
 }
