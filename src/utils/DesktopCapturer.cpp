@@ -88,16 +88,19 @@ QPixmap DesktopCapturer::captureDesktopComposite() {
         // Composite screenshot should have pixel ratio 1 to draw all screen with different ratios.
         pix.setDevicePixelRatio(1);
 
-        // Calculate offset
+        // Calculate the offset of the current screen
+        // from the top left corner of the composite screen
         geo.setX(geo.x() - topLeft().x());
         geo.setY(geo.y() - topLeft().y());
 
         painter.drawPixmap(geo.x(), geo.y(), pix);
 
         // Prepare areas
-        geo.setX(geo.x() / screen->devicePixelRatio());
-        geo.setY(geo.y() / screen->devicePixelRatio());
-        m_areas.append(geo);
+        // (everything, including location, should be in logical pixels)
+        QRect areaRect = geo;
+        areaRect.moveLeft(geo.x() / screen->devicePixelRatio());
+        areaRect.moveTop(geo.y() / screen->devicePixelRatio());
+        m_areas.append(areaRect);
     }
     painter.end();
 
