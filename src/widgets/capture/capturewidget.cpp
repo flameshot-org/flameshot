@@ -162,7 +162,7 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
         else {
             resize(desktopCapturer.screenSize());
 #ifdef Q_OS_WIN
-            move(0, 0);
+            move(desktopCapturer.topLeft() / desktopCapturer.screenToDraw()->devicePixelRatio());
 #elif (defined(Q_OS_LINUX) || defined(Q_OS_UNIX))
             move(desktopCapturer.topLeftScaledToScreen());
 #else
