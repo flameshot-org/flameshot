@@ -263,13 +263,22 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
 
     // Qt6 has only sizes in logical values, position is in physical values.
     // Move Help message to the logical pixel with devicePixelRatio.
+
     QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
     QRect currentScreenGeometry = currentScreen->geometry();
     qreal currentScreenDpr = currentScreen->devicePixelRatio();
     currentScreenGeometry.moveTo(
-      int(currentScreenGeometry.x() / currentScreenDpr),
-      int(currentScreenGeometry.y() / currentScreenDpr));
-    OverlayMessage::init(this, currentScreenGeometry);
+      static_cast<int>(currentScreenGeometry.x() / currentScreenDpr),
+      static_cast<int>(currentScreenGeometry.y() / currentScreenDpr));
+
+    QRect screenToDrawGeometry = desktopCapturer.screenToDraw()->geometry();
+    screenToDrawGeometry.moveTo(
+      static_cast<int>(screenToDrawGeometry.x() / currentScreenDpr),
+      static_cast<int>(screenToDrawGeometry.y() / currentScreenDpr));
+    qWarning() << "screenToDrawGeometry =" << screenToDrawGeometry;
+    qWarning() << "currentScreenGeometry = " << currentScreenGeometry;
+
+    OverlayMessage::init(this, screenToDrawGeometry);
 
     if (m_config.showHelp()) {
         initHelpMessage();
