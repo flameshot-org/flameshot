@@ -258,10 +258,11 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
     // Qt6 has only sizes in logical values, position is in physical values.
     // Move Help message to the logical pixel with devicePixelRatio.
     QScreen* screenAtCursorPos = m_desktopCapturer.screenAtCursorPos();
-    qreal screenAtCursorPosDpr = screenAtCursorPos->devicePixelRatio();
+    qreal screenToDrawDpr =
+      m_desktopCapturer.screenToDraw()->devicePixelRatio();
     QRect screenToDrawGeometry = m_desktopCapturer.screenToDraw()->geometry();
     screenToDrawGeometry.moveTo(screenAtCursorPos->geometry().topLeft() /
-                                screenAtCursorPosDpr);
+                                screenToDrawDpr);
     OverlayMessage::init(this, screenToDrawGeometry);
 
     if (m_config.showHelp()) {
@@ -1149,9 +1150,11 @@ void CaptureWidget::initPanel()
     }
 
     QScreen* screenAtCursorPos = m_desktopCapturer.screenAtCursorPos();
-    qreal screenAtCursorPosDpr = screenAtCursorPos->devicePixelRatio();
+    qreal screenToDrawDpr =
+      m_desktopCapturer.screenToDraw()->devicePixelRatio();
     QRect screenToDrawGeometry = m_desktopCapturer.screenToDraw()->geometry();
-    screenToDrawGeometry.moveTo(screenAtCursorPos->geometry().topLeft());
+    screenToDrawGeometry.moveTo(screenAtCursorPos->geometry().topLeft() /
+                                screenToDrawDpr);
 
     if (ConfigHandler().showSidePanelButton()) {
         auto* panelToggleButton =
@@ -1167,8 +1170,8 @@ void CaptureWidget::initPanel()
             static_cast<int>(panelToggleButton->width() / 2));
 #else
         panelToggleButton->move(
-          static_cast<int>(screenToDrawGeometry.x() / screenAtCursorPosDpr),
-          static_cast<int>(screenToDrawGeometry.y() / screenAtCursorPosDpr +
+          static_cast<int>(screenToDrawGeometry.x() / screenToDrawDpr),
+          static_cast<int>(screenToDrawGeometry.y() / screenToDrawDpr +
                            (screenToDrawGeometry.height() / 2 -
                             panelToggleButton->width() / 2)));
 #endif
@@ -1193,9 +1196,8 @@ void CaptureWidget::initPanel()
     panelRect.moveTo(mapFromGlobal(screenToDrawGeometry.topLeft()));
     panelRect.setWidth(m_colorPicker->width() * 1.5);
     m_panel->setGeometry(panelRect);
-    m_panel->move(
-      static_cast<int>(screenToDrawGeometry.x() / screenAtCursorPosDpr),
-      static_cast<int>(screenToDrawGeometry.y() / screenAtCursorPosDpr));
+    m_panel->move(static_cast<int>(screenToDrawGeometry.x() / screenToDrawDpr),
+                  static_cast<int>(screenToDrawGeometry.y() / screenToDrawDpr));
 
 #endif
     connect(m_panel,
