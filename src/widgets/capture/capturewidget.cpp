@@ -15,9 +15,6 @@
 #include "src/config/cacheutils.h"
 #include "src/core/flameshot.h"
 #include "src/core/qguiappcurrentscreen.h"
-#include "src/utils/screengrabber.h"
-#include "src/utils/screenshotsaver.h"
-#include "src/utils/systemnotification.h"
 #include "src/widgets/capture/colorpicker.h"
 #include "src/widgets/capture/hovereventfilter.h"
 #include "src/widgets/capture/modificationcommand.h"
@@ -36,8 +33,6 @@
 #include <QScreen>
 #include <QShortcut>
 #include <draggablewidgetmaker.h>
-
-#include "src/utils/DesktopCapturer.h"
 
 #if !defined(DISABLE_UPDATE_CHECKER)
 #include "src/widgets/updatenotificationwidget.h"
@@ -105,9 +100,8 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
 
     ///////////////////////////////////////////////////////////////////////////
     // Capture Desktop Screen(s)
-    DesktopCapturer desktopCapturer;
     bool compositeDesktop = true;
-    m_context.screenshot = desktopCapturer.captureDesktop(compositeDesktop);
+    m_context.screenshot = m_desktopCapturer.captureDesktop(compositeDesktop);
 
     if (fullScreen) {
         // Grab Screenshot
@@ -151,16 +145,16 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
         ////////////////////////////////////////
         // Resize and move CaptureWidget
         if (!compositeDesktop) {
-            resize(desktopCapturer.screenSize() /
-                   desktopCapturer.screenToDraw()->devicePixelRatio());
-            move(desktopCapturer.screenToDraw()->geometry().topLeft());
+            resize(m_desktopCapturer.screenSize() /
+                   m_desktopCapturer.screenToDraw()->devicePixelRatio());
+            move(m_desktopCapturer.screenToDraw()->geometry().topLeft());
         } else {
-            resize(desktopCapturer.screenSize());
+            resize(m_desktopCapturer.screenSize());
 #ifdef Q_OS_WIN
-            move(desktopCapturer.topLeft() /
-                 desktopCapturer.screenToDraw()->devicePixelRatio());
+            move(m_desktopCapturer.topLeft() /
+                 m_desktopCapturer.screenToDraw()->devicePixelRatio());
 #elif (defined(Q_OS_LINUX) || defined(Q_OS_UNIX))
-            move(desktopCapturer.topLeftScaledToScreen());
+            move(m_desktopCapturer.topLeftScaledToScreen());
 #else
             // MACOS - no need, is resolved below
 #endif
@@ -186,7 +180,7 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
         r.moveTo(0, 0);
         areas.append(r);
 #else
-        areas = desktopCapturer.areas();
+        areas = m_desktopCapturer.areas();
 #endif
     } else {
         areas.append(rect());
@@ -263,20 +257,11 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
 
     // Qt6 has only sizes in logical values, position is in physical values.
     // Move Help message to the logical pixel with devicePixelRatio.
-
-    QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
-    QRect currentScreenGeometry = currentScreen->geometry();
-    qreal currentScreenDpr = currentScreen->devicePixelRatio();
-    currentScreenGeometry.moveTo(
-      static_cast<int>(currentScreenGeometry.x() / currentScreenDpr),
-      static_cast<int>(currentScreenGeometry.y() / currentScreenDpr));
-
-    QRect screenToDrawGeometry = desktopCapturer.screenToDraw()->geometry();
+    QScreen *screenAtCursorPos = m_desktopCapturer.screenAtCursorPos();
+    qreal screenAtCursorPosDpr = screenAtCursorPos->devicePixelRatio();
+    QRect screenToDrawGeometry = m_desktopCapturer.screenToDraw()->geometry();
     screenToDrawGeometry.moveTo(
-      static_cast<int>(screenToDrawGeometry.x() / currentScreenDpr),
-      static_cast<int>(screenToDrawGeometry.y() / currentScreenDpr));
-    qWarning() << "screenToDrawGeometry =" << screenToDrawGeometry;
-    qWarning() << "currentScreenGeometry = " << currentScreenGeometry;
+        screenAtCursorPos->geometry().topLeft() / screenAtCursorPosDpr);
 
     OverlayMessage::init(this, screenToDrawGeometry);
 
@@ -1164,6 +1149,11 @@ void CaptureWidget::initPanel()
 #endif
     }
 
+    QScreen *screenAtCursorPos = m_desktopCapturer.screenAtCursorPos();
+    qreal screenAtCursorPosDpr = screenAtCursorPos->devicePixelRatio();
+    QRect screenToDrawGeometry = m_desktopCapturer.screenToDraw()->geometry();
+    screenToDrawGeometry.moveTo(screenAtCursorPos->geometry().topLeft());
+
     if (ConfigHandler().showSidePanelButton()) {
         auto* panelToggleButton =
           new OrientablePushButton(tr("Tool Settings"), this);
@@ -1177,9 +1167,11 @@ void CaptureWidget::initPanel()
           static_cast<int>(panelRect.height() / 2) -
             static_cast<int>(panelToggleButton->width() / 2));
 #else
-        panelToggleButton->move(panelRect.x(),
-                                panelRect.y() + panelRect.height() / 2 -
-                                  panelToggleButton->width() / 2);
+        panelToggleButton->move(
+            static_cast<int>(screenToDrawGeometry.x() / screenAtCursorPosDpr),
+            static_cast<int>(screenToDrawGeometry.y() / screenAtCursorPosDpr +
+                (screenToDrawGeometry.height() / 2 - panelToggleButton->width() / 2)));
+
 #endif
         panelToggleButton->setCursor(Qt::ArrowCursor);
         (new DraggableWidgetMaker(this))->makeDraggable(panelToggleButton);
@@ -1198,9 +1190,15 @@ void CaptureWidget::initPanel()
     m_panel->setFixedWidth(static_cast<int>(m_colorPicker->width() * 1.5));
     m_panel->setFixedHeight(currentScreen->geometry().height());
 #else
-    panelRect.moveTo(mapFromGlobal(panelRect.topLeft()));
+    // QRect screenToDrawGeometry = m_desktopCapturer.screenToDraw()->geometry();
+    panelRect.setHeight(screenToDrawGeometry.height());
+    panelRect.moveTo(mapFromGlobal(screenToDrawGeometry.topLeft()));
     panelRect.setWidth(m_colorPicker->width() * 1.5);
     m_panel->setGeometry(panelRect);
+    m_panel->move(
+        static_cast<int>(screenToDrawGeometry.x() / screenAtCursorPosDpr),
+        static_cast<int>(screenToDrawGeometry.y() / screenAtCursorPosDpr));
+
 #endif
     connect(m_panel,
             &UtilityPanel::layerChanged,

@@ -73,13 +73,14 @@ public:
 
     const QList<QRect>& areas() const;
 
+    QScreen* screenAtCursorPos();
+
 private:
     /**
      * @brief Finds the QScreen instance where the mouse cursor is currently
      * located.
      * @return A pointer to the QScreen object.
      */
-    QScreen* screenAtCursorPos();
 
     QRect m_geometry;
     QScreen* m_screenToDraw;
