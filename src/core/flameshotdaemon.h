@@ -2,7 +2,10 @@
 
 #include <QByteArray>
 #include <QObject>
+
+#if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
 #include <QtDBus/QDBusAbstractAdaptor>
+#endif
 
 class QPixmap;
 class QRect;
@@ -34,7 +37,14 @@ public:
       const QString& title = QStringLiteral("Flameshot Info"),
       const int timeout = 5000);
 
+#if defined(USE_KDSINGLEAPPLICATION) &&                                        \
+  (defined(Q_OS_MACOS) || defined(Q_OS_WIN))
+public slots:
+    void messageReceivedFromSecondaryInstance(const QByteArray& message);
+#endif
+
 #if !defined(DISABLE_UPDATE_CHECKER)
+public:
     void showUpdateNotificationIfAvailable(CaptureWidget* widget);
 
 public slots:
@@ -62,10 +72,11 @@ private:
     void initTrayIcon();
     void enableTrayIcon(bool enable);
 
-private:
+#if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
     static QDBusMessage createMethodCall(const QString& method);
     static void checkDBusConnection(const QDBusConnection& connection);
     static void call(const QDBusMessage& m);
+#endif
 
     bool m_persist;
     bool m_hostingClipboard;
@@ -82,5 +93,7 @@ private:
 
     static FlameshotDaemon* m_instance;
 
+#if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
     friend class FlameshotDBusAdapter;
+#endif
 };

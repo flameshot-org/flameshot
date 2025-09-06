@@ -26,10 +26,8 @@
 #include <QSharedMemory>
 #include <QTimer>
 #include <QTranslator>
-#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
-#include "abstractlogger.h"
+#if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
 #include "src/core/flameshotdbusadapter.h"
-#include <QApplication>
 #include <QDBusConnection>
 #include <QDBusMessage>
 #include <desktopinfo.h>
@@ -191,7 +189,8 @@ int main(int argc, char* argv[])
         setup_unix_signal_handlers();
         auto signalDaemon = SignalDaemon();
 #endif
-        auto kdsa = KDSingleApplication(QStringLiteral("flameshot"));
+        auto kdsa =
+          KDSingleApplication(QStringLiteral("org.flameshot.Flameshot"));
 
         if (!kdsa.isPrimaryInstance()) {
             return 0; // Quit
@@ -201,6 +200,17 @@ int main(int argc, char* argv[])
         configureApp(true, translator, qtTranslator);
         auto c = Flameshot::instance();
         FlameshotDaemon::start();
+
+#if defined(USE_KDSINGLEAPPLICATION) &&                                        \
+  (defined(Q_OS_MACOS) || defined(Q_OS_WIN))
+        if (kdsa.isPrimaryInstance()) {
+            QObject::connect(
+              &kdsa,
+              &KDSingleApplication::messageReceived,
+              FlameshotDaemon::instance(),
+              &FlameshotDaemon::messageReceivedFromSecondaryInstance);
+        }
+#endif
 
 #if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
         new FlameshotDBusAdapter(c);
