@@ -151,10 +151,11 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
         } else {
             resize(m_desktopCapturer.screenSize());
 #ifdef Q_OS_WIN
-            move(m_desktopCapturer.topLeft() /
-                 m_desktopCapturer.screenToDraw()->devicePixelRatio());
+            // move(m_desktopCapturer.topLeft() /
+                 // m_desktopCapturer.screenToDraw()->devicePixelRatio());
+            move(m_desktopCapturer.topLeft());
 #elif (defined(Q_OS_LINUX) || defined(Q_OS_UNIX))
-            move(m_desktopCapturer.topLeftScaledToScreen());
+            move(m_desktopCapturer.topLeft());
 #else
             // MACOS - no need, is resolved below
 #endif
