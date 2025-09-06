@@ -11,12 +11,12 @@
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="103"/>
         <source>Move Up</source>
-        <translation>Posunúť sa nahor</translation>
+        <translation>Posunúť hore</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="104"/>
         <source>Move Down</source>
-        <translation>Presun nadol</translation>
+        <translation>Posunúť dole</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="105"/>
@@ -34,7 +34,7 @@
     <message>
         <location filename="../../src/tools/accept/accepttool.cpp" line="41"/>
         <source>Accept the capture</source>
-        <translation>Akceptujte zachytenie</translation>
+        <translation>Prijať zachytenú obrazovku</translation>
     </message>
 </context>
 <context>
@@ -47,7 +47,7 @@
     <message>
         <location filename="../../src/tools/launcher/applaunchertool.cpp" line="33"/>
         <source>Choose an app to open the capture</source>
-        <translation>Vyberte aplikáciu na otvorenie snímky obrazovky</translation>
+        <translation>Vybrať aplikáciu na otvorenie snímky obrazovky</translation>
     </message>
 </context>
 <context>
@@ -55,7 +55,7 @@
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="50"/>
         <source>Open With</source>
-        <translation>Otvoriť s</translation>
+        <translation>Otvoriť pomocou</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="79"/>
@@ -94,7 +94,7 @@
     <message>
         <location filename="../../src/tools/arrow/arrowtool.cpp" line="87"/>
         <source>Set the Arrow as the paint tool</source>
-        <translation>Nastaviť Šípku ako nástroj pre úpravy</translation>
+        <translation>Nastaviť Šípku ako nástroj na kreslenie</translation>
     </message>
 </context>
 <context>
@@ -162,7 +162,7 @@
         <location filename="../../src/widgets/capturelauncher.ui" line="14"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="177"/>
         <source>Capture Launcher</source>
-        <translation>Spustenie zachytávania</translation>
+        <translation>Spúšťač zachytávania obrazovky</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="34"/>
@@ -214,7 +214,7 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="454"/>
         <source>Change tool size</source>
-        <translation>Zmena veľkosti nástroja</translation>
+        <translation>Zmeniť veľkosť nástroja</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="455"/>
@@ -294,7 +294,7 @@ Stlačte medzerník pre otvorenie postranného panelu.</translation>
     <message>
         <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="86"/>
         <source>Add an autoincrementing counter bubble</source>
-        <translation>Pridá bublinu s číslom (vždy zvýšeným o jednotku)</translation>
+        <translation>Pridať bublinu s (automaticky rastúcim) číslom</translation>
     </message>
 </context>
 <context>
@@ -307,7 +307,7 @@ Stlačte medzerník pre otvorenie postranného panelu.</translation>
     <message>
         <location filename="../../src/tools/circle/circletool.cpp" line="30"/>
         <source>Set the Circle as the paint tool</source>
-        <translation>Nastaviť kruh ako kresliaci nástroj</translation>
+        <translation>Nastaviť Kruh ako nástroj na kreslenie</translation>
     </message>
 </context>
 <context>
@@ -705,7 +705,7 @@ Riešte ich ručne v konfiguračnom súbore.</translation>
     <message>
         <location filename="../../src/tools/copy/copytool.cpp" line="34"/>
         <source>Copy selection to clipboard</source>
-        <translation>Kopírovanie výberu do schránky</translation>
+        <translation>Kopírovať výber do schránky</translation>
     </message>
     <message>
         <source>Copy the selection into the clipboard</source>
@@ -1021,7 +1021,7 @@ Riešte ich ručne v konfiguračnom súbore.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="367"/>
         <source>Confirmation required to delete screenshot from the latest uploads</source>
-        <translation>Odstránenie snímky z posledných nahraní je vyžadované potvrdenie</translation>
+        <translation>Pri odstraňovaní snímky z posledných nahraní je vyžadované potvrdenie</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="382"/>
@@ -1041,7 +1041,7 @@ Riešte ich ručne v konfiguračnom súbore.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="412"/>
         <source>Automatic check for updates</source>
-        <translation>Automatická kontrola aktualizácií</translation>
+        <translation>Automaticky kontrolovať aktualizácie</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="426"/>
@@ -1287,7 +1287,7 @@ Riešte ich ručne v konfiguračnom súbore.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="723"/>
         <source>Anti-aliasing image when zoom the pinned image</source>
-        <translation>Vyhladzovanie obrazu pri zväčšení pripnutého obrázka</translation>
+        <translation>Vyhladzovať obraz pri zväčšení pripnutého obrázka</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="725"/>
@@ -1403,12 +1403,12 @@ Riešte ich ručne v konfiguračnom súbore.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="881"/>
         <source>Insecure Pixelate</source>
-        <translation type="unfinished"></translation>
+        <translation>Nezabezpečené rozštvorčekovanie</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="883"/>
         <source>Draw the pixelation effect in an insecure but more asethetic way.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vykresliť efekt štvorčekov menej bezpečným alebo estetickejším spôsobom.</translation>
     </message>
 </context>
 <context>
@@ -1771,7 +1771,7 @@ Riešte ich ručne v konfiguračnom súbore.</translation>
     <message>
         <location filename="../../src/tools/invert/inverttool.cpp" line="35"/>
         <source>Set Inverter as the paint tool</source>
-        <translation>Nastavenie invertora ako nástroja na maľovanie</translation>
+        <translation>Nastaviť Obracač ako nástroj na kreslenie</translation>
     </message>
 </context>
 <context>
@@ -1784,7 +1784,7 @@ Riešte ich ručne v konfiguračnom súbore.</translation>
     <message>
         <location filename="../../src/tools/line/linetool.cpp" line="32"/>
         <source>Set the Line as the paint tool</source>
-        <translation>Nastaviť Čiaru ako nástroj pre úpravy</translation>
+        <translation>Nastaviť Čiaru ako nástroj na úpravy</translation>
     </message>
 </context>
 <context>
@@ -1797,7 +1797,7 @@ Riešte ich ručne v konfiguračnom súbore.</translation>
     <message>
         <location filename="../../src/tools/marker/markertool.cpp" line="33"/>
         <source>Set the Marker as the paint tool</source>
-        <translation>Nastaviť Fixku ako nástroj pre úpravy</translation>
+        <translation>Nastaviť Fixku ako nástroj na kreslenie</translation>
     </message>
 </context>
 <context>
@@ -1823,7 +1823,7 @@ Riešte ich ručne v konfiguračnom súbore.</translation>
     <message>
         <location filename="../../src/tools/pencil/penciltool.cpp" line="28"/>
         <source>Set the Pencil as the paint tool</source>
-        <translation>Nastaviť Ceruzku ako nástroj pre úpravy</translation>
+        <translation>Nastaviť Ceruzku ako nástroj na kreslenie</translation>
     </message>
 </context>
 <context>
@@ -1892,7 +1892,7 @@ Riešte ich ručne v konfiguračnom súbore.</translation>
     <message>
         <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="37"/>
         <source>Set Pixelate as the paint tool.</source>
-        <translation>Nastaviť Pixelate ako kresliaci nástroj.</translation>
+        <translation>Nastaviť Rozštvorčekovanie ako kresliaci nástroj.</translation>
     </message>
     <message>
         <source>Set Pixelate as the paint tool</source>
@@ -1904,12 +1904,12 @@ Riešte ich ručne v konfiguračnom súbore.</translation>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/primaryinstancewidget.cpp" line="21"/>
         <source>Primary instance</source>
-        <translation type="unfinished"></translation>
+        <translation>Primárna inštancia</translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/primaryinstancewidget.cpp" line="22"/>
         <source>&lt;b&gt;Primary instance.&lt;/b&gt; Messages received from secondaries:</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Primárna inštancia.&lt;/b&gt; Správy prijaté zo sekundárnych:</translation>
     </message>
 </context>
 <context>
@@ -2349,7 +2349,7 @@ Možno budete musieť napísať pred &apos;#&apos; opačnú lomku, teda &apos;\#
     <message>
         <location filename="../../src/tools/rectangle/rectangletool.cpp" line="32"/>
         <source>Set the Rectangle as the paint tool</source>
-        <translation>Nastaviť Obdĺžnik ako nástroj pre úpravy</translation>
+        <translation>Nastaviť Obdĺžnik ako nástroj na kreslenie</translation>
     </message>
 </context>
 <context>
@@ -2375,7 +2375,7 @@ Možno budete musieť napísať pred &apos;#&apos; opačnú lomku, teda &apos;\#
     <message>
         <location filename="../../src/tools/save/savetool.cpp" line="34"/>
         <source>Save screenshot to a file</source>
-        <translation>Uloženie snímky do súboru</translation>
+        <translation>Uložiť snímku obrazovky do súboru</translation>
     </message>
     <message>
         <source>Save the capture</source>
@@ -2424,32 +2424,32 @@ Možno budete musieť napísať pred &apos;#&apos; opačnú lomku, teda &apos;\#
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="26"/>
         <source>Secondary instance</source>
-        <translation type="unfinished"></translation>
+        <translation>Sekundárna inštancia</translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="27"/>
         <source>&lt;b&gt;Secondary instance.&lt;/b&gt; Send message to primary:</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Sekundárna inštancia.&lt;/b&gt; Poslať správu primárnej:</translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="29"/>
         <source>Type something here...</source>
-        <translation type="unfinished"></translation>
+        <translation>Sem niečo napíšte…</translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="31"/>
         <source>&amp;Send</source>
-        <translation type="unfinished"></translation>
+        <translation>O&amp;doslať</translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="54"/>
         <source>Error sending message</source>
-        <translation type="unfinished"></translation>
+        <translation>Chyba pri odosielaní správy</translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="55"/>
         <source>The message &apos;%1&apos; could not be sent to the primary.</source>
-        <translation type="unfinished"></translation>
+        <translation>Správu „%1“ nebolo možné odoslať primárnej inštancii.</translation>
     </message>
 </context>
 <context>
@@ -2462,7 +2462,7 @@ Možno budete musieť napísať pred &apos;#&apos; opačnú lomku, teda &apos;\#
     <message>
         <location filename="../../src/tools/selection/selectiontool.cpp" line="35"/>
         <source>Set Selection as the paint tool</source>
-        <translation>Nastaviť Výber ako nástroj pre úpravy</translation>
+        <translation>Nastaviť Výber ako nástroj na kreslenie</translation>
     </message>
 </context>
 <context>
@@ -2529,7 +2529,7 @@ Možno budete musieť napísať pred &apos;#&apos; opačnú lomku, teda &apos;\#
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="170"/>
         <source>Grab a color from the screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Zachytiť farbu z obrazovky</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="171"/>
@@ -2812,7 +2812,7 @@ Možno budete musieť napísať pred &apos;#&apos; opačnú lomku, teda &apos;\#
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="76"/>
         <source>Full Date (%d-%m-%Y)</source>
-        <translation type="unfinished"></translation>
+        <translation>Plný dátum (%d-%m-%Y)</translation>
     </message>
 </context>
 <context>
