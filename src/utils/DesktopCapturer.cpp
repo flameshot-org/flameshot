@@ -15,6 +15,7 @@ DesktopCapturer::DesktopCapturer()
 
 void DesktopCapturer::reset()
 {
+    m_composite = false;
     m_geometry = QRect(0, 0, 0, 0);
     m_areas.clear();
 }
@@ -132,6 +133,13 @@ QPixmap DesktopCapturer::captureDesktopAtCursorPos()
     }
     pix = screen->grabWindow(0);
     m_geometry = screen->geometry();
+
+    if (!isComposite()) {
+        QRect geometry = m_geometry;
+        geometry.moveTo(0, 0);
+        m_areas.append(geometry);
+    }
+
     m_geometry.setWidth(
       static_cast<int>(m_geometry.width() * screen->devicePixelRatio()));
     m_geometry.setHeight(
@@ -169,9 +177,8 @@ QPixmap DesktopCapturer::captureDesktop(bool composite)
     reset();
 #ifdef Q_OS_MAC
     composite = false;
-#elif defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
-    // Wayland sessions cannot use composite
-    // composite = false;
+#elif defined(Q_OS_LINUX)
+    m_composite = composite;
 #endif
     if (composite) {
         desktop = captureDesktopComposite();
@@ -196,8 +203,14 @@ QScreen* DesktopCapturer::primaryScreen()
 #if (defined(Q_OS_LINUX) || defined(Q_OS_UNIX))
     // At least in Gnome+XOrg, the last screen is actually the first screen
     // and all calculations are started from it, not from the PrimaryScreen.
-    return QGuiApplication::screens().last();
+    // return QGuiApplication::screens().last();
+    return QGuiApplication::primaryScreen();
 #else
     return QGuiApplication::primaryScreen();
 #endif
+}
+
+bool DesktopCapturer::isComposite() const
+{
+    return m_composite;
 }

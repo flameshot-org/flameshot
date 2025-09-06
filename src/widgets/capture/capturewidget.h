@@ -37,6 +37,8 @@ class QNetworkReply;
 class ColorPicker;
 class NotifierBox;
 class HoverEventFilter;
+class OverlayMessage;
+class OrientablePushButton;
 
 #if !defined(DISABLE_UPDATE_CHECKER)
 class UpdateNotificationWidget;
@@ -102,6 +104,7 @@ public:
 
 protected:
     void paintEvent(QPaintEvent* paintEvent) override;
+    void leaveEvent(QEvent* event) override;
     void mousePressEvent(QMouseEvent* mouseEvent) override;
     void mouseMoveEvent(QMouseEvent* mouseEvent) override;
     void mouseReleaseEvent(QMouseEvent* mouseEvent) override;
@@ -114,6 +117,9 @@ protected:
     void changeEvent(QEvent* changeEvent) override;
 
 private:
+    void showHelp();
+    void initScreenshotEditor(bool compositeDesktop);
+    void moveToActiveScreen();
     void setWidgetFlags();
     void pushObjectsStateToUndoStack();
     void releaseActiveTool();
@@ -235,4 +241,6 @@ private:
 
     //
     DesktopCapturer m_desktopCapturer;
+    OverlayMessage* m_ovelayMessage;
+    OrientablePushButton* m_panelToggleButton;
 };

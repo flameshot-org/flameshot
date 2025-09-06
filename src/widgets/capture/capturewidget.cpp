@@ -9,9 +9,10 @@
 // Luca Gugelmann <lucag@student.ethz.ch> released under the GNU LGPL
 // <http://www.gnu.org/licenses/old-licenses/library.txt>
 
+#if defined(FLAMESHOT_DEBUG_CAPTURE)
 #include <QDir>
 #include <QStandardPaths>
-
+#endif
 #include "abstractlogger.h"
 #include "capturewidget.h"
 #include "copytool.h"
@@ -75,7 +76,8 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
   , m_xywhDisplay(false)
   , m_existingObjectIsChanged(false)
   , m_startMove(false)
-
+  , m_ovelayMessage(nullptr)
+  , m_panelToggleButton(nullptr)
 {
     m_undoStack.setUndoLimit(ConfigHandler().undoLimit());
     m_context.circleCount = 1;
@@ -100,129 +102,10 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
     m_contrastUiColor = m_config.contrastUiColor();
     setMouseTracking(true);
     initContext(fullScreen, req);
+    m_buttonHandler = new ButtonHandler(this);
 
     ///////////////////////////////////////////////////////////////////////////
-    // Capture Desktop Screen(s)
-    bool compositeDesktop = true;
-    m_context.screenshot = m_desktopCapturer.captureDesktop(compositeDesktop);
-
-    if (fullScreen) {
-        // Grab Screenshot
-        bool ok = true;
-        // m_context.screenshot = ScreenGrabber().grabEntireDesktop(ok);
-
-        QString desktopPath =
-          QStandardPaths::writableLocation(QStandardPaths::DesktopLocation);
-        QString filePath = QDir(desktopPath).filePath("debug_screenshot.png");
-        m_context.screenshot.save(filePath, "PNG");
-#if defined(FLAMESHOT_DEBUG_CAPTURE)
-#endif
-
-        if (!ok) {
-            AbstractLogger::error() << tr("Unable to capture screen");
-            this->close();
-        }
-        m_context.origScreenshot = m_context.screenshot;
-
-        ////////////////////////////////////////
-        // Set CaptureWidget properties
-        setWidgetFlags();
-
-#if defined(Q_OS_MACOS)
-        QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
-        move(currentScreen->geometry().x(), currentScreen->geometry().y());
-        resize(currentScreen->size());
-#endif
-
-        // Set CaptureWidget properties ^^^
-        //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-        ////////////////////////////////////////
-        // Resize and move CaptureWidget
-        if (!compositeDesktop) {
-            resize(m_desktopCapturer.screenSize() /
-                   m_desktopCapturer.screenToDraw()->devicePixelRatio());
-            move(m_desktopCapturer.screenToDraw()->geometry().topLeft());
-        } else {
-            resize(m_desktopCapturer.screenSize());
-            // #ifdef Q_OS_WIN
-            //             // move(m_desktopCapturer.topLeft() /
-            //                  //
-            //                  m_desktopCapturer.screenToDraw()->devicePixelRatio());
-            //             move(screen->geometry().topLeft() /
-            //             screen->devicePixelRatio());
-            // #elif defined(Q_OS_LINUX)
-            qWarning() << "m_desktopCapturer.topLeft()"
-                       << m_desktopCapturer.topLeft();
-            qWarning()
-              << "m_desktopCapturer.screenToDraw()->geometry().topLeft()"
-              << m_desktopCapturer.screenToDraw()->geometry().topLeft();
-            qWarning() << "m_desktopCapturer.screenToDraw()->devicePixelRatio()"
-                       << m_desktopCapturer.screenToDraw()->devicePixelRatio();
-            QScreen* screen = m_desktopCapturer.screenToDraw();
-            QScreen* screenPrimary = QGuiApplication::primaryScreen();
-            QScreen* screen1 = QGuiApplication::screens()[0];
-            QScreen* screen2 = QGuiApplication::screens()[1];
-            if (screen1) {
-                qWarning() << "screen1" << screen1->geometry().topLeft();
-            }
-            if (screen2) {
-                qWarning() << "screen2" << screen2->geometry().topLeft();
-            }
-            qWarning() << "screenPrimary"
-                       << screenPrimary->geometry().topLeft();
-            move(screen->geometry().topLeft() / screen->devicePixelRatio());
-            // #endif
-        }
-        //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    }
-    // Capture Desktop Screen(s) ^^^
-    // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-    ////////////////////////////////////////
-    // Set Capture Area (drawing and tool buttons area)
-    QVector<QRect> areas;
-    if (m_context.fullscreen) {
-#if defined(Q_OS_MACOS)
-        // MacOS works just with one active display, so we need to append
-        // just one current display and keep multiple displays logic for
-        // other OS
-        QRect r;
-        QScreen* screen = QGuiAppCurrentScreen().currentScreen();
-        r = screen->geometry();
-        // all calculations are processed according to (0, 0) start
-        // point so we need to move current object to (0, 0)
-        r.moveTo(0, 0);
-        areas.append(r);
-#else
-        areas = m_desktopCapturer.areas();
-#endif
-    } else {
-        areas.append(rect());
-    }
-    // Set Capture Area (drawing and tool buttons area) ^^^
-    //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-    ////////////////////////////////////////
-    // Init Controls
-    m_buttonHandler = new ButtonHandler(this);
-    m_buttonHandler->updateScreenRegions(areas);
-    m_buttonHandler->hide();
-
-    initButtons();
-    initSelection(); // button handler must be initialized before
-    initShortcuts(); // must be called after initSelection
-    // init magnify
-    if (m_config.showMagnifier()) {
-        m_magnifier = new MagnifierWidget(
-          m_context.screenshot, m_uiColor, m_config.squareMagnifier(), this);
-    }
-
-    // Init color picker
-    m_colorPicker = new ColorPicker(this);
-    // Init notification widget
-    m_notifierBox = new NotifierBox(this);
-    initPanel();
+    initScreenshotEditor(false);
 
     // TODO: Make it more clear why this has moved. In Qt6 some timing related
     // to constructors / connect signals has changed so if initPanel is called
@@ -269,25 +152,6 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
                 m_configErrorResolved = true;
                 OverlayMessage::instance()->update();
             });
-
-    // Qt6 has only sizes in logical values, position is in physical values.
-    // Move Help message to the logical pixel with devicePixelRatio.
-    QScreen* screenAtCursorPos = m_desktopCapturer.screenAtCursorPos();
-    qreal screenToDrawDpr =
-      m_desktopCapturer.screenToDraw()->devicePixelRatio();
-    QRect screenToDrawGeometry = m_desktopCapturer.screenToDraw()->geometry();
-    screenToDrawGeometry.moveTo(screenAtCursorPos->geometry().topLeft() /
-                                screenToDrawDpr);
-    OverlayMessage::init(this, screenToDrawGeometry);
-
-    if (m_config.showHelp()) {
-        initHelpMessage();
-        OverlayMessage::push(m_helpMessage);
-    }
-
-    initQuitPrompt();
-
-    updateCursor();
 }
 
 CaptureWidget::~CaptureWidget()
@@ -312,6 +176,143 @@ CaptureWidget::~CaptureWidget()
           pixmap(), geometry, m_context.request);
     } else {
         emit Flameshot::instance()->captureFailed();
+    }
+}
+
+void CaptureWidget::initScreenshotEditor(const bool compositeDesktop)
+{
+    // Capture Desktop Screen(s)
+    if (m_selection != nullptr) {
+        m_selection->close();
+        m_selection = nullptr;
+    }
+
+    setWidgetFlags();
+    setWindowOpacity(0.0);
+
+    /////////////////////////////////////////////////////////////////////////////
+    m_context.screenshot = m_desktopCapturer.captureDesktop(compositeDesktop);
+
+#if defined(FLAMESHOT_DEBUG_CAPTURE)
+    QString desktopPath =
+      QStandardPaths::writableLocation(QStandardPaths::DesktopLocation);
+    QString filePath = QDir(desktopPath).filePath("debug_screenshot.png");
+    m_context.screenshot.save(filePath, "PNG");
+#endif
+
+    if (m_context.screenshot.isNull()) {
+        AbstractLogger::error() << tr("Unable to capture screen");
+        this->close();
+    }
+    m_context.origScreenshot = m_context.screenshot;
+
+    // Resize and move CaptureWidget
+    if (!compositeDesktop) {
+        resize(m_desktopCapturer.screenSize() /
+               m_desktopCapturer.screenToDraw()->devicePixelRatio());
+        move(m_desktopCapturer.screenToDraw()->geometry().topLeft());
+    } else {
+        resize(m_desktopCapturer.screenSize());
+        QScreen* screenToDraw = m_desktopCapturer.screenToDraw();
+        move(screenToDraw->geometry().topLeft() /
+             screenToDraw->devicePixelRatio());
+    }
+    // Capture Desktop Screen(s) ^^^
+    // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+    ////////////////////////////////////////
+    // Set Capture Area (drawing and tool buttons area)
+    QVector<QRect> areas;
+    if (m_context.fullscreen) {
+        areas = m_desktopCapturer.areas();
+    } else {
+        areas.append(rect());
+    }
+    // Set Capture Area (drawing and tool buttons area) ^^^
+    //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+    ////////////////////////////////////////
+    // Init Controls
+    m_buttonHandler->updateScreenRegions(areas);
+    m_buttonHandler->hide();
+
+    initButtons();
+    initSelection(); // button handler must be initialized before
+    initShortcuts(); // must be called after initSelection
+    // init magnify
+    if (m_config.showMagnifier()) {
+        m_magnifier = new MagnifierWidget(
+          m_context.screenshot, m_uiColor, m_config.squareMagnifier(), this);
+    }
+
+    // Init color picker
+    m_colorPicker = new ColorPicker(this);
+    // Init notification widget
+    m_notifierBox = new NotifierBox(this);
+
+    initPanel();
+    showHelp();
+    initQuitPrompt();
+    updateCursor();
+    setWindowOpacity(1.0);
+}
+
+void CaptureWidget::moveToActiveScreen()
+{
+    // hide();
+    setWindowOpacity(0.0);
+
+    m_context.screenshot = m_desktopCapturer.captureDesktop(false);
+    m_context.origScreenshot = m_context.screenshot;
+
+    ////////////////////////////////////////
+    // Resize and move CaptureWidget
+    QSize screenSize =
+      QSizeF(m_desktopCapturer.screenSize() /
+             m_desktopCapturer.screenToDraw()->devicePixelRatio())
+        .toSize();
+    resize(screenSize);
+    move(m_desktopCapturer.screenToDraw()->geometry().topLeft());
+
+    m_buttonHandler->hide();
+    m_buttonHandler->updateScreenRegions(m_desktopCapturer.areas());
+
+    QRect screenToDrawGeometry = geometry();
+    screenToDrawGeometry.moveTo(0, 0);
+
+    showHelp();
+
+    // Move "Tool Settings" button
+    m_panelToggleButton->move(
+      screenToDrawGeometry.x(),
+      screenToDrawGeometry.y() +
+        (screenToDrawGeometry.height() / 2 - m_panelToggleButton->width() / 2));
+
+    // Move Panel
+    QRect panelRect = rect();
+    panelRect.setHeight(screenToDrawGeometry.height());
+    panelRect.moveTo(mapFromGlobal(screenToDrawGeometry.topLeft()));
+    panelRect.setWidth(m_colorPicker->width() * 1.5);
+    m_panel->hide();
+    m_panel->setGeometry(panelRect);
+    m_panel->move(screenToDrawGeometry.x(), screenToDrawGeometry.y());
+
+    // Show
+    setWindowOpacity(1.0);
+}
+
+void CaptureWidget::showHelp()
+{
+    if (m_config.showHelp()) {
+        QRect screenToDrawGeometry = geometry();
+        screenToDrawGeometry.moveTo(0, 0);
+        if (m_ovelayMessage != nullptr) {
+            m_ovelayMessage->close();
+            m_ovelayMessage = nullptr;
+        }
+        m_ovelayMessage = new OverlayMessage(this, screenToDrawGeometry);
+        initHelpMessage();
+        OverlayMessage::push(m_helpMessage);
     }
 }
 
@@ -824,6 +825,15 @@ int CaptureWidget::selectToolItemAtPos(const QPoint& pos)
     return activeLayerIndex;
 }
 
+void CaptureWidget::leaveEvent(QEvent* event)
+{
+    if (!m_desktopCapturer.isComposite() &&
+        m_selection->geometry().size() == QSize(0, 0)) {
+        QTimer::singleShot(50, this, [this]() { moveToActiveScreen(); });
+    }
+    QWidget::leaveEvent(event);
+}
+
 void CaptureWidget::mousePressEvent(QMouseEvent* e)
 {
     activateWindow();
@@ -1164,34 +1174,44 @@ void CaptureWidget::initPanel()
 #endif
     }
 
-    QScreen* screenAtCursorPos = m_desktopCapturer.screenAtCursorPos();
-    qreal screenToDrawDpr =
-      m_desktopCapturer.screenToDraw()->devicePixelRatio();
     QRect screenToDrawGeometry = m_desktopCapturer.screenToDraw()->geometry();
-    screenToDrawGeometry.moveTo(screenAtCursorPos->geometry().topLeft() /
-                                screenToDrawDpr);
+    if (m_desktopCapturer.isComposite()) {
+        // This mode doesn't work correctly.
+        // It can grab a display without any issues with proper layouts,
+        // but Qt6 doesn't handle primary screen detection correctly.
+        // It may change depending on display locations (top/bottom,
+        // left/right, etc.).
+        // I didn't find a way to resolve it.
+        // Things become extremely unpredictable with three displays.
+        // Sometimes, even without recompilation and changing the display
+        // location, you may get different results.
+        QScreen* screenAtCursorPos = m_desktopCapturer.screenAtCursorPos();
+        qreal screenToDrawDpr =
+          m_desktopCapturer.screenToDraw()->devicePixelRatio();
+        screenToDrawGeometry.moveTo(screenAtCursorPos->geometry().topLeft() /
+                                    screenToDrawDpr);
+    } else {
+        screenToDrawGeometry.moveTo(0, 0);
+    }
 
     if (ConfigHandler().showSidePanelButton()) {
-        auto* panelToggleButton =
+        if (m_panelToggleButton != nullptr) {
+            m_panelToggleButton->close();
+            m_panelToggleButton = nullptr;
+        }
+        m_panelToggleButton =
           new OrientablePushButton(tr("Tool Settings"), this);
-        makeChild(panelToggleButton);
-        panelToggleButton->setColor(m_uiColor);
-        panelToggleButton->setOrientation(
+        makeChild(m_panelToggleButton);
+        m_panelToggleButton->setColor(m_uiColor);
+        m_panelToggleButton->setOrientation(
           OrientablePushButton::VerticalBottomToTop);
-#if defined(Q_OS_MACOS)
-        panelToggleButton->move(
-          0,
-          static_cast<int>(panelRect.height() / 2) -
-            static_cast<int>(panelToggleButton->width() / 2));
-#else
-        panelToggleButton->move(screenToDrawGeometry.x(),
-                                screenToDrawGeometry.y() +
-                                  (screenToDrawGeometry.height() / 2 -
-                                   panelToggleButton->width() / 2));
-#endif
-        panelToggleButton->setCursor(Qt::ArrowCursor);
-        (new DraggableWidgetMaker(this))->makeDraggable(panelToggleButton);
-        connect(panelToggleButton,
+        m_panelToggleButton->move(screenToDrawGeometry.x(),
+                                  screenToDrawGeometry.y() +
+                                    (screenToDrawGeometry.height() / 2 -
+                                     m_panelToggleButton->width() / 2));
+        m_panelToggleButton->setCursor(Qt::ArrowCursor);
+        (new DraggableWidgetMaker(this))->makeDraggable(m_panelToggleButton);
+        connect(m_panelToggleButton,
                 &QPushButton::clicked,
                 this,
                 &CaptureWidget::togglePanel);
@@ -1200,19 +1220,12 @@ void CaptureWidget::initPanel()
     m_panel = new UtilityPanel(this);
     m_panel->hide();
     makeChild(m_panel);
-#if defined(Q_OS_MACOS)
-    QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
-    panelRect.moveTo(mapFromGlobal(panelRect.topLeft()));
-    m_panel->setFixedWidth(static_cast<int>(m_colorPicker->width() * 1.5));
-    m_panel->setFixedHeight(currentScreen->geometry().height());
-#else
     panelRect.setHeight(screenToDrawGeometry.height());
     panelRect.moveTo(mapFromGlobal(screenToDrawGeometry.topLeft()));
     panelRect.setWidth(m_colorPicker->width() * 1.5);
     m_panel->setGeometry(panelRect);
     m_panel->move(screenToDrawGeometry.x(), screenToDrawGeometry.y());
 
-#endif
     connect(m_panel,
             &UtilityPanel::layerChanged,
             this,
@@ -1302,6 +1315,10 @@ void CaptureWidget::showAppUpdateNotification(const QString& appLatestVersion,
 void CaptureWidget::initSelection()
 {
     // Be mindful of the order of statements, so that slots are called properly
+    if (m_selection != nullptr) {
+        m_selection->close();
+        m_selection = nullptr;
+    }
     m_selection = new SelectionWidget(m_uiColor, this);
     QRect initialSelection = m_context.request.initialSelection();
     connect(m_selection, &SelectionWidget::geometryChanged, this, [this]() {

@@ -74,6 +74,7 @@ public:
     const QList<QRect>& areas() const;
 
     QScreen* screenAtCursorPos();
+    bool isComposite() const;
 
 private:
     /**
@@ -87,6 +88,7 @@ private:
     QRect m_geometry;
     QScreen* m_screenToDraw;
     QVector<QRect> m_areas;
+    bool m_composite;
 };
 
 #endif // DESKTOP_CAPTURER_H
