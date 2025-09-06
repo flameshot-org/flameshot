@@ -82,6 +82,8 @@ private:
      * @return A pointer to the QScreen object.
      */
 
+    QScreen* lastScreen();
+
     QRect m_geometry;
     QScreen* m_screenToDraw;
     QVector<QRect> m_areas;

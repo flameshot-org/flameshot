@@ -77,7 +77,7 @@ QRect DesktopCapturer::geometry()
 
 QPixmap DesktopCapturer::captureDesktopComposite()
 {
-    m_screenToDraw = QGuiApplication::primaryScreen();
+    m_screenToDraw = lastScreen();
     qreal screenToDrawDpr = screenToDraw()->devicePixelRatio();
 
     // Calculate screen geometry
@@ -145,7 +145,7 @@ QScreen* DesktopCapturer::screenAtCursorPos()
     // This position is in the virtual desktop coordinate system, which spans
     // all screens.
     const QPoint mousePos = QCursor::pos();
-    m_screenToDraw = QGuiApplication::primaryScreen();
+    m_screenToDraw = lastScreen();
 
     // Iterate through all screens available to the application.
     for (QScreen* screen : QGuiApplication::screens()) {
@@ -189,4 +189,11 @@ QScreen* DesktopCapturer::screenToDraw() const
 const QList<QRect>& DesktopCapturer::areas() const
 {
     return m_areas;
+}
+
+QScreen* DesktopCapturer::lastScreen()
+{
+    // At least in Gnome+XOrg, the last screen is actually the first screen
+    // and all calculations are started from it, not from the PrimaryScreen.
+    return QGuiApplication::screens().last();
 }

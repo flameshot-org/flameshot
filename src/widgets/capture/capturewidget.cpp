@@ -1169,11 +1169,10 @@ void CaptureWidget::initPanel()
           static_cast<int>(panelRect.height() / 2) -
             static_cast<int>(panelToggleButton->width() / 2));
 #else
-        panelToggleButton->move(
-          static_cast<int>(screenToDrawGeometry.x() / screenToDrawDpr),
-          static_cast<int>(screenToDrawGeometry.y() / screenToDrawDpr +
-                           (screenToDrawGeometry.height() / 2 -
-                            panelToggleButton->width() / 2)));
+        panelToggleButton->move(screenToDrawGeometry.x(),
+                                screenToDrawGeometry.y() +
+                                  (screenToDrawGeometry.height() / 2 -
+                                   panelToggleButton->width() / 2));
 #endif
         panelToggleButton->setCursor(Qt::ArrowCursor);
         (new DraggableWidgetMaker(this))->makeDraggable(panelToggleButton);
@@ -1196,8 +1195,7 @@ void CaptureWidget::initPanel()
     panelRect.moveTo(mapFromGlobal(screenToDrawGeometry.topLeft()));
     panelRect.setWidth(m_colorPicker->width() * 1.5);
     m_panel->setGeometry(panelRect);
-    m_panel->move(static_cast<int>(screenToDrawGeometry.x() / screenToDrawDpr),
-                  static_cast<int>(screenToDrawGeometry.y() / screenToDrawDpr));
+    m_panel->move(screenToDrawGeometry.x(), screenToDrawGeometry.y());
 
 #endif
     connect(m_panel,
@@ -1845,8 +1843,6 @@ CaptureTool::Type CaptureWidget::activeButtonToolType() const
 QPoint CaptureWidget::snapToGrid(const QPoint& point) const
 {
     QPoint snapPoint = mapToGlobal(point);
-
-    const auto scale{ m_context.screenshot.devicePixelRatio() };
 
     snapPoint.setX((qRound(snapPoint.x() / double(m_gridSize)) * m_gridSize));
     snapPoint.setY((qRound(snapPoint.y() / double(m_gridSize)) * m_gridSize));
