@@ -82,7 +82,7 @@ private:
      * @return A pointer to the QScreen object.
      */
 
-    QScreen* lastScreen();
+    QScreen* primaryScreen();
 
     QRect m_geometry;
     QScreen* m_screenToDraw;

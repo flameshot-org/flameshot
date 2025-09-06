@@ -9,8 +9,11 @@
 // Luca Gugelmann <lucag@student.ethz.ch> released under the GNU LGPL
 // <http://www.gnu.org/licenses/old-licenses/library.txt>
 
-#include "capturewidget.h"
+#include <QDir>
+#include <QStandardPaths>
+
 #include "abstractlogger.h"
+#include "capturewidget.h"
 #include "copytool.h"
 #include "src/config/cacheutils.h"
 #include "src/core/flameshot.h"
@@ -108,8 +111,11 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
         bool ok = true;
         // m_context.screenshot = ScreenGrabber().grabEntireDesktop(ok);
 
+        QString desktopPath =
+          QStandardPaths::writableLocation(QStandardPaths::DesktopLocation);
+        QString filePath = QDir(desktopPath).filePath("debug_screenshot.png");
+        m_context.screenshot.save(filePath, "PNG");
 #if defined(FLAMESHOT_DEBUG_CAPTURE)
-        m_context.screenshot.save("screenshot.png", "PNG");
 #endif
 
         if (!ok) {
@@ -120,25 +126,14 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
 
         ////////////////////////////////////////
         // Set CaptureWidget properties
-#if defined(Q_OS_WIN)
-// Call cmake with -DFLAMESHOT_DEBUG_CAPTURE=ON to enable easier debugging
-#if !defined(FLAMESHOT_DEBUG_CAPTURE)
-        setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint |
-                       Qt::SubWindow // Hides the taskbar icon
-        );
-#endif
-#elif defined(Q_OS_MACOS)
+        setWidgetFlags();
+
+#if defined(Q_OS_MACOS)
         QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
         move(currentScreen->geometry().x(), currentScreen->geometry().y());
         resize(currentScreen->size());
-// LINUX
-#else
-// Call cmake with -DFLAMESHOT_DEBUG_CAPTURE=ON to enable easier debugging
-#if !defined(FLAMESHOT_DEBUG_CAPTURE)
-        setWindowFlags(Qt::BypassWindowManagerHint | Qt::WindowStaysOnTopHint |
-                       Qt::FramelessWindowHint | Qt::Tool);
 #endif
-#endif
+
         // Set CaptureWidget properties ^^^
         //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -150,15 +145,34 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
             move(m_desktopCapturer.screenToDraw()->geometry().topLeft());
         } else {
             resize(m_desktopCapturer.screenSize());
-#ifdef Q_OS_WIN
-            // move(m_desktopCapturer.topLeft() /
-                 // m_desktopCapturer.screenToDraw()->devicePixelRatio());
-            move(m_desktopCapturer.topLeft());
-#elif (defined(Q_OS_LINUX) || defined(Q_OS_UNIX))
-            move(m_desktopCapturer.topLeft());
-#else
-            // MACOS - no need, is resolved below
-#endif
+            // #ifdef Q_OS_WIN
+            //             // move(m_desktopCapturer.topLeft() /
+            //                  //
+            //                  m_desktopCapturer.screenToDraw()->devicePixelRatio());
+            //             move(screen->geometry().topLeft() /
+            //             screen->devicePixelRatio());
+            // #elif defined(Q_OS_LINUX)
+            qWarning() << "m_desktopCapturer.topLeft()"
+                       << m_desktopCapturer.topLeft();
+            qWarning()
+              << "m_desktopCapturer.screenToDraw()->geometry().topLeft()"
+              << m_desktopCapturer.screenToDraw()->geometry().topLeft();
+            qWarning() << "m_desktopCapturer.screenToDraw()->devicePixelRatio()"
+                       << m_desktopCapturer.screenToDraw()->devicePixelRatio();
+            QScreen* screen = m_desktopCapturer.screenToDraw();
+            QScreen* screenPrimary = QGuiApplication::primaryScreen();
+            QScreen* screen1 = QGuiApplication::screens()[0];
+            QScreen* screen2 = QGuiApplication::screens()[1];
+            if (screen1) {
+                qWarning() << "screen1" << screen1->geometry().topLeft();
+            }
+            if (screen2) {
+                qWarning() << "screen2" << screen2->geometry().topLeft();
+            }
+            qWarning() << "screenPrimary"
+                       << screenPrimary->geometry().topLeft();
+            move(screen->geometry().topLeft() / screen->devicePixelRatio());
+            // #endif
         }
         //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     }
@@ -2029,4 +2043,17 @@ void CaptureWidget::drawInactiveRegion(QPainter* painter)
 
     painter->setClipRegion(grey);
     painter->drawRect(-1, -1, rect().width() + 1, rect().height() + 1);
+}
+
+void CaptureWidget::setWidgetFlags()
+{
+#if defined(Q_OS_WIN)
+    setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint |
+                   Qt::SubWindow // Hides the taskbar icon
+    );
+#endif
+#if defined(Q_OS_LINUX)
+    setWindowFlags(Qt::BypassWindowManagerHint | Qt::WindowStaysOnTopHint |
+                   Qt::FramelessWindowHint | Qt::Tool);
+#endif
 }

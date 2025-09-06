@@ -114,6 +114,7 @@ protected:
     void changeEvent(QEvent* changeEvent) override;
 
 private:
+    void setWidgetFlags();
     void pushObjectsStateToUndoStack();
     void releaseActiveTool();
     void uncheckActiveTool();
