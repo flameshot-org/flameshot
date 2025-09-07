@@ -75,7 +75,7 @@ jobs:
           echo "GIT_HASH=${git_hash}" >> $GITHUB_ENV
 
       - name: Install Qt
-        run: brew install qt@6 cmake
+        run: brew install qt@6
 
       - name: Configure
         run: |
