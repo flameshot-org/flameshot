@@ -7,6 +7,7 @@
 
 #include <QDateTime>
 #include <QFileInfo>
+#include <QKeyEvent>
 #include <QPixmap>
 
 void scaleThumbnail(QPixmap& pixmap)
@@ -94,6 +95,13 @@ void UploadHistory::addLine(const QString& path, const QString& fileName)
     });
 
     ui->historyContainer->addWidget(line);
+}
+
+void UploadHistory::keyPressEvent(QKeyEvent* event)
+{
+    if (event->key() == Qt::Key_Escape) {
+        close();
+    }
 }
 
 UploadHistory::~UploadHistory()
