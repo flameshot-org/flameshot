@@ -981,6 +981,7 @@ void CaptureWidget::mouseReleaseEvent(QMouseEvent* e)
             m_context.color.isValid()) {
             pushObjectsStateToUndoStack();
         }
+        m_colorPicker->setNewColor();
         m_colorPicker->hide();
         if (!m_context.color.isValid()) {
             m_context.color = ConfigHandler().drawColor();
