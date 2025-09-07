@@ -10,7 +10,7 @@ class ColorPicker : public ColorPickerWidget
     Q_OBJECT
 public:
     explicit ColorPicker(QWidget* parent = nullptr);
-
+    void setNewColor();
 signals:
     void colorSelected(QColor c);
 
