@@ -132,8 +132,6 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
                 topLeft.setY(topLeftScreen.y());
             }
         }
-        move(topLeft);
-        resize(pixmap().size());
 #elif defined(Q_OS_MACOS)
         // Emulate fullscreen mode
         //        setWindowFlags(Qt::WindowStaysOnTopHint |
@@ -286,6 +284,12 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
     initQuitPrompt();
 
     updateCursor();
+
+#if defined(Q_OS_WIN)
+    show();
+    move(topLeft); // if topLeft is negative, window must be moved after show()
+    resize(pixmap().size());
+#endif
 }
 
 CaptureWidget::~CaptureWidget()
