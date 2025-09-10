@@ -11,7 +11,7 @@
 #ifdef ENABLE_IMGUR
 #include "imgupload/imguploadertool.h"
 #endif
-#include "invert/inverttool.h"
+    #include "invert/inverttool.h"
 #include "launcher/applaunchertool.h"
 #include "line/linetool.h"
 #include "marker/markertool.h"
@@ -23,6 +23,7 @@
 #include "redo/redotool.h"
 #include "save/savetool.h"
 #include "selection/selectiontool.h"
+#include "selectiontext/selectiontexttool.h"
 #include "sizedecrease/sizedecreasetool.h"
 #include "sizeincrease/sizeincreasetool.h"
 #include "text/texttool.h"
@@ -43,6 +44,7 @@ CaptureTool* ToolFactory::CreateTool(CaptureTool::Type t, QObject* parent)
         if_TYPE_return_TOOL(TYPE_DRAWER, LineTool);
         if_TYPE_return_TOOL(TYPE_ARROW, ArrowTool);
         if_TYPE_return_TOOL(TYPE_SELECTION, SelectionTool);
+        if_TYPE_return_TOOL(TYPE_SELECTION_TEXT, SelectionTextTool);
         if_TYPE_return_TOOL(TYPE_RECTANGLE, RectangleTool);
         if_TYPE_return_TOOL(TYPE_CIRCLE, CircleTool);
         if_TYPE_return_TOOL(TYPE_MARKER, MarkerTool);

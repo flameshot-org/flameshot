@@ -4,14 +4,15 @@
 #pragma once
 
 #include "src/tools/abstractactiontool.h"
-#include <tesseract/baseapi.h>
-#include <leptonica/allheaders.h>
 
-class CopyTool : public AbstractActionTool
+#include <leptonica/allheaders.h>
+#include <tesseract/baseapi.h>
+
+class SelectionTextTool : public AbstractActionTool
 {
     Q_OBJECT
 public:
-    explicit CopyTool(QObject* parent = nullptr);
+    explicit SelectionTextTool(QObject* parent = nullptr);
 
     bool closeOnButtonPressed() const override;
 
