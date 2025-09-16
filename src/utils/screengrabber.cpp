@@ -13,7 +13,7 @@
 #include <QProcess>
 #include <QScreen>
 
-#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
+#if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
 #include "request.h"
 #include <QDBusInterface>
 #include <QDBusReply>
@@ -28,7 +28,7 @@ ScreenGrabber::ScreenGrabber(QObject* parent)
 
 void ScreenGrabber::generalGrimScreenshot(bool& ok, QPixmap& res)
 {
-#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
+#if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
     if (!ConfigHandler().useGrimAdapter()) {
         return;
     }
@@ -60,7 +60,7 @@ void ScreenGrabber::generalGrimScreenshot(bool& ok, QPixmap& res)
 void ScreenGrabber::freeDesktopPortal(bool& ok, QPixmap& res)
 {
 
-#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
+#if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
     QDBusInterface screenshotInterface(
       QStringLiteral("org.freedesktop.portal.Desktop"),
       QStringLiteral("/org/freedesktop/portal/desktop"),
@@ -137,6 +137,7 @@ void ScreenGrabber::freeDesktopPortal(bool& ok, QPixmap& res)
     }
 #endif
 }
+
 QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
 {
     ok = true;
@@ -205,11 +206,22 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
 #endif
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX) || defined(Q_OS_WIN)
     QRect geometry = desktopGeometry();
-    QPixmap p(QApplication::primaryScreen()->grabWindow(
-      wid, geometry.x(), geometry.y(), geometry.width(), geometry.height()));
-    QScreen* screen = qApp->screenAt(QCursor::pos());
-    p.setDevicePixelRatio(screen->devicePixelRatio());
-    return p;
+
+    // Qt6 fix: Create a composite image from all screens to handle
+    // multi-monitor setups where screens have different positions/heights.
+    // This fixes the dual monitor offset bug and handles edge cases where
+    // the desktop bounding box includes virtual space.
+    QScreen* primaryScreen = QGuiApplication::primaryScreen();
+    QRect r = primaryScreen->geometry();
+    QPixmap desktop(geometry.size());
+    desktop.fill(Qt::black); // Fill with black background
+    desktop =
+      primaryScreen->grabWindow(wid,
+                                -r.x() / primaryScreen->devicePixelRatio(),
+                                -r.y() / primaryScreen->devicePixelRatio(),
+                                geometry.width(),
+                                geometry.height());
+    return desktop;
 #endif
 }
 
@@ -259,8 +271,12 @@ QRect ScreenGrabber::desktopGeometry()
 
     for (QScreen* const screen : QGuiApplication::screens()) {
         QRect scrRect = screen->geometry();
-        scrRect.moveTo(scrRect.x() / screen->devicePixelRatio(),
-                       scrRect.y() / screen->devicePixelRatio());
+        // Qt6 fix: Don't divide by devicePixelRatio for multi-monitor setups
+        // This was causing coordinate offset issues in dual monitor
+        // configurations
+        // But it still has a screen position in real pixels, not logical ones
+        qreal dpr = screen->devicePixelRatio();
+        scrRect.moveTo(QPointF(scrRect.x() / dpr, scrRect.y() / dpr).toPoint());
         geometry = geometry.united(scrRect);
     }
     return geometry;

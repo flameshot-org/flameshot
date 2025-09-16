@@ -64,7 +64,7 @@ size_t ButtonHandler::size() const
 
 // updatePosition updates the position of the buttons around the
 // selection area. Ignores the sides blocked by the end of the screen.
-// When the selection is too small it works on a virtual selection with
+// When the selection is too small, it works on a virtual selection with
 // the original in the center.
 void ButtonHandler::updatePosition(const QRect& selection)
 {
@@ -122,7 +122,7 @@ void ButtonHandler::updatePosition(const QRect& selection)
               horizontalPoints(center, addCounter, true);
             moveButtonsToPoints(positions, elemIndicator);
         }
-        // Add buttons at the right side of the selection
+        // Add buttons to the right side of the selection
         if (!m_blockedRight && elemIndicator < vecLength) {
             int addCounter = buttonsPerCol;
             addCounter = qBound(0, addCounter, vecLength - elemIndicator);
@@ -146,7 +146,7 @@ void ButtonHandler::updatePosition(const QRect& selection)
               horizontalPoints(center, addCounter, false);
             moveButtonsToPoints(positions, elemIndicator);
         }
-        // Add buttons at the left side of the selection
+        // Add buttons to the left side of the selection
         if (!m_blockedLeft && elemIndicator < vecLength) {
             int addCounter = buttonsPerCol;
             addCounter = qBound(0, addCounter, vecLength - elemIndicator);

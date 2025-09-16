@@ -2,7 +2,7 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #ifdef USE_KDSINGLEAPPLICATION
-#include "kdsingleapplication.h"
+#include <kdsingleapplication.h>
 #ifdef Q_OS_UNIX
 #include "core/signaldaemon.h"
 #include "csignal"
@@ -26,10 +26,8 @@
 #include <QSharedMemory>
 #include <QTimer>
 #include <QTranslator>
-#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
-#include "abstractlogger.h"
+#if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
 #include "src/core/flameshotdbusadapter.h"
-#include <QApplication>
 #include <QDBusConnection>
 #include <QDBusMessage>
 #include <desktopinfo.h>
@@ -108,18 +106,8 @@ QSharedMemory* guiMutexLock()
     return shm;
 }
 
-QTranslator translator, qtTranslator;
-
-void configureApp(bool gui)
+void configureTranslation(QTranslator& translator, QTranslator& qtTranslator)
 {
-    if (gui) {
-#if defined(Q_OS_WIN) && QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
-        QApplication::setStyle("Fusion"); // Supports dark scheme on Win 10/11
-#else
-        QApplication::setStyle(new StyleOverride);
-#endif
-    }
-
     bool foundTranslation;
     // Configure translations
     for (const QString& path : PathInfo::translationsPaths()) {
@@ -148,24 +136,42 @@ void configureApp(bool gui)
                         .arg(QLocale::languageToString(
                           QLocale::system().language()));
     }
+    qApp->installTranslator(&translator);
+    qApp->installTranslator(&qtTranslator);
+}
+
+void configureApp(bool gui, QTranslator& translator, QTranslator& qtTranslator)
+{
+    if (gui) {
+#if defined(Q_OS_WIN) && QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
+        QApplication::setStyle("Fusion"); // Supports dark scheme on Win 10/11
+#else
+        QApplication::setStyle(new StyleOverride);
+#endif
+    }
 
     auto app = QCoreApplication::instance();
-    app->installTranslator(&translator);
-    app->installTranslator(&qtTranslator);
     app->setAttribute(Qt::AA_DontCreateNativeWidgetSiblings, true);
+    configureTranslation(translator, qtTranslator);
 }
 
 // TODO find a way so we don't have to do this
 /// Recreate the application as a QApplication
-void reinitializeAsQApplication(int& argc, char* argv[])
+void reinitializeAsQApplication(int& argc,
+                                char* argv[],
+                                QTranslator& translator,
+                                QTranslator& qtTranslator)
 {
     delete QCoreApplication::instance();
     new QApplication(argc, argv);
-    configureApp(true);
+    configureApp(true, translator, qtTranslator);
 }
 
 int main(int argc, char* argv[])
 {
+
+    QTranslator translator, qtTranslator;
+
     // Required for saving button list QList<CaptureTool::Type>
     qRegisterMetaType<QList<int>>();
 
@@ -176,22 +182,35 @@ int main(int argc, char* argv[])
     // no arguments, just launch Flameshot
     if (argc == 1) {
         QApplication app(argc, argv);
+        configureTranslation(translator, qtTranslator);
 
 #ifdef USE_KDSINGLEAPPLICATION
 #ifdef Q_OS_UNIX
         setup_unix_signal_handlers();
         auto signalDaemon = SignalDaemon();
 #endif
-        auto kdsa = KDSingleApplication(QStringLiteral("flameshot"));
+        auto kdsa =
+          KDSingleApplication(QStringLiteral("org.flameshot.Flameshot"));
 
         if (!kdsa.isPrimaryInstance()) {
             return 0; // Quit
         }
 #endif
 
-        configureApp(true);
+        configureApp(true, translator, qtTranslator);
         auto c = Flameshot::instance();
         FlameshotDaemon::start();
+
+#if defined(USE_KDSINGLEAPPLICATION) &&                                        \
+  (defined(Q_OS_MACOS) || defined(Q_OS_WIN))
+        if (kdsa.isPrimaryInstance()) {
+            QObject::connect(
+              &kdsa,
+              &KDSingleApplication::messageReceived,
+              FlameshotDaemon::instance(),
+              &FlameshotDaemon::messageReceivedFromSecondaryInstance);
+        }
+#endif
 
 #if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
         new FlameshotDBusAdapter(c);
@@ -210,7 +229,8 @@ int main(int argc, char* argv[])
      * CLI parsing  |
      * ------------*/
     new QCoreApplication(argc, argv);
-    configureApp(false);
+    configureApp(false, translator, qtTranslator);
+
     CommandLineParser parser;
     // Add description
     parser.setDescription(
@@ -412,12 +432,13 @@ int main(int argc, char* argv[])
     Flameshot::setOrigin(Flameshot::CLI);
     if (parser.isSet(helpOption) || parser.isSet(versionOption)) {
     } else if (parser.isSet(launcherArgument)) { // LAUNCHER
-        reinitializeAsQApplication(argc, argv);
+        reinitializeAsQApplication(argc, argv, translator, qtTranslator);
         Flameshot* flameshot = Flameshot::instance();
         flameshot->launcher();
         qApp->exec();
     } else if (parser.isSet(guiArgument)) { // GUI
-        reinitializeAsQApplication(argc, argv);
+        reinitializeAsQApplication(argc, argv, translator, qtTranslator);
+
         // Prevent multiple instances of 'flameshot gui' from running if not
         // configured to do so.
         if (!ConfigHandler().allowMultipleGuiInstances()) {
@@ -480,7 +501,7 @@ int main(int argc, char* argv[])
         }
         return requestCaptureAndWait(req);
     } else if (parser.isSet(fullArgument)) { // FULL
-        reinitializeAsQApplication(argc, argv);
+        reinitializeAsQApplication(argc, argv, translator, qtTranslator);
 
         // Option values
         QString path = parser.value(pathOption);
@@ -515,7 +536,7 @@ int main(int argc, char* argv[])
         }
         return requestCaptureAndWait(req);
     } else if (parser.isSet(screenArgument)) { // SCREEN
-        reinitializeAsQApplication(argc, argv);
+        reinitializeAsQApplication(argc, argv, translator, qtTranslator);
 
         QString numberStr = parser.value(screenNumberOption);
         // Option values
@@ -587,7 +608,7 @@ int main(int argc, char* argv[])
         }
         if (!someFlagSet) {
             // Open gui when no options are given
-            reinitializeAsQApplication(argc, argv);
+            reinitializeAsQApplication(argc, argv, translator, qtTranslator);
             QObject::connect(
               qApp, &QApplication::lastWindowClosed, qApp, &QApplication::quit);
             Flameshot::instance()->config();

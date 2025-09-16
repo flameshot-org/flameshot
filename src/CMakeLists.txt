@@ -7,9 +7,17 @@ find_package(
         Widgets
         Network
         Svg
-        DBus
         LinguistTools
 )
+
+if (UNIX AND NOT APPLE)
+find_package(
+        Qt${QT_VERSION_MAJOR}
+        CONFIG
+        REQUIRED
+        DBus
+)
+endif()
 
 if (USE_WAYLAND_CLIPBOARD)
     find_package(KF6GuiAddons)
@@ -208,19 +216,28 @@ target_link_libraries(
         project_warnings
         project_options
         Qt${QT_VERSION_MAJOR}::Svg
-        Qt${QT_VERSION_MAJOR}::DBus
         Qt${QT_VERSION_MAJOR}::Network
         Qt${QT_VERSION_MAJOR}::Widgets
         QtColorWidgets
 )
+if (UNIX AND NOT APPLE)
+target_link_libraries(
+        flameshot
+        Qt${QT_VERSION_MAJOR}::DBus
+)
+endif()
 
 if (USE_KDSINGLEAPPLICATION)
   message(STATUS "KDSingleApplication is used!")
   add_compile_definitions(USE_KDSINGLEAPPLICATION=1)
 
+  if (USE_BUNDLED_KDSINGLEAPPLICATION)
+    target_include_directories(flameshot PRIVATE ${kdsingleapplication_SOURCE_DIR} ${kdsingleapplication_BINARY_DIR})
+  endif()
+
   target_link_libraries(
           flameshot
-          kdsingleapplication
+          KDAB::kdsingleapplication
   )
 endif()
 
@@ -282,8 +299,13 @@ endif()
 message("Flameshot predefined color palette large: " ${FLAMESHOT_PREDEFINED_COLOR_PALETTE_LARGE})
 target_compile_definitions(flameshot PRIVATE PREDEFINED_COLOR_PALETTE_LARGE=${FLAMESHOT_PREDEFINED_COLOR_PALETTE_LARGE})
 
+
 find_package (Git)
-if (GIT_FOUND)
+if( DEFINED ENV{GIT_HASH})
+    message("Using provided git_commit_hash: $ENV{GIT_HASH}")
+    set(FLAMESHOT_GIT_HASH $ENV{GIT_HASH})
+    target_compile_definitions(flameshot PRIVATE FLAMESHOT_GIT_HASH="${FLAMESHOT_GIT_HASH}")
+elseif (GIT_FOUND)
     message("git found: ${GIT_EXECUTABLE} in version     ${GIT_VERSION_STRING}")
     execute_process(COMMAND ${GIT_EXECUTABLE} rev-parse --short HEAD OUTPUT_VARIABLE FLAMESHOT_GIT_HASH)
     string(REGEX REPLACE "\r*\n$" "" FLAMESHOT_GIT_HASH "${FLAMESHOT_GIT_HASH}")
@@ -291,8 +313,9 @@ if (GIT_FOUND)
     message("FLAMESHOT_GIT_HASH: ${FLAMESHOT_GIT_HASH}")
 else()
     target_compile_definitions(flameshot PRIVATE FLAMESHOT_GIT_HASH="-")
-    message("git command is not found")
+    message(WARNING "Compiling without git commit hash")
 endif ()
+
 target_compile_definitions(flameshot PRIVATE APP_PREFIX="${CMAKE_INSTALL_PREFIX}")
 target_compile_definitions(flameshot PRIVATE APP_VERSION="v${PROJECT_VERSION}")
 #target_compile_definitions(flameshot PRIVATE QAPPLICATION_CLASS=QApplication)

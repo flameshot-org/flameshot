@@ -1,13 +1,14 @@
 #
 # spec file for package flameshot on opensuse leap 15.x
 #
-Name: flameshot
-Version: 13.0.0
-Release: 1
+Name:    flameshot
+Version: 13.1.0
+Release: 2
 License: GPLv3+ and ASL 2.0 and GPLv2 and LGPLv3 and Free Art
 Summary: Powerful yet simple to use screenshot software
-URL: https://github.com/flameshot-org/flameshot
+URL:     https://github.com/flameshot-org/flameshot
 Source0: %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
+Vendor:  Flameshot
 
 BuildRequires: cmake >= 3.13.0
 BuildRequires: gcc-c++ >= 7
@@ -23,7 +24,6 @@ BuildRequires: cmake(Qt6LinguistTools) >= 6.0.0
 BuildRequires: cmake(Qt6Network) >= 6.0.0
 BuildRequires: cmake(Qt6Svg) >= 6.0.0
 BuildRequires: cmake(Qt6Widgets) >= 6.0.0
-
 
 Requires: hicolor-icon-theme
 Requires: qt6-base >= 6.0.0
@@ -46,7 +46,6 @@ Features:
  * Easy to use.
  * In-app screenshot edition.
  * DBus interface.
- * Upload to Imgur
 
 %prep
 %autosetup -p1
@@ -95,6 +94,15 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_mandir}/man1/%{name}.1*
 
 %changelog
+* Sat Aug 16 2025 Elliott Tallis <tallis.elliott@gmail.com> - 13.1.0-2
+- Minor spec file tweaks
+
+* Sun Aug 15 2025 Jeremy Borgman <borgman.jeremy@pm.me> - 13.1.0
+- Update for v13.1.0 release
+
+* Sun Aug 06 2025 Jeremy Borgman <borgman.jeremy@pm.me> - 13.0.1
+- Update for v13.0.1 release
+
 * Sun Aug 03 2025 Jeremy Borgman <borgman.jeremy@pm.me> - 13.0.0
 - Update for v13 release
 

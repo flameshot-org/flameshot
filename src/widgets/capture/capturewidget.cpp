@@ -13,11 +13,8 @@
 #include "abstractlogger.h"
 #include "copytool.h"
 #include "src/config/cacheutils.h"
-#include "src/config/generalconf.h"
 #include "src/core/flameshot.h"
 #include "src/core/qguiappcurrentscreen.h"
-#include "src/tools/toolfactory.h"
-#include "src/utils/colorutils.h"
 #include "src/utils/screengrabber.h"
 #include "src/utils/screenshotsaver.h"
 #include "src/utils/systemnotification.h"
@@ -32,9 +29,7 @@
 #include <QApplication>
 #include <QCheckBox>
 #include <QDateTime>
-#include <QDebug>
 #include <QFontMetrics>
-#include <QLabel>
 #include <QMessageBox>
 #include <QPaintEvent>
 #include <QPainter>
@@ -150,13 +145,30 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
         QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
         move(currentScreen->geometry().x(), currentScreen->geometry().y());
         resize(currentScreen->size());
+// LINUX
 #else
 // Call cmake with -DFLAMESHOT_DEBUG_CAPTURE=ON to enable easier debugging
 #if !defined(FLAMESHOT_DEBUG_CAPTURE)
         setWindowFlags(Qt::BypassWindowManagerHint | Qt::WindowStaysOnTopHint |
                        Qt::FramelessWindowHint | Qt::Tool);
-        resize(pixmap().size());
+        // Fix for Qt6 dual monitor offset: position widget to cover entire
+        // desktop
+        QRect desktopGeom = ScreenGrabber().desktopGeometry();
+        move(desktopGeom.topLeft());
+        resize(desktopGeom.size());
 #endif
+        // Need to move to the top left screen
+        QPoint topLeft(0, INT_MAX);
+        for (QScreen* const screen : QGuiApplication::screens()) {
+            qreal dpr = screen->devicePixelRatio();
+            QPoint topLeftScreen = screen->geometry().topLeft() / dpr;
+            if (topLeftScreen.x() == 0) {
+                if (topLeftScreen.y() < topLeft.y()) {
+                    topLeft.setY(topLeftScreen.y());
+                }
+            }
+        }
+        move(topLeft);
 #endif
     }
     QVector<QRect> areas;
@@ -178,6 +190,7 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
         r.moveTo(0, 0);
         areas.append(r);
 #else
+        // LINUX & WINDOWS
         for (QScreen* const screen : QGuiApplication::screens()) {
             QRect r = screen->geometry();
             r.moveTo(r.x() / screen->devicePixelRatio(),
@@ -255,8 +268,15 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
                 OverlayMessage::instance()->update();
             });
 
-    OverlayMessage::init(this,
-                         QGuiAppCurrentScreen().currentScreen()->geometry());
+    // Qt6 has only sizes in logical values, position is in physical values.
+    // Move Help message to the logical pixel with devicePixelRatio.
+    QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
+    QRect currentScreenGeometry = currentScreen->geometry();
+    qreal currentScreenDpr = currentScreen->devicePixelRatio();
+    currentScreenGeometry.moveTo(
+      int(currentScreenGeometry.x() / currentScreenDpr),
+      int(currentScreenGeometry.y() / currentScreenDpr));
+    OverlayMessage::init(this, currentScreenGeometry);
 
     if (m_config.showHelp()) {
         initHelpMessage();
@@ -411,6 +431,13 @@ void CaptureWidget::onGridSizeChanged(int size)
 {
     m_gridSize = size;
     repaint();
+}
+
+void CaptureWidget::startColorGrab()
+{
+    if (m_sidePanel) {
+        m_sidePanel->startColorGrab();
+    }
 }
 
 void CaptureWidget::showxywh()
@@ -954,6 +981,7 @@ void CaptureWidget::mouseReleaseEvent(QMouseEvent* e)
             m_context.color.isValid()) {
             pushObjectsStateToUndoStack();
         }
+        m_colorPicker->setNewColor();
         m_colorPicker->hide();
         if (!m_context.color.isValid()) {
             m_context.color = ConfigHandler().drawColor();
@@ -1206,6 +1234,10 @@ void CaptureWidget::initPanel()
             &SidePanelWidget::togglePanel,
             m_panel,
             &UtilityPanel::toggle);
+    connect(
+      m_sidePanel, &SidePanelWidget::showPanel, m_panel, &UtilityPanel::show);
+    connect(
+      m_sidePanel, &SidePanelWidget::hidePanel, m_panel, &UtilityPanel::hide);
     connect(m_sidePanel,
             &SidePanelWidget::displayGridChanged,
             this,
@@ -1573,6 +1605,9 @@ void CaptureWidget::initShortcuts()
     newShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_TOGGLE_PANEL")),
                 this,
                 SLOT(togglePanel()));
+    newShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_GRAB_COLOR")),
+                this,
+                SLOT(startColorGrab()));
 
     newShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_RESIZE_LEFT")),
                 m_selection,

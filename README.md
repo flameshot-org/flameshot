@@ -225,6 +225,7 @@ These shortcuts are available in GUI mode:
 | <kbd>Ctrl</kbd> + <kbd>Backspace</kbd>                                    | Cancel current selection                                       | 
 | <kbd>Return</kbd>                                             | Upload the selection to Imgur                                      |
 | <kbd>Spacebar</kbd>                                                       | Toggle visibility of sidebar with options of the selected tool, color picker for the drawing color and history menu |
+| <kbd>G</kbd>                                                       | Starts the color picker |
 | Right Click                                                               | Show the color wheel                                              |
 | Mouse Wheel                                                               | Change the tool's thickness                                    |
 | <kbd>Print screen</kbd>                                          | Capture Screen |
@@ -376,6 +377,10 @@ follow the steps below:
 1. Go to the Applications folder (Finder > Go > Applications, or <kbd>Shift</kbd>+<kbd>Command</kbd>+<kbd>A</kbd>)
 1. Right-Click on "flameshot.app" and choose "Open" from the context menu
 2. In the dialog click "Open"
+
+On MacOs 15 and above, you will have to go to system settings -> privacy and security after doing this and click "Open Anyway" or you can open flameshot first time with the following command.
+
+```sudo xattr -rd com.apple.quarantine /Applications/flameshot.app```
 
 After following all those steps above, `flameshot` will open without problems in your Mac.
 

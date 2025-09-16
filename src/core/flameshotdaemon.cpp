@@ -10,11 +10,14 @@
 #include "src/widgets/trayicon.h"
 #include <QApplication>
 #include <QClipboard>
-#include <QDBusConnection>
-#include <QDBusMessage>
 #include <QIODevice>
 #include <QPixmap>
 #include <QRect>
+
+#if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
+#include <QDBusConnection>
+#include <QDBusMessage>
+#endif
 
 #if !defined(DISABLE_UPDATE_CHECKER)
 #include <QDesktopServices>
@@ -24,6 +27,12 @@
 #include <QNetworkReply>
 #include <QTimer>
 #include <QUrl>
+#endif
+
+#if defined(USE_KDSINGLEAPPLICATION) &&                                        \
+  (defined(Q_OS_MACOS) || defined(Q_OS_WIN))
+#include <QBuffer>
+#include <kdsingleapplication.h>
 #endif
 
 #ifdef Q_OS_WIN
@@ -62,9 +71,9 @@ FlameshotDaemon::FlameshotDaemon()
   , m_clipboardSignalBlocked(false)
   , m_trayIcon(nullptr)
 #if !defined(DISABLE_UPDATE_CHECKER)
-  , m_networkCheckUpdates(nullptr)
-  , m_showCheckAppUpdateStatus(false)
   , m_appLatestVersion(QStringLiteral(APP_VERSION).replace("v", ""))
+  , m_showCheckAppUpdateStatus(false)
+  , m_networkCheckUpdates(nullptr)
 #endif
 {
     connect(
@@ -116,11 +125,18 @@ void FlameshotDaemon::createPin(const QPixmap& capture, QRect geometry)
 
     QByteArray data;
     QDataStream stream(&data, QIODevice::WriteOnly);
-    stream << capture;
-    stream << geometry;
+
+#if defined(USE_KDSINGLEAPPLICATION) &&                                        \
+  (defined(Q_OS_MACOS) || defined(Q_OS_WIN))
+    auto kdsa = KDSingleApplication(QStringLiteral("org.flameshot.Flameshot"));
+    stream << QStringLiteral("attachPin") << capture << geometry;
+    kdsa.sendMessage(data);
+#else
+    stream << capture << geometry;
     QDBusMessage m = createMethodCall(QStringLiteral("attachPin"));
     m << data;
     call(m);
+#endif
 }
 
 void FlameshotDaemon::copyToClipboard(const QPixmap& capture)
@@ -130,15 +146,22 @@ void FlameshotDaemon::copyToClipboard(const QPixmap& capture)
         return;
     }
 
+    QByteArray data;
+    QDataStream stream(&data, QIODevice::WriteOnly);
+
+#if defined(USE_KDSINGLEAPPLICATION) &&                                        \
+  (defined(Q_OS_MACOS) || defined(Q_OS_WIN))
+    auto kdsa = KDSingleApplication(QStringLiteral("org.flameshot.Flameshot"));
+    stream << QStringLiteral("attachScreenshotToClipboard") << capture;
+    kdsa.sendMessage(data);
+#else
+    stream << capture;
     QDBusMessage m =
       createMethodCall(QStringLiteral("attachScreenshotToClipboard"));
 
-    QByteArray data;
-    QDataStream stream(&data, QIODevice::WriteOnly);
-    stream << capture;
-
     m << data;
     call(m);
+#endif
 }
 
 void FlameshotDaemon::copyToClipboard(const QString& text,
@@ -148,10 +171,19 @@ void FlameshotDaemon::copyToClipboard(const QString& text,
         instance()->attachTextToClipboard(text, notification);
         return;
     }
-    auto m = createMethodCall(QStringLiteral("attachTextToClipboard"));
 
+#if defined(USE_KDSINGLEAPPLICATION) &&                                        \
+  (defined(Q_OS_MACOS) || defined(Q_OS_WIN))
+    auto kdsa = KDSingleApplication(QStringLiteral("org.flameshot.Flameshot"));
+    QByteArray data;
+    QDataStream stream(&data, QIODevice::WriteOnly);
+    stream << QStringLiteral("attachTextToClipboard") << text << notification;
+    kdsa.sendMessage(data);
+#else
+    auto m = createMethodCall(QStringLiteral("attachTextToClipboard"));
     m << text << notification;
     call(m);
+#endif
 }
 
 /**
@@ -279,7 +311,7 @@ void FlameshotDaemon::attachScreenshotToClipboard(const QPixmap& pixmap)
     clipboard->blockSignals(false);
 }
 
-// D-BUS ADAPTER METHODS
+// D-BUS / KDSingleApplication METHODS
 
 void FlameshotDaemon::attachPin(const QByteArray& data)
 {
@@ -393,6 +425,7 @@ void FlameshotDaemon::handleReplyCheckUpdates(QNetworkReply* reply)
 }
 #endif
 
+#if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
 QDBusMessage FlameshotDaemon::createMethodCall(const QString& method)
 {
     QDBusMessage m =
@@ -417,6 +450,64 @@ void FlameshotDaemon::call(const QDBusMessage& m)
     checkDBusConnection(sessionBus);
     sessionBus.call(m);
 }
+#endif
+
+#if defined(USE_KDSINGLEAPPLICATION) &&                                        \
+  (defined(Q_OS_MACOS) || defined(Q_OS_WIN))
+void FlameshotDaemon::messageReceivedFromSecondaryInstance(
+  const QByteArray& message)
+{
+    // qDebug() << "Received message from second instance:" << message;
+
+    QByteArray messageCopy = message;
+    QBuffer buffer(&messageCopy);
+    buffer.open(QIODevice::ReadOnly);
+    QDataStream stream(&buffer);
+    QString methodCall;
+    stream >> methodCall;
+    // qDebug() << "Method:" << methodCall;
+
+    if (methodCall == QStringLiteral("attachPin")) {
+        QPixmap capture;
+        QRect geometry;
+        stream >> capture >> geometry;
+        // qDebug() << "Pixmap:" << capture;
+        // qDebug() << "Geometry:" << geometry;
+        if (!capture.isNull()) {
+            FlameshotDaemon::instance()->attachPin(capture, geometry);
+        } else {
+            qWarning() << "Received \"attachPin\" from second instance, but "
+                          "pixmap is empty!";
+        }
+    } else if (methodCall == QStringLiteral("attachScreenshotToClipboard")) {
+        QPixmap capture;
+        stream >> capture;
+        // qDebug() << "Pixmap:" << capture;
+        if (!capture.isNull()) {
+            FlameshotDaemon::instance()->attachScreenshotToClipboard(capture);
+        } else {
+            qWarning() << "Received \"attachScreenshotToClipboard\" from "
+                          "second instance, but pixmap is empty!";
+        }
+    } else if (methodCall == (QStringLiteral("attachTextToClipboard"))) {
+        QString text;
+        QString notification;
+        stream >> text >> notification;
+        // qDebug() << "Text:" << text;
+        // qDebug() << "Notification:" << notification;
+        if (!text.isEmpty()) {
+            FlameshotDaemon::instance()->attachTextToClipboard(text,
+                                                               notification);
+        } else {
+            qWarning() << "Received \"attachTextToClipboard\" from second "
+                          "instance, but text is empty!";
+        }
+    } else {
+        qWarning() << "Received unknown message from second instance:"
+                   << message;
+    }
+}
+#endif
 
 // STATIC ATTRIBUTES
 FlameshotDaemon* FlameshotDaemon::m_instance = nullptr;

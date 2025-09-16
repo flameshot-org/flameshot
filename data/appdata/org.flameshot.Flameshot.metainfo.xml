@@ -19,8 +19,6 @@ SPDX-License-Identifier: CC0-1.0
   </developer>
 
   <supports>
-	<control>pointing</control>
-	<control>keyboard</control>
 	<control>touch</control>
   </supports>
   
@@ -36,7 +34,7 @@ SPDX-License-Identifier: CC0-1.0
       Powerful and simple to use screenshot software with built-in
       editor with advanced features.
     </p>
-    <p><strong>Features:</strong></p>
+    <p>Features:</p>
     <ul>
       <li>Customizable appearance</li>
       <li>Very easy to use</li>
@@ -50,23 +48,23 @@ SPDX-License-Identifier: CC0-1.0
 
   <screenshots>
     <screenshot type="default">
-      <image>https://raw.githubusercontent.com/flameshot-org/flameshot/master/data/img/preview/large_demo.png</image>
+      <image>https://raw.githubusercontent.com/flameshot-org/flameshot/master/docs/images/large_demo.png</image>
       <caption>Flameshot Usage</caption>
     </screenshot>
     <screenshot>
-      <image>https://raw.githubusercontent.com/flameshot-org/flameshot/master/data/img/preview/small_demo.png</image>
+      <image>https://raw.githubusercontent.com/flameshot-org/flameshot/master/docs/images/small_demo.png</image>
       <caption>Demo of Pixelation, Arrow, Box, And Counter Bubble</caption>
     </screenshot>
     <screenshot>
-      <image>https://raw.githubusercontent.com/flameshot-org/flameshot/master/data/img/preview/launcher.png</image>
+      <image>https://raw.githubusercontent.com/flameshot-org/flameshot/master/docs/images/launcher.png</image>
       <caption>The Launcher Window</caption>
     </screenshot>
     <screenshot>
-      <image>https://raw.githubusercontent.com/flameshot-org/flameshot/master/data/img/preview/config_interface.png</image>
+      <image>https://raw.githubusercontent.com/flameshot-org/flameshot/master/docs/images/config_interface.png</image>
       <caption>Configuration Window - Interface tab</caption>
     </screenshot>
     <screenshot>
-      <image>https://raw.githubusercontent.com/flameshot-org/flameshot/master/data/img/preview/config_shortcuts.png</image>
+      <image>https://raw.githubusercontent.com/flameshot-org/flameshot/master/docs/images/config_shortcuts.png</image>
       <caption>Configuration Window - Shortcuts tab</caption>
     </screenshot>
   </screenshots>
@@ -93,9 +91,9 @@ SPDX-License-Identifier: CC0-1.0
   </categories>
 
   <releases>
+    <release version="13.1.0" date="2025-08-15"/>
+    <release version="13.0.1" date="2025-08-06"/>
     <release version="13.0.0" date="2025-08-03"/>
-    <release version="13.0.rc2" date="2025-07-27"/>
-    <release version="13.0.rc1" date="2025-07-12"/>
     <release version="12.1.0" date="2022-07-03"/>
     <release version="12.0.0" date="2022-06-21"/>
     <release version="11.0.0" date="2022-01-14"/>

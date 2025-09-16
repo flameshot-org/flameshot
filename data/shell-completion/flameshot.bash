@@ -4,6 +4,7 @@
 # To be installed in "/usr/share/bash-completion/completions/flameshot"
 # and "/usr/share/zsh/site-functions/"
 
+
 _flameshot() {
 	local prev cur cmd gui_opts full_opts config_opts
 	COMPREPLY=()
@@ -11,10 +12,10 @@ _flameshot() {
 	prev="${COMP_WORDS[COMP_CWORD-1]}"
 	cur="${COMP_WORDS[COMP_CWORD]}"
 	cmd="gui full config launcher screen"
-	screen_opts="--number --path --delay --raw --last-region -p -d -r -n"
-	gui_opts="--path --delay --raw --last-region -p -d -r"
-	full_opts="--path --delay --clipboard --raw --last-region -p -d -c -r"
-	config_opts="--contrastcolor --filename --maincolor --showhelp --trayicon --autostart -k -f -m -s -t -a"
+	screen_opts="--number -n --path -p --clipboard -c --delay -d --region --raw -r --upload -u --pin --help"
+	gui_opts="--path -p --clipboard -c --delay -d --region --last-region --raw -r --print-geometry -g --upload -u --pin --accept-on-select -s --help"
+	full_opts="--path -p --clipboard -c --delay -d --region --raw -r --upload -u --help"
+	config_opts="--autostart -a --filename -f --notifications -n --trayicon -t --showhelp -s --maincolor -m --contrastcolor -k --check"
 
 	case "${prev}" in
 		launcher)
@@ -40,7 +41,8 @@ _flameshot() {
 			_filedir -d
 			return 0
 			;;
-		-s|--showhelp|-t|--trayicon)
+        # TODO: We should see how we can add the -n (for `config --notifications`) here that does not conflict with -n (for `screen --number`)
+		-a|--autostart|-s|--showhelp|-t|--trayicon|--notifications)
 			COMPREPLY=( $(compgen -W "true false" -- "${cur}") )
 			return 0
 			;;
