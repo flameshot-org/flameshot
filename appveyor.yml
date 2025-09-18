@@ -3,7 +3,7 @@ image:
 clone_folder: c:\projects\source
 
 environment:
-  Qt6_INSTALL_DIR: 'C:\Qt\6.8.1\msvc2022_64'
+  Qt6_INSTALL_DIR: 'C:\Qt\6.9\msvc2022_64'
   PATH: '%Qt6_INSTALL_DIR%\bin;%PATH%'
 
 build_script:
