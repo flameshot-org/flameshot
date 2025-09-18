@@ -5,7 +5,7 @@
 #include <QTextStream>
 
 /**
- * @brief A class that allows you to log events to where they need to go.
+ * @brief A class that allowsf you to log events to where they need to go.
  */
 class AbstractLogger
 {
