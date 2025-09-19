@@ -192,77 +192,77 @@
 <context>
     <name>CaptureWidget</name>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="117"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="112"/>
         <source>Unable to capture screen</source>
         <translation>Nepodarilo sa zachytiť obrazovku</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="440"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="456"/>
         <source>Mouse</source>
         <translation>Myš</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="440"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="456"/>
         <source>Select screenshot area</source>
         <translation>Výber oblasti snímky obrazovky</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="454"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="470"/>
         <source>Mouse Wheel</source>
         <translation>Koliesko myši</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="454"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="470"/>
         <source>Change tool size</source>
         <translation>Zmeniť veľkosť nástroja</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="455"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="471"/>
         <source>Right Click</source>
         <translation>Klik pravým tlačidlom</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="455"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="471"/>
         <source>Show color picker</source>
         <translation>Zobrazenie okna na výber farby</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="457"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="473"/>
         <source>Open side panel</source>
         <translation>Otvorenie bočného panela</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="458"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="474"/>
         <source>Esc</source>
         <translation>Esc</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="458"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="474"/>
         <source>Exit</source>
         <translation>Ukončenie</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="499"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="515"/>
         <source>Quit Capture</source>
         <translation>Ukončiť snímanie</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="500"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="516"/>
         <source>Are you sure you want to quit capture?</source>
         <translation>Naozaj chcete ukončiť snímanie?</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="505"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="521"/>
         <source>Do not show this again</source>
         <translation>Ďalej už nezobrazovať</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="711"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="727"/>
         <source>Flameshot has lost focus. Keyboard shortcuts won&apos;t work until you click somewhere.</source>
         <translation>Flameshot stratil pozornosť. Klávesové skratky nebudú fungovať, kým niekam nekliknete.</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="717"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="733"/>
         <source>Configuration error resolved. Launch `flameshot gui` again to apply it.</source>
         <translation>Chyba konfigurácie vyriešená. Spustite znova `flameshot gui`, aby ste ju použili.</translation>
     </message>
@@ -279,7 +279,7 @@ Použite kolečko myši pre zmenu hrúbky vybraného nástroja.
 Stlačte medzerník pre otvorenie postranného panelu.</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="1150"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="1167"/>
         <source>Tool Settings</source>
         <translation>Nastavenia nástrojov</translation>
     </message>
@@ -805,22 +805,22 @@ Riešte ich ručne v konfiguračnom súbore.</translation>
 <context>
     <name>FlameshotDaemon</name>
     <message>
-        <location filename="../../src/core/flameshotdaemon.cpp" line="375"/>
+        <location filename="../../src/core/flameshotdaemon.cpp" line="407"/>
         <source>New version %1 is available</source>
         <translation>Je dostupná nová verzia: %1</translation>
     </message>
     <message>
-        <location filename="../../src/core/flameshotdaemon.cpp" line="381"/>
+        <location filename="../../src/core/flameshotdaemon.cpp" line="413"/>
         <source>You have the latest version</source>
         <translation>Máte najnovšiu verziu</translation>
     </message>
     <message>
-        <location filename="../../src/core/flameshotdaemon.cpp" line="390"/>
+        <location filename="../../src/core/flameshotdaemon.cpp" line="422"/>
         <source>Failed to get information about the latest version.</source>
         <translation>Zneužívanie informácií o najnovšej verzii.</translation>
     </message>
     <message>
-        <location filename="../../src/core/flameshotdaemon.cpp" line="412"/>
+        <location filename="../../src/core/flameshotdaemon.cpp" line="445"/>
         <source>Unable to connect via DBus</source>
         <translation>Nie je možné pripojiť sa prostredníctvom DBus</translation>
     </message>
@@ -1926,17 +1926,17 @@ Riešte ich ručne v konfiguračnom súbore.</translation>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../src/main.cpp" line="210"/>
+        <location filename="../../src/main.cpp" line="220"/>
         <source>Unable to connect via DBus</source>
         <translation>Nie je možné pripojiť sa prostredníctvom DBus</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="227"/>
+        <location filename="../../src/main.cpp" line="237"/>
         <source>Powerful yet simple to use screenshot software.</source>
         <translation>Mocný, no zároveň jednoduchý softvér na zachytávanie obrazovky.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="228"/>
+        <location filename="../../src/main.cpp" line="238"/>
         <source>See</source>
         <translation>Pozrite</translation>
     </message>
@@ -1945,17 +1945,17 @@ Riešte ich ručne v konfiguračnom súbore.</translation>
         <translation type="vanished">Zachytiť celú plochu.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="234"/>
+        <location filename="../../src/main.cpp" line="244"/>
         <source>Open the capture launcher.</source>
         <translation>Otvoriť spúšťač zachytávania.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="237"/>
+        <location filename="../../src/main.cpp" line="247"/>
         <source>Start a manual capture in GUI mode.</source>
         <translation>Spustiť manuálne zachytávanie v režime GUI.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="239"/>
+        <location filename="../../src/main.cpp" line="249"/>
         <source>Configure</source>
         <translation>Konfigurovať</translation>
     </message>
@@ -1968,122 +1968,122 @@ Riešte ich ručne v konfiguračnom súbore.</translation>
         <translation type="vanished">Cesta, kam bude snímka uložená</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="232"/>
+        <location filename="../../src/main.cpp" line="242"/>
         <source>Capture screenshot of all monitors at the same time.</source>
         <translation>Urobiť naraz snímku obrazovky všetkých monitorov.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="242"/>
+        <location filename="../../src/main.cpp" line="252"/>
         <source>Capture a screenshot of the specified monitor.</source>
         <translation>Urobiť snímku obrazovky konkrétneho monitora.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="247"/>
+        <location filename="../../src/main.cpp" line="257"/>
         <source>Existing directory or new file to save to</source>
         <translation>Existujúci adresár alebo nový súbor na uloženie</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="250"/>
+        <location filename="../../src/main.cpp" line="260"/>
         <source>Save the capture to the clipboard</source>
         <translation>Uložiť snímku do schránky</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="252"/>
+        <location filename="../../src/main.cpp" line="262"/>
         <source>Pin the capture to the screen</source>
         <translation>Pripnutie snímky k obrazovke</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="254"/>
+        <location filename="../../src/main.cpp" line="264"/>
         <source>Upload screenshot</source>
         <translation>Upload screenshot</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="256"/>
+        <location filename="../../src/main.cpp" line="266"/>
         <source>Delay time in milliseconds</source>
         <translation>Oneskorenie času v milisekundách</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="261"/>
+        <location filename="../../src/main.cpp" line="271"/>
         <source>Repeat screenshot with previously selected region</source>
         <translation>Opakujte screenshot s predtým vybraným regiónom</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="264"/>
+        <location filename="../../src/main.cpp" line="274"/>
         <source>Screenshot region to select</source>
         <translation>Oblasť obrazovky na výber</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="267"/>
+        <location filename="../../src/main.cpp" line="277"/>
         <source>Set the filename pattern</source>
         <translation>Nastaviť masku pre pomenovanie súborov</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="271"/>
+        <location filename="../../src/main.cpp" line="281"/>
         <source>Accept capture as soon as a selection is made</source>
         <translation>Akceptovať zachytenie hneď po výbere</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="273"/>
+        <location filename="../../src/main.cpp" line="283"/>
         <source>Enable or disable the trayicon</source>
         <translation>Povoliť alebo zakázať ikonu v lište</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="277"/>
+        <location filename="../../src/main.cpp" line="287"/>
         <source>Enable or disable run at startup</source>
         <translation>Povoliť alebo zakázáť spustenie pri štarte systému</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="281"/>
+        <location filename="../../src/main.cpp" line="291"/>
         <source>Enable or disable the notifications</source>
         <translation>Povoliť alebo zakázať notifikácie</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="284"/>
+        <location filename="../../src/main.cpp" line="294"/>
         <source>Check the configuration for errors</source>
         <translation>Kontrola konfigurácie na chyby</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="287"/>
+        <location filename="../../src/main.cpp" line="297"/>
         <source>Show the help message in the capture mode</source>
         <translation>Ukazovať nápovedu v režime zachytávania</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="290"/>
+        <location filename="../../src/main.cpp" line="300"/>
         <source>Define the main UI color</source>
         <translation>Nastaviť farbu hlavného používateľského rozhrania</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="294"/>
+        <location filename="../../src/main.cpp" line="304"/>
         <source>Define the contrast UI color</source>
         <translation>Nastaviť kontrastnú farbu používateľského rozhrania</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="297"/>
+        <location filename="../../src/main.cpp" line="307"/>
         <source>Print raw PNG capture</source>
         <translation>Zobraziť surovú PNG snímku</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="300"/>
+        <location filename="../../src/main.cpp" line="310"/>
         <source>Print geometry of the selection in the format WxH+X+Y. Does nothing if raw is specified</source>
         <translation>Zobraziť geometriu výberu vo formáte Š D X Y. Neurobí nič pri nastavení raw</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="304"/>
+        <location filename="../../src/main.cpp" line="314"/>
         <source>Define the screen to capture (starting from 0)</source>
         <translation>Definujte obrazovku, ktorú chcete zachytiť (od 0)</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="324"/>
+        <location filename="../../src/main.cpp" line="334"/>
         <source>Invalid delay, it must be a number greater than 0</source>
         <translation>Neplatné oneskorenie, musí to byť číslo väčšie ako 0</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="327"/>
+        <location filename="../../src/main.cpp" line="337"/>
         <source>Invalid region, use &apos;WxH+X+Y&apos; or &apos;all&apos; or &apos;screen0/screen1/...&apos;.</source>
         <translation>Neplatná oblasť, použite &apos;WxH+X+Y&apos; alebo &apos;all&apos; alebo &apos;screen0/screen1/...&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="340"/>
+        <location filename="../../src/main.cpp" line="350"/>
         <source>Invalid path, must be an existing directory or a new file in an existing directory</source>
         <translation>Nesprávna cesta, musí to byť existujúci adresár alebo nový súbor v existujúcom adresári</translation>
     </message>
@@ -2092,17 +2092,17 @@ Riešte ich ručne v konfiguračnom súbore.</translation>
         <translation type="vanished">Nastaviť monitor, ktorý bude zachytávaný</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="305"/>
+        <location filename="../../src/main.cpp" line="315"/>
         <source>default: screen containing the cursor</source>
         <translation>predvolené: monitor, na ktorom je kurzor myši</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="306"/>
+        <location filename="../../src/main.cpp" line="316"/>
         <source>Screen number</source>
         <translation>Číslo monitora</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="315"/>
+        <location filename="../../src/main.cpp" line="325"/>
         <source>Invalid color, this flag supports the following formats:
 - #RGB (each of R, G, and B is a single hex digit)
 - #RRGGBB
@@ -2123,7 +2123,7 @@ Možno budete musieť napísať pred &apos;#&apos; opačnú lomku, teda &apos;\#
         <translation type="vanished">Neplatné oneskorenie, musí byť vyššie ako 0</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="326"/>
+        <location filename="../../src/main.cpp" line="336"/>
         <source>Invalid screen number, it must be non negative</source>
         <translation>Neplatné číslo monitora, môže byť len kladné</translation>
     </message>
@@ -2132,7 +2132,7 @@ Možno budete musieť napísať pred &apos;#&apos; opačnú lomku, teda &apos;\#
         <translation type="vanished">Neplatná cesta, musí sa jednať o skutočnú cestu na systéme</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="353"/>
+        <location filename="../../src/main.cpp" line="363"/>
         <source>Invalid value, it must be defined as &apos;true&apos; or &apos;false&apos;</source>
         <translation>Neplatná hodnota, musí byť definovaná ako &apos;pravda&apos; alebo &apos;nepravda&apos;</translation>
     </message>
@@ -2394,27 +2394,27 @@ Možno budete musieť napísať pred &apos;#&apos; opačnú lomku, teda &apos;\#
         <translation>Univerzálny adaptér Wayland na snímanie obrazovky vyžaduje Grim ako komponent Waylandu na snímanie obrazovky. Ak tento komponent chýba, nainštalujte ho!</translation>
     </message>
     <message>
-        <location filename="../../src/utils/screengrabber.cpp" line="170"/>
+        <location filename="../../src/utils/screengrabber.cpp" line="171"/>
         <source>If the useGrimAdapter setting is not enabled, the dbus protocol will be used. It should be noted that using the dbus protocol under wayland is not recommended. It is recommended to enable the useGrimAdapter setting in flameshot.ini to activate the grim-based general wayland screenshot adapter</source>
         <translation>Ak nie je nastavenie useGrimAdapter povolené, použije sa protokol dbus. Treba poznamenať, že používanie protokolu dbus pod Waylandom sa neodporúča. Odporúča sa povoliť nastavenie useGrimAdapter v súbore flameshot.ini, aby sa aktivoval všeobecný adaptér na snímanie obrazovky Wayland založený na grime</translation>
     </message>
     <message>
-        <location filename="../../src/utils/screengrabber.cpp" line="181"/>
+        <location filename="../../src/utils/screengrabber.cpp" line="182"/>
         <source>grim&apos;s screenshot component is implemented based on wlroots, it may not be used in GNOME or similar desktop environments</source>
         <translation>komponent programu Grim na tvorbu snímok je postavený na wlroots, nedá sa použiť v prostredí GNOME ani v podobných prostrediach</translation>
     </message>
     <message>
-        <location filename="../../src/utils/screengrabber.cpp" line="193"/>
+        <location filename="../../src/utils/screengrabber.cpp" line="194"/>
         <source>Unable to detect desktop environment (GNOME? KDE? Qile? Sway? ...)</source>
         <translation>Nepodarilo za zistiť pracovné prostredie (GNOME? KDE? Qile? Sway? ...)</translation>
     </message>
     <message>
-        <location filename="../../src/utils/screengrabber.cpp" line="196"/>
+        <location filename="../../src/utils/screengrabber.cpp" line="197"/>
         <source>Hint: try setting the XDG_CURRENT_DESKTOP environment variable.</source>
         <translation>Tip: skúste nastaviť XDG_CURRENT_DESKTOP prostredie premenné.</translation>
     </message>
     <message>
-        <location filename="../../src/utils/screengrabber.cpp" line="201"/>
+        <location filename="../../src/utils/screengrabber.cpp" line="202"/>
         <source>Unable to capture screen</source>
         <translation>Nepodarilo sa zachytiť obrazovku</translation>
     </message>

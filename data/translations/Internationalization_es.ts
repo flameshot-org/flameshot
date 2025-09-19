@@ -192,77 +192,77 @@
 <context>
     <name>CaptureWidget</name>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="117"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="112"/>
         <source>Unable to capture screen</source>
         <translation>Imposible capturar la pantalla</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="440"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="456"/>
         <source>Mouse</source>
         <translation>Mouse</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="440"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="456"/>
         <source>Select screenshot area</source>
         <translation>Seleccionar área de captura de pantalla</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="454"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="470"/>
         <source>Mouse Wheel</source>
         <translation>Rueda del Ratón</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="454"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="470"/>
         <source>Change tool size</source>
         <translation>Cambiar tamaño de la herramienta</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="455"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="471"/>
         <source>Right Click</source>
         <translation>Clic Derecho</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="455"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="471"/>
         <source>Show color picker</source>
         <translation>Mostrar el selector de color</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="457"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="473"/>
         <source>Open side panel</source>
         <translation>Abrir panel lateral</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="458"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="474"/>
         <source>Esc</source>
         <translation>Esc</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="458"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="474"/>
         <source>Exit</source>
         <translation>Salir</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="499"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="515"/>
         <source>Quit Capture</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="500"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="516"/>
         <source>Are you sure you want to quit capture?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="505"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="521"/>
         <source>Do not show this again</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="711"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="727"/>
         <source>Flameshot has lost focus. Keyboard shortcuts won&apos;t work until you click somewhere.</source>
         <translation>Flameshot ha perdido el foco. Los atajos de teclado no funcionarán a menos de que hagas clic en alguna parte.</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="717"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="733"/>
         <source>Configuration error resolved. Launch `flameshot gui` again to apply it.</source>
         <translation>Error de configuración resuelto. Lanza `flameshot gui` de nuevo para aplicarlo.</translation>
     </message>
@@ -279,7 +279,7 @@ Usa la rueda del ratón para cambiar el grosor de la herramienta.
 Presiona Espacio para abrir el panel lateral.</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="1150"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="1167"/>
         <source>Tool Settings</source>
         <translation>Ajustes de herramienta</translation>
     </message>
@@ -809,22 +809,22 @@ Por favor, resuélvelos manualmente en el archivo de configuración.</translatio
 <context>
     <name>FlameshotDaemon</name>
     <message>
-        <location filename="../../src/core/flameshotdaemon.cpp" line="375"/>
+        <location filename="../../src/core/flameshotdaemon.cpp" line="407"/>
         <source>New version %1 is available</source>
         <translation>Nueva versión %1 está disponible</translation>
     </message>
     <message>
-        <location filename="../../src/core/flameshotdaemon.cpp" line="381"/>
+        <location filename="../../src/core/flameshotdaemon.cpp" line="413"/>
         <source>You have the latest version</source>
         <translation>Tienes la última versión</translation>
     </message>
     <message>
-        <location filename="../../src/core/flameshotdaemon.cpp" line="390"/>
+        <location filename="../../src/core/flameshotdaemon.cpp" line="422"/>
         <source>Failed to get information about the latest version.</source>
         <translation>No se pudo obtener información sobre la última versión.</translation>
     </message>
     <message>
-        <location filename="../../src/core/flameshotdaemon.cpp" line="412"/>
+        <location filename="../../src/core/flameshotdaemon.cpp" line="445"/>
         <source>Unable to connect via DBus</source>
         <translation>No se puede conectar a través de DBus</translation>
     </message>
@@ -1932,17 +1932,17 @@ Por favor, resuélvelos manualmente en el archivo de configuración.</translatio
         <translation type="vanished">Capture is saved and copied to the clipboard as </translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="210"/>
+        <location filename="../../src/main.cpp" line="220"/>
         <source>Unable to connect via DBus</source>
         <translation>Imposible conectar mediante DBus</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="227"/>
+        <location filename="../../src/main.cpp" line="237"/>
         <source>Powerful yet simple to use screenshot software.</source>
         <translation>Software de captura de pantalla poderoso pero sencillo de usar.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="228"/>
+        <location filename="../../src/main.cpp" line="238"/>
         <source>See</source>
         <translation>Ver</translation>
     </message>
@@ -1951,17 +1951,17 @@ Por favor, resuélvelos manualmente en el archivo de configuración.</translatio
         <translation type="vanished">Capturar el escritorio completo.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="234"/>
+        <location filename="../../src/main.cpp" line="244"/>
         <source>Open the capture launcher.</source>
         <translation>Abrir el lanzador de capturas.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="237"/>
+        <location filename="../../src/main.cpp" line="247"/>
         <source>Start a manual capture in GUI mode.</source>
         <translation>Iniciar una captura manual en el modo GUI.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="239"/>
+        <location filename="../../src/main.cpp" line="249"/>
         <source>Configure</source>
         <translation>Configurar</translation>
     </message>
@@ -1974,122 +1974,122 @@ Por favor, resuélvelos manualmente en el archivo de configuración.</translatio
         <translation type="vanished">Path where the capture will be saved</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="232"/>
+        <location filename="../../src/main.cpp" line="242"/>
         <source>Capture screenshot of all monitors at the same time.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="242"/>
+        <location filename="../../src/main.cpp" line="252"/>
         <source>Capture a screenshot of the specified monitor.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="247"/>
+        <location filename="../../src/main.cpp" line="257"/>
         <source>Existing directory or new file to save to</source>
         <translation>Directorio existente o nuevo archivo en el que guardar</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="250"/>
+        <location filename="../../src/main.cpp" line="260"/>
         <source>Save the capture to the clipboard</source>
         <translation>Guarda la captura en el portapapeles</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="252"/>
+        <location filename="../../src/main.cpp" line="262"/>
         <source>Pin the capture to the screen</source>
         <translation>Fija la captura a la pantalla</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="254"/>
+        <location filename="../../src/main.cpp" line="264"/>
         <source>Upload screenshot</source>
         <translation>Upload screenshot</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="256"/>
+        <location filename="../../src/main.cpp" line="266"/>
         <source>Delay time in milliseconds</source>
         <translation>Duración de demora en milisegundos</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="261"/>
+        <location filename="../../src/main.cpp" line="271"/>
         <source>Repeat screenshot with previously selected region</source>
         <translation>Repetir la captura de pantalla con la región previamente seleccionada</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="264"/>
+        <location filename="../../src/main.cpp" line="274"/>
         <source>Screenshot region to select</source>
         <translation>Región de captura de pantalla a seleccionar</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="267"/>
+        <location filename="../../src/main.cpp" line="277"/>
         <source>Set the filename pattern</source>
         <translation>Establecer el patrón de nombre de archivo</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="271"/>
+        <location filename="../../src/main.cpp" line="281"/>
         <source>Accept capture as soon as a selection is made</source>
         <translation>Aceptar captura en cuanto se haga una selección</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="273"/>
+        <location filename="../../src/main.cpp" line="283"/>
         <source>Enable or disable the trayicon</source>
         <translation>Activar o desactivar el icono de la bandeja</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="277"/>
+        <location filename="../../src/main.cpp" line="287"/>
         <source>Enable or disable run at startup</source>
         <translation>Activar o desactivar la ejecución al inicio</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="281"/>
+        <location filename="../../src/main.cpp" line="291"/>
         <source>Enable or disable the notifications</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="284"/>
+        <location filename="../../src/main.cpp" line="294"/>
         <source>Check the configuration for errors</source>
         <translation>Comprobar si hay errores en la configuración</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="287"/>
+        <location filename="../../src/main.cpp" line="297"/>
         <source>Show the help message in the capture mode</source>
         <translation>Mostrar el mensaje de ayuda en el modo de captura</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="290"/>
+        <location filename="../../src/main.cpp" line="300"/>
         <source>Define the main UI color</source>
         <translation>Definir el color principal de la interfaz de usuario</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="294"/>
+        <location filename="../../src/main.cpp" line="304"/>
         <source>Define the contrast UI color</source>
         <translation>Definir el color de contraste de la interfaz de usuario</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="297"/>
+        <location filename="../../src/main.cpp" line="307"/>
         <source>Print raw PNG capture</source>
         <translation>Imprimir la captura PNG sin procesar</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="300"/>
+        <location filename="../../src/main.cpp" line="310"/>
         <source>Print geometry of the selection in the format WxH+X+Y. Does nothing if raw is specified</source>
         <translation>Imprimir geometría de la selección en el formato WxH+X+Y. No hace nada si se especifica que no se procese</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="304"/>
+        <location filename="../../src/main.cpp" line="314"/>
         <source>Define the screen to capture (starting from 0)</source>
         <translation>Definir la pantalla a capturar (empezando por 0)</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="324"/>
+        <location filename="../../src/main.cpp" line="334"/>
         <source>Invalid delay, it must be a number greater than 0</source>
         <translation>Demora inválida, debe ser un valor mayor a 0</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="327"/>
+        <location filename="../../src/main.cpp" line="337"/>
         <source>Invalid region, use &apos;WxH+X+Y&apos; or &apos;all&apos; or &apos;screen0/screen1/...&apos;.</source>
         <translation>Región inválida, utiliza &quot;WxH+X+Y&quot; o &quot;todo&quot; o &quot;pantalla0/pantalla1/...&quot;.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="340"/>
+        <location filename="../../src/main.cpp" line="350"/>
         <source>Invalid path, must be an existing directory or a new file in an existing directory</source>
         <translation>Ruta inválida, debe ser un directorio existente o un nuevo archivo en un directorio existente</translation>
     </message>
@@ -2098,17 +2098,17 @@ Por favor, resuélvelos manualmente en el archivo de configuración.</translatio
         <translation type="vanished">Define the screen to capture</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="305"/>
+        <location filename="../../src/main.cpp" line="315"/>
         <source>default: screen containing the cursor</source>
         <translation>por defecto: pantalla que contiene el cursor</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="306"/>
+        <location filename="../../src/main.cpp" line="316"/>
         <source>Screen number</source>
         <translation>Screen number</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="315"/>
+        <location filename="../../src/main.cpp" line="325"/>
         <source>Invalid color, this flag supports the following formats:
 - #RGB (each of R, G, and B is a single hex digit)
 - #RRGGBB
@@ -2129,7 +2129,7 @@ Puede ser que necesites preceder el símbolo &quot;#&quot; con &quot;\&quot;, co
         <translation type="vanished">Invalid delay, it must be higher than 0</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="326"/>
+        <location filename="../../src/main.cpp" line="336"/>
         <source>Invalid screen number, it must be non negative</source>
         <translation>Número de pantalla inválido, no debe ser negativo</translation>
     </message>
@@ -2138,7 +2138,7 @@ Puede ser que necesites preceder el símbolo &quot;#&quot; con &quot;\&quot;, co
         <translation type="vanished">Invalid path, it must be a real path in the system</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="353"/>
+        <location filename="../../src/main.cpp" line="363"/>
         <source>Invalid value, it must be defined as &apos;true&apos; or &apos;false&apos;</source>
         <translation>Valor inválido, debe ser definido como &quot;verdadero&quot; o &quot;falso&quot;</translation>
     </message>
@@ -2342,27 +2342,27 @@ Puede ser que necesites preceder el símbolo &quot;#&quot; con &quot;\&quot;, co
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/utils/screengrabber.cpp" line="170"/>
+        <location filename="../../src/utils/screengrabber.cpp" line="171"/>
         <source>If the useGrimAdapter setting is not enabled, the dbus protocol will be used. It should be noted that using the dbus protocol under wayland is not recommended. It is recommended to enable the useGrimAdapter setting in flameshot.ini to activate the grim-based general wayland screenshot adapter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/utils/screengrabber.cpp" line="181"/>
+        <location filename="../../src/utils/screengrabber.cpp" line="182"/>
         <source>grim&apos;s screenshot component is implemented based on wlroots, it may not be used in GNOME or similar desktop environments</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/utils/screengrabber.cpp" line="193"/>
+        <location filename="../../src/utils/screengrabber.cpp" line="194"/>
         <source>Unable to detect desktop environment (GNOME? KDE? Qile? Sway? ...)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/utils/screengrabber.cpp" line="196"/>
+        <location filename="../../src/utils/screengrabber.cpp" line="197"/>
         <source>Hint: try setting the XDG_CURRENT_DESKTOP environment variable.</source>
         <translation>Sugerencia: intenta configurar la variable del entorno XDG_CURRENT_DESKTOP.</translation>
     </message>
     <message>
-        <location filename="../../src/utils/screengrabber.cpp" line="201"/>
+        <location filename="../../src/utils/screengrabber.cpp" line="202"/>
         <source>Unable to capture screen</source>
         <translation>Imposible capturar la pantalla</translation>
     </message>

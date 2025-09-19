@@ -192,78 +192,78 @@
 <context>
     <name>CaptureWidget</name>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="117"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="112"/>
         <source>Unable to capture screen</source>
         <translatorcomment>Impossible capturar la pantalla</translatorcomment>
         <translation>Δεν είναι δυνατή η λήψη της οθόνης</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="440"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="456"/>
         <source>Mouse</source>
         <translation>Ποντίκι</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="440"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="456"/>
         <source>Select screenshot area</source>
         <translation>Επιλέξτε περιοχή στιγμιότυπου οθόνης</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="454"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="470"/>
         <source>Mouse Wheel</source>
         <translation>Τροχός Ποντικιού</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="454"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="470"/>
         <source>Change tool size</source>
         <translation>Αλλαγή μεγέθους εργαλείου</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="455"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="471"/>
         <source>Right Click</source>
         <translation>Δεξί Κλίκ</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="455"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="471"/>
         <source>Show color picker</source>
         <translation>Εμφάνιση επιλογέα χρώματος</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="457"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="473"/>
         <source>Open side panel</source>
         <translation>Ανοίξτε το πλαϊνό πλαίσιο</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="458"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="474"/>
         <source>Esc</source>
         <translation>Esc</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="458"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="474"/>
         <source>Exit</source>
         <translation>Έξοδος</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="499"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="515"/>
         <source>Quit Capture</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="500"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="516"/>
         <source>Are you sure you want to quit capture?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="505"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="521"/>
         <source>Do not show this again</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="711"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="727"/>
         <source>Flameshot has lost focus. Keyboard shortcuts won&apos;t work until you click somewhere.</source>
         <translation>Το Flameshot έχει χάσει την εστίαση. Οι συντομεύσεις πληκτρολογίου δεν θα λειτουργήσουν μέχρι να κάνετε κλικ κάπου.</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="717"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="733"/>
         <source>Configuration error resolved. Launch `flameshot gui` again to apply it.</source>
         <translation>Επιλύθηκε το σφάλμα διαμόρφωσης. Εκκινήστε ξανά το «flameshot gui» για να το εφαρμόσετε.</translation>
     </message>
@@ -280,7 +280,7 @@ Press Space to open the side panel.</source>
 Πατήστε καινό για να ανοίξετε τον πλευρικό πίνακα.</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="1150"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="1167"/>
         <source>Tool Settings</source>
         <translation>Ρυθμίσεις Εργαλείου</translation>
     </message>
@@ -802,22 +802,22 @@ Please solve them manually in the configuration file.</source>
 <context>
     <name>FlameshotDaemon</name>
     <message>
-        <location filename="../../src/core/flameshotdaemon.cpp" line="375"/>
+        <location filename="../../src/core/flameshotdaemon.cpp" line="407"/>
         <source>New version %1 is available</source>
         <translation>Η νέα έκδοση % 1 είναι διαθέσιμη</translation>
     </message>
     <message>
-        <location filename="../../src/core/flameshotdaemon.cpp" line="381"/>
+        <location filename="../../src/core/flameshotdaemon.cpp" line="413"/>
         <source>You have the latest version</source>
         <translation>Έχετε την πιο πρόσφατη έκδοση</translation>
     </message>
     <message>
-        <location filename="../../src/core/flameshotdaemon.cpp" line="390"/>
+        <location filename="../../src/core/flameshotdaemon.cpp" line="422"/>
         <source>Failed to get information about the latest version.</source>
         <translation>Αποτυχία λήψης πληροφοριών για την πιο πρόσφατη έκδοση.</translation>
     </message>
     <message>
-        <location filename="../../src/core/flameshotdaemon.cpp" line="412"/>
+        <location filename="../../src/core/flameshotdaemon.cpp" line="445"/>
         <source>Unable to connect via DBus</source>
         <translation>Δεν είναι δυνατή η σύνδεση μέσω DBus</translation>
     </message>
@@ -1909,17 +1909,17 @@ Please solve them manually in the configuration file.</source>
         <translation>Σφάλμα κατά την προσπάθεια αποθήκευσης ως </translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="210"/>
+        <location filename="../../src/main.cpp" line="220"/>
         <source>Unable to connect via DBus</source>
         <translation>Δεν είναι δυνατή η σύνδεση μέσω DBus</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="227"/>
+        <location filename="../../src/main.cpp" line="237"/>
         <source>Powerful yet simple to use screenshot software.</source>
         <translation>Ισχυρό αλλά απλό στη χρήση λογισμικό στιγμιότυπων οθόνης.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="228"/>
+        <location filename="../../src/main.cpp" line="238"/>
         <source>See</source>
         <translation>Δες</translation>
     </message>
@@ -1928,17 +1928,17 @@ Please solve them manually in the configuration file.</source>
         <translation type="vanished">Καταγράψτε ολόκληρη την επιφάνεια εργασίας.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="234"/>
+        <location filename="../../src/main.cpp" line="244"/>
         <source>Open the capture launcher.</source>
         <translation>Ανοίξτε τον εκκινητή καταγραφής.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="237"/>
+        <location filename="../../src/main.cpp" line="247"/>
         <source>Start a manual capture in GUI mode.</source>
         <translation>Ξεκινήστε μια χειροκίνητη λήψη σε λειτουργία GUI.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="239"/>
+        <location filename="../../src/main.cpp" line="249"/>
         <source>Configure</source>
         <translation>Διαμορφώστε</translation>
     </message>
@@ -1951,122 +1951,122 @@ Please solve them manually in the configuration file.</source>
         <translation type="vanished">Path where the capture will be saved</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="232"/>
+        <location filename="../../src/main.cpp" line="242"/>
         <source>Capture screenshot of all monitors at the same time.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="242"/>
+        <location filename="../../src/main.cpp" line="252"/>
         <source>Capture a screenshot of the specified monitor.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="247"/>
+        <location filename="../../src/main.cpp" line="257"/>
         <source>Existing directory or new file to save to</source>
         <translation>Υπάρχων κατάλογος ή νέο αρχείο για αποθήκευση</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="250"/>
+        <location filename="../../src/main.cpp" line="260"/>
         <source>Save the capture to the clipboard</source>
         <translation>Αποθηκεύστε τη λήψη στο πρόχειρο</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="252"/>
+        <location filename="../../src/main.cpp" line="262"/>
         <source>Pin the capture to the screen</source>
         <translation>Καρφιτσώστε τη λήψη στην οθόνη</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="254"/>
+        <location filename="../../src/main.cpp" line="264"/>
         <source>Upload screenshot</source>
         <translation>Μεταφόρτωση στιγμιότυπου οθόνης</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="256"/>
+        <location filename="../../src/main.cpp" line="266"/>
         <source>Delay time in milliseconds</source>
         <translation>Χρόνος καθυστέρησης σε χιλιοστά του δευτερολέπτου</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="261"/>
+        <location filename="../../src/main.cpp" line="271"/>
         <source>Repeat screenshot with previously selected region</source>
         <translation>Επαναλάβετε το στιγμιότυπο οθόνης με την προηγουμένως επιλεγμένη περιοχή</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="264"/>
+        <location filename="../../src/main.cpp" line="274"/>
         <source>Screenshot region to select</source>
         <translation>Περιοχή στιγμιότυπου οθόνης για επιλογή</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="267"/>
+        <location filename="../../src/main.cpp" line="277"/>
         <source>Set the filename pattern</source>
         <translation>Ορίστε το μοτίβο ονόματος αρχείου</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="271"/>
+        <location filename="../../src/main.cpp" line="281"/>
         <source>Accept capture as soon as a selection is made</source>
         <translation>Αποδεχτείτε τη λήψη μόλις γίνει μια επιλογή</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="273"/>
+        <location filename="../../src/main.cpp" line="283"/>
         <source>Enable or disable the trayicon</source>
         <translation>Ενεργοποιήστε ή απενεργοποιήστε το εικονίδιο tray</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="277"/>
+        <location filename="../../src/main.cpp" line="287"/>
         <source>Enable or disable run at startup</source>
         <translation>Ενεργοποίηση ή απενεργοποίηση της εκτέλεσης κατά την εκκίνηση</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="281"/>
+        <location filename="../../src/main.cpp" line="291"/>
         <source>Enable or disable the notifications</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="284"/>
+        <location filename="../../src/main.cpp" line="294"/>
         <source>Check the configuration for errors</source>
         <translation>Ελέγξτε τη διαμόρφωση για σφάλματα</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="287"/>
+        <location filename="../../src/main.cpp" line="297"/>
         <source>Show the help message in the capture mode</source>
         <translation>Εμφάνιση του μηνύματος βοήθειας στη λειτουργία λήψης</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="290"/>
+        <location filename="../../src/main.cpp" line="300"/>
         <source>Define the main UI color</source>
         <translation>Καθορίστε το κύριο χρώμα διεπαφής χρήστη</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="294"/>
+        <location filename="../../src/main.cpp" line="304"/>
         <source>Define the contrast UI color</source>
         <translation>Καθορίστε το χρώμα του αντίθεσης διεπαφής χρήστη</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="297"/>
+        <location filename="../../src/main.cpp" line="307"/>
         <source>Print raw PNG capture</source>
         <translation>Εκτυπώστε λήψη raw PNG</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="300"/>
+        <location filename="../../src/main.cpp" line="310"/>
         <source>Print geometry of the selection in the format WxH+X+Y. Does nothing if raw is specified</source>
         <translation>Εκτύπωση γεωμετρίας της επιλογής στη μορφή WxH+X+Y. Δεν κάνει τίποτα εάν έχει καθοριστεί raw</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="304"/>
+        <location filename="../../src/main.cpp" line="314"/>
         <source>Define the screen to capture (starting from 0)</source>
         <translation>Καθορίστε την οθόνη για λήψη (ξεκινώντας από το 0)</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="324"/>
+        <location filename="../../src/main.cpp" line="334"/>
         <source>Invalid delay, it must be a number greater than 0</source>
         <translation>Μη έγκυρη καθυστέρηση, πρέπει να είναι αριθμός μεγαλύτερος από 0</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="327"/>
+        <location filename="../../src/main.cpp" line="337"/>
         <source>Invalid region, use &apos;WxH+X+Y&apos; or &apos;all&apos; or &apos;screen0/screen1/...&apos;.</source>
         <translation>Μη έγκυρη περιοχή, χρησιμοποιήστε &apos;WxH+X+Y&apos; ή &apos;όλες&apos; ή &apos;οθόνη0/οθόνη1/...&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="340"/>
+        <location filename="../../src/main.cpp" line="350"/>
         <source>Invalid path, must be an existing directory or a new file in an existing directory</source>
         <translation>Μη έγκυρη διαδρομή, πρέπει να είναι ένας υπάρχων κατάλογος ή ένα νέο αρχείο σε έναν υπάρχοντα κατάλογο</translation>
     </message>
@@ -2075,17 +2075,17 @@ Please solve them manually in the configuration file.</source>
         <translation type="vanished">Define the screen to capture</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="305"/>
+        <location filename="../../src/main.cpp" line="315"/>
         <source>default: screen containing the cursor</source>
         <translation>προεπιλογή: οθόνη που περιέχει τον κέρσορα</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="306"/>
+        <location filename="../../src/main.cpp" line="316"/>
         <source>Screen number</source>
         <translation>Αριθμός οθόνης</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="315"/>
+        <location filename="../../src/main.cpp" line="325"/>
         <source>Invalid color, this flag supports the following formats:
 - #RGB (each of R, G, and B is a single hex digit)
 - #RRGGBB
@@ -2106,7 +2106,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <translation type="vanished">Invalid delay, it must be higher than 0</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="326"/>
+        <location filename="../../src/main.cpp" line="336"/>
         <source>Invalid screen number, it must be non negative</source>
         <translation>Μη έγκυρος αριθμός οθόνης, δεν πρέπει να είναι αρνητικός</translation>
     </message>
@@ -2115,7 +2115,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <translation type="vanished">Invalid path, it must be a real path in the system</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="353"/>
+        <location filename="../../src/main.cpp" line="363"/>
         <source>Invalid value, it must be defined as &apos;true&apos; or &apos;false&apos;</source>
         <translation>Μη έγκυρη τιμή, πρέπει να οριστεί ως &quot;true&quot; ή &quot;false&quot;</translation>
     </message>
@@ -2319,27 +2319,27 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/utils/screengrabber.cpp" line="170"/>
+        <location filename="../../src/utils/screengrabber.cpp" line="171"/>
         <source>If the useGrimAdapter setting is not enabled, the dbus protocol will be used. It should be noted that using the dbus protocol under wayland is not recommended. It is recommended to enable the useGrimAdapter setting in flameshot.ini to activate the grim-based general wayland screenshot adapter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/utils/screengrabber.cpp" line="181"/>
+        <location filename="../../src/utils/screengrabber.cpp" line="182"/>
         <source>grim&apos;s screenshot component is implemented based on wlroots, it may not be used in GNOME or similar desktop environments</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/utils/screengrabber.cpp" line="193"/>
+        <location filename="../../src/utils/screengrabber.cpp" line="194"/>
         <source>Unable to detect desktop environment (GNOME? KDE? Qile? Sway? ...)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/utils/screengrabber.cpp" line="196"/>
+        <location filename="../../src/utils/screengrabber.cpp" line="197"/>
         <source>Hint: try setting the XDG_CURRENT_DESKTOP environment variable.</source>
         <translation>Συμβουλή: δοκιμάστε να ρυθμίσετε τη μεταβλητή περιβάλλοντος XDG_CURRENT_DESKTOP.</translation>
     </message>
     <message>
-        <location filename="../../src/utils/screengrabber.cpp" line="201"/>
+        <location filename="../../src/utils/screengrabber.cpp" line="202"/>
         <source>Unable to capture screen</source>
         <translation>Δεν είναι δυνατή η λήψη της οθόνης</translation>
     </message>
