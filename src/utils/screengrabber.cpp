@@ -13,6 +13,7 @@
 #include <QProcess>
 #include <QScreen>
 
+#include <QStandardPaths>
 #if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
 #include "request.h"
 #include <QDBusInterface>
@@ -21,6 +22,9 @@
 #include <QUrl>
 #include <QUuid>
 #endif
+
+// TODO: This should be removed after the complete switch to the DesktopCapture
+// It is still used (but does not properly work) for non-fullscreen captures
 
 ScreenGrabber::ScreenGrabber(QObject* parent)
   : QObject(parent)
@@ -221,6 +225,12 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
                                 -r.y() / primaryScreen->devicePixelRatio(),
                                 geometry.width(),
                                 geometry.height());
+
+    QString downloadsPath =
+      QStandardPaths::writableLocation(QStandardPaths::DownloadLocation);
+    QString filePath = downloadsPath + "/screenshot.png";
+    desktop.save(filePath, "PNG");
+
     return desktop;
 #endif
 }
@@ -269,16 +279,31 @@ QRect ScreenGrabber::desktopGeometry()
 {
     QRect geometry;
 
+    qreal dpr = 1.0;
+#ifdef Q_OS_WIN
+    QScreen* primaryScreen = QGuiApplication::primaryScreen();
+    dpr = primaryScreen->devicePixelRatio();
+    qWarning() << "ScreenGrabber::desktopGeometry() - (primaryScreen) dpr ="
+               << dpr;
+#endif
+
     for (QScreen* const screen : QGuiApplication::screens()) {
         QRect scrRect = screen->geometry();
+        qWarning() << "ScreenGrabber::desktopGeometry() - scrRect =" << scrRect;
         // Qt6 fix: Don't divide by devicePixelRatio for multi-monitor setups
         // This was causing coordinate offset issues in dual monitor
         // configurations
         // But it still has a screen position in real pixels, not logical ones
-        qreal dpr = screen->devicePixelRatio();
+#ifdef Q_OS_LINUX
+        dpr = screen->devicePixelRatio();
+#endif
+
         scrRect.moveTo(QPointF(scrRect.x() / dpr, scrRect.y() / dpr).toPoint());
+        qWarning() << "ScreenGrabber::desktopGeometry() - scrRect (scaled = "
+                   << dpr << ") =" << scrRect;
         geometry = geometry.united(scrRect);
     }
+    qWarning() << "ScreenGrabber::desktopGeometry() - geometry =" << geometry;
     return geometry;
 }
 
