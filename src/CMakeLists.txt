@@ -118,14 +118,17 @@ set(FLAMESHOT_TS_FILES
       ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_bg.ts
       ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_ca.ts
       ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_cs.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_da.ts
       ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_de_DE.ts
       ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_el.ts
       ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_en.ts
       ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_es.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_et.ts
       ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_eu.ts
       ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_fa.ts
       ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_fi.ts
       ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_fr.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_ga.ts
       ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_gl.ts
       ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_grc.ts
       ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_he.ts
@@ -138,12 +141,17 @@ set(FLAMESHOT_TS_FILES
       ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_nb_NO.ts
       ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_nl_NL.ts
       ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_nl.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_pt.ts
       ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_pl.ts
       ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_pt_BR.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_ro.ts
       ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_ru.ts
       ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_sk.ts
       ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_sr_SP.ts
       ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_sv_SE.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_sw.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_ta.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_th.ts
       ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_tr.ts
       ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_uk.ts
       ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_vi.ts
