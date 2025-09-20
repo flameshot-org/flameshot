@@ -111,31 +111,60 @@ void configureTranslation(QTranslator& translator, QTranslator& qtTranslator)
     bool foundTranslation;
     // Configure translations
     for (const QString& path : PathInfo::translationsPaths()) {
-        foundTranslation =
-          translator.load(QLocale(),
-                          QStringLiteral("Internationalization"),
-                          QStringLiteral("_"),
-                          path);
+        if (ConfigHandler().uiLanguage() == QStringLiteral("auto")) {
+            // Load language, which was detected from the system
+            foundTranslation =
+              translator.load(QLocale(),
+                              QStringLiteral("Internationalization"),
+                              QStringLiteral("_"),
+                              path);
+        } else {
+            // Load language from settings
+            foundTranslation =
+              translator.load(QStringLiteral("Internationalization_") +
+                                ConfigHandler().uiLanguage(),
+                              path);
+        }
         if (foundTranslation) {
             break;
         }
     }
     if (!foundTranslation) {
-        QLocale l;
-        qWarning() << QStringLiteral("No Flameshot translation found for %1")
-                        .arg(l.uiLanguages().join(", "));
+        if (ConfigHandler().uiLanguage() == QStringLiteral("auto")) {
+            QLocale l;
+            qWarning() << QStringLiteral(
+                            "No Flameshot translation found for %1")
+                            .arg(l.uiLanguages().join(", "));
+        } else {
+            qWarning() << QStringLiteral(
+                            "No Flameshot translation found for %1")
+                            .arg(ConfigHandler().uiLanguage());
+        }
     }
 
-    foundTranslation =
-      qtTranslator.load(QLocale::system(),
-                        "qt",
-                        "_",
-                        QLibraryInfo::path(QLibraryInfo::TranslationsPath));
-    if (!foundTranslation) {
-        qWarning() << QStringLiteral("No Qt translation found for %1")
-                        .arg(QLocale::languageToString(
-                          QLocale::system().language()));
+    if (ConfigHandler().uiLanguage() == QStringLiteral("auto")) {
+        foundTranslation =
+          qtTranslator.load(QLocale::system(),
+                            "qt",
+                            "_",
+                            QLibraryInfo::path(QLibraryInfo::TranslationsPath));
+    } else {
+        foundTranslation = qtTranslator.load(
+          QStringLiteral("qt_") + ConfigHandler().uiLanguage(),
+
+          QLibraryInfo::path(QLibraryInfo::TranslationsPath));
     }
+    if (!foundTranslation) {
+        if (ConfigHandler().uiLanguage() == QStringLiteral("auto")) {
+            qWarning() << QStringLiteral("No Qt translation found for %1")
+                            .arg(QLocale::languageToString(
+                              QLocale::system().language()));
+        } else {
+            qWarning() << QStringLiteral("No Qt translation found for %1")
+                            .arg(ConfigHandler().uiLanguage());
+        }
+    }
+
     qApp->installTranslator(&translator);
     qApp->installTranslator(&qtTranslator);
 }

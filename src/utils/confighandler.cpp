@@ -107,6 +107,7 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     OPTION("uploadHistoryMax"            ,LowerBoundedInt    ( 0, 25         )),
     OPTION("undoLimit"                   ,BoundedInt         ( 0, 999, 100   )),
     // Interface tab
+    OPTION("uiLanguage"                  ,String             ( "auto"        )),
     OPTION("uiColor"                     ,Color              ( {116, 0, 150} )),
     OPTION("contrastUiColor"             ,Color              ( {39, 0, 50}   )),
     OPTION("contrastOpacity"             ,BoundedInt         ( 0, 255, 190   )),

@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include <QComboBox>
 #include <QTabWidget>
 #include <QWidget>
 
@@ -35,6 +36,9 @@ private:
     ButtonListView* m_buttonList;
     ExtendedSlider* m_opacitySlider;
 
+    QComboBox* m_selectTranslation;
+
     void initWidgets();
     void initOpacitySlider();
+    void initTranslations();
 };
