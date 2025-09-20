@@ -55,15 +55,12 @@ bool verifyLaunchFile()
  *             misbehave.
  */
 #define OPTION(KEY, TYPE)                                                      \
-    {                                                                          \
-        QStringLiteral(KEY), QSharedPointer<ValueHandler>(new TYPE)            \
-    }
+    { QStringLiteral(KEY), QSharedPointer<ValueHandler>(new TYPE) }
 
 #define SHORTCUT(NAME, DEFAULT_VALUE)                                          \
-    {                                                                          \
-        QStringLiteral(NAME), QSharedPointer<KeySequence>(new KeySequence(     \
-                                QKeySequence(QLatin1String(DEFAULT_VALUE))))   \
-    }
+    { QStringLiteral(NAME),                                                    \
+      QSharedPointer<KeySequence>(                                             \
+        new KeySequence(QKeySequence(QLatin1String(DEFAULT_VALUE)))) }
 
 /**
  * This map contains all the information that is needed to parse, verify and
@@ -107,6 +104,7 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     OPTION("uploadHistoryMax"            ,LowerBoundedInt    ( 0, 25         )),
     OPTION("undoLimit"                   ,BoundedInt         ( 0, 999, 100   )),
     // Interface tab
+    OPTION("uiLanguage"                  ,String             ( "auto"        )),
     OPTION("uiColor"                     ,Color              ( {116, 0, 150} )),
     OPTION("contrastUiColor"             ,Color              ( {39, 0, 50}   )),
     OPTION("contrastOpacity"             ,BoundedInt         ( 0, 255, 190   )),
@@ -211,7 +209,7 @@ ConfigHandler::ConfigHandler()
         QObject::connect(m_configWatcher.data(),
                          &QFileSystemWatcher::fileChanged,
                          [](const QString& fileName) {
-                             emit getInstance()->fileChanged();
+                             emit getInstance() -> fileChanged();
 
                              if (QFile(fileName).exists()) {
                                  m_configWatcher->addPath(fileName);
@@ -711,12 +709,12 @@ void ConfigHandler::setErrorState(bool error) const
     if (!hadError && m_hasError) {
         QString msg = errorMessage();
         AbstractLogger::error() << msg;
-        emit getInstance()->error();
+        emit getInstance() -> error();
     } else if (hadError && !m_hasError) {
         auto msg =
           tr("You have successfully resolved the configuration error.");
         AbstractLogger::info() << msg;
-        emit getInstance()->errorResolved();
+        emit getInstance() -> errorResolved();
     }
 }
 

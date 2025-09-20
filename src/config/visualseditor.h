@@ -5,6 +5,7 @@
 
 #include <QTabWidget>
 #include <QWidget>
+#include <QComboBox>
 
 class ExtendedSlider;
 class QVBoxLayout;
@@ -35,6 +36,9 @@ private:
     ButtonListView* m_buttonList;
     ExtendedSlider* m_opacitySlider;
 
+    QComboBox* m_selectTranslation;
+
     void initWidgets();
     void initOpacitySlider();
+    void initTranslations();
 };
