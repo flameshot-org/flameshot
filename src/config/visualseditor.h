@@ -3,9 +3,9 @@
 
 #pragma once
 
+#include <QComboBox>
 #include <QTabWidget>
 #include <QWidget>
-#include <QComboBox>
 
 class ExtendedSlider;
 class QVBoxLayout;
