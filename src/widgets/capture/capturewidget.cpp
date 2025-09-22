@@ -142,7 +142,9 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
       ConfigHandler::getInstance(), &ConfigHandler::error, this, [=, this]() {
           m_configError = true;
           m_configErrorResolved = false;
-          OverlayMessage::instance()->update();
+          if (m_config.showHelp()) {
+              OverlayMessage::instance()->update();
+          }
       });
     connect(ConfigHandler::getInstance(),
             &ConfigHandler::errorResolved,
@@ -150,7 +152,9 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
             [=, this]() {
                 m_configError = false;
                 m_configErrorResolved = true;
-                OverlayMessage::instance()->update();
+                if (m_config.showHelp()) {
+                    OverlayMessage::instance()->update();
+                }
             });
 }
 
@@ -855,7 +859,8 @@ void CaptureWidget::mousePressEvent(QMouseEvent* e)
         }
         showColorPicker(m_mousePressedPos);
         return;
-    } else if (e->button() == Qt::LeftButton) {
+    }
+    if (e->button() == Qt::LeftButton) {
         m_mouseIsClicked = true;
 
         // Click using a tool excluding tool MOVE
@@ -1329,7 +1334,9 @@ void CaptureWidget::initSelection()
         m_buttonHandler->hide();
         updateCursor();
         updateSizeIndicator();
-        OverlayMessage::pop();
+        if (m_config.showHelp()) {
+            OverlayMessage::pop();
+        }
     });
     connect(m_selection, &SelectionWidget::geometrySettled, this, [this]() {
         if (m_selection->isVisibleTo(this)) {
@@ -1346,7 +1353,8 @@ void CaptureWidget::initSelection()
         }
     });
     connect(m_selection, &SelectionWidget::visibilityChanged, this, [this]() {
-        if (!m_selection->isVisible() && !m_helpMessage.isEmpty()) {
+        if (!m_selection->isVisible() && !m_helpMessage.isEmpty() &&
+            m_config.showHelp()) {
             OverlayMessage::push(m_helpMessage);
         }
     });
