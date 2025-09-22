@@ -186,7 +186,7 @@
         <location filename="../../src/widgets/capturelauncher.ui" line="93"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="183"/>
         <source>WxH+x+y</source>
-        <translation>WxH+x+y</translation>
+        <translation>LxA+x+y</translation>
     </message>
 </context>
 <context>
@@ -245,17 +245,17 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="515"/>
         <source>Quit Capture</source>
-        <translation type="unfinished"></translation>
+        <translation>Scoir den Gabháil</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="516"/>
         <source>Are you sure you want to quit capture?</source>
-        <translation type="unfinished"></translation>
+        <translation>An bhfuil tú cinnte gur mian leat scor den ghabháil?</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="521"/>
         <source>Do not show this again</source>
-        <translation type="unfinished"></translation>
+        <translation>Ná taispeáin seo arís</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="727"/>
@@ -1061,12 +1061,12 @@ Réitigh iad de láimh sa chomhad cumraíochta.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="323"/>
         <source>Show abort notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Taispeáin fógraí scoir</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="324"/>
         <source>Enable abort notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Cumasaigh fógraí scoir</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="337"/>
@@ -1076,12 +1076,12 @@ Réitigh iad de láimh sa chomhad cumraíochta.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="350"/>
         <source>Use grim to capture screenshots</source>
-        <translation type="unfinished"></translation>
+        <translation>Úsáid grim chun scáileáin a ghabháil</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="352"/>
         <source>Grim is a wayland only utility to capture screens based on the screencopy protocol. Generally only enable on minimal wayland window managers like sway, hyprland, etc.</source>
-        <translation type="unfinished"></translation>
+        <translation>Is fóntais de chuid Wayland amháin é Grim chun scáileáin a ghabháil bunaithe ar an bprótacal cóipeála scáileáin. Go ginearálta, ní féidir é a chumasú ach ar bhainisteoirí fuinneoige íosta Wayland ar nós Sway, Hyprland, srl.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="370"/>
@@ -1128,42 +1128,42 @@ Réitigh iad de láimh sa chomhad cumraíochta.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="439"/>
         <source>Automatically unload from memory when it is not needed</source>
-        <translation type="unfinished"></translation>
+        <translation>Díluchtú go huathoibríoch ón gcuimhne nuair nach bhfuil gá leis</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="440"/>
         <source>Automatically close daemon (background process) when it is not needed</source>
-        <translation type="unfinished"></translation>
+        <translation>Dún an daemon (próiseas cúlra) go huathoibríoch nuair nach bhfuil gá leis</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="451"/>
         <source>Launch in background at startup</source>
-        <translation type="unfinished"></translation>
+        <translation>Seoladh sa chúlra ag an am tosaithe</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="452"/>
         <source>Launch Flameshot daemon (background process) when computer is booted</source>
-        <translation type="unfinished"></translation>
+        <translation>Seoladh daemon Flameshot (próiseas cúlra) nuair a thosaítear an ríomhaire</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="477"/>
         <source>Ask before quit capture</source>
-        <translation type="unfinished"></translation>
+        <translation>Fiafraigh sula scoireann tú den ghabháil</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="480"/>
         <source>Show the confirmation prompt before ESC quit</source>
-        <translation type="unfinished"></translation>
+        <translation>Taispeáin an leid dheimhnithe sula scoireann ESC</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="505"/>
         <source>Enable Copy to clipboard on Double Click</source>
-        <translation type="unfinished"></translation>
+        <translation>Cumasaigh Cóipeáil chuig an ngearrthaisce ar Chliceáil Dhúbailte</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="517"/>
         <source>Copy URL after uploading was successful</source>
-        <translation type="unfinished"></translation>
+        <translation>Cóipeáil URL tar éis an uaslódála a bheith rathúil</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="529"/>
@@ -1213,7 +1213,7 @@ Réitigh iad de láimh sa chomhad cumraíochta.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="685"/>
         <source>Use lossy JPG format for clipboard (lossless PNG default)</source>
-        <translation type="unfinished"></translation>
+        <translation>Úsáid formáid JPG caillteanach don ghearrthaisce (PNG gan chailliúint réamhshocraithe)</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="711"/>
@@ -1274,82 +1274,82 @@ Réitigh iad de láimh sa chomhad cumraíochta.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="801"/>
         <source>Milliseconds before geometry display hides; 0 means do not hide</source>
-        <translation type="unfinished"></translation>
+        <translation>Mileasoicindí sula bhfolaítear an taispeáint geoiméadrachta; ciallaíonn 0 nach bhfolaítear é</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="804"/>
         <source>Set geometry display timeout (ms)</source>
-        <translation type="unfinished"></translation>
+        <translation>Socraigh am scoir taispeána geoiméadrachta (ms)</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="812"/>
         <source>Selection Geometry Display</source>
-        <translation type="unfinished"></translation>
+        <translation>Taispeántas Geoiméadrachta Roghnúcháin</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="819"/>
         <source>Display Location</source>
-        <translation type="unfinished"></translation>
+        <translation>Suíomh Taispeána</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="822"/>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Dada</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="823"/>
         <source>Top Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Barr ar Chlé</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="825"/>
         <source>Top Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Barr ar Dheis</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="827"/>
         <source>Bottom Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Bun ar Chlé</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="829"/>
         <source>Bottom Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Bun ar Dheis</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="831"/>
         <source>Center</source>
-        <translation type="unfinished"></translation>
+        <translation>Lár</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="856"/>
         <source>Quality range of 0-100; Higher number is better quality and larger file size</source>
-        <translation type="unfinished"></translation>
+        <translation>Raon cáilíochta 0-100; Is fearr cáilíocht agus méid comhaid níos mó uimhir níos airde</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="860"/>
         <source>JPEG Quality</source>
-        <translation type="unfinished"></translation>
+        <translation>Cáilíocht JPEG</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="871"/>
         <source>Reverse arrow</source>
-        <translation type="unfinished"></translation>
+        <translation>Saighead droim ar ais</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="872"/>
         <source>Draw the arrow head first</source>
-        <translation type="unfinished"></translation>
+        <translation>Tarraing ceann na saighde ar dtús</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="881"/>
         <source>Insecure Pixelate</source>
-        <translation type="unfinished"></translation>
+        <translation>Picteilín Neamhshábháilte</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="883"/>
         <source>Draw the pixelation effect in an insecure but more asethetic way.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tarraing an éifeacht picteilithe ar bhealach neamhchinnte ach níos neamh-eitiéiteach.</translation>
     </message>
 </context>
 <context>
@@ -1792,27 +1792,27 @@ Réitigh iad de láimh sa chomhad cumraíochta.</translation>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="298"/>
         <source>Rotate Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Rothlaigh ar Dheis</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="303"/>
         <source>Rotate Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Rothlaigh ar Chlé</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="308"/>
         <source>Increase Opacity</source>
-        <translation type="unfinished"></translation>
+        <translation>Méadaigh Teimhneacht</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="315"/>
         <source>Decrease Opacity</source>
-        <translation type="unfinished"></translation>
+        <translation>Laghdaigh an Teimhneacht</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="322"/>
         <source>Close</source>
-        <translation type="unfinished">Dún</translation>
+        <translation>Dún</translation>
     </message>
 </context>
 <context>
@@ -1825,7 +1825,7 @@ Réitigh iad de láimh sa chomhad cumraíochta.</translation>
     <message>
         <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="37"/>
         <source>Set Pixelate as the paint tool.</source>
-        <translation type="unfinished"></translation>
+        <translation>Socraigh Pixelate mar an uirlis péintéireachta.</translation>
     </message>
     <message>
         <source>Set Pixelate as the paint tool</source>
@@ -1837,12 +1837,12 @@ Réitigh iad de láimh sa chomhad cumraíochta.</translation>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/primaryinstancewidget.cpp" line="21"/>
         <source>Primary instance</source>
-        <translation type="unfinished"></translation>
+        <translation>Príomh-eiseamláir</translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/primaryinstancewidget.cpp" line="22"/>
         <source>&lt;b&gt;Primary instance.&lt;/b&gt; Messages received from secondaries:</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Príomh-chás.&lt;/b&gt; Teachtaireachtaí a fuarthas ó thánaisteacha:</translation>
     </message>
 </context>
 <context>
@@ -1953,12 +1953,12 @@ Réitigh iad de láimh sa chomhad cumraíochta.</translation>
     <message>
         <location filename="../../src/main.cpp" line="242"/>
         <source>Capture screenshot of all monitors at the same time.</source>
-        <translation type="unfinished"></translation>
+        <translation>Gabh pictiúr scáileáin de na monatóirí go léir ag an am céanna.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="252"/>
         <source>Capture a screenshot of the specified monitor.</source>
-        <translation type="unfinished"></translation>
+        <translation>Gabh pictiúr scáileáin den mhonatóir sonraithe.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="257"/>
@@ -2018,7 +2018,7 @@ Réitigh iad de láimh sa chomhad cumraíochta.</translation>
     <message>
         <location filename="../../src/main.cpp" line="291"/>
         <source>Enable or disable the notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Cumasaigh nó díchumasaigh na fógraí</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="294"/>
@@ -2159,12 +2159,12 @@ B&apos;fhéidir go mbeidh ort éalú ón gcomhartha &apos;#&apos; mar atá i &ap
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="68"/>
         <source>Subcommands</source>
-        <translation type="unfinished"></translation>
+        <translation>Fo-orduithe</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="328"/>
         <source>subcommands</source>
-        <translation type="unfinished"></translation>
+        <translation>fo-orduithe</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="329"/>
@@ -2316,22 +2316,22 @@ B&apos;fhéidir go mbeidh ort éalú ón gcomhartha &apos;#&apos; mar atá i &ap
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="53"/>
         <source>The universal wayland screen capture adapter requires Grim as the screen capture component of wayland. If the screen capture component is missing, please install it!</source>
-        <translation type="unfinished"></translation>
+        <translation>Éilíonn an t-oiriúntóir gabhála scáileáin uilíoch Wayland Grim mar chomhpháirt gabhála scáileáin de Wayland. Mura bhfuil an chomhpháirt gabhála scáileáin ann, suiteáil é le do thoil!</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="171"/>
         <source>If the useGrimAdapter setting is not enabled, the dbus protocol will be used. It should be noted that using the dbus protocol under wayland is not recommended. It is recommended to enable the useGrimAdapter setting in flameshot.ini to activate the grim-based general wayland screenshot adapter</source>
-        <translation type="unfinished"></translation>
+        <translation>Mura bhfuil an socrú useGrimAdapter cumasaithe, úsáidfear an prótacal dbus. Ba chóir a thabhairt faoi deara nach moltar an prótacal dbus a úsáid faoi wayland. Moltar an socrú useGrimAdapter a chumasú i flameshot.ini chun an t-oiriúntóir scáileáin wayland ginearálta bunaithe ar grim a ghníomhachtú</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="182"/>
         <source>grim&apos;s screenshot component is implemented based on wlroots, it may not be used in GNOME or similar desktop environments</source>
-        <translation type="unfinished"></translation>
+        <translation>Tá comhpháirt scáileáin grim curtha i bhfeidhm bunaithe ar wlroots, ní fhéadfar é a úsáid i dtimpeallachtaí deisce GNOME nó i dtimpeallachtaí deisce comhchosúla</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="194"/>
         <source>Unable to detect desktop environment (GNOME? KDE? Qile? Sway? ...)</source>
-        <translation type="unfinished"></translation>
+        <translation>Ní féidir timpeallacht deisce a bhrath (GNOME? KDE? Qile? Sway? ...)</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="197"/>
@@ -2349,32 +2349,32 @@ B&apos;fhéidir go mbeidh ort éalú ón gcomhartha &apos;#&apos; mar atá i &ap
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="26"/>
         <source>Secondary instance</source>
-        <translation type="unfinished"></translation>
+        <translation>Sampla tánaisteach</translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="27"/>
         <source>&lt;b&gt;Secondary instance.&lt;/b&gt; Send message to primary:</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Ceist thánaisteach.&lt;/b&gt; Seol teachtaireacht chuig an bpríomhcheantar:</translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="29"/>
         <source>Type something here...</source>
-        <translation type="unfinished"></translation>
+        <translation>Clóscríobh rud éigin anseo...</translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="31"/>
         <source>&amp;Send</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Seol</translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="54"/>
         <source>Error sending message</source>
-        <translation type="unfinished"></translation>
+        <translation>Earráid ag seoladh an teachtaireachta</translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="55"/>
         <source>The message &apos;%1&apos; could not be sent to the primary.</source>
-        <translation type="unfinished"></translation>
+        <translation>Níorbh fhéidir an teachtaireacht &apos;%1&apos; a sheoladh chuig an bpríomh-theachtaireacht.</translation>
     </message>
 </context>
 <context>
@@ -2454,7 +2454,7 @@ B&apos;fhéidir go mbeidh ort éalú ón gcomhartha &apos;#&apos; mar atá i &ap
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="170"/>
         <source>Grab a color from the screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Faigh dath ón scáileán</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="171"/>
@@ -2479,22 +2479,22 @@ B&apos;fhéidir go mbeidh ort éalú ón gcomhartha &apos;#&apos; mar atá i &ap
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="176"/>
         <source>Symmetrically decrease width by 2px</source>
-        <translation type="unfinished"></translation>
+        <translation>Laghdaigh an leithead go siméadrach faoi 2px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="178"/>
         <source>Symmetrically increase width by 2px</source>
-        <translation type="unfinished"></translation>
+        <translation>Méadaigh an leithead go siméadrach faoi 2px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="180"/>
         <source>Symmetrically increase height by 2px</source>
-        <translation type="unfinished"></translation>
+        <translation>Méadaigh an airde go siméadrach faoi 2px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="182"/>
         <source>Symmetrically decrease height by 2px</source>
-        <translation type="unfinished"></translation>
+        <translation>Laghdaigh an airde go siméadrach faoi 2px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="183"/>
@@ -2529,12 +2529,12 @@ B&apos;fhéidir go mbeidh ort éalú ón gcomhartha &apos;#&apos; mar atá i &ap
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="190"/>
         <source>Delete selected drawn object</source>
-        <translation type="unfinished"></translation>
+        <translation>Scrios an réad tarraingthe roghnaithe</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="191"/>
         <source>Cancel current selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Cealaigh an rogha reatha</translation>
     </message>
     <message>
         <source>Delete current tool</source>
@@ -2583,7 +2583,7 @@ B&apos;fhéidir go mbeidh ort éalú ón gcomhartha &apos;#&apos; mar atá i &ap
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="85"/>
         <source>Display grid</source>
-        <translation type="unfinished"></translation>
+        <translation>Eangach taispeána</translation>
     </message>
 </context>
 <context>
@@ -2727,7 +2727,7 @@ B&apos;fhéidir go mbeidh ort éalú ón gcomhartha &apos;#&apos; mar atá i &ap
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="76"/>
         <source>Full Date (%d-%m-%Y)</source>
-        <translation type="unfinished"></translation>
+        <translation>Dáta Iomlán (%d-%m-%Y)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="64"/>
@@ -2844,7 +2844,7 @@ B&apos;fhéidir go mbeidh ort éalú ón gcomhartha &apos;#&apos; mar atá i &ap
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="160"/>
         <source>&amp;Open Save Path</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Oscail an Chonair Shábháilte</translation>
     </message>
 </context>
 <context>
