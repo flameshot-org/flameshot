@@ -2965,9 +2965,19 @@ Puede ser que necesites preceder el símbolo &quot;#&quot; con &quot;\&quot;, co
 <context>
     <name>TrayIcon</name>
     <message>
+        <location filename="../../src/widgets/trayicon.cpp" line="143"/>
+        <source>Select the sale you want to capture with a scroll and leave the mouse over it until you finish and the \"Save Image\" text box appears...</source>
+        <translation>Seleccione con un click la venta que quiere capturar con desplazamiento (Scroll) y deje el mouse sobre ella, hasta que termine y le salga el cuadro de texto Guardar imagen...</translation>
+    </message>
+    <message>
         <location filename="../../src/widgets/trayicon.cpp" line="112"/>
         <source>&amp;Take Screenshot</source>
         <translation>&amp;Capturar Pantalla</translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/trayicon.cpp" line="100"/>
+        <source>&amp;Scrolling screenshot</source>
+        <translation>&amp;Capturar Pantalla con Desplazamiento</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="133"/>

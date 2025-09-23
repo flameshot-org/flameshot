@@ -6,6 +6,15 @@
 #include "utils/confighandler.h"
 #include "utils/globalvalues.h"
 
+#include "opencv2/core/mat.hpp"
+#include "opencv2/imgcodecs.hpp"
+#include "qcollator.h"
+#include "qdir.h"
+#include "qmessagebox.h"
+#include "qprocess.h"
+#include "qregularexpression.h"
+#include "qstandardpaths.h"
+#include "screenshotsaver.h"
 #include <QApplication>
 #include <QGuiApplication>
 #include <QMenu>
@@ -13,9 +22,23 @@
 #include <QTimer>
 #include <QUrl>
 #include <QVersionNumber>
+#include <algorithm>
+#include <iostream>
+#include <QThread>
 
 #if defined(Q_OS_MACOS)
 #include <QOperatingSystemVersion>
+#endif
+
+#include <capturescreenscroll.h>
+#if defined( Q_OS_LINUX )
+
+//#include "tools/overlay/overlaytool.h"
+#include <X11/extensions/XTest.h>
+#include <X11/cursorfont.h>
+#include <X11/Xlib.h>
+#include <X11/Xutil.h>
+
 #endif
 
 TrayIcon::TrayIcon(QObject* parent)
@@ -124,12 +147,147 @@ void TrayIcon::initMenu()
             QTimer::singleShot(400, this, [this]() { startGuiCapture(); });
         }
 #else
-    // Wait 400 ms to hide the QMenu
-    QTimer::singleShot(400, this, [this]() {
-        startGuiCapture();
-    });
+        // Wait 400 ms to hide the QMenu
+        QTimer::singleShot(400, this, [this]() {
+            startGuiCapture();
+        });
 #endif
+
     });
+
+    auto* captureActionWithDesplazamiento = new QAction(tr("&Scrolling screenshot"), this);
+    connect( captureActionWithDesplazamiento, &QAction::triggered, this, [ this ]() {
+
+        QMessageBox msgCapturaWithScroll;
+
+        msgCapturaWithScroll.setText( QObject::tr("Select the sale you want to capture with a scroll and leave the mouse over it until you finish and the \"Save Image\" text box appears..." ) );
+        msgCapturaWithScroll.exec();
+
+#if defined( Q_OS_LINUX )
+
+        Display* display = XOpenDisplay( nullptr );
+        if ( !display ) {
+            qWarning() << "No se pudo abrir X11 Display.";
+            return;
+        }
+
+        Window root = DefaultRootWindow( display );
+
+        qDebug() << "Please click on the window you want to capture (waiting for xwininfo)...";
+        WId targetWindowId = getWindowIdFromXwininfo();
+
+        if ( targetWindowId == 0 ) {
+            qDebug() << "Failed to get window ID.";
+            return;
+        }
+
+
+        XWindowAttributes winAttr;
+        if ( !XGetWindowAttributes( display, targetWindowId, &winAttr ) ) {
+            qDebug() << "Error: ID de ventana no válido" << targetWindowId;
+            return;
+        }
+
+        int xOffset = 0;
+        int yOffset = 50;
+        int width = winAttr.width;
+        int height = winAttr.height;
+
+        QPixmap previousCapture;
+        int i = 0;
+
+        QString picturesPath = QStandardPaths::writableLocation( QStandardPaths::PicturesLocation );
+        QString baseDir = picturesPath + "/FlameshotCapture";
+        QDir().mkpath( baseDir );
+
+        captureScreenScroll* captureSS = new captureScreenScroll( static_cast<void*>( display ), targetWindowId, xOffset, yOffset, width, height );
+
+        while ( true ) {
+
+            QPixmap currentCapture = captureSS -> captureScrollableArea();
+
+            if ( currentCapture.isNull() ) {
+                qDebug() << "❌ Captura nula. Terminando.";
+                break;
+            }
+
+            if ( captureSS -> imagesEqual( previousCapture.toImage(), currentCapture.toImage() ) ) {
+                qDebug() << "⚠️ Imagen no cambió. Deteniendo scroll.";
+                break;
+            }
+
+            QString const filename = QString( "captura%1.png" ).arg( i );
+            currentCapture.save( baseDir + "/" + filename );
+            qDebug() << "📸 Captura guardada:" << filename;
+            previousCapture = currentCapture;
+
+            // Scroll hacia abajo
+            XTestFakeButtonEvent( display, 5, True, CurrentTime );
+            XFlush( display );
+            XTestFakeButtonEvent( display, 5, False, CurrentTime );
+            XFlush( display );
+            usleep( 200000 );
+
+            i++;
+        }
+#endif
+        // Post-procesamiento
+        struct Item { std::string path; std::string name; };
+        std::vector<Item> items;
+
+        for (const auto& e : fs::directory_iterator( baseDir.toStdString() ) )
+            if ( e.is_regular_file() && e.path().extension() == ".png" )
+                items.push_back( { e.path().string(), e.path().filename().string() } );
+
+        QCollator coll;
+        coll.setNumericMode( true );
+        coll.setCaseSensitivity( Qt::CaseInsensitive );
+
+        std::stable_sort( items.begin(), items.end(),
+                         [ & ]( const Item& a, const Item& b ) {
+                             return coll.compare( QString::fromUtf8( a.name ),
+                                                  QString::fromUtf8( b.name ) ) < 0;
+                         } );
+
+        std::vector<std::string> paths;
+        for ( const auto& i : items )
+            paths.push_back( i.path );
+
+        cv::Mat result;
+        cv::Mat firstRefImage;
+
+        for ( const auto& f : paths ) {
+            qDebug() << "procesando " << QString::fromStdString( f ) << '\n';
+            cv::Mat img = cv::imread( f );
+            if ( img.empty() ) {
+                std::cerr << "No se lee " << f << '\n';
+                continue;
+            }
+
+            cv::Mat cropped = captureSS -> cropHorizontal( img );
+
+            if ( result.empty() ) {
+                result = cropped.clone();
+                firstRefImage = cropped.clone();
+                continue;
+            }
+
+            result = captureSS -> combineImages( result, cropped );
+        }
+
+        QPixmap finalImage = captureSS -> cvMatToQPixmap( result );
+
+        if ( !finalImage.isNull() ) {
+            cv::imwrite( baseDir.toStdString() + "/resultado_stitched.png", result );
+            saveToFilesystemGUI( finalImage );
+            QString dirPath = baseDir;
+            QDir( dirPath ).removeRecursively();
+        } else {
+            qDebug() << "Failed to stitch images.";
+        }
+
+    } );
+
     m_launcherAction = new QAction(tr("&Open Launcher"), this);
     connect(m_launcherAction,
             &QAction::triggered,
@@ -191,6 +349,7 @@ void TrayIcon::initMenu()
             &Flameshot::openSavePath);
 
     m_menu->addAction(m_captureAction);
+    m_menu->addAction(captureActionWithDesplazamiento);
     m_menu->addAction(m_launcherAction);
     m_menu->addSeparator();
 #ifdef ENABLE_IMGUR
@@ -271,7 +430,6 @@ void TrayIcon::initScreenMenu()
 
         QAction* screenAction = m_screenMenu->addAction(screenDescription);
         connect(screenAction, &QAction::triggered, this, [this, i]() {
-            // Wait and hide the menu
             QTimer::singleShot(
               100, this, [this, i]() { startGuiCaptureOnScreen(i); });
         });
@@ -293,3 +451,28 @@ void TrayIcon::startGuiCaptureOnScreen(int screenIndex)
     req.setSelectedMonitor(screenIndex);
     Flameshot::instance()->requestCapture(req);
 }
+
+#if defined( Q_OS_LINUX )
+WId TrayIcon::getWindowIdFromXwininfo()
+{
+    QProcess process;
+    process.start( "xwininfo" );
+    process.waitForFinished( -1 );
+
+    QString output = process.readAllStandardOutput();
+    qDebug() << "xwininfo output:\n" << output;
+
+    QRegularExpression re( "Window id: (0x[0-9a-fA-F]+)" );
+    QRegularExpressionMatch match = re.match( output );
+
+    if ( match.hasMatch() ) {
+        QString windowIdStr = match.captured( 1 );
+        bool ok = false;
+        WId windowId = windowIdStr.toULongLong( &ok, 16 );
+        if ( ok )
+            return windowId;
+    }
+
+    return 0;
+}
+#endif

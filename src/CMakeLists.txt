@@ -19,6 +19,8 @@ find_package(
 )
 endif()
 
+find_package(OpenCV REQUIRED)
+
 if (USE_WAYLAND_CLIPBOARD)
     find_package(KF6GuiAddons)
 endif()
@@ -72,7 +74,9 @@ if (APPLE)
 
     add_executable(flameshot MACOSX_BUNDLE main.cpp ${APP_ICON_MACOSX})
 else ()
-    add_executable(flameshot)
+    add_executable(flameshot
+        widgets/capturescreenscroll.cpp widgets/capturescreenscroll.h
+        tools/overlay/overlaytool.cpp tools/overlay/overlaytool.h)
 endif ()
 
 add_executable(Flameshot::flameshot ALIAS flameshot)
@@ -176,8 +180,10 @@ target_sources(
 
 
 target_include_directories(flameshot PUBLIC
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/>  # src/
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../>
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/>
     $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/>
+    ${OpenCV_INCLUDE_DIRS}
 )
 
 target_link_libraries(
@@ -188,6 +194,9 @@ target_link_libraries(
         Qt${QT_VERSION_MAJOR}::Network
         Qt${QT_VERSION_MAJOR}::Widgets
         QtColorWidgets
+        X11
+        Xtst
+        ${OpenCV_LIBS}
 )
 if (UNIX)
 target_link_libraries(
