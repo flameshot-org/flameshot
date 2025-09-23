@@ -450,6 +450,9 @@ void Flameshot::exportCapture(const QPixmap& capture,
                               QRect& selection,
                               const CaptureRequest& req)
 {
+
+    QMessageBox Aux;
+
     using CR = CaptureRequest;
     int tasks = req.tasks(), mode = req.captureMode();
     QString path = req.path();

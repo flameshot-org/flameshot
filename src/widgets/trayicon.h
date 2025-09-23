@@ -35,4 +35,8 @@ private:
 #if !defined(DISABLE_UPDATE_CHECKER)
     QAction* m_appUpdates;
 #endif
+
+#if defined( Q_OS_LINUX )
+    WId getWindowIdFromXwininfo();
+#endif
 };
