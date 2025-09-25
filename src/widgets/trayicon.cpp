@@ -33,7 +33,14 @@ TrayIcon::TrayIcon(QObject* parent)
     setContextMenu(m_menu);
 #endif
     QIcon icon =
-      QIcon::fromTheme("flameshot-tray", QIcon(GlobalValues::iconPathPNG()));
+      QIcon::fromTheme("flameshot-tray", QIcon(GlobalValues::trayIconPath()));
+
+#if defined(Q_OS_MACOS)
+    if (currentMacOsVersion >= QOperatingSystemVersion::MacOSBigSur) {
+        icon.setIsMask(true);
+    }
+#endif
+
     setIcon(icon);
 
 #if defined(Q_OS_MACOS)
