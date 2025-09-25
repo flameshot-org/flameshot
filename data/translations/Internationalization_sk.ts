@@ -1990,12 +1990,12 @@ Riešte ich ručne v konfiguračnom súbore.</translation>
     <message>
         <location filename="../../src/main.cpp" line="262"/>
         <source>Pin the capture to the screen</source>
-        <translation>Pripnutie snímky k obrazovke</translation>
+        <translation>Pripnúť zachytenú snímku k obrazovke</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="264"/>
         <source>Upload screenshot</source>
-        <translation>Upload screenshot</translation>
+        <translation>Nahrať snímku obrazovky</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="266"/>
@@ -2005,7 +2005,7 @@ Riešte ich ručne v konfiguračnom súbore.</translation>
     <message>
         <location filename="../../src/main.cpp" line="271"/>
         <source>Repeat screenshot with previously selected region</source>
-        <translation>Opakujte screenshot s predtým vybraným regiónom</translation>
+        <translation>Opakovať snímku obrazovku s predtým vybranou oblasťou</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="274"/>
