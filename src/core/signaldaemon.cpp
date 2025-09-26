@@ -1,4 +1,5 @@
 #include "signaldaemon.h"
+#include "flameshot.h"
 #include <QApplication>
 #include <QSocketNotifier>
 #include <csignal>
@@ -45,7 +46,7 @@ void SignalDaemon::handleSigTerm()
     char tmp = 0;
     ::read(sigtermFd[1], &tmp, sizeof(tmp));
 
-    QApplication::quit();
+    QApplication::exit(E_SIGTERM);
     snTerm->setEnabled(true);
 }
 
@@ -56,7 +57,7 @@ void SignalDaemon::handleSigInt()
     char tmp = 0;
     ::read(sigintFd[1], &tmp, sizeof(tmp));
 
-    QApplication::quit();
+    QApplication::exit(E_SIGINT);
 
     snInt->setEnabled(true);
 }

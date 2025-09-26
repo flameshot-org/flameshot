@@ -182,10 +182,7 @@ void FlameshotDaemon::copyToClipboard(const QString& text,
 #else
     auto m = createMethodCall(QStringLiteral("attachTextToClipboard"));
     m << text << notification;
-
-    QDBusConnection sessionBus = QDBusConnection::sessionBus();
-    checkDBusConnection(sessionBus);
-    sessionBus.call(m);
+    call(m);
 #endif
 }
 
@@ -283,7 +280,7 @@ void FlameshotDaemon::quitIfIdle()
         return;
     }
     if (!m_hostingClipboard && m_widgets.isEmpty()) {
-        qApp->exit(0);
+        qApp->exit(E_OK);
     }
 }
 
@@ -443,7 +440,7 @@ void FlameshotDaemon::checkDBusConnection(const QDBusConnection& connection)
 {
     if (!connection.isConnected()) {
         AbstractLogger::error() << tr("Unable to connect via DBus");
-        qApp->exit(1);
+        qApp->exit(E_DBUSCONN);
     }
 }
 
