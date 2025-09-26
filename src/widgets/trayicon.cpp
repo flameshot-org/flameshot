@@ -186,12 +186,14 @@ void TrayIcon::initMenu()
 
 void TrayIcon::updateCaptureActionShortcut()
 {
+#if defined(Q_OS_MACOS)
     if (!m_captureAction) {
         return;
     }
 
     QString shortcut = ConfigHandler().shortcut("TAKE_SCREENSHOT");
     m_captureAction->setShortcut(QKeySequence(shortcut));
+#endif
 }
 
 #if !defined(DISABLE_UPDATE_CHECKER)
