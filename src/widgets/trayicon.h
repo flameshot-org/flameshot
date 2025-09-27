@@ -18,6 +18,7 @@ public:
 private:
     void initTrayIcon();
     void initMenu();
+    void updateCaptureActionShortcut();
 #if !defined(DISABLE_UPDATE_CHECKER)
     void enableCheckUpdatesAction(bool enable);
 #endif
@@ -25,6 +26,7 @@ private:
     void startGuiCapture();
 
     QMenu* m_menu;
+    QAction* m_captureAction;
 #if !defined(DISABLE_UPDATE_CHECKER)
     QAction* m_appUpdates;
 #endif
