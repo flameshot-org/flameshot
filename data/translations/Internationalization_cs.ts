@@ -244,12 +244,12 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="515"/>
         <source>Quit Capture</source>
-        <translation type="unfinished"></translation>
+        <translation>Opustit zachycování</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="516"/>
         <source>Are you sure you want to quit capture?</source>
-        <translation type="unfinished"></translation>
+        <translation>Opravdu chcete opustit zachycování?</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="521"/>
