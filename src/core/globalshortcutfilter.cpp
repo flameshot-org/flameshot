@@ -27,7 +27,7 @@ bool GlobalShortcutFilter::nativeEventFilter(const QByteArray& eventType,
 
     MSG* msg = static_cast<MSG*>(message);
     if (msg->message == WM_HOTKEY) {
-        // TODO: this is just a temporal workwrround, proper global
+        // TODO: this is just a temporary workaround; proper global
         // support would need custom shortcuts defined by the user.
         const quint32 keycode = HIWORD(msg->lParam);
         const quint32 modifiers = LOWORD(msg->lParam);

@@ -6,7 +6,7 @@
 #include <QPoint>
 #include <QScreen>
 
-// ButtonHandler is a habdler for every active button. It makes easier to
+// ButtonHandler is a handler for every active button. It makes easier to
 // manipulate the buttons as a unit.
 
 ButtonHandler::ButtonHandler(const QVector<CaptureToolButton*>& v,
@@ -76,7 +76,7 @@ void ButtonHandler::updatePosition(const QRect& selection)
     // Copy of the selection area for internal modifications
     m_selection = intersectWithAreas(selection);
     updateBlockedSides();
-    ensureSelectionMinimunSize();
+    ensureSelectionMinimumSize();
     // Indicates the actual button to be moved
     int elemIndicator = 0;
 
@@ -312,10 +312,10 @@ void ButtonHandler::positionButtonsInside(int index)
     m_buttonsAreInside = true;
 }
 
-void ButtonHandler::ensureSelectionMinimunSize()
+void ButtonHandler::ensureSelectionMinimumSize()
 {
     // Detect if a side is smaller than a button in order to prevent collision
-    // and redimension the base area the the base size of a single button per
+    // and redimension the base area to the base size of a single button per
     // side
     if (m_selection.width() < m_buttonBaseSize) {
         if (!m_blockedLeft) {
