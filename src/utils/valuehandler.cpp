@@ -532,21 +532,36 @@ QVariant Region::process(const QVariant& val)
     // FIXME: This is temporary, just before D-Bus is removed
     char** argv = new char*[1];
     int* argc = new int{ 0 };
+    QApplication* tempApp = nullptr;
     if (QGuiApplication::screens().empty()) {
-        new QApplication(*argc, argv);
+        tempApp = new QApplication(*argc, argv);
     }
 
     QString str = val.toString();
 
     if (str == "all") {
-        return ScreenGrabber().desktopGeometry();
+        QRect result = ScreenGrabber().desktopGeometry();
+        // Cleanup allocated memory before returning
+        delete tempApp;
+        delete[] argv;
+        delete argc;
+        return result;
     } else if (str.startsWith("screen")) {
         bool ok;
         int number = str.mid(6).toInt(&ok);
         if (!ok || number < 0) {
+            // Cleanup allocated memory before returning
+            delete tempApp;
+            delete[] argv;
+            delete argc;
             return {};
         }
-        return ScreenGrabber().screenGeometry(qApp->screens()[number]);
+        QRect result = ScreenGrabber().screenGeometry(qApp->screens()[number]);
+        // Cleanup allocated memory before returning
+        delete tempApp;
+        delete[] argv;
+        delete argc;
+        return result;
     }
 
     static const QRegularExpression regex(
@@ -560,6 +575,10 @@ QVariant Region::process(const QVariant& val)
     );
 
     if (!regex.match(str).hasMatch()) {
+        // Cleanup allocated memory before returning
+        delete tempApp;
+        delete[] argv;
+        delete argc;
         return {};
     }
 
@@ -571,8 +590,19 @@ QVariant Region::process(const QVariant& val)
     y = regex.match(str).captured(4).toInt(&y_ok);
 
     if (!(w_ok && h_ok && x_ok && y_ok)) {
+        // Cleanup allocated memory before returning
+        delete tempApp;
+        delete[] argv;
+        delete argc;
         return {};
     }
 
-    return QRect(x, y, w, h).normalized();
+    QRect result = QRect(x, y, w, h).normalized();
+    
+    // Cleanup allocated memory before returning
+    delete tempApp;
+    delete[] argv;
+    delete argc;
+    
+    return result;
 }
