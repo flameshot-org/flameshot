@@ -290,8 +290,8 @@ void ButtonHandler::expandSelection()
 
 void ButtonHandler::positionButtonsInside(int index)
 {
-    // Position the buttons in the botton-center of the main but inside of the
-    // selection.
+    // Position the buttons at the bottom center of the main area,
+    // but inside the selection.
     QRect mainArea = m_selection;
     mainArea = intersectWithAreas(mainArea);
     const int buttonsPerRow = (mainArea.width()) / (m_buttonExtendedSize);
