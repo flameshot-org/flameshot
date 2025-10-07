@@ -598,11 +598,11 @@ QVariant Region::process(const QVariant& val)
     }
 
     QRect result = QRect(x, y, w, h).normalized();
-    
+
     // Cleanup allocated memory before returning
     delete tempApp;
     delete[] argv;
     delete argc;
-    
+
     return result;
 }
