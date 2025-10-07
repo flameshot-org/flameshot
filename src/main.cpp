@@ -101,6 +101,7 @@ QSharedMemory* guiMutexLock()
     shm = new QSharedMemory(key);
 #endif
     if (!shm->create(1)) {
+        delete shm;
         return nullptr;
     }
     return shm;
