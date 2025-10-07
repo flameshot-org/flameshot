@@ -26,7 +26,7 @@ env:
 jobs:
   windows-pack:
     name: VS 2022 ${{ matrix.config.arch }}-${{ matrix.type }}
-    runs-on: windows-2025
+    runs-on: ${{ matrix.config.runs }}
     env:
       VCINSTALLDIR: C:/Program Files/Microsoft Visual Studio/2022/Enterprise/VC
       # 2025.02.14
@@ -39,14 +39,21 @@ jobs:
         qt_ver: [6.9.1]
         qt_target: [desktop]
         config:
-          - {
-            arch: x64,
-            generator: "-G'Visual Studio 17 2022' -A x64",
-            vcpkg_triplet: x64-windows,
-            qt_arch: win64_msvc2022_64,
-            qt_arch_install: msvc2022_64,
+          - arch: x64
+            generator: "-G'Visual Studio 17 2022' -A x64"
+            vcpkg_triplet: x64-windows
+            qt_arch: win64_msvc2022_64
+            qt_arch_install: msvc2022_64
             pak_arch: win64
-          }
+            runs: windows-2025
+            
+          - arch: arm64
+            generator: "-G'Visual Studio 17 2022' -A ARM64"
+            vcpkg_triplet: arm64-windows
+            qt_arch: win64_msvc2022_arm64
+            qt_arch_install: msvc2022_arm64
+            pak_arch: win-arm64
+            runs: windows-11-arm
         type: [portable, installer]
     steps:
       - name: Checkout Source code
@@ -110,6 +117,23 @@ jobs:
           arch: ${{ matrix.config.qt_arch }}
           modules: 'qtimageformats'
           dir: '${{ github.workspace }}/build/'
+
+          
+      - name: Check and Install WiX Toolset
+        # Currently windows-11-arm runner have not install WixToolset, so install it manually.
+        shell: pwsh
+        run: |
+          $WixPath = Get-Item -Path "${Env:ProgramFiles(x86)}\WiX Toolset v3.*" -ErrorAction SilentlyContinue
+          if ($WixPath) {
+            Write-Host "WiX Toolset already installed at $($WixPath.FullName)"
+            (Join-Path $WixPath.FullName bin) | Out-File $Env:GITHUB_PATH -Append
+          } else {
+            Write-Host "WiX Toolset not found, downloading and installing manually..."
+            Invoke-WebRequest -Uri "https://github.com/wixtoolset/wix3/releases/download/wix3141rtm/wix314-binaries.zip" -OutFile "wix314-binaries.zip"
+            Expand-Archive -Path "wix314-binaries.zip" -DestinationPath "C:/wix"
+            "C:\wix" | Out-File $Env:GITHUB_PATH -Append
+          }
+
 
       - name: Configure
         working-directory: build
