@@ -30,6 +30,7 @@ private:
     void addPreset();
     void deletePreset();
     void updatePreset();
+    void updateDefaultIndex();
 
     ColorPickerEditMode* m_colorpicker;
     color_widgets::ColorWheel* m_colorWheel;
@@ -44,6 +45,7 @@ private:
     QPushButton* m_addPresetButton;
 
     QColor m_color;
+    int m_defaultIndex;
     int m_selectedIndex;
     QVector<QColor> m_colorList;
     ConfigHandler m_config;

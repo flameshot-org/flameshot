@@ -99,7 +99,6 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     OPTION("antialiasingPinZoom"         ,Bool               ( true          )),
     OPTION("useJpgForClipboard"          ,Bool               ( false         )),
     OPTION("uploadWithoutConfirmation"   ,Bool               ( false         )),
-    OPTION("pickerOpensGrabber"          ,Bool               ( false         )),
     OPTION("saveAfterCopy"               ,Bool               ( false         )),
     OPTION("savePath"                    ,ExistingDir        (               )),
     OPTION("savePathFixed"               ,Bool               ( false         )),

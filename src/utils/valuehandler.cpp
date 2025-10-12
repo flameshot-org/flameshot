@@ -406,9 +406,9 @@ bool UserColors::check(const QVariant& val)
     }
     for (const QString& str : val.toStringList()) {
 #if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
-        if (!QColor::isValidColor(str) && str != "picker") {
+        if (!QColor::isValidColor(str) && str != "picker" && str != "grabber") {
 #else
-        if (!QColor::isValidColorName(str) && str != "picker") {
+        if (!QColor::isValidColorName(str) && str != "picker" && str != "grabber") {
 #endif
             return false;
         }
@@ -430,7 +430,7 @@ QVariant UserColors::process(const QVariant& val)
     colors.reserve(strColors.size());
 
     for (const QString& str : strColors) {
-        if (str != "picker") {
+        if (str != "picker" && str != "grabber") {
             colors.append(QColor(str));
         } else {
             colors.append(QColor());

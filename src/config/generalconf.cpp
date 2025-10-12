@@ -56,7 +56,6 @@ GeneralConf::GeneralConf(QWidget* parent)
     initAntialiasingPinZoom();
     initUndoLimit();
     initInsecurePixelate();
-    initPickerOpensGrabber();
 #ifdef ENABLE_IMGUR
     initCopyAndCloseAfterUpload();
     initUploadWithoutConfirmation();
@@ -91,7 +90,6 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
     m_antialiasingPinZoom->setChecked(config.antialiasingPinZoom());
     m_useJpgForClipboard->setChecked(config.useJpgForClipboard());
     m_copyOnDoubleClick->setChecked(config.copyOnDoubleClick());
-    m_pickerOpensGrabber->setChecked(config.pickerOpensGrabber());
 #ifdef ENABLE_IMGUR
     m_uploadWithoutConfirmation->setChecked(config.uploadWithoutConfirmation());
     m_copyURLAfterUpload->setChecked(config.copyURLAfterUpload());
@@ -741,19 +739,6 @@ void GeneralConf::initUploadWithoutConfirmation()
     m_scrollAreaLayout->addWidget(m_uploadWithoutConfirmation);
     connect(m_uploadWithoutConfirmation, &QCheckBox::clicked, [](bool checked) {
         ConfigHandler().setUploadWithoutConfirmation(checked);
-    });
-}
-
-void GeneralConf::initPickerOpensGrabber()
-{
-    m_pickerOpensGrabber =
-      new QCheckBox(tr("Custom color picker opens grabber"), this);
-    m_pickerOpensGrabber->setToolTip(
-      tr("Custom option in the color picker opens grabber instead of the "
-         "side panel"));
-    m_scrollAreaLayout->addWidget(m_pickerOpensGrabber);
-    connect(m_pickerOpensGrabber, &QCheckBox::clicked, [](bool checked) {
-        ConfigHandler().setPickerOpensGrabber(checked);
     });
 }
 

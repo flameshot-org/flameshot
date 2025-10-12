@@ -25,7 +25,7 @@ ColorPicker::ColorPicker(QPixmap* p, QWidget* parent)
 }
 void ColorPicker::setNewColor()
 {
-    if (ConfigHandler().pickerOpensGrabber() && m_selectedIndex == 0) {
+    if (!m_colorList.at(m_selectedIndex).isValid() && m_selectedIndex == 1) {
         startColorGrab();
     } else {
         emit colorSelected(m_colorList.at(m_selectedIndex));

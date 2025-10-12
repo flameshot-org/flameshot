@@ -18,10 +18,13 @@
 
 ColorPickerEditor::ColorPickerEditor(QWidget* parent)
   : QWidget(parent)
-  , m_selectedIndex(1)
 {
     m_color = m_config.drawColor();
     m_colorList = m_config.userColors();
+
+    m_defaultIndex = 0;
+    updateDefaultIndex();
+    m_selectedIndex = m_defaultIndex;
 
     m_gLayout = new QGridLayout(this);
 
@@ -168,6 +171,17 @@ void ColorPickerEditor::updatePreset()
     m_config.setUserColors(m_colorList);
 }
 
+void ColorPickerEditor::updateDefaultIndex()
+{
+    for (int i = 0; i < m_colorList.size(); ++i) {
+        // default index should be the first 'real' color
+        if (m_colorList.at(i).isValid()) {
+            m_defaultIndex = i;
+            break;
+        }
+    }
+}
+
 void ColorPickerEditor::onAddPreset()
 {
 #if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
@@ -184,7 +198,7 @@ void ColorPickerEditor::onAddPreset()
 
     addPreset();
     m_colorpicker->updateWidget();
-    m_selectedIndex = 1;
+    m_selectedIndex = m_defaultIndex;
     m_colorpicker->updateSelection(m_selectedIndex);
     m_colorEdit->setText(m_colorList[m_selectedIndex].name(QColor::HexRgb));
 }
@@ -193,7 +207,7 @@ void ColorPickerEditor::onDeletePreset()
 {
     deletePreset();
     m_colorpicker->updateWidget();
-    m_selectedIndex = 1;
+    m_selectedIndex = m_defaultIndex;
     m_colorpicker->updateSelection(m_selectedIndex);
     m_colorEdit->setText(m_colorList[m_selectedIndex].name(QColor::HexRgb));
 }
