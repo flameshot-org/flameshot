@@ -9,6 +9,7 @@
 #include <QColor>
 #include <QGridLayout>
 #include <QHBoxLayout>
+#include <QCheckBox>
 #include <QLabel>
 #include <QLineEdit>
 #include <QMessageBox>
@@ -38,6 +39,17 @@ ColorPickerEditor::ColorPickerEditor(QWidget* parent)
     m_gLayout->addWidget(m_colorWheel, 1, 0);
 
     auto* m_vLocalLayout1 = new QVBoxLayout();
+
+    m_enableGrabberCheckBox = new QCheckBox(tr("Enable Color Grabber"), this);
+    m_enableGrabberCheckBox->setToolTip(
+      tr("Show a color grabber option in the picker")
+    );
+    m_enableGrabberCheckBox->setChecked(!m_colorList.at(1).isValid());
+    connect(m_enableGrabberCheckBox,
+            &QCheckBox::toggled,
+            this,
+            &ColorPickerEditor::updateGrabberShown);
+    m_vLocalLayout1->addWidget(m_enableGrabberCheckBox);
     m_vLocalLayout1->addStretch();
 
     m_colorEditLabel = new QLabel(tr("Edit Preset:"), this);
@@ -125,9 +137,7 @@ void ColorPickerEditor::addPreset()
         return;
     }
 
-    const int maxPresetsAllowed = 17;
-
-    if (m_colorList.size() >= maxPresetsAllowed) {
+    if (m_colorList.size() >= m_maxPresetsAllowed) {
         QMessageBox::critical(
           this,
           tr("Error"),
@@ -142,9 +152,7 @@ void ColorPickerEditor::addPreset()
 
 void ColorPickerEditor::deletePreset()
 {
-    const int minPresetsAllowed = 3;
-
-    if (m_colorList.size() <= minPresetsAllowed) {
+    if (m_colorList.size() <= m_minPresetsAllowed) {
         QMessageBox::critical(
           this,
           tr("Error"),
@@ -180,6 +188,44 @@ void ColorPickerEditor::updateDefaultIndex()
             break;
         }
     }
+}
+
+void ColorPickerEditor::updateGrabberShown(bool shown)
+{
+    if (shown && m_colorList.at(1).isValid()) {
+        if (m_colorList.size() >= m_maxPresetsAllowed) {
+            QMessageBox::critical(
+              this,
+              tr("Error"),
+              tr("Unable to enable grabber. Maximum limit reached."));
+            m_enableGrabberCheckBox->setChecked(false);
+            return;
+        }
+
+        ++m_selectedIndex;
+        m_colorList.insert(1, QColor());
+    } else if (!shown && !m_colorList.at(1).isValid()) {
+        if (m_colorList.size() <= m_minPresetsAllowed) {
+            QMessageBox::critical(
+              this,
+              tr("Error"),
+              tr("Unable to disable grabber. Minimum limit reached."));
+            m_enableGrabberCheckBox->setChecked(true);
+            return;
+        }
+
+        --m_selectedIndex;
+        m_colorList.remove(1);
+    } else {
+        // checkbox state already matches editor state
+        // happens when the above max/min conditions are reached
+        return;
+    }
+
+    m_config.setUserColors(m_colorList);
+    updateDefaultIndex();
+    m_colorpicker->updateWidget();
+    m_colorpicker->updateSelection(m_selectedIndex);
 }
 
 void ColorPickerEditor::onAddPreset()

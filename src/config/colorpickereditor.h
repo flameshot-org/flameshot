@@ -7,6 +7,7 @@
 #include "src/utils/confighandler.h"
 
 #include <QWidget>
+#include <QCheckBox>
 
 class ColorPickerEditMode;
 class QLabel;
@@ -31,10 +32,15 @@ private:
     void deletePreset();
     void updatePreset();
     void updateDefaultIndex();
+    void updateGrabberShown(bool shown);
+
+    const int m_maxPresetsAllowed = 17;
+    const int m_minPresetsAllowed = 3;
 
     ColorPickerEditMode* m_colorpicker;
     color_widgets::ColorWheel* m_colorWheel;
 
+    QCheckBox* m_enableGrabberCheckBox;
     QLabel* m_colorEditLabel;
     QLineEdit* m_colorEdit;
     QPushButton* m_deletePresetButton;
