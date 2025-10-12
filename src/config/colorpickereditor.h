@@ -7,9 +7,9 @@
 #include "src/utils/confighandler.h"
 
 #include <QWidget>
-#include <QCheckBox>
 
 class ColorPickerEditMode;
+class QCheckBox;
 class QLabel;
 class QPushButton;
 class QLineEdit;
