@@ -831,8 +831,7 @@ int CaptureWidget::selectToolItemAtPos(const QPoint& pos)
 
 void CaptureWidget::leaveEvent(QEvent* event)
 {
-    if (!m_desktopCapturer.isComposite() &&
-        m_selection->geometry().size() == QSize(0, 0)) {
+    if (!m_desktopCapturer.isComposite() && !m_selection->isVisible()) {
         QTimer::singleShot(50, this, [this]() { moveToActiveScreen(); });
     }
     QWidget::leaveEvent(event);
