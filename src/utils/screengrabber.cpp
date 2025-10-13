@@ -14,11 +14,10 @@
 #include <QScreen>
 
 #include <QStandardPaths>
-#if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
+
+#if defined(Q_OS_LINUX)
 #include "request.h"
 #include <QDBusInterface>
-#include <QDBusReply>
-#include <QDir>
 #include <QUrl>
 #include <QUuid>
 #endif
@@ -32,7 +31,7 @@ ScreenGrabber::ScreenGrabber(QObject* parent)
 
 void ScreenGrabber::generalGrimScreenshot(bool& ok, QPixmap& res)
 {
-#if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
+#if defined(Q_OS_LINUX)
     if (!ConfigHandler().useGrimAdapter()) {
         return;
     }
@@ -63,8 +62,7 @@ void ScreenGrabber::generalGrimScreenshot(bool& ok, QPixmap& res)
 
 void ScreenGrabber::freeDesktopPortal(bool& ok, QPixmap& res)
 {
-
-#if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
+#if defined(Q_OS_LINUX)
     QDBusInterface screenshotInterface(
       QStringLiteral("org.freedesktop.portal.Desktop"),
       QStringLiteral("/org/freedesktop/portal/desktop"),
@@ -157,7 +155,7 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
                                 currentScreen->geometry().height()));
     screenPixmap.setDevicePixelRatio(currentScreen->devicePixelRatio());
     return screenPixmap;
-#elif defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
+#elif defined(Q_OS_LINUX)
     if (m_info.waylandDetected()) {
         QPixmap res;
         // handle screenshot based on DE
@@ -208,7 +206,7 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
         return res;
     }
 #endif
-#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX) || defined(Q_OS_WIN)
+    // #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX) || defined(Q_OS_WIN)
     QRect geometry = desktopGeometry();
 
     // Qt6 fix: Create a composite image from all screens to handle
@@ -232,7 +230,7 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
     desktop.save(filePath, "PNG");
 
     return desktop;
-#endif
+    // #endif
 }
 
 QRect ScreenGrabber::screenGeometry(QScreen* screen)
