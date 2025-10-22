@@ -539,7 +539,11 @@ QVariant Region::process(const QVariant& val)
 
     QString str = val.toString();
 
-    auto cleanup = [&]() { delete tempApp; delete[] argv; delete argc; };
+    auto cleanup = [&]() {
+        delete tempApp;
+        delete[] argv;
+        delete argc;
+    };
 
     if (str == "all") {
         QRect result = ScreenGrabber().desktopGeometry();
