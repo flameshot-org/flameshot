@@ -539,28 +539,21 @@ QVariant Region::process(const QVariant& val)
 
     QString str = val.toString();
 
+    auto cleanup = [&]() { delete tempApp; delete[] argv; delete argc; };
+
     if (str == "all") {
         QRect result = ScreenGrabber().desktopGeometry();
-        // Cleanup allocated memory before returning
-        delete tempApp;
-        delete[] argv;
-        delete argc;
+        cleanup();
         return result;
     } else if (str.startsWith("screen")) {
         bool ok;
         int number = str.mid(6).toInt(&ok);
         if (!ok || number < 0) {
-            // Cleanup allocated memory before returning
-            delete tempApp;
-            delete[] argv;
-            delete argc;
+            cleanup();
             return {};
         }
         QRect result = ScreenGrabber().screenGeometry(qApp->screens()[number]);
-        // Cleanup allocated memory before returning
-        delete tempApp;
-        delete[] argv;
-        delete argc;
+        cleanup();
         return result;
     }
 
@@ -575,10 +568,7 @@ QVariant Region::process(const QVariant& val)
     );
 
     if (!regex.match(str).hasMatch()) {
-        // Cleanup allocated memory before returning
-        delete tempApp;
-        delete[] argv;
-        delete argc;
+        cleanup();
         return {};
     }
 
@@ -590,19 +580,12 @@ QVariant Region::process(const QVariant& val)
     y = regex.match(str).captured(4).toInt(&y_ok);
 
     if (!(w_ok && h_ok && x_ok && y_ok)) {
-        // Cleanup allocated memory before returning
-        delete tempApp;
-        delete[] argv;
-        delete argc;
+        cleanup();
         return {};
     }
 
     QRect result = QRect(x, y, w, h).normalized();
 
-    // Cleanup allocated memory before returning
-    delete tempApp;
-    delete[] argv;
-    delete argc;
-
+    cleanup();
     return result;
 }
