@@ -132,8 +132,20 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
                 topLeft.setY(topLeftScreen.y());
             }
         }
+// qDebug()<<topLeft;
+#if (defined(Q_OS_LINUX) || defined(Q_OS_MACOS))
         move(topLeft);
-        resize(pixmap().size());
+#endif
+        // move(QPoint(853,0));
+        resize(
+          pixmap().size() /
+          QGuiApplication::screens()[0]
+            ->devicePixelRatio()); //这里的pixmap()函数实际上返回的是m_context.screenshot
+                                   // QString savePath =
+        // "E:/QT/code/mflame/m_context__screenshot_diff1-25.png"; bool
+        // saveSuccess = m_context.screenshot.save(savePath, "PNG");
+        // qDebug()<<saveSuccess<<"; "<<__LINE__;
+
 #elif defined(Q_OS_MACOS)
         // Emulate fullscreen mode
         //        setWindowFlags(Qt::WindowStaysOnTopHint |

@@ -268,15 +268,17 @@ QPixmap ScreenGrabber::grabScreen(QScreen* screen, bool& ok)
 QRect ScreenGrabber::desktopGeometry()
 {
     QRect geometry;
-
+    qreal dpr = QGuiApplication::screens()[0]->devicePixelRatio();
     for (QScreen* const screen : QGuiApplication::screens()) {
         QRect scrRect = screen->geometry();
         // Qt6 fix: Don't divide by devicePixelRatio for multi-monitor setups
         // This was causing coordinate offset issues in dual monitor
         // configurations
         // But it still has a screen position in real pixels, not logical ones
-        qreal dpr = screen->devicePixelRatio();
         scrRect.moveTo(QPointF(scrRect.x() / dpr, scrRect.y() / dpr).toPoint());
+        scrRect.setWidth(scrRect.width() * screen->devicePixelRatio() / dpr);
+        scrRect.setHeight(scrRect.height() * screen->devicePixelRatio() / dpr);
+        // dpr = screen->devicePixelRatio();//这里应该是除以第一个屏幕的dpr
         geometry = geometry.united(scrRect);
     }
     return geometry;
