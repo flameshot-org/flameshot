@@ -35,11 +35,6 @@ OverlayMessage::OverlayMessage(QWidget* parent, const QRect& targetArea)
     QWidget::hide();
 }
 
-void OverlayMessage::init(QWidget* parent, const QRect& targetArea)
-{
-    new OverlayMessage(parent, targetArea);
-}
-
 /**
  * @brief Push a message to the message stack.
  * @param msg Message text formatted as rich text
