@@ -10,6 +10,7 @@
 #include <QRegularExpression>
 #include <QStandardPaths>
 #include <QVariant>
+#include <memory>
 
 // VALUE HANDLER
 
@@ -530,35 +531,24 @@ bool Region::check(const QVariant& val)
 QVariant Region::process(const QVariant& val)
 {
     // FIXME: This is temporary, just before D-Bus is removed
-    char** argv = new char*[1];
-    int* argc = new int{ 0 };
-    QApplication* tempApp = nullptr;
+    auto argv = std::make_unique<char*[]>(1);
+    auto argc = std::make_unique<int>(0);
+    std::unique_ptr<QApplication> tempApp;
     if (QGuiApplication::screens().empty()) {
-        tempApp = new QApplication(*argc, argv);
+        tempApp = std::make_unique<QApplication>(*argc, argv.get());
     }
 
     QString str = val.toString();
 
-    auto cleanup = [&]() {
-        delete tempApp;
-        delete[] argv;
-        delete argc;
-    };
-
     if (str == "all") {
-        QRect result = ScreenGrabber().desktopGeometry();
-        cleanup();
-        return result;
+        return ScreenGrabber().desktopGeometry();
     } else if (str.startsWith("screen")) {
         bool ok;
         int number = str.mid(6).toInt(&ok);
         if (!ok || number < 0) {
-            cleanup();
             return {};
         }
-        QRect result = ScreenGrabber().screenGeometry(qApp->screens()[number]);
-        cleanup();
-        return result;
+        return ScreenGrabber().screenGeometry(qApp->screens()[number]);
     }
 
     static const QRegularExpression regex(
@@ -572,7 +562,6 @@ QVariant Region::process(const QVariant& val)
     );
 
     if (!regex.match(str).hasMatch()) {
-        cleanup();
         return {};
     }
 
@@ -584,12 +573,8 @@ QVariant Region::process(const QVariant& val)
     y = regex.match(str).captured(4).toInt(&y_ok);
 
     if (!(w_ok && h_ok && x_ok && y_ok)) {
-        cleanup();
         return {};
     }
 
-    QRect result = QRect(x, y, w, h).normalized();
-
-    cleanup();
-    return result;
+    return QRect(x, y, w, h).normalized();
 }
