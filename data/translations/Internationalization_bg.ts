@@ -451,7 +451,7 @@ Press Space to open the side panel.</translation>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="96"/>
         <source>Enter color manually or select it using the color-wheel</source>
-        <translation>Въведете цвят на ръка или изберете от цветния кърг</translation>
+        <translation>Въведете цвят на ръка или изберете от цветния кръг</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="106"/>
