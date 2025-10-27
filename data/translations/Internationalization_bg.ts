@@ -539,51 +539,51 @@ Press Space to open the side panel.</translation>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="14"/>
         <source>Resolve configuration errors</source>
-        <translation>Resolve configuration errors</translation>
+        <translation>Отстраняване на грешки в настройките</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="50"/>
         <source>&lt;b&gt;You must resolve all errors before continuing:&lt;/b&gt;</source>
-        <translation>&lt;b&gt;You must resolve all errors before continuing:&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Трябва да отстраните всички грешки преди да продължите:&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="61"/>
         <source>Reset</source>
-        <translation>Reset</translation>
+        <translation>Нулиране</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="63"/>
         <source>Reset to the default value.</source>
-        <translation>Reset to the default value.</translation>
+        <translation>Нулиране до подразбираната стойност.</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="77"/>
         <source>Remove</source>
-        <translation>Remove</translation>
+        <translation>Премахване</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="79"/>
         <source>Remove this setting.</source>
-        <translation>Remove this setting.</translation>
+        <translation>Премахва настройката.</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="90"/>
         <source>Some keyboard shortcuts have conflicts.
 This will NOT prevent flameshot from starting.
 Please solve them manually in the configuration file.</source>
-        <translation>Some keyboard shortcuts have conflicts.
-This will NOT prevent flameshot from starting.
-Please solve them manually in the configuration file.</translation>
+        <translation>Няколко клавишни комбинации са в конфликт.
+Това НЯМА да попречи да стартирате Flameshot.
+Отстранете ръчно от файла с настройките.</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="112"/>
         <source>Resolve all</source>
-        <translation>Resolve all</translation>
+        <translation>Отстраняване всички</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="113"/>
         <source>Resolve all listed errors.</source>
-        <translation>Resolve all listed errors.</translation>
+        <translation>Отстраняване на всички изброени грешки.</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="125"/>
@@ -689,12 +689,12 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/tools/copy/copytool.cpp" line="24"/>
         <source>Copy</source>
-        <translation>Copy</translation>
+        <translation>Копиране</translation>
     </message>
     <message>
         <location filename="../../src/tools/copy/copytool.cpp" line="34"/>
         <source>Copy selection to clipboard</source>
-        <translation>Copy selection to clipboard</translation>
+        <translation>Копиране на избраното</translation>
     </message>
     <message>
         <source>Copy the selection into the clipboard</source>
@@ -713,12 +713,12 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/tools/exit/exittool.cpp" line="23"/>
         <source>Exit</source>
-        <translation>Exit</translation>
+        <translation>Изход</translation>
     </message>
     <message>
         <location filename="../../src/tools/exit/exittool.cpp" line="33"/>
         <source>Leave the capture screen</source>
-        <translation>Leave the capture screen</translation>
+        <translation>Излиза от екрана за заснемане</translation>
     </message>
 </context>
 <context>
@@ -726,32 +726,32 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="24"/>
         <source>Edit the name of your captures:</source>
-        <translation>Edit the name of your captures:</translation>
+        <translation>Задайте шаблон за името на заснетите изображения:</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="28"/>
         <source>Edit:</source>
-        <translation>Edit:</translation>
+        <translation>Шаблон:</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="30"/>
         <source>Preview:</source>
-        <translation>Preview:</translation>
+        <translation>Преглед:</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="73"/>
         <source>Save</source>
-        <translation>Save</translation>
+        <translation>Запазване</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="76"/>
         <source>Saves the pattern</source>
-        <translation>Saves the pattern</translation>
+        <translation>Запазва шаблона</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="78"/>
         <source>Restore</source>
-        <translation>Restore</translation>
+        <translation>Възстановяване</translation>
     </message>
     <message>
         <source>Reset</source>
@@ -760,17 +760,17 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="81"/>
         <source>Restores the saved pattern</source>
-        <translation>Restores the saved pattern</translation>
+        <translation>Възстановява запазения шаблон</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="83"/>
         <source>Clear</source>
-        <translation>Clear</translation>
+        <translation>Изчистване</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="89"/>
         <source>Deletes the name</source>
-        <translation>Deletes the name</translation>
+        <translation>Премахва името</translation>
     </message>
 </context>
 <context>
@@ -783,12 +783,12 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="119"/>
         <source>Unable to close active modal widgets</source>
-        <translation>Активните приспособления не могат да бъдат затворени</translation>
+        <translation>Работещите приспособления не могат да бъдат затворени</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="431"/>
         <source>URL copied to clipboard.</source>
-        <translation>URL copied to clipboard.</translation>
+        <translation>Адресът е копиран.</translation>
     </message>
 </context>
 <context>
@@ -887,7 +887,7 @@ Please solve them manually in the configuration file.</translation>
         <location filename="../../src/config/generalconf.cpp" line="192"/>
         <location filename="../../src/config/generalconf.cpp" line="394"/>
         <source>Import</source>
-        <translation>Import</translation>
+        <translation>Внасяне</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="198"/>
@@ -900,33 +900,33 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="198"/>
         <source>Unable to read file.</source>
-        <translation>Unable to read file.</translation>
+        <translation>Грешка при прочитане на файла.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="207"/>
         <location filename="../../src/config/generalconf.cpp" line="232"/>
         <source>Unable to write file.</source>
-        <translation>Unable to write file.</translation>
+        <translation>Грешка при запис на файла.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="219"/>
         <source>Save File</source>
-        <translation>Save File</translation>
+        <translation>Запазване на файл</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="241"/>
         <source>Confirm Reset</source>
-        <translation>Confirm Reset</translation>
+        <translation>Потвърждаване на нулиране</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="242"/>
         <source>Are you sure you want to reset the configuration?</source>
-        <translation>Are you sure you want to reset the configuration?</translation>
+        <translation>Желаете ли настройките да бъдат нулирани?</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="273"/>
         <source>Show help message</source>
-        <translation>Show help message</translation>
+        <translation>Показване на помощно съобщение</translation>
     </message>
     <message>
         <source>Show the help message at the beginning in the capture mode.</source>
@@ -935,7 +935,7 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="298"/>
         <source>Show the side panel button</source>
-        <translation>Show the side panel button</translation>
+        <translation>Показване на бутон за страничния панел</translation>
     </message>
     <message>
         <source>Show the side panel toggle button in the capture mode.</source>
@@ -944,12 +944,12 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="311"/>
         <source>Show desktop notifications</source>
-        <translation>Show desktop notifications</translation>
+        <translation>Показване на известия</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="336"/>
         <source>Show tray icon</source>
-        <translation>Show tray icon</translation>
+        <translation>Показване в лентата за известия</translation>
     </message>
     <message>
         <source>Show the systemtray icon</source>
@@ -958,32 +958,32 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="367"/>
         <source>Confirmation required to delete screenshot from the latest uploads</source>
-        <translation>Confirmation required to delete screenshot from the latest uploads</translation>
+        <translation>Потвърждаване при премахване на елемент от последно качените</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="382"/>
         <source>Configuration File</source>
-        <translation>Configuration File</translation>
+        <translation>Файл с настройките</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="387"/>
         <source>Export</source>
-        <translation>Export</translation>
+        <translation>Изнасяне</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="401"/>
         <source>Reset</source>
-        <translation>Reset</translation>
+        <translation>Нулиране</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="412"/>
         <source>Automatic check for updates</source>
-        <translation>Automatic check for updates</translation>
+        <translation>Проверка за обновяване</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="426"/>
         <source>Allow multiple flameshot GUI instances simultaneously</source>
-        <translation>Allow multiple flameshot GUI instances simultaneously</translation>
+        <translation>Разрешаване на няколко графични екземпляра на Flameshot</translation>
     </message>
     <message>
         <source>Automatically close daemon when it is not needed</source>
@@ -1000,17 +1000,17 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="463"/>
         <source>Show welcome message on launch</source>
-        <translation>Show welcome message on launch</translation>
+        <translation>Показване на приветствие при пускане</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="491"/>
         <source>Use large predefined color palette</source>
-        <translation>Use large predefined color palette</translation>
+        <translation>Използване на голяма предварително зададена палитра</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="515"/>
         <source>Copy URL after upload</source>
-        <translation>Copy URL after upload</translation>
+        <translation>Копиране на адреса след качване</translation>
     </message>
     <message>
         <source>Copy URL and close window after upload</source>
@@ -1019,7 +1019,7 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="527"/>
         <source>Save image after copy</source>
-        <translation>Save image after copy</translation>
+        <translation>Запазване на изображението след копиране</translation>
     </message>
     <message>
         <source>Save image file after copying it</source>
@@ -1489,7 +1489,7 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="169"/>
         <source>URL copied to clipboard.</source>
-        <translation>URL copied to clipboard.</translation>
+        <translation>Адресът е копиран.</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="175"/>
@@ -1903,7 +1903,7 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/main.cpp" line="220"/>
         <source>Unable to connect via DBus</source>
-        <translation>Unable to connect via DBus</translation>
+        <translation>Грешка при свързване чрез DBus</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="237"/>
@@ -2287,7 +2287,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/tools/save/savetool.cpp" line="24"/>
         <source>Save</source>
-        <translation>Save</translation>
+        <translation>Запазване</translation>
     </message>
     <message>
         <location filename="../../src/tools/save/savetool.cpp" line="34"/>
