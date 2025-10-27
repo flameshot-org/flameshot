@@ -10,6 +10,7 @@
 #include <QRegularExpression>
 #include <QStandardPaths>
 #include <QVariant>
+#include <memory>
 
 // VALUE HANDLER
 
@@ -530,10 +531,11 @@ bool Region::check(const QVariant& val)
 QVariant Region::process(const QVariant& val)
 {
     // FIXME: This is temporary, just before D-Bus is removed
-    char** argv = new char*[1];
-    int* argc = new int{ 0 };
+    auto argv = std::make_unique<char*[]>(1);
+    auto argc = std::make_unique<int>(0);
+    std::unique_ptr<QApplication> tempApp;
     if (QGuiApplication::screens().empty()) {
-        new QApplication(*argc, argv);
+        tempApp = std::make_unique<QApplication>(*argc, argv.get());
     }
 
     QString str = val.toString();
