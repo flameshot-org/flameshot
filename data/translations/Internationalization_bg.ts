@@ -186,7 +186,7 @@
         <location filename="../../src/widgets/capturelauncher.ui" line="93"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="183"/>
         <source>WxH+x+y</source>
-        <translation>WxH+x+y</translation>
+        <translation>Ш×В+x+y</translation>
     </message>
 </context>
 <context>
@@ -260,12 +260,12 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="727"/>
         <source>Flameshot has lost focus. Keyboard shortcuts won&apos;t work until you click somewhere.</source>
-        <translation>Flameshot has lost focus. Keyboard shortcuts won&apos;t work until you click somewhere.</translation>
+        <translation>Flameshot загуби фокус. Клавишните комбинации няма да работят докато не щракнете с мишката някъде.</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="733"/>
         <source>Configuration error resolved. Launch `flameshot gui` again to apply it.</source>
-        <translation>Configuration error resolved. Launch `flameshot gui` again to apply it.</translation>
+        <translation>Грешката в настройките е отстранена. Стартирайте отново `flameshot gui`, за да бъдат приети.</translation>
     </message>
     <message>
         <source>Select an area with the mouse, or press Esc to exit.
@@ -393,7 +393,7 @@ Press Space to open the side panel.</translation>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="60"/>
         <source>Toggle magnifier</source>
-        <translation>Toggle magnifier</translation>
+        <translation>Превключване на лупата</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="60"/>
@@ -403,7 +403,7 @@ Press Space to open the side panel.</translation>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="61"/>
         <source>Cancel</source>
-        <translation>Cancel</translation>
+        <translation>Отказ</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="61"/>
@@ -416,12 +416,12 @@ Press Space to open the side panel.</translation>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="40"/>
         <source>Edit Preset:</source>
-        <translation>Edit Preset:</translation>
+        <translation>Променяне на елемента:</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="45"/>
         <source>Enter color to update preset</source>
-        <translation>Enter color to update preset</translation>
+        <translation>Въведете цвят, за да промените елемента</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="65"/>
@@ -431,53 +431,53 @@ Press Space to open the side panel.</translation>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="67"/>
         <source>Press button to update the selected preset</source>
-        <translation>Press button to update the selected preset</translation>
+        <translation>Натиснете бутона, за да обновите избрания елемент</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="74"/>
         <source>Delete</source>
-        <translation>Delete</translation>
+        <translation>Премахване</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="76"/>
         <source>Press button to delete the selected preset</source>
-        <translation>Press button to delete the selected preset</translation>
+        <translation>Натиснете бутона, за да премахнете избрания елемент</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="90"/>
         <source>Add Preset:</source>
-        <translation>Add Preset:</translation>
+        <translation>Добавяне на елемент:</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="96"/>
         <source>Enter color manually or select it using the color-wheel</source>
-        <translation>Enter color manually or select it using the color-wheel</translation>
+        <translation>Въведете цвят на ръка или изберете от цветния кърг</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="106"/>
         <source>Add</source>
-        <translation>Add</translation>
+        <translation>Добавяне</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="107"/>
         <source>Press button to add preset</source>
-        <translation>Press button to add preset</translation>
+        <translation>Натиснете бутона, за да добавите елемент</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="130"/>
         <location filename="../../src/config/colorpickereditor.cpp" line="147"/>
         <source>Error</source>
-        <translation>Error</translation>
+        <translation>Грешка</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="131"/>
         <source>Unable to add preset. Maximum limit reached.</source>
-        <translation>Unable to add preset. Maximum limit reached.</translation>
+        <translation>Грешка при добавяне на елемент. Достигнато е ограничението.</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="148"/>
         <source>Unable to remove preset. Minimum limit reached.</source>
-        <translation>Unable to remove preset. Minimum limit reached.</translation>
+        <translation>Грешка при премахване на елемент. Достигнато е ограничението.</translation>
     </message>
 </context>
 <context>
@@ -485,7 +485,7 @@ Press Space to open the side panel.</translation>
     <message>
         <location filename="../../src/config/configerrordetails.cpp" line="20"/>
         <source>Configuration errors</source>
-        <translation>Configuration errors</translation>
+        <translation>Грешки в настройките</translation>
     </message>
 </context>
 <context>
@@ -494,44 +494,44 @@ Press Space to open the side panel.</translation>
         <location filename="../../src/utils/confighandler.cpp" line="579"/>
         <source>Unrecognized setting: &apos;%1&apos;
 </source>
-        <translation>Unrecognized setting: &apos;%1&apos;
+        <translation>Неизвестна настройки: „%1“
 </translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="587"/>
         <source>Unrecognized shortcut name: &apos;%1&apos;.
 </source>
-        <translation>Unrecognized shortcut name: &apos;%1&apos;.
+        <translation>Непознато име клавишна комбинация: „%1“.
 </translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="630"/>
         <source>Shortcut conflict: &apos;%1&apos; and &apos;%2&apos; have the same shortcut: %3
 </source>
-        <translation>Shortcut conflict: &apos;%1&apos; and &apos;%2&apos; have the same shortcut: %3
+        <translation>Клавишните комбинации на „%1“ и „%2“ съвпадат: %3
 </translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="668"/>
         <source>Bad value in &apos;%1&apos;. Expected: %2
 </source>
-        <translation>Bad value in &apos;%1&apos;. Expected: %2
+        <translation>Невярна стойност „%1“. Очаквана: %2
 </translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="717"/>
         <source>You have successfully resolved the configuration error.</source>
-        <translation>You have successfully resolved the configuration error.</translation>
+        <translation>Успешно сте отстранили грешка в настройките.</translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="740"/>
         <source>The configuration contains an error. Open configuration to resolve.</source>
-        <translation>The configuration contains an error. Open configuration to resolve.</translation>
+        <translation>Грешка в настройките. Отворете прозореца с настройки, за да я отстраните.</translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="794"/>
         <source>Bad config key &apos;%1&apos; in ConfigHandler. Please report this as a bug.</source>
-        <translation>Bad config key &apos;%1&apos; in ConfigHandler. Please report this as a bug.</translation>
+        <translation>Неверен ключ на настройка „%1“ в ConfigHandler. Съобщете за дефект.</translation>
     </message>
 </context>
 <context>
@@ -588,7 +588,7 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="125"/>
         <source>Details</source>
-        <translation>Details</translation>
+        <translation>Подробности</translation>
     </message>
 </context>
 <context>
@@ -596,37 +596,37 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="40"/>
         <source>Configuration</source>
-        <translation>Configuration</translation>
+        <translation>Настройки</translation>
     </message>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="68"/>
         <source>Interface</source>
-        <translation>Interface</translation>
+        <translation>Интерфейс</translation>
     </message>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="78"/>
         <source>Filename Editor</source>
-        <translation>Filename Editor</translation>
+        <translation>Име на файла</translation>
     </message>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="59"/>
         <source>General</source>
-        <translation>General</translation>
+        <translation>Общи</translation>
     </message>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="87"/>
         <source>Shortcuts</source>
-        <translation>Shortcuts</translation>
+        <translation>Клавишни комбинации</translation>
     </message>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="120"/>
         <source>Resolve</source>
-        <translation>Resolve</translation>
+        <translation>Отстраняване</translation>
     </message>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="124"/>
         <source>&lt;b&gt;Configuration file has errors. Resolve them before continuing.&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Configuration file has errors. Resolve them before continuing.&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Файлът с настройките съдържа грешки. Отстранете ги преди да продължите.&lt;/b&gt;</translation>
     </message>
 </context>
 <context>
@@ -778,7 +778,7 @@ Please solve them manually in the configuration file.</translation>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="119"/>
         <source>Error</source>
-        <translation>Error</translation>
+        <translation>Грешка</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="119"/>
@@ -895,7 +895,7 @@ Please solve them manually in the configuration file.</translation>
         <location filename="../../src/config/generalconf.cpp" line="232"/>
         <location filename="../../src/config/generalconf.cpp" line="763"/>
         <source>Error</source>
-        <translation>Error</translation>
+        <translation>Грешка</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="198"/>
@@ -2114,7 +2114,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/tools/launcher/openwithprogram.cpp" line="30"/>
         <source>Error</source>
-        <translation>Error</translation>
+        <translation>Грешка</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/openwithprogram.cpp" line="31"/>
@@ -2836,7 +2836,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="160"/>
         <source>&amp;Open Save Path</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Отваряне пътя за запис</translation>
     </message>
 </context>
 <context>
@@ -3052,7 +3052,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="170"/>
         <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="240"/>
         <source>Delete the current palette</source>
-        <translation>Премахване</translation>
+        <translation>Премахване на палитрата</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="181"/>
