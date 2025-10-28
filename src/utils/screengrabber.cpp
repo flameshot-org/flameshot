@@ -13,14 +13,17 @@
 #include <QProcess>
 #include <QScreen>
 
-#if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
+#include <QStandardPaths>
+
+#if defined(Q_OS_LINUX)
 #include "request.h"
 #include <QDBusInterface>
-#include <QDBusReply>
-#include <QDir>
 #include <QUrl>
 #include <QUuid>
 #endif
+
+// TODO: This should be removed after the complete switch to the DesktopCapture
+// It is still used (but does not properly work) for non-fullscreen captures
 
 ScreenGrabber::ScreenGrabber(QObject* parent)
   : QObject(parent)
@@ -28,7 +31,7 @@ ScreenGrabber::ScreenGrabber(QObject* parent)
 
 void ScreenGrabber::generalGrimScreenshot(bool& ok, QPixmap& res)
 {
-#if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
+#if defined(Q_OS_LINUX)
     if (!ConfigHandler().useGrimAdapter()) {
         return;
     }
@@ -59,8 +62,7 @@ void ScreenGrabber::generalGrimScreenshot(bool& ok, QPixmap& res)
 
 void ScreenGrabber::freeDesktopPortal(bool& ok, QPixmap& res)
 {
-
-#if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
+#if defined(Q_OS_LINUX)
     QDBusInterface screenshotInterface(
       QStringLiteral("org.freedesktop.portal.Desktop"),
       QStringLiteral("/org/freedesktop/portal/desktop"),
@@ -153,7 +155,7 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
                                 currentScreen->geometry().height()));
     screenPixmap.setDevicePixelRatio(currentScreen->devicePixelRatio());
     return screenPixmap;
-#elif defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
+#elif defined(Q_OS_LINUX)
     if (m_info.waylandDetected()) {
         QPixmap res;
         // handle screenshot based on DE
@@ -204,7 +206,7 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
         return res;
     }
 #endif
-#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX) || defined(Q_OS_WIN)
+    // #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX) || defined(Q_OS_WIN)
     QRect geometry = desktopGeometry();
 
     // Qt6 fix: Create a composite image from all screens to handle
@@ -221,8 +223,14 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
                                 -r.y() / primaryScreen->devicePixelRatio(),
                                 geometry.width(),
                                 geometry.height());
+
+    QString downloadsPath =
+      QStandardPaths::writableLocation(QStandardPaths::DownloadLocation);
+    QString filePath = downloadsPath + "/screenshot.png";
+    desktop.save(filePath, "PNG");
+
     return desktop;
-#endif
+    // #endif
 }
 
 QRect ScreenGrabber::screenGeometry(QScreen* screen)
@@ -269,16 +277,31 @@ QRect ScreenGrabber::desktopGeometry()
 {
     QRect geometry;
 
+    qreal dpr = 1.0;
+#ifdef Q_OS_WIN
+    QScreen* primaryScreen = QGuiApplication::primaryScreen();
+    dpr = primaryScreen->devicePixelRatio();
+    qWarning() << "ScreenGrabber::desktopGeometry() - (primaryScreen) dpr ="
+               << dpr;
+#endif
+
     for (QScreen* const screen : QGuiApplication::screens()) {
         QRect scrRect = screen->geometry();
+        qWarning() << "ScreenGrabber::desktopGeometry() - scrRect =" << scrRect;
         // Qt6 fix: Don't divide by devicePixelRatio for multi-monitor setups
         // This was causing coordinate offset issues in dual monitor
         // configurations
         // But it still has a screen position in real pixels, not logical ones
-        qreal dpr = screen->devicePixelRatio();
+#ifdef Q_OS_LINUX
+        dpr = screen->devicePixelRatio();
+#endif
+
         scrRect.moveTo(QPointF(scrRect.x() / dpr, scrRect.y() / dpr).toPoint());
+        qWarning() << "ScreenGrabber::desktopGeometry() - scrRect (scaled = "
+                   << dpr << ") =" << scrRect;
         geometry = geometry.united(scrRect);
     }
+    qWarning() << "ScreenGrabber::desktopGeometry() - geometry =" << geometry;
     return geometry;
 }
 

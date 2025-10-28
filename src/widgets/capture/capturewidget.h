@@ -17,6 +17,7 @@
 #include "src/config/generalconf.h"
 #include "src/tools/capturecontext.h"
 #include "src/tools/capturetool.h"
+#include "src/utils/DesktopCapturer.h"
 #include "src/utils/confighandler.h"
 #include "src/widgets/capture/magnifierwidget.h"
 #include "src/widgets/capture/selectionwidget.h"
@@ -36,6 +37,9 @@ class QNetworkReply;
 class ColorPicker;
 class NotifierBox;
 class HoverEventFilter;
+class OverlayMessage;
+class OrientablePushButton;
+
 #if !defined(DISABLE_UPDATE_CHECKER)
 class UpdateNotificationWidget;
 #endif
@@ -100,6 +104,7 @@ public:
 
 protected:
     void paintEvent(QPaintEvent* paintEvent) override;
+    void leaveEvent(QEvent* event) override;
     void mousePressEvent(QMouseEvent* mouseEvent) override;
     void mouseMoveEvent(QMouseEvent* mouseEvent) override;
     void mouseReleaseEvent(QMouseEvent* mouseEvent) override;
@@ -112,6 +117,10 @@ protected:
     void changeEvent(QEvent* changeEvent) override;
 
 private:
+    void showHelp();
+    void initScreenshotEditor(bool compositeDesktop);
+    void moveToActiveScreen();
+    void setWidgetFlags();
     void pushObjectsStateToUndoStack();
     void releaseActiveTool();
     void uncheckActiveTool();
@@ -229,4 +238,9 @@ private:
     // Grid
     bool m_displayGrid{ false };
     int m_gridSize{ 10 };
+
+    //
+    DesktopCapturer m_desktopCapturer;
+    OverlayMessage* m_ovelayMessage;
+    OrientablePushButton* m_panelToggleButton;
 };

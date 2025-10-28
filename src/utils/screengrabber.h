@@ -1,6 +1,9 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
+// TODO: This should be removed after the complete switch to the DesktopCapture
+// It is still used (but does not properly work) for non-fullscreen captures
+
 #pragma once
 
 #include "src/utils/desktopinfo.h"
