@@ -155,18 +155,52 @@ void saveToClipboardMime(const QPixmap& capture, const QString& imageType)
     if (imageType == "jpeg") {
         imageWriter.setQuality(ConfigHandler().jpegQuality());
     }
-    imageWriter.write(capture.toImage());
-
-    QPixmap formattedPixmap;
-    bool isLoaded =
-      formattedPixmap.loadFromData(reinterpret_cast<uchar*>(array.data()),
-                                   array.size(),
-                                   imageType.toUpper().toUtf8());
-    if (isLoaded) {
-
-        auto* mimeData = new QMimeData();
-
+    if (!imageWriter.write(capture.toImage())) {
+        AbstractLogger::error()
+          << QObject::tr("Error while writing image to buffer");
+        return;
+    }
+    if (DesktopInfo().waylandDetected()
 #ifdef USE_WAYLAND_CLIPBOARD
+        && false // already handled by USE_WAYLAND_CLIPBOARD
+#endif
+        ) {
+        // Use wl-copy for GNOME Wayland and other non-KDE Wayland environments
+        QProcess process;
+        QString mime = "image/" + imageType;
+        QStringList args = {"--type", mime};
+        process.start("wl-copy", args);
+        if (!process.waitForStarted()) {
+            AbstractLogger::error()
+              << QObject::tr("Failed to start wl-copy: ") + process.errorString();
+            return;
+        }
+        process.write(array);
+        process.closeWriteChannel();
+        if (!process.waitForFinished()) {
+            AbstractLogger::error()
+              << QObject::tr("wl-copy failed: ") + process.errorString();
+            return;
+        }
+        if (process.exitCode() != 0) {
+            AbstractLogger::error()
+              << QObject::tr("wl-copy returned error code: ") + QString::number(process.exitCode());
+            return;
+        }
+    } else {
+        auto* mimeData = new QMimeData();
+#ifdef USE_WAYLAND_CLIPBOARD
+        QPixmap formattedPixmap;
+        bool isLoaded =
+          formattedPixmap.loadFromData(reinterpret_cast<uchar*>(array.data()),
+                                       array.size(),
+                                       imageType.toUpper().toUtf8());
+        if (!isLoaded) {
+            delete mimeData;
+            AbstractLogger::error()
+              << QObject::tr("Error while loading image data");
+            return;
+        }
         mimeData->setImageData(formattedPixmap.toImage());
         mimeData->setData(QStringLiteral("x-kde-force-image-copy"),
                           QByteArray());
@@ -176,10 +210,6 @@ void saveToClipboardMime(const QPixmap& capture, const QString& imageType)
         mimeData->setData("image/" + imageType, array);
         QApplication::clipboard()->setMimeData(mimeData);
 #endif
-
-    } else {
-        AbstractLogger::error()
-          << QObject::tr("Error while saving to clipboard");
     }
 }
 
