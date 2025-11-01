@@ -21,10 +21,6 @@
 #define FLAMESHOT_ICON "flameshot"
 #endif
 
-// The default DBus notification timeout is ussually ~25 seconds
-// This is too long to wait to send a desktop notification
-#define DBUS_NOTIFICATION_TIMEOUT_MS 1000
-
 SystemNotification::SystemNotification(QObject* parent)
   : QObject(parent)
   , m_interface(nullptr)
@@ -42,7 +38,6 @@ SystemNotification::SystemNotification(QObject* parent)
 
     if (connectionInterface->isServiceRegistered(service)) {
         m_interface = new QDBusInterface(service, path, interface, bus, this);
-        m_interface->setTimeout(DBUS_NOTIFICATION_TIMEOUT_MS);
     } else {
         AbstractLogger::warning(AbstractLogger::Stderr |
                                 AbstractLogger::LogFile)
