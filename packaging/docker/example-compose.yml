@@ -1,0 +1,13 @@
+version: '3.8'
+services:
+  flameshot:
+    image: flameshot:local
+    environment:
+      - DISPLAY=${DISPLAY}
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+    devices:
+      - /dev/dri:/dev/dri
+    network_mode: host
+    entrypoint: ["/usr/local/bin/flameshot"]
+    command: ["gui"]

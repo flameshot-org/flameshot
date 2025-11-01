@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+IMAGE_NAME=flameshot-builder-rocky:local
+HERE=$(cd "$(dirname "$0")" && pwd)
+REPO_ROOT=$(cd "$HERE/../../../.." && pwd)
+
+echo "Building builder image: $IMAGE_NAME"
+docker build -t "$IMAGE_NAME" -f "$HERE/Dockerfile" "$HERE"
+
+echo "Running build inside container (output will be written to $REPO_ROOT/build)"
+mkdir -p "$REPO_ROOT/build"
+HOST_UID=$(id -u)
+HOST_GID=$(id -g)
+
+docker run --rm -it --user "$HOST_UID:$HOST_GID" -v "$REPO_ROOT":/src -w /src "$IMAGE_NAME" \
+  bash -lc "rm -rf build && cmake -S . -B build -DQT_VERSION_MAJOR=6 -DCMAKE_BUILD_TYPE=Release && cmake --build build -j\$(nproc)"
+
+echo "Build finished. Artifacts in $REPO_ROOT/build (created as UID:GID $HOST_UID:$HOST_GID)"
