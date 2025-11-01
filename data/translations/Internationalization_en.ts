@@ -503,6 +503,14 @@
     </message>
 </context>
 <context>
+    <name>SystemNotification</name>
+    <message>
+        <location filename="../../src/utils/systemnotification.cpp" line="49"/>
+        <source>No DBus System Notification service found</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ConfigResolver</name>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="14"/>
