@@ -16,6 +16,8 @@
 #include <QPixmap>
 #include <QProcess>
 #include <QTemporaryFile>
+#include <QTimer>
+#include <QWidget>
 
 #if USE_WAYLAND_CLIPBOARD
 #include <KSystemClipboard>
@@ -147,8 +149,67 @@ void saveJpegToClipboardMacOS(const QPixmap& capture)
     tempFile.remove();
 }
 
+class LazyImageMimeData : public QMimeData  
+{  
+public:  
+    LazyImageMimeData(const QPixmap& pixmap, const QString& format)  
+        : m_pixmap(pixmap)  
+        , m_format(format)  
+    {  
+    }  
+  
+    QStringList formats() const override  
+    {  
+        return { "image/" + m_format, "application/x-qt-image" };  
+    }  
+  
+protected:  
+    QVariant retrieveData(const QString& mimeType, QMetaType type) const override  
+    {  
+        if (mimeType == "application/x-qt-image") {  
+            return m_pixmap.toImage();  
+        }  
+        if (mimeType == "image/" + m_format) {  
+            QByteArray ba;  
+            QBuffer buffer(&ba);  
+            buffer.open(QIODevice::WriteOnly);  
+            m_pixmap.toImage().save(&buffer, m_format.toUpper().toLatin1());  
+            return ba;  
+        }  
+        return QMimeData::retrieveData(mimeType, type);  
+    }  
+  
+private:  
+    QPixmap m_pixmap;  
+    QString m_format;  
+};
+
 void saveToClipboardMime(const QPixmap& capture, const QString& imageType)
 {
+#ifdef USE_WAYLAND_CLIPBOARD
+    // GNOME + Wayland Workaround  
+    DesktopInfo desktopInfo;  
+    if (desktopInfo.waylandDetected() &&  
+        desktopInfo.windowManager() == DesktopInfo::GNOME) {  
+        QWidget helperWindow;  
+        helperWindow.setWindowFlags(Qt::Window | Qt::FramelessWindowHint |  
+                                    Qt::WindowStaysOnTopHint);  
+        helperWindow.setAttribute(Qt::WA_TranslucentBackground);  
+        helperWindow.setFixedSize(1, 1);  
+    
+        QEventLoop eventLoop;  
+    
+        QTimer::singleShot(50, [&]() {  
+            auto* mimeData = new LazyImageMimeData(capture, imageType);  
+            QApplication::clipboard()->setMimeData(mimeData, QClipboard::Clipboard);  
+            QTimer::singleShot(250, &eventLoop, &QEventLoop::quit);  
+        });  
+    
+        helperWindow.show();  
+        eventLoop.exec();  
+        return;  
+    }  
+#endif
     QByteArray array;
     QBuffer buffer{ &array };
     QImageWriter imageWriter{ &buffer, imageType.toUpper().toUtf8() };
