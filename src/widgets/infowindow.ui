@@ -129,6 +129,13 @@
        </property>
       </widget>
      </item>
+     <item>
+      <widget class="QPushButton" name="OpenLogPathButton">
+       <property name="text">
+        <string>Open Log Directory</string>
+       </property>
+      </widget>
+     </item>
     </layout>
    </item>
   </layout>

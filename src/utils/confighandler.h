@@ -141,6 +141,9 @@ public:
     CONFIG_GETTER_SETTER(showSelectionGeometryHideTime,
                          showSelectionGeometryHideTime,
                          int)
+    CONFIG_GETTER_SETTER(logToFile, setLogToFile, bool)
+    CONFIG_GETTER_SETTER(logFilePath, setLogFilePath, QString)
+    CONFIG_GETTER_SETTER(logFileLevel, setLogFileLevel, int)
 
     // SPECIAL CASES
     bool startupLaunch();
