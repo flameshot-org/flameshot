@@ -61,8 +61,18 @@ void ScreenGrabber::freeDesktopPortal(bool& ok, QPixmap& res)
 {
 
 #if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
+    auto* connectionInterface = QDBusConnection::sessionBus().interface();
+    auto service = QStringLiteral("org.freedesktop.portal.Desktop");
+
+    if (!connectionInterface->isServiceRegistered(service)) {
+        ok = false;
+        AbstractLogger::error() << tr(
+          "Could not locate the `org.freedesktop.portal.Desktop` service");
+        return;
+    }
+
     QDBusInterface screenshotInterface(
-      QStringLiteral("org.freedesktop.portal.Desktop"),
+      service,
       QStringLiteral("/org/freedesktop/portal/desktop"),
       QStringLiteral("org.freedesktop.portal.Screenshot"));
 
@@ -72,7 +82,7 @@ void ScreenGrabber::freeDesktopPortal(bool& ok, QPixmap& res)
 
     // premake interface
     auto* request = new OrgFreedesktopPortalRequestInterface(
-      QStringLiteral("org.freedesktop.portal.Desktop"),
+      service,
       "/org/freedesktop/portal/desktop/request/" +
         QDBusConnection::sessionBus().baseService().remove(':').replace('.',
                                                                         '_') +
