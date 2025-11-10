@@ -604,6 +604,47 @@ void CaptureWidget::uncheckActiveTool()
     updateCursor();
 }
 
+void CaptureWidget::closeEvent(QCloseEvent* event)
+{
+#if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
+    /* GNOME copy problem workaround, copy 
+       operation seems to work only when there
+       is a visible window to retrieve the 
+       data from. On GNOME, the GUI should 
+       handle the copy operation, not the 
+       daemon.
+    */
+    DesktopInfo desktopInfo;
+    if (m_captureDone &&
+        desktopInfo.waylandDetected() &&
+        desktopInfo.windowManager() == DesktopInfo::GNOME &&
+        (m_context.request.tasks() & CaptureRequest::COPY)) {
+          
+        static bool clipboardHandled = false;
+        
+        if (!clipboardHandled) {
+            event->ignore();
+            clipboardHandled = true;
+            
+            QPixmap capturePixmap = pixmap();
+            saveToClipboard(capturePixmap);
+            m_context.request.removeTask(CaptureRequest::COPY);
+            hide();
+            
+            QTimer::singleShot(150, this, [this]() {
+                QWidget::close();
+            });
+            
+            return;
+        }
+        
+        clipboardHandled = false;
+    }
+#endif
+    
+    QWidget::closeEvent(event);
+}
+
 void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
 {
     Q_UNUSED(paintEvent)
