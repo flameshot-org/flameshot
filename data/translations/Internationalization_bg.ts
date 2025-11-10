@@ -983,7 +983,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="426"/>
         <source>Allow multiple flameshot GUI instances simultaneously</source>
-        <translation>Разрешаване на няколко екземпляра на интерфейса на Flameshot</translation>
+        <translation>Разрешаване на няколко графични екземпляра на Flameshot</translation>
     </message>
     <message>
         <source>Automatically close daemon when it is not needed</source>
@@ -1000,7 +1000,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="463"/>
         <source>Show welcome message on launch</source>
-        <translation>Показване на приветствие при стартиране</translation>
+        <translation>Показване на приветствие при пускане</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="491"/>
@@ -1903,7 +1903,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/main.cpp" line="220"/>
         <source>Unable to connect via DBus</source>
-        <translation>Грешка при свързване по DBus</translation>
+        <translation>Грешка при свързване чрез DBus</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="237"/>
