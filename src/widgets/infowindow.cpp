@@ -5,7 +5,10 @@
 #include "./ui_infowindow.h"
 #include "src/core/flameshotdaemon.h"
 #include "src/core/qguiappcurrentscreen.h"
+#include "src/utils/abstractlogger.h"
+#include "src/utils/confighandler.h"
 #include "src/utils/globalvalues.h"
+#include <QDesktopServices>
 #include <QKeyEvent>
 #include <QScreen>
 
@@ -22,6 +25,11 @@ InfoWindow::InfoWindow(QWidget* parent)
 
     connect(
       ui->CopyInfoButton, &QPushButton::clicked, this, &InfoWindow::copyInfo);
+
+    connect(ui->OpenLogPathButton,
+            &QPushButton::clicked,
+            this,
+            &InfoWindow::openLogDir);
 
     show();
     // Call show() first, otherwise the correct geometry cannot be fetched for
@@ -56,4 +64,10 @@ void InfoWindow::copyInfo()
 {
     FlameshotDaemon::copyToClipboard(GlobalValues::versionInfo() + "\n" +
                                      generateKernelString());
+}
+
+void InfoWindow::openLogDir()
+{
+    auto url = QUrl::fromLocalFile(ConfigHandler().logFilePath());
+    QDesktopServices::openUrl(url);
 }

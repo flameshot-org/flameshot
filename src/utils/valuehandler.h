@@ -169,6 +169,13 @@ class ExistingDir : public ValueHandler
     QString expected() override;
 };
 
+class LoggingDir : public ValueHandler
+{
+    bool check(const QVariant& val) override;
+    QVariant fallback() override;
+    QString expected() override;
+};
+
 class FilenamePattern : public ValueHandler
 {
     bool check(const QVariant&) override;

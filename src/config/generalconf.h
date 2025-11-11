@@ -50,6 +50,7 @@ private slots:
     void undoLimit(int limit);
     void saveAfterCopyChanged(bool checked);
     void changeSavePath();
+    void changeLogFilePath();
     void importConfiguration();
     void exportFileConfiguration();
     void resetConfiguration();
@@ -62,6 +63,8 @@ private slots:
     void setJpegQuality(int v);
     void setReverseArrow(bool checked);
     void setInsecurePixelate(bool checked);
+    void setLogToFile(bool checked);
+    void setLogFileLevel(int index);
 
 private:
     const QString chooseFolder(const QString& currentPath = "");
@@ -101,6 +104,7 @@ private:
     void initJpegQuality();
     void initReverseArrow();
     void initInsecurePixelate();
+    void initLogToFile();
 
     void _updateComponents(bool allowEmptySavePath);
 
@@ -150,4 +154,8 @@ private:
     QSpinBox* m_jpegQuality;
     QCheckBox* m_reverseArrow;
     QCheckBox* m_insecurePixelate;
+    QCheckBox* m_logToFile;
+    QLineEdit* m_logFilePath;
+    QPushButton* m_changeLogFilePathButton;
+    QComboBox* m_logFileLevel;
 };

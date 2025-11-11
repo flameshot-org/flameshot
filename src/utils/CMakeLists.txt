@@ -25,19 +25,20 @@ target_sources(
           colorutils.cpp
           history.cpp
           strfparse.cpp
+          logfile.cpp
 )
 
 IF (UNIX AND NOT APPLE)
-target_sources(
-  flameshot
-  PRIVATE request.h
-          request.cpp
-)
+    target_sources(
+      flameshot
+      PRIVATE request.h
+              request.cpp
+    )
 ENDIF()
 
 IF (WIN32)
-  target_sources(
-    flameshot
-    PRIVATE winlnkfileparse.cpp
-  )
+    target_sources(
+        flameshot
+        PRIVATE winlnkfileparse.cpp
+      )
 ENDIF()
