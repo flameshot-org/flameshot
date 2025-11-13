@@ -4,11 +4,11 @@
 #include "colorpicker.h"
 #include "src/utils/confighandler.h"
 #include "src/utils/globalvalues.h"
-#include <cmath>
 #include <QMouseEvent>
 #include <QPainter>
 #include <QPoint>
 #include <QSize>
+#include <cmath>
 
 ColorPicker::ColorPicker(QWidget* parent)
   : ColorPickerWidget(parent)
@@ -33,9 +33,9 @@ void ColorPicker::setNewColor()
 void ColorPicker::mouseMoveEvent(QMouseEvent* e)
 {
     const size_t colsize = m_colorList.size();
-    const QSize  middle  = this->size() * 0.5;
-    const QPoint center  = -(this->pos() - this->mapToParent(e->pos())
-        + QPoint(middle.width(), middle.height()));
+    const QSize middle = this->size() * 0.5;
+    const QPoint center = -(this->pos() - this->mapToParent(e->pos()) +
+                            QPoint(middle.width(), middle.height()));
     const double arclength = 2.0 * M_PI / colsize;
 
     // Computes the new index based on the orientation of the mouse
@@ -52,12 +52,10 @@ void ColorPicker::mouseMoveEvent(QMouseEvent* e)
     //  of the first color is -3pi / 2 (in the screen coordinates,
     //  so pi/2 in normal coordinates) and the colors are being drawn
     //  counter clockwise.
-    m_selectedIndex = (
-       int(
-            (std::atan2(-center.y(), center.x()) + arclength / 2) / arclength
-            + 3 * colsize / 4.0
-        )
-    ) % colsize;
+    m_selectedIndex =
+      (int((std::atan2(-center.y(), center.x()) + arclength / 2) / arclength +
+           3 * colsize / 4.0)) %
+      colsize;
 
     update(m_colorAreaList.at(m_selectedIndex) + QMargins(10, 10, 10, 10));
     update(m_colorAreaList.at(m_lastIndex) + QMargins(10, 10, 10, 10));
