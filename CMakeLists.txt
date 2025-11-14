@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.13)
+cmake_minimum_required(VERSION 3.16)
 # cmake_policy(SET CMP0076 OLD)
 
 set(FLAMESHOT_VERSION 13.3.0)
