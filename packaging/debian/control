@@ -3,7 +3,7 @@ Section: graphics
 Priority: optional
 Maintainer: Boyuan Yang <byang@debian.org>
 Build-Depends:
- cmake (>= 3.13~),
+ cmake (>= 3.16~),
  debhelper (>= 11),
  qt6-base-dev (>= 6.2.0~),
  qt6-tools-dev (>= 6.2.0~),
@@ -12,7 +12,7 @@ Build-Depends:
  qt6-l10n-tools,
  libgl-dev,
 Standards-Version: 4.5.0
-Homepage: https://github.com/flameshot-org/flameshot
+Homepage: https://flameshot.org/
 Vcs-Browser: https://github.com/flameshot-org/flameshot
 Vcs-Git: https://github.com/flameshot-org/flameshot.git
 
