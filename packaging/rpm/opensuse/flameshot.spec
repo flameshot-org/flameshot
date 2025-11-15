@@ -10,7 +10,7 @@ URL:     https://github.com/flameshot-org/flameshot
 Source0: %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
 Vendor:  Flameshot
 
-BuildRequires: cmake >= 3.13.0
+BuildRequires: cmake >= 3.16.0
 BuildRequires: gcc-c++ >= 7
 BuildRequires: fdupes
 BuildRequires: update-desktop-files
