@@ -1607,7 +1607,7 @@ Please solve them manually in the configuration file.</source>
         <location filename="../../src/widgets/infowindow.ui" line="102"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="121"/>
         <source>Flameshot v</source>
-        <translation>Flameshot v</translation>
+        <translation>Flameshot изд.</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="115"/>
@@ -2040,27 +2040,27 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/main.cpp" line="310"/>
         <source>Print geometry of the selection in the format WxH+X+Y. Does nothing if raw is specified</source>
-        <translation>Print geometry of the selection in the format WxH+X+Y. Does nothing if raw is specified</translation>
+        <translation>Извежда геометрията на избраната област във формат Ш×В+x+y. Няма влияние ако е избрано „raw“</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="314"/>
         <source>Define the screen to capture (starting from 0)</source>
-        <translation>Define the screen to capture (starting from 0)</translation>
+        <translation>Укажете екрана, който да бъде заснет (започвайки от 0)</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="334"/>
         <source>Invalid delay, it must be a number greater than 0</source>
-        <translation>Invalid delay, it must be a number greater than 0</translation>
+        <translation>Неприемлива стойност на изчакване, трябва да бъде число по-голямо от 0</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="337"/>
         <source>Invalid region, use &apos;WxH+X+Y&apos; or &apos;all&apos; or &apos;screen0/screen1/...&apos;.</source>
-        <translation>Invalid region, use &apos;WxH+X+Y&apos; or &apos;all&apos; or &apos;screen0/screen1/...&apos;.</translation>
+        <translation>Неприемлива област, използвайте „Ш×В+x+y“, „all“ или „screen0/screen1/…“.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="350"/>
         <source>Invalid path, must be an existing directory or a new file in an existing directory</source>
-        <translation>Invalid path, must be an existing directory or a new file in an existing directory</translation>
+        <translation>Неприемлив път, трябва да бъде съществуваща папка или нов файл в съществуваща папка</translation>
     </message>
     <message>
         <source>Define the screen to capture</source>
@@ -2069,12 +2069,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/main.cpp" line="315"/>
         <source>default: screen containing the cursor</source>
-        <translation>default: screen containing the cursor</translation>
+        <translation>стандартно: екранът, съдържащ показалеца на мишката</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="316"/>
         <source>Screen number</source>
-        <translation>Screen number</translation>
+        <translation>Номер на екрана</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="325"/>
@@ -2085,13 +2085,13 @@ Please solve them manually in the configuration file.</source>
 - #RRRRGGGGBBBB
 - Named colors like &apos;blue&apos; or &apos;red&apos;
 You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
-        <translation>Invalid color, this flag supports the following formats:
-- #RGB (each of R, G, and B is a single hex digit)
+        <translation>Неправилен цвят, флагът поддържа следните формати:
+- #RGB (като R, G, и B са едноцифрени шеснадесетични числа)
 - #RRGGBB
 - #RRRGGGBBB
 - #RRRRGGGGBBBB
-- Named colors like &apos;blue&apos; or &apos;red&apos;
-You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translation>
+- имена на цветове, напр. „blue“ или „red“
+Възможно е да се наложи да предпазите знака „#“, както в „\#FFF“</translation>
     </message>
     <message>
         <source>Invalid delay, it must be higher than 0</source>
@@ -2100,7 +2100,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/main.cpp" line="336"/>
         <source>Invalid screen number, it must be non negative</source>
-        <translation>Invalid screen number, it must be non negative</translation>
+        <translation>Несъществуващ номер на екран, трябва да бъде неотрицателен</translation>
     </message>
     <message>
         <source>Invalid path, it must be a real path in the system</source>
@@ -2109,7 +2109,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/main.cpp" line="363"/>
         <source>Invalid value, it must be defined as &apos;true&apos; or &apos;false&apos;</source>
-        <translation>Invalid value, it must be defined as &apos;true&apos; or &apos;false&apos;</translation>
+        <translation>Неприемлива стройност, трябва да бъде определена като „true“ или „false“</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/openwithprogram.cpp" line="30"/>
@@ -2119,7 +2119,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/tools/launcher/openwithprogram.cpp" line="31"/>
         <source>Unable to write in</source>
-        <translation>Unable to write in</translation>
+        <translation>Грешка при записване</translation>
     </message>
     <message>
         <source>URL copied to clipboard.</source>
@@ -2128,7 +2128,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="54"/>
         <source>Options</source>
-        <translation>Options</translation>
+        <translation>Аргументи</translation>
     </message>
     <message>
         <source>Arguments</source>
@@ -2141,32 +2141,32 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="68"/>
         <source>Subcommands</source>
-        <translation type="unfinished"></translation>
+        <translation>Подкоманди</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="328"/>
         <source>subcommands</source>
-        <translation type="unfinished"></translation>
+        <translation>подкоманди</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="329"/>
         <source>Usage</source>
-        <translation>Usage</translation>
+        <translation>Начин на използване</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="329"/>
         <source>options</source>
-        <translation>options</translation>
+        <translation>аргументи</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="334"/>
         <source>Per default runs Flameshot in the background and adds a tray icon for configuration.</source>
-        <translation>Per default runs Flameshot in the background and adds a tray icon for configuration.</translation>
+        <translation>Стандартно стартира Flameshot във фонов режим и дабавя пиктограма в областта за известията с цел настройка.</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="71"/>
         <source>Hello, I&apos;m here! Click icon in the tray to take a screenshot or click with a right button to see more options.</source>
-        <translation>Hello, I&apos;m here! Click icon in the tray to take a screenshot or click with a right button to see more options.</translation>
+        <translation>Здравейте! За да заснемете екран щракнете пиктограмата в областта за известията, а за да видите повече настройки щракнете с десен бутон.</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="156"/>
