@@ -1360,12 +1360,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="881"/>
         <source>Insecure Pixelate</source>
-        <translation type="unfinished"></translation>
+        <translation>불안정 픽셀레이트</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="883"/>
         <source>Draw the pixelation effect in an insecure but more asethetic way.</source>
-        <translation type="unfinished"></translation>
+        <translation>픽셀화 효과를 불안정하지만 더 미학적인 방식으로 그리세요.</translation>
     </message>
 </context>
 <context>
@@ -1853,12 +1853,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/primaryinstancewidget.cpp" line="21"/>
         <source>Primary instance</source>
-        <translation type="unfinished"></translation>
+        <translation>기본 인스턴스</translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/primaryinstancewidget.cpp" line="22"/>
         <source>&lt;b&gt;Primary instance.&lt;/b&gt; Messages received from secondaries:</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;기본 인스턴스.&lt;/b&gt; 보조로부터 받은 메시지:</translation>
     </message>
 </context>
 <context>
@@ -2369,32 +2369,32 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="26"/>
         <source>Secondary instance</source>
-        <translation type="unfinished"></translation>
+        <translation>보조 인스턴스</translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="27"/>
         <source>&lt;b&gt;Secondary instance.&lt;/b&gt; Send message to primary:</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;보조 인스턴스.&lt;/b&gt; 기본으로 메시지 보내기:</translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="29"/>
         <source>Type something here...</source>
-        <translation type="unfinished"></translation>
+        <translation>여기에 무언가를 입력하세요...</translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="31"/>
         <source>&amp;Send</source>
-        <translation type="unfinished"></translation>
+        <translation>보내기(&amp;S)</translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="54"/>
         <source>Error sending message</source>
-        <translation type="unfinished"></translation>
+        <translation>메시지 전송 오류</translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="55"/>
         <source>The message &apos;%1&apos; could not be sent to the primary.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; 메시지를 기본 메시지로 보낼 수 없습니다.</translation>
     </message>
 </context>
 <context>
@@ -2475,7 +2475,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="170"/>
         <source>Grab a color from the screen</source>
-        <translation type="unfinished"></translation>
+        <translation>화면에서 색상 잡기</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="171"/>
@@ -2758,7 +2758,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="76"/>
         <source>Full Date (%d-%m-%Y)</source>
-        <translation type="unfinished"></translation>
+        <translation>전체 날짜 (%d-%m-%Y)</translation>
     </message>
 </context>
 <context>
