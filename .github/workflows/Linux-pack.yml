@@ -262,9 +262,9 @@ jobs:
       matrix:
         config:
           - {
-              name: ubuntu-22.04,
+              name: ubuntu-24.04,
               os: ubuntu,
-              symbol: jammy,
+              symbol: noble,
               arch: amd64,
               image_repo: quay.io/flameshot-org/ci-building
             }
