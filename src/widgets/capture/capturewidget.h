@@ -45,6 +45,7 @@ class SidePanelWidget;
 class CaptureWidget : public QWidget
 {
     Q_OBJECT
+    friend class ClipboardWatcherMimeData;
 
 public:
     explicit CaptureWidget(const CaptureRequest& req,
@@ -150,6 +151,7 @@ private:
     void drawInactiveRegion(QPainter* painter);
     void drawToolsData(bool drawSelection = true);
     void drawObjectSelection();
+    void clipboardDataServed();
 
     void processPixmapWithTool(QPixmap* pixmap, CaptureTool* tool);
 
@@ -230,4 +232,6 @@ private:
     // Grid
     bool m_displayGrid{ false };
     int m_gridSize{ 10 };
+
+    bool m_waitingForClipboardRead{ false };
 };
