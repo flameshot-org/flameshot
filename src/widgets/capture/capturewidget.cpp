@@ -27,9 +27,6 @@
 #include "src/widgets/panel/sidepanelwidget.h"
 #include "src/widgets/panel/utilitypanel.h"
 #include <QApplication>
-#include <QBuffer>
-#include <QClipboard>
-#include <QMimeData>
 #include <QCheckBox>
 #include <QDateTime>
 #include <QFontMetrics>
@@ -78,7 +75,7 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
   , m_xywhDisplay(false)
   , m_existingObjectIsChanged(false)
   , m_startMove(false)
-  , m_waitingForClipboardRead(false)
+  , m_clipboardWorkaroundDone(false)
 
 {
     m_undoStack.setUndoLimit(ConfigHandler().undoLimit());
@@ -608,72 +605,14 @@ void CaptureWidget::uncheckActiveTool()
     updateCursor();
 }
 
-class ClipboardWatcherMimeData : public QMimeData
-{
-public:
-    ClipboardWatcherMimeData(const QImage& img, CaptureWidget* owner)
-      : m_image(img)
-      , m_owner(owner)
-    {}
-
-protected:
-    QStringList formats() const override
-    {
-        return { QStringLiteral("image/png"),
-                 QStringLiteral("application/x-qt-image") };
-    }
-
-    QVariant retrieveData(const QString& mimeType,
-                          QMetaType type) const override
-    {
-        if (mimeType == QLatin1String("application/x-qt-image")) {
-            notifyOwner();
-            return QVariant::fromValue(m_image);
-        }
-        if (mimeType == QLatin1String("image/png")) {
-            QByteArray ba;
-            QBuffer buffer(&ba);
-            buffer.open(QIODevice::WriteOnly);
-            m_image.save(&buffer, "PNG");
-            notifyOwner();
-            return ba;
-        }
-        auto result = QMimeData::retrieveData(mimeType, type);
-        if (result.isValid())
-            notifyOwner();
-        return result;
-    }
-
-private:
-    void notifyOwner() const
-    {
-        AbstractLogger::info()
-  << "Clipboard data requested by compositor; closing capture window.";
-        if (m_notified || m_owner.isNull())
-            return;
-        m_notified = true;
-        QPointer<CaptureWidget> guard = m_owner;
-        QTimer::singleShot(0, m_owner.data(), [guard]() {
-            if (guard)
-                guard->clipboardDataServed();
-        });
-    }
-
-    QImage m_image;
-    mutable bool m_notified{ false };
-    QPointer<CaptureWidget> m_owner;
-};
-
-
-
 void CaptureWidget::closeEvent(QCloseEvent* event)
 {
 #if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
-    /* GNOME copy problem workaround, copy 
+    /* GNOME copy problem workaround, copy
        operation seems to work only when there
-       is a visible window to retrieve the 
-       data from. On GNOME, the GUI should 
-       handle the copy operation, not the 
+       is a visible window to retrieve the
+       data from. On GNOME, the GUI should
+       handle the copy operation, not the
        daemon.
     */
     const bool copyRequested =
@@ -685,46 +624,19 @@ void CaptureWidget::closeEvent(QCloseEvent* event)
           desktopInfo.waylandDetected() &&
           desktopInfo.windowManager() == DesktopInfo::GNOME;
 
-        if (needGnomeWorkaround) {
+        if (needGnomeWorkaround && !m_clipboardWorkaroundDone) {
             event->ignore();
+            m_clipboardWorkaroundDone = true;
+            m_context.request.removeTask(CaptureRequest::COPY);
             AbstractLogger::info()
-  << "GNOME Wayland detected; keeping capture window alive until clipboard data is fetched.";
-            if (!m_waitingForClipboardRead) {
-                m_waitingForClipboardRead = true;
-
-                auto image = pixmap().toImage();
-                m_context.request.removeTask(CaptureRequest::COPY);
-
-                auto* mimeData =
-                  new ClipboardWatcherMimeData(image, this);
-                QClipboard* clipboard = QGuiApplication::clipboard();
-                clipboard->setMimeData(mimeData);
-
-                hide(); // keep the surface alive, but invisible
-
-                QTimer::singleShot(500, this, [this]() {
-                    if (m_waitingForClipboardRead) {
-                        m_waitingForClipboardRead = false;
-                        QWidget::close();
-                    }
-                });
-            }
-            
+              << "GNOME Wayland detected; keeping capture window alive until clipboard data is fetched.";
+            saveToClipboardGnomeWorkaround(pixmap(), this);
             return;
         }
     }
 #endif
 
     QWidget::closeEvent(event);
-}
-
-void CaptureWidget::clipboardDataServed()
-{
-    if (!m_waitingForClipboardRead)
-        return;
-
-    m_waitingForClipboardRead = false;
-    QWidget::close();
 }
 
 void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
