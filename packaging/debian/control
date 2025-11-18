@@ -11,6 +11,7 @@ Build-Depends:
  qt6-svg-dev (>= 6.0.0~) | libqt6svg6-dev (>= 6.0.0~),
  qt6-l10n-tools,
  libgl-dev,
+Rules-Requires-Root: no
 Standards-Version: 4.7.2
 Homepage: https://flameshot.org/
 Vcs-Browser: https://github.com/flameshot-org/flameshot
