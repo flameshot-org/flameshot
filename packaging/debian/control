@@ -5,25 +5,33 @@ Maintainer: Boyuan Yang <byang@debian.org>
 Build-Depends:
  cmake (>= 3.16~),
  debhelper (>= 11),
- qt6-base-dev (>= 6.2.0~),
- qt6-tools-dev (>= 6.2.0~),
- qt6-tools-dev-tools (>= 6.2.0~),
- qt6-svg-dev (>= 6.2.0~) | libqt6svg6-dev (>= 6.2.0~),
+ qt6-base-dev (>= 6.0.0~),
+ qt6-tools-dev (>= 6.0.0~),
+ qt6-tools-dev-tools (>= 6.0.0~),
+ qt6-svg-dev (>= 6.0.0~) | libqt6svg6-dev (>= 6.0.0~),
  qt6-l10n-tools,
  libgl-dev,
-Standards-Version: 4.5.0
+Standards-Version: 4.7.2
 Homepage: https://flameshot.org/
 Vcs-Browser: https://github.com/flameshot-org/flameshot
 Vcs-Git: https://github.com/flameshot-org/flameshot.git
 
 Package: flameshot
 Architecture: any
+# ${shlibs:Depends}, # Ubuntu noble expand shlibs to t64 Qt libs, later versions of Ubuntu reverted back without suffix
 Depends:
- hicolor-icon-theme,
- libqt6svg6 (>= 6.2.0~),
- qt6-qpa-plugins (>= 6.2.0~),
- ${shlibs:Depends},
  ${misc:Depends},
+ libc6 (>= 2.31),
+ libgcc-s1 (>= 3.3.1),
+ libstdc++6 (>= 10),
+ hicolor-icon-theme,
+ qt6-qpa-plugins (>= 6.0.0~),
+ libqt6core6 (>= 6.0.0~),
+ libqt6dbus6 (>= 6.0.0~),
+ libqt6gui6 (>= 6.0.0~),
+ libqt6network6 (>= 6.0.0~),
+ libqt6widgets6 (>= 6.0.0~),
+ libqt6svg6 (>= 6.0.0~),
 Recommends:
  xdg-desktop-portal-gtk | xdg-desktop-portal-gnome | xdg-desktop-portal-kde | xdg-desktop-portal-wlr,
  grim,
