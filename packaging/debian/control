@@ -18,7 +18,8 @@ Vcs-Git: https://github.com/flameshot-org/flameshot.git
 
 Package: flameshot
 Architecture: any
-# ${shlibs:Depends}, # Ubuntu noble expand shlibs to t64 Qt libs, later versions of Ubuntu reverted back without suffix
+# Ubuntu noble expanded shlibs to t64 Qt libs; later versions of Ubuntu reverted back without suffix.
+# ${shlibs:Depends},
 Depends:
  ${misc:Depends},
  libc6 (>= 2.31),
