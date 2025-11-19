@@ -3,27 +3,37 @@ Section: graphics
 Priority: optional
 Maintainer: Boyuan Yang <byang@debian.org>
 Build-Depends:
- cmake (>= 3.13~),
- debhelper (>= 11),
- qt6-base-dev (>= 6.2.0~),
- qt6-tools-dev (>= 6.2.0~),
- qt6-tools-dev-tools (>= 6.2.0~),
- qt6-svg-dev (>= 6.2.0~) | libqt6svg6-dev (>= 6.2.0~),
- qt6-l10n-tools,
+ cmake (>= 3.22~),
+ debhelper (>= 12),
+ qt6-base-dev (>= 6.2.4~),
+ qt6-tools-dev (>= 6.2.4~),
+ qt6-tools-dev-tools (>= 6.2.4~),
+ qt6-svg-dev (>= 6.2.4~) | libqt6svg6-dev (>= 6.2.4~),
+ qt6-l10n-tools (>= 6.2.4~),
  libgl-dev,
-Standards-Version: 4.5.0
-Homepage: https://github.com/flameshot-org/flameshot
+Rules-Requires-Root: no
+Standards-Version: 4.7.2
+Homepage: https://flameshot.org/
 Vcs-Browser: https://github.com/flameshot-org/flameshot
 Vcs-Git: https://github.com/flameshot-org/flameshot.git
 
 Package: flameshot
 Architecture: any
+# Ubuntu noble expanded shlibs are suffixed with t64 for Qt dependencies, later versions of Ubuntu reverted back without suffix so make it future proof
+# ${shlibs:Depends},
 Depends:
- hicolor-icon-theme,
- libqt6svg6 (>= 6.2.0~),
- qt6-qpa-plugins (>= 6.2.0~),
- ${shlibs:Depends},
  ${misc:Depends},
+ libc6 (>= 2.35),
+ libgcc-s1 (>= 11),
+ libstdc++6 (>= 11),
+ hicolor-icon-theme,
+ qt6-qpa-plugins (>= 6.2.4~),
+ libqt6core6 (>= 6.2.4~),
+ libqt6dbus6 (>= 6.2.4~),
+ libqt6gui6 (>= 6.2.4~),
+ libqt6network6 (>= 6.2.4~),
+ libqt6widgets6 (>= 6.2.4~),
+ libqt6svg6 (>= 6.2.4~),
 Recommends:
  xdg-desktop-portal-gtk | xdg-desktop-portal-gnome | xdg-desktop-portal-kde | xdg-desktop-portal-wlr,
  grim,

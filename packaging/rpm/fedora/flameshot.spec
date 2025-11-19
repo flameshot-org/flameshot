@@ -10,26 +10,26 @@ URL:     https://github.com/flameshot-org/flameshot
 Source0: %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
 Vendor:  Flameshot
 
-BuildRequires: cmake >= 3.13.0
-BuildRequires: gcc-c++ >= 7
+BuildRequires: cmake >= 3.22
+BuildRequires: gcc-c++ >= 11
 BuildRequires: fdupes
 BuildRequires: libappstream-glib
 BuildRequires: ninja-build
 BuildRequires: desktop-file-utils
 
-BuildRequires: cmake(Qt6Core) >= 6.0.0
+BuildRequires: cmake(Qt6Core) >= 6.2.4
 BuildRequires: cmake(KF6GuiAddons) >= 6.7.0
-BuildRequires: cmake(Qt6DBus) >= 6.0.0
-BuildRequires: cmake(Qt6Gui) >= 6.0.0
-BuildRequires: cmake(Qt6LinguistTools) >= 6.0.0
-BuildRequires: cmake(Qt6Network) >= 6.0.0
-BuildRequires: cmake(Qt6Svg) >= 6.0.0
-BuildRequires: cmake(Qt6Widgets) >= 6.0.0
+BuildRequires: cmake(Qt6DBus) >= 6.2.4
+BuildRequires: cmake(Qt6Gui) >= 6.2.4
+BuildRequires: cmake(Qt6LinguistTools) >= 6.2.4
+BuildRequires: cmake(Qt6Network) >= 6.2.4
+BuildRequires: cmake(Qt6Svg) >= 6.2.4
+BuildRequires: cmake(Qt6Widgets) >= 6.2.4
 
 Requires: hicolor-icon-theme
-Requires: qt6-qtbase >= 6.0.0
-Requires: qt6-qttools >= 6.0.0
-Requires: qt6-qtsvg >= 6.0.0
+Requires: qt6-qtbase >= 6.2.4
+Requires: qt6-qttools >= 6.2.4
+Requires: qt6-qtsvg >= 6.2.4
 
 Recommends: qt6-qtimageformats
 Recommends: xdg-desktop-portal%{?_isa}
