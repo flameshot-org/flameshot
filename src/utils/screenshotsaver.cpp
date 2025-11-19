@@ -262,8 +262,7 @@ private:
         if (m_notified || m_owner.isNull())
             return;
         m_notified = true;
-        AbstractLogger::info()
-          << "Clipboard data fetched by compositor; closing capture window.";
+        AbstractLogger::info() << QObject::tr("Capture saved to clipboard.");
         QPointer<QWidget> guard = m_owner;
         QTimer::singleShot(0, [guard]() {
             if (guard)
@@ -287,6 +286,7 @@ bool saveToClipboardGnomeWorkaround(const QPixmap& pixmap, QWidget* keepAlive)
 
     // Safety net: force close after 500ms if compositor never fetches
     QTimer::singleShot(500, keepAlive, [keepAlive]() {
+        qWarning() << "GNOME workaround timed out, compositor did not request clipboard data within 500ms. Force closing.";
         if (keepAlive)
             keepAlive->close();
     });
