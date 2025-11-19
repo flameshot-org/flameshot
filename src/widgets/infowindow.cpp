@@ -5,7 +5,11 @@
 #include "./ui_infowindow.h"
 #include "src/core/flameshotdaemon.h"
 #include "src/core/qguiappcurrentscreen.h"
+#include "src/utils/abstractlogger.h"
+#include "src/utils/confighandler.h"
 #include "src/utils/globalvalues.h"
+#include <QDesktopServices>
+#include <QDir>
 #include <QKeyEvent>
 #include <QScreen>
 
@@ -22,6 +26,15 @@ InfoWindow::InfoWindow(QWidget* parent)
 
     connect(
       ui->CopyInfoButton, &QPushButton::clicked, this, &InfoWindow::copyInfo);
+
+    connect(ui->OpenLogPathButton,
+            &QPushButton::clicked,
+            this,
+            &InfoWindow::openLogDir);
+
+    ui->OpenLogPathButton->setEnabled(ConfigHandler().logToFile());
+    ui->OpenLogPathButton->setToolTip(
+      tr("Enable saving log messages to a file in the configuration menu"));
 
     show();
     // Call show() first, otherwise the correct geometry cannot be fetched for
@@ -56,4 +69,18 @@ void InfoWindow::copyInfo()
 {
     FlameshotDaemon::copyToClipboard(GlobalValues::versionInfo() + "\n" +
                                      generateKernelString());
+}
+
+void InfoWindow::openLogDir()
+{
+    auto path = ConfigHandler().logFilePath();
+    auto dir = QDir(path);
+
+    if (!dir.exists()) {
+        dir.mkpath(".");
+    }
+
+    auto url = QUrl::fromLocalFile(dir.path());
+
+    QDesktopServices::openUrl(url);
 }

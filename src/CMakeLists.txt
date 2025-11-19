@@ -539,3 +539,7 @@ if (APPLE)
 
 
 endif ()
+
+if(${Qt6Core_VERSION} VERSION_GREATER_EQUAL 6.7)
+    target_compile_definitions(flameshot PRIVATE QT_STATE_DIR_SUPPORTED=1)
+endif()

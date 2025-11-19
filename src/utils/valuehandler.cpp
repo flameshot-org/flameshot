@@ -3,6 +3,7 @@
 #include "colorpickerwidget.h"
 #include "confighandler.h"
 #include "screengrabber.h"
+#include "utils/logfile.h"
 #include <QColor>
 #include <QFileInfo>
 #include <QImageWriter>
@@ -274,6 +275,27 @@ QVariant ExistingDir::fallback()
 QString ExistingDir::expected()
 {
     return QStringLiteral("existing directory");
+}
+
+// LOGGING DIR
+//
+bool LoggingDir::check(const QVariant& val)
+{
+    if (!val.canConvert<QString>() || val.toString().isEmpty()) {
+        return false;
+    }
+    QFileInfo info(val.toString());
+    return info.isDir() && info.isWritable();
+}
+
+QVariant LoggingDir::fallback()
+{
+    return LogFile::defaultLogFilePath();
+}
+
+QString LoggingDir::expected()
+{
+    return QStringLiteral("a writeable directory");
 }
 
 // FILENAME PATTERN
