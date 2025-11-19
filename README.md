@@ -414,10 +414,10 @@ Also you can open and build/debug the project in a C++ IDE. For example, in Qt C
 
 #### Compile-time
 
-- Qt >= 6.0
+- Qt >= 6.2.4 (available by default on Ubuntu Jammy)
   + Development tools
-- GCC >= 7.4
-- CMake >= 3.29
+- GCC >= 12
+- CMake >= 3.22
 
 #### Run-time
 
