@@ -138,6 +138,9 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     OPTION("jpegQuality"                 , BoundedInt        ( 0,100,75      )),
     OPTION("reverseArrow"                ,Bool               ( false         )),
     OPTION("insecurePixelate"            ,Bool               ( false         )),
+    OPTION("logToFile"                   ,Bool               ( true          )),
+    OPTION("logFilePath"                 ,LoggingDir         (               )),
+    OPTION("logFileLevel"                ,BoundedInt         ( AbstractLogger::Channel::Info, AbstractLogger::Channel::Error, AbstractLogger::Channel::Info)),  
 };
 
 static QMap<QString, QSharedPointer<KeySequence>> recognizedShortcuts = {
