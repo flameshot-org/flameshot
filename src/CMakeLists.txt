@@ -76,7 +76,9 @@ if (APPLE)
 else ()
     add_executable(flameshot
         widgets/capturescreenscroll.cpp widgets/capturescreenscroll.h
-        tools/overlay/overlaytool.cpp tools/overlay/overlaytool.h)
+        tools/overlay/overlaytool.cpp tools/overlay/overlaytool.h
+        tools/windowhighlightoverlay.cpp
+        tools/windowhighlightoverlay.h)
 endif ()
 
 add_executable(Flameshot::flameshot ALIAS flameshot)
@@ -92,8 +94,14 @@ if (WIN32)
         PRIVATE
         windows-cli.cpp)
     set_target_properties(flameshot-cli PROPERTIES OUTPUT_NAME "flameshot-cli")
-    target_link_options(flameshot-cli PRIVATE /SUBSYSTEM:CONSOLE)
-    set_property(TARGET flameshot PROPERTY WIN32_EXECUTABLE true)
+    if (MSVC)
+        target_link_options(flameshot-cli PRIVATE /SUBSYSTEM:CONSOLE)
+    else()          # MinGW
+        target_link_options(flameshot-cli PRIVATE "-mconsole" "-municode")
+    endif()
+
+    # Consola, no GUI:
+    set_property(TARGET flameshot-cli PROPERTY WIN32_EXECUTABLE FALSE)
     # Getting error D8016 - /utf-8 automatically set by current cmake/msvc ?
     #if (MSVC)
     #    target_compile_options(flameshot PRIVATE /source-charset:utf-8)
@@ -194,8 +202,6 @@ target_link_libraries(
         Qt${QT_VERSION_MAJOR}::Network
         Qt${QT_VERSION_MAJOR}::Widgets
         QtColorWidgets
-        X11
-        Xtst
         ${OpenCV_LIBS}
 )
 if (UNIX)
@@ -203,6 +209,14 @@ target_link_libraries(
         flameshot
         Qt${QT_VERSION_MAJOR}::DBus
 )
+endif()
+
+if ( UNIX AND NOT WIN32 )
+    target_link_libraries(
+        flameshot
+        X11
+        Xtst
+    )
 endif()
 
 if (USE_KDSINGLEAPPLICATION)
@@ -398,7 +412,7 @@ if (UNIX)
 endif ()
 
 # windeployqt
-if (WIN32)
+if (WIN32 AND NOT MINGW)
     # Add CMAKE_PREFIX_PATH to search paths
     foreach(prefix ${CMAKE_PREFIX_PATH})
         list(APPEND WINDEPLOYQT_SEARCH_PATHS "${prefix}/bin")

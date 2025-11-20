@@ -36,7 +36,14 @@ public:
     explicit captureScreenScroll( QObject* parent = nullptr );
     explicit captureScreenScroll( void *, WId , int, int, int, int );
 
+#if defined ( Q_OS_LINUX )
     QPixmap captureScrollableArea();
+#endif
+
+#if defined ( Q_OS_WIN )
+    QImage captureWithPrintWindow(HWND hwnd);
+#endif
+
     bool imagesEqual( const QImage&, const QImage& );
     cv::Mat cropFooter( const cv::Mat&, int );
     cv::Mat combineImages( const cv::Mat&, const cv::Mat& );
@@ -48,8 +55,11 @@ signals:
 
 private:
 
+#if defined ( Q_OS_LINUX )
     void * display;
     QPixmap captureX11Window();
+#endif
+
 
 };
 

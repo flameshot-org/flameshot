@@ -1,10 +1,4 @@
 #include "trayicon.h"
-#include "core/capturerequest.h"
-#include "core/flameshot.h"
-#include "core/flameshotdaemon.h"
-#include "core/qguiappcurrentscreen.h"
-#include "utils/confighandler.h"
-#include "utils/globalvalues.h"
 
 #include "opencv2/core/mat.hpp"
 #include "opencv2/imgcodecs.hpp"
@@ -15,16 +9,20 @@
 #include "qregularexpression.h"
 #include "qstandardpaths.h"
 #include "screenshotsaver.h"
+#include "src/core/flameshot.h"
+#include "src/core/flameshotdaemon.h"
+#include "src/utils/globalvalues.h"
+
+#include "src/utils/confighandler.h"
 #include <QApplication>
-#include <QGuiApplication>
 #include <QMenu>
-#include <QScreen>
 #include <QTimer>
 #include <QUrl>
 #include <QVersionNumber>
 #include <algorithm>
 #include <iostream>
 #include <QThread>
+
 
 #if defined(Q_OS_MACOS)
 #include <QOperatingSystemVersion>
@@ -41,12 +39,16 @@
 
 #endif
 
+#if defined( Q_OS_WIN )
+#include <qscreen.h>
+#include <windows.h>
+#include "tools/windowhighlightoverlay.h"
+#endif
+
 TrayIcon::TrayIcon(QObject* parent)
   : QSystemTrayIcon(parent)
-  , m_screenMenu(nullptr)
 {
     initMenu();
-    initScreenMenu();
 
     setToolTip(QStringLiteral("Flameshot"));
 #if defined(Q_OS_MACOS)
@@ -61,14 +63,7 @@ TrayIcon::TrayIcon(QObject* parent)
     setContextMenu(m_menu);
 #endif
     QIcon icon =
-      QIcon::fromTheme("flameshot-tray", QIcon(GlobalValues::trayIconPath()));
-
-#if defined(Q_OS_MACOS)
-    if (currentMacOsVersion >= QOperatingSystemVersion::MacOSBigSur) {
-        icon.setIsMask(true);
-    }
-#endif
-
+      QIcon::fromTheme("flameshot-tray", QIcon(GlobalValues::iconPathPNG()));
     setIcon(icon);
 
 #if defined(Q_OS_MACOS)
@@ -113,7 +108,7 @@ TrayIcon::TrayIcon(QObject* parent)
     connect(ConfigHandler::getInstance(),
             &ConfigHandler::fileChanged,
             this,
-            [this]() { updateCaptureActionShortcut(); });
+            [this]() {});
 }
 
 TrayIcon::~TrayIcon()
@@ -132,11 +127,8 @@ void TrayIcon::initMenu()
 {
     m_menu = new QMenu();
 
-    m_captureAction = new QAction(tr("&Take Screenshot"), this);
-
-    updateCaptureActionShortcut();
-
-    connect(m_captureAction, &QAction::triggered, this, [this]() {
+    auto* captureAction = new QAction(tr("&Take Screenshot"), this);
+    connect(captureAction, &QAction::triggered, this, [this]() {
 #if defined(Q_OS_MACOS)
         auto currentMacOsVersion = QOperatingSystemVersion::current();
         if (currentMacOsVersion >= QOperatingSystemVersion::MacOSBigSur) {
@@ -158,12 +150,11 @@ void TrayIcon::initMenu()
     auto* captureActionWithDesplazamiento = new QAction(tr("&Scrolling screenshot"), this);
     connect( captureActionWithDesplazamiento, &QAction::triggered, this, [ this ]() {
 
+#if defined( Q_OS_LINUX )
         QMessageBox msgCapturaWithScroll;
 
         msgCapturaWithScroll.setText( QObject::tr("Select the sale you want to capture with a scroll and leave the mouse over it until you finish and the \"Save Image\" text box appears..." ) );
         msgCapturaWithScroll.exec();
-
-#if defined( Q_OS_LINUX )
 
         Display* display = XOpenDisplay( nullptr );
         if ( !display ) {
@@ -188,108 +179,283 @@ void TrayIcon::initMenu()
             return;
         }
 
-        int xOffset = 0;
-        int yOffset = 50;
         int width = winAttr.width;
         int height = winAttr.height;
+#endif
+        int xOffset = 0;
+        int yOffset = 50;
 
-        QPixmap previousCapture;
-        int i = 0;
-
-        QString picturesPath = QStandardPaths::writableLocation( QStandardPaths::PicturesLocation );
-        QString baseDir = picturesPath + "/FlameshotCapture";
-        QDir().mkpath( baseDir );
+#if defined( Q_OS_LINUX )
 
         captureScreenScroll* captureSS = new captureScreenScroll( static_cast<void*>( display ), targetWindowId, xOffset, yOffset, width, height );
 
-        while ( true ) {
+#elif defined ( Q_OS_WIN )
 
-            QPixmap currentCapture = captureSS -> captureScrollableArea();
+        captureScreenScroll* captureSS = new captureScreenScroll();
 
-            if ( currentCapture.isNull() ) {
-                qDebug() << "❌ Captura nula. Terminando.";
-                break;
-            }
+        static WindowHighlightOverlay overlay;
+        overlay.initVirtualDesktop();
+        overlay.startTracking();
 
-            if ( captureSS -> imagesEqual( previousCapture.toImage(), currentCapture.toImage() ) ) {
-                qDebug() << "⚠️ Imagen no cambió. Deteniendo scroll.";
-                break;
-            }
+        static bool scrollEnCurso = false;
 
-            QString const filename = QString( "captura%1.png" ).arg( i );
-            currentCapture.save( baseDir + "/" + filename );
-            qDebug() << "📸 Captura guardada:" << filename;
-            previousCapture = currentCapture;
+        QObject::connect(&overlay, &WindowHighlightOverlay::panelSelected,
+                         &overlay,
+                         [&, hwnd = HWND{}](HWND selectedHwnd) mutable {
+                             if (scrollEnCurso) {
+                                 qDebug() << "Scroll ya en curso. Ignorando.";
+                                 return;
+                             }
 
-            // Scroll hacia abajo
-            XTestFakeButtonEvent( display, 5, True, CurrentTime );
-            XFlush( display );
-            XTestFakeButtonEvent( display, 5, False, CurrentTime );
-            XFlush( display );
-            usleep( 200000 );
+                                    // ⚠️ Filtro: ignorar barra de scroll u objetos pequeños
+                             RECT rect;
+                             if (GetWindowRect(selectedHwnd, &rect)) {
+                                 int width = rect.right - rect.left;
+                                 int height = rect.bottom - rect.top;
 
-            i++;
-        }
+                                 if (width < 80 || height < 80) {
+                                     qDebug() << "HWND ignorado por tamaño sospechoso:" << width << "x" << height;
+                                     return;
+                                 }
+                             }
+
+                             scrollEnCurso = true;
+                             hwnd = selectedHwnd;
+
+                             QObject::disconnect(&overlay, nullptr, &overlay, nullptr);
+
+                             /*QString baseDir = QStandardPaths::writableLocation(QStandardPaths::PicturesLocation) + "/FlameshotScroll";
+                             QDir().mkpath(baseDir);*/
+
 #endif
-        // Post-procesamiento
-        struct Item { std::string path; std::string name; };
-        std::vector<Item> items;
+                             QString picturesPath = QStandardPaths::writableLocation( QStandardPaths::PicturesLocation );
+                             QString baseDir = picturesPath + "/FlameshotCapture";
+                             QDir().mkpath( baseDir );
 
-        for (const auto& e : fs::directory_iterator( baseDir.toStdString() ) )
-            if ( e.is_regular_file() && e.path().extension() == ".png" )
-                items.push_back( { e.path().string(), e.path().filename().string() } );
+                             int shotIdx = 0;
+#if defined (Q_OS_WIN)
+                                    // Llevar al inicio como ShareX
+                             SendMessage(hwnd, WM_VSCROLL, SB_TOP, 0);
+                             Sleep(200);
+#endif
 
-        QCollator coll;
-        coll.setNumericMode( true );
-        coll.setCaseSensitivity( Qt::CaseInsensitive );
+#if defined( Q_OS_LINUX )
+                             QPixmap previousCapture;
+#elif defined ( Q_OS_WIN )
 
-        std::stable_sort( items.begin(), items.end(),
-                         [ & ]( const Item& a, const Item& b ) {
-                             return coll.compare( QString::fromUtf8( a.name ),
-                                                  QString::fromUtf8( b.name ) ) < 0;
-                         } );
+                             QImage previousCapture;
 
-        std::vector<std::string> paths;
-        for ( const auto& i : items )
-            paths.push_back( i.path );
+#endif
 
-        cv::Mat result;
-        cv::Mat firstRefImage;
+                             bool hasPrevious = false;
 
-        for ( const auto& f : paths ) {
-            qDebug() << "procesando " << QString::fromStdString( f ) << '\n';
-            cv::Mat img = cv::imread( f );
-            if ( img.empty() ) {
-                std::cerr << "No se lee " << f << '\n';
-                continue;
-            }
+                             while ( true ) {
+ #if defined ( Q_OS_WIN )
 
-            cv::Mat cropped = captureSS -> cropHorizontal( img );
+                                QScreen* screen = nullptr;
+                                for (QScreen* s : QGuiApplication::screens()) {
+                                    if (s->geometry().contains(QCursor::pos())) {
+                                        screen = s;
+                                        break;
+                                    }
+                                }
 
-            if ( result.empty() ) {
-                result = cropped.clone();
-                firstRefImage = cropped.clone();
-                continue;
-            }
+                                if (!screen) screen = QGuiApplication::primaryScreen();
 
-            result = captureSS -> combineImages( result, cropped );
-        }
+                                QImage currentCapture = captureSS -> captureWithPrintWindow(hwnd);
+                                if (currentCapture.isNull()) {
 
-        QPixmap finalImage = captureSS -> cvMatToQPixmap( result );
+                                    qDebug() << "❌ NULLLL.....";
+                                    break;
+                                }
 
-        if ( !finalImage.isNull() ) {
-            cv::imwrite( baseDir.toStdString() + "/resultado_stitched.png", result );
-            saveToFilesystemGUI( finalImage );
-            QString dirPath = baseDir;
-            QDir( dirPath ).removeRecursively();
-        } else {
-            qDebug() << "Failed to stitch images.";
-        }
+                                QImage previousCapture2 = previousCapture;
+
+                                QImage currentCapture2 = currentCapture;
+
+#endif
+#if defined ( Q_OS_LINUX )
+                                QPixmap currentCapture = captureSS -> captureScrollableArea();
+
+                                if ( currentCapture.isNull() ) {
+                                    qDebug() << "❌ Captura nula. Terminando.";
+                                    break;
+                                }
+
+                                QImage previousCapture2 = previousCapture.toImage();
+
+                                QImage currentCapture2 = currentCapture.toImage();
+
+#endif
+                                //qDebug() << "captureSS -> imagesEqual( previousCapture2, currentCapture2 ): " << captureSS -> imagesEqual( previousCapture2, currentCapture2 );
+
+                                /*if ( captureSS -> imagesEqual( previousCapture2, currentCapture2 ) ) {
+                                    qDebug() << "⚠️ Imagen no cambió. Deteniendo scroll.";
+                                    break;
+                                }*/
+
+                                if (hasPrevious) {
+                                    bool iguales = captureSS->imagesEqual(previousCapture2, currentCapture2);
+                                    qDebug() << "imagesEqual(prev, curr):" << iguales;
+
+                                    if (iguales) {
+                                        qDebug() << "⚠️ Imagen no cambió. Deteniendo scroll.";
+                                        break;
+                                    }
+                                } else {
+                                    qDebug() << "Primera captura, no se compara aún.";
+                                }
+
+                                QString const filename = QString( "captura%1.png" ).arg(shotIdx++, 3, 10, QChar('0'));
+
+                                currentCapture.save( baseDir + "/" + filename );
+
+                                qDebug() << "📸 Captura guardada:" << filename;
+
+                                previousCapture = currentCapture;
+                                hasPrevious = true;
+
+#if defined ( Q_OS_LINUX )
+                                // Scroll hacia abajo
+                                //XSetInputFocus( display, targetWindowId, RevertToParent, CurrentTime );  // Asegura foco
+                                XTestFakeButtonEvent( display, 5, True, CurrentTime );
+                                XFlush( display );
+                                XTestFakeButtonEvent( display, 5, False, CurrentTime );
+                                XFlush( display );
+                                usleep( 200000 );
+#endif
+
+#if defined (Q_OS_WIN)
+                                       // Scroll hacia abajo
+                                INPUT scroll = {};
+                                scroll.type = INPUT_MOUSE;
+                                scroll.mi.dwFlags = MOUSEEVENTF_WHEEL;
+                                scroll.mi.mouseData = -3 * WHEEL_DELTA;
+
+                                SendInput(1, &scroll, sizeof(INPUT));
+
+                                //std::this_thread::sleep_for(std::chrono::milliseconds(200));
+
+                                QThread::msleep(1000);
+#endif
+
+                            }
+
+#if defined ( Q_OS_WIN )
+                            overlay.stopTracking();
+                            overlay.hide();
+                            scrollEnCurso = false;
+#endif
+
+                            // Post-procesamiento
+                            struct Item { std::string path; std::string name; };
+                            std::vector<Item> items;
+
+                            for (const auto& e : fs::directory_iterator( baseDir.toStdString() ) )
+                                if ( e.is_regular_file() && e.path().extension() == ".png" )
+                                    items.push_back( { e.path().string(), e.path().filename().string() } );
+
+                            /*std::stable_sort(items.begin(), items.end(),
+                                      [](const Item& x, const Item& y) {
+                                          return x.name < y.name;
+                                      });*/
+
+                            QCollator coll;
+                            coll.setNumericMode( true );
+                            coll.setCaseSensitivity( Qt::CaseInsensitive );
+
+                            std::stable_sort( items.begin(), items.end(),
+                                             [ & ]( const Item& a, const Item& b ) {
+                                                 // a.name y b.name son std::string en UTF-8
+                                                 return coll.compare( QString::fromUtf8( a.name ),
+                                                                      QString::fromUtf8( b.name ) ) < 0;
+                                             } );
+
+                            std::vector<std::string> paths;
+                            for ( const auto& i : items )
+                                paths.push_back( i.path );
+
+                            /*cv::Mat result;
+                            cv::Mat firstRefImage;
+
+                            for ( const auto& f : paths ) {
+                                qDebug() << "procesando " << QString::fromStdString( f ) << '\n';
+                                cv::Mat img = cv::imread( f );
+                                if ( img.empty() ) {
+                                    std::cerr << "No se lee " << f << '\n';
+                                    continue;
+                                }
+
+                                cv::Mat cropped = captureSS -> cropHorizontal( img );
+
+                                if ( result.empty() ) {
+                                    result = cropped.clone();
+                                    firstRefImage = cropped.clone();
+                                    continue;
+                                }
+
+                                result = captureSS -> combineImages( result, cropped );
+                            }*/
+
+                            /*****************/
+
+                            cv::Mat result;
+                            cv::Mat firstRefImage;
+
+                            for ( const auto& f : paths ) {
+                                qDebug() << "procesando " << QString::fromStdString( f ) << '\n';
+                                cv::Mat img = cv::imread( f );
+                                if ( img.empty() ) {
+                                    std::cerr << "No se lee " << f << '\n';
+                                    continue;
+                                }
+
+                                cv::Mat cropped = captureSS->cropHorizontal(img);
+
+                                qDebug() << "img size:"     << img.cols << "x" << img.rows
+                                         << "cropped size:" << cropped.cols << "x" << cropped.rows;
+
+                                if (cropped.empty()) {
+                                    qDebug() << "⚠️ cropped vacío, se omite esta imagen";
+                                    continue;
+                                }
+
+                                if ( result.empty() ) {
+                                    result = cropped.clone();
+                                    firstRefImage = cropped.clone();
+                                    qDebug() << "result inicializado con size:"
+                                             << result.cols << "x" << result.rows;
+                                    continue;
+                                }
+
+                                qDebug() << "Antes de combineImages:"
+                                         << "result:"  << result.cols  << "x" << result.rows
+                                         << "cropped:" << cropped.cols << "x" << cropped.rows;
+
+                                       // aquí viene el dolor 💥
+                                result = captureSS->combineImages(result, cropped);
+                            }
+
+
+                            /*****************/
+
+                            QPixmap finalImage = captureSS -> cvMatToQPixmap( result );
+
+                            if ( !finalImage.isNull() ) {
+                                cv::imwrite( baseDir.toStdString() + "/resultado_stitched.png", result );
+                                saveToFilesystemGUI( finalImage );
+                                QString dirPath = baseDir;
+                                QDir( dirPath ).removeRecursively();
+                            } else {
+                                qDebug() << "Failed to stitch images.";
+                            }
+
+        } );
 
     } );
 
-    m_launcherAction = new QAction(tr("&Open Launcher"), this);
-    connect(m_launcherAction,
+    auto* launcherAction = new QAction(tr("&Open Launcher"), this);
+    connect(launcherAction,
             &QAction::triggered,
             Flameshot::instance(),
             &Flameshot::launcher);
@@ -298,11 +464,9 @@ void TrayIcon::initMenu()
             &QAction::triggered,
             Flameshot::instance(),
             &Flameshot::config);
-    m_infoAction = new QAction(tr("&About"), this);
-    connect(m_infoAction,
-            &QAction::triggered,
-            Flameshot::instance(),
-            &Flameshot::info);
+    auto* infoAction = new QAction(tr("&About"), this);
+    connect(
+      infoAction, &QAction::triggered, Flameshot::instance(), &Flameshot::info);
 
 #if !defined(DISABLE_UPDATE_CHECKER)
     m_appUpdates = new QAction(tr("Check for updates"), this);
@@ -315,20 +479,10 @@ void TrayIcon::initMenu()
             &FlameshotDaemon::newVersionAvailable,
             this,
             [this](const QVersionNumber& version) {
-                if (ConfigHandler().checkForUpdates()) {
-                    QString newVersion =
-                      tr("Download version %1").arg(version.toString());
-                    m_appUpdates->setText(newVersion);
-                    m_appUpdates->setVisible(true);
-
-                    // hack to work around menu not updating when the text /
-                    // visibility is modified Force menu refresh by removing and
-                    // re-adding the action
-                    m_menu->removeAction(m_appUpdates);
-                    m_menu->insertAction(m_infoAction, m_appUpdates);
-                }
+                QString newVersion =
+                  tr("New version %1 is available").arg(version.toString());
+                m_appUpdates->setText(newVersion);
             });
-    updateCheckUpdatesMenuVisibility();
 #endif
 
     QAction* quitAction = new QAction(tr("&Quit"), this);
@@ -348,9 +502,9 @@ void TrayIcon::initMenu()
             Flameshot::instance(),
             &Flameshot::openSavePath);
 
-    m_menu->addAction(m_captureAction);
-    m_menu->addAction(captureActionWithDesplazamiento);
-    m_menu->addAction(m_launcherAction);
+    m_menu->addAction(captureAction);
+    m_menu -> addAction( captureActionWithDesplazamiento );
+    m_menu->addAction(launcherAction);
     m_menu->addSeparator();
 #ifdef ENABLE_IMGUR
     m_menu->addAction(recentAction);
@@ -362,80 +516,24 @@ void TrayIcon::initMenu()
 #if !defined(DISABLE_UPDATE_CHECKER)
     m_menu->addAction(m_appUpdates);
 #endif
-    m_menu->addAction(m_infoAction);
+    m_menu->addAction(infoAction);
     m_menu->addSeparator();
     m_menu->addAction(quitAction);
 }
 
-void TrayIcon::updateCaptureActionShortcut()
-{
-#if defined(Q_OS_MACOS)
-    if (!m_captureAction) {
-        return;
-    }
-
-    QString shortcut = ConfigHandler().shortcut("TAKE_SCREENSHOT");
-    m_captureAction->setShortcut(QKeySequence(shortcut));
-#endif
-}
-
 #if !defined(DISABLE_UPDATE_CHECKER)
-void TrayIcon::updateCheckUpdatesMenuVisibility()
+void TrayIcon::enableCheckUpdatesAction(bool enable)
 {
-    if (m_appUpdates == nullptr) {
-        return;
+    if (m_appUpdates != nullptr) {
+        m_appUpdates->setVisible(enable);
+        m_appUpdates->setEnabled(enable);
     }
-
-    bool autoCheckEnabled = ConfigHandler().checkForUpdates();
-    if (autoCheckEnabled) {
-        // When auto-check is enabled, hide the menu item initially
-        // It will be shown when a new version is available via a callback
-        m_appUpdates->setVisible(false);
-    } else {
-        m_appUpdates->setVisible(true);
-        m_appUpdates->setText(tr("Check for updates"));
+    if (enable) {
+        FlameshotDaemon::instance()->getLatestAvailableVersion();
     }
 }
 #endif
 
-void TrayIcon::initScreenMenu()
-{
-#ifndef Q_OS_MACOS
-    const QList<QScreen*> screens = QGuiApplication::screens();
-    if (screens.size() <= 1) {
-        return;
-    }
-
-    m_screenMenu = new QMenu(tr("Select Screen"));
-
-    QList<QAction*> actions = m_menu->actions();
-    int index = actions.indexOf(m_launcherAction);
-    if (index >= 0 && index + 1 < actions.size()) {
-        m_menu->insertMenu(actions[index + 1], m_screenMenu);
-    } else {
-        m_menu->addMenu(m_screenMenu);
-    }
-
-    QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
-    int currentIndex = screens.indexOf(currentScreen);
-
-    for (int i = 0; i < screens.size(); ++i) {
-        QScreen* screen = screens[i];
-        QRect geom = screen->geometry();
-        QString screenDescription = tr("Monitor %1: %2 (%3x%4)")
-                                      .arg(i + 1)
-                                      .arg(screen->name())
-                                      .arg(geom.width())
-                                      .arg(geom.height());
-
-        QAction* screenAction = m_screenMenu->addAction(screenDescription);
-        connect(screenAction, &QAction::triggered, this, [this, i]() {
-            QTimer::singleShot(
-              100, this, [this, i]() { startGuiCaptureOnScreen(i); });
-        });
-    }
-#endif
-}
 
 void TrayIcon::startGuiCapture()
 {
@@ -445,12 +543,6 @@ void TrayIcon::startGuiCapture()
 #endif
 }
 
-void TrayIcon::startGuiCaptureOnScreen(int screenIndex)
-{
-    CaptureRequest req(CaptureRequest::GRAPHICAL_MODE, 400);
-    req.setSelectedMonitor(screenIndex);
-    Flameshot::instance()->requestCapture(req);
-}
 
 #if defined( Q_OS_LINUX )
 WId TrayIcon::getWindowIdFromXwininfo()
@@ -475,4 +567,5 @@ WId TrayIcon::getWindowIdFromXwininfo()
 
     return 0;
 }
+
 #endif

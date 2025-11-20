@@ -1,7 +1,14 @@
 #include <opencv2/opencv.hpp>
 #include <QApplication>
 
+#if defined ( Q_OS_WIN )
+#include <windef.h>
+#include <windows.h>
+#endif
+
 #include "capturescreenscroll.h"
+
+#if defined ( Q_OS_LINUX )
 #include <X11/Xutil.h>
 #include <X11/Xlib.h>
 #include <X11/extensions/XTest.h>
@@ -11,6 +18,8 @@
 #undef FocusIn
 #undef FocusOut
 
+#endif
+
 #include "qimage.h"
 #include "qpixmap.h"
 #include "qscreen.h"
@@ -19,6 +28,7 @@ captureScreenScroll::captureScreenScroll( QObject* parent )
   : QObject{ parent }
 {}
 
+#if defined ( Q_OS_LINUX )
 captureScreenScroll::captureScreenScroll( void *display, WId id, int xOffset, int yOffset, int width, int height )
   : display( display ),
     id( id ),
@@ -30,12 +40,14 @@ captureScreenScroll::captureScreenScroll( void *display, WId id, int xOffset, in
 
 }
 
+
 QPixmap captureScreenScroll::captureScrollableArea()
 {
     qDebug() << "ID "<< this -> id << "xOffset " << this -> xOffset << "yOffset " << this -> yOffset << "width " << this -> width << "height " << this -> height;
 
     return captureX11Window();
 }
+
 
 QPixmap captureScreenScroll::captureX11Window() {
 
@@ -54,11 +66,57 @@ QPixmap captureScreenScroll::captureX11Window() {
 
     return pixmap;
 }
+#endif
 
+#if defined ( Q_OS_WIN )
+QImage captureScreenScroll::captureWithPrintWindow(HWND hwnd) {
+    RECT rect;
+    if (!GetWindowRect(hwnd, &rect)) {
+        qDebug() << "GetWindowRect falló";
+        return {};
+    }
+
+    int width = rect.right - rect.left;
+    int height = rect.bottom - rect.top;
+
+    HDC hdcWindow = GetDC(hwnd);
+    HDC hdcMemDC = CreateCompatibleDC(hdcWindow);
+    HBITMAP hBitmap = CreateCompatibleBitmap(hdcWindow, width, height);
+    HBITMAP hOld = (HBITMAP)SelectObject(hdcMemDC, hBitmap);
+
+    BOOL success = PrintWindow(hwnd, hdcMemDC, PW_RENDERFULLCONTENT);
+
+    SelectObject(hdcMemDC, hOld);
+    DeleteDC(hdcMemDC);
+    ReleaseDC(hwnd, hdcWindow);
+
+    if (!success) {
+        DeleteObject(hBitmap);
+        qDebug() << "PrintWindow falló";
+        return {};
+    }
+
+    BITMAP bmp;
+    GetObject(hBitmap, sizeof(BITMAP), &bmp);
+
+    QImage img(bmp.bmWidth, bmp.bmHeight, QImage::Format_ARGB32);
+    GetBitmapBits(hBitmap, bmp.bmHeight * bmp.bmWidthBytes, img.bits());
+
+    DeleteObject(hBitmap);
+
+    return img.rgbSwapped(); // para que no se vea azul/rojo invertido
+}
+#endif
 
 bool captureScreenScroll::imagesEqual( const QImage& a, const QImage& b )
 {
-    if ( a.size() != b.size() ) return false;
+    if ( a.size() != b.size() ) {
+        qDebug() << "imagesEqual: tamaños distintos:"
+                 << a.size() << b.size();
+
+        return false;
+    }
+
     cv::Mat imgA = cv::Mat( a.height(), a.width(), CV_8UC4, ( void* ) a.bits(), a.bytesPerLine() );
     cv::Mat imgB = cv::Mat( b.height(), b.width(), CV_8UC4, ( void* ) b.bits(), b.bytesPerLine() );
 
@@ -67,6 +125,7 @@ bool captureScreenScroll::imagesEqual( const QImage& a, const QImage& b )
     cv::cvtColor( diff, diff, cv::COLOR_BGRA2GRAY );
     double meanDiff = cv::mean( diff )[ 0 ];
 
+    //qDebug() << "meanDiff: " << meanDiff;
     return meanDiff < 3.0; // tolerancia ajustable
 }
 
@@ -195,3 +254,4 @@ cv::Mat captureScreenScroll::combineImages( const cv::Mat& result, const cv::Mat
     status = Failed;
     return cv::Mat(); // return empty if failed
 }
+
