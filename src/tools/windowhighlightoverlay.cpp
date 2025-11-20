@@ -7,7 +7,7 @@
 
 static constexpr QColor BORDER_COLOR(136, 0, 170, 255);
 static constexpr int    BORDER_WIDTH = 3;
-
+#if defined( Q_OS_WIN )
 WindowHighlightOverlay* WindowHighlightOverlay::s_instance_ = nullptr;
 
 WindowHighlightOverlay::WindowHighlightOverlay(QWidget *parent)
@@ -86,6 +86,7 @@ LRESULT CALLBACK WindowHighlightOverlay::LowLevelMouseProc(int nCode, WPARAM wPa
     return CallNextHookEx(nullptr, nCode, wParam, lParam);
 }
 
+
 void WindowHighlightOverlay::updateTarget()
 {
     QRect r = getWindowUnderCursor();
@@ -105,6 +106,7 @@ QRect WindowHighlightOverlay::getWindowUnderCursor() const
     if (!GetWindowRect(hwnd, &rc)) return {};
     return QRect(rc.left, rc.top, rc.right - rc.left, rc.bottom - rc.top);
 }
+#endif
 
 void WindowHighlightOverlay::paintEvent(QPaintEvent *)
 {
@@ -125,6 +127,7 @@ void WindowHighlightOverlay::paintEvent(QPaintEvent *)
                               -BORDER_WIDTH / 2, -BORDER_WIDTH / 2));
 }
 
+#if defined( Q_OS_WIN )
 void WindowHighlightOverlay::setOverlayWindowMouseBlocking(QWidget* widget) {
     HWND hwnd = reinterpret_cast<HWND>(widget->winId());
 
@@ -153,3 +156,4 @@ void WindowHighlightOverlay::blockMouseEventsOn(QWidget* widget) {
     SetWindowPos(hwnd, HWND_TOPMOST, 0, 0, 0, 0,
                  SWP_NOMOVE | SWP_NOSIZE | SWP_FRAMECHANGED);
 }
+#endif

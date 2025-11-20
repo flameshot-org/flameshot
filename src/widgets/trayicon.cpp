@@ -449,8 +449,9 @@ void TrayIcon::initMenu()
                             } else {
                                 qDebug() << "Failed to stitch images.";
                             }
-
+#if defined ( Q_OS_WIN )
         } );
+#endif
 
     } );
 
