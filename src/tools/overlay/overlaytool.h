@@ -17,7 +17,9 @@ signals:
 
 protected:
     void paintEvent(QPaintEvent*) override;
+#if defined( Q_OS_LINUX )
     void mousePressEvent(QMouseEvent* event) override;
+#endif
     void keyPressEvent(QKeyEvent* event) override;
 
 private:

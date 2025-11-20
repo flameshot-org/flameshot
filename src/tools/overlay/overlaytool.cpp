@@ -5,13 +5,14 @@
 #include <QScreen>
 #include <QKeyEvent>
 
+#if defined( Q_OS_LINUX )
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
 #include <X11/Xutil.h>
 #include <X11/cursorfont.h>
-
-
 #include <X11/extensions/shape.h>
+#endif
+
 //#undef None
 #undef KeyPress
 #undef KeyRelease
@@ -52,7 +53,7 @@ void Overlay::paintEvent(QPaintEvent*) {
 }
 
 
-
+#if defined( Q_OS_LINUX )
 WId Overlay::getRealWindowUnderCursor(WId overlayWinId)
 {
     Display* display = XOpenDisplay(nullptr);
@@ -158,6 +159,7 @@ void Overlay::mousePressEvent(QMouseEvent* event) {
     emit windowSelected(static_cast<WId>(retChild));
     close();
 }
+#endif
 
 void Overlay::keyPressEvent(QKeyEvent* event) {
     if (event->key() == Qt::Key_Escape) {
