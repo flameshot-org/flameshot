@@ -470,10 +470,23 @@ pacman -S qt6-svg
 pacman -S openssl ca-certificates qt6-imageformats
 ```
 
-#### NixOS
+#### Nix
+
+Development Shell:
+```shell
+# Without flakes:
+nix-shell
+
+# With flakes:
+nix develop
+```
 
 ```shell
-nix-shell
+# Build flameshot
+nix build
+
+# Build and run flameshot
+nix run
 ```
 
 #### macOS
