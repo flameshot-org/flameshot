@@ -17,4 +17,3 @@ void saveToClipboard(const QPixmap& capture);
 // GNOME Wayland: keeps the widget alive until clipboard data is fetched
 bool saveToClipboardGnomeWorkaround(const QPixmap& pixmap, QWidget* keepAlive);
 bool saveToFilesystemGUI(const QPixmap& capture);
-

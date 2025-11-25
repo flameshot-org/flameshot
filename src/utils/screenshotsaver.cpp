@@ -25,11 +25,11 @@
 #include <QBuffer>
 #include <QClipboard>
 #include <QFileDialog>
+#include <QGuiApplication>
 #include <QMessageBox>
 #include <QMimeData>
-#include <QStandardPaths>
-#include <QGuiApplication>
 #include <QPointer>
+#include <QStandardPaths>
 #include <QTimer>
 #include <qimagewriter.h>
 #include <qmimedatabase.h>
@@ -275,7 +275,6 @@ private:
     QPointer<QWidget> m_owner;
 };
 
-
 bool saveToClipboardGnomeWorkaround(const QPixmap& pixmap, QWidget* keepAlive)
 {
     auto* mimeData = new ClipboardWatcherMimeData(pixmap.toImage(), keepAlive);
@@ -286,7 +285,8 @@ bool saveToClipboardGnomeWorkaround(const QPixmap& pixmap, QWidget* keepAlive)
 
     // Safety net: force close after 500ms if compositor never fetches
     QTimer::singleShot(500, keepAlive, [keepAlive]() {
-        qWarning() << "GNOME workaround timed out, compositor did not request clipboard data within 500ms. Force closing.";
+        qWarning() << "GNOME workaround timed out, compositor did not request "
+                      "clipboard data within 500ms. Force closing.";
         if (keepAlive)
             keepAlive->close();
     });

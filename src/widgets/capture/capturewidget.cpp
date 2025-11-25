@@ -629,7 +629,8 @@ void CaptureWidget::closeEvent(QCloseEvent* event)
             m_clipboardWorkaroundDone = true;
             m_context.request.removeTask(CaptureRequest::COPY);
             AbstractLogger::info()
-              << "GNOME Wayland detected; keeping capture window alive until clipboard data is fetched.";
+              << "GNOME Wayland detected; keeping capture window alive until "
+                 "clipboard data is fetched.";
             saveToClipboardGnomeWorkaround(pixmap(), this);
             return;
         }
