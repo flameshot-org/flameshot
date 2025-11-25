@@ -42,7 +42,7 @@
       <img alt="Get it from the Snap Store" src="https://snapcraft.io/static/images/badges/en/snap-store-black.svg" />
     </a>
     <a href="https://flathub.org/apps/details/org.flameshot.Flameshot">
-      <img height="60" alt="Download on Flathub" src="https://flathub.org/assets/badges/flathub-badge-en.svg"/>
+      <img height="60" alt="Get it on Flathub" src="https://flathub.org/api/badge?locale=en"/>
     </a>
   </p>
 </div>
@@ -416,7 +416,7 @@ Also you can open and build/debug the project in a C++ IDE. For example, in Qt C
 
 - Qt >= 6.2.4 (available by default on Ubuntu Jammy)
   + Development tools
-- GCC >= 12
+- GCC >= 11
 - CMake >= 3.22
 
 #### Run-time
