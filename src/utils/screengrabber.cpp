@@ -222,13 +222,14 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
     QScreen* primaryScreen = QGuiApplication::primaryScreen();
     QRect geometry = primaryScreen->geometry();
     QPixmap desktop(geometry.size());
+    auto dpi = primaryScreen->devicePixelRatio();
     desktop.fill(Qt::black); // Fill with black background
     desktop =
       primaryScreen->grabWindow(wid,
-                                -geometry.x() / primaryScreen->devicePixelRatio(),
-                                -geometry.y() / primaryScreen->devicePixelRatio(),
-                                geometry.width(),
-                                geometry.height());
+          -geometry.x() / dpi,
+          -geometry.y() / dpi,
+          geometry.width(),
+          geometry.height());
     return desktop;
 #endif
 }
