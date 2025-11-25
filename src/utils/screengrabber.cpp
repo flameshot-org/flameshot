@@ -220,13 +220,13 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
     // This fixes the dual monitor offset bug and handles edge cases where
     // the desktop bounding box includes virtual space.
     QScreen* primaryScreen = QGuiApplication::primaryScreen();
-    QRect r = primaryScreen->geometry();
+    QRect geometry = primaryScreen->geometry();
     QPixmap desktop(geometry.size());
     desktop.fill(Qt::black); // Fill with black background
     desktop =
       primaryScreen->grabWindow(wid,
-                                -r.x() / primaryScreen->devicePixelRatio(),
-                                -r.y() / primaryScreen->devicePixelRatio(),
+                                -geometry.x() / primaryScreen->devicePixelRatio(),
+                                -geometry.y() / primaryScreen->devicePixelRatio(),
                                 geometry.width(),
                                 geometry.height());
     return desktop;
