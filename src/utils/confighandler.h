@@ -74,6 +74,7 @@ public:
     CONFIG_GETTER_SETTER(userColors, setUserColors, QVector<QColor>);
     CONFIG_GETTER_SETTER(savePath, setSavePath, QString)
     CONFIG_GETTER_SETTER(savePathFixed, setSavePathFixed, bool)
+    CONFIG_GETTER_SETTER(uiLanguage, setUiLanguage, QString)
     CONFIG_GETTER_SETTER(uiColor, setUiColor, QColor)
     CONFIG_GETTER_SETTER(contrastUiColor, setContrastUiColor, QColor)
     CONFIG_GETTER_SETTER(drawColor, setDrawColor, QColor)
@@ -140,6 +141,9 @@ public:
     CONFIG_GETTER_SETTER(showSelectionGeometryHideTime,
                          showSelectionGeometryHideTime,
                          int)
+    CONFIG_GETTER_SETTER(logToFile, setLogToFile, bool)
+    CONFIG_GETTER_SETTER(logFilePath, setLogFilePath, QString)
+    CONFIG_GETTER_SETTER(logFileLevel, setLogFileLevel, int)
 
     // SPECIAL CASES
     bool startupLaunch();

@@ -22,6 +22,10 @@ ColorPicker::ColorPicker(QWidget* parent)
         }
     }
 }
+void ColorPicker::setNewColor()
+{
+    emit colorSelected(m_colorList.at(m_selectedIndex));
+}
 
 void ColorPicker::mouseMoveEvent(QMouseEvent* e)
 {
@@ -44,5 +48,4 @@ void ColorPicker::showEvent(QShowEvent* event)
 void ColorPicker::hideEvent(QHideEvent* event)
 {
     releaseMouse();
-    emit colorSelected(m_colorList.at(m_selectedIndex));
 }

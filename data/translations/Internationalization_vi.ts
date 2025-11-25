@@ -4,30 +4,22 @@
 <context>
     <name>AbstractWidgetList</name>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="55"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="55"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="55"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="52"/>
         <source>Add New</source>
         <translation>Thêm mới</translation>
     </message>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="104"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="104"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="104"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="103"/>
         <source>Move Up</source>
         <translation>Di chuyển lên</translation>
     </message>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="106"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="106"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="106"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="104"/>
         <source>Move Down</source>
         <translation>Di chuyển xuống</translation>
     </message>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="108"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="108"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="108"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="105"/>
         <source>Remove</source>
         <translation>Gỡ bỏ</translation>
     </message>
@@ -149,66 +141,50 @@
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="100"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="198"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="198"/>
-        <location filename="../../src/flameshot_autogen/include/ui_capturelauncher.h" line="194"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="184"/>
         <location filename="../../src/widgets/capturelauncher.cpp" line="53"/>
         <source> seconds</source>
         <translation> giây</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="165"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="199"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="199"/>
-        <location filename="../../src/flameshot_autogen/include/ui_capturelauncher.h" line="195"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="185"/>
         <source>Take new screenshot</source>
         <translation>Chụp ảnh màn hình mới</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="66"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="191"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="191"/>
-        <location filename="../../src/flameshot_autogen/include/ui_capturelauncher.h" line="187"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="180"/>
         <source>Area:</source>
         <translation>Khu vực:</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="14"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="184"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="184"/>
-        <location filename="../../src/flameshot_autogen/include/ui_capturelauncher.h" line="180"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="177"/>
         <source>Capture Launcher</source>
         <translation>Trình khởi chạy chụp màn hình</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="34"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="187"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="187"/>
-        <location filename="../../src/flameshot_autogen/include/ui_capturelauncher.h" line="183"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="178"/>
         <source>TextLabel</source>
         <translation>Nhãn văn bản</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="51"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="188"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="188"/>
-        <location filename="../../src/flameshot_autogen/include/ui_capturelauncher.h" line="184"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="179"/>
         <source>Capture Mode</source>
         <translation>Chế độ chụp</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="80"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="194"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="194"/>
-        <location filename="../../src/flameshot_autogen/include/ui_capturelauncher.h" line="190"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="182"/>
         <source>Delay:</source>
         <translation>Độ trễ:</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="93"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="196"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="196"/>
-        <location filename="../../src/flameshot_autogen/include/ui_capturelauncher.h" line="192"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="183"/>
         <source>WxH+x+y</source>
         <translation>WxH+x+y</translation>
     </message>
@@ -216,78 +192,78 @@
 <context>
     <name>CaptureWidget</name>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="117"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="112"/>
         <source>Unable to capture screen</source>
         <translatorcomment>Impossible capturar la pantalla</translatorcomment>
         <translation>Không thể chụp màn hình :&lt;</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="440"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="456"/>
         <source>Mouse</source>
         <translation>Chuột</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="440"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="456"/>
         <source>Select screenshot area</source>
         <translation>Chọn khu vực chụp màn hình</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="454"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="470"/>
         <source>Mouse Wheel</source>
         <translation>Con lăn chuột</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="454"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="470"/>
         <source>Change tool size</source>
         <translation>Thay đổi kích cỡ công cụ</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="455"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="471"/>
         <source>Right Click</source>
         <translation>Nhấp chuột phải</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="455"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="471"/>
         <source>Show color picker</source>
         <translation>Hiện trình chọn màu</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="457"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="473"/>
         <source>Open side panel</source>
         <translation>Mở bảng điều khiển bên</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="458"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="474"/>
         <source>Esc</source>
         <translation>Esc</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="458"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="474"/>
         <source>Exit</source>
         <translation>Thoát</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="499"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="515"/>
         <source>Quit Capture</source>
         <translation>Thoát trình chụp</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="500"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="516"/>
         <source>Are you sure you want to quit capture?</source>
         <translation>Bạn có chắc chắn muốn hủy chụp không?</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="505"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="521"/>
         <source>Do not show this again</source>
         <translation>Không bao giờ hiển thị nữa</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="711"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="727"/>
         <source>Flameshot has lost focus. Keyboard shortcuts won&apos;t work until you click somewhere.</source>
         <translation>Flameshot đã mất tiêu điểm. Các phím tắt sẽ không hoạt động cho đến khi bạn nhấp vào đâu đó.</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="717"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="733"/>
         <source>Configuration error resolved. Launch `flameshot gui` again to apply it.</source>
         <translation>Đã giải quyết lỗi cấu hình. Khởi chạy lại `flameshot gui` để áp dụng.</translation>
     </message>
@@ -304,7 +280,7 @@ Use the Mouse Wheel to change the thickness of your tool.
 Press Space to open the side panel.</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="1150"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="1167"/>
         <source>Tool Settings</source>
         <translation>Cài đặt công cụ</translation>
     </message>
@@ -339,82 +315,55 @@ Press Space to open the side panel.</translation>
     <name>ColorDialog</name>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="19"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="19"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="19"/>
-        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="352"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="352"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="312"/>
         <source>Select Color</source>
         <translation>Chọn màu</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="60"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="60"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="60"/>
-        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="354"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="354"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="313"/>
         <source>Saturation</source>
         <translation>Độ bão hòa</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="67"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="67"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="67"/>
-        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="356"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="356"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="314"/>
         <source>Hue</source>
         <translation>Sắc độ màu</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="84"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="84"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="84"/>
-        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="358"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="358"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="315"/>
         <source>Hex</source>
         <translation>Hex</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="91"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="91"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="91"/>
-        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="360"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="360"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="316"/>
         <source>Blue</source>
         <translation>Xanh dương</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="128"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="128"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="128"/>
-        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="362"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="362"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="317"/>
         <source>Value</source>
         <translation>Giá trị</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="135"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="135"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="135"/>
-        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="364"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="364"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="318"/>
         <source>Green</source>
         <translation>Xanh lá</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="142"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="142"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="142"/>
-        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="366"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="366"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="319"/>
         <source>Alpha</source>
         <translation>Độ trong suốt</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="149"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="149"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="149"/>
-        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="368"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="368"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="320"/>
         <source>Red</source>
         <translation>Đỏ</translation>
     </message>
@@ -845,22 +794,22 @@ Vui lòng xử lí chúng thủ công trong tệp cấu hình.</translation>
 <context>
     <name>FlameshotDaemon</name>
     <message>
-        <location filename="../../src/core/flameshotdaemon.cpp" line="375"/>
+        <location filename="../../src/core/flameshotdaemon.cpp" line="407"/>
         <source>New version %1 is available</source>
         <translation>Phiên bản %1 đã phát hành 🥳</translation>
     </message>
     <message>
-        <location filename="../../src/core/flameshotdaemon.cpp" line="381"/>
+        <location filename="../../src/core/flameshotdaemon.cpp" line="413"/>
         <source>You have the latest version</source>
         <translation>Bạn đã dùng phiên bản mới nhất</translation>
     </message>
     <message>
-        <location filename="../../src/core/flameshotdaemon.cpp" line="390"/>
+        <location filename="../../src/core/flameshotdaemon.cpp" line="422"/>
         <source>Failed to get information about the latest version.</source>
         <translation>Không thể lấy được thông tin về phiên bản mới.</translation>
     </message>
     <message>
-        <location filename="../../src/core/flameshotdaemon.cpp" line="412"/>
+        <location filename="../../src/core/flameshotdaemon.cpp" line="445"/>
         <source>Unable to connect via DBus</source>
         <translation>Không thể kết nối thông qua DBus</translation>
     </message>
@@ -1626,65 +1575,49 @@ Vui lòng xử lí chúng thủ công trong tệp cấu hình.</translation>
     <name>InfoWindow</name>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="14"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="124"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="124"/>
-        <location filename="../../src/flameshot_autogen/include/ui_infowindow.h" line="124"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="116"/>
         <source>About</source>
         <translation>Về chúng tôi</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="26"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="126"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="126"/>
-        <location filename="../../src/flameshot_autogen/include/ui_infowindow.h" line="126"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="117"/>
         <source>Icon</source>
         <translation>Biểu tượng</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="43"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="128"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="128"/>
-        <location filename="../../src/flameshot_autogen/include/ui_infowindow.h" line="128"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="118"/>
         <source>License</source>
         <translation>Giấy phép</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="56"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="130"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="130"/>
-        <location filename="../../src/flameshot_autogen/include/ui_infowindow.h" line="130"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="119"/>
         <source>GPLv3+</source>
         <translation>GPLv3+</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="89"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="132"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="132"/>
-        <location filename="../../src/flameshot_autogen/include/ui_infowindow.h" line="132"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="120"/>
         <source>Version</source>
         <translation>Phiên bản</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="102"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="134"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="134"/>
-        <location filename="../../src/flameshot_autogen/include/ui_infowindow.h" line="134"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="121"/>
         <source>Flameshot v</source>
         <translation>Flameshot v</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="115"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="136"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="136"/>
-        <location filename="../../src/flameshot_autogen/include/ui_infowindow.h" line="136"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="122"/>
         <source>OS Info</source>
         <translation>Thông tin OS</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="128"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="138"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="138"/>
-        <location filename="../../src/flameshot_autogen/include/ui_infowindow.h" line="138"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="123"/>
         <source>Copy Info</source>
         <translation>Sao chép thông tin</translation>
     </message>
@@ -1895,15 +1828,11 @@ Vui lòng xử lí chúng thủ công trong tệp cấu hình.</translation>
     <name>PrimaryInstanceWidget</name>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/primaryinstancewidget.cpp" line="21"/>
-        <location filename="../../cmake-build-debug/_deps/kdsingleapplication-src/examples/widgetsingleapplication/primaryinstancewidget.cpp" line="21"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/kdsingleapplication-src/examples/widgetsingleapplication/primaryinstancewidget.cpp" line="21"/>
         <source>Primary instance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/primaryinstancewidget.cpp" line="22"/>
-        <location filename="../../cmake-build-debug/_deps/kdsingleapplication-src/examples/widgetsingleapplication/primaryinstancewidget.cpp" line="22"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/kdsingleapplication-src/examples/widgetsingleapplication/primaryinstancewidget.cpp" line="22"/>
         <source>&lt;b&gt;Primary instance.&lt;/b&gt; Messages received from secondaries:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1972,17 +1901,17 @@ Vui lòng xử lí chúng thủ công trong tệp cấu hình.</translation>
         <translation>Lỗi khi thử lưu ảnh dưới dạng </translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="201"/>
+        <location filename="../../src/main.cpp" line="220"/>
         <source>Unable to connect via DBus</source>
         <translation>Không thể kết nối thông qua DBus</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="217"/>
+        <location filename="../../src/main.cpp" line="237"/>
         <source>Powerful yet simple to use screenshot software.</source>
         <translation>Phần mềm chụp ảnh màn hình mạnh mẽ nhưng dễ sử dụng.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="218"/>
+        <location filename="../../src/main.cpp" line="238"/>
         <source>See</source>
         <translation>Thấy</translation>
     </message>
@@ -1991,17 +1920,17 @@ Vui lòng xử lí chúng thủ công trong tệp cấu hình.</translation>
         <translation type="vanished">Capture the entire desktop.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="224"/>
+        <location filename="../../src/main.cpp" line="244"/>
         <source>Open the capture launcher.</source>
         <translation>Mở trình chụp.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="227"/>
+        <location filename="../../src/main.cpp" line="247"/>
         <source>Start a manual capture in GUI mode.</source>
         <translation>Bắt đầu chụp thủ công ở chế độ giao diện.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="229"/>
+        <location filename="../../src/main.cpp" line="249"/>
         <source>Configure</source>
         <translation>Cấu hình</translation>
     </message>
@@ -2014,122 +1943,122 @@ Vui lòng xử lí chúng thủ công trong tệp cấu hình.</translation>
         <translation type="vanished">Path where the capture will be saved</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="222"/>
+        <location filename="../../src/main.cpp" line="242"/>
         <source>Capture screenshot of all monitors at the same time.</source>
         <translation>Chụp màn hình tất cả màn hình cùng lúc.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="232"/>
+        <location filename="../../src/main.cpp" line="252"/>
         <source>Capture a screenshot of the specified monitor.</source>
         <translation>Chụp ảnh màn hình của màn hình được chỉ định.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="237"/>
+        <location filename="../../src/main.cpp" line="257"/>
         <source>Existing directory or new file to save to</source>
         <translation>Thư mục hiện có hoặc tệp mới để lưu vào</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="240"/>
+        <location filename="../../src/main.cpp" line="260"/>
         <source>Save the capture to the clipboard</source>
         <translation>Lưu ảnh chụp vào bảng tạm</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="242"/>
+        <location filename="../../src/main.cpp" line="262"/>
         <source>Pin the capture to the screen</source>
         <translation>Ghim ảnh chụp vào màn hình</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="244"/>
+        <location filename="../../src/main.cpp" line="264"/>
         <source>Upload screenshot</source>
         <translation>Đăng tải ảnh chụp màn hình</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="246"/>
+        <location filename="../../src/main.cpp" line="266"/>
         <source>Delay time in milliseconds</source>
         <translation>Thời gian trễ tính bằng mili giây</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="251"/>
+        <location filename="../../src/main.cpp" line="271"/>
         <source>Repeat screenshot with previously selected region</source>
         <translation>Lặp lại ảnh chụp màn hình với vùng đã chọn trước đó</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="254"/>
+        <location filename="../../src/main.cpp" line="274"/>
         <source>Screenshot region to select</source>
         <translation>Vùng ảnh chụp để chọn</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="257"/>
+        <location filename="../../src/main.cpp" line="277"/>
         <source>Set the filename pattern</source>
         <translation>Đặt mẫu tên tệp</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="261"/>
+        <location filename="../../src/main.cpp" line="281"/>
         <source>Accept capture as soon as a selection is made</source>
         <translation>Chấp nhận chụp ngay khi lựa chọn được thực hiện</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="263"/>
+        <location filename="../../src/main.cpp" line="283"/>
         <source>Enable or disable the trayicon</source>
         <translation>Bật hoặc tắt biểu tượng trong khay</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="267"/>
+        <location filename="../../src/main.cpp" line="287"/>
         <source>Enable or disable run at startup</source>
         <translation>Bật hoặc tắt chạy khi khởi động</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="271"/>
+        <location filename="../../src/main.cpp" line="291"/>
         <source>Enable or disable the notifications</source>
         <translation>Bật hoạt tắt thông báo</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="274"/>
+        <location filename="../../src/main.cpp" line="294"/>
         <source>Check the configuration for errors</source>
         <translation>Kiểm tra cấu hình để tim lỗi</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="277"/>
+        <location filename="../../src/main.cpp" line="297"/>
         <source>Show the help message in the capture mode</source>
         <translation>Hiển thị ô trợ giúp khi ở chế độ chụp</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="280"/>
+        <location filename="../../src/main.cpp" line="300"/>
         <source>Define the main UI color</source>
         <translation>Chọn màu chính cho giao diện</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="284"/>
+        <location filename="../../src/main.cpp" line="304"/>
         <source>Define the contrast UI color</source>
         <translation>Chọn màu sắc tương phản cho giao diện</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="287"/>
+        <location filename="../../src/main.cpp" line="307"/>
         <source>Print raw PNG capture</source>
         <translation>In ảnh chụp PNG gốc</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="290"/>
+        <location filename="../../src/main.cpp" line="310"/>
         <source>Print geometry of the selection in the format WxH+X+Y. Does nothing if raw is specified</source>
         <translation>In thông số của vùng chọn theo định dạng WxH+X+Y. Không thực hiện gì nếu đã chọn chế độ raw</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="294"/>
+        <location filename="../../src/main.cpp" line="314"/>
         <source>Define the screen to capture (starting from 0)</source>
         <translation>Chọn màn hình cần chụp (bắt đầu từ 0)</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="314"/>
+        <location filename="../../src/main.cpp" line="334"/>
         <source>Invalid delay, it must be a number greater than 0</source>
         <translation>Độ trễ không hợp lệ, nó cần phải là một con số lớn hơn 0</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="317"/>
+        <location filename="../../src/main.cpp" line="337"/>
         <source>Invalid region, use &apos;WxH+X+Y&apos; or &apos;all&apos; or &apos;screen0/screen1/...&apos;.</source>
         <translation>Vùng không hợp lệ, sử dụng &apos;WxH+X+Y&apos; hoặc &apos;all&apos; hoặc &apos;screen0/screen1/...&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="330"/>
+        <location filename="../../src/main.cpp" line="350"/>
         <source>Invalid path, must be an existing directory or a new file in an existing directory</source>
         <translation>Đường dẫn không hợp lệ, phải là một thư mục hiện có hoặc một tệp mới trong một thư mục hiện có</translation>
     </message>
@@ -2138,17 +2067,17 @@ Vui lòng xử lí chúng thủ công trong tệp cấu hình.</translation>
         <translation type="vanished">Define the screen to capture</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="295"/>
+        <location filename="../../src/main.cpp" line="315"/>
         <source>default: screen containing the cursor</source>
         <translation>mặc định: màn hình chứa con trỏ chuột</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="296"/>
+        <location filename="../../src/main.cpp" line="316"/>
         <source>Screen number</source>
         <translation>Số màn hình</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="305"/>
+        <location filename="../../src/main.cpp" line="325"/>
         <source>Invalid color, this flag supports the following formats:
 - #RGB (each of R, G, and B is a single hex digit)
 - #RRGGBB
@@ -2169,7 +2098,7 @@ Bạn có thẻ cần thoát kí tự # như &apos;\#FFF&apos;</translation>
         <translation type="vanished">Invalid delay, it must be higher than 0</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="316"/>
+        <location filename="../../src/main.cpp" line="336"/>
         <source>Invalid screen number, it must be non negative</source>
         <translation>Số màn hình không hợp lệ, nó cần phải là một số không âm</translation>
     </message>
@@ -2178,7 +2107,7 @@ Bạn có thẻ cần thoát kí tự # như &apos;\#FFF&apos;</translation>
         <translation type="vanished">Invalid path, it must be a real path in the system</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="343"/>
+        <location filename="../../src/main.cpp" line="363"/>
         <source>Invalid value, it must be defined as &apos;true&apos; or &apos;false&apos;</source>
         <translation>Giá trị không hợp lệ, phải được định nghĩa là &apos;true&apos; (đúng) hoặc &apos;false&apos; (sai)</translation>
     </message>
@@ -2382,27 +2311,27 @@ Bạn có thẻ cần thoát kí tự # như &apos;\#FFF&apos;</translation>
         <translation>Bộ điều hợp chụp màn hình phổ thông của Wayland yêu cầu Grim làm thành phần chụp màn hình. Nếu thiếu thành phần này, vui lòng cài đặt!</translation>
     </message>
     <message>
-        <location filename="../../src/utils/screengrabber.cpp" line="170"/>
+        <location filename="../../src/utils/screengrabber.cpp" line="171"/>
         <source>If the useGrimAdapter setting is not enabled, the dbus protocol will be used. It should be noted that using the dbus protocol under wayland is not recommended. It is recommended to enable the useGrimAdapter setting in flameshot.ini to activate the grim-based general wayland screenshot adapter</source>
         <translation>Nếu tùy chọn useGrimAdapter chưa được bật, giao thức dbus sẽ được sử dụng. Tuy nhiên, việc dùng dbus trên Wayland không được khuyến nghị. Bạn nên bật useGrimAdapter trong tập tin flameshot.ini để kích hoạt bộ điều hợp chụp màn hình Wayland dựa trên Grim</translation>
     </message>
     <message>
-        <location filename="../../src/utils/screengrabber.cpp" line="181"/>
+        <location filename="../../src/utils/screengrabber.cpp" line="182"/>
         <source>grim&apos;s screenshot component is implemented based on wlroots, it may not be used in GNOME or similar desktop environments</source>
         <translation>Thành phần chụp màn hình Grim được xây dựng dựa trên wlroots, nên có thể không sử dụng được trong GNOME hoặc các môi trường desktop tương tự</translation>
     </message>
     <message>
-        <location filename="../../src/utils/screengrabber.cpp" line="193"/>
+        <location filename="../../src/utils/screengrabber.cpp" line="194"/>
         <source>Unable to detect desktop environment (GNOME? KDE? Qile? Sway? ...)</source>
         <translation>Không thể xác định được môi trường desktop (GNOME? KDE? Qile? Sway? ...)</translation>
     </message>
     <message>
-        <location filename="../../src/utils/screengrabber.cpp" line="196"/>
+        <location filename="../../src/utils/screengrabber.cpp" line="197"/>
         <source>Hint: try setting the XDG_CURRENT_DESKTOP environment variable.</source>
         <translation>Gợi ý: hãy thử thiết lập biến môi trường XDG_CURRENT_DESKTOP.</translation>
     </message>
     <message>
-        <location filename="../../src/utils/screengrabber.cpp" line="201"/>
+        <location filename="../../src/utils/screengrabber.cpp" line="202"/>
         <source>Unable to capture screen</source>
         <translation>Không thể chụp màn hình :&lt;</translation>
     </message>
@@ -2411,43 +2340,31 @@ Bạn có thẻ cần thoát kí tự # như &apos;\#FFF&apos;</translation>
     <name>SecondaryInstanceWidget</name>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="26"/>
-        <location filename="../../cmake-build-debug/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="26"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="26"/>
         <source>Secondary instance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="27"/>
-        <location filename="../../cmake-build-debug/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="27"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="27"/>
         <source>&lt;b&gt;Secondary instance.&lt;/b&gt; Send message to primary:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="29"/>
-        <location filename="../../cmake-build-debug/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="29"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="29"/>
         <source>Type something here...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="31"/>
-        <location filename="../../cmake-build-debug/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="31"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="31"/>
         <source>&amp;Send</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="54"/>
-        <location filename="../../cmake-build-debug/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="54"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="54"/>
         <source>Error sending message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="55"/>
-        <location filename="../../cmake-build-debug/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="55"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="55"/>
         <source>The message &apos;%1&apos; could not be sent to the primary.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2999,8 +2916,6 @@ Bạn có thẻ cần thoát kí tự # như &apos;\#FFF&apos;</translation>
     <name>UploadHistory</name>
     <message>
         <location filename="../../src/widgets/uploadhistory.ui" line="14"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_uploadhistory.h" line="69"/>
-        <location filename="../../src/flameshot_autogen/include/ui_uploadhistory.h" line="69"/>
         <source>Upload History</source>
         <translation>Đăng tải lịch sử</translation>
     </message>
@@ -3014,29 +2929,21 @@ Bạn có thẻ cần thoát kí tự # như &apos;\#FFF&apos;</translation>
     <name>UploadLineItem</name>
     <message>
         <location filename="../../src/widgets/uploadlineitem.ui" line="20"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_uploadlineitem.h" line="123"/>
-        <location filename="../../src/flameshot_autogen/include/ui_uploadlineitem.h" line="122"/>
         <source>Form</source>
         <translation>Hình thức</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadlineitem.ui" line="49"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_uploadlineitem.h" line="125"/>
-        <location filename="../../src/flameshot_autogen/include/ui_uploadlineitem.h" line="124"/>
         <source>TextLabel</source>
         <translation>Nhãn văn bản</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadlineitem.ui" line="82"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_uploadlineitem.h" line="127"/>
-        <location filename="../../src/flameshot_autogen/include/ui_uploadlineitem.h" line="126"/>
         <source>Copy URL</source>
         <translation>Sao chép URL</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadlineitem.ui" line="95"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_uploadlineitem.h" line="128"/>
-        <location filename="../../src/flameshot_autogen/include/ui_uploadlineitem.h" line="127"/>
         <source>Open In Browser</source>
         <translation>Mở bằng trình duyệt</translation>
     </message>
@@ -3095,9 +3002,7 @@ Bạn có thẻ cần thoát kí tự # như &apos;\#FFF&apos;</translation>
 <context>
     <name>color_widgets::ColorDialog</name>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.cpp" line="65"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.cpp" line="65"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.cpp" line="65"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.cpp" line="63"/>
         <source>Pick</source>
         <translation>Chọn</translation>
     </message>
@@ -3105,9 +3010,7 @@ Bạn có thẻ cần thoát kí tự # như &apos;\#FFF&apos;</translation>
 <context>
     <name>color_widgets::ColorPalette</name>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette.cpp" line="403"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette.cpp" line="403"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette.cpp" line="403"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette.cpp" line="417"/>
         <source>Unnamed</source>
         <translation>Không tên</translation>
     </message>
@@ -3115,16 +3018,12 @@ Bạn có thẻ cần thoát kí tự # như &apos;\#FFF&apos;</translation>
 <context>
     <name>color_widgets::ColorPaletteModel</name>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_model.cpp" line="56"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_model.cpp" line="56"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_model.cpp" line="56"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_model.cpp" line="55"/>
         <source>Unnamed</source>
         <translation>Không tên</translation>
     </message>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_model.cpp" line="134"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_model.cpp" line="134"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_model.cpp" line="134"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_model.cpp" line="130"/>
         <source>%1 (%2 colors)</source>
         <translation>%1 (%2 màu)</translation>
     </message>
@@ -3133,131 +3032,87 @@ Bạn có thẻ cần thoát kí tự # như &apos;\#FFF&apos;</translation>
     <name>color_widgets::ColorPaletteWidget</name>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="64"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="64"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="64"/>
-        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="257"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="257"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="231"/>
         <source>Open a new palette from file</source>
         <translation>Mở một bảng màu mới từ tệp</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="75"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="75"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="75"/>
-        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="263"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="263"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="234"/>
         <source>Create a new palette</source>
         <translation>Tạo một bảng màu mới</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="86"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="86"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="86"/>
-        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="269"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="269"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="237"/>
         <source>Duplicate the current palette</source>
         <translation>Nhân đôi bảng màu hiện tại</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="170"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="170"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="170"/>
-        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="275"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="275"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="240"/>
         <source>Delete the current palette</source>
         <translation>Xóa bảng màu hiện tại</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="181"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="181"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="181"/>
-        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="281"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="281"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="243"/>
         <source>Revert changes to the current palette</source>
         <translation>Đặt lại các thay đổi của bảng màu hiện tại</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="192"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="192"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="192"/>
-        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="287"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="287"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="246"/>
         <source>Save changes to the current palette</source>
         <translation>Lưu lại thay đối của bảng màu hiện tại</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="216"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="216"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="216"/>
-        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="293"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="293"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="249"/>
         <source>Add a color to the palette</source>
         <translation>Thêm màu vào bảng màu</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="227"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="227"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="227"/>
-        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="298"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="298"/>
+        <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="252"/>
         <source>Remove the selected color from the palette</source>
         <translation>Gỡ bỏ màu đang chọn trong bảng màu</translation>
     </message>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="207"/>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="224"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="207"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="224"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="207"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="224"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="181"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="196"/>
         <source>New Palette</source>
         <translation>Bảng màu mới</translation>
     </message>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="208"/>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="225"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="208"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="225"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="208"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="225"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="182"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="197"/>
         <source>Name</source>
         <translation>Tên</translation>
     </message>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="254"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="254"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="254"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="223"/>
         <source>GIMP Palettes (*.gpl)</source>
         <translation>Bảng màu GIMP (*.gpl)</translation>
     </message>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="255"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="255"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="255"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="224"/>
         <source>Palette Image (%1)</source>
         <translation>Ảnh bảng màu (%1)</translation>
     </message>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="256"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="256"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="256"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="225"/>
         <source>All Files (*)</source>
         <translation>Mọi tập tin (*)</translation>
     </message>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="257"/>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="271"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="257"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="271"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="257"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="271"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="226"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="239"/>
         <source>Open Palette</source>
         <translation>Mở bảng màu</translation>
     </message>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="272"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="272"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="272"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="240"/>
         <source>Failed to load the palette file
 %1</source>
         <translation>Không thể tải được tệp bảng màu
@@ -3267,23 +3122,17 @@ Bạn có thẻ cần thoát kí tự # như &apos;\#FFF&apos;</translation>
 <context>
     <name>color_widgets::GradientEditor</name>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_editor.cpp" line="300"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_editor.cpp" line="300"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_editor.cpp" line="300"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_editor.cpp" line="321"/>
         <source>Add Color</source>
         <translation>Thêm màu</translation>
     </message>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_editor.cpp" line="312"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_editor.cpp" line="312"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_editor.cpp" line="312"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_editor.cpp" line="330"/>
         <source>Remove Color</source>
         <translation>Loại bỏ màu</translation>
     </message>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_editor.cpp" line="323"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_editor.cpp" line="323"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_editor.cpp" line="323"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_editor.cpp" line="338"/>
         <source>Edit Color...</source>
         <translation>Chỉnh sửa màu...</translation>
     </message>
@@ -3291,9 +3140,7 @@ Bạn có thẻ cần thoát kí tự # như &apos;\#FFF&apos;</translation>
 <context>
     <name>color_widgets::GradientListModel</name>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_list_model.cpp" line="216"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_list_model.cpp" line="216"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_list_model.cpp" line="216"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_list_model.cpp" line="215"/>
         <source>%1 (%2 colors)</source>
         <translation>%1 (%2 màu)</translation>
     </message>
@@ -3301,16 +3148,12 @@ Bạn có thẻ cần thoát kí tự # như &apos;\#FFF&apos;</translation>
 <context>
     <name>color_widgets::Swatch</name>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/swatch.cpp" line="829"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/swatch.cpp" line="829"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/swatch.cpp" line="829"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/swatch.cpp" line="855"/>
         <source>Clear Color</source>
         <translation>Xóa màu</translation>
     </message>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/swatch.cpp" line="838"/>
-        <location filename="../../cmake-build-debug/_deps/qtcolorwidgets-src/src/QtColorWidgets/swatch.cpp" line="838"/>
-        <location filename="../../cmake-build-debug-event-trace/_deps/qtcolorwidgets-src/src/QtColorWidgets/swatch.cpp" line="838"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/swatch.cpp" line="864"/>
         <source>%1 (%2)</source>
         <translation>%1 (%2)</translation>
     </message>

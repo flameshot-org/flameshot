@@ -3,6 +3,7 @@
 #include "colorpickerwidget.h"
 #include "confighandler.h"
 #include "screengrabber.h"
+#include "utils/logfile.h"
 #include <QColor>
 #include <QFileInfo>
 #include <QImageWriter>
@@ -10,6 +11,7 @@
 #include <QRegularExpression>
 #include <QStandardPaths>
 #include <QVariant>
+#include <memory>
 
 // VALUE HANDLER
 
@@ -275,6 +277,27 @@ QString ExistingDir::expected()
     return QStringLiteral("existing directory");
 }
 
+// LOGGING DIR
+//
+bool LoggingDir::check(const QVariant& val)
+{
+    if (!val.canConvert<QString>() || val.toString().isEmpty()) {
+        return false;
+    }
+    QFileInfo info(val.toString());
+    return info.isDir() && info.isWritable();
+}
+
+QVariant LoggingDir::fallback()
+{
+    return LogFile::defaultLogFilePath();
+}
+
+QString LoggingDir::expected()
+{
+    return QStringLiteral("a writeable directory");
+}
+
 // FILENAME PATTERN
 
 bool FilenamePattern::check(const QVariant&)
@@ -530,10 +553,11 @@ bool Region::check(const QVariant& val)
 QVariant Region::process(const QVariant& val)
 {
     // FIXME: This is temporary, just before D-Bus is removed
-    char** argv = new char*[1];
-    int* argc = new int{ 0 };
+    auto argv = std::make_unique<char*[]>(1);
+    auto argc = std::make_unique<int>(0);
+    std::unique_ptr<QApplication> tempApp;
     if (QGuiApplication::screens().empty()) {
-        new QApplication(*argc, argv);
+        tempApp = std::make_unique<QApplication>(*argc, argv.get());
     }
 
     QString str = val.toString();

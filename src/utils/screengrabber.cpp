@@ -13,7 +13,7 @@
 #include <QProcess>
 #include <QScreen>
 
-#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
+#if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
 #include "request.h"
 #include <QDBusInterface>
 #include <QDBusReply>
@@ -28,7 +28,7 @@ ScreenGrabber::ScreenGrabber(QObject* parent)
 
 void ScreenGrabber::generalGrimScreenshot(bool& ok, QPixmap& res)
 {
-#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
+#if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
     if (!ConfigHandler().useGrimAdapter()) {
         return;
     }
@@ -60,9 +60,19 @@ void ScreenGrabber::generalGrimScreenshot(bool& ok, QPixmap& res)
 void ScreenGrabber::freeDesktopPortal(bool& ok, QPixmap& res)
 {
 
-#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
+#if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
+    auto* connectionInterface = QDBusConnection::sessionBus().interface();
+    auto service = QStringLiteral("org.freedesktop.portal.Desktop");
+
+    if (!connectionInterface->isServiceRegistered(service)) {
+        ok = false;
+        AbstractLogger::error() << tr(
+          "Could not locate the `org.freedesktop.portal.Desktop` service");
+        return;
+    }
+
     QDBusInterface screenshotInterface(
-      QStringLiteral("org.freedesktop.portal.Desktop"),
+      service,
       QStringLiteral("/org/freedesktop/portal/desktop"),
       QStringLiteral("org.freedesktop.portal.Screenshot"));
 
@@ -72,7 +82,7 @@ void ScreenGrabber::freeDesktopPortal(bool& ok, QPixmap& res)
 
     // premake interface
     auto* request = new OrgFreedesktopPortalRequestInterface(
-      QStringLiteral("org.freedesktop.portal.Desktop"),
+      service,
       "/org/freedesktop/portal/desktop/request/" +
         QDBusConnection::sessionBus().baseService().remove(':').replace('.',
                                                                         '_') +
@@ -137,6 +147,7 @@ void ScreenGrabber::freeDesktopPortal(bool& ok, QPixmap& res)
     }
 #endif
 }
+
 QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
 {
     ok = true;
@@ -208,22 +219,16 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
     // multi-monitor setups where screens have different positions/heights.
     // This fixes the dual monitor offset bug and handles edge cases where
     // the desktop bounding box includes virtual space.
-    QRect geometry = desktopGeometry();
+    QScreen* primaryScreen = QGuiApplication::primaryScreen();
+    QRect r = primaryScreen->geometry();
     QPixmap desktop(geometry.size());
-    desktop.fill(Qt::black);
-
-    QPainter painter(&desktop);
-    for (QScreen* screen : QGuiApplication::screens()) {
-        QRect geo = screen->geometry();
-        auto shot = screen->grabWindow(0);
-        qreal dpr = screen->devicePixelRatio();
-        QRectF targetRect = QRect(geo.topLeft(), geo.size() * dpr);
-        QRectF sourceRect(QPointF(0, 0), QSizeF(shot.size()));
-        painter.drawPixmap(targetRect, shot, sourceRect);
-    }
-    painter.end();
-    auto dpr2 = QApplication::primaryScreen()->devicePixelRatio();
-    desktop.setDevicePixelRatio(dpr2);
+    desktop.fill(Qt::black); // Fill with black background
+    desktop =
+      primaryScreen->grabWindow(wid,
+                                -r.x() / primaryScreen->devicePixelRatio(),
+                                -r.y() / primaryScreen->devicePixelRatio(),
+                                geometry.width(),
+                                geometry.height());
     return desktop;
 #endif
 }
@@ -277,13 +282,10 @@ QRect ScreenGrabber::desktopGeometry()
         // Qt6 fix: Don't divide by devicePixelRatio for multi-monitor setups
         // This was causing coordinate offset issues in dual monitor
         // configurations
+        // But it still has a screen position in real pixels, not logical ones
         qreal dpr = screen->devicePixelRatio();
-        QRect physRect(scrRect.x() * dpr,
-                       scrRect.y() * dpr,
-                       scrRect.width() * dpr,
-                       scrRect.height() * dpr);
-
-        geometry = geometry.united(physRect);
+        scrRect.moveTo(QPointF(scrRect.x() / dpr, scrRect.y() / dpr).toPoint());
+        geometry = geometry.united(scrRect);
     }
     return geometry;
 }

@@ -438,7 +438,7 @@ Also you can open and build/debug the project in a C++ IDE. For example, in Qt C
 apt install g++ cmake build-essential qt6-base-dev qt6-tools-dev-tools qt6-svg-dev qt6-tools-dev
 
 # Run-time
-apt install libqt6dbus6 libqt6network6 libqt6core6 libqt6widgets6 libqt6gui6 libqt6svg6 qt6-qpa-plugins
+apt install libkf6guiaddons-dev libqt6dbus6 libqt6network6 libqt6core6 libqt6widgets6 libqt6gui6 libqt6svg6 qt6-qpa-plugins
 
 # Optional
 apt install git openssl ca-certificates qt6-image-formats-plugins
@@ -470,10 +470,23 @@ pacman -S qt6-svg
 pacman -S openssl ca-certificates qt6-imageformats
 ```
 
-#### NixOS
+#### Nix
+
+Development Shell:
+```shell
+# Without flakes:
+nix-shell
+
+# With flakes:
+nix develop
+```
 
 ```shell
-nix-shell
+# Build flameshot
+nix build
+
+# Build and run flameshot
+nix run
 ```
 
 #### macOS

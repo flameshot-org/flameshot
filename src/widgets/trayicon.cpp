@@ -33,7 +33,14 @@ TrayIcon::TrayIcon(QObject* parent)
     setContextMenu(m_menu);
 #endif
     QIcon icon =
-      QIcon::fromTheme("flameshot-tray", QIcon(GlobalValues::iconPathPNG()));
+      QIcon::fromTheme("flameshot-tray", QIcon(GlobalValues::trayIconPath()));
+
+#if defined(Q_OS_MACOS)
+    if (currentMacOsVersion >= QOperatingSystemVersion::MacOSBigSur) {
+        icon.setIsMask(true);
+    }
+#endif
+
     setIcon(icon);
 
 #if defined(Q_OS_MACOS)
@@ -78,7 +85,7 @@ TrayIcon::TrayIcon(QObject* parent)
     connect(ConfigHandler::getInstance(),
             &ConfigHandler::fileChanged,
             this,
-            [this]() {});
+            [this]() { updateCaptureActionShortcut(); });
 }
 
 TrayIcon::~TrayIcon()
@@ -97,8 +104,11 @@ void TrayIcon::initMenu()
 {
     m_menu = new QMenu();
 
-    auto* captureAction = new QAction(tr("&Take Screenshot"), this);
-    connect(captureAction, &QAction::triggered, this, [this]() {
+    m_captureAction = new QAction(tr("&Take Screenshot"), this);
+
+    updateCaptureActionShortcut();
+
+    connect(m_captureAction, &QAction::triggered, this, [this]() {
 #if defined(Q_OS_MACOS)
         auto currentMacOsVersion = QOperatingSystemVersion::current();
         if (currentMacOsVersion >= QOperatingSystemVersion::MacOSBigSur) {
@@ -163,7 +173,7 @@ void TrayIcon::initMenu()
             Flameshot::instance(),
             &Flameshot::openSavePath);
 
-    m_menu->addAction(captureAction);
+    m_menu->addAction(m_captureAction);
     m_menu->addAction(launcherAction);
     m_menu->addSeparator();
 #ifdef ENABLE_IMGUR
@@ -179,6 +189,18 @@ void TrayIcon::initMenu()
     m_menu->addAction(infoAction);
     m_menu->addSeparator();
     m_menu->addAction(quitAction);
+}
+
+void TrayIcon::updateCaptureActionShortcut()
+{
+#if defined(Q_OS_MACOS)
+    if (!m_captureAction) {
+        return;
+    }
+
+    QString shortcut = ConfigHandler().shortcut("TAKE_SCREENSHOT");
+    m_captureAction->setShortcut(QKeySequence(shortcut));
+#endif
 }
 
 #if !defined(DISABLE_UPDATE_CHECKER)

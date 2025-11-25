@@ -107,6 +107,7 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     OPTION("uploadHistoryMax"            ,LowerBoundedInt    ( 0, 25         )),
     OPTION("undoLimit"                   ,BoundedInt         ( 0, 999, 100   )),
     // Interface tab
+    OPTION("uiLanguage"                  ,String             ( "auto"        )),
     OPTION("uiColor"                     ,Color              ( {116, 0, 150} )),
     OPTION("contrastUiColor"             ,Color              ( {39, 0, 50}   )),
     OPTION("contrastOpacity"             ,BoundedInt         ( 0, 255, 190   )),
@@ -137,6 +138,9 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     OPTION("jpegQuality"                 , BoundedInt        ( 0,100,75      )),
     OPTION("reverseArrow"                ,Bool               ( false         )),
     OPTION("insecurePixelate"            ,Bool               ( false         )),
+    OPTION("logToFile"                   ,Bool               ( true          )),
+    OPTION("logFilePath"                 ,LoggingDir         (               )),
+    OPTION("logFileLevel"                ,BoundedInt         ( AbstractLogger::Channel::Info, AbstractLogger::Channel::Error, AbstractLogger::Channel::Info)),  
 };
 
 static QMap<QString, QSharedPointer<KeySequence>> recognizedShortcuts = {

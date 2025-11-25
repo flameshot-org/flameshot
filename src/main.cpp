@@ -26,10 +26,8 @@
 #include <QSharedMemory>
 #include <QTimer>
 #include <QTranslator>
-#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
-#include "abstractlogger.h"
+#if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
 #include "src/core/flameshotdbusadapter.h"
-#include <QApplication>
 #include <QDBusConnection>
 #include <QDBusMessage>
 #include <desktopinfo.h>
@@ -76,7 +74,7 @@ int requestCaptureAndWait(const CaptureRequest& req)
 #else
         // if this instance is not daemon, make sure it exit after caputre finish
         if (FlameshotDaemon::instance() == nullptr && !Flameshot::instance()->haveExternalWidget()) {
-            qApp->exit(0);
+            qApp->exit(E_OK);
         }
 #endif
     });
@@ -87,7 +85,7 @@ int requestCaptureAndWait(const CaptureRequest& req)
             : AbstractLogger::Target::Default &
                 ~AbstractLogger::Target::Notification);
         AbstractLogger::info(logTarget) << "Screenshot aborted.";
-        qApp->exit(1);
+        qApp->exit(E_ABORTED);
     });
     return qApp->exec();
 }
@@ -103,6 +101,7 @@ QSharedMemory* guiMutexLock()
     shm = new QSharedMemory(key);
 #endif
     if (!shm->create(1)) {
+        delete shm;
         return nullptr;
     }
     return shm;
@@ -113,31 +112,60 @@ void configureTranslation(QTranslator& translator, QTranslator& qtTranslator)
     bool foundTranslation;
     // Configure translations
     for (const QString& path : PathInfo::translationsPaths()) {
-        foundTranslation =
-          translator.load(QLocale(),
-                          QStringLiteral("Internationalization"),
-                          QStringLiteral("_"),
-                          path);
+        if (ConfigHandler().uiLanguage() == QStringLiteral("auto")) {
+            // Load language, which was detected from the system
+            foundTranslation =
+              translator.load(QLocale(),
+                              QStringLiteral("Internationalization"),
+                              QStringLiteral("_"),
+                              path);
+        } else {
+            // Load language from settings
+            foundTranslation =
+              translator.load(QStringLiteral("Internationalization_") +
+                                ConfigHandler().uiLanguage(),
+                              path);
+        }
         if (foundTranslation) {
             break;
         }
     }
     if (!foundTranslation) {
-        QLocale l;
-        qWarning() << QStringLiteral("No Flameshot translation found for %1")
-                        .arg(l.uiLanguages().join(", "));
+        if (ConfigHandler().uiLanguage() == QStringLiteral("auto")) {
+            QLocale l;
+            qWarning() << QStringLiteral(
+                            "No Flameshot translation found for %1")
+                            .arg(l.uiLanguages().join(", "));
+        } else {
+            qWarning() << QStringLiteral(
+                            "No Flameshot translation found for %1")
+                            .arg(ConfigHandler().uiLanguage());
+        }
     }
 
-    foundTranslation =
-      qtTranslator.load(QLocale::system(),
-                        "qt",
-                        "_",
-                        QLibraryInfo::path(QLibraryInfo::TranslationsPath));
-    if (!foundTranslation) {
-        qWarning() << QStringLiteral("No Qt translation found for %1")
-                        .arg(QLocale::languageToString(
-                          QLocale::system().language()));
+    if (ConfigHandler().uiLanguage() == QStringLiteral("auto")) {
+        foundTranslation =
+          qtTranslator.load(QLocale::system(),
+                            "qt",
+                            "_",
+                            QLibraryInfo::path(QLibraryInfo::TranslationsPath));
+    } else {
+        foundTranslation = qtTranslator.load(
+          QStringLiteral("qt_") + ConfigHandler().uiLanguage(),
+
+          QLibraryInfo::path(QLibraryInfo::TranslationsPath));
     }
+    if (!foundTranslation) {
+        if (ConfigHandler().uiLanguage() == QStringLiteral("auto")) {
+            qWarning() << QStringLiteral("No Qt translation found for %1")
+                            .arg(QLocale::languageToString(
+                              QLocale::system().language()));
+        } else {
+            qWarning() << QStringLiteral("No Qt translation found for %1")
+                            .arg(ConfigHandler().uiLanguage());
+        }
+    }
+
     qApp->installTranslator(&translator);
     qApp->installTranslator(&qtTranslator);
 }
@@ -191,7 +219,8 @@ int main(int argc, char* argv[])
         setup_unix_signal_handlers();
         auto signalDaemon = SignalDaemon();
 #endif
-        auto kdsa = KDSingleApplication(QStringLiteral("flameshot"));
+        auto kdsa =
+          KDSingleApplication(QStringLiteral("org.flameshot.Flameshot"));
 
         if (!kdsa.isPrimaryInstance()) {
             return 0; // Quit
@@ -201,6 +230,17 @@ int main(int argc, char* argv[])
         configureApp(true, translator, qtTranslator);
         auto c = Flameshot::instance();
         FlameshotDaemon::start();
+
+#if defined(USE_KDSINGLEAPPLICATION) &&                                        \
+  (defined(Q_OS_MACOS) || defined(Q_OS_WIN))
+        if (kdsa.isPrimaryInstance()) {
+            QObject::connect(
+              &kdsa,
+              &KDSingleApplication::messageReceived,
+              FlameshotDaemon::instance(),
+              &FlameshotDaemon::messageReceivedFromSecondaryInstance);
+        }
+#endif
 
 #if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
         new FlameshotDBusAdapter(c);
