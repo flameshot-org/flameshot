@@ -1,7 +1,6 @@
 @echo off
 setlocal enabledelayedexpansion
-
-REM 设置 VS2022 的开发者命令行环境
+::设置 VS2022 的开发者命令行环境
 CALL "%ProgramFiles%\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvars64.bat"
 
 REM 创建构建目录
