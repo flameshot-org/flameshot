@@ -75,6 +75,7 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
   , m_xywhDisplay(false)
   , m_existingObjectIsChanged(false)
   , m_startMove(false)
+  , m_clipboardWorkaroundDone(false)
 
 {
     m_undoStack.setUndoLimit(ConfigHandler().undoLimit());
@@ -602,6 +603,41 @@ void CaptureWidget::uncheckActiveTool()
     releaseActiveTool();
     updateSelectionState();
     updateCursor();
+}
+
+void CaptureWidget::closeEvent(QCloseEvent* event)
+{
+#if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
+    /* GNOME copy problem workaround, copy
+       operation seems to work only when there
+       is a visible window to retrieve the
+       data from. On GNOME, the GUI should
+       handle the copy operation, not the
+       daemon.
+    */
+    const bool copyRequested =
+      (m_context.request.tasks() & CaptureRequest::COPY);
+
+    if (m_captureDone && copyRequested) {
+        DesktopInfo desktopInfo;
+        const bool needGnomeWorkaround =
+          desktopInfo.waylandDetected() &&
+          desktopInfo.windowManager() == DesktopInfo::GNOME;
+
+        if (needGnomeWorkaround && !m_clipboardWorkaroundDone) {
+            event->ignore();
+            m_clipboardWorkaroundDone = true;
+            m_context.request.removeTask(CaptureRequest::COPY);
+            AbstractLogger::info()
+              << "GNOME Wayland detected; keeping capture window alive until "
+                 "clipboard data is fetched.";
+            saveToClipboardGnomeWorkaround(pixmap(), this);
+            return;
+        }
+    }
+#endif
+
+    QWidget::closeEvent(event);
 }
 
 void CaptureWidget::paintEvent(QPaintEvent* paintEvent)

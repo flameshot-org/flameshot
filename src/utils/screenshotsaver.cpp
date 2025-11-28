@@ -25,9 +25,12 @@
 #include <QBuffer>
 #include <QClipboard>
 #include <QFileDialog>
+#include <QGuiApplication>
 #include <QMessageBox>
 #include <QMimeData>
+#include <QPointer>
 #include <QStandardPaths>
+#include <QTimer>
 #include <qimagewriter.h>
 #include <qmimedatabase.h>
 #if defined(Q_OS_MACOS)
@@ -215,6 +218,80 @@ void saveToClipboard(const QPixmap& capture)
         QApplication::clipboard()->setPixmap(capture);
 #endif
     }
+}
+
+class ClipboardWatcherMimeData : public QMimeData
+{
+public:
+    ClipboardWatcherMimeData(const QImage& img, QWidget* owner)
+      : m_image(img)
+      , m_owner(owner)
+    {}
+
+protected:
+    QStringList formats() const override
+    {
+        return { QStringLiteral("image/png"),
+                 QStringLiteral("application/x-qt-image") };
+    }
+
+    QVariant retrieveData(const QString& mimeType,
+                          QMetaType type) const override
+    {
+        if (mimeType == QLatin1String("application/x-qt-image")) {
+            notifyOwner();
+            return QVariant::fromValue(m_image);
+        }
+        if (mimeType == QLatin1String("image/png")) {
+            QByteArray ba;
+            QBuffer buffer(&ba);
+            buffer.open(QIODevice::WriteOnly);
+            m_image.save(&buffer, "PNG");
+            notifyOwner();
+            return ba;
+        }
+        auto result = QMimeData::retrieveData(mimeType, type);
+        if (result.isValid())
+            notifyOwner();
+        return result;
+    }
+
+private:
+    void notifyOwner() const
+    {
+        if (m_notified || m_owner.isNull())
+            return;
+        m_notified = true;
+        AbstractLogger::info() << QObject::tr("Capture saved to clipboard.");
+        QPointer<QWidget> guard = m_owner;
+        QTimer::singleShot(0, [guard]() {
+            if (guard)
+                guard->close();
+        });
+    }
+
+    QImage m_image;
+    mutable bool m_notified{ false };
+    QPointer<QWidget> m_owner;
+};
+
+bool saveToClipboardGnomeWorkaround(const QPixmap& pixmap, QWidget* keepAlive)
+{
+    auto* mimeData = new ClipboardWatcherMimeData(pixmap.toImage(), keepAlive);
+    QClipboard* clipboard = QGuiApplication::clipboard();
+    clipboard->setMimeData(mimeData);
+
+    keepAlive->hide();
+
+    // Safety net: force close after 500ms if compositor never fetches
+    QTimer::singleShot(500, keepAlive, [keepAlive]() {
+        qWarning() << "GNOME workaround timed out, compositor did not request "
+                      "clipboard data within 500ms. Force closing.";
+        if (keepAlive)
+            keepAlive->close();
+    });
+
+    return true;
 }
 
 bool saveToFilesystemGUI(const QPixmap& capture)
