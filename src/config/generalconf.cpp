@@ -688,14 +688,20 @@ void GeneralConf::initUseJpgForClipboard()
 {
     m_useJpgForClipboard =
       new QCheckBox(tr("Use JPG format for clipboard (PNG default)"), this);
+
+#ifdef Q_OS_WIN
+    ConfigHandler().setUseJpgForClipboard(false);
+    m_useJpgForClipboard->setVisible(false);
+#else
     m_useJpgForClipboard->setToolTip(
       tr("Use lossy JPG format for clipboard (lossless PNG default)"));
-    m_scrollAreaLayout->addWidget(m_useJpgForClipboard);
-
     connect(m_useJpgForClipboard,
             &QCheckBox::clicked,
             this,
             &GeneralConf::useJpgForClipboardChanged);
+#endif
+
+    m_scrollAreaLayout->addWidget(m_useJpgForClipboard);
 }
 
 void GeneralConf::saveAfterCopyChanged(bool checked)
