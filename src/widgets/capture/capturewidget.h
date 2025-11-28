@@ -110,6 +110,7 @@ protected:
     void resizeEvent(QResizeEvent* resizeEvent) override;
     void moveEvent(QMoveEvent* moveEvent) override;
     void changeEvent(QEvent* changeEvent) override;
+    void closeEvent(QCloseEvent* event) override;
 
 private:
     void pushObjectsStateToUndoStack();
@@ -229,4 +230,6 @@ private:
     // Grid
     bool m_displayGrid{ false };
     int m_gridSize{ 10 };
+
+    bool m_clipboardWorkaroundDone{ false };
 };
