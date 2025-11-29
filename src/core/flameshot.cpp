@@ -382,11 +382,10 @@ void Flameshot::exportCapture(const QPixmap& capture,
         QByteArray byteArray;
         QBuffer buffer(&byteArray);
         capture.save(&buffer, "PNG");
-        QFile file;
-        file.open(stdout, QIODevice::WriteOnly);
-
-        file.write(byteArray);
-        file.close();
+        if (QFile file; file.open(stdout, QIODevice::WriteOnly)) {
+            file.write(byteArray);
+            file.close();
+        }
     }
 
     if (tasks & CR::SAVE) {
