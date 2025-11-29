@@ -918,7 +918,7 @@ void CaptureWidget::mouseDoubleClickEvent(QMouseEvent* event)
             drawToolsData();
             updateLayersPanel();
             handleToolSignal(CaptureTool::REQ_ADD_CHILD_WIDGET);
-            if (!m_activeTool.isNull()){
+            if (!m_activeTool.isNull()) {
                 m_panel->setToolWidget(m_activeTool->configurationWidget());
             }
         }
