@@ -44,7 +44,7 @@ bool saveToFilesystem(const QPixmap& capture,
     QString completePath = FileNameHandler().properScreenshotPath(
       path, ConfigHandler().saveAsFileExtension());
     QFile file{ completePath };
-    bool okay= false;
+    bool okay = false;
 
     if (file.open(QIODevice::WriteOnly)) {
         QString saveExtension;
@@ -66,7 +66,8 @@ bool saveToFilesystem(const QPixmap& capture,
             AbstractLogger::info().attachNotificationPath(notificationPath)
               << saveMessage;
         } else {
-            saveMessage += QObject::tr("Error trying to save as ") + completePath;
+            saveMessage +=
+              QObject::tr("Error trying to save as ") + completePath;
             if (file.error() != QFile::NoError) {
                 saveMessage += ": " + file.errorString();
             }
@@ -335,7 +336,8 @@ bool saveToFilesystemGUI(const QPixmap& capture)
         }
 
         if (okay) {
-            // Don't use QDir::separator() here, as Qt internally always uses '/'
+            // Don't use QDir::separator() here, as Qt internally always uses
+            // '/'
             QString pathNoFile = savePath.left(savePath.lastIndexOf('/'));
 
             ConfigHandler().setSavePath(pathNoFile);
@@ -348,7 +350,8 @@ bool saveToFilesystemGUI(const QPixmap& capture)
                 savePath.replace('/', '\\');
 #endif
                 FlameshotDaemon::copyToClipboard(
-                  savePath, QObject::tr("Path copied to clipboard as ") + savePath);
+                  savePath,
+                  QObject::tr("Path copied to clipboard as ") + savePath);
             }
 
         } else {
