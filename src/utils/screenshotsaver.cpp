@@ -44,37 +44,38 @@ bool saveToFilesystem(const QPixmap& capture,
     QString completePath = FileNameHandler().properScreenshotPath(
       path, ConfigHandler().saveAsFileExtension());
     QFile file{ completePath };
-    file.open(QIODevice::WriteOnly);
+    bool okay = false;
 
-    bool okay;
-    QString saveExtension;
-    saveExtension = QFileInfo(completePath).suffix().toLower();
-    if (saveExtension == "jpg" || saveExtension == "jpeg") {
-        okay = capture.save(&file, nullptr, ConfigHandler().jpegQuality());
-    } else {
-        okay = capture.save(&file);
-    }
-
-    QString saveMessage = messagePrefix;
-    QString notificationPath = completePath;
-    if (!saveMessage.isEmpty()) {
-        saveMessage += " ";
-    }
-
-    if (okay) {
-        saveMessage += QObject::tr("Capture saved as ") + completePath;
-        AbstractLogger::info().attachNotificationPath(notificationPath)
-          << saveMessage;
-    } else {
-        saveMessage += QObject::tr("Error trying to save as ") + completePath;
-        if (file.error() != QFile::NoError) {
-            saveMessage += ": " + file.errorString();
+    if (file.open(QIODevice::WriteOnly)) {
+        QString saveExtension;
+        saveExtension = QFileInfo(completePath).suffix().toLower();
+        if (saveExtension == "jpg" || saveExtension == "jpeg") {
+            okay = capture.save(&file, nullptr, ConfigHandler().jpegQuality());
+        } else {
+            okay = capture.save(&file);
         }
-        notificationPath = "";
-        AbstractLogger::error().attachNotificationPath(notificationPath)
-          << saveMessage;
-    }
 
+        QString saveMessage = messagePrefix;
+        QString notificationPath = completePath;
+        if (!saveMessage.isEmpty()) {
+            saveMessage += " ";
+        }
+
+        if (okay) {
+            saveMessage += QObject::tr("Capture saved as ") + completePath;
+            AbstractLogger::info().attachNotificationPath(notificationPath)
+              << saveMessage;
+        } else {
+            saveMessage +=
+              QObject::tr("Error trying to save as ") + completePath;
+            if (file.error() != QFile::NoError) {
+                saveMessage += ": " + file.errorString();
+            }
+            notificationPath = "";
+            AbstractLogger::error().attachNotificationPath(notificationPath)
+              << saveMessage;
+        }
+    }
     return okay;
 }
 
@@ -325,44 +326,46 @@ bool saveToFilesystemGUI(const QPixmap& capture)
     }
 
     QFile file{ savePath };
-    file.open(QIODevice::WriteOnly);
+    if (file.open(QIODevice::WriteOnly)) {
+        QString saveExtension;
+        saveExtension = QFileInfo(savePath).suffix().toLower();
+        if (saveExtension == "jpg" || saveExtension == "jpeg") {
+            okay = capture.save(&file, nullptr, ConfigHandler().jpegQuality());
+        } else {
+            okay = capture.save(&file);
+        }
 
-    QString saveExtension;
-    saveExtension = QFileInfo(savePath).suffix().toLower();
-    if (saveExtension == "jpg" || saveExtension == "jpeg") {
-        okay = capture.save(&file, nullptr, ConfigHandler().jpegQuality());
-    } else {
-        okay = capture.save(&file);
-    }
+        if (okay) {
+            // Don't use QDir::separator() here, as Qt internally always uses
+            // '/'
+            QString pathNoFile = savePath.left(savePath.lastIndexOf('/'));
 
-    if (okay) {
-        // Don't use QDir::separator() here, as Qt internally always uses '/'
-        QString pathNoFile = savePath.left(savePath.lastIndexOf('/'));
+            ConfigHandler().setSavePath(pathNoFile);
 
-        ConfigHandler().setSavePath(pathNoFile);
+            QString msg = QObject::tr("Capture saved as ") + savePath;
+            AbstractLogger().attachNotificationPath(savePath) << msg;
 
-        QString msg = QObject::tr("Capture saved as ") + savePath;
-        AbstractLogger().attachNotificationPath(savePath) << msg;
-
-        if (config.copyPathAfterSave()) {
+            if (config.copyPathAfterSave()) {
 #ifdef Q_OS_WIN
-            savePath.replace('/', '\\');
+                savePath.replace('/', '\\');
 #endif
-            FlameshotDaemon::copyToClipboard(
-              savePath, QObject::tr("Path copied to clipboard as ") + savePath);
+                FlameshotDaemon::copyToClipboard(
+                  savePath,
+                  QObject::tr("Path copied to clipboard as ") + savePath);
+            }
+
+        } else {
+            QString msg = QObject::tr("Error trying to save as ") + savePath;
+
+            if (file.error() != QFile::NoError) {
+                msg += ": " + file.errorString();
+            }
+
+            QMessageBox saveErrBox(
+              QMessageBox::Warning, QObject::tr("Save Error"), msg);
+            saveErrBox.setWindowIcon(QIcon(GlobalValues::iconPath()));
+            saveErrBox.exec();
         }
-
-    } else {
-        QString msg = QObject::tr("Error trying to save as ") + savePath;
-
-        if (file.error() != QFile::NoError) {
-            msg += ": " + file.errorString();
-        }
-
-        QMessageBox saveErrBox(
-          QMessageBox::Warning, QObject::tr("Save Error"), msg);
-        saveErrBox.setWindowIcon(QIcon(GlobalValues::iconPath()));
-        saveErrBox.exec();
     }
 
     return okay;
