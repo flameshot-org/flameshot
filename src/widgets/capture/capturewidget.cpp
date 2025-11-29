@@ -918,7 +918,9 @@ void CaptureWidget::mouseDoubleClickEvent(QMouseEvent* event)
             drawToolsData();
             updateLayersPanel();
             handleToolSignal(CaptureTool::REQ_ADD_CHILD_WIDGET);
-            m_panel->setToolWidget(m_activeTool->configurationWidget());
+            if (!m_activeTool.isNull()) {
+                m_panel->setToolWidget(m_activeTool->configurationWidget());
+            }
         }
     } else if (m_selection->geometry().contains(event->pos())) {
         if ((event->button() == Qt::LeftButton) &&
