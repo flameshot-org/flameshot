@@ -2,9 +2,7 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 #include "generalconf.h"
 #include "src/core/flameshot.h"
-#include "src/utils/abstractlogger.h"
 #include "src/utils/confighandler.h"
-#include "src/utils/logfile.h"
 #include <QCheckBox>
 #include <QComboBox>
 #include <QFile>
@@ -58,7 +56,6 @@ GeneralConf::GeneralConf(QWidget* parent)
     initAntialiasingPinZoom();
     initUndoLimit();
     initInsecurePixelate();
-    initLogToFile();
 #ifdef ENABLE_IMGUR
     initCopyAndCloseAfterUpload();
     initUploadWithoutConfirmation();
@@ -124,9 +121,6 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
     if (allowEmptySavePath || !config.savePath().isEmpty()) {
         m_savePath->setText(config.savePath());
     }
-    m_logToFile->setChecked(config.logToFile());
-    m_logFilePath->setText(config.logFilePath());
-
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
     m_showTray->setChecked(!config.disabledTrayIcon());
 #endif
@@ -250,7 +244,6 @@ void GeneralConf::resetConfiguration()
     if (reply == QMessageBox::Yes) {
         m_savePath->setText(
           QStandardPaths::writableLocation(QStandardPaths::PicturesLocation));
-        m_logFilePath->setText(LogFile::defaultLogFilePath());
         ConfigHandler().setDefaultSettings();
         _updateComponents(true);
     }
@@ -719,33 +712,6 @@ void GeneralConf::changeSavePath()
     }
 }
 
-void GeneralConf::changeLogFilePath()
-{
-    QString path = ConfigHandler().logFilePath();
-
-    if (path.isEmpty()) {
-        path = LogFile::defaultLogFilePath();
-    }
-
-    path = QFileDialog::getExistingDirectory(
-      this,
-      tr("Choose a Folder"),
-      path,
-      QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
-
-    if (!QFileInfo(path).isWritable()) {
-        QMessageBox::about(
-          this, tr("Error"), tr("Unable to write to directory."));
-        path = QString();
-    }
-
-    if (!path.isEmpty()) {
-        m_logFilePath->setText(path);
-        ConfigHandler().setLogFilePath(path);
-        LogFile::resetLogFile();
-    }
-}
-
 void GeneralConf::initCopyPathAfterSave()
 {
     m_copyPathAfterSave = new QCheckBox(tr("Copy file path after save"), this);
@@ -920,7 +886,7 @@ void GeneralConf::initInsecurePixelate()
 {
     m_insecurePixelate = new QCheckBox(tr("Insecure Pixelate"), this);
     m_insecurePixelate->setToolTip(
-      tr("Draw the pixelation effect in an insecure but more aesthetic way."));
+      tr("Draw the pixelation effect in an insecure but more asethetic way."));
     m_insecurePixelate->setChecked(ConfigHandler().insecurePixelate());
     m_scrollAreaLayout->addWidget(m_insecurePixelate);
 
@@ -928,70 +894,6 @@ void GeneralConf::initInsecurePixelate()
             &QCheckBox::clicked,
             this,
             &GeneralConf::setInsecurePixelate);
-}
-
-void GeneralConf::initLogToFile()
-{
-    auto* box = new QGroupBox(tr("Logging"));
-    box->setFlat(true);
-    m_layout->addWidget(box);
-
-    auto* vboxLayout = new QVBoxLayout();
-    box->setLayout(vboxLayout);
-
-    m_logToFile = new QCheckBox(tr("Log to file"), this);
-    m_logToFile->setToolTip(
-      tr("Save all log messages produced by flameshot to a file"));
-    m_logToFile->setChecked(ConfigHandler().logToFile());
-
-    connect(m_logToFile, &QCheckBox::clicked, this, &GeneralConf::setLogToFile);
-    vboxLayout->addWidget(m_logToFile);
-
-    auto* pathLayout = new QHBoxLayout();
-
-    QString path = ConfigHandler().logFilePath();
-    m_logFilePath = new QLineEdit(path, this);
-    m_logFilePath->setToolTip(
-      tr("The directory where log files will be saved"));
-    m_logFilePath->setDisabled(true);
-    QString foreground = this->palette().windowText().color().name();
-    m_logFilePath->setStyleSheet(QStringLiteral("color:%1").arg(foreground));
-    pathLayout->addWidget(m_logFilePath);
-
-    m_changeLogFilePathButton = new QPushButton(tr("Change..."), this);
-    pathLayout->addWidget(m_changeLogFilePathButton);
-    connect(m_changeLogFilePathButton,
-            &QPushButton::clicked,
-            this,
-            &GeneralConf::changeLogFilePath);
-
-    vboxLayout->addLayout(pathLayout);
-
-    auto* levelLayout = new QHBoxLayout();
-    auto* levelLabel = new QLabel(tr("Minimum Log Level"));
-    levelLabel->setToolTip(
-      tr("Specify the minimum severity level of log messages that "
-         "should be saved to disk"));
-    levelLayout->addWidget(levelLabel);
-
-    m_logFileLevel = new QComboBox(this);
-
-    m_logFileLevel->addItem(tr("Info (All Log Messages)"),
-                            AbstractLogger::Channel::Info);
-    m_logFileLevel->addItem(tr("Warnings and Errors"),
-                            AbstractLogger::Channel::Warning);
-    m_logFileLevel->addItem(tr("Errors"), AbstractLogger::Channel::Error);
-
-    auto level = ConfigHandler().value("logFileLevel").toInt();
-    m_logFileLevel->setCurrentIndex(m_logFileLevel->findData(level));
-
-    connect(
-      m_logFileLevel,
-      static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
-      this,
-      &GeneralConf::setLogFileLevel);
-    levelLayout->addWidget(m_logFileLevel);
-    vboxLayout->addLayout(levelLayout);
 }
 
 void GeneralConf::setSelGeoHideTime(int v)
@@ -1033,14 +935,4 @@ void GeneralConf::setReverseArrow(bool checked)
 void GeneralConf::setInsecurePixelate(bool checked)
 {
     ConfigHandler().setInsecurePixelate(checked);
-}
-
-void GeneralConf::setLogToFile(bool checked)
-{
-    ConfigHandler().setLogToFile(checked);
-}
-
-void GeneralConf::setLogFileLevel(int index)
-{
-    ConfigHandler().setValue("logFileLevel", m_logFileLevel->itemData(index));
 }
