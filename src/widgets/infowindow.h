@@ -27,7 +27,6 @@ protected:
 
 private slots:
     void copyInfo();
-    void openLogDir();
 };
 
 QString generateKernelString();
