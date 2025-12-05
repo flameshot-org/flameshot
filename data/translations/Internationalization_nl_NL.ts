@@ -21,7 +21,7 @@
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="105"/>
         <source>Remove</source>
-        <translation>Verwijder</translation>
+        <translation>Verwijderen</translation>
     </message>
 </context>
 <context>
@@ -34,7 +34,7 @@
     <message>
         <location filename="../../src/tools/accept/accepttool.cpp" line="41"/>
         <source>Accept the capture</source>
-        <translation>Accepteer de vangst</translation>
+        <translation>Opname accepteren</translation>
     </message>
 </context>
 <context>
@@ -174,7 +174,7 @@
         <location filename="../../src/widgets/capturelauncher.ui" line="51"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="179"/>
         <source>Capture Mode</source>
-        <translation>Opname mode</translation>
+        <translation>Opname-modus</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="80"/>
@@ -186,7 +186,7 @@
         <location filename="../../src/widgets/capturelauncher.ui" line="93"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="183"/>
         <source>WxH+x+y</source>
-        <translation>WxH+x+y</translation>
+        <translation>BxH+x+y</translation>
     </message>
 </context>
 <context>
@@ -204,7 +204,7 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="456"/>
         <source>Select screenshot area</source>
-        <translation>Selecteer schermopname gebied</translation>
+        <translation>Schermfotogebied selecteren</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="470"/>
@@ -229,7 +229,7 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="473"/>
         <source>Open side panel</source>
-        <translation>Open zijpaneel</translation>
+        <translation>Zijpaneel openen</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="474"/>
@@ -244,17 +244,17 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="515"/>
         <source>Quit Capture</source>
-        <translation type="unfinished"></translation>
+        <translation>Opname beëindigen</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="516"/>
         <source>Are you sure you want to quit capture?</source>
-        <translation type="unfinished"></translation>
+        <translation>Opname beëindigen?</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="521"/>
         <source>Do not show this again</source>
-        <translation type="unfinished"></translation>
+        <translation>Laat dit niet meer zien</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="727"/>
@@ -264,7 +264,7 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="733"/>
         <source>Configuration error resolved. Launch `flameshot gui` again to apply it.</source>
-        <translation>Configuratie fout opgelost. Start `flameshot gui` opnieuw om het toe te passen.</translation>
+        <translation>Configuratiefout opgelost. Start `flameshot gui` opnieuw om het toe te passen.</translation>
     </message>
     <message>
         <source>Select an area with the mouse, or press Esc to exit.
@@ -372,12 +372,12 @@ Druk op spatie om het zijpaneel te openen.</translation>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="58"/>
         <source>Accept color</source>
-        <translation>Accepteer kleur</translation>
+        <translation>Kleur accepteren</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="58"/>
         <source>Enter or Left Click</source>
-        <translation>Enter or Left Click</translation>
+        <translation>Enter of Linkermuisknop</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="59"/>
@@ -387,7 +387,7 @@ Druk op spatie om het zijpaneel te openen.</translation>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="59"/>
         <source>Hold Left Click</source>
-        <translation>Hold Left Click</translation>
+        <translation>Linkermuisknop ingedrukt houden</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="60"/>
@@ -397,17 +397,17 @@ Druk op spatie om het zijpaneel te openen.</translation>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="60"/>
         <source>Space or Right Click</source>
-        <translation>Space or Right Click</translation>
+        <translation>Spatie of Rechtermuisknop</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="61"/>
         <source>Cancel</source>
-        <translation>Annuleer</translation>
+        <translation>Annuleren</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="61"/>
         <source>Esc</source>
-        <translation type="unfinished">Esc</translation>
+        <translation>Esc</translation>
     </message>
 </context>
 <context>
@@ -423,27 +423,27 @@ Druk op spatie om het zijpaneel te openen.</translation>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="40"/>
         <source>Edit Preset:</source>
-        <translation>Edit Preset:</translation>
+        <translation>Voorinstelling bewerken:</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="45"/>
         <source>Enter color to update preset</source>
-        <translation>Enter color to update preset</translation>
+        <translation>Kleur invoeren om de voorinstelling bij te werken</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="65"/>
         <source>Update</source>
-        <translation type="unfinished">Bijwerken</translation>
+        <translation>Bijwerken</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="67"/>
         <source>Press button to update the selected preset</source>
-        <translation>Press button to update the selected preset</translation>
+        <translation>Druk op de knop om de geselecteerde voorinstelling bij te werken</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="74"/>
         <source>Delete</source>
-        <translation>Verwijder</translation>
+        <translation>Verwijderen</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="76"/>
@@ -492,7 +492,7 @@ Druk op spatie om het zijpaneel te openen.</translation>
     <message>
         <location filename="../../src/config/configerrordetails.cpp" line="20"/>
         <source>Configuration errors</source>
-        <translation>Configuratie fouten</translation>
+        <translation>Configuratiefouten</translation>
     </message>
 </context>
 <context>
@@ -528,12 +528,12 @@ Druk op spatie om het zijpaneel te openen.</translation>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="717"/>
         <source>You have successfully resolved the configuration error.</source>
-        <translation>U hebt de configuratiefout met succes opgelost.</translation>
+        <translation>Configuratiefout met succes opgelost.</translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="740"/>
         <source>The configuration contains an error. Open configuration to resolve.</source>
-        <translation>De configuratie bevat een fout. Open de configuratie om op te lossen.</translation>
+        <translation>De configuratie bevat een fout. Open de configuratie om dit op te lossen.</translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="794"/>
@@ -556,7 +556,7 @@ Druk op spatie om het zijpaneel te openen.</translation>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="61"/>
         <source>Reset</source>
-        <translation>Terugstellen</translation>
+        <translation>Herstellen</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="63"/>
@@ -566,7 +566,7 @@ Druk op spatie om het zijpaneel te openen.</translation>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="77"/>
         <source>Remove</source>
-        <translation>Verwijder</translation>
+        <translation>Verwijderen</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="79"/>
@@ -585,12 +585,12 @@ Los ze alstublieft handmatig op in het configuratiebestand.</translation>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="112"/>
         <source>Resolve all</source>
-        <translation>Los alles op</translation>
+        <translation>Alles oplossen</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="113"/>
         <source>Resolve all listed errors.</source>
-        <translation>Los alle vermelde fouten op.</translation>
+        <translation>Alle vermelde fouten oplossen.</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="125"/>
@@ -705,7 +705,7 @@ Los ze alstublieft handmatig op in het configuratiebestand.</translation>
     <message>
         <location filename="../../src/tools/copy/copytool.cpp" line="34"/>
         <source>Copy selection to clipboard</source>
-        <translation>Kopieer selectie naar klembord</translation>
+        <translation>Selectie naar klembord kopiëren</translation>
     </message>
     <message>
         <source>Copy the selection into the clipboard</source>
@@ -729,7 +729,7 @@ Los ze alstublieft handmatig op in het configuratiebestand.</translation>
     <message>
         <location filename="../../src/tools/exit/exittool.cpp" line="33"/>
         <source>Leave the capture screen</source>
-        <translation>Verlaat het vastlegscherm</translation>
+        <translation>Opnamescherm verlaten</translation>
     </message>
 </context>
 <context>
@@ -737,7 +737,7 @@ Los ze alstublieft handmatig op in het configuratiebestand.</translation>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="24"/>
         <source>Edit the name of your captures:</source>
-        <translation>Bewerk de naam van je schermfoto&apos;s:</translation>
+        <translation>Naam van de schermfoto&apos;s bewerken:</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="28"/>
@@ -789,17 +789,17 @@ Los ze alstublieft handmatig op in het configuratiebestand.</translation>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="119"/>
         <source>Error</source>
-        <translation>Error</translation>
+        <translation>Fout</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="119"/>
         <source>Unable to close active modal widgets</source>
-        <translation type="unfinished">De actieve, modale widgets kunnen niet worden gesloten</translation>
+        <translation>Actieve widgets kunnen niet worden gesloten</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="431"/>
         <source>URL copied to clipboard.</source>
-        <translation type="unfinished">URL gekopieerd naar klembord.</translation>
+        <translation>URL gekopieerd naar klembord.</translation>
     </message>
 </context>
 <context>
@@ -807,17 +807,17 @@ Los ze alstublieft handmatig op in het configuratiebestand.</translation>
     <message>
         <location filename="../../src/core/flameshotdaemon.cpp" line="407"/>
         <source>New version %1 is available</source>
-        <translation type="unfinished">Er is een nieuwe versie beschikbaar: %1</translation>
+        <translation>Nieuwe versie %1 is beschikbaar</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshotdaemon.cpp" line="413"/>
         <source>You have the latest version</source>
-        <translation type="unfinished">Je beschikt over de nieuwste versie</translation>
+        <translation>Dit is de nieuwste versie</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshotdaemon.cpp" line="422"/>
         <source>Failed to get information about the latest version.</source>
-        <translation type="unfinished">Er kan geen versie-informatie worden opgehaald.</translation>
+        <translation>Kan geen informatie krijgen over de nieuwste versie.</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshotdaemon.cpp" line="445"/>
@@ -936,7 +936,7 @@ Los ze alstublieft handmatig op in het configuratiebestand.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="242"/>
         <source>Are you sure you want to reset the configuration?</source>
-        <translation>Weet je zeker dat je de standwaardwaarden van de configuratie wilt herstellen?</translation>
+        <translation>Weet u zeker dat u de standwaardwaarden van de configuratie wilt herstellen?</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="273"/>
@@ -973,7 +973,7 @@ Los ze alstublieft handmatig op in het configuratiebestand.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="367"/>
         <source>Confirmation required to delete screenshot from the latest uploads</source>
-        <translation>Schermfoto verwijderen uit recentste uploads bevestigen</translation>
+        <translation>Bevestiging vereist bij verwijdering van schermfoto uit recente uploads</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="382"/>
@@ -998,7 +998,7 @@ Los ze alstublieft handmatig op in het configuratiebestand.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="426"/>
         <source>Allow multiple flameshot GUI instances simultaneously</source>
-        <translation>Sta meerdere flameshot GUI instanties tegelijk toe</translation>
+        <translation>Meerdere instanties van flameshot GUI toestaan</translation>
     </message>
     <message>
         <source>This allows you to take screenshots of flameshot itself for example.</source>
@@ -1024,7 +1024,7 @@ Los ze alstublieft handmatig op in het configuratiebestand.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="491"/>
         <source>Use large predefined color palette</source>
-        <translation>Gebruik groot voorgedefinieerd kleurenpalet</translation>
+        <translation>Groot voorgedefinieerd kleurenpalet gebruiken</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="515"/>
@@ -1047,17 +1047,17 @@ Los ze alstublieft handmatig op in het configuratiebestand.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="274"/>
         <source>Show the help message at the beginning in the capture mode</source>
-        <translation>Toon het helpbericht aan het begin in de vastlegmodus</translation>
+        <translation>Toon het helpbericht aan het begin in de opnamemodus</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="284"/>
         <source>Use last region for GUI mode</source>
-        <translation type="unfinished">Use last region for GUI mode</translation>
+        <translation>Vorige gebied gebruiken bij GUI-modus</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="286"/>
         <source>Use the last region as the default selection for the next screenshot in GUI mode</source>
-        <translation type="unfinished">Use the last region as the default selection for the next screenshot in GUI mode</translation>
+        <translation>In GUI-modus het laatste gebied als standaardselectie voor de volgende schermfotogebied gebruiken</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="300"/>
@@ -1072,12 +1072,12 @@ Los ze alstublieft handmatig op in het configuratiebestand.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="323"/>
         <source>Show abort notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Meldingen van afbreking tonen</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="324"/>
         <source>Enable abort notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Meldingen van afbreking inschakelen</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="337"/>
@@ -1087,17 +1087,17 @@ Los ze alstublieft handmatig op in het configuratiebestand.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="350"/>
         <source>Use grim to capture screenshots</source>
-        <translation type="unfinished"></translation>
+        <translation>Grim gebruiken om schermfoto&apos;s te maken</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="352"/>
         <source>Grim is a wayland only utility to capture screens based on the screencopy protocol. Generally only enable on minimal wayland window managers like sway, hyprland, etc.</source>
-        <translation type="unfinished"></translation>
+        <translation>Grim is een hulpprogramma in Wayland om schermen vast te leggen op basis van het screencopy-protocol. Schakel het in principe alleen in op minimale wayland-vensterbeheerders zoals sway, hyprland, enz.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="370"/>
         <source>Ask for confirmation to delete screenshot from the latest uploads</source>
-        <translation>Vraag om bevestiging om screenshot te verwijderen van de laatste uploads</translation>
+        <translation>Om bevestiging vragen bij het verwijderen van schermfoto&apos;s van de laatste uploads</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="413"/>
@@ -1107,7 +1107,7 @@ Los ze alstublieft handmatig op in het configuratiebestand.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="427"/>
         <source>This allows you to take screenshots of Flameshot itself for example</source>
-        <translation>Hiermee kunt u screenshots maken van Flameshot zelf, bijvoorbeeld</translation>
+        <translation>Hiermee kunt u schermfoto&apos;s maken van Flameshot zelf, bijvoorbeeld</translation>
     </message>
     <message>
         <source>Launch Flameshot daemon when computer is booted</source>
@@ -1116,17 +1116,17 @@ Los ze alstublieft handmatig op in het configuratiebestand.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="466"/>
         <source>Show the welcome message box in the middle of the screen while taking a screenshot</source>
-        <translation>Toon de welkomstboodschap in het midden van het scherm tijdens het maken van een screenshot</translation>
+        <translation>Toon de welkomstboodschap in het midden van het scherm tijdens het maken van een schermfoto</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="493"/>
         <source>Use a large predefined color palette</source>
-        <translation>Gebruik een groot voorgedefinieerd kleurenpalet</translation>
+        <translation>Een groot voorgedefinieerd kleurenpalet gebruiken</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="503"/>
         <source>Copy on double click</source>
-        <translation>Copy on double click</translation>
+        <translation>Kopiëren met dubbelklik</translation>
     </message>
     <message>
         <source>Enable Copy on Double Click</source>
@@ -1139,47 +1139,47 @@ Los ze alstublieft handmatig op in het configuratiebestand.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="439"/>
         <source>Automatically unload from memory when it is not needed</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatisch uit het geheugen verwijderen wanneer het niet meer nodig is</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="440"/>
         <source>Automatically close daemon (background process) when it is not needed</source>
-        <translation type="unfinished"></translation>
+        <translation>Daemon (achtergrondproces) automatisch afsluiten wanneer deze niet meer nodig is</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="451"/>
         <source>Launch in background at startup</source>
-        <translation type="unfinished"></translation>
+        <translation>Bij systeemstart op de achtergrond starten</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="452"/>
         <source>Launch Flameshot daemon (background process) when computer is booted</source>
-        <translation type="unfinished"></translation>
+        <translation>Flameshot-daemon (achtergrondproces) starten wanneer de computer wordt opgestart</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="477"/>
         <source>Ask before quit capture</source>
-        <translation type="unfinished"></translation>
+        <translation>Beëindiging van opname bevestigen</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="480"/>
         <source>Show the confirmation prompt before ESC quit</source>
-        <translation type="unfinished"></translation>
+        <translation>Bevestigingsprompt tonen bij afbreken met ESC</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="505"/>
         <source>Enable Copy to clipboard on Double Click</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopiëren naar klembord met Dubbelklik inschakelen</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="517"/>
         <source>Copy URL after uploading was successful</source>
-        <translation type="unfinished"></translation>
+        <translation>URL kopiëren na uploaden was succesvol</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="529"/>
         <source>After copying the screenshot, save it to a file as well</source>
-        <translation>Nadat u de schermafbeelding hebt gekopieerd, slaat u deze ook op in een bestand</translation>
+        <translation>Schermfoto, na het kopiëren, ook opslaan in bestand</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="536"/>
@@ -1194,7 +1194,7 @@ Los ze alstublieft handmatig op in het configuratiebestand.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="560"/>
         <source>Use fixed path for screenshots to save</source>
-        <translation>Schermfoto&apos;s altijd opslaan op dezelfde locatie</translation>
+        <translation>Vaste locatie gebruiken voor het opslaan van schermfoto&apos;s</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="572"/>
@@ -1204,12 +1204,12 @@ Los ze alstublieft handmatig op in het configuratiebestand.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="601"/>
         <source>Latest Uploads Max Size</source>
-        <translation>Max. grootte van recentste uploads</translation>
+        <translation>Max. grootte van recente uploads</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="623"/>
         <source>Imgur Application Client ID</source>
-        <translation>Imgur Application Client ID</translation>
+        <translation>Imgur Application-Client-ID</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="654"/>
@@ -1224,7 +1224,7 @@ Los ze alstublieft handmatig op in het configuratiebestand.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="685"/>
         <source>Use lossy JPG format for clipboard (lossless PNG default)</source>
-        <translation type="unfinished"></translation>
+        <translation>Verliesgevend JPG-formaat gebruiken voor klembord (standaard verliesvrij PNG)</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="711"/>
@@ -1270,7 +1270,7 @@ Los ze alstublieft handmatig op in het configuratiebestand.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="773"/>
         <source>Enable a magnifier while selecting the screenshot area</source>
-        <translation>Een vergrootglas inschakelen bij het selecteren van het screenshotgebied</translation>
+        <translation>Vergrootglas inschakelen bij het selecteren van het schermfotogebied</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="784"/>
@@ -1285,82 +1285,82 @@ Los ze alstublieft handmatig op in het configuratiebestand.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="801"/>
         <source>Milliseconds before geometry display hides; 0 means do not hide</source>
-        <translation type="unfinished"></translation>
+        <translation>Milliseconden voordat de geometrieweergave zich verbergt; 0 betekent niet verbergen</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="804"/>
         <source>Set geometry display timeout (ms)</source>
-        <translation type="unfinished"></translation>
+        <translation>Dimmen van geometrieweergave (ms)</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="812"/>
         <source>Selection Geometry Display</source>
-        <translation type="unfinished"></translation>
+        <translation>Geometrieweergave</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="819"/>
         <source>Display Location</source>
-        <translation type="unfinished"></translation>
+        <translation>Locatie weergeven</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="822"/>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="823"/>
         <source>Top Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Linksboven</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="825"/>
         <source>Top Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Rechtsboven</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="827"/>
         <source>Bottom Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Linksonder</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="829"/>
         <source>Bottom Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Rechtsonder</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="831"/>
         <source>Center</source>
-        <translation type="unfinished"></translation>
+        <translation>Midden</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="856"/>
         <source>Quality range of 0-100; Higher number is better quality and larger file size</source>
-        <translation type="unfinished"></translation>
+        <translation>Kwaliteitsbereik van 0-100; Hogere waarde is betere kwaliteit en grotere bestandsgrootte</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="860"/>
         <source>JPEG Quality</source>
-        <translation type="unfinished"></translation>
+        <translation>JPEG-kwaliteit</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="871"/>
         <source>Reverse arrow</source>
-        <translation type="unfinished"></translation>
+        <translation>Pijl omkeren</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="872"/>
         <source>Draw the arrow head first</source>
-        <translation type="unfinished"></translation>
+        <translation>De pijlpunt eerst tekenen</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="881"/>
         <source>Insecure Pixelate</source>
-        <translation type="unfinished"></translation>
+        <translation>Onbeveiligde pixelvorming</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="883"/>
         <source>Draw the pixelation effect in an insecure but more asethetic way.</source>
-        <translation type="unfinished"></translation>
+        <translation>Teken het pixelvormingeffect op een onbeveiligde, maar meer esthetische wijze.</translation>
     </message>
 </context>
 <context>
@@ -1513,17 +1513,17 @@ Los ze alstublieft handmatig op in het configuratiebestand.</translation>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="175"/>
         <source>Screenshot copied to clipboard.</source>
-        <translation>Screenshot gekopieerd naar klembord.</translation>
+        <translation>Schermfoto gekopieerd naar klembord.</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="189"/>
         <source>Unable to save the screenshot to disk.</source>
-        <translation>Kan de schermafbeelding niet op schijf opslaan.</translation>
+        <translation>Kan de schermfoto niet op schijf opslaan.</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="192"/>
         <source>Screenshot saved.</source>
-        <translation>Screenshot bewaard.</translation>
+        <translation>Schermfoto opgeslagen.</translation>
     </message>
 </context>
 <context>
@@ -1797,37 +1797,37 @@ Los ze alstublieft handmatig op in het configuratiebestand.</translation>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="284"/>
         <source>Copy to clipboard</source>
-        <translation type="unfinished">Kopiëren naar klembord</translation>
+        <translation>Kopiëren naar klembord</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="291"/>
         <source>Save to file</source>
-        <translation>Save to file</translation>
+        <translation>Opslaan naar bestand</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="298"/>
         <source>Rotate Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Rechtsom roteren</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="303"/>
         <source>Rotate Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Linksom roteren</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="308"/>
         <source>Increase Opacity</source>
-        <translation type="unfinished"></translation>
+        <translation>Dekking vergroten</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="315"/>
         <source>Decrease Opacity</source>
-        <translation type="unfinished"></translation>
+        <translation>Dekking verminderen</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="322"/>
         <source>Close</source>
-        <translation type="unfinished">Sluiten</translation>
+        <translation>Sluiten</translation>
     </message>
 </context>
 <context>
@@ -1840,7 +1840,7 @@ Los ze alstublieft handmatig op in het configuratiebestand.</translation>
     <message>
         <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="37"/>
         <source>Set Pixelate as the paint tool.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pixelvorming als werktuig instellen.</translation>
     </message>
     <message>
         <source>Set Pixelate as the paint tool</source>
@@ -1852,12 +1852,12 @@ Los ze alstublieft handmatig op in het configuratiebestand.</translation>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/primaryinstancewidget.cpp" line="21"/>
         <source>Primary instance</source>
-        <translation type="unfinished"></translation>
+        <translation>Primaire instantie</translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/primaryinstancewidget.cpp" line="22"/>
         <source>&lt;b&gt;Primary instance.&lt;/b&gt; Messages received from secondaries:</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Primaire instantie.&lt;/b&gt; Berichten ontvangen van secundaire instanties:</translation>
     </message>
 </context>
 <context>
@@ -1935,7 +1935,7 @@ Los ze alstublieft handmatig op in het configuratiebestand.</translation>
     <message>
         <location filename="../../src/main.cpp" line="237"/>
         <source>Powerful yet simple to use screenshot software.</source>
-        <translation>Eenvoudig doch krachtig schermfotoprogramma.</translation>
+        <translation>Krachtige doch eenvoudige software voor schermfoto&apos;s.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="238"/>
@@ -1972,12 +1972,12 @@ Los ze alstublieft handmatig op in het configuratiebestand.</translation>
     <message>
         <location filename="../../src/main.cpp" line="242"/>
         <source>Capture screenshot of all monitors at the same time.</source>
-        <translation type="unfinished"></translation>
+        <translation>Schermfoto maken van alle beeldschermen tegelijk.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="252"/>
         <source>Capture a screenshot of the specified monitor.</source>
-        <translation type="unfinished"></translation>
+        <translation>Schermfoto maken van het gespecialiseerde beeldscherm.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="257"/>
@@ -1997,7 +1997,7 @@ Los ze alstublieft handmatig op in het configuratiebestand.</translation>
     <message>
         <location filename="../../src/main.cpp" line="264"/>
         <source>Upload screenshot</source>
-        <translation>Upload screenshot</translation>
+        <translation>Schermfoto uploaden</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="266"/>
@@ -2007,12 +2007,12 @@ Los ze alstublieft handmatig op in het configuratiebestand.</translation>
     <message>
         <location filename="../../src/main.cpp" line="271"/>
         <source>Repeat screenshot with previously selected region</source>
-        <translation>Repeat screenshot with previously selected region</translation>
+        <translation>Schermfoto herhalen met voorgaande gebied</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="274"/>
         <source>Screenshot region to select</source>
-        <translation>Screenshot regio te selecteren</translation>
+        <translation>Te selecteren schermfotogebied</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="277"/>
@@ -2037,7 +2037,7 @@ Los ze alstublieft handmatig op in het configuratiebestand.</translation>
     <message>
         <location filename="../../src/main.cpp" line="291"/>
         <source>Enable or disable the notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Meldingen in- of uitschakelen</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="294"/>
@@ -2151,12 +2151,12 @@ Mogelijk moet je het &apos;#&apos;-teken insluiten. Voorbeeld: &apos;\#FFF&apos;
     <message>
         <location filename="../../src/core/flameshot.cpp" line="156"/>
         <source>Requested screen exceeds screen count</source>
-        <translation>Requested screen exceeds screen count</translation>
+        <translation>Opgevraagd scherm overschrijdt het aantal schermen</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="408"/>
         <source>Full screen screenshot pinned to screen</source>
-        <translation>Schermvullende schermafbeelding vastgepind op scherm</translation>
+        <translation>Volledige schermfoto op scherm vastgemaakt</translation>
     </message>
     <message>
         <source>URL copied to clipboard.</source>
@@ -2178,12 +2178,12 @@ Mogelijk moet je het &apos;#&apos;-teken insluiten. Voorbeeld: &apos;\#FFF&apos;
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="68"/>
         <source>Subcommands</source>
-        <translation type="unfinished"></translation>
+        <translation>Nevenopdrachten</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="328"/>
         <source>subcommands</source>
-        <translation type="unfinished"></translation>
+        <translation>nevenopdrachten</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="329"/>
@@ -2203,7 +2203,7 @@ Mogelijk moet je het &apos;#&apos;-teken insluiten. Voorbeeld: &apos;\#FFF&apos;
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="71"/>
         <source>Hello, I&apos;m here! Click icon in the tray to take a screenshot or click with a right button to see more options.</source>
-        <translation>Hallo, hier ben ik! Klik op het systeemvakpictogram om een schermfoto te maken of rechtsklik om meer opties te tonen.</translation>
+        <translation>Hallo, hier ben ik! Klik op het pictogram in het systeemvak om een schermfoto te maken of gebruik de rechtermuisknop voor meer opties.</translation>
     </message>
     <message>
         <source>Toggle side panel</source>
@@ -2261,7 +2261,7 @@ Mogelijk moet je het &apos;#&apos;-teken insluiten. Voorbeeld: &apos;\#FFF&apos;
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="207"/>
         <source>Screenshot history</source>
-        <translation>Schermfotogeschiedenis</translation>
+        <translation>Laatste schermfoto&apos;s</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="211"/>
@@ -2320,7 +2320,7 @@ Mogelijk moet je het &apos;#&apos;-teken insluiten. Voorbeeld: &apos;\#FFF&apos;
     <message>
         <location filename="../../src/tools/save/savetool.cpp" line="34"/>
         <source>Save screenshot to a file</source>
-        <translation>Screenshot opslaan als bestand</translation>
+        <translation>Schermfoto opslaan naar bestand</translation>
     </message>
     <message>
         <source>Save the capture</source>
@@ -2336,27 +2336,27 @@ Mogelijk moet je het &apos;#&apos;-teken insluiten. Voorbeeld: &apos;\#FFF&apos;
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="53"/>
         <source>The universal wayland screen capture adapter requires Grim as the screen capture component of wayland. If the screen capture component is missing, please install it!</source>
-        <translation type="unfinished"></translation>
+        <translation>De universele wayland schermopname-adapter vereist Grim als de schermopname-component van wayland. Als de component voor het vastleggen van het scherm ontbreekt, installeer deze dan!</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="171"/>
         <source>If the useGrimAdapter setting is not enabled, the dbus protocol will be used. It should be noted that using the dbus protocol under wayland is not recommended. It is recommended to enable the useGrimAdapter setting in flameshot.ini to activate the grim-based general wayland screenshot adapter</source>
-        <translation type="unfinished"></translation>
+        <translation>Als de instelling useGrimAdapter niet is ingeschakeld, wordt het dbus-protocol gebruikt. Let op dat het gebruik van het dbus-protocol onder wayland wordt aangeraden. Het advies is om in flameshot.ini de instelling useGrimAdapter in te schakelen om de grim-based algemene wayland schermfoto-adapter te activeren</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="182"/>
         <source>grim&apos;s screenshot component is implemented based on wlroots, it may not be used in GNOME or similar desktop environments</source>
-        <translation type="unfinished"></translation>
+        <translation>de schermafdrukcomponent van grim is geïmplementeerd op basis van wlroots en kan niet worden gebruikt in GNOME of vergelijkbare desktopomgevingen</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="194"/>
         <source>Unable to detect desktop environment (GNOME? KDE? Qile? Sway? ...)</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan desktopomgeving niet detecteren (GNOME? KDE? Qile? Sway? ...)</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="197"/>
         <source>Hint: try setting the XDG_CURRENT_DESKTOP environment variable.</source>
-        <translation>Hint: try setting the XDG_CURRENT_DESKTOP environment variable.</translation>
+        <translation>Tip: stel de omgevingsvariabele XDG_CURRENT_DESKTOP in.</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="202"/>
@@ -2369,32 +2369,32 @@ Mogelijk moet je het &apos;#&apos;-teken insluiten. Voorbeeld: &apos;\#FFF&apos;
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="26"/>
         <source>Secondary instance</source>
-        <translation type="unfinished"></translation>
+        <translation>Secundaire instantie</translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="27"/>
         <source>&lt;b&gt;Secondary instance.&lt;/b&gt; Send message to primary:</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Secundaire instantie.&lt;/b&gt; Bericht verzenden naar primaire:</translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="29"/>
         <source>Type something here...</source>
-        <translation type="unfinished"></translation>
+        <translation>Typ hier iets...</translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="31"/>
         <source>&amp;Send</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Verzenden</translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="54"/>
         <source>Error sending message</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout bij verzenden bericht</translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="55"/>
         <source>The message &apos;%1&apos; could not be sent to the primary.</source>
-        <translation type="unfinished"></translation>
+        <translation>Het bericht &apos;%1&apos; kon niet naar de primaire instantie worden verzonden.</translation>
     </message>
 </context>
 <context>
@@ -2464,97 +2464,97 @@ Mogelijk moet je het &apos;#&apos;-teken insluiten. Voorbeeld: &apos;\#FFF&apos;
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="162"/>
         <source>Left Double-click</source>
-        <translation>Left Double-click</translation>
+        <translation>Linker dubbelklik</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="169"/>
         <source>Toggle side panel</source>
-        <translation type="unfinished">Zijpaneel in-/uitklappen</translation>
+        <translation>Zijpaneel in-/uitklappen</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="170"/>
         <source>Grab a color from the screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Kleur kiezen van het scherm</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="171"/>
         <source>Resize selection left 1px</source>
-        <translation type="unfinished">Afmetingen van selectie 1px aanpassen (links)</translation>
+        <translation>Selectie 1px naar links aanpassen</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="172"/>
         <source>Resize selection right 1px</source>
-        <translation type="unfinished">Afmetingen van selectie 1px aanpassen (rechts</translation>
+        <translation>Selectie 1px naar rechts aanpassen</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="173"/>
         <source>Resize selection up 1px</source>
-        <translation type="unfinished">Afmetingen van selectie 1px aanpassen (omhoog)</translation>
+        <translation>Selectie 1px omhoog aanpassen</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="174"/>
         <source>Resize selection down 1px</source>
-        <translation type="unfinished">Afmetingen van selectie 1px aanpassen (omlaag)</translation>
+        <translation>Selectie 1px omlaag aanpassen</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="176"/>
         <source>Symmetrically decrease width by 2px</source>
-        <translation type="unfinished"></translation>
+        <translation>Breedte symmetrisch met 2px verkleinen</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="178"/>
         <source>Symmetrically increase width by 2px</source>
-        <translation type="unfinished"></translation>
+        <translation>Breedte symmetrisch met 2px vergroten</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="180"/>
         <source>Symmetrically increase height by 2px</source>
-        <translation type="unfinished"></translation>
+        <translation>Hoogte symmetrisch met 2px vergroten</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="182"/>
         <source>Symmetrically decrease height by 2px</source>
-        <translation type="unfinished"></translation>
+        <translation>Hoogte symmetrisch met 2px verkleinen</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="183"/>
         <source>Select entire screen</source>
-        <translation type="unfinished">Gehele scherm selecteren</translation>
+        <translation>Volledig scherm selecteren</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="184"/>
         <source>Move selection left 1px</source>
-        <translation type="unfinished">Selectie 1px naar links verschuiven</translation>
+        <translation>Selectie 1px naar links verschuiven</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="185"/>
         <source>Move selection right 1px</source>
-        <translation type="unfinished">Selectie 1px naar rechts verschuiven</translation>
+        <translation>Selectie 1px naar rechts verschuiven</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="186"/>
         <source>Move selection up 1px</source>
-        <translation type="unfinished">Selectie 1px omhoog verschuiven</translation>
+        <translation>Selectie 1px omhoog verschuiven</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="187"/>
         <source>Move selection down 1px</source>
-        <translation type="unfinished">Selectie 1px omlaag verschuiven</translation>
+        <translation>Selectie 1px omlaag verschuiven</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="188"/>
         <source>Commit text in text area</source>
-        <translation type="unfinished">Tekst in tekstvak</translation>
+        <translation>Tekst in tekstgebied vastleggen</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="190"/>
         <source>Delete selected drawn object</source>
-        <translation type="unfinished"></translation>
+        <translation>Geselecteerd object verwijderen</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="191"/>
         <source>Cancel current selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Huidige selectie annuleren</translation>
     </message>
     <message>
         <source>Delete current tool</source>
@@ -2563,12 +2563,12 @@ Mogelijk moet je het &apos;#&apos;-teken insluiten. Voorbeeld: &apos;\#FFF&apos;
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="200"/>
         <source>Capture screen</source>
-        <translation type="unfinished">Scherm vastleggen</translation>
+        <translation>Scherm vastleggen</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="202"/>
         <source>Screenshot history</source>
-        <translation type="unfinished">Schermfotogeschiedenis</translation>
+        <translation>Laatste schermfoto&apos;s</translation>
     </message>
 </context>
 <context>
@@ -2603,7 +2603,7 @@ Mogelijk moet je het &apos;#&apos;-teken insluiten. Voorbeeld: &apos;\#FFF&apos;
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="85"/>
         <source>Display grid</source>
-        <translation type="unfinished"></translation>
+        <translation>Raster weergeven</translation>
     </message>
 </context>
 <context>
@@ -2757,7 +2757,7 @@ Mogelijk moet je het &apos;#&apos;-teken insluiten. Voorbeeld: &apos;\#FFF&apos;
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="76"/>
         <source>Full Date (%d-%m-%Y)</source>
-        <translation type="unfinished"></translation>
+        <translation>Volledige datum (%d-%m-%Y)</translation>
     </message>
 </context>
 <context>
@@ -2824,47 +2824,47 @@ Mogelijk moet je het &apos;#&apos;-teken insluiten. Voorbeeld: &apos;\#FFF&apos;
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="100"/>
         <source>&amp;Take Screenshot</source>
-        <translation type="unfinished">Schermfo&amp;to maken</translation>
+        <translation>&amp;Schermfoto maken</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="118"/>
         <source>&amp;Open Launcher</source>
-        <translation type="unfinished">Starter &amp;openen</translation>
+        <translation>Starter &amp;openen</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="123"/>
         <source>&amp;Configuration</source>
-        <translation type="unfinished">&amp;Configuratie</translation>
+        <translation>&amp;Configuratie</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="128"/>
         <source>&amp;About</source>
-        <translation type="unfinished">&amp;Over</translation>
+        <translation>&amp;Over</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="133"/>
         <source>Check for updates</source>
-        <translation type="unfinished">Controleren op updates</translation>
+        <translation>Controleren op updates</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="144"/>
         <source>New version %1 is available</source>
-        <translation type="unfinished">Er is een nieuwe versie beschikbaar: %1</translation>
+        <translation>Nieuwe versie %1 is beschikbaar</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="149"/>
         <source>&amp;Quit</source>
-        <translation type="unfinished">&amp;Afsluiten</translation>
+        <translation>&amp;Afsluiten</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="154"/>
         <source>&amp;Latest Uploads</source>
-        <translation type="unfinished">Recentste up&amp;loads</translation>
+        <translation>Recente up&amp;loads</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="160"/>
         <source>&amp;Open Save Path</source>
-        <translation type="unfinished"></translation>
+        <translation>Opslaglocatie &amp;openen</translation>
     </message>
 </context>
 <context>
@@ -2950,7 +2950,7 @@ Mogelijk moet je het &apos;#&apos;-teken insluiten. Voorbeeld: &apos;\#FFF&apos;
     <message>
         <location filename="../../src/widgets/uploadhistory.cpp" line="60"/>
         <source>Screenshots history is empty</source>
-        <translation>Schermopname geschiedenis is leeg</translation>
+        <translation>Geen laatste schermfoto&apos;s</translation>
     </message>
 </context>
 <context>
@@ -2983,7 +2983,7 @@ Mogelijk moet je het &apos;#&apos;-teken insluiten. Voorbeeld: &apos;\#FFF&apos;
     <message>
         <location filename="../../src/widgets/uploadlineitem.cpp" line="51"/>
         <source>Are you sure you want to delete a screenshot from the latest uploads and server?</source>
-        <translation>Weet je zeker dat je de schermopname wilt verwijderen uit de recentste uploads en van de server?</translation>
+        <translation>Weet u zeker dat u een schermfoto van de recente uploads en server wilt verwijderen?</translation>
     </message>
 </context>
 <context>
