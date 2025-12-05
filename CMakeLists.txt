@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.13)
+cmake_minimum_required(VERSION 3.22)
 # cmake_policy(SET CMP0076 OLD)
 
 set(FLAMESHOT_VERSION 13.3.0)
@@ -7,9 +7,9 @@ set(FLAMESHOT_VERSION 13.3.0)
 set(GIT_API_URL "https://api.github.com/repos/flameshot-org/flameshot/releases/latest")
 
 project(
-        flameshot
-        VERSION ${FLAMESHOT_VERSION}
-        LANGUAGES CXX)
+  flameshot
+  VERSION ${FLAMESHOT_VERSION}
+  LANGUAGES CXX)
 set(PROJECT_NAME_CAPITALIZED "Flameshot")
 
 include(FetchContent)
@@ -27,27 +27,27 @@ set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 # Dependency can be fetched via flatpak builder
 if(EXISTS "${CMAKE_SOURCE_DIR}/external/Qt-Color-Widgets/CMakeLists.txt")
-    add_subdirectory("${CMAKE_SOURCE_DIR}/external/Qt-Color-Widgets" EXCLUDE_FROM_ALL)
+  add_subdirectory("${CMAKE_SOURCE_DIR}/external/Qt-Color-Widgets" EXCLUDE_FROM_ALL)
 else()
-    FetchContent_Declare(
-        qtColorWidgets
-        GIT_REPOSITORY https://gitlab.com/mattbas/Qt-Color-Widgets.git
-        GIT_TAG 352bc8f99bf2174d5724ee70623427aa31ddc26a
-    )
+  FetchContent_Declare(
+    qtColorWidgets
+    GIT_REPOSITORY https://gitlab.com/mattbas/Qt-Color-Widgets.git
+    GIT_TAG 352bc8f99bf2174d5724ee70623427aa31ddc26a
+  )
   #Workaround for duplicate GUID in windows WIX installer
-  if (WIN32)
-      FetchContent_GetProperties(qtColorWidgets)
-      if(NOT qtcolorwidgets_POPULATED)
-          FetchContent_Populate(qtColorWidgets)
-          add_subdirectory(${qtcolorwidgets_SOURCE_DIR} ${qtcolorwidgets_BINARY_DIR} EXCLUDE_FROM_ALL)
-      endif()
+  if(WIN32)
+    FetchContent_GetProperties(qtColorWidgets)
+    if(NOT qtcolorwidgets_POPULATED)
+      FetchContent_Populate(qtColorWidgets)
+      add_subdirectory(${qtcolorwidgets_SOURCE_DIR} ${qtcolorwidgets_BINARY_DIR} EXCLUDE_FROM_ALL)
+    endif()
   else()
-      FetchContent_MakeAvailable(qtColorWidgets)
+    FetchContent_MakeAvailable(qtColorWidgets)
   endif()
 endif()
 
 # This can be read from ${PROJECT_NAME} after project() is called
-if (APPLE)
+if(APPLE)
   set(CMAKE_OSX_DEPLOYMENT_TARGET "10.15" CACHE STRING "Minimum OS X deployment version")
 endif()
 
@@ -66,8 +66,8 @@ elseif(APPLE)
   set(Qt6_DIR "$(brew --prefix qt6)/lib/cmake/Qt6/" CACHE PATH "directory where Qt6Config.cmake exists.")
 endif()
 set(RUN_IN_PLACE
-        ${DEFAULT_RUN_IN_PLACE}
-        CACHE BOOL "Run directly in source directory structure")
+  ${DEFAULT_RUN_IN_PLACE}
+  CACHE BOOL "Run directly in source directory structure")
 
 
 option(FLAMESHOT_DEBUG_CAPTURE "Enable mode to make debugging easier" OFF)
@@ -80,13 +80,13 @@ option(USE_WAYLAND_CLIPBOARD "USE KF Gui Wayland Clipboard" OFF)
 option(DISABLE_UPDATE_CHECKER "Disable check for updates" OFF)
 option(ENABLE_IMGUR "Enable Imgur Uploader" OFF)
 
-if (ENABLE_IMGUR)
+if(ENABLE_IMGUR)
   add_compile_definitions(ENABLE_IMGUR)
 endif()
 
-if (DISABLE_UPDATE_CHECKER)
+if(DISABLE_UPDATE_CHECKER)
   add_compile_definitions(DISABLE_UPDATE_CHECKER)
-endif ()
+endif()
 
 include(cmake/StandardProjectSettings.cmake)
 
@@ -108,8 +108,8 @@ enable_sanitizers(project_options)
 
 # allow for static analysis options include(cmake/StaticAnalyzers.cmake)
 
-if (USE_KDSINGLEAPPLICATION)
-  if (USE_BUNDLED_KDSINGLEAPPLICATION)
+if(USE_KDSINGLEAPPLICATION)
+  if(USE_BUNDLED_KDSINGLEAPPLICATION)
     set(KDSingleApplication_EXAMPLES OFF CACHE BOOL "Don't build the examples")
     set(KDSingleApplication_STATIC ON CACHE BOOL "Build static versions of the libraries")
 
@@ -118,9 +118,9 @@ if (USE_KDSINGLEAPPLICATION)
       add_subdirectory("${CMAKE_SOURCE_DIR}/external/KDSingleApplication")
     else()
       FetchContent_Declare(
-          kdsingleApplication
-          GIT_REPOSITORY https://github.com/KDAB/KDSingleApplication.git
-          GIT_TAG v1.2.0
+        kdsingleApplication
+        GIT_REPOSITORY https://github.com/KDAB/KDSingleApplication.git
+        GIT_TAG v1.2.0
       )
       FetchContent_MakeAvailable(kdsingleApplication)
     endif()
@@ -132,11 +132,11 @@ endif()
 # ToDo: Check if this is used anywhere
 option(BUILD_STATIC_LIBS ON)
 
-if (APPLE)
+if(APPLE)
   FetchContent_Declare(
-      qHotKey
-      GIT_REPOSITORY https://github.com/flameshot-org/QHotkey
-      GIT_TAG master
+    qHotKey
+    GIT_REPOSITORY https://github.com/flameshot-org/QHotkey
+    GIT_TAG master
   )
   FetchContent_MakeAvailable(QHotKey)
 endif()
