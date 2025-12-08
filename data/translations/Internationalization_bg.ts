@@ -225,7 +225,7 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="471"/>
         <source>Show color picker</source>
-        <translation>Показване на палитра</translation>
+        <translation>Избиране на цвят</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="473"/>
@@ -1088,7 +1088,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="427"/>
         <source>This allows you to take screenshots of Flameshot itself for example</source>
-        <translation>Дава възможност за заснемане на Flameshot, например.</translation>
+        <translation>Дава възможност за заснемане на Flameshot, например</translation>
     </message>
     <message>
         <source>Launch Flameshot daemon when computer is booted</source>
@@ -1704,12 +1704,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/line/linetool.cpp" line="22"/>
         <source>Line</source>
-        <translation>Линия</translation>
+        <translation>Права</translation>
     </message>
     <message>
         <location filename="../../src/tools/line/linetool.cpp" line="32"/>
         <source>Set the Line as the paint tool</source>
-        <translation>Избиране на инструмент „Линия“</translation>
+        <translation>Избиране на инструмент „Права“</translation>
     </message>
 </context>
 <context>
@@ -2171,12 +2171,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="156"/>
         <source>Requested screen exceeds screen count</source>
-        <translation>Requested screen exceeds screen count</translation>
+        <translation>Исканият номер на екран надхвърля наличния брой екрани</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="408"/>
         <source>Full screen screenshot pinned to screen</source>
-        <translation>Full screen screenshot pinned to screen</translation>
+        <translation>Екранна снимка на целия екран е закачена</translation>
     </message>
     <message>
         <source>Toggle side panel</source>
@@ -2229,7 +2229,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="195"/>
         <source>Quit capture</source>
-        <translation>Quit capture</translation>
+        <translation>Изход от заснемане</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="207"/>
@@ -2249,7 +2249,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="219"/>
         <source>Change the tool&apos;s size</source>
-        <translation>Change the tool&apos;s size</translation>
+        <translation>Променяне размера на инструмента</translation>
     </message>
     <message>
         <source>Change the tool&apos;s thickness</source>
@@ -2274,12 +2274,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/redo/redotool.cpp" line="23"/>
         <source>Redo</source>
-        <translation>Redo</translation>
+        <translation>Повторение</translation>
     </message>
     <message>
         <location filename="../../src/tools/redo/redotool.cpp" line="33"/>
         <source>Redo the next modification</source>
-        <translation>Redo the next modification</translation>
+        <translation>Повтаряне на последната промяна</translation>
     </message>
 </context>
 <context>
@@ -2292,7 +2292,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/save/savetool.cpp" line="34"/>
         <source>Save screenshot to a file</source>
-        <translation>Save screenshot to a file</translation>
+        <translation>Запазване на екранната снимка във файл</translation>
     </message>
     <message>
         <source>Save the capture</source>
@@ -2308,32 +2308,32 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="53"/>
         <source>The universal wayland screen capture adapter requires Grim as the screen capture component of wayland. If the screen capture component is missing, please install it!</source>
-        <translation type="unfinished"></translation>
+        <translation>Универсалният адаптер за заснемане на екрана на Wayland изисква Grim като компонент за заснемане на екран на Wayland. Ако компонентът липсва го инсталирайте!</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="171"/>
         <source>If the useGrimAdapter setting is not enabled, the dbus protocol will be used. It should be noted that using the dbus protocol under wayland is not recommended. It is recommended to enable the useGrimAdapter setting in flameshot.ini to activate the grim-based general wayland screenshot adapter</source>
-        <translation type="unfinished"></translation>
+        <translation>Ако настройката „useGrimAdapter“ не е включена ще бъде използван протоколът dbus. Имайте предвид, използването на dbus под Waylandе не е препоръпително. Препоръчително е да включите настройката „useGrimAdapter“ във „flameshot.ini“, за да бъде използвн базираният на Grim универсален адаптор за заснемане на екрана на Wayland</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="182"/>
         <source>grim&apos;s screenshot component is implemented based on wlroots, it may not be used in GNOME or similar desktop environments</source>
-        <translation type="unfinished"></translation>
+        <translation>Компонентът за екранни снимки Grim е реализиран на базата на wlroots, за това не може да бъде използван в GNOME или подобни графични среди</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="194"/>
         <source>Unable to detect desktop environment (GNOME? KDE? Qile? Sway? ...)</source>
-        <translation type="unfinished"></translation>
+        <translation>Графичната среда не може да бъде определена (GNOME? KDE? Qile? Sway?…)</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="197"/>
         <source>Hint: try setting the XDG_CURRENT_DESKTOP environment variable.</source>
-        <translation>Подсказка: пробвайте да зададете променлирата на средата XDG_CURRENT_DESKTOP.</translation>
+        <translation>Подсказка: пробвайте да зададете променливата на средата XDG_CURRENT_DESKTOP.</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="202"/>
         <source>Unable to capture screen</source>
-        <translation>Unable to capture screen</translation>
+        <translation>Грешка при заснемане на екрана</translation>
     </message>
 </context>
 <context>
