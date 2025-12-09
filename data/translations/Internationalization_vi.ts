@@ -34,7 +34,7 @@
     <message>
         <location filename="../../src/tools/accept/accepttool.cpp" line="41"/>
         <source>Accept the capture</source>
-        <translation>Chấp nhận tấm ảnh chụp</translation>
+        <translation>Chấp nhận ảnh chụp</translation>
     </message>
 </context>
 <context>
@@ -42,12 +42,12 @@
     <message>
         <location filename="../../src/tools/launcher/applaunchertool.cpp" line="23"/>
         <source>App Launcher</source>
-        <translation>Mở ảnh bằng</translation>
+        <translation>Trình khởi chạy ứng dụng</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applaunchertool.cpp" line="33"/>
         <source>Choose an app to open the capture</source>
-        <translation>Chọn ứng dụng để mở ảnh chụp màn hình</translation>
+        <translation>Chọn ứng dụng để mở ảnh chụp</translation>
     </message>
 </context>
 <context>
@@ -60,12 +60,12 @@
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="79"/>
         <source>Launch in terminal</source>
-        <translation>Chạy trong Dấu nhắc lệnh</translation>
+        <translation>Chạy trong terminal</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="80"/>
         <source>Keep open after selection</source>
-        <translation>Vẫn giữ sau khi chọn</translation>
+        <translation>Giữ mở sau khi lựa chọn</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="116"/>
@@ -76,7 +76,7 @@
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="150"/>
         <source>Unable to launch in terminal.</source>
-        <translation>Không mở khởi chạy dấu nhắc lệnh.</translation>
+        <translation>Không mở khởi chạy trong terminal.</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="116"/>
@@ -195,7 +195,7 @@
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="112"/>
         <source>Unable to capture screen</source>
         <translatorcomment>Impossible capturar la pantalla</translatorcomment>
-        <translation>Không thể chụp màn hình :&lt;</translation>
+        <translation>Không thể chụp màn hình</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="456"/>
@@ -416,12 +416,12 @@ Press Space to open the side panel.</translation>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="40"/>
         <source>Edit Preset:</source>
-        <translation>Chỉnh sửa giá trị:</translation>
+        <translation>Chỉnh sửa mẫu thiết lập:</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="45"/>
         <source>Enter color to update preset</source>
-        <translation>Nhập màu để cập nhật</translation>
+        <translation>Nhập màu để cập nhật mẫu thiết lập</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="65"/>
@@ -431,7 +431,7 @@ Press Space to open the side panel.</translation>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="67"/>
         <source>Press button to update the selected preset</source>
-        <translation>Nhấn nút này để cập nhật màu đã chọn</translation>
+        <translation>Nhấn nút này để cập nhật mẫu thiết lập đã chọn</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="74"/>
@@ -441,17 +441,17 @@ Press Space to open the side panel.</translation>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="76"/>
         <source>Press button to delete the selected preset</source>
-        <translation>Nhấn nút này để xóa màu đã chọn</translation>
+        <translation>Nhấn nút để xóa cài mẫu thiết lập đã chọn</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="90"/>
         <source>Add Preset:</source>
-        <translation>Thêm màu:</translation>
+        <translation>Thêm mẫu thiết lập:</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="96"/>
         <source>Enter color manually or select it using the color-wheel</source>
-        <translation>Nhập màu theo cách thủ công hoặc điều chỉnh vòng màu</translation>
+        <translation>Nhập mẫu thiết lập theo cách thủ công hoặc điều chỉnh vòng màu</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="106"/>
@@ -461,7 +461,7 @@ Press Space to open the side panel.</translation>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="107"/>
         <source>Press button to add preset</source>
-        <translation>Nhấn nút này để thêm màu</translation>
+        <translation>Nhấn nút này để thêm mẫu thiết lập</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="130"/>
@@ -472,12 +472,12 @@ Press Space to open the side panel.</translation>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="131"/>
         <source>Unable to add preset. Maximum limit reached.</source>
-        <translation>Không thể thêm màu vì đã đạt đến giới hạn tối đa.</translation>
+        <translation>Không thể thêm mẫu thiết lập vì đã đạt đến giới hạn tối đa.</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="148"/>
         <source>Unable to remove preset. Minimum limit reached.</source>
-        <translation>Không thể xóa bỏ màu vì đã đạt đến giới hạn tối thiếu.</translation>
+        <translation>Không thể xóa bỏ mẫu thiết lập vì đã đạt đến giới hạn tối thiếu.</translation>
     </message>
 </context>
 <context>
@@ -531,7 +531,7 @@ Press Space to open the side panel.</translation>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="794"/>
         <source>Bad config key &apos;%1&apos; in ConfigHandler. Please report this as a bug.</source>
-        <translation>Khóa cấu hình không hợp lệ &apos;%1&apos; trong ConfigHandler. Vui lòng báo lỗi này.</translation>
+        <translation>Khóa cấu hình không hợp lệ &apos;%1&apos; trong ConfigHandler. Vui lòng báo cáo lỗi này.</translation>
     </message>
 </context>
 <context>
@@ -694,7 +694,7 @@ Vui lòng xử lí chúng thủ công trong tệp cấu hình.</translation>
     <message>
         <location filename="../../src/tools/copy/copytool.cpp" line="34"/>
         <source>Copy selection to clipboard</source>
-        <translation>Sao chép vùng đã chọn vào bảng tạm</translation>
+        <translation>Sao chép vùng đã chọn vào bộ nhớ tạm</translation>
     </message>
     <message>
         <source>Copy the selection into the clipboard</source>
@@ -788,7 +788,7 @@ Vui lòng xử lí chúng thủ công trong tệp cấu hình.</translation>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="431"/>
         <source>URL copied to clipboard.</source>
-        <translation>Đã sao chép URL vào bảng tạm.</translation>
+        <translation>Đã sao chép URL vào bộ nhớ tạm.</translation>
     </message>
 </context>
 <context>
@@ -796,7 +796,7 @@ Vui lòng xử lí chúng thủ công trong tệp cấu hình.</translation>
     <message>
         <location filename="../../src/core/flameshotdaemon.cpp" line="407"/>
         <source>New version %1 is available</source>
-        <translation>Phiên bản %1 đã phát hành 🥳</translation>
+        <translation>Đã có phiên bản mới %1</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshotdaemon.cpp" line="413"/>
@@ -887,7 +887,7 @@ Vui lòng xử lí chúng thủ công trong tệp cấu hình.</translation>
         <location filename="../../src/config/generalconf.cpp" line="192"/>
         <location filename="../../src/config/generalconf.cpp" line="394"/>
         <source>Import</source>
-        <translation>Nhập vào</translation>
+        <translation>Nhập</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="198"/>
@@ -911,7 +911,7 @@ Vui lòng xử lí chúng thủ công trong tệp cấu hình.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="219"/>
         <source>Save File</source>
-        <translation>Lưu tập tin</translation>
+        <translation>Lưu tệp</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="241"/>
@@ -1073,7 +1073,7 @@ Vui lòng xử lí chúng thủ công trong tệp cấu hình.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="352"/>
         <source>Grim is a wayland only utility to capture screens based on the screencopy protocol. Generally only enable on minimal wayland window managers like sway, hyprland, etc.</source>
-        <translation>(Google dịch) Grim là tiện ích chỉ dành cho Wayland để chụp màn hình dựa trên giao thức screencopy. Nhìn chung, chỉ bật trên các trình quản lý cửa sổ Wayland tối thiểu như sway, hyprland, v.v.</translation>
+        <translation>Grim là tiện ích chỉ dành cho Wayland để chụp màn hình dựa trên giao thức screencopy. Nhìn chung, chỉ bật trên các trình quản lý cửa sổ Wayland tối thiểu như sway, hyprland, v.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="370"/>
@@ -1150,7 +1150,7 @@ Vui lòng xử lí chúng thủ công trong tệp cấu hình.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="505"/>
         <source>Enable Copy to clipboard on Double Click</source>
-        <translation>Cho phép sao chép vào bảng tạm bằng cách nháy đúp chuột 📋</translation>
+        <translation>Cho phép sao chép vào bảng tạm bằng cách nháy đúp chuột</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="517"/>
