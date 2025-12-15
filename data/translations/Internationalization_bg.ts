@@ -225,7 +225,7 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="471"/>
         <source>Show color picker</source>
-        <translation>Показване на палитра</translation>
+        <translation>Избиране на цвят</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="473"/>
@@ -1088,7 +1088,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="427"/>
         <source>This allows you to take screenshots of Flameshot itself for example</source>
-        <translation>Дава възможност за заснемане на Flameshot, например.</translation>
+        <translation>Дава възможност за заснемане на Flameshot, например</translation>
     </message>
     <message>
         <source>Launch Flameshot daemon when computer is booted</source>
@@ -1220,7 +1220,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="723"/>
         <source>Anti-aliasing image when zoom the pinned image</source>
-        <translation>Сгласяне на закаченото изображение при мащабиране</translation>
+        <translation>Заглаждане на закаченото изображение при мащабиране</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="725"/>
@@ -1704,12 +1704,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/line/linetool.cpp" line="22"/>
         <source>Line</source>
-        <translation>Линия</translation>
+        <translation>Права</translation>
     </message>
     <message>
         <location filename="../../src/tools/line/linetool.cpp" line="32"/>
         <source>Set the Line as the paint tool</source>
-        <translation>Избиране на инструмент „Линия“</translation>
+        <translation>Избиране на инструмент „Права“</translation>
     </message>
 </context>
 <context>
@@ -1965,7 +1965,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/main.cpp" line="262"/>
         <source>Pin the capture to the screen</source>
-        <translation>Закачане снимката на екрана</translation>
+        <translation>Закачане на екранната снимка</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="264"/>
@@ -2086,7 +2086,7 @@ Please solve them manually in the configuration file.</source>
 - Named colors like &apos;blue&apos; or &apos;red&apos;
 You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <translation>Неправилен цвят, флагът поддържа следните формати:
-- #RGB (като R, G, и B са едноцифрени шеснадесетични числа)
+- #RGB (като R, G, и B са едноцифрени шестнадесетични числа)
 - #RRGGBB
 - #RRRGGGBBB
 - #RRRRGGGGBBBB
@@ -2161,7 +2161,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="334"/>
         <source>Per default runs Flameshot in the background and adds a tray icon for configuration.</source>
-        <translation>Стандартно стартира Flameshot във фонов режим и дабавя пиктограма в областта за известията с цел настройка.</translation>
+        <translation>Стандартно стартира Flameshot във фонов режим и добавя пиктограма в областта за известията с цел настройка.</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="71"/>
@@ -2171,12 +2171,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="156"/>
         <source>Requested screen exceeds screen count</source>
-        <translation>Requested screen exceeds screen count</translation>
+        <translation>Исканият номер на екран надхвърля наличния брой екрани</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="408"/>
         <source>Full screen screenshot pinned to screen</source>
-        <translation>Full screen screenshot pinned to screen</translation>
+        <translation>Екранна снимка на целия екран е закачена</translation>
     </message>
     <message>
         <source>Toggle side panel</source>
@@ -2229,7 +2229,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="195"/>
         <source>Quit capture</source>
-        <translation>Quit capture</translation>
+        <translation>Изход от заснемане</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="207"/>
@@ -2249,7 +2249,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="219"/>
         <source>Change the tool&apos;s size</source>
-        <translation>Change the tool&apos;s size</translation>
+        <translation>Променяне размера на инструмента</translation>
     </message>
     <message>
         <source>Change the tool&apos;s thickness</source>
@@ -2274,12 +2274,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/redo/redotool.cpp" line="23"/>
         <source>Redo</source>
-        <translation>Redo</translation>
+        <translation>Повторение</translation>
     </message>
     <message>
         <location filename="../../src/tools/redo/redotool.cpp" line="33"/>
         <source>Redo the next modification</source>
-        <translation>Redo the next modification</translation>
+        <translation>Повтаряне на последната промяна</translation>
     </message>
 </context>
 <context>
@@ -2292,7 +2292,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/save/savetool.cpp" line="34"/>
         <source>Save screenshot to a file</source>
-        <translation>Save screenshot to a file</translation>
+        <translation>Запазване на екранната снимка във файл</translation>
     </message>
     <message>
         <source>Save the capture</source>
@@ -2308,32 +2308,32 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="53"/>
         <source>The universal wayland screen capture adapter requires Grim as the screen capture component of wayland. If the screen capture component is missing, please install it!</source>
-        <translation type="unfinished"></translation>
+        <translation>Универсалният адаптер за заснемане на екрана на Wayland изисква Grim като компонент за заснемане на екран на Wayland. Ако компонентът липсва го инсталирайте!</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="171"/>
         <source>If the useGrimAdapter setting is not enabled, the dbus protocol will be used. It should be noted that using the dbus protocol under wayland is not recommended. It is recommended to enable the useGrimAdapter setting in flameshot.ini to activate the grim-based general wayland screenshot adapter</source>
-        <translation type="unfinished"></translation>
+        <translation>Ако настройката „useGrimAdapter“ не е включена ще бъде използван протоколът dbus. Имайте предвид, използването на dbus под Waylandе не е препоръчително. Препоръчително е да включите настройката „useGrimAdapter“ във „flameshot.ini“, за да бъде използвн базираният на Grim универсален адаптор за заснемане на екрана на Wayland</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="182"/>
         <source>grim&apos;s screenshot component is implemented based on wlroots, it may not be used in GNOME or similar desktop environments</source>
-        <translation type="unfinished"></translation>
+        <translation>Компонентът за екранни снимки Grim е реализиран на базата на wlroots, за това не може да бъде използван в GNOME или подобни графични среди</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="194"/>
         <source>Unable to detect desktop environment (GNOME? KDE? Qile? Sway? ...)</source>
-        <translation type="unfinished"></translation>
+        <translation>Графичната среда не може да бъде определена (GNOME? KDE? Qile? Sway?…)</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="197"/>
         <source>Hint: try setting the XDG_CURRENT_DESKTOP environment variable.</source>
-        <translation>Подсказка: пробвайте да зададете променлирата на средата XDG_CURRENT_DESKTOP.</translation>
+        <translation>Подсказка: пробвайте да зададете променливата на средата XDG_CURRENT_DESKTOP.</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="202"/>
         <source>Unable to capture screen</source>
-        <translation>Unable to capture screen</translation>
+        <translation>Грешка при заснемане на екрана</translation>
     </message>
 </context>
 <context>
@@ -2341,32 +2341,32 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="26"/>
         <source>Secondary instance</source>
-        <translation type="unfinished"></translation>
+        <translation>Вторичен екземпляр</translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="27"/>
         <source>&lt;b&gt;Secondary instance.&lt;/b&gt; Send message to primary:</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Вторичен екземпляр.&lt;/b&gt; Изпращане на съобщение до първичния:</translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="29"/>
         <source>Type something here...</source>
-        <translation type="unfinished"></translation>
+        <translation>Въведете тук…</translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="31"/>
         <source>&amp;Send</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Изпращане</translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="54"/>
         <source>Error sending message</source>
-        <translation type="unfinished"></translation>
+        <translation>Грешка при изпращане на съобщение</translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="55"/>
         <source>The message &apos;%1&apos; could not be sent to the primary.</source>
-        <translation type="unfinished"></translation>
+        <translation>Съобщението „%1“ не може да бъде изпратено до първичния.</translation>
     </message>
 </context>
 <context>
@@ -2374,7 +2374,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/selection/selectiontool.cpp" line="25"/>
         <source>Rectangular Selection</source>
-        <translation>Rectangular Selection</translation>
+        <translation>Правоъгълна рамка</translation>
     </message>
     <message>
         <location filename="../../src/tools/selection/selectiontool.cpp" line="35"/>
@@ -2387,12 +2387,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="18"/>
         <source>Set Shortcut</source>
-        <translation>Set Shortcut</translation>
+        <translation>Задаване на клавишна комбинация</translation>
     </message>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="24"/>
         <source>Enter new shortcut to change </source>
-        <translation>Enter new shortcut to change </translation>
+        <translation>За да замените, въведете новата клавишна комбинация </translation>
     </message>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="38"/>
@@ -2408,7 +2408,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <location filename="../../src/config/setshortcutwidget.cpp" line="48"/>
         <location filename="../../src/config/setshortcutwidget.cpp" line="53"/>
         <source>Flameshot must be restarted for changes to take effect.</source>
-        <translation>Flameshot must be restarted for changes to take effect.</translation>
+        <translation>За да влязат в сила промените Flameshot трябва да бъде рестартиран.</translation>
     </message>
 </context>
 <context>
@@ -2416,22 +2416,22 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="27"/>
         <source>Hot Keys</source>
-        <translation>Hot Keys</translation>
+        <translation>Клавишни комбинации</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="48"/>
         <source>Available shortcuts in the screen capture mode.</source>
-        <translation>Available shortcuts in the screen capture mode.</translation>
+        <translation>Налични клавишни комбинации в режим заснемане на екрана.</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="59"/>
         <source>Description</source>
-        <translation>Description</translation>
+        <translation>Описание</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="59"/>
         <source>Key</source>
-        <translation>Key</translation>
+        <translation>Клавиши</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="162"/>
@@ -2446,7 +2446,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="170"/>
         <source>Grab a color from the screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Взимане на цвят от екрана</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="171"/>
@@ -2471,22 +2471,22 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="176"/>
         <source>Symmetrically decrease width by 2px</source>
-        <translation type="unfinished"></translation>
+        <translation>Симетрично намаляване ширината с 2 пиксела</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="178"/>
         <source>Symmetrically increase width by 2px</source>
-        <translation type="unfinished"></translation>
+        <translation>Симетрично увеличаване ширината с 2 пиксела</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="180"/>
         <source>Symmetrically increase height by 2px</source>
-        <translation type="unfinished"></translation>
+        <translation>Симетрично увеличаване височината с 2 пиксела</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="182"/>
         <source>Symmetrically decrease height by 2px</source>
-        <translation type="unfinished"></translation>
+        <translation>Симетрично намаляване височината с 2 пиксела</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="183"/>
@@ -2521,12 +2521,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="190"/>
         <source>Delete selected drawn object</source>
-        <translation type="unfinished"></translation>
+        <translation>Премахване на избрания обект</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="191"/>
         <source>Cancel current selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Отменя текущо избраното</translation>
     </message>
     <message>
         <source>Delete current tool</source>
@@ -2560,22 +2560,22 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="37"/>
         <source>Active tool size: </source>
-        <translation>Active tool size: </translation>
+        <translation>Размер на текущия инструмент: </translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="57"/>
         <source>Active Color: </source>
-        <translation>Active Color: </translation>
+        <translation>Текущ цвят: </translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="78"/>
         <source>Grab Color</source>
-        <translation>Grab Color</translation>
+        <translation>Взимане на цвят</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="85"/>
         <source>Display grid</source>
-        <translation type="unfinished"></translation>
+        <translation>Показване на решетка</translation>
     </message>
 </context>
 <context>
@@ -2583,12 +2583,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/sizedecrease/sizedecreasetool.cpp" line="37"/>
         <source>Decrease Tool Size</source>
-        <translation>Decrease Tool Size</translation>
+        <translation>Намаляване размера на инструмента</translation>
     </message>
     <message>
         <location filename="../../src/tools/sizedecrease/sizedecreasetool.cpp" line="47"/>
         <source>Decrease the size of the other tools</source>
-        <translation>Decrease the size of the other tools</translation>
+        <translation>Намаляване размера на другите инструменти</translation>
     </message>
 </context>
 <context>
@@ -2596,12 +2596,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/sizeincrease/sizeincreasetool.cpp" line="37"/>
         <source>Increase Tool Size</source>
-        <translation>Increase Tool Size</translation>
+        <translation>Увеличаване размера на инструмента</translation>
     </message>
     <message>
         <location filename="../../src/tools/sizeincrease/sizeincreasetool.cpp" line="47"/>
         <source>Increase the size of the other tools</source>
-        <translation>Increase the size of the other tools</translation>
+        <translation>Увеличаване размера на другите инструменти</translation>
     </message>
 </context>
 <context>
@@ -2624,112 +2624,112 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="43"/>
         <source>Century (00-99)</source>
-        <translation>Century (00-99)</translation>
+        <translation>Век (00-99)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="44"/>
         <source>Year (00-99)</source>
-        <translation>Year (00-99)</translation>
+        <translation>Година (00-99)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="45"/>
         <source>Year (2000)</source>
-        <translation>Year (2000)</translation>
+        <translation>Година (2000)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="48"/>
         <source>Month Name (jan)</source>
-        <translation>Month Name (jan)</translation>
+        <translation>Име на месеца (яну)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="49"/>
         <source>Month Name (january)</source>
-        <translation>Month Name (january)</translation>
+        <translation>Име на месеца (януари)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="51"/>
         <source>Month (01-12)</source>
-        <translation>Month (01-12)</translation>
+        <translation>Месец (01-12)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="52"/>
         <source>Week Day (1-7)</source>
-        <translation>Week Day (1-7)</translation>
+        <translation>Ден от седмицата (1-7)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="53"/>
         <source>Week (01-53)</source>
-        <translation>Week (01-53)</translation>
+        <translation>Седмица (01-53)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="56"/>
         <source>Day Name (mon)</source>
-        <translation>Day Name (mon)</translation>
+        <translation>Ден от седмицата (пон)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="57"/>
         <source>Day Name (monday)</source>
-        <translation>Day Name (monday)</translation>
+        <translation>Ден от седмицата (понеделник)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="59"/>
         <source>Day (01-31)</source>
-        <translation>Day (01-31)</translation>
+        <translation>Ден от месеца (01-31)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="60"/>
         <source>Day of Month (1-31)</source>
-        <translation>Day of Month (1-31)</translation>
+        <translation>Ден от месеца (1-31)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="61"/>
         <source>Day (001-366)</source>
-        <translation>Day (001-366)</translation>
+        <translation>Ден (001-366)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="67"/>
         <source>Hour (00-23)</source>
-        <translation>Hour (00-23)</translation>
+        <translation>Час (00-23)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="68"/>
         <source>Hour (01-12)</source>
-        <translation>Hour (01-12)</translation>
+        <translation>Час (01-12)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="69"/>
         <source>Minute (00-59)</source>
-        <translation>Minute (00-59)</translation>
+        <translation>Минути (00-59)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="70"/>
         <source>Second (00-59)</source>
-        <translation>Second (00-59)</translation>
+        <translation>Секунди (00-59)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="73"/>
         <source>Full Date (%m/%d/%y)</source>
-        <translation>Full Date (%m/%d/%y)</translation>
+        <translation>Пълна дата (%d/%m/%y)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="75"/>
         <source>Full Date (%Y-%m-%d)</source>
-        <translation>Full Date (%Y-%m-%d)</translation>
+        <translation>Пълна дата (%Y-%m-%d)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="76"/>
         <source>Full Date (%d-%m-%Y)</source>
-        <translation type="unfinished"></translation>
+        <translation>Пълна дата (%d-%m-%Y)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="64"/>
         <source>Time (%H-%M-%S)</source>
-        <translation>Time (%H-%M-%S)</translation>
+        <translation>Час (%H-%M-%S)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="65"/>
         <source>Time (%H-%M)</source>
-        <translation>Time (%H-%M)</translation>
+        <translation>Час (%H-%M)</translation>
     </message>
 </context>
 <context>
@@ -2737,7 +2737,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/utils/systemnotification.cpp" line="42"/>
         <source>Flameshot Info</source>
-        <translation>Flameshot Info</translation>
+        <translation>Известие от Flameshot</translation>
     </message>
 </context>
 <context>
@@ -2796,7 +2796,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="100"/>
         <source>&amp;Take Screenshot</source>
-        <translation>&amp;Снимка на екрана</translation>
+        <translation>&amp;Екранна снимка</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="118"/>
@@ -2917,7 +2917,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/widgets/uploadhistory.ui" line="14"/>
         <source>Upload History</source>
-        <translation>Upload History</translation>
+        <translation>История на качените</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadhistory.cpp" line="60"/>
@@ -2930,12 +2930,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/widgets/uploadlineitem.ui" line="20"/>
         <source>Form</source>
-        <translation>Form</translation>
+        <translation>Формуляр</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadlineitem.ui" line="49"/>
         <source>TextLabel</source>
-        <translation>TextLabel</translation>
+        <translation>Етикет</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadlineitem.ui" line="82"/>
@@ -2945,7 +2945,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/widgets/uploadlineitem.ui" line="95"/>
         <source>Open In Browser</source>
-        <translation>Open In Browser</translation>
+        <translation>Отваряне в мрежов четец</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadlineitem.cpp" line="50"/>
@@ -2955,7 +2955,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/widgets/uploadlineitem.cpp" line="51"/>
         <source>Are you sure you want to delete a screenshot from the latest uploads and server?</source>
-        <translation type="unfinished">Are you sure you want to delete a screenshot from the latest uploads and server?</translation>
+        <translation>Желаете ли екранната снимка да бъде премахната от последно качените и от сървъра?</translation>
     </message>
 </context>
 <context>

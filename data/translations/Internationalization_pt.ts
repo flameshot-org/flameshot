@@ -2583,7 +2583,7 @@ Você pode ter que invalidar o sinal &apos;#&apos;, por exemplo &apos;\#FFF&apos
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="85"/>
         <source>Display grid</source>
-        <translation>Grade de exibição</translation>
+        <translation>Grelha de exibição</translation>
     </message>
 </context>
 <context>
