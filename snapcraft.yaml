@@ -33,9 +33,12 @@ apps:
 
 parts:
   flameshot:
+    plugin: cmake
     source: https://github.com/flameshot-org/flameshot.git
     source-tag: v$SNAPCRAFT_PROJECT_VERSION
-    plugin: cmake
+    build-packages:
+      - libxkbcommon-dev
+      - libproxy-dev
     cmake-parameters:
       - -DFLAMESHOT_ICON=/snap/flameshot/current/usr/share/icons/hicolor/scalable/apps/flameshot.svg
       - -DCMAKE_INSTALL_PREFIX=/usr
