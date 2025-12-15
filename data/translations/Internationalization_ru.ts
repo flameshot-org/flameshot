@@ -1074,7 +1074,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="426"/>
         <source>Allow multiple flameshot GUI instances simultaneously</source>
-        <translation>Разрешить несколько экземпляров графической оболочки Flameshot</translation>
+        <translation>Разрешить несколько экземпляров оболочки Flameshot</translation>
     </message>
     <message>
         <source>This allows you to take screenshots of flameshot itself for example.</source>
@@ -1192,7 +1192,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="466"/>
         <source>Show the welcome message box in the middle of the screen while taking a screenshot</source>
-        <translation>Показывать окно приветствия в центре экрана при создании снимка экрана</translation>
+        <translation>Показывать окно приветствия в центре экрана при создании снимка</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="493"/>
@@ -1295,12 +1295,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="683"/>
         <source>Use JPG format for clipboard (PNG default)</source>
-        <translation>Использовать формат JPG для буфера обмена (по умолчанию PNG)</translation>
+        <translation>Использовать формат JPG для буфера обмена (вместо PNG)</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="685"/>
         <source>Use lossy JPG format for clipboard (lossless PNG default)</source>
-        <translation>Использовать формат JPG для буфера обмена (по умолчанию — PNG без потерь)</translation>
+        <translation>Использовать формат с потерями JPG для буфера обмена (по умолчанию — PNG без потерь)</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="711"/>
@@ -1366,7 +1366,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="804"/>
         <source>Set geometry display timeout (ms)</source>
-        <translation>Задать время показа панели геометрии (мс)</translation>
+        <translation>Время показа панели геометрии (мс)</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="812"/>
