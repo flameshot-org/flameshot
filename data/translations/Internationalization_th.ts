@@ -162,7 +162,7 @@
         <location filename="../../src/widgets/capturelauncher.ui" line="14"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="177"/>
         <source>Capture Launcher</source>
-        <translation>ตัวเรียกใช้การจับภาพ</translation>
+        <translation>เรียกใช้ตัวจับภาพ</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="34"/>
@@ -245,17 +245,17 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="515"/>
         <source>Quit Capture</source>
-        <translation type="unfinished"></translation>
+        <translation>ออกจากการจับภาพ</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="516"/>
         <source>Are you sure you want to quit capture?</source>
-        <translation type="unfinished"></translation>
+        <translation>คุณแน่ใจหรือไม่ว่าต้องการยกเลิกการบันทึกภาพ?</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="521"/>
         <source>Do not show this again</source>
-        <translation type="unfinished"></translation>
+        <translation>ไม่ต้องแสดงอีก</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="727"/>
@@ -571,7 +571,9 @@ Premeu Espai per obrir el calaix lateral.</translation>
         <source>Some keyboard shortcuts have conflicts.
 This will NOT prevent flameshot from starting.
 Please solve them manually in the configuration file.</source>
-        <translation>แป้นลัดบางปุ่มอาจมีปัญหาขัดแย้งกัน การดำเนินการนี้จะไม่ป้องกันไม่ให้ Flameshot เริ่มทำงาน แก้ไขปัญหาในไฟล์กำหนดค่า</translation>
+        <translation>แป้นลัดบางปุ่มอาจมีปัญหาขัดแย้งกัน
+การดำเนินการนี้จะไม่ป้องกันไม่ให้ Flameshot เริ่มทำงาน
+แก้ไขปัญหาในไฟล์กำหนดค่า</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="112"/>
@@ -1059,12 +1061,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="323"/>
         <source>Show abort notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>แสดงการแจ้งเตือนการยกเลิก</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="324"/>
         <source>Enable abort notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>เปิดใช้งานการแจ้งเตือนยกเลิก</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="337"/>
@@ -1074,12 +1076,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="350"/>
         <source>Use grim to capture screenshots</source>
-        <translation type="unfinished"></translation>
+        <translation>ใช้ Grim เพื่อจับภาพหน้าจอ</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="352"/>
         <source>Grim is a wayland only utility to capture screens based on the screencopy protocol. Generally only enable on minimal wayland window managers like sway, hyprland, etc.</source>
-        <translation type="unfinished"></translation>
+        <translation>Grim เป็นยูทิลิตี้สำหรับ Wayland เท่านั้น ที่ใช้ในการจับภาพหน้าจอโดยใช้โปรโตคอล screencopy โดยทั่วไปจะเปิดใช้งานเฉพาะบนตัวจัดการหน้าต่าง Wayland ขั้นต่ำ เช่น Sway, Hyprland เป็นต้น</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="370"/>
@@ -1126,42 +1128,42 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="439"/>
         <source>Automatically unload from memory when it is not needed</source>
-        <translation type="unfinished"></translation>
+        <translation>ลบออกจากหน่วยความจำโดยอัตโนมัติเมื่อไม่จำเป็นต้องใช้งาน</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="440"/>
         <source>Automatically close daemon (background process) when it is not needed</source>
-        <translation type="unfinished"></translation>
+        <translation>ปิดโปรแกรมพื้นหลัง (daemon) โดยอัตโนมัติเมื่อไม่จำเป็นต้องใช้งาน</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="451"/>
         <source>Launch in background at startup</source>
-        <translation type="unfinished"></translation>
+        <translation>เปิดใช้งานในพื้นหลังเมื่อเริ่มต้นระบบ</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="452"/>
         <source>Launch Flameshot daemon (background process) when computer is booted</source>
-        <translation type="unfinished"></translation>
+        <translation>เรียกใช้โปรแกรม Flameshot daemon (กระบวนการทำงานเบื้องหลัง) เมื่อคอมพิวเตอร์เปิดเครื่อง</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="477"/>
         <source>Ask before quit capture</source>
-        <translation type="unfinished"></translation>
+        <translation>ถามก่อนออกจากโหมดบันทึกภาพ</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="480"/>
         <source>Show the confirmation prompt before ESC quit</source>
-        <translation type="unfinished"></translation>
+        <translation>แสดงข้อความยืนยันก่อนกด ESC เพื่อออก</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="505"/>
         <source>Enable Copy to clipboard on Double Click</source>
-        <translation type="unfinished"></translation>
+        <translation>เปิดใช้งานการคัดลอกไปยังคลิปบอร์ดเมื่อดับเบิ้ลคลิก</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="517"/>
         <source>Copy URL after uploading was successful</source>
-        <translation type="unfinished"></translation>
+        <translation>คัดลอก URL หลังจากอัปโหลดสำเร็จแล้ว</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="529"/>
@@ -1211,7 +1213,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="685"/>
         <source>Use lossy JPG format for clipboard (lossless PNG default)</source>
-        <translation type="unfinished"></translation>
+        <translation>ใช้ไฟล์ JPG ที่มีการบีบอัดข้อมูลบางส่วนสำหรับการคัดลอกลงคลิปบอร์ด (ค่าเริ่มต้นคือไฟล์ PNG ที่ไม่มีการบีบอัดข้อมูล)</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="711"/>
@@ -1272,17 +1274,17 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="801"/>
         <source>Milliseconds before geometry display hides; 0 means do not hide</source>
-        <translation type="unfinished"></translation>
+        <translation>มิลลิวินาทีก่อนที่การแสดงผลรูปทรงเรขาคณิตจะซ่อนลง; 0 หมายถึงไม่ซ่อน</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="804"/>
         <source>Set geometry display timeout (ms)</source>
-        <translation type="unfinished"></translation>
+        <translation>ตั้งค่าระยะเวลาหมดเวลาการแสดงผลรูปทรงเรขาคณิต (มิลลิวินาที)</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="812"/>
         <source>Selection Geometry Display</source>
-        <translation type="unfinished"></translation>
+        <translation>เลือกการแสดงผลเรขาคณิต</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="819"/>
@@ -1601,7 +1603,7 @@ Please solve them manually in the configuration file.</source>
         <location filename="../../src/widgets/infowindow.ui" line="56"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="119"/>
         <source>GPLv3+</source>
-        <translation type="unfinished">GPLv3+</translation>
+        <translation>GPLv3+</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="89"/>
@@ -1810,7 +1812,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="322"/>
         <source>Close</source>
-        <translation type="unfinished">ปิด</translation>
+        <translation>ปิด</translation>
     </message>
 </context>
 <context>
