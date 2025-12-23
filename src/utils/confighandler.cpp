@@ -212,7 +212,7 @@ ConfigHandler::ConfigHandler()
         QObject::connect(m_configWatcher.data(),
                          &QFileSystemWatcher::fileChanged,
                          [](const QString& fileName) {
-                             emit getInstance()->fileChanged();
+                             emit getInstance() -> fileChanged();
 
                              if (QFile(fileName).exists()) {
                                  m_configWatcher->addPath(fileName);
@@ -712,12 +712,12 @@ void ConfigHandler::setErrorState(bool error) const
     if (!hadError && m_hasError) {
         QString msg = errorMessage();
         AbstractLogger::error() << msg;
-        emit getInstance()->error();
+        emit getInstance() -> error();
     } else if (hadError && !m_hasError) {
         auto msg =
           tr("You have successfully resolved the configuration error.");
         AbstractLogger::info() << msg;
-        emit getInstance()->errorResolved();
+        emit getInstance() -> errorResolved();
     }
 }
 
