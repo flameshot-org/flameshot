@@ -29,11 +29,11 @@ jobs:
       matrix:
         dist:
           - {
-              os: macos-14,
+              os: macos-15,
               arch: arm64
             }
           - {
-              os: macos-13,
+              os: macos-15,
               arch: intel
             }
     runs-on: ${{ matrix.dist.os }}
