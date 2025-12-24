@@ -39,8 +39,7 @@ void ScreenGrabber::generalGrimScreenshot(bool& ok, QPixmap& res)
     QProcess Process;
     QString program = "grim";
     QStringList arguments;
-    arguments << "-t"
-              << "ppm" << imgPath;
+    arguments << "-t" << "ppm" << imgPath;
     Process.start(program, arguments);
     if (Process.waitForFinished()) {
         res.load(imgPath, "ppm");
