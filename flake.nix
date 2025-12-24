@@ -10,7 +10,11 @@
   };
 
   outputs =
-    inputs@{ flake-parts, systems, ... }:
+    inputs@{
+      flake-parts,
+      systems,
+      ...
+    }:
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems = import systems;
       imports = [
@@ -114,13 +118,11 @@
           devShells.default = pkgs.mkShell {
             name = "flameshot-dev";
 
-            buildInputs =
-              with pkgs;
-              [
-                cmake
-                gdb
-              ]
-              ++ buildInputs;
+            inputsFrom = [ flameshot ];
+
+            buildInputs = with pkgs; [
+              gdb
+            ];
           };
 
           treefmt = {
