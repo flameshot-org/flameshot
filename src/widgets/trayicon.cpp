@@ -1,10 +1,12 @@
 #include "trayicon.h"
 
+#include "countdownwindow.h"
 #include "src/core/flameshot.h"
 #include "src/core/flameshotdaemon.h"
 #include "src/utils/globalvalues.h"
 
 #include "src/utils/confighandler.h"
+#include <QActionGroup>
 #include <QApplication>
 #include <QMenu>
 #include <QTimer>
@@ -17,6 +19,10 @@
 
 TrayIcon::TrayIcon(QObject* parent)
   : QSystemTrayIcon(parent)
+  , m_delayMenu(nullptr)
+  , m_delayActionGroup(nullptr)
+  , m_countdownTimer(nullptr)
+  , m_remainingSeconds(0)
 {
     initMenu();
 
@@ -85,11 +91,20 @@ TrayIcon::TrayIcon(QObject* parent)
     connect(ConfigHandler::getInstance(),
             &ConfigHandler::fileChanged,
             this,
-            [this]() { updateCaptureActionShortcut(); });
+            [this]() {
+                updateCaptureActionShortcut();
+                updateDelayActions();
+            });
 }
 
 TrayIcon::~TrayIcon()
 {
+    if (m_countdownTimer) {
+        m_countdownTimer->stop();
+        delete m_countdownTimer;
+    }
+    delete m_delayMenu;
+    delete m_delayActionGroup;
     delete m_menu;
 }
 
@@ -125,6 +140,40 @@ void TrayIcon::initMenu()
     });
 #endif
     });
+
+    // Create delay submenu
+    m_delayMenu = new QMenu(tr("Screenshot &Delay"), m_menu);
+    m_delayActionGroup = new QActionGroup(this);
+    m_delayActionGroup->setExclusive(true);
+
+    // Define delay options (in milliseconds)
+    QVector<QPair<QString, int>> delayOptions = { { tr("No Delay"), 0 },
+                                                  { tr("1 second"), 1000 },
+                                                  { tr("3 seconds"), 3000 },
+                                                  { tr("5 seconds"), 5000 },
+                                                  { tr("10 seconds"), 10000 } };
+
+    // Get current delay from config (default to 0)
+    int currentDelay = ConfigHandler().captureDelay();
+
+    for (const auto& option : delayOptions) {
+        QAction* delayAction = new QAction(option.first, m_delayMenu);
+        delayAction->setCheckable(true);
+        delayAction->setData(option.second);
+
+        if (option.second == currentDelay) {
+            delayAction->setChecked(true);
+        }
+
+        connect(delayAction, &QAction::triggered, this, [this, delayAction]() {
+            int delay = delayAction->data().toInt();
+            ConfigHandler().setCaptureDelay(delay);
+        });
+
+        m_delayActionGroup->addAction(delayAction);
+        m_delayMenu->addAction(delayAction);
+    }
+
     auto* launcherAction = new QAction(tr("&Open Launcher"), this);
     connect(launcherAction,
             &QAction::triggered,
@@ -181,6 +230,7 @@ void TrayIcon::initMenu()
 #endif
     m_menu->addAction(openSavePathAction);
     m_menu->addSeparator();
+    m_menu->addMenu(m_delayMenu);
     m_menu->addAction(configAction);
     m_menu->addSeparator();
 #if !defined(DISABLE_UPDATE_CHECKER)
@@ -203,6 +253,22 @@ void TrayIcon::updateCaptureActionShortcut()
 #endif
 }
 
+void TrayIcon::updateDelayActions()
+{
+    if (!m_delayActionGroup) {
+        return;
+    }
+
+    int currentDelay = ConfigHandler().captureDelay();
+
+    for (QAction* action : m_delayActionGroup->actions()) {
+        if (action->data().toInt() == currentDelay) {
+            action->setChecked(true);
+            break;
+        }
+    }
+}
+
 #if !defined(DISABLE_UPDATE_CHECKER)
 void TrayIcon::enableCheckUpdatesAction(bool enable)
 {
@@ -218,8 +284,39 @@ void TrayIcon::enableCheckUpdatesAction(bool enable)
 
 void TrayIcon::startGuiCapture()
 {
-    auto* widget = Flameshot::instance()->gui();
+    // Get the configured delay
+    int delay = ConfigHandler().captureDelay();
+
+    if (delay > 0) {
+        startGuiCaptureWithCountdown(delay);
+    } else {
+        // No delay, start immediately
+        auto* widget = Flameshot::instance()->gui();
 #if !defined(DISABLE_UPDATE_CHECKER)
-    FlameshotDaemon::instance()->showUpdateNotificationIfAvailable(widget);
+        FlameshotDaemon::instance()->showUpdateNotificationIfAvailable(widget);
 #endif
+    }
+}
+
+void TrayIcon::startGuiCaptureWithCountdown(int delayMs)
+{
+    int seconds = delayMs / 1000;
+
+    // Create countdown window
+    auto* countdownWindow = new CountdownWindow(seconds);
+
+    // When countdown finishes, take the screenshot
+    connect(
+      countdownWindow, &CountdownWindow::countdownFinished, this, [this]() {
+          // Add a small delay to ensure the window is fully closed
+          QTimer::singleShot(50, this, [this]() {
+              auto* widget = Flameshot::instance()->gui();
+#if !defined(DISABLE_UPDATE_CHECKER)
+              FlameshotDaemon::instance()->showUpdateNotificationIfAvailable(
+                widget);
+#endif
+          });
+      });
+
+    countdownWindow->startCountdown();
 }
