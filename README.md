@@ -293,7 +293,7 @@ To use Flameshot instead of the default screenshot application in Ubuntu we need
   
    Ubuntu 22.04: Go to _Settings_ > _Keyboard_ > _View and Customise Shortcuts_ > _Custom shortcuts_ and press the '+' button at the bottom.
 
-3. Name the command as you like it, e.g. `flameshot`. And in the command insert `/usr/bin/flameshot gui`.
+3. Name the command as you like it, e.g. `flameshot`. And in the command insert `/usr/bin/flameshot gui` or `systemd-run --user --scope flameshot gui` on ubuntu 25.10.
 
 4. Then click "_Set Shortcut.._" and press <kbd>Prt Sc</kbd>. This will show as "_print_".
 
