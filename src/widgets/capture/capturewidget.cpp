@@ -163,10 +163,8 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
         for (QScreen* const screen : QGuiApplication::screens()) {
             qreal dpr = screen->devicePixelRatio();
             QPoint topLeftScreen = screen->geometry().topLeft() / dpr;
-            if (topLeftScreen.x() == 0) {
-                if (topLeftScreen.y() < topLeft.y()) {
-                    topLeft.setY(topLeftScreen.y());
-                }
+            if (topLeftScreen.y() < topLeft.y()) {
+                topLeft.setY(topLeftScreen.y());
             }
         }
         move(topLeft);
