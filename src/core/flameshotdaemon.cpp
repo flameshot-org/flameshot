@@ -35,6 +35,33 @@
 #include <kdsingleapplication.h>
 #endif
 
+#if defined(Q_OS_MACOS) && defined(USE_KDSINGLEAPPLICATION)
+namespace {
+template<typename PayloadWriter>
+bool forwardToPrimaryInstance(const QString& method,
+                              PayloadWriter&& payloadWriter)
+{
+    KDSingleApplication kdsa(QStringLiteral("org.flameshot.Flameshot"));
+    if (kdsa.isPrimaryInstance()) {
+        return false;
+    }
+
+    QByteArray data;
+    QDataStream stream(&data, QIODevice::WriteOnly);
+    stream << method;
+    payloadWriter(stream);
+
+    if (!kdsa.sendMessage(data)) {
+        AbstractLogger::warning()
+          << QObject::tr("Unable to contact primary Flameshot instance. "
+                         "Copy operation may fail.");
+        return false;
+    }
+    return true;
+}
+} // namespace
+#endif
+
 #ifdef Q_OS_WIN
 #include "src/core/globalshortcutfilter.h"
 #endif
@@ -141,6 +168,13 @@ void FlameshotDaemon::createPin(const QPixmap& capture, QRect geometry)
 
 void FlameshotDaemon::copyToClipboard(const QPixmap& capture)
 {
+#if defined(Q_OS_MACOS) && defined(USE_KDSINGLEAPPLICATION)
+    if (forwardToPrimaryInstance(
+          QStringLiteral("attachScreenshotToClipboard"),
+          [&](QDataStream& stream) { stream << capture; })) {
+        return;
+    }
+#endif
     if (instance()) {
         instance()->attachScreenshotToClipboard(capture);
         return;
@@ -167,6 +201,13 @@ void FlameshotDaemon::copyToClipboard(const QPixmap& capture)
 void FlameshotDaemon::copyToClipboard(const QString& text,
                                       const QString& notification)
 {
+#if defined(Q_OS_MACOS) && defined(USE_KDSINGLEAPPLICATION)
+    if (forwardToPrimaryInstance(
+          QStringLiteral("attachTextToClipboard"),
+          [&](QDataStream& stream) { stream << text << notification; })) {
+        return;
+    }
+#endif
     if (instance()) {
         instance()->attachTextToClipboard(text, notification);
         return;
