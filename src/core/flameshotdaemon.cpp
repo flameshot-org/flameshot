@@ -141,7 +141,12 @@ void FlameshotDaemon::createPin(const QPixmap& capture, QRect geometry)
 
 void FlameshotDaemon::copyToClipboard(const QPixmap& capture)
 {
+#if defined(Q_OS_MACOS) && defined(USE_KDSINGLEAPPLICATION)
+    auto kdsa = KDSingleApplication(QStringLiteral("org.flameshot.Flameshot"));
+    if (kdsa.isPrimaryInstance() && instance()) {
+#else
     if (instance()) {
+#endif
         instance()->attachScreenshotToClipboard(capture);
         return;
     }
@@ -151,7 +156,9 @@ void FlameshotDaemon::copyToClipboard(const QPixmap& capture)
 
 #if defined(USE_KDSINGLEAPPLICATION) &&                                        \
   (defined(Q_OS_MACOS) || defined(Q_OS_WIN))
+#if defined(Q_OS_WIN)
     auto kdsa = KDSingleApplication(QStringLiteral("org.flameshot.Flameshot"));
+#endif
     stream << QStringLiteral("attachScreenshotToClipboard") << capture;
     kdsa.sendMessage(data);
 #else
@@ -167,14 +174,21 @@ void FlameshotDaemon::copyToClipboard(const QPixmap& capture)
 void FlameshotDaemon::copyToClipboard(const QString& text,
                                       const QString& notification)
 {
+#if defined(Q_OS_MACOS) && defined(USE_KDSINGLEAPPLICATION)
+    auto kdsa = KDSingleApplication(QStringLiteral("org.flameshot.Flameshot"));
+    if (kdsa.isPrimaryInstance() && instance()) {
+#else
     if (instance()) {
+#endif
         instance()->attachTextToClipboard(text, notification);
         return;
     }
 
 #if defined(USE_KDSINGLEAPPLICATION) &&                                        \
   (defined(Q_OS_MACOS) || defined(Q_OS_WIN))
+#if defined(Q_OS_WIN)
     auto kdsa = KDSingleApplication(QStringLiteral("org.flameshot.Flameshot"));
+#endif
     QByteArray data;
     QDataStream stream(&data, QIODevice::WriteOnly);
     stream << QStringLiteral("attachTextToClipboard") << text << notification;
