@@ -906,6 +906,16 @@ void CaptureWidget::mousePressEvent(QMouseEvent* e)
 void CaptureWidget::mouseDoubleClickEvent(QMouseEvent* event)
 {
     int activeLayerIndex = m_panel->activeLayerIndex();
+    // Fallback: If panel doesn't know selection, try to find tool under mouse
+    if (activeLayerIndex == -1) {
+        for (int i = 0; i < m_captureToolObjects.size(); ++i) {
+            if (m_captureToolObjects.at(i)->boundingRect().contains(event->pos())) {
+                activeLayerIndex = i;
+                break;
+            }
+        }
+    }
+
     if (activeLayerIndex != -1) {
         // Start object editing
         auto activeTool = m_captureToolObjects.at(activeLayerIndex);
@@ -914,6 +924,7 @@ void CaptureWidget::mouseDoubleClickEvent(QMouseEvent* event)
             m_mouseIsClicked = false;
             m_context.mousePos = *m_activeTool->pos();
             m_captureToolObjectsBackup = m_captureToolObjects;
+            m_existingObjectIsChanged = true;
             m_activeTool->setEditMode(true);
             drawToolsData();
             updateLayersPanel();
@@ -1564,7 +1575,9 @@ void CaptureWidget::updateActiveLayer(int layer)
 
     if (m_existingObjectIsChanged) {
         m_existingObjectIsChanged = false;
-        pushObjectsStateToUndoStack();
+        if (m_captureToolObjectsBackup.size() > 0) {
+            pushObjectsStateToUndoStack();
+        }
     }
     drawToolsData();
     drawObjectSelection();
