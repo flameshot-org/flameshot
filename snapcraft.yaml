@@ -1,7 +1,5 @@
----
-
 name: flameshot
-adopt-info: flameshot
+version: '13.3.0'
 base: core24
 summary: Powerful yet simple to use screenshot software
 description: |
@@ -15,52 +13,40 @@ confinement: strict
 compression: lzo
 platforms:
   amd64:
-    build-on: amd64
-    build-for: amd64
-
+    build-on: [amd64]
+    build-for: [amd64]
+#  arm64:
+#    build-on: [arm64]
+#    build-for: [arm64]
 
 apps:
   flameshot:
     command: usr/bin/flameshot
     desktop: usr/share/applications/org.flameshot.Flameshot.desktop
-    extensions:
-      - kde-neon-6
-    environment:
-      XDG_DATA_DIRS: $SNAP/share:$XDG_DATA_DIRS
+    common-id: org.flameshot.Flameshot
+    extensions: [kde-neon-6]
     slots: [dbus-flameshot]
     plugs:
       - home
-      - desktop
-      - wayland
       - gsettings
       - removable-media
-      - network
-      - network-bind
 
 parts:
   flameshot:
-    #source: ./
-    source: https://github.com/flameshot-org/flameshot.git
     plugin: cmake
+    source: https://github.com/flameshot-org/flameshot.git
+    source-tag: v$SNAPCRAFT_PROJECT_VERSION
     build-packages:
-      - git
+      - libxkbcommon-dev
+      - libproxy-dev
     cmake-parameters:
       - -DFLAMESHOT_ICON=/snap/flameshot/current/usr/share/icons/hicolor/scalable/apps/flameshot.svg
       - -DCMAKE_INSTALL_PREFIX=/usr
       - -DUSE_WAYLAND_CLIPBOARD=1
-    source-type: git
-    override-pull: |
-      craftctl default
-      # remove release candidates
-      last_committed_tag="$(git tag -l --sort=-v:refname | grep -v rc | head -1)"
-      git_revno="$(git rev-list $(git describe --tags --abbrev=0)..HEAD --count)"
-      git_hash="$(git rev-parse --short HEAD)"
-      snapcraftctl set-version "${last_committed_tag}+git${git_revno}.${git_hash}"
     override-build: |
       craftctl default
-      # Correct the Icon path
       sed -i 's|^Icon=.*|Icon=${SNAP}/usr/share/icons/hicolor/scalable/apps/org.flameshot.Flameshot.svg|' ${CRAFT_PART_INSTALL}/usr/share/applications/org.flameshot.Flameshot.desktop
-      sed -i 's/^\(Name\(\[.\+\]\)\?=.*\)$/\1 (Snap Edition)/g' ${CRAFT_PART_INSTALL}/usr/share/applications/org.flameshot.Flameshot.desktop
+      sed -i 's/^\(Name\(\[.\+\]\)\?=.*\)$/\1 [Snap]/g' ${CRAFT_PART_INSTALL}/usr/share/applications/org.flameshot.Flameshot.desktop
 
 slots:
   # Depending on in which environment we're running we either need
