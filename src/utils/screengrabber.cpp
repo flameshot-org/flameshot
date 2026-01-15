@@ -105,11 +105,12 @@ void ScreenGrabber::freeDesktopPortal(bool& ok, QPixmap& res)
             // https://bugreports.qt.io/browse/QTBUG-135612
             QRect approxPhysGeo = desktopGeometry();
             QRect logicalGeo = logicalDesktopGeometry();
-            if (res.size() ==
-                approxPhysGeo.size()) // which means the res is physical size
-                                      // and the dpr is correct.
+            const auto appDpr = qApp->devicePixelRatio();
+            if (res.size() == approxPhysGeo.size() ||
+                res.size() / appDpr == approxPhysGeo.size())
+            // which means the res is physical size and the dpr is correct.
             {
-                res.setDevicePixelRatio(qApp->devicePixelRatio());
+                res.setDevicePixelRatio(appDpr);
             } else if (res.size() ==
                        logicalGeo.size()) // which means the res is logical size
                                           // and we need to do nothing.
