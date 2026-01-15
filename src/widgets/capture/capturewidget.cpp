@@ -160,9 +160,9 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
             }
         }
         move(topLeft);
-// #if defined(Q_OS_WIN)
-//         resize(pixmap().size());
-// #endif
+#if defined(Q_OS_WIN)
+        resize(pixmap().size());
+#endif
     }
 #endif
 
