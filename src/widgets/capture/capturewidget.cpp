@@ -136,33 +136,34 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
 #else
         setWindowFlags(Qt::BypassWindowManagerHint | Qt::WindowStaysOnTopHint |
                        Qt::FramelessWindowHint | Qt::Tool);
+#endif
+#endif
+
         // Fix for Qt6 dual monitor offset: position widget to cover entire
         // desktop
         QRect desktopGeom = ScreenGrabber().desktopGeometry();
         move(desktopGeom.topLeft());
         resize(desktopGeom.size());
-#endif
-#endif
 
-        for (QScreen* const screen : QGuiApplication::screens()) {
+//         for (QScreen* const screen : QGuiApplication::screens()) {
+// // #if defined(Q_OS_WIN)
+// //             QPoint topLeftScreen = screen->geometry().topLeft();
+// // #else
+//             qreal dpr = screen->devicePixelRatio();
+//             QPoint topLeftScreen = screen->geometry().topLeft() / dpr;
+// // #endif
+// 
+//             if (topLeftScreen.x() < topLeft.x()) {
+//                 topLeft.setX(topLeftScreen.x());
+//             }
+//             if (topLeftScreen.y() < topLeft.y()) {
+//                 topLeft.setY(topLeftScreen.y());
+//             }
+//         }
+//         move(topLeft);
 // #if defined(Q_OS_WIN)
-//             QPoint topLeftScreen = screen->geometry().topLeft();
-// #else
-            qreal dpr = screen->devicePixelRatio();
-            QPoint topLeftScreen = screen->geometry().topLeft() / dpr;
+//         resize(pixmap().size());
 // #endif
-
-            if (topLeftScreen.x() < topLeft.x()) {
-                topLeft.setX(topLeftScreen.x());
-            }
-            if (topLeftScreen.y() < topLeft.y()) {
-                topLeft.setY(topLeftScreen.y());
-            }
-        }
-        move(topLeft);
-#if defined(Q_OS_WIN)
-        resize(pixmap().size());
-#endif
     }
 #endif
 
