@@ -145,12 +145,12 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
 #endif
 
         for (QScreen* const screen : QGuiApplication::screens()) {
-#if defined(Q_OS_WIN)
-            QPoint topLeftScreen = screen->geometry().topLeft();
-#else
+// #if defined(Q_OS_WIN)
+//             QPoint topLeftScreen = screen->geometry().topLeft();
+// #else
             qreal dpr = screen->devicePixelRatio();
             QPoint topLeftScreen = screen->geometry().topLeft() / dpr;
-#endif
+// #endif
 
             if (topLeftScreen.x() < topLeft.x()) {
                 topLeft.setX(topLeftScreen.x());
@@ -160,9 +160,9 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
             }
         }
         move(topLeft);
-#if defined(Q_OS_WIN)
-        resize(pixmap().size());
-#endif
+// #if defined(Q_OS_WIN)
+//         resize(pixmap().size());
+// #endif
     }
 #endif
 
