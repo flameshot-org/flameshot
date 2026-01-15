@@ -46,6 +46,18 @@ void ScreenGrabber::generalGrimScreenshot(bool& ok, QPixmap& res)
         res.load(imgPath, "ppm");
         QFile imgFile(imgPath);
         imgFile.remove();
+
+        // Handle device pixel ratio like freeDesktopPortal does
+        QRect approxPhysGeo = desktopGeometry();
+        QRect logicalGeo = logicalDesktopGeometry();
+        if (res.size() == approxPhysGeo.size()) {
+            res.setDevicePixelRatio(qApp->devicePixelRatio());
+        } else if (res.size() != logicalGeo.size()) {
+            // Physical size doesn't match expected, calculate actual DPR
+            res.setDevicePixelRatio(res.height() * 1.0f / logicalGeo.height());
+        }
+        // If res.size() == logicalGeo.size(), no DPR adjustment needed
+
         ok = true;
     } else {
         ok = false;
