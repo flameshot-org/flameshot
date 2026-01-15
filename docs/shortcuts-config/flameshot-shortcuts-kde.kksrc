@@ -1,0 +1,34 @@
+[Custom Commands][net.local.flameshot-2.desktop]
+Exec=flameshot gui --delay 3000
+Name=Take screenshot with delay
+
+[Custom Commands][net.local.flameshot-3.desktop]
+Exec=flameshot full
+Name=Take full-screen screenshot and save
+
+[Custom Commands][net.local.flameshot-4.desktop]
+Exec=flameshot full --clipboard
+Name=Take full-screen screenshot and copy it to clipboard
+
+[Custom Commands][net.local.flameshot-5.desktop]
+Exec=flameshot launcher
+Name=Open Flameshot Launcher
+
+[Custom Commands][net.local.flameshot.desktop]
+Exec=flameshot gui
+Name=Take screenshot
+
+[net.local.flameshot-2.desktop][Global Shortcuts]
+_launch=Ctrl+Print
+
+[net.local.flameshot-3.desktop][Global Shortcuts]
+_launch=Shift+Print
+
+[net.local.flameshot-4.desktop][Global Shortcuts]
+_launch=Ctrl+Shift+Print
+
+[net.local.flameshot-5.desktop][Global Shortcuts]
+_launch=
+
+[net.local.flameshot.desktop][Global Shortcuts]
+_launch=Print
