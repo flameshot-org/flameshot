@@ -102,7 +102,7 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
     setMouseTracking(true);
     initContext(fullScreen, req);
     // Top left of the whole set of screens
-    QPoint topLeft(INT_MAX, INT_MAX);
+    QPoint topLeft(0, 0);
 
     if (fullScreen) {
         // Grab Screenshot
@@ -138,32 +138,12 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
                        Qt::FramelessWindowHint | Qt::Tool);
 #endif
 #endif
-
         // Fix for Qt6 dual monitor offset: position widget to cover entire
         // desktop
         QRect desktopGeom = ScreenGrabber().desktopGeometry();
-        move(desktopGeom.topLeft());
+        topLeft = desktopGeom.topLeft();
+        move(topLeft);
         resize(desktopGeom.size());
-
-//         for (QScreen* const screen : QGuiApplication::screens()) {
-// // #if defined(Q_OS_WIN)
-// //             QPoint topLeftScreen = screen->geometry().topLeft();
-// // #else
-//             qreal dpr = screen->devicePixelRatio();
-//             QPoint topLeftScreen = screen->geometry().topLeft() / dpr;
-// // #endif
-// 
-//             if (topLeftScreen.x() < topLeft.x()) {
-//                 topLeft.setX(topLeftScreen.x());
-//             }
-//             if (topLeftScreen.y() < topLeft.y()) {
-//                 topLeft.setY(topLeftScreen.y());
-//             }
-//         }
-//         move(topLeft);
-// #if defined(Q_OS_WIN)
-//         resize(pixmap().size());
-// #endif
     }
 #endif
 
