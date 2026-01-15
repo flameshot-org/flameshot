@@ -101,10 +101,9 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
     m_contrastUiColor = m_config.contrastUiColor();
     setMouseTracking(true);
     initContext(fullScreen, req);
-#if (defined(Q_OS_WIN) || defined(Q_OS_MACOS))
     // Top left of the whole set of screens
     QPoint topLeft(0, 0);
-#endif
+
     if (fullScreen) {
         // Grab Screenshot
         bool ok = true;
@@ -115,27 +114,7 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
         }
         m_context.origScreenshot = m_context.screenshot;
 
-#if defined(Q_OS_WIN)
-// Call cmake with -DFLAMESHOT_DEBUG_CAPTURE=ON to enable easier debugging
-#if !defined(FLAMESHOT_DEBUG_CAPTURE)
-        setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint |
-                       Qt::SubWindow // Hides the taskbar icon
-        );
-#endif
-
-        for (QScreen* const screen : QGuiApplication::screens()) {
-            QPoint topLeftScreen = screen->geometry().topLeft();
-
-            if (topLeftScreen.x() < topLeft.x()) {
-                topLeft.setX(topLeftScreen.x());
-            }
-            if (topLeftScreen.y() < topLeft.y()) {
-                topLeft.setY(topLeftScreen.y());
-            }
-        }
-        move(topLeft);
-        resize(pixmap().size());
-#elif defined(Q_OS_MACOS)
+#if defined(Q_OS_MACOS)
         // Emulate fullscreen mode
         //        setWindowFlags(Qt::WindowStaysOnTopHint |
         //        Qt::BypassWindowManagerHint |
@@ -146,32 +125,28 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
         QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
         move(currentScreen->geometry().x(), currentScreen->geometry().y());
         resize(currentScreen->size());
-// LINUX
+// LINUX & WINDOWS
 #else
 // Call cmake with -DFLAMESHOT_DEBUG_CAPTURE=ON to enable easier debugging
 #if !defined(FLAMESHOT_DEBUG_CAPTURE)
+#if defined(Q_OS_WIN)
+        setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint |
+                       Qt::SubWindow // Hides the taskbar icon
+        );
+#else
         setWindowFlags(Qt::BypassWindowManagerHint | Qt::WindowStaysOnTopHint |
                        Qt::FramelessWindowHint | Qt::Tool);
+#endif
+#endif
         // Fix for Qt6 dual monitor offset: position widget to cover entire
         // desktop
         QRect desktopGeom = ScreenGrabber().desktopGeometry();
-        move(desktopGeom.topLeft());
-        resize(desktopGeom.size());
-#endif
-        // Need to move to the top left screen
-        QPoint topLeft(0, INT_MAX);
-        for (QScreen* const screen : QGuiApplication::screens()) {
-            qreal dpr = screen->devicePixelRatio();
-            QPoint topLeftScreen = screen->geometry().topLeft() / dpr;
-            if (topLeftScreen.x() == 0) {
-                if (topLeftScreen.y() < topLeft.y()) {
-                    topLeft.setY(topLeftScreen.y());
-                }
-            }
-        }
+        topLeft = desktopGeom.topLeft();
         move(topLeft);
-#endif
+        resize(desktopGeom.size());
     }
+#endif
+
     QVector<QRect> areas;
     if (m_context.fullscreen) {
         QPoint topLeftOffset = QPoint(0, 0);
