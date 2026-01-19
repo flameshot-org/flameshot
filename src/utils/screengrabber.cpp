@@ -291,6 +291,7 @@ void ScreenGrabber::adjustDevicePixelRatio(QPixmap& pixmap)
         pixmap.setDevicePixelRatio(qApp->devicePixelRatio());
     } else if (pixmap.size() != logicalGeo.size()) {
         // Pixmap is physical size but Qt's DPR is incorrect, calculate actual
-        pixmap.setDevicePixelRatio(pixmap.height() * 1.0f / logicalGeo.height());
+        pixmap.setDevicePixelRatio(pixmap.height() * 1.0f /
+                                   logicalGeo.height());
     }
 }
