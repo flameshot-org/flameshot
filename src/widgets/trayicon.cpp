@@ -135,9 +135,11 @@ void TrayIcon::initMenu()
             &QAction::triggered,
             Flameshot::instance(),
             &Flameshot::config);
-    auto* infoAction = new QAction(tr("&About"), this);
-    connect(
-      infoAction, &QAction::triggered, Flameshot::instance(), &Flameshot::info);
+    m_infoAction = new QAction(tr("&About"), this);
+    connect(m_infoAction,
+            &QAction::triggered,
+            Flameshot::instance(),
+            &Flameshot::info);
 
 #if !defined(DISABLE_UPDATE_CHECKER)
     m_appUpdates = new QAction(tr("Check for updates"), this);
@@ -150,10 +152,20 @@ void TrayIcon::initMenu()
             &FlameshotDaemon::newVersionAvailable,
             this,
             [this](const QVersionNumber& version) {
-                QString newVersion =
-                  tr("New version %1 is available").arg(version.toString());
-                m_appUpdates->setText(newVersion);
+                if (ConfigHandler().checkForUpdates()) {
+                    QString newVersion =
+                      tr("Download version %1").arg(version.toString());
+                    m_appUpdates->setText(newVersion);
+                    m_appUpdates->setVisible(true);
+
+                    // hack to work around menu not updating when the text /
+                    // visibility is modified Force menu refresh by removing and
+                    // re-adding the action
+                    m_menu->removeAction(m_appUpdates);
+                    m_menu->insertAction(m_infoAction, m_appUpdates);
+                }
             });
+    updateCheckUpdatesMenuVisibility();
 #endif
 
     QAction* quitAction = new QAction(tr("&Quit"), this);
@@ -186,7 +198,7 @@ void TrayIcon::initMenu()
 #if !defined(DISABLE_UPDATE_CHECKER)
     m_menu->addAction(m_appUpdates);
 #endif
-    m_menu->addAction(infoAction);
+    m_menu->addAction(m_infoAction);
     m_menu->addSeparator();
     m_menu->addAction(quitAction);
 }
@@ -204,14 +216,20 @@ void TrayIcon::updateCaptureActionShortcut()
 }
 
 #if !defined(DISABLE_UPDATE_CHECKER)
-void TrayIcon::enableCheckUpdatesAction(bool enable)
+void TrayIcon::updateCheckUpdatesMenuVisibility()
 {
-    if (m_appUpdates != nullptr) {
-        m_appUpdates->setVisible(enable);
-        m_appUpdates->setEnabled(enable);
+    if (m_appUpdates == nullptr) {
+        return;
     }
-    if (enable) {
-        FlameshotDaemon::instance()->getLatestAvailableVersion();
+
+    bool autoCheckEnabled = ConfigHandler().checkForUpdates();
+    if (autoCheckEnabled) {
+        // When auto-check is enabled, hide the menu item initially
+        // It will be shown when a new version is available via a callback
+        m_appUpdates->setVisible(false);
+    } else {
+        m_appUpdates->setVisible(true);
+        m_appUpdates->setText(tr("Check for updates"));
     }
 }
 #endif

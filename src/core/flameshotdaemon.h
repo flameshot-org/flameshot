@@ -87,7 +87,7 @@ private:
 #if !defined(DISABLE_UPDATE_CHECKER)
     QString m_appLatestUrl;
     QString m_appLatestVersion;
-    bool m_showCheckAppUpdateStatus;
+    bool m_showManualCheckAppUpdateStatus;
     QNetworkAccessManager* m_networkCheckUpdates;
 #endif
 
