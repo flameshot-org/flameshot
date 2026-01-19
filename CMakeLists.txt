@@ -32,7 +32,7 @@ else()
   FetchContent_Declare(
     qtColorWidgets
     GIT_REPOSITORY https://gitlab.com/mattbas/Qt-Color-Widgets.git
-    GIT_TAG 352bc8f99bf2174d5724ee70623427aa31ddc26a
+    GIT_TAG 4f3c7e2af8e3138d89533475af66df42ccf08ef8
   )
   #Workaround for duplicate GUID in windows WIX installer
   if(WIN32)
