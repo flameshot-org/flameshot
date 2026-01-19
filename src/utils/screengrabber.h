@@ -21,5 +21,6 @@ public:
     QRect logicalDesktopGeometry();
 
 private:
+    void adjustDevicePixelRatio(QPixmap& pixmap);
     DesktopInfo m_info;
 };
