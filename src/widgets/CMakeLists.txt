@@ -16,6 +16,7 @@ target_sources(
         loadspinner.h
         notificationwidget.h
         orientablepushbutton.h
+        countdownwindow.h
 
         colorpickerwidget.h
         capture/capturetoolobjects.h
@@ -44,6 +45,7 @@ target_sources(
         loadspinner.cpp
         notificationwidget.cpp
         orientablepushbutton.cpp
+        countdownwindow.cpp
         colorpickerwidget.cpp
         capture/capturetoolobjects.cpp
 )

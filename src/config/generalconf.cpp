@@ -47,6 +47,8 @@ GeneralConf::GeneralConf(QWidget* parent)
     initShowQuitPrompt();
     initAllowMultipleGuiInstances();
     initSaveLastRegion();
+    initCaptureDelay();
+
     initShowHelp();
     initShowSidePanelButton();
     initUseJpgForClipboard();
@@ -105,6 +107,16 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
     m_showMagnifier->setChecked(config.showMagnifier());
     m_squareMagnifier->setChecked(config.squareMagnifier());
     m_saveLastRegion->setChecked(config.saveLastRegion());
+
+    // Find and select the item with matching capture delay value
+    int currentDelayMs = config.captureDelay();
+    for (int i = 0; i < m_captureDelay->count(); ++i) {
+        if (m_captureDelay->itemData(i).toInt() == currentDelayMs) {
+            m_captureDelay->setCurrentIndex(i);
+            break;
+        }
+    }
+
     m_reverseArrow->setChecked(config.reverseArrow());
 
 #if !defined(Q_OS_WIN)
@@ -138,6 +150,13 @@ void GeneralConf::updateComponents()
 void GeneralConf::saveLastRegion(bool checked)
 {
     ConfigHandler().setSaveLastRegion(checked);
+}
+
+void GeneralConf::captureDelayChanged(int index)
+{
+    // Get the delay value (in milliseconds) from the selected item's data
+    int delayMs = m_captureDelay->itemData(index).toInt();
+    ConfigHandler().setCaptureDelay(delayMs);
 }
 
 void GeneralConf::showHelpChanged(bool checked)
@@ -291,6 +310,39 @@ void GeneralConf::initSaveLastRegion()
             &QCheckBox::clicked,
             this,
             &GeneralConf::saveLastRegion);
+}
+
+void GeneralConf::initCaptureDelay()
+{
+    auto* delayLayout = new QHBoxLayout();
+
+    m_captureDelay = new QComboBox(this);
+
+    // Add the same options as in the tray icon menu
+    m_captureDelay->addItem(tr("No delay"), 0);
+    m_captureDelay->addItem(tr("1 second"), 1000);
+    m_captureDelay->addItem(tr("3 seconds"), 3000);
+    m_captureDelay->addItem(tr("5 seconds"), 5000);
+    m_captureDelay->addItem(tr("10 seconds"), 10000);
+
+    m_captureDelay->setToolTip(
+      tr("Delay before capturing screenshot when triggered from tray icon"));
+
+    auto* delayLabel = new QLabel(tr("Screenshot delay"), this);
+    delayLabel->setToolTip(
+      tr("Delay before capturing screenshot when triggered from tray icon"));
+
+    delayLayout->addWidget(m_captureDelay);
+    delayLayout->addWidget(delayLabel);
+    delayLayout->addStretch();
+
+    m_scrollAreaLayout->addLayout(delayLayout);
+
+    connect(
+      m_captureDelay,
+      static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+      this,
+      &GeneralConf::captureDelayChanged);
 }
 
 void GeneralConf::initShowSidePanelButton()
