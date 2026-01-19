@@ -170,6 +170,7 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
         switch (m_info.windowManager()) {
             case DesktopInfo::GNOME:
             case DesktopInfo::KDE:
+            case DesktopInfo::COSMIC:
                 freeDesktopPortal(ok, res);
                 break;
             case DesktopInfo::QTILE:
