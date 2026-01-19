@@ -44,7 +44,9 @@ bool saveToFilesystem(const QPixmap& capture,
     QString completePath = FileNameHandler().properScreenshotPath(
       path, ConfigHandler().saveAsFileExtension());
     QFile file{ completePath };
-    file.open(QIODevice::WriteOnly);
+    if (!file.open(QIODevice::WriteOnly)) {
+        return false;
+    }
 
     bool okay;
     QString saveExtension;
@@ -325,7 +327,9 @@ bool saveToFilesystemGUI(const QPixmap& capture)
     }
 
     QFile file{ savePath };
-    file.open(QIODevice::WriteOnly);
+    if (!file.open(QIODevice::WriteOnly)) {
+        return false;
+    }
 
     QString saveExtension;
     saveExtension = QFileInfo(savePath).suffix().toLower();
