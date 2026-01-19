@@ -46,18 +46,7 @@ void ScreenGrabber::generalGrimScreenshot(bool& ok, QPixmap& res)
         res.load(imgPath, "ppm");
         QFile imgFile(imgPath);
         imgFile.remove();
-
-        // Handle device pixel ratio like freeDesktopPortal does
-        QRect approxPhysGeo = desktopGeometry();
-        QRect logicalGeo = logicalDesktopGeometry();
-        if (res.size() == approxPhysGeo.size()) {
-            res.setDevicePixelRatio(qApp->devicePixelRatio());
-        } else if (res.size() != logicalGeo.size()) {
-            // Physical size doesn't match expected, calculate actual DPR
-            res.setDevicePixelRatio(res.height() * 1.0f / logicalGeo.height());
-        }
-        // If res.size() == logicalGeo.size(), no DPR adjustment needed
-
+        adjustDevicePixelRatio(res);
         ok = true;
     } else {
         ok = false;
@@ -110,29 +99,7 @@ void ScreenGrabber::freeDesktopPortal(bool& ok, QPixmap& res)
             QUrl uri = map.value("uri").toString();
             QString uriString = uri.toLocalFile();
             res = QPixmap(uriString);
-
-            // we calculate an approximated physical desktop geometry based on
-            // dpr(provided by qt), we calculate the logical desktop geometry
-            // later, this is the accurate size, more info:
-            // https://bugreports.qt.io/browse/QTBUG-135612
-            QRect approxPhysGeo = desktopGeometry();
-            QRect logicalGeo = logicalDesktopGeometry();
-            if (res.size() ==
-                approxPhysGeo.size()) // which means the res is physical size
-                                      // and the dpr is correct.
-            {
-                res.setDevicePixelRatio(qApp->devicePixelRatio());
-            } else if (res.size() ==
-                       logicalGeo.size()) // which means the res is logical size
-                                          // and we need to do nothing.
-            {
-                // No action needed
-            } else // which means the res is physical size and the dpr is not
-                   // correct.
-            {
-                res.setDevicePixelRatio(res.height() * 1.0f /
-                                        logicalGeo.height());
-            }
+            adjustDevicePixelRatio(res);
             QFile imgFile(uriString);
             imgFile.remove();
         }
@@ -313,4 +280,17 @@ QRect ScreenGrabber::logicalDesktopGeometry()
         geometry = geometry.united(scrRect);
     }
     return geometry;
+}
+
+void ScreenGrabber::adjustDevicePixelRatio(QPixmap& pixmap)
+{
+    QRect physicalGeo = desktopGeometry();
+    QRect logicalGeo = logicalDesktopGeometry();
+    if (pixmap.size() == physicalGeo.size()) {
+        // Pixmap is physical size and Qt's DPR is correct
+        pixmap.setDevicePixelRatio(qApp->devicePixelRatio());
+    } else if (pixmap.size() != logicalGeo.size()) {
+        // Pixmap is physical size but Qt's DPR is incorrect, calculate actual
+        pixmap.setDevicePixelRatio(pixmap.height() * 1.0f / logicalGeo.height());
+    }
 }
