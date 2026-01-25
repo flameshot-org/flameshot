@@ -38,7 +38,6 @@ private slots:
     void showSidePanelButtonChanged(bool checked);
     void showDesktopNotificationChanged(bool checked);
     void showAbortNotificationChanged(bool checked);
-    void useGrimAdapter(bool checked);
 #if !defined(DISABLE_UPDATE_CHECKER)
     void checkForUpdatesChanged(bool checked);
 #endif
@@ -89,7 +88,6 @@ private:
     void initShowSidePanelButton();
     void initShowStartupLaunchMessage();
     void initShowTrayIcon();
-    void initUseGrimAdapter();
     void initSquareMagnifier();
     void initUndoLimit();
     void initUploadWithoutConfirmation();
@@ -111,7 +109,6 @@ private:
     QCheckBox* m_sysNotifications;
     QCheckBox* m_abortNotifications;
     QCheckBox* m_showTray;
-    QCheckBox* m_useGrimAdapter;
     QCheckBox* m_helpMessage;
     QCheckBox* m_sidePanelButton;
 #if !defined(DISABLE_UPDATE_CHECKER)
