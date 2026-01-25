@@ -35,6 +35,7 @@
 #include <QPainter>
 #include <QScreen>
 #include <QShortcut>
+#include <QWindow>
 #include <draggablewidgetmaker.h>
 
 #if !defined(DISABLE_UPDATE_CHECKER)
@@ -101,19 +102,24 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
     m_contrastUiColor = m_config.contrastUiColor();
     setMouseTracking(true);
     initContext(fullScreen, req);
+
+    ScreenGrabber grabber;
+    QScreen* selectedScreen = nullptr;
+
 #if (defined(Q_OS_WIN) || defined(Q_OS_MACOS))
     // Top left of the whole set of screens
     QPoint topLeft(0, 0);
 #endif
     if (fullScreen) {
-        // Grab Screenshot
         bool ok = true;
-        m_context.screenshot = ScreenGrabber().grabEntireDesktop(ok);
+        m_context.screenshot = grabber.grabEntireDesktop(ok);
         if (!ok) {
             AbstractLogger::error() << tr("Unable to capture screen");
             this->close();
         }
         m_context.origScreenshot = m_context.screenshot;
+
+        selectedScreen = grabber.getSelectedScreen();
 
 #if defined(Q_OS_WIN)
 // Call cmake with -DFLAMESHOT_DEBUG_CAPTURE=ON to enable easier debugging
@@ -123,17 +129,23 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
         );
 #endif
 
-        for (QScreen* const screen : QGuiApplication::screens()) {
-            QPoint topLeftScreen = screen->geometry().topLeft();
+        // Position the window at the selected screen's position
+        // (or the topLeft of all screens if no specific screen was selected)
+        if (selectedScreen) {
+            move(selectedScreen->geometry().topLeft());
+        } else {
+            for (QScreen* const screen : QGuiApplication::screens()) {
+                QPoint topLeftScreen = screen->geometry().topLeft();
 
-            if (topLeftScreen.x() < topLeft.x()) {
-                topLeft.setX(topLeftScreen.x());
+                if (topLeftScreen.x() < topLeft.x()) {
+                    topLeft.setX(topLeftScreen.x());
+                }
+                if (topLeftScreen.y() < topLeft.y()) {
+                    topLeft.setY(topLeftScreen.y());
+                }
             }
-            if (topLeftScreen.y() < topLeft.y()) {
-                topLeft.setY(topLeftScreen.y());
-            }
+            move(topLeft);
         }
-        move(topLeft);
         resize(pixmap().size());
 #elif defined(Q_OS_MACOS)
         // Emulate fullscreen mode
@@ -144,62 +156,54 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
         //                       Qt::Popup
         //                       );
         QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
-        move(currentScreen->geometry().x(), currentScreen->geometry().y());
-        resize(currentScreen->size());
+        if (!currentScreen) {
+            currentScreen = QGuiApplication::primaryScreen();
+        }
+        if (currentScreen) {
+            move(currentScreen->geometry().x(), currentScreen->geometry().y());
+            resize(currentScreen->size());
+        } else {
+            // Fallback to the pixmap size or keep current widget size
+            if (!pixmap().isNull()) {
+                resize(pixmap().size());
+            }
+        }
 // LINUX
 #else
 // Call cmake with -DFLAMESHOT_DEBUG_CAPTURE=ON to enable easier debugging
 #if !defined(FLAMESHOT_DEBUG_CAPTURE)
         setWindowFlags(Qt::BypassWindowManagerHint | Qt::WindowStaysOnTopHint |
                        Qt::FramelessWindowHint | Qt::Tool);
-        // Fix for Qt6 dual monitor offset: position widget to cover entire
-        // desktop
-        QRect desktopGeom = ScreenGrabber().desktopGeometry();
-        move(desktopGeom.topLeft());
-        resize(desktopGeom.size());
-#endif
-        // Need to move to the top left screen
-        QPoint topLeft(0, INT_MAX);
-        for (QScreen* const screen : QGuiApplication::screens()) {
-            qreal dpr = screen->devicePixelRatio();
-            QPoint topLeftScreen = screen->geometry().topLeft() / dpr;
-            if (topLeftScreen.x() == 0) {
-                if (topLeftScreen.y() < topLeft.y()) {
-                    topLeft.setY(topLeftScreen.y());
-                }
-            }
+
+        // Always display on the selected screen (not spanning entire desktop)
+        if (selectedScreen == nullptr) {
+            selectedScreen = QGuiApplication::primaryScreen();
         }
-        move(topLeft);
+        QRect screenGeom = selectedScreen->geometry();
+        move(screenGeom.topLeft());
+        resize(screenGeom.size());
+#endif
 #endif
     }
+
+    // Move the window to the correct screen
+    if (selectedScreen != nullptr && windowHandle()) {
+        windowHandle()->setScreen(selectedScreen);
+    }
+
     QVector<QRect> areas;
     if (m_context.fullscreen) {
-        QPoint topLeftOffset = QPoint(0, 0);
-#if defined(Q_OS_WIN)
-        topLeftOffset = topLeft;
-#endif
-
-#if defined(Q_OS_MACOS)
-        // MacOS works just with one active display, so we need to append
-        // just one current display and keep multiple displays logic for
-        // other OS
-        QRect r;
-        QScreen* screen = QGuiAppCurrentScreen().currentScreen();
-        r = screen->geometry();
-        // all calculations are processed according to (0, 0) start
-        // point so we need to move current object to (0, 0)
+        // Always display on a single screen, normalized to (0, 0)
+        QScreen* screenForAreas = selectedScreen;
+        if (!screenForAreas) {
+            screenForAreas = QGuiAppCurrentScreen().currentScreen();
+        }
+        if (!screenForAreas) {
+            screenForAreas = QGuiApplication::primaryScreen();
+        }
+        QRect r = screenForAreas ? screenForAreas->geometry() : QRect();
         r.moveTo(0, 0);
         areas.append(r);
-#else
-        // LINUX & WINDOWS
-        for (QScreen* const screen : QGuiApplication::screens()) {
-            QRect r = screen->geometry();
-            r.moveTo(r.x() / screen->devicePixelRatio(),
-                     r.y() / screen->devicePixelRatio());
-            r.moveTo(r.topLeft() - topLeftOffset);
-            areas.append(r);
-        }
-#endif
     } else {
         areas.append(rect());
     }
@@ -272,11 +276,26 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
     // Qt6 has only sizes in logical values, position is in physical values.
     // Move Help message to the logical pixel with devicePixelRatio.
     QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
-    QRect currentScreenGeometry = currentScreen->geometry();
-    qreal currentScreenDpr = currentScreen->devicePixelRatio();
-    currentScreenGeometry.moveTo(
-      int(currentScreenGeometry.x() / currentScreenDpr),
-      int(currentScreenGeometry.y() / currentScreenDpr));
+    QRect currentScreenGeometry;
+    qreal currentScreenDpr = 1.0;
+    if (currentScreen) {
+        currentScreenGeometry = currentScreen->geometry();
+        currentScreenDpr = currentScreen->devicePixelRatio();
+        currentScreenGeometry.moveTo(
+          int(currentScreenGeometry.x() / currentScreenDpr),
+          int(currentScreenGeometry.y() / currentScreenDpr));
+    } else {
+        QScreen* primary = QGuiApplication::primaryScreen();
+        if (primary) {
+            currentScreenGeometry = primary->geometry();
+            currentScreenDpr = primary->devicePixelRatio();
+            currentScreenGeometry.moveTo(
+              int(currentScreenGeometry.x() / currentScreenDpr),
+              int(currentScreenGeometry.y() / currentScreenDpr));
+        } else {
+            currentScreenGeometry = rect();
+        }
+    }
     OverlayMessage::init(this, currentScreenGeometry);
 
     if (m_config.showHelp()) {
@@ -1063,8 +1082,16 @@ void CaptureWidget::setToolSize(int size)
     m_context.toolSize = qBound(1, size, maxToolSize);
     updateTool(activeButtonTool());
 
-    QPoint topLeft =
-      QGuiAppCurrentScreen().currentScreen()->geometry().topLeft();
+    QScreen* topLeftScreen = QGuiAppCurrentScreen().currentScreen();
+    QPoint topLeft(0, 0);
+    if (topLeftScreen) {
+        topLeft = topLeftScreen->geometry().topLeft();
+    } else {
+        QScreen* primary = QGuiApplication::primaryScreen();
+        if (primary) {
+            topLeft = primary->geometry().topLeft();
+        }
+    }
     int offset = m_notifierBox->width() / 4;
     m_notifierBox->move(mapFromGlobal(topLeft) + QPoint(offset, offset));
     m_notifierBox->showMessage(QString::number(m_context.toolSize));
@@ -1190,10 +1217,24 @@ void CaptureWidget::initPanel()
     if (m_context.fullscreen) {
 #if (defined(Q_OS_MACOS) || defined(Q_OS_LINUX))
         QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
-        panelRect = currentScreen->geometry();
-        auto devicePixelRatio = currentScreen->devicePixelRatio();
-        panelRect.moveTo(static_cast<int>(panelRect.x() / devicePixelRatio),
-                         static_cast<int>(panelRect.y() / devicePixelRatio));
+        if (currentScreen) {
+            panelRect = currentScreen->geometry();
+            auto devicePixelRatio = currentScreen->devicePixelRatio();
+            panelRect.moveTo(
+              static_cast<int>(panelRect.x() / devicePixelRatio),
+              static_cast<int>(panelRect.y() / devicePixelRatio));
+        } else {
+            QScreen* primary = QGuiApplication::primaryScreen();
+            if (primary) {
+                panelRect = primary->geometry();
+                auto devicePixelRatio = primary->devicePixelRatio();
+                panelRect.moveTo(
+                  static_cast<int>(panelRect.x() / devicePixelRatio),
+                  static_cast<int>(panelRect.y() / devicePixelRatio));
+            } else {
+                panelRect = rect();
+            }
+        }
 #else
         panelRect = QGuiApplication::primaryScreen()->geometry();
         auto devicePixelRatio =
@@ -1235,7 +1276,16 @@ void CaptureWidget::initPanel()
     QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
     panelRect.moveTo(mapFromGlobal(panelRect.topLeft()));
     m_panel->setFixedWidth(static_cast<int>(m_colorPicker->width() * 1.5));
-    m_panel->setFixedHeight(currentScreen->geometry().height());
+    if (currentScreen) {
+        m_panel->setFixedHeight(currentScreen->geometry().height());
+    } else {
+        QScreen* primary = QGuiApplication::primaryScreen();
+        if (primary) {
+            m_panel->setFixedHeight(primary->geometry().height());
+        } else {
+            m_panel->setFixedHeight(height());
+        }
+    }
 #else
     panelRect.moveTo(mapFromGlobal(panelRect.topLeft()));
     panelRect.setWidth(m_colorPicker->width() * 1.5);

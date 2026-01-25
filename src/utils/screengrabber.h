@@ -4,8 +4,14 @@
 #pragma once
 
 #include "src/utils/desktopinfo.h"
+#include <QEvent>
+#include <QList>
 #include <QObject>
+#include <QPixmap>
 #include <QScreen>
+
+class QEventLoop;
+class QWidget;
 
 class ScreenGrabber : public QObject
 {
@@ -19,8 +25,20 @@ public:
     void generalGrimScreenshot(bool& ok, QPixmap& res);
     QRect desktopGeometry();
     QRect logicalDesktopGeometry();
+    int getSelectedMonitor() const { return m_selectedMonitor; }
+    QScreen* getSelectedScreen() const;
+    QPixmap selectMonitorAndCrop(const QPixmap& fullScreenshot, bool& ok);
+
+protected:
+    bool eventFilter(QObject* obj, QEvent* event) override;
 
 private:
     void adjustDevicePixelRatio(QPixmap& pixmap);
+    QWidget* createMonitorPreviews(const QPixmap& fullScreenshot);
+    QPixmap cropToMonitor(const QPixmap& fullScreenshot, int monitorIndex);
+
     DesktopInfo m_info;
+    QPixmap Screenshot;
+    int m_selectedMonitor;
+    QEventLoop* m_monitorSelectionLoop;
 };
