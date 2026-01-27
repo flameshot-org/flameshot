@@ -273,30 +273,9 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
                 OverlayMessage::instance()->update();
             });
 
-    // Qt6 has only sizes in logical values, position is in physical values.
-    // Move Help message to the logical pixel with devicePixelRatio.
-    QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
-    QRect currentScreenGeometry;
-    qreal currentScreenDpr = 1.0;
-    if (currentScreen) {
-        currentScreenGeometry = currentScreen->geometry();
-        currentScreenDpr = currentScreen->devicePixelRatio();
-        currentScreenGeometry.moveTo(
-          int(currentScreenGeometry.x() / currentScreenDpr),
-          int(currentScreenGeometry.y() / currentScreenDpr));
-    } else {
-        QScreen* primary = QGuiApplication::primaryScreen();
-        if (primary) {
-            currentScreenGeometry = primary->geometry();
-            currentScreenDpr = primary->devicePixelRatio();
-            currentScreenGeometry.moveTo(
-              int(currentScreenGeometry.x() / currentScreenDpr),
-              int(currentScreenGeometry.y() / currentScreenDpr));
-        } else {
-            currentScreenGeometry = rect();
-        }
-    }
-    OverlayMessage::init(this, currentScreenGeometry);
+    // OverlayMessage is a child widget, so use widget-local coordinates
+    // (rect()) instead of global screen coordinates
+    OverlayMessage::init(this, rect());
 
     if (m_config.showHelp()) {
         initHelpMessage();
@@ -1213,36 +1192,10 @@ void CaptureWidget::initContext(bool fullscreen, const CaptureRequest& req)
 
 void CaptureWidget::initPanel()
 {
+    // Use widget-local coordinates (rect()) for all child widgets
+    // Child widgets use parent-relative coordinate system, not global screen
+    // coords
     QRect panelRect = rect();
-    if (m_context.fullscreen) {
-#if (defined(Q_OS_MACOS) || defined(Q_OS_LINUX))
-        QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
-        if (currentScreen) {
-            panelRect = currentScreen->geometry();
-            auto devicePixelRatio = currentScreen->devicePixelRatio();
-            panelRect.moveTo(
-              static_cast<int>(panelRect.x() / devicePixelRatio),
-              static_cast<int>(panelRect.y() / devicePixelRatio));
-        } else {
-            QScreen* primary = QGuiApplication::primaryScreen();
-            if (primary) {
-                panelRect = primary->geometry();
-                auto devicePixelRatio = primary->devicePixelRatio();
-                panelRect.moveTo(
-                  static_cast<int>(panelRect.x() / devicePixelRatio),
-                  static_cast<int>(panelRect.y() / devicePixelRatio));
-            } else {
-                panelRect = rect();
-            }
-        }
-#else
-        panelRect = QGuiApplication::primaryScreen()->geometry();
-        auto devicePixelRatio =
-          QGuiApplication::primaryScreen()->devicePixelRatio();
-        panelRect.moveTo(panelRect.x() / devicePixelRatio,
-                         panelRect.y() / devicePixelRatio);
-#endif
-    }
 
     if (ConfigHandler().showSidePanelButton()) {
         auto* panelToggleButton =
@@ -1257,6 +1210,8 @@ void CaptureWidget::initPanel()
           static_cast<int>(panelRect.height() / 2) -
             static_cast<int>(panelToggleButton->width() / 2));
 #else
+        // panelRect is already adjusted for DPR, so centering calculations work
+        // correctly
         panelToggleButton->move(panelRect.x(),
                                 panelRect.y() + panelRect.height() / 2 -
                                   panelToggleButton->width() / 2);
@@ -1273,21 +1228,10 @@ void CaptureWidget::initPanel()
     m_panel->hide();
     makeChild(m_panel);
 #if defined(Q_OS_MACOS)
-    QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
-    panelRect.moveTo(mapFromGlobal(panelRect.topLeft()));
     m_panel->setFixedWidth(static_cast<int>(m_colorPicker->width() * 1.5));
-    if (currentScreen) {
-        m_panel->setFixedHeight(currentScreen->geometry().height());
-    } else {
-        QScreen* primary = QGuiApplication::primaryScreen();
-        if (primary) {
-            m_panel->setFixedHeight(primary->geometry().height());
-        } else {
-            m_panel->setFixedHeight(height());
-        }
-    }
+    m_panel->setFixedHeight(height());
 #else
-    panelRect.moveTo(mapFromGlobal(panelRect.topLeft()));
+    // Panel uses widget-local coordinates (parent-relative)
     panelRect.setWidth(m_colorPicker->width() * 1.5);
     m_panel->setGeometry(panelRect);
 #endif
