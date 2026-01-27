@@ -644,6 +644,9 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
 {
     Q_UNUSED(paintEvent)
     QPainter painter(this);
+    if (!painter.isActive()) {
+        return;
+    }
     GeneralConf::xywh_position position =
       static_cast<GeneralConf::xywh_position>(m_config.showSelectionGeometry());
     /* QPainter::save and restore is somewhat costly so we try to guess

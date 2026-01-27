@@ -38,6 +38,8 @@ void OrientablePushButton::paintEvent(QPaintEvent* event)
     Q_UNUSED(event)
 
     QStylePainter painter(this);
+    if (!painter.isActive())
+        return;
     QStyleOptionButton option;
     initStyleOption(&option);
 
