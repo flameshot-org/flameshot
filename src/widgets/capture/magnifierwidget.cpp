@@ -35,6 +35,9 @@ MagnifierWidget::MagnifierWidget(const QPixmap& p,
 void MagnifierWidget::paintEvent(QPaintEvent*)
 {
     QPainter p(this);
+    if (!p.isActive()) {
+        return;
+    }
     if (m_square) {
         drawMagnifier(p);
     } else {

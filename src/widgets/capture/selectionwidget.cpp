@@ -380,6 +380,9 @@ void SelectionWidget::parentMouseMoveEvent(QMouseEvent* e)
 void SelectionWidget::paintEvent(QPaintEvent*)
 {
     QPainter p(this);
+    if (!p.isActive()) {
+        return;
+    }
     p.setPen(m_color);
     p.drawRect(rect() + QMargins(0, 0, -1, -1));
     p.setRenderHint(QPainter::Antialiasing);
