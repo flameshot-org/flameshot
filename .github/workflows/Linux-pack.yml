@@ -408,6 +408,14 @@ jobs:
           echo "VER_INFO=${ver_info}" >> $GITHUB_ENV
           echo "GIT_HASH=${git_hash}" >> $GITHUB_ENV
 
+      - name: Update flatpak manifest with commit SHA
+        run: |
+          git_hash=$(git rev-parse HEAD)
+          sed -i "s/branch: master/commit: ${git_hash}/" packaging/flatpak/org.flameshot.Flameshot.yml
+          echo "=======FLATPAK MANIFEST========"
+          cat packaging/flatpak/org.flameshot.Flameshot.yml
+          echo "==============================="
+
       - name: Setup flatpak
         run: |
           sudo apt-get -y -qq update
