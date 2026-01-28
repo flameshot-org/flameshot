@@ -41,38 +41,6 @@ ScreenGrabber::ScreenGrabber(QObject* parent)
   , m_monitorSelectionLoop(nullptr)
 {}
 
-void ScreenGrabber::generalGrimScreenshot(bool& ok, QPixmap& res)
-{
-#if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
-    if (!ConfigHandler().useGrimAdapter()) {
-        return;
-    }
-
-    QString runDir =
-      QProcessEnvironment::systemEnvironment().value("XDG_RUNTIME_DIR");
-    QString imgPath = runDir + "/flameshot.ppm";
-    QProcess Process;
-    QString program = "grim";
-    QStringList arguments;
-    arguments << "-t"
-              << "ppm" << imgPath;
-    Process.start(program, arguments);
-    if (Process.waitForFinished()) {
-        res.load(imgPath, "ppm");
-        QFile imgFile(imgPath);
-        imgFile.remove();
-        adjustDevicePixelRatio(res);
-        ok = true;
-    } else {
-        ok = false;
-        AbstractLogger::error()
-          << tr("The universal wayland screen capture adapter requires Grim as "
-                "the screen capture component of wayland. If the screen "
-                "capture component is missing, please install it!");
-    }
-#endif
-}
-
 void ScreenGrabber::freeDesktopPortal(bool& ok, QPixmap& res)
 {
 
@@ -217,48 +185,7 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
     if (m_info.waylandDetected()) {
         QPixmap res;
         // handle screenshot based on DE
-        switch (m_info.windowManager()) {
-            case DesktopInfo::GNOME:
-            case DesktopInfo::KDE:
-            case DesktopInfo::COSMIC:
-                freeDesktopPortal(ok, res);
-                break;
-            case DesktopInfo::QTILE:
-            case DesktopInfo::WLROOTS:
-            case DesktopInfo::HYPRLAND:
-            case DesktopInfo::OTHER: {
-                if (!ConfigHandler().useGrimAdapter()) {
-                    if (!ConfigHandler().disabledGrimWarning()) {
-                        AbstractLogger::warning() << tr(
-                          "If the useGrimAdapter setting is not enabled, the "
-                          "dbus protocol will be used. It should be noted that "
-                          "using the dbus protocol under wayland is not "
-                          "recommended. It is recommended to enable the "
-                          "useGrimAdapter setting in flameshot.ini to activate "
-                          "the grim-based general wayland screenshot adapter");
-                    }
-                    freeDesktopPortal(ok, res);
-                } else {
-                    if (!ConfigHandler().disabledGrimWarning()) {
-                        AbstractLogger::warning() << tr(
-                          "grim's screenshot component is implemented based on "
-                          "wlroots, it may not be used in GNOME or similar "
-                          "desktop environments");
-                    }
-                    generalGrimScreenshot(ok, res);
-                }
-                break;
-            }
-            default:
-                ok = false;
-                AbstractLogger::error()
-                  << tr("Unable to detect desktop environment (GNOME? KDE? "
-                        "Qile? Sway? ...)");
-                AbstractLogger::error()
-                  << tr("Hint: try setting the XDG_CURRENT_DESKTOP environment "
-                        "variable.");
-                break;
-        }
+        freeDesktopPortal(ok, res);
         if (!ok) {
             AbstractLogger::error() << tr("Unable to capture screen");
         }
