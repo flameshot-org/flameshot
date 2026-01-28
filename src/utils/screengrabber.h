@@ -22,7 +22,6 @@ public:
     QRect screenGeometry(QScreen* screen);
     QPixmap grabScreen(QScreen* screenNumber, bool& ok);
     void freeDesktopPortal(bool& ok, QPixmap& res);
-    void generalGrimScreenshot(bool& ok, QPixmap& res);
     QRect desktopGeometry();
     QRect logicalDesktopGeometry();
     int getSelectedMonitor() const { return m_selectedMonitor; }
