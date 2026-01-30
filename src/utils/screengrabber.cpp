@@ -75,20 +75,19 @@ void ScreenGrabber::freeDesktopPortal(bool& ok, QPixmap& res)
       this);
 
     QEventLoop loop;
-    QPixmap fullScreenshot;
 
-    const auto onPortalResponse =
-      [&fullScreenshot, &loop, this](uint status, const QVariantMap& map) {
-          if (status == 0) {
-              // Parse this as URI to handle unicode properly
-              QUrl uri = map.value("uri").toString();
-              QString uriString = uri.toLocalFile();
-              fullScreenshot = QPixmap(uriString);
-              QFile imgFile(uriString);
-              imgFile.remove();
-          }
-          loop.quit();
-      };
+    const auto onPortalResponse = [&res, &loop, this](uint status,
+                                                      const QVariantMap& map) {
+        if (status == 0) {
+            // Parse this as URI to handle unicode properly
+            QUrl uri = map.value("uri").toString();
+            QString uriString = uri.toLocalFile();
+            res = QPixmap(uriString);
+            QFile imgFile(uriString);
+            imgFile.remove();
+        }
+        loop.quit();
+    };
 
     // prevent racy situations and listen before calling screenshot
     QMetaObject::Connection conn = QObject::connect(
@@ -116,15 +115,17 @@ void ScreenGrabber::freeDesktopPortal(bool& ok, QPixmap& res)
     request->Close().waitForFinished();
     request->deleteLater();
 
-    if (fullScreenshot.isNull()) {
+    if (res.isNull()) {
         ok = false;
         return;
     }
 
-    QPixmap result = selectMonitorAndCrop(fullScreenshot, ok);
-    if (ok) {
-        res = result;
-    }
+#ifdef FLAMESHOT_DEBUG_CAPTURE
+    qDebug() << tr("FreeDesktop portal screenshot size: %1x%2, DPR: %3")
+                  .arg(res.width())
+                  .arg(res.height())
+                  .arg(res.devicePixelRatio());
+#endif
 #endif
 }
 
@@ -132,7 +133,6 @@ QPixmap ScreenGrabber::selectMonitorAndCrop(const QPixmap& fullScreenshot,
                                             bool& ok)
 {
     ok = true;
-
 #if defined(Q_OS_MACOS)
     // Avoid showing additional top-level monitor selection UI on macOS
     // Only screenshot the monitor where the tray activated the screenshot
@@ -181,28 +181,32 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
       wid, geom.x(), geom.y(), geom.width(), geom.height());
     screenPixmap.setDevicePixelRatio(currentScreen->devicePixelRatio());
     return screenPixmap;
+
 #elif defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
+    QPixmap fullScreenshot;
     if (m_info.waylandDetected()) {
-        QPixmap res;
-        // handle screenshot based on DE
-        freeDesktopPortal(ok, res);
+        freeDesktopPortal(ok, fullScreenshot);
         if (!ok) {
             AbstractLogger::error() << tr("Unable to capture screen");
+            return QPixmap();
         }
-        return res;
     }
-#endif
-#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX) || defined(Q_OS_WIN)
-    QRect geometry = desktopGeometry();
-    QScreen* primaryScreen = QGuiApplication::primaryScreen();
-    QRect r = primaryScreen->geometry();
-    QPixmap desktop =
-      primaryScreen->grabWindow(wid,
-                                -r.x() / primaryScreen->devicePixelRatio(),
-                                -r.y() / primaryScreen->devicePixelRatio(),
-                                geometry.width(),
-                                geometry.height());
+    // X11
+    else {
+        QRect geometry = desktopGeometry();
+        QScreen* primaryScreen = QGuiApplication::primaryScreen();
+        QRect r = primaryScreen->geometry();
+        fullScreenshot =
+          primaryScreen->grabWindow(wid,
+                                    -r.x() / primaryScreen->devicePixelRatio(),
+                                    -r.y() / primaryScreen->devicePixelRatio(),
+                                    geometry.width(),
+                                    geometry.height());
+    }
+    return selectMonitorAndCrop(fullScreenshot, ok);
 
+#elif defined(Q_OS_WIN)
+    QPixmap desktop = windowsScreenshot(wid);
     return selectMonitorAndCrop(desktop, ok);
 #endif
 }
@@ -212,15 +216,6 @@ QRect ScreenGrabber::screenGeometry(QScreen* screen)
     QRect geometry;
     if (m_info.waylandDetected()) {
         QPoint topLeft(0, 0);
-#ifdef Q_OS_WIN
-        for (QScreen* const screen : QGuiApplication::screens()) {
-            QPoint topLeftScreen = screen->geometry().topLeft();
-            if (topLeft.x() > topLeftScreen.x() ||
-                topLeft.y() > topLeftScreen.y()) {
-                topLeft = topLeftScreen;
-            }
-        }
-#endif
         geometry = screen->geometry();
         geometry.moveTo(geometry.topLeft() - topLeft);
     } else {
@@ -253,12 +248,10 @@ QRect ScreenGrabber::desktopGeometry()
 
     for (QScreen* const screen : QGuiApplication::screens()) {
         QRect scrRect = screen->geometry();
-        // Qt6 fix: Don't divide by devicePixelRatio for multi-monitor setups
-        // This was causing coordinate offset issues in dual monitor
-        // configurations
-        // But it still has a screen position in real pixels, not logical ones
+#if !defined(Q_OS_WIN)
         qreal dpr = screen->devicePixelRatio();
         scrRect.moveTo(QPointF(scrRect.x() / dpr, scrRect.y() / dpr).toPoint());
+#endif
         geometry = geometry.united(scrRect);
     }
     return geometry;
@@ -419,16 +412,19 @@ QPixmap ScreenGrabber::cropToMonitor(const QPixmap& fullScreenshot,
                   .arg(fullScreenshot.height());
 #endif
 
-    // Calculate the scaling factor used in the screenshot
+    // All platform-specific functions return screenshots at physical pixel
+    // dimensions. Calculate the scale factor from logical to physical pixels.
     qreal screenshotScaleX = (qreal)fullScreenshot.width() / totalLogicalWidth;
     qreal screenshotScaleY =
       (qreal)fullScreenshot.height() / totalLogicalHeight;
 
+#ifdef FLAMESHOT_DEBUG_CAPTURE
     qDebug() << tr("Screenshot scale factors: X=%1 Y=%2")
                   .arg(screenshotScaleX)
                   .arg(screenshotScaleY);
+#endif
 
-    // Calculate crop rect in screenshot coordinates
+    // Calculate crop rect in screenshot (physical pixel) coordinates
     // Need to offset by minX/minY to handle negative coordinates
     int cropX = qRound((targetGeometry.x() - minX) * screenshotScaleX);
     int cropY = qRound((targetGeometry.y() - minY) * screenshotScaleY);
@@ -464,9 +460,34 @@ QPixmap ScreenGrabber::cropToMonitor(const QPixmap& fullScreenshot,
 
     QPixmap cropped = fullScreenshot.copy(cropRect);
 
-    // Set the DPR on the cropped pixmap
-    qreal screenshotDpr = (qreal)cropped.width() / targetGeometry.width();
-    cropped.setDevicePixelRatio(screenshotDpr);
+    // The cropped region contains physical pixels from all platforms.
+    // Set the DPR based on the scale factor so Qt interprets the physical
+    // pixels correctly relative to logical coordinates.
+    cropped.setDevicePixelRatio(screenshotScaleX);
 
     return cropped;
+}
+
+QPixmap ScreenGrabber::windowsScreenshot(int wid)
+{
+    const QList<QScreen*> screens = QGuiApplication::screens();
+    QRect geometry = desktopGeometry();
+
+    QPixmap desktop(geometry.width(), geometry.height());
+    desktop.fill(Qt::black);
+
+    QPainter painter(&desktop);
+    painter.setCompositionMode(QPainter::CompositionMode_Source);
+    for (QScreen* screen : screens) {
+        QRect screenGeom = screen->geometry();
+        QPixmap screenPixmap = screen->grabWindow(wid);
+
+        int x = screenGeom.x() - geometry.x();
+        int y = screenGeom.y() - geometry.y();
+
+        painter.drawPixmap(x, y, screenPixmap);
+    }
+    painter.end();
+
+    return desktop;
 }

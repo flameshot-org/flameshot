@@ -146,7 +146,13 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
             }
             move(topLeft);
         }
-        resize(pixmap().size());
+        // On Windows, account for DPR when sizing the window
+        QSize windowSize = pixmap().size();
+        if (pixmap().devicePixelRatio() > 1.0) {
+            windowSize = QSize(pixmap().width() / pixmap().devicePixelRatio(),
+                               pixmap().height() / pixmap().devicePixelRatio());
+        }
+        resize(windowSize);
 #elif defined(Q_OS_MACOS)
         // Emulate fullscreen mode
         //        setWindowFlags(Qt::WindowStaysOnTopHint |
