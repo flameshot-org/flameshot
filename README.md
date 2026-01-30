@@ -386,6 +386,7 @@ After following all those steps above, `flameshot` will open without problems in
 
 ### Windows
 
+- [Scoop](https://github.com/ScoopInstaller/Extras/blob/master/bucket/flameshot.json): `scoop install flameshot`
 - [Chocolatey](https://chocolatey.org/packages/flameshot)
 
 <details>
