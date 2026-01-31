@@ -1,4 +1,3 @@
-// SPDX-License-Identifier: GPL-3.0-or-later
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "screengrabber.h"
@@ -232,7 +231,18 @@ QPixmap ScreenGrabber::grabScreen(QScreen* screen, bool& ok)
     if (m_info.waylandDetected()) {
         p = grabEntireDesktop(ok);
         if (ok) {
-            return p.copy(geometry);
+            // grabEntireDesktop returns a pixmap with DPR set to the scale factor.
+            // scale before copying
+            qreal dpr = p.devicePixelRatio();
+            QRect physicalGeometry(
+                qRound(geometry.x() * dpr),
+                qRound(geometry.y() * dpr),
+                qRound(geometry.width() * dpr),
+                qRound(geometry.height() * dpr)
+            );
+            QPixmap cropped = p.copy(physicalGeometry);
+            cropped.setDevicePixelRatio(dpr);
+            return cropped;
         }
     } else {
         ok = true;
