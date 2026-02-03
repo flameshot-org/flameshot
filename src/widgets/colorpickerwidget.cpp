@@ -28,6 +28,8 @@ const QVector<QColor>& ColorPickerWidget::getDefaultLargeColorPalette()
 void ColorPickerWidget::paintEvent(QPaintEvent* e)
 {
     QPainter painter(this);
+    if (!painter.isActive())
+        return;
     painter.setRenderHint(QPainter::Antialiasing);
     painter.setPen(QColor(Qt::black));
 

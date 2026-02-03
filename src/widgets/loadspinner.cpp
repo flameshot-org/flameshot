@@ -54,6 +54,8 @@ void LoadSpinner::stop()
 void LoadSpinner::paintEvent(QPaintEvent*)
 {
     QPainter painter(this);
+    if (!painter.isActive())
+        return;
     painter.setRenderHint(QPainter::Antialiasing, true);
     auto pen = QPen(m_color);
 
