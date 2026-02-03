@@ -142,6 +142,8 @@ bool ColorGrabWidget::eventFilter(QObject*, QEvent* event)
 void ColorGrabWidget::paintEvent(QPaintEvent*)
 {
     QPainter painter(this);
+    if (!painter.isActive())
+        return;
     painter.drawImage(QRectF(0, 0, width(), height()), m_previewImage);
 }
 
