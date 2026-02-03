@@ -114,7 +114,7 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
         bool ok = true;
         m_context.screenshot = grabber.grabEntireDesktop(ok);
         if (!ok) {
-            AbstractLogger::error() << tr("Unable to capture screen");
+            // Error already logged in ScreenGrabber
             this->close();
         }
         m_context.origScreenshot = m_context.screenshot;

@@ -34,10 +34,13 @@
 #include <QUuid>
 #endif
 
+bool ScreenGrabber::m_monitorSelectionActive = false;
+
 ScreenGrabber::ScreenGrabber(QObject* parent)
   : QObject(parent)
   , m_selectedMonitor(-1)
   , m_monitorSelectionLoop(nullptr)
+  , m_userCancelled(false)
 {}
 
 void ScreenGrabber::freeDesktopPortal(bool& ok, QPixmap& res)
@@ -143,7 +146,17 @@ QPixmap ScreenGrabber::selectMonitorAndCrop(const QPixmap& fullScreenshot,
         return cropToMonitor(fullScreenshot, 0);
     }
 
+    if (m_monitorSelectionActive) {
+        AbstractLogger::error()
+          << tr("Screenshot already in progress, please wait for the current "
+                "screenshot to complete");
+        ok = false;
+        return QPixmap();
+    }
+
+    m_monitorSelectionActive = true;
     m_selectedMonitor = -1;
+    m_userCancelled = false;
     QWidget* container = createMonitorPreviews(fullScreenshot);
 
     // Wait for user to select a monitor
@@ -153,11 +166,15 @@ QPixmap ScreenGrabber::selectMonitorAndCrop(const QPixmap& fullScreenshot,
     m_monitorSelectionLoop = nullptr;
 
     delete container;
+    m_monitorSelectionActive = false;
 
     if (m_selectedMonitor >= 0) {
         return cropToMonitor(fullScreenshot, m_selectedMonitor);
     } else {
         ok = false;
+        if (m_userCancelled) {
+            AbstractLogger::info() << tr("Screenshot cancelled");
+        }
         return fullScreenshot;
     }
 #endif
@@ -231,15 +248,13 @@ QPixmap ScreenGrabber::grabScreen(QScreen* screen, bool& ok)
     if (m_info.waylandDetected()) {
         p = grabEntireDesktop(ok);
         if (ok) {
-            // grabEntireDesktop returns a pixmap with DPR set to the scale factor.
-            // scale before copying
+            // grabEntireDesktop returns a pixmap with DPR set to the scale
+            // factor. scale before copying
             qreal dpr = p.devicePixelRatio();
-            QRect physicalGeometry(
-                qRound(geometry.x() * dpr),
-                qRound(geometry.y() * dpr),
-                qRound(geometry.width() * dpr),
-                qRound(geometry.height() * dpr)
-            );
+            QRect physicalGeometry(qRound(geometry.x() * dpr),
+                                   qRound(geometry.y() * dpr),
+                                   qRound(geometry.width() * dpr),
+                                   qRound(geometry.height() * dpr));
             QPixmap cropped = p.copy(physicalGeometry);
             cropped.setDevicePixelRatio(dpr);
             return cropped;
@@ -375,6 +390,7 @@ bool ScreenGrabber::eventFilter(QObject* obj, QEvent* event)
         if (keyEvent->key() == Qt::Key_Escape) {
             // User cancelled selection
             m_selectedMonitor = -1;
+            m_userCancelled = true;
             if (m_monitorSelectionLoop) {
                 m_monitorSelectionLoop->quit();
             }

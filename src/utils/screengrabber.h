@@ -41,4 +41,6 @@ private:
     QPixmap Screenshot;
     int m_selectedMonitor;
     QEventLoop* m_monitorSelectionLoop;
+    bool m_userCancelled;
+    static bool m_monitorSelectionActive;
 };
