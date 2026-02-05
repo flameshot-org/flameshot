@@ -303,7 +303,7 @@ CaptureWidget::~CaptureWidget()
     }
 #endif
     if (m_captureDone) {
-        auto lastRegion = m_selection->geometry();
+        auto lastRegion = extendedRect(m_selection->geometry());
         setLastRegion(lastRegion);
         QRect geometry(m_context.selection);
         geometry.setTopLeft(geometry.topLeft() + m_context.widgetOffset);
