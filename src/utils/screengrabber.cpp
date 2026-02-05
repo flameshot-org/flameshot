@@ -180,10 +180,11 @@ QPixmap ScreenGrabber::selectMonitorAndCrop(const QPixmap& fullScreenshot,
 #endif
 }
 
-QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
+QPixmap ScreenGrabber::grabEntireDesktop(bool& ok, int preSelectedMonitor)
 {
     ok = true;
     int wid = 0;
+    QPixmap screenshot;
 
 #if defined(Q_OS_MACOS)
     QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
@@ -193,15 +194,14 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
         return QPixmap();
     }
     const QRect geom = currentScreen->geometry();
-    QPixmap screenPixmap = currentScreen->grabWindow(
+    screenshot = currentScreen->grabWindow(
       wid, geom.x(), geom.y(), geom.width(), geom.height());
-    screenPixmap.setDevicePixelRatio(currentScreen->devicePixelRatio());
-    return screenPixmap;
+    screenshot.setDevicePixelRatio(currentScreen->devicePixelRatio());
+    return screenshot;
 
 #elif defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
-    QPixmap fullScreenshot;
     if (m_info.waylandDetected()) {
-        freeDesktopPortal(ok, fullScreenshot);
+        freeDesktopPortal(ok, screenshot);
         if (!ok) {
             AbstractLogger::error() << tr("Unable to capture screen");
             return QPixmap();
@@ -212,19 +212,28 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
         QRect geometry = desktopGeometry();
         QScreen* primaryScreen = QGuiApplication::primaryScreen();
         QRect r = primaryScreen->geometry();
-        fullScreenshot =
+        screenshot =
           primaryScreen->grabWindow(wid,
                                     -r.x() / primaryScreen->devicePixelRatio(),
                                     -r.y() / primaryScreen->devicePixelRatio(),
                                     geometry.width(),
                                     geometry.height());
     }
-    return selectMonitorAndCrop(fullScreenshot, ok);
 
 #elif defined(Q_OS_WIN)
-    QPixmap desktop = windowsScreenshot(wid);
-    return selectMonitorAndCrop(desktop, ok);
+    screenshot = windowsScreenshot(wid);
 #endif
+
+    // If monitor was pre-selected (from launcher), skip UI and crop directly
+    if (preSelectedMonitor >= 0) {
+        const QList<QScreen*> screens = QGuiApplication::screens();
+        if (preSelectedMonitor < screens.size()) {
+            m_selectedMonitor = preSelectedMonitor;
+            return cropToMonitor(screenshot, preSelectedMonitor);
+        }
+    }
+
+    return selectMonitorAndCrop(screenshot, ok);
 }
 
 QRect ScreenGrabber::screenGeometry(QScreen* screen)

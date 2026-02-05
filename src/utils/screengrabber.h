@@ -18,7 +18,7 @@ class ScreenGrabber : public QObject
     Q_OBJECT
 public:
     explicit ScreenGrabber(QObject* parent = nullptr);
-    QPixmap grabEntireDesktop(bool& ok);
+    QPixmap grabEntireDesktop(bool& ok, int preSelectedMonitor = -1);
     QRect screenGeometry(QScreen* screen);
     QPixmap grabScreen(QScreen* screenNumber, bool& ok);
     void freeDesktopPortal(bool& ok, QPixmap& res);

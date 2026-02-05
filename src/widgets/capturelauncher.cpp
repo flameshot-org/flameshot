@@ -10,7 +10,9 @@
 #include "src/utils/screengrabber.h"
 #include "src/utils/screenshotsaver.h"
 #include "src/widgets/imagelabel.h"
+#include <QGuiApplication>
 #include <QMimeData>
+#include <QScreen>
 
 // https://github.com/KDE/spectacle/blob/941c1a517be82bed25d1254ebd735c29b0d2951c/src/Gui/KSWidget.cpp
 // https://github.com/KDE/spectacle/blob/941c1a517be82bed25d1254ebd735c29b0d2951c/src/Gui/KSMainWindow.cpp
@@ -18,16 +20,14 @@
 CaptureLauncher::CaptureLauncher(QDialog* parent)
   : QDialog(parent)
   , ui(new Ui::CaptureLauncher)
+  , m_countdownTimer(new QTimer(this))
+  , m_remainingSeconds(0)
 {
     qApp->installEventFilter(this); // see eventFilter()
     ui->setupUi(this);
     setAttribute(Qt::WA_DeleteOnClose);
     setWindowIcon(QIcon(GlobalValues::iconPath()));
     bool ok;
-
-    ui->imagePreview->setScreenshot(ScreenGrabber().grabEntireDesktop(ok));
-    ui->imagePreview->setSizePolicy(QSizePolicy::Expanding,
-                                    QSizePolicy::Expanding);
 
     ui->captureType->insertItem(
       1, tr("Rectangular Region"), CaptureRequest::GRAPHICAL_MODE);
@@ -40,10 +40,43 @@ CaptureLauncher::CaptureLauncher(QDialog* parent)
 #else
     ui->captureType->insertItem(
       2, tr("Full Screen (All Monitors)"), CaptureRequest::FULLSCREEN_MODE);
+    const QList<QScreen*> screens = QGuiApplication::screens();
+    for (int i = 0; i < screens.size(); ++i) {
+        QScreen* screen = screens[i];
+        QRect geom = screen->geometry();
+        QString monitorText = tr("Monitor %1: %2 (%3x%4)")
+                                .arg(i + 1)
+                                .arg(screen->name())
+                                .arg(geom.width())
+                                .arg(geom.height());
+        ui->monitorSelection->addItem(monitorText, i);
+    }
+    // Select current screen by default
+    QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
+    int currentIndex = screens.indexOf(currentScreen);
+    if (currentIndex >= 0) {
+        ui->monitorSelection->setCurrentIndex(currentIndex);
+    }
+#endif
+
+#ifdef Q_OS_MACOS
+    ui->monitorLabel->setVisible(false);
+    ui->monitorSelection->setVisible(false);
 #endif
 
     ui->delayTime->setSpecialValueText(tr("No Delay"));
     ui->launchButton->setFocus();
+
+    ui->countdownLabel->setVisible(false);
+    ui->countdownLabel->setStyleSheet(
+      "QLabel { font-size: 24px; font-weight: bold;}");
+    ui->countdownLabel->setAlignment(Qt::AlignCenter);
+
+    // Connect countdown timer
+    connect(m_countdownTimer,
+            &QTimer::timeout,
+            this,
+            &CaptureLauncher::updateCountdown);
 
     // Function to add or remove plural to seconds
     connect(ui->delayTime,
@@ -100,15 +133,24 @@ CaptureLauncher::CaptureLauncher(QDialog* parent)
 void CaptureLauncher::startCapture()
 {
     ui->launchButton->setEnabled(false);
-    hide();
+
+    int delaySeconds = ui->delayTime->value();
+
+    if (delaySeconds > 0) {
+        m_remainingSeconds = delaySeconds;
+        ui->countdownLabel->setVisible(true);
+        ui->countdownLabel->setText(QString::number(m_remainingSeconds));
+        m_countdownTimer->start(1000);
+    } else {
+        hide();
+    }
 
     auto const additionalDelayToHideUI = 600;
     auto const secondsToMilliseconds = 1000;
     auto mode = static_cast<CaptureRequest::CaptureMode>(
       ui->captureType->currentData().toInt());
-    CaptureRequest req(mode,
-                       additionalDelayToHideUI +
-                         ui->delayTime->value() * secondsToMilliseconds);
+    CaptureRequest req(
+      mode, additionalDelayToHideUI + delaySeconds * secondsToMilliseconds);
 
     if (mode == CaptureRequest::CaptureMode::GRAPHICAL_MODE) {
         req.setInitialSelection(QRect(ui->screenshotX->text().toInt(),
@@ -116,6 +158,13 @@ void CaptureLauncher::startCapture()
                                       ui->screenshotWidth->text().toInt(),
                                       ui->screenshotHeight->text().toInt()));
     }
+
+#ifndef Q_OS_MACOS
+    int selectedMonitor = ui->monitorSelection->currentData().toInt();
+    req.setSelectedMonitor(selectedMonitor);
+#else
+    req.setSelectedMonitor(-1);
+#endif
 
     connectCaptureSlots();
     Flameshot::instance()->requestCapture(req);
@@ -154,9 +203,8 @@ void CaptureLauncher::onCaptureTaken(QPixmap const& screenshot)
 {
     // MacOS specific, more details in the function disconnectCaptureSlots()
     disconnectCaptureSlots();
-
-    ui->imagePreview->setScreenshot(screenshot);
-    show();
+    m_countdownTimer->stop();
+    ui->countdownLabel->setVisible(false);
 
     auto mode = static_cast<CaptureRequest::CaptureMode>(
       ui->captureType->currentData().toInt());
@@ -171,8 +219,23 @@ void CaptureLauncher::onCaptureFailed()
 {
     // MacOS specific, more details in the function disconnectCaptureSlots()
     disconnectCaptureSlots();
+    m_countdownTimer->stop();
+    ui->countdownLabel->setVisible(false);
     show();
     ui->launchButton->setEnabled(true);
+}
+
+void CaptureLauncher::updateCountdown()
+{
+    m_remainingSeconds--;
+
+    if (m_remainingSeconds > 0) {
+        ui->countdownLabel->setText(QString::number(m_remainingSeconds));
+    } else {
+        m_countdownTimer->stop();
+        ui->countdownLabel->setVisible(false);
+        hide();
+    }
 }
 
 CaptureLauncher::~CaptureLauncher()

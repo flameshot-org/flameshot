@@ -112,7 +112,14 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
 #endif
     if (fullScreen) {
         bool ok = true;
-        m_context.screenshot = grabber.grabEntireDesktop(ok);
+        int preSelectedMonitor;
+        if (req.hasSelectedMonitor()) {
+            preSelectedMonitor = req.selectedMonitor();
+        } else {
+            preSelectedMonitor = -1;
+        }
+        m_context.screenshot =
+          grabber.grabEntireDesktop(ok, preSelectedMonitor);
         if (!ok) {
             // Error already logged in ScreenGrabber
             this->close();
