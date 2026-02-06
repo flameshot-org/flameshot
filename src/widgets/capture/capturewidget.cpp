@@ -50,7 +50,8 @@
 
 CaptureWidget::CaptureWidget(const CaptureRequest& req,
                              bool fullScreen,
-                             QWidget* parent)
+                             QWidget* parent,
+                             const QPixmap& preGrabbedScreenshot)
   : QWidget(parent)
   , m_toolSizeByKeyboard(0)
   , m_mouseIsClicked(false)
@@ -108,7 +109,11 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
     if (fullScreen) {
         // Grab Screenshot
         bool ok = true;
-        m_context.screenshot = ScreenGrabber().grabEntireDesktop(ok);
+        if (!preGrabbedScreenshot.isNull()) {
+            m_context.screenshot = preGrabbedScreenshot;
+        } else {
+            m_context.screenshot = ScreenGrabber().grabEntireDesktop(ok);
+        }
         if (!ok) {
             AbstractLogger::error() << tr("Unable to capture screen");
             this->close();

@@ -82,7 +82,8 @@ Flameshot* Flameshot::instance()
     return &c;
 }
 
-CaptureWidget* Flameshot::gui(const CaptureRequest& req)
+CaptureWidget* Flameshot::gui(const CaptureRequest& req,
+                              const QPixmap& preGrabbedScreenshot)
 {
     if (!resolveAnyConfigErrors()) {
         return nullptr;
@@ -120,7 +121,8 @@ CaptureWidget* Flameshot::gui(const CaptureRequest& req)
             return nullptr;
         }
 
-        m_captureWindow = new CaptureWidget(req);
+        m_captureWindow =
+          new CaptureWidget(req, true, nullptr, preGrabbedScreenshot);
 
 #ifdef Q_OS_WIN
         m_captureWindow->show();
