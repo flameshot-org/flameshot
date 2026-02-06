@@ -39,6 +39,11 @@
 #include "src/core/globalshortcutfilter.h"
 #endif
 
+#if defined(USE_X11_SHORTCUT)
+#include "src/core/x11shortcutfilter.h"
+#include "src/utils/screengrabber.h"
+#endif
+
 /**
  * @brief A way of accessing the flameshot daemon both from the daemon itself,
  * and from subcommands.
@@ -389,6 +394,22 @@ void FlameshotDaemon::initTrayIcon()
     if (!ConfigHandler().disabledTrayIcon()) {
         enableTrayIcon(true);
     }
+#if defined(USE_X11_SHORTCUT)
+    // On X11, listen for Print Screen key directly using XInput2 raw events.
+    // This avoids focus changes that would close popups/dropdowns before
+    // the screenshot is captured.
+    if (qApp->platformName() == "xcb") {
+        auto* x11Filter = new X11ShortcutFilter(this);
+        connect(x11Filter, &X11ShortcutFilter::printPressed, this, [this]() {
+            bool ok = true;
+            QPixmap screenshot = ScreenGrabber().grabEntireDesktop(ok);
+            if (ok) {
+                Flameshot::instance()->gui(
+                  CaptureRequest::GRAPHICAL_MODE, screenshot);
+            }
+        });
+    }
+#endif
 #elif defined(Q_OS_WIN)
     enableTrayIcon(true);
 

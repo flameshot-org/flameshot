@@ -30,3 +30,7 @@ endif ()
 if (WIN32)
     target_sources(flameshot PRIVATE globalshortcutfilter.h globalshortcutfilter.cpp)
 endif ()
+
+if (UNIX AND NOT APPLE AND XI_FOUND AND X11_FOUND)
+    target_sources(flameshot PRIVATE x11shortcutfilter.h x11shortcutfilter.cpp)
+endif ()
