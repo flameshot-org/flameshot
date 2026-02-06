@@ -51,7 +51,8 @@
 
 CaptureWidget::CaptureWidget(const CaptureRequest& req,
                              bool fullScreen,
-                             QWidget* parent)
+                             QWidget* parent,
+                             const QPixmap& preGrabbedScreenshot)
   : QWidget(parent)
   , m_toolSizeByKeyboard(0)
   , m_mouseIsClicked(false)
@@ -118,8 +119,12 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
         } else {
             preSelectedMonitor = -1;
         }
-        m_context.screenshot =
-          grabber.grabEntireDesktop(ok, preSelectedMonitor);
+        if (!preGrabbedScreenshot.isNull()) {
+            m_context.screenshot = preGrabbedScreenshot;
+        } else {
+            m_context.screenshot =
+              grabber.grabEntireDesktop(ok, preSelectedMonitor);
+        }
         if (!ok) {
             // Error already logged in ScreenGrabber
             this->close();

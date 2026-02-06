@@ -45,7 +45,8 @@ public:
 
 public slots:
     CaptureWidget* gui(
-      const CaptureRequest& req = CaptureRequest::GRAPHICAL_MODE);
+      const CaptureRequest& req = CaptureRequest::GRAPHICAL_MODE,
+      const QPixmap& preGrabbedScreenshot = QPixmap());
     void screen(CaptureRequest req, int const screenNumber = -1);
     void full(const CaptureRequest& req);
     void launcher();

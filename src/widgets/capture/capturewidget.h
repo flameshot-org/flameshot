@@ -49,7 +49,8 @@ class CaptureWidget : public QWidget
 public:
     explicit CaptureWidget(const CaptureRequest& req,
                            bool fullScreen = true,
-                           QWidget* parent = nullptr);
+                           QWidget* parent = nullptr,
+                           const QPixmap& preGrabbedScreenshot = QPixmap());
     ~CaptureWidget();
 
     QPixmap pixmap();
