@@ -1,12 +1,16 @@
 #include "trayicon.h"
 
+#include "src/core/capturerequest.h"
 #include "src/core/flameshot.h"
 #include "src/core/flameshotdaemon.h"
+#include "src/core/qguiappcurrentscreen.h"
 #include "src/utils/globalvalues.h"
 
 #include "src/utils/confighandler.h"
 #include <QApplication>
+#include <QGuiApplication>
 #include <QMenu>
+#include <QScreen>
 #include <QTimer>
 #include <QUrl>
 #include <QVersionNumber>
@@ -17,8 +21,10 @@
 
 TrayIcon::TrayIcon(QObject* parent)
   : QSystemTrayIcon(parent)
+  , m_screenMenu(nullptr)
 {
     initMenu();
+    initScreenMenu();
 
     setToolTip(QStringLiteral("Flameshot"));
 #if defined(Q_OS_MACOS)
@@ -125,8 +131,8 @@ void TrayIcon::initMenu()
     });
 #endif
     });
-    auto* launcherAction = new QAction(tr("&Open Launcher"), this);
-    connect(launcherAction,
+    m_launcherAction = new QAction(tr("&Open Launcher"), this);
+    connect(m_launcherAction,
             &QAction::triggered,
             Flameshot::instance(),
             &Flameshot::launcher);
@@ -186,7 +192,7 @@ void TrayIcon::initMenu()
             &Flameshot::openSavePath);
 
     m_menu->addAction(m_captureAction);
-    m_menu->addAction(launcherAction);
+    m_menu->addAction(m_launcherAction);
     m_menu->addSeparator();
 #ifdef ENABLE_IMGUR
     m_menu->addAction(recentAction);
@@ -234,10 +240,57 @@ void TrayIcon::updateCheckUpdatesMenuVisibility()
 }
 #endif
 
+void TrayIcon::initScreenMenu()
+{
+#ifndef Q_OS_MACOS
+    const QList<QScreen*> screens = QGuiApplication::screens();
+    if (screens.size() <= 1) {
+        return;
+    }
+
+    m_screenMenu = new QMenu(tr("Select Screen"));
+
+    QList<QAction*> actions = m_menu->actions();
+    int index = actions.indexOf(m_launcherAction);
+    if (index >= 0 && index + 1 < actions.size()) {
+        m_menu->insertMenu(actions[index + 1], m_screenMenu);
+    } else {
+        m_menu->addMenu(m_screenMenu);
+    }
+
+    QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
+    int currentIndex = screens.indexOf(currentScreen);
+
+    for (int i = 0; i < screens.size(); ++i) {
+        QScreen* screen = screens[i];
+        QRect geom = screen->geometry();
+        QString screenDescription = tr("Monitor %1: %2 (%3x%4)")
+                                      .arg(i + 1)
+                                      .arg(screen->name())
+                                      .arg(geom.width())
+                                      .arg(geom.height());
+
+        QAction* screenAction = m_screenMenu->addAction(screenDescription);
+        connect(screenAction, &QAction::triggered, this, [this, i]() {
+            // Wait and hide the menu
+            QTimer::singleShot(
+              100, this, [this, i]() { startGuiCaptureOnScreen(i); });
+        });
+    }
+#endif
+}
+
 void TrayIcon::startGuiCapture()
 {
     auto* widget = Flameshot::instance()->gui();
 #if !defined(DISABLE_UPDATE_CHECKER)
     FlameshotDaemon::instance()->showUpdateNotificationIfAvailable(widget);
 #endif
+}
+
+void TrayIcon::startGuiCaptureOnScreen(int screenIndex)
+{
+    CaptureRequest req(CaptureRequest::GRAPHICAL_MODE, 400);
+    req.setSelectedMonitor(screenIndex);
+    Flameshot::instance()->requestCapture(req);
 }

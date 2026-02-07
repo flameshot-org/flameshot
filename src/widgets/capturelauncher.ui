@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>807</width>
-    <height>213</height>
+    <width>452</width>
+    <height>250</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,35 +15,11 @@
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout_4">
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_3">
-     <item>
-      <widget class="ImageLabel" name="imagePreview">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>420</width>
-         <height>0</height>
-        </size>
-       </property>
-       <property name="text">
-        <string>TextLabel</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item>
     <layout class="QVBoxLayout" name="verticalLayout_2">
      <item>
       <widget class="QLabel" name="modeLabel">
        <property name="font">
         <font>
-         <weight>75</weight>
          <bold>true</bold>
         </font>
        </property>
@@ -51,7 +27,7 @@
         <string>Capture Mode</string>
        </property>
        <property name="alignment">
-        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
        </property>
        <property name="margin">
         <number>-1</number>
@@ -80,6 +56,16 @@
           <string>Delay:</string>
          </property>
         </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="monitorLabel">
+         <property name="text">
+          <string>Monitor:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QComboBox" name="monitorSelection"/>
        </item>
        <item row="4" column="0">
         <widget class="QLabel" name="sizeLabel">
@@ -153,7 +139,14 @@
        </item>
       </layout>
      </item>
-     <item alignment="Qt::AlignHCenter">
+     <item alignment="Qt::AlignmentFlag::AlignHCenter">
+      <widget class="QLabel" name="countdownLabel">
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item alignment="Qt::AlignmentFlag::AlignHCenter">
       <widget class="QPushButton" name="launchButton">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
@@ -170,13 +163,6 @@
    </item>
   </layout>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>ImageLabel</class>
-   <extends>QLabel</extends>
-   <header>imagelabel.h</header>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections/>
 </ui>
