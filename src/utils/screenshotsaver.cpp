@@ -171,11 +171,16 @@ void saveToClipboardMime(const QPixmap& capture, const QString& imageType)
         auto* mimeData = new QMimeData();
 
 #ifdef USE_WAYLAND_CLIPBOARD
-        mimeData->setImageData(formattedPixmap.toImage());
-        mimeData->setData(QStringLiteral("x-kde-force-image-copy"),
-                          QByteArray());
-        KSystemClipboard::instance()->setMimeData(mimeData,
-                                                  QClipboard::Clipboard);
+        if (QGuiApplication::platformName() == "wayland") {
+            mimeData->setImageData(formattedPixmap.toImage());
+            mimeData->setData(QStringLiteral("x-kde-force-image-copy"),
+                              QByteArray());
+            KSystemClipboard::instance()->setMimeData(mimeData,
+                                                      QClipboard::Clipboard);
+        } else {
+            mimeData->setData("image/" + imageType, array);
+            QApplication::clipboard()->setMimeData(mimeData);
+        }
 #else
         mimeData->setData("image/" + imageType, array);
         QApplication::clipboard()->setMimeData(mimeData);
