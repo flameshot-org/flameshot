@@ -1370,8 +1370,6 @@ void CaptureWidget::initSelection()
     });
     if (!initialSelection.isNull()) {
         const qreal scale = m_context.screenshot.devicePixelRatio();
-        initialSelection.moveTopLeft(initialSelection.topLeft() -
-                                     mapToGlobal(QPoint(0, 0)));
         initialSelection.setTop(initialSelection.top() / scale);
         initialSelection.setBottom(initialSelection.bottom() / scale);
         initialSelection.setLeft(initialSelection.left() / scale);
