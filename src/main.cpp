@@ -345,6 +345,11 @@ int main(int argc, char* argv[])
         QObject::tr("default: screen containing the cursor"),
       QObject::tr("Screen number"),
       QStringLiteral("-1"));
+    CommandOption monitorOption(
+      { "m", "monitor" },
+      QObject::tr("Define the screen to capture (starting from 0)"),
+      QObject::tr("Monitor number"),
+      QStringLiteral("-1"));
 
     // Add checkers
     auto colorChecker = [](const QString& colorCode) -> bool {
@@ -406,7 +411,9 @@ int main(int argc, char* argv[])
     autostartOption.addChecker(booleanChecker, booleanErr);
     notificationOption.addChecker(booleanChecker, booleanErr);
     showHelpOption.addChecker(booleanChecker, booleanErr);
+    showHelpOption.addChecker(booleanChecker, booleanErr);
     screenNumberOption.addChecker(numericChecker, numberErr);
+    monitorOption.addChecker(numericChecker, numberErr);
 
     // Relationships
     parser.AddArgument(guiArgument);
@@ -425,7 +432,8 @@ int main(int argc, char* argv[])
                         selectionOption,
                         uploadOption,
                         pinOption,
-                        acceptOnSelectOption },
+                        acceptOnSelectOption,
+                        monitorOption },
                       guiArgument);
     parser.AddOptions({ screenNumberOption,
                         clipboardOption,
@@ -498,6 +506,10 @@ int main(int argc, char* argv[])
         bool upload = parser.isSet(uploadOption);
         bool acceptOnSelect = parser.isSet(acceptOnSelectOption);
         CaptureRequest req(CaptureRequest::GRAPHICAL_MODE, delay, path);
+        if (parser.isSet(monitorOption)) {
+            QString monitor = parser.value(monitorOption);
+            req.setSelectedMonitor(monitor.toInt());
+        }
         if (!region.isEmpty()) {
             auto selectionRegion = Region().value(region).toRect();
             req.setInitialSelection(selectionRegion);
