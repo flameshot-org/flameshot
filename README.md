@@ -147,6 +147,12 @@ Example commands:
     flameshot screen -n 1 -c
     ```
 
+- Capture with GUI on a specific monitor (e.g. monitor 1):
+
+    ```shell
+    flameshot gui -m 1
+    ```
+
 In case of doubt choose the first or the second command as shortcut in your favorite desktop environment.
 
 A systray icon will be in your system's panel while Flameshot is running.
