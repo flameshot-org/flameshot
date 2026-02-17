@@ -19,6 +19,7 @@
 #include <QScreen>
 #include <QTimer>
 #include <QWidget>
+#include <algorithm>
 
 #ifdef FLAMESHOT_DEBUG_CAPTURE
 #include <QDebug>
@@ -315,7 +316,17 @@ QWidget* ScreenGrabber::createMonitorPreviews(const QPixmap& fullScreenshot)
     containerLayout->setSpacing(20);
     containerLayout->setContentsMargins(20, 20, 20, 20);
 
+    // Build list of screen indices sorted by X position (left to right)
+    QList<int> sortedIndices;
     for (int i = 0; i < screens.size(); ++i) {
+        sortedIndices.append(i);
+    }
+    std::sort(
+      sortedIndices.begin(), sortedIndices.end(), [&screens](int a, int b) {
+          return screens[a]->geometry().x() < screens[b]->geometry().x();
+      });
+
+    for (int i : sortedIndices) {
         QScreen* screen = screens[i];
 
         QPixmap cropped = cropToMonitor(fullScreenshot, i);
