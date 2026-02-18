@@ -504,13 +504,14 @@ QPixmap ScreenGrabber::cropToMonitor(const QPixmap& fullScreenshot,
                                  targetPhysicalHeight,
                                  Qt::IgnoreAspectRatio,
                                  Qt::SmoothTransformation);
-    }
 #ifdef FLAMESHOT_DEBUG_CAPTURE
     qDebug() << tr("Scaling screenshot to: %1 %2")
                   .arg(targetPhysicalWidth)
                   .arg(targetPhysicalHeight);
 #endif
 
+
+    }
 #endif
     // Cropped region should be at target monitor's native DPR
     cropped.setDevicePixelRatio(targetDpr);
