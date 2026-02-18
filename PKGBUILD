@@ -10,7 +10,6 @@ depends=('qt6-base' 'qt6-svg' 'hicolor-icon-theme' 'kguiaddons')
 makedepends=('qt6-tools' 'cmake' 'ninja')
 optdepends=(
     'gnome-shell-extension-appindicator: for system tray icon if you are using Gnome'
-    'grim: for wlroots wayland support'
     'xdg-desktop-portal: for wayland support, you will need the implementation for your wayland desktop environment'
     'qt6-imageformats: for additional export image formats (e.g. tiff, webp, and more)'
 )

@@ -18,6 +18,8 @@ CaptureRequest::CaptureRequest(CaptureRequest::CaptureMode mode,
   , m_delay(delay)
   , m_tasks(tasks)
   , m_data(std::move(data))
+  , m_selectedMonitor(-1)
+  , m_hasSelectedMonitor(false)
 {
 
     ConfigHandler config;
@@ -85,4 +87,20 @@ void CaptureRequest::addPinTask(const QRect& pinWindowGeometry)
 void CaptureRequest::setInitialSelection(const QRect& selection)
 {
     m_initialSelection = selection;
+}
+
+void CaptureRequest::setSelectedMonitor(int monitorIndex)
+{
+    m_selectedMonitor = monitorIndex;
+    m_hasSelectedMonitor = true;
+}
+
+int CaptureRequest::selectedMonitor() const
+{
+    return m_selectedMonitor;
+}
+
+bool CaptureRequest::hasSelectedMonitor() const
+{
+    return m_hasSelectedMonitor;
 }
