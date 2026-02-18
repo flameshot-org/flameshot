@@ -2,7 +2,7 @@
 Flameshot currently supports Sway and other wlroots based Wayland compositors through [xdg-desktop-portal-wlr](https://github.com/emersion/xdg-desktop-portal-wlr). However, due to the way dbus works, there may be some extra steps required for the integration to work properly.
 
 ## Basic steps
-The following packages need to be installed: `xdg-desktop-portal xdg-desktop-portal-wlr grim`. Please ensure your distro packages these, or install them manually.
+The following packages need to be installed: `xdg-desktop-portal xdg-desktop-portal-wlr`. Please ensure your distro packages these, or install them manually.
 
 Ensure that environment variables are set properly. If your distro does not set them automatically, use a launch script to export `XDG_CURRENT_DESKTOP=sway` or `XDG_CURRENT_DESKTOP=river` **before** Sway or River is launched.
 ```sh
