@@ -39,7 +39,7 @@ CaptureLauncher::CaptureLauncher(QDialog* parent)
       2, tr("Full Screen (Current Display)"), CaptureRequest::FULLSCREEN_MODE);
 #else
     ui->captureType->insertItem(
-      2, tr("Full Screen (All Monitors)"), CaptureRequest::FULLSCREEN_MODE);
+      2, tr("Full Screen"), CaptureRequest::FULLSCREEN_MODE);
     const QList<QScreen*> screens = QGuiApplication::screens();
     for (int i = 0; i < screens.size(); ++i) {
         QScreen* screen = screens[i];
