@@ -56,6 +56,7 @@ jobs:
             qt6-base-dev \
             qt6-svg-dev \
             qt6-tools-dev \
+            xvfb \
 
       - name: Create Build Environment
         # Some projects don't allow in-source building, so create a separate build directory
@@ -82,7 +83,8 @@ jobs:
         shell: bash
         # Execute tests defined by the CMake configuration.
         # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
-        run: ctest -C $BUILD_TYPE
+        # xvfb-run provides a virtual display for tests that use QPixmap
+        run: xvfb-run ctest -C $BUILD_TYPE --output-on-failure
 
   windows-build:
     runs-on: ${{ matrix.config.os }}
@@ -127,3 +129,9 @@ jobs:
         shell: powershell
         run: |
           cmake --build . --config $env:BUILD_TYPE
+
+      - name: Test
+        working-directory: build
+        shell: powershell
+        run: |
+          ctest -C $env:BUILD_TYPE --output-on-failure

@@ -143,6 +143,9 @@ endif()
 
 add_subdirectory(src)
 
+enable_testing()
+add_subdirectory(tests)
+
 # CPack
 set(CPACK_PACKAGE_VENDOR "flameshot-org")
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Powerful yet simple to use screenshot software.")
