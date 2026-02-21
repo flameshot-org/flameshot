@@ -289,6 +289,8 @@ To use Flameshot instead of the default screenshot application in Gnome we need 
   
    Go to _Settings_ > _Keyboard_ > _View and Customise Shortcuts_ > _Screenshots_ > _Take a screenshot interactively_ and press `backspace`
 
+   ![image](https://raw.githubusercontent.com/flameshot-org/flameshot/master/data/img/readme/data/img/readme/instructions-ubuntu22046.png)
+
 2. Add custom binding on <kbd>Prt Sc</kbd>:
   
    Go to _Settings_ > _Keyboard_ > _View and Customise Shortcuts_ > _Custom shortcuts_ and press the '+' button at the bottom.
