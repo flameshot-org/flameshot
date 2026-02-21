@@ -26,13 +26,13 @@ build_script:
 
     if "%PORTABLE_CONFIG%"=="OFF" (
       cpack -G WIX -B package
-    }
+    )
 
     if "%PORTABLE_CONFIG%"=="ON" (
       mkdir portable_exe
       cp src/Release/*.exe portable_exe/.
       7z a -tzip portable_exe.zip portable_exe/
-    }
+    )
 
 artifacts:
 - path: build\package\*.msi
