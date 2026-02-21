@@ -17,10 +17,12 @@ public:
     void updateSelection(int index);
 
 protected:
+    void updateDefaultIndex();
     void paintEvent(QPaintEvent* event) override;
     void repaint(int i, QPainter& painter);
 
     int m_colorAreaSize;
+    int m_defaultIndex;
     int m_selectedIndex, m_lastIndex;
     QVector<QRect> m_colorAreaList;
     QVector<QColor> m_colorList;

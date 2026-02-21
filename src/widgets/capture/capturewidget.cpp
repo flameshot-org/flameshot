@@ -219,7 +219,7 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
     }
 
     // Init color picker
-    m_colorPicker = new ColorPicker(this);
+    m_colorPicker = new ColorPicker(&m_context.screenshot, this);
     // Init notification widget
     m_notifierBox = new NotifierBox(this);
     initPanel();
