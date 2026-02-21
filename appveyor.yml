@@ -16,15 +16,9 @@ build_script:
     set "OPENSSL_ROOT_DIR=C:/OpenSSL-v111-Win64"
     cmake -S C:\projects\source -B build -G "Visual Studio 17 2022" -DCMAKE_BUILD_TYPE=Release -DENABLE_OPENSSL=ON -DUSE_PORTABLE_CONFIG=%PORTABLE_CONFIG%
     cmake --build build --parallel 2 --config Release
-    cd build
-    if "%PORTABLE_CONFIG%"=="OFF" (
-      cpack -G WIX -B package
-    )
-    if "%PORTABLE_CONFIG%"=="ON" (
-      mkdir portable_exe
-      copy src\Release\*.exe portable_exe\.
-      7z a -tzip portable_exe.zip portable_exe\
-    )
+- cmd: cd build
+- cmd: if "%PORTABLE_CONFIG%"=="OFF" cpack -G WIX -B package
+- cmd: if "%PORTABLE_CONFIG%"=="ON" (mkdir portable_exe & copy src\Release\*.exe portable_exe\. & 7z a -tzip portable_exe.zip portable_exe\)
 
 artifacts:
 - path: build\package\*.msi
