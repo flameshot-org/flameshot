@@ -307,7 +307,7 @@ CaptureWidget::~CaptureWidget()
         Flameshot::instance()->exportCapture(
           pixmap(), geometry, m_context.request);
     } else {
-        emit Flameshot::instance()->captureFailed();
+        emit Flameshot::instance() -> captureFailed();
     }
 }
 
@@ -865,21 +865,27 @@ void CaptureWidget::mousePressEvent(QMouseEvent* e)
     m_startMovePos = QPoint();
     m_mousePressedPos = e->pos();
     m_activeToolOffsetToMouseOnStart = QPoint();
-    if (m_colorPicker->isVisible()) {
-        updateCursor();
-        return;
-    }
+
     // reset object selection if capture area selection is active
     if (m_selection->getMouseSide(e->pos()) != SelectionWidget::CENTER) {
         m_panel->setActiveLayer(-1);
     }
+
     if (e->button() == Qt::RightButton) {
         if (m_activeTool && m_activeTool->editMode()) {
             return;
         }
         showColorPicker(m_mousePressedPos);
+        // Counters a bug of reseting the layout of m_panel
+        // because updateSelectionState gets called with
+        // CaptureTool::NONE. Also forces the user to
+        // select a color, which is more intuitive
+        // than clicking for cancelling the selection.
+        m_selection->setIgnoreMouse(true);
         return;
-    } else if (e->button() == Qt::LeftButton) {
+    }
+
+    if (e->button() == Qt::LeftButton) {
         m_mouseIsClicked = true;
 
         // Click using a tool excluding tool MOVE
@@ -899,6 +905,7 @@ void CaptureWidget::mousePressEvent(QMouseEvent* e)
     }
 
     selectToolItemAtPos(m_mousePressedPos);
+
     updateSelectionState();
     updateCursor();
 }
@@ -1013,7 +1020,7 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
 
 void CaptureWidget::mouseReleaseEvent(QMouseEvent* e)
 {
-    if (e->button() == Qt::LeftButton && m_colorPicker->isVisible()) {
+    if (e->button() == Qt::RightButton && m_colorPicker->isVisible()) {
         // Color picker
         if (m_colorPicker->isVisible() && m_panel->activeLayerIndex() >= 0 &&
             m_context.color.isValid()) {
@@ -1025,7 +1032,12 @@ void CaptureWidget::mouseReleaseEvent(QMouseEvent* e)
             m_context.color = ConfigHandler().drawColor();
             m_panel->show();
         }
-    } else if (m_mouseIsClicked) {
+        m_selection->setIgnoreMouse(false);
+        updateSelectionState();
+        return;
+    }
+
+    if (m_mouseIsClicked) {
         if (m_activeTool) {
             // end draw/edit
             m_activeTool->drawEnd(m_context.mousePos);
