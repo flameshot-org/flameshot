@@ -197,10 +197,15 @@ static QMap<QString, QSharedPointer<KeySequence>> recognizedShortcuts = {
 // CLASS CONFIGHANDLER
 
 ConfigHandler::ConfigHandler()
+#ifndef USE_PORTABLE_CONFIG
   : m_settings(QSettings::IniFormat,
                QSettings::UserScope,
                qApp->organizationName(),
                qApp->applicationName())
+#else
+  : m_settings(qApp->applicationDirPath() + "/flameshot.ini",
+               QSettings::IniFormat)
+#endif
 {
     static bool firstInitialization = true;
     if (firstInitialization) {

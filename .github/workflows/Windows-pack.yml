@@ -36,7 +36,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        qt_ver: [6.9.1]
+        qt_ver: [6.9.3]
         qt_target: [desktop]
         config:
           - {
@@ -119,7 +119,7 @@ jobs:
           -DCMAKE_TOOLCHAIN_FILE="${{ github.workspace }}\vcpkg\scripts\buildsystems\vcpkg.cmake"  `
           -DENABLE_OPENSSL=ON `
           -DCMAKE_BUILD_TYPE=Release  `
-          -DRUN_IN_PLACE=${{ contains(matrix.type, 'portable') }}
+          -DUSE_PORTABLE_CONFIG=${{ contains(matrix.type, 'portable') }}
 
       - name: Compile
         working-directory: build
