@@ -53,9 +53,9 @@ endif()
 
 
 # Configuration options
-set(DEFAULT_RUN_IN_PLACE FALSE)
+set(DEFAULT_USE_PORTABLE_CONFIG FALSE)
 if(WIN32)
-  set(DEFAULT_RUN_IN_PLACE TRUE)
+  set(DEFAULT_USE_PORTABLE_CONFIG TRUE)
   # For Windows RC file.
   add_definitions(-DFLAMESHOT_VERSION_MAJOR=${CMAKE_PROJECT_VERSION_MAJOR})
   add_definitions(-DFLAMESHOT_VERSION_MINOR=${CMAKE_PROJECT_VERSION_MINOR})
@@ -65,10 +65,12 @@ if(WIN32)
 elseif(APPLE)
   set(Qt6_DIR "$(brew --prefix qt6)/lib/cmake/Qt6/" CACHE PATH "directory where Qt6Config.cmake exists.")
 endif()
-set(RUN_IN_PLACE
-  ${DEFAULT_RUN_IN_PLACE}
-  CACHE BOOL "Run directly in source directory structure")
-
+set(USE_PORTABLE_CONFIG
+  ${DEFAULT_USE_PORTABLE_CONFIG}
+  CACHE BOOL "Store config in application folder")
+if(USE_PORTABLE_CONFIG)
+add_compile_definitions(USE_PORTABLE_CONFIG)
+endif()
 
 option(FLAMESHOT_DEBUG_CAPTURE "Enable mode to make debugging easier" OFF)
 option(USE_MONOCHROME_ICON "Build using monochrome icon as default" OFF)
@@ -158,13 +160,8 @@ if(WIN32)
   # Include all dynamically linked runtime libraries such as MSVCRxxx.dll
   include(InstallRequiredSystemLibraries)
 
-  if(RUN_IN_PLACE)
-    if(CMAKE_SIZEOF_VOID_P EQUAL 8)
-      set(CPACK_PACKAGE_FILE_NAME "${PROJECT_NAME}-${PROJECT_VERSION}-win64")
-    else()
-      set(CPACK_PACKAGE_FILE_NAME "${PROJECT_NAME}-${PROJECT_VERSION}-win32")
-    endif()
-
+  if(USE_PORTABLE_CONFIG)
+    set(CPACK_PACKAGE_FILE_NAME "${PROJECT_NAME}-${PROJECT_VERSION}-win64")
     set(CPACK_GENERATOR ZIP)
 
   else()
@@ -189,13 +186,7 @@ if(WIN32)
     set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_SOURCE_DIR}/packaging/win-installer/LICENSE/GPL-3.0.txt")
     set(CPACK_RESOURCE_FILE_README "${CMAKE_SOURCE_DIR}/README.md")
 
-    # The correct way would be to include both x32 and x64 into one installer and install the appropriate one. CMake
-    # does not support that, so there are two separate GUID's
-    if(CMAKE_SIZEOF_VOID_P EQUAL 8)
-      set(CPACK_WIX_UPGRADE_GUID "26D8062A-66D9-48D9-8924-42090FB9B3F9")
-    else()
-      set(CPACK_WIX_UPGRADE_GUID "2C53E1B9-51D9-4429-AAE4-B02221959AA5")
-    endif()
+    set(CPACK_WIX_UPGRADE_GUID "26D8062A-66D9-48D9-8924-42090FB9B3F9")
   endif()
 elseif(APPLE)
   set(CPACK_INCLUDE_TOPLEVEL_DIRECTORY 0)
