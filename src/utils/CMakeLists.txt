@@ -4,6 +4,7 @@ target_sources(
   PRIVATE abstractlogger.h
           filenamehandler.h
           screengrabber.h
+          screengrabber_geometry.h
           systemnotification.h
           valuehandler.h
           strfparse.h
@@ -14,6 +15,7 @@ target_sources(
   PRIVATE abstractlogger.cpp
           filenamehandler.cpp
           screengrabber.cpp
+          screengrabber_geometry.cpp
           monitorpreview.cpp
           confighandler.cpp
           systemnotification.cpp

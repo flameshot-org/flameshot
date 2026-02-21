@@ -2,6 +2,7 @@
 #include "screengrabber.h"
 #include "abstractlogger.h"
 #include "monitorpreview.h"
+#include "screengrabber_geometry.h"
 #include "src/core/qguiappcurrentscreen.h"
 #include "src/utils/confighandler.h"
 #include "src/utils/filenamehandler.h"
@@ -261,18 +262,17 @@ QPixmap ScreenGrabber::grabScreen(QScreen* screen, bool& ok)
 
 QRect ScreenGrabber::desktopGeometry()
 {
-    QRect geometry;
+    QList<ScreenMetadata> meta;
 
     for (QScreen* const screen : QGuiApplication::screens()) {
-        QRect scrRect = screen->geometry();
-#if !defined(Q_OS_WIN)
-        // https://doc.qt.io/qt-6/highdpi.html#device-independent-screen-geometry
-        qreal dpr = screen->devicePixelRatio();
-        scrRect.moveTo(QPointF(scrRect.x() / dpr, scrRect.y() / dpr).toPoint());
-#endif
-        geometry = geometry.united(scrRect);
+        meta.append({ screen->geometry(), screen->devicePixelRatio() });
     }
-    return geometry;
+
+#if defined(Q_OS_WIN)
+    return ScreenGeometry::calculateDesktopGeometry(meta, true);
+#else
+    return ScreenGeometry::calculateDesktopGeometry(meta, false);
+#endif
 }
 
 QScreen* ScreenGrabber::getSelectedScreen() const
@@ -317,14 +317,14 @@ QWidget* ScreenGrabber::createMonitorPreviews(const QPixmap& fullScreenshot)
     containerLayout->setContentsMargins(20, 20, 20, 20);
 
     // Build list of screen indices sorted by X position (left to right)
-    QList<int> sortedIndices;
+    QList<ScreenMetadata> screenMeta;
     for (int i = 0; i < screens.size(); ++i) {
-        sortedIndices.append(i);
+        screenMeta.append(
+          { screens[i]->geometry(), screens[i]->devicePixelRatio() });
     }
-    std::sort(
-      sortedIndices.begin(), sortedIndices.end(), [&screens](int a, int b) {
-          return screens[a]->geometry().x() < screens[b]->geometry().x();
-      });
+
+    QList<int> sortedIndices =
+      ScreenGeometry::sortScreenIndicesByPosition(screenMeta);
 
     for (int i : sortedIndices) {
         QScreen* screen = screens[i];
@@ -387,94 +387,62 @@ QPixmap ScreenGrabber::cropToMonitor(const QPixmap& fullScreenshot,
     }
 
     QScreen* targetScreen = screens[monitorIndex];
-    QRect targetGeometry = targetScreen->geometry();
     qreal targetDpr = targetScreen->devicePixelRatio();
 
-    // Calculate total logical dimensions and minimum coordinates
-    int minX = 0, minY = 0;
-    int maxX = 0, maxY = 0;
-
+    QList<ScreenMetadata> meta;
     for (QScreen* screen : screens) {
-        QRect geo = screen->geometry();
-        minX = qMin(minX, geo.x());
-        minY = qMin(minY, geo.y());
-        maxX = qMax(maxX, geo.x() + geo.width());
-        maxY = qMax(maxY, geo.y() + geo.height());
+        meta.append({ screen->geometry(), screen->devicePixelRatio() });
     }
 
-    int totalLogicalWidth = maxX - minX;
-    int totalLogicalHeight = maxY - minY;
-
-#ifdef FLAMESHOT_DEBUG_CAPTURE
-    qDebug() << tr("Total logical dimensions: %1x%2 (min: %3,%4)")
-                  .arg(totalLogicalWidth)
-                  .arg(totalLogicalHeight)
-                  .arg(minX)
-                  .arg(minY);
-    qDebug() << tr("Screenshot dimensions: %1x%2")
-                  .arg(fullScreenshot.width())
-                  .arg(fullScreenshot.height());
-#endif
-
-    int cropX, cropY, cropWidth, cropHeight;
-
+    QRect cropRect;
 #if defined(Q_OS_LINUX)
-    // Linux (both X11 and Wayland via freedesktop portal):
-    // Use logical coordinate-based cropping since portal returns full
-    // desktop
-    qreal screenshotScaleX = (qreal)fullScreenshot.width() / totalLogicalWidth;
-    qreal screenshotScaleY =
-      (qreal)fullScreenshot.height() / totalLogicalHeight;
-
-#ifdef FLAMESHOT_DEBUG_CAPTURE
-    qDebug() << tr("Screenshot scale factors: X=%1 Y=%2")
-                  .arg(screenshotScaleX)
-                  .arg(screenshotScaleY);
+    cropRect = ScreenGeometry::calculateCropRectLinux(
+      meta, monitorIndex, fullScreenshot.width(), fullScreenshot.height());
+#else
+    cropRect = ScreenGeometry::calculateCropRectWindows(meta, monitorIndex);
 #endif
 
-    cropX = qRound((targetGeometry.x() - minX) * screenshotScaleX);
-    cropY = qRound((targetGeometry.y() - minY) * screenshotScaleY);
-    cropWidth = qRound(targetGeometry.width() * screenshotScaleX);
-    cropHeight = qRound(targetGeometry.height() * screenshotScaleY);
+#ifdef FLAMESHOT_DEBUG_CAPTURE
+    {
+        int minX = 0, minY = 0, maxX = 0, maxY = 0;
+        for (const auto& s : meta) {
+            minX = qMin(minX, s.geometry.x());
+            minY = qMin(minY, s.geometry.y());
+            maxX = qMax(maxX, s.geometry.x() + s.geometry.width());
+            maxY = qMax(maxY, s.geometry.y() + s.geometry.height());
+        }
+
+        qDebug() << tr("Total logical dimensions: %1x%2 (min: %3,%4)")
+                      .arg(maxX - minX)
+                      .arg(maxY - minY)
+                      .arg(minX)
+                      .arg(minY);
+        qDebug() << tr("Screenshot dimensions: %1x%2")
+                      .arg(fullScreenshot.width())
+                      .arg(fullScreenshot.height());
+#if defined(Q_OS_LINUX)
+        int totalLogicalWidth = maxX - minX;
+        int totalLogicalHeight = maxY - minY;
+        if (totalLogicalWidth > 0 && totalLogicalHeight > 0) {
+            qDebug() << tr("Screenshot scale factors: X=%1 Y=%2")
+                          .arg((qreal)fullScreenshot.width() /
+                               totalLogicalWidth)
+                          .arg((qreal)fullScreenshot.height() /
+                               totalLogicalHeight);
+        }
 #else
-    // Windows: Calculate physical pixel positions for mixed DPI
-    cropX = 0;
-    cropY = 0;
-
-    for (QScreen* screen : screens) {
-        QRect geom = screen->geometry();
-        qreal dpr = screen->devicePixelRatio();
-
-        // Sum physical widths of screens completely to the left
-        if (geom.x() + geom.width() <= targetGeometry.x()) {
-            cropX += qRound(geom.width() * dpr);
-        }
-
-        // Sum physical heights of screens completely above
-        if (geom.y() + geom.height() <= targetGeometry.y()) {
-            cropY += qRound(geom.height() * dpr);
-        }
+        qDebug() << tr("Calculated crop position for mixed DPI: X=%1 Y=%2")
+                      .arg(cropRect.x())
+                      .arg(cropRect.y());
+#endif
     }
 
-    cropWidth = qRound(targetGeometry.width() * targetDpr);
-    cropHeight = qRound(targetGeometry.height() * targetDpr);
-
-#ifdef FLAMESHOT_DEBUG_CAPTURE
-    qDebug() << tr("Calculated crop position for mixed DPI: X=%1 Y=%2")
-                  .arg(cropX)
-                  .arg(cropY);
-#endif
-#endif
-
-    QRect cropRect(cropX, cropY, cropWidth, cropHeight);
-
-#ifdef FLAMESHOT_DEBUG_CAPTURE
     qDebug() << tr("Screen %1: %2").arg(monitorIndex).arg(targetScreen->name());
     qDebug() << tr("  Logical geometry: %1x%2+%3+%4 DPR: %5")
-                  .arg(targetGeometry.width())
-                  .arg(targetGeometry.height())
-                  .arg(targetGeometry.x())
-                  .arg(targetGeometry.y())
+                  .arg(targetScreen->geometry().width())
+                  .arg(targetScreen->geometry().height())
+                  .arg(targetScreen->geometry().x())
+                  .arg(targetScreen->geometry().y())
                   .arg(targetDpr);
     qDebug() << tr("  Crop rect in screenshot: %1x%2+%3+%4")
                   .arg(cropRect.width())
@@ -497,9 +465,12 @@ QPixmap ScreenGrabber::cropToMonitor(const QPixmap& fullScreenshot,
 
 #if defined(Q_OS_LINUX)
     // Linux: May need rescaling if scale factors don't match
-    if (qAbs(screenshotScaleX - targetDpr) > 0.01) {
-        int targetPhysicalWidth = qRound(targetGeometry.width() * targetDpr);
-        int targetPhysicalHeight = qRound(targetGeometry.height() * targetDpr);
+    if (ScreenGeometry::linuxCropNeedsRescaling(
+          meta, monitorIndex, fullScreenshot.width())) {
+        int targetPhysicalWidth =
+          qRound(targetScreen->geometry().width() * targetDpr);
+        int targetPhysicalHeight =
+          qRound(targetScreen->geometry().height() * targetDpr);
         cropped = cropped.scaled(targetPhysicalWidth,
                                  targetPhysicalHeight,
                                  Qt::IgnoreAspectRatio,
