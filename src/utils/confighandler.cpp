@@ -86,6 +86,7 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     OPTION("allowMultipleGuiInstances"   ,Bool               ( false         )),
     OPTION("showMagnifier"               ,Bool               ( false         )),
     OPTION("squareMagnifier"             ,Bool               ( false         )),
+    OPTION("hexColor"                    ,Bool               ( false         )),
 #if !defined(Q_OS_WIN)
     OPTION("autoCloseIdleDaemon"         ,Bool               ( false         )),
 #endif
@@ -150,6 +151,7 @@ static QMap<QString, QSharedPointer<KeySequence>> recognizedShortcuts = {
     SHORTCUT("TYPE_MOVESELECTION"       ,   "Ctrl+M"                ),
     SHORTCUT("TYPE_UNDO"                ,   "Ctrl+Z"                ),
     SHORTCUT("TYPE_COPY"                ,   "Ctrl+C"                ),
+    SHORTCUT("TYPE_SCREENCOLORPICKER"   ,   "Ctrl+P"                ),
     SHORTCUT("TYPE_SAVE"                ,   "Ctrl+S"                ),
     SHORTCUT("TYPE_ACCEPT"              ,   "Return"                ),
     SHORTCUT("TYPE_EXIT"                ,   "Ctrl+Q"                ),

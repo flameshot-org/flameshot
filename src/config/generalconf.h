@@ -89,6 +89,7 @@ private:
     void initShowStartupLaunchMessage();
     void initShowTrayIcon();
     void initSquareMagnifier();
+    void initHexColor();
     void initUndoLimit();
     void initUploadWithoutConfirmation();
     void initUseJpgForClipboard();
@@ -140,6 +141,7 @@ private:
     QCheckBox* m_predefinedColorPaletteLarge;
     QCheckBox* m_showMagnifier;
     QCheckBox* m_squareMagnifier;
+    QCheckBox* m_hexColor;
     QCheckBox* m_copyOnDoubleClick;
     QCheckBox* m_showSelectionGeometry;
     QComboBox* m_selectGeometryLocation;

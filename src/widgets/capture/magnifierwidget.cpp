@@ -13,12 +13,14 @@
 MagnifierWidget::MagnifierWidget(const QPixmap& p,
                                  const QColor& c,
                                  bool isSquare,
+                                 bool ishexColor,
                                  QWidget* parent)
   : QWidget(parent)
   , m_color(c)
   , m_borderColor(c)
   , m_screenshot(p)
   , m_square(isSquare)
+  , m_hexColor(ishexColor)
 {
     setFixedSize(parent->width(), parent->height());
     setAttribute(Qt::WA_TransparentForMouseEvents);
@@ -175,4 +177,48 @@ void MagnifierWidget::drawMagnifier(QPainter& painter)
          { crossHairTop, crossHairRight, crossHairBottom, crossHairLeft }) {
         painter.fillRect(rect, m_color);
     }
+
+    int centerX = magX + m_pixels / 2;
+    int centerY = magY + m_pixels / 2;
+    if (m_screenshot.rect().contains(centerX, centerY)) {
+        m_centerPixelColor = m_screenshot.toImage().pixelColor(centerX, centerY);
+    } else {
+        m_centerPixelColor = Qt::black;
+    }
+
+    QRectF rgbBar(
+      crossHairBorder.x(),
+      crossHairBorder.bottom() + 1,
+      crossHairBorder.width(),
+      22
+      );
+    painter.fillRect(rgbBar, m_borderColor);
+
+    QRectF colorRect(rgbBar.x() + 2, rgbBar.y() + 2, 18, 18);
+    painter.fillRect(colorRect, m_centerPixelColor);
+    painter.setPen(Qt::white);
+    painter.drawRect(colorRect);
+
+    QString rgbText;
+    if (m_hexColor) {
+        rgbText = QString("#%1%2%3")
+                      .arg(m_centerPixelColor.red(), 2, 16, QChar('0')).toUpper()
+                      .arg(m_centerPixelColor.green(), 2, 16, QChar('0')).toUpper()
+                      .arg(m_centerPixelColor.blue(), 2, 16, QChar('0')).toUpper();
+    } else {
+        rgbText = QString("R:%1 G:%2 B:%3")
+                      .arg(m_centerPixelColor.red(), 3)
+                      .arg(m_centerPixelColor.green(), 3)
+                      .arg(m_centerPixelColor.blue(), 3);
+    }
+
+    painter.setFont(m_textFont);
+    painter.setPen(Qt::white);
+    painter.drawText(rgbBar.adjusted(24, 0, -2, 0),
+                     Qt::AlignCenter, rgbText);
+
+
 }
+
+
+
