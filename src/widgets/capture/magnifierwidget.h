@@ -11,6 +11,7 @@ public:
     explicit MagnifierWidget(const QPixmap& p,
                              const QColor& c,
                              bool isSquare,
+                             bool ishexColor,
                              QWidget* parent = nullptr);
 
 protected:
@@ -23,6 +24,7 @@ private:
     const int m_pixels = 2 * m_magPixels + 1;
     const int m_devicePixelRatio = 1;
     bool m_square;
+    bool m_hexColor;
     QColor m_color;
     QColor m_borderColor;
     QPixmap m_screenshot;

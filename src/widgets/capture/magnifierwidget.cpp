@@ -13,12 +13,14 @@
 MagnifierWidget::MagnifierWidget(const QPixmap& p,
                                  const QColor& c,
                                  bool isSquare,
+                                 bool ishexColor,
                                  QWidget* parent)
   : QWidget(parent)
   , m_color(c)
   , m_borderColor(c)
   , m_screenshot(p)
   , m_square(isSquare)
+  , m_hexColor(ishexColor)
 {
     setFixedSize(parent->width(), parent->height());
     setAttribute(Qt::WA_TransparentForMouseEvents);
@@ -197,14 +199,25 @@ void MagnifierWidget::drawMagnifier(QPainter& painter)
     painter.setPen(Qt::white);
     painter.drawRect(colorRect);
 
-    QString rgbText = QString("R:%1 G:%2 B:%3")
-                        .arg(m_centerPixelColor.red(), 3)
-                        .arg(m_centerPixelColor.green(), 3)
-                        .arg(m_centerPixelColor.blue(), 3);
+    QString rgbText;
+    if (m_hexColor) {
+        rgbText = QString("#%1%2%3")
+                      .arg(m_centerPixelColor.red(), 2, 16, QChar('0')).toUpper()
+                      .arg(m_centerPixelColor.green(), 2, 16, QChar('0')).toUpper()
+                      .arg(m_centerPixelColor.blue(), 2, 16, QChar('0')).toUpper();
+    } else {
+        rgbText = QString("R:%1 G:%2 B:%3")
+                      .arg(m_centerPixelColor.red(), 3)
+                      .arg(m_centerPixelColor.green(), 3)
+                      .arg(m_centerPixelColor.blue(), 3);
+    }
+
     painter.setFont(m_textFont);
     painter.setPen(Qt::white);
     painter.drawText(rgbBar.adjusted(24, 0, -2, 0),
-                     Qt::AlignCenter | Qt::AlignVCenter, rgbText);
+                     Qt::AlignCenter, rgbText);
+
+
 }
 
 

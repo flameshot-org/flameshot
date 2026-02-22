@@ -69,6 +69,7 @@ GeneralConf::GeneralConf(QWidget* parent)
 
     initShowMagnifier();
     initSquareMagnifier();
+    initHexColor();
     initJpegQuality();
     initReverseArrow();
     // this has to be at the end
@@ -766,7 +767,15 @@ void GeneralConf::initSquareMagnifier()
         ConfigHandler().setSquareMagnifier(checked);
     });
 }
-
+void GeneralConf::initHexColor()
+{
+    m_hexColor = new QCheckBox(tr("Hex color format under magnifier"), this);
+    m_hexColor->setToolTip(tr("Use rgb (false) / hex (true) color format for color picker"));
+    m_scrollAreaLayout->addWidget(m_hexColor);
+    connect(m_hexColor, &QCheckBox::clicked, [](bool checked) {
+        ConfigHandler().setHexColor(checked);
+    });
+}
 void GeneralConf::initShowSelectionGeometry()
 {
     auto* tobox = new QHBoxLayout();

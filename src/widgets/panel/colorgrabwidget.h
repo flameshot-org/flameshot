@@ -2,7 +2,7 @@
 #define COLORGRABWIDGET_H
 
 #include <QWidget>
-
+#include "magnifierwidget.h"
 class SidePanelWidget;
 class OverlayMessage;
 

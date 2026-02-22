@@ -215,7 +215,7 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
     // init magnify
     if (m_config.showMagnifier()) {
         m_magnifier = new MagnifierWidget(
-          m_context.screenshot, m_uiColor, m_config.squareMagnifier(), this);
+          m_context.screenshot, m_uiColor, m_config.squareMagnifier(), m_config.hexColor(), this);
     }
 
     // Init color picker
