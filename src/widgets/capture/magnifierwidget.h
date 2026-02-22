@@ -29,4 +29,6 @@ private:
     QPixmap m_paddedScreenshot;
     void drawMagnifier(QPainter& painter);
     void drawMagnifierCircle(QPainter& painter);
+    QColor m_centerPixelColor;
+    QFont m_textFont;
 };

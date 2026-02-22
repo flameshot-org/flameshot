@@ -175,4 +175,37 @@ void MagnifierWidget::drawMagnifier(QPainter& painter)
          { crossHairTop, crossHairRight, crossHairBottom, crossHairLeft }) {
         painter.fillRect(rect, m_color);
     }
+
+    int centerX = magX + m_pixels / 2;
+    int centerY = magY + m_pixels / 2;
+    if (m_screenshot.rect().contains(centerX, centerY)) {
+        m_centerPixelColor = m_screenshot.toImage().pixelColor(centerX, centerY);
+    } else {
+        m_centerPixelColor = Qt::black;
+    }
+
+    QRectF rgbBar(
+      crossHairBorder.x(),
+      crossHairBorder.bottom() + 1,
+      crossHairBorder.width(),
+      22
+      );
+    painter.fillRect(rgbBar, m_borderColor);
+
+    QRectF colorRect(rgbBar.x() + 2, rgbBar.y() + 2, 18, 18);
+    painter.fillRect(colorRect, m_centerPixelColor);
+    painter.setPen(Qt::white);
+    painter.drawRect(colorRect);
+
+    QString rgbText = QString("R:%1 G:%2 B:%3")
+                        .arg(m_centerPixelColor.red(), 3)
+                        .arg(m_centerPixelColor.green(), 3)
+                        .arg(m_centerPixelColor.blue(), 3);
+    painter.setFont(m_textFont);
+    painter.setPen(Qt::white);
+    painter.drawText(rgbBar.adjusted(24, 0, -2, 0),
+                     Qt::AlignCenter | Qt::AlignVCenter, rgbText);
 }
+
+
+
