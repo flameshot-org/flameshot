@@ -72,8 +72,7 @@ if (APPLE)
 
     add_executable(flameshot MACOSX_BUNDLE main.cpp ${APP_ICON_MACOSX})
 else ()
-    add_executable(flameshot
-        tools/screencolorpicker/screencolorpickertool.cpp)
+    add_executable(flameshot)
 endif ()
 
 add_executable(Flameshot::flameshot ALIAS flameshot)
