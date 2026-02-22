@@ -140,7 +140,7 @@ static std::map<CaptureTool::Type, int> buttonTypeOrder
       { CaptureTool::TYPE_CIRCLECOUNT, 10 },
       { CaptureTool::TYPE_MOVESELECTION, 12 }, { CaptureTool::TYPE_UNDO, 13 },
       { CaptureTool::TYPE_REDO, 14 }, { CaptureTool::TYPE_COPY, 15 },
-      { CaptureTool::TYPE_SAVE, 16 },
+    { CaptureTool::TYPE_SAVE, 16 }, {CaptureTool::TYPE_SCREENCOLORPICKER, 17},
 #ifdef ENABLE_IMGUR
       { CaptureTool::TYPE_IMAGEUPLOADER, 17 },
 #endif
@@ -164,15 +164,15 @@ int CaptureToolButton::getPriorityByButton(CaptureTool::Type b)
 }
 
 QList<CaptureTool::Type> CaptureToolButton::iterableButtonTypes = {
-    CaptureTool::TYPE_PENCIL,        CaptureTool::TYPE_DRAWER,
-    CaptureTool::TYPE_ARROW,         CaptureTool::TYPE_SELECTION,
-    CaptureTool::TYPE_RECTANGLE,     CaptureTool::TYPE_CIRCLE,
-    CaptureTool::TYPE_MARKER,        CaptureTool::TYPE_TEXT,
-    CaptureTool::TYPE_CIRCLECOUNT,   CaptureTool::TYPE_PIXELATE,
-    CaptureTool::TYPE_INVERT,        CaptureTool::TYPE_MOVESELECTION,
-    CaptureTool::TYPE_UNDO,          CaptureTool::TYPE_REDO,
-    CaptureTool::TYPE_COPY,          CaptureTool::TYPE_SAVE,
-    CaptureTool::TYPE_EXIT,
+    CaptureTool::TYPE_PENCIL,           CaptureTool::TYPE_DRAWER,
+    CaptureTool::TYPE_ARROW,            CaptureTool::TYPE_SELECTION,
+    CaptureTool::TYPE_RECTANGLE,        CaptureTool::TYPE_CIRCLE,
+    CaptureTool::TYPE_MARKER,           CaptureTool::TYPE_TEXT,
+    CaptureTool::TYPE_CIRCLECOUNT,      CaptureTool::TYPE_PIXELATE,
+    CaptureTool::TYPE_INVERT,           CaptureTool::TYPE_MOVESELECTION,
+    CaptureTool::TYPE_UNDO,             CaptureTool::TYPE_REDO,
+    CaptureTool::TYPE_COPY,             CaptureTool::TYPE_SAVE,
+    CaptureTool::TYPE_SCREENCOLORPICKER,CaptureTool::TYPE_EXIT,
 #ifdef ENABLE_IMGUR
     CaptureTool::TYPE_IMAGEUPLOADER,
 #endif

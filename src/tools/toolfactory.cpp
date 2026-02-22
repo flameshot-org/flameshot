@@ -22,11 +22,13 @@
 #include "rectangle/rectangletool.h"
 #include "redo/redotool.h"
 #include "save/savetool.h"
+#include "screencolorpicker/screencolorpickertool.h"
 #include "selection/selectiontool.h"
 #include "sizedecrease/sizedecreasetool.h"
 #include "sizeincrease/sizeincreasetool.h"
 #include "text/texttool.h"
 #include "undo/undotool.h"
+
 
 ToolFactory::ToolFactory(QObject* parent)
   : QObject(parent)
@@ -50,6 +52,7 @@ CaptureTool* ToolFactory::CreateTool(CaptureTool::Type t, QObject* parent)
         if_TYPE_return_TOOL(TYPE_UNDO, UndoTool);
         if_TYPE_return_TOOL(TYPE_COPY, CopyTool);
         if_TYPE_return_TOOL(TYPE_SAVE, SaveTool);
+        if_TYPE_return_TOOL(TYPE_SCREENCOLORPICKER, ScreenColorPickerTool);
         if_TYPE_return_TOOL(TYPE_EXIT, ExitTool);
 #ifdef ENABLE_IMGUR
         if_TYPE_return_TOOL(TYPE_IMAGEUPLOADER, ImgUploaderTool);
