@@ -301,6 +301,11 @@ CaptureWidget::~CaptureWidget()
 #endif
     if (m_captureDone) {
         auto lastRegion = m_selection->geometry();
+        const qreal scale = m_context.screenshot.devicePixelRatio();
+        lastRegion.setTop(lastRegion.top() * scale);
+        lastRegion.setBottom(lastRegion.bottom() * scale);
+        lastRegion.setLeft(lastRegion.left() * scale);
+        lastRegion.setRight(lastRegion.right() * scale);
         setLastRegion(lastRegion);
         QRect geometry(m_context.selection);
         geometry.setTopLeft(geometry.topLeft() + m_context.widgetOffset);
