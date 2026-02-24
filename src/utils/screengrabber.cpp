@@ -205,23 +205,75 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok, int preSelectedMonitor)
     return screenshot;
 
 #elif defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
-    freeDesktopPortal(ok, screenshot);
-    if (!ok) {
-        AbstractLogger::error() << tr("Unable to capture screen");
-        return QPixmap();
+    if (m_info.waylandDetected()) {
+        freeDesktopPortal(ok, screenshot);
+        if (!ok) {
+            AbstractLogger::error() << tr("Unable to capture screen");
+            return QPixmap();
+        }
+    } else {
+        // X11: Per-monitor grab in NATIVE pixel coordinates.
+        //
+        // QScreen::geometry() on X11 returns mixed coordinates:
+        //   position = native pixels (X11 coords, not scaled)
+        //   size     = logical pixels (native / devicePixelRatio)
+        // This is intentional Qt6 design (fromNativeScreenGeometry).
+        //
+        // To composite correctly with mixed DPI, we reconstruct
+        // native geometry: position is already native, size needs
+        // multiplying by DPR to get back to native.
+
+        auto nativeScreenGeometry = [](QScreen* s) -> QRect {
+            QRect g = s->geometry();
+            qreal dpr = s->devicePixelRatio();
+            return QRect(g.topLeft(),
+                         QSize(qRound(g.width() * dpr),
+                               qRound(g.height() * dpr)));
+        };
+
+        QRect nativeTotal;
+        for (QScreen* const screen : QGuiApplication::screens()) {
+            nativeTotal = nativeTotal.united(nativeScreenGeometry(screen));
+        }
+
+        QPixmap desktop(nativeTotal.size());
+        desktop.fill(Qt::black);
+
+        QPainter painter(&desktop);
+        for (QScreen* screen : QGuiApplication::screens()) {
+            QRect logicalGeom = screen->geometry();
+            QPixmap screenCapture = screen->grabWindow(
+              wid, 0, 0, logicalGeom.width(), logicalGeom.height());
+            screenCapture.setDevicePixelRatio(1.0);
+
+            QRect nativeGeom = nativeScreenGeometry(screen);
+            QPoint relativePos = nativeGeom.topLeft() - nativeTotal.topLeft();
+            painter.drawPixmap(relativePos, screenCapture);
+        }
+        painter.end();
+
+        screenshot = desktop;
+        ok = true;
     }
 
 #elif defined(Q_OS_WIN)
     screenshot = windowsScreenshot(wid);
 #endif
 
-    // If monitor was pre-selected skip UI and crop directly
+    // If monitor was pre-selected, skip UI and crop directly
     if (preSelectedMonitor >= 0) {
         const QList<QScreen*> screens = QGuiApplication::screens();
         if (preSelectedMonitor < screens.size()) {
             m_selectedMonitor = preSelectedMonitor;
             return cropToMonitor(screenshot, preSelectedMonitor);
         }
+    }
+
+    // When called without monitor pre-selection (e.g. from `flameshot full`),
+    // return the full composite screenshot. The monitor selection dialog
+    // is only shown when explicitly requested via `flameshot screen`.
+    if (preSelectedMonitor < 0) {
+        return screenshot;
     }
 
     return selectMonitorAndCrop(screenshot, ok);
