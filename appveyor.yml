@@ -3,41 +3,28 @@ image:
 clone_folder: c:\projects\source
 
 environment:
-  Qt6_INSTALL_DIR: 'C:\Qt\6.9\msvc2022_64'
+  Qt6_INSTALL_DIR: 'C:\Qt\6.9.3\msvc2022_64'
   PATH: '%Qt6_INSTALL_DIR%\bin;%PATH%'
+  matrix:
+    - PORTABLE_CONFIG: OFF
+    - PORTABLE_CONFIG: ON
 
 build_script:
-- cmd: >-
-
+- cmd: |-
     set QTDIR=%Qt6_INSTALL_DIR%
-
     set "VCINSTALLDIR=C:\Program Files (x86)\Microsoft Visual Studio\2022\Community\VC"
-
     set "OPENSSL_ROOT_DIR=C:/OpenSSL-v111-Win64"
-
-    cmake -S c:\projects\source -B build -G "Visual Studio 17 2022" -DCMAKE_BUILD_TYPE:STRING=Release -DENABLE_OPENSSL=ON -DRUN_IN_PLACE=OFF
-
-    cmake --build build --parallel 2 --config "Release"
-
-    cd build 
-
-    cpack -G WIX -B package
-
-    mkdir artifact
-
-    cp package/*.msi artifact/.
-
-    cp src/Release/*.exe artifact/.
-
-    7z a -tzip artifact.zip artifact/
+    cmake -S C:\projects\source -B build -G "Visual Studio 17 2022" -DCMAKE_BUILD_TYPE=Release -DENABLE_OPENSSL=ON -DUSE_PORTABLE_CONFIG=%PORTABLE_CONFIG%
+    cmake --build build --parallel 2 --config Release
+- cmd: cd build
+- cmd: if "%PORTABLE_CONFIG%"=="OFF" cpack -G WIX -B package
+- cmd: if "%PORTABLE_CONFIG%"=="ON" (mkdir portable_exe & copy src\Release\*.exe portable_exe\. & 7z a -tzip portable_exe.zip portable_exe\)
 
 artifacts:
 - path: build\package\*.msi
   name: installer
-- path: build\src\Release\*.exe
-  name: executable
-- path: build\artifact.zip
-  name: archive
+- path: build\portable_exe.zip
+  name: portable exe
 
 deploy:
 - provider: Webhook
