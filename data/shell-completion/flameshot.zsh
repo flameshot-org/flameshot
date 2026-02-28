@@ -24,7 +24,6 @@ _flameshot_gui_opts=(
     "--last-region[Repeat screenshot with previously selected region]"
     {-r,--raw}'[Print raw PNG capture]'
     {-g,--print-geometry}'[Print geometry of the selection in the format WxH+X+Y. Does nothing if raw is specified]'
-    {-u,--upload}'[Upload screenshot]'
     "--pin[Pin the capture to the screen]"
     {-s,--accept-on-select}'[Accept capture as soon as a selection is made]'
     {-h,--help}'[Show the available arguments]'
@@ -40,12 +39,12 @@ _flameshot_gui() {
 
 _flameshot_screen_opts=(
     {-n,--number}'[Define the screen to capture (starting from 0). Default: screen containing the cursor]'
+    {-e,--edit}'[Interactively select and edit the screenshot region]'
     {-p,--path}'[Existing directory or new file to save to]':dir:_files
     {-c,--clipboard}'[Save the capture to the clipboard]'
     {-d,--delay}'[Delay time in milliseconds]'
     "--region[Screenshot region to select <WxH+X+Y or string>]"
     {-r,--raw}'[Print raw PNG capture]'
-    {-u,--upload}'[Upload screenshot]'
     "--pin[Pin the capture to the screen]"
     {-h,--help}'[Show the available arguments]'
 )
@@ -64,7 +63,6 @@ _flameshot_full_opts=(
     {-d,--delay}'[Delay time in milliseconds]'
     "--region[Screenshot region to select <WxH+X+Y or string>]"
     {-r,--raw}'[Print raw PNG capture]'
-    {-u,--upload}'[Upload screenshot]'
     {-h,--help}'[Show the available arguments]'
 )
 

@@ -242,15 +242,10 @@ QPixmap ScreenGrabber::grabScreen(QScreen* screen, bool& ok)
     QPixmap p;
     QRect geometry = screenGeometry(screen);
 #if defined(Q_OS_LINUX)
-    p = grabEntireDesktop(ok);
-    if (ok) {
-        // Both X11 and Wayland: Use cropToMonitor for consistent handling
-        // of misaligned monitors and mixed DPI
-        const QList<QScreen*> screens = QGuiApplication::screens();
-        int screenIndex = screens.indexOf(screen);
+    const QList<QScreen*> screens = QGuiApplication::screens();
+    int screenIndex = screens.indexOf(screen);
 
-        return cropToMonitor(p, screenIndex);
-    }
+    p = grabEntireDesktop(ok, screenIndex);
 #else
     ok = true;
     return screen->grabWindow(
