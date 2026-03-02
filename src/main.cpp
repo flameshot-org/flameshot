@@ -436,12 +436,9 @@ int main(int argc, char* argv[])
                         rawImageOption,
                         pinOption },
                       screenArgument);
-    parser.AddOptions({ pathOption,
-                        clipboardOption,
-                        delayOption,
-                        regionOption,
-                        rawImageOption },
-                      fullArgument);
+    parser.AddOptions(
+      { pathOption, clipboardOption, delayOption, rawImageOption },
+      fullArgument);
     parser.AddOptions({ autostartOption,
                         notificationOption,
                         filenameOption,
@@ -534,15 +531,10 @@ int main(int argc, char* argv[])
             path = QDir(path).absolutePath();
         }
         int delay = parser.value(delayOption).toInt();
-        QString region = parser.value(regionOption);
         bool clipboard = parser.isSet(clipboardOption);
         bool raw = parser.isSet(rawImageOption);
-        // Not a valid command
 
         CaptureRequest req(CaptureRequest::FULLSCREEN_MODE, delay);
-        if (!region.isEmpty()) {
-            req.setInitialSelection(Region().value(region).toRect());
-        }
         if (clipboard) {
             req.addTask(CaptureRequest::COPY);
         }

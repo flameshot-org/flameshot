@@ -14,6 +14,7 @@
 #include <QKeyEvent>
 #include <QLabel>
 #include <QMouseEvent>
+#include <QPainter>
 #include <QPixmap>
 #include <QProcess>
 #include <QScreen>
@@ -225,6 +226,46 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok, int preSelectedMonitor)
     }
 
     return selectMonitorAndCrop(screenshot, ok);
+}
+
+QPixmap ScreenGrabber::grabFullDesktop(bool& ok)
+{
+    ok = true;
+    QPixmap screenshot;
+
+#if defined(Q_OS_MACOS)
+    // On macOS, composite all screens into a single pixmap.
+    const QList<QScreen*> screens = QGuiApplication::screens();
+    QRect totalGeom;
+    for (QScreen* s : screens) {
+        totalGeom = totalGeom.united(s->geometry());
+    }
+    qreal maxDpr = 1.0;
+    for (QScreen* s : screens) {
+        maxDpr = qMax(maxDpr, s->devicePixelRatio());
+    }
+    screenshot = QPixmap(qRound(totalGeom.width() * maxDpr),
+                         qRound(totalGeom.height() * maxDpr));
+    screenshot.setDevicePixelRatio(maxDpr);
+    screenshot.fill(Qt::black);
+    QPainter painter(&screenshot);
+    for (QScreen* s : screens) {
+        QRect geom = s->geometry();
+        QPixmap p = s->grabWindow(0);
+        QPoint offset = geom.topLeft() - totalGeom.topLeft();
+        painter.drawPixmap(offset, p);
+    }
+    painter.end();
+#elif defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
+    freeDesktopPortal(ok, screenshot);
+    if (!ok) {
+        AbstractLogger::error() << tr("Unable to capture screen");
+    }
+#elif defined(Q_OS_WIN)
+    screenshot = windowsScreenshot(0);
+#endif
+
+    return screenshot;
 }
 
 QRect ScreenGrabber::screenGeometry(QScreen* screen)

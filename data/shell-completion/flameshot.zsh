@@ -61,7 +61,6 @@ _flameshot_full_opts=(
     {-p,--path}'[Existing directory or new file to save to]':dir:_files
     {-c,--clipboard}'[Save the capture to the clipboard]'
     {-d,--delay}'[Delay time in milliseconds]'
-    "--region[Screenshot region to select <WxH+X+Y or string>]"
     {-r,--raw}'[Print raw PNG capture]'
     {-h,--help}'[Show the available arguments]'
 )

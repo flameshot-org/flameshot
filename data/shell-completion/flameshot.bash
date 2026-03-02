@@ -14,7 +14,7 @@ _flameshot() {
 	cmd="gui full config launcher screen"
 	screen_opts="--number -n --edit -e --path -p --clipboard -c --delay -d --region --raw -r --pin --help"
 	gui_opts="--path -p --clipboard -c --delay -d --region --last-region --raw -r --print-geometry -g --pin --accept-on-select -s --help"
-	full_opts="--path -p --clipboard -c --delay -d --region --raw -r --help"
+	full_opts="--path -p --clipboard -c --delay -d --raw -r --help"
 	config_opts="--autostart -a --filename -f --notifications -n --trayicon -t --showhelp -s --maincolor -m --contrastcolor -k --check"
 
 	case "${prev}" in

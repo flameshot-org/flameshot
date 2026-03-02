@@ -104,7 +104,6 @@ __flameshot_complete full --no-files
 __flameshot_complete full --long-option "path"        --short-option "p" --description "Output file or directory"                          --require-parameter
 __flameshot_complete full --long-option "clipboard"   --short-option "c" --description "Copy screenshot to the clipboard"                                      --no-files
 __flameshot_complete full --long-option "delay"       --short-option "d" --description "Delay time in milliseconds"                        --require-parameter --no-files
-__flameshot_complete full --long-option "region"                         --description "Screenshot region to select (WxH+X+Y)"             --require-parameter --no-files --arguments "(__flameshot_complete_region full)" --keep-order
 __flameshot_complete full --long-option "raw"         --short-option "r" --description "Print raw PNG capture"                                                 --no-files
 __flameshot_complete full --long-option "help"        --short-option "h" --description "Show the available arguments"                                          --no-files
 

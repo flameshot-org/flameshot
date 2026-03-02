@@ -201,13 +201,9 @@ void Flameshot::full(const CaptureRequest& req)
     }
 
     bool ok = true;
-    QPixmap p(ScreenGrabber().grabEntireDesktop(ok));
-    QRect region = req.initialSelection();
-    if (!region.isNull()) {
-        p = p.copy(region);
-    }
+    QPixmap p(ScreenGrabber().grabFullDesktop(ok));
     if (ok) {
-        QRect selection; // `flameshot full` does not support --selection
+        QRect selection; // `flameshot full` does not support region selection
         exportCapture(p, selection, req);
     } else {
         emit captureFailed();
