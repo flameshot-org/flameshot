@@ -529,7 +529,9 @@ int main(int argc, char* argv[])
                 req.addSaveTask();
             }
         }
-        return requestCaptureAndWait(req);
+        int guiExitCode = requestCaptureAndWait(req);
+        delete qApp;
+        return guiExitCode;
     } else if (parser.isSet(fullArgument)) { // FULL
         reinitializeAsQApplication(argc, argv, translator, qtTranslator);
 
@@ -564,7 +566,11 @@ int main(int argc, char* argv[])
         if (!clipboard && path.isEmpty() && !raw && !upload) {
             req.addSaveTask();
         }
-        return requestCaptureAndWait(req);
+        {
+            int fullExitCode = requestCaptureAndWait(req);
+            delete qApp;
+            return fullExitCode;
+        }
     } else if (parser.isSet(screenArgument)) { // SCREEN
         reinitializeAsQApplication(argc, argv, translator, qtTranslator);
 
@@ -614,7 +620,11 @@ int main(int argc, char* argv[])
             req.addSaveTask();
         }
 
-        return requestCaptureAndWait(req);
+        {
+            int screenExitCode = requestCaptureAndWait(req);
+            delete qApp;
+            return screenExitCode;
+        }
     } else if (parser.isSet(configArgument)) { // CONFIG
         bool autostart = parser.isSet(autostartOption);
         bool notification = parser.isSet(notificationOption);
@@ -680,6 +690,6 @@ int main(int argc, char* argv[])
         }
     }
 finish:
-
+    delete qApp;
     return 0;
 }
