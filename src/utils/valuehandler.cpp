@@ -530,11 +530,15 @@ bool Region::check(const QVariant& val)
 
 QVariant Region::process(const QVariant& val)
 {
-    // FIXME: This is temporary, just before D-Bus is removed
+    // Create a temporary QApplication if there is no global Qt application
+    // instance at all. Creating one while a QCoreApplication already exists
+    // is forbidden by Qt: the second constructor aborts early, but its
+    // destructor still runs and corrupts global state (e.g. Wayland
+    // connections), causing subsequent portal calls to hang.
     auto argv = std::make_unique<char*[]>(1);
     auto argc = std::make_unique<int>(0);
     std::unique_ptr<QApplication> tempApp;
-    if (QGuiApplication::screens().empty()) {
+    if (!QCoreApplication::instance()) {
         tempApp = std::make_unique<QApplication>(*argc, argv.get());
     }
 
