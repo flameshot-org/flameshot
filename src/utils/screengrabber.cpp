@@ -206,10 +206,42 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok, int preSelectedMonitor)
     return screenshot;
 
 #elif defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
-    freeDesktopPortal(ok, screenshot);
-    if (!ok) {
-        AbstractLogger::error() << tr("Unable to capture screen");
-        return QPixmap();
+    if (m_info.waylandDetected()) {
+        freeDesktopPortal(ok, screenshot);
+        if (!ok) {
+            AbstractLogger::error() << tr("Unable to capture screen");
+            return QPixmap();
+        }
+    } else {
+        // X11: grab per-monitor using native pixel coordinates.
+        // QScreen::geometry() in Qt6 returns mixed coords (native position,
+        // logical size), so we reconstruct native size via DPR.
+        auto nativeGeom = [](QScreen* s) -> QRect {
+            QRect g = s->geometry();
+            qreal dpr = s->devicePixelRatio();
+            return QRect(g.topLeft(),
+                         QSize(qRound(g.width() * dpr),
+                               qRound(g.height() * dpr)));
+        };
+
+        QScreen* currentScreen = QGuiApplication::primaryScreen();
+        if (preSelectedMonitor >= 0) {
+            const QList<QScreen*> screens = QGuiApplication::screens();
+            if (preSelectedMonitor < screens.size()) {
+                currentScreen = screens[preSelectedMonitor];
+            }
+        }
+
+        QRect logicalGeom = currentScreen->geometry();
+        screenshot = currentScreen->grabWindow(
+          wid, 0, 0, logicalGeom.width(), logicalGeom.height());
+        screenshot.setDevicePixelRatio(1.0);
+        ok = true;
+
+        if (preSelectedMonitor >= 0) {
+            m_selectedMonitor = preSelectedMonitor;
+            return screenshot;
+        }
     }
 
 #elif defined(Q_OS_WIN)
