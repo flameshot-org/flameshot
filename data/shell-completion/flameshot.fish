@@ -83,7 +83,6 @@ __flameshot_complete gui --long-option "region"                              --d
 __flameshot_complete gui --long-option "last-region"                         --description "Repeat screenshot with previously selected region"                     --no-files
 __flameshot_complete gui --long-option "raw"              --short-option "r" --description "Print raw PNG capture"                                                 --no-files
 __flameshot_complete gui --long-option "print-geometry"   --short-option "g" --description "Print geometry of the selection"                                       --no-files
-__flameshot_complete gui --long-option "upload"           --short-option "u" --description "Upload the screenshot"                                                 --no-files
 __flameshot_complete gui --long-option "pin"                                 --description "Pin the screenshot to the screen"                                      --no-files
 __flameshot_complete gui --long-option "accept-on-select" --short-option "s" --description "Accept capture as soon as a selection is made"                         --no-files
 __flameshot_complete gui --long-option "help"             --short-option "h" --description "Show the available arguments"                                          --no-files
@@ -91,12 +90,12 @@ __flameshot_complete gui --long-option "help"             --short-option "h" --d
 # SCREEN subcommand
 __flameshot_complete screen --no-files
 __flameshot_complete screen --long-option "number"      --short-option "n" --description "Screen number (starting from 0)"                    --require-parameter --no-files --arguments "(__flameshot_complete_screen_number)"
+__flameshot_complete screen --long-option "edit"        --short-option "e" --description "Interactively select and edit the screenshot region"                    --no-files
 __flameshot_complete screen --long-option "path"        --short-option "p" --description "Output file or directory"                           --require-parameter
 __flameshot_complete screen --long-option "clipboard"   --short-option "c" --description "Copy screenshot to the clipboard"                                       --no-files
 __flameshot_complete screen --long-option "delay"       --short-option "d" --description "Delay time in milliseconds"                         --require-parameter --no-files
 __flameshot_complete screen --long-option "region"                          --description "Screenshot region to select (WxH+X+Y)"             --require-parameter --no-files --arguments "(__flameshot_complete_region screen)"
 __flameshot_complete screen --long-option "raw"         --short-option "r" --description "Print raw PNG capture"                                                 --no-files
-__flameshot_complete screen --long-option "upload"      --short-option "u" --description "Upload the screenshot"                                                 --no-files
 __flameshot_complete screen --long-option "pin"                            --description "Pin the screenshot to the screen"                                      --no-files
 __flameshot_complete screen --long-option "help"        --short-option "h" --description "Show the available arguments"                                          --no-files
 
@@ -105,9 +104,7 @@ __flameshot_complete full --no-files
 __flameshot_complete full --long-option "path"        --short-option "p" --description "Output file or directory"                          --require-parameter
 __flameshot_complete full --long-option "clipboard"   --short-option "c" --description "Copy screenshot to the clipboard"                                      --no-files
 __flameshot_complete full --long-option "delay"       --short-option "d" --description "Delay time in milliseconds"                        --require-parameter --no-files
-__flameshot_complete full --long-option "region"                         --description "Screenshot region to select (WxH+X+Y)"             --require-parameter --no-files --arguments "(__flameshot_complete_region full)" --keep-order
 __flameshot_complete full --long-option "raw"         --short-option "r" --description "Print raw PNG capture"                                                 --no-files
-__flameshot_complete full --long-option "upload"      --short-option "u" --description "Upload the screenshot"                                                 --no-files
 __flameshot_complete full --long-option "help"        --short-option "h" --description "Show the available arguments"                                          --no-files
 
 # LAUNCHER command

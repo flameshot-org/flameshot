@@ -146,28 +146,40 @@ void Flameshot::screen(CaptureRequest req, const int screenNumber)
         return;
     }
 
-    bool ok = true;
-    QScreen* screen;
+    bool ok = false;
+    QPixmap p;
+    QRect geometry;
 
     if (screenNumber < 0) {
-        QPoint globalCursorPos = QCursor::pos();
-        screen = qApp->screenAt(globalCursorPos);
+        ScreenGrabber grabber;
+        p = grabber.grabEntireDesktop(ok);
+        if (ok) {
+            QScreen* selectedScreen = grabber.getSelectedScreen();
+            if (selectedScreen) {
+                geometry = ScreenGrabber().screenGeometry(selectedScreen);
+            } else {
+                ok = false;
+            }
+        }
     } else if (screenNumber >= qApp->screens().count()) {
         AbstractLogger() << QObject::tr(
           "Requested screen exceeds screen count");
-        emit captureFailed();
-        return;
+        ok = false;
     } else {
-        screen = qApp->screens()[screenNumber];
+        // Specific screen number provided - use grabScreen to bypass selector
+        QScreen* screen = qApp->screens()[screenNumber];
+        p = ScreenGrabber().grabScreen(screen, ok);
+        if (ok) {
+            geometry = ScreenGrabber().screenGeometry(screen);
+        }
     }
-    QPixmap p(ScreenGrabber().grabScreen(screen, ok));
+
     if (ok) {
-        QRect geometry = ScreenGrabber().screenGeometry(screen);
         QRect region = req.initialSelection();
         if (region.isNull()) {
-            region = ScreenGrabber().screenGeometry(screen);
+            region = geometry;
         } else {
-            QRect screenGeom = ScreenGrabber().screenGeometry(screen);
+            QRect screenGeom = geometry;
             screenGeom.moveTopLeft({ 0, 0 });
             region = region.intersected(screenGeom);
             p = p.copy(region);
@@ -189,13 +201,9 @@ void Flameshot::full(const CaptureRequest& req)
     }
 
     bool ok = true;
-    QPixmap p(ScreenGrabber().grabEntireDesktop(ok));
-    QRect region = req.initialSelection();
-    if (!region.isNull()) {
-        p = p.copy(region);
-    }
+    QPixmap p(ScreenGrabber().grabFullDesktop(ok));
     if (ok) {
-        QRect selection; // `flameshot full` does not support --selection
+        QRect selection; // `flameshot full` does not support region selection
         exportCapture(p, selection, req);
     } else {
         emit captureFailed();
