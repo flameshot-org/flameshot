@@ -1061,7 +1061,7 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../src/config/generalconf.cpp" line="286"/>
         <source>Use the last region as the default selection for the next screenshot in GUI mode</source>
-        <translation type="unfinished">Use the last region as the default selection for the next screenshot in GUI mode</translation>
+        <translation>Utiliser la dernière région en tant que sélection par défaut lors de la prochaine capture d&apos;écran en mode GUI</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="300"/>
