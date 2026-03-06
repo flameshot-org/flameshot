@@ -186,7 +186,7 @@
         <location filename="../../src/widgets/capturelauncher.ui" line="93"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="183"/>
         <source>WxH+x+y</source>
-        <translation>WxH+x+y</translation>
+        <translation>LxH+x+y</translation>
     </message>
 </context>
 <context>
@@ -244,7 +244,7 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="515"/>
         <source>Quit Capture</source>
-        <translation type="unfinished">Annuler la capture</translation>
+        <translation>Annuler la capture</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="516"/>
@@ -538,7 +538,7 @@ Appuyer sur Espace pour ouvrir le panneau latéral.</translation>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="794"/>
         <source>Bad config key &apos;%1&apos; in ConfigHandler. Please report this as a bug.</source>
-        <translation>Mauvaise clef de configuration&apos;%1&apos; dans ConfigHandler. Signaler le en tant que bug SVP.</translation>
+        <translation>Mauvaise clé de configuration&apos;%1&apos; dans ConfigHandler. Signaler le en tant que bug.</translation>
     </message>
 </context>
 <context>
@@ -1056,7 +1056,7 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../src/config/generalconf.cpp" line="284"/>
         <source>Use last region for GUI mode</source>
-        <translation type="unfinished">Utiliser la dernière région pour le mode GUI</translation>
+        <translation>Utiliser la dernière région pour le mode GUI</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="286"/>
@@ -1076,12 +1076,12 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../src/config/generalconf.cpp" line="323"/>
         <source>Show abort notifications</source>
-        <translation type="unfinished">Afficher les notifications d&apos;annulation</translation>
+        <translation>Afficher les notifications d&apos;annulation</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="324"/>
         <source>Enable abort notifications</source>
-        <translation type="unfinished">Permettre les notifications d&apos;annulation</translation>
+        <translation>Permettre les notifications d&apos;annulation</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="337"/>
@@ -1096,7 +1096,7 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../src/config/generalconf.cpp" line="352"/>
         <source>Grim is a wayland only utility to capture screens based on the screencopy protocol. Generally only enable on minimal wayland window managers like sway, hyprland, etc.</source>
-        <translation type="unfinished"></translation>
+        <translation>Grim est un utilitaire Wayland permettant de capturer des écrans à partir du protocole screencopy. Il ne doit généralement être activé que sur des gestionnaires de fenêtres Wayland minimalistes tels que sway, hyprland, etc.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="370"/>
@@ -1143,7 +1143,7 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../src/config/generalconf.cpp" line="439"/>
         <source>Automatically unload from memory when it is not needed</source>
-        <translation type="unfinished">Déchargement automatique de la mémoire quand ce n&apos;est pas nécessaire</translation>
+        <translation>Décharger automatiquement de la mémoire quand ce n&apos;est pas utilisé</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="440"/>
@@ -1153,7 +1153,7 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../src/config/generalconf.cpp" line="451"/>
         <source>Launch in background at startup</source>
-        <translation type="unfinished">Démarrage en arrière-plan</translation>
+        <translation>Démarrage en arrière-plan</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="452"/>
@@ -1168,7 +1168,7 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../src/config/generalconf.cpp" line="480"/>
         <source>Show the confirmation prompt before ESC quit</source>
-        <translation type="unfinished">Afficher la demande de confirmation avant d&apos;annuler via ESC</translation>
+        <translation>Afficher la demande de confirmation avant d&apos;annuler via ESC</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="505"/>
@@ -1178,7 +1178,7 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../src/config/generalconf.cpp" line="517"/>
         <source>Copy URL after uploading was successful</source>
-        <translation type="unfinished">Copier l&apos;URL suite à un téléchargement fructueux</translation>
+        <translation>Copier l&apos;URL après le téléchargement réussi</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="529"/>
@@ -1248,7 +1248,7 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../src/config/generalconf.cpp" line="725"/>
         <source>After zooming the pinned image, should the image get smoothened or stay pixelated</source>
-        <translation>Après avoir zoomé sur l&apos;image épinglée, l&apos;image doit-elle être lissée ou rester pixelisée&#x202f;?</translation>
+        <translation>Après avoir zoomé sur l&apos;image épinglée, l&apos;image doit-elle être lissée ou rester pixelisée</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="736"/>
@@ -1359,12 +1359,12 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../src/config/generalconf.cpp" line="881"/>
         <source>Insecure Pixelate</source>
-        <translation type="unfinished"></translation>
+        <translation>Pixelisation non sécurisée</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="883"/>
         <source>Draw the pixelation effect in an insecure but more asethetic way.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dessinez l&apos;effet de pixellisation d&apos;une manière moins sûre, mais plus esthétique.</translation>
     </message>
 </context>
 <context>
@@ -1848,12 +1848,12 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/primaryinstancewidget.cpp" line="21"/>
         <source>Primary instance</source>
-        <translation type="unfinished"></translation>
+        <translation>Instance principale</translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/primaryinstancewidget.cpp" line="22"/>
         <source>&lt;b&gt;Primary instance.&lt;/b&gt; Messages received from secondaries:</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Instance principale.&lt;/b&gt; Messages reçus des instances secondaires&#xa0;:</translation>
     </message>
 </context>
 <context>
@@ -1988,7 +1988,7 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../src/main.cpp" line="262"/>
         <source>Pin the capture to the screen</source>
-        <translation>Pin the capture to the screen</translation>
+        <translation>Épingler la capture à l&apos;écran</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="264"/>
@@ -2003,7 +2003,7 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../src/main.cpp" line="271"/>
         <source>Repeat screenshot with previously selected region</source>
-        <translation>Repeat screenshot with previously selected region</translation>
+        <translation>Répéter la capture d&apos;écran avec la région précédemment sélectionnée</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="274"/>
@@ -2058,17 +2058,17 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../src/main.cpp" line="307"/>
         <source>Print raw PNG capture</source>
-        <translation>Print raw PNG capture</translation>
+        <translation>Imprimer la capture PNG brute</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="310"/>
         <source>Print geometry of the selection in the format WxH+X+Y. Does nothing if raw is specified</source>
-        <translation>Print geometry of the selection in the format WxH+X+Y. Does nothing if raw is specified</translation>
+        <translation>Imprime la géométrie de la sélection au format LxH+X+Y. Ne fait rien si brut est spécifié</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="314"/>
         <source>Define the screen to capture (starting from 0)</source>
-        <translation>Define the screen to capture (starting from 0)</translation>
+        <translation>Définissez l&apos;écran à capturer (en commençant par 0)</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="334"/>
@@ -2078,12 +2078,12 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../src/main.cpp" line="337"/>
         <source>Invalid region, use &apos;WxH+X+Y&apos; or &apos;all&apos; or &apos;screen0/screen1/...&apos;.</source>
-        <translation>Invalid region, use &apos;WxH+X+Y&apos; or &apos;all&apos; or &apos;screen0/screen1/...&apos;.</translation>
+        <translation>Région non valide, utilisez &apos;WxH+X+Y&apos; ou &apos;tout&apos; ou &apos;écran0/écran1/...&apos;.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="350"/>
         <source>Invalid path, must be an existing directory or a new file in an existing directory</source>
-        <translation>Invalid path, must be an existing directory or a new file in an existing directory</translation>
+        <translation>Chemin d&apos;accès invalide, doit être un répertoire existant ou un nouveau fichier dans un répertoire existant</translation>
     </message>
     <message>
         <source>Define the screen to capture</source>
@@ -2147,12 +2147,12 @@ Vous devrez probablement remplacer le signe &apos;#&apos; par &apos;\#FFF&apos;<
     <message>
         <location filename="../../src/core/flameshot.cpp" line="156"/>
         <source>Requested screen exceeds screen count</source>
-        <translation>Requested screen exceeds screen count</translation>
+        <translation>L&apos;écran demandé dépasse le nombre d&apos;écrans</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="408"/>
         <source>Full screen screenshot pinned to screen</source>
-        <translation>Full screen screenshot pinned to screen</translation>
+        <translation>Capture d&apos;écran plein écran épinglée à l&apos;écran</translation>
     </message>
     <message>
         <source>URL copied to clipboard.</source>
@@ -2184,7 +2184,7 @@ Vous devrez probablement remplacer le signe &apos;#&apos; par &apos;\#FFF&apos;<
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="329"/>
         <source>Usage</source>
-        <translation>Usage</translation>
+        <translation>Utilisation</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="329"/>
@@ -2248,7 +2248,7 @@ Vous devrez probablement remplacer le signe &apos;#&apos; par &apos;\#FFF&apos;<
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="195"/>
         <source>Quit capture</source>
-        <translation>Quitter la capture d&apos;écran</translation>
+        <translation>Annuler la capture</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="207"/>
@@ -2268,7 +2268,7 @@ Vous devrez probablement remplacer le signe &apos;#&apos; par &apos;\#FFF&apos;<
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="219"/>
         <source>Change the tool&apos;s size</source>
-        <translation>Change the tool&apos;s size</translation>
+        <translation>Modifier la taille de l&apos;outil</translation>
     </message>
     <message>
         <source>Change the tool&apos;s thickness</source>
@@ -2311,7 +2311,7 @@ Vous devrez probablement remplacer le signe &apos;#&apos; par &apos;\#FFF&apos;<
     <message>
         <location filename="../../src/tools/save/savetool.cpp" line="34"/>
         <source>Save screenshot to a file</source>
-        <translation>Save screenshot to a file</translation>
+        <translation>Enregistrer la capture d&apos;écran dans un fichier</translation>
     </message>
     <message>
         <source>Save the capture</source>
@@ -2327,17 +2327,17 @@ Vous devrez probablement remplacer le signe &apos;#&apos; par &apos;\#FFF&apos;<
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="53"/>
         <source>The universal wayland screen capture adapter requires Grim as the screen capture component of wayland. If the screen capture component is missing, please install it!</source>
-        <translation type="unfinished"></translation>
+        <translation>L&apos;adaptateur universel de capture d&apos;écran Wayland nécessite Grim comme composant de capture d&apos;écran de Wayland. Si le composant de capture d&apos;écran est manquant, veuillez l&apos;installer&#x202f;!</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="171"/>
         <source>If the useGrimAdapter setting is not enabled, the dbus protocol will be used. It should be noted that using the dbus protocol under wayland is not recommended. It is recommended to enable the useGrimAdapter setting in flameshot.ini to activate the grim-based general wayland screenshot adapter</source>
-        <translation type="unfinished"></translation>
+        <translation>Si le paramètre useGrimAdapter n&apos;est pas activé, le protocole dbus sera utilisé. Il convient de noter que l&apos;utilisation du protocole dbus sous Wayland n&apos;est pas recommandée. Il est recommandé d&apos;activer le paramètre useGrimAdapter dans flameshot.ini pour activer l&apos;adaptateur de capture d&apos;écran Wayland général basé sur grim</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="182"/>
         <source>grim&apos;s screenshot component is implemented based on wlroots, it may not be used in GNOME or similar desktop environments</source>
-        <translation type="unfinished"></translation>
+        <translation>Le composant de capture d&apos;écran de Grim est implémenté sur la base de wlroots, il ne peut donc pas être utilisé dans GNOME ou dans des environnements de bureau similaires</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="194"/>
@@ -2360,32 +2360,32 @@ Vous devrez probablement remplacer le signe &apos;#&apos; par &apos;\#FFF&apos;<
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="26"/>
         <source>Secondary instance</source>
-        <translation type="unfinished"></translation>
+        <translation>Instance secondaire</translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="27"/>
         <source>&lt;b&gt;Secondary instance.&lt;/b&gt; Send message to primary:</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Instance secondaire.&lt;/b&gt; Envoyer un message à l&apos;instance principale&#xa0;:</translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="29"/>
         <source>Type something here...</source>
-        <translation type="unfinished"></translation>
+        <translation>Écrivez quelque chose ici...</translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="31"/>
         <source>&amp;Send</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Envoyer</translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="54"/>
         <source>Error sending message</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur lors de l&apos;envoi du message</translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="55"/>
         <source>The message &apos;%1&apos; could not be sent to the primary.</source>
-        <translation type="unfinished"></translation>
+        <translation>Le message « %1 » n&apos;a pas pu être envoyé à l&apos;instance principale.</translation>
     </message>
 </context>
 <context>
@@ -2427,7 +2427,7 @@ Vous devrez probablement remplacer le signe &apos;#&apos; par &apos;\#FFF&apos;<
         <location filename="../../src/config/setshortcutwidget.cpp" line="48"/>
         <location filename="../../src/config/setshortcutwidget.cpp" line="53"/>
         <source>Flameshot must be restarted for changes to take effect.</source>
-        <translation>Flameshot must be restarted for changes to take effect.</translation>
+        <translation>Flameshot doit être redémarré pour que les modifications prennent effet.</translation>
     </message>
 </context>
 <context>
@@ -2455,17 +2455,17 @@ Vous devrez probablement remplacer le signe &apos;#&apos; par &apos;\#FFF&apos;<
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="162"/>
         <source>Left Double-click</source>
-        <translation>Left Double-click</translation>
+        <translation>Double-clic gauche</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="169"/>
         <source>Toggle side panel</source>
-        <translation>Toggle side panel</translation>
+        <translation>Basculer le panneau latéral</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="170"/>
         <source>Grab a color from the screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionnez une couleur à l&apos;écran</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="171"/>
@@ -2540,7 +2540,7 @@ Vous devrez probablement remplacer le signe &apos;#&apos; par &apos;\#FFF&apos;<
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="190"/>
         <source>Delete selected drawn object</source>
-        <translation type="unfinished">Supprimer l&apos;objet sélectionné peint</translation>
+        <translation>Supprimer l&apos;objet dessiné sélectionné</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="191"/>
@@ -2748,7 +2748,7 @@ Vous devrez probablement remplacer le signe &apos;#&apos; par &apos;\#FFF&apos;<
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="76"/>
         <source>Full Date (%d-%m-%Y)</source>
-        <translation type="unfinished"></translation>
+        <translation>Date complète (%d-%m-%Y)</translation>
     </message>
 </context>
 <context>
@@ -2855,7 +2855,7 @@ Vous devrez probablement remplacer le signe &apos;#&apos; par &apos;\#FFF&apos;<
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="160"/>
         <source>&amp;Open Save Path</source>
-        <translation type="unfinished">Répertoire d&apos;&amp;Ouverture et de Sauvegarde</translation>
+        <translation>Répertoire d&apos;&amp;Ouverture et de Sauvegarde</translation>
     </message>
 </context>
 <context>
@@ -3023,7 +3023,7 @@ Vous devrez probablement remplacer le signe &apos;#&apos; par &apos;\#FFF&apos;<
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.cpp" line="63"/>
         <source>Pick</source>
-        <translation>Pick</translation>
+        <translation>Choisir</translation>
     </message>
 </context>
 <context>
@@ -3031,7 +3031,7 @@ Vous devrez probablement remplacer le signe &apos;#&apos; par &apos;\#FFF&apos;<
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette.cpp" line="417"/>
         <source>Unnamed</source>
-        <translation>Unnamed</translation>
+        <translation>Sans nom</translation>
     </message>
 </context>
 <context>
@@ -3039,7 +3039,7 @@ Vous devrez probablement remplacer le signe &apos;#&apos; par &apos;\#FFF&apos;<
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_model.cpp" line="55"/>
         <source>Unnamed</source>
-        <translation>Unnamed</translation>
+        <translation>Sans nom</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_model.cpp" line="130"/>
