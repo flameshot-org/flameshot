@@ -23,6 +23,29 @@ CaptureToolButton::CaptureToolButton(const CaptureTool::Type t, QWidget* parent)
   , m_emergeAnimation(nullptr)
 {
     initButton();
+
+     // 🎨 Custom colors for important action buttons
+    switch (m_buttonType) {
+    case CaptureTool::TYPE_SAVE:
+        setColor(QColor("#4CAF50")); // green
+        break;
+
+    case CaptureTool::TYPE_COPY:
+        setColor(QColor("#2196F3")); // blue
+        break;
+
+    case CaptureTool::TYPE_EXIT:
+        setColor(QColor("#F44336")); // red
+        break;
+
+    case CaptureTool::TYPE_ACCEPT:
+        setColor(QColor("#4CAF50")); // green confirm
+        break;
+
+    default:
+        break; // all other tools keep normal color
+    }
+
     updateIcon();
 }
 
