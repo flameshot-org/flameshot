@@ -139,6 +139,11 @@ public:
     CONFIG_GETTER_SETTER(showSelectionGeometryHideTime,
                          showSelectionGeometryHideTime,
                          int)
+#if defined(Q_OS_WIN)
+    CONFIG_GETTER_SETTER(ignorePrntScrForcesSnipping,
+                         setIgnorePrntScrForcesSnipping,
+                         bool)
+#endif
 
     // SPECIAL CASES
     bool startupLaunch();

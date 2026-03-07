@@ -12,6 +12,7 @@
 #include <QIcon>
 #include <QKeyEvent>
 #include <QLabel>
+#include <QMessageBox>
 #include <QRect>
 #include <QScreen>
 #include <QStringList>
@@ -34,11 +35,16 @@ ShortcutsWidget::ShortcutsWidget(QWidget* parent)
     m_layout = new QVBoxLayout(this);
     m_layout->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
 
+#if defined(Q_OS_WIN)
+    checkPrintScreenForcesSnipping();
+#endif
+
     initInfoTable();
     connect(ConfigHandler::getInstance(),
             &ConfigHandler::fileChanged,
             this,
             &ShortcutsWidget::populateInfoTable);
+
     show();
 }
 
@@ -202,8 +208,10 @@ void ShortcutsWidget::loadShortcuts()
     appendShortcut("SCREENSHOT_HISTORY", tr("Screenshot history"));
 #endif
 #elif defined(Q_OS_WIN)
-    m_shortcuts << (QStringList()
-                    << "" << QObject::tr("Capture screen") << "Print Screen");
+    if (this->isPrintScreenKeyForSnippingDisabled()) {
+        m_shortcuts << (QStringList() << "" << QObject::tr("Capture screen")
+                                      << "Print Screen");
+    }
     appendShortcut("TAKE_SCREENSHOT", tr("Capture screen"));
 #ifdef ENABLE_IMGUR
     m_shortcuts << (QStringList() << "" << QObject::tr("Screenshot history")
@@ -239,5 +247,60 @@ const QString& ShortcutsWidget::nativeOSHotKeyText(const QString& text)
     m_res.replace("Meta+", "⌃");
     m_res.replace("Shift+", "⇧");
     return m_res;
+}
+#endif
+
+#if defined(Q_OS_WIN)
+void ShortcutsWidget::checkPrintScreenForcesSnipping()
+{
+    if (!isPrintScreenKeyForSnippingDisabled() &&
+        !ConfigHandler().ignorePrntScrForcesSnipping()) {
+        QMessageBox msgBox;
+        msgBox.setWindowTitle("Flameshot");
+        msgBox.setIcon(QMessageBox::Question);
+        msgBox.setText(tr("It seems, that Windows forces to open its screenshot"
+                          " tool when the 'Print Screen' key is pressed. Would "
+                          "you like to disable this so that Flameshot can use "
+                          "the 'Print Screen' key?") +
+                       "\n\n" +
+                       tr("Flameshot must be restarted for changes to take "
+                          "effect."));
+        QPushButton* yesBtn = msgBox.addButton(QMessageBox::Yes);
+        QPushButton* noBtn = msgBox.addButton(QMessageBox::No);
+        QPushButton* noDontAskAgainBtn =
+          new QPushButton(tr("No, don't ask again"));
+        msgBox.addButton(noDontAskAgainBtn, QMessageBox::RejectRole);
+        msgBox.setDefaultButton(yesBtn);
+        msgBox.exec();
+
+        if (msgBox.clickedButton() == yesBtn) {
+            if (!disablePrintScreenKeyForSnipping()) {
+                QMessageBox::warning(
+                  this, "Flameshot", tr("The registry could not be changed!"));
+            }
+        } else if (msgBox.clickedButton() == noDontAskAgainBtn) {
+            ConfigHandler().setIgnorePrntScrForcesSnipping(true);
+        }
+    }
+}
+
+bool ShortcutsWidget::isPrintScreenKeyForSnippingDisabled()
+{
+    QSettings PrintKeyForSnipping("HKEY_CURRENT_USER\\Control Panel\\Keyboard",
+                                  QSettings::NativeFormat);
+    return PrintKeyForSnipping.value("PrintScreenKeyForSnippingEnabled", 1)
+             .toInt() == 0;
+}
+
+bool ShortcutsWidget::disablePrintScreenKeyForSnipping()
+{
+    QSettings PrintKeyForSnipping("HKEY_CURRENT_USER\\Control Panel\\Keyboard",
+                                  QSettings::NativeFormat);
+    PrintKeyForSnipping.setValue("PrintScreenKeyForSnippingEnabled", 0);
+    PrintKeyForSnipping.sync();
+    if (QSettings::AccessError == PrintKeyForSnipping.status()) {
+        return false;
+    }
+    return this->isPrintScreenKeyForSnippingDisabled();
 }
 #endif
