@@ -45,5 +45,5 @@ bool GlobalShortcutFilter::nativeEventFilter(const QByteArray& eventType,
             return true;
         }
     }
-    return false;  // Forward event to Qt
+    return false; // Forward event to Qt
 }
