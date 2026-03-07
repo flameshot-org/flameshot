@@ -394,9 +394,6 @@ void FlameshotDaemon::initTrayIcon()
 
     GlobalShortcutFilter* nativeFilter = new GlobalShortcutFilter(this);
     qApp->installNativeEventFilter(nativeFilter);
-    connect(nativeFilter, &GlobalShortcutFilter::printPressed, this, [this]() {
-        Flameshot::instance()->gui();
-    });
 #endif
 }
 

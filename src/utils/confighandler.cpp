@@ -180,6 +180,9 @@ static QMap<QString, QSharedPointer<KeySequence>> recognizedShortcuts = {
     SHORTCUT("TYPE_MOVE_UP"             ,   "Up"                    ),
     SHORTCUT("TYPE_MOVE_DOWN"           ,   "Down"                  ),
     SHORTCUT("TYPE_COMMIT_CURRENT_TOOL" ,   "Ctrl+Return"           ),
+#if defined(Q_OS_WIN)
+    SHORTCUT("TAKE_SCREENSHOT"          ,   "Ctrl+Shift+X"          ),
+#endif
 #if defined(Q_OS_MACOS)
     SHORTCUT("TYPE_DELETE_CURRENT_TOOL" ,   "Backspace"             ),
     SHORTCUT("TAKE_SCREENSHOT"          ,   "Ctrl+Shift+X"          ),

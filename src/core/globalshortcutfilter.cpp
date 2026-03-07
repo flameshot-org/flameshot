@@ -35,15 +35,15 @@ bool GlobalShortcutFilter::nativeEventFilter(const QByteArray& eventType,
         // Show screenshots history
         if (VK_SNAPSHOT == keycode && MOD_SHIFT == modifiers) {
             Flameshot::instance()->history();
+            return true;
         }
 #endif
         // Capture screen
         if (VK_SNAPSHOT == keycode && 0 == modifiers) {
             Flameshot::instance()->requestCapture(
               CaptureRequest(CaptureRequest::GRAPHICAL_MODE));
+            return true;
         }
-
-        return true;
     }
-    return false;
+    return false;  // Forward event to Qt
 }
