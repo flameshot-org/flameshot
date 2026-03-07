@@ -18,9 +18,6 @@ public:
                            void* message,
                            qintptr* result);
 
-signals:
-    void printPressed();
-
 private:
     quint32 getNativeModifier(Qt::KeyboardModifiers modifiers);
     quint32 nativeKeycode(Qt::Key key);

@@ -20,6 +20,10 @@ set(QT_DEFAULT_MAJOR_VERSION 6 CACHE STRING "")
 set(QT_VERSION_MAJOR 6 CACHE STRING "")
 #BUILD_SHARED_LIBS used by QHotkey and QtColorWidgets
 option(BUILD_SHARED_LIBS OFF)
+#QHOTKEY_INSTALL used by QHotkey; must be disabled on Windows
+if(WIN32)
+set(QHOTKEY_INSTALL OFF CACHE BOOL "qHotkey install")
+endif()
 
 #Needed due to linker error with QtColorWidget
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
@@ -134,7 +138,7 @@ endif()
 # ToDo: Check if this is used anywhere
 option(BUILD_STATIC_LIBS ON)
 
-if(APPLE)
+if(WIN32 OR APPLE)
   FetchContent_Declare(
     qHotKey
     GIT_REPOSITORY https://github.com/flameshot-org/QHotkey

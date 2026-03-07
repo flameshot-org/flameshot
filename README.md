@@ -237,9 +237,9 @@ These shortcuts are available in GUI mode:
 
 ### Global
 
-Flameshot uses <kbd>Print screen</kbd> (Windows) and <kbd>cmd</kbd>-<kbd>shift</kbd>-<kbd>x</kbd> (macOS) as default global hotkeys.
-
-On Linux, Flameshot doesn't yet support <kbd>Prt Sc</kbd> out of the box, but with a bit of configuration you can set this up:
+- Windows: <kbd>Prt Sc</kbd> (fixed, cannot be changed) and <kbd>Win</kbd> + <kbd>Shift</kbd> + <kbd>X</kbd> (can be changed in the settings)
+- macOS: <kbd>cmd</kbd> + <kbd>Shift</kbd> + <kbd>X</kbd> (can be changed in the settings)
+- Linux: Flameshot doesn't yet support <kbd>Prt Sc</kbd> out of the box, but you can set this up with a bit of configuration:
 
 #### On KDE Plasma desktop
 

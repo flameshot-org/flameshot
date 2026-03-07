@@ -10,6 +10,7 @@
 #include <QWidget>
 
 class SetShortcutDialog;
+class QCheckBox;
 class QTableWidget;
 class QVBoxLayout;
 
@@ -21,7 +22,7 @@ public:
 
 private:
     void initInfoTable();
-#if (defined(Q_OS_MAC) || defined(Q_OS_MACOS))
+#if (defined(Q_OS_MACOS))
     const QString& nativeOSHotKeyText(const QString& text);
 #endif
 
@@ -30,7 +31,7 @@ private slots:
     void onShortcutCellClicked(int, int);
 
 private:
-#if (defined(Q_OS_MAC) || defined(Q_OS_MACOS))
+#if (defined(Q_OS_MACOS))
     QString m_res;
 #endif
     ConfigHandler m_config;
@@ -41,6 +42,16 @@ private:
     void loadShortcuts();
     void appendShortcut(const QString& shortcutName,
                         const QString& description);
+#if defined(Q_OS_WIN)
+    void checkPrintScreenForcesSnipping();
+    bool isPrintScreenKeyForSnippingDisabled();
+    bool disablePrintScreenKeyForSnipping();
+
+    bool isMsScreenclipRegistered();
+    bool registerMsScreenclip();
+    bool unregisterMsScreenclip();
+    QCheckBox* m_registerMsScreenclip;
+#endif
 };
 
 #endif // HOTKEYSCONFIG_H
