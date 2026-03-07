@@ -10,6 +10,7 @@
 #include <QWidget>
 
 class SetShortcutDialog;
+class QCheckBox;
 class QTableWidget;
 class QVBoxLayout;
 
@@ -45,6 +46,11 @@ private:
     void checkPrintScreenForcesSnipping();
     bool isPrintScreenKeyForSnippingDisabled();
     bool disablePrintScreenKeyForSnipping();
+
+    bool isMsScreenclipRegistered();
+    bool registerMsScreenclip();
+    bool unregisterMsScreenclip();
+    QCheckBox* m_registerMsScreenclip;
 #endif
 };
 

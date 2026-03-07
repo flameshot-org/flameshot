@@ -7,7 +7,9 @@
 #include "src/core/qguiappcurrentscreen.h"
 #include "src/utils/globalvalues.h"
 #include "toolfactory.h"
+#include <QCheckBox>
 #include <QCursor>
+#include <QDir>
 #include <QHeaderView>
 #include <QIcon>
 #include <QKeyEvent>
@@ -44,6 +46,43 @@ ShortcutsWidget::ShortcutsWidget(QWidget* parent)
             &ConfigHandler::fileChanged,
             this,
             &ShortcutsWidget::populateInfoTable);
+
+#if defined(Q_OS_WIN)
+    m_registerMsScreenclip =
+      new QCheckBox(tr("Register Flameshot as MS-SCREENCLIP application "
+                       "(administrator privileges required)"),
+                    this);
+    m_registerMsScreenclip->setToolTip(
+      tr("After registering, you can select Flameshot as the default "
+         "screenshot application in Windows Settings."));
+    m_registerMsScreenclip->setChecked(isMsScreenclipRegistered());
+    m_layout->addWidget(m_registerMsScreenclip);
+
+    connect(
+      m_registerMsScreenclip, &QCheckBox::clicked, this, [this](bool checked) {
+          if (checked) {
+              if (!registerMsScreenclip()) {
+                  QMessageBox::warning(
+                    this,
+                    "Flameshot",
+                    tr("The registry could not be changed!") + "\n" +
+                      tr("You may start Flameshot as administrator ONCE and "
+                         "try again!"));
+                  m_registerMsScreenclip->setChecked(false);
+              }
+          } else {
+              if (!unregisterMsScreenclip()) {
+                  QMessageBox::warning(
+                    this,
+                    "Flameshot",
+                    tr("The registry could not be changed!") + "\n" +
+                      tr("You may start Flameshot as administrator ONCE and "
+                         "try again!"));
+                  m_registerMsScreenclip->setChecked(true);
+              }
+          }
+      });
+#endif
 
     show();
 }
@@ -303,4 +342,103 @@ bool ShortcutsWidget::disablePrintScreenKeyForSnipping()
     }
     return this->isPrintScreenKeyForSnippingDisabled();
 }
+
+bool ShortcutsWidget::isMsScreenclipRegistered()
+{
+    QSettings URLAssociations(
+      "HKEY_LOCAL_MACHINE\\SOFTWARE\\Flameshot\\Capabilities\\URLAssociations",
+      QSettings::NativeFormat);
+    QString value = URLAssociations.value("ms-screenclip", "").toString();
+    if (value.toLower() != "flameshot")
+        return false;
+
+    QSettings RegisteredApplications(
+      "HKEY_LOCAL_MACHINE\\SOFTWARE\\RegisteredApplications",
+      QSettings::NativeFormat);
+    value = RegisteredApplications.value("Flameshot", "").toString();
+    if (value.toLower() !=
+        QString("SOFTWARE\\Flameshot\\Capabilities").toLower())
+        return false;
+
+    QSettings FlameshotShellCmd(
+      "HKEY_CURRENT_USER\\Software\\Classes\\Flameshot\\Shell\\Open\\command",
+      QSettings::NativeFormat);
+    value = FlameshotShellCmd.value(".").toString();
+    if (value.toLower() != QString("\"" +
+                                   QDir::toNativeSeparators(
+                                     QCoreApplication::applicationFilePath()) +
+                                   "\" gui")
+                             .toLower())
+        return false;
+
+    return true; // All registry entries found
+}
+
+bool ShortcutsWidget::registerMsScreenclip()
+{
+    QSettings URLAssociations(
+      "HKEY_LOCAL_MACHINE\\SOFTWARE\\Flameshot\\Capabilities\\URLAssociations",
+      QSettings::NativeFormat);
+    URLAssociations.setValue("ms-screenclip", "Flameshot");
+    URLAssociations.sync();
+    if (QSettings::AccessError == URLAssociations.status()) {
+        return false;
+    }
+
+    QSettings RegisteredApplications(
+      "HKEY_LOCAL_MACHINE\\SOFTWARE\\RegisteredApplications",
+      QSettings::NativeFormat);
+    RegisteredApplications.setValue("Flameshot",
+                                    "SOFTWARE\\Flameshot\\Capabilities");
+    RegisteredApplications.sync();
+    if (QSettings::AccessError == RegisteredApplications.status()) {
+        return false;
+    }
+
+    QSettings FlameshotShellCmd(
+      "HKEY_CURRENT_USER\\Software\\Classes\\Flameshot\\Shell\\Open\\command",
+      QSettings::NativeFormat);
+    FlameshotShellCmd.setValue(
+      ".",
+      "\"" + QDir::toNativeSeparators(QCoreApplication::applicationFilePath()) +
+        "\" gui");
+    FlameshotShellCmd.sync();
+    if (QSettings::AccessError == FlameshotShellCmd.status()) {
+        return false;
+    }
+
+    return isMsScreenclipRegistered();
+}
+
+bool ShortcutsWidget::unregisterMsScreenclip()
+{
+    QSettings FlameshotShellCmd("HKEY_CURRENT_USER\\Software\\Classes",
+                                QSettings::NativeFormat);
+    FlameshotShellCmd.remove("Flameshot");
+    FlameshotShellCmd.sync();
+    if (QSettings::AccessError == FlameshotShellCmd.status()) {
+        return false;
+    }
+
+    QSettings RegisteredApplications(
+      "HKEY_LOCAL_MACHINE\\SOFTWARE\\RegisteredApplications",
+      QSettings::NativeFormat);
+    RegisteredApplications.remove("Flameshot");
+    RegisteredApplications.sync();
+    if (QSettings::AccessError == RegisteredApplications.status()) {
+        return false;
+    }
+
+    QSettings URLAssociations(
+      "HKEY_LOCAL_MACHINE\\SOFTWARE\\Flameshot\\Capabilities\\URLAssociations",
+      QSettings::NativeFormat);
+    URLAssociations.remove("ms-screenclip");
+    URLAssociations.sync();
+    if (QSettings::AccessError == URLAssociations.status()) {
+        return false;
+    }
+
+    return !isMsScreenclipRegistered();
+}
+
 #endif
