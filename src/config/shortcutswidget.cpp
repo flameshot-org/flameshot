@@ -48,40 +48,7 @@ ShortcutsWidget::ShortcutsWidget(QWidget* parent)
             &ShortcutsWidget::populateInfoTable);
 
 #if defined(Q_OS_WIN)
-    m_registerMsScreenclip =
-      new QCheckBox(tr("Register Flameshot as MS-SCREENCLIP application "
-                       "(administrator privileges required)"),
-                    this);
-    m_registerMsScreenclip->setToolTip(
-      tr("After registering, you can select Flameshot as the default "
-         "screenshot application in Windows Settings."));
-    m_registerMsScreenclip->setChecked(isMsScreenclipRegistered());
-    m_layout->addWidget(m_registerMsScreenclip);
-
-    connect(
-      m_registerMsScreenclip, &QCheckBox::clicked, this, [this](bool checked) {
-          if (checked) {
-              if (!registerMsScreenclip()) {
-                  QMessageBox::warning(
-                    this,
-                    "Flameshot",
-                    tr("The registry could not be changed!") + "\n" +
-                      tr("You may start Flameshot as administrator ONCE and "
-                         "try again!"));
-                  m_registerMsScreenclip->setChecked(false);
-              }
-          } else {
-              if (!unregisterMsScreenclip()) {
-                  QMessageBox::warning(
-                    this,
-                    "Flameshot",
-                    tr("The registry could not be changed!") + "\n" +
-                      tr("You may start Flameshot as administrator ONCE and "
-                         "try again!"));
-                  m_registerMsScreenclip->setChecked(true);
-              }
-          }
-      });
+    initMsScreenclipCheckbox();
 #endif
 
     show();
@@ -341,6 +308,44 @@ bool ShortcutsWidget::disablePrintScreenKeyForSnipping()
         return false;
     }
     return this->isPrintScreenKeyForSnippingDisabled();
+}
+
+ShortcutsWidget::initMsScreenclipCheckbox()
+{
+    m_registerMsScreenclip =
+      new QCheckBox(tr("Register Flameshot as MS-SCREENCLIP application "
+                       "(administrator privileges required)"),
+                    this);
+    m_registerMsScreenclip->setToolTip(
+      tr("After registering, you can select Flameshot as the default "
+         "screenshot application in Windows Settings."));
+    m_registerMsScreenclip->setChecked(isMsScreenclipRegistered());
+    m_layout->addWidget(m_registerMsScreenclip);
+
+    connect(
+      m_registerMsScreenclip, &QCheckBox::clicked, this, [this](bool checked) {
+          if (checked) {
+              if (!registerMsScreenclip()) {
+                  QMessageBox::warning(
+                    this,
+                    "Flameshot",
+                    tr("The registry could not be changed!") + "\n" +
+                      tr("You may start Flameshot as administrator ONCE and "
+                         "try again!"));
+                  m_registerMsScreenclip->setChecked(false);
+              }
+          } else {
+              if (!unregisterMsScreenclip()) {
+                  QMessageBox::warning(
+                    this,
+                    "Flameshot",
+                    tr("The registry could not be changed!") + "\n" +
+                      tr("You may start Flameshot as administrator ONCE and "
+                         "try again!"));
+                  m_registerMsScreenclip->setChecked(true);
+              }
+          }
+      });
 }
 
 bool ShortcutsWidget::isMsScreenclipRegistered()
