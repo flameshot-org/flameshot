@@ -310,7 +310,7 @@ bool ShortcutsWidget::disablePrintScreenKeyForSnipping()
     return this->isPrintScreenKeyForSnippingDisabled();
 }
 
-ShortcutsWidget::initMsScreenclipCheckbox()
+void ShortcutsWidget::initMsScreenclipCheckbox()
 {
     m_registerMsScreenclip =
       new QCheckBox(tr("Register Flameshot as MS-SCREENCLIP application "
