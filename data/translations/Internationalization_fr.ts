@@ -281,7 +281,7 @@ Appuyer sur Espace pour ouvrir le panneau latéral.</translation>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="1167"/>
         <source>Tool Settings</source>
-        <translation>Réglages des outils</translation>
+        <translation>Paramètres des outils</translation>
     </message>
 </context>
 <context>
