@@ -9,8 +9,6 @@
 
 ColorPickerWidget::ColorPickerWidget(QWidget* parent)
   : QWidget(parent)
-  , m_selectedIndex(1)
-  , m_lastIndex(1)
 {
     initColorPicker();
 }
@@ -68,7 +66,21 @@ void ColorPickerWidget::repaint(int i, QPainter& painter)
         // draw preset color
         painter.setBrush(QColor(m_colorList.at(i)));
         painter.drawRoundedRect(m_colorAreaList.at(i), 100, 100);
+    } else if (i == 1) {
+        // color grabber
+        // draw color picker svg on a themed background
+        QColor background = this->palette().window().color();
+        bool isDark = ColorUtils::colorIsDark(background);
+        QString modifier =
+            isDark ? PathInfo::whiteIconPath() : PathInfo::blackIconPath();
+
+        QRect lastRect = m_colorAreaList.at(i);
+        painter.setBrush(background);
+        painter.drawRoundedRect(lastRect, 100, 100);
+        QIcon grabIcon(modifier + "colorize.svg");
+        grabIcon.paint(&painter, lastRect);
     } else {
+        // color picker
         // draw rainbow (part) for custom color
         QRect lastRect = m_colorAreaList.at(i);
         int nStep = 1;
@@ -113,6 +125,17 @@ void ColorPickerWidget::updateWidget()
     update();
 }
 
+void ColorPickerWidget::updateDefaultIndex()
+{
+    for (int i = 0; i < m_colorList.size(); ++i) {
+        // default index should be the first 'real' color
+        if (m_colorList.at(i).isValid()) {
+            m_defaultIndex = i;
+            break;
+        }
+    }
+}
+
 void ColorPickerWidget::initColorPicker()
 {
     ConfigHandler config;
@@ -120,6 +143,10 @@ void ColorPickerWidget::initColorPicker()
     m_colorAreaSize = GlobalValues::buttonBaseSize() * 0.6;
     // save the color values in member variables for faster access
     m_uiColor = config.uiColor();
+
+    updateDefaultIndex();
+    m_selectedIndex = m_defaultIndex;
+    m_lastIndex = m_defaultIndex;
 
     // extraSize represents the extra space needed for the highlight of the
     // selected color.
