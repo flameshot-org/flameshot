@@ -245,17 +245,17 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="515"/>
         <source>Quit Capture</source>
-        <translation type="unfinished"></translation>
+        <translation>Ακύρωση Λήψης</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="516"/>
         <source>Are you sure you want to quit capture?</source>
-        <translation type="unfinished"></translation>
+        <translation>Είστε σίγουροι ότι θέλετε να ακυρώσετε τη λήψη;</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="521"/>
         <source>Do not show this again</source>
-        <translation type="unfinished"></translation>
+        <translation>Μην εμφανιστεί ξανά</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="727"/>
@@ -1045,7 +1045,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="284"/>
         <source>Use last region for GUI mode</source>
-        <translation type="unfinished">Χρησιμοποιήστε την τελευταία περιοχή</translation>
+        <translation>Χρησιμοποιήστε την τελευταία περιοχή</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="286"/>
@@ -1065,12 +1065,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="323"/>
         <source>Show abort notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Εμφάνιση ειδοποίησεων ακύρωσης</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="324"/>
         <source>Enable abort notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Ενεργοποίηση ειδοποιήσεων ακύρωσης</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="337"/>
@@ -1080,12 +1080,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="350"/>
         <source>Use grim to capture screenshots</source>
-        <translation type="unfinished"></translation>
+        <translation>Χρήση του grim για λήψη στιγμιότυπων οθόνης</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="352"/>
         <source>Grim is a wayland only utility to capture screens based on the screencopy protocol. Generally only enable on minimal wayland window managers like sway, hyprland, etc.</source>
-        <translation type="unfinished"></translation>
+        <translation>Το grim είναι ένα εργαλείο που λειτουργεί μόνο στο Wayland για λήψη στιγμιότυπων οθόνης, βασισμένο στο πρωτόκολλο screencopy. Συνήθως θα πρέπει να το ενεργοποιείτε μόνο σε minimal διαχειριστές παραθύρων Wayland, όπως το sway, το hyprland κ.λπ.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="370"/>
@@ -1157,17 +1157,17 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="480"/>
         <source>Show the confirmation prompt before ESC quit</source>
-        <translation type="unfinished"></translation>
+        <translation>Εμφάνιση επιβεβαίωσης πριν την έξοδο με το πλήκτρο ESC</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="505"/>
         <source>Enable Copy to clipboard on Double Click</source>
-        <translation type="unfinished"></translation>
+        <translation>Ενεργοποίηση αντιγραφής στο πρόχειρο με διπλό κλικ</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="517"/>
         <source>Copy URL after uploading was successful</source>
-        <translation type="unfinished"></translation>
+        <translation>Αντιγραφή του URL μετά από επιτυχημένη μεταφόρτωση</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="529"/>
