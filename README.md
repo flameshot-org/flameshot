@@ -285,6 +285,8 @@ Steps for using the configuration:
 
 To use Flameshot instead of the default screenshot application in Gnome we need to remove the binding on <kbd>Prt Sc</kbd> key, and then create a new binding for `flameshot gui` ([adapted](https://askubuntu.com/posts/1039949/revisions) from [Pavel's answer on AskUbuntu](https://askubuntu.com/revisions/1036473/1)).
 
+For Flatpak installs, use `/usr/bin/flatpak run --branch=stable --arch=x86_64 --command=/app/bin/flameshot org.flameshot.Flameshot gui` for the binding. All other instructions below are identical.
+
 1. Remove the binding on <kbd>Prt Sc</kbd>:
   
    Go to _Settings_ > _Keyboard_ > _View and Customise Shortcuts_ > _Screenshots_ > _Take a screenshot interactively_ and press `backspace`
