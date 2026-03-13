@@ -2,9 +2,30 @@
 // SPDX-FileCopyrightText: 2026 Flameshot Contributors
 
 #include "x11shortcutfilter.h"
+#include <QSet>
+#include <QString>
 #include <X11/Xlib.h>
 #include <X11/extensions/XInput2.h>
 #include <X11/keysym.h>
+
+static QSet<int> virtualDeviceIds(Display* dpy)
+{
+    QSet<int> ids;
+    int numDevices = 0;
+    XIDeviceInfo* devices = XIQueryDevice(dpy, XIAllDevices, &numDevices);
+    if (!devices) {
+        return ids;
+    }
+    for (int i = 0; i < numDevices; ++i) {
+        QString name = QString::fromUtf8(devices[i].name).toLower();
+        if (name.contains("synergy") || name.contains("barrier") ||
+            name.contains("input leap")) {
+            ids.insert(devices[i].deviceid);
+        }
+    }
+    XIFreeDeviceInfo(devices);
+    return ids;
+}
 
 // Worker: runs in a dedicated thread with its own X11 connection
 
@@ -44,6 +65,7 @@ void X11ShortcutWorker::run()
     XISetMask(mask, XI_RawKeyPress);
     XISelectEvents(dpy, DefaultRootWindow(dpy), &evmask, 1);
     XFlush(dpy);
+    QSet<int> virtualIds = virtualDeviceIds(dpy);
     m_running = true;
     while (m_running) {
         while (XPending(dpy) > 0) {
@@ -55,7 +77,8 @@ void X11ShortcutWorker::run()
                     if (xev.xcookie.evtype == XI_RawKeyPress) {
                         auto* rawEvent =
                           static_cast<XIRawEvent*>(xev.xcookie.data);
-                        if (rawEvent->detail == printKeycode) {
+                        if (rawEvent->detail == printKeycode &&
+                            !virtualIds.contains(rawEvent->sourceid)) {
                             emit printPressed();
                         }
                     }
