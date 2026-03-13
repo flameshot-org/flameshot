@@ -1093,7 +1093,7 @@ Mesedez, konpon itzazu eskuz konfigurazio fitxategian.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="286"/>
         <source>Use the last region as the default selection for the next screenshot in GUI mode</source>
-        <translation type="unfinished">Azken eremua erabiltzen du hurrengo pantaila-argazkirako hautaketa-eremu lehenetsi gisa</translation>
+        <translation>Azken eremua erabiltzen du hurrengo pantaila-argazkirako hautaketa-eremu lehenetsi gisa</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="300"/>
@@ -1892,12 +1892,12 @@ Mesedez, konpon itzazu eskuz konfigurazio fitxategian.</translation>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/primaryinstancewidget.cpp" line="21"/>
         <source>Primary instance</source>
-        <translation type="unfinished"></translation>
+        <translation>Instantzia nagusia</translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/primaryinstancewidget.cpp" line="22"/>
         <source>&lt;b&gt;Primary instance.&lt;/b&gt; Messages received from secondaries:</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Instantzia nagusia.&lt;/b&gt; Bigarren mailakoetatik jasotako mezuak:</translation>
     </message>
 </context>
 <context>
@@ -2412,12 +2412,12 @@ Baliteke &apos;#&apos; karakterea ihes egin behar izatea, &apos;\#FFF&apos;n bez
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="26"/>
         <source>Secondary instance</source>
-        <translation type="unfinished"></translation>
+        <translation>Bigarren mailako instantzia</translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="27"/>
         <source>&lt;b&gt;Secondary instance.&lt;/b&gt; Send message to primary:</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Bigarren mailako instantzia.&lt;/b&gt; Bidali mezua nagusira:</translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="29"/>
@@ -2437,7 +2437,7 @@ Baliteke &apos;#&apos; karakterea ihes egin behar izatea, &apos;\#FFF&apos;n bez
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="55"/>
         <source>The message &apos;%1&apos; could not be sent to the primary.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; mezua ezin da bidali nagusira.</translation>
     </message>
 </context>
 <context>
@@ -2800,7 +2800,7 @@ Baliteke &apos;#&apos; karakterea ihes egin behar izatea, &apos;\#FFF&apos;n bez
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="76"/>
         <source>Full Date (%d-%m-%Y)</source>
-        <translation type="unfinished"></translation>
+        <translation>Data osoa (%Y-%m-%d)</translation>
     </message>
 </context>
 <context>
