@@ -174,33 +174,45 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
                        Qt::FramelessWindowHint | Qt::Tool);
 #endif
 
-        // Always display on the selected screen (not spanning entire desktop)
-        if (selectedScreen == nullptr) {
-            selectedScreen = QGuiApplication::primaryScreen();
-        }
-        QRect screenGeom = selectedScreen->geometry();
-        move(screenGeom.topLeft());
-        resize(screenGeom.size());
-
-        if (selectedScreen != nullptr && windowHandle()) {
-            windowHandle()->setScreen(selectedScreen);
+        if (ConfigHandler().captureAllMonitors()) {
+            QRect fullGeom = grabber.desktopGeometry();
+            move(fullGeom.topLeft());
+            resize(fullGeom.size());
+        } else {
+            if (selectedScreen == nullptr) {
+                selectedScreen = QGuiApplication::primaryScreen();
+            }
+            QRect screenGeom = selectedScreen->geometry();
+            move(screenGeom.topLeft());
+            resize(screenGeom.size());
+            if (selectedScreen != nullptr && windowHandle()) {
+                windowHandle()->setScreen(selectedScreen);
+            }
         }
 #endif
     }
 
     QVector<QRect> areas;
     if (m_context.fullscreen) {
-        // Always display on a single screen, normalized to (0, 0)
-        QScreen* screenForAreas = selectedScreen;
-        if (!screenForAreas) {
-            screenForAreas = QGuiAppCurrentScreen().currentScreen();
+        if (ConfigHandler().captureAllMonitors()) {
+            QRect fullGeom = grabber.desktopGeometry();
+            for (QScreen* const screen : QGuiApplication::screens()) {
+                QRect r = screen->geometry();
+                r.translate(-fullGeom.topLeft());
+                areas.append(r);
+            }
+        } else {
+            QScreen* screenForAreas = selectedScreen;
+            if (!screenForAreas) {
+                screenForAreas = QGuiAppCurrentScreen().currentScreen();
+            }
+            if (!screenForAreas) {
+                screenForAreas = QGuiApplication::primaryScreen();
+            }
+            QRect r = screenForAreas ? screenForAreas->geometry() : QRect();
+            r.moveTo(0, 0);
+            areas.append(r);
         }
-        if (!screenForAreas) {
-            screenForAreas = QGuiApplication::primaryScreen();
-        }
-        QRect r = screenForAreas ? screenForAreas->geometry() : QRect();
-        r.moveTo(0, 0);
-        areas.append(r);
     } else {
         areas.append(rect());
     }

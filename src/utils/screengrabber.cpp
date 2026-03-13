@@ -152,6 +152,10 @@ QPixmap ScreenGrabber::selectMonitorAndCrop(const QPixmap& fullScreenshot,
         return cropToMonitor(fullScreenshot, 0);
     }
 
+    if (ConfigHandler().captureAllMonitors()) {
+        return fullScreenshot;
+    }
+
     if (m_monitorSelectionActive) {
         AbstractLogger::error()
           << tr("Screenshot already in progress, please wait for the current "
@@ -340,17 +344,25 @@ QWidget* ScreenGrabber::createMonitorPreviews(const QPixmap& fullScreenshot)
     }
 #endif
 
-    QWidget* monitorPreviews = new QWidget(
-      nullptr, Qt::Window | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
-    monitorPreviews->setAttribute(Qt::WA_TranslucentBackground);
-    monitorPreviews->setStyleSheet(
-      "QWidget { background-color: transparent; }");
-    monitorPreviews->installEventFilter(this); // For ESC key handling
-    monitorPreviews->setFocusPolicy(Qt::StrongFocus);
+    QWidget* overlay =
+      new QWidget(nullptr,
+                  Qt::Window | Qt::FramelessWindowHint |
+                    Qt::WindowStaysOnTopHint | Qt::BypassWindowManagerHint);
+    overlay->setStyleSheet(
+      "QWidget#overlay { background-color: rgba(0, 0, 0, 160); }");
+    overlay->setObjectName("overlay");
+    overlay->installEventFilter(this);
+    overlay->setFocusPolicy(Qt::StrongFocus);
+    overlay->setMouseTracking(true);
 
-    QHBoxLayout* containerLayout = new QHBoxLayout(monitorPreviews);
+    QRect totalGeom = desktopGeometry();
+    overlay->move(totalGeom.topLeft());
+    overlay->resize(totalGeom.size());
+
+    QHBoxLayout* containerLayout = new QHBoxLayout(overlay);
     containerLayout->setSpacing(20);
-    containerLayout->setContentsMargins(20, 20, 20, 20);
+    containerLayout->setContentsMargins(0, 0, 0, 0);
+    containerLayout->setAlignment(Qt::AlignCenter);
 
     // Build list of screen indices sorted by X position (left to right)
     QList<int> sortedIndices;
@@ -371,7 +383,7 @@ QWidget* ScreenGrabber::createMonitorPreviews(const QPixmap& fullScreenshot)
         thumbnail.setDevicePixelRatio(1.0);
 
         MonitorPreview* preview =
-          new MonitorPreview(i, screen, thumbnail, monitorPreviews);
+          new MonitorPreview(i, screen, thumbnail, overlay);
 
         connect(
           preview, &MonitorPreview::monitorSelected, this, [this](int index) {
@@ -384,17 +396,12 @@ QWidget* ScreenGrabber::createMonitorPreviews(const QPixmap& fullScreenshot)
         containerLayout->addWidget(preview);
     }
 
-    monitorPreviews->setLayout(containerLayout);
-    monitorPreviews->adjustSize();
-
-    QScreen* primaryScreen = QGuiApplication::primaryScreen();
-    QRect screenGeometry = primaryScreen->geometry();
-    QPoint center = screenGeometry.center();
-    monitorPreviews->move(center.x() - monitorPreviews->width() / 2,
-                          center.y() - monitorPreviews->height() / 2);
-
-    monitorPreviews->show();
-    return monitorPreviews;
+    overlay->setLayout(containerLayout);
+    overlay->show();
+    overlay->activateWindow();
+    overlay->setFocus();
+    overlay->grabKeyboard();
+    return overlay;
 }
 
 bool ScreenGrabber::eventFilter(QObject* obj, QEvent* event)
@@ -402,13 +409,27 @@ bool ScreenGrabber::eventFilter(QObject* obj, QEvent* event)
     if (event->type() == QEvent::KeyPress) {
         QKeyEvent* keyEvent = static_cast<QKeyEvent*>(event);
         if (keyEvent->key() == Qt::Key_Escape) {
-            // User cancelled selection
             m_selectedMonitor = -1;
             m_userCancelled = true;
             if (m_monitorSelectionLoop) {
                 m_monitorSelectionLoop->quit();
             }
             return true;
+        }
+    }
+    if (event->type() == QEvent::MouseButtonPress) {
+        QMouseEvent* mouseEvent = static_cast<QMouseEvent*>(event);
+        QWidget* widget = qobject_cast<QWidget*>(obj);
+        if (widget && widget->objectName() == "overlay") {
+            QWidget* child = widget->childAt(mouseEvent->pos());
+            if (!child) {
+                m_selectedMonitor = -1;
+                m_userCancelled = true;
+                if (m_monitorSelectionLoop) {
+                    m_monitorSelectionLoop->quit();
+                }
+                return true;
+            }
         }
     }
     return QObject::eventFilter(obj, event);

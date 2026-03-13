@@ -55,6 +55,7 @@ GeneralConf::GeneralConf(QWidget* parent)
     initAntialiasingPinZoom();
     initUndoLimit();
     initInsecurePixelate();
+    initCaptureAllMonitors();
 #ifdef ENABLE_IMGUR
     initCopyAndCloseAfterUpload();
     initUploadWithoutConfirmation();
@@ -105,6 +106,7 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
     m_squareMagnifier->setChecked(config.squareMagnifier());
     m_saveLastRegion->setChecked(config.saveLastRegion());
     m_reverseArrow->setChecked(config.reverseArrow());
+    m_captureAllMonitors->setChecked(config.captureAllMonitors());
 
 #if !defined(Q_OS_WIN)
     m_autoCloseIdleDaemon->setChecked(config.autoCloseIdleDaemon());
@@ -907,4 +909,24 @@ void GeneralConf::setReverseArrow(bool checked)
 void GeneralConf::setInsecurePixelate(bool checked)
 {
     ConfigHandler().setInsecurePixelate(checked);
+}
+
+void GeneralConf::initCaptureAllMonitors()
+{
+    m_captureAllMonitors =
+      new QCheckBox(tr("Capture all monitors at once"), this);
+    m_captureAllMonitors->setToolTip(
+      tr("Capture all monitors without showing the monitor selection popup.\n"
+         "Warning: this may cause display issues on multi-monitor setups with "
+         "mixed DPI scaling."));
+    m_scrollAreaLayout->addWidget(m_captureAllMonitors);
+    connect(m_captureAllMonitors,
+            &QCheckBox::clicked,
+            this,
+            &GeneralConf::captureAllMonitorsChanged);
+}
+
+void GeneralConf::captureAllMonitorsChanged(bool checked)
+{
+    ConfigHandler().setCaptureAllMonitors(checked);
 }

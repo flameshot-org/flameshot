@@ -136,6 +136,7 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     OPTION("jpegQuality"                 , BoundedInt        ( 0,100,75      )),
     OPTION("reverseArrow"                ,Bool               ( false         )),
     OPTION("insecurePixelate"            ,Bool               ( false         )),
+    OPTION("captureAllMonitors"          ,Bool               ( false         )),
 };
 
 static QMap<QString, QSharedPointer<KeySequence>> recognizedShortcuts = {

@@ -61,6 +61,7 @@ private slots:
     void setJpegQuality(int v);
     void setReverseArrow(bool checked);
     void setInsecurePixelate(bool checked);
+    void captureAllMonitorsChanged(bool checked);
 
 private:
     const QString chooseFolder(const QString& currentPath = "");
@@ -99,6 +100,7 @@ private:
     void initJpegQuality();
     void initReverseArrow();
     void initInsecurePixelate();
+    void initCaptureAllMonitors();
 
     void _updateComponents(bool allowEmptySavePath);
 
@@ -147,4 +149,5 @@ private:
     QSpinBox* m_jpegQuality;
     QCheckBox* m_reverseArrow;
     QCheckBox* m_insecurePixelate;
+    QCheckBox* m_captureAllMonitors;
 };
