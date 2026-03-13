@@ -281,7 +281,7 @@ Appuyer sur Espace pour ouvrir le panneau latéral.</translation>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="1167"/>
         <source>Tool Settings</source>
-        <translation>Réglages des outils</translation>
+        <translation>Paramètres des outils</translation>
     </message>
 </context>
 <context>
@@ -799,7 +799,7 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../src/core/flameshot.cpp" line="431"/>
         <source>URL copied to clipboard.</source>
-        <translation>URL copiée dans le presse-papiers.</translation>
+        <translation>URL copiée dans le presse papier.</translation>
     </message>
 </context>
 <context>
@@ -1066,7 +1066,7 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../src/config/generalconf.cpp" line="300"/>
         <source>Show the side panel toggle button in the capture mode</source>
-        <translation>Afficher le bouton pour activer le panneau du côté en mode capture</translation>
+        <translation>Afficher le bouton pour activer le panneau latéral en mode capture</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="312"/>
@@ -1125,7 +1125,7 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../src/config/generalconf.cpp" line="493"/>
         <source>Use a large predefined color palette</source>
-        <translation>Utiliser une vaste palette de couleurs prédéfinie</translation>
+        <translation>Utiliser une grande palette de couleurs prédéfinie</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="503"/>
@@ -1213,7 +1213,7 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../src/config/generalconf.cpp" line="623"/>
         <source>Imgur Application Client ID</source>
-        <translation>Client ID pour l&apos;application Imgur</translation>
+        <translation>ID Client pour l&apos;application Imgur</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="654"/>
@@ -2008,7 +2008,7 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../src/main.cpp" line="274"/>
         <source>Screenshot region to select</source>
-        <translation>Zone de capture d&apos;écran à sélectionner</translation>
+        <translation>Région de capture d&apos;écran à sélectionner</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="277"/>
@@ -2068,7 +2068,7 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../src/main.cpp" line="314"/>
         <source>Define the screen to capture (starting from 0)</source>
-        <translation>Définissez l&apos;écran à capturer (en commençant par 0)</translation>
+        <translation>Définir l&apos;écran à capturer (en partant de 0)</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="334"/>
@@ -2078,12 +2078,12 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../src/main.cpp" line="337"/>
         <source>Invalid region, use &apos;WxH+X+Y&apos; or &apos;all&apos; or &apos;screen0/screen1/...&apos;.</source>
-        <translation>Région non valide, utilisez &apos;WxH+X+Y&apos; ou &apos;tout&apos; ou &apos;écran0/écran1/...&apos;.</translation>
+        <translation>Région non valide, utilisez &apos;LxH+X+Y&apos; ou &apos;tout&apos; ou &apos;écran0/écran1/...&apos;.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="350"/>
         <source>Invalid path, must be an existing directory or a new file in an existing directory</source>
-        <translation>Chemin d&apos;accès invalide, doit être un répertoire existant ou un nouveau fichier dans un répertoire existant</translation>
+        <translation>Chemin invalide, doit être un répertoire existant ou un nouveau fichier dans un répertoire existant</translation>
     </message>
     <message>
         <source>Define the screen to capture</source>
@@ -2152,7 +2152,7 @@ Vous devrez probablement remplacer le signe &apos;#&apos; par &apos;\#FFF&apos;<
     <message>
         <location filename="../../src/core/flameshot.cpp" line="408"/>
         <source>Full screen screenshot pinned to screen</source>
-        <translation>Capture d&apos;écran plein écran épinglée à l&apos;écran</translation>
+        <translation>Capture plein écran épinglée à l&apos;écran</translation>
     </message>
     <message>
         <source>URL copied to clipboard.</source>
@@ -2268,7 +2268,7 @@ Vous devrez probablement remplacer le signe &apos;#&apos; par &apos;\#FFF&apos;<
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="219"/>
         <source>Change the tool&apos;s size</source>
-        <translation>Modifier la taille de l&apos;outil</translation>
+        <translation>Changer la taille de l&apos;outil</translation>
     </message>
     <message>
         <source>Change the tool&apos;s thickness</source>
@@ -2460,7 +2460,7 @@ Vous devrez probablement remplacer le signe &apos;#&apos; par &apos;\#FFF&apos;<
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="169"/>
         <source>Toggle side panel</source>
-        <translation>Basculer le panneau latéral</translation>
+        <translation>Ouvrir le panneau latéral</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="170"/>
