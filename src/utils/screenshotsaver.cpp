@@ -207,7 +207,7 @@ void saveToClipboard(const QPixmap& capture)
         AbstractLogger() << QObject::tr("Capture saved to clipboard.");
     }
     if (ConfigHandler().useJpgForClipboard()) {
-#ifdef Q_OS_MAC
+#ifdef Q_OS_MACOS
         saveJpegToClipboardMacOS(capture);
 #else
         saveToClipboardMime(capture, "jpeg");

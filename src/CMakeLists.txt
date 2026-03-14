@@ -296,6 +296,11 @@ if (WIN32)
     if (NOT USE_OPENSSL)
         message(WARNING "OpenSSL is required to upload screenshots")
     endif ()
+
+    target_link_libraries(
+            flameshot
+            qhotkey
+    )
 endif ()
 
 # Choose default color palette (small or large)

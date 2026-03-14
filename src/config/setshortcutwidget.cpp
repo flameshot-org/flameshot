@@ -8,6 +8,7 @@
 #include <QLabel>
 #include <QLayout>
 #include <QPixmap>
+#include <QTimer>
 
 SetShortcutDialog::SetShortcutDialog(QDialog* parent,
                                      const QString& shortcutName)
@@ -34,7 +35,7 @@ SetShortcutDialog::SetShortcutDialog(QDialog* parent,
     m_layout->addWidget(infoIcon);
 
     QString msg = "";
-#if defined(Q_OS_MAC)
+#if defined(Q_OS_MACOS)
     msg = tr(
       "Press Esc to cancel or ⌘+Backspace to disable the keyboard shortcut.");
 #else
@@ -58,6 +59,15 @@ SetShortcutDialog::SetShortcutDialog(QDialog* parent,
     infoBottom->setMargin(10);
     infoBottom->setAlignment(Qt::AlignCenter);
     m_layout->addWidget(infoBottom);
+
+    // 0ms Delay: Event loop waits until after show(); widget fully initialized
+    QTimer::singleShot(0, this, &SetShortcutDialog::startCapture);
+}
+
+void SetShortcutDialog::startCapture()
+{
+    grabKeyboard(); // Call AFTER show()!
+    setFocus();
 }
 
 const QKeySequence& SetShortcutDialog::shortcut()
@@ -67,16 +77,19 @@ const QKeySequence& SetShortcutDialog::shortcut()
 
 void SetShortcutDialog::keyPressEvent(QKeyEvent* ke)
 {
-    if (ke->modifiers() & Qt::ShiftModifier) {
+    Qt::KeyboardModifiers mods = ke->modifiers();
+
+    if (mods & Qt::ShiftModifier) {
         m_modifier += "Shift+";
     }
-    if (ke->modifiers() & Qt::ControlModifier) {
+    if (mods & Qt::ControlModifier) {
         m_modifier += "Ctrl+";
     }
-    if (ke->modifiers() & Qt::AltModifier) {
+    if (mods & Qt::AltModifier) {
         m_modifier += "Alt+";
     }
-    if (ke->modifiers() & Qt::MetaModifier) {
+    // ke->key() == Qt::Key_Meta required on Windows to grab Win key
+    if (ke->modifiers() & Qt::MetaModifier || ke->key() == Qt::Key_Meta) {
         m_modifier += "Meta+";
     }
 
@@ -90,4 +103,16 @@ void SetShortcutDialog::keyReleaseEvent(QKeyEvent* event)
         reject();
     }
     accept();
+}
+
+void SetShortcutDialog::accept()
+{
+    releaseKeyboard();
+    QDialog::accept();
+}
+
+void SetShortcutDialog::reject()
+{
+    releaseKeyboard();
+    QDialog::reject();
 }

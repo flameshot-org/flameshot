@@ -3,7 +3,7 @@
 
 #include "flameshot.h"
 #include "flameshotdaemon.h"
-#if defined(Q_OS_MACOS)
+#if defined(Q_OS_MACOS) || defined(Q_OS_WIN)
 #include "qhotkey.h"
 #endif
 
@@ -43,8 +43,10 @@
 Flameshot::Flameshot()
   : m_haveExternalWidget(false)
   , m_captureWindow(nullptr)
-#if defined(Q_OS_MACOS)
+#if (defined(Q_OS_MACOS) || defined(Q_OS_WIN))
   , m_HotkeyScreenshotCapture(nullptr)
+#endif
+#if (defined(Q_OS_MACOS) && ENABLE_IMGUR)
   , m_HotkeyScreenshotHistory(nullptr)
 #endif
 {
@@ -57,22 +59,23 @@ Flameshot::Flameshot()
     // CaptureWidget
     QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
     currentScreen->grabWindow(0, 0, 0, 1, 1);
-
-    // set global shortcuts for MacOS
+#endif
+#if (defined(Q_OS_MACOS) || defined(Q_OS_WIN))
+    // Set global shortcuts for MacOS or Windows
     m_HotkeyScreenshotCapture = new QHotkey(
       QKeySequence(ConfigHandler().shortcut("TAKE_SCREENSHOT")), true, this);
     QObject::connect(m_HotkeyScreenshotCapture,
                      &QHotkey::activated,
                      qApp,
                      [this]() { gui(); });
-#ifdef ENABLE_IMGUR
+#endif
+#if (defined(Q_OS_MACOS) && ENABLE_IMGUR)
     m_HotkeyScreenshotHistory = new QHotkey(
       QKeySequence(ConfigHandler().shortcut("SCREENSHOT_HISTORY")), true, this);
     QObject::connect(m_HotkeyScreenshotHistory,
                      &QHotkey::activated,
                      qApp,
                      [this]() { history(); });
-#endif
 #endif
 }
 
