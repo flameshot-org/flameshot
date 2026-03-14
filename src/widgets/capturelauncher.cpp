@@ -62,6 +62,11 @@ CaptureLauncher::CaptureLauncher(QDialog* parent)
 #ifdef Q_OS_MACOS
     ui->monitorLabel->setVisible(false);
     ui->monitorSelection->setVisible(false);
+#else
+    if (screens.size() <= 1) {
+        ui->monitorLabel->setVisible(false);
+        ui->monitorSelection->setVisible(false);
+    }
 #endif
 
     ui->delayTime->setSpecialValueText(tr("No Delay"));
@@ -119,6 +124,11 @@ CaptureLauncher::CaptureLauncher(QDialog* parent)
     ui->screenshotWidth->setText(QString::number(lastRegion.width()));
     ui->screenshotHeight->setText(QString::number(lastRegion.height()));
 
+    ui->screenshotWidth->setMaximumWidth(70);
+    ui->screenshotHeight->setMaximumWidth(70);
+    ui->screenshotX->setMaximumWidth(70);
+    ui->screenshotY->setMaximumWidth(70);
+    adjustSize();
     show();
     // Call show() first, otherwise the correct geometry cannot be fetched
     // for centering the window on the screen
