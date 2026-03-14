@@ -11,6 +11,9 @@
 #ifdef ENABLE_IMGUR
 #include "imgupload/imguploadertool.h"
 #endif
+#ifdef ENABLE_QRCODE
+#include "qrscan/qrscantool.h"
+#endif
 #include "invert/inverttool.h"
 #include "launcher/applaunchertool.h"
 #include "line/linetool.h"
@@ -66,6 +69,9 @@ CaptureTool* ToolFactory::CreateTool(CaptureTool::Type t, QObject* parent)
         if_TYPE_return_TOOL(TYPE_SIZEDECREASE, SizeDecreaseTool);
         if_TYPE_return_TOOL(TYPE_INVERT, InvertTool);
         if_TYPE_return_TOOL(TYPE_ACCEPT, AcceptTool);
+#ifdef ENABLE_QRCODE
+        if_TYPE_return_TOOL(TYPE_QR_SCAN, QrScanTool);
+#endif
         default:
             return nullptr;
     }

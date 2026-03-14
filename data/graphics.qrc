@@ -101,5 +101,7 @@
         <file>img/material/black/image.svg</file>
         <file>img/material/white/apps.svg</file>
         <file>img/material/white/image.svg</file>
+        <file>img/material/black/qr-code.svg</file>
+        <file>img/material/white/qr-code.svg</file>
     </qresource>
 </RCC>

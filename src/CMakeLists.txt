@@ -219,6 +219,11 @@ target_include_directories(
          $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/>
          )
 
+if(ENABLE_QRCODE)
+  target_include_directories(flameshot PUBLIC
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/tools/qrscan>)
+endif()
+
 target_link_libraries(
         flameshot
         project_warnings
@@ -228,6 +233,9 @@ target_link_libraries(
         Qt${QT_VERSION_MAJOR}::Widgets
         QtColorWidgets
 )
+if(ENABLE_QRCODE)
+  target_link_libraries(flameshot ZXing::ZXing)
+endif()
 if (UNIX)
 target_link_libraries(
         flameshot

@@ -57,6 +57,10 @@ target_sources(
           text/textwidget.cpp)
 target_sources(flameshot PRIVATE undo/undotool.h undo/undotool.cpp)
 
+if(ENABLE_QRCODE)
+  target_sources(flameshot PRIVATE qrscan/qrscantool.h qrscan/qrscantool.cpp)
+endif()
+
 target_sources(
   flameshot
   PRIVATE abstractactiontool.cpp
