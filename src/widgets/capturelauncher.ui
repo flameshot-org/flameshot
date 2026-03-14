@@ -6,16 +6,21 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>452</width>
-    <height>250</height>
+    <width>0</width>
+    <height>0</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Capture Launcher</string>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout_4">
+   <property name="leftMargin"><number>4</number></property>
+   <property name="topMargin"><number>4</number></property>
+   <property name="rightMargin"><number>4</number></property>
+   <property name="bottomMargin"><number>4</number></property>
    <item>
     <layout class="QVBoxLayout" name="verticalLayout_2">
+     <property name="spacing"><number>4</number></property>
      <item>
       <widget class="QLabel" name="modeLabel">
        <property name="font">
@@ -45,6 +50,9 @@
        </item>
        <item row="1" column="1">
         <widget class="QComboBox" name="captureType">
+         <property name="sizeAdjustPolicy">
+          <enum>QComboBox::SizeAdjustPolicy::AdjustToContents</enum>
+         </property>
          <property name="currentText">
           <string/>
          </property>
