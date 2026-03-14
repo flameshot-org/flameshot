@@ -21,6 +21,7 @@
 #endif
 
 #include "src/utils/confighandler.h"
+#include "src/utils/desktopinfo.h"
 #include "src/utils/screengrabber.h"
 #include "src/widgets/capture/capturewidget.h"
 #include "src/widgets/capturelauncher.h"
@@ -133,8 +134,16 @@ CaptureWidget* Flameshot::gui(const CaptureRequest& req)
         m_captureWindow->activateWindow();
         m_captureWindow->raise();
 #else
-        m_captureWindow->showFullScreen();
-//        m_captureWindow->show(); // For CaptureWidget Debugging under Linux
+        // On X11, showFullScreen() in Qt6 restricts the window to a single
+        // monitor even with BypassWindowManagerHint, causing hangs when no
+        // monitor selection dialog appears. Use show() on X11 instead.
+        if (DesktopInfo().waylandDetected()) {
+            m_captureWindow->showFullScreen();
+        } else {
+            m_captureWindow->show();
+        }
+        m_captureWindow->activateWindow();
+        m_captureWindow->raise();
 #endif
         return m_captureWindow;
     } else {
