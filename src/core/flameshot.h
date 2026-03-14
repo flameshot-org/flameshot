@@ -15,7 +15,7 @@ class CaptureLauncher;
 #ifdef ENABLE_IMGUR
 class UploadHistory;
 #endif
-#if (defined(Q_OS_MAC) || defined(Q_OS_MACOS))
+#if (defined(Q_OS_MACOS) || defined(Q_OS_WIN))
 class QHotkey;
 #endif
 
@@ -90,8 +90,10 @@ private:
     QPointer<CaptureLauncher> m_launcherWindow;
     QPointer<ConfigWindow> m_configWindow;
 
-#if (defined(Q_OS_MAC) || defined(Q_OS_MACOS))
+#if (defined(Q_OS_MACOS) || defined(Q_OS_WIN))
     QHotkey* m_HotkeyScreenshotCapture;
+#endif
+#if (defined(Q_OS_MACOS) && ENABLE_IMGUR)
     QHotkey* m_HotkeyScreenshotHistory;
 #endif
 };
