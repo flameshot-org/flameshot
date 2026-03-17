@@ -1,42 +1,71 @@
+#ifndef TRAYICON_H
+#define TRAYICON_H
+
 #include <QSystemTrayIcon>
+#include <QImage>
+#include <functional>
+#include <QRect>
 
-#pragma once
+#include "tools/wayland/waylandportalcapturebackend.h"
 
+class QMenu;
 class QAction;
+class captureScreenScroll;
 
 class TrayIcon : public QSystemTrayIcon
 {
     Q_OBJECT
 public:
-    TrayIcon(QObject* parent = nullptr);
-    virtual ~TrayIcon();
+    explicit TrayIcon(QObject* parent = nullptr);
+    ~TrayIcon() override;
 
 #if !defined(DISABLE_UPDATE_CHECKER)
     QAction* appUpdates();
+    void enableCheckUpdatesAction(bool enable);
+#endif
+
+public slots:
+    void startGuiCapture();
+
+private:
+    struct ScrollCaptureContext {
+        captureScreenScroll* captureSS = nullptr;
+        QString baseDir;
+        int shotIdx = 0;
+        QImage previousCapture;
+        bool hasPrevious = false;
+
+        std::function<QImage()> grabFrame;
+        std::function<bool()> doScroll;
+        std::function<void()> cleanup;
+    };
+
+    WaylandPortalCaptureBackend* m_waylandBackend = nullptr;
+
+private:
+    void initMenu();
+    void startScrollingCapture();
+
+    QString createScrollCaptureDir() const;
+    bool runCaptureLoop(ScrollCaptureContext& ctx) const;
+    void waitAfterScroll(const QImage& beforeScroll) const;
+    bool stitchAndSaveResult(captureScreenScroll* captureSS, const QString& baseDir) const;
+
+#if defined(Q_OS_LINUX)
+    QRect selectScrollRegionFromImage(const QImage& screenshot);
+    bool setupLinuxScrollingCapture(ScrollCaptureContext& ctx);
+#endif
+
+#if defined(Q_OS_WIN)
+    bool setupWindowsScrollingCapture(ScrollCaptureContext& ctx);
 #endif
 
 private:
-    void initTrayIcon();
-    void initMenu();
-    void initScreenMenu();
-    void updateCaptureActionShortcut();
+    QMenu* m_menu = nullptr;
+
 #if !defined(DISABLE_UPDATE_CHECKER)
-    void updateCheckUpdatesMenuVisibility();
-#endif
-
-    void startGuiCapture();
-    void startGuiCaptureOnScreen(int screenIndex);
-
-    QMenu* m_menu;
-    QMenu* m_screenMenu;
-    QAction* m_captureAction;
-    QAction* m_launcherAction;
-    QAction* m_infoAction;
-#if !defined(DISABLE_UPDATE_CHECKER)
-    QAction* m_appUpdates;
-#endif
-
-#if defined( Q_OS_LINUX )
-    WId getWindowIdFromXwininfo();
+    QAction* m_appUpdates = nullptr;
 #endif
 };
+
+#endif // TRAYICON_H
