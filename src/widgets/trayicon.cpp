@@ -217,8 +217,10 @@ TrayIcon::TrayIcon(QObject* parent)
   : QSystemTrayIcon(parent)
 {
     initMenu();
-    m_waylandBackend = new WaylandPortalCaptureBackend(this);
 
+#if defined(Q_OS_LINUX)
+    m_waylandBackend = new WaylandPortalCaptureBackend(this);
+#endif
     setToolTip(QStringLiteral("Flameshot"));
 
 #if defined(Q_OS_MACOS)
@@ -338,7 +340,9 @@ bool TrayIcon::runCaptureLoop(ScrollCaptureContext& ctx) const
                 break;
             }
 
+#if defined(Q_OS_LINUX)
             waitAfterScroll(beforeScroll);
+#endif
             continue;
         }
 
@@ -366,12 +370,15 @@ bool TrayIcon::runCaptureLoop(ScrollCaptureContext& ctx) const
             break;
         }
 
+#if defined(Q_OS_LINUX)
         waitAfterScroll(beforeScroll);
+#endif
     }
 
     return capturedAny;
 }
 
+#if defined(Q_OS_LINUX)
 void TrayIcon::waitAfterScroll(const QImage& beforeScroll) const
 {
     if (m_waylandBackend && m_waylandBackend->isReady()) {
@@ -381,6 +388,7 @@ void TrayIcon::waitAfterScroll(const QImage& beforeScroll) const
         QThread::msleep(150);
     }
 }
+#endif
 
 bool TrayIcon::stitchAndSaveResult(captureScreenScroll* captureSS,
                                    const QString& baseDir) const
@@ -1007,7 +1015,13 @@ bool TrayIcon::setupWindowsScrollingCapture(ScrollCaptureContext& ctx)
         return true;
     };
 
-    ctx.cleanup = [&overlay, &scrollEnCurso]() {
+    /*ctx.cleanup = [&overlay, &scrollEnCurso]() {
+        overlay.stopTracking();
+        overlay.hide();
+        scrollEnCurso = false;
+    };*/
+
+    ctx.cleanup = []() {
         overlay.stopTracking();
         overlay.hide();
         scrollEnCurso = false;

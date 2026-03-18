@@ -1,3 +1,4 @@
+#if defined(Q_OS_LINUX)
 #include "waylandportalcapturebackend.h"
 
 #include <QDBusArgument>
@@ -911,3 +912,4 @@ bool WaylandPortalCaptureBackend::movePointerToSelectedRectCenter()
       static_cast<double>(center.x()),
       static_cast<double>(center.y()));
 }
+#endif
