@@ -1,4 +1,7 @@
+#include <QtGlobal>
+
 #if defined(Q_OS_LINUX)
+
 #include "waylandportalcapturebackend.h"
 
 #include <QDBusArgument>
