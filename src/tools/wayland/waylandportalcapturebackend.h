@@ -1,3 +1,4 @@
+#if defined(Q_OS_LINUX)
 #pragma once
 
 #include "portalrequesthelper.h"
@@ -111,3 +112,4 @@ private:
     spa_hook m_streamHook {};
 
 };
+#endif

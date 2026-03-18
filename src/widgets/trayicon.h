@@ -6,7 +6,9 @@
 #include <functional>
 #include <QRect>
 
+#if defined(Q_OS_LINUX)
 #include "tools/wayland/waylandportalcapturebackend.h"
+#endif
 
 class QMenu;
 class QAction;
@@ -40,8 +42,9 @@ private:
         std::function<void()> cleanup;
     };
 
+#if defined(Q_OS_LINUX)
     WaylandPortalCaptureBackend* m_waylandBackend = nullptr;
-
+#endif
 private:
     void initMenu();
     void startScrollingCapture();
