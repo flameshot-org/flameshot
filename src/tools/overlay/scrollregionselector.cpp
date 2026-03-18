@@ -58,7 +58,9 @@ void ScrollRegionSelector::paintEvent(QPaintEvent* event)
             hole.addRect(sel);
 
             p.fillPath(full.subtracted(hole), QColor(0, 0, 0, 110));
-            p.fillRect(sel, QColor(255, 0, 0, 30));
+            //p.fillRect(sel, QColor(255, 0, 0, 30));
+
+            p.fillRect(sel, QColor(180, 0, 255, 40));
         }
     } else {
         // Modo Xorg/X11: NO oscurecer fondo, dejar totalmente transparente
@@ -70,7 +72,8 @@ void ScrollRegionSelector::paintEvent(QPaintEvent* event)
     }
 
     if (!sel.isNull()) {
-        QPen pen(QColor(255, 0, 0), 2);
+        //QPen pen(QColor(255, 0, 0), 2);
+        QPen pen(QColor(220, 100, 255), 2);
         p.setPen(pen);
         p.drawRect(sel.adjusted(0, 0, -1, -1));
     }

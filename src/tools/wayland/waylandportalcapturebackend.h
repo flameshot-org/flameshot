@@ -1,5 +1,8 @@
-#if defined(Q_OS_LINUX)
 #pragma once
+
+#include <QtGlobal>
+
+#if defined(Q_OS_LINUX)
 
 #include "portalrequesthelper.h"
 

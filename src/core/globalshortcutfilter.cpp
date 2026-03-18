@@ -1,15 +1,21 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
+// SPDX-License-Identifier: GPL-3.0-or-later
+// SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
+
 #include "globalshortcutfilter.h"
 #include "core/flameshot.h"
 
+#if defined(Q_OS_WIN)
 #include <qt_windows.h>
+#endif
 
 GlobalShortcutFilter::GlobalShortcutFilter(QObject* parent)
   : QObject(parent)
 {
-    // Forced Print Screen
+#if defined(Q_OS_WIN)
+  // Forced Print Screen
     if (RegisterHotKey(NULL, 1, 0, VK_SNAPSHOT)) {
         // ok - capture screen
     }
@@ -17,6 +23,7 @@ GlobalShortcutFilter::GlobalShortcutFilter(QObject* parent)
     if (RegisterHotKey(NULL, 2, MOD_SHIFT, VK_SNAPSHOT)) {
         // ok - show screenshots history
     }
+#endif
 }
 
 bool GlobalShortcutFilter::nativeEventFilter(const QByteArray& eventType,
@@ -26,6 +33,7 @@ bool GlobalShortcutFilter::nativeEventFilter(const QByteArray& eventType,
     Q_UNUSED(eventType)
     Q_UNUSED(result)
 
+#if defined(Q_OS_WIN)
     MSG* msg = static_cast<MSG*>(message);
     if (msg->message == WM_HOTKEY) {
         // TODO: this is just a temporary workaround; proper global
@@ -39,12 +47,16 @@ bool GlobalShortcutFilter::nativeEventFilter(const QByteArray& eventType,
             return true;
         }
 #endif
-        // Capture screen
+       // Capture screen
         if (VK_SNAPSHOT == keycode && 0 == modifiers) {
             Flameshot::instance()->requestCapture(
               CaptureRequest(CaptureRequest::GRAPHICAL_MODE));
             return true;
         }
     }
-    return false; // Forward event to Qt
+#else
+    Q_UNUSED(message)
+#endif
+
+    return false;
 }
