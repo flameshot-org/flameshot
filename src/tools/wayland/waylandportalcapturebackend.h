@@ -1,4 +1,3 @@
-#if defined(Q_OS_LINUX)
 #pragma once
 
 #include <QtGlobal>
