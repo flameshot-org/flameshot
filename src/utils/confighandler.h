@@ -143,6 +143,7 @@ public:
     CONFIG_GETTER_SETTER(ignorePrntScrForcesSnipping,
                          setIgnorePrntScrForcesSnipping,
                          bool)
+    CONFIG_GETTER_SETTER(hdrFix, setHdrFix, bool)
 #endif
 
     // SPECIAL CASES

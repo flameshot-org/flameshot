@@ -15,6 +15,7 @@
 #include <QLabel>
 #include <QMouseEvent>
 #include <QPainter>
+#include <QColorSpace>
 #include <QPixmap>
 #include <QProcess>
 #include <QScreen>
@@ -578,6 +579,17 @@ QPixmap ScreenGrabber::windowsScreenshot(int wid)
         qreal screenDpr = screen->devicePixelRatio();
 
         QPixmap screenPixmap = screen->grabWindow(wid);
+#if defined(Q_OS_WIN)
+        if (ConfigHandler().hdrFix()) {
+            QImage img = screenPixmap.toImage();
+            if (img.colorSpace().isValid() &&
+                img.colorSpace() != QColorSpace(QColorSpace::SRgb)) {
+                img.convertToColorSpace(QColorSpace(QColorSpace::SRgb));
+                img.setColorSpace(QColorSpace());
+                screenPixmap = QPixmap::fromImage(img);
+            }
+        }
+#endif
         screenPixmap.setDevicePixelRatio(1.0);
 
         int logicalX = screenGeom.x() - minLogicalX;

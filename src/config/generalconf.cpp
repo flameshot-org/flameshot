@@ -55,6 +55,9 @@ GeneralConf::GeneralConf(QWidget* parent)
     initAntialiasingPinZoom();
     initUndoLimit();
     initInsecurePixelate();
+#if defined(Q_OS_WIN)
+    initHdrFix();
+#endif
 #ifdef ENABLE_IMGUR
     initCopyAndCloseAfterUpload();
     initUploadWithoutConfirmation();
@@ -105,6 +108,9 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
     m_squareMagnifier->setChecked(config.squareMagnifier());
     m_saveLastRegion->setChecked(config.saveLastRegion());
     m_reverseArrow->setChecked(config.reverseArrow());
+#if defined(Q_OS_WIN)
+    m_hdrFix->setChecked(config.hdrFix());
+#endif
 
 #if !defined(Q_OS_WIN)
     m_autoCloseIdleDaemon->setChecked(config.autoCloseIdleDaemon());
@@ -908,3 +914,21 @@ void GeneralConf::setInsecurePixelate(bool checked)
 {
     ConfigHandler().setInsecurePixelate(checked);
 }
+
+#if defined(Q_OS_WIN)
+void GeneralConf::initHdrFix()
+{
+    m_hdrFix = new QCheckBox(tr("Fix HDR overexposure"), this);
+    m_hdrFix->setToolTip(
+      tr("Convert HDR screenshots to sRGB to prevent overexposure on "
+         "displays with HDR enabled."));
+    m_hdrFix->setChecked(ConfigHandler().hdrFix());
+    m_scrollAreaLayout->addWidget(m_hdrFix);
+    connect(m_hdrFix, &QCheckBox::clicked, this, &GeneralConf::setHdrFix);
+}
+
+void GeneralConf::setHdrFix(bool checked)
+{
+    ConfigHandler().setHdrFix(checked);
+}
+#endif

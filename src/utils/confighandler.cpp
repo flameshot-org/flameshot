@@ -139,6 +139,7 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
 #if defined(Q_OS_WIN)
     // Not visible on settings dialog
     OPTION("ignorePrntScrForcesSnipping" ,Bool               ( false         )),
+    OPTION("hdrFix"                      ,Bool               ( true          )),
 #endif
 };
 
