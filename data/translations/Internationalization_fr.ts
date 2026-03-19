@@ -392,7 +392,7 @@ Appuyer sur Espace pour ouvrir le panneau latéral.</translation>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="60"/>
         <source>Toggle magnifier</source>
-        <translation>Activer loupe</translation>
+        <translation>Activer la loupe</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="60"/>
@@ -799,7 +799,7 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../src/core/flameshot.cpp" line="431"/>
         <source>URL copied to clipboard.</source>
-        <translation>URL copiée dans le presse papier.</translation>
+        <translation>URL copiée dans le presse-papiers.</translation>
     </message>
 </context>
 <context>
@@ -1066,7 +1066,7 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../src/config/generalconf.cpp" line="300"/>
         <source>Show the side panel toggle button in the capture mode</source>
-        <translation>Afficher le bouton pour activer le panneau latéral en mode capture</translation>
+        <translation>Afficher le bouton pour ouvrir le panneau latéral en mode capture</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="312"/>
@@ -1173,7 +1173,7 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../src/config/generalconf.cpp" line="505"/>
         <source>Enable Copy to clipboard on Double Click</source>
-        <translation>Activer la copie vers le presse-papier par double-clic</translation>
+        <translation>Activer la copie vers le presse-papiers par double-clic</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="517"/>
@@ -1228,7 +1228,7 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../src/config/generalconf.cpp" line="685"/>
         <source>Use lossy JPG format for clipboard (lossless PNG default)</source>
-        <translation>Utiliser un format JPG avec perte pour le presse-papier (PNG sans perte par défaut)</translation>
+        <translation>Utiliser un format JPG avec perte pour le presse-papiers (PNG sans perte par défaut)</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="711"/>
@@ -1238,7 +1238,7 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../src/config/generalconf.cpp" line="712"/>
         <source>Copy the file path to clipboard after the file is saved</source>
-        <translation>Copier le chemin vers le fichier dans le presse-papier quand il a été enregistré</translation>
+        <translation>Copier le chemin vers le fichier dans le presse-papiers quand il a été enregistré</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="723"/>
@@ -1513,7 +1513,7 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="175"/>
         <source>Screenshot copied to clipboard.</source>
-        <translation>Capture d&apos;écran copiée dans le presse-papier.</translation>
+        <translation>Capture d&apos;écran copiée dans le presse-papiers.</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="189"/>
@@ -1793,7 +1793,7 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="284"/>
         <source>Copy to clipboard</source>
-        <translation>Copier dans le presse-papier</translation>
+        <translation>Copier dans le presse-papiers</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="291"/>
@@ -1884,7 +1884,7 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
         <location filename="../../src/utils/screenshotsaver.cpp" line="196"/>
         <location filename="../../src/utils/screenshotsaver.cpp" line="198"/>
         <source>Capture saved to clipboard.</source>
-        <translation>Capture enregistrée dans le presse-papier.</translation>
+        <translation>Capture enregistrée dans le presse-papiers.</translation>
     </message>
     <message>
         <source>Capture saved to clipboard</source>
@@ -1893,7 +1893,7 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="182"/>
         <source>Error while saving to clipboard</source>
-        <translation>Erreur lors de l&apos;enregistrement dans le presse-papier</translation>
+        <translation>Erreur lors de l&apos;enregistrement dans le presse-papiers</translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="66"/>
@@ -1983,7 +1983,7 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../src/main.cpp" line="260"/>
         <source>Save the capture to the clipboard</source>
-        <translation>Enregistrer la capture dans le presse-papier</translation>
+        <translation>Enregistrer la capture dans le presse-papiers</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="262"/>
@@ -2460,7 +2460,7 @@ Vous devrez probablement remplacer le signe &apos;#&apos; par &apos;\#FFF&apos;<
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="169"/>
         <source>Toggle side panel</source>
-        <translation>Ouvrir le panneau latéral</translation>
+        <translation>Afficher le panneau latéral</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="170"/>
