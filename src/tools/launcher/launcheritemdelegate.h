@@ -3,7 +3,8 @@
 
 #pragma once
 
-#include "src/utils/desktopfileparse.h"
+#include "utils/desktopfileparse.h"
+
 #include <QStyledItemDelegate>
 
 class LauncherItemDelegate : public QStyledItemDelegate

@@ -2,11 +2,12 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "imguruploader.h"
-#include "src/utils/confighandler.h"
-#include "src/utils/filenamehandler.h"
-#include "src/utils/history.h"
-#include "src/widgets/loadspinner.h"
-#include "src/widgets/notificationwidget.h"
+#include "utils/confighandler.h"
+#include "utils/filenamehandler.h"
+#include "utils/history.h"
+#include "widgets/loadspinner.h"
+#include "widgets/notificationwidget.h"
+
 #include <QBuffer>
 #include <QDesktopServices>
 #include <QJsonArray>

@@ -3,7 +3,8 @@
 
 #pragma once
 
-#include "src/utils/confighandler.h"
+#include "utils/confighandler.h"
+
 #include <QStringList>
 #include <QVector>
 #include <QWidget>

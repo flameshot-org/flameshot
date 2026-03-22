@@ -4,7 +4,8 @@
 #pragma once
 
 #include "capturebutton.h"
-#include "src/tools/capturetool.h"
+#include "tools/capturetool.h"
+
 #include <QMap>
 #include <QVector>
 

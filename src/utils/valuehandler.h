@@ -1,7 +1,7 @@
 #pragma once
 
-#include "src/widgets/capture/capturetoolbutton.h"
-#include "src/widgets/colorpickerwidget.h"
+#include "widgets/capture/capturetoolbutton.h"
+#include "widgets/colorpickerwidget.h"
 
 #include <QColor>
 #include <QList>

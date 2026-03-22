@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include "src/tools/abstractpathtool.h"
+#include "tools/abstractpathtool.h"
 
 class PencilTool : public AbstractPathTool
 {

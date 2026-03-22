@@ -2,9 +2,10 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "textconfig.h"
-#include "src/utils/colorutils.h"
-#include "src/utils/confighandler.h"
-#include "src/utils/pathinfo.h"
+#include "utils/colorutils.h"
+#include "utils/confighandler.h"
+#include "utils/pathinfo.h"
+
 #include <QComboBox>
 #include <QFontDatabase>
 #include <QHBoxLayout>

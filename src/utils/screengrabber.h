@@ -3,7 +3,8 @@
 
 #pragma once
 
-#include "src/utils/desktopinfo.h"
+#include "utils/desktopinfo.h"
+
 #include <QEvent>
 #include <QList>
 #include <QObject>

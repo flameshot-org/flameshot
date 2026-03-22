@@ -2,6 +2,7 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "magnifierwidget.h"
+
 #include <QApplication>
 #include <QEvent>
 #include <QMouseEvent>

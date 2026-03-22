@@ -3,7 +3,8 @@
 
 #pragma once
 
-#include "src/tools/imgupload/storages/imguploaderbase.h"
+#include "tools/imgupload/storages/imguploaderbase.h"
+
 #include <QObject>
 
 #define IMG_UPLOADER_STORAGE_DEFAULT "imgur"

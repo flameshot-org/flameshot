@@ -2,11 +2,12 @@
 // SPDX-FileCopyrightText: 2020 Yurii Puchkov at Namecheap & Contributors
 
 #include "shortcutswidget.h"
-#include "capturetool.h"
-#include "setshortcutwidget.h"
-#include "src/core/qguiappcurrentscreen.h"
-#include "src/utils/globalvalues.h"
-#include "toolfactory.h"
+#include "config/setshortcutwidget.h"
+#include "core/qguiappcurrentscreen.h"
+#include "tools/capturetool.h"
+#include "tools/toolfactory.h"
+#include "utils/globalvalues.h"
+
 #include <QCheckBox>
 #include <QCursor>
 #include <QDir>

@@ -1,7 +1,6 @@
-#include "src/config/configerrordetails.h"
-
-#include "src/utils/abstractlogger.h"
-#include "src/utils/confighandler.h"
+#include "configerrordetails.h"
+#include "utils/abstractlogger.h"
+#include "utils/confighandler.h"
 
 #include <QApplication>
 #include <QDialogButtonBox>

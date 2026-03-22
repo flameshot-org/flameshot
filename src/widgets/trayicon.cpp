@@ -1,12 +1,11 @@
 #include "trayicon.h"
+#include "core/capturerequest.h"
+#include "core/flameshot.h"
+#include "core/flameshotdaemon.h"
+#include "core/qguiappcurrentscreen.h"
+#include "utils/confighandler.h"
+#include "utils/globalvalues.h"
 
-#include "src/core/capturerequest.h"
-#include "src/core/flameshot.h"
-#include "src/core/flameshotdaemon.h"
-#include "src/core/qguiappcurrentscreen.h"
-#include "src/utils/globalvalues.h"
-
-#include "src/utils/confighandler.h"
 #include <QApplication>
 #include <QGuiApplication>
 #include <QMenu>

@@ -2,12 +2,13 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "accepttool.h"
-#include "src/utils/screenshotsaver.h"
+#include "utils/screenshotsaver.h"
+
 #include <QApplication>
 #include <QPainter>
 #include <QStyle>
 #if defined(Q_OS_MACOS)
-#include "src/widgets/capture/capturewidget.h"
+#include "widgets/capture/capturewidget.h"
 #include <QWidget>
 #endif
 

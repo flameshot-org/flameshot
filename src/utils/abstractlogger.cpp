@@ -1,8 +1,8 @@
 #include "abstractlogger.h"
-#include "systemnotification.h"
-#include <cassert>
+#include "utils/systemnotification.h"
 
 #include <QFileInfo>
+#include <cassert>
 
 AbstractLogger::AbstractLogger(Channel channel, int targets)
   : m_defaultChannel(channel)

@@ -2,8 +2,9 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "imguploaddialog.h"
-#include "src/utils/confighandler.h"
-#include "src/utils/globalvalues.h"
+#include "utils/confighandler.h"
+#include "utils/globalvalues.h"
+
 #include <QCheckBox>
 #include <QDialogButtonBox>
 #include <QLabel>

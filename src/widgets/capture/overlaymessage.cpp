@@ -1,6 +1,6 @@
 #include "overlaymessage.h"
-#include "colorutils.h"
-#include "confighandler.h"
+#include "utils/colorutils.h"
+#include "utils/confighandler.h"
 
 #include <QApplication>
 #include <QDebug>

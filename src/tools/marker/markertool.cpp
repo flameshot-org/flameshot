@@ -2,6 +2,7 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "markertool.h"
+
 #include <QPainter>
 
 #define PADDING_VALUE 14

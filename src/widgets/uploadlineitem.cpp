@@ -1,10 +1,10 @@
 #include "uploadlineitem.h"
 #include "./ui_uploadlineitem.h"
-#include "src/core/flameshotdaemon.h"
-#include "src/tools/imgupload/imguploadermanager.h"
-#include "src/utils/confighandler.h"
-#include "src/utils/history.h"
-#include "src/widgets/notificationwidget.h"
+#include "core/flameshotdaemon.h"
+#include "tools/imgupload/imguploadermanager.h"
+#include "utils/confighandler.h"
+#include "utils/history.h"
+#include "widgets/notificationwidget.h"
 
 #include <QDesktopServices>
 #include <QFileInfo>

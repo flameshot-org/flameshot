@@ -2,6 +2,7 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "inverttool.h"
+
 #include <QApplication>
 #include <QGraphicsBlurEffect>
 #include <QGraphicsPixmapItem>

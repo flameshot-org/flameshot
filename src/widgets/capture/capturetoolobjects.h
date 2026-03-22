@@ -3,7 +3,8 @@
 
 #pragma once
 
-#include "src/tools/capturetool.h"
+#include "tools/capturetool.h"
+
 #include <QList>
 #include <QPointer>
 

@@ -2,6 +2,7 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "draggablewidgetmaker.h"
+
 #include <QMouseEvent>
 
 DraggableWidgetMaker::DraggableWidgetMaker(QObject* parent)

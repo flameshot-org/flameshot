@@ -2,8 +2,9 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "buttonlistview.h"
-#include "src/tools/toolfactory.h"
-#include "src/utils/confighandler.h"
+#include "tools/toolfactory.h"
+#include "utils/confighandler.h"
+
 #include <QListWidgetItem>
 #include <algorithm>
 

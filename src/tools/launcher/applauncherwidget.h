@@ -3,14 +3,14 @@
 
 #pragma once
 
+#if defined(Q_OS_WIN)
+#include "utils/winlnkfileparse.h"
+#else
+#include "utils/desktopfileparse.h"
+#endif
+
 #include <QMap>
 #include <QWidget>
-
-#if defined(Q_OS_WIN)
-#include "src/utils/winlnkfileparse.h"
-#else
-#include "src/utils/desktopfileparse.h"
-#endif
 
 class QTabWidget;
 class QCheckBox;

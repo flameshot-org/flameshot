@@ -4,7 +4,7 @@
 #pragma once
 
 #include "QtColorWidgets/color_wheel.hpp"
-#include "src/utils/confighandler.h"
+#include "utils/confighandler.h"
 
 #include <QWidget>
 

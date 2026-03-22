@@ -1,22 +1,22 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
-#include <QGraphicsDropShadowEffect>
-#include <QGraphicsOpacityEffect>
-#include <QPinchGesture>
-#include <QWindow>
 
 #include "pinwidget.h"
-#include "qguiappcurrentscreen.h"
-#include "screenshotsaver.h"
-#include "src/utils/confighandler.h"
-#include "src/utils/globalvalues.h"
+#include "core/qguiappcurrentscreen.h"
+#include "utils/confighandler.h"
+#include "utils/globalvalues.h"
+#include "utils/screenshotsaver.h"
 
+#include <QGraphicsDropShadowEffect>
+#include <QGraphicsOpacityEffect>
 #include <QLabel>
 #include <QMenu>
+#include <QPinchGesture>
 #include <QScreen>
 #include <QShortcut>
 #include <QVBoxLayout>
 #include <QWheelEvent>
+#include <QWindow>
 
 namespace {
 constexpr int MARGIN = 7;
