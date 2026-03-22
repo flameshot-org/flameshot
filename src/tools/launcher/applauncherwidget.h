@@ -4,7 +4,7 @@
 #pragma once
 
 // Must be included before #if def, otherwise Q_OS_WIN is unknown
-#include <QtSystemDetection>
+#include <QSysInfo>
 
 #if defined(Q_OS_WIN)
 #include "utils/winlnkfileparse.h"
