@@ -23,13 +23,13 @@ jobs:
     steps:
     - name: Checkout Source code
       if: github.event_name == 'push'
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
     - name: Checkout Source code
       if: github.event_name == 'pull_request'
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         ref: ${{ github.event.pull_request.head.sha }}
-    - uses: DoozyX/clang-format-lint-action@v0.13
+    - uses: DoozyX/clang-format-lint-action@v0.18
       with:
         source: './src'
         extensions: 'h,cpp'
