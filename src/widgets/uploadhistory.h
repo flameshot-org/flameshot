@@ -1,5 +1,4 @@
-#ifndef UPLOADHISTORY_H
-#define UPLOADHISTORY_H
+#pragma once
 
 #include <QWidget>
 
@@ -29,4 +28,3 @@ private:
 
     Ui::UploadHistory* ui;
 };
-#endif // UPLOADHISTORY_H

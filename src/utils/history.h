@@ -1,5 +1,4 @@
-#ifndef HISTORY_H
-#define HISTORY_H
+#pragma once
 
 #define HISTORYPIXMAP_MAX_PREVIEW_WIDTH 250
 #define HISTORYPIXMAP_MAX_PREVIEW_HEIGHT 100
@@ -35,5 +34,3 @@ private:
     QString m_packedFileName;
     HistoryFileName m_unpackedFileName;
 };
-
-#endif // HISTORY_H

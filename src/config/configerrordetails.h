@@ -1,6 +1,6 @@
-#include <QDialog>
-
 #pragma once
+
+#include <QDialog>
 
 class ConfigErrorDetails : public QDialog
 {

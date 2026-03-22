@@ -1,9 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // SPDX-FileCopyrightText: Yurii Puchkov & Contributors
-//
 
-#ifndef FLAMESHOT_IMGUPLOADERMANAGER_H
-#define FLAMESHOT_IMGUPLOADERMANAGER_H
+#pragma once
 
 #include "src/tools/imgupload/storages/imguploaderbase.h"
 #include <QObject>
@@ -34,5 +32,3 @@ private:
     QString m_urlString;
     QString m_imgUploaderPlugin;
 };
-
-#endif // FLAMESHOT_IMGUPLOADERMANAGER_H
