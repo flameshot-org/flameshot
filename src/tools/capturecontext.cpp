@@ -2,8 +2,6 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "capturecontext.h"
-#include "core/capturerequest.h"
-#include "core/flameshot.h"
 
 // TODO rename
 QPixmap CaptureContext::selectedScreenshotArea() const

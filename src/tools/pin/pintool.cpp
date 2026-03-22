@@ -2,8 +2,6 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "pintool.h"
-#include "core/qguiappcurrentscreen.h"
-#include "tools/pin/pinwidget.h"
 
 #include <QScreen>
 

@@ -3,7 +3,6 @@
 
 #include "capturebutton.h"
 #include "utils/colorutils.h"
-#include "utils/confighandler.h"
 #include "utils/globalvalues.h"
 
 #include <QGraphicsDropShadowEffect>

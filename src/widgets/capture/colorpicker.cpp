@@ -3,7 +3,6 @@
 
 #include "colorpicker.h"
 #include "utils/confighandler.h"
-#include "utils/globalvalues.h"
 
 #include <QMouseEvent>
 #include <QPainter>

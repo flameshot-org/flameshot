@@ -2,7 +2,6 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "screenshotsaver.h"
-#include "core/flameshot.h"
 #include "core/flameshotdaemon.h"
 #include "utils/abstractlogger.h"
 #include "utils/confighandler.h"

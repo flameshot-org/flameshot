@@ -1,7 +1,5 @@
 #include "colorgrabwidget.h"
 #include "core/qguiappcurrentscreen.h"
-#include "utils/colorutils.h"
-#include "utils/confighandler.h"
 #include "widgets/capture/overlaymessage.h"
 #include "widgets/panel/sidepanelwidget.h"
 

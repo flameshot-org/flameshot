@@ -1,7 +1,6 @@
 #include "configresolver.h"
 #include "config/configerrordetails.h"
 #include "utils/confighandler.h"
-#include "utils/valuehandler.h"
 
 #include <QDialogButtonBox>
 #include <QLabel>

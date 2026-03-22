@@ -23,7 +23,6 @@
 
 #if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
 #include "core/flameshotdbusadapter.h"
-#include "utils/desktopinfo.h"
 #include <QDBusConnection>
 #include <QDBusMessage>
 #endif

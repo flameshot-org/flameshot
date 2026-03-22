@@ -1,5 +1,4 @@
 #include "systemnotification.h"
-#include "core/flameshot.h"
 #include "utils/abstractlogger.h"
 #include "utils/confighandler.h"
 

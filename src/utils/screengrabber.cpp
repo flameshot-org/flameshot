@@ -3,7 +3,6 @@
 #include "core/qguiappcurrentscreen.h"
 #include "utils/abstractlogger.h"
 #include "utils/confighandler.h"
-#include "utils/filenamehandler.h"
 #include "utils/monitorpreview.h"
 #include "utils/systemnotification.h"
 

@@ -4,7 +4,6 @@
 #pragma once
 
 #include "tools/capturetool.h"
-#include "widgets/capture/capturetoolbutton.h"
 
 #include <QObject>
 

@@ -11,7 +11,6 @@
 
 #pragma once
 
-#include "config/generalconf.h"
 #include "tools/capturecontext.h"
 #include "tools/capturetool.h"
 #include "utils/confighandler.h"

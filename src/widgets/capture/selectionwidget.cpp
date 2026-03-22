@@ -2,7 +2,6 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "selectionwidget.h"
-#include "tools/capturetool.h"
 #include "utils/globalvalues.h"
 #include "widgets/capture/capturetoolbutton.h"
 

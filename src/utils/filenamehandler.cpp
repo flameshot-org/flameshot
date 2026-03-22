@@ -7,7 +7,6 @@
 #include "utils/strfparse.h"
 
 #include <QDir>
-#include <ctime>
 #include <exception>
 #include <locale>
 

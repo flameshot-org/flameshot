@@ -2,7 +2,6 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "sidepanelwidget.h"
-#include "core/qguiappcurrentscreen.h"
 #include "utils/colorutils.h"
 #include "utils/pathinfo.h"
 #include "widgets/panel/colorgrabwidget.h"

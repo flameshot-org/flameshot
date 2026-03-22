@@ -7,9 +7,7 @@
 #include "core/flameshot.h"
 #include "core/qguiappcurrentscreen.h"
 #include "utils/globalvalues.h"
-#include "utils/screengrabber.h"
 #include "utils/screenshotsaver.h"
-#include "widgets/imagelabel.h"
 
 #include <QGuiApplication>
 #include <QMimeData>

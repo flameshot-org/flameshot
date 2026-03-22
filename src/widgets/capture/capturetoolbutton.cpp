@@ -4,7 +4,6 @@
 #include "capturetoolbutton.h"
 #include "tools/capturetool.h"
 #include "tools/toolfactory.h"
-#include "utils/colorutils.h"
 #include "utils/confighandler.h"
 #include "utils/globalvalues.h"
 

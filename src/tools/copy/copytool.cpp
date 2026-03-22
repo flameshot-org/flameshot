@@ -2,7 +2,6 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "copytool.h"
-#include "utils/screenshotsaver.h"
 
 #include <QPainter>
 

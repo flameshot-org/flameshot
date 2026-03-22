@@ -16,7 +16,6 @@
 #include <QSharedPointer>
 #include <QStandardPaths>
 #include <QVector>
-#include <algorithm>
 #include <stdexcept>
 
 #if defined(Q_OS_MACOS)

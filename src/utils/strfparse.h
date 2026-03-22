@@ -3,10 +3,7 @@
 
 #pragma once
 
-#include <algorithm>
-#include <ctime>
-#include <map>
-#include <sstream>
+#include <string>
 #include <vector>
 
 namespace strfparse {

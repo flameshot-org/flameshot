@@ -2,7 +2,6 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "generalconf.h"
-#include "core/flameshot.h"
 #include "utils/confighandler.h"
 
 #include <QCheckBox>
