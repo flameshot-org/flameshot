@@ -140,6 +140,11 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     // Not visible on settings dialog
     OPTION("ignorePrntScrForcesSnipping" ,Bool               ( false         )),
 #endif
+#if defined(Q_OS_LINUX)
+    // Bypass freedesktop portal and use Qt's native X11
+    // screenshot method. Intended for WMs without xdg-desktop-portal.
+    OPTION("useX11LegacyScreenshot"      ,Bool               ( false         )),
+#endif
 };
 
 static QMap<QString, QSharedPointer<KeySequence>> recognizedShortcuts = {

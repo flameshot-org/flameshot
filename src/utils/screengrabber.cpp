@@ -205,13 +205,25 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok, int preSelectedMonitor)
     screenshot.setDevicePixelRatio(currentScreen->devicePixelRatio());
     return screenshot;
 
-#elif defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
-    freeDesktopPortal(ok, screenshot);
-    if (!ok) {
-        AbstractLogger::error() << tr("Unable to capture screen");
-        return QPixmap();
+#elif defined(Q_OS_LINUX)
+    if (!m_info.waylandDetected() && ConfigHandler().useX11LegacyScreenshot()) {
+        qWarning() << "Using deprecated legacy X11 screenshot method. "
+                      "Consider installing xdg-desktop-portal for your "
+                      "desktop. Future versions of Flameshot may remove the "
+                      "option to use the legacy method.";
+        screenshot = x11LegacyScreenshot();
+        ok = !screenshot.isNull();
+        if (!ok) {
+            AbstractLogger::error() << tr("Unable to capture screen");
+            return QPixmap();
+        }
+    } else {
+        freeDesktopPortal(ok, screenshot);
+        if (!ok) {
+            AbstractLogger::error() << tr("Unable to capture screen");
+            return QPixmap();
+        }
     }
-
 #elif defined(Q_OS_WIN)
     screenshot = windowsScreenshot(wid);
 #endif
@@ -256,10 +268,21 @@ QPixmap ScreenGrabber::grabFullDesktop(bool& ok)
         painter.drawPixmap(offset, p);
     }
     painter.end();
-#elif defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
-    freeDesktopPortal(ok, screenshot);
-    if (!ok) {
-        AbstractLogger::error() << tr("Unable to capture screen");
+#elif defined(Q_OS_LINUX)
+    if (!m_info.waylandDetected() && ConfigHandler().useX11LegacyScreenshot()) {
+        qWarning() << "Using deprecated legacy X11 screenshot method. "
+                      "Consider installing xdg-desktop-portal for your "
+                      "desktop.";
+        screenshot = x11LegacyScreenshot();
+        ok = !screenshot.isNull();
+        if (!ok) {
+            AbstractLogger::error() << tr("Unable to capture screen");
+        }
+    } else {
+        freeDesktopPortal(ok, screenshot);
+        if (!ok) {
+            AbstractLogger::error() << tr("Unable to capture screen");
+        }
     }
 #elif defined(Q_OS_WIN)
     screenshot = windowsScreenshot(0);
@@ -624,6 +647,47 @@ QPixmap ScreenGrabber::windowsScreenshot(int wid)
     for (QScreen* screen : screens) {
         const ScreenInfo& info = screenInfos[screen];
         painter.drawPixmap(info.physicalRect.topLeft(), info.pixmap);
+    }
+    painter.end();
+
+    return desktop;
+}
+
+QPixmap ScreenGrabber::x11LegacyScreenshot()
+{
+    const QList<QScreen*> screens = QGuiApplication::screens();
+
+    if (screens.isEmpty()) {
+        return QPixmap();
+    }
+
+    if (screens.size() == 1) {
+        QScreen* screen = screens.first();
+        QPixmap p = screen->grabWindow(0);
+        p.setDevicePixelRatio(screen->devicePixelRatio());
+        return p;
+    }
+
+    // Composite all screens using logical geometry.
+    // On i3 (tested) DPR is uniform so we don't need the per-screen
+    // physical pixel math that the Windows backend does. Not sure if this is
+    // true for other DE's like xmonad.
+    QRect totalGeom;
+    for (QScreen* s : screens) {
+        totalGeom = totalGeom.united(s->geometry());
+    }
+
+    qreal dpr = screens.first()->devicePixelRatio();
+    QPixmap desktop(qRound(totalGeom.width() * dpr),
+                    qRound(totalGeom.height() * dpr));
+    desktop.setDevicePixelRatio(dpr);
+    desktop.fill(Qt::black);
+
+    QPainter painter(&desktop);
+    for (QScreen* s : screens) {
+        QPixmap p = s->grabWindow(0);
+        QPoint offset = s->geometry().topLeft() - totalGeom.topLeft();
+        painter.drawPixmap(offset, p);
     }
     painter.end();
 

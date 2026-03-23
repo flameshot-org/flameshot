@@ -61,6 +61,9 @@ private slots:
     void setJpegQuality(int v);
     void setReverseArrow(bool checked);
     void setInsecurePixelate(bool checked);
+#if defined(Q_OS_LINUX)
+    void useX11LegacyScreenshotChanged(bool checked);
+#endif
 
 private:
     const QString chooseFolder(const QString& currentPath = "");
@@ -99,6 +102,9 @@ private:
     void initJpegQuality();
     void initReverseArrow();
     void initInsecurePixelate();
+#if defined(Q_OS_LINUX)
+    void initUseX11LegacyScreenshot();
+#endif
 
     void _updateComponents(bool allowEmptySavePath);
 
@@ -147,4 +153,7 @@ private:
     QSpinBox* m_jpegQuality;
     QCheckBox* m_reverseArrow;
     QCheckBox* m_insecurePixelate;
+#if defined(Q_OS_LINUX)
+    QCheckBox* m_useX11LegacyScreenshot;
+#endif
 };
