@@ -26,7 +26,11 @@ bool ColorPickerEditMode::eventFilter(QObject* obj, QEvent* event)
                 m_mousePressPos = mouseEvent->pos();
                 m_mouseMovePos = m_mousePressPos;
 
-                for (int i = 1; i < m_colorList.size(); ++i) {
+                for (int i = 0; i < m_colorList.size(); ++i) {
+                    if (!m_colorList.at(i).isValid()) {
+                        // color grabber or picker
+                        continue;
+                    }
                     if (m_colorAreaList.at(i).contains(m_mousePressPos)) {
                         m_isPressing = true;
                         m_draggedPresetInitialPos =
@@ -71,7 +75,11 @@ bool ColorPickerEditMode::eventFilter(QObject* obj, QEvent* event)
 
                 bool swapped = false;
 
-                for (int i = 1; i < m_colorList.size(); ++i) {
+                for (int i = 0; i < m_colorList.size(); ++i) {
+                    if (!m_colorList.at(i).isValid()) {
+                        // color grabber or picker
+                        continue;
+                    }
                     if (i != m_selectedIndex &&
                         m_colorAreaList.at(i).contains(draggedPresetCenter)) {
                         // swap colors

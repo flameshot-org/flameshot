@@ -9,6 +9,7 @@
 #include <QWidget>
 
 class ColorPickerEditMode;
+class QCheckBox;
 class QLabel;
 class QPushButton;
 class QLineEdit;
@@ -30,10 +31,16 @@ private:
     void addPreset();
     void deletePreset();
     void updatePreset();
+    void updateDefaultIndex();
+    void updateGrabberShown(bool shown);
+
+    const int m_maxPresetsAllowed = 17;
+    const int m_minPresetsAllowed = 3;
 
     ColorPickerEditMode* m_colorpicker;
     color_widgets::ColorWheel* m_colorWheel;
 
+    QCheckBox* m_enableGrabberCheckBox;
     QLabel* m_colorEditLabel;
     QLineEdit* m_colorEdit;
     QPushButton* m_deletePresetButton;
@@ -44,6 +51,7 @@ private:
     QPushButton* m_addPresetButton;
 
     QColor m_color;
+    int m_defaultIndex;
     int m_selectedIndex;
     QVector<QColor> m_colorList;
     ConfigHandler m_config;
