@@ -4,7 +4,10 @@
 #include <QGuiApplication>
 #include <QScreen>
 #include <QDebug>
+
+#if defined( Q_OS_WIN )
 #include <dwmapi.h>
+#endif
 
 static constexpr QColor BORDER_COLOR(136, 0, 170, 255);
 static constexpr int    BORDER_WIDTH = 3;
