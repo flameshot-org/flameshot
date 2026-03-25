@@ -1,7 +1,11 @@
+<<<<<<< HEAD
 #include <QtGlobal>
 
 #if defined(Q_OS_LINUX)
 
+=======
+#if defined(Q_OS_LINUX)
+>>>>>>> 6b04cb1d (Corrigiendo compatibilidad con windows, agregando #if defined (Q_OS_LINUX) #endif. 20260317 19:50. GCP.TUX...)
 #include "waylandportalcapturebackend.h"
 
 #include <QDBusArgument>
