@@ -279,6 +279,14 @@ target_link_libraries(
         ${OpenCV_LIBS}
 )
 
+if (WIN32)
+    target_link_libraries(
+        flameshot
+        PRIVATE
+            dwmapi
+    )
+endif()
+
 if (UNIX AND NOT WIN32)
     target_link_libraries(
         flameshot

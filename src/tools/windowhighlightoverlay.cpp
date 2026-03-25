@@ -4,6 +4,7 @@
 #include <QGuiApplication>
 #include <QScreen>
 #include <QDebug>
+#include <dwmapi.h>
 
 static constexpr QColor BORDER_COLOR(136, 0, 170, 255);
 static constexpr int    BORDER_WIDTH = 3;
@@ -96,7 +97,7 @@ void WindowHighlightOverlay::updateTarget()
     }
 }
 
-QRect WindowHighlightOverlay::getWindowUnderCursor() const
+/*QRect WindowHighlightOverlay::getWindowUnderCursor() const
 {
     POINT pt;
     GetCursorPos(&pt);
@@ -105,6 +106,38 @@ QRect WindowHighlightOverlay::getWindowUnderCursor() const
     RECT rc;
     if (!GetWindowRect(hwnd, &rc)) return {};
     return QRect(rc.left, rc.top, rc.right - rc.left, rc.bottom - rc.top);
+}*/
+
+QRect WindowHighlightOverlay::getWindowUnderCursor() const
+{
+    POINT pt;
+    GetCursorPos(&pt);
+
+    HWND hwnd = WindowFromPoint(pt);
+    if (!hwnd || hwnd == reinterpret_cast<HWND>(winId())) {
+        return {};
+    }
+
+    RECT rc{};
+    HRESULT hr = DwmGetWindowAttribute(
+      hwnd,
+      DWMWA_EXTENDED_FRAME_BOUNDS,
+      &rc,
+      sizeof(rc)
+      );
+
+    if (FAILED(hr)) {
+        if (!GetWindowRect(hwnd, &rc)) {
+            return {};
+        }
+    }
+
+    QRect rect(rc.left, rc.top, rc.right - rc.left, rc.bottom - rc.top);
+
+           // Ajuste fino opcional si aún lo ves un poco grande
+    rect = rect.adjusted(1, 1, -1, -1);
+
+    return rect;
 }
 #endif
 
