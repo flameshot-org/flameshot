@@ -4,7 +4,10 @@
 #include <QGuiApplication>
 #include <QScreen>
 #include <QDebug>
+
+#if defined( Q_OS_WIN )
 #include <dwmapi.h>
+#endif
 
 #if defined( Q_OS_WIN )
 #include <dwmapi.h>
