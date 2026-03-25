@@ -37,10 +37,10 @@ public:
       const QString& title = QStringLiteral("Flameshot Info"),
       const int timeout = 5000);
 
-#if defined(USE_KDSINGLEAPPLICATION) &&                                        \
-  (defined(Q_OS_MACOS) || defined(Q_OS_WIN))
-public slots:
-    void messageReceivedFromSecondaryInstance(const QByteArray& message);
+#if defined(USE_KDSINGLEAPPLICATION) && \
+    (defined(Q_OS_MACOS) || defined(Q_OS_WIN))
+      public slots:
+                     void messageReceivedFromSecondaryInstance(const QByteArray& message);
 #endif
 
 #if !defined(DISABLE_UPDATE_CHECKER)
@@ -93,7 +93,6 @@ private:
 
     static FlameshotDaemon* m_instance;
 
-#if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
+           // 🔥 FIX: permitir acceso desde DBus adapter también en Windows
     friend class FlameshotDBusAdapter;
-#endif
 };
