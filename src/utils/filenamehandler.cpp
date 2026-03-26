@@ -2,11 +2,11 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "filenamehandler.h"
-#include "abstractlogger.h"
-#include "src/utils/confighandler.h"
-#include "src/utils/strfparse.h"
+#include "utils/abstractlogger.h"
+#include "utils/confighandler.h"
+#include "utils/strfparse.h"
+
 #include <QDir>
-#include <ctime>
 #include <exception>
 #include <locale>
 

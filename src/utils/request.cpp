@@ -6,6 +6,7 @@
  */
 
 #include "request.h"
+
 OrgFreedesktopPortalRequestInterface::OrgFreedesktopPortalRequestInterface(
   const QString& service,
   const QString& path,

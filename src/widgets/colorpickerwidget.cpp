@@ -2,8 +2,9 @@
 // SPDX-FileCopyrightText: 2022 Dearsh Oberoi
 
 #include "colorpickerwidget.h"
-#include "src/utils/confighandler.h"
-#include "src/utils/globalvalues.h"
+#include "utils/confighandler.h"
+#include "utils/globalvalues.h"
+
 #include <QMouseEvent>
 #include <QPainter>
 

@@ -1,13 +1,13 @@
 #include "uploadhistory.h"
 #include "./ui_uploadhistory.h"
-#include "src/tools/imgupload/imguploadermanager.h"
-#include "src/utils/confighandler.h"
-#include "src/utils/history.h"
-#include "uploadlineitem.h"
+#include "tools/imgupload/imguploadermanager.h"
+#include "utils/history.h"
+#include "widgets/uploadlineitem.h"
 
 #include <QDateTime>
 #include <QFileInfo>
 #include <QPixmap>
+#include <QPushButton>
 
 void scaleThumbnail(QPixmap& pixmap)
 {

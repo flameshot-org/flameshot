@@ -2,8 +2,8 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "commandlineparser.h"
-#include "abstractlogger.h"
-#include "src/utils/globalvalues.h"
+#include "utils/abstractlogger.h"
+#include "utils/globalvalues.h"
 #include <QApplication>
 #include <QTextStream>
 

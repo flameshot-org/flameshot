@@ -2,6 +2,7 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "movetool.h"
+
 #include <QPainter>
 
 MoveTool::MoveTool(QObject* parent)

@@ -2,6 +2,7 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "exittool.h"
+
 #include <QPainter>
 
 ExitTool::ExitTool(QObject* parent)

@@ -3,8 +3,8 @@
 
 #pragma once
 
-#include "src/cli/commandargument.h"
-#include "src/cli/commandoption.h"
+#include "cli/commandargument.h"
+#include "cli/commandoption.h"
 #include <QMap>
 
 class CommandLineParser

@@ -2,11 +2,12 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "visualseditor.h"
-#include "src/config/buttonlistview.h"
-#include "src/config/colorpickereditor.h"
-#include "src/config/extendedslider.h"
-#include "src/config/uicoloreditor.h"
-#include "src/utils/confighandler.h"
+#include "config/buttonlistview.h"
+#include "config/colorpickereditor.h"
+#include "config/extendedslider.h"
+#include "config/uicoloreditor.h"
+#include "utils/confighandler.h"
+
 #include <QDirIterator>
 #include <QHBoxLayout>
 #include <QLabel>

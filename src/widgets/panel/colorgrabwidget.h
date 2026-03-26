@@ -1,5 +1,4 @@
-#ifndef COLORGRABWIDGET_H
-#define COLORGRABWIDGET_H
+#pragma once
 
 #include <QWidget>
 
@@ -41,5 +40,3 @@ private:
     bool m_extraZoomActive;
     bool m_magnifierActive;
 };
-
-#endif // COLORGRABWIDGET_H

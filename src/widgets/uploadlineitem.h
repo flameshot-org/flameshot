@@ -1,5 +1,4 @@
-#ifndef UPLOADLINEITEM_H
-#define UPLOADLINEITEM_H
+#pragma once
 
 #include <QWidget>
 
@@ -31,4 +30,3 @@ signals:
 private:
     Ui::UploadLineItem* ui;
 };
-#endif // UPLOADLINEITEM_H

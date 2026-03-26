@@ -2,6 +2,7 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "notificationwidget.h"
+
 #include <QFrame>
 #include <QIcon>
 #include <QLabel>

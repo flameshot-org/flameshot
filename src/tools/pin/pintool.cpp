@@ -2,8 +2,7 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "pintool.h"
-#include "src/core/qguiappcurrentscreen.h"
-#include "src/tools/pin/pinwidget.h"
+
 #include <QScreen>
 
 PinTool::PinTool(QObject* parent)

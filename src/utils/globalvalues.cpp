@@ -2,9 +2,9 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "globalvalues.h"
+
 #include <QApplication>
 #include <QFontMetrics>
-
 #if defined(Q_OS_MACOS)
 #include <QOperatingSystemVersion>
 #endif

@@ -3,13 +3,12 @@
 
 #include "capturelauncher.h"
 #include "./ui_capturelauncher.h"
-#include "src/config/cacheutils.h"
-#include "src/core/flameshot.h"
-#include "src/core/qguiappcurrentscreen.h"
-#include "src/utils/globalvalues.h"
-#include "src/utils/screengrabber.h"
-#include "src/utils/screenshotsaver.h"
-#include "src/widgets/imagelabel.h"
+#include "config/cacheutils.h"
+#include "core/flameshot.h"
+#include "core/qguiappcurrentscreen.h"
+#include "utils/globalvalues.h"
+#include "utils/screenshotsaver.h"
+
 #include <QGuiApplication>
 #include <QMimeData>
 #include <QScreen>

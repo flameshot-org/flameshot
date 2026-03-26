@@ -4,7 +4,8 @@
 #pragma once
 
 #include "QtColorWidgets/color_wheel.hpp"
-#include "src/widgets/capture/capturetoolbutton.h"
+#include "widgets/capture/capturetoolbutton.h"
+
 #include <QGroupBox>
 
 class QVBoxLayout;

@@ -3,7 +3,8 @@
 //
 
 #include "updatenotificationwidget.h"
-#include "src/utils/confighandler.h"
+#include "utils/confighandler.h"
+
 #include <QDesktopServices>
 #include <QLabel>
 #include <QPropertyAnimation>

@@ -2,7 +2,7 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "copytool.h"
-#include "src/utils/screenshotsaver.h"
+
 #include <QPainter>
 
 CopyTool::CopyTool(QObject* parent)

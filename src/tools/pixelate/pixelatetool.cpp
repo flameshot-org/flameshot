@@ -2,6 +2,8 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "pixelatetool.h"
+#include "utils/confighandler.h"
+
 #include <QApplication>
 #include <QGraphicsBlurEffect>
 #include <QGraphicsPixmapItem>
@@ -11,7 +13,6 @@
 #include <array>
 #include <random>
 
-#include "confighandler.h"
 PixelateTool::PixelateTool(QObject* parent)
   : AbstractTwoPointTool(parent)
 {}

@@ -2,9 +2,9 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "selectionwidget.h"
-#include "capturetool.h"
-#include "capturetoolbutton.h"
-#include "src/utils/globalvalues.h"
+#include "utils/globalvalues.h"
+#include "widgets/capture/capturetoolbutton.h"
+
 #include <QApplication>
 #include <QEvent>
 #include <QMouseEvent>

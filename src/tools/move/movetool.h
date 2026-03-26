@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include "src/tools/abstractactiontool.h"
+#include "tools/abstractactiontool.h"
 
 class MoveTool : public AbstractActionTool
 {

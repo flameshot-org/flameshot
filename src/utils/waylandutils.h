@@ -1,5 +1,4 @@
-#ifndef WAYLANDUTILS_H
-#define WAYLANDUTILS_H
+#pragma once
 
 class WaylandUtils
 {
@@ -10,5 +9,3 @@ public:
 
 private:
 };
-
-#endif // WAYLANDUTILS_H

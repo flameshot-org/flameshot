@@ -2,7 +2,8 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "buttonhandler.h"
-#include "src/utils/globalvalues.h"
+#include "utils/globalvalues.h"
+
 #include <QPoint>
 #include <QScreen>
 

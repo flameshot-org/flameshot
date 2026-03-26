@@ -2,9 +2,10 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "confighandler.h"
-#include "abstractlogger.h"
-#include "src/tools/capturetool.h"
-#include "valuehandler.h"
+#include "tools/capturetool.h"
+#include "utils/abstractlogger.h"
+#include "utils/valuehandler.h"
+
 #include <QCoreApplication>
 #include <QDebug>
 #include <QDir>
@@ -15,7 +16,6 @@
 #include <QSharedPointer>
 #include <QStandardPaths>
 #include <QVector>
-#include <algorithm>
 #include <stdexcept>
 
 #if defined(Q_OS_MACOS)

@@ -2,17 +2,16 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "configwindow.h"
-#include "abstractlogger.h"
-#include "src/config/configresolver.h"
-#include "src/config/filenameeditor.h"
-#include "src/config/generalconf.h"
-#include "src/config/shortcutswidget.h"
-#include "src/config/strftimechooserwidget.h"
-#include "src/config/visualseditor.h"
-#include "src/utils/colorutils.h"
-#include "src/utils/confighandler.h"
-#include "src/utils/globalvalues.h"
-#include "src/utils/pathinfo.h"
+#include "config/configresolver.h"
+#include "config/filenameeditor.h"
+#include "config/generalconf.h"
+#include "config/shortcutswidget.h"
+#include "config/visualseditor.h"
+#include "utils/colorutils.h"
+#include "utils/confighandler.h"
+#include "utils/globalvalues.h"
+#include "utils/pathinfo.h"
+
 #include <QApplication>
 #include <QDialogButtonBox>
 #include <QFileSystemWatcher>

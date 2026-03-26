@@ -1,8 +1,9 @@
 #include "valuehandler.h"
-#include "capturetool.h"
-#include "colorpickerwidget.h"
-#include "confighandler.h"
-#include "screengrabber.h"
+#include "tools/capturetool.h"
+#include "utils/confighandler.h"
+#include "utils/screengrabber.h"
+#include "widgets/colorpickerwidget.h"
+
 #include <QColor>
 #include <QFileInfo>
 #include <QImageWriter>

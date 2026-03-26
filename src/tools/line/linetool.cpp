@@ -2,6 +2,7 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "linetool.h"
+
 #include <QPainter>
 
 LineTool::LineTool(QObject* parent)

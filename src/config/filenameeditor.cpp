@@ -2,9 +2,10 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "filenameeditor.h"
-#include "src/config/strftimechooserwidget.h"
-#include "src/utils/confighandler.h"
-#include "src/utils/filenamehandler.h"
+#include "config/strftimechooserwidget.h"
+#include "utils/confighandler.h"
+#include "utils/filenamehandler.h"
+
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QLineEdit>

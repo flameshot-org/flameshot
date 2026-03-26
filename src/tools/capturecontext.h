@@ -3,7 +3,8 @@
 
 #pragma once
 
-#include "capturerequest.h"
+#include "core/capturerequest.h"
+
 #include <QPainter>
 #include <QPixmap>
 #include <QPoint>

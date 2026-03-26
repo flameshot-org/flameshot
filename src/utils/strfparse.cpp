@@ -3,6 +3,11 @@
 
 #include "strfparse.h"
 
+#include <algorithm>
+#include <ctime>
+#include <map>
+#include <sstream>
+
 namespace strfparse {
 std::vector<std::string> split(std::string const& s, char delimiter)
 {

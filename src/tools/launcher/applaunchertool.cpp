@@ -2,7 +2,7 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "applaunchertool.h"
-#include "applauncherwidget.h"
+#include "tools/launcher/applauncherwidget.h"
 
 AppLauncher::AppLauncher(QObject* parent)
   : AbstractActionTool(parent)

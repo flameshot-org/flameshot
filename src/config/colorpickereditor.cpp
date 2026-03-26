@@ -2,8 +2,8 @@
 // SPDX-FileCopyrightText: 2022 Dearsh Oberoi
 
 #include "colorpickereditor.h"
-#include "colorpickereditmode.h"
-#include "src/utils/globalvalues.h"
+#include "config/colorpickereditmode.h"
+#include "utils/globalvalues.h"
 
 #include <QApplication>
 #include <QColor>

@@ -8,8 +8,8 @@
  * Do not edit! All changes made to it will be lost.
  */
 
-#ifndef RESPONSE_CPP
-#define RESPONSE_CPP
+#pragma once
+
 #include <QtCore/QByteArray>
 #include <QtCore/QList>
 #include <QtCore/QMap>
@@ -57,4 +57,3 @@ typedef ::OrgFreedesktopPortalRequestInterface Request;
 }
 }
 }
-#endif

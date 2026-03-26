@@ -16,6 +16,7 @@
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "sizeincreasetool.h"
+
 #include <QPainter>
 
 SizeIncreaseTool::SizeIncreaseTool(QObject* parent)

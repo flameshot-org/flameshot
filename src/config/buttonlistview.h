@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include "src/widgets/capture/capturetoolbutton.h"
+#include "widgets/capture/capturetoolbutton.h"
 #include <QListWidget>
 
 class ButtonListView : public QListWidget

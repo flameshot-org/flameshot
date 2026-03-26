@@ -1,13 +1,13 @@
 #include "flameshotdaemon.h"
+#include "core/flameshot.h"
+#include "tools/pin/pinwidget.h"
+#include "utils/abstractlogger.h"
+#include "utils/confighandler.h"
+#include "utils/globalvalues.h"
+#include "utils/screenshotsaver.h"
+#include "widgets/capture/capturewidget.h"
+#include "widgets/trayicon.h"
 
-#include "abstractlogger.h"
-#include "confighandler.h"
-#include "flameshot.h"
-#include "pinwidget.h"
-#include "screenshotsaver.h"
-#include "src/utils/globalvalues.h"
-#include "src/widgets/capture/capturewidget.h"
-#include "src/widgets/trayicon.h"
 #include <QApplication>
 #include <QClipboard>
 #include <QIODevice>
@@ -36,7 +36,7 @@
 #endif
 
 #ifdef Q_OS_WIN
-#include "src/core/globalshortcutfilter.h"
+#include "core/globalshortcutfilter.h"
 #endif
 
 /**

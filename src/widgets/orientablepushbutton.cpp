@@ -4,6 +4,7 @@
 // Based on https://stackoverflow.com/a/53135675/964478
 
 #include "orientablepushbutton.h"
+
 #include <QPainter>
 #include <QStyleOptionButton>
 #include <QStylePainter>
