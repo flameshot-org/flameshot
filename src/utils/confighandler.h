@@ -145,6 +145,9 @@ public:
                          setIgnorePrntScrForcesSnipping,
                          bool)
 #endif
+#if !defined(Q_OS_MACOS)
+    CONFIG_GETTER_SETTER(captureActiveMonitor, setCaptureActiveMonitor, bool)
+#endif
 #if defined(Q_OS_LINUX)
     CONFIG_GETTER_SETTER(useX11LegacyScreenshot,
                          setUseX11LegacyScreenshot,
