@@ -17,7 +17,7 @@
 
 #pragma once
 
-#include "src/tools/abstractactiontool.h"
+#include "tools/abstractactiontool.h"
 
 class SizeIncreaseTool : public AbstractActionTool
 {

@@ -2,7 +2,8 @@
 // SPDX-FileCopyrightText: 2020 Yurii Puchkov at Namecheap & Contributors
 
 #include "setshortcutwidget.h"
-#include "src/utils/globalvalues.h"
+#include "utils/globalvalues.h"
+
 #include <QIcon>
 #include <QKeyEvent>
 #include <QLabel>

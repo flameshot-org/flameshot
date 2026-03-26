@@ -2,11 +2,12 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "applauncherwidget.h"
-#include "src/tools/launcher/launcheritemdelegate.h"
-#include "src/utils/confighandler.h"
-#include "src/utils/filenamehandler.h"
-#include "src/utils/globalvalues.h"
-#include "terminallauncher.h"
+#include "tools/launcher/launcheritemdelegate.h"
+#include "tools/launcher/terminallauncher.h"
+#include "utils/confighandler.h"
+#include "utils/filenamehandler.h"
+#include "utils/globalvalues.h"
+
 #include <QCheckBox>
 #include <QDir>
 #include <QHBoxLayout>

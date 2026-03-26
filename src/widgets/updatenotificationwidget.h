@@ -2,8 +2,7 @@
 // Created by yuriypuchkov on 09.12.2020.
 //
 
-#ifndef FLAMESHOT_UPDATENOTIFICATIONWIDGET_H
-#define FLAMESHOT_UPDATENOTIFICATIONWIDGET_H
+#pragma once
 
 #include <QPointer>
 #include <QWidget>
@@ -43,5 +42,3 @@ private:
     QPropertyAnimation* m_showAnimation;
     QPropertyAnimation* m_hideAnimation;
 };
-
-#endif // FLAMESHOT_UPDATENOTIFICATIONWIDGET_H

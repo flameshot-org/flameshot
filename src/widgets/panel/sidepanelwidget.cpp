@@ -2,11 +2,11 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "sidepanelwidget.h"
-#include "colorgrabwidget.h"
-#include "src/core/qguiappcurrentscreen.h"
-#include "src/utils/colorutils.h"
-#include "src/utils/pathinfo.h"
-#include "utilitypanel.h"
+#include "utils/colorutils.h"
+#include "utils/pathinfo.h"
+#include "widgets/panel/colorgrabwidget.h"
+#include "widgets/panel/utilitypanel.h"
+
 #include <QApplication>
 #include <QCheckBox>
 #include <QKeyEvent>

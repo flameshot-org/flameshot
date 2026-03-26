@@ -3,7 +3,8 @@
 
 #pragma once
 
-#include "src/tools/abstracttwopointtool.h"
+#include "tools/abstracttwopointtool.h"
+
 #include <QPainter>
 #include <QPainterPath>
 

@@ -3,14 +3,17 @@
 
 #pragma once
 
-#include <QMap>
-#include <QWidget>
+// Must be included before #if def, otherwise Q_OS_WIN is unknown
+#include <QSysInfo>
 
 #if defined(Q_OS_WIN)
-#include "src/utils/winlnkfileparse.h"
+#include "utils/winlnkfileparse.h"
 #else
-#include "src/utils/desktopfileparse.h"
+#include "utils/desktopfileparse.h"
 #endif
+
+#include <QMap>
+#include <QWidget>
 
 class QTabWidget;
 class QCheckBox;

@@ -10,6 +10,7 @@
 // <http://www.gnu.org/licenses/old-licenses/library.txt>
 
 #include "hovereventfilter.h"
+
 #include <QEvent>
 
 HoverEventFilter::HoverEventFilter(QObject* parent)

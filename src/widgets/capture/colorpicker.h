@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include "src/widgets/colorpickerwidget.h"
+#include "widgets/colorpickerwidget.h"
 
 class ColorPicker : public ColorPickerWidget
 {

@@ -10,22 +10,24 @@
 // <http://www.gnu.org/licenses/old-licenses/library.txt>
 
 #include "capturewidget.h"
-#include "abstractlogger.h"
-#include "copytool.h"
-#include "src/config/cacheutils.h"
-#include "src/core/flameshot.h"
-#include "src/core/qguiappcurrentscreen.h"
-#include "src/utils/screengrabber.h"
-#include "src/utils/screenshotsaver.h"
-#include "src/utils/systemnotification.h"
-#include "src/widgets/capture/colorpicker.h"
-#include "src/widgets/capture/hovereventfilter.h"
-#include "src/widgets/capture/modificationcommand.h"
-#include "src/widgets/capture/notifierbox.h"
-#include "src/widgets/capture/overlaymessage.h"
-#include "src/widgets/orientablepushbutton.h"
-#include "src/widgets/panel/sidepanelwidget.h"
-#include "src/widgets/panel/utilitypanel.h"
+#include "config/cacheutils.h"
+#include "config/generalconf.h"
+#include "core/flameshot.h"
+#include "core/qguiappcurrentscreen.h"
+#include "tools/copy/copytool.h"
+#include "utils/abstractlogger.h"
+#include "utils/screengrabber.h"
+#include "utils/screenshotsaver.h"
+#include "widgets/capture/colorpicker.h"
+#include "widgets/capture/hovereventfilter.h"
+#include "widgets/capture/modificationcommand.h"
+#include "widgets/capture/notifierbox.h"
+#include "widgets/capture/overlaymessage.h"
+#include "widgets/draggablewidgetmaker.h"
+#include "widgets/orientablepushbutton.h"
+#include "widgets/panel/sidepanelwidget.h"
+#include "widgets/panel/utilitypanel.h"
+
 #include <QApplication>
 #include <QCheckBox>
 #include <QDateTime>
@@ -36,10 +38,9 @@
 #include <QScreen>
 #include <QShortcut>
 #include <QWindow>
-#include <draggablewidgetmaker.h>
 
 #if !defined(DISABLE_UPDATE_CHECKER)
-#include "src/widgets/updatenotificationwidget.h"
+#include "widgets/updatenotificationwidget.h"
 #endif
 
 #define MOUSE_DISTANCE_TO_START_MOVING 3

@@ -2,13 +2,12 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "screenshotsaver.h"
-#include "abstractlogger.h"
-#include "src/core/flameshot.h"
-#include "src/core/flameshotdaemon.h"
-#include "src/utils/confighandler.h"
-#include "src/utils/filenamehandler.h"
-#include "src/utils/globalvalues.h"
+#include "core/flameshotdaemon.h"
+#include "utils/abstractlogger.h"
+#include "utils/confighandler.h"
 #include "utils/desktopinfo.h"
+#include "utils/filenamehandler.h"
+#include "utils/globalvalues.h"
 
 #include <QByteArray>
 #include <QDebug>
@@ -34,7 +33,7 @@
 #include <qimagewriter.h>
 #include <qmimedatabase.h>
 #if defined(Q_OS_MACOS)
-#include "src/widgets/capture/capturewidget.h"
+#include "widgets/capture/capturewidget.h"
 #endif
 
 bool saveToFilesystem(const QPixmap& capture,

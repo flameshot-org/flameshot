@@ -1,10 +1,8 @@
 #include "colorgrabwidget.h"
-#include "sidepanelwidget.h"
+#include "core/qguiappcurrentscreen.h"
+#include "widgets/capture/overlaymessage.h"
+#include "widgets/panel/sidepanelwidget.h"
 
-#include "colorutils.h"
-#include "confighandler.h"
-#include "overlaymessage.h"
-#include "src/core/qguiappcurrentscreen.h"
 #include <QApplication>
 #include <QDebug>
 #include <QKeyEvent>

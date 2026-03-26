@@ -3,10 +3,12 @@
 
 #pragma once
 
-#include "src/tools/capturetool.h"
-#include "textconfig.h"
+#include "tools/capturetool.h"
+#include "tools/text/textconfig.h"
+
 #include <QPoint>
 #include <QPointer>
+
 class TextWidget;
 class TextConfig;
 

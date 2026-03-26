@@ -3,12 +3,12 @@
 //
 
 #include "imguploadermanager.h"
-#include <QPixmap>
-#include <QWidget>
-
 // TODO - remove this hard-code and create plugin manager in the future, you may
 // include other storage headers here
-#include "storages/imgur/imguruploader.h"
+#include "tools/imgupload/storages/imgur/imguruploader.h"
+
+#include <QPixmap>
+#include <QWidget>
 
 ImgUploaderManager::ImgUploaderManager(QObject* parent)
   : QObject(parent)

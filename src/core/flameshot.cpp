@@ -2,29 +2,29 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "flameshot.h"
-#include "flameshotdaemon.h"
+#include "core/flameshotdaemon.h"
 #if defined(Q_OS_MACOS) || defined(Q_OS_WIN)
 #include "qhotkey.h"
 #endif
 
-#include "abstractlogger.h"
-#include "screenshotsaver.h"
-#include "src/config/configresolver.h"
-#include "src/config/configwindow.h"
-#include "src/core/qguiappcurrentscreen.h"
+#include "config/configresolver.h"
+#include "config/configwindow.h"
+#include "core/qguiappcurrentscreen.h"
+#include "utils/abstractlogger.h"
+#include "utils/confighandler.h"
+#include "utils/screengrabber.h"
+#include "utils/screenshotsaver.h"
+#include "widgets/capture/capturewidget.h"
+#include "widgets/capturelauncher.h"
+#include "widgets/infowindow.h"
 
 #ifdef ENABLE_IMGUR
-#include "src/tools/imgupload/imguploadermanager.h"
-#include "src/tools/imgupload/storages/imguploaderbase.h"
-#include "src/widgets/imguploaddialog.h"
-#include "src/widgets/uploadhistory.h"
+#include "tools/imgupload/imguploadermanager.h"
+#include "tools/imgupload/storages/imguploaderbase.h"
+#include "widgets/imguploaddialog.h"
+#include "widgets/uploadhistory.h"
 #endif
 
-#include "src/utils/confighandler.h"
-#include "src/utils/screengrabber.h"
-#include "src/widgets/capture/capturewidget.h"
-#include "src/widgets/capturelauncher.h"
-#include "src/widgets/infowindow.h"
 #include <QApplication>
 #include <QBuffer>
 #include <QDebug>

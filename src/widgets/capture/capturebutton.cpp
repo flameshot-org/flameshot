@@ -2,9 +2,9 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "capturebutton.h"
-#include "src/utils/colorutils.h"
-#include "src/utils/confighandler.h"
-#include "src/utils/globalvalues.h"
+#include "utils/colorutils.h"
+#include "utils/globalvalues.h"
+
 #include <QGraphicsDropShadowEffect>
 
 CaptureButton::CaptureButton(QWidget* parent)

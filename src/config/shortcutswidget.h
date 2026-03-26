@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // SPDX-FileCopyrightText: 2020 Yurii Puchkov at Namecheap & Contributors
 
-#ifndef HOTKEYSCONFIG_H
-#define HOTKEYSCONFIG_H
+#pragma once
 
-#include "src/utils/confighandler.h"
+#include "utils/confighandler.h"
+
 #include <QStringList>
 #include <QVector>
 #include <QWidget>
@@ -54,5 +54,3 @@ private:
     QCheckBox* m_registerMsScreenclip;
 #endif
 };
-
-#endif // HOTKEYSCONFIG_H

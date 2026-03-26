@@ -5,33 +5,34 @@
 #include <kdsingleapplication.h>
 #ifdef Q_OS_UNIX
 #include "core/signaldaemon.h"
-#include "csignal"
+#include <csignal>
 #endif
 #endif
 
-#include "abstractlogger.h"
-#include "src/cli/commandlineparser.h"
-#include "src/config/cacheutils.h"
-#include "src/config/styleoverride.h"
-#include "src/core/capturerequest.h"
-#include "src/core/flameshot.h"
-#include "src/core/flameshotdaemon.h"
-#include "src/utils/confighandler.h"
-#include "src/utils/filenamehandler.h"
-#include "src/utils/pathinfo.h"
-#include "src/utils/valuehandler.h"
+#include "cli/commandlineparser.h"
+#include "config/cacheutils.h"
+#include "config/styleoverride.h"
+#include "core/capturerequest.h"
+#include "core/flameshot.h"
+#include "core/flameshotdaemon.h"
+#include "utils/abstractlogger.h"
+#include "utils/confighandler.h"
+#include "utils/filenamehandler.h"
+#include "utils/pathinfo.h"
+#include "utils/valuehandler.h"
+
+#if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
+#include "core/flameshotdbusadapter.h"
+#include <QDBusConnection>
+#include <QDBusMessage>
+#endif
+
 #include <QApplication>
 #include <QDir>
 #include <QLibraryInfo>
 #include <QSharedMemory>
 #include <QTimer>
 #include <QTranslator>
-#if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
-#include "src/core/flameshotdbusadapter.h"
-#include <QDBusConnection>
-#include <QDBusMessage>
-#include <desktopinfo.h>
-#endif
 
 // Required for saving button list QList<CaptureTool::Type>
 Q_DECLARE_METATYPE(QList<int>)

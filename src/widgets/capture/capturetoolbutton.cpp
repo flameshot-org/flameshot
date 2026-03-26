@@ -2,11 +2,11 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "capturetoolbutton.h"
-#include "src/tools/capturetool.h"
-#include "src/tools/toolfactory.h"
-#include "src/utils/colorutils.h"
-#include "src/utils/confighandler.h"
-#include "src/utils/globalvalues.h"
+#include "tools/capturetool.h"
+#include "tools/toolfactory.h"
+#include "utils/confighandler.h"
+#include "utils/globalvalues.h"
+
 #include <QApplication>
 #include <QIcon>
 #include <QMouseEvent>

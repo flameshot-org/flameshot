@@ -1,9 +1,9 @@
 #include "signaldaemon.h"
-#include "flameshot.h"
+#include "core/flameshot.h"
+
 #include <QApplication>
+#include <QDebug>
 #include <QSocketNotifier>
-#include <csignal>
-#include <qdebug.h>
 #include <sys/socket.h>
 #include <unistd.h>
 

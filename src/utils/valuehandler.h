@@ -1,9 +1,9 @@
 #pragma once
 
-#include "src/widgets/capture/capturetoolbutton.h"
-#include "src/widgets/colorpickerwidget.h"
+#include "tools/capturetool.h"
 
 #include <QColor>
+#include <QKeySequence>
 #include <QList>
 #include <QString>
 

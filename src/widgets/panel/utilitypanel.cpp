@@ -2,7 +2,8 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "utilitypanel.h"
-#include "capturewidget.h"
+#include "widgets/capture/capturewidget.h"
+
 #include <QHBoxLayout>
 #include <QListWidget>
 #include <QPropertyAnimation>

@@ -2,9 +2,10 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "notifierbox.h"
-#include "src/utils/colorutils.h"
-#include "src/utils/confighandler.h"
-#include "src/utils/globalvalues.h"
+#include "utils/colorutils.h"
+#include "utils/confighandler.h"
+#include "utils/globalvalues.h"
+
 #include <QApplication>
 #include <QPainter>
 #include <QTimer>

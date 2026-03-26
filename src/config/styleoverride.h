@@ -3,8 +3,7 @@
 //
 // Created by jeremy on 9/24/20.
 
-#ifndef FLAMESHOT_STYLEOVERRIDE_H
-#define FLAMESHOT_STYLEOVERRIDE_H
+#pragma once
 
 #include <QObject>
 #include <QProxyStyle>
@@ -18,5 +17,3 @@ public:
                   const QWidget* widget = Q_NULLPTR,
                   QStyleHintReturn* returnData = Q_NULLPTR) const;
 };
-
-#endif // FLAMESHOT_STYLEOVERRIDE_H

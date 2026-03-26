@@ -1,8 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // SPDX-FileCopyrightText: 2020 Yurii Puchkov at Namecheap & Contributors
 
-#ifndef SETSHORTCUTWIDGET_H
-#define SETSHORTCUTWIDGET_H
+#pragma once
 
 #include <QDialog>
 #include <QKeySequence>
@@ -33,5 +32,3 @@ private:
     QString m_modifier;
     QKeySequence m_ks;
 };
-
-#endif // SETSHORTCUTWIDGET_H

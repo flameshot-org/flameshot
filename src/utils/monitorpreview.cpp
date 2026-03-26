@@ -2,8 +2,9 @@
 // SPDX-FileCopyrightText: 2026 Jeremy Borgman & Contributors
 
 #include "monitorpreview.h"
-#include "src/utils/colorutils.h"
-#include "src/utils/confighandler.h"
+#include "utils/colorutils.h"
+#include "utils/confighandler.h"
+
 #include <QLabel>
 #include <QMouseEvent>
 #include <QScreen>

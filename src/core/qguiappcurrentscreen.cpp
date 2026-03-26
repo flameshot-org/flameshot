@@ -2,6 +2,7 @@
 // SPDX-FileCopyrightText: 2021 Yuriy Puchkov <yuriy.puchkov@namecheap.com>
 
 #include "qguiappcurrentscreen.h"
+
 #include <QCursor>
 #include <QGuiApplication>
 #include <QPoint>

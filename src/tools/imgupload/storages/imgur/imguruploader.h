@@ -3,7 +3,8 @@
 
 #pragma once
 
-#include "src/tools/imgupload/storages/imguploaderbase.h"
+#include "tools/imgupload/storages/imguploaderbase.h"
+
 #include <QUrl>
 #include <QWidget>
 

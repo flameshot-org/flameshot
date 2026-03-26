@@ -1,11 +1,11 @@
 
 #include "screengrabber.h"
-#include "abstractlogger.h"
-#include "monitorpreview.h"
-#include "src/core/qguiappcurrentscreen.h"
-#include "src/utils/confighandler.h"
-#include "src/utils/filenamehandler.h"
-#include "src/utils/systemnotification.h"
+#include "core/qguiappcurrentscreen.h"
+#include "utils/abstractlogger.h"
+#include "utils/confighandler.h"
+#include "utils/monitorpreview.h"
+#include "utils/systemnotification.h"
+
 #include <QApplication>
 #include <QEventLoop>
 #include <QGuiApplication>

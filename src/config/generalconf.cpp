@@ -1,8 +1,9 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
+
 #include "generalconf.h"
-#include "src/core/flameshot.h"
-#include "src/utils/confighandler.h"
+#include "utils/confighandler.h"
+
 #include <QCheckBox>
 #include <QComboBox>
 #include <QFile>

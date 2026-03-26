@@ -3,8 +3,8 @@
 
 #pragma once
 
-#include "src/utils/confighandler.h"
-#include "src/widgets/colorpickerwidget.h"
+#include "utils/confighandler.h"
+#include "widgets/colorpickerwidget.h"
 
 class ColorPickerEditMode : public ColorPickerWidget
 {

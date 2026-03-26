@@ -3,9 +3,10 @@
 
 #pragma once
 
-#include "src/tools/capturecontext.h"
-#include "src/utils/colorutils.h"
-#include "src/utils/pathinfo.h"
+#include "tools/capturecontext.h"
+#include "utils/colorutils.h"
+#include "utils/pathinfo.h"
+
 #include <QIcon>
 #include <QPainter>
 

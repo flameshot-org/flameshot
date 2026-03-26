@@ -3,9 +3,10 @@
 
 #include "infowindow.h"
 #include "./ui_infowindow.h"
-#include "src/core/flameshotdaemon.h"
-#include "src/core/qguiappcurrentscreen.h"
-#include "src/utils/globalvalues.h"
+#include "core/flameshotdaemon.h"
+#include "core/qguiappcurrentscreen.h"
+#include "utils/globalvalues.h"
+
 #include <QKeyEvent>
 #include <QScreen>
 

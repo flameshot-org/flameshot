@@ -2,7 +2,7 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "flameshotdbusadapter.h"
-#include "src/core/flameshotdaemon.h"
+#include "core/flameshotdaemon.h"
 
 FlameshotDBusAdapter::FlameshotDBusAdapter(QObject* parent)
   : QDBusAbstractAdaptor(parent)

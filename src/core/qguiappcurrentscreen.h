@@ -1,8 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // SPDX-FileCopyrightText: 2021 Yuriy Puchkov <yuriy.puchkov@namecheap.com>
 
-#ifndef FLAMESHOT_QGUIAPPCURRENTSCREEN_H
-#define FLAMESHOT_QGUIAPPCURRENTSCREEN_H
+#pragma once
 
 #include <QPoint>
 
@@ -22,5 +21,3 @@ private:
 private:
     QScreen* m_currentScreen;
 };
-
-#endif // FLAMESHOT_QGUIAPPCURRENTSCREEN_H

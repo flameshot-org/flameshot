@@ -2,7 +2,8 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "circlecounttool.h"
-#include "colorutils.h"
+#include "utils/colorutils.h"
+
 #include <QPainter>
 #include <QPainterPath>
 

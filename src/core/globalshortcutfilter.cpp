@@ -2,7 +2,8 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "globalshortcutfilter.h"
-#include "src/core/flameshot.h"
+#include "core/flameshot.h"
+
 #include <qt_windows.h>
 
 GlobalShortcutFilter::GlobalShortcutFilter(QObject* parent)

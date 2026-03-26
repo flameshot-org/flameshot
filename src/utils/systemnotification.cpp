@@ -1,17 +1,16 @@
 #include "systemnotification.h"
-#include "src/core/flameshot.h"
-#include "src/utils/abstractlogger.h"
-#include "src/utils/confighandler.h"
+#include "utils/abstractlogger.h"
+#include "utils/confighandler.h"
+
 #include <QApplication>
 #include <QUrl>
-
 #if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
 #include <QDBusConnection>
 #include <QDBusConnectionInterface>
 #include <QDBusInterface>
 #include <QDBusMessage>
 #else
-#include "src/core/flameshotdaemon.h"
+#include "core/flameshotdaemon.h"
 #endif
 
 // work-around for snap, which cannot install icons into

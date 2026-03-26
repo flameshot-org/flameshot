@@ -1,5 +1,6 @@
 #include "history.h"
-#include "src/utils/confighandler.h"
+#include "utils/confighandler.h"
+
 #include <QDir>
 #include <QFile>
 #include <QProcessEnvironment>

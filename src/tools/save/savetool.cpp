@@ -2,7 +2,7 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "savetool.h"
-#include "src/utils/screenshotsaver.h"
+
 #include <QPainter>
 
 SaveTool::SaveTool(QObject* parent)

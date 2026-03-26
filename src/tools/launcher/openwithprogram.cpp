@@ -4,7 +4,7 @@
 #include "openwithprogram.h"
 
 #if defined(Q_OS_WIN)
-#include "src/utils/filenamehandler.h"
+#include "utils/filenamehandler.h"
 #include <QDir>
 #include <QMessageBox>
 #include <windows.h>
@@ -16,7 +16,7 @@
 
 #pragma comment(lib, "Shell32.lib")
 #else
-#include "src/tools/launcher/applauncherwidget.h"
+#include "tools/launcher/applauncherwidget.h"
 #endif
 
 void showOpenWithMenu(const QPixmap& capture)

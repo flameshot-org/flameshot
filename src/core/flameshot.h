@@ -3,7 +3,8 @@
 
 #pragma once
 
-#include "src/core/capturerequest.h"
+#include "core/capturerequest.h"
+
 #include <QObject>
 #include <QPointer>
 #include <QVersionNumber>

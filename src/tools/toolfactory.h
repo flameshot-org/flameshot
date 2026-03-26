@@ -3,8 +3,8 @@
 
 #pragma once
 
-#include "src/tools/capturetool.h"
-#include "src/widgets/capture/capturetoolbutton.h"
+#include "tools/capturetool.h"
+
 #include <QObject>
 
 class CaptureTool;

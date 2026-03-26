@@ -2,8 +2,9 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "capturerequest.h"
-#include "confighandler.h"
-#include "src/config/cacheutils.h"
+#include "config/cacheutils.h"
+#include "utils/confighandler.h"
+
 #include <QApplication>
 #include <QClipboard>
 #include <QDateTime>
