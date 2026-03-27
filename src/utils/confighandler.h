@@ -145,6 +145,11 @@ public:
                          setIgnorePrntScrForcesSnipping,
                          bool)
 #endif
+#if defined(Q_OS_LINUX)
+    CONFIG_GETTER_SETTER(useX11LegacyScreenshot,
+                         setUseX11LegacyScreenshot,
+                         bool)
+#endif
 
     // SPECIAL CASES
     bool startupLaunch();

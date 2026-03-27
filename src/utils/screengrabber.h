@@ -38,6 +38,7 @@ private:
     QWidget* createMonitorPreviews(const QPixmap& fullScreenshot);
     QPixmap cropToMonitor(const QPixmap& fullScreenshot, int monitorIndex);
     QPixmap windowsScreenshot(int wid);
+    QPixmap x11LegacyScreenshot();
 
     DesktopInfo m_info;
     QPixmap Screenshot;
