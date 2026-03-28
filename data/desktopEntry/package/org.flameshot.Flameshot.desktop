@@ -81,7 +81,7 @@ Name[nl_NL]=Schermfoto maken
 Name[es]=Tomar captura de pantalla
 Name[de]=Bildschirmfoto aufnehmen
 Name[pt_BR]=Capturar tela
-Exec=flameshot gui --delay 500
+Exec=flameshot gui
 
 [Desktop Action Launcher]
 Name=Open launcher
