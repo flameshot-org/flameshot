@@ -56,6 +56,9 @@ GeneralConf::GeneralConf(QWidget* parent)
     initAntialiasingPinZoom();
     initUndoLimit();
     initInsecurePixelate();
+#if !defined(Q_OS_MACOS)
+    initCaptureActiveMonitor();
+#endif
 #if defined(Q_OS_LINUX)
     initUseX11LegacyScreenshot();
 #endif
@@ -126,6 +129,9 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
     }
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
     m_showTray->setChecked(!config.disabledTrayIcon());
+#endif
+#if !defined(Q_OS_MACOS)
+    m_captureActiveMonitor->setChecked(config.captureActiveMonitor());
 #endif
 #if defined(Q_OS_LINUX)
     m_useX11LegacyScreenshot->setChecked(config.useX11LegacyScreenshot());
@@ -915,6 +921,29 @@ void GeneralConf::setInsecurePixelate(bool checked)
 {
     ConfigHandler().setInsecurePixelate(checked);
 }
+
+#if !defined(Q_OS_MACOS)
+void GeneralConf::initCaptureActiveMonitor()
+{
+    m_captureActiveMonitor = new QCheckBox(
+      tr("Capture active monitor (skip monitor selection)"), this);
+    m_captureActiveMonitor->setToolTip(
+      tr("Automatically capture the monitor where the cursor is located "
+         "instead of showing the monitor selection dialog. "
+         "This feature is not supported on Wayland."));
+    m_scrollAreaLayout->addWidget(m_captureActiveMonitor);
+
+    connect(m_captureActiveMonitor,
+            &QCheckBox::clicked,
+            this,
+            &GeneralConf::captureActiveMonitorChanged);
+}
+
+void GeneralConf::captureActiveMonitorChanged(bool checked)
+{
+    ConfigHandler().setCaptureActiveMonitor(checked);
+}
+#endif
 
 #if defined(Q_OS_LINUX)
 void GeneralConf::initUseX11LegacyScreenshot()

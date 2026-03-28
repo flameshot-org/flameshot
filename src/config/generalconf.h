@@ -61,6 +61,9 @@ private slots:
     void setJpegQuality(int v);
     void setReverseArrow(bool checked);
     void setInsecurePixelate(bool checked);
+#if !defined(Q_OS_MACOS)
+    void captureActiveMonitorChanged(bool checked);
+#endif
 #if defined(Q_OS_LINUX)
     void useX11LegacyScreenshotChanged(bool checked);
 #endif
@@ -102,6 +105,9 @@ private:
     void initJpegQuality();
     void initReverseArrow();
     void initInsecurePixelate();
+#if !defined(Q_OS_MACOS)
+    void initCaptureActiveMonitor();
+#endif
 #if defined(Q_OS_LINUX)
     void initUseX11LegacyScreenshot();
 #endif
@@ -153,6 +159,9 @@ private:
     QSpinBox* m_jpegQuality;
     QCheckBox* m_reverseArrow;
     QCheckBox* m_insecurePixelate;
+#if !defined(Q_OS_MACOS)
+    QCheckBox* m_captureActiveMonitor;
+#endif
 #if defined(Q_OS_LINUX)
     QCheckBox* m_useX11LegacyScreenshot;
 #endif

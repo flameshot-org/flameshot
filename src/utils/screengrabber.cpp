@@ -152,6 +152,26 @@ QPixmap ScreenGrabber::selectMonitorAndCrop(const QPixmap& fullScreenshot,
         return cropToMonitor(fullScreenshot, 0);
     }
 
+    // Capture Active Monitor: auto-select monitor under cursor
+    if (ConfigHandler().captureActiveMonitor()) {
+        if (m_info.waylandDetected()) {
+            AbstractLogger::error()
+              << tr("Capture Active Monitor is not supported on Wayland due to "
+                    "Wayland security model.");
+            ok = false;
+            return QPixmap();
+        }
+
+        QGuiAppCurrentScreen screenFinder;
+        QScreen* cursorScreen = screenFinder.currentScreen();
+        int monitorIndex = screens.indexOf(cursorScreen);
+        if (monitorIndex >= 0) {
+            m_selectedMonitor = monitorIndex;
+            return cropToMonitor(fullScreenshot, monitorIndex);
+        }
+        // Fall through to manual selection if screen lookup fails
+    }
+
     if (m_monitorSelectionActive) {
         AbstractLogger::error()
           << tr("Screenshot already in progress, please wait for the current "
