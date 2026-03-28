@@ -133,8 +133,12 @@ CaptureWidget* Flameshot::gui(const CaptureRequest& req)
         m_captureWindow->activateWindow();
         m_captureWindow->raise();
 #else
-        m_captureWindow->showFullScreen();
-//        m_captureWindow->show(); // For CaptureWidget Debugging under Linux
+        // Linux capture geometry is already set explicitly in CaptureWidget.
+        // Showing it normally avoids extra fullscreen repositioning by the
+        // window manager, which can offset the selection overlay.
+        m_captureWindow->show();
+        m_captureWindow->activateWindow();
+        m_captureWindow->raise();
 #endif
         return m_captureWindow;
     } else {

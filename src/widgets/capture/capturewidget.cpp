@@ -16,6 +16,7 @@
 #include "core/qguiappcurrentscreen.h"
 #include "tools/copy/copytool.h"
 #include "utils/abstractlogger.h"
+#include "utils/desktopinfo.h"
 #include "utils/screengrabber.h"
 #include "utils/screenshotsaver.h"
 #include "widgets/capture/colorpicker.h"
@@ -106,6 +107,19 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
 
     ScreenGrabber grabber;
     QScreen* selectedScreen = nullptr;
+    auto bindWindowToScreen = [this](QScreen* screen) {
+        if (!screen) {
+            return;
+        }
+
+        if (windowHandle() == nullptr) {
+            winId();
+        }
+
+        if (windowHandle() != nullptr) {
+            windowHandle()->setScreen(screen);
+        }
+    };
 
 #if (defined(Q_OS_WIN) || defined(Q_OS_MACOS))
     // Top left of the whole set of screens
@@ -160,9 +174,7 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
         }
         resize(windowSize);
 
-        if (selectedScreen != nullptr && windowHandle()) {
-            windowHandle()->setScreen(selectedScreen);
-        }
+        bindWindowToScreen(selectedScreen);
 #elif defined(Q_OS_MACOS)
         QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
         move(currentScreen->geometry().x(), currentScreen->geometry().y());
@@ -171,9 +183,20 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
 #else
 // Call cmake with -DFLAMESHOT_DEBUG_CAPTURE=ON to enable easier debugging
 #if !defined(FLAMESHOT_DEBUG_CAPTURE)
-        // Note: Qt::BypassWindowManagerHint is removed to fix x11 gnome crash
-        setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint |
-                       Qt::Tool);
+        DesktopInfo desktopInfo;
+        Qt::WindowFlags flags =
+          Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint | Qt::Tool;
+
+        // Keep bypass mode for X11 desktops that need precise placement, but
+        // avoid the GNOME/X11 crash fixed in #4570.
+        const bool isGnomeX11 = !desktopInfo.waylandDetected() &&
+                                desktopInfo.windowManager() ==
+                                  DesktopInfo::GNOME;
+        if (!isGnomeX11) {
+            flags |= Qt::BypassWindowManagerHint;
+        }
+
+        setWindowFlags(flags);
 #endif
 
         // Always display on the selected screen (not spanning entire desktop)
@@ -184,9 +207,7 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
         move(screenGeom.topLeft());
         resize(screenGeom.size());
 
-        if (selectedScreen != nullptr && windowHandle()) {
-            windowHandle()->setScreen(selectedScreen);
-        }
+        bindWindowToScreen(selectedScreen);
 #endif
     }
 
