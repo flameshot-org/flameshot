@@ -171,9 +171,16 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
 #else
 // Call cmake with -DFLAMESHOT_DEBUG_CAPTURE=ON to enable easier debugging
 #if !defined(FLAMESHOT_DEBUG_CAPTURE)
-        // Note: Qt::BypassWindowManagerHint is removed to fix x11 gnome crash
-        setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint |
-                       Qt::Tool);
+        if (DesktopInfo().waylandDetected()) {
+            setWindowFlags(Qt::BypassWindowManagerHint |
+                           Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint |
+                           Qt::Tool);
+        } else {
+            // Note: Qt::BypassWindowManagerHint is removed to fix x11 gnome
+            // crash. It's needed on Cosmic
+            setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint |
+                           Qt::Tool);
+        }
 #endif
 
         // Always display on the selected screen (not spanning entire desktop)
