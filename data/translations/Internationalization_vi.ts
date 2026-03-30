@@ -53,33 +53,33 @@
 <context>
     <name>AppLauncherWidget</name>
     <message>
-        <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="50"/>
+        <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="51"/>
         <source>Open With</source>
         <translation>Mở bằng</translation>
     </message>
     <message>
-        <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="79"/>
+        <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="80"/>
         <source>Launch in terminal</source>
         <translation>Chạy trong terminal</translation>
     </message>
     <message>
-        <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="80"/>
+        <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="81"/>
         <source>Keep open after selection</source>
         <translation>Giữ mở sau khi lựa chọn</translation>
     </message>
     <message>
-        <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="116"/>
-        <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="150"/>
+        <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="117"/>
+        <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="151"/>
         <source>Error</source>
         <translation>Lỗi</translation>
     </message>
     <message>
-        <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="150"/>
+        <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="151"/>
         <source>Unable to launch in terminal.</source>
         <translation>Không mở khởi chạy trong terminal.</translation>
     </message>
     <message>
-        <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="116"/>
+        <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="117"/>
         <source>Unable to write in</source>
         <translation>Không thể viết vào</translation>
     </message>
@@ -87,12 +87,12 @@
 <context>
     <name>ArrowTool</name>
     <message>
-        <location filename="../../src/tools/arrow/arrowtool.cpp" line="77"/>
+        <location filename="../../src/tools/arrow/arrowtool.cpp" line="78"/>
         <source>Arrow</source>
         <translation>Mũi tên</translation>
     </message>
     <message>
-        <location filename="../../src/tools/arrow/arrowtool.cpp" line="87"/>
+        <location filename="../../src/tools/arrow/arrowtool.cpp" line="88"/>
         <source>Set the Arrow as the paint tool</source>
         <translation>Chọn công cụ này để vẽ mũi tên</translation>
     </message>
@@ -115,76 +115,89 @@
         <translation type="vanished">&lt;b&gt;Capture Mode&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.cpp" line="33"/>
+        <location filename="../../src/widgets/capturelauncher.cpp" line="32"/>
         <source>Rectangular Region</source>
         <translation>Vùng hình chữ nhật</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.cpp" line="39"/>
+        <location filename="../../src/widgets/capturelauncher.cpp" line="38"/>
         <source>Full Screen (Current Display)</source>
         <translation>Toàn màn hình (màn hình hiện tại)</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.cpp" line="42"/>
-        <source>Full Screen (All Monitors)</source>
-        <translation>Toàn màn hình (tất cả các màn hình)</translation>
+        <location filename="../../src/widgets/capturelauncher.cpp" line="41"/>
+        <source>Full Screen</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.cpp" line="45"/>
+        <location filename="../../src/widgets/capturelauncher.cpp" line="46"/>
+        <source>Monitor %1: %2 (%3x%4)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Full Screen (All Monitors)</source>
+        <translation type="vanished">Toàn màn hình (tất cả các màn hình)</translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/capturelauncher.cpp" line="71"/>
         <source>No Delay</source>
         <translation>Không độ trễ</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.cpp" line="53"/>
+        <location filename="../../src/widgets/capturelauncher.cpp" line="90"/>
         <source> second</source>
         <translation> giây</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.ui" line="100"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="184"/>
-        <location filename="../../src/widgets/capturelauncher.cpp" line="53"/>
+        <location filename="../../src/widgets/capturelauncher.ui" line="94"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="186"/>
+        <location filename="../../src/widgets/capturelauncher.cpp" line="90"/>
         <source> seconds</source>
         <translation> giây</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.ui" line="165"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="185"/>
+        <location filename="../../src/widgets/capturelauncher.ui" line="166"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="188"/>
         <source>Take new screenshot</source>
         <translation>Chụp ảnh màn hình mới</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.ui" line="66"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="180"/>
+        <location filename="../../src/widgets/capturelauncher.ui" line="47"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="181"/>
         <source>Area:</source>
         <translation>Khu vực:</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="14"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="177"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="179"/>
         <source>Capture Launcher</source>
         <translation>Trình khởi chạy chụp màn hình</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.ui" line="34"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="178"/>
         <source>TextLabel</source>
-        <translation>Nhãn văn bản</translation>
+        <translation type="vanished">Nhãn văn bản</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.ui" line="51"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="179"/>
+        <location filename="../../src/widgets/capturelauncher.ui" line="32"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="180"/>
         <source>Capture Mode</source>
         <translation>Chế độ chụp</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.ui" line="80"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="182"/>
+        <location filename="../../src/widgets/capturelauncher.ui" line="64"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="183"/>
         <source>Delay:</source>
         <translation>Độ trễ:</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.ui" line="93"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="183"/>
+        <location filename="../../src/widgets/capturelauncher.ui" line="71"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="184"/>
+        <source>Monitor:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/capturelauncher.ui" line="87"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="185"/>
         <source>WxH+x+y</source>
         <translation>WxH+x+y</translation>
     </message>
@@ -192,78 +205,77 @@
 <context>
     <name>CaptureWidget</name>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="112"/>
         <source>Unable to capture screen</source>
         <translatorcomment>Impossible capturar la pantalla</translatorcomment>
-        <translation>Không thể chụp màn hình</translation>
+        <translation type="vanished">Không thể chụp màn hình</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="456"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="468"/>
         <source>Mouse</source>
         <translation>Chuột</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="456"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="468"/>
         <source>Select screenshot area</source>
         <translation>Chọn khu vực chụp màn hình</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="470"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="482"/>
         <source>Mouse Wheel</source>
         <translation>Con lăn chuột</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="470"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="482"/>
         <source>Change tool size</source>
         <translation>Thay đổi kích cỡ công cụ</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="471"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="483"/>
         <source>Right Click</source>
         <translation>Nhấp chuột phải</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="471"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="483"/>
         <source>Show color picker</source>
         <translation>Hiện trình chọn màu</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="473"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="485"/>
         <source>Open side panel</source>
         <translation>Mở bảng điều khiển bên</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="474"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="486"/>
         <source>Esc</source>
         <translation>Esc</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="474"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="486"/>
         <source>Exit</source>
         <translation>Thoát</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="515"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="527"/>
         <source>Quit Capture</source>
         <translation>Thoát trình chụp</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="516"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="528"/>
         <source>Are you sure you want to quit capture?</source>
         <translation>Bạn có chắc chắn muốn hủy chụp không?</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="521"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="533"/>
         <source>Do not show this again</source>
         <translation>Không bao giờ hiển thị nữa</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="727"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="777"/>
         <source>Flameshot has lost focus. Keyboard shortcuts won&apos;t work until you click somewhere.</source>
         <translation>Flameshot đã mất tiêu điểm. Các phím tắt sẽ không hoạt động cho đến khi bạn nhấp vào đâu đó.</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="733"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="783"/>
         <source>Configuration error resolved. Launch `flameshot gui` again to apply it.</source>
         <translation>Đã giải quyết lỗi cấu hình. Khởi chạy lại `flameshot gui` để áp dụng.</translation>
     </message>
@@ -280,7 +292,7 @@ Use the Mouse Wheel to change the thickness of your tool.
 Press Space to open the side panel.</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="1167"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="1215"/>
         <source>Tool Settings</source>
         <translation>Cài đặt công cụ</translation>
     </message>
@@ -288,12 +300,12 @@ Press Space to open the side panel.</translation>
 <context>
     <name>CircleCountTool</name>
     <message>
-        <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="68"/>
+        <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="69"/>
         <source>Circle Counter</source>
         <translation>Bộ đếm vòng tròn</translation>
     </message>
     <message>
-        <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="86"/>
+        <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="87"/>
         <source>Add an autoincrementing counter bubble</source>
         <translation>Thêm các vòng tròn có ghi số theo thứ tự nhấp chuột</translation>
     </message>
@@ -301,12 +313,12 @@ Press Space to open the side panel.</translation>
 <context>
     <name>CircleTool</name>
     <message>
-        <location filename="../../src/tools/circle/circletool.cpp" line="20"/>
+        <location filename="../../src/tools/circle/circletool.cpp" line="21"/>
         <source>Circle</source>
         <translation>Hình tròn</translation>
     </message>
     <message>
-        <location filename="../../src/tools/circle/circletool.cpp" line="30"/>
+        <location filename="../../src/tools/circle/circletool.cpp" line="31"/>
         <source>Set the Circle as the paint tool</source>
         <translation>Chọn công cụ này để vẽ hình tròn</translation>
     </message>
@@ -371,42 +383,42 @@ Press Space to open the side panel.</translation>
 <context>
     <name>ColorGrabWidget</name>
     <message>
-        <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="58"/>
+        <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="56"/>
         <source>Accept color</source>
         <translation>Chấp nhận màu</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="58"/>
+        <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="56"/>
         <source>Enter or Left Click</source>
         <translation>Nhấn Enter hoặc nhấp chuột trái</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="59"/>
+        <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="57"/>
         <source>Precisely select color</source>
         <translation>Trình chọn màu chuẩn</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="59"/>
+        <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="57"/>
         <source>Hold Left Click</source>
         <translation>Nhấn giữ chuột trái</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="60"/>
+        <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="58"/>
         <source>Toggle magnifier</source>
         <translation>Bật/tắt kính lúp</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="60"/>
+        <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="58"/>
         <source>Space or Right Click</source>
         <translation>Nhấn phím cách hoặc nhấp chuột phải</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="61"/>
+        <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="59"/>
         <source>Cancel</source>
         <translation>Hủy</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="61"/>
+        <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="59"/>
         <source>Esc</source>
         <translation>Esc</translation>
     </message>
@@ -483,7 +495,7 @@ Press Space to open the side panel.</translation>
 <context>
     <name>ConfigErrorDetails</name>
     <message>
-        <location filename="../../src/config/configerrordetails.cpp" line="20"/>
+        <location filename="../../src/config/configerrordetails.cpp" line="19"/>
         <source>Configuration errors</source>
         <translation>Lỗi cấu hình</translation>
     </message>
@@ -491,45 +503,45 @@ Press Space to open the side panel.</translation>
 <context>
     <name>ConfigHandler</name>
     <message>
-        <location filename="../../src/utils/confighandler.cpp" line="579"/>
+        <location filename="../../src/utils/confighandler.cpp" line="600"/>
         <source>Unrecognized setting: &apos;%1&apos;
 </source>
         <translation>Cài đặt không dược nhận dạng: &apos;%1&apos;
 </translation>
     </message>
     <message>
-        <location filename="../../src/utils/confighandler.cpp" line="587"/>
+        <location filename="../../src/utils/confighandler.cpp" line="608"/>
         <source>Unrecognized shortcut name: &apos;%1&apos;.
 </source>
         <translation>Tên phím tắt không được nhận dạng: &apos;%1&apos;.
 </translation>
     </message>
     <message>
-        <location filename="../../src/utils/confighandler.cpp" line="630"/>
+        <location filename="../../src/utils/confighandler.cpp" line="651"/>
         <source>Shortcut conflict: &apos;%1&apos; and &apos;%2&apos; have the same shortcut: %3
 </source>
         <translation>Xung đột phím tắt: &apos;%1&apos; vè &apos;%2&apos; có cùng phím tắt: %3
 </translation>
     </message>
     <message>
-        <location filename="../../src/utils/confighandler.cpp" line="668"/>
+        <location filename="../../src/utils/confighandler.cpp" line="689"/>
         <source>Bad value in &apos;%1&apos;. Expected: %2
 </source>
         <translation>Giá trị không hợp lệ ở &apos;%1&apos;. Dự định: %2
 </translation>
     </message>
     <message>
-        <location filename="../../src/utils/confighandler.cpp" line="717"/>
+        <location filename="../../src/utils/confighandler.cpp" line="738"/>
         <source>You have successfully resolved the configuration error.</source>
         <translation>Bạn đã giải quyết thành công được lỗi cấu hình.</translation>
     </message>
     <message>
-        <location filename="../../src/utils/confighandler.cpp" line="740"/>
+        <location filename="../../src/utils/confighandler.cpp" line="761"/>
         <source>The configuration contains an error. Open configuration to resolve.</source>
         <translation>Cấu hình có lỗi. Mở cấu hình để giải quyết.</translation>
     </message>
     <message>
-        <location filename="../../src/utils/confighandler.cpp" line="794"/>
+        <location filename="../../src/utils/confighandler.cpp" line="816"/>
         <source>Bad config key &apos;%1&apos; in ConfigHandler. Please report this as a bug.</source>
         <translation>Khóa cấu hình không hợp lệ &apos;%1&apos; trong ConfigHandler. Vui lòng báo cáo lỗi này.</translation>
     </message>
@@ -537,37 +549,37 @@ Press Space to open the side panel.</translation>
 <context>
     <name>ConfigResolver</name>
     <message>
-        <location filename="../../src/config/configresolver.cpp" line="14"/>
+        <location filename="../../src/config/configresolver.cpp" line="13"/>
         <source>Resolve configuration errors</source>
         <translation>Giải quyết lỗi cấu hình</translation>
     </message>
     <message>
-        <location filename="../../src/config/configresolver.cpp" line="50"/>
+        <location filename="../../src/config/configresolver.cpp" line="49"/>
         <source>&lt;b&gt;You must resolve all errors before continuing:&lt;/b&gt;</source>
         <translation>&lt;b&gt;Bạn phải giải quyết tất cả lỗi trước khi tiếp tục:&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/config/configresolver.cpp" line="61"/>
+        <location filename="../../src/config/configresolver.cpp" line="60"/>
         <source>Reset</source>
         <translation>Đặt lại</translation>
     </message>
     <message>
-        <location filename="../../src/config/configresolver.cpp" line="63"/>
+        <location filename="../../src/config/configresolver.cpp" line="62"/>
         <source>Reset to the default value.</source>
         <translation>Đặt lại thành giá trị mặc định.</translation>
     </message>
     <message>
-        <location filename="../../src/config/configresolver.cpp" line="77"/>
+        <location filename="../../src/config/configresolver.cpp" line="76"/>
         <source>Remove</source>
         <translation>Gỡ bỏ</translation>
     </message>
     <message>
-        <location filename="../../src/config/configresolver.cpp" line="79"/>
+        <location filename="../../src/config/configresolver.cpp" line="78"/>
         <source>Remove this setting.</source>
         <translation>Gỡ bỏ cài đặt này.</translation>
     </message>
     <message>
-        <location filename="../../src/config/configresolver.cpp" line="90"/>
+        <location filename="../../src/config/configresolver.cpp" line="89"/>
         <source>Some keyboard shortcuts have conflicts.
 This will NOT prevent flameshot from starting.
 Please solve them manually in the configuration file.</source>
@@ -576,17 +588,17 @@ Please solve them manually in the configuration file.</source>
 Vui lòng xử lí chúng thủ công trong tệp cấu hình.</translation>
     </message>
     <message>
-        <location filename="../../src/config/configresolver.cpp" line="112"/>
+        <location filename="../../src/config/configresolver.cpp" line="111"/>
         <source>Resolve all</source>
         <translation>Giải quyết tất cả</translation>
     </message>
     <message>
-        <location filename="../../src/config/configresolver.cpp" line="113"/>
+        <location filename="../../src/config/configresolver.cpp" line="112"/>
         <source>Resolve all listed errors.</source>
         <translation>Giải quyết tất cả các lỗi đã được liệt kê.</translation>
     </message>
     <message>
-        <location filename="../../src/config/configresolver.cpp" line="125"/>
+        <location filename="../../src/config/configresolver.cpp" line="124"/>
         <source>Details</source>
         <translation>Chi tiết</translation>
     </message>
@@ -594,37 +606,37 @@ Vui lòng xử lí chúng thủ công trong tệp cấu hình.</translation>
 <context>
     <name>ConfigWindow</name>
     <message>
-        <location filename="../../src/config/configwindow.cpp" line="40"/>
+        <location filename="../../src/config/configwindow.cpp" line="39"/>
         <source>Configuration</source>
         <translation>Cấu hình</translation>
     </message>
     <message>
-        <location filename="../../src/config/configwindow.cpp" line="68"/>
+        <location filename="../../src/config/configwindow.cpp" line="67"/>
         <source>Interface</source>
         <translation>Giao diện</translation>
     </message>
     <message>
-        <location filename="../../src/config/configwindow.cpp" line="78"/>
+        <location filename="../../src/config/configwindow.cpp" line="77"/>
         <source>Filename Editor</source>
         <translation>Chỉnh sửa tên tệp</translation>
     </message>
     <message>
-        <location filename="../../src/config/configwindow.cpp" line="59"/>
+        <location filename="../../src/config/configwindow.cpp" line="58"/>
         <source>General</source>
         <translation>Chung</translation>
     </message>
     <message>
-        <location filename="../../src/config/configwindow.cpp" line="87"/>
+        <location filename="../../src/config/configwindow.cpp" line="86"/>
         <source>Shortcuts</source>
         <translation>Phím tắt</translation>
     </message>
     <message>
-        <location filename="../../src/config/configwindow.cpp" line="120"/>
+        <location filename="../../src/config/configwindow.cpp" line="119"/>
         <source>Resolve</source>
         <translation>Giải quyết</translation>
     </message>
     <message>
-        <location filename="../../src/config/configwindow.cpp" line="124"/>
+        <location filename="../../src/config/configwindow.cpp" line="123"/>
         <source>&lt;b&gt;Configuration file has errors. Resolve them before continuing.&lt;/b&gt;</source>
         <translation>&lt;b&gt;Tệp cấu hình có lỗi. Vui lòng giải quyết chúng trước khi tiếp tục&lt;/b&gt;</translation>
     </message>
@@ -711,12 +723,12 @@ Vui lòng xử lí chúng thủ công trong tệp cấu hình.</translation>
 <context>
     <name>ExitTool</name>
     <message>
-        <location filename="../../src/tools/exit/exittool.cpp" line="23"/>
+        <location filename="../../src/tools/exit/exittool.cpp" line="24"/>
         <source>Exit</source>
         <translation>Thoát</translation>
     </message>
     <message>
-        <location filename="../../src/tools/exit/exittool.cpp" line="33"/>
+        <location filename="../../src/tools/exit/exittool.cpp" line="34"/>
         <source>Leave the capture screen</source>
         <translation>Thoát khỏi màn hình trình chụp</translation>
     </message>
@@ -724,32 +736,32 @@ Vui lòng xử lí chúng thủ công trong tệp cấu hình.</translation>
 <context>
     <name>FileNameEditor</name>
     <message>
-        <location filename="../../src/config/filenameeditor.cpp" line="24"/>
+        <location filename="../../src/config/filenameeditor.cpp" line="25"/>
         <source>Edit the name of your captures:</source>
         <translation>Chỉnh sửa tên ảnh chụp của bạn:</translation>
     </message>
     <message>
-        <location filename="../../src/config/filenameeditor.cpp" line="28"/>
+        <location filename="../../src/config/filenameeditor.cpp" line="29"/>
         <source>Edit:</source>
         <translation>Chỉnh sửa:</translation>
     </message>
     <message>
-        <location filename="../../src/config/filenameeditor.cpp" line="30"/>
+        <location filename="../../src/config/filenameeditor.cpp" line="31"/>
         <source>Preview:</source>
         <translation>Xem trước:</translation>
     </message>
     <message>
-        <location filename="../../src/config/filenameeditor.cpp" line="73"/>
+        <location filename="../../src/config/filenameeditor.cpp" line="74"/>
         <source>Save</source>
         <translation>Lưu</translation>
     </message>
     <message>
-        <location filename="../../src/config/filenameeditor.cpp" line="76"/>
+        <location filename="../../src/config/filenameeditor.cpp" line="77"/>
         <source>Saves the pattern</source>
         <translation>Lưu lại mẫu</translation>
     </message>
     <message>
-        <location filename="../../src/config/filenameeditor.cpp" line="78"/>
+        <location filename="../../src/config/filenameeditor.cpp" line="79"/>
         <source>Restore</source>
         <translation>Khôi phục lại</translation>
     </message>
@@ -758,17 +770,17 @@ Vui lòng xử lí chúng thủ công trong tệp cấu hình.</translation>
         <translation type="vanished">Reinicialitza</translation>
     </message>
     <message>
-        <location filename="../../src/config/filenameeditor.cpp" line="81"/>
+        <location filename="../../src/config/filenameeditor.cpp" line="82"/>
         <source>Restores the saved pattern</source>
         <translation>Khôi phục lại mẫu đã lưu</translation>
     </message>
     <message>
-        <location filename="../../src/config/filenameeditor.cpp" line="83"/>
+        <location filename="../../src/config/filenameeditor.cpp" line="84"/>
         <source>Clear</source>
         <translation>Làm trống</translation>
     </message>
     <message>
-        <location filename="../../src/config/filenameeditor.cpp" line="89"/>
+        <location filename="../../src/config/filenameeditor.cpp" line="90"/>
         <source>Deletes the name</source>
         <translation>Xóa tên</translation>
     </message>
@@ -776,17 +788,17 @@ Vui lòng xử lí chúng thủ công trong tệp cấu hình.</translation>
 <context>
     <name>Flameshot</name>
     <message>
-        <location filename="../../src/core/flameshot.cpp" line="119"/>
+        <location filename="../../src/core/flameshot.cpp" line="122"/>
         <source>Error</source>
         <translation>Lỗi</translation>
     </message>
     <message>
-        <location filename="../../src/core/flameshot.cpp" line="119"/>
+        <location filename="../../src/core/flameshot.cpp" line="122"/>
         <source>Unable to close active modal widgets</source>
         <translation>Không thể đóng các tiện ích dạng hộp thoại đang hoạt động</translation>
     </message>
     <message>
-        <location filename="../../src/core/flameshot.cpp" line="431"/>
+        <location filename="../../src/core/flameshot.cpp" line="441"/>
         <source>URL copied to clipboard.</source>
         <translation>Đã sao chép URL vào bộ nhớ tạm.</translation>
     </message>
@@ -794,22 +806,22 @@ Vui lòng xử lí chúng thủ công trong tệp cấu hình.</translation>
 <context>
     <name>FlameshotDaemon</name>
     <message>
-        <location filename="../../src/core/flameshotdaemon.cpp" line="407"/>
         <source>New version %1 is available</source>
-        <translation>Đã có phiên bản mới %1</translation>
+        <translation type="vanished">Đã có phiên bản mới %1</translation>
     </message>
     <message>
-        <location filename="../../src/core/flameshotdaemon.cpp" line="413"/>
+        <location filename="../../src/core/flameshotdaemon.cpp" line="272"/>
+        <location filename="../../src/core/flameshotdaemon.cpp" line="436"/>
         <source>You have the latest version</source>
         <translation>Bạn đã dùng phiên bản mới nhất</translation>
     </message>
     <message>
-        <location filename="../../src/core/flameshotdaemon.cpp" line="422"/>
+        <location filename="../../src/core/flameshotdaemon.cpp" line="445"/>
         <source>Failed to get information about the latest version.</source>
         <translation>Không thể lấy được thông tin về phiên bản mới.</translation>
     </message>
     <message>
-        <location filename="../../src/core/flameshotdaemon.cpp" line="445"/>
+        <location filename="../../src/core/flameshotdaemon.cpp" line="468"/>
         <source>Unable to connect via DBus</source>
         <translation>Không thể kết nối thông qua DBus</translation>
     </message>
@@ -884,47 +896,47 @@ Vui lòng xử lí chúng thủ công trong tệp cấu hình.</translation>
 <context>
     <name>GeneralConf</name>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="192"/>
-        <location filename="../../src/config/generalconf.cpp" line="394"/>
+        <location filename="../../src/config/generalconf.cpp" line="195"/>
+        <location filename="../../src/config/generalconf.cpp" line="379"/>
         <source>Import</source>
         <translation>Nhập</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="198"/>
-        <location filename="../../src/config/generalconf.cpp" line="207"/>
-        <location filename="../../src/config/generalconf.cpp" line="232"/>
-        <location filename="../../src/config/generalconf.cpp" line="763"/>
+        <location filename="../../src/config/generalconf.cpp" line="201"/>
+        <location filename="../../src/config/generalconf.cpp" line="210"/>
+        <location filename="../../src/config/generalconf.cpp" line="235"/>
+        <location filename="../../src/config/generalconf.cpp" line="754"/>
         <source>Error</source>
         <translation>Lỗi</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="198"/>
+        <location filename="../../src/config/generalconf.cpp" line="201"/>
         <source>Unable to read file.</source>
         <translation>Không thể đọc tệp.</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="207"/>
-        <location filename="../../src/config/generalconf.cpp" line="232"/>
+        <location filename="../../src/config/generalconf.cpp" line="210"/>
+        <location filename="../../src/config/generalconf.cpp" line="235"/>
         <source>Unable to write file.</source>
         <translation>Không thể ghi tệp.</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="219"/>
+        <location filename="../../src/config/generalconf.cpp" line="222"/>
         <source>Save File</source>
         <translation>Lưu tệp</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="241"/>
+        <location filename="../../src/config/generalconf.cpp" line="244"/>
         <source>Confirm Reset</source>
         <translation>Xác nhận đặt lại</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="242"/>
+        <location filename="../../src/config/generalconf.cpp" line="245"/>
         <source>Are you sure you want to reset the configuration?</source>
         <translation>Bạn có chắc chắn muốn đặt lại cấu hình không?</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="273"/>
+        <location filename="../../src/config/generalconf.cpp" line="276"/>
         <source>Show help message</source>
         <translation>Hiển thị bảng trợ giúp</translation>
     </message>
@@ -933,7 +945,7 @@ Vui lòng xử lí chúng thủ công trong tệp cấu hình.</translation>
         <translation type="vanished">Show the help message at the beginning in the capture mode.</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="298"/>
+        <location filename="../../src/config/generalconf.cpp" line="301"/>
         <source>Show the side panel button</source>
         <translation>Hiển thị nút bảng điều khiển bên</translation>
     </message>
@@ -942,12 +954,12 @@ Vui lòng xử lí chúng thủ công trong tệp cấu hình.</translation>
         <translation type="vanished">Show the side panel toggle button in the capture mode.</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="311"/>
+        <location filename="../../src/config/generalconf.cpp" line="314"/>
         <source>Show desktop notifications</source>
         <translation>Hiển thị thông báo máy tính</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="336"/>
+        <location filename="../../src/config/generalconf.cpp" line="339"/>
         <source>Show tray icon</source>
         <translation>Hiển thị biểu tượng trong khay</translation>
     </message>
@@ -956,32 +968,32 @@ Vui lòng xử lí chúng thủ công trong tệp cấu hình.</translation>
         <translation type="vanished">Show the systemtray icon</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="367"/>
+        <location filename="../../src/config/generalconf.cpp" line="352"/>
         <source>Confirmation required to delete screenshot from the latest uploads</source>
         <translation>Cần xác nhận để xóa ảnh chụp màn hình khỏi các lần tải lên gần đây</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="382"/>
+        <location filename="../../src/config/generalconf.cpp" line="367"/>
         <source>Configuration File</source>
         <translation>Tệp cấu hình</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="387"/>
+        <location filename="../../src/config/generalconf.cpp" line="372"/>
         <source>Export</source>
         <translation>Xuất ra</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="401"/>
+        <location filename="../../src/config/generalconf.cpp" line="386"/>
         <source>Reset</source>
         <translation>Đặt lại</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="412"/>
+        <location filename="../../src/config/generalconf.cpp" line="397"/>
         <source>Automatic check for updates</source>
         <translation>Tự động kiểm tra cập nhật mới</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="426"/>
+        <location filename="../../src/config/generalconf.cpp" line="411"/>
         <source>Allow multiple flameshot GUI instances simultaneously</source>
         <translation>Cho phép nhiều phiên bản giao diện đồ họa Flameshot chạy đồng thời</translation>
     </message>
@@ -998,17 +1010,17 @@ Vui lòng xử lí chúng thủ công trong tệp cấu hình.</translation>
         <translation type="vanished">Launch Flameshot</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="463"/>
+        <location filename="../../src/config/generalconf.cpp" line="448"/>
         <source>Show welcome message on launch</source>
         <translation>Hiện thông báo chào mừng khi khởi chạy</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="491"/>
+        <location filename="../../src/config/generalconf.cpp" line="476"/>
         <source>Use large predefined color palette</source>
         <translation>Sử dụng bảng màu với nhiều màu hơn</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="515"/>
+        <location filename="../../src/config/generalconf.cpp" line="500"/>
         <source>Copy URL after upload</source>
         <translation>Sao chép URL sau khi đăng tải</translation>
     </message>
@@ -1017,7 +1029,7 @@ Vui lòng xử lí chúng thủ công trong tệp cấu hình.</translation>
         <translation type="vanished">Copy URL and close window after upload</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="527"/>
+        <location filename="../../src/config/generalconf.cpp" line="512"/>
         <source>Save image after copy</source>
         <translation>Lưu lại ảnh sau khi sao chép</translation>
     </message>
@@ -1026,67 +1038,65 @@ Vui lòng xử lí chúng thủ công trong tệp cấu hình.</translation>
         <translation type="vanished">Save image file after copying it</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="274"/>
+        <location filename="../../src/config/generalconf.cpp" line="277"/>
         <source>Show the help message at the beginning in the capture mode</source>
         <translation>Hiển thị ô hỗ trợ khi bắt đầu chế độ chụp</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="284"/>
+        <location filename="../../src/config/generalconf.cpp" line="287"/>
         <source>Use last region for GUI mode</source>
         <translation>Giữ định dạng của trước đó khi chụp</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="286"/>
+        <location filename="../../src/config/generalconf.cpp" line="289"/>
         <source>Use the last region as the default selection for the next screenshot in GUI mode</source>
         <translation>Sử dụng định dạng giao diện trước thành mặc định cho lần chụp tiếp theo</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="300"/>
+        <location filename="../../src/config/generalconf.cpp" line="303"/>
         <source>Show the side panel toggle button in the capture mode</source>
         <translation>Hiển thị nút mở bảng điều khiển bên trong chế độ chụp</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="312"/>
+        <location filename="../../src/config/generalconf.cpp" line="315"/>
         <source>Enable desktop notifications</source>
         <translation>Bật thông báo trên màn hình</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="323"/>
+        <location filename="../../src/config/generalconf.cpp" line="326"/>
         <source>Show abort notifications</source>
         <translation>Hiện thông báo hủy</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="324"/>
+        <location filename="../../src/config/generalconf.cpp" line="327"/>
         <source>Enable abort notifications</source>
         <translation>Hiện thông báo hủy</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="337"/>
+        <location filename="../../src/config/generalconf.cpp" line="340"/>
         <source>Show icon in the system tray</source>
         <translation>Hiển thị biểu tượng trong khay</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="350"/>
         <source>Use grim to capture screenshots</source>
-        <translation>Sử dụng grim để chụp ảnh màn hình</translation>
+        <translation type="vanished">Sử dụng grim để chụp ảnh màn hình</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="352"/>
         <source>Grim is a wayland only utility to capture screens based on the screencopy protocol. Generally only enable on minimal wayland window managers like sway, hyprland, etc.</source>
-        <translation>Grim là tiện ích chỉ dành cho Wayland để chụp màn hình dựa trên giao thức screencopy. Nhìn chung, chỉ bật trên các trình quản lý cửa sổ Wayland tối thiểu như sway, hyprland, v.</translation>
+        <translation type="vanished">Grim là tiện ích chỉ dành cho Wayland để chụp màn hình dựa trên giao thức screencopy. Nhìn chung, chỉ bật trên các trình quản lý cửa sổ Wayland tối thiểu như sway, hyprland, v.</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="370"/>
+        <location filename="../../src/config/generalconf.cpp" line="355"/>
         <source>Ask for confirmation to delete screenshot from the latest uploads</source>
         <translation>Yêu cầu xác nhận để xóa ảnh chụp màn hình khỏi các lần tải lên gần đây nhất</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="413"/>
+        <location filename="../../src/config/generalconf.cpp" line="398"/>
         <source>Check for updates automatically</source>
         <translation>Kiểm tra cập nhật mới một cách tự động</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="427"/>
+        <location filename="../../src/config/generalconf.cpp" line="412"/>
         <source>This allows you to take screenshots of Flameshot itself for example</source>
         <translation>Cái này cho phép bạn chụp ảnh màn hình của Flameshot chẳng hạn</translation>
     </message>
@@ -1095,17 +1105,17 @@ Vui lòng xử lí chúng thủ công trong tệp cấu hình.</translation>
         <translation type="vanished">Launch Flameshot daemon when computer is booted</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="466"/>
+        <location filename="../../src/config/generalconf.cpp" line="451"/>
         <source>Show the welcome message box in the middle of the screen while taking a screenshot</source>
         <translation>Hiển thị thông báo chào mừng ở giữa màn hình trong khi chụp ảnh</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="493"/>
+        <location filename="../../src/config/generalconf.cpp" line="478"/>
         <source>Use a large predefined color palette</source>
         <translation>Sử dụng một bảng màu gồm nhiều màu sắc hơn</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="503"/>
+        <location filename="../../src/config/generalconf.cpp" line="488"/>
         <source>Copy on double click</source>
         <translation>Sao chép khi nháy đúp chuột</translation>
     </message>
@@ -1118,230 +1128,250 @@ Vui lòng xử lí chúng thủ công trong tệp cấu hình.</translation>
         <translation type="vanished">Copy URL and close window after uploading was successful</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="439"/>
+        <location filename="../../src/config/generalconf.cpp" line="424"/>
         <source>Automatically unload from memory when it is not needed</source>
         <translation>Giải phóng bộ nhớ tự động khi không cần thiết</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="440"/>
+        <location filename="../../src/config/generalconf.cpp" line="425"/>
         <source>Automatically close daemon (background process) when it is not needed</source>
         <translation>Tự động đóng daemon (tác vụ nền) khi không cần thiết</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="451"/>
+        <location filename="../../src/config/generalconf.cpp" line="436"/>
         <source>Launch in background at startup</source>
         <translation>Tự động chạy trong nền khi khởi động</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="452"/>
+        <location filename="../../src/config/generalconf.cpp" line="437"/>
         <source>Launch Flameshot daemon (background process) when computer is booted</source>
         <translation>Khởi chạy Flameshot daemon (tác vụ nền) khi máy tính đang khởi động</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="477"/>
+        <location filename="../../src/config/generalconf.cpp" line="462"/>
         <source>Ask before quit capture</source>
         <translation>Hỏi trước khi thoát trình chụp</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="480"/>
+        <location filename="../../src/config/generalconf.cpp" line="465"/>
         <source>Show the confirmation prompt before ESC quit</source>
         <translation>Hiện thị lời nhắc xác nhận trước khi thoát bằng nút Esc</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="505"/>
+        <location filename="../../src/config/generalconf.cpp" line="490"/>
         <source>Enable Copy to clipboard on Double Click</source>
         <translation>Cho phép sao chép vào bảng tạm bằng cách nháy đúp chuột</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="517"/>
+        <location filename="../../src/config/generalconf.cpp" line="502"/>
         <source>Copy URL after uploading was successful</source>
         <translation>Sao chép URL sau khi đăng tải thành công</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="529"/>
+        <location filename="../../src/config/generalconf.cpp" line="514"/>
         <source>After copying the screenshot, save it to a file as well</source>
         <translation>Sau khi sao chép ảnh chụp màn hình, ứng dụng sẽ tự động lưu nó thành tệp</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="536"/>
+        <location filename="../../src/config/generalconf.cpp" line="521"/>
         <source>Save Path</source>
         <translation>Đường dẫn để lưu</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="552"/>
+        <location filename="../../src/config/generalconf.cpp" line="537"/>
         <source>Change...</source>
         <translation>Thay đổi...</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="560"/>
+        <location filename="../../src/config/generalconf.cpp" line="545"/>
         <source>Use fixed path for screenshots to save</source>
         <translation>Sử dụng đường dẫn cố định để lưu ảnh chụp màn hình</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="572"/>
+        <location filename="../../src/config/generalconf.cpp" line="557"/>
         <source>Preferred save file extension:</source>
         <translation>Đuôi tệp cần ưu tiên:</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="601"/>
+        <location filename="../../src/config/generalconf.cpp" line="586"/>
         <source>Latest Uploads Max Size</source>
         <translation>Giới hạn kích thước tối đa cho các tệp vừa tải lên</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="623"/>
+        <location filename="../../src/config/generalconf.cpp" line="608"/>
         <source>Imgur Application Client ID</source>
         <translation>ID ứng dụng Imgur</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="654"/>
+        <location filename="../../src/config/generalconf.cpp" line="639"/>
         <source>Undo limit</source>
         <translation>Giới hạn lần hoàn tác</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="683"/>
+        <location filename="../../src/config/generalconf.cpp" line="668"/>
         <source>Use JPG format for clipboard (PNG default)</source>
         <translation>Sử dụng định dạng JPG cho bảng tạm (mặc định là PNG)</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="685"/>
+        <location filename="../../src/config/generalconf.cpp" line="675"/>
         <source>Use lossy JPG format for clipboard (lossless PNG default)</source>
         <translation>Sử dụng định dạng JPG &quot;chất lượng tệ hơn&quot; cho bảng tạm (mặc định là định dạng PNG &quot;chất lượng tốt hơn&quot;)</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="711"/>
+        <location filename="../../src/config/generalconf.cpp" line="702"/>
         <source>Copy file path after save</source>
         <translation>Sao chép đường dẫn tệp sau khi lưu</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="712"/>
+        <location filename="../../src/config/generalconf.cpp" line="703"/>
         <source>Copy the file path to clipboard after the file is saved</source>
         <translation>Sao chép đường dẫn tệp vào bảng tạm khi tệp đã được lưu</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="723"/>
+        <location filename="../../src/config/generalconf.cpp" line="714"/>
         <source>Anti-aliasing image when zoom the pinned image</source>
         <translation>Làm mịn ảnh khi phóng to ảnh đang ghim</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="725"/>
+        <location filename="../../src/config/generalconf.cpp" line="716"/>
         <source>After zooming the pinned image, should the image get smoothened or stay pixelated</source>
         <translation>Sau khi phóng to ảnh đã ghim, ảnh sẽ trở nên mượt mà hơn thay vì nguyên dạng pixel</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="736"/>
-        <location filename="../../src/config/generalconf.cpp" line="738"/>
+        <location filename="../../src/config/generalconf.cpp" line="727"/>
+        <location filename="../../src/config/generalconf.cpp" line="729"/>
         <source>Upload image without confirmation</source>
         <translation>Đăng tải hình ảnh mà không cần xác nhận</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="754"/>
+        <location filename="../../src/config/generalconf.cpp" line="745"/>
         <source>Choose a Folder</source>
         <translation>Chọn thư mục</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="763"/>
+        <location filename="../../src/config/generalconf.cpp" line="754"/>
         <source>Unable to write to directory.</source>
         <translation>Không thể ghi vào thư mục.</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="772"/>
+        <location filename="../../src/config/generalconf.cpp" line="763"/>
         <source>Show magnifier</source>
         <translation>Hiển thị kính lúp</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="773"/>
+        <location filename="../../src/config/generalconf.cpp" line="764"/>
         <source>Enable a magnifier while selecting the screenshot area</source>
         <translation>Cho phép kính lúp khi chọn khu vực để chụp ảnh</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="784"/>
+        <location filename="../../src/config/generalconf.cpp" line="775"/>
         <source>Square shaped magnifier</source>
         <translation>Kính lúp hình vuông</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="785"/>
+        <location filename="../../src/config/generalconf.cpp" line="776"/>
         <source>Make the magnifier to be square-shaped</source>
         <translation>Làm cho kính lúp có hình vuông</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="801"/>
+        <location filename="../../src/config/generalconf.cpp" line="792"/>
         <source>Milliseconds before geometry display hides; 0 means do not hide</source>
         <translation>Mili giây trước khi trình kích thước ẩn đi; giá trị 0 sẽ không ẩn</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="804"/>
+        <location filename="../../src/config/generalconf.cpp" line="795"/>
         <source>Set geometry display timeout (ms)</source>
         <translation>Điều chỉnh thời gian chờ của trình kích thước (ms)</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="812"/>
+        <location filename="../../src/config/generalconf.cpp" line="803"/>
         <source>Selection Geometry Display</source>
         <translation>Lựa chọn của Trình kích thước</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="819"/>
+        <location filename="../../src/config/generalconf.cpp" line="810"/>
         <source>Display Location</source>
         <translation>Vị trí hiển thị</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="822"/>
+        <location filename="../../src/config/generalconf.cpp" line="813"/>
         <source>None</source>
         <translation>Không có</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="823"/>
+        <location filename="../../src/config/generalconf.cpp" line="814"/>
         <source>Top Left</source>
         <translation>Ở trên bên trái</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="825"/>
+        <location filename="../../src/config/generalconf.cpp" line="816"/>
         <source>Top Right</source>
         <translation>Ở trên bên phải</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="827"/>
+        <location filename="../../src/config/generalconf.cpp" line="818"/>
         <source>Bottom Left</source>
         <translation>Ở dưới bên trái</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="829"/>
+        <location filename="../../src/config/generalconf.cpp" line="820"/>
         <source>Bottom Right</source>
         <translation>Ở dưới bên phải</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="831"/>
+        <location filename="../../src/config/generalconf.cpp" line="822"/>
         <source>Center</source>
         <translation>Trung tâm</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="856"/>
+        <location filename="../../src/config/generalconf.cpp" line="847"/>
         <source>Quality range of 0-100; Higher number is better quality and larger file size</source>
         <translation>Tùy chỉnh chất lượng với phạm vi từ 0 -100; Số càng cao thì chất lượng và dung lượng càng cao</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="860"/>
+        <location filename="../../src/config/generalconf.cpp" line="851"/>
         <source>JPEG Quality</source>
         <translation>Chất lượng ảnh JPEG</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="871"/>
+        <location filename="../../src/config/generalconf.cpp" line="862"/>
         <source>Reverse arrow</source>
         <translation>Mũi tên ngược</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="872"/>
+        <location filename="../../src/config/generalconf.cpp" line="863"/>
         <source>Draw the arrow head first</source>
         <translation>Khi vẽ sẽ vẽ đầu của mũi tên trước</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="881"/>
+        <location filename="../../src/config/generalconf.cpp" line="872"/>
         <source>Insecure Pixelate</source>
         <translation>Pixelate không an toàn</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="883"/>
+        <location filename="../../src/config/generalconf.cpp" line="874"/>
         <source>Draw the pixelation effect in an insecure but more asethetic way.</source>
         <translation>Vẽ hiệu ứng pixel theo cách không an toàn nhưng thẩm mỹ hơn.</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="929"/>
+        <source>Capture active monitor (skip monitor selection)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="931"/>
+        <source>Automatically capture the monitor where the cursor is located instead of showing the monitor selection dialog. This feature is not supported on Wayland.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="952"/>
+        <source>Use legacy X11 screenshot method (deprecated)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="954"/>
+        <source>Bypass the freedesktop portal and use Qt&apos;s native X11 screen capture. Enable this if your window manager lacks xdg-desktop-portal (e.g. xmonad, i3). Only effective on X11; ignored on Wayland.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1393,18 +1423,18 @@ Vui lòng xử lí chúng thủ công trong tệp cấu hình.</translation>
 <context>
     <name>ImgUploadDialog</name>
     <message>
-        <location filename="../../src/widgets/imguploaddialog.cpp" line="18"/>
+        <location filename="../../src/widgets/imguploaddialog.cpp" line="19"/>
         <source>Upload Confirmation</source>
         <translation>Xác nhận đăng tải</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/imguploaddialog.cpp" line="22"/>
+        <location filename="../../src/widgets/imguploaddialog.cpp" line="23"/>
         <source>Do you want to upload this capture?</source>
         <translation>Bạn có chắc chắn muốn đăng tấm ảnh chụp này không?</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/imguploaddialog.cpp" line="35"/>
         <location filename="../../src/widgets/imguploaddialog.cpp" line="36"/>
+        <location filename="../../src/widgets/imguploaddialog.cpp" line="37"/>
         <source>Upload without confirmation</source>
         <translation>Đăng tải mà không cần xác nhận</translation>
     </message>
@@ -1447,62 +1477,62 @@ Vui lòng xử lí chúng thủ công trong tệp cấu hình.</translation>
 <context>
     <name>ImgUploaderBase</name>
     <message>
-        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="37"/>
+        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="38"/>
         <source>Upload image</source>
         <translation>Đăng tải hình ảnh</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="49"/>
+        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="50"/>
         <source>Uploading Image</source>
         <translation>Đang đăng tải hình ảnh</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="128"/>
+        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="129"/>
         <source>Copy URL</source>
         <translation>Sao chép URL</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="129"/>
+        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="130"/>
         <source>Open URL</source>
         <translation>Mở URL</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="130"/>
+        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="131"/>
         <source>Delete image</source>
         <translation>Xóa hình ảnh</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="131"/>
+        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="132"/>
         <source>Image to Clipboard.</source>
         <translation>Hình ảnh vào bộ nhớ tạm.</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="132"/>
+        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="133"/>
         <source>Save image</source>
         <translation>Lưu hình ảnh</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="162"/>
+        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="163"/>
         <source>Unable to open the URL.</source>
         <translation>Không thể mở URL.</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="169"/>
+        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="170"/>
         <source>URL copied to clipboard.</source>
         <translation>Đã sao chép URL vào bộ nhớ tạm.</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="175"/>
+        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="176"/>
         <source>Screenshot copied to clipboard.</source>
         <translation>Đã sao chép ảnh chụp màn hình vào bộ nhớ tạm.</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="189"/>
+        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="190"/>
         <source>Unable to save the screenshot to disk.</source>
         <translation>Không thể lưu ảnh chụp màn hình vào ổ đĩa.</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="192"/>
+        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="193"/>
         <source>Screenshot saved.</source>
         <translation>Đã lưu ảnh chụp màn hình.</translation>
     </message>
@@ -1547,7 +1577,7 @@ Vui lòng xử lí chúng thủ công trong tệp cấu hình.</translation>
         <translation type="vanished">Image to Clipboard.</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgupload/storages/imgur/imguruploader.cpp" line="107"/>
+        <location filename="../../src/tools/imgupload/storages/imgur/imguruploader.cpp" line="108"/>
         <source>Unable to open the URL.</source>
         <translation>Không thể mở URL.</translation>
     </message>
@@ -1689,12 +1719,12 @@ Vui lòng xử lí chúng thủ công trong tệp cấu hình.</translation>
 <context>
     <name>InvertTool</name>
     <message>
-        <location filename="../../src/tools/invert/inverttool.cpp" line="25"/>
+        <location filename="../../src/tools/invert/inverttool.cpp" line="26"/>
         <source>Invert</source>
         <translation>Đảo màu</translation>
     </message>
     <message>
-        <location filename="../../src/tools/invert/inverttool.cpp" line="35"/>
+        <location filename="../../src/tools/invert/inverttool.cpp" line="36"/>
         <source>Set Inverter as the paint tool</source>
         <translation>Sử dụng công cụ này để đảo màu ảnh</translation>
     </message>
@@ -1702,12 +1732,12 @@ Vui lòng xử lí chúng thủ công trong tệp cấu hình.</translation>
 <context>
     <name>LineTool</name>
     <message>
-        <location filename="../../src/tools/line/linetool.cpp" line="22"/>
+        <location filename="../../src/tools/line/linetool.cpp" line="23"/>
         <source>Line</source>
         <translation>Đường kẻ</translation>
     </message>
     <message>
-        <location filename="../../src/tools/line/linetool.cpp" line="32"/>
+        <location filename="../../src/tools/line/linetool.cpp" line="33"/>
         <source>Set the Line as the paint tool</source>
         <translation>Sử dụng công cụ này để vẽ đường thẳng</translation>
     </message>
@@ -1715,25 +1745,34 @@ Vui lòng xử lí chúng thủ công trong tệp cấu hình.</translation>
 <context>
     <name>MarkerTool</name>
     <message>
-        <location filename="../../src/tools/marker/markertool.cpp" line="23"/>
+        <location filename="../../src/tools/marker/markertool.cpp" line="24"/>
         <source>Marker</source>
         <translation>Đánh dấu</translation>
     </message>
     <message>
-        <location filename="../../src/tools/marker/markertool.cpp" line="33"/>
+        <location filename="../../src/tools/marker/markertool.cpp" line="34"/>
         <source>Set the Marker as the paint tool</source>
         <translation>Sử dụng công cụ này để đánh dấu (giống bút dạ quang)</translation>
     </message>
 </context>
 <context>
+    <name>MonitorPreview</name>
+    <message>
+        <location filename="../../src/utils/monitorpreview.cpp" line="31"/>
+        <source>Monitor %1: %2
+Click to select</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>MoveTool</name>
     <message>
-        <location filename="../../src/tools/move/movetool.cpp" line="23"/>
+        <location filename="../../src/tools/move/movetool.cpp" line="24"/>
         <source>Move</source>
         <translation>Di chuyển</translation>
     </message>
     <message>
-        <location filename="../../src/tools/move/movetool.cpp" line="33"/>
+        <location filename="../../src/tools/move/movetool.cpp" line="34"/>
         <source>Move the selection area</source>
         <translation>Để di chuyển khu vực đã chọn</translation>
     </message>
@@ -1754,12 +1793,12 @@ Vui lòng xử lí chúng thủ công trong tệp cấu hình.</translation>
 <context>
     <name>PinTool</name>
     <message>
-        <location filename="../../src/tools/pin/pintool.cpp" line="25"/>
+        <location filename="../../src/tools/pin/pintool.cpp" line="24"/>
         <source>Pin Tool</source>
         <translation>Ghim</translation>
     </message>
     <message>
-        <location filename="../../src/tools/pin/pintool.cpp" line="35"/>
+        <location filename="../../src/tools/pin/pintool.cpp" line="34"/>
         <source>Pin image on the desktop</source>
         <translation>Ghim ảnh lên màn hình</translation>
     </message>
@@ -1810,12 +1849,12 @@ Vui lòng xử lí chúng thủ công trong tệp cấu hình.</translation>
 <context>
     <name>PixelateTool</name>
     <message>
-        <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="27"/>
+        <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="28"/>
         <source>Pixelate</source>
         <translation>Làm mờ</translation>
     </message>
     <message>
-        <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="37"/>
+        <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="38"/>
         <source>Set Pixelate as the paint tool.</source>
         <translation>Chọn công cụ này để làm mờ ảnh.</translation>
     </message>
@@ -1851,23 +1890,24 @@ Vui lòng xử lí chúng thủ công trong tệp cấu hình.</translation>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="196"/>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="198"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="204"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="206"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="270"/>
         <source>Capture saved to clipboard.</source>
         <translation>Đã lưu ảnh chụp vào bảng tạm.</translation>
     </message>
     <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="182"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="190"/>
         <source>Error while saving to clipboard</source>
         <translation>Xảy ra lỗi khi lưu vào bảng tạm</translation>
     </message>
     <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="244"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="326"/>
         <source>Save screenshot</source>
         <translation>Lưu ảnh chụp màn hình</translation>
     </message>
     <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="275"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="358"/>
         <source>Path copied to clipboard as </source>
         <translation>Đường dẫn đã được sao chép vào bảng tạm dưới dạng </translation>
     </message>
@@ -1884,34 +1924,34 @@ Vui lòng xử lí chúng thủ công trong tệp cấu hình.</translation>
         <translation type="vanished">Capture is saved and copied to the clipboard as </translation>
     </message>
     <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="286"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="369"/>
         <source>Save Error</source>
         <translation>Lưu lỗi</translation>
     </message>
     <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="62"/>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="267"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="64"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="349"/>
         <source>Capture saved as </source>
         <translation>Đã lưu ảnh chụp dưới dạng </translation>
     </message>
     <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="66"/>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="279"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="69"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="362"/>
         <source>Error trying to save as </source>
         <translation>Lỗi khi thử lưu ảnh dưới dạng </translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="220"/>
+        <location filename="../../src/main.cpp" line="251"/>
         <source>Unable to connect via DBus</source>
         <translation>Không thể kết nối thông qua DBus</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="237"/>
+        <location filename="../../src/main.cpp" line="268"/>
         <source>Powerful yet simple to use screenshot software.</source>
         <translation>Phần mềm chụp ảnh màn hình mạnh mẽ nhưng dễ sử dụng.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="238"/>
+        <location filename="../../src/main.cpp" line="269"/>
         <source>See</source>
         <translation>Thấy</translation>
     </message>
@@ -1920,17 +1960,17 @@ Vui lòng xử lí chúng thủ công trong tệp cấu hình.</translation>
         <translation type="vanished">Capture the entire desktop.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="244"/>
+        <location filename="../../src/main.cpp" line="275"/>
         <source>Open the capture launcher.</source>
         <translation>Mở trình chụp.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="247"/>
+        <location filename="../../src/main.cpp" line="278"/>
         <source>Start a manual capture in GUI mode.</source>
         <translation>Bắt đầu chụp thủ công ở chế độ giao diện.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="249"/>
+        <location filename="../../src/main.cpp" line="280"/>
         <source>Configure</source>
         <translation>Cấu hình</translation>
     </message>
@@ -1943,122 +1983,126 @@ Vui lòng xử lí chúng thủ công trong tệp cấu hình.</translation>
         <translation type="vanished">Path where the capture will be saved</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="242"/>
+        <location filename="../../src/main.cpp" line="273"/>
         <source>Capture screenshot of all monitors at the same time.</source>
         <translation>Chụp màn hình tất cả màn hình cùng lúc.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="252"/>
+        <location filename="../../src/main.cpp" line="283"/>
         <source>Capture a screenshot of the specified monitor.</source>
         <translation>Chụp ảnh màn hình của màn hình được chỉ định.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="257"/>
+        <location filename="../../src/main.cpp" line="288"/>
         <source>Existing directory or new file to save to</source>
         <translation>Thư mục hiện có hoặc tệp mới để lưu vào</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="260"/>
+        <location filename="../../src/main.cpp" line="291"/>
         <source>Save the capture to the clipboard</source>
         <translation>Lưu ảnh chụp vào bộ nhớ tạm</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="262"/>
+        <location filename="../../src/main.cpp" line="293"/>
         <source>Pin the capture to the screen</source>
         <translation>Ghim ảnh chụp trên màn hình</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="264"/>
         <source>Upload screenshot</source>
-        <translation>Đăng tải ảnh chụp màn hình</translation>
+        <translation type="vanished">Đăng tải ảnh chụp màn hình</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="266"/>
+        <location filename="../../src/main.cpp" line="295"/>
         <source>Delay time in milliseconds</source>
         <translation>Thời gian trễ tính bằng mili giây</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="271"/>
+        <location filename="../../src/main.cpp" line="300"/>
         <source>Repeat screenshot with previously selected region</source>
         <translation>Lặp lại ảnh chụp màn hình với vùng đã chọn trước đó</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="274"/>
+        <location filename="../../src/main.cpp" line="303"/>
         <source>Screenshot region to select</source>
         <translation>Vùng ảnh chụp để chọn</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="277"/>
+        <location filename="../../src/main.cpp" line="306"/>
         <source>Set the filename pattern</source>
         <translation>Đặt mẫu tên tệp</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="281"/>
+        <location filename="../../src/main.cpp" line="310"/>
         <source>Accept capture as soon as a selection is made</source>
         <translation>Chấp nhận chụp ngay khi lựa chọn được thực hiện</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="283"/>
+        <location filename="../../src/main.cpp" line="312"/>
         <source>Enable or disable the trayicon</source>
         <translation>Bật hoặc tắt biểu tượng trong khay</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="287"/>
+        <location filename="../../src/main.cpp" line="316"/>
         <source>Enable or disable run at startup</source>
         <translation>Bật hoặc tắt chạy khi khởi động</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="291"/>
+        <location filename="../../src/main.cpp" line="320"/>
         <source>Enable or disable the notifications</source>
         <translation>Bật hoặc tắt thông báo</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="294"/>
+        <location filename="../../src/main.cpp" line="323"/>
         <source>Check the configuration for errors</source>
         <translation>Kiểm tra cấu hình để tim lỗi</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="297"/>
+        <location filename="../../src/main.cpp" line="326"/>
         <source>Show the help message in the capture mode</source>
         <translation>Hiển thị ô trợ giúp khi ở chế độ chụp</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="300"/>
+        <location filename="../../src/main.cpp" line="329"/>
         <source>Define the main UI color</source>
         <translation>Chọn màu chính cho giao diện</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="304"/>
+        <location filename="../../src/main.cpp" line="333"/>
         <source>Define the contrast UI color</source>
         <translation>Chọn màu sắc tương phản cho giao diện</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="307"/>
+        <location filename="../../src/main.cpp" line="336"/>
         <source>Print raw PNG capture</source>
         <translation>In ảnh chụp PNG gốc</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="310"/>
+        <location filename="../../src/main.cpp" line="339"/>
         <source>Print geometry of the selection in the format WxH+X+Y. Does nothing if raw is specified</source>
         <translation>In thông số của vùng chọn theo định dạng WxH+X+Y. Không thực hiện gì nếu đã chọn chế độ raw</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="314"/>
+        <location filename="../../src/main.cpp" line="343"/>
         <source>Define the screen to capture (starting from 0)</source>
         <translation>Chọn màn hình cần chụp (bắt đầu từ 0)</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="334"/>
+        <location filename="../../src/main.cpp" line="349"/>
+        <source>Interactively select and edit the screenshot region</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/main.cpp" line="366"/>
         <source>Invalid delay, it must be a number greater than 0</source>
         <translation>Độ trễ không hợp lệ, nó cần phải là một con số lớn hơn 0</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="337"/>
+        <location filename="../../src/main.cpp" line="369"/>
         <source>Invalid region, use &apos;WxH+X+Y&apos; or &apos;all&apos; or &apos;screen0/screen1/...&apos;.</source>
         <translation>Vùng không hợp lệ, sử dụng &apos;WxH+X+Y&apos; hoặc &apos;all&apos; hoặc &apos;screen0/screen1/...&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="350"/>
+        <location filename="../../src/main.cpp" line="382"/>
         <source>Invalid path, must be an existing directory or a new file in an existing directory</source>
         <translation>Đường dẫn không hợp lệ, phải là một thư mục hiện có hoặc một tệp mới trong một thư mục hiện có</translation>
     </message>
@@ -2067,17 +2111,17 @@ Vui lòng xử lí chúng thủ công trong tệp cấu hình.</translation>
         <translation type="vanished">Define the screen to capture</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="315"/>
+        <location filename="../../src/main.cpp" line="344"/>
         <source>default: screen containing the cursor</source>
         <translation>mặc định: màn hình chứa con trỏ chuột</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="316"/>
+        <location filename="../../src/main.cpp" line="345"/>
         <source>Screen number</source>
         <translation>Số màn hình</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="325"/>
+        <location filename="../../src/main.cpp" line="357"/>
         <source>Invalid color, this flag supports the following formats:
 - #RGB (each of R, G, and B is a single hex digit)
 - #RRGGBB
@@ -2098,7 +2142,7 @@ Bạn có thể cần phải thoát khỏi dấu &apos;#&apos; như trong &apos;
         <translation type="vanished">Invalid delay, it must be higher than 0</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="336"/>
+        <location filename="../../src/main.cpp" line="368"/>
         <source>Invalid screen number, it must be non negative</source>
         <translation>Số màn hình không hợp lệ, nó cần phải là một số không âm</translation>
     </message>
@@ -2107,7 +2151,7 @@ Bạn có thể cần phải thoát khỏi dấu &apos;#&apos; như trong &apos;
         <translation type="vanished">Invalid path, it must be a real path in the system</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="363"/>
+        <location filename="../../src/main.cpp" line="395"/>
         <source>Invalid value, it must be defined as &apos;true&apos; or &apos;false&apos;</source>
         <translation>Giá trị không hợp lệ, phải được định nghĩa là &apos;true&apos; (đúng) hoặc &apos;false&apos; (sai)</translation>
     </message>
@@ -2164,17 +2208,17 @@ Bạn có thể cần phải thoát khỏi dấu &apos;#&apos; như trong &apos;
         <translation>Mặc định, Flameshot sẽ chạy ngầm và hiển thị biểu tượng ở khay hệ thống để cấu hình.</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/trayicon.cpp" line="71"/>
+        <location filename="../../src/widgets/trayicon.cpp" line="83"/>
         <source>Hello, I&apos;m here! Click icon in the tray to take a screenshot or click with a right button to see more options.</source>
         <translation>Chào bạn, tôi ở đây nè! Nhấp vào biểu tượng trong khay để chụp ảnh màn hình hoặc nhấp bằng nút phải để xem thêm tùy chọn.</translation>
     </message>
     <message>
-        <location filename="../../src/core/flameshot.cpp" line="156"/>
+        <location filename="../../src/core/flameshot.cpp" line="168"/>
         <source>Requested screen exceeds screen count</source>
         <translation>Yêu cầu màn hình vượt quá số lượng hiện có</translation>
     </message>
     <message>
-        <location filename="../../src/core/flameshot.cpp" line="408"/>
+        <location filename="../../src/core/flameshot.cpp" line="418"/>
         <source>Full screen screenshot pinned to screen</source>
         <translation>Ảnh chụp toàn màn hình đã ghim vào màn hình</translation>
     </message>
@@ -2227,27 +2271,27 @@ Bạn có thể cần phải thoát khỏi dấu &apos;#&apos; như trong &apos;
         <translation type="vanished">Delete current tool</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="195"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="208"/>
         <source>Quit capture</source>
         <translation>Thoát chụp</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="207"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="224"/>
         <source>Screenshot history</source>
         <translation>Lịch sử chụp màn hình</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="211"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="219"/>
         <source>Capture screen</source>
         <translation>Chụp màn hình</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="218"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="233"/>
         <source>Show color picker</source>
         <translation>Hiện trình chọn màu</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="219"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="234"/>
         <source>Change the tool&apos;s size</source>
         <translation>Thay đổi kích cỡ công cụ</translation>
     </message>
@@ -2259,12 +2303,12 @@ Bạn có thể cần phải thoát khỏi dấu &apos;#&apos; như trong &apos;
 <context>
     <name>RectangleTool</name>
     <message>
-        <location filename="../../src/tools/rectangle/rectangletool.cpp" line="22"/>
+        <location filename="../../src/tools/rectangle/rectangletool.cpp" line="23"/>
         <source>Rectangle</source>
         <translation>Hình chữ nhật</translation>
     </message>
     <message>
-        <location filename="../../src/tools/rectangle/rectangletool.cpp" line="32"/>
+        <location filename="../../src/tools/rectangle/rectangletool.cpp" line="33"/>
         <source>Set the Rectangle as the paint tool</source>
         <translation>Chọn công cụ này để vẽ hình chữ nhật</translation>
     </message>
@@ -2272,12 +2316,12 @@ Bạn có thể cần phải thoát khỏi dấu &apos;#&apos; như trong &apos;
 <context>
     <name>RedoTool</name>
     <message>
-        <location filename="../../src/tools/redo/redotool.cpp" line="23"/>
+        <location filename="../../src/tools/redo/redotool.cpp" line="24"/>
         <source>Redo</source>
         <translation>Làm lại</translation>
     </message>
     <message>
-        <location filename="../../src/tools/redo/redotool.cpp" line="33"/>
+        <location filename="../../src/tools/redo/redotool.cpp" line="34"/>
         <source>Redo the next modification</source>
         <translation>Làm lại sửa đổi tiếp theo</translation>
     </message>
@@ -2306,34 +2350,128 @@ Bạn có thể cần phải thoát khỏi dấu &apos;#&apos; như trong &apos;
         <translation type="vanished">Unable to detect desktop environment (GNOME? KDE? Sway? ...)</translation>
     </message>
     <message>
-        <location filename="../../src/utils/screengrabber.cpp" line="53"/>
         <source>The universal wayland screen capture adapter requires Grim as the screen capture component of wayland. If the screen capture component is missing, please install it!</source>
-        <translation>Bộ điều hợp chụp màn hình phổ thông của Wayland yêu cầu Grim làm thành phần chụp màn hình. Nếu thiếu thành phần này, vui lòng cài đặt!</translation>
+        <translation type="vanished">Bộ điều hợp chụp màn hình phổ thông của Wayland yêu cầu Grim làm thành phần chụp màn hình. Nếu thiếu thành phần này, vui lòng cài đặt!</translation>
     </message>
     <message>
-        <location filename="../../src/utils/screengrabber.cpp" line="171"/>
         <source>If the useGrimAdapter setting is not enabled, the dbus protocol will be used. It should be noted that using the dbus protocol under wayland is not recommended. It is recommended to enable the useGrimAdapter setting in flameshot.ini to activate the grim-based general wayland screenshot adapter</source>
-        <translation>Nếu tùy chọn useGrimAdapter chưa được bật, giao thức dbus sẽ được sử dụng. Tuy nhiên, việc dùng dbus trên Wayland không được khuyến nghị. Bạn nên bật useGrimAdapter trong tập tin flameshot.ini để kích hoạt bộ điều hợp chụp màn hình Wayland dựa trên Grim</translation>
+        <translation type="vanished">Nếu tùy chọn useGrimAdapter chưa được bật, giao thức dbus sẽ được sử dụng. Tuy nhiên, việc dùng dbus trên Wayland không được khuyến nghị. Bạn nên bật useGrimAdapter trong tập tin flameshot.ini để kích hoạt bộ điều hợp chụp màn hình Wayland dựa trên Grim</translation>
     </message>
     <message>
-        <location filename="../../src/utils/screengrabber.cpp" line="182"/>
         <source>grim&apos;s screenshot component is implemented based on wlroots, it may not be used in GNOME or similar desktop environments</source>
-        <translation>Thành phần chụp màn hình Grim được xây dựng dựa trên wlroots, nên có thể không sử dụng được trong GNOME hoặc các môi trường desktop tương tự</translation>
+        <translation type="vanished">Thành phần chụp màn hình Grim được xây dựng dựa trên wlroots, nên có thể không sử dụng được trong GNOME hoặc các môi trường desktop tương tự</translation>
     </message>
     <message>
-        <location filename="../../src/utils/screengrabber.cpp" line="194"/>
         <source>Unable to detect desktop environment (GNOME? KDE? Qile? Sway? ...)</source>
-        <translation>Không thể xác định được môi trường desktop (GNOME? KDE? Qile? Sway? ...)</translation>
+        <translation type="vanished">Không thể xác định được môi trường desktop (GNOME? KDE? Qile? Sway? ...)</translation>
     </message>
     <message>
-        <location filename="../../src/utils/screengrabber.cpp" line="197"/>
         <source>Hint: try setting the XDG_CURRENT_DESKTOP environment variable.</source>
-        <translation>Gợi ý: hãy thử thiết lập biến môi trường XDG_CURRENT_DESKTOP.</translation>
+        <translation type="vanished">Gợi ý: hãy thử thiết lập biến môi trường XDG_CURRENT_DESKTOP.</translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/screengrabber.cpp" line="61"/>
+        <source>Could not locate the `org.freedesktop.portal.Desktop` service</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/screengrabber.cpp" line="109"/>
+        <source>Screenshot portal timed out after 30 seconds</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/screengrabber.cpp" line="132"/>
+        <source>FreeDesktop portal screenshot size: %1x%2, DPR: %3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/screengrabber.cpp" line="159"/>
+        <source>Capture Active Monitor is not supported on Wayland due to Wayland security model.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/screengrabber.cpp" line="177"/>
+        <source>Screenshot already in progress, please wait for the current screenshot to complete</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="202"/>
+        <source>Screenshot cancelled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/screengrabber.cpp" line="218"/>
+        <source>Unable to get current screen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/screengrabber.cpp" line="237"/>
+        <location filename="../../src/utils/screengrabber.cpp" line="243"/>
+        <location filename="../../src/utils/screengrabber.cpp" line="299"/>
+        <location filename="../../src/utils/screengrabber.cpp" line="304"/>
         <source>Unable to capture screen</source>
         <translation>Không thể chụp màn hình</translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/screengrabber.cpp" line="373"/>
+        <source>=== All Screen Information ===</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/screengrabber.cpp" line="376"/>
+        <location filename="../../src/utils/screengrabber.cpp" line="551"/>
+        <source>Screen %1: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/screengrabber.cpp" line="377"/>
+        <source>  Logical geometry: %1x%2+%3+%4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/screengrabber.cpp" line="382"/>
+        <source>  DPR: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/screengrabber.cpp" line="488"/>
+        <source>Total logical dimensions: %1x%2 (min: %3,%4)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/screengrabber.cpp" line="493"/>
+        <source>Screenshot dimensions: %1x%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/screengrabber.cpp" line="509"/>
+        <source>Screenshot scale factors: X=%1 Y=%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/screengrabber.cpp" line="542"/>
+        <source>Calculated crop position for mixed DPI: X=%1 Y=%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/screengrabber.cpp" line="552"/>
+        <source>  Logical geometry: %1x%2+%3+%4 DPR: %5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/screengrabber.cpp" line="558"/>
+        <source>  Crop rect in screenshot: %1x%2+%3+%4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/screengrabber.cpp" line="571"/>
+        <source>Crop rect is empty, returning full screenshot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/screengrabber.cpp" line="587"/>
+        <source>Scaling screenshot to: %1 %2</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2372,12 +2510,12 @@ Bạn có thể cần phải thoát khỏi dấu &apos;#&apos; như trong &apos;
 <context>
     <name>SelectionTool</name>
     <message>
-        <location filename="../../src/tools/selection/selectiontool.cpp" line="25"/>
+        <location filename="../../src/tools/selection/selectiontool.cpp" line="26"/>
         <source>Rectangular Selection</source>
         <translation>Lựa chọn hình chữ nhật</translation>
     </message>
     <message>
-        <location filename="../../src/tools/selection/selectiontool.cpp" line="35"/>
+        <location filename="../../src/tools/selection/selectiontool.cpp" line="36"/>
         <source>Set Selection as the paint tool</source>
         <translation>Đặt lựa chọn làm công cụ vẽ</translation>
     </message>
@@ -2385,28 +2523,28 @@ Bạn có thể cần phải thoát khỏi dấu &apos;#&apos; như trong &apos;
 <context>
     <name>SetShortcutDialog</name>
     <message>
-        <location filename="../../src/config/setshortcutwidget.cpp" line="18"/>
+        <location filename="../../src/config/setshortcutwidget.cpp" line="20"/>
         <source>Set Shortcut</source>
         <translation>Đặt phím tắt</translation>
     </message>
     <message>
-        <location filename="../../src/config/setshortcutwidget.cpp" line="24"/>
+        <location filename="../../src/config/setshortcutwidget.cpp" line="26"/>
         <source>Enter new shortcut to change </source>
         <translation>Hãy nhập phím tắt mới để đổi </translation>
     </message>
     <message>
-        <location filename="../../src/config/setshortcutwidget.cpp" line="38"/>
+        <location filename="../../src/config/setshortcutwidget.cpp" line="40"/>
         <source>Press Esc to cancel or ⌘+Backspace to disable the keyboard shortcut.</source>
         <translation>Nhấn Esc để hủy hoặc ⌘ + Phím cách để vô hiệu hóa phím tắt.</translation>
     </message>
     <message>
-        <location filename="../../src/config/setshortcutwidget.cpp" line="42"/>
+        <location filename="../../src/config/setshortcutwidget.cpp" line="44"/>
         <source>Press Esc to cancel or Backspace to disable the keyboard shortcut.</source>
         <translation>Nhấn Esc để hủy hoặc Phím cách để vô hiệu hóa phím tắt.</translation>
     </message>
     <message>
-        <location filename="../../src/config/setshortcutwidget.cpp" line="48"/>
-        <location filename="../../src/config/setshortcutwidget.cpp" line="53"/>
+        <location filename="../../src/config/setshortcutwidget.cpp" line="50"/>
+        <location filename="../../src/config/setshortcutwidget.cpp" line="55"/>
         <source>Flameshot must be restarted for changes to take effect.</source>
         <translation>Cần khởi động lại Flameshot để những thay đổi có hiệu lực.</translation>
     </message>
@@ -2414,131 +2552,170 @@ Bạn có thể cần phải thoát khỏi dấu &apos;#&apos; như trong &apos;
 <context>
     <name>ShortcutsWidget</name>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="27"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="31"/>
         <source>Hot Keys</source>
         <translation>Phím nóng</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="48"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="61"/>
         <source>Available shortcuts in the screen capture mode.</source>
         <translation>Các phím tắt có sẵn trong chế độ chụp màn hình.</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="59"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="72"/>
         <source>Description</source>
         <translation>Miêu tả</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="59"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="72"/>
         <source>Key</source>
         <translation>Phím</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="162"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="175"/>
         <source>Left Double-click</source>
         <translation>Nháy đúp chuột trái</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="169"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="182"/>
         <source>Toggle side panel</source>
         <translation>Bật/Tắt bảng điều khiển bên</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="170"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="183"/>
         <source>Grab a color from the screen</source>
         <translation>Lấy một màu từ màn hình</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="171"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="184"/>
         <source>Resize selection left 1px</source>
         <translation>Kéo kích thước cạnh trái thêm 1px</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="172"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="185"/>
         <source>Resize selection right 1px</source>
         <translation>Kéo kích thước cạnh phải thêm 1px</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="173"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="186"/>
         <source>Resize selection up 1px</source>
         <translation>Kéo kích thước cạnh trên thêm 1px</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="174"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="187"/>
         <source>Resize selection down 1px</source>
         <translation>Kéo kích thước cạnh dưới thêm 1px</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="176"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="189"/>
         <source>Symmetrically decrease width by 2px</source>
         <translation>Giảm chiều rộng 2px</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="178"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="191"/>
         <source>Symmetrically increase width by 2px</source>
         <translation>Tăng chiều rộng 2px</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="180"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="193"/>
         <source>Symmetrically increase height by 2px</source>
         <translation>Tăng chiều cao 2px</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="182"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="195"/>
         <source>Symmetrically decrease height by 2px</source>
         <translation>Giảm chiều cao 2px</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="183"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="196"/>
         <source>Select entire screen</source>
         <translation>Chọn bao phủ toàn bộ màn hình</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="184"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="197"/>
         <source>Move selection left 1px</source>
         <translation>Di chuyển khu vực đã chọn sang trái 1px</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="185"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="198"/>
         <source>Move selection right 1px</source>
         <translation>Di chuyển khu vực đã chọn sang phải 1px</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="186"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="199"/>
         <source>Move selection up 1px</source>
         <translation>Di chuyển khu vực đã chọn lên trên 1px</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="187"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="200"/>
         <source>Move selection down 1px</source>
         <translation>Di chuyển khu vực đã chọn xuống dưới 1px</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="188"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="201"/>
         <source>Commit text in text area</source>
         <translation>Xác nhận nội dung văn bản đã nhập</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="190"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="203"/>
         <source>Delete selected drawn object</source>
         <translation>Xóa đối tượng đã chọn</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="191"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="204"/>
         <source>Cancel current selection</source>
         <translation>Hủy lựa chọn hiện tại</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="268"/>
+        <source>It seems, that Windows forces to open its screenshot tool when the &apos;Print Screen&apos; key is pressed. Would you like to disable this so that Flameshot can use the &apos;Print Screen&apos; key?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="273"/>
+        <source>Flameshot must be restarted for changes to take effect.</source>
+        <translation type="unfinished">Cần khởi động lại Flameshot để những thay đổi có hiệu lực.</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="278"/>
+        <source>No, don&apos;t ask again</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="286"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="333"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="343"/>
+        <source>The registry could not be changed!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="317"/>
+        <source>Register Flameshot as MS-SCREENCLIP application (administrator privileges required)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="321"/>
+        <source>After registering, you can select Flameshot as the default screenshot application in Windows Settings.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="334"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="344"/>
+        <source>You may start Flameshot as administrator ONCE and try again!</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Delete current tool</source>
         <translation type="obsolete">Delete current tool</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="200"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="213"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="222"/>
         <source>Capture screen</source>
         <translation>Chụp màn hình</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="202"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="215"/>
         <source>Screenshot history</source>
         <translation>Lịch sử chụp màn hình</translation>
     </message>
@@ -2581,12 +2758,12 @@ Bạn có thể cần phải thoát khỏi dấu &apos;#&apos; như trong &apos;
 <context>
     <name>SizeDecreaseTool</name>
     <message>
-        <location filename="../../src/tools/sizedecrease/sizedecreasetool.cpp" line="37"/>
+        <location filename="../../src/tools/sizedecrease/sizedecreasetool.cpp" line="38"/>
         <source>Decrease Tool Size</source>
         <translation>Giảm kích thước công cụ</translation>
     </message>
     <message>
-        <location filename="../../src/tools/sizedecrease/sizedecreasetool.cpp" line="47"/>
+        <location filename="../../src/tools/sizedecrease/sizedecreasetool.cpp" line="48"/>
         <source>Decrease the size of the other tools</source>
         <translation>Giảm kích thước của các công cụ</translation>
     </message>
@@ -2594,12 +2771,12 @@ Bạn có thể cần phải thoát khỏi dấu &apos;#&apos; như trong &apos;
 <context>
     <name>SizeIncreaseTool</name>
     <message>
-        <location filename="../../src/tools/sizeincrease/sizeincreasetool.cpp" line="37"/>
+        <location filename="../../src/tools/sizeincrease/sizeincreasetool.cpp" line="38"/>
         <source>Increase Tool Size</source>
         <translation>Tăng kích thước công cụ</translation>
     </message>
     <message>
-        <location filename="../../src/tools/sizeincrease/sizeincreasetool.cpp" line="47"/>
+        <location filename="../../src/tools/sizeincrease/sizeincreasetool.cpp" line="48"/>
         <source>Increase the size of the other tools</source>
         <translation>Tăng kích thước của các công cụ</translation>
     </message>
@@ -2622,120 +2799,103 @@ Bạn có thể cần phải thoát khỏi dấu &apos;#&apos; như trong &apos;
 <context>
     <name>StrftimeChooserWidget</name>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="43"/>
         <source>Century (00-99)</source>
-        <translation>Thế kỉ (00-99)</translation>
+        <translation type="vanished">Thế kỉ (00-99)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="44"/>
         <source>Year (00-99)</source>
-        <translation>Năm - ngắn gọn (00-99)</translation>
+        <translation type="vanished">Năm - ngắn gọn (00-99)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="45"/>
         <source>Year (2000)</source>
-        <translation>Năm - đầy đủ (2000)</translation>
+        <translation type="vanished">Năm - đầy đủ (2000)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="48"/>
         <source>Month Name (jan)</source>
-        <translation>Tên tháng - ngắn gọn (jan)</translation>
+        <translation type="vanished">Tên tháng - ngắn gọn (jan)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="49"/>
         <source>Month Name (january)</source>
-        <translation>Tên tháng - đầy đủ (january)</translation>
+        <translation type="vanished">Tên tháng - đầy đủ (january)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="51"/>
         <source>Month (01-12)</source>
-        <translation>Tháng (01-12)</translation>
+        <translation type="vanished">Tháng (01-12)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="52"/>
         <source>Week Day (1-7)</source>
-        <translation>Ngày trong tuần (1-7)</translation>
+        <translation type="vanished">Ngày trong tuần (1-7)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="53"/>
         <source>Week (01-53)</source>
-        <translation>Tuần (01-53)</translation>
+        <translation type="vanished">Tuần (01-53)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="56"/>
         <source>Day Name (mon)</source>
-        <translation>Thứ - ngắn gọn (mon)</translation>
+        <translation type="vanished">Thứ - ngắn gọn (mon)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="57"/>
         <source>Day Name (monday)</source>
-        <translation>Thứ - đầy đủ (monday)</translation>
+        <translation type="vanished">Thứ - đầy đủ (monday)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="59"/>
         <source>Day (01-31)</source>
-        <translation>Ngày (01-31)</translation>
+        <translation type="vanished">Ngày (01-31)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="60"/>
         <source>Day of Month (1-31)</source>
-        <translation>Day trong tháng (1-31)</translation>
+        <translation type="vanished">Day trong tháng (1-31)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="61"/>
         <source>Day (001-366)</source>
-        <translation>Ngày trong năm (001-366)</translation>
+        <translation type="vanished">Ngày trong năm (001-366)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="67"/>
         <source>Hour (00-23)</source>
-        <translation>Giờ - định dạng 24h (00-23)</translation>
+        <translation type="vanished">Giờ - định dạng 24h (00-23)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="68"/>
         <source>Hour (01-12)</source>
-        <translation>Giờ - định dạng 12h (01-12)</translation>
+        <translation type="vanished">Giờ - định dạng 12h (01-12)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="69"/>
         <source>Minute (00-59)</source>
-        <translation>Phút (00-59)</translation>
+        <translation type="vanished">Phút (00-59)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="70"/>
         <source>Second (00-59)</source>
-        <translation>Giây (00-59)</translation>
+        <translation type="vanished">Giây (00-59)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="73"/>
         <source>Full Date (%m/%d/%y)</source>
-        <translation>Tháng/ngày/năm (%m/%d/%y)</translation>
+        <translation type="vanished">Tháng/ngày/năm (%m/%d/%y)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="75"/>
         <source>Full Date (%Y-%m-%d)</source>
-        <translation>Năm-tháng-ngày (%Y-%m-%d)</translation>
+        <translation type="vanished">Năm-tháng-ngày (%Y-%m-%d)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="76"/>
         <source>Full Date (%d-%m-%Y)</source>
-        <translation>Ngày đầy đủ (%d-%m-%Y)</translation>
+        <translation type="vanished">Ngày đầy đủ (%d-%m-%Y)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="64"/>
         <source>Time (%H-%M-%S)</source>
-        <translation>Giờ-phút-giây (%H-%M-%S)</translation>
+        <translation type="vanished">Giờ-phút-giây (%H-%M-%S)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="65"/>
         <source>Time (%H-%M)</source>
-        <translation>Giờ-phút (%H-%M)</translation>
+        <translation type="vanished">Giờ-phút (%H-%M)</translation>
     </message>
 </context>
 <context>
     <name>SystemNotification</name>
     <message>
-        <location filename="../../src/utils/systemnotification.cpp" line="42"/>
+        <location filename="../../src/utils/systemnotification.cpp" line="43"/>
+        <source>No DBus System Notification service found</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/systemnotification.cpp" line="51"/>
         <source>Flameshot Info</source>
         <translation>Thông tin Flameshot</translation>
     </message>
@@ -2743,37 +2903,37 @@ Bạn có thể cần phải thoát khỏi dấu &apos;#&apos; như trong &apos;
 <context>
     <name>TextConfig</name>
     <message>
-        <location filename="../../src/tools/text/textconfig.cpp" line="44"/>
+        <location filename="../../src/tools/text/textconfig.cpp" line="45"/>
         <source>StrikeOut</source>
         <translation>Đường gạch xóa</translation>
     </message>
     <message>
-        <location filename="../../src/tools/text/textconfig.cpp" line="53"/>
+        <location filename="../../src/tools/text/textconfig.cpp" line="54"/>
         <source>Underline</source>
         <translation>Gạch chân</translation>
     </message>
     <message>
-        <location filename="../../src/tools/text/textconfig.cpp" line="62"/>
+        <location filename="../../src/tools/text/textconfig.cpp" line="63"/>
         <source>Bold</source>
         <translation>Bôi đen</translation>
     </message>
     <message>
-        <location filename="../../src/tools/text/textconfig.cpp" line="71"/>
+        <location filename="../../src/tools/text/textconfig.cpp" line="72"/>
         <source>Italic</source>
         <translation>In nghiêng</translation>
     </message>
     <message>
-        <location filename="../../src/tools/text/textconfig.cpp" line="81"/>
+        <location filename="../../src/tools/text/textconfig.cpp" line="82"/>
         <source>Left Align</source>
         <translation>Căn trái</translation>
     </message>
     <message>
-        <location filename="../../src/tools/text/textconfig.cpp" line="90"/>
+        <location filename="../../src/tools/text/textconfig.cpp" line="91"/>
         <source>Center Align</source>
         <translation>Căn giữa</translation>
     </message>
     <message>
-        <location filename="../../src/tools/text/textconfig.cpp" line="99"/>
+        <location filename="../../src/tools/text/textconfig.cpp" line="100"/>
         <source>Right Align</source>
         <translation>Căn phải</translation>
     </message>
@@ -2794,47 +2954,62 @@ Bạn có thể cần phải thoát khỏi dấu &apos;#&apos; như trong &apos;
 <context>
     <name>TrayIcon</name>
     <message>
-        <location filename="../../src/widgets/trayicon.cpp" line="100"/>
+        <location filename="../../src/widgets/trayicon.cpp" line="112"/>
         <source>&amp;Take Screenshot</source>
         <translation>&amp;Chụp ảnh màn hình</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/trayicon.cpp" line="118"/>
+        <location filename="../../src/widgets/trayicon.cpp" line="133"/>
         <source>&amp;Open Launcher</source>
         <translation>&amp;Mở trình khởi chạy</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/trayicon.cpp" line="123"/>
+        <location filename="../../src/widgets/trayicon.cpp" line="138"/>
         <source>&amp;Configuration</source>
         <translation>&amp;Cấu hình</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/trayicon.cpp" line="128"/>
+        <location filename="../../src/widgets/trayicon.cpp" line="143"/>
         <source>&amp;About</source>
         <translation>&amp;Về chúng tôi</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/trayicon.cpp" line="133"/>
+        <location filename="../../src/widgets/trayicon.cpp" line="150"/>
+        <location filename="../../src/widgets/trayicon.cpp" line="237"/>
         <source>Check for updates</source>
         <translation>Kiểm tra các bản cập nhật</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/trayicon.cpp" line="144"/>
-        <source>New version %1 is available</source>
-        <translation>Đã có phiên bản mới %1</translation>
+        <location filename="../../src/widgets/trayicon.cpp" line="162"/>
+        <source>Download version %1</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/widgets/trayicon.cpp" line="149"/>
+        <location filename="../../src/widgets/trayicon.cpp" line="250"/>
+        <source>Select Screen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/trayicon.cpp" line="266"/>
+        <source>Monitor %1: %2 (%3x%4)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New version %1 is available</source>
+        <translation type="vanished">Đã có phiên bản mới %1</translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/trayicon.cpp" line="176"/>
         <source>&amp;Quit</source>
         <translation>&amp;Thoát</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/trayicon.cpp" line="154"/>
+        <location filename="../../src/widgets/trayicon.cpp" line="181"/>
         <source>&amp;Latest Uploads</source>
         <translation>&amp;Tải lên mới nhất</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/trayicon.cpp" line="160"/>
+        <location filename="../../src/widgets/trayicon.cpp" line="187"/>
         <source>&amp;Open Save Path</source>
         <translation>&amp;Mở đường dẫn lưu</translation>
     </message>
@@ -2846,32 +3021,32 @@ Bạn có thể cần phải thoát khỏi dấu &apos;#&apos; như trong &apos;
         <translation type="vanished">UI Color Editor</translation>
     </message>
     <message>
-        <location filename="../../src/config/uicoloreditor.cpp" line="88"/>
+        <location filename="../../src/config/uicoloreditor.cpp" line="89"/>
         <source>Change the color moving the selectors and see the changes in the preview buttons.</source>
         <translation>Thay đổi màu sắc bằng cách di chuyển các thanh chọn và xem sự thay đổi trong các nút xem trước.</translation>
     </message>
     <message>
-        <location filename="../../src/config/uicoloreditor.cpp" line="99"/>
+        <location filename="../../src/config/uicoloreditor.cpp" line="100"/>
         <source>Select a Button to modify it</source>
         <translation>Chọn nút cần sửa đổi</translation>
     </message>
     <message>
-        <location filename="../../src/config/uicoloreditor.cpp" line="109"/>
+        <location filename="../../src/config/uicoloreditor.cpp" line="110"/>
         <source>Main Color</source>
         <translation>Màu chính</translation>
     </message>
     <message>
-        <location filename="../../src/config/uicoloreditor.cpp" line="113"/>
+        <location filename="../../src/config/uicoloreditor.cpp" line="114"/>
         <source>Click on this button to set the edition mode of the main color.</source>
         <translation>Nhấn vào nút này để chỉnh sửa màu chính của giao diện.</translation>
     </message>
     <message>
-        <location filename="../../src/config/uicoloreditor.cpp" line="124"/>
+        <location filename="../../src/config/uicoloreditor.cpp" line="125"/>
         <source>Contrast Color</source>
         <translation>Màu tương phản</translation>
     </message>
     <message>
-        <location filename="../../src/config/uicoloreditor.cpp" line="129"/>
+        <location filename="../../src/config/uicoloreditor.cpp" line="130"/>
         <source>Click on this button to set the edition mode of the contrast color.</source>
         <translation>Nhấn vào nút này để thay đổi màu tương phản.</translation>
     </message>
@@ -2879,12 +3054,12 @@ Bạn có thể cần phải thoát khỏi dấu &apos;#&apos; như trong &apos;
 <context>
     <name>UndoTool</name>
     <message>
-        <location filename="../../src/tools/undo/undotool.cpp" line="23"/>
+        <location filename="../../src/tools/undo/undotool.cpp" line="24"/>
         <source>Undo</source>
         <translation>Hoàn Tác</translation>
     </message>
     <message>
-        <location filename="../../src/tools/undo/undotool.cpp" line="33"/>
+        <location filename="../../src/tools/undo/undotool.cpp" line="34"/>
         <source>Undo the last modification</source>
         <translation>Hoàn tác sửa đổi cuối cùng</translation>
     </message>
@@ -2892,22 +3067,22 @@ Bạn có thể cần phải thoát khỏi dấu &apos;#&apos; như trong &apos;
 <context>
     <name>UpdateNotificationWidget</name>
     <message>
-        <location filename="../../src/widgets/updatenotificationwidget.cpp" line="70"/>
+        <location filename="../../src/widgets/updatenotificationwidget.cpp" line="71"/>
         <source>New Flameshot version %1 is available</source>
         <translation>Đã có phiên bản Flameshot mới %1</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/updatenotificationwidget.cpp" line="123"/>
+        <location filename="../../src/widgets/updatenotificationwidget.cpp" line="129"/>
         <source>Ignore</source>
         <translation>Không quan tâm</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/updatenotificationwidget.cpp" line="131"/>
+        <location filename="../../src/widgets/updatenotificationwidget.cpp" line="137"/>
         <source>Later</source>
         <translation>Sau</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/updatenotificationwidget.cpp" line="139"/>
+        <location filename="../../src/widgets/updatenotificationwidget.cpp" line="145"/>
         <source>Update</source>
         <translation>Cập Nhật</translation>
     </message>
@@ -2961,12 +3136,12 @@ Bạn có thể cần phải thoát khỏi dấu &apos;#&apos; như trong &apos;
 <context>
     <name>UtilityPanel</name>
     <message>
-        <location filename="../../src/widgets/panel/utilitypanel.cpp" line="196"/>
+        <location filename="../../src/widgets/panel/utilitypanel.cpp" line="197"/>
         <source>Close</source>
         <translation>Đóng</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/panel/utilitypanel.cpp" line="206"/>
+        <location filename="../../src/widgets/panel/utilitypanel.cpp" line="207"/>
         <source>&lt;Empty&gt;</source>
         <translation>&lt;Trống&gt;</translation>
     </message>
@@ -2974,29 +3149,44 @@ Bạn có thể cần phải thoát khỏi dấu &apos;#&apos; như trong &apos;
 <context>
     <name>VisualsEditor</name>
     <message>
-        <location filename="../../src/config/visualseditor.cpp" line="41"/>
+        <location filename="../../src/config/visualseditor.cpp" line="44"/>
         <source>Opacity of area outside selection:</source>
         <translation>Độ mờ của vùng bên ngoài vùng chọn:</translation>
     </message>
     <message>
-        <location filename="../../src/config/visualseditor.cpp" line="68"/>
+        <location filename="../../src/config/visualseditor.cpp" line="73"/>
         <source>UI Color Editor</source>
         <translation>Trình chỉnh sửa màu giao diện</translation>
     </message>
     <message>
-        <location filename="../../src/config/visualseditor.cpp" line="74"/>
+        <location filename="../../src/config/visualseditor.cpp" line="79"/>
         <source>Colorpicker Editor</source>
         <translation>Trình chọn màu</translation>
     </message>
     <message>
-        <location filename="../../src/config/visualseditor.cpp" line="79"/>
+        <location filename="../../src/config/visualseditor.cpp" line="84"/>
         <source>Button Selection</source>
         <translation>Lựa chọn nút</translation>
     </message>
     <message>
-        <location filename="../../src/config/visualseditor.cpp" line="85"/>
+        <location filename="../../src/config/visualseditor.cpp" line="90"/>
         <source>Select All</source>
         <translation>Chọn tất cả</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/visualseditor.cpp" line="101"/>
+        <source>UI language</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/visualseditor.cpp" line="141"/>
+        <source>Configuration</source>
+        <translation type="unfinished">Cấu hình</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/visualseditor.cpp" line="142"/>
+        <source>Flameshot must be restarted to apply these changes!</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3010,7 +3200,7 @@ Bạn có thể cần phải thoát khỏi dấu &apos;#&apos; như trong &apos;
 <context>
     <name>color_widgets::ColorPalette</name>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette.cpp" line="417"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette.cpp" line="422"/>
         <source>Unnamed</source>
         <translation>Không tên</translation>
     </message>

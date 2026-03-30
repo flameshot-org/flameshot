@@ -53,33 +53,33 @@
 <context>
     <name>AppLauncherWidget</name>
     <message>
-        <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="50"/>
+        <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="51"/>
         <source>Open With</source>
         <translation>Отваряне с</translation>
     </message>
     <message>
-        <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="79"/>
+        <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="80"/>
         <source>Launch in terminal</source>
         <translation>Отваряне в терминал</translation>
     </message>
     <message>
-        <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="80"/>
+        <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="81"/>
         <source>Keep open after selection</source>
         <translation>Оставяне работещо след избиране</translation>
     </message>
     <message>
-        <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="116"/>
-        <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="150"/>
+        <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="117"/>
+        <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="151"/>
         <source>Error</source>
         <translation>Грешка</translation>
     </message>
     <message>
-        <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="150"/>
+        <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="151"/>
         <source>Unable to launch in terminal.</source>
         <translation>Грешка при отваряне на терминал.</translation>
     </message>
     <message>
-        <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="116"/>
+        <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="117"/>
         <source>Unable to write in</source>
         <translation>Грешка при записване</translation>
     </message>
@@ -87,12 +87,12 @@
 <context>
     <name>ArrowTool</name>
     <message>
-        <location filename="../../src/tools/arrow/arrowtool.cpp" line="77"/>
+        <location filename="../../src/tools/arrow/arrowtool.cpp" line="78"/>
         <source>Arrow</source>
         <translation>Стрелка</translation>
     </message>
     <message>
-        <location filename="../../src/tools/arrow/arrowtool.cpp" line="87"/>
+        <location filename="../../src/tools/arrow/arrowtool.cpp" line="88"/>
         <source>Set the Arrow as the paint tool</source>
         <translation>Избиране на инструмент „Стрелка“</translation>
     </message>
@@ -115,76 +115,89 @@
         <translation type="vanished">&lt;b&gt;Capture Mode&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.cpp" line="33"/>
+        <location filename="../../src/widgets/capturelauncher.cpp" line="32"/>
         <source>Rectangular Region</source>
         <translation>Правоъгълна област</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.cpp" line="39"/>
+        <location filename="../../src/widgets/capturelauncher.cpp" line="38"/>
         <source>Full Screen (Current Display)</source>
         <translation>Целия екран (текущия монитор)</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.cpp" line="42"/>
-        <source>Full Screen (All Monitors)</source>
-        <translation>Целия екран (всички монитори)</translation>
+        <location filename="../../src/widgets/capturelauncher.cpp" line="41"/>
+        <source>Full Screen</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.cpp" line="45"/>
+        <location filename="../../src/widgets/capturelauncher.cpp" line="46"/>
+        <source>Monitor %1: %2 (%3x%4)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Full Screen (All Monitors)</source>
+        <translation type="vanished">Целия екран (всички монитори)</translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/capturelauncher.cpp" line="71"/>
         <source>No Delay</source>
         <translation>Без изчакване</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.cpp" line="53"/>
+        <location filename="../../src/widgets/capturelauncher.cpp" line="90"/>
         <source> second</source>
         <translation> секунда</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.ui" line="100"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="184"/>
-        <location filename="../../src/widgets/capturelauncher.cpp" line="53"/>
+        <location filename="../../src/widgets/capturelauncher.ui" line="94"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="186"/>
+        <location filename="../../src/widgets/capturelauncher.cpp" line="90"/>
         <source> seconds</source>
         <translation> секунди</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.ui" line="165"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="185"/>
+        <location filename="../../src/widgets/capturelauncher.ui" line="166"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="188"/>
         <source>Take new screenshot</source>
         <translation>Ново заснемане</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.ui" line="66"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="180"/>
+        <location filename="../../src/widgets/capturelauncher.ui" line="47"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="181"/>
         <source>Area:</source>
         <translation>Област:</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="14"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="177"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="179"/>
         <source>Capture Launcher</source>
         <translation>Започване на заснемане</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.ui" line="34"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="178"/>
         <source>TextLabel</source>
-        <translation>Етикет</translation>
+        <translation type="vanished">Етикет</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.ui" line="51"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="179"/>
+        <location filename="../../src/widgets/capturelauncher.ui" line="32"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="180"/>
         <source>Capture Mode</source>
         <translation>Режим на заснемане</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.ui" line="80"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="182"/>
+        <location filename="../../src/widgets/capturelauncher.ui" line="64"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="183"/>
         <source>Delay:</source>
         <translation>Изчакване:</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.ui" line="93"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="183"/>
+        <location filename="../../src/widgets/capturelauncher.ui" line="71"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="184"/>
+        <source>Monitor:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/capturelauncher.ui" line="87"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="185"/>
         <source>WxH+x+y</source>
         <translation>Ш×В+x+y</translation>
     </message>
@@ -192,78 +205,77 @@
 <context>
     <name>CaptureWidget</name>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="112"/>
         <source>Unable to capture screen</source>
         <translatorcomment>Impossible capturar la pantalla</translatorcomment>
-        <translation>Грешка при заснемане на екрана</translation>
+        <translation type="vanished">Грешка при заснемане на екрана</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="456"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="468"/>
         <source>Mouse</source>
         <translation>Мишка</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="456"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="468"/>
         <source>Select screenshot area</source>
         <translation>Избиране на заснеманата област</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="470"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="482"/>
         <source>Mouse Wheel</source>
         <translation>Колелце на мишката</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="470"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="482"/>
         <source>Change tool size</source>
         <translation>Промяна на размера на инструмента</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="471"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="483"/>
         <source>Right Click</source>
         <translation>Щракване с десен бутон</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="471"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="483"/>
         <source>Show color picker</source>
         <translation>Избиране на цвят</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="473"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="485"/>
         <source>Open side panel</source>
         <translation>Отваряне на страничен панел</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="474"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="486"/>
         <source>Esc</source>
         <translation>Esc</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="474"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="486"/>
         <source>Exit</source>
         <translation>Изход</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="515"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="527"/>
         <source>Quit Capture</source>
         <translation>Изход от заснемане</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="516"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="528"/>
         <source>Are you sure you want to quit capture?</source>
         <translation>Желаете ли да напуснете заснемането?</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="521"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="533"/>
         <source>Do not show this again</source>
         <translation>Без повторно показване</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="727"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="777"/>
         <source>Flameshot has lost focus. Keyboard shortcuts won&apos;t work until you click somewhere.</source>
         <translation>Flameshot загуби фокус. Клавишните комбинации няма да работят докато не щракнете с мишката някъде.</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="733"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="783"/>
         <source>Configuration error resolved. Launch `flameshot gui` again to apply it.</source>
         <translation>Грешката в настройките е отстранена. Стартирайте отново `flameshot gui`, за да бъдат приети.</translation>
     </message>
@@ -280,7 +292,7 @@ Use the Mouse Wheel to change the thickness of your tool.
 Press Space to open the side panel.</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="1167"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="1215"/>
         <source>Tool Settings</source>
         <translation>Настройки на инструмента</translation>
     </message>
@@ -288,12 +300,12 @@ Press Space to open the side panel.</translation>
 <context>
     <name>CircleCountTool</name>
     <message>
-        <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="68"/>
+        <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="69"/>
         <source>Circle Counter</source>
         <translation>Номериране</translation>
     </message>
     <message>
-        <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="86"/>
+        <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="87"/>
         <source>Add an autoincrementing counter bubble</source>
         <translation>Добавяне на последователни числа в балонче</translation>
     </message>
@@ -301,12 +313,12 @@ Press Space to open the side panel.</translation>
 <context>
     <name>CircleTool</name>
     <message>
-        <location filename="../../src/tools/circle/circletool.cpp" line="20"/>
+        <location filename="../../src/tools/circle/circletool.cpp" line="21"/>
         <source>Circle</source>
         <translation>Окръжност</translation>
     </message>
     <message>
-        <location filename="../../src/tools/circle/circletool.cpp" line="30"/>
+        <location filename="../../src/tools/circle/circletool.cpp" line="31"/>
         <source>Set the Circle as the paint tool</source>
         <translation>Избиране на инструмент „Окръжност“</translation>
     </message>
@@ -371,42 +383,42 @@ Press Space to open the side panel.</translation>
 <context>
     <name>ColorGrabWidget</name>
     <message>
-        <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="58"/>
+        <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="56"/>
         <source>Accept color</source>
         <translation>Приемане на цвета</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="58"/>
+        <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="56"/>
         <source>Enter or Left Click</source>
         <translation>Enter или щракване с ляв бутон</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="59"/>
+        <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="57"/>
         <source>Precisely select color</source>
         <translation>Избиране на точен цвят</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="59"/>
+        <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="57"/>
         <source>Hold Left Click</source>
         <translation>Задържане на левия бутон</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="60"/>
+        <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="58"/>
         <source>Toggle magnifier</source>
         <translation>Превключване на лупата</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="60"/>
+        <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="58"/>
         <source>Space or Right Click</source>
         <translation>Интервал или щракване с десен бутон</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="61"/>
+        <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="59"/>
         <source>Cancel</source>
         <translation>Отказ</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="61"/>
+        <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="59"/>
         <source>Esc</source>
         <translation>Esc</translation>
     </message>
@@ -483,7 +495,7 @@ Press Space to open the side panel.</translation>
 <context>
     <name>ConfigErrorDetails</name>
     <message>
-        <location filename="../../src/config/configerrordetails.cpp" line="20"/>
+        <location filename="../../src/config/configerrordetails.cpp" line="19"/>
         <source>Configuration errors</source>
         <translation>Грешки в настройките</translation>
     </message>
@@ -491,45 +503,45 @@ Press Space to open the side panel.</translation>
 <context>
     <name>ConfigHandler</name>
     <message>
-        <location filename="../../src/utils/confighandler.cpp" line="579"/>
+        <location filename="../../src/utils/confighandler.cpp" line="600"/>
         <source>Unrecognized setting: &apos;%1&apos;
 </source>
         <translation>Неизвестна настройки: „%1“
 </translation>
     </message>
     <message>
-        <location filename="../../src/utils/confighandler.cpp" line="587"/>
+        <location filename="../../src/utils/confighandler.cpp" line="608"/>
         <source>Unrecognized shortcut name: &apos;%1&apos;.
 </source>
         <translation>Непознато име клавишна комбинация: „%1“.
 </translation>
     </message>
     <message>
-        <location filename="../../src/utils/confighandler.cpp" line="630"/>
+        <location filename="../../src/utils/confighandler.cpp" line="651"/>
         <source>Shortcut conflict: &apos;%1&apos; and &apos;%2&apos; have the same shortcut: %3
 </source>
         <translation>Клавишните комбинации на „%1“ и „%2“ съвпадат: %3
 </translation>
     </message>
     <message>
-        <location filename="../../src/utils/confighandler.cpp" line="668"/>
+        <location filename="../../src/utils/confighandler.cpp" line="689"/>
         <source>Bad value in &apos;%1&apos;. Expected: %2
 </source>
         <translation>Невярна стойност „%1“. Очаквана: %2
 </translation>
     </message>
     <message>
-        <location filename="../../src/utils/confighandler.cpp" line="717"/>
+        <location filename="../../src/utils/confighandler.cpp" line="738"/>
         <source>You have successfully resolved the configuration error.</source>
         <translation>Успешно сте отстранили грешка в настройките.</translation>
     </message>
     <message>
-        <location filename="../../src/utils/confighandler.cpp" line="740"/>
+        <location filename="../../src/utils/confighandler.cpp" line="761"/>
         <source>The configuration contains an error. Open configuration to resolve.</source>
         <translation>Грешка в настройките. Отворете прозореца с настройки, за да я отстраните.</translation>
     </message>
     <message>
-        <location filename="../../src/utils/confighandler.cpp" line="794"/>
+        <location filename="../../src/utils/confighandler.cpp" line="816"/>
         <source>Bad config key &apos;%1&apos; in ConfigHandler. Please report this as a bug.</source>
         <translation>Неверен ключ на настройка „%1“ в ConfigHandler. Съобщете за дефект.</translation>
     </message>
@@ -537,37 +549,37 @@ Press Space to open the side panel.</translation>
 <context>
     <name>ConfigResolver</name>
     <message>
-        <location filename="../../src/config/configresolver.cpp" line="14"/>
+        <location filename="../../src/config/configresolver.cpp" line="13"/>
         <source>Resolve configuration errors</source>
         <translation>Отстраняване на грешки в настройките</translation>
     </message>
     <message>
-        <location filename="../../src/config/configresolver.cpp" line="50"/>
+        <location filename="../../src/config/configresolver.cpp" line="49"/>
         <source>&lt;b&gt;You must resolve all errors before continuing:&lt;/b&gt;</source>
         <translation>&lt;b&gt;Трябва да отстраните всички грешки преди да продължите:&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/config/configresolver.cpp" line="61"/>
+        <location filename="../../src/config/configresolver.cpp" line="60"/>
         <source>Reset</source>
         <translation>Нулиране</translation>
     </message>
     <message>
-        <location filename="../../src/config/configresolver.cpp" line="63"/>
+        <location filename="../../src/config/configresolver.cpp" line="62"/>
         <source>Reset to the default value.</source>
         <translation>Нулиране до подразбираната стойност.</translation>
     </message>
     <message>
-        <location filename="../../src/config/configresolver.cpp" line="77"/>
+        <location filename="../../src/config/configresolver.cpp" line="76"/>
         <source>Remove</source>
         <translation>Премахване</translation>
     </message>
     <message>
-        <location filename="../../src/config/configresolver.cpp" line="79"/>
+        <location filename="../../src/config/configresolver.cpp" line="78"/>
         <source>Remove this setting.</source>
         <translation>Премахва настройката.</translation>
     </message>
     <message>
-        <location filename="../../src/config/configresolver.cpp" line="90"/>
+        <location filename="../../src/config/configresolver.cpp" line="89"/>
         <source>Some keyboard shortcuts have conflicts.
 This will NOT prevent flameshot from starting.
 Please solve them manually in the configuration file.</source>
@@ -576,17 +588,17 @@ Please solve them manually in the configuration file.</source>
 Отстранете ръчно от файла с настройките.</translation>
     </message>
     <message>
-        <location filename="../../src/config/configresolver.cpp" line="112"/>
+        <location filename="../../src/config/configresolver.cpp" line="111"/>
         <source>Resolve all</source>
         <translation>Отстраняване всички</translation>
     </message>
     <message>
-        <location filename="../../src/config/configresolver.cpp" line="113"/>
+        <location filename="../../src/config/configresolver.cpp" line="112"/>
         <source>Resolve all listed errors.</source>
         <translation>Отстраняване на всички изброени грешки.</translation>
     </message>
     <message>
-        <location filename="../../src/config/configresolver.cpp" line="125"/>
+        <location filename="../../src/config/configresolver.cpp" line="124"/>
         <source>Details</source>
         <translation>Подробности</translation>
     </message>
@@ -594,37 +606,37 @@ Please solve them manually in the configuration file.</source>
 <context>
     <name>ConfigWindow</name>
     <message>
-        <location filename="../../src/config/configwindow.cpp" line="40"/>
+        <location filename="../../src/config/configwindow.cpp" line="39"/>
         <source>Configuration</source>
         <translation>Настройки</translation>
     </message>
     <message>
-        <location filename="../../src/config/configwindow.cpp" line="68"/>
+        <location filename="../../src/config/configwindow.cpp" line="67"/>
         <source>Interface</source>
         <translation>Интерфейс</translation>
     </message>
     <message>
-        <location filename="../../src/config/configwindow.cpp" line="78"/>
+        <location filename="../../src/config/configwindow.cpp" line="77"/>
         <source>Filename Editor</source>
         <translation>Име на файла</translation>
     </message>
     <message>
-        <location filename="../../src/config/configwindow.cpp" line="59"/>
+        <location filename="../../src/config/configwindow.cpp" line="58"/>
         <source>General</source>
         <translation>Общи</translation>
     </message>
     <message>
-        <location filename="../../src/config/configwindow.cpp" line="87"/>
+        <location filename="../../src/config/configwindow.cpp" line="86"/>
         <source>Shortcuts</source>
         <translation>Клавишни комбинации</translation>
     </message>
     <message>
-        <location filename="../../src/config/configwindow.cpp" line="120"/>
+        <location filename="../../src/config/configwindow.cpp" line="119"/>
         <source>Resolve</source>
         <translation>Отстраняване</translation>
     </message>
     <message>
-        <location filename="../../src/config/configwindow.cpp" line="124"/>
+        <location filename="../../src/config/configwindow.cpp" line="123"/>
         <source>&lt;b&gt;Configuration file has errors. Resolve them before continuing.&lt;/b&gt;</source>
         <translation>&lt;b&gt;Файлът с настройките съдържа грешки. Отстранете ги преди да продължите.&lt;/b&gt;</translation>
     </message>
@@ -711,12 +723,12 @@ Please solve them manually in the configuration file.</source>
 <context>
     <name>ExitTool</name>
     <message>
-        <location filename="../../src/tools/exit/exittool.cpp" line="23"/>
+        <location filename="../../src/tools/exit/exittool.cpp" line="24"/>
         <source>Exit</source>
         <translation>Изход</translation>
     </message>
     <message>
-        <location filename="../../src/tools/exit/exittool.cpp" line="33"/>
+        <location filename="../../src/tools/exit/exittool.cpp" line="34"/>
         <source>Leave the capture screen</source>
         <translation>Излиза от екрана за заснемане</translation>
     </message>
@@ -724,32 +736,32 @@ Please solve them manually in the configuration file.</source>
 <context>
     <name>FileNameEditor</name>
     <message>
-        <location filename="../../src/config/filenameeditor.cpp" line="24"/>
+        <location filename="../../src/config/filenameeditor.cpp" line="25"/>
         <source>Edit the name of your captures:</source>
         <translation>Задайте шаблон за името на заснетите изображения:</translation>
     </message>
     <message>
-        <location filename="../../src/config/filenameeditor.cpp" line="28"/>
+        <location filename="../../src/config/filenameeditor.cpp" line="29"/>
         <source>Edit:</source>
         <translation>Шаблон:</translation>
     </message>
     <message>
-        <location filename="../../src/config/filenameeditor.cpp" line="30"/>
+        <location filename="../../src/config/filenameeditor.cpp" line="31"/>
         <source>Preview:</source>
         <translation>Преглед:</translation>
     </message>
     <message>
-        <location filename="../../src/config/filenameeditor.cpp" line="73"/>
+        <location filename="../../src/config/filenameeditor.cpp" line="74"/>
         <source>Save</source>
         <translation>Запазване</translation>
     </message>
     <message>
-        <location filename="../../src/config/filenameeditor.cpp" line="76"/>
+        <location filename="../../src/config/filenameeditor.cpp" line="77"/>
         <source>Saves the pattern</source>
         <translation>Запазва шаблона</translation>
     </message>
     <message>
-        <location filename="../../src/config/filenameeditor.cpp" line="78"/>
+        <location filename="../../src/config/filenameeditor.cpp" line="79"/>
         <source>Restore</source>
         <translation>Възстановяване</translation>
     </message>
@@ -758,17 +770,17 @@ Please solve them manually in the configuration file.</source>
         <translation type="vanished">Reinicialitza</translation>
     </message>
     <message>
-        <location filename="../../src/config/filenameeditor.cpp" line="81"/>
+        <location filename="../../src/config/filenameeditor.cpp" line="82"/>
         <source>Restores the saved pattern</source>
         <translation>Възстановява запазения шаблон</translation>
     </message>
     <message>
-        <location filename="../../src/config/filenameeditor.cpp" line="83"/>
+        <location filename="../../src/config/filenameeditor.cpp" line="84"/>
         <source>Clear</source>
         <translation>Изчистване</translation>
     </message>
     <message>
-        <location filename="../../src/config/filenameeditor.cpp" line="89"/>
+        <location filename="../../src/config/filenameeditor.cpp" line="90"/>
         <source>Deletes the name</source>
         <translation>Премахва името</translation>
     </message>
@@ -776,17 +788,17 @@ Please solve them manually in the configuration file.</source>
 <context>
     <name>Flameshot</name>
     <message>
-        <location filename="../../src/core/flameshot.cpp" line="119"/>
+        <location filename="../../src/core/flameshot.cpp" line="122"/>
         <source>Error</source>
         <translation>Грешка</translation>
     </message>
     <message>
-        <location filename="../../src/core/flameshot.cpp" line="119"/>
+        <location filename="../../src/core/flameshot.cpp" line="122"/>
         <source>Unable to close active modal widgets</source>
         <translation>Работещите приспособления не могат да бъдат затворени</translation>
     </message>
     <message>
-        <location filename="../../src/core/flameshot.cpp" line="431"/>
+        <location filename="../../src/core/flameshot.cpp" line="441"/>
         <source>URL copied to clipboard.</source>
         <translation>Адресът е копиран.</translation>
     </message>
@@ -794,22 +806,22 @@ Please solve them manually in the configuration file.</source>
 <context>
     <name>FlameshotDaemon</name>
     <message>
-        <location filename="../../src/core/flameshotdaemon.cpp" line="407"/>
         <source>New version %1 is available</source>
-        <translation>Налично е ново издание %1</translation>
+        <translation type="vanished">Налично е ново издание %1</translation>
     </message>
     <message>
-        <location filename="../../src/core/flameshotdaemon.cpp" line="413"/>
+        <location filename="../../src/core/flameshotdaemon.cpp" line="272"/>
+        <location filename="../../src/core/flameshotdaemon.cpp" line="436"/>
         <source>You have the latest version</source>
         <translation>Използвате последното издание</translation>
     </message>
     <message>
-        <location filename="../../src/core/flameshotdaemon.cpp" line="422"/>
+        <location filename="../../src/core/flameshotdaemon.cpp" line="445"/>
         <source>Failed to get information about the latest version.</source>
         <translation>Грешка при получаване на информация за последното издание.</translation>
     </message>
     <message>
-        <location filename="../../src/core/flameshotdaemon.cpp" line="445"/>
+        <location filename="../../src/core/flameshotdaemon.cpp" line="468"/>
         <source>Unable to connect via DBus</source>
         <translation>Грешка при свързване по DBus</translation>
     </message>
@@ -884,47 +896,47 @@ Please solve them manually in the configuration file.</source>
 <context>
     <name>GeneralConf</name>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="192"/>
-        <location filename="../../src/config/generalconf.cpp" line="394"/>
+        <location filename="../../src/config/generalconf.cpp" line="195"/>
+        <location filename="../../src/config/generalconf.cpp" line="379"/>
         <source>Import</source>
         <translation>Внасяне</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="198"/>
-        <location filename="../../src/config/generalconf.cpp" line="207"/>
-        <location filename="../../src/config/generalconf.cpp" line="232"/>
-        <location filename="../../src/config/generalconf.cpp" line="763"/>
+        <location filename="../../src/config/generalconf.cpp" line="201"/>
+        <location filename="../../src/config/generalconf.cpp" line="210"/>
+        <location filename="../../src/config/generalconf.cpp" line="235"/>
+        <location filename="../../src/config/generalconf.cpp" line="754"/>
         <source>Error</source>
         <translation>Грешка</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="198"/>
+        <location filename="../../src/config/generalconf.cpp" line="201"/>
         <source>Unable to read file.</source>
         <translation>Грешка при прочитане на файла.</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="207"/>
-        <location filename="../../src/config/generalconf.cpp" line="232"/>
+        <location filename="../../src/config/generalconf.cpp" line="210"/>
+        <location filename="../../src/config/generalconf.cpp" line="235"/>
         <source>Unable to write file.</source>
         <translation>Грешка при запис на файла.</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="219"/>
+        <location filename="../../src/config/generalconf.cpp" line="222"/>
         <source>Save File</source>
         <translation>Запазване на файл</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="241"/>
+        <location filename="../../src/config/generalconf.cpp" line="244"/>
         <source>Confirm Reset</source>
         <translation>Потвърждаване на нулиране</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="242"/>
+        <location filename="../../src/config/generalconf.cpp" line="245"/>
         <source>Are you sure you want to reset the configuration?</source>
         <translation>Желаете ли настройките да бъдат нулирани?</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="273"/>
+        <location filename="../../src/config/generalconf.cpp" line="276"/>
         <source>Show help message</source>
         <translation>Показване на помощно съобщение</translation>
     </message>
@@ -933,7 +945,7 @@ Please solve them manually in the configuration file.</source>
         <translation type="vanished">Show the help message at the beginning in the capture mode.</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="298"/>
+        <location filename="../../src/config/generalconf.cpp" line="301"/>
         <source>Show the side panel button</source>
         <translation>Показване на бутон за страничния панел</translation>
     </message>
@@ -942,12 +954,12 @@ Please solve them manually in the configuration file.</source>
         <translation type="vanished">Show the side panel toggle button in the capture mode.</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="311"/>
+        <location filename="../../src/config/generalconf.cpp" line="314"/>
         <source>Show desktop notifications</source>
         <translation>Показване на известия</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="336"/>
+        <location filename="../../src/config/generalconf.cpp" line="339"/>
         <source>Show tray icon</source>
         <translation>Показване в лентата за известия</translation>
     </message>
@@ -956,32 +968,32 @@ Please solve them manually in the configuration file.</source>
         <translation type="vanished">Show the systemtray icon</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="367"/>
+        <location filename="../../src/config/generalconf.cpp" line="352"/>
         <source>Confirmation required to delete screenshot from the latest uploads</source>
         <translation>Потвърждаване при премахване на елемент от последно качените</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="382"/>
+        <location filename="../../src/config/generalconf.cpp" line="367"/>
         <source>Configuration File</source>
         <translation>Файл с настройките</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="387"/>
+        <location filename="../../src/config/generalconf.cpp" line="372"/>
         <source>Export</source>
         <translation>Изнасяне</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="401"/>
+        <location filename="../../src/config/generalconf.cpp" line="386"/>
         <source>Reset</source>
         <translation>Нулиране</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="412"/>
+        <location filename="../../src/config/generalconf.cpp" line="397"/>
         <source>Automatic check for updates</source>
         <translation>Проверка за обновяване</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="426"/>
+        <location filename="../../src/config/generalconf.cpp" line="411"/>
         <source>Allow multiple flameshot GUI instances simultaneously</source>
         <translation>Разрешаване на няколко екземпляра на интерфейса на Flameshot</translation>
     </message>
@@ -998,17 +1010,17 @@ Please solve them manually in the configuration file.</source>
         <translation type="vanished">Launch Flameshot</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="463"/>
+        <location filename="../../src/config/generalconf.cpp" line="448"/>
         <source>Show welcome message on launch</source>
         <translation>Показване на приветствие при стартиране</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="491"/>
+        <location filename="../../src/config/generalconf.cpp" line="476"/>
         <source>Use large predefined color palette</source>
         <translation>Използване на голяма предварително зададена палитра</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="515"/>
+        <location filename="../../src/config/generalconf.cpp" line="500"/>
         <source>Copy URL after upload</source>
         <translation>Копиране на адреса след качване</translation>
     </message>
@@ -1017,7 +1029,7 @@ Please solve them manually in the configuration file.</source>
         <translation type="vanished">Copy URL and close window after upload</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="527"/>
+        <location filename="../../src/config/generalconf.cpp" line="512"/>
         <source>Save image after copy</source>
         <translation>Запазване на изображението след копиране</translation>
     </message>
@@ -1026,67 +1038,65 @@ Please solve them manually in the configuration file.</source>
         <translation type="vanished">Save image file after copying it</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="274"/>
+        <location filename="../../src/config/generalconf.cpp" line="277"/>
         <source>Show the help message at the beginning in the capture mode</source>
         <translation>Показване на помощно съобщение в началото на заснемането</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="284"/>
+        <location filename="../../src/config/generalconf.cpp" line="287"/>
         <source>Use last region for GUI mode</source>
         <translation>Използване на последно избраната област за графичния режим</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="286"/>
+        <location filename="../../src/config/generalconf.cpp" line="289"/>
         <source>Use the last region as the default selection for the next screenshot in GUI mode</source>
         <translation>Използване на последната избрана област като начална за следващо заснемане в графичен режим</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="300"/>
+        <location filename="../../src/config/generalconf.cpp" line="303"/>
         <source>Show the side panel toggle button in the capture mode</source>
         <translation>Показване на бутона за страничната лента по време на заснемане</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="312"/>
+        <location filename="../../src/config/generalconf.cpp" line="315"/>
         <source>Enable desktop notifications</source>
         <translation>Включване на настолните известия</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="323"/>
+        <location filename="../../src/config/generalconf.cpp" line="326"/>
         <source>Show abort notifications</source>
         <translation>Показване на известия при прекратяване</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="324"/>
+        <location filename="../../src/config/generalconf.cpp" line="327"/>
         <source>Enable abort notifications</source>
         <translation>Включване на известията при прекратяване</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="337"/>
+        <location filename="../../src/config/generalconf.cpp" line="340"/>
         <source>Show icon in the system tray</source>
         <translation>Показване на пиктограмата в лентата за известията</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="350"/>
         <source>Use grim to capture screenshots</source>
-        <translation>Използване на Grim за заснемане</translation>
+        <translation type="vanished">Използване на Grim за заснемане</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="352"/>
         <source>Grim is a wayland only utility to capture screens based on the screencopy protocol. Generally only enable on minimal wayland window managers like sway, hyprland, etc.</source>
-        <translation>Grim е инструмент за заснемане на екранни снимки само за Wayland, чрез протокола Screencopy. Предназначен е за минималистичните приложения за управление на прозорци като Sway и т.н.</translation>
+        <translation type="vanished">Grim е инструмент за заснемане на екранни снимки само за Wayland, чрез протокола Screencopy. Предназначен е за минималистичните приложения за управление на прозорци като Sway и т.н.</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="370"/>
+        <location filename="../../src/config/generalconf.cpp" line="355"/>
         <source>Ask for confirmation to delete screenshot from the latest uploads</source>
         <translation>Потвърждаване премахването на екранни снимки от последно качените</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="413"/>
+        <location filename="../../src/config/generalconf.cpp" line="398"/>
         <source>Check for updates automatically</source>
         <translation>Автоматична проверка за обновяване</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="427"/>
+        <location filename="../../src/config/generalconf.cpp" line="412"/>
         <source>This allows you to take screenshots of Flameshot itself for example</source>
         <translation>Дава възможност за заснемане на Flameshot, например</translation>
     </message>
@@ -1095,17 +1105,17 @@ Please solve them manually in the configuration file.</source>
         <translation type="vanished">Launch Flameshot daemon when computer is booted</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="466"/>
+        <location filename="../../src/config/generalconf.cpp" line="451"/>
         <source>Show the welcome message box in the middle of the screen while taking a screenshot</source>
         <translation>Показва прозорец с приветствие в средата на екрана преди заснемане</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="493"/>
+        <location filename="../../src/config/generalconf.cpp" line="478"/>
         <source>Use a large predefined color palette</source>
         <translation>Използване на голяма предварително създадена палитра</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="503"/>
+        <location filename="../../src/config/generalconf.cpp" line="488"/>
         <source>Copy on double click</source>
         <translation>Копиране при двойно щракване с мишката</translation>
     </message>
@@ -1118,230 +1128,250 @@ Please solve them manually in the configuration file.</source>
         <translation type="vanished">Copy URL and close window after uploading was successful</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="439"/>
+        <location filename="../../src/config/generalconf.cpp" line="424"/>
         <source>Automatically unload from memory when it is not needed</source>
         <translation>Автоматично премахване от паметта, когато не се използва</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="440"/>
+        <location filename="../../src/config/generalconf.cpp" line="425"/>
         <source>Automatically close daemon (background process) when it is not needed</source>
         <translation>Автоматично затваря демона (процеса на във фонов режим), когато вече не е необходим</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="451"/>
+        <location filename="../../src/config/generalconf.cpp" line="436"/>
         <source>Launch in background at startup</source>
         <translation>Стартиране във фонов режим със системата</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="452"/>
+        <location filename="../../src/config/generalconf.cpp" line="437"/>
         <source>Launch Flameshot daemon (background process) when computer is booted</source>
         <translation>Стартиране демона на Flameshot (процеса на във фонов режим) при включване на устройството</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="477"/>
+        <location filename="../../src/config/generalconf.cpp" line="462"/>
         <source>Ask before quit capture</source>
         <translation>Потвърждаване при изход от заснемане</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="480"/>
+        <location filename="../../src/config/generalconf.cpp" line="465"/>
         <source>Show the confirmation prompt before ESC quit</source>
         <translation>Показва диалог за потвърждение преди изход с Esc</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="505"/>
+        <location filename="../../src/config/generalconf.cpp" line="490"/>
         <source>Enable Copy to clipboard on Double Click</source>
         <translation>Включване на копирането при двойно щракване</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="517"/>
+        <location filename="../../src/config/generalconf.cpp" line="502"/>
         <source>Copy URL after uploading was successful</source>
         <translation>Копиране на адреса при успешно качване</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="529"/>
+        <location filename="../../src/config/generalconf.cpp" line="514"/>
         <source>After copying the screenshot, save it to a file as well</source>
         <translation>След копиране на екранната снимка също така да бъде запазена като файл</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="536"/>
+        <location filename="../../src/config/generalconf.cpp" line="521"/>
         <source>Save Path</source>
         <translation>Път за запис</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="552"/>
+        <location filename="../../src/config/generalconf.cpp" line="537"/>
         <source>Change...</source>
         <translation>Смяна…</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="560"/>
+        <location filename="../../src/config/generalconf.cpp" line="545"/>
         <source>Use fixed path for screenshots to save</source>
         <translation>Използване на фиксиран път за запазване на снимки</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="572"/>
+        <location filename="../../src/config/generalconf.cpp" line="557"/>
         <source>Preferred save file extension:</source>
         <translation>Предпочитано разширение при запазване:</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="601"/>
+        <location filename="../../src/config/generalconf.cpp" line="586"/>
         <source>Latest Uploads Max Size</source>
         <translation>Ограничение на последно качените</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="623"/>
+        <location filename="../../src/config/generalconf.cpp" line="608"/>
         <source>Imgur Application Client ID</source>
         <translation>Ключ за ППИ на Imgur</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="654"/>
+        <location filename="../../src/config/generalconf.cpp" line="639"/>
         <source>Undo limit</source>
         <translation>Ограничение на стъпките за отменяне</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="683"/>
+        <location filename="../../src/config/generalconf.cpp" line="668"/>
         <source>Use JPG format for clipboard (PNG default)</source>
         <translation>Използване на JPG при копиране (стандартно PNG)</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="685"/>
+        <location filename="../../src/config/generalconf.cpp" line="675"/>
         <source>Use lossy JPG format for clipboard (lossless PNG default)</source>
         <translation>Използване на JPG формат със загуба на качество при копиране (стандартно PNG без загуба)</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="711"/>
+        <location filename="../../src/config/generalconf.cpp" line="702"/>
         <source>Copy file path after save</source>
         <translation>Копиране на пътя към файла след запазване</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="712"/>
+        <location filename="../../src/config/generalconf.cpp" line="703"/>
         <source>Copy the file path to clipboard after the file is saved</source>
         <translation>Копиране на пътя към файла след запазване на файла</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="723"/>
+        <location filename="../../src/config/generalconf.cpp" line="714"/>
         <source>Anti-aliasing image when zoom the pinned image</source>
         <translation>Заглаждане на закаченото изображение при мащабиране</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="725"/>
+        <location filename="../../src/config/generalconf.cpp" line="716"/>
         <source>After zooming the pinned image, should the image get smoothened or stay pixelated</source>
         <translation>Трябва ли изображението при мащабиране на бъде загладено или да остане пикселизирано</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="736"/>
-        <location filename="../../src/config/generalconf.cpp" line="738"/>
+        <location filename="../../src/config/generalconf.cpp" line="727"/>
+        <location filename="../../src/config/generalconf.cpp" line="729"/>
         <source>Upload image without confirmation</source>
         <translation>Качване на изображения без потвърждение</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="754"/>
+        <location filename="../../src/config/generalconf.cpp" line="745"/>
         <source>Choose a Folder</source>
         <translation>Избор на папка</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="763"/>
+        <location filename="../../src/config/generalconf.cpp" line="754"/>
         <source>Unable to write to directory.</source>
         <translation>Грешка при писане в папка.</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="772"/>
+        <location filename="../../src/config/generalconf.cpp" line="763"/>
         <source>Show magnifier</source>
         <translation>Показване на лупа</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="773"/>
+        <location filename="../../src/config/generalconf.cpp" line="764"/>
         <source>Enable a magnifier while selecting the screenshot area</source>
         <translation>Наличие на лупа при избор на областта за заснемане</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="784"/>
+        <location filename="../../src/config/generalconf.cpp" line="775"/>
         <source>Square shaped magnifier</source>
         <translation>Квадратна лупа</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="785"/>
+        <location filename="../../src/config/generalconf.cpp" line="776"/>
         <source>Make the magnifier to be square-shaped</source>
         <translation>Променя формата на лупата на квадратна</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="801"/>
+        <location filename="../../src/config/generalconf.cpp" line="792"/>
         <source>Milliseconds before geometry display hides; 0 means do not hide</source>
         <translation>Време преди скриване на панела с размера на избраното, в милисекунди; 0 – без скриване</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="804"/>
+        <location filename="../../src/config/generalconf.cpp" line="795"/>
         <source>Set geometry display timeout (ms)</source>
         <translation>Време на видимост на размерите (мс)</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="812"/>
+        <location filename="../../src/config/generalconf.cpp" line="803"/>
         <source>Selection Geometry Display</source>
         <translation>Панел с размер на избраното</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="819"/>
+        <location filename="../../src/config/generalconf.cpp" line="810"/>
         <source>Display Location</source>
         <translation>Място в екрана</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="822"/>
+        <location filename="../../src/config/generalconf.cpp" line="813"/>
         <source>None</source>
         <translation>Изключено</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="823"/>
+        <location filename="../../src/config/generalconf.cpp" line="814"/>
         <source>Top Left</source>
         <translation>Горе ляво</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="825"/>
+        <location filename="../../src/config/generalconf.cpp" line="816"/>
         <source>Top Right</source>
         <translation>Горе дясно</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="827"/>
+        <location filename="../../src/config/generalconf.cpp" line="818"/>
         <source>Bottom Left</source>
         <translation>Долу ляво</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="829"/>
+        <location filename="../../src/config/generalconf.cpp" line="820"/>
         <source>Bottom Right</source>
         <translation>Долу дясно</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="831"/>
+        <location filename="../../src/config/generalconf.cpp" line="822"/>
         <source>Center</source>
         <translation>В средата</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="856"/>
+        <location filename="../../src/config/generalconf.cpp" line="847"/>
         <source>Quality range of 0-100; Higher number is better quality and larger file size</source>
         <translation>Диапазон на качеството от 0 до 100. По-голямото число е по-високо качество и по-голям размер на файла</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="860"/>
+        <location filename="../../src/config/generalconf.cpp" line="851"/>
         <source>JPEG Quality</source>
         <translation>Качество на JPEG</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="871"/>
+        <location filename="../../src/config/generalconf.cpp" line="862"/>
         <source>Reverse arrow</source>
         <translation>Обръщане на стрелките</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="872"/>
+        <location filename="../../src/config/generalconf.cpp" line="863"/>
         <source>Draw the arrow head first</source>
         <translation>Започване с острото на стрелката</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="881"/>
+        <location filename="../../src/config/generalconf.cpp" line="872"/>
         <source>Insecure Pixelate</source>
         <translation>Несигурно размиване</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="883"/>
+        <location filename="../../src/config/generalconf.cpp" line="874"/>
         <source>Draw the pixelation effect in an insecure but more asethetic way.</source>
         <translation>Изчертаване на размиването по несигурен, но естетичен начин.</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="929"/>
+        <source>Capture active monitor (skip monitor selection)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="931"/>
+        <source>Automatically capture the monitor where the cursor is located instead of showing the monitor selection dialog. This feature is not supported on Wayland.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="952"/>
+        <source>Use legacy X11 screenshot method (deprecated)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="954"/>
+        <source>Bypass the freedesktop portal and use Qt&apos;s native X11 screen capture. Enable this if your window manager lacks xdg-desktop-portal (e.g. xmonad, i3). Only effective on X11; ignored on Wayland.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1393,18 +1423,18 @@ Please solve them manually in the configuration file.</source>
 <context>
     <name>ImgUploadDialog</name>
     <message>
-        <location filename="../../src/widgets/imguploaddialog.cpp" line="18"/>
+        <location filename="../../src/widgets/imguploaddialog.cpp" line="19"/>
         <source>Upload Confirmation</source>
         <translation>Потвърждаване на качване</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/imguploaddialog.cpp" line="22"/>
+        <location filename="../../src/widgets/imguploaddialog.cpp" line="23"/>
         <source>Do you want to upload this capture?</source>
         <translation>Желаете ли снимката да бъде качена?</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/imguploaddialog.cpp" line="35"/>
         <location filename="../../src/widgets/imguploaddialog.cpp" line="36"/>
+        <location filename="../../src/widgets/imguploaddialog.cpp" line="37"/>
         <source>Upload without confirmation</source>
         <translation>Качване без потвърждаване</translation>
     </message>
@@ -1447,62 +1477,62 @@ Please solve them manually in the configuration file.</source>
 <context>
     <name>ImgUploaderBase</name>
     <message>
-        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="37"/>
+        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="38"/>
         <source>Upload image</source>
         <translation>Качване на изображение</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="49"/>
+        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="50"/>
         <source>Uploading Image</source>
         <translation>Изображението се качва</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="128"/>
+        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="129"/>
         <source>Copy URL</source>
         <translation>Копиране на адреса</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="129"/>
+        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="130"/>
         <source>Open URL</source>
         <translation>Отваряне на адреса</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="130"/>
+        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="131"/>
         <source>Delete image</source>
         <translation>Премахване на изображение</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="131"/>
+        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="132"/>
         <source>Image to Clipboard.</source>
         <translation>Изображение във временната памет.</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="132"/>
+        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="133"/>
         <source>Save image</source>
         <translation>Запазване на изображение</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="162"/>
+        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="163"/>
         <source>Unable to open the URL.</source>
         <translation>Грешка при отваряне на адреса.</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="169"/>
+        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="170"/>
         <source>URL copied to clipboard.</source>
         <translation>Адресът е копиран.</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="175"/>
+        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="176"/>
         <source>Screenshot copied to clipboard.</source>
         <translation>Екранната снимка е копирана.</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="189"/>
+        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="190"/>
         <source>Unable to save the screenshot to disk.</source>
         <translation>Грешка при запазване на екранната снимка на диска.</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="192"/>
+        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="193"/>
         <source>Screenshot saved.</source>
         <translation>Екранната снимка е запазена.</translation>
     </message>
@@ -1547,7 +1577,7 @@ Please solve them manually in the configuration file.</source>
         <translation type="vanished">Image to Clipboard.</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgupload/storages/imgur/imguruploader.cpp" line="107"/>
+        <location filename="../../src/tools/imgupload/storages/imgur/imguruploader.cpp" line="108"/>
         <source>Unable to open the URL.</source>
         <translation>Грешка при отваряне на адреса.</translation>
     </message>
@@ -1689,12 +1719,12 @@ Please solve them manually in the configuration file.</source>
 <context>
     <name>InvertTool</name>
     <message>
-        <location filename="../../src/tools/invert/inverttool.cpp" line="25"/>
+        <location filename="../../src/tools/invert/inverttool.cpp" line="26"/>
         <source>Invert</source>
         <translation>Негатив</translation>
     </message>
     <message>
-        <location filename="../../src/tools/invert/inverttool.cpp" line="35"/>
+        <location filename="../../src/tools/invert/inverttool.cpp" line="36"/>
         <source>Set Inverter as the paint tool</source>
         <translation>Избиране на инструмент „Негатив“</translation>
     </message>
@@ -1702,12 +1732,12 @@ Please solve them manually in the configuration file.</source>
 <context>
     <name>LineTool</name>
     <message>
-        <location filename="../../src/tools/line/linetool.cpp" line="22"/>
+        <location filename="../../src/tools/line/linetool.cpp" line="23"/>
         <source>Line</source>
         <translation>Права</translation>
     </message>
     <message>
-        <location filename="../../src/tools/line/linetool.cpp" line="32"/>
+        <location filename="../../src/tools/line/linetool.cpp" line="33"/>
         <source>Set the Line as the paint tool</source>
         <translation>Избиране на инструмент „Права“</translation>
     </message>
@@ -1715,25 +1745,34 @@ Please solve them manually in the configuration file.</source>
 <context>
     <name>MarkerTool</name>
     <message>
-        <location filename="../../src/tools/marker/markertool.cpp" line="23"/>
+        <location filename="../../src/tools/marker/markertool.cpp" line="24"/>
         <source>Marker</source>
         <translation>Маркер</translation>
     </message>
     <message>
-        <location filename="../../src/tools/marker/markertool.cpp" line="33"/>
+        <location filename="../../src/tools/marker/markertool.cpp" line="34"/>
         <source>Set the Marker as the paint tool</source>
         <translation>Избиране на инструмент „Маркер“</translation>
     </message>
 </context>
 <context>
+    <name>MonitorPreview</name>
+    <message>
+        <location filename="../../src/utils/monitorpreview.cpp" line="31"/>
+        <source>Monitor %1: %2
+Click to select</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>MoveTool</name>
     <message>
-        <location filename="../../src/tools/move/movetool.cpp" line="23"/>
+        <location filename="../../src/tools/move/movetool.cpp" line="24"/>
         <source>Move</source>
         <translation>Преместване</translation>
     </message>
     <message>
-        <location filename="../../src/tools/move/movetool.cpp" line="33"/>
+        <location filename="../../src/tools/move/movetool.cpp" line="34"/>
         <source>Move the selection area</source>
         <translation>Премества избраната област</translation>
     </message>
@@ -1754,12 +1793,12 @@ Please solve them manually in the configuration file.</source>
 <context>
     <name>PinTool</name>
     <message>
-        <location filename="../../src/tools/pin/pintool.cpp" line="25"/>
+        <location filename="../../src/tools/pin/pintool.cpp" line="24"/>
         <source>Pin Tool</source>
         <translation>Габърче</translation>
     </message>
     <message>
-        <location filename="../../src/tools/pin/pintool.cpp" line="35"/>
+        <location filename="../../src/tools/pin/pintool.cpp" line="34"/>
         <source>Pin image on the desktop</source>
         <translation>Закачане изображението към работния плот</translation>
     </message>
@@ -1810,12 +1849,12 @@ Please solve them manually in the configuration file.</source>
 <context>
     <name>PixelateTool</name>
     <message>
-        <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="27"/>
+        <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="28"/>
         <source>Pixelate</source>
         <translation>Размиване</translation>
     </message>
     <message>
-        <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="37"/>
+        <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="38"/>
         <source>Set Pixelate as the paint tool.</source>
         <translation>Избиране на инструмент „Размиване“</translation>
     </message>
@@ -1851,23 +1890,24 @@ Please solve them manually in the configuration file.</source>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="196"/>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="198"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="204"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="206"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="270"/>
         <source>Capture saved to clipboard.</source>
         <translation>Екранната снимка е копирана.</translation>
     </message>
     <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="182"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="190"/>
         <source>Error while saving to clipboard</source>
         <translation>Грешка при копиране</translation>
     </message>
     <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="244"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="326"/>
         <source>Save screenshot</source>
         <translation>Запазване на екранна снимка</translation>
     </message>
     <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="275"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="358"/>
         <source>Path copied to clipboard as </source>
         <translation>Пътят е копиран като </translation>
     </message>
@@ -1884,34 +1924,34 @@ Please solve them manually in the configuration file.</source>
         <translation type="vanished">Capture is saved and copied to the clipboard as </translation>
     </message>
     <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="286"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="369"/>
         <source>Save Error</source>
         <translation>Грешка при запазване</translation>
     </message>
     <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="62"/>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="267"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="64"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="349"/>
         <source>Capture saved as </source>
         <translation>Екранната снимка е запазена като </translation>
     </message>
     <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="66"/>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="279"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="69"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="362"/>
         <source>Error trying to save as </source>
         <translation>Грешка при опит за запазване като </translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="220"/>
+        <location filename="../../src/main.cpp" line="251"/>
         <source>Unable to connect via DBus</source>
         <translation>Грешка при свързване по DBus</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="237"/>
+        <location filename="../../src/main.cpp" line="268"/>
         <source>Powerful yet simple to use screenshot software.</source>
         <translation>Мощен, но лесен за употреба инструмент за екранни снимки.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="238"/>
+        <location filename="../../src/main.cpp" line="269"/>
         <source>See</source>
         <translation>Преглед</translation>
     </message>
@@ -1920,17 +1960,17 @@ Please solve them manually in the configuration file.</source>
         <translation type="vanished">Capture the entire desktop.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="244"/>
+        <location filename="../../src/main.cpp" line="275"/>
         <source>Open the capture launcher.</source>
         <translation>Отваряне на средството за заснемане.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="247"/>
+        <location filename="../../src/main.cpp" line="278"/>
         <source>Start a manual capture in GUI mode.</source>
         <translation>Стартиране на ръчно заснемане в графичен режим.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="249"/>
+        <location filename="../../src/main.cpp" line="280"/>
         <source>Configure</source>
         <translation>Настройки</translation>
     </message>
@@ -1943,122 +1983,126 @@ Please solve them manually in the configuration file.</source>
         <translation type="vanished">Path where the capture will be saved</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="242"/>
+        <location filename="../../src/main.cpp" line="273"/>
         <source>Capture screenshot of all monitors at the same time.</source>
         <translation>Екранна снимка на всички монитори едновременно.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="252"/>
+        <location filename="../../src/main.cpp" line="283"/>
         <source>Capture a screenshot of the specified monitor.</source>
         <translation>Екранна снимка на избрания монитор.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="257"/>
+        <location filename="../../src/main.cpp" line="288"/>
         <source>Existing directory or new file to save to</source>
         <translation>Съществуваща папка или нов файл, в който да бъде запазено</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="260"/>
+        <location filename="../../src/main.cpp" line="291"/>
         <source>Save the capture to the clipboard</source>
         <translation>Запазване на снимката във временната памет</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="262"/>
+        <location filename="../../src/main.cpp" line="293"/>
         <source>Pin the capture to the screen</source>
         <translation>Закачане на екранната снимка</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="264"/>
         <source>Upload screenshot</source>
-        <translation>Качване на екранна снимка</translation>
+        <translation type="vanished">Качване на екранна снимка</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="266"/>
+        <location filename="../../src/main.cpp" line="295"/>
         <source>Delay time in milliseconds</source>
         <translation>Забавяне в милисекунди</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="271"/>
+        <location filename="../../src/main.cpp" line="300"/>
         <source>Repeat screenshot with previously selected region</source>
         <translation>Повтаряне на снимката с предишната избрана област</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="274"/>
+        <location filename="../../src/main.cpp" line="303"/>
         <source>Screenshot region to select</source>
         <translation>Избор на област за заснемане</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="277"/>
+        <location filename="../../src/main.cpp" line="306"/>
         <source>Set the filename pattern</source>
         <translation>Избиране на шаблон за име на файла</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="281"/>
+        <location filename="../../src/main.cpp" line="310"/>
         <source>Accept capture as soon as a selection is made</source>
         <translation>Приемане на снимката веднага след избиране на областта</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="283"/>
+        <location filename="../../src/main.cpp" line="312"/>
         <source>Enable or disable the trayicon</source>
         <translation>Превключва пиктограмата в лентата за известия</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="287"/>
+        <location filename="../../src/main.cpp" line="316"/>
         <source>Enable or disable run at startup</source>
         <translation>Превключва стартирането със системата</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="291"/>
+        <location filename="../../src/main.cpp" line="320"/>
         <source>Enable or disable the notifications</source>
         <translation>Превключва известията</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="294"/>
+        <location filename="../../src/main.cpp" line="323"/>
         <source>Check the configuration for errors</source>
         <translation>Проверяване настройките за грешки</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="297"/>
+        <location filename="../../src/main.cpp" line="326"/>
         <source>Show the help message in the capture mode</source>
         <translation>Показване на помощно съобщение преди заснемане</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="300"/>
+        <location filename="../../src/main.cpp" line="329"/>
         <source>Define the main UI color</source>
         <translation>Задаване основен цвят на интерфейса</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="304"/>
+        <location filename="../../src/main.cpp" line="333"/>
         <source>Define the contrast UI color</source>
         <translation>Задаване контрастен цвят на интерфейса</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="307"/>
+        <location filename="../../src/main.cpp" line="336"/>
         <source>Print raw PNG capture</source>
         <translation>Необработено изображение PNG</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="310"/>
+        <location filename="../../src/main.cpp" line="339"/>
         <source>Print geometry of the selection in the format WxH+X+Y. Does nothing if raw is specified</source>
         <translation>Извежда геометрията на избраната област във формат Ш×В+x+y. Няма влияние ако е избрано „raw“</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="314"/>
+        <location filename="../../src/main.cpp" line="343"/>
         <source>Define the screen to capture (starting from 0)</source>
         <translation>Укажете екрана, който да бъде заснет (започвайки от 0)</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="334"/>
+        <location filename="../../src/main.cpp" line="349"/>
+        <source>Interactively select and edit the screenshot region</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/main.cpp" line="366"/>
         <source>Invalid delay, it must be a number greater than 0</source>
         <translation>Неприемлива стойност на изчакване, трябва да бъде число по-голямо от 0</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="337"/>
+        <location filename="../../src/main.cpp" line="369"/>
         <source>Invalid region, use &apos;WxH+X+Y&apos; or &apos;all&apos; or &apos;screen0/screen1/...&apos;.</source>
         <translation>Неприемлива област, използвайте „Ш×В+x+y“, „all“ или „screen0/screen1/…“.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="350"/>
+        <location filename="../../src/main.cpp" line="382"/>
         <source>Invalid path, must be an existing directory or a new file in an existing directory</source>
         <translation>Неприемлив път, трябва да бъде съществуваща папка или нов файл в съществуваща папка</translation>
     </message>
@@ -2067,17 +2111,17 @@ Please solve them manually in the configuration file.</source>
         <translation type="vanished">Define the screen to capture</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="315"/>
+        <location filename="../../src/main.cpp" line="344"/>
         <source>default: screen containing the cursor</source>
         <translation>стандартно: екранът, съдържащ показалеца на мишката</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="316"/>
+        <location filename="../../src/main.cpp" line="345"/>
         <source>Screen number</source>
         <translation>Номер на екрана</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="325"/>
+        <location filename="../../src/main.cpp" line="357"/>
         <source>Invalid color, this flag supports the following formats:
 - #RGB (each of R, G, and B is a single hex digit)
 - #RRGGBB
@@ -2098,7 +2142,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <translation type="vanished">Invalid delay, it must be higher than 0</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="336"/>
+        <location filename="../../src/main.cpp" line="368"/>
         <source>Invalid screen number, it must be non negative</source>
         <translation>Несъществуващ номер на екран, трябва да бъде неотрицателен</translation>
     </message>
@@ -2107,7 +2151,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <translation type="vanished">Invalid path, it must be a real path in the system</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="363"/>
+        <location filename="../../src/main.cpp" line="395"/>
         <source>Invalid value, it must be defined as &apos;true&apos; or &apos;false&apos;</source>
         <translation>Неприемлива стройност, трябва да бъде определена като „true“ или „false“</translation>
     </message>
@@ -2164,17 +2208,17 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <translation>Стандартно стартира Flameshot във фонов режим и добавя пиктограма в областта за известията с цел настройка.</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/trayicon.cpp" line="71"/>
+        <location filename="../../src/widgets/trayicon.cpp" line="83"/>
         <source>Hello, I&apos;m here! Click icon in the tray to take a screenshot or click with a right button to see more options.</source>
         <translation>Здравейте! За да заснемете екран щракнете пиктограмата в областта за известията, а за да видите повече настройки щракнете с десен бутон.</translation>
     </message>
     <message>
-        <location filename="../../src/core/flameshot.cpp" line="156"/>
+        <location filename="../../src/core/flameshot.cpp" line="168"/>
         <source>Requested screen exceeds screen count</source>
         <translation>Исканият номер на екран надхвърля наличния брой екрани</translation>
     </message>
     <message>
-        <location filename="../../src/core/flameshot.cpp" line="408"/>
+        <location filename="../../src/core/flameshot.cpp" line="418"/>
         <source>Full screen screenshot pinned to screen</source>
         <translation>Екранна снимка на целия екран е закачена</translation>
     </message>
@@ -2227,27 +2271,27 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <translation type="vanished">Delete current tool</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="195"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="208"/>
         <source>Quit capture</source>
         <translation>Изход от заснемане</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="207"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="224"/>
         <source>Screenshot history</source>
         <translation>История на снимките</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="211"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="219"/>
         <source>Capture screen</source>
         <translation>Заснемане на екрана</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="218"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="233"/>
         <source>Show color picker</source>
         <translation>Избиране на цвят</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="219"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="234"/>
         <source>Change the tool&apos;s size</source>
         <translation>Променяне размера на инструмента</translation>
     </message>
@@ -2259,12 +2303,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
 <context>
     <name>RectangleTool</name>
     <message>
-        <location filename="../../src/tools/rectangle/rectangletool.cpp" line="22"/>
+        <location filename="../../src/tools/rectangle/rectangletool.cpp" line="23"/>
         <source>Rectangle</source>
         <translation>Правоъгълник</translation>
     </message>
     <message>
-        <location filename="../../src/tools/rectangle/rectangletool.cpp" line="32"/>
+        <location filename="../../src/tools/rectangle/rectangletool.cpp" line="33"/>
         <source>Set the Rectangle as the paint tool</source>
         <translation>Избиране на инструмент „Правоъгълник“</translation>
     </message>
@@ -2272,12 +2316,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
 <context>
     <name>RedoTool</name>
     <message>
-        <location filename="../../src/tools/redo/redotool.cpp" line="23"/>
+        <location filename="../../src/tools/redo/redotool.cpp" line="24"/>
         <source>Redo</source>
         <translation>Повторение</translation>
     </message>
     <message>
-        <location filename="../../src/tools/redo/redotool.cpp" line="33"/>
+        <location filename="../../src/tools/redo/redotool.cpp" line="34"/>
         <source>Redo the next modification</source>
         <translation>Повтаряне на последната промяна</translation>
     </message>
@@ -2306,34 +2350,128 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <translation type="vanished">Unable to detect desktop environment (GNOME? KDE? Sway? ...)</translation>
     </message>
     <message>
-        <location filename="../../src/utils/screengrabber.cpp" line="53"/>
         <source>The universal wayland screen capture adapter requires Grim as the screen capture component of wayland. If the screen capture component is missing, please install it!</source>
-        <translation>Универсалният адаптер за заснемане на екрана на Wayland изисква Grim като компонент за заснемане на екран на Wayland. Ако компонентът липсва го инсталирайте!</translation>
+        <translation type="vanished">Универсалният адаптер за заснемане на екрана на Wayland изисква Grim като компонент за заснемане на екран на Wayland. Ако компонентът липсва го инсталирайте!</translation>
     </message>
     <message>
-        <location filename="../../src/utils/screengrabber.cpp" line="171"/>
         <source>If the useGrimAdapter setting is not enabled, the dbus protocol will be used. It should be noted that using the dbus protocol under wayland is not recommended. It is recommended to enable the useGrimAdapter setting in flameshot.ini to activate the grim-based general wayland screenshot adapter</source>
-        <translation>Ако настройката „useGrimAdapter“ не е включена ще бъде използван протоколът dbus. Имайте предвид, използването на dbus под Waylandе не е препоръчително. Препоръчително е да включите настройката „useGrimAdapter“ във „flameshot.ini“, за да бъде използвн базираният на Grim универсален адаптор за заснемане на екрана на Wayland</translation>
+        <translation type="vanished">Ако настройката „useGrimAdapter“ не е включена ще бъде използван протоколът dbus. Имайте предвид, използването на dbus под Waylandе не е препоръчително. Препоръчително е да включите настройката „useGrimAdapter“ във „flameshot.ini“, за да бъде използвн базираният на Grim универсален адаптор за заснемане на екрана на Wayland</translation>
     </message>
     <message>
-        <location filename="../../src/utils/screengrabber.cpp" line="182"/>
         <source>grim&apos;s screenshot component is implemented based on wlroots, it may not be used in GNOME or similar desktop environments</source>
-        <translation>Компонентът за екранни снимки Grim е реализиран на базата на wlroots, за това не може да бъде използван в GNOME или подобни графични среди</translation>
+        <translation type="vanished">Компонентът за екранни снимки Grim е реализиран на базата на wlroots, за това не може да бъде използван в GNOME или подобни графични среди</translation>
     </message>
     <message>
-        <location filename="../../src/utils/screengrabber.cpp" line="194"/>
         <source>Unable to detect desktop environment (GNOME? KDE? Qile? Sway? ...)</source>
-        <translation>Графичната среда не може да бъде определена (GNOME? KDE? Qile? Sway?…)</translation>
+        <translation type="vanished">Графичната среда не може да бъде определена (GNOME? KDE? Qile? Sway?…)</translation>
     </message>
     <message>
-        <location filename="../../src/utils/screengrabber.cpp" line="197"/>
         <source>Hint: try setting the XDG_CURRENT_DESKTOP environment variable.</source>
-        <translation>Подсказка: пробвайте да зададете променливата на средата XDG_CURRENT_DESKTOP.</translation>
+        <translation type="vanished">Подсказка: пробвайте да зададете променливата на средата XDG_CURRENT_DESKTOP.</translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/screengrabber.cpp" line="61"/>
+        <source>Could not locate the `org.freedesktop.portal.Desktop` service</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/screengrabber.cpp" line="109"/>
+        <source>Screenshot portal timed out after 30 seconds</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/screengrabber.cpp" line="132"/>
+        <source>FreeDesktop portal screenshot size: %1x%2, DPR: %3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/screengrabber.cpp" line="159"/>
+        <source>Capture Active Monitor is not supported on Wayland due to Wayland security model.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/screengrabber.cpp" line="177"/>
+        <source>Screenshot already in progress, please wait for the current screenshot to complete</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="202"/>
+        <source>Screenshot cancelled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/screengrabber.cpp" line="218"/>
+        <source>Unable to get current screen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/screengrabber.cpp" line="237"/>
+        <location filename="../../src/utils/screengrabber.cpp" line="243"/>
+        <location filename="../../src/utils/screengrabber.cpp" line="299"/>
+        <location filename="../../src/utils/screengrabber.cpp" line="304"/>
         <source>Unable to capture screen</source>
         <translation>Грешка при заснемане на екрана</translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/screengrabber.cpp" line="373"/>
+        <source>=== All Screen Information ===</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/screengrabber.cpp" line="376"/>
+        <location filename="../../src/utils/screengrabber.cpp" line="551"/>
+        <source>Screen %1: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/screengrabber.cpp" line="377"/>
+        <source>  Logical geometry: %1x%2+%3+%4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/screengrabber.cpp" line="382"/>
+        <source>  DPR: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/screengrabber.cpp" line="488"/>
+        <source>Total logical dimensions: %1x%2 (min: %3,%4)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/screengrabber.cpp" line="493"/>
+        <source>Screenshot dimensions: %1x%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/screengrabber.cpp" line="509"/>
+        <source>Screenshot scale factors: X=%1 Y=%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/screengrabber.cpp" line="542"/>
+        <source>Calculated crop position for mixed DPI: X=%1 Y=%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/screengrabber.cpp" line="552"/>
+        <source>  Logical geometry: %1x%2+%3+%4 DPR: %5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/screengrabber.cpp" line="558"/>
+        <source>  Crop rect in screenshot: %1x%2+%3+%4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/screengrabber.cpp" line="571"/>
+        <source>Crop rect is empty, returning full screenshot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/screengrabber.cpp" line="587"/>
+        <source>Scaling screenshot to: %1 %2</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2372,12 +2510,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
 <context>
     <name>SelectionTool</name>
     <message>
-        <location filename="../../src/tools/selection/selectiontool.cpp" line="25"/>
+        <location filename="../../src/tools/selection/selectiontool.cpp" line="26"/>
         <source>Rectangular Selection</source>
         <translation>Правоъгълна рамка</translation>
     </message>
     <message>
-        <location filename="../../src/tools/selection/selectiontool.cpp" line="35"/>
+        <location filename="../../src/tools/selection/selectiontool.cpp" line="36"/>
         <source>Set Selection as the paint tool</source>
         <translation>Избиране на инструмент „Правоъгълна рамка“</translation>
     </message>
@@ -2385,28 +2523,28 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
 <context>
     <name>SetShortcutDialog</name>
     <message>
-        <location filename="../../src/config/setshortcutwidget.cpp" line="18"/>
+        <location filename="../../src/config/setshortcutwidget.cpp" line="20"/>
         <source>Set Shortcut</source>
         <translation>Задаване на клавишна комбинация</translation>
     </message>
     <message>
-        <location filename="../../src/config/setshortcutwidget.cpp" line="24"/>
+        <location filename="../../src/config/setshortcutwidget.cpp" line="26"/>
         <source>Enter new shortcut to change </source>
         <translation>За да замените, въведете новата клавишна комбинация </translation>
     </message>
     <message>
-        <location filename="../../src/config/setshortcutwidget.cpp" line="38"/>
+        <location filename="../../src/config/setshortcutwidget.cpp" line="40"/>
         <source>Press Esc to cancel or ⌘+Backspace to disable the keyboard shortcut.</source>
         <translation>Натиснете Esc за отказ или ⌘+Backspace за отмяна на клавишната комбинация.</translation>
     </message>
     <message>
-        <location filename="../../src/config/setshortcutwidget.cpp" line="42"/>
+        <location filename="../../src/config/setshortcutwidget.cpp" line="44"/>
         <source>Press Esc to cancel or Backspace to disable the keyboard shortcut.</source>
         <translation>Натиснете Esc за отказ или Backspace за отмяна на клавишната комбинация.</translation>
     </message>
     <message>
-        <location filename="../../src/config/setshortcutwidget.cpp" line="48"/>
-        <location filename="../../src/config/setshortcutwidget.cpp" line="53"/>
+        <location filename="../../src/config/setshortcutwidget.cpp" line="50"/>
+        <location filename="../../src/config/setshortcutwidget.cpp" line="55"/>
         <source>Flameshot must be restarted for changes to take effect.</source>
         <translation>За да влязат в сила промените Flameshot трябва да бъде рестартиран.</translation>
     </message>
@@ -2414,131 +2552,170 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
 <context>
     <name>ShortcutsWidget</name>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="27"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="31"/>
         <source>Hot Keys</source>
         <translation>Клавишни комбинации</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="48"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="61"/>
         <source>Available shortcuts in the screen capture mode.</source>
         <translation>Налични клавишни комбинации в режим заснемане на екрана.</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="59"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="72"/>
         <source>Description</source>
         <translation>Описание</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="59"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="72"/>
         <source>Key</source>
         <translation>Клавиши</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="162"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="175"/>
         <source>Left Double-click</source>
         <translation>Двойно щракване с ляв бутон</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="169"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="182"/>
         <source>Toggle side panel</source>
         <translation>Превключване на страничната лента</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="170"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="183"/>
         <source>Grab a color from the screen</source>
         <translation>Взимане на цвят от екрана</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="171"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="184"/>
         <source>Resize selection left 1px</source>
         <translation>Преоразмеряване на избраното с 1 пиксел наляво</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="172"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="185"/>
         <source>Resize selection right 1px</source>
         <translation>Преоразмеряване на избраното с 1 пиксел надясно</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="173"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="186"/>
         <source>Resize selection up 1px</source>
         <translation>Преоразмеряване на избраното с 1 пиксел нагоре</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="174"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="187"/>
         <source>Resize selection down 1px</source>
         <translation>Преоразмеряване на избраното с 1 пиксел надолу</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="176"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="189"/>
         <source>Symmetrically decrease width by 2px</source>
         <translation>Симетрично намаляване ширината с 2 пиксела</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="178"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="191"/>
         <source>Symmetrically increase width by 2px</source>
         <translation>Симетрично увеличаване ширината с 2 пиксела</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="180"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="193"/>
         <source>Symmetrically increase height by 2px</source>
         <translation>Симетрично увеличаване височината с 2 пиксела</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="182"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="195"/>
         <source>Symmetrically decrease height by 2px</source>
         <translation>Симетрично намаляване височината с 2 пиксела</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="183"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="196"/>
         <source>Select entire screen</source>
         <translation>Избиране на целия екран</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="184"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="197"/>
         <source>Move selection left 1px</source>
         <translation>Преместване на избраното с 1 пиксел наляво</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="185"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="198"/>
         <source>Move selection right 1px</source>
         <translation>Преместване на избраното с 1 пиксел надясно</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="186"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="199"/>
         <source>Move selection up 1px</source>
         <translation>Преместване на избраното с 1 пиксел нагоре</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="187"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="200"/>
         <source>Move selection down 1px</source>
         <translation>Преместване на избраното с 1 пиксел надолу</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="188"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="201"/>
         <source>Commit text in text area</source>
         <translation>Потвърждаване на текста в текстовото поле</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="190"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="203"/>
         <source>Delete selected drawn object</source>
         <translation>Премахване на избрания обект</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="191"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="204"/>
         <source>Cancel current selection</source>
         <translation>Отменя текущо избраното</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="268"/>
+        <source>It seems, that Windows forces to open its screenshot tool when the &apos;Print Screen&apos; key is pressed. Would you like to disable this so that Flameshot can use the &apos;Print Screen&apos; key?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="273"/>
+        <source>Flameshot must be restarted for changes to take effect.</source>
+        <translation type="unfinished">За да влязат в сила промените Flameshot трябва да бъде рестартиран.</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="278"/>
+        <source>No, don&apos;t ask again</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="286"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="333"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="343"/>
+        <source>The registry could not be changed!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="317"/>
+        <source>Register Flameshot as MS-SCREENCLIP application (administrator privileges required)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="321"/>
+        <source>After registering, you can select Flameshot as the default screenshot application in Windows Settings.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="334"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="344"/>
+        <source>You may start Flameshot as administrator ONCE and try again!</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Delete current tool</source>
         <translation type="vanished">Премахване на текущия инструмент</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="200"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="213"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="222"/>
         <source>Capture screen</source>
         <translation>Заснемане на екрана</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="202"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="215"/>
         <source>Screenshot history</source>
         <translation>История на снимките</translation>
     </message>
@@ -2581,12 +2758,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
 <context>
     <name>SizeDecreaseTool</name>
     <message>
-        <location filename="../../src/tools/sizedecrease/sizedecreasetool.cpp" line="37"/>
+        <location filename="../../src/tools/sizedecrease/sizedecreasetool.cpp" line="38"/>
         <source>Decrease Tool Size</source>
         <translation>Намаляване размера на инструмента</translation>
     </message>
     <message>
-        <location filename="../../src/tools/sizedecrease/sizedecreasetool.cpp" line="47"/>
+        <location filename="../../src/tools/sizedecrease/sizedecreasetool.cpp" line="48"/>
         <source>Decrease the size of the other tools</source>
         <translation>Намаляване размера на другите инструменти</translation>
     </message>
@@ -2594,12 +2771,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
 <context>
     <name>SizeIncreaseTool</name>
     <message>
-        <location filename="../../src/tools/sizeincrease/sizeincreasetool.cpp" line="37"/>
+        <location filename="../../src/tools/sizeincrease/sizeincreasetool.cpp" line="38"/>
         <source>Increase Tool Size</source>
         <translation>Увеличаване размера на инструмента</translation>
     </message>
     <message>
-        <location filename="../../src/tools/sizeincrease/sizeincreasetool.cpp" line="47"/>
+        <location filename="../../src/tools/sizeincrease/sizeincreasetool.cpp" line="48"/>
         <source>Increase the size of the other tools</source>
         <translation>Увеличаване размера на другите инструменти</translation>
     </message>
@@ -2622,120 +2799,103 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
 <context>
     <name>StrftimeChooserWidget</name>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="43"/>
         <source>Century (00-99)</source>
-        <translation>Век (00-99)</translation>
+        <translation type="vanished">Век (00-99)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="44"/>
         <source>Year (00-99)</source>
-        <translation>Година (00-99)</translation>
+        <translation type="vanished">Година (00-99)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="45"/>
         <source>Year (2000)</source>
-        <translation>Година (2000)</translation>
+        <translation type="vanished">Година (2000)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="48"/>
         <source>Month Name (jan)</source>
-        <translation>Име на месеца (яну)</translation>
+        <translation type="vanished">Име на месеца (яну)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="49"/>
         <source>Month Name (january)</source>
-        <translation>Име на месеца (януари)</translation>
+        <translation type="vanished">Име на месеца (януари)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="51"/>
         <source>Month (01-12)</source>
-        <translation>Месец (01-12)</translation>
+        <translation type="vanished">Месец (01-12)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="52"/>
         <source>Week Day (1-7)</source>
-        <translation>Ден от седмицата (1-7)</translation>
+        <translation type="vanished">Ден от седмицата (1-7)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="53"/>
         <source>Week (01-53)</source>
-        <translation>Седмица (01-53)</translation>
+        <translation type="vanished">Седмица (01-53)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="56"/>
         <source>Day Name (mon)</source>
-        <translation>Ден от седмицата (пон)</translation>
+        <translation type="vanished">Ден от седмицата (пон)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="57"/>
         <source>Day Name (monday)</source>
-        <translation>Ден от седмицата (понеделник)</translation>
+        <translation type="vanished">Ден от седмицата (понеделник)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="59"/>
         <source>Day (01-31)</source>
-        <translation>Ден от месеца (01-31)</translation>
+        <translation type="vanished">Ден от месеца (01-31)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="60"/>
         <source>Day of Month (1-31)</source>
-        <translation>Ден от месеца (1-31)</translation>
+        <translation type="vanished">Ден от месеца (1-31)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="61"/>
         <source>Day (001-366)</source>
-        <translation>Ден (001-366)</translation>
+        <translation type="vanished">Ден (001-366)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="67"/>
         <source>Hour (00-23)</source>
-        <translation>Час (00-23)</translation>
+        <translation type="vanished">Час (00-23)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="68"/>
         <source>Hour (01-12)</source>
-        <translation>Час (01-12)</translation>
+        <translation type="vanished">Час (01-12)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="69"/>
         <source>Minute (00-59)</source>
-        <translation>Минути (00-59)</translation>
+        <translation type="vanished">Минути (00-59)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="70"/>
         <source>Second (00-59)</source>
-        <translation>Секунди (00-59)</translation>
+        <translation type="vanished">Секунди (00-59)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="73"/>
         <source>Full Date (%m/%d/%y)</source>
-        <translation>Пълна дата (%d/%m/%y)</translation>
+        <translation type="vanished">Пълна дата (%d/%m/%y)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="75"/>
         <source>Full Date (%Y-%m-%d)</source>
-        <translation>Пълна дата (%Y-%m-%d)</translation>
+        <translation type="vanished">Пълна дата (%Y-%m-%d)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="76"/>
         <source>Full Date (%d-%m-%Y)</source>
-        <translation>Пълна дата (%d-%m-%Y)</translation>
+        <translation type="vanished">Пълна дата (%d-%m-%Y)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="64"/>
         <source>Time (%H-%M-%S)</source>
-        <translation>Час (%H-%M-%S)</translation>
+        <translation type="vanished">Час (%H-%M-%S)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="65"/>
         <source>Time (%H-%M)</source>
-        <translation>Час (%H-%M)</translation>
+        <translation type="vanished">Час (%H-%M)</translation>
     </message>
 </context>
 <context>
     <name>SystemNotification</name>
     <message>
-        <location filename="../../src/utils/systemnotification.cpp" line="42"/>
+        <location filename="../../src/utils/systemnotification.cpp" line="43"/>
+        <source>No DBus System Notification service found</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/systemnotification.cpp" line="51"/>
         <source>Flameshot Info</source>
         <translation>Известие от Flameshot</translation>
     </message>
@@ -2743,37 +2903,37 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
 <context>
     <name>TextConfig</name>
     <message>
-        <location filename="../../src/tools/text/textconfig.cpp" line="44"/>
+        <location filename="../../src/tools/text/textconfig.cpp" line="45"/>
         <source>StrikeOut</source>
         <translation>Зачертан</translation>
     </message>
     <message>
-        <location filename="../../src/tools/text/textconfig.cpp" line="53"/>
+        <location filename="../../src/tools/text/textconfig.cpp" line="54"/>
         <source>Underline</source>
         <translation>Подчертан</translation>
     </message>
     <message>
-        <location filename="../../src/tools/text/textconfig.cpp" line="62"/>
+        <location filename="../../src/tools/text/textconfig.cpp" line="63"/>
         <source>Bold</source>
         <translation>Получер</translation>
     </message>
     <message>
-        <location filename="../../src/tools/text/textconfig.cpp" line="71"/>
+        <location filename="../../src/tools/text/textconfig.cpp" line="72"/>
         <source>Italic</source>
         <translation>Наклонен</translation>
     </message>
     <message>
-        <location filename="../../src/tools/text/textconfig.cpp" line="81"/>
+        <location filename="../../src/tools/text/textconfig.cpp" line="82"/>
         <source>Left Align</source>
         <translation>Ляво подравнен</translation>
     </message>
     <message>
-        <location filename="../../src/tools/text/textconfig.cpp" line="90"/>
+        <location filename="../../src/tools/text/textconfig.cpp" line="91"/>
         <source>Center Align</source>
         <translation>Центриран</translation>
     </message>
     <message>
-        <location filename="../../src/tools/text/textconfig.cpp" line="99"/>
+        <location filename="../../src/tools/text/textconfig.cpp" line="100"/>
         <source>Right Align</source>
         <translation>Дясно подравнен</translation>
     </message>
@@ -2794,47 +2954,62 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
 <context>
     <name>TrayIcon</name>
     <message>
-        <location filename="../../src/widgets/trayicon.cpp" line="100"/>
+        <location filename="../../src/widgets/trayicon.cpp" line="112"/>
         <source>&amp;Take Screenshot</source>
         <translation>&amp;Екранна снимка</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/trayicon.cpp" line="118"/>
+        <location filename="../../src/widgets/trayicon.cpp" line="133"/>
         <source>&amp;Open Launcher</source>
         <translation>&amp;Начален екран</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/trayicon.cpp" line="123"/>
+        <location filename="../../src/widgets/trayicon.cpp" line="138"/>
         <source>&amp;Configuration</source>
         <translation>Н&amp;астройки</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/trayicon.cpp" line="128"/>
+        <location filename="../../src/widgets/trayicon.cpp" line="143"/>
         <source>&amp;About</source>
         <translation>&amp;Относно</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/trayicon.cpp" line="133"/>
+        <location filename="../../src/widgets/trayicon.cpp" line="150"/>
+        <location filename="../../src/widgets/trayicon.cpp" line="237"/>
         <source>Check for updates</source>
         <translation>Проверка за обновяване</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/trayicon.cpp" line="144"/>
-        <source>New version %1 is available</source>
-        <translation>Налично е ново издание %1</translation>
+        <location filename="../../src/widgets/trayicon.cpp" line="162"/>
+        <source>Download version %1</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/widgets/trayicon.cpp" line="149"/>
+        <location filename="../../src/widgets/trayicon.cpp" line="250"/>
+        <source>Select Screen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/trayicon.cpp" line="266"/>
+        <source>Monitor %1: %2 (%3x%4)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New version %1 is available</source>
+        <translation type="vanished">Налично е ново издание %1</translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/trayicon.cpp" line="176"/>
         <source>&amp;Quit</source>
         <translation>&amp;Изход</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/trayicon.cpp" line="154"/>
+        <location filename="../../src/widgets/trayicon.cpp" line="181"/>
         <source>&amp;Latest Uploads</source>
         <translation>&amp;Последно качени</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/trayicon.cpp" line="160"/>
+        <location filename="../../src/widgets/trayicon.cpp" line="187"/>
         <source>&amp;Open Save Path</source>
         <translation>&amp;Отваряне пътя за запис</translation>
     </message>
@@ -2846,32 +3021,32 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <translation type="vanished">UI Color Editor</translation>
     </message>
     <message>
-        <location filename="../../src/config/uicoloreditor.cpp" line="88"/>
+        <location filename="../../src/config/uicoloreditor.cpp" line="89"/>
         <source>Change the color moving the selectors and see the changes in the preview buttons.</source>
         <translation>Променяйте цвета с помощта на манипулаторите и вижте промяната в цвета на бутоните.</translation>
     </message>
     <message>
-        <location filename="../../src/config/uicoloreditor.cpp" line="99"/>
+        <location filename="../../src/config/uicoloreditor.cpp" line="100"/>
         <source>Select a Button to modify it</source>
         <translation>За да промените цвета на бутон, го изберете</translation>
     </message>
     <message>
-        <location filename="../../src/config/uicoloreditor.cpp" line="109"/>
+        <location filename="../../src/config/uicoloreditor.cpp" line="110"/>
         <source>Main Color</source>
         <translation>Основен цвят</translation>
     </message>
     <message>
-        <location filename="../../src/config/uicoloreditor.cpp" line="113"/>
+        <location filename="../../src/config/uicoloreditor.cpp" line="114"/>
         <source>Click on this button to set the edition mode of the main color.</source>
         <translation>За промяна на основния цвят, изберете този бутон.</translation>
     </message>
     <message>
-        <location filename="../../src/config/uicoloreditor.cpp" line="124"/>
+        <location filename="../../src/config/uicoloreditor.cpp" line="125"/>
         <source>Contrast Color</source>
         <translation>Контрастен цвят</translation>
     </message>
     <message>
-        <location filename="../../src/config/uicoloreditor.cpp" line="129"/>
+        <location filename="../../src/config/uicoloreditor.cpp" line="130"/>
         <source>Click on this button to set the edition mode of the contrast color.</source>
         <translation>За промяна на контрастния цвят, изберете този бутон.</translation>
     </message>
@@ -2879,12 +3054,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
 <context>
     <name>UndoTool</name>
     <message>
-        <location filename="../../src/tools/undo/undotool.cpp" line="23"/>
+        <location filename="../../src/tools/undo/undotool.cpp" line="24"/>
         <source>Undo</source>
         <translation>Отменяне</translation>
     </message>
     <message>
-        <location filename="../../src/tools/undo/undotool.cpp" line="33"/>
+        <location filename="../../src/tools/undo/undotool.cpp" line="34"/>
         <source>Undo the last modification</source>
         <translation>Отменя последната промяна</translation>
     </message>
@@ -2892,22 +3067,22 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
 <context>
     <name>UpdateNotificationWidget</name>
     <message>
-        <location filename="../../src/widgets/updatenotificationwidget.cpp" line="70"/>
+        <location filename="../../src/widgets/updatenotificationwidget.cpp" line="71"/>
         <source>New Flameshot version %1 is available</source>
         <translation>Налично е издание %1 на Flameshot</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/updatenotificationwidget.cpp" line="123"/>
+        <location filename="../../src/widgets/updatenotificationwidget.cpp" line="129"/>
         <source>Ignore</source>
         <translation>Пренебрегване</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/updatenotificationwidget.cpp" line="131"/>
+        <location filename="../../src/widgets/updatenotificationwidget.cpp" line="137"/>
         <source>Later</source>
         <translation>После</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/updatenotificationwidget.cpp" line="139"/>
+        <location filename="../../src/widgets/updatenotificationwidget.cpp" line="145"/>
         <source>Update</source>
         <translation>Обновяване</translation>
     </message>
@@ -2961,12 +3136,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
 <context>
     <name>UtilityPanel</name>
     <message>
-        <location filename="../../src/widgets/panel/utilitypanel.cpp" line="196"/>
+        <location filename="../../src/widgets/panel/utilitypanel.cpp" line="197"/>
         <source>Close</source>
         <translation>Затваряне</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/panel/utilitypanel.cpp" line="206"/>
+        <location filename="../../src/widgets/panel/utilitypanel.cpp" line="207"/>
         <source>&lt;Empty&gt;</source>
         <translation>&lt;празно&gt;</translation>
     </message>
@@ -2974,29 +3149,44 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
 <context>
     <name>VisualsEditor</name>
     <message>
-        <location filename="../../src/config/visualseditor.cpp" line="41"/>
+        <location filename="../../src/config/visualseditor.cpp" line="44"/>
         <source>Opacity of area outside selection:</source>
         <translation>Прозрачност на областта извън избраното:</translation>
     </message>
     <message>
-        <location filename="../../src/config/visualseditor.cpp" line="68"/>
+        <location filename="../../src/config/visualseditor.cpp" line="73"/>
         <source>UI Color Editor</source>
         <translation>Цвят на интерфейса</translation>
     </message>
     <message>
-        <location filename="../../src/config/visualseditor.cpp" line="74"/>
+        <location filename="../../src/config/visualseditor.cpp" line="79"/>
         <source>Colorpicker Editor</source>
         <translation>Редактор на палитрата</translation>
     </message>
     <message>
-        <location filename="../../src/config/visualseditor.cpp" line="79"/>
+        <location filename="../../src/config/visualseditor.cpp" line="84"/>
         <source>Button Selection</source>
         <translation>Избрани бутони</translation>
     </message>
     <message>
-        <location filename="../../src/config/visualseditor.cpp" line="85"/>
+        <location filename="../../src/config/visualseditor.cpp" line="90"/>
         <source>Select All</source>
         <translation>Избиране на всички</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/visualseditor.cpp" line="101"/>
+        <source>UI language</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/visualseditor.cpp" line="141"/>
+        <source>Configuration</source>
+        <translation type="unfinished">Настройки</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/visualseditor.cpp" line="142"/>
+        <source>Flameshot must be restarted to apply these changes!</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3010,7 +3200,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
 <context>
     <name>color_widgets::ColorPalette</name>
     <message>
-        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette.cpp" line="417"/>
+        <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette.cpp" line="422"/>
         <source>Unnamed</source>
         <translation>Без име</translation>
     </message>
