@@ -3,6 +3,13 @@
   <interface name="org.flameshot.Flameshot">
 
     <!--
+        captureScreen:
+
+        Open the GUI screenshot capture tool.
+    -->
+    <method name="captureScreen"/>
+
+    <!--
         attachPin:
         @data: Byte array containing the screenshot and geometry information.
 
