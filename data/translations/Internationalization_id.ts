@@ -127,12 +127,12 @@
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="41"/>
         <source>Full Screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Layar Penuh</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="46"/>
         <source>Monitor %1: %2 (%3x%4)</source>
-        <translation type="unfinished"></translation>
+        <translation>Monitor %1: %2 (%3x%4)</translation>
     </message>
     <message>
         <source>Full Screen (All Monitors)</source>
@@ -193,7 +193,7 @@
         <location filename="../../src/widgets/capturelauncher.ui" line="71"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="184"/>
         <source>Monitor:</source>
-        <translation type="unfinished"></translation>
+        <translation>Monitor:</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="87"/>
@@ -591,9 +591,9 @@ Press Space to open the side panel.</translation>
         <source>Some keyboard shortcuts have conflicts.
 This will NOT prevent flameshot from starting.
 Please solve them manually in the configuration file.</source>
-        <translation>Beberapa shortcut keyboard memiliki konflik.
+        <translation>Beberapa pintasan papan ketik memiliki konflik.
 Ini TIDAK akan menahan flameshot untuk memulai.
-Mohon atasi mereka secara manual di file konfigurasi.</translation>
+Silakan atasi mereka secara manual di berkas konfigurasi.</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="111"/>
@@ -626,7 +626,7 @@ Mohon atasi mereka secara manual di file konfigurasi.</translation>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="77"/>
         <source>Filename Editor</source>
-        <translation>Pengaturan Nama File</translation>
+        <translation>Pengaturan Nama Berkas</translation>
     </message>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="58"/>
@@ -646,7 +646,7 @@ Mohon atasi mereka secara manual di file konfigurasi.</translation>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="123"/>
         <source>&lt;b&gt;Configuration file has errors. Resolve them before continuing.&lt;/b&gt;</source>
-        <translation>&lt;b&gt;File konfigurasi memiliki kesalahan. Atasi mereka sebelum melanjutkan.&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Berkas konfigurasi memiliki galat. Atasi mereka sebelum melanjutkan.&lt;/b&gt;</translation>
     </message>
 </context>
 <context>
@@ -924,18 +924,18 @@ Mohon atasi mereka secara manual di file konfigurasi.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="201"/>
         <source>Unable to read file.</source>
-        <translation>Tidak bisa membaca berkas.</translation>
+        <translation>Tidak dapat membaca berkas.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="210"/>
         <location filename="../../src/config/generalconf.cpp" line="235"/>
         <source>Unable to write file.</source>
-        <translation>Tak bisa menulis berkas.</translation>
+        <translation>Tidak dapat menulis berkas.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="222"/>
         <source>Save File</source>
-        <translation>Simpan File</translation>
+        <translation>Simpan Berkas</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="244"/>
@@ -987,7 +987,7 @@ Mohon atasi mereka secara manual di file konfigurasi.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="367"/>
         <source>Configuration File</source>
-        <translation>Konfigurasi Berkas</translation>
+        <translation>Berkas Konfigurasi</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="372"/>
@@ -1206,7 +1206,7 @@ Mohon atasi mereka secara manual di file konfigurasi.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="557"/>
         <source>Preferred save file extension:</source>
-        <translation>Ekstensi file penyimpanan yang disukai:</translation>
+        <translation>Ekstensi berkas penyimpanan yang disukai:</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="586"/>
@@ -1236,7 +1236,7 @@ Mohon atasi mereka secara manual di file konfigurasi.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="702"/>
         <source>Copy file path after save</source>
-        <translation>Salin lokasi file setelah menyimpan</translation>
+        <translation>Salin lokasi berkas setelah menyimpan</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="703"/>
@@ -1372,22 +1372,22 @@ Mohon atasi mereka secara manual di file konfigurasi.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="929"/>
         <source>Capture active monitor (skip monitor selection)</source>
-        <translation type="unfinished"></translation>
+        <translation>Ambil monitor aktif (lewati pemilihan monitor)</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="931"/>
         <source>Automatically capture the monitor where the cursor is located instead of showing the monitor selection dialog. This feature is not supported on Wayland.</source>
-        <translation type="unfinished"></translation>
+        <translation>Secara otomatis ambil monitor di mana kursor dilokasikan alih-alih menampilkan dialog pemilihan monitor. Fitur ini tidak didukung di Wayland.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="952"/>
         <source>Use legacy X11 screenshot method (deprecated)</source>
-        <translation type="unfinished"></translation>
+        <translation>Gunakan metode tangkapan layar X11 lama (usang)</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="954"/>
         <source>Bypass the freedesktop portal and use Qt&apos;s native X11 screen capture. Enable this if your window manager lacks xdg-desktop-portal (e.g. xmonad, i3). Only effective on X11; ignored on Wayland.</source>
-        <translation type="unfinished"></translation>
+        <translation>Lewati portal freedesktop dan gunakan pengambilan layar X11 bawaan Qt. Aktifkan ini jika pengelola jendela Anda tidak memiliki xdg-desktop-portal (mis. xmonad, i3). Hanya efektif di X11; diabaikan di Wayland.</translation>
     </message>
 </context>
 <context>
@@ -1777,7 +1777,8 @@ Mohon atasi mereka secara manual di file konfigurasi.</translation>
         <location filename="../../src/utils/monitorpreview.cpp" line="31"/>
         <source>Monitor %1: %2
 Click to select</source>
-        <translation type="unfinished"></translation>
+        <translation>Monitor %1: %2
+Klik untuk memilih</translation>
     </message>
 </context>
 <context>
@@ -2011,7 +2012,7 @@ Click to select</source>
     <message>
         <location filename="../../src/main.cpp" line="288"/>
         <source>Existing directory or new file to save to</source>
-        <translation>Direktori yang ada atau file baru untuk disimpan</translation>
+        <translation>Direktori yang ada atau berkas baru untuk disimpan</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="291"/>
@@ -2045,7 +2046,7 @@ Click to select</source>
     <message>
         <location filename="../../src/main.cpp" line="306"/>
         <source>Set the filename pattern</source>
-        <translation>Atur pola nama file</translation>
+        <translation>Atur pola nama berkas</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="310"/>
@@ -2105,7 +2106,7 @@ Click to select</source>
     <message>
         <location filename="../../src/main.cpp" line="349"/>
         <source>Interactively select and edit the screenshot region</source>
-        <translation type="unfinished"></translation>
+        <translation>Secara interaktif pilih dan sunting wilayah tangkapan layar</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="366"/>
@@ -2120,7 +2121,7 @@ Click to select</source>
     <message>
         <location filename="../../src/main.cpp" line="382"/>
         <source>Invalid path, must be an existing directory or a new file in an existing directory</source>
-        <translation>Jalur tidak valid, harus berupa direkotri yang sudah ada atau file baru di direktori yang sudah ada</translation>
+        <translation>Jalur tidak valid, harus berupa direkotri yang sudah ada atau berkas baru di direktori yang sudah ada</translation>
     </message>
     <message>
         <source>Define the screen to capture</source>
@@ -2356,7 +2357,7 @@ Anda mungkin perlu untuk escape dari tanda &apos;#&apos; seperti pada &apos;\#FF
     <message>
         <location filename="../../src/tools/save/savetool.cpp" line="34"/>
         <source>Save screenshot to a file</source>
-        <translation>Simpan screenshot sebagai file</translation>
+        <translation>Simpan screenshot sebagai berkas</translation>
     </message>
     <message>
         <source>Save the capture</source>
@@ -2392,37 +2393,37 @@ Anda mungkin perlu untuk escape dari tanda &apos;#&apos; seperti pada &apos;\#FF
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="61"/>
         <source>Could not locate the `org.freedesktop.portal.Desktop` service</source>
-        <translation type="unfinished"></translation>
+        <translation>Tidak dapat melokasikan layanan `org.freedesktop.portal.Desktop`</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="109"/>
         <source>Screenshot portal timed out after 30 seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>Portal tangkapan layar kehabisan waktu setelah 30 detik</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="132"/>
         <source>FreeDesktop portal screenshot size: %1x%2, DPR: %3</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukuran tangkapan layar portal FreeDesktop: %1x%2, DPR: %3</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="159"/>
         <source>Capture Active Monitor is not supported on Wayland due to Wayland security model.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ambil Monitor Aktif tidak didukung di Wayland karena model keamanan Wayland.</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="177"/>
         <source>Screenshot already in progress, please wait for the current screenshot to complete</source>
-        <translation type="unfinished"></translation>
+        <translation>Tangkapan layar sedang berlangsung, silakan tunggu untuk tangkapan layar saat ini selesai</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="202"/>
         <source>Screenshot cancelled</source>
-        <translation type="unfinished"></translation>
+        <translation>Tangkapan layar dibatalkan</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="218"/>
         <source>Unable to get current screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Tidak dapat mendapatkan layar saat ini</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="237"/>
@@ -2435,63 +2436,63 @@ Anda mungkin perlu untuk escape dari tanda &apos;#&apos; seperti pada &apos;\#FF
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="373"/>
         <source>=== All Screen Information ===</source>
-        <translation type="unfinished"></translation>
+        <translation>=== Informasi Semua Layar ===</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="376"/>
         <location filename="../../src/utils/screengrabber.cpp" line="551"/>
         <source>Screen %1: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Layar %1: %2</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="377"/>
         <source>  Logical geometry: %1x%2+%3+%4</source>
-        <translation type="unfinished"></translation>
+        <translation>  Geometri logika: %1x%2+%3+%4</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="382"/>
         <source>  DPR: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>  DPR: %1</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="488"/>
         <source>Total logical dimensions: %1x%2 (min: %3,%4)</source>
-        <translation type="unfinished"></translation>
+        <translation>Total dimensi logika: %1x%2 (min: %3, %4)</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="493"/>
         <source>Screenshot dimensions: %1x%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Dimensi tangkapan layar: %1x%2</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="509"/>
         <source>Screenshot scale factors: X=%1 Y=%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Faktor skala tangkapan layar: X=%1 Y=%2</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="542"/>
         <source>Calculated crop position for mixed DPI: X=%1 Y=%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Posisi pangkas terhitung untuk DPI tercampur: X=%1 Y=%2</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="552"/>
         <source>  Logical geometry: %1x%2+%3+%4 DPR: %5</source>
-        <translation type="unfinished"></translation>
+        <translation>  Geometri logika: %1x%2+%3+%4 DPR: %5</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="558"/>
         <source>  Crop rect in screenshot: %1x%2+%3+%4</source>
-        <translation type="unfinished"></translation>
+        <translation>  Pers pangkas dalam tangkapan layar: %1x%2+%3+%4</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="571"/>
         <source>Crop rect is empty, returning full screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Pers pangkas kosong, menghasilkan tangkapan layar penuh</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="587"/>
         <source>Scaling screenshot to: %1 %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Menskalakan tangkapan layar ke: %1 %2</translation>
     </message>
 </context>
 <context>
@@ -2689,40 +2690,40 @@ Anda mungkin perlu untuk escape dari tanda &apos;#&apos; seperti pada &apos;\#FF
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="268"/>
         <source>It seems, that Windows forces to open its screenshot tool when the &apos;Print Screen&apos; key is pressed. Would you like to disable this so that Flameshot can use the &apos;Print Screen&apos; key?</source>
-        <translation type="unfinished"></translation>
+        <translation>Sepertinya, bahwa Windows memaksakan untuk membuka alat tangkapan layarnya ketika tombol &apos;Print Screen&apos; ditekan. Apakah Anda ingin menonaktifkan ini jadi Flameshot dapat menggunakan tombol &apos;Print Screen&apos;?</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="273"/>
         <source>Flameshot must be restarted for changes to take effect.</source>
-        <translation type="unfinished">Flameshot harus di mulai ulang agar perubahan diterapkan.</translation>
+        <translation>Flameshot harus di mulai ulang agar perubahan berlaku.</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="278"/>
         <source>No, don&apos;t ask again</source>
-        <translation type="unfinished"></translation>
+        <translation>Tidak, jangan tanyakan lagi</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="286"/>
         <location filename="../../src/config/shortcutswidget.cpp" line="333"/>
         <location filename="../../src/config/shortcutswidget.cpp" line="343"/>
         <source>The registry could not be changed!</source>
-        <translation type="unfinished"></translation>
+        <translation>Registri tidak dapat diubah!</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="317"/>
         <source>Register Flameshot as MS-SCREENCLIP application (administrator privileges required)</source>
-        <translation type="unfinished"></translation>
+        <translation>Daftar Flameshot sebagai aplikasi MS-SCREENCLIP (hak akses administrator diperlukan)</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="321"/>
         <source>After registering, you can select Flameshot as the default screenshot application in Windows Settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>Setelah mendaftar, Anda dapat memilih Flameshot sebagai aplikasi tangkapan layar bawaan di Pengaturan Windows.</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="334"/>
         <location filename="../../src/config/shortcutswidget.cpp" line="344"/>
         <source>You may start Flameshot as administrator ONCE and try again!</source>
-        <translation type="unfinished"></translation>
+        <translation>Anda mungkin memulai Flameshot sebagai administrator SEKALI dan coba lagi!</translation>
     </message>
     <message>
         <source>Delete current tool</source>
@@ -2912,7 +2913,7 @@ Anda mungkin perlu untuk escape dari tanda &apos;#&apos; seperti pada &apos;\#FF
     <message>
         <location filename="../../src/utils/systemnotification.cpp" line="43"/>
         <source>No DBus System Notification service found</source>
-        <translation type="unfinished"></translation>
+        <translation>Tidak ada layanan Notifikasi Sistem DBus ditemukan</translation>
     </message>
     <message>
         <location filename="../../src/utils/systemnotification.cpp" line="51"/>
@@ -3002,17 +3003,17 @@ Anda mungkin perlu untuk escape dari tanda &apos;#&apos; seperti pada &apos;\#FF
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="162"/>
         <source>Download version %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Unduh versi %1</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="250"/>
         <source>Select Screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Pilih Layar</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="266"/>
         <source>Monitor %1: %2 (%3x%4)</source>
-        <translation type="unfinished"></translation>
+        <translation>Monitor %1: %2 (%3x%4)</translation>
     </message>
     <message>
         <source>New version %1 is available</source>
@@ -3196,17 +3197,17 @@ Anda mungkin perlu untuk escape dari tanda &apos;#&apos; seperti pada &apos;\#FF
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="101"/>
         <source>UI language</source>
-        <translation type="unfinished"></translation>
+        <translation>Bahasa UI</translation>
     </message>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="141"/>
         <source>Configuration</source>
-        <translation type="unfinished">Pengaturan</translation>
+        <translation>Konfigurasi</translation>
     </message>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="142"/>
         <source>Flameshot must be restarted to apply these changes!</source>
-        <translation type="unfinished"></translation>
+        <translation>Flameshot harus dimulai ulang untuk menerapkan perubahan ini!</translation>
     </message>
 </context>
 <context>
@@ -3244,7 +3245,7 @@ Anda mungkin perlu untuk escape dari tanda &apos;#&apos; seperti pada &apos;\#FF
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="64"/>
         <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="231"/>
         <source>Open a new palette from file</source>
-        <translation>Buka palet baru dari file</translation>
+        <translation>Buka palet baru dari berkas</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="75"/>
@@ -3313,7 +3314,7 @@ Anda mungkin perlu untuk escape dari tanda &apos;#&apos; seperti pada &apos;\#FF
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="225"/>
         <source>All Files (*)</source>
-        <translation>Semua File (*)</translation>
+        <translation>Semua Berkas (*)</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="226"/>
@@ -3325,7 +3326,7 @@ Anda mungkin perlu untuk escape dari tanda &apos;#&apos; seperti pada &apos;\#FF
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="240"/>
         <source>Failed to load the palette file
 %1</source>
-        <translation>Gagal memuat file palet
+        <translation>Gagal memuat berkas palet
 %1</translation>
     </message>
 </context>
