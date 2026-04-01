@@ -19,20 +19,20 @@ build_script:
 - cmd: |-
     cmake -S C:\projects\source -B C:\projects\source\build-portable -G "Visual Studio 17 2022" -DCMAKE_BUILD_TYPE=Release -DENABLE_OPENSSL=ON -DUSE_PORTABLE_CONFIG=ON
     cmake --build C:\projects\source\build-portable --parallel 2 --config Release
-  # Combine both into archive.zip
+  # Combine both into artifact.zip
 - cmd: |-
-    mkdir C:\projects\source\artifact
-    copy C:\projects\source\build\package\*.msi C:\projects\source\artifact\.
-    copy C:\projects\source\build-portable\src\Release\*.exe C:\projects\source\artifact\.
-    7z a -tzip C:\projects\source\artifact.zip C:\projects\source\artifact\
+    mkdir C:\projects\source\build\artifact
+    copy C:\projects\source\build\package\*.msi C:\projects\source\build\artifact\.
+    copy C:\projects\source\build-portable\src\Release\*.exe C:\projects\source\build\artifact\.
+    7z a -tzip C:\projects\source\build\artifact.zip C:\projects\source\build\artifact\
 
 artifacts:
-- path: artifact.zip
-  name: archive
+- path: build\artifact.zip
+  name: artifact
 
 deploy:
 - provider: Webhook
   url: https://app.signpath.io/API/v1/042f605f-b378-45d8-ad16-b7695b071036/Integrations/AppVeyor?ProjectSlug=flameshot&SigningPolicySlug=test-signing
   #url: https://app.signpath.io/API/v1/042f605f-b378-45d8-ad16-b7695b071036/Integrations/AppVeyor?ProjectSlug=flameshot&SigningPolicySlug=release-signing
   authorization:
-    secure: G5nNnkfRSJ+EEx+7LlUSSoEyoL+pHYItvjrNxbWITE7RB+cm9qzuHRdwmrZdEDjdVCLZ2TkNawynMxYcGMZAQA==
+    secure: UGxEQ/cEpACvBCjp1lSeZOMkB49/GRpm+PGG9asArdbaVHmLuPuso//tRhNDZJXY5nL4E+/FaaFqV9tBIkYbUQ==
