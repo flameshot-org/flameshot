@@ -127,7 +127,7 @@
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="41"/>
         <source>Full Screen</source>
-        <translation type="unfinished"></translation>
+        <translation>เต็มหน้าจอ</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="46"/>
@@ -1299,87 +1299,87 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="810"/>
         <source>Display Location</source>
-        <translation type="unfinished"></translation>
+        <translation>ตำแหน่งแสดงผล</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="813"/>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>เสร็จ</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="814"/>
         <source>Top Left</source>
-        <translation type="unfinished"></translation>
+        <translation>มุมบนซ้าย</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="816"/>
         <source>Top Right</source>
-        <translation type="unfinished"></translation>
+        <translation>บนขวา</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="818"/>
         <source>Bottom Left</source>
-        <translation type="unfinished"></translation>
+        <translation>ล่างซ้าย</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="820"/>
         <source>Bottom Right</source>
-        <translation type="unfinished"></translation>
+        <translation>ล่างขวา</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="822"/>
         <source>Center</source>
-        <translation type="unfinished"></translation>
+        <translation>กึ่งกลาง</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="847"/>
         <source>Quality range of 0-100; Higher number is better quality and larger file size</source>
-        <translation type="unfinished"></translation>
+        <translation>ระดับคุณภาพอยู่ระหว่าง 0-100; ตัวเลขที่สูงกว่าหมายถึงคุณภาพที่ดีกว่าและขนาดไฟล์ที่ใหญ่กว่า</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="851"/>
         <source>JPEG Quality</source>
-        <translation type="unfinished"></translation>
+        <translation>คุณภาพ JPEG</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="862"/>
         <source>Reverse arrow</source>
-        <translation type="unfinished"></translation>
+        <translation>ลูกศรย้อนกลับ</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="863"/>
         <source>Draw the arrow head first</source>
-        <translation type="unfinished"></translation>
+        <translation>วาดหัวลูกศรก่อน</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="872"/>
         <source>Insecure Pixelate</source>
-        <translation type="unfinished"></translation>
+        <translation>พิกเซลที่ไม่สมบูรณ์</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="874"/>
         <source>Draw the pixelation effect in an insecure but more asethetic way.</source>
-        <translation type="unfinished"></translation>
+        <translation>วาดเอฟเฟ็กต์พิกเซลแตกในลักษณะที่ไม่มั่นคงแต่ดูสวยงามกว่า</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="929"/>
         <source>Capture active monitor (skip monitor selection)</source>
-        <translation type="unfinished"></translation>
+        <translation>บันทึกภาพหน้าจอที่ใช้งานอยู่ (ข้ามขั้นตอนเลือกหน้าจอ)</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="931"/>
         <source>Automatically capture the monitor where the cursor is located instead of showing the monitor selection dialog. This feature is not supported on Wayland.</source>
-        <translation type="unfinished"></translation>
+        <translation>จับภาพหน้าจอที่เคอร์เซอร์อยู่โดยอัตโนมัติ แทนที่จะแสดงกล่องโต้ตอบเลือกหน้าจอ คุณสมบัตินี้ไม่รองรับบน Wayland</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="952"/>
         <source>Use legacy X11 screenshot method (deprecated)</source>
-        <translation type="unfinished"></translation>
+        <translation>ใช้เมธอดการจับภาพหน้าจอแบบเดิมของ X11 (เลิกใช้แล้ว)</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="954"/>
         <source>Bypass the freedesktop portal and use Qt&apos;s native X11 screen capture. Enable this if your window manager lacks xdg-desktop-portal (e.g. xmonad, i3). Only effective on X11; ignored on Wayland.</source>
-        <translation type="unfinished"></translation>
+        <translation>ข้ามขั้นตอนการใช้งานพอร์ทัล freedesktop และใช้การจับภาพหน้าจอ X11 ดั้งเดิมของ Qt แทน เปิดใช้งานตัวเลือกนี้หากตัวจัดการหน้าต่างของคุณไม่มี xdg-desktop-portal (เช่น xmonad, i3) วิธีนี้ใช้ได้เฉพาะกับ X11 เท่านั้น จะไม่มีผลกับ Wayland</translation>
     </message>
 </context>
 <context>
@@ -1769,7 +1769,8 @@ Please solve them manually in the configuration file.</source>
         <location filename="../../src/utils/monitorpreview.cpp" line="31"/>
         <source>Monitor %1: %2
 Click to select</source>
-        <translation type="unfinished"></translation>
+        <translation>ตรวจสอบ %1: %2
+คลิกเพื่อเลือก</translation>
     </message>
 </context>
 <context>
@@ -1831,22 +1832,22 @@ Click to select</source>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="298"/>
         <source>Rotate Right</source>
-        <translation type="unfinished"></translation>
+        <translation>หมุนไปทางขวา</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="303"/>
         <source>Rotate Left</source>
-        <translation type="unfinished"></translation>
+        <translation>หมุนไปทางซ้าย</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="308"/>
         <source>Increase Opacity</source>
-        <translation type="unfinished"></translation>
+        <translation>เพิ่มความทึบแสง</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="315"/>
         <source>Decrease Opacity</source>
-        <translation type="unfinished"></translation>
+        <translation>ลดความทึบแสง</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="322"/>
@@ -1864,7 +1865,7 @@ Click to select</source>
     <message>
         <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="38"/>
         <source>Set Pixelate as the paint tool.</source>
-        <translation type="unfinished"></translation>
+        <translation>ตั้งค่า Pixelate เป็นเครื่องมือระบายสี</translation>
     </message>
     <message>
         <source>Set Pixelate as the paint tool</source>
@@ -1876,12 +1877,12 @@ Click to select</source>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/primaryinstancewidget.cpp" line="21"/>
         <source>Primary instance</source>
-        <translation type="unfinished"></translation>
+        <translation>อินสแตนซ์หลัก</translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/primaryinstancewidget.cpp" line="22"/>
         <source>&lt;b&gt;Primary instance.&lt;/b&gt; Messages received from secondaries:</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;อินสแตนซ์หลัก&lt;/b&gt; ข้อความที่ได้รับจากอินสแตนซ์รอง:</translation>
     </message>
 </context>
 <context>
@@ -1993,12 +1994,12 @@ Click to select</source>
     <message>
         <location filename="../../src/main.cpp" line="273"/>
         <source>Capture screenshot of all monitors at the same time.</source>
-        <translation type="unfinished"></translation>
+        <translation>จับภาพหน้าจอทุกจอพร้อมกัน</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="283"/>
         <source>Capture a screenshot of the specified monitor.</source>
-        <translation type="unfinished"></translation>
+        <translation>จับภาพหน้าจอของจอที่ระบุไว้</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="288"/>
@@ -2057,7 +2058,7 @@ Click to select</source>
     <message>
         <location filename="../../src/main.cpp" line="320"/>
         <source>Enable or disable the notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>เปิดใช้งานหรือปิดใช้งานการแจ้งเตือน</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="323"/>
@@ -2087,7 +2088,7 @@ Click to select</source>
     <message>
         <location filename="../../src/main.cpp" line="339"/>
         <source>Print geometry of the selection in the format WxH+X+Y. Does nothing if raw is specified</source>
-        <translation type="unfinished"></translation>
+        <translation>พิมพ์รูปทรงเรขาคณิตของส่วนที่เลือกในรูปแบบ กว้าง x สูง + สูง x ยาว + ต่ำ</translation>
     </message>
     <message>
         <source>Print geometry of the selection in the format W H X Y. Does nothing if raw is specified</source>
@@ -2101,7 +2102,7 @@ Click to select</source>
     <message>
         <location filename="../../src/main.cpp" line="349"/>
         <source>Interactively select and edit the screenshot region</source>
-        <translation type="unfinished"></translation>
+        <translation>เลือกและแก้ไขขอบเขตการจับภาพหน้าจอแบบโต้ตอบ</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="366"/>
@@ -2207,12 +2208,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="68"/>
         <source>Subcommands</source>
-        <translation type="unfinished"></translation>
+        <translation>คำสั่งย่อย</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="328"/>
         <source>subcommands</source>
-        <translation type="unfinished"></translation>
+        <translation>คำสั่งย่อย</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="329"/>
@@ -2368,27 +2369,27 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="61"/>
         <source>Could not locate the `org.freedesktop.portal.Desktop` service</source>
-        <translation type="unfinished"></translation>
+        <translation>ไม่พบ `org.freedesktop.portal.Desktop`</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="109"/>
         <source>Screenshot portal timed out after 30 seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>พอร์ทัลจับภาพหน้าจอหมดเวลาหลังจาก 30 วินาที</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="132"/>
         <source>FreeDesktop portal screenshot size: %1x%2, DPR: %3</source>
-        <translation type="unfinished"></translation>
+        <translation>ขนาดภาพหน้าจอพอร์ทัล FreeDesktop: %1x%2, DPR: %3</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="159"/>
         <source>Capture Active Monitor is not supported on Wayland due to Wayland security model.</source>
-        <translation type="unfinished"></translation>
+        <translation>Capture Active Monitor ไม่ได้รับการสนับสนุนบน Wayland เนื่องจากรูปแบบความปลอดภัยของ Wayland</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="177"/>
         <source>Screenshot already in progress, please wait for the current screenshot to complete</source>
-        <translation type="unfinished"></translation>
+        <translation>กำลังดำเนินการจับภาพหน้าจออยู่ โปรดรอจนกว่าการจับภาพหน้าจอจะเสร็จสมบูรณ์</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="202"/>
