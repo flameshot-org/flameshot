@@ -9,12 +9,11 @@ if(ENABLE_CPPCHECK)
     message(STATUS "CPPCHECK is enabled!")
     set(CMAKE_CXX_CPPCHECK
         ${CPPCHECK}
+        --library=qt
         --suppress=missingInclude
         --enable=all
         --inline-suppr
-        --inconclusive
-        -i
-        ${CMAKE_SOURCE_DIR}/imgui/lib)
+        --inconclusive)
   else()
     message(SEND_ERROR "cppcheck requested but executable not found")
   endif()
