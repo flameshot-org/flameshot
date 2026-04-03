@@ -6,6 +6,7 @@ set(ENABLE_QT_DEPRECATION_CHECK "" CACHE STRING "Define hex value (e.g. 0x061100
 if(ENABLE_CPPCHECK)
   find_program(CPPCHECK cppcheck)
   if(CPPCHECK)
+    message(STATUS "CPPCHECK is enabled!")
     set(CMAKE_CXX_CPPCHECK
         ${CPPCHECK}
         --suppress=missingInclude
@@ -22,6 +23,7 @@ endif()
 if(ENABLE_CLANG_TIDY)
   find_program(CLANGTIDY clang-tidy)
   if(CLANGTIDY)
+    message(STATUS "CLANGTIDY is enabled!")
     set(CMAKE_CXX_CLANG_TIDY ${CLANGTIDY} -extra-arg=-Wno-unknown-warning-option)
   else()
     message(SEND_ERROR "clang-tidy requested but executable not found")
@@ -31,6 +33,7 @@ endif()
 if(ENABLE_INCLUDE_WHAT_YOU_USE)
   find_program(INCLUDE_WHAT_YOU_USE include-what-you-use)
   if(INCLUDE_WHAT_YOU_USE)
+    message(STATUS "INCLUDE_WHAT_YOU_USE is enabled!")
     set(CMAKE_CXX_INCLUDE_WHAT_YOU_USE ${INCLUDE_WHAT_YOU_USE})
   else()
     message(SEND_ERROR "include-what-you-use requested but executable not found")
