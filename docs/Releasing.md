@@ -5,7 +5,6 @@ These are the code changes that need to take place:
 - [ ] Update version and changelog at `packaging/debian/changelog`
 - [ ] Update version and changelog at `packaging/rpm/flameshot.spec`
 - [ ] Update `data/appdata/flameshot.metainfo.xml`
-- [ ] Update macOS version in `cmake/modules/MacOSXBundleInfo.plist.in` 
 - [ ] Commit and push to a PR
 - [ ] Merge PR to main
 - [ ] Create and push git tag on main
