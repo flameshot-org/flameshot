@@ -944,12 +944,11 @@ void GeneralConf::initGraphicalCaptureMultiMonitorMode()
     layout->addWidget(new QLabel(tr("Graphical capture on multiple monitors")));
 
     m_graphicalCaptureMultiMonitorMode = new QComboBox(this);
-    m_graphicalCaptureMultiMonitorMode->setToolTip(tr(
-      "Choose whether Flameshot should ask for a monitor first or open a "
-      "single selection overlay spanning all displays."));
+    m_graphicalCaptureMultiMonitorMode->setToolTip(
+      tr("Choose whether Flameshot should ask for a monitor first or open a "
+         "single selection overlay spanning all displays."));
     m_graphicalCaptureMultiMonitorMode->addItem(
-      tr("Ask which monitor to capture"),
-      GeneralConf::capture_ask_monitor);
+      tr("Ask which monitor to capture"), GeneralConf::capture_ask_monitor);
     m_graphicalCaptureMultiMonitorMode->addItem(
       tr("Capture all displays"), GeneralConf::capture_all_displays);
     layout->addWidget(m_graphicalCaptureMultiMonitorMode);

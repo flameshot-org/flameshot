@@ -76,12 +76,11 @@ QVector<NativeMonitorInfo> windowsNativeMonitorInfos()
               return TRUE;
           }
 
-          const QRect rect(monitorInfo.rcMonitor.left,
-                           monitorInfo.rcMonitor.top,
-                           monitorInfo.rcMonitor.right -
-                             monitorInfo.rcMonitor.left,
-                           monitorInfo.rcMonitor.bottom -
-                             monitorInfo.rcMonitor.top);
+          const QRect rect(
+            monitorInfo.rcMonitor.left,
+            monitorInfo.rcMonitor.top,
+            monitorInfo.rcMonitor.right - monitorInfo.rcMonitor.left,
+            monitorInfo.rcMonitor.bottom - monitorInfo.rcMonitor.top);
           results->append({ rect });
           return TRUE;
       },
@@ -507,19 +506,18 @@ QWidget* ScreenGrabber::createMonitorPreviews(const QPixmap& fullScreenshot)
           400, 250, Qt::KeepAspectRatio, Qt::SmoothTransformation);
         thumbnail.setDevicePixelRatio(1.0);
 
-        MonitorPreview* preview =
-          new MonitorPreview(
-            i, monitorLabelNumber, screen, thumbnail, monitorPreviews);
+        MonitorPreview* preview = new MonitorPreview(
+          i, monitorLabelNumber, screen, thumbnail, monitorPreviews);
 
         connect(preview,
                 &MonitorPreview::monitorSelected,
                 this,
                 [this, screen](int index) {
-              m_selectedMonitor = index;
-              m_selectedScreen = screen;
-              if (m_monitorSelectionLoop) {
-                  m_monitorSelectionLoop->quit();
-              }
+                    m_selectedMonitor = index;
+                    m_selectedScreen = screen;
+                    if (m_monitorSelectionLoop) {
+                        m_monitorSelectionLoop->quit();
+                    }
                 });
 
         containerLayout->addWidget(preview);
@@ -727,7 +725,8 @@ QPixmap ScreenGrabber::windowsScreenshot(int wid, bool logicalCoordinates)
         painter.setCompositionMode(QPainter::CompositionMode_Source);
 
         for (QScreen* screen : screens) {
-            QRect logicalRect = screen->geometry().translated(-geometry.topLeft());
+            QRect logicalRect =
+              screen->geometry().translated(-geometry.topLeft());
             QPixmap screenPixmap = screen->grabWindow(wid);
             screenPixmap.setDevicePixelRatio(1.0);
 
