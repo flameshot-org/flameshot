@@ -106,6 +106,8 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
 
     ScreenGrabber grabber;
     QScreen* selectedScreen = nullptr;
+    QRect desktopGeom;
+    bool useAllDisplays = false;
 
 #if (defined(Q_OS_WIN) || defined(Q_OS_MACOS))
     // Top left of the whole set of screens
@@ -113,21 +115,39 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
 #endif
     if (fullScreen) {
         bool ok = true;
-        int preSelectedMonitor;
-        if (req.hasSelectedMonitor()) {
+        const bool useSelectedMonitor =
+          req.hasSelectedMonitor() && req.selectedMonitor() >= 0;
+#if defined(Q_OS_WIN)
+        useAllDisplays =
+          req.captureAllDisplays() ||
+          (req.captureMode() == CaptureRequest::CaptureMode::GRAPHICAL_MODE &&
+           m_config.graphicalCaptureMultiMonitorMode() == 1);
+#else
+        useAllDisplays = false;
+#endif
+        int preSelectedMonitor = -1;
+        if (useSelectedMonitor) {
             preSelectedMonitor = req.selectedMonitor();
-        } else {
-            preSelectedMonitor = -1;
         }
-        m_context.screenshot =
-          grabber.grabEntireDesktop(ok, preSelectedMonitor);
+
+        if (useSelectedMonitor) {
+            m_context.screenshot =
+              grabber.grabEntireDesktop(ok, preSelectedMonitor);
+        } else if (useAllDisplays) {
+            m_context.screenshot = grabber.grabFullDesktop(ok, false);
+            desktopGeom = grabber.desktopGeometryPhysical();
+        } else {
+            m_context.screenshot = grabber.grabEntireDesktop(ok);
+        }
         if (!ok) {
             // Error already logged in ScreenGrabber
             this->close();
         }
         m_context.origScreenshot = m_context.screenshot;
 
-        selectedScreen = grabber.getSelectedScreen();
+        if (!useAllDisplays) {
+            selectedScreen = grabber.getSelectedScreen();
+        }
 
 #if defined(Q_OS_WIN)
 #if !defined(FLAMESHOT_DEBUG_CAPTURE)
@@ -140,23 +160,34 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
         if (selectedScreen) {
             move(selectedScreen->geometry().topLeft());
         } else {
-            for (QScreen* const screen : QGuiApplication::screens()) {
-                QPoint topLeftScreen = screen->geometry().topLeft();
+            if (!desktopGeom.isNull()) {
+                topLeft = desktopGeom.topLeft();
+            } else {
+                for (QScreen* const screen : QGuiApplication::screens()) {
+                    QPoint topLeftScreen = screen->geometry().topLeft();
 
-                if (topLeftScreen.x() < topLeft.x()) {
-                    topLeft.setX(topLeftScreen.x());
-                }
-                if (topLeftScreen.y() < topLeft.y()) {
-                    topLeft.setY(topLeftScreen.y());
+                    if (topLeftScreen.x() < topLeft.x()) {
+                        topLeft.setX(topLeftScreen.x());
+                    }
+                    if (topLeftScreen.y() < topLeft.y()) {
+                        topLeft.setY(topLeftScreen.y());
+                    }
                 }
             }
             move(topLeft);
         }
-        // On Windows, account for DPR when sizing the window
-        QSize windowSize = pixmap().size();
-        if (pixmap().devicePixelRatio() > 1.0) {
-            windowSize = QSize(pixmap().width() / pixmap().devicePixelRatio(),
-                               pixmap().height() / pixmap().devicePixelRatio());
+        // When no monitor is preselected, span the virtual desktop geometry.
+        QSize windowSize;
+        if (!desktopGeom.isNull()) {
+            windowSize = desktopGeom.size();
+        } else {
+            // On Windows, account for DPR when sizing the window
+            windowSize = pixmap().size();
+            if (pixmap().devicePixelRatio() > 1.0) {
+                windowSize =
+                  QSize(pixmap().width() / pixmap().devicePixelRatio(),
+                        pixmap().height() / pixmap().devicePixelRatio());
+            }
         }
         resize(windowSize);
 
@@ -199,17 +230,30 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
 
     QVector<QRect> areas;
     if (m_context.fullscreen) {
-        // Always display on a single screen, normalized to (0, 0)
-        QScreen* screenForAreas = selectedScreen;
-        if (!screenForAreas) {
-            screenForAreas = QGuiAppCurrentScreen().currentScreen();
+        if (!desktopGeom.isNull() && useAllDisplays) {
+            const QVector<QRect> physicalGeometries =
+              grabber.desktopScreenGeometriesPhysical();
+            for (const QRect& screenRect : physicalGeometries) {
+                areas.append(screenRect.translated(-desktopGeom.topLeft()));
+            }
+        } else if (!desktopGeom.isNull()) {
+            for (QScreen* const screen : QGuiApplication::screens()) {
+                QRect r = screen->geometry().translated(-desktopGeom.topLeft());
+                areas.append(r);
+            }
+        } else {
+            // Always display on a single screen, normalized to (0, 0)
+            QScreen* screenForAreas = selectedScreen;
+            if (!screenForAreas) {
+                screenForAreas = QGuiAppCurrentScreen().currentScreen();
+            }
+            if (!screenForAreas) {
+                screenForAreas = QGuiApplication::primaryScreen();
+            }
+            QRect r = screenForAreas ? screenForAreas->geometry() : QRect();
+            r.moveTo(0, 0);
+            areas.append(r);
         }
-        if (!screenForAreas) {
-            screenForAreas = QGuiApplication::primaryScreen();
-        }
-        QRect r = screenForAreas ? screenForAreas->geometry() : QRect();
-        r.moveTo(0, 0);
-        areas.append(r);
     } else {
         areas.append(rect());
     }

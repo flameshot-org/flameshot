@@ -19,14 +19,20 @@ const QString PathInfo::blackIconPath()
 
 QStringList PathInfo::translationsPaths()
 {
-    QString binaryPath =
+    const QString applicationDir =
       QFileInfo(qApp->applicationDirPath()).absoluteFilePath();
-    QString trPath = QDir::toNativeSeparators(binaryPath + "/translations");
+    const QString trPath =
+      QDir::toNativeSeparators(applicationDir + "/translations");
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
     return QStringList()
            << QStringLiteral(APP_PREFIX) + "/share/flameshot/translations"
            << trPath << QStringLiteral("/usr/share/flameshot/translations")
            << QStringLiteral("/usr/local/share/flameshot/translations");
 #endif
-    return QStringList() << trPath;
+    const QString parentPath =
+      QDir::toNativeSeparators(QDir(applicationDir).absoluteFilePath(".."));
+    const QString parentTranslationsPath =
+      QDir::toNativeSeparators(parentPath + "/translations");
+
+    return QStringList() << trPath << parentTranslationsPath << parentPath;
 }

@@ -7,6 +7,7 @@
 #include "core/flameshot.h"
 #include "core/qguiappcurrentscreen.h"
 #include "utils/globalvalues.h"
+#include "utils/screengrabber.h"
 #include "utils/screenshotsaver.h"
 
 #include <QGuiApplication>
@@ -37,14 +38,17 @@ CaptureLauncher::CaptureLauncher(QDialog* parent)
     ui->captureType->insertItem(
       2, tr("Full Screen (Current Display)"), CaptureRequest::FULLSCREEN_MODE);
 #else
+    ui->monitorSelection->addItem(tr("All displays"), QVariant());
     ui->captureType->insertItem(
       2, tr("Full Screen"), CaptureRequest::FULLSCREEN_MODE);
-    const QList<QScreen*> screens = QGuiApplication::screens();
+    const QList<QScreen*> screens = ScreenGrabber().orderedScreens();
+    const QList<QScreen*> originalScreens = QGuiApplication::screens();
     for (int i = 0; i < screens.size(); ++i) {
         QScreen* screen = screens[i];
         QRect geom = screen->geometry();
+        const int monitorLabelNumber = originalScreens.indexOf(screen) + 1;
         QString monitorText = tr("Monitor %1: %2 (%3x%4)")
-                                .arg(i + 1)
+                                .arg(monitorLabelNumber)
                                 .arg(screen->name())
                                 .arg(geom.width())
                                 .arg(geom.height());
@@ -54,7 +58,7 @@ CaptureLauncher::CaptureLauncher(QDialog* parent)
     QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
     int currentIndex = screens.indexOf(currentScreen);
     if (currentIndex >= 0) {
-        ui->monitorSelection->setCurrentIndex(currentIndex);
+        ui->monitorSelection->setCurrentIndex(currentIndex + 1);
     }
 #endif
 
@@ -169,10 +173,14 @@ void CaptureLauncher::startCapture()
     }
 
 #ifndef Q_OS_MACOS
-    int selectedMonitor = ui->monitorSelection->currentData().toInt();
-    req.setSelectedMonitor(selectedMonitor);
-#else
-    req.setSelectedMonitor(-1);
+    const QVariant selectedMonitorData = ui->monitorSelection->currentData();
+    if (selectedMonitorData.isValid()) {
+        req.setSelectedMonitor(selectedMonitorData.toInt());
+#if defined(Q_OS_WIN)
+    } else if (mode == CaptureRequest::CaptureMode::GRAPHICAL_MODE) {
+        req.setCaptureAllDisplays(true);
+#endif
+    }
 #endif
 
     connectCaptureSlots();

@@ -81,6 +81,7 @@
     - [Fedora](#fedora)
     - [Arch](#arch)
   - [Build](#build)
+    - [Windows developer workflow](#windows-developer-workflow)
   - [Install](#install)
 - [License](#license)
 - [Privacy Policy](#privacy-policy)
@@ -496,6 +497,62 @@ First of all you need to install [brew](https://brew.sh) and then install the de
 brew install qt6
 brew install cmake
 ```
+
+#### Windows developer workflow
+
+For Windows, the repository now includes helper scripts that prepare the toolchain and build the project with the same stack used by the Windows CI workflow:
+
+- `scripts/setup-windows-build.ps1`
+  + Installs or repairs Visual Studio 2022 Build Tools with C++ support
+  + Installs Python and `aqtinstall`
+  + Downloads Qt 6.9.3 for MSVC 2022
+  + Clones `vcpkg`, installs OpenSSL, and persists the required environment variables
+- `scripts/build-windows.ps1`
+  + Loads the Visual Studio build environment
+  + Configures CMake with the right `Qt6_DIR`, `QT_DIR`, `CMAKE_PREFIX_PATH`, and `vcpkg` toolchain
+  + Builds `Release` by default
+  + Runs `windeployqt` and copies OpenSSL runtime DLLs into `build\src\Release`
+
+Run the setup script once from an elevated PowerShell:
+
+```powershell
+Set-ExecutionPolicy -Scope Process Bypass
+.\scripts\setup-windows-build.ps1
+```
+
+Then build from a regular PowerShell:
+
+```powershell
+.\scripts\build-windows.ps1
+```
+
+On Windows, Flameshot now exposes a multi-monitor graphical capture setting in the configuration dialog:
+
+- `Ask which monitor to capture`
+  + Preserves the legacy monitor picker before opening the editor
+- `Capture all displays`
+  + Opens a single selection overlay across the whole Windows desktop layout and is intended for mixed-resolution or mixed-DPI setups
+
+The new mode is implemented in the Windows-specific capture path. Linux and macOS continue using their existing platform behavior.
+
+Useful options:
+
+```powershell
+# Reconfigure from scratch
+.\scripts\build-windows.ps1 -Clean -ConfigureOnly
+
+# Build using the existing CMake cache
+.\scripts\build-windows.ps1 -BuildOnly
+```
+
+Expected binaries:
+
+```text
+build\src\Release\flameshot.exe
+build\src\Release\flameshot-cli.exe
+```
+
+Use `flameshot-cli.exe -h` if you want help text in the console on Windows.
 
 ### Build
 

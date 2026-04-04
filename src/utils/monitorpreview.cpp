@@ -11,6 +11,7 @@
 #include <QVBoxLayout>
 
 MonitorPreview::MonitorPreview(int monitorIndex,
+                               int monitorLabelNumber,
                                QScreen* screen,
                                const QPixmap& thumbnail,
                                QWidget* parent)
@@ -29,7 +30,7 @@ MonitorPreview::MonitorPreview(int monitorIndex,
     imageLabel->setScaledContents(false);
 
     m_textLabel = new QLabel(tr("Monitor %1: %2\nClick to select")
-                               .arg(m_monitorIndex + 1)
+                               .arg(monitorLabelNumber)
                                .arg(screen->name()),
                              this);
     m_textLabel->setAlignment(Qt::AlignCenter);

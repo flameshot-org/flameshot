@@ -49,7 +49,9 @@ public:
     void addSaveTask(const QString& path = QString());
     void addPinTask(const QRect& pinWindowGeometry);
     void setInitialSelection(const QRect& selection);
+    void setCaptureAllDisplays(bool captureAllDisplays);
     void setSelectedMonitor(int monitorIndex);
+    bool captureAllDisplays() const;
     int selectedMonitor() const;
     bool hasSelectedMonitor() const;
 
@@ -60,6 +62,7 @@ private:
     ExportTask m_tasks;
     QVariant m_data;
     QRect m_pinWindowGeometry, m_initialSelection;
+    bool m_captureAllDisplays;
     int m_selectedMonitor;
     bool m_hasSelectedMonitor;
 

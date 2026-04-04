@@ -28,6 +28,13 @@ public:
         xywh_bottom_right = 4,
         xywh_center = 5
     };
+#if defined(Q_OS_WIN)
+    enum graphical_capture_multi_monitor_mode
+    {
+        capture_ask_monitor = 0,
+        capture_all_displays = 1
+    };
+#endif
 
 public slots:
     void updateComponents();
@@ -61,6 +68,9 @@ private slots:
     void setJpegQuality(int v);
     void setReverseArrow(bool checked);
     void setInsecurePixelate(bool checked);
+#if defined(Q_OS_WIN)
+    void setGraphicalCaptureMultiMonitorMode(int index);
+#endif
 #if !defined(Q_OS_MACOS)
     void captureActiveMonitorChanged(bool checked);
 #endif
@@ -105,11 +115,18 @@ private:
     void initJpegQuality();
     void initReverseArrow();
     void initInsecurePixelate();
+#if defined(Q_OS_WIN)
+    void initGraphicalCaptureMultiMonitorMode();
+#endif
 #if !defined(Q_OS_MACOS)
     void initCaptureActiveMonitor();
 #endif
 #if defined(Q_OS_LINUX)
     void initUseX11LegacyScreenshot();
+#endif
+
+#if defined(Q_OS_WIN)
+    void updateGraphicalCaptureMultiMonitorControls();
 #endif
 
     void _updateComponents(bool allowEmptySavePath);
@@ -159,6 +176,9 @@ private:
     QSpinBox* m_jpegQuality;
     QCheckBox* m_reverseArrow;
     QCheckBox* m_insecurePixelate;
+#if defined(Q_OS_WIN)
+    QComboBox* m_graphicalCaptureMultiMonitorMode;
+#endif
 #if !defined(Q_OS_MACOS)
     QCheckBox* m_captureActiveMonitor;
 #endif

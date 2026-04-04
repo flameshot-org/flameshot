@@ -144,6 +144,9 @@ public:
     CONFIG_GETTER_SETTER(ignorePrntScrForcesSnipping,
                          setIgnorePrntScrForcesSnipping,
                          bool)
+    CONFIG_GETTER_SETTER(graphicalCaptureMultiMonitorMode,
+                         setGraphicalCaptureMultiMonitorMode,
+                         int)
 #endif
 #if !defined(Q_OS_MACOS)
     CONFIG_GETTER_SETTER(captureActiveMonitor, setCaptureActiveMonitor, bool)

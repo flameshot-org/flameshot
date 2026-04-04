@@ -126,6 +126,11 @@
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="41"/>
+        <source>All displays</source>
+        <translation>Todos os monitores</translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/capturelauncher.cpp" line="41"/>
         <source>Full Screen</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1360,6 +1365,31 @@ Resolva-as manualmente no ficheiro de configuração.</translation>
         <location filename="../../src/config/generalconf.cpp" line="874"/>
         <source>Draw the pixelation effect in an insecure but more asethetic way.</source>
         <translation>Desenhar o efeito de pixelização de uma forma menos segura, mas mais estética.</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="944"/>
+        <source>Graphical capture on multiple monitors</source>
+        <translation>Captura gráfica em múltiplos monitores</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="947"/>
+        <source>Choose whether Flameshot should ask for a monitor first or open a single selection overlay spanning all displays.</source>
+        <translation>Escolha se o Flameshot deve perguntar primeiro qual monitor capturar ou abrir uma única sobreposição de seleção cobrindo todos os monitores.</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="951"/>
+        <source>Ask which monitor to capture</source>
+        <translation>Perguntar qual monitor capturar</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="954"/>
+        <source>Capture all displays</source>
+        <translation>Capturar todos os monitores</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="984"/>
+        <source>This option is only available when Flameshot asks which monitor to capture first.</source>
+        <translation>Esta opção só está disponível quando o Flameshot pergunta primeiro qual monitor capturar.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="929"/>

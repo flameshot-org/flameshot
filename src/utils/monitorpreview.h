@@ -15,6 +15,7 @@ class MonitorPreview : public QWidget
     Q_OBJECT
 public:
     MonitorPreview(int monitorIndex,
+                   int monitorLabelNumber,
                    QScreen* screen,
                    const QPixmap& thumbnail,
                    QWidget* parent = nullptr);

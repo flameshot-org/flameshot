@@ -25,6 +25,12 @@ GeneralConf::GeneralConf(QWidget* parent)
   : QWidget(parent)
   , m_historyConfirmationToDelete(nullptr)
   , m_undoLimit(nullptr)
+#if defined(Q_OS_WIN)
+  , m_graphicalCaptureMultiMonitorMode(nullptr)
+#endif
+#if !defined(Q_OS_MACOS)
+  , m_captureActiveMonitor(nullptr)
+#endif
 {
     m_layout = new QVBoxLayout(this);
     m_layout->setAlignment(Qt::AlignTop);
@@ -56,6 +62,9 @@ GeneralConf::GeneralConf(QWidget* parent)
     initAntialiasingPinZoom();
     initUndoLimit();
     initInsecurePixelate();
+#if defined(Q_OS_WIN)
+    initGraphicalCaptureMultiMonitorMode();
+#endif
 #if !defined(Q_OS_MACOS)
     initCaptureActiveMonitor();
 #endif
@@ -132,6 +141,12 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
 #endif
 #if !defined(Q_OS_MACOS)
     m_captureActiveMonitor->setChecked(config.captureActiveMonitor());
+#endif
+#if defined(Q_OS_WIN)
+    m_graphicalCaptureMultiMonitorMode->setCurrentIndex(
+      m_graphicalCaptureMultiMonitorMode->findData(
+        config.graphicalCaptureMultiMonitorMode()));
+    updateGraphicalCaptureMultiMonitorControls();
 #endif
 #if defined(Q_OS_LINUX)
     m_useX11LegacyScreenshot->setChecked(config.useX11LegacyScreenshot());
@@ -921,6 +936,62 @@ void GeneralConf::setInsecurePixelate(bool checked)
 {
     ConfigHandler().setInsecurePixelate(checked);
 }
+
+#if defined(Q_OS_WIN)
+void GeneralConf::initGraphicalCaptureMultiMonitorMode()
+{
+    auto* layout = new QHBoxLayout();
+    layout->addWidget(new QLabel(tr("Graphical capture on multiple monitors")));
+
+    m_graphicalCaptureMultiMonitorMode = new QComboBox(this);
+    m_graphicalCaptureMultiMonitorMode->setToolTip(tr(
+      "Choose whether Flameshot should ask for a monitor first or open a "
+      "single selection overlay spanning all displays."));
+    m_graphicalCaptureMultiMonitorMode->addItem(
+      tr("Ask which monitor to capture"),
+      GeneralConf::capture_ask_monitor);
+    m_graphicalCaptureMultiMonitorMode->addItem(
+      tr("Capture all displays"), GeneralConf::capture_all_displays);
+    layout->addWidget(m_graphicalCaptureMultiMonitorMode);
+
+    m_scrollAreaLayout->addLayout(layout);
+
+    connect(
+      m_graphicalCaptureMultiMonitorMode,
+      static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+      this,
+      &GeneralConf::setGraphicalCaptureMultiMonitorMode);
+}
+
+void GeneralConf::setGraphicalCaptureMultiMonitorMode(int index)
+{
+    ConfigHandler().setGraphicalCaptureMultiMonitorMode(
+      m_graphicalCaptureMultiMonitorMode->itemData(index).toInt());
+    updateGraphicalCaptureMultiMonitorControls();
+}
+
+void GeneralConf::updateGraphicalCaptureMultiMonitorControls()
+{
+    if (!m_captureActiveMonitor) {
+        return;
+    }
+
+    const bool allDisplaysSelected =
+      m_graphicalCaptureMultiMonitorMode->currentData().toInt() ==
+      GeneralConf::capture_all_displays;
+    m_captureActiveMonitor->setEnabled(!allDisplaysSelected);
+    if (allDisplaysSelected) {
+        m_captureActiveMonitor->setToolTip(tr(
+          "This option is only available when Flameshot asks which monitor to "
+          "capture first."));
+    } else {
+        m_captureActiveMonitor->setToolTip(
+          tr("Automatically capture the monitor where the cursor is located "
+             "instead of showing the monitor selection dialog. "
+             "This feature is not supported on Wayland."));
+    }
+}
+#endif
 
 #if !defined(Q_OS_MACOS)
 void GeneralConf::initCaptureActiveMonitor()

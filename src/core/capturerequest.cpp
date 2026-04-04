@@ -7,7 +7,6 @@
 
 #include <QApplication>
 #include <QClipboard>
-#include <QDateTime>
 #include <stdexcept>
 #include <utility>
 
@@ -19,6 +18,7 @@ CaptureRequest::CaptureRequest(CaptureRequest::CaptureMode mode,
   , m_delay(delay)
   , m_tasks(tasks)
   , m_data(std::move(data))
+  , m_captureAllDisplays(false)
   , m_selectedMonitor(-1)
   , m_hasSelectedMonitor(false)
 {
@@ -90,10 +90,20 @@ void CaptureRequest::setInitialSelection(const QRect& selection)
     m_initialSelection = selection;
 }
 
+void CaptureRequest::setCaptureAllDisplays(bool captureAllDisplays)
+{
+    m_captureAllDisplays = captureAllDisplays;
+}
+
 void CaptureRequest::setSelectedMonitor(int monitorIndex)
 {
     m_selectedMonitor = monitorIndex;
     m_hasSelectedMonitor = true;
+}
+
+bool CaptureRequest::captureAllDisplays() const
+{
+    return m_captureAllDisplays;
 }
 
 int CaptureRequest::selectedMonitor() const

@@ -22,6 +22,10 @@
 #include <QWidget>
 #include <algorithm>
 
+#if defined(Q_OS_WIN)
+#include <windows.h>
+#endif
+
 #ifdef FLAMESHOT_DEBUG_CAPTURE
 #include <QDebug>
 #endif
@@ -37,9 +41,62 @@
 
 bool ScreenGrabber::m_monitorSelectionActive = false;
 
+#if defined(Q_OS_WIN)
+namespace {
+struct NativeMonitorInfo
+{
+    QRect rect;
+};
+
+bool nativeMonitorLess(const NativeMonitorInfo& a, const NativeMonitorInfo& b)
+{
+    if (a.rect.x() != b.rect.x()) {
+        return a.rect.x() < b.rect.x();
+    }
+    if (a.rect.y() != b.rect.y()) {
+        return a.rect.y() < b.rect.y();
+    }
+    if (a.rect.width() != b.rect.width()) {
+        return a.rect.width() < b.rect.width();
+    }
+    return a.rect.height() < b.rect.height();
+}
+
+QVector<NativeMonitorInfo> windowsNativeMonitorInfos()
+{
+    QVector<NativeMonitorInfo> monitors;
+    EnumDisplayMonitors(
+      nullptr,
+      nullptr,
+      [](HMONITOR monitor, HDC, LPRECT, LPARAM data) -> BOOL {
+          auto* results = reinterpret_cast<QVector<NativeMonitorInfo>*>(data);
+          MONITORINFOEX monitorInfo;
+          monitorInfo.cbSize = sizeof(MONITORINFOEX);
+          if (!GetMonitorInfo(monitor, &monitorInfo)) {
+              return TRUE;
+          }
+
+          const QRect rect(monitorInfo.rcMonitor.left,
+                           monitorInfo.rcMonitor.top,
+                           monitorInfo.rcMonitor.right -
+                             monitorInfo.rcMonitor.left,
+                           monitorInfo.rcMonitor.bottom -
+                             monitorInfo.rcMonitor.top);
+          results->append({ rect });
+          return TRUE;
+      },
+      reinterpret_cast<LPARAM>(&monitors));
+
+    std::sort(monitors.begin(), monitors.end(), nativeMonitorLess);
+    return monitors;
+}
+} // namespace
+#endif
+
 ScreenGrabber::ScreenGrabber(QObject* parent)
   : QObject(parent)
   , m_selectedMonitor(-1)
+  , m_selectedScreen(nullptr)
   , m_monitorSelectionLoop(nullptr)
   , m_userCancelled(false)
 {
@@ -47,6 +104,24 @@ ScreenGrabber::ScreenGrabber(QObject* parent)
     // (multi-monitor/high-DPI) Default is 128MB, set to 1GB to handle 4K+
     // multi-monitor setups
     QImageReader::setAllocationLimit(1024);
+}
+
+QList<QScreen*> ScreenGrabber::orderedScreens() const
+{
+    QList<QScreen*> screens = QGuiApplication::screens();
+    std::sort(screens.begin(), screens.end(), [](QScreen* a, QScreen* b) {
+        if (a->geometry().x() != b->geometry().x()) {
+            return a->geometry().x() < b->geometry().x();
+        }
+        if (a->geometry().y() != b->geometry().y()) {
+            return a->geometry().y() < b->geometry().y();
+        }
+        if (a->geometry().width() != b->geometry().width()) {
+            return a->geometry().width() < b->geometry().width();
+        }
+        return a->geometry().height() < b->geometry().height();
+    });
+    return screens;
 }
 
 void ScreenGrabber::freeDesktopPortal(bool& ok, QPixmap& res)
@@ -147,7 +222,7 @@ QPixmap ScreenGrabber::selectMonitorAndCrop(const QPixmap& fullScreenshot,
     return cropToMonitor(fullScreenshot, 0);
 #else
     // If there's only one monitor, skip selection
-    const QList<QScreen*> screens = QGuiApplication::screens();
+    const QList<QScreen*> screens = orderedScreens();
     if (screens.size() == 1) {
         return cropToMonitor(fullScreenshot, 0);
     }
@@ -167,7 +242,8 @@ QPixmap ScreenGrabber::selectMonitorAndCrop(const QPixmap& fullScreenshot,
         int monitorIndex = screens.indexOf(cursorScreen);
         if (monitorIndex >= 0) {
             m_selectedMonitor = monitorIndex;
-            return cropToMonitor(fullScreenshot, monitorIndex);
+            m_selectedScreen = cursorScreen;
+            return cropToScreen(fullScreenshot, cursorScreen);
         }
         // Fall through to manual selection if screen lookup fails
     }
@@ -182,6 +258,7 @@ QPixmap ScreenGrabber::selectMonitorAndCrop(const QPixmap& fullScreenshot,
 
     m_monitorSelectionActive = true;
     m_selectedMonitor = -1;
+    m_selectedScreen = nullptr;
     m_userCancelled = false;
     QWidget* container = createMonitorPreviews(fullScreenshot);
 
@@ -195,7 +272,7 @@ QPixmap ScreenGrabber::selectMonitorAndCrop(const QPixmap& fullScreenshot,
     m_monitorSelectionActive = false;
 
     if (m_selectedMonitor >= 0) {
-        return cropToMonitor(fullScreenshot, m_selectedMonitor);
+        return cropToScreen(fullScreenshot, m_selectedScreen);
     } else {
         ok = false;
         if (m_userCancelled) {
@@ -250,24 +327,25 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok, int preSelectedMonitor)
 
     // If monitor was pre-selected skip UI and crop directly
     if (preSelectedMonitor >= 0) {
-        const QList<QScreen*> screens = QGuiApplication::screens();
+        const QList<QScreen*> screens = orderedScreens();
         if (preSelectedMonitor < screens.size()) {
             m_selectedMonitor = preSelectedMonitor;
-            return cropToMonitor(screenshot, preSelectedMonitor);
+            m_selectedScreen = screens[preSelectedMonitor];
+            return cropToScreen(screenshot, m_selectedScreen);
         }
     }
 
     return selectMonitorAndCrop(screenshot, ok);
 }
 
-QPixmap ScreenGrabber::grabFullDesktop(bool& ok)
+QPixmap ScreenGrabber::grabFullDesktop(bool& ok, bool logicalCoordinates)
 {
     ok = true;
     QPixmap screenshot;
 
 #if defined(Q_OS_MACOS)
     // On macOS, composite all screens into a single pixmap.
-    const QList<QScreen*> screens = QGuiApplication::screens();
+    const QList<QScreen*> screens = orderedScreens();
     QRect totalGeom;
     for (QScreen* s : screens) {
         totalGeom = totalGeom.united(s->geometry());
@@ -305,7 +383,7 @@ QPixmap ScreenGrabber::grabFullDesktop(bool& ok)
         }
     }
 #elif defined(Q_OS_WIN)
-    screenshot = windowsScreenshot(0);
+    screenshot = windowsScreenshot(0, logicalCoordinates);
 #endif
 
     return screenshot;
@@ -354,20 +432,45 @@ QRect ScreenGrabber::desktopGeometry()
     return geometry;
 }
 
+QVector<QRect> ScreenGrabber::desktopScreenGeometriesPhysical() const
+{
+#if defined(Q_OS_WIN)
+    QVector<QRect> geometries;
+    const auto nativeMonitors = windowsNativeMonitorInfos();
+    geometries.reserve(nativeMonitors.size());
+    for (const auto& monitor : nativeMonitors) {
+        geometries.append(monitor.rect);
+    }
+    return geometries;
+#else
+    QVector<QRect> geometries;
+    const auto screens = QGuiApplication::screens();
+    geometries.reserve(screens.size());
+    for (QScreen* screen : screens) {
+        geometries.append(screen->geometry());
+    }
+    return geometries;
+#endif
+}
+
+QRect ScreenGrabber::desktopGeometryPhysical() const
+{
+    QRect geometry;
+    for (const QRect& rect : desktopScreenGeometriesPhysical()) {
+        geometry = geometry.united(rect);
+    }
+    return geometry;
+}
+
 QScreen* ScreenGrabber::getSelectedScreen() const
 {
-    const QList<QScreen*> screens = QGuiApplication::screens();
-
-    if ((m_selectedMonitor < 0) || (m_selectedMonitor >= screens.size())) {
-        return nullptr;
-    }
-
-    return screens[m_selectedMonitor];
+    return m_selectedScreen;
 }
 
 QWidget* ScreenGrabber::createMonitorPreviews(const QPixmap& fullScreenshot)
 {
-    const QList<QScreen*> screens = QGuiApplication::screens();
+    const QList<QScreen*> screens = orderedScreens();
+    const QList<QScreen*> originalScreens = QGuiApplication::screens();
 
 #ifdef FLAMESHOT_DEBUG_CAPTURE
     qDebug() << tr("=== All Screen Information ===");
@@ -395,18 +498,9 @@ QWidget* ScreenGrabber::createMonitorPreviews(const QPixmap& fullScreenshot)
     containerLayout->setSpacing(20);
     containerLayout->setContentsMargins(20, 20, 20, 20);
 
-    // Build list of screen indices sorted by X position (left to right)
-    QList<int> sortedIndices;
     for (int i = 0; i < screens.size(); ++i) {
-        sortedIndices.append(i);
-    }
-    std::sort(
-      sortedIndices.begin(), sortedIndices.end(), [&screens](int a, int b) {
-          return screens[a]->geometry().x() < screens[b]->geometry().x();
-      });
-
-    for (int i : sortedIndices) {
         QScreen* screen = screens[i];
+        const int monitorLabelNumber = originalScreens.indexOf(screen) + 1;
 
         QPixmap cropped = cropToMonitor(fullScreenshot, i);
         QPixmap thumbnail = cropped.scaled(
@@ -414,15 +508,19 @@ QWidget* ScreenGrabber::createMonitorPreviews(const QPixmap& fullScreenshot)
         thumbnail.setDevicePixelRatio(1.0);
 
         MonitorPreview* preview =
-          new MonitorPreview(i, screen, thumbnail, monitorPreviews);
+          new MonitorPreview(
+            i, monitorLabelNumber, screen, thumbnail, monitorPreviews);
 
-        connect(
-          preview, &MonitorPreview::monitorSelected, this, [this](int index) {
+        connect(preview,
+                &MonitorPreview::monitorSelected,
+                this,
+                [this, screen](int index) {
               m_selectedMonitor = index;
+              m_selectedScreen = screen;
               if (m_monitorSelectionLoop) {
                   m_monitorSelectionLoop->quit();
               }
-          });
+                });
 
         containerLayout->addWidget(preview);
     }
@@ -460,12 +558,27 @@ bool ScreenGrabber::eventFilter(QObject* obj, QEvent* event)
 QPixmap ScreenGrabber::cropToMonitor(const QPixmap& fullScreenshot,
                                      int monitorIndex)
 {
-    const QList<QScreen*> screens = QGuiApplication::screens();
+    const QList<QScreen*> screens = orderedScreens();
     if (monitorIndex >= screens.size()) {
         return fullScreenshot;
     }
 
-    QScreen* targetScreen = screens[monitorIndex];
+    return cropToScreen(fullScreenshot, screens[monitorIndex]);
+}
+
+QPixmap ScreenGrabber::cropToScreen(const QPixmap& fullScreenshot,
+                                    QScreen* targetScreen)
+{
+    const QList<QScreen*> screens = orderedScreens();
+    if (targetScreen == nullptr) {
+        return fullScreenshot;
+    }
+
+    const int monitorIndex = screens.indexOf(targetScreen);
+    if (monitorIndex < 0) {
+        return fullScreenshot;
+    }
+
     QRect targetGeometry = targetScreen->geometry();
     qreal targetDpr = targetScreen->devicePixelRatio();
 
@@ -516,27 +629,32 @@ QPixmap ScreenGrabber::cropToMonitor(const QPixmap& fullScreenshot,
     cropWidth = qRound(targetGeometry.width() * screenshotScaleX);
     cropHeight = qRound(targetGeometry.height() * screenshotScaleY);
 #else
-    // Windows: Calculate physical pixel positions for mixed DPI
-    cropX = 0;
-    cropY = 0;
-
-    for (QScreen* screen : screens) {
-        QRect geom = screen->geometry();
-        qreal dpr = screen->devicePixelRatio();
-
-        // Sum physical widths of screens completely to the left
-        if (geom.x() + geom.width() <= targetGeometry.x()) {
-            cropX += qRound(geom.width() * dpr);
-        }
-
-        // Sum physical heights of screens completely above
-        if (geom.y() + geom.height() <= targetGeometry.y()) {
-            cropY += qRound(geom.height() * dpr);
+    // Windows: crop from the same physical monitor layout used when the full
+    // screenshot was composed.
+    QVector<QRect> nativeRects = desktopScreenGeometriesPhysical();
+    int minPhysicalX = 0;
+    int minPhysicalY = 0;
+    if (!nativeRects.isEmpty()) {
+        minPhysicalX = nativeRects.first().x();
+        minPhysicalY = nativeRects.first().y();
+        for (const QRect& rect : nativeRects) {
+            minPhysicalX = qMin(minPhysicalX, rect.x());
+            minPhysicalY = qMin(minPhysicalY, rect.y());
         }
     }
 
+    cropX = 0;
+    cropY = 0;
     cropWidth = qRound(targetGeometry.width() * targetDpr);
     cropHeight = qRound(targetGeometry.height() * targetDpr);
+
+    if (monitorIndex < nativeRects.size()) {
+        const QRect nativeRect = nativeRects[monitorIndex];
+        cropX = nativeRect.x() - minPhysicalX;
+        cropY = nativeRect.y() - minPhysicalY;
+        cropWidth = nativeRect.width();
+        cropHeight = nativeRect.height();
+    }
 
 #ifdef FLAMESHOT_DEBUG_CAPTURE
     qDebug() << tr("Calculated crop position for mixed DPI: X=%1 Y=%2")
@@ -596,13 +714,37 @@ QPixmap ScreenGrabber::cropToMonitor(const QPixmap& fullScreenshot,
     return cropped;
 }
 
-QPixmap ScreenGrabber::windowsScreenshot(int wid)
+QPixmap ScreenGrabber::windowsScreenshot(int wid, bool logicalCoordinates)
 {
-    const QList<QScreen*> screens = QGuiApplication::screens();
+    const QList<QScreen*> screens = orderedScreens();
     QRect geometry = desktopGeometry();
+
+    if (logicalCoordinates) {
+        QPixmap desktop(geometry.size());
+        desktop.fill(Qt::black);
+
+        QPainter painter(&desktop);
+        painter.setCompositionMode(QPainter::CompositionMode_Source);
+
+        for (QScreen* screen : screens) {
+            QRect logicalRect = screen->geometry().translated(-geometry.topLeft());
+            QPixmap screenPixmap = screen->grabWindow(wid);
+            screenPixmap.setDevicePixelRatio(1.0);
+
+            painter.drawPixmap(
+              logicalRect,
+              screenPixmap,
+              QRect(0, 0, screenPixmap.width(), screenPixmap.height()));
+        }
+        painter.end();
+
+        return desktop;
+    }
 
     int canvasWidth = 0;
     int canvasHeight = 0;
+    int minPhysicalX = 0;
+    int minPhysicalY = 0;
 
     // Build a map tracking where each screen should be positioned in
     // physical pixels
@@ -613,38 +755,30 @@ QPixmap ScreenGrabber::windowsScreenshot(int wid)
     };
     QMap<QScreen*, ScreenInfo> screenInfos;
 
-    int minLogicalX = geometry.x();
-    int minLogicalY = geometry.y();
+    QVector<QRect> nativeRects = desktopScreenGeometriesPhysical();
+    if (!nativeRects.isEmpty()) {
+        minPhysicalX = nativeRects.first().x();
+        minPhysicalY = nativeRects.first().y();
+        for (const QRect& rect : nativeRects) {
+            minPhysicalX = qMin(minPhysicalX, rect.x());
+            minPhysicalY = qMin(minPhysicalY, rect.y());
+        }
+    }
 
-    for (QScreen* screen : screens) {
-        QRect screenGeom = screen->geometry();
-        qreal screenDpr = screen->devicePixelRatio();
-
+    for (int index = 0; index < screens.size(); ++index) {
+        QScreen* screen = screens[index];
         QPixmap screenPixmap = screen->grabWindow(wid);
         screenPixmap.setDevicePixelRatio(1.0);
-
-        int logicalX = screenGeom.x() - minLogicalX;
-        int logicalY = screenGeom.y() - minLogicalY;
 
         int physicalWidth = screenPixmap.width();
         int physicalHeight = screenPixmap.height();
 
         int physicalX = 0;
         int physicalY = 0;
-
-        for (QScreen* otherScreen : screens) {
-            QRect otherGeom = otherScreen->geometry();
-            qreal otherDpr = otherScreen->devicePixelRatio();
-
-            // If this screen is entirely to the left of current screen
-            if (otherGeom.x() + otherGeom.width() <= screenGeom.x()) {
-                physicalX += qRound(otherGeom.width() * otherDpr);
-            }
-
-            // If this screen is entirely above the current screen
-            if (otherGeom.y() + otherGeom.height() <= screenGeom.y()) {
-                physicalY += qRound(otherGeom.height() * otherDpr);
-            }
+        if (index < nativeRects.size()) {
+            const QRect nativeRect = nativeRects[index];
+            physicalX = nativeRect.x() - minPhysicalX;
+            physicalY = nativeRect.y() - minPhysicalY;
         }
 
         ScreenInfo info;
@@ -675,7 +809,7 @@ QPixmap ScreenGrabber::windowsScreenshot(int wid)
 
 QPixmap ScreenGrabber::x11LegacyScreenshot()
 {
-    const QList<QScreen*> screens = QGuiApplication::screens();
+    const QList<QScreen*> screens = orderedScreens();
 
     if (screens.isEmpty()) {
         return QPixmap();

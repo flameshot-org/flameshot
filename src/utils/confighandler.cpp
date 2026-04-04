@@ -139,6 +139,9 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
 #if defined(Q_OS_WIN)
     // Not visible on settings dialog
     OPTION("ignorePrntScrForcesSnipping" ,Bool               ( false         )),
+    // Windows GUI capture can either keep the legacy per-monitor picker
+    // or span the full virtual desktop in a single selection overlay.
+    OPTION("graphicalCaptureMultiMonitorMode", BoundedInt    ( 0, 1, 0       )),
 #endif
 #if !defined(Q_OS_MACOS)
     // Auto-select the monitor under the cursor instead of showing
