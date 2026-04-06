@@ -116,12 +116,12 @@
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="41"/>
         <source>Full Screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Schermo intero</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="46"/>
         <source>Monitor %1: %2 (%3x%4)</source>
-        <translation type="unfinished"></translation>
+        <translation>Monitor %1: %2 (%3x%4)</translation>
     </message>
     <message>
         <source>Full Screen (All Monitors)</source>
@@ -182,7 +182,7 @@
         <location filename="../../src/widgets/capturelauncher.ui" line="71"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="184"/>
         <source>Monitor:</source>
-        <translation type="unfinished"></translation>
+        <translation>Monitor:</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="87"/>
@@ -1293,22 +1293,22 @@ Si prega di risolverli manualmente nel file di configurazione.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="929"/>
         <source>Capture active monitor (skip monitor selection)</source>
-        <translation type="unfinished"></translation>
+        <translation>Cattura il monitor attivo (salta la selezione del monitor)</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="931"/>
         <source>Automatically capture the monitor where the cursor is located instead of showing the monitor selection dialog. This feature is not supported on Wayland.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cattura automaticamente il monitor in cui si trova il cursore anziché mostrare la finestra di dialogo di selezione del monitor. Questa funzione non è supportata su Wayland.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="952"/>
         <source>Use legacy X11 screenshot method (deprecated)</source>
-        <translation type="unfinished"></translation>
+        <translation>Usa il metodo di acquisizione schermata legacy di X11 (obsoleto)</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="954"/>
         <source>Bypass the freedesktop portal and use Qt&apos;s native X11 screen capture. Enable this if your window manager lacks xdg-desktop-portal (e.g. xmonad, i3). Only effective on X11; ignored on Wayland.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ignora il portale freedesktop e utilizza la cattura schermo nativa di Qt per X11. Abilita questa opzione se il tuo window manager non include xdg-desktop-portal (ad esempio xmonad, i3). Funziona solo su X11; viene ignorata su Wayland.</translation>
     </message>
 </context>
 <context>
@@ -1634,7 +1634,8 @@ Si prega di risolverli manualmente nel file di configurazione.</translation>
         <location filename="../../src/utils/monitorpreview.cpp" line="31"/>
         <source>Monitor %1: %2
 Click to select</source>
-        <translation type="unfinished"></translation>
+        <translation>Monitor %1: %2
+Fare clic per selezionare</translation>
     </message>
 </context>
 <context>
@@ -1949,7 +1950,7 @@ Click to select</source>
     <message>
         <location filename="../../src/main.cpp" line="349"/>
         <source>Interactively select and edit the screenshot region</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleziona e modifica in modo interattivo l&apos;area dello screenshot</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="366"/>
@@ -2249,37 +2250,37 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="61"/>
         <source>Could not locate the `org.freedesktop.portal.Desktop` service</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile individuare il servizio `org.freedesktop.portal.Desktop`</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="109"/>
         <source>Screenshot portal timed out after 30 seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>Il portale per gli screenshot è scaduto dopo 30 secondi</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="132"/>
         <source>FreeDesktop portal screenshot size: %1x%2, DPR: %3</source>
-        <translation type="unfinished"></translation>
+        <translation>Dimensioni screenshot del portale FreeDesktop: %1x%2, DPR: %3</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="159"/>
         <source>Capture Active Monitor is not supported on Wayland due to Wayland security model.</source>
-        <translation type="unfinished"></translation>
+        <translation>La funzionalità Capture Active Monitor non è supportata su Wayland a causa del modello di sicurezza di Wayland.</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="177"/>
         <source>Screenshot already in progress, please wait for the current screenshot to complete</source>
-        <translation type="unfinished"></translation>
+        <translation>Acquisizione dello screenshot in corso, attendere il completamento dell&apos;acquisizione corrente</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="202"/>
         <source>Screenshot cancelled</source>
-        <translation type="unfinished"></translation>
+        <translation>Screenshot annullato</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="218"/>
         <source>Unable to get current screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile ottenere la schermata corrente</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="237"/>
@@ -2292,63 +2293,63 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="373"/>
         <source>=== All Screen Information ===</source>
-        <translation type="unfinished"></translation>
+        <translation>=== Tutte le informazioni sullo schermo ===</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="376"/>
         <location filename="../../src/utils/screengrabber.cpp" line="551"/>
         <source>Screen %1: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Schermo %1: %2</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="377"/>
         <source>  Logical geometry: %1x%2+%3+%4</source>
-        <translation type="unfinished"></translation>
+        <translation>  Geometria logica: %1x%2+%3+%4</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="382"/>
         <source>  DPR: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>  DPR: %1</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="488"/>
         <source>Total logical dimensions: %1x%2 (min: %3,%4)</source>
-        <translation type="unfinished"></translation>
+        <translation>Dimensioni logiche totali: %1x%2 (min: %3,%4)</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="493"/>
         <source>Screenshot dimensions: %1x%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Dimensioni dello screenshot: %1x%2</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="509"/>
         <source>Screenshot scale factors: X=%1 Y=%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Fattori di scala dello screenshot: X=%1 Y=%2</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="542"/>
         <source>Calculated crop position for mixed DPI: X=%1 Y=%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Posizione di ritaglio calcolata per DPI misto: X=%1 Y=%2</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="552"/>
         <source>  Logical geometry: %1x%2+%3+%4 DPR: %5</source>
-        <translation type="unfinished"></translation>
+        <translation>  Geometria logica: %1x%2+%3+%4 DPR: %5</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="558"/>
         <source>  Crop rect in screenshot: %1x%2+%3+%4</source>
-        <translation type="unfinished"></translation>
+        <translation>  Ritaglia il rettangolo nello screenshot: %1x%2+%3+%4</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="571"/>
         <source>Crop rect is empty, returning full screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Il riquadro di ritaglio è vuoto, viene restituita la schermata completa</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="587"/>
         <source>Scaling screenshot to: %1 %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Ridimensionamento dello screenshot a: %1 %2</translation>
     </message>
 </context>
 <context>
@@ -2546,40 +2547,40 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="268"/>
         <source>It seems, that Windows forces to open its screenshot tool when the &apos;Print Screen&apos; key is pressed. Would you like to disable this so that Flameshot can use the &apos;Print Screen&apos; key?</source>
-        <translation type="unfinished"></translation>
+        <translation>Sembra che Windows forzi l&apos;apertura del suo strumento di acquisizione schermata quando si preme il tasto &quot;Stamp&quot;. Desideri disabilitare questa funzione in modo che Flameshot possa utilizzare il tasto &quot;Stamp&quot;?</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="273"/>
         <source>Flameshot must be restarted for changes to take effect.</source>
-        <translation type="unfinished">Flameshot deve essere riavviato per rendere effettive le modifiche.</translation>
+        <translation>Flameshot deve essere riavviato affinché le modifiche abbiano effetto.</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="278"/>
         <source>No, don&apos;t ask again</source>
-        <translation type="unfinished"></translation>
+        <translation>No, non chiedere di nuovo</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="286"/>
         <location filename="../../src/config/shortcutswidget.cpp" line="333"/>
         <location filename="../../src/config/shortcutswidget.cpp" line="343"/>
         <source>The registry could not be changed!</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile modificare il registro!</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="317"/>
         <source>Register Flameshot as MS-SCREENCLIP application (administrator privileges required)</source>
-        <translation type="unfinished"></translation>
+        <translation>Registra Flameshot come applicazione MS-SCREENCLIP (sono necessari i privilegi di amministratore)</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="321"/>
         <source>After registering, you can select Flameshot as the default screenshot application in Windows Settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dopo la registrazione, è possibile selezionare Flameshot come applicazione predefinita per gli screenshot nelle Impostazioni di Windows.</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="334"/>
         <location filename="../../src/config/shortcutswidget.cpp" line="344"/>
         <source>You may start Flameshot as administrator ONCE and try again!</source>
-        <translation type="unfinished"></translation>
+        <translation>Puoi avviare Flameshot come amministratore UNA SOLA VOLTA e riprovare!</translation>
     </message>
     <message>
         <source>Delete current tool</source>
@@ -2769,7 +2770,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/utils/systemnotification.cpp" line="43"/>
         <source>No DBus System Notification service found</source>
-        <translation type="unfinished"></translation>
+        <translation>Nessun servizio di notifica di sistema DBus trovato</translation>
     </message>
     <message>
         <location filename="../../src/utils/systemnotification.cpp" line="51"/>
@@ -2859,17 +2860,17 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="162"/>
         <source>Download version %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Scarica la versione %1</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="250"/>
         <source>Select Screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleziona schermo</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="266"/>
         <source>Monitor %1: %2 (%3x%4)</source>
-        <translation type="unfinished"></translation>
+        <translation>Monitor %1: %2 (%3x%4)</translation>
     </message>
     <message>
         <source>New version %1 is available</source>
@@ -3053,17 +3054,17 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="101"/>
         <source>UI language</source>
-        <translation type="unfinished"></translation>
+        <translation>Lingua interfaccia utente</translation>
     </message>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="141"/>
         <source>Configuration</source>
-        <translation type="unfinished">Configurazione</translation>
+        <translation>Configurazione</translation>
     </message>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="142"/>
         <source>Flameshot must be restarted to apply these changes!</source>
-        <translation type="unfinished"></translation>
+        <translation>Flameshot deve essere riavviato per applicare queste modifiche!</translation>
     </message>
 </context>
 <context>
