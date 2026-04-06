@@ -164,6 +164,10 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
             windowHandle()->setScreen(selectedScreen);
         }
 #elif defined(Q_OS_MACOS)
+        if (!ConfigHandler().useNativeFullscreen()) {
+            setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint |
+                           Qt::Tool);
+        }
         QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
         move(currentScreen->geometry().x(), currentScreen->geometry().y());
         resize(currentScreen->size());
