@@ -112,8 +112,6 @@ include(cmake/CompilerWarnings.cmake)
 include(cmake/Sanitizers.cmake)
 enable_sanitizers(project_options)
 
-# allow for static analysis options include(cmake/StaticAnalyzers.cmake)
-
 if(USE_KDSINGLEAPPLICATION)
   if(USE_BUNDLED_KDSINGLEAPPLICATION)
     set(KDSingleApplication_EXAMPLES OFF CACHE BOOL "Don't build the examples")
@@ -134,6 +132,10 @@ if(USE_KDSINGLEAPPLICATION)
     find_package(KDSingleApplication-qt6 REQUIRED)
   endif()
 endif()
+
+# allow for static analysis options (include after kdsingleApplication because
+# of potential conflict if ENABLE_QT_DEPRECATION_CHECK is used)
+include(cmake/StaticAnalyzers.cmake)
 
 # ToDo: Check if this is used anywhere
 option(BUILD_STATIC_LIBS ON)
