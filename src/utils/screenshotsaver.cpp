@@ -111,45 +111,6 @@ QString ShowSaveFileDialog(const QString& title, const QString& directory)
     }
 }
 
-void saveJpegToClipboardMacOS(const QPixmap& capture)
-{
-    // Convert QPixmap to JPEG data
-    QByteArray jpegData;
-    QBuffer buffer(&jpegData);
-    buffer.open(QIODevice::WriteOnly);
-
-    QImageWriter imageWriter(&buffer, "jpeg");
-
-    // Set JPEG quality to whatever is in settings
-    imageWriter.setQuality(ConfigHandler().jpegQuality());
-    if (!imageWriter.write(capture.toImage())) {
-        qWarning() << "Failed to write image to JPEG format.";
-        return;
-    }
-
-    // Save JPEG data to a temporary file
-    QTemporaryFile tempFile;
-    if (!tempFile.open()) {
-        qWarning() << "Failed to open temporary file for writing.";
-        return;
-    }
-    tempFile.write(jpegData);
-    tempFile.close();
-
-    // Use osascript to copy the contents of the file to clipboard
-    QProcess process;
-    QString script =
-      QString("set the clipboard to (read (POSIX file \"%1\") as «class PNGf»)")
-        .arg(tempFile.fileName());
-    process.start("osascript", QStringList() << "-e" << script);
-    if (!process.waitForFinished()) {
-        qWarning() << "Failed to execute AppleScript.";
-    }
-
-    // Clean up
-    tempFile.remove();
-}
-
 void saveToClipboardMime(const QPixmap& capture, const QString& imageType)
 {
     QByteArray array;
@@ -169,7 +130,12 @@ void saveToClipboardMime(const QPixmap& capture, const QString& imageType)
 
         auto* mimeData = new QMimeData();
 
-#ifdef USE_WAYLAND_CLIPBOARD
+#if defined(Q_OS_MACOS)
+        // On macOS, setData("image/png") doesn't map to a UTI that native
+        // apps recognize. Use setImageData which Qt converts to public.tiff.
+        mimeData->setImageData(formattedPixmap.toImage());
+        QApplication::clipboard()->setMimeData(mimeData);
+#elif defined(USE_WAYLAND_CLIPBOARD)
         if (QGuiApplication::platformName() == "wayland") {
             mimeData->setImageData(formattedPixmap.toImage());
             mimeData->setData(QStringLiteral("x-kde-force-image-copy"),
@@ -206,14 +172,13 @@ void saveToClipboard(const QPixmap& capture)
         AbstractLogger() << QObject::tr("Capture saved to clipboard.");
     }
     if (ConfigHandler().useJpgForClipboard()) {
-#ifdef Q_OS_MACOS
-        saveJpegToClipboardMacOS(capture);
-#else
         saveToClipboardMime(capture, "jpeg");
-#endif
     } else {
-        // Need to send message before copying to clipboard
-#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
+#if defined(Q_OS_MACOS)
+        // On macOS, setPixmap uses lazy clipboard which fails when the
+        // process exits ("Cannot keep promise"). Use serialized bytes.
+        saveToClipboardMime(capture, "png");
+#elif defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
         if (DesktopInfo().waylandDetected()) {
             saveToClipboardMime(capture, "png");
         } else {
