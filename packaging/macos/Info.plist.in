@@ -28,5 +28,7 @@
     <true/>
     <key>LSUIElement</key>
     <true/>
+    <key>NSScreenCaptureUsageDescription</key>
+    <string>Flameshot needs screen recording permission to capture screenshots.</string>
 </dict>
 </plist>

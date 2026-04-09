@@ -165,8 +165,12 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
         }
 #elif defined(Q_OS_MACOS)
         QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
-        move(currentScreen->geometry().x(), currentScreen->geometry().y());
-        resize(currentScreen->size());
+        QRect screenGeom = currentScreen->geometry();
+        move(screenGeom.topLeft());
+        resize(screenGeom.size());
+        if (windowHandle()) {
+            windowHandle()->setScreen(currentScreen);
+        }
 // LINUX
 #else
 // Call cmake with -DFLAMESHOT_DEBUG_CAPTURE=ON to enable easier debugging

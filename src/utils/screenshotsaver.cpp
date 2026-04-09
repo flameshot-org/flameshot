@@ -11,6 +11,7 @@
 
 #include <QByteArray>
 #include <QDebug>
+#include <QDir>
 #include <QImageWriter>
 #include <QPixmap>
 #include <QProcess>
@@ -111,44 +112,44 @@ QString ShowSaveFileDialog(const QString& title, const QString& directory)
     }
 }
 
-void saveJpegToClipboardMacOS(const QPixmap& capture)
+#if defined(Q_OS_MACOS)
+void saveToClipboardMacOS(const QPixmap& capture)
 {
-    // Convert QPixmap to JPEG data
-    QByteArray jpegData;
-    QBuffer buffer(&jpegData);
-    buffer.open(QIODevice::WriteOnly);
-
-    QImageWriter imageWriter(&buffer, "jpeg");
-
-    // Set JPEG quality to whatever is in settings
-    imageWriter.setQuality(ConfigHandler().jpegQuality());
-    if (!imageWriter.write(capture.toImage())) {
-        qWarning() << "Failed to write image to JPEG format.";
-        return;
-    }
-
-    // Save JPEG data to a temporary file
+    // Save capture as PNG to a temporary file, then use osascript to copy
+    // to clipboard. This is more reliable than QClipboard::setPixmap()
+    // on macOS, which fails when called during widget destruction or when
+    // the app is losing focus.
     QTemporaryFile tempFile;
+    tempFile.setFileTemplate(QDir::tempPath() + "/flameshot_clip_XXXXXX.png");
     if (!tempFile.open()) {
-        qWarning() << "Failed to open temporary file for writing.";
+        qWarning() << "Failed to open temporary file for clipboard.";
         return;
     }
-    tempFile.write(jpegData);
+    if (!capture.save(&tempFile, "PNG")) {
+        qWarning() << "Failed to write PNG to temporary file.";
+        return;
+    }
     tempFile.close();
 
-    // Use osascript to copy the contents of the file to clipboard
+    // Use osascript to copy PNG data to the system clipboard
     QProcess process;
     QString script =
-      QString("set the clipboard to (read (POSIX file \"%1\") as «class PNGf»)")
+      QString(
+        "set the clipboard to "
+        "(read (POSIX file \"%1\") as «class PNGf»)")
         .arg(tempFile.fileName());
     process.start("osascript", QStringList() << "-e" << script);
-    if (!process.waitForFinished()) {
-        qWarning() << "Failed to execute AppleScript.";
+    if (!process.waitForFinished(5000)) {
+        qWarning() << "AppleScript clipboard copy timed out.";
+    } else if (process.exitCode() != 0) {
+        qWarning() << "AppleScript clipboard copy failed:"
+                   << process.readAllStandardError();
     }
 
     // Clean up
     tempFile.remove();
 }
+#endif
 
 void saveToClipboardMime(const QPixmap& capture, const QString& imageType)
 {
@@ -205,24 +206,29 @@ void saveToClipboard(const QPixmap& capture)
     } else {
         AbstractLogger() << QObject::tr("Capture saved to clipboard.");
     }
+#if defined(Q_OS_MACOS)
+    // On macOS, always use native osascript to copy to clipboard.
+    // QClipboard::setPixmap() is unreliable on macOS because:
+    // 1. It fails when called during widget destruction (WA_DeleteOnClose)
+    // 2. The app may lose focus before macOS finalizes the clipboard transfer
+    // Using osascript ensures the system clipboard is set independently
+    // of Qt's window lifecycle.
+    saveToClipboardMacOS(capture);
+#elif defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
     if (ConfigHandler().useJpgForClipboard()) {
-#ifdef Q_OS_MACOS
-        saveJpegToClipboardMacOS(capture);
-#else
         saveToClipboardMime(capture, "jpeg");
-#endif
+    } else if (DesktopInfo().waylandDetected()) {
+        saveToClipboardMime(capture, "png");
     } else {
-        // Need to send message before copying to clipboard
-#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
-        if (DesktopInfo().waylandDetected()) {
-            saveToClipboardMime(capture, "png");
-        } else {
-            QApplication::clipboard()->setPixmap(capture);
-        }
-#else
         QApplication::clipboard()->setPixmap(capture);
-#endif
     }
+#else
+    if (ConfigHandler().useJpgForClipboard()) {
+        saveToClipboardMime(capture, "jpeg");
+    } else {
+        QApplication::clipboard()->setPixmap(capture);
+    }
+#endif
 }
 
 class ClipboardWatcherMimeData : public QMimeData

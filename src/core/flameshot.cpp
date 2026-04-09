@@ -128,8 +128,13 @@ CaptureWidget* Flameshot::gui(const CaptureRequest& req)
 #ifdef Q_OS_WIN
         m_captureWindow->show();
 #elif defined(Q_OS_MACOS)
-        // In "Emulate fullscreen mode"
-        m_captureWindow->showFullScreen();
+        // Use frameless window instead of showFullScreen() to avoid
+        // creating a new macOS Space which hides all other windows.
+        // Qt::Tool avoids a Dock icon and Mission Control interference.
+        m_captureWindow->setWindowFlags(Qt::FramelessWindowHint |
+                                        Qt::WindowStaysOnTopHint |
+                                        Qt::Tool);
+        m_captureWindow->show();
         m_captureWindow->activateWindow();
         m_captureWindow->raise();
 #else

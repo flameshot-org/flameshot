@@ -39,6 +39,9 @@ private:
     QPixmap cropToMonitor(const QPixmap& fullScreenshot, int monitorIndex);
     QPixmap windowsScreenshot(int wid);
     QPixmap x11LegacyScreenshot();
+#if defined(Q_OS_MACOS)
+    QPixmap macosNativeScreenshot(QScreen* screen);
+#endif
 
     DesktopInfo m_info;
     QPixmap Screenshot;

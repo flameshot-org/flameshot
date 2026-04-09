@@ -7,7 +7,10 @@
 #include "utils/systemnotification.h"
 
 #include <QApplication>
+#include <QCoreApplication>
+#include <QDir>
 #include <QEventLoop>
+#include <QFile>
 #include <QGuiApplication>
 #include <QHBoxLayout>
 #include <QImageReader>
@@ -219,9 +222,15 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok, int preSelectedMonitor)
         ok = false;
         return QPixmap();
     }
-    const QRect geom = currentScreen->geometry();
-    screenshot = currentScreen->grabWindow(
-      wid, geom.x(), geom.y(), geom.width(), geom.height());
+    // Use macOS native screencapture for reliable capture that includes
+    // all visible windows. Falls back to Qt's grabWindow() on failure.
+    screenshot = macosNativeScreenshot(currentScreen);
+    if (screenshot.isNull()) {
+        // Fallback to Qt method
+        const QRect geom = currentScreen->geometry();
+        screenshot = currentScreen->grabWindow(
+          wid, geom.x(), geom.y(), geom.width(), geom.height());
+    }
     screenshot.setDevicePixelRatio(currentScreen->devicePixelRatio());
     return screenshot;
 
@@ -266,28 +275,34 @@ QPixmap ScreenGrabber::grabFullDesktop(bool& ok)
     QPixmap screenshot;
 
 #if defined(Q_OS_MACOS)
-    // On macOS, composite all screens into a single pixmap.
-    const QList<QScreen*> screens = QGuiApplication::screens();
-    QRect totalGeom;
-    for (QScreen* s : screens) {
-        totalGeom = totalGeom.united(s->geometry());
+    // Use macOS native screencapture for reliable full desktop capture.
+    // Falls back to Qt compositing method on failure.
+    QScreen* primaryScreen = QGuiApplication::primaryScreen();
+    screenshot = macosNativeScreenshot(primaryScreen);
+    if (screenshot.isNull()) {
+        // Fallback: composite all screens into a single pixmap using Qt.
+        const QList<QScreen*> screens = QGuiApplication::screens();
+        QRect totalGeom;
+        for (QScreen* s : screens) {
+            totalGeom = totalGeom.united(s->geometry());
+        }
+        qreal maxDpr = 1.0;
+        for (QScreen* s : screens) {
+            maxDpr = qMax(maxDpr, s->devicePixelRatio());
+        }
+        screenshot = QPixmap(qRound(totalGeom.width() * maxDpr),
+                             qRound(totalGeom.height() * maxDpr));
+        screenshot.setDevicePixelRatio(maxDpr);
+        screenshot.fill(Qt::black);
+        QPainter painter(&screenshot);
+        for (QScreen* s : screens) {
+            QRect geom = s->geometry();
+            QPixmap p = s->grabWindow(0);
+            QPoint offset = geom.topLeft() - totalGeom.topLeft();
+            painter.drawPixmap(offset, p);
+        }
+        painter.end();
     }
-    qreal maxDpr = 1.0;
-    for (QScreen* s : screens) {
-        maxDpr = qMax(maxDpr, s->devicePixelRatio());
-    }
-    screenshot = QPixmap(qRound(totalGeom.width() * maxDpr),
-                         qRound(totalGeom.height() * maxDpr));
-    screenshot.setDevicePixelRatio(maxDpr);
-    screenshot.fill(Qt::black);
-    QPainter painter(&screenshot);
-    for (QScreen* s : screens) {
-        QRect geom = s->geometry();
-        QPixmap p = s->grabWindow(0);
-        QPoint offset = geom.topLeft() - totalGeom.topLeft();
-        painter.drawPixmap(offset, p);
-    }
-    painter.end();
 #elif defined(Q_OS_LINUX)
     if (!m_info.waylandDetected() && ConfigHandler().useX11LegacyScreenshot()) {
         qWarning() << "Using deprecated legacy X11 screenshot method. "
@@ -713,3 +728,46 @@ QPixmap ScreenGrabber::x11LegacyScreenshot()
 
     return desktop;
 }
+
+#if defined(Q_OS_MACOS)
+QPixmap ScreenGrabber::macosNativeScreenshot(QScreen* screen)
+{
+    // Use macOS native screencapture command for reliable screen capture.
+    // This avoids issues with CGWindowListCreateImage deprecation and
+    // permission problems on newer macOS versions where QScreen::grabWindow()
+    // may only return the desktop wallpaper without any application windows.
+    QString tmpPath =
+      QDir::tempPath() + "/flameshot_capture_" +
+      QString::number(QCoreApplication::applicationPid()) + ".png";
+
+    QStringList args;
+    args << "-x" // no sound
+         << "-C" // capture cursor
+         << "-t" << "png" << tmpPath;
+
+    QProcess process;
+    process.start("screencapture", args);
+    if (!process.waitForFinished(5000)) {
+        AbstractLogger::warning()
+          << tr("macOS screencapture command timed out");
+        return QPixmap();
+    }
+
+    if (process.exitCode() != 0) {
+        AbstractLogger::warning()
+          << tr("macOS screencapture command failed with exit code %1")
+               .arg(process.exitCode());
+        return QPixmap();
+    }
+
+    QPixmap result(tmpPath);
+    QFile::remove(tmpPath);
+
+    if (result.isNull()) {
+        AbstractLogger::warning()
+          << tr("Failed to load screenshot from macOS screencapture");
+    }
+
+    return result;
+}
+#endif
