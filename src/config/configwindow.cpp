@@ -32,6 +32,11 @@ ConfigWindow::ConfigWindow(QWidget* parent)
     auto* layout = new QVBoxLayout(this);
     m_tabWidget = new QTabWidget(this);
     m_tabWidget->tabBar()->setUsesScrollButtons(false);
+#if defined(Q_OS_MACOS)
+    // Fix Qt6 macOS bug where tab pane content renders behind the tab bar
+    m_tabWidget->setStyleSheet(
+      "QTabWidget::pane { border-top: 2px solid palette(mid); }");
+#endif
     layout->addWidget(m_tabWidget);
 
     setAttribute(Qt::WA_DeleteOnClose);
