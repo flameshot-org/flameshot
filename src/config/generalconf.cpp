@@ -34,9 +34,7 @@ GeneralConf::GeneralConf(QWidget* parent)
     initScrollArea();
 
     initAutostart();
-#if !defined(Q_OS_WIN)
     initAutoCloseIdleDaemon();
-#endif
     initShowTrayIcon();
     initShowDesktopNotification();
     initShowAbortNotification();
@@ -112,11 +110,7 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
     m_squareMagnifier->setChecked(config.squareMagnifier());
     m_saveLastRegion->setChecked(config.saveLastRegion());
     m_reverseArrow->setChecked(config.reverseArrow());
-
-#if !defined(Q_OS_WIN)
     m_autoCloseIdleDaemon->setChecked(config.autoCloseIdleDaemon());
-#endif
-
     m_predefinedColorPaletteLarge->setChecked(
       config.predefinedColorPaletteLarge());
     m_showStartupLaunchMessage->setChecked(config.showStartupLaunchMessage());
@@ -127,9 +121,9 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
     if (allowEmptySavePath || !config.savePath().isEmpty()) {
         m_savePath->setText(config.savePath());
     }
-#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
+
     m_showTray->setChecked(!config.disabledTrayIcon());
-#endif
+
 #if !defined(Q_OS_MACOS)
     m_captureActiveMonitor->setChecked(config.captureActiveMonitor());
 #endif
@@ -335,7 +329,6 @@ void GeneralConf::initShowAbortNotification()
 
 void GeneralConf::initShowTrayIcon()
 {
-#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
     m_showTray = new QCheckBox(tr("Show tray icon"), this);
     m_showTray->setToolTip(tr("Show icon in the system tray"));
     m_scrollAreaLayout->addWidget(m_showTray);
@@ -343,7 +336,6 @@ void GeneralConf::initShowTrayIcon()
     connect(m_showTray, &QCheckBox::clicked, this, [](bool checked) {
         ConfigHandler().setDisabledTrayIcon(!checked);
     });
-#endif
 }
 
 void GeneralConf::initHistoryConfirmationToDelete()
