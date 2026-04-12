@@ -39,6 +39,7 @@ constexpr const char* visibleInDockProperty = "_visibleInDock";
 
 } // namespace
 
+#include <CoreGraphics/CoreGraphics.h>
 #endif
 
 #include "config/configresolver.h"
@@ -88,11 +89,10 @@ Flameshot::Flameshot()
     qApp->setStyleSheet(StyleSheet);
 
 #if defined(Q_OS_MACOS)
-    // Try to take a test screenshot, MacOS will request a "Screen Recording"
-    // permissions on the first run. Otherwise it will be hidden under the
-    // CaptureWidget
-    QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
-    currentScreen->grabWindow(0, 0, 0, 1, 1);
+    // Request Screen Recording permission via the proper CoreGraphics API
+    if (!CGPreflightScreenCaptureAccess()) {
+        CGRequestScreenCaptureAccess();
+    }
 #endif
 #if (defined(Q_OS_MACOS) || defined(Q_OS_WIN))
     // Set global shortcuts for MacOS or Windows

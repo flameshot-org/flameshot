@@ -127,12 +127,12 @@
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="41"/>
         <source>Full Screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Pełny ekran</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="46"/>
         <source>Monitor %1: %2 (%3x%4)</source>
-        <translation type="unfinished"></translation>
+        <translation>Monitor %1: %2 (%3x%4)</translation>
     </message>
     <message>
         <source>Full Screen (All Monitors)</source>
@@ -193,7 +193,7 @@
         <location filename="../../src/widgets/capturelauncher.ui" line="71"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="184"/>
         <source>Monitor:</source>
-        <translation type="unfinished"></translation>
+        <translation>Monitor:</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="87"/>
@@ -1323,7 +1323,7 @@ Rozwiąż błędy ręcznie w pliku konfiguracyjnym.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="813"/>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Żaden</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="814"/>
@@ -1348,7 +1348,7 @@ Rozwiąż błędy ręcznie w pliku konfiguracyjnym.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="822"/>
         <source>Center</source>
-        <translation type="unfinished"></translation>
+        <translation>Środek</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="847"/>
@@ -1358,7 +1358,7 @@ Rozwiąż błędy ręcznie w pliku konfiguracyjnym.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="851"/>
         <source>JPEG Quality</source>
-        <translation type="unfinished"></translation>
+        <translation>Jakość JPEG</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="862"/>
@@ -1383,7 +1383,7 @@ Rozwiąż błędy ręcznie w pliku konfiguracyjnym.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="929"/>
         <source>Capture active monitor (skip monitor selection)</source>
-        <translation type="unfinished"></translation>
+        <translation>Przechwyć aktywny monitor (pomiń wybór monitorów)</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="931"/>
@@ -2088,7 +2088,7 @@ Click to select</source>
     <message>
         <location filename="../../src/main.cpp" line="320"/>
         <source>Enable or disable the notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Włącz lub wyłącz powiadomienia</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="323"/>

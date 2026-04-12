@@ -1461,7 +1461,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="952"/>
         <source>Use legacy X11 screenshot method (deprecated)</source>
-        <translation>Использовать устаревший метод создания снимков экрана X11 (не рекомендуется)</translation>
+        <translation>Использовать устаревший метод снимка экрана X11 (не рекомендуется)</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="954"/>
