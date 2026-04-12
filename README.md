@@ -243,7 +243,7 @@ These shortcuts are available in GUI mode:
 
 #### On KDE Plasma desktop
 
-To make configuration easier, there's a [file](docs/shortcuts-config/flameshot-shortcuts-kde.khotkeys) in the repository that more or less automates this process. This file will assign the following hotkeys by default:
+To make configuration easier, there's a [file](docs/shortcuts-config/flameshot-shortcuts-kde.kksrc) in the repository that more or less automates this process. This file will assign the following hotkeys by default:
 
 |  Keys                                                  |  Description                                                                       |
 |---                                                     |---                                                                                 |
