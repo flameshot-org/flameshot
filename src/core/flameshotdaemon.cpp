@@ -51,9 +51,7 @@
  *   quits.
  *
  * If the `autoCloseIdleDaemon` option is true, the daemon will close as soon as
- * it is not needed to host pinned screenshots and the clipboard. On Windows,
- * this option is disabled and the daemon always persists, because the system
- * tray is currently the only way to interact with flameshot there.
+ * it is not needed to host pinned screenshots and the clipboard.
  *
  * Both the daemon and non-daemon flameshot processes use the same public API,
  * which is implemented as static methods. In the daemon process, this class is
@@ -85,9 +83,7 @@ FlameshotDaemon::FlameshotDaemon()
           m_hostingClipboard = false;
           quitIfIdle();
       });
-#ifdef Q_OS_WIN
-    m_persist = true;
-#else
+
     m_persist = !ConfigHandler().autoCloseIdleDaemon();
     connect(ConfigHandler::getInstance(),
             &ConfigHandler::fileChanged,
@@ -97,7 +93,6 @@ FlameshotDaemon::FlameshotDaemon()
                 enableTrayIcon(!config.disabledTrayIcon());
                 m_persist = !config.autoCloseIdleDaemon();
             });
-#endif
 
 #if !defined(DISABLE_UPDATE_CHECKER)
     if (ConfigHandler().checkForUpdates()) {
@@ -371,13 +366,10 @@ void FlameshotDaemon::attachTextToClipboard(const QString& text,
 
 void FlameshotDaemon::initTrayIcon()
 {
-#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
     if (!ConfigHandler().disabledTrayIcon()) {
         enableTrayIcon(true);
     }
-#elif defined(Q_OS_WIN)
-    enableTrayIcon(true);
-
+#if defined(Q_OS_WIN)
     GlobalShortcutFilter* nativeFilter = new GlobalShortcutFilter(this);
     qApp->installNativeEventFilter(nativeFilter);
 #endif
