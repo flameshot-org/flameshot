@@ -8,6 +8,37 @@
 #endif
 
 #if defined(Q_OS_MACOS)
+#include <QWindow>
+#include <objc/message.h>
+
+namespace {
+
+constexpr long NSApplicationActivationPolicyRegular = 0;
+constexpr long NSApplicationActivationPolicyAccessory = 1;
+
+void setActivationPolicy(long policy)
+{
+    auto sharedApp = reinterpret_cast<id (*)(id, SEL)>(objc_msgSend);
+    auto setPolicy = reinterpret_cast<void (*)(id, SEL, long)>(objc_msgSend);
+    id nsApp = sharedApp(reinterpret_cast<id>(objc_getClass("NSApplication")),
+                         sel_registerName("sharedApplication"));
+    setPolicy(nsApp, sel_registerName("setActivationPolicy:"), policy);
+}
+
+void setActivationPolicyRegular()
+{
+    setActivationPolicy(NSApplicationActivationPolicyRegular);
+}
+
+void setActivationPolicyAccessory()
+{
+    setActivationPolicy(NSApplicationActivationPolicyAccessory);
+}
+
+constexpr const char* visibleInDockProperty = "_visibleInDock";
+
+} // namespace
+
 #include <CoreGraphics/CoreGraphics.h>
 #endif
 
@@ -227,8 +258,7 @@ void Flameshot::launcher()
     }
     m_launcherWindow->show();
 #if defined(Q_OS_MACOS)
-    m_launcherWindow->activateWindow();
-    m_launcherWindow->raise();
+    showDockIcon(m_launcherWindow);
 #endif
 }
 
@@ -248,8 +278,7 @@ void Flameshot::config()
         position.moveCenter(currentScreen->availableGeometry().center());
         m_configWindow->move(position.topLeft());
 #if defined(Q_OS_MACOS)
-        m_configWindow->activateWindow();
-        m_configWindow->raise();
+        showDockIcon(m_configWindow);
 #endif
     }
 }
@@ -259,8 +288,7 @@ void Flameshot::info()
     if (m_infoWindow == nullptr) {
         m_infoWindow = new InfoWindow();
 #if defined(Q_OS_MACOS)
-        m_infoWindow->activateWindow();
-        m_infoWindow->raise();
+        showDockIcon(m_infoWindow);
 #endif
     }
 }
@@ -286,9 +314,46 @@ void Flameshot::history()
     historyWidget->move(position.topLeft());
 
 #if defined(Q_OS_MACOS)
-    historyWidget->activateWindow();
-    historyWidget->raise();
+    showDockIcon(historyWidget);
 #endif
+}
+#endif
+
+#if defined(Q_OS_MACOS)
+void Flameshot::onWindowVisibilityChanged(QWindow::Visibility newVisibility)
+{
+    auto* qw = qobject_cast<QWindow*>(sender());
+    if (!qw) {
+        return;
+    }
+
+    if (newVisibility == QWindow::Hidden) {
+        qw->setProperty(visibleInDockProperty, false);
+        --m_dockIconVisibleCount;
+        if (m_dockIconVisibleCount == 0) {
+            setActivationPolicyAccessory();
+        }
+    } else {
+        bool windowTrackedInDock = qw->property(visibleInDockProperty).toBool();
+        if (!windowTrackedInDock) {
+            qw->setProperty(visibleInDockProperty, true);
+            ++m_dockIconVisibleCount;
+            setActivationPolicyRegular();
+        }
+    }
+}
+
+void Flameshot::showDockIcon(QWidget* w)
+{
+    QWindow* qw = w->windowHandle();
+    if (!qw) {
+        return;
+    }
+
+    connect(qw,
+            &QWindow::visibilityChanged,
+            this,
+            &Flameshot::onWindowVisibilityChanged);
 }
 #endif
 
