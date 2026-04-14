@@ -135,34 +135,15 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
                        Qt::SubWindow // Hides the taskbar icon
         );
 #endif
-        // Position the window at the selected screen's position
-        // (or the topLeft of all screens if no specific screen was selected)
-        if (selectedScreen) {
-            move(selectedScreen->geometry().topLeft());
-        } else {
-            for (QScreen* const screen : QGuiApplication::screens()) {
-                QPoint topLeftScreen = screen->geometry().topLeft();
-
-                if (topLeftScreen.x() < topLeft.x()) {
-                    topLeft.setX(topLeftScreen.x());
-                }
-                if (topLeftScreen.y() < topLeft.y()) {
-                    topLeft.setY(topLeftScreen.y());
-                }
-            }
-            move(topLeft);
-        }
-        // On Windows, account for DPR when sizing the window
-        QSize windowSize = pixmap().size();
-        if (pixmap().devicePixelRatio() > 1.0) {
-            windowSize = QSize(pixmap().width() / pixmap().devicePixelRatio(),
-                               pixmap().height() / pixmap().devicePixelRatio());
-        }
-        resize(windowSize);
-
-        if (selectedScreen != nullptr && windowHandle()) {
-            windowHandle()->setScreen(selectedScreen);
-        }
+        // The overlay spans the full virtual desktop. Its geometry is
+        // derived from QScreen::virtualGeometry() (logical coordinates,
+        // includes negative coords, vertical offsets and gaps). The
+        // background pixmap produced by ScreenGrabber::windowsScreenshot()
+        // matches this exact logical footprint.
+        const QRect vdesk =
+          QGuiApplication::primaryScreen()->virtualGeometry();
+        move(vdesk.topLeft());
+        resize(vdesk.size());
 #elif defined(Q_OS_MACOS)
         QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
         move(currentScreen->geometry().x(), currentScreen->geometry().y());
@@ -199,6 +180,19 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
 
     QVector<QRect> areas;
     if (m_context.fullscreen) {
+#if defined(Q_OS_WIN)
+        // Spanning overlay: expose every physical monitor as its own region
+        // in widget-local coordinates so the button handler keeps tool
+        // buttons visible on whichever monitor the selection lands on.
+        const QPoint origin =
+          QGuiApplication::primaryScreen()->virtualGeometry().topLeft();
+        for (QScreen* s : QGuiApplication::screens()) {
+            areas.append(s->geometry().translated(-origin));
+        }
+        if (areas.isEmpty()) {
+            areas.append(rect());
+        }
+#else
         // Always display on a single screen, normalized to (0, 0)
         QScreen* screenForAreas = selectedScreen;
         if (!screenForAreas) {
@@ -210,6 +204,7 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
         QRect r = screenForAreas ? screenForAreas->geometry() : QRect();
         r.moveTo(0, 0);
         areas.append(r);
+#endif
     } else {
         areas.append(rect());
     }
@@ -279,10 +274,24 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
                 OverlayMessage::instance()->update();
             });
 
-    // OverlayMessage is a child widget, so use widget-local coordinates
-    // In fullscreen mode, use the normalized area; otherwise use widget rect
-    QRect overlayArea =
-      m_context.fullscreen && !areas.isEmpty() ? areas.first() : rect();
+    // OverlayMessage is a child widget, so use widget-local coordinates.
+    // For the spanning overlay, anchor help/error text to the primary
+    // monitor's region so it lands on the display the user is most likely
+    // looking at, rather than spanning the whole virtual desktop.
+    QRect overlayArea = rect();
+    if (m_context.fullscreen) {
+#if defined(Q_OS_WIN)
+        QScreen* primary = QGuiApplication::primaryScreen();
+        if (primary) {
+            overlayArea = primary->geometry().translated(
+              -primary->virtualGeometry().topLeft());
+        }
+#else
+        if (!areas.isEmpty()) {
+            overlayArea = areas.first();
+        }
+#endif
+    }
     OverlayMessage::init(this, overlayArea);
 
     if (m_config.showHelp()) {
@@ -653,7 +662,6 @@ void CaptureWidget::closeEvent(QCloseEvent* event)
 
 void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
 {
-    Q_UNUSED(paintEvent)
     QPainter painter(this);
     if (!painter.isActive()) {
         return;
@@ -676,7 +684,19 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
         painter.save();
         save = true;
     }
-    painter.drawPixmap(0, 0, m_context.screenshot);
+    // Only blit the invalidated region of the background pixmap. With a 4K
+    // monitor this is the dominant cost during selection drag; full-pixmap
+    // blits on every mouse move produce the "awful performance" symptom.
+    {
+        const QRect dirty =
+          paintEvent && !paintEvent->rect().isNull() ? paintEvent->rect() : rect();
+        const qreal dpr = m_context.screenshot.devicePixelRatio();
+        const QRectF src(dirty.x() * dpr,
+                         dirty.y() * dpr,
+                         dirty.width() * dpr,
+                         dirty.height() * dpr);
+        painter.drawPixmap(dirty, m_context.screenshot, src);
+    }
     if (m_selection && m_xywhDisplay) {
         const QRect& selection = m_selection->geometry().normalized();
         const qreal scale = m_context.screenshot.devicePixelRatio();

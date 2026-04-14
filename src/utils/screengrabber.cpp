@@ -248,7 +248,8 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok, int preSelectedMonitor)
     screenshot = windowsScreenshot(wid);
 #endif
 
-    // If monitor was pre-selected skip UI and crop directly
+    // Explicit per-monitor capture path (e.g. `flameshot screen -n N`,
+    // DBus capture-screen): crop the spanning composite down to that monitor.
     if (preSelectedMonitor >= 0) {
         const QList<QScreen*> screens = QGuiApplication::screens();
         if (preSelectedMonitor < screens.size()) {
@@ -257,7 +258,15 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok, int preSelectedMonitor)
         }
     }
 
+#if defined(Q_OS_WIN)
+    // Windows keeps its unified virtual-desktop capture model: the
+    // interactive overlay draws from the full spanning composite. The
+    // monitor-picker / single-monitor-crop path used on other platforms is
+    // intentionally bypassed here.
+    return screenshot;
+#else
     return selectMonitorAndCrop(screenshot, ok);
+#endif
 }
 
 QPixmap ScreenGrabber::grabFullDesktop(bool& ok)
@@ -516,27 +525,20 @@ QPixmap ScreenGrabber::cropToMonitor(const QPixmap& fullScreenshot,
     cropWidth = qRound(targetGeometry.width() * screenshotScaleX);
     cropHeight = qRound(targetGeometry.height() * screenshotScaleY);
 #else
-    // Windows: Calculate physical pixel positions for mixed DPI
-    cropX = 0;
-    cropY = 0;
-
-    for (QScreen* screen : screens) {
-        QRect geom = screen->geometry();
-        qreal dpr = screen->devicePixelRatio();
-
-        // Sum physical widths of screens completely to the left
-        if (geom.x() + geom.width() <= targetGeometry.x()) {
-            cropX += qRound(geom.width() * dpr);
-        }
-
-        // Sum physical heights of screens completely above
-        if (geom.y() + geom.height() <= targetGeometry.y()) {
-            cropY += qRound(geom.height() * dpr);
-        }
+    // Windows: windowsScreenshot() returns one pixmap for the whole virtual
+    // desktop via the OS, tagged at the primary screen's DPR. Work in that
+    // pixel space: offsets are (targetGeometry - vdesk.topLeft()) scaled by
+    // the pixmap's native pixel-per-logical-unit ratio.
+    QRect vdesk;
+    for (QScreen* s : screens) {
+        vdesk = vdesk.united(s->geometry());
     }
-
-    cropWidth = qRound(targetGeometry.width() * targetDpr);
-    cropHeight = qRound(targetGeometry.height() * targetDpr);
+    const qreal canvasDpr =
+      vdesk.width() > 0 ? (qreal)fullScreenshot.width() / vdesk.width() : 1.0;
+    cropX = qRound((targetGeometry.x() - vdesk.x()) * canvasDpr);
+    cropY = qRound((targetGeometry.y() - vdesk.y()) * canvasDpr);
+    cropWidth = qRound(targetGeometry.width() * canvasDpr);
+    cropHeight = qRound(targetGeometry.height() * canvasDpr);
 
 #ifdef FLAMESHOT_DEBUG_CAPTURE
     qDebug() << tr("Calculated crop position for mixed DPI: X=%1 Y=%2")
@@ -589,6 +591,15 @@ QPixmap ScreenGrabber::cropToMonitor(const QPixmap& fullScreenshot,
                       .arg(targetPhysicalHeight);
 #endif
     }
+#elif defined(Q_OS_WIN)
+    // Windows: rescale the extracted region to the target monitor's own
+    // native physical resolution if the canvas DPR differs from target DPR.
+    if (qAbs(canvasDpr - targetDpr) > 0.01) {
+        const int w = qRound(targetGeometry.width() * targetDpr);
+        const int h = qRound(targetGeometry.height() * targetDpr);
+        cropped = cropped.scaled(
+          w, h, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+    }
 #endif
     // Cropped region should be at target monitor's native DPR
     cropped.setDevicePixelRatio(targetDpr);
@@ -599,77 +610,33 @@ QPixmap ScreenGrabber::cropToMonitor(const QPixmap& fullScreenshot,
 QPixmap ScreenGrabber::windowsScreenshot(int wid)
 {
     const QList<QScreen*> screens = QGuiApplication::screens();
-    QRect geometry = desktopGeometry();
-
-    int canvasWidth = 0;
-    int canvasHeight = 0;
-
-    // Build a map tracking where each screen should be positioned in
-    // physical pixels
-    struct ScreenInfo
-    {
-        QRect physicalRect; // Where to draw in the canvas
-        QPixmap pixmap;
-    };
-    QMap<QScreen*, ScreenInfo> screenInfos;
-
-    int minLogicalX = geometry.x();
-    int minLogicalY = geometry.y();
-
-    for (QScreen* screen : screens) {
-        QRect screenGeom = screen->geometry();
-        qreal screenDpr = screen->devicePixelRatio();
-
-        QPixmap screenPixmap = screen->grabWindow(wid);
-        screenPixmap.setDevicePixelRatio(1.0);
-
-        int logicalX = screenGeom.x() - minLogicalX;
-        int logicalY = screenGeom.y() - minLogicalY;
-
-        int physicalWidth = screenPixmap.width();
-        int physicalHeight = screenPixmap.height();
-
-        int physicalX = 0;
-        int physicalY = 0;
-
-        for (QScreen* otherScreen : screens) {
-            QRect otherGeom = otherScreen->geometry();
-            qreal otherDpr = otherScreen->devicePixelRatio();
-
-            // If this screen is entirely to the left of current screen
-            if (otherGeom.x() + otherGeom.width() <= screenGeom.x()) {
-                physicalX += qRound(otherGeom.width() * otherDpr);
-            }
-
-            // If this screen is entirely above the current screen
-            if (otherGeom.y() + otherGeom.height() <= screenGeom.y()) {
-                physicalY += qRound(otherGeom.height() * otherDpr);
-            }
-        }
-
-        ScreenInfo info;
-        info.physicalRect =
-          QRect(physicalX, physicalY, physicalWidth, physicalHeight);
-        info.pixmap = screenPixmap;
-        screenInfos[screen] = info;
-
-        canvasWidth = qMax(canvasWidth, physicalX + physicalWidth);
-        canvasHeight = qMax(canvasHeight, physicalY + physicalHeight);
+    if (screens.isEmpty()) {
+        return QPixmap();
     }
 
-    // Composite all screens onto canvas
-    QPixmap desktop(canvasWidth, canvasHeight);
-    desktop.fill(Qt::black);
-
-    QPainter painter(&desktop);
-    painter.setCompositionMode(QPainter::CompositionMode_Source);
-
-    for (QScreen* screen : screens) {
-        const ScreenInfo& info = screenInfos[screen];
-        painter.drawPixmap(info.physicalRect.topLeft(), info.pixmap);
+    // Virtual desktop bounds in logical coordinates (includes negative
+    // coords, vertical offsets and gaps).
+    QRect vdesk;
+    for (QScreen* s : screens) {
+        vdesk = vdesk.united(s->geometry());
     }
-    painter.end();
+    if (vdesk.isEmpty()) {
+        return QPixmap();
+    }
 
+    // Let the OS composite the virtual desktop for us. On Windows,
+    // QScreen::grabWindow(0, x, y, w, h) with (x,y) in virtual-desktop
+    // coordinates asks the Desktop Window Manager for that exact rectangle.
+    // Windows handles per-monitor DPI, spatial layout, monitor ordering,
+    // gaps, and negative coordinates internally. No manual compositor.
+    QScreen* primary = QGuiApplication::primaryScreen();
+    QPixmap desktop = primary->grabWindow(
+      wid, vdesk.x(), vdesk.y(), vdesk.width(), vdesk.height());
+
+    // grabWindow() returns the pixmap already DPR-tagged by Qt; the tag
+    // corresponds to the grab origin (primary). We keep that tagging: the
+    // pixmap's logical size equals vdesk.size(), so a spanning widget sized
+    // to vdesk.size() (logical) draws it 1:1.
     return desktop;
 }
 
