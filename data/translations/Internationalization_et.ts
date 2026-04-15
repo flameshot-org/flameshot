@@ -94,7 +94,7 @@
     <message>
         <location filename="../../src/tools/arrow/arrowtool.cpp" line="88"/>
         <source>Set the Arrow as the paint tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Määra nool joonistustarvikuks</translation>
     </message>
 </context>
 <context>
@@ -315,12 +315,12 @@ Premeu Espai per obrir el calaix lateral.</translation>
     <message>
         <location filename="../../src/tools/circle/circletool.cpp" line="21"/>
         <source>Circle</source>
-        <translation type="unfinished"></translation>
+        <translation>Ring</translation>
     </message>
     <message>
         <location filename="../../src/tools/circle/circletool.cpp" line="31"/>
         <source>Set the Circle as the paint tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Määra ring joonistustarvikuks</translation>
     </message>
 </context>
 <context>
@@ -533,7 +533,7 @@ Premeu Espai per obrir el calaix lateral.</translation>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="738"/>
         <source>You have successfully resolved the configuration error.</source>
-        <translation>Sul õnnestus kenasti lahendada see seadistusviga.</translation>
+        <translation>Sul õnnestus see seadistusviga kenasti lahendada.</translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="761"/>
@@ -1291,87 +1291,87 @@ Palun lahenda vead käsitsi seadistusfailis.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="810"/>
         <source>Display Location</source>
-        <translation type="unfinished"></translation>
+        <translation>Asukoht ekraanil</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="813"/>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Puudub</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="814"/>
         <source>Top Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Ülal vasakul</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="816"/>
         <source>Top Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Ülal paremal</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="818"/>
         <source>Bottom Left</source>
-        <translation type="unfinished"></translation>
+        <translation>All vasakul</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="820"/>
         <source>Bottom Right</source>
-        <translation type="unfinished"></translation>
+        <translation>All paremal</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="822"/>
         <source>Center</source>
-        <translation type="unfinished"></translation>
+        <translation>Keskel</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="847"/>
         <source>Quality range of 0-100; Higher number is better quality and larger file size</source>
-        <translation type="unfinished"></translation>
+        <translation>Kvaliteet vahemikust 0 kuni 100; suurem number tagab parema kvaliteedi ja suurema faili</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="851"/>
         <source>JPEG Quality</source>
-        <translation type="unfinished"></translation>
+        <translation>JPEG-i kvaliteet</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="862"/>
         <source>Reverse arrow</source>
-        <translation type="unfinished"></translation>
+        <translation>Pööratud nool</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="863"/>
         <source>Draw the arrow head first</source>
-        <translation type="unfinished"></translation>
+        <translation>Esmalt joonista nooleots</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="872"/>
         <source>Insecure Pixelate</source>
-        <translation type="unfinished"></translation>
+        <translation>Ebaturvaline pikseldus</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="874"/>
         <source>Draw the pixelation effect in an insecure but more asethetic way.</source>
-        <translation type="unfinished"></translation>
+        <translation>Joonista pikseldusefekt ebaturvalises, kuid ilusal viisil.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="929"/>
         <source>Capture active monitor (skip monitor selection)</source>
-        <translation type="unfinished"></translation>
+        <translation>Kasuta hõiveks aktiivset monitori (jäta valik vahele)</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="931"/>
         <source>Automatically capture the monitor where the cursor is located instead of showing the monitor selection dialog. This feature is not supported on Wayland.</source>
-        <translation type="unfinished"></translation>
+        <translation>Selle asemel, et küsida mis monitorist/ekraanist soovid ekraanitõmmist teha, tee sealt, kus asub kursor. See funktsionaalsus pole Waylandis toetatud.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="952"/>
         <source>Use legacy X11 screenshot method (deprecated)</source>
-        <translation type="unfinished"></translation>
+        <translation>Kasuta X11 ekraanitõmmise pärandmeetodit (on tänaseks aegunud)</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="954"/>
         <source>Bypass the freedesktop portal and use Qt&apos;s native X11 screen capture. Enable this if your window manager lacks xdg-desktop-portal (e.g. xmonad, i3). Only effective on X11; ignored on Wayland.</source>
-        <translation type="unfinished"></translation>
+        <translation>Jäta freedesktopi portaal vahele ja kasuta Qt oma X11 ekraanihõive funktsionaalsust. Lülita see valik sisse vaid siis, kui sinu töölauakeskonna aknahalduris puudub xdg-desktop-portal (nt. xmonad, i3). Toimib vaid X11 puhul ja eiratakse Waylandis.</translation>
     </message>
 </context>
 <context>
@@ -1721,12 +1721,12 @@ Palun lahenda vead käsitsi seadistusfailis.</translation>
     <message>
         <location filename="../../src/tools/invert/inverttool.cpp" line="26"/>
         <source>Invert</source>
-        <translation type="unfinished"></translation>
+        <translation>Inverter</translation>
     </message>
     <message>
         <location filename="../../src/tools/invert/inverttool.cpp" line="36"/>
         <source>Set Inverter as the paint tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Määra inverter joonistustarvikuks</translation>
     </message>
 </context>
 <context>
@@ -1734,12 +1734,12 @@ Palun lahenda vead käsitsi seadistusfailis.</translation>
     <message>
         <location filename="../../src/tools/line/linetool.cpp" line="23"/>
         <source>Line</source>
-        <translation type="unfinished"></translation>
+        <translation>Joon</translation>
     </message>
     <message>
         <location filename="../../src/tools/line/linetool.cpp" line="33"/>
         <source>Set the Line as the paint tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Määra joon joonistustarvikuks</translation>
     </message>
 </context>
 <context>
@@ -1747,12 +1747,12 @@ Palun lahenda vead käsitsi seadistusfailis.</translation>
     <message>
         <location filename="../../src/tools/marker/markertool.cpp" line="24"/>
         <source>Marker</source>
-        <translation type="unfinished"></translation>
+        <translation>Marker</translation>
     </message>
     <message>
         <location filename="../../src/tools/marker/markertool.cpp" line="34"/>
         <source>Set the Marker as the paint tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Määra marker joonistustarvikuks</translation>
     </message>
 </context>
 <context>
@@ -1796,12 +1796,12 @@ Valimiseks klõpsa</translation>
     <message>
         <location filename="../../src/tools/pin/pintool.cpp" line="24"/>
         <source>Pin Tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Nööpnõel</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pintool.cpp" line="34"/>
         <source>Pin image on the desktop</source>
-        <translation type="unfinished"></translation>
+        <translation>Kinnita pilt töölauale</translation>
     </message>
 </context>
 <context>
@@ -1857,7 +1857,7 @@ Valimiseks klõpsa</translation>
     <message>
         <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="38"/>
         <source>Set Pixelate as the paint tool.</source>
-        <translation type="unfinished"></translation>
+        <translation>Määra pikseldaja joonistustarvikuks.</translation>
     </message>
     <message>
         <source>Set Pixelate as the paint tool</source>
@@ -1986,7 +1986,7 @@ Valimiseks klõpsa</translation>
     <message>
         <location filename="../../src/main.cpp" line="273"/>
         <source>Capture screenshot of all monitors at the same time.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tee korraga ekraanitõmmis kõikidest ekraanidest.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="283"/>
@@ -2301,7 +2301,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/rectangle/rectangletool.cpp" line="33"/>
         <source>Set the Rectangle as the paint tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Määra ristkülik joonistustarvikuks</translation>
     </message>
 </context>
 <context>
@@ -2488,7 +2488,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/selection/selectiontool.cpp" line="36"/>
         <source>Set Selection as the paint tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Määra valikuvidin joonistustarvikuks</translation>
     </message>
 </context>
 <context>
