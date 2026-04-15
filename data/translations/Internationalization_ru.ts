@@ -1466,7 +1466,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="954"/>
         <source>Bypass the freedesktop portal and use Qt&apos;s native X11 screen capture. Enable this if your window manager lacks xdg-desktop-portal (e.g. xmonad, i3). Only effective on X11; ignored on Wayland.</source>
-        <translation>Обойти freedesktop portal и использовать собственный захват экрана X11 от Qt. Включите это, если вашему оконному менеджеру не хватает xdg-desktop-portal (например, xmonad, i3). Действует только на X11; игнорируется в Wayland.</translation>
+        <translation>Обходить freedesktop portal и использовать родной захват экрана Qt для X11. Включите, если у вашего оконного менеджера нет xdg-desktop-portal (напр., xmonad, i3). Работает только в X11; игнорируется в Wayland.</translation>
     </message>
 </context>
 <context>
