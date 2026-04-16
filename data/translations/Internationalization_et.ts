@@ -94,7 +94,7 @@
     <message>
         <location filename="../../src/tools/arrow/arrowtool.cpp" line="88"/>
         <source>Set the Arrow as the paint tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Määra nool joonistustarvikuks</translation>
     </message>
 </context>
 <context>
@@ -127,12 +127,12 @@
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="41"/>
         <source>Full Screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Terve ekraan</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="46"/>
         <source>Monitor %1: %2 (%3x%4)</source>
-        <translation type="unfinished"></translation>
+        <translation>Ekraan %1: %2 (%3x%4)</translation>
     </message>
     <message>
         <source>Full Screen (All Monitors)</source>
@@ -193,7 +193,7 @@
         <location filename="../../src/widgets/capturelauncher.ui" line="71"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="184"/>
         <source>Monitor:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ekraan:</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="87"/>
@@ -277,7 +277,7 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="783"/>
         <source>Configuration error resolved. Launch `flameshot gui` again to apply it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Seadistusviga on lahendatud. Rakendamiseks käivita „flameshot gui“ uuesti.</translation>
     </message>
     <message>
         <source>Select an area with the mouse, or press Esc to exit.
@@ -307,7 +307,7 @@ Premeu Espai per obrir el calaix lateral.</translation>
     <message>
         <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="87"/>
         <source>Add an autoincrementing counter bubble</source>
-        <translation type="unfinished"></translation>
+        <translation>Lisa iseuuenduv loendurimull</translation>
     </message>
 </context>
 <context>
@@ -315,12 +315,12 @@ Premeu Espai per obrir el calaix lateral.</translation>
     <message>
         <location filename="../../src/tools/circle/circletool.cpp" line="21"/>
         <source>Circle</source>
-        <translation type="unfinished"></translation>
+        <translation>Ring</translation>
     </message>
     <message>
         <location filename="../../src/tools/circle/circletool.cpp" line="31"/>
         <source>Set the Circle as the paint tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Määra ring joonistustarvikuks</translation>
     </message>
 </context>
 <context>
@@ -415,7 +415,7 @@ Premeu Espai per obrir el calaix lateral.</translation>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="59"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Katkesta</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="59"/>
@@ -443,17 +443,17 @@ Premeu Espai per obrir el calaix lateral.</translation>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="67"/>
         <source>Press button to update the selected preset</source>
-        <translation type="unfinished"></translation>
+        <translation>Klõpsa nuppu valitud eelseadistuse uuendamiseks</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="74"/>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Kustuta</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="76"/>
         <source>Press button to delete the selected preset</source>
-        <translation type="unfinished"></translation>
+        <translation>Klõpsa nuppu valitud eelseadistuse kustutamiseks</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="90"/>
@@ -506,40 +506,44 @@ Premeu Espai per obrir el calaix lateral.</translation>
         <location filename="../../src/utils/confighandler.cpp" line="600"/>
         <source>Unrecognized setting: &apos;%1&apos;
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Tuvastamatu seadistus: „%1“
+</translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="608"/>
         <source>Unrecognized shortcut name: &apos;%1&apos;.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Otselingi tundmatu nimi: „%1“
+</translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="651"/>
         <source>Shortcut conflict: &apos;%1&apos; and &apos;%2&apos; have the same shortcut: %3
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Otselingi viga: „%1“ ja „%2„ sisaldavad sama linki: %3
+</translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="689"/>
         <source>Bad value in &apos;%1&apos;. Expected: %2
 </source>
-        <translation type="unfinished"></translation>
+        <translation>„%1“ sisaldab vigast väärtust. Korrektne oleks: %2
+</translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="738"/>
         <source>You have successfully resolved the configuration error.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sul õnnestus see seadistusviga kenasti lahendada.</translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="761"/>
         <source>The configuration contains an error. Open configuration to resolve.</source>
-        <translation type="unfinished"></translation>
+        <translation>Seadistustes on viga. Lahendamiseks ava seadistuste vaade.</translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="816"/>
         <source>Bad config key &apos;%1&apos; in ConfigHandler. Please report this as a bug.</source>
-        <translation type="unfinished"></translation>
+        <translation>ConfigHandleris on vale seadistusvõti: „%1“. Palun teata sellest, kui veast.</translation>
     </message>
 </context>
 <context>
@@ -547,49 +551,51 @@ Premeu Espai per obrir el calaix lateral.</translation>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="13"/>
         <source>Resolve configuration errors</source>
-        <translation type="unfinished"></translation>
+        <translation>Lahenda seadistusvead</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="49"/>
         <source>&lt;b&gt;You must resolve all errors before continuing:&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Enne jätkamist pead lahendama kõik seadistusvead:&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="60"/>
         <source>Reset</source>
-        <translation type="unfinished"></translation>
+        <translation>Lähtesta</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="62"/>
         <source>Reset to the default value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Lähtesta vaikimisi väärtuseks.</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="76"/>
         <source>Remove</source>
-        <translation type="unfinished">Eemalda</translation>
+        <translation>Eemalda</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="78"/>
         <source>Remove this setting.</source>
-        <translation type="unfinished"></translation>
+        <translation>Eemalda see seadistus.</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="89"/>
         <source>Some keyboard shortcuts have conflicts.
 This will NOT prevent flameshot from starting.
 Please solve them manually in the configuration file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Mõnedes klahvistiku kiirklahvides leidub konflikte.
+See aga EI TAKISTA Flameshoti käivitumist.
+Palun lahenda vead käsitsi seadistusfailis.</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="111"/>
         <source>Resolve all</source>
-        <translation type="unfinished"></translation>
+        <translation>Lahenda kõik</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="112"/>
         <source>Resolve all listed errors.</source>
-        <translation type="unfinished"></translation>
+        <translation>Lahenda nimetatud vead.</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="124"/>
@@ -821,7 +827,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/core/flameshotdaemon.cpp" line="468"/>
         <source>Unable to connect via DBus</source>
-        <translation type="unfinished">No s&apos;ha pogut connectar mitjançant DBus</translation>
+        <translation>DBus-i kaudu ühendamine ei õnnestu</translation>
     </message>
 </context>
 <context>
@@ -926,12 +932,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="244"/>
         <source>Confirm Reset</source>
-        <translation type="unfinished">Confirmar Reset</translation>
+        <translation>Kinnita lähtestamine</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="245"/>
         <source>Are you sure you want to reset the configuration?</source>
-        <translation type="unfinished">Esteu segur que voleu reiniciar la configuració?</translation>
+        <translation>Kas oled kindel, et soovid seadistuse lähtestada?</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="276"/>
@@ -968,32 +974,32 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="352"/>
         <source>Confirmation required to delete screenshot from the latest uploads</source>
-        <translation type="unfinished"></translation>
+        <translation>Kustutamaks ekraanitõmmist hiljutiste üleslaadimiste loendist on vaja sinu kinnitust</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="367"/>
         <source>Configuration File</source>
-        <translation type="unfinished">Fitxer de Configuració</translation>
+        <translation>Seadistusfail</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="372"/>
         <source>Export</source>
-        <translation type="unfinished">Exportar</translation>
+        <translation>Ekspordi</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="386"/>
         <source>Reset</source>
-        <translation type="unfinished"></translation>
+        <translation>Lähtesta</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="397"/>
         <source>Automatic check for updates</source>
-        <translation type="unfinished"></translation>
+        <translation>Automaatne uuenduste kontroll</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="411"/>
         <source>Allow multiple flameshot GUI instances simultaneously</source>
-        <translation type="unfinished"></translation>
+        <translation>Luba mitmel Flameshoti programmi kasutajaliidesel korraga töötada</translation>
     </message>
     <message>
         <source>This allows you to take screenshots of flameshot itself for example.</source>
@@ -1014,17 +1020,17 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="448"/>
         <source>Show welcome message on launch</source>
-        <translation type="unfinished"></translation>
+        <translation>Käivitamisel näita tervitusteadet</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="476"/>
         <source>Use large predefined color palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Kasuta mahukat eelseadistatud värvipaletti</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="500"/>
         <source>Copy URL after upload</source>
-        <translation type="unfinished"></translation>
+        <translation>Peale üleslaadimist kopeeri üleslaaditu võrguaadress</translation>
     </message>
     <message>
         <source>Copy URL and close window after upload</source>
@@ -1042,7 +1048,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="277"/>
         <source>Show the help message at the beginning in the capture mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Näita hõiverežiimi alguses abiteabe sõnumit</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="287"/>
@@ -1062,37 +1068,37 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="315"/>
         <source>Enable desktop notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Lülita töölaua teavitused sisse</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="326"/>
         <source>Show abort notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Näita katkestamise teavitusi</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="327"/>
         <source>Enable abort notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Lülita katkestamise teavitused sisse</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="340"/>
         <source>Show icon in the system tray</source>
-        <translation type="unfinished"></translation>
+        <translation>Näita süsteemisalves ikooni</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="355"/>
         <source>Ask for confirmation to delete screenshot from the latest uploads</source>
-        <translation type="unfinished"></translation>
+        <translation>Küsi kinnitust ekraanitõmmise kustutamisel hiljutiste üleslaadimiste alt</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="398"/>
         <source>Check for updates automatically</source>
-        <translation type="unfinished"></translation>
+        <translation>Aeg-ajalt kontrolli uuenduste olemasolu</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="412"/>
         <source>This allows you to take screenshots of Flameshot itself for example</source>
-        <translation type="unfinished"></translation>
+        <translation>See näiteks võimaldab sul teha ekraanitõmmist Flameshotist endast</translation>
     </message>
     <message>
         <source>Launch Flameshot daemon when computer is booted</source>
@@ -1101,17 +1107,17 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="451"/>
         <source>Show the welcome message box in the middle of the screen while taking a screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Ekraanitõmmise tegemisel näita ekraani keskel tervitusteadet</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="478"/>
         <source>Use a large predefined color palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Kasuta mahukat eelseadistatud värvipaletti</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="488"/>
         <source>Copy on double click</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopeeri topeltklõpsuga</translation>
     </message>
     <message>
         <source>Enable Copy on Double Click</source>
@@ -1129,17 +1135,17 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="425"/>
         <source>Automatically close daemon (background process) when it is not needed</source>
-        <translation type="unfinished"></translation>
+        <translation>Lõpeta taustateenuse töö automaatsel niipea, kuid seda vaja pole</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="436"/>
         <source>Launch in background at startup</source>
-        <translation type="unfinished"></translation>
+        <translation>Käivita taustateenusena</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="437"/>
         <source>Launch Flameshot daemon (background process) when computer is booted</source>
-        <translation type="unfinished"></translation>
+        <translation>Arvuti käivitamisel käivita Flameshot taustateenusena</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="462"/>
@@ -1154,7 +1160,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="490"/>
         <source>Enable Copy to clipboard on Double Click</source>
-        <translation type="unfinished"></translation>
+        <translation>Võimalda topeltklõpsuga lõikelauale kopeerimist</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="502"/>
@@ -1164,7 +1170,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="514"/>
         <source>After copying the screenshot, save it to a file as well</source>
-        <translation type="unfinished"></translation>
+        <translation>Peale ekraanitõmmise kopeerimist salvesta ta ka failina</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="521"/>
@@ -1235,37 +1241,37 @@ Please solve them manually in the configuration file.</source>
         <location filename="../../src/config/generalconf.cpp" line="727"/>
         <location filename="../../src/config/generalconf.cpp" line="729"/>
         <source>Upload image without confirmation</source>
-        <translation type="unfinished"></translation>
+        <translation>Laadi pilt üles ilma kinnituseta</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="745"/>
         <source>Choose a Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Vali kaust</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="754"/>
         <source>Unable to write to directory.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kausta kirjutamine ei õnnestu.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="763"/>
         <source>Show magnifier</source>
-        <translation type="unfinished"></translation>
+        <translation>Näita suurendusklaasi</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="764"/>
         <source>Enable a magnifier while selecting the screenshot area</source>
-        <translation type="unfinished"></translation>
+        <translation>Ekraanitõmmise ala valimise lülita sisse suurendusklaas</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="775"/>
         <source>Square shaped magnifier</source>
-        <translation type="unfinished"></translation>
+        <translation>Ruudukujuline suurendusklaas</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="776"/>
         <source>Make the magnifier to be square-shaped</source>
-        <translation type="unfinished"></translation>
+        <translation>Muuda suurendusklaas ruudukujuliseks</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="792"/>
@@ -1280,92 +1286,92 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="803"/>
         <source>Selection Geometry Display</source>
-        <translation type="unfinished"></translation>
+        <translation>Valiku geomeetria kuvamine</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="810"/>
         <source>Display Location</source>
-        <translation type="unfinished"></translation>
+        <translation>Asukoht ekraanil</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="813"/>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Puudub</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="814"/>
         <source>Top Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Ülal vasakul</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="816"/>
         <source>Top Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Ülal paremal</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="818"/>
         <source>Bottom Left</source>
-        <translation type="unfinished"></translation>
+        <translation>All vasakul</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="820"/>
         <source>Bottom Right</source>
-        <translation type="unfinished"></translation>
+        <translation>All paremal</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="822"/>
         <source>Center</source>
-        <translation type="unfinished"></translation>
+        <translation>Keskel</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="847"/>
         <source>Quality range of 0-100; Higher number is better quality and larger file size</source>
-        <translation type="unfinished"></translation>
+        <translation>Kvaliteet vahemikust 0 kuni 100; suurem number tagab parema kvaliteedi ja suurema faili</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="851"/>
         <source>JPEG Quality</source>
-        <translation type="unfinished"></translation>
+        <translation>JPEG-i kvaliteet</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="862"/>
         <source>Reverse arrow</source>
-        <translation type="unfinished"></translation>
+        <translation>Pööratud nool</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="863"/>
         <source>Draw the arrow head first</source>
-        <translation type="unfinished"></translation>
+        <translation>Esmalt joonista nooleots</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="872"/>
         <source>Insecure Pixelate</source>
-        <translation type="unfinished"></translation>
+        <translation>Ebaturvaline pikseldus</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="874"/>
         <source>Draw the pixelation effect in an insecure but more asethetic way.</source>
-        <translation type="unfinished"></translation>
+        <translation>Joonista pikseldusefekt ebaturvalises, kuid ilusal viisil.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="929"/>
         <source>Capture active monitor (skip monitor selection)</source>
-        <translation type="unfinished"></translation>
+        <translation>Kasuta hõiveks aktiivset monitori (jäta valik vahele)</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="931"/>
         <source>Automatically capture the monitor where the cursor is located instead of showing the monitor selection dialog. This feature is not supported on Wayland.</source>
-        <translation type="unfinished"></translation>
+        <translation>Selle asemel, et küsida mis monitorist/ekraanist soovid ekraanitõmmist teha, tee sealt, kus asub kursor. See funktsionaalsus pole Waylandis toetatud.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="952"/>
         <source>Use legacy X11 screenshot method (deprecated)</source>
-        <translation type="unfinished"></translation>
+        <translation>Kasuta X11 ekraanitõmmise pärandmeetodit (on tänaseks aegunud)</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="954"/>
         <source>Bypass the freedesktop portal and use Qt&apos;s native X11 screen capture. Enable this if your window manager lacks xdg-desktop-portal (e.g. xmonad, i3). Only effective on X11; ignored on Wayland.</source>
-        <translation type="unfinished"></translation>
+        <translation>Jäta freedesktopi portaal vahele ja kasuta Qt oma X11 ekraanihõive funktsionaalsust. Lülita see valik sisse vaid siis, kui sinu töölauakeskonna aknahalduris puudub xdg-desktop-portal (nt. xmonad, i3). Toimib vaid X11 puhul ja eiratakse Waylandis.</translation>
     </message>
 </context>
 <context>
@@ -1715,12 +1721,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/invert/inverttool.cpp" line="26"/>
         <source>Invert</source>
-        <translation type="unfinished"></translation>
+        <translation>Inverter</translation>
     </message>
     <message>
         <location filename="../../src/tools/invert/inverttool.cpp" line="36"/>
         <source>Set Inverter as the paint tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Määra inverter joonistustarvikuks</translation>
     </message>
 </context>
 <context>
@@ -1728,12 +1734,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/line/linetool.cpp" line="23"/>
         <source>Line</source>
-        <translation type="unfinished"></translation>
+        <translation>Joon</translation>
     </message>
     <message>
         <location filename="../../src/tools/line/linetool.cpp" line="33"/>
         <source>Set the Line as the paint tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Määra joon joonistustarvikuks</translation>
     </message>
 </context>
 <context>
@@ -1741,12 +1747,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/marker/markertool.cpp" line="24"/>
         <source>Marker</source>
-        <translation type="unfinished"></translation>
+        <translation>Marker</translation>
     </message>
     <message>
         <location filename="../../src/tools/marker/markertool.cpp" line="34"/>
         <source>Set the Marker as the paint tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Määra marker joonistustarvikuks</translation>
     </message>
 </context>
 <context>
@@ -1755,7 +1761,8 @@ Please solve them manually in the configuration file.</source>
         <location filename="../../src/utils/monitorpreview.cpp" line="31"/>
         <source>Monitor %1: %2
 Click to select</source>
-        <translation type="unfinished"></translation>
+        <translation>%1. Ekraan: %2
+Valimiseks klõpsa</translation>
     </message>
 </context>
 <context>
@@ -1763,12 +1770,12 @@ Click to select</source>
     <message>
         <location filename="../../src/tools/move/movetool.cpp" line="24"/>
         <source>Move</source>
-        <translation type="unfinished"></translation>
+        <translation>Nihuta</translation>
     </message>
     <message>
         <location filename="../../src/tools/move/movetool.cpp" line="34"/>
         <source>Move the selection area</source>
-        <translation type="unfinished"></translation>
+        <translation>Liiguta valikuala</translation>
     </message>
 </context>
 <context>
@@ -1776,12 +1783,12 @@ Click to select</source>
     <message>
         <location filename="../../src/tools/pencil/penciltool.cpp" line="18"/>
         <source>Pencil</source>
-        <translation type="unfinished"></translation>
+        <translation>Pliiats</translation>
     </message>
     <message>
         <location filename="../../src/tools/pencil/penciltool.cpp" line="28"/>
         <source>Set the Pencil as the paint tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Määra pliiats joonistustarvikuks</translation>
     </message>
 </context>
 <context>
@@ -1789,12 +1796,12 @@ Click to select</source>
     <message>
         <location filename="../../src/tools/pin/pintool.cpp" line="24"/>
         <source>Pin Tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Nööpnõel</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pintool.cpp" line="34"/>
         <source>Pin image on the desktop</source>
-        <translation type="unfinished"></translation>
+        <translation>Kinnita pilt töölauale</translation>
     </message>
 </context>
 <context>
@@ -1802,7 +1809,7 @@ Click to select</source>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="282"/>
         <source>Context menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontekstimenüü</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="284"/>
@@ -1817,22 +1824,22 @@ Click to select</source>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="298"/>
         <source>Rotate Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Pööra paremale</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="303"/>
         <source>Rotate Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Pööra vasakule</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="308"/>
         <source>Increase Opacity</source>
-        <translation type="unfinished"></translation>
+        <translation>Suurenda läbipaistmatust</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="315"/>
         <source>Decrease Opacity</source>
-        <translation type="unfinished"></translation>
+        <translation>Vähenda läbipaistmatust</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="322"/>
@@ -1850,7 +1857,7 @@ Click to select</source>
     <message>
         <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="38"/>
         <source>Set Pixelate as the paint tool.</source>
-        <translation type="unfinished"></translation>
+        <translation>Määra pikseldaja joonistustarvikuks.</translation>
     </message>
     <message>
         <source>Set Pixelate as the paint tool</source>
@@ -1937,7 +1944,7 @@ Click to select</source>
     <message>
         <location filename="../../src/main.cpp" line="251"/>
         <source>Unable to connect via DBus</source>
-        <translation type="unfinished">No s&apos;ha pogut connectar mitjançant DBus</translation>
+        <translation>DBus-i kaudu ühendamine ei õnnestu</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="268"/>
@@ -1947,7 +1954,7 @@ Click to select</source>
     <message>
         <location filename="../../src/main.cpp" line="269"/>
         <source>See</source>
-        <translation type="unfinished"></translation>
+        <translation>Vaata</translation>
     </message>
     <message>
         <source>Capture the entire desktop.</source>
@@ -1956,7 +1963,7 @@ Click to select</source>
     <message>
         <location filename="../../src/main.cpp" line="275"/>
         <source>Open the capture launcher.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ava hõivekäivitaja.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="278"/>
@@ -1979,7 +1986,7 @@ Click to select</source>
     <message>
         <location filename="../../src/main.cpp" line="273"/>
         <source>Capture screenshot of all monitors at the same time.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tee korraga ekraanitõmmis kõikidest ekraanidest.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="283"/>
@@ -1994,22 +2001,22 @@ Click to select</source>
     <message>
         <location filename="../../src/main.cpp" line="291"/>
         <source>Save the capture to the clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Salvesta hõivatud sisu lõikelauale</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="293"/>
         <source>Pin the capture to the screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Kinnita hõivatud sisu ekraanile</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="295"/>
         <source>Delay time in milliseconds</source>
-        <translation type="unfinished"></translation>
+        <translation>Viivitus millisekundites</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="300"/>
         <source>Repeat screenshot with previously selected region</source>
-        <translation type="unfinished"></translation>
+        <translation>Tee varemvalitud alast uus ekraanitõmmis</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="303"/>
@@ -2019,7 +2026,7 @@ Click to select</source>
     <message>
         <location filename="../../src/main.cpp" line="306"/>
         <source>Set the filename pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>Kirjelda failinime muster</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="310"/>
@@ -2054,12 +2061,12 @@ Click to select</source>
     <message>
         <location filename="../../src/main.cpp" line="329"/>
         <source>Define the main UI color</source>
-        <translation type="unfinished"></translation>
+        <translation>Määratle kasutajaliidese põhivärv</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="333"/>
         <source>Define the contrast UI color</source>
-        <translation type="unfinished"></translation>
+        <translation>Määratle kasutajaliidese kontrastvärv</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="336"/>
@@ -2166,7 +2173,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="54"/>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Valikud</translation>
     </message>
     <message>
         <source>Arguments</source>
@@ -2179,32 +2186,32 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="68"/>
         <source>Subcommands</source>
-        <translation type="unfinished"></translation>
+        <translation>Alamkäsud</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="328"/>
         <source>subcommands</source>
-        <translation type="unfinished"></translation>
+        <translation>alamkäsud</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="329"/>
         <source>Usage</source>
-        <translation type="unfinished"></translation>
+        <translation>Kasutus</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="329"/>
         <source>options</source>
-        <translation type="unfinished"></translation>
+        <translation>valikud</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="334"/>
         <source>Per default runs Flameshot in the background and adds a tray icon for configuration.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vaikimisi käivitud Flamshot taustal ja lisab seadistamiseks süsteemisalve ikooni.</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="83"/>
         <source>Hello, I&apos;m here! Click icon in the tray to take a screenshot or click with a right button to see more options.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hei, ma olen siin! Ekraanitõmmise tegemiseks klõpsa süsteemisalve ikooni või lisavalikute jaoks paremat klahvi.</translation>
     </message>
     <message>
         <source>Toggle side panel</source>
@@ -2262,12 +2269,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="224"/>
         <source>Screenshot history</source>
-        <translation type="unfinished">Ekraanitõmmiste ajalugu</translation>
+        <translation>Ekraanitõmmiste ajalugu</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="219"/>
         <source>Capture screen</source>
-        <translation type="unfinished">Tee ekraanitõmmis</translation>
+        <translation>Tee ekraanitõmmis</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="233"/>
@@ -2277,7 +2284,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="234"/>
         <source>Change the tool&apos;s size</source>
-        <translation type="unfinished"></translation>
+        <translation>Muuda tarviku suurust</translation>
     </message>
     <message>
         <source>Change the tool&apos;s thickness</source>
@@ -2294,7 +2301,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/rectangle/rectangletool.cpp" line="33"/>
         <source>Set the Rectangle as the paint tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Määra ristkülik joonistustarvikuks</translation>
     </message>
 </context>
 <context>
@@ -2481,7 +2488,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/selection/selectiontool.cpp" line="36"/>
         <source>Set Selection as the paint tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Määra valikuvidin joonistustarvikuks</translation>
     </message>
 </context>
 <context>
@@ -2942,17 +2949,17 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="162"/>
         <source>Download version %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Laadi alla versioon %1</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="250"/>
         <source>Select Screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Vali ekraan</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="266"/>
         <source>Monitor %1: %2 (%3x%4)</source>
-        <translation type="unfinished"></translation>
+        <translation>Ekraan %1: %2 (%3x%4)</translation>
     </message>
     <message>
         <source>New version %1 is available</source>
@@ -3021,7 +3028,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/undo/undotool.cpp" line="34"/>
         <source>Undo the last modification</source>
-        <translation type="unfinished">Desfés l&apos;última modificació</translation>
+        <translation>Võta viimane muudatus tagasi</translation>
     </message>
 </context>
 <context>
@@ -3034,17 +3041,17 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/widgets/updatenotificationwidget.cpp" line="129"/>
         <source>Ignore</source>
-        <translation type="unfinished"></translation>
+        <translation>Eira</translation>
     </message>
     <message>
         <location filename="../../src/widgets/updatenotificationwidget.cpp" line="137"/>
         <source>Later</source>
-        <translation type="unfinished"></translation>
+        <translation>Hiljem</translation>
     </message>
     <message>
         <location filename="../../src/widgets/updatenotificationwidget.cpp" line="145"/>
         <source>Update</source>
-        <translation type="unfinished">Uuenda</translation>
+        <translation>Uuenda</translation>
     </message>
 </context>
 <context>
@@ -3070,7 +3077,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/widgets/uploadlineitem.ui" line="49"/>
         <source>TextLabel</source>
-        <translation type="unfinished">Tekstisilt</translation>
+        <translation>Tekstisilt</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadlineitem.ui" line="82"/>
@@ -3080,7 +3087,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/widgets/uploadlineitem.ui" line="95"/>
         <source>Open In Browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Ava veebibrauseris</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadlineitem.cpp" line="50"/>
@@ -3098,12 +3105,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/widgets/panel/utilitypanel.cpp" line="197"/>
         <source>Close</source>
-        <translation type="unfinished">Sulge</translation>
+        <translation>Sulge</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/utilitypanel.cpp" line="207"/>
         <source>&lt;Empty&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;Tühi&gt;</translation>
     </message>
 </context>
 <context>
@@ -3136,17 +3143,17 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="101"/>
         <source>UI language</source>
-        <translation type="unfinished"></translation>
+        <translation>Kasutajaliidese keel</translation>
     </message>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="141"/>
         <source>Configuration</source>
-        <translation type="unfinished">Seadistused</translation>
+        <translation>Seadistused</translation>
     </message>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="142"/>
         <source>Flameshot must be restarted to apply these changes!</source>
-        <translation type="unfinished"></translation>
+        <translation>Nende muudatuste jõustamiseks pead Flameshoti uuesti käivitama!</translation>
     </message>
 </context>
 <context>
@@ -3154,7 +3161,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.cpp" line="63"/>
         <source>Pick</source>
-        <translation type="unfinished"></translation>
+        <translation>Vali</translation>
     </message>
 </context>
 <context>
@@ -3162,7 +3169,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette.cpp" line="422"/>
         <source>Unnamed</source>
-        <translation type="unfinished"></translation>
+        <translation>Nimetu</translation>
     </message>
 </context>
 <context>
@@ -3170,12 +3177,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_model.cpp" line="55"/>
         <source>Unnamed</source>
-        <translation type="unfinished"></translation>
+        <translation>Ilma nimeta</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_model.cpp" line="130"/>
         <source>%1 (%2 colors)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 (%2 värvi)</translation>
     </message>
 </context>
 <context>
@@ -3184,88 +3191,89 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="64"/>
         <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="231"/>
         <source>Open a new palette from file</source>
-        <translation type="unfinished"></translation>
+        <translation>Ava uus palett failist</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="75"/>
         <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="234"/>
         <source>Create a new palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Koosta uus palett</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="86"/>
         <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="237"/>
         <source>Duplicate the current palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Tee senisest paletist koopia</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="170"/>
         <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="240"/>
         <source>Delete the current palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Kustuta senine palett</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="181"/>
         <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="243"/>
         <source>Revert changes to the current palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Pööra senise paleti muudatused tagasi</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="192"/>
         <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="246"/>
         <source>Save changes to the current palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Salvesta senise paleti muudatused</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="216"/>
         <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="249"/>
         <source>Add a color to the palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Lisa värv paletile</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="227"/>
         <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="252"/>
         <source>Remove the selected color from the palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Eemalda valitud värv paletilt</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="181"/>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="196"/>
         <source>New Palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Uus palett</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="182"/>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="197"/>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nimi</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="223"/>
         <source>GIMP Palettes (*.gpl)</source>
-        <translation type="unfinished"></translation>
+        <translation>GIMP-i paletid (*.gpl)</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="224"/>
         <source>Palette Image (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Paleti pilt (%1)</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="225"/>
         <source>All Files (*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Kõik failid (*)</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="226"/>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="239"/>
         <source>Open Palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Ava palett</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="240"/>
         <source>Failed to load the palette file
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Paletifaili laadimine ei õnnestunud
+%1</translation>
     </message>
 </context>
 <context>
@@ -3273,17 +3281,17 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_editor.cpp" line="321"/>
         <source>Add Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Lisa värv</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_editor.cpp" line="330"/>
         <source>Remove Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Eemalda värv</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_editor.cpp" line="338"/>
         <source>Edit Color...</source>
-        <translation type="unfinished"></translation>
+        <translation>Muuda värvi…</translation>
     </message>
 </context>
 <context>
@@ -3291,7 +3299,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_list_model.cpp" line="215"/>
         <source>%1 (%2 colors)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 (%2 värvi)</translation>
     </message>
 </context>
 <context>
@@ -3299,12 +3307,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/swatch.cpp" line="855"/>
         <source>Clear Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Tühjenda värv</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/swatch.cpp" line="864"/>
         <source>%1 (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 (%2)</translation>
     </message>
 </context>
 </TS>
