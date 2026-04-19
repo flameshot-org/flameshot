@@ -2,6 +2,7 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "selectionwidget.h"
+#include "utils/confighandler.h"
 #include "utils/globalvalues.h"
 #include "widgets/capture/capturetoolbutton.h"
 
@@ -56,27 +57,30 @@ SelectionWidget::SideType SelectionWidget::getMouseSide(
         return NO_SIDE;
     }
     QPoint localPos = mapFromParent(mousePos);
-    if (m_TLArea.contains(localPos)) {
-        return TOPLEFT_SIDE;
-    } else if (m_TRArea.contains(localPos)) {
-        return TOPRIGHT_SIDE;
-    } else if (m_BLArea.contains(localPos)) {
-        return BOTTOMLEFT_SIDE;
-    } else if (m_BRArea.contains(localPos)) {
-        return BOTTOMRIGHT_SIDE;
-    } else if (m_LArea.contains(localPos)) {
-        return LEFT_SIDE;
-    } else if (m_TArea.contains(localPos)) {
-        return TOP_SIDE;
-    } else if (m_RArea.contains(localPos)) {
-        return RIGHT_SIDE;
-    } else if (m_BArea.contains(localPos)) {
-        return BOTTOM_SIDE;
-    } else if (rect().contains(localPos)) {
-        return CENTER;
-    } else {
-        return NO_SIDE;
+    if (ConfigHandler().showSelectionHandles()) {
+        if (m_TLArea.contains(localPos)) {
+            return TOPLEFT_SIDE;
+        } else if (m_TRArea.contains(localPos)) {
+            return TOPRIGHT_SIDE;
+        } else if (m_BLArea.contains(localPos)) {
+            return BOTTOMLEFT_SIDE;
+        } else if (m_BRArea.contains(localPos)) {
+            return BOTTOMRIGHT_SIDE;
+        } else if (m_LArea.contains(localPos)) {
+            return LEFT_SIDE;
+        } else if (m_TArea.contains(localPos)) {
+            return TOP_SIDE;
+        } else if (m_RArea.contains(localPos)) {
+            return RIGHT_SIDE;
+        } else if (m_BArea.contains(localPos)) {
+            return BOTTOM_SIDE;
+        } else if (rect().contains(localPos)) {
+            return CENTER;
+        } else {
+            return NO_SIDE;
+        }
     }
+    return rect().contains(localPos) ? CENTER : NO_SIDE;
 }
 
 QVector<QRect> SelectionWidget::handlerAreas()
@@ -386,9 +390,11 @@ void SelectionWidget::paintEvent(QPaintEvent*)
     p.setPen(m_color);
     p.drawRect(rect() + QMargins(0, 0, -1, -1));
     p.setRenderHint(QPainter::Antialiasing);
-    p.setBrush(m_color);
-    for (auto rectangle : handlerAreas()) {
-        p.drawEllipse(rectangle);
+    if (ConfigHandler().showSelectionHandles()) {
+        p.setBrush(m_color);
+        for (auto rectangle : handlerAreas()) {
+            p.drawEllipse(rectangle);
+        }
     }
 }
 
