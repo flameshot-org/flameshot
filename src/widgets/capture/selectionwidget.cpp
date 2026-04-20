@@ -20,6 +20,7 @@ SelectionWidget::SelectionWidget(QColor c, QWidget* parent)
   , m_color(std::move(c))
   , m_activeSide(NO_SIDE)
   , m_ignoreMouse(false)
+  , m_aspectRatio(1)
 {
     // prevents this widget from consuming CaptureToolButton mouse events
     setAttribute(Qt::WA_TransparentForMouseEvents);
@@ -176,6 +177,7 @@ void SelectionWidget::parentMousePressEvent(QMouseEvent* e)
 
     m_dragStartPos = e->pos();
     m_activeSide = getMouseSide(e->pos());
+    m_aspectRatio = (float)geometry().width() / (float)geometry().height();
 }
 
 void SelectionWidget::parentMouseReleaseEvent(QMouseEvent* e)
@@ -215,7 +217,6 @@ void SelectionWidget::parentMouseMoveEvent(QMouseEvent* e)
     }
 
     auto geom = geometry();
-    float aspectRatio = (float)geom.width() / (float)geom.height();
     bool symmetryMod = qApp->keyboardModifiers() & Qt::ShiftModifier;
     bool preserveAspect = qApp->keyboardModifiers() & Qt::ControlModifier;
 
@@ -230,20 +231,20 @@ void SelectionWidget::parentMouseMoveEvent(QMouseEvent* e)
                 if (preserveAspect) {
                     if ((float)(oldRight - pos.x()) /
                           (float)(oldBottom - pos.y()) >
-                        aspectRatio) {
+                        m_aspectRatio) {
                         /* width longer than expected width, hence increase
                          * height to compensate for the aspect ratio */
                         newLeft = pos.x();
                         newTop =
                           oldBottom -
-                          (int)(((float)(oldRight - pos.x())) / aspectRatio);
+                          (int)(((float)(oldRight - pos.x())) / m_aspectRatio);
                     } else {
                         /* height longer than expected height, hence increase
                          * width to compensate for the aspect ratio */
                         newTop = pos.y();
                         newLeft =
                           oldRight -
-                          (int)(((float)(oldBottom - pos.y())) * aspectRatio);
+                          (int)(((float)(oldBottom - pos.y())) * m_aspectRatio);
                     }
                 } else {
                     newTopLeft = pos;
@@ -254,15 +255,15 @@ void SelectionWidget::parentMouseMoveEvent(QMouseEvent* e)
             if (m_activeSide) {
                 if (preserveAspect) {
                     if ((float)(pos.x() - oldLeft) / (float)(pos.y() - oldTop) >
-                        aspectRatio) {
+                        m_aspectRatio) {
                         newRight = pos.x();
                         newBottom =
                           oldTop +
-                          (int)(((float)(pos.x() - oldLeft)) / aspectRatio);
+                          (int)(((float)(pos.x() - oldLeft)) / m_aspectRatio);
                     } else {
                         newBottom = pos.y();
                         newRight = oldLeft + (int)(((float)(pos.y() - oldTop)) *
-                                                   aspectRatio);
+                                                   m_aspectRatio);
                     }
                 } else {
                     newBottomRight = pos;
@@ -274,16 +275,16 @@ void SelectionWidget::parentMouseMoveEvent(QMouseEvent* e)
                 if (preserveAspect) {
                     if ((float)(pos.x() - oldLeft) /
                           (float)(oldBottom - pos.y()) >
-                        aspectRatio) {
+                        m_aspectRatio) {
                         newRight = pos.x();
                         newTop =
                           oldBottom -
-                          (int)(((float)(pos.x() - oldLeft)) / aspectRatio);
+                          (int)(((float)(pos.x() - oldLeft)) / m_aspectRatio);
                     } else {
                         newTop = pos.y();
                         newRight =
                           oldLeft +
-                          (int)(((float)(oldBottom - pos.y())) * aspectRatio);
+                          (int)(((float)(oldBottom - pos.y())) * m_aspectRatio);
                     }
                 } else {
                     newTop = pos.y();
@@ -296,15 +297,15 @@ void SelectionWidget::parentMouseMoveEvent(QMouseEvent* e)
                 if (preserveAspect) {
                     if ((float)(oldRight - pos.x()) /
                           (float)(pos.y() - oldTop) >
-                        aspectRatio) {
+                        m_aspectRatio) {
                         newLeft = pos.x();
                         newBottom =
                           oldTop +
-                          (int)(((float)(oldRight - pos.x())) / aspectRatio);
+                          (int)(((float)(oldRight - pos.x())) / m_aspectRatio);
                     } else {
                         newBottom = pos.y();
                         newLeft = oldRight - (int)(((float)(pos.y() - oldTop)) *
-                                                   aspectRatio);
+                                                   m_aspectRatio);
                     }
                 } else {
                     newBottom = pos.y();
@@ -319,7 +320,7 @@ void SelectionWidget::parentMouseMoveEvent(QMouseEvent* e)
                     /* By default bottom edge moves when dragging sides, this
                      * behavior feels natural */
                     newBottom = oldTop + (int)(((float)(oldRight - pos.x())) /
-                                               aspectRatio);
+                                               m_aspectRatio);
                 }
             }
             break;
@@ -328,7 +329,7 @@ void SelectionWidget::parentMouseMoveEvent(QMouseEvent* e)
                 newRight = pos.x();
                 if (preserveAspect) {
                     newBottom = oldTop + (int)(((float)(pos.x() - oldLeft)) /
-                                               aspectRatio);
+                                               m_aspectRatio);
                 }
             }
             break;
@@ -340,7 +341,7 @@ void SelectionWidget::parentMouseMoveEvent(QMouseEvent* e)
                      * behavior feels natural */
                     newRight =
                       oldLeft +
-                      (int)(((float)(oldBottom - pos.y()) * aspectRatio));
+                      (int)(((float)(oldBottom - pos.y()) * m_aspectRatio));
                 }
             }
             break;
@@ -348,8 +349,9 @@ void SelectionWidget::parentMouseMoveEvent(QMouseEvent* e)
             if (m_activeSide) {
                 newBottom = pos.y();
                 if (preserveAspect) {
-                    newRight = oldLeft +
-                               (int)(((float)(pos.y() - oldTop) * aspectRatio));
+                    newRight =
+                      oldLeft +
+                      (int)(((float)(pos.y() - oldTop) * m_aspectRatio));
                 }
             }
             break;
