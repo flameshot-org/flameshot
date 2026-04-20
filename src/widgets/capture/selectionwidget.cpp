@@ -177,7 +177,9 @@ void SelectionWidget::parentMousePressEvent(QMouseEvent* e)
 
     m_dragStartPos = e->pos();
     m_activeSide = getMouseSide(e->pos());
-    m_aspectRatio = (float)geometry().width() / (float)geometry().height();
+    if ((float)geometry().height() > 0) {
+        m_aspectRatio = (float)geometry().width() / (float)geometry().height();
+    }
 }
 
 void SelectionWidget::parentMouseReleaseEvent(QMouseEvent* e)
