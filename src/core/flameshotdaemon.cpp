@@ -4,6 +4,7 @@
 #include "utils/abstractlogger.h"
 #include "utils/confighandler.h"
 #include "utils/globalvalues.h"
+#include "utils/pinhistorymanager.h"
 #include "utils/screenshotsaver.h"
 #include "widgets/capture/capturewidget.h"
 #include "widgets/trayicon.h"
@@ -68,6 +69,7 @@ FlameshotDaemon::FlameshotDaemon()
   , m_hostingClipboard(false)
   , m_clipboardSignalBlocked(false)
   , m_trayIcon(nullptr)
+  , m_pinHistory(new PinHistoryManager(this))
 #if !defined(DISABLE_UPDATE_CHECKER)
   , m_appLatestVersion(QStringLiteral(APP_VERSION).replace("v", ""))
   , m_showManualCheckAppUpdateStatus(false)
@@ -297,14 +299,21 @@ void FlameshotDaemon::quitIfIdle()
 
 // SERVICE METHODS
 
-void FlameshotDaemon::attachPin(const QPixmap& pixmap, QRect geometry)
+void FlameshotDaemon::attachPin(const QPixmap& pixmap,
+                                QRect geometry,
+                                qreal zoom,
+                                qreal opacity)
 {
-    auto* pinWidget = new PinWidget(pixmap, geometry);
+    auto* pinWidget = new PinWidget(pixmap, geometry, nullptr, zoom, opacity);
     m_widgets.append(pinWidget);
     connect(pinWidget, &QObject::destroyed, this, [=, this]() {
         m_widgets.removeOne(pinWidget);
         quitIfIdle();
     });
+    connect(pinWidget,
+            &PinWidget::dismissed,
+            m_pinHistory,
+            &PinHistoryManager::recordDismissal);
 
     pinWidget->show();
     pinWidget->activateWindow();

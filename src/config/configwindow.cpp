@@ -5,6 +5,7 @@
 #include "config/configresolver.h"
 #include "config/filenameeditor.h"
 #include "config/generalconf.h"
+#include "config/pinhistoryconf.h"
 #include "config/shortcutswidget.h"
 #include "config/visualseditor.h"
 #include "utils/colorutils.h"
@@ -81,6 +82,15 @@ ConfigWindow::ConfigWindow(QWidget* parent)
                         QIcon(modifier + "name_edition.svg"),
                         tr("Filename Editor"));
 
+    // pin history
+    m_pinHistoryConf = new PinHistoryConf();
+    m_pinHistoryConfTab = new QWidget();
+    auto* pinHistoryLayout = new QVBoxLayout(m_pinHistoryConfTab);
+    m_pinHistoryConfTab->setLayout(pinHistoryLayout);
+    pinHistoryLayout->addWidget(m_pinHistoryConf);
+    m_tabWidget->addTab(
+      m_pinHistoryConfTab, QIcon(modifier + "config.svg"), tr("Pin History"));
+
     // shortcuts
     m_shortcuts = new ShortcutsWidget();
     m_shortcutsTab = new QWidget();
@@ -103,11 +113,16 @@ ConfigWindow::ConfigWindow(QWidget* parent)
             &ConfigWindow::updateChildren,
             m_generalConfig,
             &GeneralConf::updateComponents);
+    connect(this,
+            &ConfigWindow::updateChildren,
+            m_pinHistoryConf,
+            &PinHistoryConf::updateComponents);
 
     // Error indicator (this must come last)
     initErrorIndicator(m_visualsTab, m_visuals);
     initErrorIndicator(m_filenameEditorTab, m_filenameEditor);
     initErrorIndicator(m_generalConfigTab, m_generalConfig);
+    initErrorIndicator(m_pinHistoryConfTab, m_pinHistoryConf);
     initErrorIndicator(m_shortcutsTab, m_shortcuts);
 }
 

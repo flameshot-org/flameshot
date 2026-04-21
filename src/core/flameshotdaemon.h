@@ -13,6 +13,7 @@ class QDBusMessage;
 class QDBusConnection;
 class TrayIcon;
 class CaptureWidget;
+class PinHistoryManager;
 
 #if !defined(DISABLE_UPDATE_CHECKER)
 class QNetworkAccessManager;
@@ -36,6 +37,13 @@ public:
       const QString& text,
       const QString& title = QStringLiteral("Flameshot Info"),
       const int timeout = 5000);
+
+    PinHistoryManager* pinHistory() const { return m_pinHistory; }
+
+    void attachPin(const QPixmap& pixmap,
+                   QRect geometry,
+                   qreal zoom = 1.0,
+                   qreal opacity = 1.0);
 
 #if defined(USE_KDSINGLEAPPLICATION) &&                                        \
   (defined(Q_OS_MACOS) || defined(Q_OS_WIN))
@@ -61,7 +69,6 @@ signals:
 private:
     FlameshotDaemon();
     void quitIfIdle();
-    void attachPin(const QPixmap& pixmap, QRect geometry);
     void attachScreenshotToClipboard(const QPixmap& pixmap);
 
     void attachPin(const QByteArray& data);
@@ -83,6 +90,7 @@ private:
     bool m_clipboardSignalBlocked;
     QList<QWidget*> m_widgets;
     TrayIcon* m_trayIcon;
+    PinHistoryManager* m_pinHistory;
 
 #if !defined(DISABLE_UPDATE_CHECKER)
     QString m_appLatestUrl;

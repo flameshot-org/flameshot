@@ -19,6 +19,8 @@ target_sources(
 
         colorpickerwidget.h
         capture/capturetoolobjects.h
+        pinhistorymodel.h
+        pinhistorydialog.h
 )
 
 if (ENABLE_IMGUR)
@@ -46,6 +48,8 @@ target_sources(
         orientablepushbutton.cpp
         colorpickerwidget.cpp
         capture/capturetoolobjects.cpp
+        pinhistorymodel.cpp
+        pinhistorydialog.cpp
 )
 
 if (ENABLE_IMGUR)

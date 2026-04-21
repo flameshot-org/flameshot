@@ -7,6 +7,9 @@ target_sources(
           systemnotification.h
           valuehandler.h
           strfparse.h
+          pinhistoryentry.h
+          pinhistorystore.h
+          pinhistorymanager.h
 )
 
 target_sources(
@@ -26,6 +29,9 @@ target_sources(
           colorutils.cpp
           history.cpp
           strfparse.cpp
+          pinhistoryentry.cpp
+          pinhistorystore.cpp
+          pinhistorymanager.cpp
 )
 
 IF (UNIX AND NOT APPLE)

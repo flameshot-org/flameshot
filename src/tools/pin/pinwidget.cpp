@@ -7,6 +7,7 @@
 #include "utils/globalvalues.h"
 #include "utils/screenshotsaver.h"
 
+#include <QCloseEvent>
 #include <QGraphicsDropShadowEffect>
 #include <QGraphicsOpacityEffect>
 #include <QLabel>
@@ -27,12 +28,17 @@ constexpr qreal MIN_SIZE = 100.0;
 
 PinWidget::PinWidget(const QPixmap& pixmap,
                      const QRect& geometry,
-                     QWidget* parent)
+                     QWidget* parent,
+                     qreal zoom,
+                     qreal opacity)
   : QWidget(parent)
   , m_pixmap(pixmap)
   , m_layout(new QVBoxLayout(this))
   , m_label(new QLabel())
   , m_shadowEffect(new QGraphicsDropShadowEffect(this))
+  , m_scaleFactor(zoom > 0 ? zoom : 1.0)
+  , m_opacity(opacity > 0 ? opacity : 1.0)
+  , m_sizeChanged(zoom != 1.0)
 {
     setWindowIcon(QIcon(GlobalValues::iconPath()));
     setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint |
@@ -97,6 +103,18 @@ void PinWidget::closePin()
 {
     update();
     close();
+}
+
+void PinWidget::closeEvent(QCloseEvent* event)
+{
+    QString screenName;
+    if (QWindow* handle = windowHandle()) {
+        if (QScreen* screen = handle->screen()) {
+            screenName = screen->name();
+        }
+    }
+    emit dismissed(m_pixmap, geometry(), m_scaleFactor, m_opacity, screenName);
+    QWidget::closeEvent(event);
 }
 bool PinWidget::scrollEvent(QWheelEvent* event)
 {

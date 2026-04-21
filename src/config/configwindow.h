@@ -8,6 +8,7 @@
 class FileNameEditor;
 class ShortcutsWidget;
 class GeneralConf;
+class PinHistoryConf;
 class QFileSystemWatcher;
 class VisualsEditor;
 class QWidget;
@@ -38,6 +39,9 @@ private:
 
     VisualsEditor* m_visuals;
     QWidget* m_visualsTab;
+
+    PinHistoryConf* m_pinHistoryConf;
+    QWidget* m_pinHistoryConfTab;
 
     void initErrorIndicator(QWidget* tab, QWidget* widget);
 };

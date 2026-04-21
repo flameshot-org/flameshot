@@ -5,9 +5,13 @@
 #include "core/qguiappcurrentscreen.h"
 #include "utils/confighandler.h"
 #include "utils/globalvalues.h"
+#include "utils/pinhistoryentry.h"
+#include "utils/pinhistorymanager.h"
 
+#include <QAction>
 #include <QApplication>
 #include <QGuiApplication>
+#include <QLocale>
 #include <QMenu>
 #include <QScreen>
 #include <QTimer>
@@ -21,6 +25,9 @@
 TrayIcon::TrayIcon(QObject* parent)
   : QSystemTrayIcon(parent)
   , m_screenMenu(nullptr)
+  , m_recentPinsMenu(nullptr)
+  , m_recentPinsAction(nullptr)
+  , m_pinHistoryAction(nullptr)
 {
     initMenu();
     initScreenMenu();
@@ -190,6 +197,18 @@ void TrayIcon::initMenu()
             Flameshot::instance(),
             &Flameshot::openSavePath);
 
+    m_pinHistoryAction = new QAction(tr("&Pin history…"), this);
+    connect(m_pinHistoryAction,
+            &QAction::triggered,
+            Flameshot::instance(),
+            &Flameshot::pinHistory);
+
+    m_recentPinsMenu = new QMenu(tr("Recent pins"), m_menu);
+    connect(m_recentPinsMenu,
+            &QMenu::aboutToShow,
+            this,
+            &TrayIcon::rebuildRecentPinsMenu);
+
     m_menu->addAction(m_captureAction);
     m_menu->addAction(m_launcherAction);
     m_menu->addSeparator();
@@ -197,6 +216,8 @@ void TrayIcon::initMenu()
     m_menu->addAction(recentAction);
 #endif
     m_menu->addAction(openSavePathAction);
+    m_menu->addAction(m_pinHistoryAction);
+    m_recentPinsAction = m_menu->addMenu(m_recentPinsMenu);
     m_menu->addSeparator();
     m_menu->addAction(configAction);
     m_menu->addSeparator();
@@ -292,4 +313,47 @@ void TrayIcon::startGuiCaptureOnScreen(int screenIndex)
     CaptureRequest req(CaptureRequest::GRAPHICAL_MODE, 400);
     req.setSelectedMonitor(screenIndex);
     Flameshot::instance()->requestCapture(req);
+}
+
+void TrayIcon::rebuildRecentPinsMenu()
+{
+    m_recentPinsMenu->clear();
+
+    auto* daemon = FlameshotDaemon::instance();
+    PinHistoryManager* manager = daemon ? daemon->pinHistory() : nullptr;
+    const bool enabled = manager && ConfigHandler().pinHistoryEnabled();
+
+    if (!enabled) {
+        if (m_recentPinsAction) {
+            m_recentPinsAction->setVisible(false);
+        }
+        return;
+    }
+
+    const QList<PinHistoryEntry> entries = manager->entries();
+    if (entries.isEmpty()) {
+        if (m_recentPinsAction) {
+            m_recentPinsAction->setVisible(false);
+        }
+        return;
+    }
+
+    if (m_recentPinsAction) {
+        m_recentPinsAction->setVisible(true);
+    }
+
+    constexpr int kMaxRecent = 5;
+    const int limit = std::min<int>(entries.size(), kMaxRecent);
+    for (int i = 0; i < limit; ++i) {
+        const PinHistoryEntry& entry = entries[i];
+        const QString timeLabel = QLocale::system().toString(
+          entry.dismissedAt.toLocalTime().time(), QLocale::ShortFormat);
+        const QString label =
+          tr("%1 · %2×%3").arg(timeLabel).arg(entry.width).arg(entry.height);
+        QAction* action = m_recentPinsMenu->addAction(label);
+        const QString id = entry.id;
+        connect(action, &QAction::triggered, this, [manager, id]() {
+            manager->restore(id);
+        });
+    }
 }
