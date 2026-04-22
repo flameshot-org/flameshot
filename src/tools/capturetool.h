@@ -51,6 +51,7 @@ public:
         TYPE_INVERT = 22,
         TYPE_ACCEPT = 23,
         TYPE_CANCEL = 24,
+        TYPE_ZOOMLENS = 25,
     };
     Q_ENUM(Type);
 
@@ -158,6 +159,9 @@ public:
     // Move tool objects
     virtual void move(const QPoint& pos) { Q_UNUSED(pos) };
     virtual const QPoint* pos() { return nullptr; };
+    // Called before the first move() in a drag to let the tool know
+    // which part was clicked (for tools with multiple movable regions).
+    virtual void prepareMove(const QPoint& clickPos) { Q_UNUSED(clickPos) };
 
 signals:
     void requestAction(Request r);
