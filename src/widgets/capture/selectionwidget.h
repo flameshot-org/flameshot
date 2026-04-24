@@ -103,4 +103,7 @@ private:
 
     QRect m_TLArea, m_TRArea, m_BLArea, m_BRArea;
     QRect m_LArea, m_TArea, m_RArea, m_BArea;
+
+    int m_moveStep;
+    int m_resizeStep;
 };
