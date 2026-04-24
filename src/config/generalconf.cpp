@@ -57,6 +57,9 @@ GeneralConf::GeneralConf(QWidget* parent)
 #if !defined(Q_OS_MACOS)
     initCaptureActiveMonitor();
 #endif
+#if defined(Q_OS_MACOS)
+    initUseNativeFullscreen();
+#endif
 #if defined(Q_OS_LINUX)
     initUseX11LegacyScreenshot();
 #endif
@@ -126,6 +129,9 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
 
 #if !defined(Q_OS_MACOS)
     m_captureActiveMonitor->setChecked(config.captureActiveMonitor());
+#endif
+#if defined(Q_OS_MACOS)
+    m_useNativeFullscreen->setChecked(config.useNativeFullscreen());
 #endif
 #if defined(Q_OS_LINUX)
     m_useX11LegacyScreenshot->setChecked(config.useX11LegacyScreenshot());
@@ -934,6 +940,29 @@ void GeneralConf::initCaptureActiveMonitor()
 void GeneralConf::captureActiveMonitorChanged(bool checked)
 {
     ConfigHandler().setCaptureActiveMonitor(checked);
+}
+#endif
+
+#if defined(Q_OS_MACOS)
+void GeneralConf::initUseNativeFullscreen()
+{
+    m_useNativeFullscreen =
+      new QCheckBox(tr("Use native fullscreen for capture overlay"), this);
+    m_useNativeFullscreen->setToolTip(
+      tr("Use macOS native fullscreen mode for the capture overlay. "
+         "When disabled (default), the overlay avoids the fullscreen "
+         "desktop animation."));
+    m_scrollAreaLayout->addWidget(m_useNativeFullscreen);
+
+    connect(m_useNativeFullscreen,
+            &QCheckBox::clicked,
+            this,
+            &GeneralConf::useNativeFullscreenChanged);
+}
+
+void GeneralConf::useNativeFullscreenChanged(bool checked)
+{
+    ConfigHandler().setUseNativeFullscreen(checked);
 }
 #endif
 
