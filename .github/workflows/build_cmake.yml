@@ -32,17 +32,17 @@ jobs:
     steps:
       - name: Checkout Source code
         if: github.event_name == 'push'
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Checkout Source code
         if: github.event_name == 'pull_request'
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           ref: ${{ github.event.pull_request.head.sha }}
 
       - name: Checkout Source code
         if: github.event_name == 'workflow_dispatch'
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           ref: ${{ github.sha }}
 
@@ -100,7 +100,7 @@ jobs:
           }
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Fix Python path
         shell: pwsh
