@@ -559,7 +559,7 @@ cmake --install "$BUILD_DIR"
 
 ## License
 
-- The main code is licensed under [GPLv3](LICENSE)
+- The main code is licensed under [GPLv3+](LICENSE)
 - The logo of Flameshot is licensed under [Free Art License v1.3](data/img/app/flameshotLogoLicense.txt)
 - The button icons are licensed under Apache License 2.0. See: https://github.com/google/material-design-icons
 - The code at capture/capturewidget.cpp is based on https://github.com/ckaiser/Lightscreen/blob/master/dialogs/areadialog.cpp (GPLv2)
@@ -567,7 +567,7 @@ cmake --install "$BUILD_DIR"
 - I copied a few lines of code from KSnapshot regiongrabber.cpp revision `796531` (LGPL)
 - Qt-Color-Widgets taken and modified from https://github.com/mbasaglia/Qt-Color-Widgets (see their license and exceptions in the project) (LGPL/GPL)
 
-Info: If I take code from your project and that implies a relicense to GPLv3, you can reuse my changes with the original previous license of your project applied.
+Info: If I take code from your project and that implies a relicense to GPLv3+, you can reuse my changes with the original previous license of your project applied.
 
 ## Privacy Policy
 

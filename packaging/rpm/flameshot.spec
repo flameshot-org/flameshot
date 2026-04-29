@@ -3,7 +3,7 @@ Version: 13.3.0
 Release: 1%{?dist}
 Summary: Powerful yet simple to use screenshot software
 
-License: GPL-3.0-or-later and Apache-2.0 and GPL-2.0 and LGPL-3.0 and LAL-1.3
+License: GPL-3.0-or-later
 URL:     https://github.com/flameshot-org/flameshot
 Source0: %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
 Vendor:  Flameshot
