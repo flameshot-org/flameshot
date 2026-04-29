@@ -573,13 +573,12 @@ int main(int argc, char* argv[])
         bool pin = parser.isSet(pinOption);
         bool edit = parser.isSet(editOption);
 
-        CaptureRequest req(edit ? CaptureRequest::GRAPHICAL_MODE
-                                : CaptureRequest::SCREEN_MODE,
-                           delay);
-
-        // For edit mode, set the selected monitor
-        if (edit && screenNumber >= 0) {
-            req.setSelectedMonitor(screenNumber);
+        CaptureRequest req(CaptureRequest::SCREEN_MODE, delay, screenNumber);
+        if (edit) {
+            req = CaptureRequest(CaptureRequest::GRAPHICAL_MODE, delay);
+            if (screenNumber >= 0) {
+                req.setSelectedMonitor(screenNumber);
+            }
         }
 
         if (!region.isEmpty()) {
