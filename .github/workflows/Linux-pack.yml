@@ -197,7 +197,7 @@ jobs:
         if: matrix.dist.os == 'fedora'
         run: |
           mkdir $GITHUB_WORKSPACE/rpm
-          cp $GITHUB_WORKSPACE/packaging/rpm/fedora/flameshot.spec $GITHUB_WORKSPACE/rpm
+          cp $GITHUB_WORKSPACE/packaging/rpm/flameshot.spec $GITHUB_WORKSPACE/rpm
           bash $GITHUB_WORKSPACE/tools/packpack
         env:
           OS: ${{ matrix.dist.os }}
@@ -208,7 +208,7 @@ jobs:
         if: matrix.dist.os == 'opensuse-leap'
         run: |
           mkdir $GITHUB_WORKSPACE/rpm
-          cp $GITHUB_WORKSPACE/packaging/rpm/opensuse/flameshot.spec $GITHUB_WORKSPACE/rpm
+          cp $GITHUB_WORKSPACE/packaging/rpm/flameshot.spec $GITHUB_WORKSPACE/rpm
           bash $GITHUB_WORKSPACE/tools/packpack
         env:
           OS: ${{ matrix.dist.os }}
