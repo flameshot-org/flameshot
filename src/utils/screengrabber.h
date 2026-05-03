@@ -8,6 +8,7 @@
 #include <QEvent>
 #include <QList>
 #include <QObject>
+#include <QPoint>
 #include <QPixmap>
 #include <QScreen>
 
@@ -37,6 +38,7 @@ private:
     void adjustDevicePixelRatio(QPixmap& pixmap);
     QWidget* createMonitorPreviews(const QPixmap& fullScreenshot);
     QPixmap cropToMonitor(const QPixmap& fullScreenshot, int monitorIndex);
+    bool gnomeShellNativeScreenshot(QPixmap& res);
     QPixmap windowsScreenshot(int wid);
     QPixmap x11LegacyScreenshot();
 
@@ -45,5 +47,7 @@ private:
     int m_selectedMonitor;
     QEventLoop* m_monitorSelectionLoop;
     bool m_userCancelled;
+    bool m_hasGnomeShellPointer;
+    QPoint m_gnomeShellPointer;
     static bool m_monitorSelectionActive;
 };

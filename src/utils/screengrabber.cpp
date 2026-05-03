@@ -28,9 +28,13 @@
 
 #if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
 #include "request.h"
+#include <QDBusConnection>
 #include <QDBusInterface>
+#include <QDBusMessage>
 #include <QDBusReply>
 #include <QDir>
+#include <QFile>
+#include <QTemporaryFile>
 #include <QUrl>
 #include <QUuid>
 #endif
@@ -42,6 +46,7 @@ ScreenGrabber::ScreenGrabber(QObject* parent)
   , m_selectedMonitor(-1)
   , m_monitorSelectionLoop(nullptr)
   , m_userCancelled(false)
+  , m_hasGnomeShellPointer(false)
 {
     // Increase image allocation limit for large screenshots
     // (multi-monitor/high-DPI) Default is 128MB, set to 1GB to handle 4K+
@@ -137,6 +142,71 @@ void ScreenGrabber::freeDesktopPortal(bool& ok, QPixmap& res)
 #endif
 }
 
+bool ScreenGrabber::gnomeShellNativeScreenshot(QPixmap& res)
+{
+#if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
+    m_hasGnomeShellPointer = false;
+
+    if (!m_info.waylandDetected() ||
+        m_info.windowManager() != DesktopInfo::GNOME) {
+        return false;
+    }
+
+    const QString service = QStringLiteral("org.flameshot.ShellIntegration");
+    auto* connectionInterface = QDBusConnection::sessionBus().interface();
+    if (!connectionInterface->isServiceRegistered(service)) {
+        return false;
+    }
+
+    QTemporaryFile file(QDir::temp().filePath(
+      QStringLiteral("flameshot-gnome-shell-XXXXXX.png")));
+    file.setAutoRemove(false);
+    if (!file.open()) {
+        return false;
+    }
+
+    const QString filename = file.fileName();
+    file.close();
+    QFile::remove(filename);
+
+    QDBusInterface screenshotInterface(
+      service,
+      QStringLiteral("/org/flameshot/ShellIntegration"),
+      QStringLiteral("org.flameshot.ShellIntegration"));
+
+    QDBusMessage reply =
+      screenshotInterface.call(QStringLiteral("Screenshot"), filename);
+
+    if (reply.type() == QDBusMessage::ErrorMessage) {
+        QFile::remove(filename);
+        AbstractLogger::error()
+          << tr("GNOME Shell native screenshot failed: %1")
+               .arg(reply.errorMessage());
+        return false;
+    }
+
+    const auto args = reply.arguments();
+    if (args.size() < 2 || !args.at(0).toBool()) {
+        QFile::remove(filename);
+        return false;
+    }
+
+    const QString filenameUsed = args.at(1).toString();
+    res = QPixmap(filenameUsed);
+    QFile::remove(filenameUsed);
+
+    if (!res.isNull() && args.size() >= 4) {
+        m_gnomeShellPointer = QPoint(args.at(2).toInt(), args.at(3).toInt());
+        m_hasGnomeShellPointer = true;
+    }
+
+    return !res.isNull();
+#else
+    Q_UNUSED(res)
+    return false;
+#endif
+}
+
 QPixmap ScreenGrabber::selectMonitorAndCrop(const QPixmap& fullScreenshot,
                                             bool& ok)
 {
@@ -153,17 +223,21 @@ QPixmap ScreenGrabber::selectMonitorAndCrop(const QPixmap& fullScreenshot,
     }
 
     // Capture Active Monitor: auto-select monitor under cursor
-    if (ConfigHandler().captureActiveMonitor()) {
-        if (m_info.waylandDetected()) {
+    if (ConfigHandler().captureActiveMonitor() || m_hasGnomeShellPointer) {
+        QGuiAppCurrentScreen screenFinder;
+        QScreen* cursorScreen = nullptr;
+        if (m_hasGnomeShellPointer) {
+            cursorScreen = screenFinder.currentScreen(m_gnomeShellPointer);
+        } else if (m_info.waylandDetected()) {
             AbstractLogger::error()
               << tr("Capture Active Monitor is not supported on Wayland due to "
                     "Wayland security model.");
             ok = false;
             return QPixmap();
+        } else {
+            cursorScreen = screenFinder.currentScreen();
         }
 
-        QGuiAppCurrentScreen screenFinder;
-        QScreen* cursorScreen = screenFinder.currentScreen();
         int monitorIndex = screens.indexOf(cursorScreen);
         if (monitorIndex >= 0) {
             m_selectedMonitor = monitorIndex;
@@ -237,6 +311,8 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok, int preSelectedMonitor)
             AbstractLogger::error() << tr("Unable to capture screen");
             return QPixmap();
         }
+    } else if (gnomeShellNativeScreenshot(screenshot)) {
+        ok = true;
     } else {
         freeDesktopPortal(ok, screenshot);
         if (!ok) {
@@ -298,6 +374,8 @@ QPixmap ScreenGrabber::grabFullDesktop(bool& ok)
         if (!ok) {
             AbstractLogger::error() << tr("Unable to capture screen");
         }
+    } else if (gnomeShellNativeScreenshot(screenshot)) {
+        ok = true;
     } else {
         freeDesktopPortal(ok, screenshot);
         if (!ok) {

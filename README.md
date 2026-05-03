@@ -327,6 +327,14 @@ Now every time you press <kbd>Prt Sc</kbd> it will start Flameshot GUI instead o
 
 - Experimental Gnome Wayland and Plasma Wayland support.
 
+- GNOME Wayland normally captures through `xdg-desktop-portal`, which may show
+  a GNOME Shell flash. Flameshot includes an optional GNOME Shell bridge under
+  [`contrib/gnome-shell-extension`](contrib/gnome-shell-extension/README.md).
+  When enabled on supported GNOME Shell versions, Flameshot uses that bridge to
+  capture without the portal flash and to auto-select the monitor under the
+  pointer on multi-monitor setups. If the bridge is not installed or fails,
+  Flameshot falls back to the existing portal backend.
+
 - If you are using Gnome you need to install the [AppIndicator and KStatusNotifierItem Support](https://extensions.gnome.org/extension/615/appindicator-support/) extension in order to see the system tray icon.
 
 - Press <kbd>Enter</kbd> or <kbd>Ctrl</kbd> + <kbd>C</kbd> when you are in a capture mode and you don't have an active selection and the whole desktop will be copied to your clipboard. Pressing <kbd>Ctrl</kbd> + <kbd>S</kbd> will save your capture to a file. Check the [Shortcuts](#keyboard-shortcuts) for more information.

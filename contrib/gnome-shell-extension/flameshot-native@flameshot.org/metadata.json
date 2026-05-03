@@ -1,0 +1,9 @@
+{
+  "name": "Flameshot Native Screenshot Bridge",
+  "description": "Allows Flameshot to capture GNOME Wayland screenshots through GNOME Shell without the portal flash.",
+  "uuid": "flameshot-native@flameshot.org",
+  "shell-version": [
+    "49",
+    "50"
+  ]
+}
