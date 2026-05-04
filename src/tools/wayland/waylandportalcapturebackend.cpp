@@ -97,59 +97,59 @@ WaylandPortalCaptureBackend::~WaylandPortalCaptureBackend()
 
 bool WaylandPortalCaptureBackend::initialize(const QString& parentWindowId)
 {
-    qDebug() << "initialize() - inicio";
+    qDebug() << "initialize() - start";
 
     m_parentWindowId = parentWindowId;
     loadRestoreToken();
 
     if (!QDBusConnection::sessionBus().isConnected()) {
-        qWarning() << "No hay conexión al session bus de D-Bus.";
+        qWarning() << "No connection to the D-Bus session bus.";
         return false;
     }
     qDebug() << "DBus OK";
 
     if (!createRemoteDesktopSession()) {
-        qWarning() << "Fallo en createRemoteDesktopSession()";
+        qWarning() << "createRemoteDesktopSession() failed";
         return false;
     }
     qDebug() << "createRemoteDesktopSession() OK";
 
     if (!selectDevicesAndSources()) {
-        qWarning() << "Fallo en selectDevicesAndSources()";
+        qWarning() << "selectDevicesAndSources() failed";
         shutdown();
         return false;
     }
     qDebug() << "selectDevicesAndSources() OK";
 
     if (!startSession(parentWindowId)) {
-        qWarning() << "Fallo en startSession()";
+        qWarning() << "startSession() failed";
         shutdown();
         return false;
     }
     qDebug() << "startSession() OK. nodeId =" << m_streamNodeId;
 
     if (!openPipeWireRemote()) {
-        qWarning() << "Fallo en openPipeWireRemote()";
+        qWarning() << "openPipeWireRemote() failed";
         shutdown();
         return false;
     }
     qDebug() << "openPipeWireRemote() OK. fd =" << m_pipewireFd;
 
     if (!startPipeWireStream()) {
-        qWarning() << "Fallo en startPipeWireStream()";
+        qWarning() << "startPipeWireStream() failed";
         shutdown();
         return false;
     }
     qDebug() << "startPipeWireStream() OK";
 
     if (!waitForFirstFrame(3000)) {
-        qWarning() << "No llegó el primer frame dentro del tiempo esperado.";
+        qWarning() << "First frame did not arrive within the expected time.";
         shutdown();
         return false;
     }
 
     m_ready = true;
-    qDebug() << "initialize() - listo";
+    qDebug() << "initialize() - ready";
     return true;
 }
 
@@ -205,7 +205,7 @@ QRect WaylandPortalCaptureBackend::selectedRect() const
 void WaylandPortalCaptureBackend::setSelectedRect(const QRect& rect)
 {
     m_selectedRect = rect.normalized();
-    qDebug() << "Rect original =" << rect << "Rect final =" << m_selectedRect;
+    qDebug() << "Original rect =" << rect << "Final rect =" << m_selectedRect;
 }
 
 void WaylandPortalCaptureBackend::loadRestoreToken()
@@ -214,7 +214,7 @@ void WaylandPortalCaptureBackend::loadRestoreToken()
     m_restoreToken = settings.value("restore_token").toString();
 
     if (!m_restoreToken.isEmpty()) {
-        qDebug() << "restore_token cargado.";
+        qDebug() << "restore_token loaded.";
     }
 }
 
@@ -228,7 +228,7 @@ void WaylandPortalCaptureBackend::saveRestoreToken() const
     }
 
     settings.setValue("restore_token", m_restoreToken);
-    qDebug() << "restore_token guardado.";
+    qDebug() << "restore_token saved.";
 }
 
 void WaylandPortalCaptureBackend::clearRestoreToken()
@@ -238,7 +238,7 @@ void WaylandPortalCaptureBackend::clearRestoreToken()
     QSettings settings("flameshot", "wayland");
     settings.remove("restore_token");
 
-    qDebug() << "restore_token borrado.";
+    qDebug() << "restore_token cleared.";
 }
 
 bool WaylandPortalCaptureBackend::createRemoteDesktopSession()
@@ -255,20 +255,20 @@ bool WaylandPortalCaptureBackend::createRemoteDesktopSession()
 
     QDBusReply<QDBusObjectPath> reply = iface.call("CreateSession", options);
     if (!reply.isValid()) {
-        qWarning() << "CreateSession falló:" << reply.error().message();
+        qWarning() << "CreateSession failed:" << reply.error().message();
         return false;
     }
 
     PortalRequestHelper helper;
     auto response = helper.waitForResponse(reply.value().path());
     if (!response || response->responseCode != 0) {
-        qWarning() << "CreateSession fue rechazado o expiró.";
+        qWarning() << "CreateSession was rejected or timed out.";
         return false;
     }
 
     const QString sessionHandle = response->results.value("session_handle").toString();
     if (sessionHandle.isEmpty()) {
-        qWarning() << "No llegó session_handle en CreateSession.";
+        qWarning() << "No session_handle received in CreateSession.";
         return false;
     }
 
@@ -292,14 +292,14 @@ bool WaylandPortalCaptureBackend::selectDevicesAndSources()
       remoteIface.call("SelectDevices", QDBusObjectPath(m_sessionHandle), deviceOptions);
 
     if (!devicesReply.isValid()) {
-        qWarning() << "SelectDevices falló:" << devicesReply.error().message();
+        qWarning() << "SelectDevices failed:" << devicesReply.error().message();
         return false;
     }
 
     PortalRequestHelper devicesHelper;
     auto devicesResponse = devicesHelper.waitForResponse(devicesReply.value().path());
     if (!devicesResponse || devicesResponse->responseCode != 0) {
-        qWarning() << "SelectDevices fue rechazado o expiró.";
+        qWarning() << "SelectDevices was rejected or timed out.";
         return false;
     }
 
@@ -317,21 +317,21 @@ bool WaylandPortalCaptureBackend::selectDevicesAndSources()
 
     if (!m_restoreToken.isEmpty()) {
         sourceOptions.insert("restore_token", m_restoreToken);
-        qDebug() << "Usando restore_token para SelectSources.";
+        qDebug() << "Using restore_token for SelectSources.";
     }
 
     QDBusReply<QDBusObjectPath> sourcesReply =
       screenIface.call("SelectSources", QDBusObjectPath(m_sessionHandle), sourceOptions);
 
     if (!sourcesReply.isValid()) {
-        qWarning() << "SelectSources falló:" << sourcesReply.error().message();
+        qWarning() << "SelectSources failed:" << sourcesReply.error().message();
         return false;
     }
 
     PortalRequestHelper sourcesHelper;
     auto sourcesResponse = sourcesHelper.waitForResponse(sourcesReply.value().path());
     if (!sourcesResponse || sourcesResponse->responseCode != 0) {
-        qWarning() << "SelectSources fue rechazado o expiró.";
+        qWarning() << "SelectSources was rejected or timed out.";
         return false;
     }
 
@@ -340,7 +340,7 @@ bool WaylandPortalCaptureBackend::selectDevicesAndSources()
 
 bool WaylandPortalCaptureBackend::startSession(const QString& parentWindowId)
 {
-    qDebug() << "startSession() - inicio";
+    qDebug() << "startSession() - start";
 
     QDBusInterface iface(
       kPortalService,
@@ -355,7 +355,7 @@ bool WaylandPortalCaptureBackend::startSession(const QString& parentWindowId)
       iface.call("Start", QDBusObjectPath(m_sessionHandle), parentWindowId, options);
 
     if (!reply.isValid()) {
-        qWarning() << "Start falló:" << reply.error().message();
+        qWarning() << "Start failed:" << reply.error().message();
         return false;
     }
 
@@ -364,7 +364,7 @@ bool WaylandPortalCaptureBackend::startSession(const QString& parentWindowId)
     PortalRequestHelper helper;
     auto response = helper.waitForResponse(reply.value().path());
     if (!response || response->responseCode != 0) {
-        qWarning() << "Start fue rechazado o expiró.";
+        qWarning() << "Start was rejected or timed out.";
         clearRestoreToken();
         return false;
     }
@@ -373,11 +373,11 @@ bool WaylandPortalCaptureBackend::startSession(const QString& parentWindowId)
     qDebug() << "Start results keys =" << response->results.keys();
 
     const QVariant streamsVariant = response->results.value("streams");
-    qDebug() << "streamsVariant válido =" << streamsVariant.isValid()
-             << "tipo =" << streamsVariant.typeName();
+    qDebug() << "streamsVariant valid =" << streamsVariant.isValid()
+             << "type =" << streamsVariant.typeName();
 
     if (!streamsVariant.isValid()) {
-        qWarning() << "Start no devolvió streams.";
+        qWarning() << "Start did not return any streams.";
         return false;
     }
 
@@ -385,14 +385,14 @@ bool WaylandPortalCaptureBackend::startSession(const QString& parentWindowId)
     QList<PortalStream> streams;
     dbusArg >> streams;
 
-    qDebug() << "Cantidad de streams =" << streams.size();
+    qDebug() << "Stream count =" << streams.size();
 
     if (streams.isEmpty()) {
-        qWarning() << "El portal no devolvió streams.";
+        qWarning() << "Portal did not return any streams.";
         return false;
     }
 
-    qDebug() << "Primer stream nodeId =" << streams.first().nodeId;
+    qDebug() << "First stream nodeId =" << streams.first().nodeId;
 
     m_streamNodeId = streams.first().nodeId;
 
@@ -400,10 +400,10 @@ bool WaylandPortalCaptureBackend::startSession(const QString& parentWindowId)
     if (!restoreToken.isEmpty()) {
         m_restoreToken = restoreToken;
         saveRestoreToken();
-        qDebug() << "restore_token recibido y guardado.";
+        qDebug() << "restore_token received and saved.";
     }
 
-    qDebug() << "startSession() - fin, nodeId =" << m_streamNodeId;
+    qDebug() << "startSession() - done, nodeId =" << m_streamNodeId;
     return m_streamNodeId != 0;
 }
 
@@ -415,7 +415,7 @@ bool WaylandPortalCaptureBackend::openPipeWireRemote()
 
     if (!(QDBusConnection::sessionBus().connectionCapabilities() &
           QDBusConnection::UnixFileDescriptorPassing)) {
-        qWarning() << "La conexión D-Bus no soporta paso de file descriptors.";
+        qWarning() << "D-Bus connection does not support file descriptor passing.";
         return false;
     }
 
@@ -430,19 +430,19 @@ bool WaylandPortalCaptureBackend::openPipeWireRemote()
       iface.call("OpenPipeWireRemote", QDBusObjectPath(m_sessionHandle), options);
 
     if (!reply.isValid()) {
-        qWarning() << "OpenPipeWireRemote falló:" << reply.error().message();
+        qWarning() << "OpenPipeWireRemote failed:" << reply.error().message();
         return false;
     }
 
     const QDBusUnixFileDescriptor fd = reply.value();
     if (!fd.isValid()) {
-        qWarning() << "OpenPipeWireRemote devolvió un FD inválido.";
+        qWarning() << "OpenPipeWireRemote returned an invalid FD.";
         return false;
     }
 
     m_pipewireFd = ::dup(fd.fileDescriptor());
     if (m_pipewireFd < 0) {
-        qWarning() << "dup() falló para el FD de PipeWire.";
+        qWarning() << "dup() failed for the PipeWire FD.";
         return false;
     }
 
@@ -451,12 +451,12 @@ bool WaylandPortalCaptureBackend::openPipeWireRemote()
 
 bool WaylandPortalCaptureBackend::startPipeWireStream()
 {
-    qDebug() << "startPipeWireStream() - inicio";
+    qDebug() << "startPipeWireStream() - start";
     qDebug() << "m_pipewireFd =" << m_pipewireFd
              << "m_streamNodeId =" << m_streamNodeId;
 
     if (m_pipewireFd < 0 || m_streamNodeId == 0) {
-        qWarning() << "PipeWire no tiene FD o nodeId válido.";
+        qWarning() << "PipeWire has no valid FD or nodeId.";
         return false;
     }
 
@@ -464,13 +464,13 @@ bool WaylandPortalCaptureBackend::startPipeWireStream()
 
     m_pwLoop = pw_thread_loop_new("flameshot-wayland-loop", nullptr);
     if (!m_pwLoop) {
-        qWarning() << "pw_thread_loop_new falló.";
+        qWarning() << "pw_thread_loop_new failed.";
         return false;
     }
     qDebug() << "pw_thread_loop_new OK";
 
     if (pw_thread_loop_start(m_pwLoop) < 0) {
-        qWarning() << "pw_thread_loop_start falló.";
+        qWarning() << "pw_thread_loop_start failed.";
         return false;
     }
     qDebug() << "pw_thread_loop_start OK";
@@ -480,7 +480,7 @@ bool WaylandPortalCaptureBackend::startPipeWireStream()
     pw_loop* loop = pw_thread_loop_get_loop(m_pwLoop);
     m_pwContext = pw_context_new(loop, nullptr, 0);
     if (!m_pwContext) {
-        qWarning() << "pw_context_new falló.";
+        qWarning() << "pw_context_new failed.";
         pw_thread_loop_unlock(m_pwLoop);
         return false;
     }
@@ -488,7 +488,7 @@ bool WaylandPortalCaptureBackend::startPipeWireStream()
 
     m_pwCore = pw_context_connect_fd(m_pwContext, m_pipewireFd, nullptr, 0);
     if (!m_pwCore) {
-        qWarning() << "pw_context_connect_fd falló.";
+        qWarning() << "pw_context_connect_fd failed.";
         pw_thread_loop_unlock(m_pwLoop);
         return false;
     }
@@ -498,7 +498,7 @@ bool WaylandPortalCaptureBackend::startPipeWireStream()
       pw_core_get_registry(m_pwCore, PW_VERSION_REGISTRY, 0));
 
     if (!m_pwRegistry) {
-        qWarning() << "pw_core_get_registry falló.";
+        qWarning() << "pw_core_get_registry failed.";
         pw_thread_loop_unlock(m_pwLoop);
         return false;
     }
@@ -510,19 +510,19 @@ bool WaylandPortalCaptureBackend::startPipeWireStream()
       &kRegistryEvents,
       this);
 
-    qDebug() << "pw_registry_add_listener OK, esperando nodeId =" << m_streamNodeId;
+    qDebug() << "pw_registry_add_listener OK, waiting for nodeId =" << m_streamNodeId;
 
     pw_thread_loop_unlock(m_pwLoop);
 
     for (int i = 0; i < 100; ++i) {
         if (m_pwStream) {
-            qDebug() << "m_pwStream creado correctamente";
+            qDebug() << "m_pwStream created successfully";
             return true;
         }
         QThread::msleep(50);
     }
 
-    qWarning() << "No se pudo enlazar el stream de PipeWire al nodeId" << m_streamNodeId;
+    qWarning() << "Failed to link PipeWire stream to nodeId" << m_streamNodeId;
     return false;
 }
 
@@ -617,23 +617,23 @@ void WaylandPortalCaptureBackend::handleRegistryGlobal(uint32_t id,
     qDebug() << "Registry global: id =" << id
              << "type =" << (type ? type : "(null)")
              << "version =" << version
-             << "esperado nodeId =" << m_streamNodeId;
+             << "expected nodeId =" << m_streamNodeId;
 
     if (id != m_streamNodeId || !type) {
         return;
     }
 
     if (std::strcmp(type, PW_TYPE_INTERFACE_Node) != 0) {
-        qDebug() << "El id coincide pero no es Node";
+        qDebug() << "ID matches but is not a Node type";
         return;
     }
 
     if (m_pwStream) {
-        qDebug() << "m_pwStream ya existe";
+        qDebug() << "m_pwStream already exists";
         return;
     }
 
-    qDebug() << "Encontrado node objetivo en registry, creando stream...";
+    qDebug() << "Target node found in registry, creating stream...";
 
     pw_properties* props = pw_properties_new(
       PW_KEY_MEDIA_TYPE, "Video",
@@ -643,7 +643,7 @@ void WaylandPortalCaptureBackend::handleRegistryGlobal(uint32_t id,
 
     m_pwStream = pw_stream_new(m_pwCore, "flameshot-wayland-capture", props);
     if (!m_pwStream) {
-        qWarning() << "pw_stream_new falló.";
+        qWarning() << "pw_stream_new failed.";
         return;
     }
 
@@ -674,17 +674,17 @@ void WaylandPortalCaptureBackend::handleRegistryGlobal(uint32_t id,
       1);
 
     if (res < 0) {
-        qWarning() << "pw_stream_connect falló:" << spa_strerror(res);
+        qWarning() << "pw_stream_connect failed:" << spa_strerror(res);
         pw_stream_destroy(m_pwStream);
         m_pwStream = nullptr;
         return;
     }
 
-    qDebug() << "pw_stream_connect OK, activando stream...";
+    qDebug() << "pw_stream_connect OK, activating stream...";
 
     const int activeRes = pw_stream_set_active(m_pwStream, true);
     if (activeRes < 0) {
-        qWarning() << "pw_stream_set_active falló:" << spa_strerror(activeRes);
+        qWarning() << "pw_stream_set_active failed:" << spa_strerror(activeRes);
     } else {
         qDebug() << "pw_stream_set_active OK";
     }
@@ -698,14 +698,14 @@ bool WaylandPortalCaptureBackend::hasValidFrame() const
 
 bool WaylandPortalCaptureBackend::waitForFirstFrame(int timeoutMs)
 {
-    qDebug() << "Esperando primer frame... timeout =" << timeoutMs << "ms";
+    qDebug() << "Waiting for first frame... timeout =" << timeoutMs << "ms";
 
     const int stepMs = 50;
     int waited = 0;
 
     while (waited < timeoutMs) {
         if (hasValidFrame()) {
-            qDebug() << "Primer frame recibido correctamente.";
+            qDebug() << "First frame received successfully.";
             return true;
         }
 
@@ -771,7 +771,7 @@ void WaylandPortalCaptureBackend::handleStreamProcess()
         QMutexLocker locker(&m_frameMutex);
         m_latestFrame = frame.copy();
 
-        qDebug() << "Frame recibido:" << width << "x" << height;
+        qDebug() << "Frame received:" << width << "x" << height;
     }
 
     pw_stream_queue_buffer(m_pwStream, buffer);
@@ -794,7 +794,7 @@ bool WaylandPortalCaptureBackend::callRemoteDesktopNotifyPointerAxisDiscrete(uin
                  steps);
 
     if (!reply.isValid()) {
-        qWarning() << "NotifyPointerAxisDiscrete falló:" << reply.error().message();
+        qWarning() << "NotifyPointerAxisDiscrete failed:" << reply.error().message();
         return false;
     }
 
@@ -812,11 +812,11 @@ bool WaylandPortalCaptureBackend::waitForFrameChange(const QImage& previous, int
         if (!current.isNull() && !previous.isNull()) {
             if (current.size() == previous.size()) {
                 if (current != previous) {
-                    qDebug() << "Se detectó cambio de frame tras" << waited << "ms";
+                    qDebug() << "Frame change detected after" << waited << "ms";
                     return true;
                 }
             } else {
-                qDebug() << "Se detectó cambio de tamaño/frame tras" << waited << "ms";
+                qDebug() << "Frame size/content change detected after" << waited << "ms";
                 return true;
             }
         }
@@ -825,14 +825,14 @@ bool WaylandPortalCaptureBackend::waitForFrameChange(const QImage& previous, int
         waited += sleepStepMs;
     }
 
-    qDebug() << "Timeout esperando cambio de frame.";
+    qDebug() << "Timeout waiting for frame change.";
     return false;
 }
 
 bool WaylandPortalCaptureBackend::scrollAndWaitChange(const QImage& previous, int steps)
 {
     if (!scrollDown(steps)) {
-        qDebug() << "❌ No se pudo hacer scrollDown.";
+        qDebug() << "scrollDown() failed.";
         return false;
     }
 
@@ -865,7 +865,7 @@ bool WaylandPortalCaptureBackend::callRemoteDesktopNotifyPointerAxis(double dx, 
                  dy);
 
     if (!reply.isValid()) {
-        qWarning() << "NotifyPointerAxis falló:" << reply.error().message();
+        qWarning() << "NotifyPointerAxis failed:" << reply.error().message();
         return false;
     }
 
@@ -891,7 +891,7 @@ bool WaylandPortalCaptureBackend::callRemoteDesktopNotifyPointerMotionAbsolute(u
                  y);
 
     if (!reply.isValid()) {
-        qWarning() << "NotifyPointerMotionAbsolute falló:" << reply.error().message();
+        qWarning() << "NotifyPointerMotionAbsolute failed:" << reply.error().message();
         return false;
     }
 
@@ -906,7 +906,7 @@ bool WaylandPortalCaptureBackend::movePointerToSelectedRectCenter()
 
     QPoint center = m_selectedRect.center();
 
-    qDebug() << "Moviendo puntero al centro del rect seleccionado:"
+    qDebug() << "Moving pointer to center of selected rect:"
              << center
              << "stream =" << m_streamNodeId;
 

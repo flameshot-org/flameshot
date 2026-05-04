@@ -94,18 +94,18 @@ QRect selectScrollRegion()
 
     const QList<QScreen*> screens = QGuiApplication::screens();
     if (screens.isEmpty()) {
-        qWarning() << "No se encontraron pantallas.";
+        qWarning() << "No screens found.";
         return QRect();
     }
 
     QRect virtualGeometry;
     for (QScreen* s : screens) {
-        qDebug() << "Pantalla X11:" << s->name() << s->geometry();
+        qDebug() << "X11 screen:" << s->name() << s->geometry();
         virtualGeometry = virtualGeometry.united(s->geometry());
     }
 
     if (!virtualGeometry.isValid()) {
-        qWarning() << "Geometría virtual inválida.";
+        qWarning() << "Invalid virtual geometry.";
         return QRect();
     }
 
@@ -115,7 +115,7 @@ QRect selectScrollRegion()
 
     selector->winId();
 
-    qDebug() << "Creando selector X11 geometry =" << selector->geometry();
+    qDebug() << "Creating X11 selector, geometry =" << selector->geometry();
 
     QObject::connect(selector,
                      &ScrollRegionSelector::selectionFinished,
@@ -307,7 +307,7 @@ bool TrayIcon::runCaptureLoop(ScrollCaptureContext& ctx) const
         QImage currentCapture = ctx.grabFrame();
 
         if (currentCapture.isNull()) {
-            qDebug() << "❌ Captura nula. Terminando.";
+            qDebug() << "Null frame captured. Stopping.";
             break;
         }
 
@@ -322,15 +322,15 @@ bool TrayIcon::runCaptureLoop(ScrollCaptureContext& ctx) const
 
             qDebug() << "imagesEqual(prev, curr):" << iguales;
         } else {
-            qDebug() << "Primera captura, no se compara aún.";
+            qDebug() << "First capture, skipping comparison.";
         }
 
         if (ctx.hasPrevious && iguales) {
             sameCount++;
-            qDebug() << "⚠️ Imagen sin cambio. Conteo:" << sameCount;
+            qDebug() << "No change detected. Count:" << sameCount;
 
             if (sameCount >= 3) {
-                qDebug() << "⛔ Tres capturas iguales consecutivas. Deteniendo scroll.";
+                qDebug() << "Three identical consecutive captures. Stopping scroll.";
                 break;
             }
 
@@ -349,14 +349,14 @@ bool TrayIcon::runCaptureLoop(ScrollCaptureContext& ctx) const
         sameCount = 0;
 
         const QString filename =
-          QString("captura%1.png").arg(ctx.shotIdx++, 3, 10, QChar('0'));
+          QString("capture%1.png").arg(ctx.shotIdx++, 3, 10, QChar('0'));
 
         if (!currentCapture.save(ctx.baseDir + "/" + filename)) {
-            qDebug() << "❌ No se pudo guardar la captura:" << filename;
+            qDebug() << "Failed to save capture:" << filename;
             break;
         }
 
-        qDebug() << "📸 Captura guardada:" << filename
+        qDebug() << "Capture saved:" << filename
                  << "size =" << currentCapture.size();
 
         capturedAny = true;
@@ -399,11 +399,11 @@ bool TrayIcon::stitchAndSaveResult(captureScreenScroll* captureSS,
     validImages.reserve(paths.size());
 
     for (const auto& f : paths) {
-        qDebug() << "procesando " << QString::fromStdString(f) << '\n';
+        qDebug() << "Processing" << QString::fromStdString(f) << '\n';
 
         cv::Mat img = cv::imread(f);
         if (img.empty()) {
-            std::cerr << "No se lee " << f << '\n';
+            std::cerr << "Cannot read " << f << '\n';
             continue;
         }
 
@@ -413,7 +413,7 @@ bool TrayIcon::stitchAndSaveResult(captureScreenScroll* captureSS,
                  << "cropped size:" << cropped.cols << "x" << cropped.rows;
 
         if (cropped.empty()) {
-            qDebug() << "⚠️ cropped vacío, se omite esta imagen";
+            qDebug() << "Cropped image is empty, skipping";
             continue;
         }
 
@@ -421,27 +421,27 @@ bool TrayIcon::stitchAndSaveResult(captureScreenScroll* captureSS,
     }
 
     if (validImages.empty()) {
-        qDebug() << "❌ No hay imágenes válidas para stitching.";
+        qDebug() << "No valid images for stitching.";
         return false;
     }
 
     cv::Mat result = validImages[0].clone();
 
-    qDebug() << "result inicializado con size:"
+    qDebug() << "Result initialized with size:"
              << result.cols << "x" << result.rows;
 
     for (size_t i = 1; i < validImages.size(); ++i) {
         const cv::Mat& cropped = validImages[i];
         const bool isLastImage = (i == validImages.size() - 1);
 
-        qDebug() << "Antes de combineImages:"
+        qDebug() << "Before combineImages:"
                  << "result:" << result.cols << "x" << result.rows
                  << "cropped:" << cropped.cols << "x" << cropped.rows
                  << "isLastImage =" << isLastImage;
 
         cv::Mat combined = captureSS->combineImages(result, cropped, isLastImage);
         if (combined.empty()) {
-            qDebug() << "⚠️ No se pudo combinar la captura actual. Terminando stitching.";
+            qDebug() << "Failed to combine current capture. Stopping stitching.";
             break;
         }
 
@@ -449,7 +449,7 @@ bool TrayIcon::stitchAndSaveResult(captureScreenScroll* captureSS,
     }
 
     if (result.empty()) {
-        qDebug() << "❌ Stitching vacío. No se generó imagen final.";
+        qDebug() << "Empty stitch result. No final image generated.";
         return false;
     }
 
@@ -484,7 +484,7 @@ void TrayIcon::startScrollingCapture()
     QMessageBox::information(
       nullptr,
       QObject::tr("Scrolling screenshot"),
-      QObject::tr("La captura con desplazamiento aún no está implementada para macOS."));
+      QObject::tr("Scrolling capture is not yet implemented on macOS."));
     return;
 #endif
 
@@ -496,10 +496,10 @@ void TrayIcon::startScrollingCapture()
 
     if (captured && ctx.captureSS) {
         if (!stitchAndSaveResult(ctx.captureSS, ctx.baseDir)) {
-            qDebug() << "❌ Falló el stitching final.";
+            qDebug() << "Final stitching failed.";
         }
     } else {
-        qDebug() << "⚠️ No hubo capturas válidas. Se omite stitching.";
+        qDebug() << "No valid captures. Skipping stitching.";
     }
 
     delete ctx.captureSS;
@@ -675,7 +675,7 @@ bool TrayIcon::setupLinuxScrollingCapture(ScrollCaptureContext& ctx)
         WaylandPortalCaptureBackend* backend = m_waylandBackend;
 
         if (!backend) {
-            qWarning() << "m_waylandBackend es null";
+            qWarning() << "m_waylandBackend is null";
             return false;
         }
 
@@ -684,7 +684,7 @@ bool TrayIcon::setupLinuxScrollingCapture(ScrollCaptureContext& ctx)
               nullptr,
               QObject::tr("Scrolling screenshot"),
               QObject::tr(
-                "No se pudo inicializar la captura Wayland usando "
+                "Failed to initialize Wayland capture using "
                 "xdg-desktop-portal + PipeWire."));
             return false;
         }
@@ -705,7 +705,7 @@ bool TrayIcon::setupLinuxScrollingCapture(ScrollCaptureContext& ctx)
             QMessageBox::warning(
               nullptr,
               QObject::tr("Scrolling screenshot"),
-              QObject::tr("No se pudo obtener la imagen inicial de la pantalla en Wayland."));
+              QObject::tr("Failed to get the initial screen frame on Wayland."));
             return false;
         }
 
@@ -713,7 +713,7 @@ bool TrayIcon::setupLinuxScrollingCapture(ScrollCaptureContext& ctx)
         if (selectedRect.isNull() ||
             selectedRect.width() < 20 ||
             selectedRect.height() < 20) {
-            qDebug() << "Selección cancelada o inválida en Wayland.";
+            qDebug() << "Selection cancelled or invalid on Wayland.";
             backend->shutdown();
             //delete backend;
             return false;
@@ -741,15 +741,15 @@ bool TrayIcon::setupLinuxScrollingCapture(ScrollCaptureContext& ctx)
 
         ctx.doScroll = [backend]() -> bool {
             if (!backend->movePointerToSelectedRectCenter()) {
-                qDebug() << "❌ No se pudo mover el puntero al centro del rect seleccionado.";
+                qDebug() << "Failed to move pointer to center of selected rect.";
                 return false;
             }
 
             QThread::msleep(120);
 
-            qDebug() << "Enviando scrollDown(3) en Wayland";
+            qDebug() << "Sending scrollDown(3) on Wayland";
             if (!backend->scrollDown(3)) {
-                qDebug() << "❌ Error enviando scroll Wayland.";
+                qDebug() << "Failed to send Wayland scroll.";
                 return false;
             }
 
@@ -769,7 +769,7 @@ bool TrayIcon::setupLinuxScrollingCapture(ScrollCaptureContext& ctx)
         WaylandPortalCaptureBackend* backend = m_waylandBackend;
 
         if (!backend) {
-            qWarning() << "m_waylandBackend es null";
+            qWarning() << "m_waylandBackend is null";
             return false;
         }
 
@@ -778,7 +778,7 @@ bool TrayIcon::setupLinuxScrollingCapture(ScrollCaptureContext& ctx)
               nullptr,
               QObject::tr("Scrolling screenshot"),
               QObject::tr(
-                "No se pudo inicializar la captura Wayland usando "
+                "Failed to initialize Wayland capture using "
                 "xdg-desktop-portal + PipeWire."));
             return false;
         }
@@ -798,7 +798,7 @@ bool TrayIcon::setupLinuxScrollingCapture(ScrollCaptureContext& ctx)
             QMessageBox::warning(
               nullptr,
               QObject::tr("Scrolling screenshot"),
-              QObject::tr("No se pudo obtener la imagen inicial de la pantalla en Wayland."));
+              QObject::tr("Failed to get the initial screen frame on Wayland."));
             return false;
         }
 
@@ -806,7 +806,7 @@ bool TrayIcon::setupLinuxScrollingCapture(ScrollCaptureContext& ctx)
         if (selectedRect.isNull() ||
             selectedRect.width() < 20 ||
             selectedRect.height() < 20) {
-            qDebug() << "Selección cancelada o inválida en Wayland.";
+            qDebug() << "Selection cancelled or invalid on Wayland.";
             backend->shutdown();
             return false;
         }
@@ -834,15 +834,15 @@ bool TrayIcon::setupLinuxScrollingCapture(ScrollCaptureContext& ctx)
 
         ctx.doScroll = [backend]() -> bool {
             if (!backend->movePointerToSelectedRectCenter()) {
-                qDebug() << "❌ No se pudo mover el puntero al centro del rect seleccionado.";
+                qDebug() << "Failed to move pointer to center of selected rect.";
                 return false;
             }
 
             QThread::msleep(120);
 
-            qDebug() << "Enviando scrollDown(3) en Wayland";
+            qDebug() << "Sending scrollDown(3) on Wayland";
             if (!backend->scrollDown(3)) {
-                qDebug() << "❌ Error enviando scroll Wayland.";
+                qDebug() << "Failed to send Wayland scroll.";
                 return false;
             }
 
@@ -867,7 +867,7 @@ bool TrayIcon::setupLinuxScrollingCapture(ScrollCaptureContext& ctx)
     if (selectedGlobalRect.isNull() ||
         selectedGlobalRect.width() < 20 ||
         selectedGlobalRect.height() < 20) {
-        qDebug() << "Selección cancelada o inválida.";
+        qDebug() << "Selection cancelled or invalid.";
         return false;
     }
 
@@ -875,7 +875,7 @@ bool TrayIcon::setupLinuxScrollingCapture(ScrollCaptureContext& ctx)
 
     Display* display = XOpenDisplay(nullptr);
     if (!display) {
-        qWarning() << "No se pudo abrir X11 Display.";
+        qWarning() << "Failed to open X11 Display.";
         return false;
     }
 
@@ -893,12 +893,12 @@ bool TrayIcon::setupLinuxScrollingCapture(ScrollCaptureContext& ctx)
         delete scrollController;
         QMessageBox::warning(
           nullptr,
-          QObject::tr("Permisos insuficientes"),
+          QObject::tr("Insufficient permissions"),
           QObject::tr(
-            "No se pudo acceder a /dev/uinput.\n\n"
-            "Para habilitar el scroll automático en Linux/X11, "
-            "debes dar permisos al dispositivo mediante udev y agregar "
-            "tu usuario al grupo correspondiente."));
+            "Could not access /dev/uinput.\n\n"
+            "To enable automatic scrolling on Linux/X11, "
+            "grant device permissions via udev and add "
+            "your user to the appropriate group."));
         XCloseDisplay(display);
         return false;
     }
@@ -919,15 +919,15 @@ bool TrayIcon::setupLinuxScrollingCapture(ScrollCaptureContext& ctx)
         const QPoint oldPos = currentPointerPos(display);
 
         if (!movePointerTo(display, scrollTarget)) {
-            qDebug() << "❌ No se pudo mover el puntero al área seleccionada.";
+            qDebug() << "Failed to move pointer to selected area.";
             return false;
         }
 
         QThread::msleep(80);
 
-        qDebug() << "Enviando scrollDown(3) en" << scrollTarget;
+        qDebug() << "Sending scrollDown(3) at" << scrollTarget;
         if (!scrollController->scrollDown(3)) {
-            qDebug() << "❌ Error enviando scroll por uinput.";
+            qDebug() << "Failed to send uinput scroll.";
             movePointerTo(display, oldPos);
             return false;
         }
@@ -966,7 +966,7 @@ bool TrayIcon::setupWindowsScrollingCapture(ScrollCaptureContext& ctx)
                      &overlay,
                      [&](HWND selectedHwnd) {
                          if (scrollEnCurso) {
-                             qDebug() << "Scroll ya en curso. Ignorando.";
+                             qDebug() << "Scroll already in progress. Ignoring.";
                              return;
                          }
 
@@ -976,7 +976,7 @@ bool TrayIcon::setupWindowsScrollingCapture(ScrollCaptureContext& ctx)
                              const int height = rect.bottom - rect.top;
 
                              if (width < 80 || height < 80) {
-                                 qDebug() << "HWND ignorado por tamaño sospechoso:"
+                                 qDebug() << "HWND ignored due to suspicious size:"
                                           << width << "x" << height;
                                  return;
                              }

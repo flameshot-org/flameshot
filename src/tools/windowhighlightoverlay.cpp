@@ -141,7 +141,7 @@ QRect WindowHighlightOverlay::getWindowUnderCursor() const
 
     QRect rect(rc.left, rc.top, rc.right - rc.left, rc.bottom - rc.top);
 
-           // Ajuste fino opcional si aún lo ves un poco grande
+           // Optional fine adjustment to avoid clipping borders
     rect = rect.adjusted(1, 1, -1, -1);
 
     return rect;
@@ -155,11 +155,11 @@ void WindowHighlightOverlay::paintEvent(QPaintEvent *)
     QPainter p(this);
     p.setRenderHint(QPainter::Antialiasing);
 
-           // ⚠️ Usamos color casi transparente que BLOQUEA eventos
-    QColor maskBlocker(0, 0, 0, 1); // un alfa mínimo, pero evita que el clic pase
-    p.fillRect(this->rect(), maskBlocker); // ¡NO uses Qt::transparent!
+           // Nearly transparent color that still blocks mouse events (Qt::transparent does not)
+    QColor maskBlocker(0, 0, 0, 1);
+    p.fillRect(this->rect(), maskBlocker);
 
-           // Dibuja borde rojo (o cualquier color que uses)
+           // Draw border
     p.setPen(QPen(BORDER_COLOR, BORDER_WIDTH));
     const QPoint offset = -geometry().topLeft();
     QRect local = targetRect_.translated(offset);
@@ -173,12 +173,12 @@ void WindowHighlightOverlay::setOverlayWindowMouseBlocking(QWidget* widget) {
 
     LONG exStyle = GetWindowLong(hwnd, GWL_EXSTYLE);
 
-    exStyle &= ~WS_EX_TRANSPARENT;                 // Bloquea el paso de clics
-    exStyle |= WS_EX_LAYERED | WS_EX_TOOLWINDOW;   // Capa flotante y sin icono en la barra
+    exStyle &= ~WS_EX_TRANSPARENT;                 // Block click-through
+    exStyle |= WS_EX_LAYERED | WS_EX_TOOLWINDOW;   // Floating layer, no taskbar icon
 
     SetWindowLong(hwnd, GWL_EXSTYLE, exStyle);
 
-           // Opcional: mantener la ventana siempre arriba
+           // Optional: keep the window always on top
     SetWindowPos(hwnd, HWND_TOPMOST, 0, 0, 0, 0,
                  SWP_NOMOVE | SWP_NOSIZE | SWP_FRAMECHANGED);
 }
@@ -188,8 +188,8 @@ void WindowHighlightOverlay::blockMouseEventsOn(QWidget* widget) {
 
     LONG exStyle = GetWindowLong(hwnd, GWL_EXSTYLE);
 
-    exStyle &= ~WS_EX_TRANSPARENT;                 // 🔒 Bloquea clics que pasen
-    exStyle |= WS_EX_LAYERED | WS_EX_TOOLWINDOW;   // No aparece en la barra, se puede hacer transparente
+    exStyle &= ~WS_EX_TRANSPARENT;                 // Block click-through
+    exStyle |= WS_EX_LAYERED | WS_EX_TOOLWINDOW;   // No taskbar icon, can be made transparent
 
     SetWindowLong(hwnd, GWL_EXSTYLE, exStyle);
 

@@ -56,7 +56,7 @@ QPixmap captureScreenScroll::captureX11Window()
 {
     auto* disp = static_cast<Display*>(this->display);
     if (!disp) {
-        qDebug() << "captureX11Window: display inválido";
+        qDebug() << "captureX11Window: invalid display";
         return QPixmap();
     }
 
@@ -64,7 +64,7 @@ QPixmap captureScreenScroll::captureX11Window()
 
     XWindowAttributes attr;
     if (!XGetWindowAttributes(disp, target, &attr)) {
-        qDebug() << "captureX11Window: XGetWindowAttributes falló";
+        qDebug() << "captureX11Window: XGetWindowAttributes failed";
         return QPixmap();
     }
 
@@ -74,7 +74,7 @@ QPixmap captureScreenScroll::captureX11Window()
     int safeHeight = this->height;
 
     if (safeX >= attr.width || safeY >= attr.height) {
-        qDebug() << "captureX11Window: offsets fuera del área"
+        qDebug() << "captureX11Window: offsets out of bounds"
                  << "safeX" << safeX
                  << "safeY" << safeY
                  << "area" << attr.width << "x" << attr.height;
@@ -85,7 +85,7 @@ QPixmap captureScreenScroll::captureX11Window()
     safeHeight = std::min(safeHeight, attr.height - safeY);
 
     if (safeWidth <= 0 || safeHeight <= 0) {
-        qDebug() << "captureX11Window: tamaño inválido"
+        qDebug() << "captureX11Window: invalid size"
                  << "safeWidth" << safeWidth
                  << "safeHeight" << safeHeight;
         return QPixmap();
@@ -111,7 +111,7 @@ QPixmap captureScreenScroll::captureX11Window()
       );
 
     if (!img) {
-        qDebug() << "captureX11Window: XGetImage devolvió null";
+        qDebug() << "captureX11Window: XGetImage returned null";
         return QPixmap();
     }
 
@@ -135,7 +135,7 @@ QImage captureScreenScroll::captureWithPrintWindow(HWND hwnd)
 {
     RECT rect;
     if (!GetWindowRect(hwnd, &rect)) {
-        qDebug() << "GetWindowRect falló";
+        qDebug() << "GetWindowRect failed";
         return {};
     }
 
@@ -155,7 +155,7 @@ QImage captureScreenScroll::captureWithPrintWindow(HWND hwnd)
 
     if (!success) {
         DeleteObject(hBitmap);
-        qDebug() << "PrintWindow falló";
+        qDebug() << "PrintWindow failed";
         return {};
     }
 
@@ -174,7 +174,7 @@ QImage captureScreenScroll::captureWithPrintWindow(HWND hwnd)
 bool captureScreenScroll::imagesEqual(const QImage& a, const QImage& b)
 {
     if (a.size() != b.size()) {
-        qDebug() << "imagesEqual: tamaños distintos:" << a.size() << b.size();
+        qDebug() << "imagesEqual: size mismatch:" << a.size() << b.size();
         return false;
     }
 
@@ -206,7 +206,7 @@ QPixmap captureScreenScroll::cvMatToQPixmap(const cv::Mat& mat)
             return QPixmap::fromImage(img.copy());
         }
         default:
-            throw std::runtime_error("Formato de cv::Mat no soportado para conversión a QPixmap");
+            throw std::runtime_error("Unsupported cv::Mat format for QPixmap conversion");
     }
 }
 
@@ -326,13 +326,13 @@ cv::Mat captureScreenScroll::combineImages( const cv::Mat& result, const cv::Mat
     }
 
     if (currentImage.empty()) {
-        qDebug() << "combineImages: currentImage vacío";
+        qDebug() << "combineImages: currentImage is empty";
         status = Failed;
         return cv::Mat();
     }
 
     if (result.cols != currentImage.cols) {
-        qDebug() << "combineImages: anchos distintos:"
+        qDebug() << "combineImages: width mismatch:"
                  << "result.cols =" << result.cols
                  << "currentImage.cols =" << currentImage.cols;
         status = Failed;
@@ -350,7 +350,7 @@ cv::Mat captureScreenScroll::combineImages( const cv::Mat& result, const cv::Mat
     const int pixelSize = result.elemSize();
 
     if (compareWidth <= 0) {
-        qDebug() << "combineImages: compareWidth inválido:"
+        qDebug() << "combineImages: invalid compareWidth:"
                  << compareWidth
                  << "cols:" << currentImage.cols
                  << "ignoreSideOffset:" << ignoreSideOffset;
@@ -386,7 +386,7 @@ cv::Mat captureScreenScroll::combineImages( const cv::Mat& result, const cv::Mat
 
     const int rectBottom = result.rows - ignoreBottomOffset - 1;
     if (rectBottom < 0) {
-        qDebug() << "combineImages: rectBottom inválido:" << rectBottom;
+        qDebug() << "combineImages: invalid rectBottom:" << rectBottom;
         status = Failed;
         return cv::Mat();
     }
@@ -416,9 +416,7 @@ cv::Mat captureScreenScroll::combineImages( const cv::Mat& result, const cv::Mat
             }
         }
 
-               // Preferir:
-               // 1) mayor matchCount
-               // 2) si empatan, el match más arriba (currentY menor)
+               // Prefer: 1) higher matchCount; 2) on tie, the highest match position (lowest currentY)
         if (currentMatchCount > matchCount ||
             (currentMatchCount == matchCount && currentY < matchIndex)) {
             matchCount = currentMatchCount;
@@ -428,7 +426,7 @@ cv::Mat captureScreenScroll::combineImages( const cv::Mat& result, const cv::Mat
 
     const int minMatchThreshold = std::max(10, currentImage.rows / 10);
     if (matchCount < minMatchThreshold) {
-        qDebug() << "combineImages: match muy pequeño, ignorando:"
+        qDebug() << "combineImages: match too small, skipping:"
                  << "matchCount =" << matchCount
                  << "minMatchThreshold =" << minMatchThreshold;
         status = Failed;
@@ -438,7 +436,7 @@ cv::Mat captureScreenScroll::combineImages( const cv::Mat& result, const cv::Mat
     bool bestGuess = false;
 
     if (matchCount == 0 && bestMatchCount > 0) {
-        qDebug() << "combineImages: usando mejor coincidencia previa";
+        qDebug() << "combineImages: using best previous match";
         matchCount = bestMatchCount;
         matchIndex = bestMatchIndex;
         ignoreBottomOffset = isLastImage ? 0 : bestIgnoreBottomOffset;
@@ -461,7 +459,7 @@ cv::Mat captureScreenScroll::combineImages( const cv::Mat& result, const cv::Mat
             const int newRows = topPartHeight + matchHeight;
 
             if (topPartHeight <= 0 || newRows <= 0) {
-                qDebug() << "combineImages: dimensiones inválidas para newResult:"
+                qDebug() << "combineImages: invalid dimensions for newResult:"
                          << "topPartHeight =" << topPartHeight
                          << "matchHeight =" << matchHeight
                          << "newRows =" << newRows;
@@ -495,7 +493,7 @@ cv::Mat captureScreenScroll::combineImages( const cv::Mat& result, const cv::Mat
         }
     }
 
-    qDebug() << "combineImages: no se encontró coincidencia válida";
+    qDebug() << "combineImages: no valid match found";
     status = Failed;
     return cv::Mat();
 }*/

@@ -37,7 +37,6 @@ Overlay::Overlay(QWidget* parent)
     setMouseTracking(true);
     setFixedSize(QApplication::primaryScreen()->size());
 
-    qDebug() << "Overlay comienza0000000000000...";
 }
 
 void Overlay::updateOverlay(const QRect& rect) {
@@ -49,7 +48,6 @@ void Overlay::paintEvent(QPaintEvent*) {
     QPainter painter(this);
     painter.setPen(QPen(Qt::red, 3));
     painter.drawRect(lastRect);
-    qDebug() << "Overlay comienza111111111...";
 }
 
 
@@ -68,12 +66,12 @@ WId Overlay::getRealWindowUnderCursor(WId overlayWinId)
     Window dummy;
 
     if (!XQueryPointer(display, root, &dummy, &dummy, &x, &y, &x, &y, &mask)) {
-        qWarning() << "❌ No se pudo obtener el puntero";
+        qWarning() << "Failed to query pointer position";
         return 0;
     }
 
     if (!XQueryTree(display, root, &returnedRoot, &returnedParent, &children, &nchildren)) {
-        qWarning() << "❌ No se pudo consultar jerarquía de ventanas";
+        qWarning() << "Failed to query window hierarchy";
         return 0;
     }
 
@@ -102,20 +100,20 @@ void Overlay::startClickDetection()
 {
     Display* display = XOpenDisplay(nullptr);
     if (!display) {
-        qWarning() << "❌ No se pudo abrir X11 display";
+        qWarning() << "Failed to open X11 display";
         return;
     }
 
     Window root = DefaultRootWindow(display);
 
-           // Cambiar cursor opcionalmente
+           // Optionally change cursor
     Cursor cursor = XCreateFontCursor(display, XC_crosshair);
     int grabResult = XGrabPointer(display, root, True,
                                   ButtonPressMask, GrabModeAsync, GrabModeAsync,
                                   None, cursor, CurrentTime);
 
     if (grabResult != GrabSuccess) {
-        qWarning() << "❌ No se pudo capturar el puntero del mouse";
+        qWarning() << "Failed to grab mouse pointer";
         return;
     }
 
@@ -123,18 +121,18 @@ void Overlay::startClickDetection()
     while (true) {
         XNextEvent(display, &event);
         if (event.type == ButtonPress) {
-            // Al hacer clic, obtenemos la ventana válida
+            // On click, get the window under the cursor
             WId overlayId = this->winId();
             WId selectedWindow = getRealWindowUnderCursor(overlayId);
 
             if (selectedWindow != 0) {
-                qDebug() << "✅ Ventana seleccionada:" << selectedWindow;
+                qDebug() << "Window selected:" << selectedWindow;
 
-                emit windowSelected(selectedWindow);  // Tu señal, o úsalo directamente
+                emit windowSelected(selectedWindow);
 
                 break;
             } else {
-                qWarning() << "❌ No se encontró ventana válida";
+                qWarning() << "No valid window found under cursor";
             }
         }
     }
