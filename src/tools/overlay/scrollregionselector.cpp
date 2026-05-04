@@ -47,7 +47,7 @@ void ScrollRegionSelector::paintEvent(QPaintEvent* event)
     const QRect sel = currentRect();
 
     if (!m_screenshot.isNull()) {
-        // Modo Wayland: se dibuja la captura y se sombrea fuera de la selección
+        // Wayland mode: draw the screenshot and shade outside the selection
         p.drawImage(rect(), m_screenshot);
 
         if (!sel.isNull()) {

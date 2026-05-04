@@ -93,6 +93,6 @@ private:
 
     static FlameshotDaemon* m_instance;
 
-           // 🔥 FIX: permitir acceso desde DBus adapter también en Windows
+           // Allow access from DBus adapter also on Windows
     friend class FlameshotDBusAdapter;
 };
