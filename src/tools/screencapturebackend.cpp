@@ -172,7 +172,7 @@ bool ScreenCaptureBackend::isX11Session()
 QImage ScreenCaptureBackend::grab(const CaptureRequest& request)
 {
     if (!request.rect.isValid() || request.rect.width() <= 0 || request.rect.height() <= 0) {
-        qWarning() << "ScreenCaptureBackend::grab rect inválido:" << request.rect;
+        qWarning() << "ScreenCaptureBackend::grab invalid rect:" << request.rect;
         return {};
     }
 
@@ -180,7 +180,7 @@ QImage ScreenCaptureBackend::grab(const CaptureRequest& request)
     return grabWithXGetImage(request);
 #else
     Q_UNUSED(request);
-    qWarning() << "ScreenCaptureBackend no soportado en esta plataforma.";
+    qWarning() << "ScreenCaptureBackend not supported on this platform.";
     return {};
 #endif
 }
@@ -189,19 +189,19 @@ QImage ScreenCaptureBackend::grab(const CaptureRequest& request)
 QImage ScreenCaptureBackend::grabWithXGetImage(const CaptureRequest& request)
 {
     if (!request.display) {
-        qWarning() << "ScreenCaptureBackend: Display* es null.";
+        qWarning() << "ScreenCaptureBackend: Display* is null.";
         return {};
     }
 
     if (request.target == 0) {
-        qWarning() << "ScreenCaptureBackend: target Window es 0.";
+        qWarning() << "ScreenCaptureBackend: target Window is 0.";
         return {};
     }
 
     const bool wayland = isWaylandSession();
 
     if (wayland && request.targetIsRoot) {
-        qWarning() << "Wayland/Xwayland detectado: XGetImage sobre root no está soportado.";
+        qWarning() << "Wayland/Xwayland detected: XGetImage on root window is not supported.";
         return {};
     }
 
@@ -233,7 +233,7 @@ QImage ScreenCaptureBackend::grabWithXGetImage(const CaptureRequest& request)
     XSync(request.display, False);
 
     if (trap.hasError()) {
-        qWarning() << "XGetImage falló. errorCode =" << trap.errorCode()
+        qWarning() << "XGetImage failed. errorCode =" << trap.errorCode()
                    << "requestCode =" << trap.requestCode()
                    << "minorCode =" << trap.minorCode();
 
@@ -244,7 +244,7 @@ QImage ScreenCaptureBackend::grabWithXGetImage(const CaptureRequest& request)
     }
 
     if (!ximage) {
-        qWarning() << "XGetImage devolvió null.";
+        qWarning() << "XGetImage returned null.";
         return {};
     }
 

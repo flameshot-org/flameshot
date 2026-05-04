@@ -18,9 +18,9 @@ public:
     explicit WindowHighlightOverlay(QWidget *parent = nullptr);
     ~WindowHighlightOverlay();
 
-    void initVirtualDesktop();            // cubre todos los monitores
-    void startTracking(int intervalMs = 40); // muestra overlay + hook
-    void stopTracking();                     // oculta overlay + deshook
+    void initVirtualDesktop();            // covers all monitors
+    void startTracking(int intervalMs = 40); // shows overlay + installs hook
+    void stopTracking();                     // hides overlay + removes hook
 
 
     HWND selectedWindow() const { return selectedHwnd_; }
@@ -31,7 +31,7 @@ public:
 
 signals:
 #if defined( Q_OS_WIN )
-    void panelSelected(HWND hwnd);  // Emitido al hacer clic
+    void panelSelected(HWND hwnd);  // Emitted on mouse click
 #endif
 
 protected:
