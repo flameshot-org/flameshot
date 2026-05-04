@@ -1,35 +1,229 @@
 #include "trayicon.h"
-#include "core/capturerequest.h"
-#include "core/flameshot.h"
-#include "core/flameshotdaemon.h"
-#include "core/qguiappcurrentscreen.h"
-#include "utils/confighandler.h"
-#include "utils/globalvalues.h"
+
+#include "opencv2/core/mat.hpp"
+#include "opencv2/imgcodecs.hpp"
+#include "qcollator.h"
+#include "qdir.h"
+#include "qmessagebox.h"
+#include "qstandardpaths.h"
+#include "screenshotsaver.h"
+#include "src/core/flameshot.h"
+#include "src/core/flameshotdaemon.h"
+#include "src/utils/globalvalues.h"
+#include "src/utils/confighandler.h"
 
 #include <QApplication>
-#include <QGuiApplication>
 #include <QMenu>
-#include <QScreen>
 #include <QTimer>
-#include <QUrl>
 #include <QVersionNumber>
+#include <QThread>
+#include <QCursor>
+#include <QEventLoop>
+#include <QPointer>
+#include <QScreen>
+#include <QWindow>
+#include <QList>
+#include <QDebug>
+#include <algorithm>
+#include <iostream>
+#include <functional>
+#include <vector>
 
 #if defined(Q_OS_MACOS)
 #include <QOperatingSystemVersion>
 #endif
 
+#include <capturescreenscroll.h>
+
+#if defined(Q_OS_LINUX)
+#include "src/tools/overlay/scrollregionselector.h"
+#include "src/tools/uinputscrollcontroller.h"
+#include "tools/wayland/waylandportalcapturebackend.h"
+#include <X11/Xlib.h>
+#include <X11/Xutil.h>
+#endif
+
+#if defined(Q_OS_WIN)
+#include <windows.h>
+#include "tools/windowhighlightoverlay.h"
+#endif
+
+namespace {
+
+struct Item {
+    std::string path;
+    std::string name;
+};
+
+std::vector<std::string> collectSortedPngs(const QString& baseDir)
+{
+    std::vector<Item> items;
+
+    for (const auto& e : fs::directory_iterator(baseDir.toStdString())) {
+        if (e.is_regular_file() && e.path().extension() == ".png") {
+            items.push_back({ e.path().string(), e.path().filename().string() });
+        }
+    }
+
+    QCollator coll;
+    coll.setNumericMode(true);
+    coll.setCaseSensitivity(Qt::CaseInsensitive);
+
+    std::stable_sort(items.begin(),
+                     items.end(),
+                     [&](const Item& a, const Item& b) {
+                         return coll.compare(QString::fromUtf8(a.name),
+                                             QString::fromUtf8(b.name)) < 0;
+                     });
+
+    std::vector<std::string> paths;
+    paths.reserve(items.size());
+    for (const auto& i : items) {
+        paths.push_back(i.path);
+    }
+
+    return paths;
+}
+
+#if defined(Q_OS_LINUX)
+QRect selectScrollRegion()
+{
+    QEventLoop loop;
+    QRect selected;
+    bool accepted = false;
+
+    const QList<QScreen*> screens = QGuiApplication::screens();
+    if (screens.isEmpty()) {
+        qWarning() << "No screens found.";
+        return QRect();
+    }
+
+    QRect virtualGeometry;
+    for (QScreen* s : screens) {
+        qDebug() << "X11 screen:" << s->name() << s->geometry();
+        virtualGeometry = virtualGeometry.united(s->geometry());
+    }
+
+    if (!virtualGeometry.isValid()) {
+        qWarning() << "Invalid virtual geometry.";
+        return QRect();
+    }
+
+    auto* selector = new ScrollRegionSelector();
+    selector->setAttribute(Qt::WA_DeleteOnClose, false);
+    selector->setGeometry(virtualGeometry);
+
+    selector->winId();
+
+    qDebug() << "Creating X11 selector, geometry =" << selector->geometry();
+
+    QObject::connect(selector,
+                     &ScrollRegionSelector::selectionFinished,
+                     [&loop, &selected, &accepted, selector, virtualGeometry](const QRect& rect) {
+                         selected = QRect(
+                           virtualGeometry.x() + rect.x(),
+                           virtualGeometry.y() + rect.y(),
+                           rect.width(),
+                           rect.height());
+                         accepted = true;
+
+                         if (selector) {
+                             selector->hide();
+                             selector->close();
+                         }
+
+                         QApplication::processEvents();
+                         loop.quit();
+                     });
+
+    QObject::connect(selector,
+                     &ScrollRegionSelector::selectionCanceled,
+                     [&loop, &accepted, selector]() {
+                         accepted = false;
+
+                         if (selector) {
+                             selector->hide();
+                             selector->close();
+                         }
+
+                         QApplication::processEvents();
+                         loop.quit();
+                     });
+
+    QTimer::singleShot(10, [selector]() {
+        if (!selector) {
+            return;
+        }
+
+        selector->show();
+        selector->raise();
+        selector->activateWindow();
+        selector->setFocus(Qt::ActiveWindowFocusReason);
+        QApplication::processEvents();
+    });
+
+    loop.exec();
+
+    if (selector) {
+        selector->deleteLater();
+    }
+
+    QApplication::processEvents();
+    return accepted ? selected : QRect();
+}
+
+QPoint currentPointerPos(Display* display)
+{
+    if (!display) {
+        return QPoint();
+    }
+
+    Window root = DefaultRootWindow(display);
+    Window rootReturn, childReturn;
+    int rootX = 0, rootY = 0, winX = 0, winY = 0;
+    unsigned int mask = 0;
+
+    if (XQueryPointer(display,
+                      root,
+                      &rootReturn,
+                      &childReturn,
+                      &rootX,
+                      &rootY,
+                      &winX,
+                      &winY,
+                      &mask)) {
+        return QPoint(rootX, rootY);
+    }
+
+    return QPoint();
+}
+
+bool movePointerTo(Display* display, const QPoint& globalPos)
+{
+    if (!display) {
+        return false;
+    }
+
+    Window root = DefaultRootWindow(display);
+    XWarpPointer(display, None, root, 0, 0, 0, 0, globalPos.x(), globalPos.y());
+    XFlush(display);
+    return true;
+}
+#endif
+
+} // namespace
+
 TrayIcon::TrayIcon(QObject* parent)
   : QSystemTrayIcon(parent)
-  , m_screenMenu(nullptr)
 {
     initMenu();
-    initScreenMenu();
 
+#if defined(Q_OS_LINUX)
+    m_waylandBackend = new WaylandPortalCaptureBackend(this);
+#endif
     setToolTip(QStringLiteral("Flameshot"));
+
 #if defined(Q_OS_MACOS)
-    // Because of the following issues on MacOS "Catalina":
-    // https://bugreports.qt.io/browse/QTBUG-86393
-    // https://developer.apple.com/forums/thread/126072
     auto currentMacOsVersion = QOperatingSystemVersion::current();
     if (currentMacOsVersion >= QOperatingSystemVersion::MacOSBigSur) {
         setContextMenu(m_menu);
@@ -37,23 +231,14 @@ TrayIcon::TrayIcon(QObject* parent)
 #else
     setContextMenu(m_menu);
 #endif
+
     QIcon icon =
-      QIcon::fromTheme("flameshot-tray", QIcon(GlobalValues::trayIconPath()));
-
-#if defined(Q_OS_MACOS)
-    if (currentMacOsVersion >= QOperatingSystemVersion::MacOSBigSur) {
-        icon.setIsMask(true);
-    }
-#endif
-
+      QIcon::fromTheme("flameshot-tray", QIcon(GlobalValues::iconPathPNG()));
     setIcon(icon);
 
 #if defined(Q_OS_MACOS)
     if (currentMacOsVersion < QOperatingSystemVersion::MacOSBigSur) {
-        // Because of the following issues on MacOS "Catalina":
-        // https://bugreports.qt.io/browse/QTBUG-86393
-        // https://developer.apple.com/forums/thread/126072
-        auto trayIconActivated = [this](QSystemTrayIcon::ActivationReason r) {
+        auto trayIconActivated = [this](QSystemTrayIcon::ActivationReason) {
             if (m_menu->isVisible()) {
                 m_menu->hide();
             } else {
@@ -71,11 +256,10 @@ TrayIcon::TrayIcon(QObject* parent)
 #endif
 
 #ifdef Q_OS_WIN
-    // Ensure proper removal of tray icon when program quits on Windows.
     connect(qApp, &QCoreApplication::aboutToQuit, this, &TrayIcon::hide);
 #endif
 
-    show(); // TODO needed?
+    show();
 
     if (ConfigHandler().showStartupLaunchMessage()) {
         showMessage(
@@ -90,7 +274,7 @@ TrayIcon::TrayIcon(QObject* parent)
     connect(ConfigHandler::getInstance(),
             &ConfigHandler::fileChanged,
             this,
-            [this]() { updateCaptureActionShortcut(); });
+            [this]() {});
 }
 
 TrayIcon::~TrayIcon()
@@ -105,43 +289,262 @@ QAction* TrayIcon::appUpdates()
 }
 #endif
 
+QString TrayIcon::createScrollCaptureDir() const
+{
+    QString picturesPath =
+      QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);
+    QString baseDir = picturesPath + "/FlameshotCapture";
+    QDir().mkpath(baseDir);
+    return baseDir;
+}
+
+bool TrayIcon::runCaptureLoop(ScrollCaptureContext& ctx) const
+{
+    bool capturedAny = false;
+    int sameCount = 0;
+
+    while (true) {
+        QImage currentCapture = ctx.grabFrame();
+
+        if (currentCapture.isNull()) {
+            qDebug() << "Null frame captured. Stopping.";
+            break;
+        }
+
+        bool iguales = false;
+
+        if (ctx.hasPrevious) {
+            if (ctx.captureSS) {
+                iguales = ctx.captureSS->imagesEqual(ctx.previousCapture, currentCapture);
+            } else {
+                iguales = (ctx.previousCapture == currentCapture);
+            }
+
+            qDebug() << "imagesEqual(prev, curr):" << iguales;
+        } else {
+            qDebug() << "First capture, skipping comparison.";
+        }
+
+        if (ctx.hasPrevious && iguales) {
+            sameCount++;
+            qDebug() << "No change detected. Count:" << sameCount;
+
+            if (sameCount >= 3) {
+                qDebug() << "Three identical consecutive captures. Stopping scroll.";
+                break;
+            }
+
+            QImage beforeScroll = currentCapture;
+
+            if (!ctx.doScroll()) {
+                break;
+            }
+
+#if defined(Q_OS_LINUX)
+            waitAfterScroll(beforeScroll);
+#endif
+            continue;
+        }
+
+        sameCount = 0;
+
+        const QString filename =
+          QString("capture%1.png").arg(ctx.shotIdx++, 3, 10, QChar('0'));
+
+        if (!currentCapture.save(ctx.baseDir + "/" + filename)) {
+            qDebug() << "Failed to save capture:" << filename;
+            break;
+        }
+
+        qDebug() << "Capture saved:" << filename
+                 << "size =" << currentCapture.size();
+
+        capturedAny = true;
+
+        ctx.previousCapture = currentCapture;
+        ctx.hasPrevious = true;
+
+        QImage beforeScroll = currentCapture;
+
+        if (!ctx.doScroll()) {
+            break;
+        }
+
+#if defined(Q_OS_LINUX)
+        waitAfterScroll(beforeScroll);
+#endif
+    }
+
+    return capturedAny;
+}
+
+#if defined(Q_OS_LINUX)
+void TrayIcon::waitAfterScroll(const QImage& beforeScroll) const
+{
+    if (m_waylandBackend && m_waylandBackend->isReady()) {
+        QThread::msleep(250);
+        m_waylandBackend->waitAfterExternalScroll(beforeScroll, 1500);
+    } else {
+        QThread::msleep(150);
+    }
+}
+#endif
+
+bool TrayIcon::stitchAndSaveResult(captureScreenScroll* captureSS,
+                                   const QString& baseDir) const
+{
+    const std::vector<std::string> paths = collectSortedPngs(baseDir);
+
+    std::vector<cv::Mat> validImages;
+    validImages.reserve(paths.size());
+
+    for (const auto& f : paths) {
+        qDebug() << "Processing" << QString::fromStdString(f) << '\n';
+
+        cv::Mat img = cv::imread(f);
+        if (img.empty()) {
+            std::cerr << "Cannot read " << f << '\n';
+            continue;
+        }
+
+        cv::Mat cropped = captureSS->cropHorizontal(img);
+
+        qDebug() << "img size:" << img.cols << "x" << img.rows
+                 << "cropped size:" << cropped.cols << "x" << cropped.rows;
+
+        if (cropped.empty()) {
+            qDebug() << "Cropped image is empty, skipping";
+            continue;
+        }
+
+        validImages.push_back(cropped);
+    }
+
+    if (validImages.empty()) {
+        qDebug() << "No valid images for stitching.";
+        return false;
+    }
+
+    cv::Mat result = validImages[0].clone();
+
+    qDebug() << "Result initialized with size:"
+             << result.cols << "x" << result.rows;
+
+    for (size_t i = 1; i < validImages.size(); ++i) {
+        const cv::Mat& cropped = validImages[i];
+        const bool isLastImage = (i == validImages.size() - 1);
+
+        qDebug() << "Before combineImages:"
+                 << "result:" << result.cols << "x" << result.rows
+                 << "cropped:" << cropped.cols << "x" << cropped.rows
+                 << "isLastImage =" << isLastImage;
+
+        cv::Mat combined = captureSS->combineImages(result, cropped, isLastImage);
+        if (combined.empty()) {
+            qDebug() << "Failed to combine current capture. Stopping stitching.";
+            break;
+        }
+
+        result = combined;
+    }
+
+    if (result.empty()) {
+        qDebug() << "Empty stitch result. No final image generated.";
+        return false;
+    }
+
+    QPixmap finalImage = captureSS->cvMatToQPixmap(result);
+    if (finalImage.isNull()) {
+        qDebug() << "Failed to stitch images.";
+        return false;
+    }
+
+    cv::imwrite(baseDir.toStdString() + "/resultado_stitched.png", result);
+    saveToFilesystemGUI(finalImage);
+
+    QString dirPath = baseDir;
+    QDir(dirPath).removeRecursively();
+    return true;
+}
+
+void TrayIcon::startScrollingCapture()
+{
+    ScrollCaptureContext ctx;
+    ctx.baseDir = createScrollCaptureDir();
+
+#if defined(Q_OS_LINUX)
+    if (!setupLinuxScrollingCapture(ctx)) {
+        return;
+    }
+#elif defined(Q_OS_WIN)
+    if (!setupWindowsScrollingCapture(ctx)) {
+        return;
+    }
+#elif defined(Q_OS_MACOS)
+    QMessageBox::information(
+      nullptr,
+      QObject::tr("Scrolling screenshot"),
+      QObject::tr("Scrolling capture is not yet implemented on macOS."));
+    return;
+#endif
+
+    const bool captured = runCaptureLoop(ctx);
+
+    if (ctx.cleanup) {
+        ctx.cleanup();
+    }
+
+    if (captured && ctx.captureSS) {
+        if (!stitchAndSaveResult(ctx.captureSS, ctx.baseDir)) {
+            qDebug() << "Final stitching failed.";
+        }
+    } else {
+        qDebug() << "No valid captures. Skipping stitching.";
+    }
+
+    delete ctx.captureSS;
+    ctx.captureSS = nullptr;
+}
+
 void TrayIcon::initMenu()
 {
     m_menu = new QMenu();
 
-    m_captureAction = new QAction(tr("&Take Screenshot"), this);
-
-    updateCaptureActionShortcut();
-
-    connect(m_captureAction, &QAction::triggered, this, [this]() {
+    auto* captureAction = new QAction(tr("&Take Screenshot"), this);
+    connect(captureAction, &QAction::triggered, this, [this]() {
 #if defined(Q_OS_MACOS)
         auto currentMacOsVersion = QOperatingSystemVersion::current();
         if (currentMacOsVersion >= QOperatingSystemVersion::MacOSBigSur) {
             startGuiCapture();
         } else {
-            // It seems it is not relevant for MacOS BigSur (Wait 400 ms to hide
-            // the QMenu)
             QTimer::singleShot(400, this, [this]() { startGuiCapture(); });
         }
 #else
-    // Wait 400 ms to hide the QMenu
-    QTimer::singleShot(400, this, [this]() {
-        startGuiCapture();
-    });
+        QTimer::singleShot(400, this, [this]() { startGuiCapture(); });
 #endif
     });
-    m_launcherAction = new QAction(tr("&Open Launcher"), this);
-    connect(m_launcherAction,
+
+    auto* captureActionWithDesplazamiento =
+      new QAction(tr("&Scrolling screenshot"), this);
+    connect(captureActionWithDesplazamiento,
+            &QAction::triggered,
+            this,
+            [this]() { startScrollingCapture(); });
+
+    auto* launcherAction = new QAction(tr("&Open Launcher"), this);
+    connect(launcherAction,
             &QAction::triggered,
             Flameshot::instance(),
             &Flameshot::launcher);
+
     auto* configAction = new QAction(tr("&Configuration"), this);
     connect(configAction,
             &QAction::triggered,
             Flameshot::instance(),
             &Flameshot::config);
-    m_infoAction = new QAction(tr("&About"), this);
-    connect(m_infoAction,
+
+    auto* infoAction = new QAction(tr("&About"), this);
+    connect(infoAction,
             &QAction::triggered,
             Flameshot::instance(),
             &Flameshot::info);
@@ -157,41 +560,32 @@ void TrayIcon::initMenu()
             &FlameshotDaemon::newVersionAvailable,
             this,
             [this](const QVersionNumber& version) {
-                if (ConfigHandler().checkForUpdates()) {
-                    QString newVersion =
-                      tr("Download version %1").arg(version.toString());
-                    m_appUpdates->setText(newVersion);
-                    m_appUpdates->setVisible(true);
-
-                    // hack to work around menu not updating when the text /
-                    // visibility is modified Force menu refresh by removing and
-                    // re-adding the action
-                    m_menu->removeAction(m_appUpdates);
-                    m_menu->insertAction(m_infoAction, m_appUpdates);
-                }
+                const QString newVersion =
+                  tr("New version %1 is available").arg(version.toString());
+                m_appUpdates->setText(newVersion);
             });
-    updateCheckUpdatesMenuVisibility();
 #endif
 
     QAction* quitAction = new QAction(tr("&Quit"), this);
     connect(quitAction, &QAction::triggered, qApp, &QCoreApplication::quit);
 
 #ifdef ENABLE_IMGUR
-    // recent screenshots
     QAction* recentAction = new QAction(tr("&Latest Uploads"), this);
     connect(recentAction,
             &QAction::triggered,
             Flameshot::instance(),
             &Flameshot::history);
 #endif
+
     auto* openSavePathAction = new QAction(tr("&Open Save Path"), this);
     connect(openSavePathAction,
             &QAction::triggered,
             Flameshot::instance(),
             &Flameshot::openSavePath);
 
-    m_menu->addAction(m_captureAction);
-    m_menu->addAction(m_launcherAction);
+    m_menu->addAction(captureAction);
+    m_menu->addAction(captureActionWithDesplazamiento);
+    m_menu->addAction(launcherAction);
     m_menu->addSeparator();
 #ifdef ENABLE_IMGUR
     m_menu->addAction(recentAction);
@@ -203,81 +597,452 @@ void TrayIcon::initMenu()
 #if !defined(DISABLE_UPDATE_CHECKER)
     m_menu->addAction(m_appUpdates);
 #endif
-    m_menu->addAction(m_infoAction);
+    m_menu->addAction(infoAction);
     m_menu->addSeparator();
     m_menu->addAction(quitAction);
 }
 
-void TrayIcon::updateCaptureActionShortcut()
+#if defined(Q_OS_LINUX)
+QRect TrayIcon::selectScrollRegionFromImage(const QImage& screenshot)
 {
-#if defined(Q_OS_MACOS)
-    if (!m_captureAction) {
-        return;
+    if (screenshot.isNull()) {
+        return QRect();
     }
 
-    QString shortcut = ConfigHandler().shortcut("TAKE_SCREENSHOT");
-    m_captureAction->setShortcut(QKeySequence(shortcut));
-#endif
+    QEventLoop loop;
+    QRect selected;
+    bool accepted = false;
+
+    auto* selector = new ScrollRegionSelector();
+    selector->setAttribute(Qt::WA_DeleteOnClose, false);
+    selector->setScreenshot(screenshot);
+    selector->setGeometry(0, 0, screenshot.width(), screenshot.height());
+
+    QObject::connect(selector,
+                     &ScrollRegionSelector::selectionFinished,
+                     [&loop, &selected, &accepted, selector](const QRect& rect) {
+                         selected = rect;
+                         accepted = true;
+                         if (selector) {
+                             selector->hide();
+                             selector->close();
+                         }
+                         QApplication::processEvents();
+                         loop.quit();
+                     });
+
+    QObject::connect(selector,
+                     &ScrollRegionSelector::selectionCanceled,
+                     [&loop, &accepted, selector]() {
+                         accepted = false;
+                         if (selector) {
+                             selector->hide();
+                             selector->close();
+                         }
+                         QApplication::processEvents();
+                         loop.quit();
+                     });
+
+    QTimer::singleShot(10, [selector]() {
+        if (!selector) {
+            return;
+        }
+
+        selector->show();
+        selector->raise();
+        selector->activateWindow();
+        selector->setFocus(Qt::ActiveWindowFocusReason);
+        QApplication::processEvents();
+    });
+
+    loop.exec();
+
+    if (selector) {
+        selector->deleteLater();
+    }
+
+    QApplication::processEvents();
+    return accepted ? selected : QRect();
 }
+
+bool TrayIcon::setupLinuxScrollingCapture(ScrollCaptureContext& ctx)
+{
+    const QByteArray waylandDisplay = qgetenv("WAYLAND_DISPLAY");
+    const QByteArray sessionType = qgetenv("XDG_SESSION_TYPE").toLower();
+    const bool isWayland = !waylandDisplay.isEmpty() || sessionType == "wayland";
+
+    /*if (isWayland) {
+        WaylandPortalCaptureBackend* backend = m_waylandBackend;
+
+        if (!backend) {
+            qWarning() << "m_waylandBackend is null";
+            return false;
+        }
+
+        if (!backend->initialize(QString())) {
+            QMessageBox::warning(
+              nullptr,
+              QObject::tr("Scrolling screenshot"),
+              QObject::tr(
+                "Failed to initialize Wayland capture using "
+                "xdg-desktop-portal + PipeWire."));
+            return false;
+        }
+
+        QImage firstFrame;
+        for (int i = 0; i < 30; ++i) {
+            QThread::msleep(100);
+            firstFrame = backend->latestFrame();
+            if (!firstFrame.isNull()) {
+                break;
+            }
+            QApplication::processEvents();
+        }
+
+        if (firstFrame.isNull()) {
+            backend->shutdown();
+            //delete backend;
+            QMessageBox::warning(
+              nullptr,
+              QObject::tr("Scrolling screenshot"),
+              QObject::tr("Failed to get the initial screen frame on Wayland."));
+            return false;
+        }
+
+        QRect selectedRect = selectScrollRegionFromImage(firstFrame);
+        if (selectedRect.isNull() ||
+            selectedRect.width() < 20 ||
+            selectedRect.height() < 20) {
+            qDebug() << "Selection cancelled or invalid on Wayland.";
+            backend->shutdown();
+            //delete backend;
+            return false;
+        }
+
+        qDebug() << "Wayland selectedRect from image =" << selectedRect;
+
+        backend->setSelectedRect(selectedRect);
+
+        QApplication::processEvents();
+
+        QImage frameWithOverlay = backend->latestFrame();
+
+        QThread::msleep(250);
+        backend->waitAfterExternalScroll(frameWithOverlay, 1500);
+
+        QApplication::processEvents();
+        QThread::msleep(100);
+
+        ctx.captureSS = new captureScreenScroll();
+
+        ctx.grabFrame = [backend]() -> QImage {
+            return backend->latestFrame();
+        };
+
+        ctx.doScroll = [backend]() -> bool {
+            if (!backend->movePointerToSelectedRectCenter()) {
+                qDebug() << "Failed to move pointer to center of selected rect.";
+                return false;
+            }
+
+            QThread::msleep(120);
+
+            qDebug() << "Sending scrollDown(3) on Wayland";
+            if (!backend->scrollDown(3)) {
+                qDebug() << "Failed to send Wayland scroll.";
+                return false;
+            }
+
+            QThread::msleep(350);
+            return true;
+        };
+
+        ctx.cleanup = [backend]() {
+            backend->shutdown();
+            //delete backend;
+        };
+
+        return true;
+    }*/
+
+    if (isWayland) {
+        WaylandPortalCaptureBackend* backend = m_waylandBackend;
+
+        if (!backend) {
+            qWarning() << "m_waylandBackend is null";
+            return false;
+        }
+
+        if (!backend->initialize(QString())) {
+            QMessageBox::warning(
+              nullptr,
+              QObject::tr("Scrolling screenshot"),
+              QObject::tr(
+                "Failed to initialize Wayland capture using "
+                "xdg-desktop-portal + PipeWire."));
+            return false;
+        }
+
+        QImage firstFrame;
+        for (int i = 0; i < 30; ++i) {
+            QThread::msleep(100);
+            firstFrame = backend->latestFrame();
+            if (!firstFrame.isNull()) {
+                break;
+            }
+            QApplication::processEvents();
+        }
+
+        if (firstFrame.isNull()) {
+            backend->shutdown();
+            QMessageBox::warning(
+              nullptr,
+              QObject::tr("Scrolling screenshot"),
+              QObject::tr("Failed to get the initial screen frame on Wayland."));
+            return false;
+        }
+
+        QRect selectedRect = selectScrollRegionFromImage(firstFrame);
+        if (selectedRect.isNull() ||
+            selectedRect.width() < 20 ||
+            selectedRect.height() < 20) {
+            qDebug() << "Selection cancelled or invalid on Wayland.";
+            backend->shutdown();
+            return false;
+        }
+
+        qDebug() << "Wayland selectedRect from image =" << selectedRect;
+
+        backend->setSelectedRect(selectedRect);
+
+        QApplication::processEvents();
+
+        QImage frameWithOverlay = backend->latestFrame();
+
+        QThread::msleep(250);
+        backend->waitAfterExternalScroll(frameWithOverlay, 1500);
+
+        QApplication::processEvents();
+        QThread::msleep(100);
+
+        ctx.captureSS = new captureScreenScroll();
+
+        ctx.grabFrame = [backend]() -> QImage {
+            //return backend->latestFrame();
+            return backend->latestFrame().copy();
+        };
+
+        ctx.doScroll = [backend]() -> bool {
+            if (!backend->movePointerToSelectedRectCenter()) {
+                qDebug() << "Failed to move pointer to center of selected rect.";
+                return false;
+            }
+
+            QThread::msleep(120);
+
+            qDebug() << "Sending scrollDown(3) on Wayland";
+            if (!backend->scrollDown(3)) {
+                qDebug() << "Failed to send Wayland scroll.";
+                return false;
+            }
+
+            QThread::msleep(350);
+            return true;
+        };
+
+        ctx.cleanup = [backend]() {
+            backend->shutdown();
+        };
+
+        return true;
+    }
+           // -----------------------------
+           // X11 / Xorg: selector transparente global, sin screenshot
+           // -----------------------------
+    QRect selectedGlobalRect = selectScrollRegion();
+
+    QApplication::processEvents();
+    QThread::msleep(80);
+
+    if (selectedGlobalRect.isNull() ||
+        selectedGlobalRect.width() < 20 ||
+        selectedGlobalRect.height() < 20) {
+        qDebug() << "Selection cancelled or invalid.";
+        return false;
+    }
+
+    qDebug() << "selectedGlobalRect =" << selectedGlobalRect;
+
+    Display* display = XOpenDisplay(nullptr);
+    if (!display) {
+        qWarning() << "Failed to open X11 Display.";
+        return false;
+    }
+
+    const QPoint scrollTarget = selectedGlobalRect.center();
+
+    qDebug() << "scrollTarget =" << scrollTarget;
+
+    const int xOffset = selectedGlobalRect.x();
+    const int yOffset = selectedGlobalRect.y();
+    const int width = selectedGlobalRect.width();
+    const int height = selectedGlobalRect.height();
+
+    auto* scrollController = new UInputScrollController();
+    if (!scrollController->init()) {
+        delete scrollController;
+        QMessageBox::warning(
+          nullptr,
+          QObject::tr("Insufficient permissions"),
+          QObject::tr(
+            "Could not access /dev/uinput.\n\n"
+            "To enable automatic scrolling on Linux/X11, "
+            "grant device permissions via udev and add "
+            "your user to the appropriate group."));
+        XCloseDisplay(display);
+        return false;
+    }
+
+    ctx.captureSS = new captureScreenScroll(
+      static_cast<void*>(display),
+      0,
+      xOffset,
+      yOffset,
+      width,
+      height);
+
+    ctx.grabFrame = [captureSS = ctx.captureSS]() -> QImage {
+        return captureSS->captureScrollableArea().toImage();
+    };
+
+    ctx.doScroll = [scrollController, display, scrollTarget]() -> bool {
+        const QPoint oldPos = currentPointerPos(display);
+
+        if (!movePointerTo(display, scrollTarget)) {
+            qDebug() << "Failed to move pointer to selected area.";
+            return false;
+        }
+
+        QThread::msleep(80);
+
+        qDebug() << "Sending scrollDown(3) at" << scrollTarget;
+        if (!scrollController->scrollDown(3)) {
+            qDebug() << "Failed to send uinput scroll.";
+            movePointerTo(display, oldPos);
+            return false;
+        }
+
+        QThread::msleep(350);
+        movePointerTo(display, oldPos);
+        return true;
+    };
+
+    ctx.cleanup = [scrollController, display]() {
+        scrollController->shutdown();
+        delete scrollController;
+        XCloseDisplay(display);
+    };
+
+    return true;
+}
+#endif
+
+#if defined(Q_OS_WIN)
+bool TrayIcon::setupWindowsScrollingCapture(ScrollCaptureContext& ctx)
+{
+    ctx.captureSS = new captureScreenScroll();
+
+    static WindowHighlightOverlay overlay;
+    overlay.initVirtualDesktop();
+    overlay.startTracking();
+
+    static bool scrollEnCurso = false;
+    HWND hwnd = nullptr;
+
+    QEventLoop loop;
+
+    QObject::connect(&overlay,
+                     &WindowHighlightOverlay::panelSelected,
+                     &overlay,
+                     [&](HWND selectedHwnd) {
+                         if (scrollEnCurso) {
+                             qDebug() << "Scroll already in progress. Ignoring.";
+                             return;
+                         }
+
+                         RECT rect;
+                         if (GetWindowRect(selectedHwnd, &rect)) {
+                             const int width = rect.right - rect.left;
+                             const int height = rect.bottom - rect.top;
+
+                             if (width < 80 || height < 80) {
+                                 qDebug() << "HWND ignored due to suspicious size:"
+                                          << width << "x" << height;
+                                 return;
+                             }
+                         }
+
+                         scrollEnCurso = true;
+                         hwnd = selectedHwnd;
+                         QObject::disconnect(&overlay, nullptr, &overlay, nullptr);
+                         loop.quit();
+                     });
+
+    loop.exec();
+
+    if (!hwnd) {
+        overlay.stopTracking();
+        overlay.hide();
+        delete ctx.captureSS;
+        ctx.captureSS = nullptr;
+        return false;
+    }
+
+    SendMessage(hwnd, WM_VSCROLL, SB_TOP, 0);
+    Sleep(200);
+
+    ctx.grabFrame = [captureSS = ctx.captureSS, hwnd]() -> QImage {
+        return captureSS->captureWithPrintWindow(hwnd);
+    };
+
+    ctx.doScroll = []() -> bool {
+        INPUT scroll = {};
+        scroll.type = INPUT_MOUSE;
+        scroll.mi.dwFlags = MOUSEEVENTF_WHEEL;
+        scroll.mi.mouseData = -3 * WHEEL_DELTA;
+        SendInput(1, &scroll, sizeof(INPUT));
+        QThread::msleep(1000);
+        return true;
+    };
+
+    /*ctx.cleanup = [&overlay, &scrollEnCurso]() {
+        overlay.stopTracking();
+        overlay.hide();
+        scrollEnCurso = false;
+    };*/
+
+    ctx.cleanup = []() {
+        overlay.stopTracking();
+        overlay.hide();
+        scrollEnCurso = false;
+    };
+
+    return true;
+}
+#endif
 
 #if !defined(DISABLE_UPDATE_CHECKER)
-void TrayIcon::updateCheckUpdatesMenuVisibility()
+void TrayIcon::enableCheckUpdatesAction(bool enable)
 {
-    if (m_appUpdates == nullptr) {
-        return;
+    if (m_appUpdates != nullptr) {
+        m_appUpdates->setVisible(enable);
+        m_appUpdates->setEnabled(enable);
     }
-
-    bool autoCheckEnabled = ConfigHandler().checkForUpdates();
-    if (autoCheckEnabled) {
-        // When auto-check is enabled, hide the menu item initially
-        // It will be shown when a new version is available via a callback
-        m_appUpdates->setVisible(false);
-    } else {
-        m_appUpdates->setVisible(true);
-        m_appUpdates->setText(tr("Check for updates"));
+    if (enable) {
+        FlameshotDaemon::instance()->getLatestAvailableVersion();
     }
 }
 #endif
-
-void TrayIcon::initScreenMenu()
-{
-#ifndef Q_OS_MACOS
-    const QList<QScreen*> screens = QGuiApplication::screens();
-    if (screens.size() <= 1) {
-        return;
-    }
-
-    m_screenMenu = new QMenu(tr("Select Screen"));
-
-    QList<QAction*> actions = m_menu->actions();
-    int index = actions.indexOf(m_launcherAction);
-    if (index >= 0 && index + 1 < actions.size()) {
-        m_menu->insertMenu(actions[index + 1], m_screenMenu);
-    } else {
-        m_menu->addMenu(m_screenMenu);
-    }
-
-    QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
-    int currentIndex = screens.indexOf(currentScreen);
-
-    for (int i = 0; i < screens.size(); ++i) {
-        QScreen* screen = screens[i];
-        QRect geom = screen->geometry();
-        QString screenDescription = tr("Monitor %1: %2 (%3x%4)")
-                                      .arg(i + 1)
-                                      .arg(screen->name())
-                                      .arg(geom.width())
-                                      .arg(geom.height());
-
-        QAction* screenAction = m_screenMenu->addAction(screenDescription);
-        connect(screenAction, &QAction::triggered, this, [this, i]() {
-            // Wait and hide the menu
-            QTimer::singleShot(
-              100, this, [this, i]() { startGuiCaptureOnScreen(i); });
-        });
-    }
-#endif
-}
 
 void TrayIcon::startGuiCapture()
 {
@@ -285,11 +1050,4 @@ void TrayIcon::startGuiCapture()
 #if !defined(DISABLE_UPDATE_CHECKER)
     FlameshotDaemon::instance()->showUpdateNotificationIfAvailable(widget);
 #endif
-}
-
-void TrayIcon::startGuiCaptureOnScreen(int screenIndex)
-{
-    CaptureRequest req(CaptureRequest::GRAPHICAL_MODE, 400);
-    req.setSelectedMonitor(screenIndex);
-    Flameshot::instance()->requestCapture(req);
 }
