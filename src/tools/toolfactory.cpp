@@ -11,6 +11,7 @@
 #ifdef ENABLE_IMGUR
 #include "tools/imgupload/imguploadertool.h"
 #endif
+#include "tools/icon/icontool.h"
 #include "tools/invert/inverttool.h"
 #include "tools/launcher/applaunchertool.h"
 #include "tools/line/linetool.h"
@@ -66,6 +67,7 @@ CaptureTool* ToolFactory::CreateTool(CaptureTool::Type t, QObject* parent)
         if_TYPE_return_TOOL(TYPE_SIZEDECREASE, SizeDecreaseTool);
         if_TYPE_return_TOOL(TYPE_INVERT, InvertTool);
         if_TYPE_return_TOOL(TYPE_ACCEPT, AcceptTool);
+        if_TYPE_return_TOOL(TYPE_ICON, IconTool);
         default:
             return nullptr;
     }
