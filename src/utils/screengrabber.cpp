@@ -126,8 +126,8 @@ void ScreenGrabber::freeDesktopPortal(bool& ok, QPixmap& res)
     if (QGuiApplication::platformName() == QLatin1String("wayland")) {
         parentWindow = QStringLiteral("wayland:");
     } else {
-        parentWindow = QStringLiteral("x11:0x%1")
-                         .arg(parentDummy.winId(), 0, 16);
+        parentWindow =
+          QStringLiteral("x11:0x%1").arg(parentDummy.winId(), 0, 16);
     }
 
     screenshotInterface.call(
