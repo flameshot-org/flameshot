@@ -356,15 +356,13 @@ There are packages available in the repository of some Linux distributions:
 - [Debian 10+](https://tracker.debian.org/pkg/flameshot): `apt install flameshot`
   + Package for Debian 9 ("Stretch") also [available via stretch-backports](https://backports.debian.org/).
 - [Ubuntu](https://launchpad.net/ubuntu/+source/flameshot): `apt install flameshot`
-  + A [PPA supporting Ubuntu 22.04 and newer](https://launchpad.net/~quentiumyt/+archive/ubuntu/flameshot) is provided by
-[Quentin Lienhardt](https://github.com/QuentiumYT) that offers an up-to-date version of `flameshot`.
 - [openSUSE](https://software.opensuse.org/package/flameshot): `zypper install flameshot`
 - [Void Linux](https://github.com/void-linux/void-packages/tree/master/srcpkgs/flameshot): `xbps-install flameshot`
 - [Solus](https://dev.getsol.us/source/flameshot/): `eopkg it flameshot`
 - [Fedora](https://src.fedoraproject.org/rpms/flameshot): `dnf install flameshot`
 - [NixOS](https://search.nixos.org/packages?query=flameshot): `nix-env -iA nixos.flameshot`
 - [ALT](https://packages.altlinux.org/en/sisyphus/srpms/flameshot/): `su - -c "apt-get install flameshot"`
-- [Snap/Flatpak/AppImage](https://github.com/flameshot-org/packages)
+- [Snap/Flatpak/AppImage](https://github.com/flameshotapp/packages)
 - [Docker](https://github.com/ManuelLR/docker-flameshot)
 - [Windows](https://github.com/majkinetor/au-packages/tree/master/flameshot)
 
@@ -559,7 +557,7 @@ cmake --install "$BUILD_DIR"
 
 ## License
 
-- The main code is licensed under [GPLv3+](LICENSE)
+- The main code is licensed under [GPLv3](LICENSE)
 - The logo of Flameshot is licensed under [Free Art License v1.3](data/img/app/flameshotLogoLicense.txt)
 - The button icons are licensed under Apache License 2.0. See: https://github.com/google/material-design-icons
 - The code at capture/capturewidget.cpp is based on https://github.com/ckaiser/Lightscreen/blob/master/dialogs/areadialog.cpp (GPLv2)
@@ -567,7 +565,7 @@ cmake --install "$BUILD_DIR"
 - I copied a few lines of code from KSnapshot regiongrabber.cpp revision `796531` (LGPL)
 - Qt-Color-Widgets taken and modified from https://github.com/mbasaglia/Qt-Color-Widgets (see their license and exceptions in the project) (LGPL/GPL)
 
-Info: If I take code from your project and that implies a relicense to GPLv3+, you can reuse my changes with the original previous license of your project applied.
+Info: If I take code from your project and that implies a relicense to GPLv3, you can reuse my changes with the original previous license of your project applied.
 
 ## Privacy Policy
 
