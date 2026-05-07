@@ -111,9 +111,28 @@ void ScreenGrabber::freeDesktopPortal(bool& ok, QPixmap& res)
     });
     timeout.start();
 
+    // Build a non-empty parent_window handle. xdg-desktop-portal-gnome
+    // (>= 46) rejects an empty string with "Failed to associate portal
+    // window with parent window ''" and the Screenshot request fails.
+    // On X11 we pass a real x11:<hex> handle from an offscreen QWidget.
+    // On Wayland we fall back to an empty string inside a wayland: prefix
+    // (xdg-desktop-portal-gnome treats unknown handles as no-parent and
+    // proceeds, instead of rejecting outright).
+    QString parentWindow;
+    QWidget parentDummy;
+    parentDummy.setAttribute(Qt::WA_DontShowOnScreen, true);
+    parentDummy.resize(1, 1);
+    parentDummy.show();
+    if (QGuiApplication::platformName() == QLatin1String("wayland")) {
+        parentWindow = QStringLiteral("wayland:");
+    } else {
+        parentWindow =
+          QStringLiteral("x11:0x%1").arg(parentDummy.winId(), 0, 16);
+    }
+
     screenshotInterface.call(
       QStringLiteral("Screenshot"),
-      "",
+      parentWindow,
       QMap<QString, QVariant>({ { "handle_token", QVariant(token) },
                                 { "interactive", QVariant(false) } }));
 
