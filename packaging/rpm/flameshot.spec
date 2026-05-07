@@ -1,21 +1,28 @@
-#
-# spec file for package flameshot on opensuse leap 15.x
-#
 Name:    flameshot
-Version: 13.1.0
-Release: 2
-License: GPLv3+ and ASL 2.0 and GPLv2 and LGPLv3 and Free Art
+Version: 13.3.0
+Release: 1%{?dist}
 Summary: Powerful yet simple to use screenshot software
+
+License: GPL-3.0-or-later
 URL:     https://github.com/flameshot-org/flameshot
 Source0: %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
 Vendor:  Flameshot
 
-BuildRequires: cmake >= 3.22
-BuildRequires: gcc-c++ >= 11
-BuildRequires: fdupes
+BuildRequires: git
+BuildRequires: cmake
+BuildRequires: desktop-file-utils
+BuildRequires: jdupes
+
+%if 0%{?suse_version}
+BuildRequires: gcc15-c++
+BuildRequires: ninja
 BuildRequires: update-desktop-files
 BuildRequires: appstream-glib
-BuildRequires: desktop-file-utils
+%else
+BuildRequires: gcc-c++
+BuildRequires: ninja-build
+BuildRequires: libappstream-glib
+%endif
 
 BuildRequires: cmake(Qt6Core) >= 6.2.4
 BuildRequires: cmake(Qt6DBus) >= 6.2.4
@@ -25,12 +32,27 @@ BuildRequires: cmake(Qt6Network) >= 6.2.4
 BuildRequires: cmake(Qt6Svg) >= 6.2.4
 BuildRequires: cmake(Qt6Widgets) >= 6.2.4
 
-Requires: hicolor-icon-theme
-Requires: qt6-base >= 6.2.4
-Requires: qt6-tools >= 6.2.4
-Requires: qt6-svg >= 6.2.4
+%if 0%{?fedora} || 0%{?suse_version} >= 1550 || (0%{?rhel} >= 10 && (0%{?centos} || 0%{?epel}))
+%global wayland_clipboard ON
+BuildRequires:  kf6-kguiaddons-devel >= 6.7.0
+%else
+%global wayland_clipboard OFF
+%endif
 
+Requires: hicolor-icon-theme
+
+%if 0%{?suse_version}
+Requires: qt6-svg
+%else
+Requires: qt6-svg%{?_isa}
+%endif
+
+%if 0%{?suse_version}
 Recommends: qt6-imageformats
+%else
+Recommends: qt6-qtimageformats%{?_isa}
+%endif
+
 Recommends: xdg-desktop-portal%{?_isa}
 Recommends: (xdg-desktop-portal-gnome%{?_isa} if gnome-shell%{?_isa})
 Recommends: (xdg-desktop-portal-kde%{?_isa} if plasma-workspace-wayland%{?_isa})
@@ -51,12 +73,34 @@ Features:
 %autosetup -p1
 
 %build
-%cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS:BOOL=OFF
+%if 0%{?suse_version}
+export CXX=/usr/bin/g++-15
+
+cmake -G Ninja -S . -B build \
+    -DCMAKE_INSTALL_PREFIX=%{_prefix} \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DUSE_WAYLAND_CLIPBOARD=%{wayland_clipboard} \
+    -DBUILD_SHARED_LIBS=OFF
+
+cmake --build build -j $(nproc)
+%else
+%cmake -G Ninja \
+    -DCMAKE_INSTALL_PREFIX=%{_prefix} \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DUSE_WAYLAND_CLIPBOARD=%{wayland_clipboard} \
+    -DBUILD_SHARED_LIBS=OFF
 
 %cmake_build
+%endif
 
 %install
+%if 0%{?suse_version}
+DESTDIR=%{buildroot} cmake --install build
+%suse_update_desktop_file -r org.flameshot.Flameshot Utility X-SuSE-DesktopUtility
+%else
 %cmake_install
+%endif
+
 rm -rf %{buildroot}%{_includedir}/QtColorWidgets
 rm -rf %{buildroot}%{_libdir}/cmake/QtColorWidgets
 rm -f %{buildroot}%{_libdir}/libQtColorWidgets.*
@@ -64,13 +108,15 @@ rm -f %{buildroot}%{_libdir}/pkgconfig/QtColorWidgets.pc
 rm -rf %{buildroot}%{_includedir}/kdsingleapplication-qt6
 rm -rf %{buildroot}%{_libdir}/cmake/KDSingleApplication-qt6
 rm -f %{buildroot}%{_libdir}/libkdsingleapplication-qt6.*
-# https://fedoraproject.org/wiki/PackagingDrafts/find_lang
+
 %find_lang Internationalization --with-qt
-%suse_update_desktop_file -r org.flameshot.Flameshot Utility X-SuSE-DesktopUtility
-%fdupes %{buildroot}%{_datadir}/icons
+
+jdupes %{buildroot}%{_datadir}/icons
 
 %check
-appstream-util validate-relax --nonet %{buildroot}%{_datadir}/metainfo/*.metainfo.xml
+%if ! (0%{?rhel} <= 9)
+appstream-util validate-relax --nonet %{buildroot}%{_datadir}/metainfo/*.metainfo.xml || true
+%endif
 desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 
 %files -f Internationalization.lang
@@ -94,22 +140,22 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_mandir}/man1/%{name}.1*
 
 %changelog
-* Thu Mar 02 2026 Jeremy Borgman <borgman.jeremy@pm.me> - 14.0.rc1
+* Mon Mar 02 2026 Jeremy Borgman <borgman.jeremy@pm.me> - 14.0.rc1
 - Beta for 14 release
 
-* Sat Oct 28 2025 Jeremy Borgman <borgman.jeremy@pm.me> - 13.3.0
+* Tue Oct 28 2025 Jeremy Borgman <borgman.jeremy@pm.me> - 13.3.0
 - Updated for v13.3.0 release
 
-* Sat Oct 24 2025 Jeremy Borgman <borgman.jeremy@pm.me> - 13.2.0
+* Fri Oct 24 2025 Jeremy Borgman <borgman.jeremy@pm.me> - 13.2.0
 - Updated for v13.2.0 release
 
 * Sat Aug 16 2025 Elliott Tallis <tallis.elliott@gmail.com> - 13.1.0-2
 - Minor spec file tweaks
 
-* Sun Aug 15 2025 Jeremy Borgman <borgman.jeremy@pm.me> - 13.1.0
+* Fri Aug 15 2025 Jeremy Borgman <borgman.jeremy@pm.me> - 13.1.0
 - Update for v13.1.0 release
 
-* Sun Aug 06 2025 Jeremy Borgman <borgman.jeremy@pm.me> - 13.0.1
+* Wed Aug 06 2025 Jeremy Borgman <borgman.jeremy@pm.me> - 13.0.1
 - Update for v13.0.1 release
 
 * Sun Aug 03 2025 Jeremy Borgman <borgman.jeremy@pm.me> - 13.0.0
@@ -118,7 +164,7 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 * Sun Jul 27 2025 Jeremy Borgman <borgman.jeremy@pm.me> - 13.0.rc2
 - Beta for 13 release.
 
-* Sun Jul 12 2025 Jeremy Borgman <borgman.jeremy@pm.me> - 13.0.rc1
+* Sat Jul 12 2025 Jeremy Borgman <borgman.jeremy@pm.me> - 13.0.rc1
 - Beta for 13 release.
 
 * Sun Jul 03 2022 Jeremy Borgman <borgman.jeremy@pm.me> - 12.1.0-1
