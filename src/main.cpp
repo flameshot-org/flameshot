@@ -223,7 +223,8 @@ int main(int argc, char* argv[])
         auto kdsa =
           KDSingleApplication(QStringLiteral("org.flameshot.Flameshot"));
 
-        if (!kdsa.isPrimaryInstance()) {
+        if (!kdsa.isPrimaryInstance() &&
+            !ConfigHandler().allowMultipleGuiInstances()) {
             return 0; // Quit
         }
 #endif
