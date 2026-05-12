@@ -4,17 +4,18 @@ on:
   push:
     branches:
       - master
+      - fix*
     paths-ignore:
-      - 'README.md'
-      - 'LICENSE'
-      - 'docs/**'
+      - "README.md"
+      - "LICENSE"
+      - "docs/**"
 
   pull_request:
     paths-ignore:
-      - 'README.md'
-      - 'LICENSE'
-      - 'docs/**'
-      - 'data/translations/*.ts'
+      - "README.md"
+      - "LICENSE"
+      - "docs/**"
+      - "data/translations/*.ts"
 
   workflow_dispatch:
 
@@ -30,11 +31,11 @@ jobs:
         dist:
           - {
               os: macos-15,
-              arch: arm64
+              arch: arm64,
             }
           - {
               os: macos-15,
-              arch: intel
+              arch: intel,
             }
     runs-on: ${{ matrix.dist.os }}
     env:

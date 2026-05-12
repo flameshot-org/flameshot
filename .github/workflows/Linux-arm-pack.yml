@@ -1,24 +1,29 @@
 name: Packaging(Linux - ARM)
 
 on:
-  #push:
-  #  branches:
-  #    - master
-  #    - fix*
-  #    - move-arm-ci-to-new-ci
-  #  paths-ignore:
-  #    - 'README.md'
-  #    - 'LICENSE'
-  #    - 'docs/**'
-  
+  push:
+    branches:
+      - master
+      - fix*
+    paths-ignore:
+      - "README.md"
+      - "LICENSE"
+      - "docs/**"
+
+  pull_request:
+    paths-ignore:
+      - "README.md"
+      - "LICENSE"
+      - "docs/**"
+      - "data/translations/*.ts"
+
   workflow_dispatch:
 
 env:
   PRODUCT: flameshot
   RELEASE: 1
-  # dockerfiles, see https://github.com/flameshot-org/flameshot-dockerfiles
-  # docker images, see https://quay.io/repository/flameshot-org/ci-building
-  DOCKER_REPO: quay.io/flameshot-org/ci-building
+  # dockerfiles: see https://github.com/flameshot-org/flameshot-dockerfiles
+  # docker images: https://quay.io/repository/flameshot-org/ci-building
   # building tool: https://github.com/flameshot-org/packpack
   PACKPACK_REPO: flameshot-org/packpack
 
@@ -30,40 +35,34 @@ jobs:
       fail-fast: false
       matrix:
         dist:
-#          - {
-#              name: debian-11,
-#              os: debian,
-#              symbol: bullseye,
-#              arch: armhf
-#            }
           - {
               name: debian-12,
               os: debian,
               symbol: bookworm,
-              arch: arm64
+              arch: arm64,
             }
           - {
               name: debian-12,
               os: debian,
               symbol: bookworm,
-              arch: armhf
+              arch: armhf,
             }
           - {
               name: ubuntu-22.04,
               os: ubuntu,
               symbol: jammy,
-              arch: arm64
+              arch: arm64,
             }
           - {
               name: ubuntu-24.04,
               os: ubuntu,
               symbol: noble,
-              arch: arm64
+              arch: arm64,
             }
 
     steps:
       - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
+        uses: docker/setup-qemu-action@v4
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v4
@@ -73,7 +72,6 @@ jobs:
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
-#          ref: master
 
       - name: Checkout Source code
         if: github.event_name == 'pull_request'
@@ -104,7 +102,6 @@ jobs:
           echo "VERSION=$(cat CMakeLists.txt |grep 'set.*(.*FLAMESHOT_VERSION' | sed 's/[^0-9.]*//' |sed 's/)//g')" >> $GITHUB_ENV
           echo "VER_INFO=${ver_info}" >> $GITHUB_ENV
           echo "GIT_HASH=${git_hash}" >> $GITHUB_ENV
-
 
       - name: Get packpack tool
         uses: actions/checkout@v6

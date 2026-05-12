@@ -6,19 +6,18 @@ on:
       - master
       - fix*
     paths-ignore:
-      - 'README.md'
-      - 'LICENSE'
-      - 'docs/**'
+      - "README.md"
+      - "LICENSE"
+      - "docs/**"
 
   pull_request:
     paths-ignore:
-      - 'README.md'
-      - 'LICENSE'
-      - 'docs/**'
-      - 'data/translations/*.ts'
-  
-  workflow_dispatch:
+      - "README.md"
+      - "LICENSE"
+      - "docs/**"
+      - "data/translations/*.ts"
 
+  workflow_dispatch:
 
 env:
   PRODUCT: flameshot
@@ -40,13 +39,13 @@ jobs:
         qt_target: [desktop]
         config:
           - {
-            arch: x64,
-            generator: "-G'Visual Studio 17 2022' -A x64",
-            vcpkg_triplet: x64-windows,
-            qt_arch: win64_msvc2022_64,
-            qt_arch_install: msvc2022_64,
-            pak_arch: win64
-          }
+              arch: x64,
+              generator: "-G'Visual Studio 17 2022' -A x64",
+              vcpkg_triplet: x64-windows,
+              qt_arch: win64_msvc2022_64,
+              qt_arch_install: msvc2022_64,
+              pak_arch: win64,
+            }
         type: [portable, installer]
     steps:
       - name: Checkout Source code
@@ -54,7 +53,6 @@ jobs:
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
-#          ref: master
 
       - name: Checkout Source code
         if: github.event_name == 'pull_request'
@@ -104,12 +102,12 @@ jobs:
         uses: jurplel/install-qt-action@v4
         with:
           version: ${{ matrix.qt_ver }}
-          cache: 'true'
+          cache: "true"
           cache-key-prefix: install-qt-action-${{ matrix.qt_ver }}
-          target:  ${{ matrix.qt_target }}
+          target: ${{ matrix.qt_target }}
           arch: ${{ matrix.config.qt_arch }}
-          modules: 'qtimageformats'
-          dir: '${{ github.workspace }}/build/'
+          modules: "qtimageformats"
+          dir: "${{ github.workspace }}/build/"
 
       - name: Configure
         working-directory: build
@@ -151,33 +149,33 @@ jobs:
           New-Item -Path $env:GITHUB_WORKSPACE\build\Package\portable -ItemType Directory
 
       - name: Package Prepare (installer)
-        if:  matrix.type == 'installer'
+        if: matrix.type == 'installer'
         shell: pwsh
         run: |
           Move-Item -Path $env:GITHUB_WORKSPACE/build/Package/Flameshot-*-${{ matrix.config.pak_arch }}.msi -Destination $env:GITHUB_WORKSPACE/build/Package/installer/Flameshot-${{ env.VERSION }}-${{ matrix.config.pak_arch }}.msi
 
       - name: Package Prepare (portable)
-        if:  matrix.type == 'portable'
+        if: matrix.type == 'portable'
         shell: pwsh
         run: |
           Move-Item -Path $env:GITHUB_WORKSPACE/build/Package/flameshot-*-${{ matrix.config.pak_arch }}.zip -Destination $env:GITHUB_WORKSPACE/build/Package/portable/flameshot-${{ env.VERSION }}-${{ matrix.config.pak_arch }}.zip
 
       - name: SHA256Sum of Windows installer
-        if:  matrix.type == 'installer'
+        if: matrix.type == 'installer'
         shell: bash
         run: |
           sha256sum $GITHUB_WORKSPACE/build/Package/installer/Flameshot-${{ env.VERSION }}-${{ matrix.config.pak_arch }}.msi
           sha256sum $GITHUB_WORKSPACE/build/Package/installer/Flameshot-${{ env.VERSION }}-${{ matrix.config.pak_arch }}.msi > $GITHUB_WORKSPACE/build/Package/installer/Flameshot-${{ env.VERSION }}-${{ matrix.config.pak_arch }}.msi.sha256sum
 
       - name: SHA256Sum of Windows portable
-        if:  matrix.type == 'portable'
+        if: matrix.type == 'portable'
         shell: bash
         run: |
           sha256sum $GITHUB_WORKSPACE/build/Package/portable/flameshot-${{ env.VERSION }}-${{ matrix.config.pak_arch }}.zip
           sha256sum $GITHUB_WORKSPACE/build/Package/portable/flameshot-${{ env.VERSION }}-${{ matrix.config.pak_arch }}.zip > $GITHUB_WORKSPACE/build/Package/portable/flameshot-${{ env.VERSION }}-${{ matrix.config.pak_arch }}.zip.sha256sum
 
       - name: Artifact Upload
-        if:  matrix.type == 'installer'
+        if: matrix.type == 'installer'
         uses: actions/upload-artifact@v7
         with:
           name: ${{ env.PRODUCT }}-${{ env.VER_INFO }}-artifact-win-${{ matrix.config.arch }}-${{ matrix.type }}
@@ -187,7 +185,7 @@ jobs:
           overwrite: true
 
       - name: Artifact Upload
-        if:  matrix.type == 'portable'
+        if: matrix.type == 'portable'
         uses: actions/upload-artifact@v7
         with:
           name: ${{ env.PRODUCT }}-${{ env.VER_INFO }}-artifact-win-${{ matrix.config.arch }}-${{ matrix.type }}
