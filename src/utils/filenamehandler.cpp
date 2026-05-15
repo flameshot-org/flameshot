@@ -42,15 +42,15 @@ QString FileNameHandler::parseFilename(const QString& name)
         res.chop(1);
     }
 
-    const QString pathSeparatorToken = QStringLiteral("\x1f");
-    res.replace(QLatin1String("/"), pathSeparatorToken);
+    const bool allowPathSeparators = res.contains(QLatin1String("/"));
     res =
       QString::fromStdString(strfparse::format_time_string(res.toStdString()));
 
     // add the parsed pattern in a correct format for the filesystem
-    res = res.replace(QLatin1String("/"), QStringLiteral("⁄"))
-            .replace(QLatin1String(":"), QLatin1String("-"))
-            .replace(pathSeparatorToken, QLatin1String("/"));
+    if (!allowPathSeparators) {
+        res.replace(QLatin1String("/"), QStringLiteral("⁄"));
+    }
+    res.replace(QLatin1String(":"), QLatin1String("-"));
     return res;
 }
 
