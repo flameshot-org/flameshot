@@ -279,8 +279,10 @@ bool saveToFilesystemGUI(const QPixmap& capture)
         defaultSavePath =
           QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);
     }
-    QString savePath = FileNameHandler().properScreenshotPath(
+    const QString defaultSaveDirectory = QDir(defaultSavePath).absolutePath();
+    const QString suggestedSavePath = FileNameHandler().properScreenshotPath(
       defaultSavePath, ConfigHandler().saveAsFileExtension());
+    QString savePath = suggestedSavePath;
 #if defined(Q_OS_MACOS)
     for (QWidget* widget : qApp->topLevelWidgets()) {
         QString className(widget->metaObject()->className());
@@ -314,7 +316,14 @@ bool saveToFilesystemGUI(const QPixmap& capture)
             // '/'
             QString pathNoFile = savePath.left(savePath.lastIndexOf('/'));
 
-            ConfigHandler().setSavePath(pathNoFile);
+            if (!config.savePathFixed()) {
+                const bool acceptedSuggestedPath =
+                  QDir::cleanPath(savePath) ==
+                  QDir::cleanPath(suggestedSavePath);
+                ConfigHandler().setSavePath(acceptedSuggestedPath
+                                              ? defaultSaveDirectory
+                                              : pathNoFile);
+            }
 
             QString msg = QObject::tr("Capture saved as ") + savePath;
             AbstractLogger().attachNotificationPath(savePath) << msg;
