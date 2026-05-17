@@ -3,12 +3,14 @@
 #include "utils/confighandler.h"
 
 #include <QApplication>
+#include <QDesktopServices>
 #include <QUrl>
 #if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
 #include <QDBusConnection>
 #include <QDBusConnectionInterface>
 #include <QDBusInterface>
 #include <QDBusMessage>
+#include <QDBusReply>
 #else
 #include "core/flameshotdaemon.h"
 #endif
@@ -45,6 +47,45 @@ SystemNotification::SystemNotification(QObject* parent)
 #endif
 }
 
+QMap<uint, QString> SystemNotification::s_pendingPaths;
+
+SystemNotification* SystemNotification::actionHandler()
+{
+    static SystemNotification* handler = [] {
+        auto* h = new SystemNotification(qApp);
+#if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
+        QDBusConnection::sessionBus().connect(
+          QStringLiteral("org.freedesktop.Notifications"),
+          QStringLiteral("/org/freedesktop/Notifications"),
+          QStringLiteral("org.freedesktop.Notifications"),
+          QStringLiteral("ActionInvoked"),
+          h,
+          SLOT(onActionInvoked(uint, QString)));
+#endif
+        return h;
+    }();
+    return handler;
+}
+
+void SystemNotification::onActionInvoked(uint id, const QString& actionKey)
+{
+    if (actionKey == QLatin1String("default")) {
+        auto it = s_pendingPaths.find(id);
+        if (it != s_pendingPaths.end()) {
+            QDesktopServices::openUrl(QUrl::fromLocalFile(it.value()));
+            s_pendingPaths.erase(it);
+            if (s_pendingPaths.isEmpty()) {
+                qApp->exit();
+            }
+        }
+    }
+}
+
+bool SystemNotification::hasPendingPaths()
+{
+    return !s_pendingPaths.isEmpty();
+}
+
 void SystemNotification::sendMessage(const QString& text,
                                      const QString& savePath)
 {
@@ -75,11 +116,14 @@ void SystemNotification::sendMessage(const QString& text,
     if (nullptr != m_interface && m_interface->isValid()) {
         QList<QVariant> args;
         QVariantMap hintsMap;
+        QStringList actions;
         if (!savePath.isEmpty()) {
             QUrl fullPath = QUrl::fromLocalFile(savePath);
             // allows the notification to be dragged and dropped
             hintsMap[QStringLiteral("x-kde-urls")] =
               QStringList({ fullPath.toString() });
+            // makes the notification body clickable (freedesktop spec)
+            actions << QStringLiteral("default") << QString();
         }
 
         args << (qAppName())                 // appname
@@ -87,11 +131,17 @@ void SystemNotification::sendMessage(const QString& text,
              << FLAMESHOT_ICON               // icon
              << title                        // summary
              << text                         // body
-             << QStringList()                // actions
+             << actions                      // actions
              << hintsMap                     // hints
              << timeout;                     // timeout
-        m_interface->callWithArgumentList(
+
+        QDBusReply<uint> reply = m_interface->callWithArgumentList(
           QDBus::AutoDetect, QStringLiteral("Notify"), args);
+
+        if (reply.isValid() && !savePath.isEmpty()) {
+            actionHandler();
+            s_pendingPaths[reply.value()] = savePath;
+        }
     }
 #endif
 }

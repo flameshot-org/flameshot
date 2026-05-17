@@ -19,6 +19,7 @@
 #include "utils/confighandler.h"
 #include "utils/filenamehandler.h"
 #include "utils/pathinfo.h"
+#include "utils/systemnotification.h"
 #include "utils/valuehandler.h"
 
 #if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
@@ -74,8 +75,13 @@ int requestCaptureAndWait(const CaptureRequest& req)
         }
 #else
         // if this instance is not daemon, make sure it exit after caputre finish
-        if (FlameshotDaemon::instance() == nullptr && !Flameshot::instance()->haveExternalWidget()) {
-            qApp->exit(E_OK);
+        if (FlameshotDaemon::instance() == nullptr &&
+            !Flameshot::instance()->haveExternalWidget()) {
+            if (SystemNotification::hasPendingPaths()) {
+                QTimer::singleShot(10000, qApp, &QCoreApplication::quit);
+            } else {
+                qApp->exit(E_OK);
+            }
         }
 #endif
     });
