@@ -3,12 +3,15 @@
 #include "utils/confighandler.h"
 
 #include <QApplication>
+#include <QDesktopServices>
 #include <QUrl>
 #if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
 #include <QDBusConnection>
 #include <QDBusConnectionInterface>
 #include <QDBusInterface>
 #include <QDBusMessage>
+#include <QDBusPendingCallWatcher>
+#include <QDBusPendingReply>
 #else
 #include "core/flameshotdaemon.h"
 #endif
@@ -45,6 +48,45 @@ SystemNotification::SystemNotification(QObject* parent)
 #endif
 }
 
+QMap<uint, QString> SystemNotification::s_pendingPaths;
+
+SystemNotification* SystemNotification::actionHandler()
+{
+    static SystemNotification* handler = [] {
+        auto* h = new SystemNotification(qApp);
+#if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
+        QDBusConnection::sessionBus().connect(
+          QStringLiteral("org.freedesktop.Notifications"),
+          QStringLiteral("/org/freedesktop/Notifications"),
+          QStringLiteral("org.freedesktop.Notifications"),
+          QStringLiteral("ActionInvoked"),
+          h,
+          SLOT(onActionInvoked(uint, QString)));
+#endif
+        return h;
+    }();
+    return handler;
+}
+
+void SystemNotification::onActionInvoked(uint id, const QString& actionKey)
+{
+    if (actionKey == QLatin1String("default")) {
+        auto it = s_pendingPaths.find(id);
+        if (it != s_pendingPaths.end()) {
+            QDesktopServices::openUrl(QUrl::fromLocalFile(it.value()));
+            s_pendingPaths.erase(it);
+            if (s_pendingPaths.isEmpty()) {
+                qApp->exit();
+            }
+        }
+    }
+}
+
+bool SystemNotification::hasPendingPaths()
+{
+    return !s_pendingPaths.isEmpty();
+}
+
 void SystemNotification::sendMessage(const QString& text,
                                      const QString& savePath)
 {
@@ -75,11 +117,14 @@ void SystemNotification::sendMessage(const QString& text,
     if (nullptr != m_interface && m_interface->isValid()) {
         QList<QVariant> args;
         QVariantMap hintsMap;
+        QStringList actions;
         if (!savePath.isEmpty()) {
             QUrl fullPath = QUrl::fromLocalFile(savePath);
             // allows the notification to be dragged and dropped
             hintsMap[QStringLiteral("x-kde-urls")] =
               QStringList({ fullPath.toString() });
+            // makes the notification body clickable (freedesktop spec)
+            actions << QStringLiteral("default") << QString();
         }
 
         args << (qAppName())                 // appname
@@ -87,7 +132,7 @@ void SystemNotification::sendMessage(const QString& text,
              << FLAMESHOT_ICON               // icon
              << title                        // summary
              << text                         // body
-             << QStringList()                // actions
+             << actions                      // actions
              << hintsMap                     // hints
              << timeout;                     // timeout
         // Fire-and-forget: an asynchronous call never blocks the event loop,
@@ -97,8 +142,26 @@ void SystemNotification::sendMessage(const QString& text,
         // timeout (~25s) after every capture, freezing further captures until
         // it returned.
         if (m_interface != nullptr) {
-            m_interface->asyncCallWithArgumentList(QStringLiteral("Notify"),
-                                                   args);
+            QDBusPendingCall call =
+              m_interface->asyncCallWithArgumentList(QStringLiteral("Notify"),
+                                                    args);
+            if (!savePath.isEmpty()) {
+                // The notification id assigned by the server arrives with the
+                // reply; remember it so the persistent action handler can map
+                // a later ActionInvoked signal back to this file.
+                auto* watcher = new QDBusPendingCallWatcher(call);
+                connect(watcher,
+                        &QDBusPendingCallWatcher::finished,
+                        actionHandler(),
+                        [savePath](QDBusPendingCallWatcher* watcher) {
+                            QDBusPendingReply<uint> reply = *watcher;
+                            if (reply.isValid()) {
+                                SystemNotification::s_pendingPaths[reply.value()] =
+                                  savePath;
+                            }
+                            watcher->deleteLater();
+                        });
+            }
         }
     }
 #endif

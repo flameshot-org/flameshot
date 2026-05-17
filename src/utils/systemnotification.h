@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include <QMap>
 #include <QObject>
 
 class QDBusInterface;
@@ -20,6 +21,13 @@ public:
                      const QString& savePath,
                      const int timeout = 5000);
 
+    static bool hasPendingPaths();
+
 private:
+    Q_SLOT void onActionInvoked(uint id, const QString& actionKey);
+
+    static SystemNotification* actionHandler();
+
     QDBusInterface* m_interface;
+    static QMap<uint, QString> s_pendingPaths;
 };
