@@ -48,6 +48,7 @@ SystemNotification::SystemNotification(QObject* parent)
 }
 
 QMap<uint, QString> SystemNotification::s_pendingPaths;
+bool SystemNotification::s_exitOnLastAction = false;
 
 SystemNotification* SystemNotification::actionHandler()
 {
@@ -74,7 +75,7 @@ void SystemNotification::onActionInvoked(uint id, const QString& actionKey)
         if (it != s_pendingPaths.end()) {
             QDesktopServices::openUrl(QUrl::fromLocalFile(it.value()));
             s_pendingPaths.erase(it);
-            if (s_pendingPaths.isEmpty()) {
+            if (s_pendingPaths.isEmpty() && s_exitOnLastAction) {
                 qApp->exit();
             }
         }
@@ -84,6 +85,11 @@ void SystemNotification::onActionInvoked(uint id, const QString& actionKey)
 bool SystemNotification::hasPendingPaths()
 {
     return !s_pendingPaths.isEmpty();
+}
+
+void SystemNotification::setExitOnLastAction(bool exit)
+{
+    s_exitOnLastAction = exit;
 }
 
 void SystemNotification::sendMessage(const QString& text,

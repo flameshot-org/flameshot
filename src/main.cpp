@@ -78,6 +78,7 @@ int requestCaptureAndWait(const CaptureRequest& req)
         if (FlameshotDaemon::instance() == nullptr &&
             !Flameshot::instance()->haveExternalWidget()) {
             if (SystemNotification::hasPendingPaths()) {
+                SystemNotification::setExitOnLastAction(true);
                 QTimer::singleShot(10000, qApp, &QCoreApplication::quit);
             } else {
                 qApp->exit(E_OK);
