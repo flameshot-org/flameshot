@@ -22,6 +22,7 @@ public:
                      const int timeout = 5000);
 
     static bool hasPendingPaths();
+    static void setExitOnLastAction(bool exit);
 
 private:
     Q_SLOT void onActionInvoked(uint id, const QString& actionKey);
@@ -30,4 +31,5 @@ private:
 
     QDBusInterface* m_interface;
     static QMap<uint, QString> s_pendingPaths;
+    static bool s_exitOnLastAction;
 };
