@@ -84,6 +84,61 @@ jobs:
         # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
         run: ctest -C $BUILD_TYPE
 
+  linux-sanitizers:
+    name: Linux ASAN+UBSAN
+    runs-on: ubuntu-24.04
+    # Catches memory and undefined-behavior bugs that the normal build misses.
+    # See cmake/Sanitizers.cmake. Tracked in backlog story S1.4.
+
+    steps:
+      - name: Checkout Source code
+        if: github.event_name == 'push'
+        uses: actions/checkout@v6
+
+      - name: Checkout Source code
+        if: github.event_name == 'pull_request'
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      - name: Checkout Source code
+        if: github.event_name == 'workflow_dispatch'
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.sha }}
+
+      - name: Install Dependencies
+        run: |
+          sudo apt-get -y -qq update
+          sudo apt-get -y --no-install-recommends install \
+            cmake \
+            extra-cmake-modules \
+            build-essential \
+            qt6-base-dev \
+            qt6-svg-dev \
+            qt6-tools-dev \
+
+      - name: Configure CMake with sanitizers
+        shell: bash
+        run: |
+          cmake -S "$GITHUB_WORKSPACE" -B "${{runner.workspace}}/build-san" \
+            -DCMAKE_BUILD_TYPE=Debug \
+            -DENABLE_SANITIZER_ADDRESS=ON \
+            -DENABLE_SANITIZER_UNDEFINED_BEHAVIOR=ON
+
+      - name: Build
+        shell: bash
+        run: cmake --build "${{runner.workspace}}/build-san"
+
+      - name: Test
+        working-directory: ${{runner.workspace}}/build-san
+        shell: bash
+        env:
+          # Make UBSAN aborts visible in the job log instead of being silently absorbed.
+          UBSAN_OPTIONS: print_stacktrace=1:halt_on_error=1
+          ASAN_OPTIONS: detect_leaks=0
+        run: ctest --output-on-failure
+
   windows-build:
     runs-on: ${{ matrix.config.os }}
     strategy:
