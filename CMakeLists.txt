@@ -106,7 +106,11 @@ include(cmake/Cache.cmake)
 
 # standard compiler warnings
 include(cmake/CompilerWarnings.cmake)
-# set_project_warnings(project_warnings)
+# WARNINGS_AS_ERRORS defaults TRUE inside CompilerWarnings.cmake; keep it OFF
+# initially so existing latent warnings don't break the build. Flip on once
+# the baseline is clean (tracked in docs/backlog story S1.3).
+set(WARNINGS_AS_ERRORS OFF CACHE BOOL "Treat compiler warnings as errors")
+set_project_warnings(project_warnings)
 
 # sanitizer options if supported by compiler
 include(cmake/Sanitizers.cmake)
