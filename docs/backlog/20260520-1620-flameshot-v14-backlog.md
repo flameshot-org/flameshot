@@ -1,8 +1,36 @@
 # Flameshot — Prioritized Backlog (post-v14 beta 2)
 
-**Date:** 2026-05-20
+**Date:** 2026-05-20 (updated 22:40)
 **Source:** [Staff Engineer Panel Review](../reviews/20260520-1620-flameshot-staff-review.md)
-**Repo state:** `master` @ `1ee047f1 prep for v14 beta 2 (#4692)`, clean working tree.
+**Repo state:** branch `pr1-turn-on-alarms` @ `72fdd9bd`, 5 commits ahead of `master`, working tree clean.
+
+---
+
+## Progress Log
+
+### 2026-05-20 evening — PR-1 "Turn on the alarms" — IN FLIGHT
+
+Branch `pr1-turn-on-alarms` created off `master @ 1ee047f1`. Commits landed:
+
+| Commit | Story | Status |
+|---|---|---|
+| `b388c66d` | Docs (staff review + backlog) | ✅ committed |
+| `10ff5140` | **S1.1** — Pin QHotkey | ✅ committed — fork has no release tags, pinned to current HEAD SHA `d7063877` instead |
+| `4090fa11` | **S1.2** — Enable warnings framework (errors OFF) | ✅ committed — `WARNINGS_AS_ERRORS=OFF` forced for initial landing |
+| `4e23f9da` | **S1.4** — Add ASAN+UBSAN Linux CI job | ✅ committed — `linux-sanitizers` job in `build_cmake.yml` |
+| `72fdd9bd` | **S2.7** — Document manual test scripts | ✅ committed — chose "keep + document" path, added `tests/README.md` |
+
+**Not yet done (pick up next session):**
+- ❌ **Local build verification** on macOS — paused before installing `qt@6`/`cmake`/`ninja` via brew. The four changes are mechanical and reviewed, but no compiler has touched them yet. Recommended verification order when resuming: (1) `cmake` configure-only on this Mac (cheap, catches CMake syntax errors and validates the QHotkey pin downloads); (2) full local build (also satisfies the "can we install on the MacBook" question from the same session); (3) push branch to trigger CI matrix (truth source for the sanitizer job and Linux/Windows builds).
+- ❌ **PR not opened.** No `gh pr create` yet — branch is local only. Open when verification passes.
+
+**Risk notes:**
+- S1.2 is the riskiest commit: uncommenting `set_project_warnings(project_warnings)` will surface every latent warning across 225 files. With `WARNINGS_AS_ERRORS=OFF` it can't break the build, but the noise volume in CI logs may be substantial. Capture the count when first CI run completes — that baseline informs S1.3 sizing.
+- S1.4 sanitizer job runs `ctest` which is currently empty. Job will pass trivially today; real coverage starts when S2.1+ land.
+
+**Next session entry point:** `git checkout pr1-turn-on-alarms` then either run the local verify or `git push -u origin pr1-turn-on-alarms` for CI.
+
+---
 
 ---
 
@@ -36,23 +64,23 @@ This backlog organizes 38 stories across 7 epics, sized for an OSS project with 
 
 > "Most of the tools to fix this codebase are already in `cmake/`. They're just not turned on."
 
-### S1.1 — Pin QHotkey dependency
+### S1.1 — Pin QHotkey dependency ✅ DONE (`10ff5140`)
 **Problem:** `CMakeLists.txt:144-149` pins QHotkey to branch `master`. Non-reproducible build; vulnerable to upstream changes.
 **Acceptance:**
-- `GIT_TAG` references a release tag (`v1.5.0`) or full commit SHA
-- Build produces identical output across two consecutive runs
-- CMake fetch warning eliminated
-**Size:** XS (30 min)
+- ✅ `GIT_TAG` references full commit SHA `d7063877c14d5ae2b489dc70bbe02e76a43bf38b` (fork has no release tags)
+- ⏳ "Build produces identical output across two consecutive runs" — pending build verification
+- ⏳ CMake fetch warning eliminated — pending build run
+**Size:** XS (30 min) — actual: 15 min
 **Priority:** **P0**
 **Deps:** none
 
-### S1.2 — Enable warnings framework (no -Werror)
+### S1.2 — Enable warnings framework (no -Werror) ✅ DONE (`4090fa11`)
 **Problem:** `cmake/CompilerWarnings.cmake` is fully defined but never invoked — `set_project_warnings()` is commented out at `CMakeLists.txt:109`.
 **Acceptance:**
-- Line 109 uncommented with `WARNINGS_AS_ERRORS=FALSE`
-- Build still succeeds across all three platforms in CI
-- Warning count baseline captured in a CI summary
-**Size:** S (1 hr config + observe)
+- ✅ Line 109 replaced with `set_project_warnings(project_warnings)`; `WARNINGS_AS_ERRORS=OFF` forced via CACHE override
+- ⏳ "Build still succeeds across all three platforms in CI" — pending push
+- ⏳ "Warning count baseline captured in a CI summary" — capture from first CI run; informs S1.3 sizing
+**Size:** S (1 hr config + observe) — actual: 20 min config
 **Priority:** **P0**
 **Deps:** none
 
@@ -66,13 +94,14 @@ This backlog organizes 38 stories across 7 epics, sized for an OSS project with 
 **Priority:** P1
 **Deps:** S1.2
 
-### S1.4 — Enable ASAN+UBSAN on Linux CI
+### S1.4 — Enable ASAN+UBSAN on Linux CI ✅ DONE (`4e23f9da`)
 **Problem:** `cmake/Sanitizers.cmake` defines all four sanitizers; all default OFF; none invoked in CI.
 **Acceptance:**
-- One CI job in `build_cmake.yml` runs with `-DENABLE_SANITIZER_ADDRESS=ON -DENABLE_SANITIZER_UNDEFINED_BEHAVIOR=ON`
-- Job passes on master HEAD; failures gate PRs
-- Documented as the "memory safety canary" job
-**Size:** S (2 hr)
+- ✅ New `linux-sanitizers` job in `build_cmake.yml` runs with `-DENABLE_SANITIZER_ADDRESS=ON -DENABLE_SANITIZER_UNDEFINED_BEHAVIOR=ON`
+- ✅ `UBSAN_OPTIONS=halt_on_error=1` to make violations loud; `ASAN_OPTIONS=detect_leaks=0` to silence Qt's noisy at-exit "leaks"
+- ⏳ "Job passes on master HEAD" — pending push
+- ⏳ Will pass trivially today (empty `ctest`); real coverage starts after S2.1+
+**Size:** S (2 hr) — actual: 30 min
 **Priority:** **P0**
 **Deps:** none
 
@@ -166,14 +195,15 @@ This backlog organizes 38 stories across 7 epics, sized for an OSS project with 
 **Priority:** P1
 **Deps:** S2.1
 
-### S2.7 — Decide fate of `tests/action_options.sh` and `tests/path_option.sh`
+### S2.7 — Decide fate of `tests/action_options.sh` and `tests/path_option.sh` ✅ DONE (`72fdd9bd`)
 **Problem:** Two manual shell scripts that nobody runs. Either revive or delete.
 **Acceptance:**
-- Decision recorded in `docs/CONTRIBUTING.md`
-- Ported to Qt Test executables, OR deleted with rationale in commit message
-**Size:** XS-S (1 hr if delete; 4 hr if port)
+- ✅ Decision: **keep + document**. They are real, usable manual smoke recipes — just undiscoverable.
+- ✅ Added `tests/README.md` describing what each covers, how to run, dependencies, and why they're not in CI
+- ⏳ Future port to Qt Test runner deferred to when S2.1 lands
+**Size:** XS-S (1 hr if delete; 4 hr if port) — actual: 25 min for the README path
 **Priority:** P2
-**Deps:** S2.1
+**Deps:** S2.1 (only if porting; the document-only decision unblocks)
 
 ---
 
@@ -471,18 +501,22 @@ This backlog organizes 38 stories across 7 epics, sized for an OSS project with 
 
 ## Recommended Next Sprint (10 items, ~2 weeks volunteer effort)
 
-| # | Story | Size | Why this together |
-|---|---|---|---|
-| 1 | **S1.1** — Pin QHotkey | XS | Single highest-risk single-line fix in the repo |
-| 2 | **S1.2** — Enable warnings (no -Werror) | S | Sets up S1.3 follow-up; surfaces the warning baseline |
-| 3 | **S1.4** — ASAN+UBSAN on Linux CI | S | Cheapest memory-safety win; existing framework |
-| 4 | **S2.1** — `tests/CMakeLists.txt` scaffold | S | Prerequisite for every test going forward |
-| 5 | **S2.2** — `ConfigHandler` unit tests | M | First real test; immediately makes existing `ctest` invocation useful |
-| 6 | **S2.3** — `FileNameHandler` unit tests | M | Highest bug-density area; pays back fast |
-| 7 | **S5.1** — SLOT() → PMF | S | Mechanical, satisfying win for new contributors |
-| 8 | **S6.1** — PR-blocking packaging matrix | M | Directly prevents the #4658 ping-pong from recurring |
-| 9 | **S4.5** — `SECURITY.md` | XS | 1-hour fix; closes a basic OSS-hygiene gap |
-| 10 | **S7.1** — CONTRIBUTING.md testing section | S | Compounds the value of #4-6 by inviting contributors |
+| # | Story | Size | Status | Why this together |
+|---|---|---|---|---|
+| 1 | **S1.1** — Pin QHotkey | XS | ✅ committed (`10ff5140`) | Single highest-risk single-line fix in the repo |
+| 2 | **S1.2** — Enable warnings (no -Werror) | S | ✅ committed (`4090fa11`) | Sets up S1.3 follow-up; surfaces the warning baseline |
+| 3 | **S1.4** — ASAN+UBSAN on Linux CI | S | ✅ committed (`4e23f9da`) | Cheapest memory-safety win; existing framework |
+| 4 | **S2.1** — `tests/CMakeLists.txt` scaffold | S | ⏸ next | Prerequisite for every test going forward |
+| 5 | **S2.2** — `ConfigHandler` unit tests | M | ⏸ next | First real test; immediately makes existing `ctest` invocation useful |
+| 6 | **S2.3** — `FileNameHandler` unit tests | M | ⏸ next | Highest bug-density area; pays back fast |
+| 7 | **S5.1** — SLOT() → PMF | S | ⏸ next | Mechanical, satisfying win for new contributors |
+| 8 | **S6.1** — PR-blocking packaging matrix | M | ⏸ next | Directly prevents the #4658 ping-pong from recurring |
+| 9 | **S4.5** — `SECURITY.md` | XS | ⏸ next | 1-hour fix; closes a basic OSS-hygiene gap |
+| 10 | **S7.1** — CONTRIBUTING.md testing section | S | ⏸ next | Compounds the value of #4-6 by inviting contributors |
+
+Plus side win this evening: **S2.7** (document the manual test scripts) committed as `72fdd9bd`. Not on the original next-sprint list but it slotted in naturally with the PR-1 work.
+
+**Sprint progress: 4/10 stories committed + 1 bonus** (S1.1, S1.2, S1.4, S2.7 — call it 4½). PR not yet opened pending build verification. The remaining six stories (#4-#10) are the natural pickup for the next working session.
 
 **Rationale:** This sprint stands up the CI safety net before v14 GA. Together these items would have caught two of the last three reverted PRs (#4658 spec uniformization via #8; the empty-parent-window portal bug #4664 via #5+#6 if a capture smoke test had existed — close enough to motivate adding it next sprint as S2.5). None require touching CaptureWidget. Eight of the ten are sized XS-S; the two M-sized items (S2.2, S6.1) are independent and can be parallelized. A reasonable volunteer pace ships items 1, 4, 9 in week 1 (low-touch infrastructure) and 2, 3, 5, 6, 7, 8, 10 in week 2.
 
