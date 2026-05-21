@@ -180,17 +180,37 @@ void CircleCountTool::paintMousePreview(QPainter& painter,
 
     // Thickness for pen is *2 to range from radius to diameter to match the
     // ellipse draw function
-    auto orig_pen = painter.pen();
-    auto orig_opacity = painter.opacity();
+    auto const previewWidth = (size() + THICKNESS_OFFSET) * 2;
+    painter.save();
     painter.setOpacity(0.35);
     painter.setPen(QPen(context.color,
-                        (size() + THICKNESS_OFFSET) * 2,
+                        previewWidth,
                         Qt::SolidLine,
                         Qt::RoundCap));
     painter.drawLine(context.mousePos,
                      { context.mousePos.x() + 1, context.mousePos.y() + 1 });
-    painter.setOpacity(orig_opacity);
-    painter.setPen(orig_pen);
+
+
+    auto font = painter.font();
+    font.setPixelSize(previewWidth/2);
+    font.setBold(true);
+    painter.setFont(font);
+
+    painter.setPen(QPen("white"));
+    painter.drawText(QRect{ context.mousePos.x() - previewWidth/2,
+                            context.mousePos.y() - previewWidth/2,
+                            previewWidth,
+                            previewWidth  }, Qt::AlignCenter, QString::number(context.circleCount));
+
+    painter.restore();
+}
+
+bool CircleCountTool::handleMouseWheelEvent(int delta, bool adjustmentButtonPressed, CaptureContext& ctx)
+{
+    if(adjustmentButtonPressed) {
+        ctx.circleCount = qMin(qMax(ctx.circleCount + delta, 1), 999);
+    }
+    return adjustmentButtonPressed;
 }
 
 void CircleCountTool::drawStart(const CaptureContext& context)
