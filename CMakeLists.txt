@@ -141,10 +141,13 @@ include(cmake/StaticAnalyzers.cmake)
 option(BUILD_STATIC_LIBS ON)
 
 if(WIN32 OR APPLE)
+  # Pinned to a specific commit so the build is reproducible.
+  # The flameshot-org/QHotkey fork has no release tags; bump this SHA
+  # deliberately when picking up upstream fixes.
   FetchContent_Declare(
     qHotKey
     GIT_REPOSITORY https://github.com/flameshot-org/QHotkey
-    GIT_TAG master
+    GIT_TAG d7063877c14d5ae2b489dc70bbe02e76a43bf38b
   )
   FetchContent_MakeAvailable(QHotKey)
 endif()
