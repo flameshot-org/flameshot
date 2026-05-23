@@ -182,7 +182,7 @@ void saveToClipboard(const QPixmap& capture)
     if (ConfigHandler().useJpgForClipboard()) {
         saveToClipboardMime(capture, "jpeg");
     } else {
-#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
+#if defined(Q_OS_UNIX)
         if (DesktopInfo().waylandDetected()) {
             saveToClipboardMime(capture, "png");
         } else {

@@ -244,7 +244,7 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok, int preSelectedMonitor)
     screenshot.setDevicePixelRatio(currentScreen->devicePixelRatio());
     return screenshot;
 
-#elif defined(Q_OS_LINUX)
+#elif defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)
     if (!m_info.waylandDetected() && ConfigHandler().useX11LegacyScreenshot()) {
         qWarning() << "Using deprecated legacy X11 screenshot method. "
                       "Consider installing xdg-desktop-portal for your "
@@ -307,7 +307,7 @@ QPixmap ScreenGrabber::grabFullDesktop(bool& ok)
         painter.drawPixmap(offset, p);
     }
     painter.end();
-#elif defined(Q_OS_LINUX)
+#elif defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)
     if (!m_info.waylandDetected() && ConfigHandler().useX11LegacyScreenshot()) {
         qWarning() << "Using deprecated legacy X11 screenshot method. "
                       "Consider installing xdg-desktop-portal for your "
@@ -344,7 +344,7 @@ QPixmap ScreenGrabber::grabScreen(QScreen* screen, bool& ok)
 {
     QPixmap p;
     QRect geometry = screenGeometry(screen);
-#if defined(Q_OS_LINUX)
+#if defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)
     const QList<QScreen*> screens = QGuiApplication::screens();
     int screenIndex = screens.indexOf(screen);
 
@@ -516,7 +516,7 @@ QPixmap ScreenGrabber::cropToMonitor(const QPixmap& fullScreenshot,
 
     int cropX, cropY, cropWidth, cropHeight;
 
-#if defined(Q_OS_LINUX)
+#if defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)
     // Linux (both X11 and Wayland via freedesktop portal):
     // Use logical coordinate-based cropping since portal returns full
     // desktop
@@ -593,7 +593,7 @@ QPixmap ScreenGrabber::cropToMonitor(const QPixmap& fullScreenshot,
 
     QPixmap cropped = fullScreenshot.copy(cropRect);
 
-#if defined(Q_OS_LINUX)
+#if defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)
     // Linux: May need rescaling if scale factors don't match
     if (qAbs(screenshotScaleX - targetDpr) > 0.01) {
         int targetPhysicalWidth = qRound(targetGeometry.width() * targetDpr);
