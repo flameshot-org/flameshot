@@ -9,6 +9,7 @@ These are the code changes that need to take place:
 - [ ] Merge PR to main
 - [ ] Create and push git tag on main
 - [ ] Manually retrigger the Github actions so it uses the latest git tag 
+  - [ ] Make sure to run the Linux ARM CI: https://github.com/flameshot-org/flameshot/actions/workflows/Linux-arm-pack.yml
 
 These are the steps for actually making the release:
 - [ ] Download all binaries from CI run started from PR related to code changes shown above
