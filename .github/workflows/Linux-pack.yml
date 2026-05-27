@@ -31,7 +31,7 @@ env:
 jobs:
   deb-pack:
     name: Build deb on ${{ matrix.dist.name }} ${{ matrix.dist.arch }}
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.dist.runs-on }}
     strategy:
       fail-fast: false
       matrix:
@@ -40,19 +40,50 @@ jobs:
               name: debian-12,
               os: debian,
               symbol: bookworm,
-              arch: amd64
+              arch: amd64,
+              runs-on: ubuntu-latest
             }
           - {
               name: ubuntu-22.04,
               os: ubuntu,
               symbol: jammy,
-              arch: amd64
+              arch: amd64,
+              runs-on: ubuntu-latest
             }
           - {
               name: ubuntu-24.04,
               os: ubuntu,
               symbol: noble,
-              arch: amd64
+              arch: amd64,
+              runs-on: ubuntu-latest
+            }
+          - {
+              name: debian-12,
+              os: debian,
+              symbol: bookworm,
+              arch: arm64,
+              runs-on: ubuntu-24.04-arm
+            }
+          - {
+              name: debian-12,
+              os: debian,
+              symbol: bookworm,
+              arch: armhf,
+              runs-on: ubuntu-24.04-arm
+            }
+          - {
+              name: ubuntu-22.04,
+              os: ubuntu,
+              symbol: jammy,
+              arch: arm64,
+              runs-on: ubuntu-24.04-arm
+            }
+          - {
+              name: ubuntu-24.04,
+              os: ubuntu,
+              symbol: noble,
+              arch: arm64,
+              runs-on: ubuntu-24.04-arm
             }
 
     steps:
@@ -108,8 +139,20 @@ jobs:
         env:
           OS: ${{ matrix.dist.os }}
           DIST: ${{ matrix.dist.symbol }}
+          DOCKER_ARCH: ${{ matrix.dist.arch }}
           PRESERVE_ENVVARS: "GIT_HASH"
         run: |
+          case ${DOCKER_ARCH} in
+            armhf)
+              export ARCH=armhf
+              ;;
+            arm64)
+              export ARCH=aarch64
+              ;;
+            *)
+              export ARCH=${DOCKER_ARCH}
+              ;;
+          esac
           cp -r $GITHUB_WORKSPACE/packaging/debian $GITHUB_WORKSPACE
           bash $GITHUB_WORKSPACE/tools/packpack
           mv $GITHUB_WORKSPACE/build/${PRODUCT}_${VERSION}-${RELEASE}_${{ matrix.dist.arch }}.deb $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.${{ matrix.dist.name }}.${{ matrix.dist.arch }}.deb
