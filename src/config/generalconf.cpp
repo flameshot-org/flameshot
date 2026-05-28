@@ -60,7 +60,7 @@ GeneralConf::GeneralConf(QWidget* parent)
 #if defined(Q_OS_MACOS)
     initUseNativeFullscreen();
 #endif
-#if defined(Q_OS_LINUX)
+#if defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)
     initUseX11LegacyScreenshot();
 #endif
 #ifdef ENABLE_IMGUR
@@ -133,7 +133,7 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
 #if defined(Q_OS_MACOS)
     m_useNativeFullscreen->setChecked(config.useNativeFullscreen());
 #endif
-#if defined(Q_OS_LINUX)
+#if defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)
     m_useX11LegacyScreenshot->setChecked(config.useX11LegacyScreenshot());
 #endif
 }
@@ -966,7 +966,7 @@ void GeneralConf::useNativeFullscreenChanged(bool checked)
 }
 #endif
 
-#if defined(Q_OS_LINUX)
+#if defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)
 void GeneralConf::initUseX11LegacyScreenshot()
 {
     m_useX11LegacyScreenshot =
