@@ -48,6 +48,7 @@ SystemNotification::SystemNotification(QObject* parent)
 }
 
 QMap<uint, QString> SystemNotification::s_pendingPaths;
+QStringList SystemNotification::s_pendingDaemonNotifications;
 bool SystemNotification::s_exitOnLastAction = false;
 
 SystemNotification* SystemNotification::actionHandler()
@@ -90,6 +91,41 @@ bool SystemNotification::hasPendingPaths()
 void SystemNotification::setExitOnLastAction(bool exit)
 {
     s_exitOnLastAction = exit;
+}
+
+void SystemNotification::registerNotificationPath(uint id,
+                                                    const QString& path)
+{
+    actionHandler();
+    s_pendingPaths[id] = path;
+}
+
+void SystemNotification::registerNotificationPath(
+  const QMap<uint, QString>& paths)
+{
+    actionHandler();
+    for (auto it = paths.cbegin(); it != paths.cend(); ++it) {
+        s_pendingPaths.insert(it.key(), it.value());
+    }
+}
+
+QMap<uint, QString> SystemNotification::takePendingPaths()
+{
+    auto paths = s_pendingPaths;
+    s_pendingPaths.clear();
+    return paths;
+}
+
+void SystemNotification::addPendingDaemonNotification(const QString& path)
+{
+    s_pendingDaemonNotifications.append(path);
+}
+
+QStringList SystemNotification::takePendingDaemonNotifications()
+{
+    auto paths = s_pendingDaemonNotifications;
+    s_pendingDaemonNotifications.clear();
+    return paths;
 }
 
 void SystemNotification::sendMessage(const QString& text,
