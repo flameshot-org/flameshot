@@ -25,10 +25,12 @@
 #if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
 #include "core/flameshotdbusadapter.h"
 #include <QDBusConnection>
+#include <QDBusConnectionInterface>
 #include <QDBusMessage>
 #endif
 
 #include <QApplication>
+#include <QDebug>
 #include <QDir>
 #include <QLibraryInfo>
 #include <QNetworkProxyFactory>
@@ -78,9 +80,51 @@ int requestCaptureAndWait(const CaptureRequest& req)
         // if this instance is not daemon, make sure it exit after caputre finish
         if (FlameshotDaemon::instance() == nullptr &&
             !Flameshot::instance()->haveExternalWidget()) {
-            if (SystemNotification::hasPendingPaths()) {
-                SystemNotification::setExitOnLastAction(true);
-                QTimer::singleShot(10000, qApp, &QCoreApplication::quit);
+            auto pendingDaemon =
+              SystemNotification::takePendingDaemonNotifications();
+            if (!pendingDaemon.isEmpty()) {
+                bool delegated = false;
+                auto bus = QDBusConnection::sessionBus();
+                if (bus.isConnected() &&
+                    bus.interface()->isServiceRegistered(
+                      QStringLiteral("org.flameshot.Flameshot"))) {
+                    QDBusMessage msg = QDBusMessage::createMethodCall(
+                      QStringLiteral("org.flameshot.Flameshot"),
+                      QStringLiteral("/"),
+                      QLatin1String(""),
+                      QStringLiteral("showSaveNotification"));
+                    delegated = true;
+                    for (const auto& path : pendingDaemon) {
+                        QDBusMessage m = msg;
+                        m << path;
+                        // A blocking call verifies that the daemon actually
+                        // implements showSaveNotification. An older daemon
+                        // (not restarted after a package upgrade) answers
+                        // UnknownMethod; anything but a reply message must
+                        // reach the local fallback below instead of
+                        // silently losing the notification.
+                        QDBusMessage reply = bus.call(m, QDBus::Block, 3000);
+                        if (reply.type() != QDBusMessage::ReplyMessage) {
+                            qDebug() << "Delegating the save notification to "
+                                        "the daemon failed:"
+                                     << reply.errorMessage();
+                            delegated = false;
+                            break;
+                        }
+                    }
+                }
+                if (delegated) {
+                    qApp->exit(E_OK);
+                } else {
+                    // Fallback: send notification ourselves and wait
+                    SystemNotification sysNotif;
+                    for (const auto& path : pendingDaemon) {
+                        sysNotif.sendMessage(
+                          QObject::tr("Capture saved as ") + path, path);
+                    }
+                    SystemNotification::setExitOnLastAction(true);
+                    QTimer::singleShot(10000, qApp, &QCoreApplication::quit);
+                }
             } else {
                 qApp->exit(E_OK);
             }
