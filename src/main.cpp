@@ -76,9 +76,9 @@ int requestCaptureAndWait(const CaptureRequest& req)
             qApp->exit(0);
         }
 #else
-        // if this instance is not daemon, make sure it exit after caputre finish
         if (FlameshotDaemon::instance() == nullptr &&
             !Flameshot::instance()->haveExternalWidget()) {
+#if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
             auto pendingDaemon =
               SystemNotification::takePendingDaemonNotifications();
             if (!pendingDaemon.isEmpty()) {
@@ -117,6 +117,9 @@ int requestCaptureAndWait(const CaptureRequest& req)
             } else {
                 qApp->exit(E_OK);
             }
+#else
+            qApp->exit(E_OK);
+#endif
         }
 #endif
     });
