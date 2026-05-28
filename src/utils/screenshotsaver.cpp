@@ -8,6 +8,7 @@
 #include "utils/desktopinfo.h"
 #include "utils/filenamehandler.h"
 #include "utils/globalvalues.h"
+#include "utils/systemnotification.h"
 
 #include <QByteArray>
 #include <QDebug>
@@ -62,8 +63,14 @@ bool saveToFilesystem(const QPixmap& capture,
 
         if (okay) {
             saveMessage += QObject::tr("Capture saved as ") + completePath;
-            AbstractLogger::info().attachNotificationPath(notificationPath)
-              << saveMessage;
+            if (FlameshotDaemon::instance() == nullptr) {
+                SystemNotification::addPendingDaemonNotification(
+                  notificationPath);
+                qDebug().noquote() << saveMessage;
+            } else {
+                AbstractLogger::info().attachNotificationPath(notificationPath)
+                  << saveMessage;
+            }
         } else {
             saveMessage +=
               QObject::tr("Error trying to save as ") + completePath;
@@ -237,7 +244,7 @@ private:
         if (m_notified || m_owner.isNull())
             return;
         m_notified = true;
-        AbstractLogger::info() << QObject::tr("Capture saved to clipboard.");
+        qDebug() << "Capture saved to clipboard.";
         QPointer<QWidget> guard = m_owner;
         QTimer::singleShot(0, [guard]() {
             if (guard)
@@ -317,7 +324,12 @@ bool saveToFilesystemGUI(const QPixmap& capture)
             ConfigHandler().setSavePath(pathNoFile);
 
             QString msg = QObject::tr("Capture saved as ") + savePath;
-            AbstractLogger().attachNotificationPath(savePath) << msg;
+            if (FlameshotDaemon::instance() == nullptr) {
+                SystemNotification::addPendingDaemonNotification(savePath);
+                qDebug().noquote() << msg;
+            } else {
+                AbstractLogger().attachNotificationPath(savePath) << msg;
+            }
 
             if (config.copyPathAfterSave()) {
 #ifdef Q_OS_WIN
