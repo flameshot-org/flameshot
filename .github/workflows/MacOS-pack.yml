@@ -33,7 +33,7 @@ jobs:
               arch: arm64
             }
           - {
-              os: macos-15,
+              os: macos-13,
               arch: intel
             }
     runs-on: ${{ matrix.dist.os }}
@@ -73,6 +73,7 @@ jobs:
           echo "VERSION=$(cat CMakeLists.txt |grep 'set.*(.*FLAMESHOT_VERSION' | sed 's/[^0-9.]*//' |sed 's/)//g')" >> $GITHUB_ENV
           echo "VER_INFO=${ver_info}" >> $GITHUB_ENV
           echo "GIT_HASH=${git_hash}" >> $GITHUB_ENV
+          echo "GIT_TAG=${last_committed_tag}" >> $GITHUB_ENV
 
       - name: Install Qt
         run: brew install qt@6
@@ -91,9 +92,20 @@ jobs:
           cd "${DIR_BUILD}"
           ninja create_dmg
 
+      - name: Rename dmg
+        run: |
+          mv "${{ github.workspace }}/build/src/Flameshot-${{ env.VERSION }}.dmg" \
+             "${{ github.workspace }}/build/src/Flameshot-${{ env.GIT_TAG }}-artifact-macos-${{ matrix.dist.arch }}.dmg"
+
+      - name: Generate sha256sum
+        run: |
+          cd "${{ github.workspace }}/build/src"
+          shasum -a 256 "Flameshot-${{ env.GIT_TAG }}-artifact-macos-${{ matrix.dist.arch }}.dmg" \
+            > "Flameshot-${{ env.GIT_TAG }}-artifact-macos-${{ matrix.dist.arch }}.dmg.sha256sum"
+
       - name: Artifact Upload
         uses: actions/upload-artifact@v7
         with:
           name: ${{ env.PRODUCT }}-${{ env.VER_INFO }}-artifact-macos-${{ matrix.dist.arch }}
-          path: ${{ github.workspace }}/build/src/Flameshot-${{ env.VERSION }}.dmg
+          path: ${{ github.workspace }}/build/src/Flameshot-${{ env.GIT_TAG }}-artifact-macos-${{ matrix.dist.arch }}.dmg*
           overwrite: true
