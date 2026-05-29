@@ -1,5 +1,5 @@
 Name:    flameshot
-Version: 14.0.rc2
+Version: 14.0.rc3
 Release: 1%{?dist}
 Summary: Powerful yet simple to use screenshot software
 
