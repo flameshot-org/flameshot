@@ -1,5 +1,5 @@
 name: flameshot
-version: '14.0.rc2'
+version: '14.0.rc3'
 base: core24
 summary: Powerful yet simple to use screenshot software
 description: |
