@@ -176,8 +176,18 @@ jobs:
       fail-fast: false
       matrix:
         dist:
-          - { name: fedora-41, os: fedora, symbol: 41, arch: x86_64 }
-          - { name: fedora-42, os: fedora, symbol: 42, arch: x86_64 }
+          - {
+              name: fedora-41,
+              os: fedora,
+              symbol: 41,
+              arch: x86_64,
+            }
+          - {
+              name: fedora-42,
+              os: fedora,
+              symbol: 42,
+              arch: x86_64,
+            }
     steps:
       - name: Checkout Source code
         if: github.event_name == 'push'
