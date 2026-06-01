@@ -108,6 +108,7 @@ jobs:
         if: github.event_name == 'workflow_dispatch'
         uses: actions/checkout@v6
         with:
+          fetch-depth: 0
           ref: ${{ github.sha }}
 
       - name: Set env & Print flameshot version
@@ -209,6 +210,7 @@ jobs:
         if: github.event_name == 'workflow_dispatch'
         uses: actions/checkout@v6
         with:
+          fetch-depth: 0
           ref: ${{ github.sha }}
 
       - name: Set env & Print flameshot version
@@ -338,6 +340,7 @@ jobs:
         if: github.event_name == 'workflow_dispatch'
         uses: actions/checkout@v6
         with:
+          fetch-depth: 0
           ref: ${{ github.sha }}
 
       - name: Set env & Print flameshot version
@@ -432,6 +435,7 @@ jobs:
         if: github.event_name == 'workflow_dispatch'
         uses: actions/checkout@v6
         with:
+          fetch-depth: 0
           ref: ${{ github.sha }}
 
       - name: Set env & Print flameshot version
@@ -513,6 +517,7 @@ jobs:
         if: github.event_name == 'workflow_dispatch'
         uses: actions/checkout@v6
         with:
+          fetch-depth: 0
           ref: ${{ github.sha }}
 
       - name: Set env & Print flameshot version
