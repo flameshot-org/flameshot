@@ -294,21 +294,20 @@ jobs:
           overwrite: true
 
   appimage-pack:
-    name: Build appimage on ${{ matrix.config.name }}
+    name: Build appimage on ${{ matrix.dist.name }} ${{ matrix.dist.arch }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        config:
+        dist:
           - {
               name: ubuntu-24.04,
               os: ubuntu,
               symbol: noble,
               arch: amd64,
-              image_repo: quay.io/flameshot-org/ci-building,
             }
     container:
-      image: ${{ matrix.config.image_repo }}:${{ matrix.config.os }}-${{ matrix.config.symbol }}
+      image: ${{ env.DOCKER_REPO }}:${{ matrix.dist.os }}-${{ matrix.dist.symbol }}
       options: --cap-add SYS_ADMIN --device /dev/fuse --security-opt apparmor:unconfined
     steps:
       - name: Configure git safe directory
