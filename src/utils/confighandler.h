@@ -151,7 +151,7 @@ public:
 #if !defined(Q_OS_MACOS)
     CONFIG_GETTER_SETTER(captureActiveMonitor, setCaptureActiveMonitor, bool)
 #endif
-#if defined(Q_OS_LINUX)
+#if defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)
     CONFIG_GETTER_SETTER(useX11LegacyScreenshot,
                          setUseX11LegacyScreenshot,
                          bool)

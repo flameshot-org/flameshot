@@ -67,7 +67,7 @@ private slots:
 #if defined(Q_OS_MACOS)
     void useNativeFullscreenChanged(bool checked);
 #endif
-#if defined(Q_OS_LINUX)
+#if defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)
     void useX11LegacyScreenshotChanged(bool checked);
 #endif
 
@@ -114,7 +114,7 @@ private:
 #if defined(Q_OS_MACOS)
     void initUseNativeFullscreen();
 #endif
-#if defined(Q_OS_LINUX)
+#if defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)
     void initUseX11LegacyScreenshot();
 #endif
 
@@ -171,7 +171,7 @@ private:
 #if defined(Q_OS_MACOS)
     QCheckBox* m_useNativeFullscreen;
 #endif
-#if defined(Q_OS_LINUX)
+#if defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)
     QCheckBox* m_useX11LegacyScreenshot;
 #endif
 };

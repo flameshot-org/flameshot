@@ -30,6 +30,7 @@
 #include <QApplication>
 #include <QDir>
 #include <QLibraryInfo>
+#include <QNetworkProxyFactory>
 #include <QSharedMemory>
 #include <QTimer>
 #include <QTranslator>
@@ -209,6 +210,7 @@ int main(int argc, char* argv[])
     QCoreApplication::setApplicationVersion(APP_VERSION);
     QCoreApplication::setApplicationName(QStringLiteral("flameshot"));
     QCoreApplication::setOrganizationName(QStringLiteral("flameshot"));
+    QNetworkProxyFactory::setUseSystemConfiguration(true);
 
     // no arguments, just launch Flameshot
     if (argc == 1) {
@@ -223,7 +225,8 @@ int main(int argc, char* argv[])
         auto kdsa =
           KDSingleApplication(QStringLiteral("org.flameshot.Flameshot"));
 
-        if (!kdsa.isPrimaryInstance()) {
+        if (!kdsa.isPrimaryInstance() &&
+            !ConfigHandler().allowMultipleGuiInstances()) {
             return 0; // Quit
         }
 #endif

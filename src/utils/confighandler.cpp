@@ -26,7 +26,7 @@
 
 bool verifyLaunchFile()
 {
-#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
+#if defined(Q_OS_UNIX)
     QString path = QStandardPaths::locate(QStandardPaths::GenericConfigLocation,
                                           "autostart/",
                                           QStandardPaths::LocateDirectory) +
@@ -146,7 +146,7 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     // the monitor selection UI. Not supported on Wayland.
     OPTION("captureActiveMonitor"         ,Bool               ( false         )),
 #endif
-#if defined(Q_OS_LINUX)
+#if defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)
     // Bypass freedesktop portal and use Qt's native X11
     // screenshot method. Intended for WMs without xdg-desktop-portal.
     OPTION("useX11LegacyScreenshot"      ,Bool               ( false         )),
@@ -306,7 +306,7 @@ void ConfigHandler::setStartupLaunch(const bool start)
         qWarning() << "Unable to change login items, error:"
                    << process.readAll();
     }
-#elif defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
+#elif defined(Q_OS_UNIX)
     QString path =
       QStandardPaths::writableLocation(QStandardPaths::GenericConfigLocation) +
       "/autostart/";
