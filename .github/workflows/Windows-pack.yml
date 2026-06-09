@@ -26,7 +26,7 @@ env:
 jobs:
   windows-pack:
     name: VS 2022 ${{ matrix.config.arch }}-${{ matrix.type }}
-    runs-on: windows-2025
+    runs-on: windows-2022
     env:
       VCINSTALLDIR: C:/Program Files/Microsoft Visual Studio/2022/Enterprise/VC
       # 2025.02.14
