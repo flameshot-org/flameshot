@@ -25,6 +25,7 @@
 #include <QTemporaryFile>
 
 namespace {
+
 #if defined(Q_OS_WIN)
 QMap<QString, QString> catIconNames({ { "Graphics", "image.svg" },
                                       { "Utility", "apps.svg" } });
@@ -140,7 +141,7 @@ void AppLauncherWidget::launch(const QModelIndex& index)
     QStringList prog_args;
     prog_args << command;
 #else
-    QStringList prog_args = command.split(" ");
+    QStringList prog_args = QProcess::splitCommand(command);
 #endif
     // no quotes because it is going in an array!
     static const QRegularExpression regexp("(\\%.)");
@@ -158,7 +159,7 @@ void AppLauncherWidget::launch(const QModelIndex& index)
     bool inTerminal =
       index.data(Qt::UserRole + 1).toBool() || m_terminalCheckbox->isChecked();
     if (inTerminal) {
-        bool ok = TerminalLauncher::launchDetached(command);
+        bool ok = TerminalLauncher::launchDetached(prog_args);
         if (!ok) {
             QMessageBox::about(
               this, tr("Error"), tr("Unable to launch in terminal."));
