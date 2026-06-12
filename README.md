@@ -57,6 +57,8 @@
 
 - [Features](#features)
 - [Usage](#usage)
+  - [Usage on Windows](#usage-on-windows)
+  - [Usage on Hyprland](#usage-on-hyprland)
   - [CLI configuration](#cli-configuration)
   - [Config file](#config-file)
 - [Keyboard Shortcuts](#keyboard-shortcuts)
