@@ -44,4 +44,4 @@ After reporting you should aim to answer questions or clarifications as this hel
 
 ## Donations
 
-The best way to fund Flameshot is to create a bounty here: https://rysolv.com/issues
+Please refer to [the donation page on website]() for details, but as a brief recap, Flameshot does **not** accept financial donations, but we encourage you to put code bounty on the platform of your choice on the issues you like to be addressed.
