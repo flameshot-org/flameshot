@@ -535,30 +535,15 @@ QPixmap ScreenGrabber::cropToMonitor(const QPixmap& fullScreenshot,
     cropWidth = qRound(targetGeometry.width() * screenshotScaleX);
     cropHeight = qRound(targetGeometry.height() * screenshotScaleY);
 #else
-    // Windows: Calculate physical pixel positions for mixed DPI
-    cropX = 0;
-    cropY = 0;
-
-    for (QScreen* screen : screens) {
-        QRect geom = screen->geometry();
-        qreal dpr = screen->devicePixelRatio();
-
-        // Sum physical widths of screens completely to the left
-        if (geom.x() + geom.width() <= targetGeometry.x()) {
-            cropX += qRound(geom.width() * dpr);
-        }
-
-        // Sum physical heights of screens completely above
-        if (geom.y() + geom.height() <= targetGeometry.y()) {
-            cropY += qRound(geom.height() * dpr);
-        }
-    }
-
+    // Windows: crop rect must match windowsScreenshot() canvas layout
+    // (offset from virtual desktop logical min, scaled by target DPR).
+    cropX = qRound((targetGeometry.x() - minX) * targetDpr);
+    cropY = qRound((targetGeometry.y() - minY) * targetDpr);
     cropWidth = qRound(targetGeometry.width() * targetDpr);
     cropHeight = qRound(targetGeometry.height() * targetDpr);
 
 #ifdef FLAMESHOT_DEBUG_CAPTURE
-    qDebug() << tr("Calculated crop position for mixed DPI: X=%1 Y=%2")
+    qDebug() << tr("Calculated crop position (virtual desktop): X=%1 Y=%2")
                   .arg(cropX)
                   .arg(cropY);
 #endif
@@ -642,29 +627,19 @@ QPixmap ScreenGrabber::windowsScreenshot(int wid)
         QPixmap screenPixmap = screen->grabWindow(wid);
         screenPixmap.setDevicePixelRatio(1.0);
 
-        int logicalX = screenGeom.x() - minLogicalX;
-        int logicalY = screenGeom.y() - minLogicalY;
-
         int physicalWidth = screenPixmap.width();
         int physicalHeight = screenPixmap.height();
 
-        int physicalX = 0;
-        int physicalY = 0;
-
-        for (QScreen* otherScreen : screens) {
-            QRect otherGeom = otherScreen->geometry();
-            qreal otherDpr = otherScreen->devicePixelRatio();
-
-            // If this screen is entirely to the left of current screen
-            if (otherGeom.x() + otherGeom.width() <= screenGeom.x()) {
-                physicalX += qRound(otherGeom.width() * otherDpr);
-            }
-
-            // If this screen is entirely above the current screen
-            if (otherGeom.y() + otherGeom.height() <= screenGeom.y()) {
-                physicalY += qRound(otherGeom.height() * otherDpr);
-            }
-        }
+        // ShareX-style virtual desktop: one continuous canvas whose origin is
+        // the top-left of the union of all monitor geometries (logical
+        // coordinates). Place each monitor grab at its offset from that
+        // origin, scaled by this monitor's DPR — not by summing widths of
+        // monitors "to the left" / "above", which breaks for staggered
+        // layouts (e.g. different Y on side monitors, negative X).
+        const int physicalX =
+          qRound((screenGeom.x() - minLogicalX) * screenDpr);
+        const int physicalY =
+          qRound((screenGeom.y() - minLogicalY) * screenDpr);
 
         ScreenInfo info;
         info.physicalRect =
