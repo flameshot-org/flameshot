@@ -12,6 +12,7 @@ class QVBoxLayout;
 class QHBoxLayout;
 class CaptureToolButton;
 class ClickableLabel;
+class QLineEdit;
 
 class UIcolorEditor : public QWidget
 {
@@ -26,6 +27,7 @@ private slots:
     void updateUIcolor();
     void updateLocalColor(const QColor);
     void changeLastButton(CaptureToolButton*);
+    void changeInputColor(const QString&);
 
 private:
     QColor m_uiColor, m_contrastColor;
@@ -35,6 +37,7 @@ private:
     ClickableLabel* m_labelContrast;
     CaptureToolButton* m_lastButtonPressed;
     color_widgets::ColorWheel* m_colorWheel;
+    QLineEdit* m_hexColorEdit;
 
     static const CaptureTool::Type m_buttonIconType = CaptureTool::TYPE_CIRCLE;
 
@@ -43,4 +46,5 @@ private:
 
     void initColorWheel();
     void initButtons();
+    void initHexColorInput();
 };

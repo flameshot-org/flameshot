@@ -12,6 +12,7 @@
 #include <QMap>
 #include <QSpacerItem>
 #include <QVBoxLayout>
+#include <QLineEdit>
 
 UIcolorEditor::UIcolorEditor(QWidget* parent)
   : QWidget(parent)
@@ -24,6 +25,7 @@ UIcolorEditor::UIcolorEditor(QWidget* parent)
     m_hLayout->addItem(new QSpacerItem(space, space, QSizePolicy::Expanding));
     m_vLayout->setAlignment(Qt::AlignVCenter);
 
+    initHexColorInput();
     initButtons();
     initColorWheel();
 
@@ -68,6 +70,17 @@ void UIcolorEditor::updateLocalColor(const QColor c)
         m_contrastColor = c;
     }
     m_lastButtonPressed->setColor(c);
+    m_hexColorEdit->setText(c.name());
+}
+
+void UIcolorEditor::changeInputColor(const QString& hexColor) {
+
+    if(hexColor.contains(QRegularExpression("^#(?:[0-9A-Fa-f]{6}|[0-9A-Fa-f]{8})$"))) {
+        QColor color(hexColor);
+        if(color.isValid()) {
+            m_colorWheel->setColor(color);
+        }
+    }
 }
 
 void UIcolorEditor::initColorWheel()
@@ -148,6 +161,17 @@ void UIcolorEditor::initButtons()
     m_lastButtonPressed = m_buttonMainColor;
 }
 
+void UIcolorEditor::initHexColorInput()
+{
+    m_hexColorEdit = new QLineEdit(this);
+    m_hexColorEdit->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
+    connect(m_hexColorEdit, &QLineEdit::textChanged, this, &UIcolorEditor::changeInputColor);
+    QRegularExpression rgbRegex("^#(?:[0-9A-Fa-f]{6}|[0-9A-Fa-f]{8})$");
+    QRegularExpressionValidator *validator = new QRegularExpressionValidator(rgbRegex, m_hexColorEdit);
+    m_hexColorEdit->setValidator(validator);
+    m_hexColorEdit->setMaxLength(7);
+    m_vLayout->addWidget(m_hexColorEdit);
+}
 // visual update for the selected button
 void UIcolorEditor::changeLastButton(CaptureToolButton* b)
 {
