@@ -58,7 +58,7 @@
 - [Features](#features)
 - [Usage](#usage)
   - [Usage on Windows](#usage-on-windows)
-  - [Usage on Hyprland](#usage-on-hyprland)
+  - [Usage on Hyprland / Sway / wlroots](#usage-on-hyprland--sway--wlroots)
   - [CLI configuration](#cli-configuration)
   - [Config file](#config-file)
 - [Keyboard Shortcuts](#keyboard-shortcuts)
@@ -163,45 +163,9 @@ running `flameshot.exe -h`.
 
 If you require console output, run `flameshot-cli.exe` instead. `flameshot-cli.exe` is a minimal wrapper around `flameshot.exe` that ensures all stdout is captured and output to the console.
 
-### Usage on Hyprland
+### Usage on Hyprland / Sway / wlroots
 
-Below is a simple Hyprland setup to integrate Flameshot with Hyprland.
-
-<details>
-  <summary>Click to show the code snippet</summary>
-
-> **Note:** This example uses the new Lua config format introduced in Hyprland v0.55
-
-```lua
--- KEY BINDINGS
--- When the PrintScreen key is pressed, the currently focused monitor (the one containing the cursor) is captured, and the Flameshot GUI is brought up for annotating, cropping, etc.
-hl.bind("Print", function()
-    local mon = hl.get_active_monitor()
-    local n = mon and mon.id or 0
-    hl.dispatch(hl.dsp.exec_cmd("flameshot screen --number " .. n .. " --edit"))
-end)
-
--- WINDOW RULES
-hl.window_rule({
-    match       = { class = "flameshot" },
-    no_anim     = true,
-    pin         = true,
-    float       = true,
-    decorate    = false,
-    no_blur     = true,
-    no_shadow   = true,
-})
-hl.window_rule({
-    match   = { class = "flameshot", title = "flameshot" },
-    move    = { 0, 0 },
-})
-hl.window_rule({
-    match = { class = "flameshot", title = "flameshot-pin" },
-    move  = { "cursor_x-(window_w*0.5)", "cursor_y-(window_h*0.5)" },
-})
-```
-</details>
-
+Please [refer to this document](docs/UsageHyprlandSwayWlroots.md) for detailed instructions on how to set up Flameshot on Hyprland, Sway, and wlroots-based Wayland compositors.
 
 ### CLI configuration
 

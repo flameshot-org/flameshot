@@ -1,3 +1,42 @@
+# Hyprland support
+
+Flameshot works out of the box with very little configuration on Hyprland, as long as [`xdg-desktop-portal-hyprland`](https://wiki.hypr.land/Hypr-Ecosystem/xdg-desktop-portal-hyprland/) is installed and running.
+
+Below is a simple setup that you can use as a starting point:
+
+> [!NOTE]
+> This example uses the new Lua config format introduced in Hyprland v0.55
+
+```lua
+-- KEY BINDINGS
+-- PrintScreen key pressed -> the currently focused monitor (the one containing the cursor) is captured, and the Flameshot GUI is brought up for annotating, cropping, etc.
+hl.bind("Print", function()
+    local mon = hl.get_active_monitor()
+    local n = mon and mon.id or 0
+    hl.dispatch(hl.dsp.exec_cmd("flameshot screen --number " .. n .. " --edit"))
+end)
+
+-- WINDOW RULES
+hl.window_rule({
+    match       = { class = "flameshot" },
+    no_anim     = true,
+    pin         = true,
+    float       = true,
+    decorate    = false,
+    no_blur     = true,
+    no_shadow   = true,
+})
+hl.window_rule({
+    match   = { class = "flameshot", title = "flameshot" },
+    move    = { 0, 0 },
+})
+hl.window_rule({
+    match = { class = "flameshot", title = "flameshot-pin" },
+    move  = { "cursor_x-(window_w*0.5)", "cursor_y-(window_h*0.5)" },
+})
+```
+
+
 # Sway and wlroots support
 Flameshot currently supports Sway and other wlroots based Wayland compositors through [xdg-desktop-portal-wlr](https://github.com/emersion/xdg-desktop-portal-wlr). However, due to the way dbus works, there may be some extra steps required for the integration to work properly.
 
