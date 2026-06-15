@@ -13,6 +13,7 @@ class QHBoxLayout;
 class CaptureToolButton;
 class ClickableLabel;
 class QLineEdit;
+class QLabel;
 
 class UIcolorEditor : public QWidget
 {
@@ -38,6 +39,7 @@ private:
     CaptureToolButton* m_lastButtonPressed;
     color_widgets::ColorWheel* m_colorWheel;
     QLineEdit* m_hexColorEdit;
+    QLabel* m_hexColorLabel;
 
     static const CaptureTool::Type m_buttonIconType = CaptureTool::TYPE_CIRCLE;
 
