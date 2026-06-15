@@ -27,13 +27,7 @@ TrayIcon::TrayIcon(QObject* parent)
 
     setToolTip(QStringLiteral("Flameshot"));
 #if defined(Q_OS_MACOS)
-    // Because of the following issues on MacOS "Catalina":
-    // https://bugreports.qt.io/browse/QTBUG-86393
-    // https://developer.apple.com/forums/thread/126072
     auto currentMacOsVersion = QOperatingSystemVersion::current();
-    if (currentMacOsVersion >= QOperatingSystemVersion::MacOSBigSur) {
-        setContextMenu(m_menu);
-    }
 #else
     setContextMenu(m_menu);
 #endif
@@ -49,19 +43,18 @@ TrayIcon::TrayIcon(QObject* parent)
     setIcon(icon);
 
 #if defined(Q_OS_MACOS)
-    if (currentMacOsVersion < QOperatingSystemVersion::MacOSBigSur) {
-        // Because of the following issues on MacOS "Catalina":
-        // https://bugreports.qt.io/browse/QTBUG-86393
-        // https://developer.apple.com/forums/thread/126072
-        auto trayIconActivated = [this](QSystemTrayIcon::ActivationReason r) {
-            if (m_menu->isVisible()) {
-                m_menu->hide();
-            } else {
-                m_menu->popup(QCursor::pos());
-            }
-        };
-        connect(this, &QSystemTrayIcon::activated, this, trayIconActivated);
-    }
+    // Keep the menu detached from QSystemTrayIcon::setContextMenu on macOS.
+    // Older macOS versions already needed the manual popup workaround, and the
+    // native NSStatusItem menu path can abort on newer macOS versions after a
+    // capture has completed.
+    auto trayIconActivated = [this](QSystemTrayIcon::ActivationReason r) {
+        if (m_menu->isVisible()) {
+            m_menu->hide();
+        } else {
+            m_menu->popup(QCursor::pos());
+        }
+    };
+    connect(this, &QSystemTrayIcon::activated, this, trayIconActivated);
 #else
     connect(this, &TrayIcon::activated, this, [this](ActivationReason r) {
         if (r == Trigger) {
