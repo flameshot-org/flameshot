@@ -75,7 +75,7 @@ void UIcolorEditor::updateLocalColor(const QColor c)
 
 void UIcolorEditor::changeInputColor(const QString& hexColor) {
 
-    if(hexColor.contains(QRegularExpression("^#(?:[0-9A-Fa-f]{6}|[0-9A-Fa-f]{8})$"))) {
+    if(hexColor.contains(QRegularExpression("^#[0-9A-Fa-f]{6}$"))) {
         QColor color(hexColor);
         if(color.isValid()) {
             m_colorWheel->setColor(color);
@@ -167,7 +167,7 @@ void UIcolorEditor::initHexColorInput()
     m_hexColorLabel->setText(tr("Hex for Main Color"));
     m_hexColorEdit->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
     connect(m_hexColorEdit, &QLineEdit::textChanged, this, &UIcolorEditor::changeInputColor);
-    QRegularExpression rgbRegex("^#(?:[0-9A-Fa-f]{6}|[0-9A-Fa-f]{8})$");
+    QRegularExpression rgbRegex("^#[0-9A-Fa-f]{6}$");
     QRegularExpressionValidator *validator = new QRegularExpressionValidator(rgbRegex, m_hexColorEdit);
     m_hexColorEdit->setValidator(validator);
     m_hexColorEdit->setMaxLength(7);
