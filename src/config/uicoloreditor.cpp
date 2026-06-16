@@ -79,6 +79,8 @@ void UIcolorEditor::changeInputColor(const QString& hexColor) {
         QColor color(hexColor);
         if(color.isValid()) {
             m_colorWheel->setColor(color);
+            updateLocalColor(color);
+            updateUIcolor();
         }
     }
 }
