@@ -7,6 +7,7 @@
 #include "utils/strfparse.h"
 
 #include <QDir>
+#include <QFileInfo>
 #include <exception>
 #include <locale>
 
@@ -41,12 +42,15 @@ QString FileNameHandler::parseFilename(const QString& name)
         res.chop(1);
     }
 
+    const bool allowPathSeparators = res.contains(QLatin1String("/"));
     res =
-      QString::fromStdString(strfparse::format_time_string(name.toStdString()));
+      QString::fromStdString(strfparse::format_time_string(res.toStdString()));
 
     // add the parsed pattern in a correct format for the filesystem
-    res = res.replace(QLatin1String("/"), QStringLiteral("⁄"))
-            .replace(QLatin1String(":"), QLatin1String("-"));
+    if (!allowPathSeparators) {
+        res.replace(QLatin1String("/"), QStringLiteral("⁄"));
+    }
+    res.replace(QLatin1String(":"), QLatin1String("-"));
     return res;
 }
 
@@ -79,6 +83,7 @@ QString FileNameHandler::properScreenshotPath(QString path,
     if (info.isDir()) {
         // path is a directory => generate filename from configured pattern
         path = QDir(QDir(path).absolutePath() + "/" + parsedPattern()).path();
+        QDir().mkpath(QFileInfo(path).absolutePath());
     } else {
         // path points to a file => strip it of its suffix for now
         path = QDir(info.dir().absolutePath() + "/" + info.completeBaseName())
