@@ -13,7 +13,7 @@ Below is a simple setup that you can use as a starting point:
 hl.bind("Print", function()
     local mon = hl.get_active_monitor()
     local n = mon and mon.id or 0
-    hl.dispatch(hl.dsp.exec_cmd("flameshot screen --number " .. n .. " --edit"))
+    hl.exec_cmd("flameshot screen --number " .. n .. " --edit")
 end)
 
 -- WINDOW RULES
