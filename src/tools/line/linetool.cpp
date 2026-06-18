@@ -10,6 +10,7 @@ LineTool::LineTool(QObject* parent)
 {
     m_supportsOrthogonalAdj = true;
     m_supportsDiagonalAdj = true;
+    setModifierInvertsConstraint(true);
 }
 
 QIcon LineTool::icon(const QColor& background, bool inEditor) const

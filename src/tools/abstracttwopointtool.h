@@ -40,12 +40,24 @@ protected:
     void copyParams(const AbstractTwoPointTool* from, AbstractTwoPointTool* to);
     void setPadding(int padding) { m_padding = padding; };
 
+    // New: allow derived tools to invert the modifier behavior (default false).
+    // When false (default): Ctrl pressed => constrain (existing behavior).
+    // When true: Ctrl pressed => free drawing (inverted, used by Line/Wave).
+    void setModifierInvertsConstraint(bool invert) { m_modifierInvertsConstraint = invert; }
+    bool modifierInvertsConstraint() const { return m_modifierInvertsConstraint; }
+
+    // Optional helper for derived classes if they need direct access
+    bool isConstraintActive() const; // implemented in .cpp, uses m_modifierInvertsConstraint
+
 private:
     // class members
     int m_thickness;
     int m_padding;
     QColor m_color;
     QPair<QPoint, QPoint> m_points;
+
+    // New flag controlling modifier inversion
+    bool m_modifierInvertsConstraint = false;
 
 protected:
     // use m_padding to extend the area of the backup

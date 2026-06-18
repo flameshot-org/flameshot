@@ -154,6 +154,8 @@ static std::map<CaptureTool::Type, int> buttonTypeOrder
 
       { CaptureTool::TYPE_SIZEINCREASE, 22 },
       { CaptureTool::TYPE_SIZEDECREASE, 23 },
+      { CaptureTool::TYPE_ONDULATED, 24 },
+      { CaptureTool::TYPE_ZIGZAG, 25 },
 };
 
 int CaptureToolButton::getPriorityByButton(CaptureTool::Type b)
@@ -165,6 +167,7 @@ int CaptureToolButton::getPriorityByButton(CaptureTool::Type b)
 
 QList<CaptureTool::Type> CaptureToolButton::iterableButtonTypes = {
     CaptureTool::TYPE_PENCIL,        CaptureTool::TYPE_DRAWER,
+    CaptureTool::TYPE_ONDULATED,     CaptureTool::TYPE_ZIGZAG,
     CaptureTool::TYPE_ARROW,         CaptureTool::TYPE_SELECTION,
     CaptureTool::TYPE_RECTANGLE,     CaptureTool::TYPE_CIRCLE,
     CaptureTool::TYPE_MARKER,        CaptureTool::TYPE_TEXT,

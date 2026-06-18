@@ -209,6 +209,9 @@ static QMap<QString, QSharedPointer<KeySequence>> recognizedShortcuts = {
     SHORTCUT("TYPE_SIZEINCREASE"        ,                           ),
     SHORTCUT("TYPE_SIZEDECREASE"        ,                           ),
     SHORTCUT("TYPE_CIRCLECOUNT"         ,                           ),
+    SHORTCUT("TYPE_ONDULATED"           ,                           ),
+    SHORTCUT("TYPE_ZIGZAG"              ,                           ),
+
 };
 // clang-format on
 

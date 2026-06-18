@@ -5,6 +5,7 @@
 
 #include <QCursor>
 #include <QScreen>
+#include <QApplication> // added for keyboardModifiers()
 #include <cmath>
 
 namespace {
@@ -33,6 +34,7 @@ AbstractTwoPointTool::AbstractTwoPointTool(QObject* parent)
   : CaptureTool(parent)
   , m_thickness(1)
   , m_padding(0)
+  , m_modifierInvertsConstraint(false) // default: do not invert (existing tools unchanged)
 {}
 
 void AbstractTwoPointTool::copyParams(const AbstractTwoPointTool* from,
@@ -46,6 +48,7 @@ void AbstractTwoPointTool::copyParams(const AbstractTwoPointTool* from,
     to->m_padding = from->m_padding;
     to->m_supportsOrthogonalAdj = from->m_supportsOrthogonalAdj;
     to->m_supportsDiagonalAdj = from->m_supportsDiagonalAdj;
+    to->m_modifierInvertsConstraint = from->m_modifierInvertsConstraint;
 }
 
 bool AbstractTwoPointTool::isValid() const
@@ -99,12 +102,18 @@ void AbstractTwoPointTool::drawEnd(const QPoint& p)
 
 void AbstractTwoPointTool::drawMove(const QPoint& p)
 {
-    m_points.second = p;
+    if (isConstraintActive())
+        drawMoveWithAdjustment(p);
+    else
+        m_points.second = p;
 }
 
+// Added to abstracttwopointtool.cpp — defines the declared slot so it's linked.
 void AbstractTwoPointTool::drawMoveWithAdjustment(const QPoint& p)
 {
-    m_points.second = m_points.first + adjustedVector(p - m_points.first);
+    QPoint v = p - m_points.first;
+    QPoint adj = adjustedVector(v);
+    m_points.second = m_points.first + adj;
 }
 
 void AbstractTwoPointTool::onColorChanged(const QColor& c)
@@ -132,8 +141,23 @@ void AbstractTwoPointTool::drawStart(const CaptureContext& context)
     onSizeChanged(context.toolSize);
 }
 
+// New helper: determine whether constraint snapping should be active.
+// Default behavior: Ctrl pressed => constrain. If m_modifierInvertsConstraint is true,
+// the behavior is inverted: Ctrl pressed => free drawing (no constrain).
+bool AbstractTwoPointTool::isConstraintActive() const
+{
+    Qt::KeyboardModifiers mods = QApplication::keyboardModifiers();
+    bool ctrlPressed = (mods & Qt::ControlModifier);
+    return m_modifierInvertsConstraint ? !ctrlPressed : ctrlPressed;
+}
+
 QPoint AbstractTwoPointTool::adjustedVector(QPoint v) const
 {
+    // If constraint not active, return original vector
+    if (!isConstraintActive()) {
+        return v;
+    }
+
     if (m_supportsOrthogonalAdj && m_supportsDiagonalAdj) {
         int dir = (static_cast<int>(round(atan2(-v.y(), v.x()) / ADJ_UNIT)) +
                    DIRS_NUMBER) %

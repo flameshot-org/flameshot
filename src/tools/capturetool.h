@@ -51,6 +51,8 @@ public:
         TYPE_INVERT = 22,
         TYPE_ACCEPT = 23,
         TYPE_CANCEL = 24,
+        TYPE_ONDULATED = 25,
+        TYPE_ZIGZAG = 26,
     };
     Q_ENUM(Type);
 
