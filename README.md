@@ -5,7 +5,7 @@
         <img src="data/img/app/org.flameshot.Flameshot.svg" alt="Flameshot" />
       </a>
       <br />
-      Flameshot
+      Flameshot Enhance
     </h1>
     <h4>Powerful yet simple to use screenshot software.</h4>
   </p>
