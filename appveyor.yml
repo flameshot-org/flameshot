@@ -31,7 +31,7 @@ build_script:
     mkdir C:\projects\source\build\artifact
     copy C:\projects\source\build\package\*.msi C:\projects\source\build\artifact\.
     copy C:\projects\source\build-portable\src\Release\*.exe C:\projects\source\build\artifact\.
-    7z a -tzip C:\projects\source\build\artifact.zip C:\projects\source\build\artifact\
+    7z a -tzip C:\projects\source\build\artifact-x64.zip C:\projects\source\build\artifact\
 
 # ---------------------------------------------------------------------------
 # ARM64 cross-compile job. The build host stays x64; only the *target* is
@@ -98,10 +98,10 @@ for:
           New-Item -ItemType Directory -Force -Path $src\build\artifact | Out-Null
           Copy-Item $src\build\package\*.msi              $src\build\artifact\
           Copy-Item $src\build-portable\src\Release\*.exe $src\build\artifact\
-          7z a -tzip $src\build\artifact.zip $src\build\artifact\
+          7z a -tzip $src\build\artifact-arm64.zip $src\build\artifact\
 
 artifacts:
-- path: build\artifact.zip
+- path: build\artifact-*.zip
   name: artifact
 
 deploy:
@@ -110,9 +110,10 @@ deploy:
   #url: https://app.signpath.io/API/v1/042f605f-b378-45d8-ad16-b7695b071036/Integrations/AppVeyor?ProjectSlug=flameshot&SigningPolicySlug=release-signing
   authorization:
     secure: UGxEQ/cEpACvBCjp1lSeZOMkB49/GRpm+PGG9asArdbaVHmLuPuso//tRhNDZJXY5nL4E+/FaaFqV9tBIkYbUQ==
-  # Only sign/deploy the established x64 release on the upstream repo; arm64
-  # just uploads artifacts, and forks never attempt to deploy (their secure
-  # token is empty and the SignPath project belongs to upstream).
+  # Sign/deploy both arch artifacts, but only on the upstream repo. Forks never
+  # attempt to deploy (their secure token is empty and the SignPath project
+  # belongs to upstream). Each job uploads a distinctly named zip
+  # (artifact-x64.zip / artifact-arm64.zip) so the two signing requests don't
+  # collide.
   on:
-    ARCH: x64
     APPVEYOR_REPO_NAME: flameshot-org/flameshot
