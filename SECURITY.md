@@ -29,7 +29,7 @@ To help us triage and resolve the issue efficiently, your report must include th
 To protect our volunteers' time, the following types of reports are considered out of scope unless they present a novel, unique threat vector:
 
 - Vulnerabilities that require prior root/administrator access or an already compromised operating system
-  - this is because if root is compromised, the user have bigger problem on their hand the bad actor can do much worse than what is remotely feasible with a screenshot tool
+  - this is because if root is compromised, the user have bigger problem on their hand and the bad actor can do much worse than what is remotely feasible with a screenshot tool
 - Theoretical issues or raw outputs from automated security scanners without a verified, functional Proof of Concept.
 
 ## Response Process
