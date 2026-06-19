@@ -5,7 +5,14 @@ clone_folder: c:\projects\source
 environment:
   Qt6_INSTALL_DIR: 'C:\Qt\6.9.3\msvc2022_64'
   PATH: '%Qt6_INSTALL_DIR%\bin;%PATH%'
+  # Build both the native x64 release and an ARM64 cross-compile. Each matrix
+  # row becomes its own AppVeyor job.
+  matrix:
+    - ARCH: x64
+    - ARCH: arm64
 
+# Default (x64) build. Unchanged from the original signed-release pipeline.
+# The arm64 job overrides install/build_script in the `for:` section below.
 build_script:
   # Build installer (non-portable)
 - cmd: |-
@@ -26,6 +33,73 @@ build_script:
     copy C:\projects\source\build-portable\src\Release\*.exe C:\projects\source\build\artifact\.
     7z a -tzip C:\projects\source\build\artifact.zip C:\projects\source\build\artifact\
 
+# ---------------------------------------------------------------------------
+# ARM64 cross-compile job. The build host stays x64; only the *target* is
+# ARM64 (the Qt package is literally "..._arm64_cross_compiled"). Because the
+# host is native x64, WiX/candle and windeployqt run without emulation.
+# ---------------------------------------------------------------------------
+for:
+  - matrix:
+      only:
+        - ARCH: arm64
+    install:
+      - ps: |
+          # The VS2022 image may not ship the ARM64 MSVC cross toolset. Add it
+          # (quick no-op if already present). Remove this step if the image
+          # already includes "VC.Tools.ARM64".
+          $vsInstaller = "C:\Program Files (x86)\Microsoft Visual Studio\Installer\vs_installer.exe"
+          if (Test-Path $vsInstaller) {
+            Start-Process -FilePath $vsInstaller -Wait -ArgumentList `
+              'modify','--installPath','C:\Program Files\Microsoft Visual Studio\2022\Community',
+              '--add','Microsoft.VisualStudio.Component.VC.Tools.ARM64','--quiet','--norestart'
+          }
+
+          # Install the cross-compiled ARM64 Qt plus its x64 host tools
+          # (--autodesktop) via aqt. This mirrors the GitHub install-qt step.
+          python -m pip install --upgrade pip aqtinstall
+          python -m aqt install-qt windows desktop 6.9.3 win64_msvc2022_arm64_cross_compiled `
+            --autodesktop --outputdir C:\Qt --modules qtimageformats
+
+          # ARM64 OpenSSL (no prebuilt system copy for arm64 on the image).
+          C:\Tools\vcpkg\vcpkg.exe install openssl:arm64-windows
+    build_script:
+      - ps: |
+          $ErrorActionPreference = "Stop"
+          $src    = "C:\projects\source"
+          $qtArm  = "C:\Qt\6.9.3\msvc2022_arm64"   # target libs (CMAKE_PREFIX_PATH)
+          $qtHost = "C:\Qt\6.9.3\msvc2022_64"      # host tools  (QT_HOST_PATH)
+          $env:OPENSSL_ROOT_DIR = "C:\Tools\vcpkg\installed\arm64-windows"
+
+          # Cross args shared by both configs. -A ARM64 selects the
+          # Hostx64/arm64 cross compiler; QT_HOST_PATH provides host moc/rcc.
+          $common = @(
+            "-G", "Visual Studio 17 2022", "-A", "ARM64",
+            "-DCMAKE_PREFIX_PATH=$qtArm",
+            "-DQT_HOST_PATH=$qtHost",
+            "-DCMAKE_BUILD_TYPE=Release",
+            "-DENABLE_OPENSSL=ON"
+          )
+
+          # Installer (non-portable) -> CPack WiX produces Flameshot-*-arm64.msi
+          cmake -S $src -B $src\build @common -DUSE_PORTABLE_CONFIG=OFF
+          if ($LASTEXITCODE) { throw "configure (installer) failed" }
+          cmake --build $src\build --parallel 2 --config Release
+          if ($LASTEXITCODE) { throw "build (installer) failed" }
+          cpack --config $src\build\CPackConfig.cmake -G WIX -B $src\build\package
+          if ($LASTEXITCODE) { throw "cpack failed" }
+
+          # Portable
+          cmake -S $src -B $src\build-portable @common -DUSE_PORTABLE_CONFIG=ON
+          if ($LASTEXITCODE) { throw "configure (portable) failed" }
+          cmake --build $src\build-portable --parallel 2 --config Release
+          if ($LASTEXITCODE) { throw "build (portable) failed" }
+
+          # Combine into the same artifact.zip the x64 job produces.
+          New-Item -ItemType Directory -Force -Path $src\build\artifact | Out-Null
+          Copy-Item $src\build\package\*.msi              $src\build\artifact\
+          Copy-Item $src\build-portable\src\Release\*.exe $src\build\artifact\
+          7z a -tzip $src\build\artifact.zip $src\build\artifact\
+
 artifacts:
 - path: build\artifact.zip
   name: artifact
@@ -36,3 +110,9 @@ deploy:
   #url: https://app.signpath.io/API/v1/042f605f-b378-45d8-ad16-b7695b071036/Integrations/AppVeyor?ProjectSlug=flameshot&SigningPolicySlug=release-signing
   authorization:
     secure: UGxEQ/cEpACvBCjp1lSeZOMkB49/GRpm+PGG9asArdbaVHmLuPuso//tRhNDZJXY5nL4E+/FaaFqV9tBIkYbUQ==
+  # Only sign/deploy the established x64 release on the upstream repo; arm64
+  # just uploads artifacts, and forks never attempt to deploy (their secure
+  # token is empty and the SignPath project belongs to upstream).
+  on:
+    ARCH: x64
+    APPVEYOR_REPO_NAME: flameshot-org/flameshot
