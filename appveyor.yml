@@ -64,7 +64,10 @@ for:
           C:\Tools\vcpkg\vcpkg.exe install openssl:arm64-windows
     build_script:
       - ps: |
-          $ErrorActionPreference = "Stop"
+          # NOTE: do NOT set $ErrorActionPreference = "Stop" here. Native tools
+          # (cmake/cpack/7z) write progress to stderr, which PowerShell turns
+          # into NativeCommandError records; with Stop that aborts the build even
+          # on success (exit 0). Real failures are caught via $LASTEXITCODE below.
           $src    = "C:\projects\source"
           $qtArm  = "C:\Qt\6.9.3\msvc2022_arm64"   # target libs (CMAKE_PREFIX_PATH)
           $qtHost = "C:\Qt\6.9.3\msvc2022_64"      # host tools  (QT_HOST_PATH)
