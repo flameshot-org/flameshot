@@ -13,6 +13,7 @@
 #endif
 
 #include <QMap>
+#include <QTemporaryFile>
 #include <QWidget>
 
 class QTabWidget;
@@ -46,7 +47,7 @@ private:
     DesktopFileParser m_parser;
 #endif
     QPixmap m_pixmap;
-    QString m_tempFile;
+    QTemporaryFile* m_tempFile = nullptr;
     bool m_keepOpen;
     QMap<QString, QVector<DesktopAppData>> m_appsMap;
     QCheckBox* m_keepOpenCheckbox;

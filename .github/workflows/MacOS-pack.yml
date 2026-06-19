@@ -30,12 +30,12 @@ jobs:
       matrix:
         dist:
           - {
-              os: macos-15,
-              arch: arm64,
+              os: macos-26,
+              arch: arm64
             }
           - {
-              os: macos-15,
-              arch: intel,
+              os: macos-26-intel,
+              arch: intel
             }
     runs-on: ${{ matrix.dist.os }}
     env:

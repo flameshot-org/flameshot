@@ -57,6 +57,8 @@
 
 - [Features](#features)
 - [Usage](#usage)
+  - [Usage on Windows](#usage-on-windows)
+  - [Usage on Hyprland / Sway / wlroots](#usage-on-hyprland--sway--wlroots)
   - [CLI configuration](#cli-configuration)
   - [Config file](#config-file)
 - [Keyboard Shortcuts](#keyboard-shortcuts)
@@ -160,6 +162,10 @@ but it will not output any text to the console. This is problematic if, for exam
 running `flameshot.exe -h`.
 
 If you require console output, run `flameshot-cli.exe` instead. `flameshot-cli.exe` is a minimal wrapper around `flameshot.exe` that ensures all stdout is captured and output to the console.
+
+### Usage on Hyprland / Sway / wlroots
+
+Please [refer to this document](docs/UsageHyprlandSwayWlroots.md) for detailed instructions on how to set up Flameshot on Hyprland, Sway, and wlroots-based Wayland compositors.
 
 ### CLI configuration
 

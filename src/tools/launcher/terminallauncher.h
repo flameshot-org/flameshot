@@ -17,7 +17,7 @@ class TerminalLauncher : public QObject
 public:
     explicit TerminalLauncher(QObject* parent = nullptr);
 
-    static bool launchDetached(const QString& command);
+    static bool launchDetached(const QStringList& args);
 
 private:
     static TerminalApp getPreferedTerminal();

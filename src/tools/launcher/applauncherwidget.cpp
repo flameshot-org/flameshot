@@ -22,8 +22,10 @@
 #include <QRegularExpression>
 #include <QStandardPaths>
 #include <QTabWidget>
+#include <QTemporaryFile>
 
 namespace {
+
 #if defined(Q_OS_WIN)
 QMap<QString, QString> catIconNames({ { "Graphics", "image.svg" },
                                       { "Utility", "apps.svg" } });
@@ -108,10 +110,21 @@ AppLauncherWidget::AppLauncherWidget(const QPixmap& p, QWidget* parent)
 
 void AppLauncherWidget::launch(const QModelIndex& index)
 {
-    if (!QFileInfo(m_tempFile).isReadable()) {
-        m_tempFile =
-          FileNameHandler().properScreenshotPath(QDir::tempPath(), "png");
-        bool ok = m_pixmap.save(m_tempFile);
+    if (!m_tempFile || !QFileInfo(m_tempFile->fileName()).isReadable()) {
+        delete m_tempFile;
+        // _XXXXXX is how Qt temporary files are mocked before substitution
+        m_tempFile = new QTemporaryFile(QDir::tempPath() + "/" +
+                                          FileNameHandler().parsedPattern() +
+                                          "_XXXXXX.png",
+                                        this);
+        m_tempFile->setAutoRemove(false);
+        if (!m_tempFile->open()) {
+            QMessageBox::about(
+              this, tr("Error"), tr("Unable to write in") + QDir::tempPath());
+            return;
+        }
+        m_tempFile->close();
+        bool ok = m_pixmap.save(m_tempFile->fileName());
         if (!ok) {
             QMessageBox::about(
               this, tr("Error"), tr("Unable to write in") + QDir::tempPath());
@@ -121,13 +134,14 @@ void AppLauncherWidget::launch(const QModelIndex& index)
     // Heuristically, if there is a % in the command we assume it is the file
     // name slot
     QString command = index.data(Qt::UserRole).toString();
+    const QString tempFilePath = m_tempFile->fileName();
 #if defined(Q_OS_WIN)
     // Do not split on Windows, since file path can contain spaces
     // and % is not used in lnk files
     QStringList prog_args;
     prog_args << command;
 #else
-    QStringList prog_args = command.split(" ");
+    QStringList prog_args = QProcess::splitCommand(command);
 #endif
     // no quotes because it is going in an array!
     static const QRegularExpression regexp("(\\%.)");
@@ -135,23 +149,23 @@ void AppLauncherWidget::launch(const QModelIndex& index)
         // but that means we need to substitute IN the array not the string!
         for (auto& i : prog_args) {
             if (i.contains("%"))
-                i.replace(regexp, m_tempFile);
+                i.replace(regexp, tempFilePath);
         }
     } else {
         // we really should append the file name if there
-        prog_args.append(m_tempFile); // were no replacements
+        prog_args.append(tempFilePath); // were no replacements
     }
     QString app_name = prog_args.at(0);
     bool inTerminal =
       index.data(Qt::UserRole + 1).toBool() || m_terminalCheckbox->isChecked();
     if (inTerminal) {
-        bool ok = TerminalLauncher::launchDetached(command);
+        bool ok = TerminalLauncher::launchDetached(prog_args);
         if (!ok) {
             QMessageBox::about(
               this, tr("Error"), tr("Unable to launch in terminal."));
         }
     } else {
-        QFileInfo fi(m_tempFile);
+        QFileInfo fi(tempFilePath);
         QString workingDir = fi.absolutePath();
         prog_args.removeAt(0); // strip program name out
         QProcess::startDetached(app_name, prog_args, workingDir);
