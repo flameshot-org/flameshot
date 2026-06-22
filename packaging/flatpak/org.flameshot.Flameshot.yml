@@ -40,8 +40,8 @@ modules:
         
       - type: git
         url: https://github.com/flameshot-org/flameshot.git
-        tag: v14.0.0
-        commit: e408812d77ff1835957f85796c4cf737466bd69d
+        # tag: v14.0.0
+        # commit: e408812d77ff1835957f85796c4cf737466bd69d
 
     cleanup:
       - /share/bash-completion
