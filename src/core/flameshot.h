@@ -60,6 +60,8 @@ public slots:
     void history();
 #endif
 
+    void pinHistory();
+
     void openSavePath();
 
     QVersionNumber getVersion();

@@ -52,6 +52,7 @@ constexpr const char* visibleInDockProperty = "_visibleInDock";
 #include "widgets/capture/capturewidget.h"
 #include "widgets/capturelauncher.h"
 #include "widgets/infowindow.h"
+#include "widgets/pinhistorydialog.h"
 
 #ifdef ENABLE_IMGUR
 #include "tools/imgupload/imguploadermanager.h"
@@ -321,6 +322,33 @@ void Flameshot::history()
 #endif
 }
 #endif
+
+void Flameshot::pinHistory()
+{
+    FlameshotDaemon* daemon = FlameshotDaemon::instance();
+    if (!daemon || !daemon->pinHistory()) {
+        return;
+    }
+
+    static QPointer<PinHistoryDialog> dialog;
+    if (!dialog) {
+        dialog = new PinHistoryDialog(daemon->pinHistory());
+    }
+
+    dialog->show();
+    dialog->raise();
+    dialog->activateWindow();
+
+    QRect position = dialog->frameGeometry();
+    if (QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen()) {
+        position.moveCenter(currentScreen->availableGeometry().center());
+        dialog->move(position.topLeft());
+    }
+
+#if defined(Q_OS_MACOS)
+    showDockIcon(dialog);
+#endif
+}
 
 #if defined(Q_OS_MACOS)
 void Flameshot::onWindowVisibilityChanged(QWindow::Visibility newVisibility)

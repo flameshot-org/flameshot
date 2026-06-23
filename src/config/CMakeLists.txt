@@ -11,6 +11,8 @@ target_sources(
           extendedslider.cpp
           filenameeditor.cpp
           generalconf.cpp
+          pinhistoryconf.h
+          pinhistoryconf.cpp
           setshortcutwidget.cpp
           shortcutswidget.cpp
           strftimechooserwidget.cpp

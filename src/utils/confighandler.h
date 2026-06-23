@@ -115,6 +115,9 @@ public:
                          setHistoryConfirmationToDelete,
                          bool)
     CONFIG_GETTER_SETTER(uploadHistoryMax, setUploadHistoryMax, int)
+    CONFIG_GETTER_SETTER(pinHistoryEnabled, setPinHistoryEnabled, bool)
+    CONFIG_GETTER_SETTER(pinHistoryMaxEntries, setPinHistoryMaxEntries, int)
+    CONFIG_GETTER_SETTER(pinHistoryMaxAgeDays, setPinHistoryMaxAgeDays, int)
     CONFIG_GETTER_SETTER(saveAfterCopy, setSaveAfterCopy, bool)
     CONFIG_GETTER_SETTER(copyPathAfterSave, setCopyPathAfterSave, bool)
     CONFIG_GETTER_SETTER(saveAsFileExtension, setSaveAsFileExtension, QString)
