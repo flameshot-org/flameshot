@@ -111,6 +111,7 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
     m_allowMultipleGuiInstances->setChecked(config.allowMultipleGuiInstances());
     m_showMagnifier->setChecked(config.showMagnifier());
     m_squareMagnifier->setChecked(config.squareMagnifier());
+    m_showSelectionHandles->setChecked(config.showSelectionHandles());
     m_saveLastRegion->setChecked(config.saveLastRegion());
     m_reverseArrow->setChecked(config.reverseArrow());
     m_autoCloseIdleDaemon->setChecked(config.autoCloseIdleDaemon());
@@ -832,7 +833,22 @@ void GeneralConf::initShowSelectionGeometry()
 
     selGeoLayout->addWidget(m_selectGeometryLocation);
     vboxLayout->addLayout(selGeoLayout);
+
+    m_showSelectionHandles = new QCheckBox(tr("Show selection handles"), this);
+    m_showSelectionHandles->setToolTip(
+      tr("Show resize handles for the screenshot selection area"));
+    vboxLayout->addWidget(m_showSelectionHandles);
+    connect(m_showSelectionHandles,
+            &QCheckBox::clicked,
+            this,
+            &GeneralConf::setShowSelectionHandles);
+
     vboxLayout->addStretch();
+}
+
+void GeneralConf::setShowSelectionHandles(bool checked)
+{
+    ConfigHandler().setShowSelectionHandles(checked);
 }
 
 void GeneralConf::initJpegQuality()
