@@ -22,9 +22,9 @@ on:
 env:
   PRODUCT: flameshot
   RELEASE: 1
-  # dockerfiles: see https://github.com/flameshot-org/flameshot-dockerfiles
+  # dockerfiles: https://github.com/flameshot-org/flameshot-dockerfiles
   # docker images: https://quay.io/repository/flameshot-org/ci-building
-  # building tool: https://github.com/flameshot-org/packpack
+  # build tool: https://github.com/flameshot-org/packpack
   DOCKER_REPO: quay.io/flameshot-org/ci-building
   PACKPACK_REPO: flameshot-org/packpack
 
