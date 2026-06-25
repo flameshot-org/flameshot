@@ -970,7 +970,7 @@ void GeneralConf::useNativeFullscreenChanged(bool checked)
 void GeneralConf::initUseX11LegacyScreenshot()
 {
     m_useX11LegacyScreenshot =
-      new QCheckBox(tr("Use legacy X11 screenshot method (deprecated)"), this);
+      new QCheckBox(tr("Use legacy X11 screenshot method"), this);
     m_useX11LegacyScreenshot->setToolTip(
       tr("Bypass the freedesktop portal and use Qt's native X11 screen "
          "capture. Enable this if your window manager lacks "

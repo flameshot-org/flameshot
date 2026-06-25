@@ -101,12 +101,13 @@ void ScreenGrabber::freeDesktopPortal(bool& ok, QPixmap& res)
     QMetaObject::Connection conn = QObject::connect(
       request, &org::freedesktop::portal::Request::Response, onPortalResponse);
 
+    bool timedOut = false;
     QTimer timeout;
     timeout.setSingleShot(true);
-    timeout.setInterval(30000); // 30 second timeout
-    QObject::connect(&timeout, &QTimer::timeout, &loop, [&loop, this]() {
-        AbstractLogger::error()
-          << tr("Screenshot portal timed out after 30 seconds");
+    timeout.setInterval(15000); // 15 second timeout
+
+    QObject::connect(&timeout, &QTimer::timeout, &loop, [&loop, &timedOut]() {
+        timedOut = true;
         loop.quit();
     });
     timeout.start();
@@ -141,6 +142,18 @@ void ScreenGrabber::freeDesktopPortal(bool& ok, QPixmap& res)
     QObject::disconnect(conn);
     request->Close().waitForFinished();
     request->deleteLater();
+
+    if (timedOut) {
+        ok = false;
+
+        AbstractLogger::error()
+          << tr("The xdg-desktop-portal backend did not respond "
+                "If you are on wayland make sure an xdg-desktop-portal backend "
+                "for your desktop is "
+                "installed and properly configured.\n \n"
+                "If on X11 enable Legacy X11 method in the General Settings");
+        return;
+    }
 
     if (res.isNull()) {
         ok = false;
@@ -246,10 +259,6 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok, int preSelectedMonitor)
 
 #elif defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)
     if (!m_info.waylandDetected() && ConfigHandler().useX11LegacyScreenshot()) {
-        qWarning() << "Using deprecated legacy X11 screenshot method. "
-                      "Consider installing xdg-desktop-portal for your "
-                      "desktop. Future versions of Flameshot may remove the "
-                      "option to use the legacy method.";
         screenshot = x11LegacyScreenshot();
         ok = !screenshot.isNull();
         if (!ok) {
@@ -309,9 +318,6 @@ QPixmap ScreenGrabber::grabFullDesktop(bool& ok)
     painter.end();
 #elif defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)
     if (!m_info.waylandDetected() && ConfigHandler().useX11LegacyScreenshot()) {
-        qWarning() << "Using deprecated legacy X11 screenshot method. "
-                      "Consider installing xdg-desktop-portal for your "
-                      "desktop.";
         screenshot = x11LegacyScreenshot();
         ok = !screenshot.isNull();
         if (!ok) {
