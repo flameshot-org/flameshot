@@ -489,8 +489,8 @@ QPixmap ScreenGrabber::cropToMonitor(const QPixmap& fullScreenshot,
     qreal targetDpr = targetScreen->devicePixelRatio();
 
     // Calculate total logical dimensions and minimum coordinates
-    int minX = 0, minY = 0;
-    int maxX = 0, maxY = 0;
+    int minX = INT_MAX, minY = INT_MAX;
+    int maxX = INT_MIN, maxY = INT_MIN;
 
     for (QScreen* screen : screens) {
         QRect geo = screen->geometry();
