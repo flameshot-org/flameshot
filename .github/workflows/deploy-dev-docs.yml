@@ -2,15 +2,15 @@ name: Deploy developer docs
 
 on:
   push:
-    branches: [ master, docs ]
+    branches: [master, docs]
     paths:
-      - 'src/**'
-      - 'docs/dev/**'
-      - '.github/workflows/deploy-dev-docs.yml'
+      - "src/**"
+      - "docs/dev/**"
+      - ".github/workflows/deploy-dev-docs.yml"
 
 jobs:
   build-and-deploy:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
       - name: Install dependencies
         run: |
@@ -24,7 +24,7 @@ jobs:
       - name: Checkout flameshot source
         uses: actions/checkout@v6
         with:
-          path: 'flameshot'
+          path: "flameshot"
 
       - name: Build docs
         working-directory: ${{github.workspace}}/flameshot/docs/dev
@@ -34,9 +34,9 @@ jobs:
       - name: Checkout flameshot website
         uses: actions/checkout@v6
         with:
-          repository: 'flameshot-org/flameshot-org.github.io'
-          ref: 'gh-pages'
-          path: 'website'
+          repository: "flameshot-org/flameshot-org.github.io"
+          ref: "gh-pages"
+          path: "website"
 
       - name: Configure git credentials for website repo
         working-directory: ${{github.workspace}}/website
@@ -72,4 +72,3 @@ jobs:
         run: |
           git push --force destination dev-docs-staging
           git push destination gh-pages
-
