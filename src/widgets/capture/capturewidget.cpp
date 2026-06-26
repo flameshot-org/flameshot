@@ -990,6 +990,7 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
               m_captureToolObjects.at(m_panel->activeLayerIndex());
             if (m_activeToolOffsetToMouseOnStart.isNull()) {
                 setCursor(Qt::ClosedHandCursor);
+                activeTool->prepareMove(m_mousePressedPos);
                 m_activeToolOffsetToMouseOnStart =
                   e->pos() - *activeTool->pos();
             }
