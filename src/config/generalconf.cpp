@@ -924,7 +924,7 @@ void GeneralConf::setInsecurePixelate(bool checked)
 void GeneralConf::initCaptureActiveMonitor()
 {
     m_captureActiveMonitor = new QCheckBox(
-      tr("Capture active monitor (skip monitor selection)"), this);
+      tr("Capture active monitor in X11 (skip monitor selection)"), this);
     m_captureActiveMonitor->setToolTip(
       tr("Automatically capture the monitor where the cursor is located "
          "instead of showing the monitor selection dialog. "
