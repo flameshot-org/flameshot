@@ -4,6 +4,7 @@
 #include "flameshotdbusadapter.h"
 #include "core/flameshot.h"
 #include "core/flameshotdaemon.h"
+#include "utils/systemnotification.h"
 
 FlameshotDBusAdapter::FlameshotDBusAdapter(QObject* parent)
   : QDBusAbstractAdaptor(parent)
@@ -30,4 +31,19 @@ void FlameshotDBusAdapter::attachTextToClipboard(const QString& text,
 void FlameshotDBusAdapter::attachPin(const QByteArray& data)
 {
     FlameshotDaemon::instance()->attachPin(data);
+}
+
+void FlameshotDBusAdapter::registerNotificationPath(uint id,
+                                                      const QString& path)
+{
+    SystemNotification::registerNotificationPath(id, path);
+}
+
+void FlameshotDBusAdapter::showSaveNotification(const QString& path)
+{
+    SystemNotification sysNotif;
+    sysNotif.sendMessage(
+      QObject::tr("Capture saved as ") + path,
+      QObject::tr("Flameshot Info"),
+      path);
 }
