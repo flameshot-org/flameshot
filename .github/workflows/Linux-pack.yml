@@ -108,6 +108,7 @@ jobs:
         if: github.event_name == 'workflow_dispatch'
         uses: actions/checkout@v6
         with:
+          fetch-depth: 0
           ref: ${{ github.sha }}
 
       - name: Set env & Print flameshot version
@@ -209,6 +210,7 @@ jobs:
         if: github.event_name == 'workflow_dispatch'
         uses: actions/checkout@v6
         with:
+          fetch-depth: 0
           ref: ${{ github.sha }}
 
       - name: Set env & Print flameshot version
@@ -338,6 +340,7 @@ jobs:
         if: github.event_name == 'workflow_dispatch'
         uses: actions/checkout@v6
         with:
+          fetch-depth: 0
           ref: ${{ github.sha }}
 
       - name: Set env & Print flameshot version
@@ -432,6 +435,7 @@ jobs:
         if: github.event_name == 'workflow_dispatch'
         uses: actions/checkout@v6
         with:
+          fetch-depth: 0
           ref: ${{ github.sha }}
 
       - name: Set env & Print flameshot version
@@ -513,6 +517,7 @@ jobs:
         if: github.event_name == 'workflow_dispatch'
         uses: actions/checkout@v6
         with:
+          fetch-depth: 0
           ref: ${{ github.sha }}
 
       - name: Set env & Print flameshot version
@@ -552,4 +557,37 @@ jobs:
           path: |
             ${{ github.workspace }}/build/${{ env.PRODUCT }}-*-${{ env.RELEASE }}.amd64.snap
             ${{ github.workspace }}/build/${{ env.PRODUCT }}-*-${{ env.RELEASE }}.amd64.snap.sha256sum
+          overwrite: true
+
+  collect-linux:
+    name: Collect all Linux artifacts
+    needs: [deb-pack, rpm-pack, appimage-pack, flatpak-pack, snap-pack]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source code
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Set env
+        shell: bash
+        run: |
+          last_committed_tag=$(git tag -l --sort=-v:refname | head -1)
+          git_revno=$(git rev-list $(git describe --tags --abbrev=0)..HEAD --count)
+          git_hash=$(git rev-parse --short HEAD)
+          ver_info=${last_committed_tag}+git${git_revno}.${git_hash}
+          echo "VER_INFO=${ver_info}" >> $GITHUB_ENV
+
+      - name: Download all Linux artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: ${{ env.PRODUCT }}-*-artifact-*
+          path: linux-artifacts
+          merge-multiple: true
+
+      - name: Artifact Upload (combined)
+        uses: actions/upload-artifact@v7
+        with:
+          name: ${{ env.PRODUCT }}-${{ env.VER_INFO }}-linux-all
+          path: linux-artifacts/
           overwrite: true

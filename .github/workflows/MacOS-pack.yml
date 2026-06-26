@@ -44,17 +44,21 @@ jobs:
       - name: Checkout Source code
         if: github.event_name == 'push'
         uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
 
       - name: Checkout Source code
         if: github.event_name == 'pull_request'
         uses: actions/checkout@v6
         with:
+          fetch-depth: 0
           ref: ${{ github.event.pull_request.head.sha }}
 
       - name: Checkout Source code
         if: github.event_name == 'workflow_dispatch'
         uses: actions/checkout@v6
         with:
+          fetch-depth: 0
           ref: ${{ github.sha }}
 
       - name: Set env & Print flameshot version
@@ -73,6 +77,7 @@ jobs:
           echo "VERSION=$(cat CMakeLists.txt |grep 'set.*(.*FLAMESHOT_VERSION' | sed 's/[^0-9.]*//' |sed 's/)//g')" >> $GITHUB_ENV
           echo "VER_INFO=${ver_info}" >> $GITHUB_ENV
           echo "GIT_HASH=${git_hash}" >> $GITHUB_ENV
+          echo "GIT_TAG=${last_committed_tag}" >> $GITHUB_ENV
 
       - name: Install Qt
         run: brew install qt@6
@@ -91,9 +96,20 @@ jobs:
           cd "${DIR_BUILD}"
           ninja create_dmg
 
+      - name: Rename dmg
+        run: |
+          mv "${{ github.workspace }}/build/src/Flameshot-${{ env.VERSION }}.dmg" \
+             "${{ github.workspace }}/build/src/Flameshot-${{ env.GIT_TAG }}-artifact-macos-${{ matrix.dist.arch }}.dmg"
+
+      - name: Generate sha256sum
+        run: |
+          cd "${{ github.workspace }}/build/src"
+          shasum -a 256 "Flameshot-${{ env.GIT_TAG }}-artifact-macos-${{ matrix.dist.arch }}.dmg" \
+            > "Flameshot-${{ env.GIT_TAG }}-artifact-macos-${{ matrix.dist.arch }}.dmg.sha256sum"
+
       - name: Artifact Upload
         uses: actions/upload-artifact@v7
         with:
           name: ${{ env.PRODUCT }}-${{ env.VER_INFO }}-artifact-macos-${{ matrix.dist.arch }}
-          path: ${{ github.workspace }}/build/src/Flameshot-${{ env.VERSION }}.dmg
+          path: ${{ github.workspace }}/build/src/Flameshot-${{ env.GIT_TAG }}-artifact-macos-${{ matrix.dist.arch }}.dmg*
           overwrite: true
