@@ -2,18 +2,20 @@ name: Building(CMake)
 
 on:
   push:
-    branches: [ master ]
+    branches:
+      - master
+      - fix*
     paths-ignore:
-      - '*.md'
-      - 'LICENSE'
-      - 'docs/**'
+      - "*.md"
+      - "LICENSE"
+      - "docs/**"
+
   pull_request:
-    branches: [ master ]
     paths-ignore:
-      - '*.md'
-      - 'LICENSE'
-      - 'docs/**'
-      - 'data/translations/*.ts'
+      - "*.md"
+      - "LICENSE"
+      - "docs/**"
+      - "data/translations/*.ts"
 
   workflow_dispatch:
 
@@ -23,12 +25,8 @@ env:
 
 jobs:
   linux-build:
-    name: ${{ matrix.os}}
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-24.04]
-
+    name: Linux Build
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout Source code
         if: github.event_name == 'push'
@@ -71,6 +69,7 @@ jobs:
         # and build directories. We need to source the profile file to make sure conan is in PATH
         run: |
           cmake $GITHUB_WORKSPACE -DCMAKE_BUILD_TYPE=$BUILD_TYPE
+
       - name: Build
         working-directory: ${{runner.workspace}}/build
         shell: bash
@@ -90,14 +89,15 @@ jobs:
       fail-fast: false
       matrix:
         config:
-        - {
-            name: "Windows 2022 MSVC",
-            artifact: "Windows-MSVC.tar.xz",
-            os: windows-2022,
-            cc: "cl", cxx: "cl",
-            environment_script: "C:/Program Files/Microsoft Visual Studio/2022/Enterprise/VC/Auxiliary/Build/vcvars64.bat",
-            qt_ver: '6.9.3'
-          }
+          - {
+              name: "Windows 2022 MSVC",
+              artifact: "Windows-MSVC.tar.xz",
+              os: windows-2022,
+              cc: "cl",
+              cxx: "cl",
+              environment_script: "C:/Program Files/Microsoft Visual Studio/2022/Enterprise/VC/Auxiliary/Build/vcvars64.bat",
+              qt_ver: "6.9.3",
+            }
 
     steps:
       - uses: actions/checkout@v6
@@ -111,10 +111,10 @@ jobs:
         uses: jurplel/install-qt-action@v4
         with:
           version: ${{ matrix.config.qt_ver }}
-          cache: 'true'
+          cache: "true"
           cache-key-prefix: install-qt-action-${{ matrix.config.qt_ver }}
-          target:  desktop
-          dir: '${{ github.workspace }}/build/'
+          target: desktop
+          dir: "${{ github.workspace }}/build/"
 
       - name: Configure
         working-directory: build
