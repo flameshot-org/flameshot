@@ -179,15 +179,15 @@ jobs:
       matrix:
         dist:
           - {
-              name: fedora-41,
+              name: fedora-43,
               os: fedora,
-              symbol: 41,
+              symbol: 43,
               arch: x86_64
             }
           - {
-              name: fedora-42,
+              name: fedora-44,
               os: fedora,
-              symbol: 42,
+              symbol: 44,
               arch: x86_64
             }
     steps:
