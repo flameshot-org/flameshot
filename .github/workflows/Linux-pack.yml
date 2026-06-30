@@ -37,16 +37,9 @@ jobs:
       matrix:
         dist:
           - {
-              name: debian-12,
+              name: debian-13,
               os: debian,
-              symbol: bookworm,
-              arch: amd64,
-              runs-on: ubuntu-latest
-            }
-          - {
-              name: ubuntu-22.04,
-              os: ubuntu,
-              symbol: jammy,
+              symbol: trixie,
               arch: amd64,
               runs-on: ubuntu-latest
             }
@@ -58,30 +51,37 @@ jobs:
               runs-on: ubuntu-latest
             }
           - {
-              name: debian-12,
+              name: ubuntu-26.04,
+              os: ubuntu,
+              symbol: resolute,
+              arch: amd64,
+              runs-on: ubuntu-latest
+            }
+          - {
+              name: debian-13,
               os: debian,
-              symbol: bookworm,
+              symbol: trixie,
               arch: arm64,
               runs-on: ubuntu-24.04-arm
             }
           - {
-              name: debian-12,
+              name: debian-13,
               os: debian,
-              symbol: bookworm,
+              symbol: trixie,
               arch: armhf,
               runs-on: ubuntu-24.04-arm
             }
           - {
-              name: ubuntu-22.04,
+              name: ubuntu-24.04,
               os: ubuntu,
-              symbol: jammy,
+              symbol: noble,
               arch: arm64,
               runs-on: ubuntu-24.04-arm
             }
           - {
-              name: ubuntu-24.04,
+              name: ubuntu-26.04,
               os: ubuntu,
-              symbol: noble,
+              symbol: resolute,
               arch: arm64,
               runs-on: ubuntu-24.04-arm
             }
@@ -179,15 +179,15 @@ jobs:
       matrix:
         dist:
           - {
-              name: fedora-41,
+              name: fedora-43,
               os: fedora,
-              symbol: 41,
+              symbol: 43,
               arch: x86_64
             }
           - {
-              name: fedora-42,
+              name: fedora-44,
               os: fedora,
-              symbol: 42,
+              symbol: 44,
               arch: x86_64
             }
     steps:
