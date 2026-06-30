@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QByteArray>
+#include <QColorSpace>
 #include <QObject>
 
 #if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
@@ -26,8 +27,11 @@ class FlameshotDaemon : public QObject
 public:
     static void start();
     static FlameshotDaemon* instance();
-    static void createPin(const QPixmap& capture, QRect geometry);
-    static void copyToClipboard(const QPixmap& capture);
+    static void createPin(const QPixmap& capture,
+                          QRect geometry,
+                          const QColorSpace& colorSpace = {});
+    static void copyToClipboard(const QPixmap& capture,
+                                const QColorSpace& colorSpace = {});
     static void copyToClipboard(const QString& text,
                                 const QString& notification = "");
     static bool isThisInstanceHostingWidgets();
@@ -61,8 +65,11 @@ signals:
 private:
     FlameshotDaemon();
     void quitIfIdle();
-    void attachPin(const QPixmap& pixmap, QRect geometry);
-    void attachScreenshotToClipboard(const QPixmap& pixmap);
+    void attachPin(const QPixmap& pixmap,
+                   QRect geometry,
+                   const QColorSpace& colorSpace = {});
+    void attachScreenshotToClipboard(const QPixmap& pixmap,
+                                     const QColorSpace& colorSpace = {});
 
     void attachPin(const QByteArray& data);
     void attachScreenshotToClipboard(const QByteArray& screenshot);

@@ -5,6 +5,7 @@
 
 #include "utils/desktopinfo.h"
 
+#include <QColorSpace>
 #include <QEvent>
 #include <QList>
 #include <QObject>
@@ -28,6 +29,9 @@ public:
     QRect logicalDesktopGeometry();
     int getSelectedMonitor() const { return m_selectedMonitor; }
     QScreen* getSelectedScreen() const;
+    // ICC color profile of the most recently grabbed display (invalid when
+    // unknown / not implemented for the platform).
+    QColorSpace colorSpace() const { return m_colorSpace; }
     QPixmap selectMonitorAndCrop(const QPixmap& fullScreenshot, bool& ok);
 
 protected:
@@ -42,6 +46,7 @@ private:
 
     DesktopInfo m_info;
     QPixmap Screenshot;
+    QColorSpace m_colorSpace;
     int m_selectedMonitor;
     QEventLoop* m_monitorSelectionLoop;
     bool m_userCancelled;

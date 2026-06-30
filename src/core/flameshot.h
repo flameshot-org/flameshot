@@ -5,6 +5,7 @@
 
 #include "core/capturerequest.h"
 
+#include <QColorSpace>
 #include <QObject>
 #include <QPointer>
 #include <QVersionNumber>
@@ -78,7 +79,8 @@ public slots:
     void requestCapture(const CaptureRequest& request);
     void exportCapture(const QPixmap& p,
                        QRect& selection,
-                       const CaptureRequest& req);
+                       const CaptureRequest& req,
+                       const QColorSpace& colorSpace = {});
 
 private:
     Flameshot();
