@@ -190,12 +190,6 @@ jobs:
               symbol: 44,
               arch: x86_64
             }
-          - {
-              name: 'opensuse-leap-16.0',
-              os: opensuse-leap,
-              symbol: '16.0',
-              arch: x86_64
-            }
     steps:
       - name: Checkout Source code
         if: github.event_name == 'push'
