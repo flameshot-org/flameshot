@@ -2,12 +2,7 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "capturerequest.h"
-#include "config/cacheutils.h"
-#include "utils/confighandler.h"
 
-#include <QApplication>
-#include <QClipboard>
-#include <QDateTime>
 #include <stdexcept>
 #include <utility>
 
@@ -22,12 +17,6 @@ CaptureRequest::CaptureRequest(CaptureRequest::CaptureMode mode,
   , m_selectedMonitor(-1)
   , m_hasSelectedMonitor(false)
 {
-
-    ConfigHandler config;
-    if (m_mode == CaptureRequest::CaptureMode::GRAPHICAL_MODE &&
-        config.saveLastRegion()) {
-        setInitialSelection(getLastRegion());
-    }
 }
 
 CaptureRequest::CaptureMode CaptureRequest::captureMode() const

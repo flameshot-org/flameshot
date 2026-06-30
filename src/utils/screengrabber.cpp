@@ -238,6 +238,12 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok, int preSelectedMonitor)
         ok = false;
         return QPixmap();
     }
+    m_selectedMonitor = QGuiApplication::screens().indexOf(currentScreen);
+    if (m_selectedMonitor < 0) {
+        AbstractLogger::error() << tr("Unable to get current screen");
+        ok = false;
+        return QPixmap();
+    }
     const QRect geom = currentScreen->geometry();
     screenshot = currentScreen->grabWindow(
       wid, geom.x(), geom.y(), geom.width(), geom.height());
