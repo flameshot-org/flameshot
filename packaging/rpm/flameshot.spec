@@ -44,7 +44,11 @@ Requires: hicolor-icon-theme
 %if 0%{?suse_version}
 Requires: qt6-svg
 %else
+%if 0%{?fedora} || 0%{?rhel}
+Requires: qt6-qtsvg%{?_isa}
+%else
 Requires: qt6-svg%{?_isa}
+%endif
 %endif
 
 %if 0%{?suse_version}
