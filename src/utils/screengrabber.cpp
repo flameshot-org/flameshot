@@ -2,6 +2,7 @@
 #include "screengrabber.h"
 #include "core/qguiappcurrentscreen.h"
 #include "utils/abstractlogger.h"
+#include "utils/colorprofileprovider.h"
 #include "utils/confighandler.h"
 #include "utils/monitorpreview.h"
 #include "utils/systemnotification.h"
@@ -242,6 +243,7 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok, int preSelectedMonitor)
     screenshot = currentScreen->grabWindow(
       wid, geom.x(), geom.y(), geom.width(), geom.height());
     screenshot.setDevicePixelRatio(currentScreen->devicePixelRatio());
+    m_colorSpace = ColorProfileProvider::forScreen(currentScreen);
     return screenshot;
 
 #elif defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)
@@ -285,7 +287,10 @@ QPixmap ScreenGrabber::grabFullDesktop(bool& ok)
     QPixmap screenshot;
 
 #if defined(Q_OS_MACOS)
-    // On macOS, composite all screens into a single pixmap.
+    // On macOS, composite all screens into a single pixmap. Different screens
+    // may have different profiles, so tag with the primary screen's profile.
+    m_colorSpace =
+      ColorProfileProvider::forScreen(QGuiApplication::primaryScreen());
     const QList<QScreen*> screens = QGuiApplication::screens();
     QRect totalGeom;
     for (QScreen* s : screens) {
@@ -351,6 +356,7 @@ QPixmap ScreenGrabber::grabScreen(QScreen* screen, bool& ok)
     p = grabEntireDesktop(ok, screenIndex);
 #else
     ok = true;
+    m_colorSpace = ColorProfileProvider::forScreen(screen);
     return screen->grabWindow(
       0, geometry.x(), geometry.y(), geometry.width(), geometry.height());
 #endif

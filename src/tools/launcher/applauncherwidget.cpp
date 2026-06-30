@@ -2,8 +2,10 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "applauncherwidget.h"
+#include "core/qguiappcurrentscreen.h"
 #include "tools/launcher/launcheritemdelegate.h"
 #include "tools/launcher/terminallauncher.h"
+#include "utils/colorprofileprovider.h"
 #include "utils/confighandler.h"
 #include "utils/filenamehandler.h"
 #include "utils/globalvalues.h"
@@ -124,7 +126,14 @@ void AppLauncherWidget::launch(const QModelIndex& index)
             return;
         }
         m_tempFile->close();
-        bool ok = m_pixmap.save(m_tempFile->fileName());
+        // Tag the temp image with the current display's profile so apps opened
+        // with it see the same colors as the native screenshot tool (#4341).
+        const QColorSpace colorSpace = ColorProfileProvider::forScreen(
+          QGuiAppCurrentScreen().currentScreen());
+        bool ok = colorSpace.isValid()
+                    ? ColorProfileProvider::tagged(m_pixmap, colorSpace)
+                        .save(m_tempFile->fileName())
+                    : m_pixmap.save(m_tempFile->fileName());
         if (!ok) {
             QMessageBox::about(
               this, tr("Error"), tr("Unable to write in") + QDir::tempPath());

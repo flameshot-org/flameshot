@@ -5,6 +5,7 @@
 
 #include "core/capturerequest.h"
 
+#include <QColorSpace>
 #include <QPainter>
 #include <QPixmap>
 #include <QPoint>
@@ -16,6 +17,8 @@ struct CaptureContext
     QPixmap screenshot;
     // unmodified screenshot
     QPixmap origScreenshot;
+    // ICC color profile of the captured display (invalid when unknown)
+    QColorSpace colorSpace;
     // Selection area
     QRect selection;
     // Selected tool color

@@ -4,6 +4,7 @@
 #include "screenshotsaver.h"
 #include "core/flameshotdaemon.h"
 #include "utils/abstractlogger.h"
+#include "utils/colorprofileprovider.h"
 #include "utils/confighandler.h"
 #include "utils/desktopinfo.h"
 #include "utils/filenamehandler.h"
@@ -38,7 +39,8 @@
 
 bool saveToFilesystem(const QPixmap& capture,
                       const QString& path,
-                      const QString& messagePrefix)
+                      const QString& messagePrefix,
+                      const QColorSpace& colorSpace)
 {
     QString completePath = FileNameHandler().properScreenshotPath(
       path, ConfigHandler().saveAsFileExtension());
@@ -48,7 +50,14 @@ bool saveToFilesystem(const QPixmap& capture,
     if (file.open(QIODevice::WriteOnly)) {
         QString saveExtension;
         saveExtension = QFileInfo(completePath).suffix().toLower();
-        if (saveExtension == "jpg" || saveExtension == "jpeg") {
+        const bool isJpeg = saveExtension == "jpg" || saveExtension == "jpeg";
+        if (colorSpace.isValid()) {
+            const QImage tagged =
+              ColorProfileProvider::tagged(capture, colorSpace);
+            okay = isJpeg
+                     ? tagged.save(&file, nullptr, ConfigHandler().jpegQuality())
+                     : tagged.save(&file);
+        } else if (isJpeg) {
             okay = capture.save(&file, nullptr, ConfigHandler().jpegQuality());
         } else {
             okay = capture.save(&file);
@@ -111,15 +120,19 @@ QString ShowSaveFileDialog(const QString& title, const QString& directory)
     }
 }
 
-void saveToClipboardMime(const QPixmap& capture, const QString& imageType)
+void saveToClipboardMime(const QPixmap& capture,
+                         const QString& imageType,
+                         const QColorSpace& colorSpace)
 {
+    const QImage source = ColorProfileProvider::tagged(capture, colorSpace);
+
     QByteArray array;
     QBuffer buffer{ &array };
     QImageWriter imageWriter{ &buffer, imageType.toUpper().toUtf8() };
     if (imageType == "jpeg") {
         imageWriter.setQuality(ConfigHandler().jpegQuality());
     }
-    imageWriter.write(capture.toImage());
+    imageWriter.write(source);
 
     QPixmap formattedPixmap;
     bool isLoaded =
@@ -134,12 +147,12 @@ void saveToClipboardMime(const QPixmap& capture, const QString& imageType)
         // setImageData provides the image in a native pasteboard format
         // (public.tiff) that macOS can always access. Also include the
         // original format bytes for apps that prefer PNG/JPEG.
-        mimeData->setImageData(formattedPixmap.toImage());
+        mimeData->setImageData(source);
         mimeData->setData("image/" + imageType, array);
         QApplication::clipboard()->setMimeData(mimeData);
 #elif defined(USE_WAYLAND_CLIPBOARD)
         if (QGuiApplication::platformName() == "wayland") {
-            mimeData->setImageData(formattedPixmap.toImage());
+            mimeData->setImageData(source);
             mimeData->setData(QStringLiteral("x-kde-force-image-copy"),
                               QByteArray());
             KSystemClipboard::instance()->setMimeData(mimeData,
@@ -161,7 +174,7 @@ void saveToClipboardMime(const QPixmap& capture, const QString& imageType)
 
 // If data is saved to the clipboard before the notification is sent via
 // dbus, the application freezes.
-void saveToClipboard(const QPixmap& capture)
+void saveToClipboard(const QPixmap& capture, const QColorSpace& colorSpace)
 {
     // If we are able to properly save the file, save the file and copy to
     // clipboard.
@@ -169,7 +182,8 @@ void saveToClipboard(const QPixmap& capture)
         (!ConfigHandler().savePath().isEmpty())) {
         saveToFilesystem(capture,
                          ConfigHandler().savePath(),
-                         QObject::tr("Capture saved to clipboard."));
+                         QObject::tr("Capture saved to clipboard."),
+                         colorSpace);
     } else {
         AbstractLogger() << QObject::tr("Capture saved to clipboard.");
     }
@@ -177,10 +191,11 @@ void saveToClipboard(const QPixmap& capture)
     // On macOS, setPixmap uses lazy clipboard which fails when the
     // process exits ("Cannot keep promise"). Always use serialized bytes.
     saveToClipboardMime(capture,
-                        ConfigHandler().useJpgForClipboard() ? "jpeg" : "png");
+                        ConfigHandler().useJpgForClipboard() ? "jpeg" : "png",
+                        colorSpace);
 #else
     if (ConfigHandler().useJpgForClipboard()) {
-        saveToClipboardMime(capture, "jpeg");
+        saveToClipboardMime(capture, "jpeg", colorSpace);
     } else {
 #if defined(Q_OS_UNIX)
         if (DesktopInfo().waylandDetected()) {
@@ -269,7 +284,7 @@ bool saveToClipboardGnomeWorkaround(const QPixmap& pixmap, QWidget* keepAlive)
     return true;
 }
 
-bool saveToFilesystemGUI(const QPixmap& capture)
+bool saveToFilesystemGUI(const QPixmap& capture, const QColorSpace& colorSpace)
 {
     bool okay = false;
     ConfigHandler config;
@@ -303,7 +318,14 @@ bool saveToFilesystemGUI(const QPixmap& capture)
     if (file.open(QIODevice::WriteOnly)) {
         QString saveExtension;
         saveExtension = QFileInfo(savePath).suffix().toLower();
-        if (saveExtension == "jpg" || saveExtension == "jpeg") {
+        const bool isJpeg = saveExtension == "jpg" || saveExtension == "jpeg";
+        if (colorSpace.isValid()) {
+            const QImage tagged =
+              ColorProfileProvider::tagged(capture, colorSpace);
+            okay = isJpeg
+                     ? tagged.save(&file, nullptr, ConfigHandler().jpegQuality())
+                     : tagged.save(&file);
+        } else if (isJpeg) {
             okay = capture.save(&file, nullptr, ConfigHandler().jpegQuality());
         } else {
             okay = capture.save(&file);
