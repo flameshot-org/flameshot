@@ -1273,8 +1273,8 @@ void CaptureWidget::initPanel()
     connect(m_sidePanel,
             &SidePanelWidget::geometryChangeRequested,
             this,
-            [this](QRect const &geometry){
-                if(m_selection)
+            [this](QRect const& geometry) {
+                if (m_selection)
                     m_selection->setGeometry(geometry);
             });
     connect(m_sidePanel,

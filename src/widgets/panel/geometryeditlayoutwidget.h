@@ -12,6 +12,7 @@ public:
     void update(QRect const& geometry);
 signals:
     void edited(QRect const& geometry);
+
 private:
     QSpinBox* m_wEditor;
     QSpinBox* m_hEditor;

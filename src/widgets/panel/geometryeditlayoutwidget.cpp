@@ -4,33 +4,39 @@
 #include <QLabel>
 #include <QSpinBox>
 
+int const MIN_POSITION = 0;
+int const MAX_POSITION = 100000;
+
+int const MIN_SIZE = 1;
+int const MAX_SIZE = 100000;
+
 GeometryEditLayoutWidget::GeometryEditLayoutWidget(QWidget* parent)
   : QGroupBox("Grab area")
 {
     auto grid = new QGridLayout(this);
     auto wl = new QLabel("Width");
     m_wEditor = new QSpinBox;
-    m_wEditor->setMaximum(3000);
-    m_wEditor->setMinimum(1);
-    m_wEditor->setValue(1280);
+    m_wEditor->setMaximum(MAX_SIZE);
+    m_wEditor->setMinimum(MIN_SIZE);
+    m_wEditor->setValue(MIN_SIZE);
 
     auto hl = new QLabel("Height");
     m_hEditor = new QSpinBox;
-    m_hEditor->setMaximum(3000);
-    m_hEditor->setMinimum(1);
-    m_hEditor->setValue(1280);
+    m_hEditor->setMaximum(MAX_SIZE);
+    m_hEditor->setMinimum(MIN_SIZE);
+    m_hEditor->setValue(MIN_SIZE);
 
     auto xl = new QLabel("X");
     m_xEditor = new QSpinBox;
-    m_xEditor->setMaximum(3000);
-    m_xEditor->setMinimum(1);
-    m_xEditor->setValue(1280);
+    m_xEditor->setMaximum(MAX_POSITION);
+    m_xEditor->setMinimum(MIN_POSITION);
+    m_xEditor->setValue(MIN_POSITION);
 
     auto yl = new QLabel("Y");
     m_yEditor = new QSpinBox;
-    m_yEditor->setMaximum(3000);
-    m_yEditor->setMinimum(1);
-    m_yEditor->setValue(1280);
+    m_yEditor->setMaximum(MAX_POSITION);
+    m_yEditor->setMinimum(MIN_POSITION);
+    m_yEditor->setValue(MIN_POSITION);
 
     grid->addWidget(wl, 0, 0);
     grid->addWidget(m_wEditor, 0, 1);
