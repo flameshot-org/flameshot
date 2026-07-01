@@ -5,41 +5,42 @@ on:
     branches:
       - master
     paths-ignore:
-      - '*.md'
-      - 'LICENSE'
-      - 'docs/**'
+      - "*.md"
+      - "LICENSE"
+      - "docs/**"
 
   pull_request:
     paths-ignore:
-      - '*.md'
-      - 'LICENSE'
-      - 'docs/**'
-      - 'data/translations/*.ts'
+      - "*.md"
+      - "LICENSE"
+      - "docs/**"
+      - "data/translations/*.ts"
 
   workflow_dispatch:
 
 env:
   PRODUCT: flameshot
+  MACOSX_DEPLOYMENT_TARGET: "14.0"
 
 jobs:
   dmg-pack:
     name: Build dmg on ${{ matrix.dist.os }} ${{ matrix.dist.arch }}
+
     strategy:
       fail-fast: false
       matrix:
         dist:
-          - {
-              os: macos-26,
-              arch: arm64
-            }
-          - {
-              os: macos-26-intel,
-              arch: intel
-            }
+          - os: macos-26
+            arch: arm64
+          - os: macos-26-intel
+            arch: intel
+
     runs-on: ${{ matrix.dist.os }}
+
     env:
       APP_NAME: flameshot
       DIR_BUILD: build
+
     steps:
       - name: Checkout Source code
         if: github.event_name == 'push'
@@ -64,27 +65,55 @@ jobs:
           git_revno=$(git rev-list $(git describe --tags --abbrev=0)..HEAD --count)
           git_hash=$(git rev-parse --short HEAD)
           ver_info=${last_committed_tag}+git${git_revno}.${git_hash}
+
           echo "=======FLAMESHOT VERSION========"
           echo ${last_committed_tag:1}
           echo "Details: ${ver_info}"
           echo "================================"
-          # This will allow to build pre-preleases without git tag
-          # echo "VERSION=${last_committed_tag:1}" >> $GITHUB_ENV
-          echo "VERSION=$(cat CMakeLists.txt |grep 'set.*(.*FLAMESHOT_VERSION' | sed 's/[^0-9.]*//' |sed 's/)//g')" >> $GITHUB_ENV
+
+          echo "VERSION=$(grep 'set.*(.*FLAMESHOT_VERSION' CMakeLists.txt | sed 's/[^0-9.]*//' | sed 's/)//g')" >> $GITHUB_ENV
           echo "VER_INFO=${ver_info}" >> $GITHUB_ENV
           echo "GIT_HASH=${git_hash}" >> $GITHUB_ENV
 
       - name: Install Qt
         run: brew install qt@6
 
+      - name: Print build environment
+        run: |
+          echo "Deployment target: ${MACOSX_DEPLOYMENT_TARGET}"
+          xcodebuild -version
+          xcrun --sdk macosx --show-sdk-path
+          clang --version
+          cmake --version
+          brew info qt@6
+          brew --prefix qt@6
+
       - name: Configure
         run: |
-          rm -rf "${DIR_BUILD}"/src/flameshot.dmg "${DIR_BUILD}"/src/flameshot.app/
-          cmake -GNinja -S . -B "${DIR_BUILD}" -DQt6_DIR=$(brew --prefix qt6)/lib/cmake/Qt6 -DUSE_MONOCHROME_ICON=True
+          rm -rf "${DIR_BUILD}/src/flameshot.dmg"
+          rm -rf "${DIR_BUILD}/src/flameshot.app"
+
+          cmake \
+            -GNinja \
+            -S . \
+            -B "${DIR_BUILD}" \
+            -DQt6_DIR="$(brew --prefix qt@6)/lib/cmake/Qt6" \
+            -DCMAKE_OSX_DEPLOYMENT_TARGET=14.0 \
+            -DCMAKE_OSX_SYSROOT="$(xcrun --sdk macosx --show-sdk-path)" \
+            -DUSE_MONOCHROME_ICON=True
+
+      - name: Show CMake deployment target
+        run: |
+          grep CMAKE_OSX_DEPLOYMENT_TARGET "${DIR_BUILD}/CMakeCache.txt" || true
 
       - name: Compile
         run: |
           cmake --build "${DIR_BUILD}"
+
+      - name: Inspect resulting executable
+        run: |
+          otool -l "${DIR_BUILD}/src/flameshot.app/Contents/MacOS/flameshot" | \
+            sed -n '/LC_BUILD_VERSION/,/cmd/p'
 
       - name: Build dmg package
         run: |
