@@ -546,13 +546,13 @@ QVariant Region::process(const QVariant& val)
     QString str = val.toString();
 
     static const QRegularExpression regex(
-      "(-{,1}\\d+)"   // number (any sign)
+      "(-?\\d+)"     // number (any sign)
       "[x,\\.\\s]"    // separator ('x', ',', '.', or whitespace)
-      "(-{,1}\\d+)"   // number (any sign)
+      "(-?\\d+)"     // number (any sign)
       "[\\+,\\.\\s]*" // separator ('+',',', '.', or whitespace)
-      "(-{,1}\\d+)"   // number (non-negative)
+      "(-?\\d+)"     // number (non-negative)
       "[\\+,\\.\\s]*" // separator ('+', ',', '.', or whitespace)
-      "(-{,1}\\d+)"   // number (non-negative)
+      "(-?\\d+)"     // number (non-negative)
     );
 
     if (!regex.match(str).hasMatch()) {
