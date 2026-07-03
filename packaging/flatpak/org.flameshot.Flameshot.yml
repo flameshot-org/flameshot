@@ -40,6 +40,7 @@ modules:
         
       - type: git
         url: https://github.com/flameshot-org/flameshot.git
+        branch: master
         # tag: v14.0.0
         # commit: e408812d77ff1835957f85796c4cf737466bd69d
 
