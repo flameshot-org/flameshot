@@ -111,10 +111,11 @@ QLineF getCurvedArrowShaft(QPointF p1, QPointF p2, const int thickness)
     const qreal notchDepth =
       std::min<qreal>(QLineF(shaft.p2(), p2).length() * 0.45,
                       (ArrowWidth + thickness * 2) / 2.0);
-    const qreal overlap = std::max<qreal>(1, thickness * 0.5);
+    constexpr qreal overlap = 1.0;
 
     // The curved head has a concave back, so extend the straight shaft
-    // slightly into the head to avoid a visible gap.
+    // slightly into the head to avoid a visible gap without leaking past
+    // the head outline at large thicknesses.
     shaft.setP2(shaft.p2() + direction * (notchDepth + overlap));
     return shaft;
 }
@@ -252,6 +253,7 @@ void ArrowTool::process(QPainter& painter, const QPixmap& pixmap)
         return;
     }
 
+    painter.setPen(QPen(color(), size(), Qt::SolidLine, Qt::FlatCap));
     painter.drawLine(getCurvedArrowShaft(head, tail, size()));
     m_arrowPath = getCurvedArrowHead(head, tail, size());
     painter.fillPath(m_arrowPath, QBrush(color()));
