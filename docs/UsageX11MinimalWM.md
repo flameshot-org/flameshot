@@ -17,7 +17,11 @@ flameshot: info: Screenshot aborted.
 When a portal backend is present but does not implement the Screenshot interface (for example only `xdg-desktop-portal-gtk` is installed):
 
 ```text
-flameshot: error: Screenshot portal timed out after 30 seconds
+flameshot: error: The xdg-desktop-portal backend did not respond If you are on
+wayland make sure an xdg-desktop-portal backend for your desktop is installed
+and properly configured.
+
+If on X11 enable Legacy X11 method in the General Settings
 ```
 
 In both cases the Flameshot capture overlay never appears.
@@ -31,7 +35,7 @@ Flameshot ships a built-in option that bypasses the portal and uses Qt's native 
 
 ### From the GUI
 
-Open **Configuration → General** and tick **"Use legacy X11 screenshot method (deprecated)"**.
+Open **Configuration → General** and tick **"Use legacy X11 screenshot method"**.
 
 ### From the config file
 
