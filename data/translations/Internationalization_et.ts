@@ -94,7 +94,7 @@
     <message>
         <location filename="../../src/tools/arrow/arrowtool.cpp" line="88"/>
         <source>Set the Arrow as the paint tool</source>
-        <translation>Määra nool joonistustarvikuks</translation>
+        <translation>Kasuta noolt joonistustarvikuna</translation>
     </message>
 </context>
 <context>
@@ -320,7 +320,7 @@ Premeu Espai per obrir el calaix lateral.</translation>
     <message>
         <location filename="../../src/tools/circle/circletool.cpp" line="31"/>
         <source>Set the Circle as the paint tool</source>
-        <translation>Määra ring joonistustarvikuks</translation>
+        <translation>Kasuta ringi joonistustarvikuna</translation>
     </message>
 </context>
 <context>
@@ -1726,7 +1726,7 @@ Palun lahenda vead käsitsi seadistusfailis.</translation>
     <message>
         <location filename="../../src/tools/invert/inverttool.cpp" line="36"/>
         <source>Set Inverter as the paint tool</source>
-        <translation>Määra inverter joonistustarvikuks</translation>
+        <translation>Kasuta inverterit joonistustarvikuna</translation>
     </message>
 </context>
 <context>
@@ -1739,7 +1739,7 @@ Palun lahenda vead käsitsi seadistusfailis.</translation>
     <message>
         <location filename="../../src/tools/line/linetool.cpp" line="33"/>
         <source>Set the Line as the paint tool</source>
-        <translation>Määra joon joonistustarvikuks</translation>
+        <translation>Kasuta joont joonistustarvikuna</translation>
     </message>
 </context>
 <context>
@@ -1752,7 +1752,7 @@ Palun lahenda vead käsitsi seadistusfailis.</translation>
     <message>
         <location filename="../../src/tools/marker/markertool.cpp" line="34"/>
         <source>Set the Marker as the paint tool</source>
-        <translation>Määra marker joonistustarvikuks</translation>
+        <translation>Kasuta markervildikat joonistustarvikuna</translation>
     </message>
 </context>
 <context>
@@ -1788,7 +1788,7 @@ Valimiseks klõpsa</translation>
     <message>
         <location filename="../../src/tools/pencil/penciltool.cpp" line="28"/>
         <source>Set the Pencil as the paint tool</source>
-        <translation>Määra pliiats joonistustarvikuks</translation>
+        <translation>Kasuta pliiatsit joonistustarvikuna</translation>
     </message>
 </context>
 <context>
@@ -1857,7 +1857,7 @@ Valimiseks klõpsa</translation>
     <message>
         <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="38"/>
         <source>Set Pixelate as the paint tool.</source>
-        <translation>Määra pikseldaja joonistustarvikuks.</translation>
+        <translation>Kasuta pikseldajat joonistustarvikuna.</translation>
     </message>
     <message>
         <source>Set Pixelate as the paint tool</source>
@@ -2301,7 +2301,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/rectangle/rectangletool.cpp" line="33"/>
         <source>Set the Rectangle as the paint tool</source>
-        <translation>Määra ristkülik joonistustarvikuks</translation>
+        <translation>Kasuta ristkülikut joonistustarvikuna</translation>
     </message>
 </context>
 <context>
@@ -2488,7 +2488,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/selection/selectiontool.cpp" line="36"/>
         <source>Set Selection as the paint tool</source>
-        <translation>Määra valikuvidin joonistustarvikuks</translation>
+        <translation>Kasuta valikukasti joonistustarvikuna</translation>
     </message>
 </context>
 <context>
