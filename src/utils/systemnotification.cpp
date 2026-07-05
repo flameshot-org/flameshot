@@ -98,5 +98,6 @@ void SystemNotification::sendMessage(const QString& text,
         if (m_interface != nullptr) {
             m_interface->asyncCallWithArgumentList(QStringLiteral("Notify"), args);
         }
+    }
 #endif
 }
