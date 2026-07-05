@@ -90,13 +90,15 @@ void SystemNotification::sendMessage(const QString& text,
              << QStringList()                // actions
              << hintsMap                     // hints
              << timeout;                     // timeout
-        // Fire-and-forget: an asynchronous call never blocks the event loop, even
-        // when no notification daemon is registered on the session bus (e.g. bare
-        // startx / tiling WM sessions). The previous synchronous callWithArgumentList
-        // stalled the main thread for the QtDBus reply timeout (~25s) after every
-        // capture, freezing further captures until it returned.
+        // Fire-and-forget: an asynchronous call never blocks the event loop,
+        // even when no notification daemon is registered on the session bus
+        // (e.g. bare startx / tiling WM sessions). The previous synchronous
+        // callWithArgumentList stalled the main thread for the QtDBus reply
+        // timeout (~25s) after every capture, freezing further captures until
+        // it returned.
         if (m_interface != nullptr) {
-            m_interface->asyncCallWithArgumentList(QStringLiteral("Notify"), args);
+            m_interface->asyncCallWithArgumentList(QStringLiteral("Notify"),
+                                                   args);
         }
     }
 #endif
