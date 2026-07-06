@@ -1461,12 +1461,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="952"/>
         <source>Use legacy X11 screenshot method (deprecated)</source>
-        <translation>Использовать устаревший метод снимка экрана X11 (не рекомендуется)</translation>
+        <translation>Применять старый метод снимка экрана X11 (не рекомендуется)</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="954"/>
         <source>Bypass the freedesktop portal and use Qt&apos;s native X11 screen capture. Enable this if your window manager lacks xdg-desktop-portal (e.g. xmonad, i3). Only effective on X11; ignored on Wayland.</source>
-        <translation>Обходить freedesktop portal и использовать родной захват экрана Qt для X11. Включите, если у вашего оконного менеджера нет xdg-desktop-portal (напр., xmonad, i3). Работает только в X11; игнорируется в Wayland.</translation>
+        <translation>Обходить Freedesktop Portal и использовать родной захват Qt для X11. Включите, если у вашего оконного менеджера нет xdg-desktop-portal (напр., xmonad, i3). Работает только в X11; игнорируется в Wayland.</translation>
     </message>
 </context>
 <context>
