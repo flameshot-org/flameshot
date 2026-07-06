@@ -1493,6 +1493,18 @@ void CaptureWidget::handleToolSignal(CaptureTool::Request r)
         case CaptureTool::REQ_DECREASE_TOOL_SIZE:
             setToolSize(m_context.toolSize - 1);
             break;
+        case CaptureTool::REQ_COMMIT_CURRENT_TOOL: {
+            const bool editingExistingTool =
+              m_activeTool && m_activeTool->editMode();
+            if (commitCurrentTool()) {
+                if (editingExistingTool) {
+                    m_panel->setToolWidget(nullptr);
+                }
+                drawToolsData();
+                updateLayersPanel();
+            }
+            break;
+        }
         default:
             break;
     }
