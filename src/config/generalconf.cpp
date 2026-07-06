@@ -924,7 +924,7 @@ void GeneralConf::setInsecurePixelate(bool checked)
 void GeneralConf::initCaptureActiveMonitor()
 {
     m_captureActiveMonitor = new QCheckBox(
-      tr("Capture active monitor (skip monitor selection)"), this);
+      tr("Capture active monitor in X11 (skip monitor selection)"), this);
     m_captureActiveMonitor->setToolTip(
       tr("Automatically capture the monitor where the cursor is located "
          "instead of showing the monitor selection dialog. "
@@ -970,7 +970,7 @@ void GeneralConf::useNativeFullscreenChanged(bool checked)
 void GeneralConf::initUseX11LegacyScreenshot()
 {
     m_useX11LegacyScreenshot =
-      new QCheckBox(tr("Use legacy X11 screenshot method (deprecated)"), this);
+      new QCheckBox(tr("Use legacy X11 screenshot method"), this);
     m_useX11LegacyScreenshot->setToolTip(
       tr("Bypass the freedesktop portal and use Qt's native X11 screen "
          "capture. Enable this if your window manager lacks "

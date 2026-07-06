@@ -124,7 +124,7 @@ if(USE_KDSINGLEAPPLICATION)
       FetchContent_Declare(
         kdsingleApplication
         GIT_REPOSITORY https://github.com/KDAB/KDSingleApplication.git
-        GIT_TAG v1.2.0
+        GIT_TAG v1.2.1
       )
       FetchContent_MakeAvailable(kdsingleApplication)
     endif()

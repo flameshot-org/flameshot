@@ -10,6 +10,8 @@
 namespace {
 #define PADDING_VALUE 2
 #define THICKNESS_OFFSET 15
+int const MIN_COUNTER = 1;
+int const MAX_COUNTER = 999;
 }
 
 CircleCountTool::CircleCountTool(QObject* parent)
@@ -180,21 +182,50 @@ void CircleCountTool::paintMousePreview(QPainter& painter,
 
     // Thickness for pen is *2 to range from radius to diameter to match the
     // ellipse draw function
-    auto orig_pen = painter.pen();
-    auto orig_opacity = painter.opacity();
+    auto const previewWidth = (size() + THICKNESS_OFFSET) * 2;
+    painter.save();
     painter.setOpacity(0.35);
-    painter.setPen(QPen(context.color,
-                        (size() + THICKNESS_OFFSET) * 2,
-                        Qt::SolidLine,
-                        Qt::RoundCap));
+    painter.setPen(
+      QPen(context.color, previewWidth, Qt::SolidLine, Qt::RoundCap));
     painter.drawLine(context.mousePos,
                      { context.mousePos.x() + 1, context.mousePos.y() + 1 });
-    painter.setOpacity(orig_opacity);
-    painter.setPen(orig_pen);
+
+    auto font = painter.font();
+    font.setPixelSize(previewWidth / 2);
+    font.setBold(true);
+    painter.setFont(font);
+
+    painter.setPen(QPen("white"));
+    painter.drawText(QRect{ context.mousePos.x() - previewWidth / 2,
+                            context.mousePos.y() - previewWidth / 2,
+                            previewWidth,
+                            previewWidth },
+                     Qt::AlignCenter,
+                     QString::number(context.circleCount));
+
+    painter.restore();
+}
+
+bool CircleCountTool::handleMouseWheelEvent(int delta,
+                                            bool adjustmentButtonPressed,
+                                            CaptureContext& ctx)
+{
+    if (adjustmentButtonPressed) {
+        ctx.circleCount =
+          qBound(MIN_COUNTER, ctx.circleCount + delta, MAX_COUNTER);
+    }
+    return adjustmentButtonPressed;
 }
 
 void CircleCountTool::drawStart(const CaptureContext& context)
 {
+    setCount(context.circleCount);
+    // ------------------------------------------------------------------
+    // Temporary solution until the circle count variable removed from
+    // the context altogether and made part of Circle count tool
+    CaptureContext& ctx = const_cast<CaptureContext&>(context);
+    ctx.circleCount = qBound(MIN_COUNTER, ctx.circleCount + 1, MAX_COUNTER);
+    // ------------------------------------------------------------------
     AbstractTwoPointTool::drawStart(context);
     m_valid = true;
 }

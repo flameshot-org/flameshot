@@ -18,6 +18,7 @@ public:
     QString name() const override;
     QString description() const override;
     QRect boundingRect() const override;
+    QWidget* configurationWidget() override;
 
     CaptureTool* copy(QObject* parent = nullptr) override;
     void process(QPainter& painter, const QPixmap& pixmap) override;
@@ -29,6 +30,16 @@ protected:
 public slots:
     void pressed(CaptureContext& context) override;
 
+private slots:
+    void setArrowStyle(int style);
+
 private:
+    enum class ArrowStyle
+    {
+        Default = 0,
+        Curved = 1,
+    };
+
     QPainterPath m_arrowPath;
+    ArrowStyle m_arrowStyle = ArrowStyle::Default;
 };

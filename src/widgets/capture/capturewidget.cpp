@@ -45,6 +45,8 @@
 
 #define MOUSE_DISTANCE_TO_START_MOVING 3
 
+auto const MOUSE_WHEEL_TRESHOLD = 60;
+
 // CaptureWidget is the main component used to capture the screen. It contains
 // an area of selection with its respective buttons.
 
@@ -834,11 +836,6 @@ bool CaptureWidget::startDrawObjectTool(const QPoint& pos)
 
         m_context.mousePos = m_displayGrid ? snapToGrid(pos) : pos;
         m_activeTool->drawStart(m_context);
-        // TODO this is the wrong place to do this
-
-        if (m_activeTool->type() == CaptureTool::TYPE_CIRCLECOUNT) {
-            m_activeTool->setCount(m_context.circleCount++);
-        }
 
         return true;
     }
@@ -1145,12 +1142,16 @@ void CaptureWidget::wheelEvent(QWheelEvent* e)
      * not accept events faster that one in 200ms.
      * */
     int toolSizeOffset = 0;
-    if (e->angleDelta().y() >= 60) {
-        // mouse scroll (wheel) increment
-        toolSizeOffset = 1;
-    } else if (e->angleDelta().y() <= -60) {
-        // mouse scroll (wheel) decrement
-        toolSizeOffset = -1;
+    if (qAbs(e->angleDelta().y()) >= MOUSE_WHEEL_TRESHOLD) {
+        auto const delta =
+          qMax(qMin(e->angleDelta().y() / MOUSE_WHEEL_TRESHOLD, 1), -1);
+        if (activeButtonTool() &&
+            activeButtonTool()->handleMouseWheelEvent(
+              delta, m_adjustmentButtonPressed, m_context)) {
+            this->repaint();
+            return;
+        }
+        toolSizeOffset = delta;
     } else {
         // touchpad scroll
         qint64 current = QDateTime::currentMSecsSinceEpoch();

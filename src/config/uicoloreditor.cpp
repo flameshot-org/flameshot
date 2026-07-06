@@ -9,6 +9,7 @@
 #include <QApplication>
 #include <QComboBox>
 #include <QHBoxLayout>
+#include <QLineEdit>
 #include <QMap>
 #include <QSpacerItem>
 #include <QVBoxLayout>
@@ -24,6 +25,7 @@ UIcolorEditor::UIcolorEditor(QWidget* parent)
     m_hLayout->addItem(new QSpacerItem(space, space, QSizePolicy::Expanding));
     m_vLayout->setAlignment(Qt::AlignVCenter);
 
+    initHexColorInput();
     initButtons();
     initColorWheel();
 
@@ -68,6 +70,19 @@ void UIcolorEditor::updateLocalColor(const QColor c)
         m_contrastColor = c;
     }
     m_lastButtonPressed->setColor(c);
+    m_hexColorEdit->setText(c.name());
+}
+
+void UIcolorEditor::changeInputColor(const QString& hexColor)
+{
+    if (hexColor.contains(QRegularExpression("^#[0-9A-Fa-f]{6}$"))) {
+        QColor color(hexColor);
+        if (color.isValid()) {
+            m_colorWheel->setColor(color);
+            updateLocalColor(color);
+            updateUIcolor();
+        }
+    }
 }
 
 void UIcolorEditor::initColorWheel()
@@ -147,7 +162,25 @@ void UIcolorEditor::initButtons()
     });
     m_lastButtonPressed = m_buttonMainColor;
 }
-
+void UIcolorEditor::initHexColorInput()
+{
+    m_hexColorEdit = new QLineEdit(this);
+    m_hexColorLabel = new QLabel(this);
+    m_hexColorLabel->setText(tr("Hex for Main Color"));
+    m_hexColorEdit->setSizePolicy(
+      QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
+    connect(m_hexColorEdit,
+            &QLineEdit::textChanged,
+            this,
+            &UIcolorEditor::changeInputColor);
+    QRegularExpression rgbRegex("^#[0-9A-Fa-f]{6}$");
+    QRegularExpressionValidator* validator =
+      new QRegularExpressionValidator(rgbRegex, m_hexColorEdit);
+    m_hexColorEdit->setValidator(validator);
+    m_hexColorEdit->setMaxLength(7);
+    m_vLayout->addWidget(m_hexColorLabel);
+    m_vLayout->addWidget(m_hexColorEdit);
+}
 // visual update for the selected button
 void UIcolorEditor::changeLastButton(CaptureToolButton* b)
 {
@@ -160,10 +193,12 @@ void UIcolorEditor::changeLastButton(CaptureToolButton* b)
             m_colorWheel->setColor(m_uiColor);
             m_labelContrast->setStyleSheet(offStyle);
             m_labelMain->setStyleSheet(styleSheet());
+            m_hexColorLabel->setText(tr("Hex for Main Color"));
         } else {
             m_colorWheel->setColor(m_contrastColor);
             m_labelContrast->setStyleSheet(styleSheet());
             m_labelMain->setStyleSheet(offStyle);
+            m_hexColorLabel->setText(tr("Hex for Contrast Color"));
         }
         b->setIcon(b->icon());
     }

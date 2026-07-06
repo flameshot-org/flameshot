@@ -59,6 +59,7 @@
 - [Usage](#usage)
   - [Usage on Windows](#usage-on-windows)
   - [Usage on Hyprland / Sway / wlroots](#usage-on-hyprland--sway--wlroots)
+  - [Usage on minimal X11 window managers](#usage-on-minimal-x11-window-managers)
   - [CLI configuration](#cli-configuration)
   - [Config file](#config-file)
 - [Keyboard Shortcuts](#keyboard-shortcuts)
@@ -166,6 +167,10 @@ If you require console output, run `flameshot-cli.exe` instead. `flameshot-cli.e
 ### Usage on Hyprland / Sway / wlroots
 
 Please [refer to this document](docs/UsageHyprlandSwayWlroots.md) for detailed instructions on how to set up Flameshot on Hyprland, Sway, and wlroots-based Wayland compositors.
+
+### Usage on minimal X11 window managers
+
+On minimal X11 window managers (i3, dwm, xmonad, bspwm, ...), capturing may fail because no portal backend implements the Screenshot interface (errors such as *"Could not locate the org.freedesktop.portal.Desktop service"* or *"Screenshot portal timed out"*). Please [refer to this document](docs/UsageX11MinimalWM.md) for the fix (enabling the legacy X11 capture).
 
 ### CLI configuration
 
