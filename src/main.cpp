@@ -500,7 +500,7 @@ int main(int argc, char* argv[])
         if (!region.isEmpty()) {
             auto selectionRegion = Region().value(region).toRect();
             req.setInitialSelection(selectionRegion);
-        } else if (useLastRegion || ConfigHandler().saveLastRegion()) {
+        } else if (useLastRegion) {
             req.setInitialSelection(getLastRegion());
         }
         if (clipboard) {
