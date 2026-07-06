@@ -3327,7 +3327,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/widgets/uploadlineitem.cpp" line="51"/>
         <source>Are you sure you want to delete a screenshot from the latest uploads and server?</source>
-        <translation>Вы уверены, что хотите удалить снимок экрана из последних загрузок и с сервера?</translation>
+        <translation>Удалить снимок из последних отправок и с сервера?</translation>
     </message>
 </context>
 <context>
