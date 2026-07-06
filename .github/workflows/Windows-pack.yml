@@ -38,14 +38,12 @@ jobs:
         qt_ver: [6.9.3]
         qt_target: [desktop]
         config:
-          - {
-              arch: x64,
-              generator: "-G'Visual Studio 17 2022' -A x64",
-              vcpkg_triplet: x64-windows,
-              qt_arch: win64_msvc2022_64,
-              qt_arch_install: msvc2022_64,
-              pak_arch: win64,
-            }
+          - arch: x64
+            generator: "-G'Visual Studio 17 2022' -A x64"
+            vcpkg_triplet: x64-windows
+            qt_arch: win64_msvc2022_64
+            qt_arch_install: msvc2022_64
+            pak_arch: win64
         type: [portable, installer]
     steps:
       - name: Checkout Source code

@@ -36,55 +36,47 @@ jobs:
       fail-fast: false
       matrix:
         dist:
-          - {
-              name: debian-13,
-              os: debian,
-              symbol: trixie,
-              arch: amd64,
-              runs-on: ubuntu-latest,
-            }
-          - {
-              name: ubuntu-24.04,
-              os: ubuntu,
-              symbol: noble,
-              arch: amd64,
-              runs-on: ubuntu-latest,
-            }
-          - {
-              name: ubuntu-26.04,
-              os: ubuntu,
-              symbol: resolute,
-              arch: amd64,
-              runs-on: ubuntu-latest
-            }
-          - {
-              name: debian-13,
-              os: debian,
-              symbol: trixie,
-              arch: arm64,
-              runs-on: ubuntu-24.04-arm,
-            }
-          - {
-              name: debian-13,
-              os: debian,
-              symbol: trixie,
-              arch: armhf,
-              runs-on: ubuntu-24.04-arm,
-            }
-          - {
-              name: ubuntu-24.04,
-              os: ubuntu,
-              symbol: noble,
-              arch: arm64,
-              runs-on: ubuntu-24.04-arm,
-            }
-          - {
-              name: ubuntu-26.04,
-              os: ubuntu,
-              symbol: resolute,
-              arch: arm64,
-              runs-on: ubuntu-24.04-arm,
-            }
+          - name: debian-13
+            os: debian
+            symbol: trixie
+            arch: amd64
+            runs-on: ubuntu-latest
+
+          - name: ubuntu-24.04
+            os: ubuntu
+            symbol: noble
+            arch: amd64
+            runs-on: ubuntu-latest
+
+          - name: ubuntu-26.04
+            os: ubuntu
+            symbol: resolute
+            arch: amd64
+            runs-on: ubuntu-latest
+
+          - name: debian-13
+            os: debian
+            symbol: trixie
+            arch: arm64
+            runs-on: ubuntu-24.04-arm
+
+          - name: debian-13
+            os: debian
+            symbol: trixie
+            arch: armhf
+            runs-on: ubuntu-24.04-arm
+
+          - name: ubuntu-24.04
+            os: ubuntu
+            symbol: noble
+            arch: arm64
+            runs-on: ubuntu-24.04-arm
+
+          - name: ubuntu-26.04
+            os: ubuntu
+            symbol: resolute
+            arch: arm64
+            runs-on: ubuntu-24.04-arm
     steps:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v4
@@ -176,18 +168,15 @@ jobs:
       fail-fast: false
       matrix:
         dist:
-          - {
-              name: fedora-43,
-              os: fedora,
-              symbol: 43,
-              arch: x86_64
-            }
-          - {
-              name: fedora-44,
-              os: fedora,
-              symbol: 44,
-              arch: x86_64
-            }
+          - name: fedora-43
+            os: fedora
+            symbol: 43
+            arch: x86_64
+
+          - name: fedora-44
+            os: fedora
+            symbol: 44
+            arch: x86_64
     steps:
       - name: Checkout Source code
         if: github.event_name == 'push'
@@ -300,12 +289,10 @@ jobs:
       fail-fast: false
       matrix:
         dist:
-          - {
-              name: ubuntu-24.04,
-              os: ubuntu,
-              symbol: noble,
-              arch: amd64,
-            }
+          - name: ubuntu-24.04
+            os: ubuntu
+            symbol: noble
+            arch: amd64
     container:
       image: ${{ env.DOCKER_REPO }}:${{ matrix.dist.os }}-${{ matrix.dist.symbol }}
       options: --cap-add SYS_ADMIN --device /dev/fuse --security-opt apparmor:unconfined
