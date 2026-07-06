@@ -16,8 +16,7 @@ CaptureRequest::CaptureRequest(CaptureRequest::CaptureMode mode,
   , m_data(std::move(data))
   , m_selectedMonitor(-1)
   , m_hasSelectedMonitor(false)
-{
-}
+{}
 
 CaptureRequest::CaptureMode CaptureRequest::captureMode() const
 {
