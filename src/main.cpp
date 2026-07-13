@@ -19,11 +19,13 @@
 #include "utils/confighandler.h"
 #include "utils/filenamehandler.h"
 #include "utils/pathinfo.h"
+#include "utils/systemnotification.h"
 #include "utils/valuehandler.h"
 
 #if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
 #include "core/flameshotdbusadapter.h"
 #include <QDBusConnection>
+#include <QDBusConnectionInterface>
 #include <QDBusMessage>
 #endif
 
@@ -74,9 +76,50 @@ int requestCaptureAndWait(const CaptureRequest& req)
             qApp->exit(0);
         }
 #else
-        // if this instance is not daemon, make sure it exit after caputre finish
-        if (FlameshotDaemon::instance() == nullptr && !Flameshot::instance()->haveExternalWidget()) {
+        if (FlameshotDaemon::instance() == nullptr &&
+            !Flameshot::instance()->haveExternalWidget()) {
+#if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
+            auto pendingDaemon =
+              SystemNotification::takePendingDaemonNotifications();
+            if (!pendingDaemon.isEmpty()) {
+                bool delegated = false;
+                auto bus = QDBusConnection::sessionBus();
+                if (bus.isConnected() &&
+                    bus.interface()->isServiceRegistered(
+                      QStringLiteral("org.flameshot.Flameshot"))) {
+                    QDBusMessage msg = QDBusMessage::createMethodCall(
+                      QStringLiteral("org.flameshot.Flameshot"),
+                      QStringLiteral("/"),
+                      QLatin1String(""),
+                      QStringLiteral("showSaveNotification"));
+                    delegated = true;
+                    for (const auto& path : pendingDaemon) {
+                        QDBusMessage m = msg;
+                        m << path;
+                        if (!bus.send(m)) {
+                            delegated = false;
+                            break;
+                        }
+                    }
+                }
+                if (delegated) {
+                    qApp->exit(E_OK);
+                } else {
+                    // Fallback: send notification ourselves and wait
+                    SystemNotification sysNotif;
+                    for (const auto& path : pendingDaemon) {
+                        sysNotif.sendMessage(
+                          QObject::tr("Capture saved as ") + path, path);
+                    }
+                    SystemNotification::setExitOnLastAction(true);
+                    QTimer::singleShot(10000, qApp, &QCoreApplication::quit);
+                }
+            } else {
+                qApp->exit(E_OK);
+            }
+#else
             qApp->exit(E_OK);
+#endif
         }
 #endif
     });
