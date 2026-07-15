@@ -335,20 +335,26 @@ void CaptureWidget::initButtons()
 {
     auto allButtonTypes = CaptureToolButton::getIterableButtonTypes();
     auto visibleButtonTypes = m_config.buttons();
-    if ((m_context.request.tasks() == CaptureRequest::NO_TASK) ||
-        (m_context.request.tasks() == CaptureRequest::PRINT_GEOMETRY)) {
+    auto tasks = m_context.request.tasks();
+    if ((tasks == CaptureRequest::NO_TASK) ||
+        (tasks == CaptureRequest::PRINT_GEOMETRY)) {
         allButtonTypes.removeOne(CaptureTool::TYPE_ACCEPT);
         visibleButtonTypes.removeOne(CaptureTool::TYPE_ACCEPT);
     } else {
-        // Remove irrelevant buttons from both lists
+        // Remove only buttons whose corresponding CLI task flag is already set.
+        // Keep independent buttons (PIN, OPEN_APP) available.
         for (auto* buttonList : { &allButtonTypes, &visibleButtonTypes }) {
-            buttonList->removeOne(CaptureTool::TYPE_SAVE);
-            buttonList->removeOne(CaptureTool::TYPE_COPY);
+            if (tasks & CaptureRequest::SAVE) {
+                buttonList->removeOne(CaptureTool::TYPE_SAVE);
+            }
+            if (tasks & CaptureRequest::COPY) {
+                buttonList->removeOne(CaptureTool::TYPE_COPY);
+            }
 #ifdef ENABLE_IMGUR
-            buttonList->removeOne(CaptureTool::TYPE_IMAGEUPLOADER);
+            if (tasks & CaptureRequest::UPLOAD) {
+                buttonList->removeOne(CaptureTool::TYPE_IMAGEUPLOADER);
+            }
 #endif
-            buttonList->removeOne(CaptureTool::TYPE_OPEN_APP);
-            buttonList->removeOne(CaptureTool::TYPE_PIN);
         }
     }
     QVector<CaptureToolButton*> vectorButtons;
