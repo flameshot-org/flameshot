@@ -29,6 +29,7 @@
 #if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
 #include "request.h"
 #include <QDBusInterface>
+#include <QDBusMessage>
 #include <QDBusReply>
 #include <QDir>
 #include <QUrl>
@@ -49,7 +50,9 @@ ScreenGrabber::ScreenGrabber(QObject* parent)
     QImageReader::setAllocationLimit(1024);
 }
 
-void ScreenGrabber::freeDesktopPortal(bool& ok, QPixmap& res)
+ScreenGrabber::PortalStatus ScreenGrabber::freeDesktopPortal(
+  QPixmap& res,
+  QString& errorDetail)
 {
 
 #if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
@@ -57,10 +60,9 @@ void ScreenGrabber::freeDesktopPortal(bool& ok, QPixmap& res)
     auto service = QStringLiteral("org.freedesktop.portal.Desktop");
 
     if (!connectionInterface->isServiceRegistered(service)) {
-        ok = false;
-        AbstractLogger::error() << tr(
-          "Could not locate the `org.freedesktop.portal.Desktop` service");
-        return;
+        errorDetail =
+          tr("Could not locate the `org.freedesktop.portal.Desktop` service");
+        return PortalStatus::Unavailable;
     }
 
     QDBusInterface screenshotInterface(
@@ -131,11 +133,23 @@ void ScreenGrabber::freeDesktopPortal(bool& ok, QPixmap& res)
           QStringLiteral("x11:0x%1").arg(parentDummy.winId(), 0, 16);
     }
 
-    screenshotInterface.call(
+    QDBusMessage reply = screenshotInterface.call(
       QStringLiteral("Screenshot"),
       parentWindow,
       QMap<QString, QVariant>({ { "handle_token", QVariant(token) },
                                 { "interactive", QVariant(false) } }));
+
+    if (reply.type() == QDBusMessage::ErrorMessage) {
+        // No backend provides org.freedesktop.portal.Screenshot (or the
+        // portal rejected the request outright); the Response signal will
+        // never arrive, so fail now instead of waiting for the timeout.
+        QObject::disconnect(conn);
+        request->deleteLater();
+        errorDetail =
+          tr("The `org.freedesktop.portal.Screenshot` request failed: %1")
+            .arg(reply.errorMessage());
+        return PortalStatus::Unavailable;
+    }
 
     loop.exec();
     timeout.stop();
@@ -144,20 +158,17 @@ void ScreenGrabber::freeDesktopPortal(bool& ok, QPixmap& res)
     request->deleteLater();
 
     if (timedOut) {
-        ok = false;
-
-        AbstractLogger::error()
-          << tr("The xdg-desktop-portal backend did not respond "
-                "If you are on wayland make sure an xdg-desktop-portal backend "
-                "for your desktop is "
-                "installed and properly configured.\n \n"
-                "If on X11 enable Legacy X11 method in the General Settings");
-        return;
+        errorDetail =
+          tr("The xdg-desktop-portal backend did not respond "
+             "If you are on wayland make sure an xdg-desktop-portal backend "
+             "for your desktop is "
+             "installed and properly configured.\n \n"
+             "If on X11 enable Legacy X11 method in the General Settings");
+        return PortalStatus::Failed;
     }
 
     if (res.isNull()) {
-        ok = false;
-        return;
+        return PortalStatus::Failed;
     }
 
 #ifdef FLAMESHOT_DEBUG_CAPTURE
@@ -166,6 +177,43 @@ void ScreenGrabber::freeDesktopPortal(bool& ok, QPixmap& res)
                   .arg(res.height())
                   .arg(res.devicePixelRatio());
 #endif
+    return PortalStatus::Success;
+#else
+    Q_UNUSED(res)
+    Q_UNUSED(errorDetail)
+    return PortalStatus::Failed;
+#endif
+}
+
+QPixmap ScreenGrabber::unixScreenshot(bool& ok)
+{
+#if defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)
+    QPixmap screenshot;
+
+    if (!m_info.waylandDetected() && ConfigHandler().useX11LegacyScreenshot()) {
+        screenshot = x11LegacyScreenshot();
+        ok = !screenshot.isNull();
+        if (!ok) {
+            AbstractLogger::error() << tr("Unable to capture screen");
+        }
+        return screenshot;
+    }
+
+    QString portalError;
+    const PortalStatus status = freeDesktopPortal(screenshot, portalError);
+    ok = status == PortalStatus::Success;
+
+    if (!ok) {
+        if (!portalError.isEmpty()) {
+            AbstractLogger::error() << portalError;
+        }
+        AbstractLogger::error() << tr("Unable to capture screen");
+    }
+
+    return screenshot;
+#else
+    ok = false;
+    return QPixmap();
 #endif
 }
 
@@ -258,19 +306,9 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok, int preSelectedMonitor)
     return screenshot;
 
 #elif defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)
-    if (!m_info.waylandDetected() && ConfigHandler().useX11LegacyScreenshot()) {
-        screenshot = x11LegacyScreenshot();
-        ok = !screenshot.isNull();
-        if (!ok) {
-            AbstractLogger::error() << tr("Unable to capture screen");
-            return QPixmap();
-        }
-    } else {
-        freeDesktopPortal(ok, screenshot);
-        if (!ok) {
-            AbstractLogger::error() << tr("Unable to capture screen");
-            return QPixmap();
-        }
+    screenshot = unixScreenshot(ok);
+    if (!ok) {
+        return QPixmap();
     }
 #elif defined(Q_OS_WIN)
     screenshot = windowsScreenshot(wid);
@@ -317,18 +355,7 @@ QPixmap ScreenGrabber::grabFullDesktop(bool& ok)
     }
     painter.end();
 #elif defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)
-    if (!m_info.waylandDetected() && ConfigHandler().useX11LegacyScreenshot()) {
-        screenshot = x11LegacyScreenshot();
-        ok = !screenshot.isNull();
-        if (!ok) {
-            AbstractLogger::error() << tr("Unable to capture screen");
-        }
-    } else {
-        freeDesktopPortal(ok, screenshot);
-        if (!ok) {
-            AbstractLogger::error() << tr("Unable to capture screen");
-        }
-    }
+    screenshot = unixScreenshot(ok);
 #elif defined(Q_OS_WIN)
     screenshot = windowsScreenshot(0);
 #endif
