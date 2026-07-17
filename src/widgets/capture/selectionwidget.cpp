@@ -190,6 +190,9 @@ void SelectionWidget::parentMouseReleaseEvent(QMouseEvent* e)
     emit geometrySettled();
 }
 
+
+float aspectRatio = -1.0;
+
 void SelectionWidget::parentMouseMoveEvent(QMouseEvent* e)
 {
     updateCursor();
@@ -215,9 +218,11 @@ void SelectionWidget::parentMouseMoveEvent(QMouseEvent* e)
     }
 
     auto geom = geometry();
-    float aspectRatio = (float)geom.width() / (float)geom.height();
     bool symmetryMod = qApp->keyboardModifiers() & Qt::ShiftModifier;
     bool preserveAspect = qApp->keyboardModifiers() & Qt::ControlModifier;
+    if(aspectRatio < 0 || ! preserveAspect){
+        aspectRatio = (float)geom.width() / (float)geom.height();
+    }
 
     QPoint newTopLeft = geom.topLeft(), newBottomRight = geom.bottomRight();
     int oldLeft = newTopLeft.rx(), oldRight = newBottomRight.rx(),
