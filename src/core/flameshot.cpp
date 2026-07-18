@@ -485,8 +485,61 @@ void Flameshot::exportCapture(const QPixmap& capture,
     }
 
     if (tasks & CR::OCR) {
-        QImage img = capture.toImage().scaled(capture.width() * 4, capture.height() * 4, Qt::KeepAspectRatio, Qt::FastTransformation);
+        // 1. Scale smoothly by 3x to preserve font curves
+        QImage img = capture.toImage().scaled(capture.width() * 3, capture.height() * 3, Qt::KeepAspectRatio, Qt::SmoothTransformation);
         img = img.convertToFormat(QImage::Format_Grayscale8);
+
+        int width = img.width();
+        int height = img.height();
+
+        // 2. Detect global background polarity (light vs dark mode)
+        long long globalSum = 0;
+        for (int y = 0; y < height; ++y) {
+            const uchar* line = img.scanLine(y);
+            for (int x = 0; x < width; ++x) {
+                globalSum += line[x];
+            }
+        }
+        bool isLightBg = (globalSum / (width * height)) > 127;
+
+        // 3. Compute integral image (Summed Area Table) for O(1) local mean calculations
+        QVector<QVector<int>> sat(width + 1, QVector<int>(height + 1, 0));
+        for (int y = 0; y < height; ++y) {
+            const uchar* line = img.scanLine(y);
+            for (int x = 0; x < width; ++x) {
+                sat[x + 1][y + 1] = sat[x][y + 1] + sat[x + 1][y] - sat[x][y] + line[x];
+            }
+        }
+
+        // 4. Perform Local Adaptive Thresholding: Output black text on pure white background
+        QImage bin(width, height, QImage::Format_Grayscale8);
+        int w = 25; // Local window size (covers stroke widths at 3x scale)
+        int half = w / 2;
+        int C = 15; // Contrast threshold constant
+
+        for (int y = 0; y < height; ++y) {
+            const uchar* imgLine = img.scanLine(y);
+            uchar* binLine = bin.scanLine(y);
+            for (int x = 0; x < width; ++x) {
+                int x1 = qMax(0, x - half);
+                int x2 = qMin(width - 1, x + half);
+                int y1 = qMax(0, y - half);
+                int y2 = qMin(height - 1, y + half);
+                int count = (x2 - x1 + 1) * (y2 - y1 + 1);
+
+                int sum = sat[x2 + 1][y2 + 1] - sat[x1][y2 + 1] - sat[x2 + 1][y1] + sat[x1][y1];
+                int mean = sum / count;
+
+                if (isLightBg) {
+                    // Light mode: text is darker than neighbors
+                    binLine[x] = (imgLine[x] < mean - C) ? 0 : 255;
+                } else {
+                    // Dark mode: text is lighter than neighbors
+                    binLine[x] = (imgLine[x] > mean + C) ? 0 : 255;
+                }
+            }
+        }
+        img = bin;
 
         tesseract::TessBaseAPI* api = new tesseract::TessBaseAPI();
         if (api->Init(nullptr, "eng") == 0) {
