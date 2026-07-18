@@ -60,7 +60,9 @@ constexpr const char* visibleInDockProperty = "_visibleInDock";
 #include "widgets/uploadhistory.h"
 #endif
 
+#ifdef ENABLE_OCR
 #include <tesseract/baseapi.h>
+#endif
 
 #include <QApplication>
 #include <QBuffer>
@@ -486,6 +488,7 @@ void Flameshot::exportCapture(const QPixmap& capture,
     }
 
     if (tasks & CR::OCR) {
+#ifdef ENABLE_OCR
         // 1. Scale by 3x using FastTransformation to preserve tiny punctuation pixel intensity
         QImage img = capture.toImage().scaled(capture.width() * 3, capture.height() * 3, Qt::KeepAspectRatio, Qt::FastTransformation);
         img = img.convertToFormat(QImage::Format_Grayscale8);
@@ -546,7 +549,6 @@ void Flameshot::exportCapture(const QPixmap& capture,
         if (api->Init(nullptr, "eng") == 0) {
             api->SetVariable("load_system_dawg", "0");
             api->SetVariable("load_freq_dawg", "0");
-            img.save("/home/sniperravan/Desktop/flameshot/build/ocr_debug.png");
             api->SetImage(img.bits(), img.width(), img.height(), 1, img.bytesPerLine());
             char* outText = api->GetUTF8Text();
             QString result = QString::fromUtf8(outText).trimmed();
@@ -568,6 +570,10 @@ void Flameshot::exportCapture(const QPixmap& capture,
             AbstractLogger::error(AbstractLogger::Target::Notification)
               << tr("Failed to initialize Tesseract OCR engine.");
         }
+#else
+        AbstractLogger::error(AbstractLogger::Target::Notification)
+          << tr("OCR feature is disabled in this build of Flameshot.");
+#endif
     }
 
     if (tasks & CR::PIN) {

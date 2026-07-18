@@ -5,6 +5,7 @@
 
 #include "tools/abstractactiontool.h"
 
+#ifdef ENABLE_OCR
 class OcrTool : public AbstractActionTool
 {
     Q_OBJECT
@@ -25,3 +26,4 @@ protected:
 public slots:
     void pressed(CaptureContext& context) override;
 };
+#endif
