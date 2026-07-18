@@ -68,6 +68,7 @@ constexpr const char* visibleInDockProperty = "_visibleInDock";
 #include <QDesktopServices>
 #include <QFile>
 #include <QMessageBox>
+#include <QRegularExpression>
 #include <QThread>
 #include <QTimer>
 #include <QUrl>
@@ -552,6 +553,9 @@ void Flameshot::exportCapture(const QPixmap& capture,
             delete[] outText;
             api->End();
             delete api;
+
+            // Post-process to normalize line-leading bullet points (like 'e ', 'o ', '*', '+') followed by a capital letter
+            result.replace(QRegularExpression("(^|\\n)[e◦o°*+•] (?=[A-Z])"), "\\1• ");
 
             if (!result.isEmpty()) {
                 FlameshotDaemon::copyToClipboard(result, tr("Text extracted and copied to clipboard."));
