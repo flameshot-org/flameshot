@@ -492,6 +492,7 @@ void Flameshot::exportCapture(const QPixmap& capture,
         if (api->Init(nullptr, "eng") == 0) {
             api->SetVariable("load_system_dawg", "0");
             api->SetVariable("load_freq_dawg", "0");
+            img.save("/home/sniperravan/Desktop/flameshot/build/ocr_debug.png");
             api->SetImage(img.bits(), img.width(), img.height(), 1, img.bytesPerLine());
             char* outText = api->GetUTF8Text();
             QString result = QString::fromUtf8(outText).trimmed();
