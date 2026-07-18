@@ -490,6 +490,8 @@ void Flameshot::exportCapture(const QPixmap& capture,
 
         tesseract::TessBaseAPI* api = new tesseract::TessBaseAPI();
         if (api->Init(nullptr, "eng") == 0) {
+            api->SetVariable("load_system_dawg", "0");
+            api->SetVariable("load_freq_dawg", "0");
             api->SetImage(img.bits(), img.width(), img.height(), 1, img.bytesPerLine());
             char* outText = api->GetUTF8Text();
             QString result = QString::fromUtf8(outText).trimmed();
