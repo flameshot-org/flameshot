@@ -23,6 +23,9 @@ if (USE_WAYLAND_CLIPBOARD)
     find_package(KF6GuiAddons)
 endif()
 
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(TESSERACT REQUIRED tesseract)
+
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
@@ -179,6 +182,7 @@ target_include_directories(flameshot PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/>  # src/
     $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/>
 )
+target_include_directories(flameshot PRIVATE ${TESSERACT_INCLUDE_DIRS})
 
 target_link_libraries(
         flameshot
@@ -188,6 +192,7 @@ target_link_libraries(
         Qt${QT_VERSION_MAJOR}::Network
         Qt${QT_VERSION_MAJOR}::Widgets
         QtColorWidgets
+        ${TESSERACT_LIBRARIES}
 )
 if (UNIX)
 target_link_libraries(
