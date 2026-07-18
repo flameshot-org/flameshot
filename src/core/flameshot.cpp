@@ -486,8 +486,8 @@ void Flameshot::exportCapture(const QPixmap& capture,
     }
 
     if (tasks & CR::OCR) {
-        // 1. Scale smoothly by 3x to preserve font curves
-        QImage img = capture.toImage().scaled(capture.width() * 3, capture.height() * 3, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+        // 1. Scale by 3x using FastTransformation to preserve tiny punctuation pixel intensity
+        QImage img = capture.toImage().scaled(capture.width() * 3, capture.height() * 3, Qt::KeepAspectRatio, Qt::FastTransformation);
         img = img.convertToFormat(QImage::Format_Grayscale8);
 
         int width = img.width();
@@ -546,6 +546,7 @@ void Flameshot::exportCapture(const QPixmap& capture,
         if (api->Init(nullptr, "eng") == 0) {
             api->SetVariable("load_system_dawg", "0");
             api->SetVariable("load_freq_dawg", "0");
+            img.save("/home/sniperravan/Desktop/flameshot/build/ocr_debug.png");
             api->SetImage(img.bits(), img.width(), img.height(), 1, img.bytesPerLine());
             char* outText = api->GetUTF8Text();
             QString result = QString::fromUtf8(outText).trimmed();
