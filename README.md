@@ -98,6 +98,7 @@
 - In-app screenshot editing.
 - DBus interface.
 - Upload to Imgur.
+- Text Recognition (OCR) support (extract text from screenshots).
 
 ## Usage
 
@@ -443,6 +444,7 @@ Also you can open and build/debug the project in a C++ IDE. For example, in Qt C
 - OpenSSL
 - CA Certificates
 - Qt Image Formats - for additional export image formats (e.g. tiff, webp, and more)
+- Tesseract OCR (with `eng` training data) - for Text Recognition (OCR) support
 
 #### Debian
 
@@ -454,7 +456,7 @@ apt install g++ cmake build-essential qt6-base-dev qt6-tools-dev-tools qt6-svg-d
 apt install libkf6guiaddons-dev libqt6dbus6 libqt6network6 libqt6core6 libqt6widgets6 libqt6gui6 libqt6svg6 qt6-qpa-plugins
 
 # Optional
-apt install git openssl ca-certificates qt6-image-formats-plugins
+apt install git openssl ca-certificates qt6-image-formats-plugins libtesseract-dev tesseract-ocr tesseract-ocr-eng
 ```
 
 #### Fedora
@@ -467,7 +469,7 @@ dnf install gcc-c++ cmake qt6-qtbase-devel qt6-qtsvg-devel qt6-qttools qt6-lingu
 dnf install qt6-qtbase qt6-qtsvg kf6-kguiaddons
 
 # Optional
-dnf install git openssl ca-certificates qt6-qtimageformats
+dnf install git openssl ca-certificates qt6-qtimageformats tesseract-devel tesseract
 ```
 
 #### Arch
@@ -480,7 +482,7 @@ pacman -S cmake base-devel git qt6-base qt6-tools kguiaddons
 pacman -S qt6-svg
 
 # Optional
-pacman -S openssl ca-certificates qt6-imageformats
+pacman -S openssl ca-certificates qt6-imageformats tesseract tesseract-data-eng
 ```
 
 #### Nix
@@ -508,6 +510,10 @@ First of all you need to install [brew](https://brew.sh) and then install the de
 ```shell
 brew install qt6
 brew install cmake
+
+# Optional
+brew install tesseract
+```
 ```
 
 ### Build
