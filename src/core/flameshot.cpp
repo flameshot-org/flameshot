@@ -485,11 +485,11 @@ void Flameshot::exportCapture(const QPixmap& capture,
     }
 
     if (tasks & CR::OCR) {
-        QImage img = capture.toImage().scaled(capture.width() * 3, capture.height() * 3, Qt::KeepAspectRatio, Qt::SmoothTransformation);
-        img = img.convertToFormat(QImage::Format_RGB32);
+        QImage img = capture.toImage().scaled(capture.width() * 3, capture.height() * 3, Qt::KeepAspectRatio, Qt::FastTransformation);
+        img = img.convertToFormat(QImage::Format_Grayscale8);
         tesseract::TessBaseAPI* api = new tesseract::TessBaseAPI();
         if (api->Init(nullptr, "eng") == 0) {
-            api->SetImage(img.bits(), img.width(), img.height(), 4, img.bytesPerLine());
+            api->SetImage(img.bits(), img.width(), img.height(), 1, img.bytesPerLine());
             char* outText = api->GetUTF8Text();
             QString result = QString::fromUtf8(outText).trimmed();
             delete[] outText;
