@@ -513,9 +513,9 @@ void Flameshot::exportCapture(const QPixmap& capture,
 
         // 4. Perform Local Adaptive Thresholding: Output black text on pure white background
         QImage bin(width, height, QImage::Format_Grayscale8);
-        int w = 25; // Local window size (covers stroke widths at 3x scale)
+        int w = 51; // Larger local window size (prevents hollowing of thick font strokes and bullet points)
         int half = w / 2;
-        int C = 15; // Contrast threshold constant
+        int C = 10; // Lower contrast threshold constant to catch dim gray text
 
         for (int y = 0; y < height; ++y) {
             const uchar* imgLine = img.scanLine(y);
