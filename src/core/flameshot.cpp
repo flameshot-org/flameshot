@@ -60,6 +60,8 @@ constexpr const char* visibleInDockProperty = "_visibleInDock";
 #include "widgets/uploadhistory.h"
 #endif
 
+#include <tesseract/baseapi.h>
+
 #include <QApplication>
 #include <QBuffer>
 #include <QDebug>
@@ -480,6 +482,30 @@ void Flameshot::exportCapture(const QPixmap& capture,
 
     if (tasks & CR::COPY) {
         FlameshotDaemon::copyToClipboard(capture);
+    }
+
+    if (tasks & CR::OCR) {
+        QImage img = capture.toImage().convertToFormat(QImage::Format_RGB32);
+        tesseract::TessBaseAPI* api = new tesseract::TessBaseAPI();
+        if (api->Init(nullptr, "eng") == 0) {
+            api->SetImage(img.bits(), img.width(), img.height(), 4, img.bytesPerLine());
+            char* outText = api->GetUTF8Text();
+            QString result = QString::fromUtf8(outText).trimmed();
+            delete[] outText;
+            api->End();
+            delete api;
+
+            if (!result.isEmpty()) {
+                FlameshotDaemon::copyToClipboard(result, tr("Text extracted and copied to clipboard."));
+            } else {
+                AbstractLogger::warning(AbstractLogger::Target::Notification)
+                  << tr("OCR found no text in the selection.");
+            }
+        } else {
+            delete api;
+            AbstractLogger::error(AbstractLogger::Target::Notification)
+              << tr("Failed to initialize Tesseract OCR engine.");
+        }
     }
 
     if (tasks & CR::PIN) {
