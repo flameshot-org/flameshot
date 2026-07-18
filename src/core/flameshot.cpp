@@ -485,8 +485,17 @@ void Flameshot::exportCapture(const QPixmap& capture,
     }
 
     if (tasks & CR::OCR) {
-        QImage img = capture.toImage().scaled(capture.width() * 3, capture.height() * 3, Qt::KeepAspectRatio, Qt::FastTransformation);
+        QImage img = capture.toImage().scaled(capture.width() * 3, capture.height() * 3, Qt::KeepAspectRatio, Qt::SmoothTransformation);
         img = img.convertToFormat(QImage::Format_Grayscale8);
+
+        // Binarize the upscaled image using a hard threshold at 127 to remove gradient blur around shapes
+        for (int y = 0; y < img.height(); ++y) {
+            uchar* line = img.scanLine(y);
+            for (int x = 0; x < img.width(); ++x) {
+                line[x] = (line[x] > 127) ? 255 : 0;
+            }
+        }
+
         tesseract::TessBaseAPI* api = new tesseract::TessBaseAPI();
         if (api->Init(nullptr, "eng") == 0) {
             api->SetImage(img.bits(), img.width(), img.height(), 1, img.bytesPerLine());
