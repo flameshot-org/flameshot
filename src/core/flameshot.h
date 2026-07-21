@@ -8,6 +8,7 @@
 
 #include <QObject>
 #include <QPointer>
+#include <QString>
 #include <QVersionNumber>
 #include <QWindow>
 
@@ -18,7 +19,7 @@ class QWidget;
 #ifdef ENABLE_IMGUR
 class UploadHistory;
 #endif
-#if (defined(Q_OS_MACOS) || defined(Q_OS_WIN))
+#if defined(Q_OS_MACOS) || defined(Q_OS_WIN) || defined(Q_OS_LINUX)
 class QHotkey;
 #endif
 
@@ -83,6 +84,12 @@ public slots:
 private:
     Flameshot();
     bool resolveAnyConfigErrors();
+#if defined(Q_OS_MACOS) || defined(Q_OS_WIN) || defined(Q_OS_LINUX)
+    void reloadCaptureShortcut(const QString& shortcut);
+#endif
+#if defined(Q_OS_MACOS) && defined(ENABLE_IMGUR)
+    void reloadHistoryShortcut(const QString& shortcut);
+#endif
 
     // class members
     static Origin m_origin;
@@ -102,10 +109,12 @@ private:
     int m_dockIconVisibleCount = 0;
 #endif
 
-#if (defined(Q_OS_MACOS) || defined(Q_OS_WIN))
+#if defined(Q_OS_MACOS) || defined(Q_OS_WIN) || defined(Q_OS_LINUX)
     QHotkey* m_HotkeyScreenshotCapture;
+    QString m_captureShortcut;
 #endif
-#if (defined(Q_OS_MACOS) && ENABLE_IMGUR)
+#if defined(Q_OS_MACOS) && defined(ENABLE_IMGUR)
     QHotkey* m_HotkeyScreenshotHistory;
+    QString m_historyShortcut;
 #endif
 };

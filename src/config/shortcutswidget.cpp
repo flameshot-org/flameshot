@@ -11,6 +11,7 @@
 #include <QCheckBox>
 #include <QCursor>
 #include <QDir>
+#include <QGuiApplication>
 #include <QHeaderView>
 #include <QIcon>
 #include <QKeyEvent>
@@ -43,6 +44,19 @@ ShortcutsWidget::ShortcutsWidget(QWidget* parent)
 #endif
 
     initInfoTable();
+#if defined(Q_OS_LINUX)
+    if (!QGuiApplication::platformName().contains(QStringLiteral("xcb"),
+                                                  Qt::CaseInsensitive)) {
+        auto* waylandNotice = new QLabel(
+          tr("On native Wayland, global shortcuts are controlled by the "
+             "desktop environment. Configure the same key there to run "
+             "'flameshot gui'. Changes here apply immediately on "
+             "X11/XWayland."),
+          this);
+        waylandNotice->setWordWrap(true);
+        m_layout->addWidget(waylandNotice);
+    }
+#endif
     connect(ConfigHandler::getInstance(),
             &ConfigHandler::fileChanged,
             this,
@@ -137,7 +151,7 @@ void ShortcutsWidget::onShortcutCellClicked(int row, int col)
         }
 
         QString shortcutName = m_shortcuts.at(row).at(0);
-        auto* setShortcutDialog = new SetShortcutDialog(nullptr, shortcutName);
+        auto* setShortcutDialog = new SetShortcutDialog(nullptr);
         if (0 != setShortcutDialog->exec()) {
             QKeySequence shortcutValue = setShortcutDialog->shortcut();
 
@@ -152,6 +166,12 @@ void ShortcutsWidget::onShortcutCellClicked(int row, int col)
             }
 #endif
             if (m_config.setShortcut(shortcutName, shortcutValue.toString())) {
+#if defined(Q_OS_WIN)
+                if (shortcutName == "TAKE_SCREENSHOT" &&
+                    shortcutValue == QKeySequence(Qt::Key_Print)) {
+                    checkPrintScreenForcesSnipping();
+                }
+#endif
                 populateInfoTable();
             }
         }
@@ -215,19 +235,13 @@ void ShortcutsWidget::loadShortcuts()
     appendShortcut("SCREENSHOT_HISTORY", tr("Screenshot history"));
 #endif
 #elif defined(Q_OS_WIN)
-    if (this->isPrintScreenKeyForSnippingDisabled()) {
-        m_shortcuts << (QStringList() << "" << QObject::tr("Capture screen")
-                                      << "Print Screen");
-    }
     appendShortcut("TAKE_SCREENSHOT", tr("Capture screen"));
 #ifdef ENABLE_IMGUR
     m_shortcuts << (QStringList() << "" << QObject::tr("Screenshot history")
                                   << "Shift+Print Screen");
 #endif
-#else
-    // TODO - Linux doesn't support global shortcuts for (XServer and Wayland),
-    // possibly it will be solved in the QHotKey library later. So it is
-    // disabled for now.
+#elif defined(Q_OS_LINUX)
+    appendShortcut("TAKE_SCREENSHOT", tr("Capture screen"));
 #endif
     m_shortcuts << (QStringList()
                     << "" << QObject::tr("Show color picker") << "Right Click");
@@ -260,6 +274,12 @@ const QString& ShortcutsWidget::nativeOSHotKeyText(const QString& text)
 #if defined(Q_OS_WIN)
 void ShortcutsWidget::checkPrintScreenForcesSnipping()
 {
+    const QKeySequence captureShortcut(
+      ConfigHandler().shortcut("TAKE_SCREENSHOT"));
+    if (captureShortcut != QKeySequence(Qt::Key_Print)) {
+        return;
+    }
+
     if (!isPrintScreenKeyForSnippingDisabled() &&
         !ConfigHandler().ignorePrntScrForcesSnipping()) {
         QMessageBox msgBox;

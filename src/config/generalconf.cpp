@@ -37,6 +37,9 @@ GeneralConf::GeneralConf(QWidget* parent)
     initAutoCloseIdleDaemon();
     initShowTrayIcon();
     initShowDesktopNotification();
+#if defined(Q_OS_WIN)
+    initIncludeMouseCursor();
+#endif
     initShowAbortNotification();
 #if !defined(DISABLE_UPDATE_CHECKER)
     initCheckForUpdates();
@@ -90,6 +93,9 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
     m_helpMessage->setChecked(config.showHelp());
     m_sidePanelButton->setChecked(config.showSidePanelButton());
     m_sysNotifications->setChecked(config.showDesktopNotification());
+#if defined(Q_OS_WIN)
+    m_includeMouseCursor->setChecked(config.includeMouseCursor());
+#endif
     m_abortNotifications->setChecked(config.showAbortNotification());
     m_autostart->setChecked(config.startupLaunch());
     m_saveAfterCopy->setChecked(config.saveAfterCopy());
@@ -162,6 +168,13 @@ void GeneralConf::showDesktopNotificationChanged(bool checked)
 {
     ConfigHandler().setShowDesktopNotification(checked);
 }
+
+#if defined(Q_OS_WIN)
+void GeneralConf::includeMouseCursorChanged(bool checked)
+{
+    ConfigHandler().setIncludeMouseCursor(checked);
+}
+#endif
 
 void GeneralConf::showAbortNotificationChanged(bool checked)
 {
@@ -320,6 +333,22 @@ void GeneralConf::initShowDesktopNotification()
             this,
             &GeneralConf::showDesktopNotificationChanged);
 }
+
+#if defined(Q_OS_WIN)
+void GeneralConf::initIncludeMouseCursor()
+{
+    m_includeMouseCursor =
+      new QCheckBox(tr("Show mouse cursor in screenshots"), this);
+    m_includeMouseCursor->setToolTip(
+      tr("Include the current Windows mouse cursor in captured images"));
+    m_scrollAreaLayout->addWidget(m_includeMouseCursor);
+
+    connect(m_includeMouseCursor,
+            &QCheckBox::clicked,
+            this,
+            &GeneralConf::includeMouseCursorChanged);
+}
+#endif
 
 void GeneralConf::initShowAbortNotification()
 {

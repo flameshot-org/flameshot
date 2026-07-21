@@ -88,6 +88,9 @@ public:
     CONFIG_GETTER_SETTER(showDesktopNotification,
                          setShowDesktopNotification,
                          bool)
+#if defined(Q_OS_WIN)
+    CONFIG_GETTER_SETTER(includeMouseCursor, setIncludeMouseCursor, bool)
+#endif
     CONFIG_GETTER_SETTER(showAbortNotification, setShowAbortNotification, bool)
     CONFIG_GETTER_SETTER(filenamePattern, setFilenamePattern, QString)
     CONFIG_GETTER_SETTER(disabledTrayIcon, setDisabledTrayIcon, bool)
@@ -199,6 +202,8 @@ signals:
     void error() const;
     void errorResolved() const;
     void fileChanged() const;
+    void shortcutChanged(const QString& actionName,
+                         const QString& shortcut) const;
 
 private:
     mutable QSettings m_settings;

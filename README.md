@@ -248,9 +248,9 @@ These shortcuts are available in GUI mode:
 
 ### Global
 
-- Windows: <kbd>Prt Sc</kbd> (fixed, cannot be changed) and <kbd>Win</kbd> + <kbd>Shift</kbd> + <kbd>X</kbd> (can be changed in the settings)
-- macOS: <kbd>cmd</kbd> + <kbd>Shift</kbd> + <kbd>X</kbd> (can be changed in the settings)
-- Linux: Flameshot doesn't yet support <kbd>Prt Sc</kbd> out of the box, but you can set this up with a bit of configuration:
+- Windows: <kbd>Prt Sc</kbd> by default (changes apply immediately)
+- macOS: <kbd>cmd</kbd> + <kbd>Shift</kbd> + <kbd>X</kbd> by default (changes apply immediately)
+- Linux X11/XWayland: <kbd>Prt Sc</kbd> by default (changes apply immediately). On native Wayland, configure the desktop environment to run `flameshot gui` because the compositor owns global shortcuts:
 
 #### On KDE Plasma desktop
 

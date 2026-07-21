@@ -3,19 +3,68 @@
 
 #include "globalshortcutfilter.h"
 #include "core/flameshot.h"
+#include "utils/confighandler.h"
+
+#include <QKeySequence>
 
 #include <qt_windows.h>
 
 GlobalShortcutFilter::GlobalShortcutFilter(QObject* parent)
   : QObject(parent)
 {
-    // Forced Print Screen
-    if (RegisterHotKey(NULL, 1, 0, VK_SNAPSHOT)) {
-        // ok - capture screen
+    QObject::connect(
+      ConfigHandler::getInstance(),
+      &ConfigHandler::shortcutChanged,
+      this,
+      [this](const QString& actionName, const QString& shortcut) {
+          if (actionName == QStringLiteral("TAKE_SCREENSHOT")) {
+              reloadPrintScreenShortcut(shortcut);
+          }
+      });
+    QObject::connect(ConfigHandler::getInstance(),
+                     &ConfigHandler::fileChanged,
+                     this,
+                     [this]() {
+                         reloadPrintScreenShortcut(
+                           ConfigHandler().shortcut("TAKE_SCREENSHOT"));
+                     });
+
+    reloadPrintScreenShortcut(ConfigHandler().shortcut("TAKE_SCREENSHOT"));
+
+#ifdef ENABLE_IMGUR
+    m_historyShortcutRegistered =
+      RegisterHotKey(NULL, 2, MOD_SHIFT, VK_SNAPSHOT) != FALSE;
+#endif
+}
+
+GlobalShortcutFilter::~GlobalShortcutFilter()
+{
+    if (m_printScreenRegistered) {
+        UnregisterHotKey(NULL, 1);
+    }
+#ifdef ENABLE_IMGUR
+    if (m_historyShortcutRegistered) {
+        UnregisterHotKey(NULL, 2);
+    }
+#endif
+}
+
+void GlobalShortcutFilter::reloadPrintScreenShortcut(const QString& shortcut)
+{
+    const bool shouldRegister =
+      QKeySequence(shortcut) == QKeySequence(Qt::Key_Print);
+
+    if (!shouldRegister) {
+        if (m_printScreenRegistered) {
+            UnregisterHotKey(NULL, 1);
+            m_printScreenRegistered = false;
+        }
+        return;
     }
 
-    if (RegisterHotKey(NULL, 2, MOD_SHIFT, VK_SNAPSHOT)) {
-        // ok - show screenshots history
+    if (!m_printScreenRegistered) {
+        m_printScreenRegistered =
+          RegisterHotKey(NULL, 1, 0, VK_SNAPSHOT) != FALSE;
     }
 }
 
@@ -28,8 +77,6 @@ bool GlobalShortcutFilter::nativeEventFilter(const QByteArray& eventType,
 
     MSG* msg = static_cast<MSG*>(message);
     if (msg->message == WM_HOTKEY) {
-        // TODO: this is just a temporary workaround; proper global
-        // support would need custom shortcuts defined by the user.
         const quint32 keycode = HIWORD(msg->lParam);
         const quint32 modifiers = LOWORD(msg->lParam);
 #ifdef ENABLE_IMGUR
@@ -39,8 +86,10 @@ bool GlobalShortcutFilter::nativeEventFilter(const QByteArray& eventType,
             return true;
         }
 #endif
-        // Capture screen
-        if (VK_SNAPSHOT == keycode && 0 == modifiers) {
+        // Capture screen only when plain Print Screen is the configured
+        // TAKE_SCREENSHOT shortcut and native registration succeeded.
+        if (m_printScreenRegistered && VK_SNAPSHOT == keycode &&
+            0 == modifiers) {
             Flameshot::instance()->requestCapture(
               CaptureRequest(CaptureRequest::GRAPHICAL_MODE));
             return true;

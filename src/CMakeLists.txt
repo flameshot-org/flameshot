@@ -233,6 +233,13 @@ if (APPLE)
     )
 endif ()
 
+if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+    target_link_libraries(
+            flameshot
+            qhotkey
+    )
+endif()
+
 
 set(_src_root_path ${CMAKE_CURRENT_SOURCE_DIR})
 file(GLOB_RECURSE _source_list LIST_DIRECTORIES false

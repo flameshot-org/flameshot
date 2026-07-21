@@ -20,6 +20,11 @@
 #include <QScreen>
 #include <QTimer>
 #include <QWidget>
+#if defined(Q_OS_WIN)
+#include <QCursor>
+#include <QImage>
+#include <qt_windows.h>
+#endif
 #include <algorithm>
 
 #ifdef FLAMESHOT_DEBUG_CAPTURE
@@ -33,6 +38,113 @@
 #include <QDir>
 #include <QUrl>
 #include <QUuid>
+#endif
+
+#if defined(Q_OS_WIN)
+namespace {
+void deleteIconInfoBitmaps(ICONINFO& iconInfo)
+{
+    if (iconInfo.hbmColor != nullptr) {
+        DeleteObject(iconInfo.hbmColor);
+        iconInfo.hbmColor = nullptr;
+    }
+    if (iconInfo.hbmMask != nullptr) {
+        DeleteObject(iconInfo.hbmMask);
+        iconInfo.hbmMask = nullptr;
+    }
+}
+
+void drawMouseCursor(QPixmap& screenshot, const QRect& logicalScreenGeometry)
+{
+    if (!ConfigHandler().includeMouseCursor() || screenshot.isNull() ||
+        logicalScreenGeometry.isEmpty()) {
+        return;
+    }
+
+    CURSORINFO cursorInfo{};
+    cursorInfo.cbSize = sizeof(CURSORINFO);
+    if (!GetCursorInfo(&cursorInfo) || !(cursorInfo.flags & CURSOR_SHOWING) ||
+        cursorInfo.hCursor == nullptr) {
+        return;
+    }
+
+    // QCursor and QScreen use the same device-independent virtual desktop
+    // coordinate system. Converting the position using the actual captured
+    // pixel dimensions is more reliable than assuming the reported DPR maps
+    // exactly to the pixmap dimensions.
+    const QPoint logicalCursorPosition = QCursor::pos();
+    if (!logicalScreenGeometry.contains(logicalCursorPosition)) {
+        return;
+    }
+
+    ICONINFO iconInfo{};
+    if (!GetIconInfo(cursorInfo.hCursor, &iconInfo)) {
+        return;
+    }
+
+    const qreal scaleX =
+      static_cast<qreal>(screenshot.width()) / logicalScreenGeometry.width();
+    const qreal scaleY =
+      static_cast<qreal>(screenshot.height()) / logicalScreenGeometry.height();
+    const QPoint logicalOffset =
+      logicalCursorPosition - logicalScreenGeometry.topLeft();
+    const int cursorX =
+      qRound(logicalOffset.x() * scaleX) - static_cast<int>(iconInfo.xHotspot);
+    const int cursorY =
+      qRound(logicalOffset.y() * scaleY) - static_cast<int>(iconInfo.yHotspot);
+    deleteIconInfoBitmaps(iconInfo);
+
+    // DrawIconEx applies the native cursor's alpha/mask/XOR data directly to
+    // the captured pixels. This works for color, monochrome, inverted, custom,
+    // and animated Windows cursors, where converting HCURSOR to a Qt image can
+    // produce a fully transparent or incorrectly masked result.
+    QImage image = screenshot.toImage().convertToFormat(QImage::Format_RGB32);
+    HBITMAP bitmap = image.toHBITMAP();
+    if (bitmap == nullptr) {
+        return;
+    }
+
+    HDC screenDc = GetDC(nullptr);
+    HDC memoryDc = CreateCompatibleDC(screenDc);
+    if (memoryDc == nullptr) {
+        if (screenDc != nullptr) {
+            ReleaseDC(nullptr, screenDc);
+        }
+        DeleteObject(bitmap);
+        return;
+    }
+
+    HGDIOBJ previousBitmap = SelectObject(memoryDc, bitmap);
+    const bool bitmapSelected =
+      previousBitmap != nullptr && previousBitmap != HGDI_ERROR;
+    const BOOL cursorDrawn = bitmapSelected ? DrawIconEx(memoryDc,
+                                                         cursorX,
+                                                         cursorY,
+                                                         cursorInfo.hCursor,
+                                                         0,
+                                                         0,
+                                                         0,
+                                                         nullptr,
+                                                         DI_NORMAL)
+                                            : FALSE;
+
+    if (bitmapSelected) {
+        SelectObject(memoryDc, previousBitmap);
+    }
+    DeleteDC(memoryDc);
+    if (screenDc != nullptr) {
+        ReleaseDC(nullptr, screenDc);
+    }
+
+    if (cursorDrawn) {
+        QImage result = QImage::fromHBITMAP(bitmap);
+        if (!result.isNull()) {
+            screenshot = QPixmap::fromImage(result);
+        }
+    }
+    DeleteObject(bitmap);
+}
+} // namespace
 #endif
 
 bool ScreenGrabber::m_monitorSelectionActive = false;
@@ -357,8 +469,16 @@ QPixmap ScreenGrabber::grabScreen(QScreen* screen, bool& ok)
     p = grabEntireDesktop(ok, screenIndex);
 #else
     ok = true;
-    return screen->grabWindow(
+    QPixmap screenshot = screen->grabWindow(
       0, geometry.x(), geometry.y(), geometry.width(), geometry.height());
+#if defined(Q_OS_WIN)
+    const qreal screenshotDpr = screenshot.devicePixelRatio();
+    screenshot.setDevicePixelRatio(1.0);
+    drawMouseCursor(screenshot, screen->geometry());
+    screenshot.setDevicePixelRatio(
+      screenshotDpr > 0.0 ? screenshotDpr : screen->devicePixelRatio());
+#endif
+    return screenshot;
 #endif
     return p;
 }
@@ -646,7 +766,10 @@ QPixmap ScreenGrabber::windowsScreenshot(int wid)
         qreal screenDpr = screen->devicePixelRatio();
 
         QPixmap screenPixmap = screen->grabWindow(wid);
+        // The Windows desktop compositor below operates in physical pixels.
+        // Normalize the pixmap before drawing the native cursor with GDI.
         screenPixmap.setDevicePixelRatio(1.0);
+        drawMouseCursor(screenPixmap, screenGeom);
 
         int logicalX = screenGeom.x() - minLogicalX;
         int logicalY = screenGeom.y() - minLogicalY;

@@ -140,7 +140,7 @@ include(cmake/StaticAnalyzers.cmake)
 # ToDo: Check if this is used anywhere
 option(BUILD_STATIC_LIBS ON)
 
-if(WIN32 OR APPLE)
+if(WIN32 OR APPLE OR CMAKE_SYSTEM_NAME STREQUAL "Linux")
   FetchContent_Declare(
     qHotKey
     GIT_REPOSITORY https://github.com/flameshot-org/QHotkey

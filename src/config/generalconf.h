@@ -37,6 +37,9 @@ private slots:
     void saveLastRegion(bool checked);
     void showSidePanelButtonChanged(bool checked);
     void showDesktopNotificationChanged(bool checked);
+#if defined(Q_OS_WIN)
+    void includeMouseCursorChanged(bool checked);
+#endif
     void showAbortNotificationChanged(bool checked);
 #if !defined(DISABLE_UPDATE_CHECKER)
     void checkForUpdatesChanged(bool checked);
@@ -90,6 +93,9 @@ private:
     void initSaveAfterCopy();
     void initScrollArea();
     void initShowDesktopNotification();
+#if defined(Q_OS_WIN)
+    void initIncludeMouseCursor();
+#endif
     void initShowAbortNotification();
     void initShowHelp();
     void initShowMagnifier();
@@ -125,6 +131,9 @@ private:
     QVBoxLayout* m_scrollAreaLayout;
     QScrollArea* m_scrollArea;
     QCheckBox* m_sysNotifications;
+#if defined(Q_OS_WIN)
+    QCheckBox* m_includeMouseCursor;
+#endif
     QCheckBox* m_abortNotifications;
     QCheckBox* m_showTray;
     QCheckBox* m_helpMessage;

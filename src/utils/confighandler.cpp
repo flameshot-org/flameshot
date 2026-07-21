@@ -77,6 +77,9 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     OPTION("showHelp"                    ,Bool               ( true          )),
     OPTION("showSidePanelButton"         ,Bool               ( true          )),
     OPTION("showDesktopNotification"     ,Bool               ( true          )),
+#if defined(Q_OS_WIN)
+    OPTION("includeMouseCursor"          ,Bool               ( false         )),
+#endif
     OPTION("showAbortNotification"       ,Bool               ( true          )),
     OPTION("disabledTrayIcon"            ,Bool               ( false         )),
     OPTION("historyConfirmationToDelete" ,Bool               ( true          )),
@@ -196,8 +199,8 @@ static QMap<QString, QSharedPointer<KeySequence>> recognizedShortcuts = {
     SHORTCUT("TYPE_MOVE_UP"             ,   "Up"                    ),
     SHORTCUT("TYPE_MOVE_DOWN"           ,   "Down"                  ),
     SHORTCUT("TYPE_COMMIT_CURRENT_TOOL" ,   "Ctrl+Return"           ),
-#if defined(Q_OS_WIN)
-    SHORTCUT("TAKE_SCREENSHOT"          ,   "Meta+Shift+x"          ),
+#if defined(Q_OS_WIN) || defined(Q_OS_LINUX)
+    SHORTCUT("TAKE_SCREENSHOT"          ,   "Print"                 ),
 #endif
 #if defined(Q_OS_MACOS)
     SHORTCUT("TYPE_DELETE_CURRENT_TOOL" ,   "Backspace"             ),
@@ -444,6 +447,7 @@ bool ConfigHandler::setShortcut(const QString& actionName,
         return false;
     }
 
+    const QString previousShortcut = this->shortcut(actionName);
     bool errorFlag = false;
 
     m_settings.beginGroup(CONFIG_GROUP_SHORTCUTS);
@@ -453,7 +457,6 @@ bool ConfigHandler::setShortcut(const QString& actionName,
         // do not allow to set reserved shortcuts
         errorFlag = true;
     } else {
-        errorFlag = false;
         // Make no difference for Return and Enter keys
         QString newShortcut = KeySequence().value(shortcut).toString();
         for (auto& otherAction : m_settings.allKeys()) {
@@ -471,6 +474,14 @@ bool ConfigHandler::setShortcut(const QString& actionName,
     }
 done:
     m_settings.endGroup();
+
+    if (!errorFlag) {
+        m_settings.sync();
+        const QString updatedShortcut = this->shortcut(actionName);
+        if (updatedShortcut != previousShortcut) {
+            emit getInstance()->shortcutChanged(actionName, updatedShortcut);
+        }
+    }
     return !errorFlag;
 }
 

@@ -3,7 +3,7 @@
 
 #include "flameshot.h"
 #include "core/flameshotdaemon.h"
-#if defined(Q_OS_MACOS) || defined(Q_OS_WIN)
+#if defined(Q_OS_MACOS) || defined(Q_OS_WIN) || defined(Q_OS_LINUX)
 #include "qhotkey.h"
 #endif
 
@@ -65,6 +65,7 @@ constexpr const char* visibleInDockProperty = "_visibleInDock";
 #include <QDebug>
 #include <QDesktopServices>
 #include <QFile>
+#include <QGuiApplication>
 #include <QMessageBox>
 #include <QThread>
 #include <QTimer>
@@ -78,10 +79,10 @@ constexpr const char* visibleInDockProperty = "_visibleInDock";
 Flameshot::Flameshot()
   : m_haveExternalWidget(false)
   , m_captureWindow(nullptr)
-#if (defined(Q_OS_MACOS) || defined(Q_OS_WIN))
+#if defined(Q_OS_MACOS) || defined(Q_OS_WIN) || defined(Q_OS_LINUX)
   , m_HotkeyScreenshotCapture(nullptr)
 #endif
-#if (defined(Q_OS_MACOS) && ENABLE_IMGUR)
+#if defined(Q_OS_MACOS) && defined(ENABLE_IMGUR)
   , m_HotkeyScreenshotHistory(nullptr)
 #endif
 {
@@ -94,24 +95,103 @@ Flameshot::Flameshot()
         CGRequestScreenCaptureAccess();
     }
 #endif
-#if (defined(Q_OS_MACOS) || defined(Q_OS_WIN))
-    // Set global shortcuts for MacOS or Windows
-    m_HotkeyScreenshotCapture = new QHotkey(
-      QKeySequence(ConfigHandler().shortcut("TAKE_SCREENSHOT")), true, this);
-    QObject::connect(m_HotkeyScreenshotCapture,
-                     &QHotkey::activated,
-                     qApp,
-                     [this]() { gui(); });
+#if defined(Q_OS_MACOS) || defined(Q_OS_WIN) || defined(Q_OS_LINUX)
+    QObject::connect(
+      ConfigHandler::getInstance(),
+      &ConfigHandler::shortcutChanged,
+      this,
+      [this](const QString& actionName, const QString& shortcut) {
+          if (actionName == QStringLiteral("TAKE_SCREENSHOT")) {
+              reloadCaptureShortcut(shortcut);
+          }
+#if defined(Q_OS_MACOS) && defined(ENABLE_IMGUR)
+          else if (actionName == QStringLiteral("SCREENSHOT_HISTORY")) {
+              reloadHistoryShortcut(shortcut);
+          }
 #endif
-#if (defined(Q_OS_MACOS) && ENABLE_IMGUR)
-    m_HotkeyScreenshotHistory = new QHotkey(
-      QKeySequence(ConfigHandler().shortcut("SCREENSHOT_HISTORY")), true, this);
-    QObject::connect(m_HotkeyScreenshotHistory,
-                     &QHotkey::activated,
-                     qApp,
-                     [this]() { history(); });
+      });
+
+    // Also reload shortcuts changed by editing flameshot.ini externally.
+    QObject::connect(
+      ConfigHandler::getInstance(),
+      &ConfigHandler::fileChanged,
+      this,
+      [this]() {
+          reloadCaptureShortcut(ConfigHandler().shortcut("TAKE_SCREENSHOT"));
+#if defined(Q_OS_MACOS) && defined(ENABLE_IMGUR)
+          reloadHistoryShortcut(ConfigHandler().shortcut("SCREENSHOT_HISTORY"));
+#endif
+      });
+
+    reloadCaptureShortcut(ConfigHandler().shortcut("TAKE_SCREENSHOT"));
+#endif
+#if defined(Q_OS_MACOS) && defined(ENABLE_IMGUR)
+    reloadHistoryShortcut(ConfigHandler().shortcut("SCREENSHOT_HISTORY"));
 #endif
 }
+
+#if defined(Q_OS_MACOS) || defined(Q_OS_WIN) || defined(Q_OS_LINUX)
+void Flameshot::reloadCaptureShortcut(const QString& shortcut)
+{
+    if (shortcut == m_captureShortcut) {
+        return;
+    }
+
+    delete m_HotkeyScreenshotCapture;
+    m_HotkeyScreenshotCapture = nullptr;
+    m_captureShortcut = shortcut;
+
+    const QKeySequence captureShortcut(shortcut);
+    if (captureShortcut.isEmpty()) {
+        return;
+    }
+
+#if defined(Q_OS_WIN)
+    // Plain Print Screen is managed by GlobalShortcutFilter through the native
+    // Windows API. QHotkey handles every other configured shortcut.
+    if (captureShortcut == QKeySequence(Qt::Key_Print)) {
+        return;
+    }
+#elif defined(Q_OS_LINUX)
+    // QHotkey's Linux backend uses X11. It works on X11 and XWayland, while
+    // native Wayland requires the compositor/desktop to own the shortcut.
+    if (!QGuiApplication::platformName().contains(QStringLiteral("xcb"),
+                                                  Qt::CaseInsensitive)) {
+        return;
+    }
+#endif
+
+    m_HotkeyScreenshotCapture = new QHotkey(captureShortcut, true, this);
+    QObject::connect(m_HotkeyScreenshotCapture,
+                     &QHotkey::activated,
+                     this,
+                     [this]() { gui(); });
+}
+#endif
+
+#if defined(Q_OS_MACOS) && defined(ENABLE_IMGUR)
+void Flameshot::reloadHistoryShortcut(const QString& shortcut)
+{
+    if (shortcut == m_historyShortcut) {
+        return;
+    }
+
+    delete m_HotkeyScreenshotHistory;
+    m_HotkeyScreenshotHistory = nullptr;
+    m_historyShortcut = shortcut;
+
+    const QKeySequence historyShortcut(shortcut);
+    if (historyShortcut.isEmpty()) {
+        return;
+    }
+
+    m_HotkeyScreenshotHistory = new QHotkey(historyShortcut, true, this);
+    QObject::connect(m_HotkeyScreenshotHistory,
+                     &QHotkey::activated,
+                     this,
+                     [this]() { history(); });
+}
+#endif
 
 Flameshot* Flameshot::instance()
 {

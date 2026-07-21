@@ -13,12 +13,18 @@ class GlobalShortcutFilter
     Q_OBJECT
 public:
     explicit GlobalShortcutFilter(QObject* parent = nullptr);
+    ~GlobalShortcutFilter() override;
 
     bool nativeEventFilter(const QByteArray& eventType,
                            void* message,
                            qintptr* result);
 
 private:
+    void reloadPrintScreenShortcut(const QString& shortcut);
+
+    bool m_printScreenRegistered = false;
+    bool m_historyShortcutRegistered = false;
+
     quint32 getNativeModifier(Qt::KeyboardModifiers modifiers);
     quint32 nativeKeycode(Qt::Key key);
     bool registerShortcut(quint32 nativeKey, quint32 nativeMods);
