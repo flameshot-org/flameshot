@@ -2,6 +2,7 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "selectionwidget.h"
+#include "utils/confighandler.h"
 #include "utils/globalvalues.h"
 #include "widgets/capture/capturetoolbutton.h"
 
@@ -20,6 +21,8 @@ SelectionWidget::SelectionWidget(QColor c, QWidget* parent)
   , m_color(std::move(c))
   , m_activeSide(NO_SIDE)
   , m_ignoreMouse(false)
+  , m_moveStep(ConfigHandler().arrowMoveStep())
+  , m_resizeStep(ConfigHandler().arrowResizeStep())
 {
     // prevents this widget from consuming CaptureToolButton mouse events
     setAttribute(Qt::WA_TransparentForMouseEvents);
@@ -425,62 +428,74 @@ void SelectionWidget::updateColor(const QColor& c)
 
 void SelectionWidget::moveLeft()
 {
-    setGeometryByKeyboard(geometry().adjusted(-1, 0, -1, 0));
+    setGeometryByKeyboard(
+      geometry().adjusted(-m_moveStep, 0, -m_moveStep, 0));
 }
 
 void SelectionWidget::moveRight()
 {
-    setGeometryByKeyboard(geometry().adjusted(1, 0, 1, 0));
+    setGeometryByKeyboard(
+      geometry().adjusted(m_moveStep, 0, m_moveStep, 0));
 }
 
 void SelectionWidget::moveUp()
 {
-    setGeometryByKeyboard(geometry().adjusted(0, -1, 0, -1));
+    setGeometryByKeyboard(
+      geometry().adjusted(0, -m_moveStep, 0, -m_moveStep));
 }
 
 void SelectionWidget::moveDown()
 {
-    setGeometryByKeyboard(geometry().adjusted(0, 1, 0, 1));
+    setGeometryByKeyboard(
+      geometry().adjusted(0, m_moveStep, 0, m_moveStep));
 }
 
 void SelectionWidget::resizeLeft()
 {
-    setGeometryByKeyboard(geometry().adjusted(0, 0, -1, 0));
+    setGeometryByKeyboard(
+      geometry().adjusted(0, 0, -m_resizeStep, 0));
 }
 
 void SelectionWidget::resizeRight()
 {
-    setGeometryByKeyboard(geometry().adjusted(0, 0, 1, 0));
+    setGeometryByKeyboard(
+      geometry().adjusted(0, 0, m_resizeStep, 0));
 }
 
 void SelectionWidget::resizeUp()
 {
-    setGeometryByKeyboard(geometry().adjusted(0, 0, 0, -1));
+    setGeometryByKeyboard(
+      geometry().adjusted(0, 0, 0, -m_resizeStep));
 }
 
 void SelectionWidget::resizeDown()
 {
-    setGeometryByKeyboard(geometry().adjusted(0, 0, 0, 1));
+    setGeometryByKeyboard(
+      geometry().adjusted(0, 0, 0, m_resizeStep));
 }
 
 void SelectionWidget::symResizeLeft()
 {
-    setGeometryByKeyboard(geometry().adjusted(1, 0, -1, 0));
+    setGeometryByKeyboard(
+      geometry().adjusted(m_resizeStep, 0, -m_resizeStep, 0));
 }
 
 void SelectionWidget::symResizeRight()
 {
-    setGeometryByKeyboard(geometry().adjusted(-1, 0, 1, 0));
+    setGeometryByKeyboard(
+      geometry().adjusted(-m_resizeStep, 0, m_resizeStep, 0));
 }
 
 void SelectionWidget::symResizeUp()
 {
-    setGeometryByKeyboard(geometry().adjusted(0, -1, 0, 1));
+    setGeometryByKeyboard(
+      geometry().adjusted(0, -m_resizeStep, 0, m_resizeStep));
 }
 
 void SelectionWidget::symResizeDown()
 {
-    setGeometryByKeyboard(geometry().adjusted(0, 1, 0, -1));
+    setGeometryByKeyboard(
+      geometry().adjusted(0, m_resizeStep, 0, -m_resizeStep));
 }
 
 void SelectionWidget::updateAreas()

@@ -53,6 +53,8 @@ GeneralConf::GeneralConf(QWidget* parent)
     initCopyPathAfterSave();
     initAntialiasingPinZoom();
     initUndoLimit();
+    initArrowMoveStep();
+    initArrowResizeStep();
     initInsecurePixelate();
 #if !defined(Q_OS_MACOS)
     initCaptureActiveMonitor();
@@ -120,6 +122,8 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
     m_showQuitPrompt->setChecked(config.showQuitPrompt());
     m_screenshotPathFixedCheck->setChecked(config.savePathFixed());
     m_undoLimit->setValue(config.undoLimit());
+    m_arrowMoveStep->setValue(config.arrowMoveStep());
+    m_arrowResizeStep->setValue(config.arrowResizeStep());
 
     if (allowEmptySavePath || !config.savePath().isEmpty()) {
         m_savePath->setText(config.savePath());
@@ -658,6 +662,68 @@ void GeneralConf::initUndoLimit()
 void GeneralConf::undoLimit(int limit)
 {
     ConfigHandler().setUndoLimit(limit);
+}
+
+void GeneralConf::initArrowMoveStep()
+{
+    auto* box = new QGroupBox(tr("Arrow move step (px)"));
+    box->setFlat(true);
+    m_layout->addWidget(box);
+
+    auto* vboxLayout = new QVBoxLayout();
+    box->setLayout(vboxLayout);
+
+    m_arrowMoveStep = new QSpinBox(this);
+    m_arrowMoveStep->setMinimum(1);
+    m_arrowMoveStep->setMaximum(200);
+    m_arrowMoveStep->setToolTip(
+      tr("Pixels to move the selection per arrow key press"));
+    QString foreground = this->palette().windowText().color().name();
+    m_arrowMoveStep->setStyleSheet(
+      QStringLiteral("color: %1").arg(foreground));
+
+    connect(m_arrowMoveStep,
+            static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged),
+            this,
+            &GeneralConf::arrowMoveStepChanged);
+
+    vboxLayout->addWidget(m_arrowMoveStep);
+}
+
+void GeneralConf::arrowMoveStepChanged(int val)
+{
+    ConfigHandler().setArrowMoveStep(val);
+}
+
+void GeneralConf::initArrowResizeStep()
+{
+    auto* box = new QGroupBox(tr("Arrow resize step (px)"));
+    box->setFlat(true);
+    m_layout->addWidget(box);
+
+    auto* vboxLayout = new QVBoxLayout();
+    box->setLayout(vboxLayout);
+
+    m_arrowResizeStep = new QSpinBox(this);
+    m_arrowResizeStep->setMinimum(1);
+    m_arrowResizeStep->setMaximum(200);
+    m_arrowResizeStep->setToolTip(
+      tr("Pixels to resize the selection per Shift+arrow key press"));
+    QString foreground = this->palette().windowText().color().name();
+    m_arrowResizeStep->setStyleSheet(
+      QStringLiteral("color: %1").arg(foreground));
+
+    connect(m_arrowResizeStep,
+            static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged),
+            this,
+            &GeneralConf::arrowResizeStepChanged);
+
+    vboxLayout->addWidget(m_arrowResizeStep);
+}
+
+void GeneralConf::arrowResizeStepChanged(int val)
+{
+    ConfigHandler().setArrowResizeStep(val);
 }
 
 void GeneralConf::initUseJpgForClipboard()

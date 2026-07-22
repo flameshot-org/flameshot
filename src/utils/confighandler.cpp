@@ -138,6 +138,9 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     OPTION("reverseArrow"                ,Bool               ( false         )),
     OPTION("arrowStyle"                  ,BoundedInt         ( 0, 1, 0       )),
     OPTION("insecurePixelate"            ,Bool               ( false         )),
+    // Arrow key step sizes for selection move/resize (pixels per keypress)
+    OPTION("arrowMoveStep"               ,BoundedInt         ( 1, 200, 1    )),
+    OPTION("arrowResizeStep"             ,BoundedInt         ( 1, 200, 1    )),
 #if defined(Q_OS_WIN)
     // Not visible on settings dialog
     OPTION("ignorePrntScrForcesSnipping" ,Bool               ( false         )),
