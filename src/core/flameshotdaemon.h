@@ -3,6 +3,10 @@
 #include <QByteArray>
 #include <QObject>
 
+#if defined(Q_OS_MACOS) || defined(Q_OS_WIN) || defined(Q_OS_LINUX)
+#include "qhotkey.h"
+#endif
+
 #if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
 #include <QtDBus/QDBusAbstractAdaptor>
 #endif
