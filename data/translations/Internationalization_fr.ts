@@ -982,6 +982,16 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
         <translation>Afficher les notifications du bureau</translation>
     </message>
     <message>
+        <location filename="../../src/config/generalconf.cpp" line="341"/>
+        <source>Show mouse cursor in screenshots</source>
+        <translation>Afficher le pointeur de la souris dans les captures d’écran</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="343"/>
+        <source>Include the current Windows mouse cursor in captured images</source>
+        <translation>Inclure le pointeur de souris Windows actuel dans les images capturées</translation>
+    </message>
+    <message>
         <location filename="../../src/config/generalconf.cpp" line="339"/>
         <source>Show tray icon</source>
         <translation>Afficher les icônes de la barre d&apos;état</translation>
@@ -2577,6 +2587,11 @@ Vous devrez probablement remplacer le signe &apos;#&apos; par &apos;\#FFF&apos;<
         <translation>Raccourcis clavier</translation>
     </message>
     <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="51"/>
+        <source>On native Wayland, global shortcuts are controlled by the desktop environment. Configure the same key there to run 'flameshot gui'. Changes here apply immediately on X11/XWayland.</source>
+        <translation>Sous Wayland natif, les raccourcis globaux sont gérés par l’environnement de bureau. Configurez-y la même touche pour exécuter « flameshot gui ». Les modifications effectuées ici s’appliquent immédiatement sous X11/XWayland.</translation>
+    </message>
+    <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="61"/>
         <source>Available shortcuts in the screen capture mode.</source>
         <translation>Raccourcis disponibles en mode capture d&apos;écran.</translation>
@@ -2729,10 +2744,11 @@ Vous devrez probablement remplacer le signe &apos;#&apos; par &apos;\#FFF&apos;<
         <translation type="vanished">Effacer l&apos;outil actuel</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="213"/>
-        <location filename="../../src/config/shortcutswidget.cpp" line="222"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="233"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="238"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="244"/>
         <source>Capture screen</source>
-        <translation>Capturer l&apos;écran</translation>
+        <translation>Capturer l’écran</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="215"/>

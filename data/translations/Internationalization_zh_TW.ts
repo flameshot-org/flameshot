@@ -958,6 +958,16 @@ Please solve them manually in the configuration file.</source>
         <translation>顯示桌面通知</translation>
     </message>
     <message>
+        <location filename="../../src/config/generalconf.cpp" line="341"/>
+        <source>Show mouse cursor in screenshots</source>
+        <translation>在螢幕擷取畫面中顯示滑鼠游標</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="343"/>
+        <source>Include the current Windows mouse cursor in captured images</source>
+        <translation>在擷取的影像中包含目前的 Windows 滑鼠游標</translation>
+    </message>
+    <message>
         <location filename="../../src/config/generalconf.cpp" line="339"/>
         <source>Show tray icon</source>
         <translation>顯示工具列圖示</translation>
@@ -2536,6 +2546,11 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <translation>熱鍵</translation>
     </message>
     <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="51"/>
+        <source>On native Wayland, global shortcuts are controlled by the desktop environment. Configure the same key there to run 'flameshot gui'. Changes here apply immediately on X11/XWayland.</source>
+        <translation>在原生 Wayland 中，全域快速鍵由桌面環境管理。請在桌面環境中設定相同按鍵以執行「flameshot gui」。此處的變更會在 X11/XWayland 上立即生效。</translation>
+    </message>
+    <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="61"/>
         <source>Available shortcuts in the screen capture mode.</source>
         <translation>螢幕擷取模式中的可用快捷鍵。</translation>
@@ -2688,10 +2703,11 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <translation type="vanished">刪除目前工具</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="213"/>
-        <location filename="../../src/config/shortcutswidget.cpp" line="222"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="233"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="238"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="244"/>
         <source>Capture screen</source>
-        <translation>擷取畫面</translation>
+        <translation>擷取螢幕</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="215"/>

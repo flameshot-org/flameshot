@@ -495,6 +495,16 @@ Press Space to open the side panel.</translation>
         <translation>Show desktop notifications</translation>
     </message>
     <message>
+        <location filename="../../src/config/generalconf.cpp" line="341"/>
+        <source>Show mouse cursor in screenshots</source>
+        <translation>Ἐμφάνισις τοῦ δείκτου τοῦ μυὸς ἐν τοῖς στιγμιοτύποις ὀθόνης</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="343"/>
+        <source>Include the current Windows mouse cursor in captured images</source>
+        <translation>Πρόσθεσις τοῦ νῦν δείκτου τοῦ μυὸς τῶν Windows εἰς τὰς ληφθείσας εἰκόνας</translation>
+    </message>
+    <message>
         <location filename="../../src/config/generalconf.cpp" line="239"/>
         <source>Show tray icon</source>
         <translation>Show tray icon</translation>
@@ -1359,6 +1369,18 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
         <location filename="../../src/config/shortcutswidget.cpp" line="27"/>
         <source>Hot Keys</source>
         <translation>Hot Keys</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="51"/>
+        <source>On native Wayland, global shortcuts are controlled by the desktop environment. Configure the same key there to run 'flameshot gui'. Changes here apply immediately on X11/XWayland.</source>
+        <translation>Ἐν τῷ γνησίῳ Wayland, αἱ καθολικαὶ συντομεύσεις ὑπὸ τοῦ περιβάλλοντος ἐπιφανείας ἐλέγχονται. Ῥύθμισον ἐκεῖ τὸ αὐτὸ πλῆκτρον ἵνα ἐκτελῇ τὸ 'flameshot gui'. Αἱ ἐνταῦθα μεταβολαὶ εὐθὺς ἐνεργοῦνται ἐν X11/XWayland.</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="233"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="238"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="244"/>
+        <source>Capture screen</source>
+        <translation>Λῆψις ὀθόνης</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="52"/>

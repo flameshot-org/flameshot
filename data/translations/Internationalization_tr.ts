@@ -974,6 +974,16 @@ Lütfen bunları yapılandırma dosyasında elle çözün.</translation>
         <translation>Masaüstü bildirimlerini göster</translation>
     </message>
     <message>
+        <location filename="../../src/config/generalconf.cpp" line="341"/>
+        <source>Show mouse cursor in screenshots</source>
+        <translation>Ekran görüntülerinde fare imlecini göster</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="343"/>
+        <source>Include the current Windows mouse cursor in captured images</source>
+        <translation>Yakalanan görüntülere geçerli Windows fare imlecini ekle</translation>
+    </message>
+    <message>
         <location filename="../../src/config/generalconf.cpp" line="339"/>
         <source>Show tray icon</source>
         <translation>Tepsi simgesini göster</translation>
@@ -2556,6 +2566,11 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <translation>Kısayol Tuşları</translation>
     </message>
     <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="51"/>
+        <source>On native Wayland, global shortcuts are controlled by the desktop environment. Configure the same key there to run 'flameshot gui'. Changes here apply immediately on X11/XWayland.</source>
+        <translation>Yerel Wayland'de genel kısayollar masaüstü ortamı tarafından yönetilir. 'flameshot gui' çalıştırmak için aynı tuşu orada yapılandırın. Buradaki değişiklikler X11/XWayland'de hemen uygulanır.</translation>
+    </message>
+    <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="61"/>
         <source>Available shortcuts in the screen capture mode.</source>
         <translation>Ekran yakalama modunda kullanılabilir kısayollar.</translation>
@@ -2708,8 +2723,9 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <translation type="vanished">Geçerli aracı sil</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="213"/>
-        <location filename="../../src/config/shortcutswidget.cpp" line="222"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="233"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="238"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="244"/>
         <source>Capture screen</source>
         <translation>Ekran görüntüsü al</translation>
     </message>

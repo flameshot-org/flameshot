@@ -963,6 +963,16 @@ Please solve them manually in the configuration file.</source>
         <translation>แสดงแจ้งเตือนบนเดสก์ท็อป</translation>
     </message>
     <message>
+        <location filename="../../src/config/generalconf.cpp" line="341"/>
+        <source>Show mouse cursor in screenshots</source>
+        <translation>แสดงตัวชี้เมาส์ในภาพหน้าจอ</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="343"/>
+        <source>Include the current Windows mouse cursor in captured images</source>
+        <translation>รวมตัวชี้เมาส์ Windows ปัจจุบันไว้ในภาพที่จับ</translation>
+    </message>
+    <message>
         <location filename="../../src/config/generalconf.cpp" line="339"/>
         <source>Show tray icon</source>
         <translation>แสดงถาดไอคอน</translation>
@@ -2554,6 +2564,11 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <translation>คีย์ลัด</translation>
     </message>
     <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="51"/>
+        <source>On native Wayland, global shortcuts are controlled by the desktop environment. Configure the same key there to run 'flameshot gui'. Changes here apply immediately on X11/XWayland.</source>
+        <translation>บน Wayland แบบเนทีฟ ปุ่มลัดส่วนกลางจะถูกควบคุมโดยสภาพแวดล้อมเดสก์ท็อป โปรดกำหนดปุ่มเดียวกันที่นั่นเพื่อเรียกใช้ 'flameshot gui' การเปลี่ยนแปลงที่นี่มีผลทันทีบน X11/XWayland</translation>
+    </message>
+    <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="61"/>
         <source>Available shortcuts in the screen capture mode.</source>
         <translation>ปุ่มลัดที่สามารถใช้งานได้ในโหมดจับภาพหน้าจอ</translation>
@@ -2706,8 +2721,9 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <translation type="vanished">ลบเครื่องมือปัจจุบัน</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="213"/>
-        <location filename="../../src/config/shortcutswidget.cpp" line="222"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="233"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="238"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="244"/>
         <source>Capture screen</source>
         <translation>จับภาพหน้าจอ</translation>
     </message>

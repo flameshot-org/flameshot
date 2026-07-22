@@ -966,6 +966,16 @@ Please solve them manually in the configuration file.</translation>
         <translation type="unfinished">Користи системска обавештења</translation>
     </message>
     <message>
+        <location filename="../../src/config/generalconf.cpp" line="341"/>
+        <source>Show mouse cursor in screenshots</source>
+        <translation>Прикажи показивач миша на снимцима екрана</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="343"/>
+        <source>Include the current Windows mouse cursor in captured images</source>
+        <translation>Укључи тренутни Windows показивач миша у снимљене слике</translation>
+    </message>
+    <message>
         <location filename="../../src/config/generalconf.cpp" line="339"/>
         <source>Show tray icon</source>
         <translation type="unfinished">Иконица на системској полици</translation>
@@ -2545,6 +2555,11 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
         <translation>Hot Keys</translation>
     </message>
     <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="51"/>
+        <source>On native Wayland, global shortcuts are controlled by the desktop environment. Configure the same key there to run 'flameshot gui'. Changes here apply immediately on X11/XWayland.</source>
+        <translation>На изворном Wayland-у глобалним пречицама управља окружење радне површине. Тамо подесите исти тастер за покретање „flameshot gui“. Промене овде одмах важе на X11/XWayland-у.</translation>
+    </message>
+    <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="61"/>
         <source>Available shortcuts in the screen capture mode.</source>
         <translation type="unfinished">Доступне пречице у моду снимка екрана.</translation>
@@ -2697,10 +2712,11 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
         <translation type="obsolete">Delete current tool</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="213"/>
-        <location filename="../../src/config/shortcutswidget.cpp" line="222"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="233"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="238"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="244"/>
         <source>Capture screen</source>
-        <translation type="unfinished">Capture screen</translation>
+        <translation>Сними екран</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="215"/>

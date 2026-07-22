@@ -892,6 +892,16 @@ Si prega di risolverli manualmente nel file di configurazione.</translation>
         <translation>Mostra notifiche desktop</translation>
     </message>
     <message>
+        <location filename="../../src/config/generalconf.cpp" line="341"/>
+        <source>Show mouse cursor in screenshots</source>
+        <translation>Mostra il cursore del mouse negli screenshot</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="343"/>
+        <source>Include the current Windows mouse cursor in captured images</source>
+        <translation>Includi il cursore del mouse corrente di Windows nelle immagini acquisite</translation>
+    </message>
+    <message>
         <location filename="../../src/config/generalconf.cpp" line="339"/>
         <source>Show tray icon</source>
         <translation>Mostra icona nella barra delle applicazioni</translation>
@@ -2435,6 +2445,11 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
         <translation>Tasti di scelta rapida</translation>
     </message>
     <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="51"/>
+        <source>On native Wayland, global shortcuts are controlled by the desktop environment. Configure the same key there to run 'flameshot gui'. Changes here apply immediately on X11/XWayland.</source>
+        <translation>Su Wayland nativo, le scorciatoie globali sono gestite dall’ambiente desktop. Configura lì lo stesso tasto per eseguire «flameshot gui». Le modifiche apportate qui hanno effetto immediato su X11/XWayland.</translation>
+    </message>
+    <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="61"/>
         <source>Available shortcuts in the screen capture mode.</source>
         <translation>Scorciatoie disponibili nella modalità di cattura dello schermo.</translation>
@@ -2587,8 +2602,9 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
         <translation type="vanished">Elimina lo strumento corrente</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="213"/>
-        <location filename="../../src/config/shortcutswidget.cpp" line="222"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="233"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="238"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="244"/>
         <source>Capture screen</source>
         <translation>Cattura schermo</translation>
     </message>

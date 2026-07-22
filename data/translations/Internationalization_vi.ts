@@ -959,6 +959,16 @@ Vui lòng xử lí chúng thủ công trong tệp cấu hình.</translation>
         <translation>Hiển thị thông báo máy tính</translation>
     </message>
     <message>
+        <location filename="../../src/config/generalconf.cpp" line="341"/>
+        <source>Show mouse cursor in screenshots</source>
+        <translation>Hiển thị con trỏ chuột trong ảnh chụp màn hình</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="343"/>
+        <source>Include the current Windows mouse cursor in captured images</source>
+        <translation>Bao gồm con trỏ chuột Windows hiện tại trong ảnh đã chụp</translation>
+    </message>
+    <message>
         <location filename="../../src/config/generalconf.cpp" line="339"/>
         <source>Show tray icon</source>
         <translation>Hiển thị biểu tượng trong khay</translation>
@@ -2557,6 +2567,11 @@ Bạn có thể cần phải thoát khỏi dấu &apos;#&apos; như trong &apos;
         <translation>Phím nóng</translation>
     </message>
     <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="51"/>
+        <source>On native Wayland, global shortcuts are controlled by the desktop environment. Configure the same key there to run 'flameshot gui'. Changes here apply immediately on X11/XWayland.</source>
+        <translation>Trên Wayland gốc, phím tắt toàn cục do môi trường máy tính để bàn quản lý. Hãy cấu hình cùng phím đó tại đây để chạy “flameshot gui”. Các thay đổi ở đây được áp dụng ngay trên X11/XWayland.</translation>
+    </message>
+    <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="61"/>
         <source>Available shortcuts in the screen capture mode.</source>
         <translation>Các phím tắt có sẵn trong chế độ chụp màn hình.</translation>
@@ -2709,8 +2724,9 @@ Bạn có thể cần phải thoát khỏi dấu &apos;#&apos; như trong &apos;
         <translation type="obsolete">Delete current tool</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="213"/>
-        <location filename="../../src/config/shortcutswidget.cpp" line="222"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="233"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="238"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="244"/>
         <source>Capture screen</source>
         <translation>Chụp màn hình</translation>
     </message>

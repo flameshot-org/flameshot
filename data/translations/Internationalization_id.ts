@@ -971,6 +971,16 @@ Silakan atasi mereka secara manual di berkas konfigurasi.</translation>
         <translation>Tampilkan notifikasi desktop</translation>
     </message>
     <message>
+        <location filename="../../src/config/generalconf.cpp" line="341"/>
+        <source>Show mouse cursor in screenshots</source>
+        <translation>Tampilkan kursor tetikus pada tangkapan layar</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="343"/>
+        <source>Include the current Windows mouse cursor in captured images</source>
+        <translation>Sertakan kursor tetikus Windows saat ini dalam gambar yang diambil</translation>
+    </message>
+    <message>
         <location filename="../../src/config/generalconf.cpp" line="339"/>
         <source>Show tray icon</source>
         <translation>Tampilkan ikon baki</translation>
@@ -2578,6 +2588,11 @@ Anda mungkin perlu untuk escape dari tanda &apos;#&apos; seperti pada &apos;\#FF
         <translation>Tombol Panas</translation>
     </message>
     <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="51"/>
+        <source>On native Wayland, global shortcuts are controlled by the desktop environment. Configure the same key there to run 'flameshot gui'. Changes here apply immediately on X11/XWayland.</source>
+        <translation>Pada Wayland native, pintasan global dikendalikan oleh lingkungan desktop. Atur tombol yang sama di sana untuk menjalankan 'flameshot gui'. Perubahan di sini langsung berlaku pada X11/XWayland.</translation>
+    </message>
+    <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="61"/>
         <source>Available shortcuts in the screen capture mode.</source>
         <translation>Shortcut yang tersedia di mode capture layar.</translation>
@@ -2730,10 +2745,11 @@ Anda mungkin perlu untuk escape dari tanda &apos;#&apos; seperti pada &apos;\#FF
         <translation type="obsolete">Delete current tool</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="213"/>
-        <location filename="../../src/config/shortcutswidget.cpp" line="222"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="233"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="238"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="244"/>
         <source>Capture screen</source>
-        <translation>Ambil layar</translation>
+        <translation>Tangkap layar</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="215"/>

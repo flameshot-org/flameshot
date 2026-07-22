@@ -994,6 +994,16 @@ Please solve them manually in the configuration file.</translation>
         <translation>Asztali értesítések megjelenítése</translation>
     </message>
     <message>
+        <location filename="../../src/config/generalconf.cpp" line="341"/>
+        <source>Show mouse cursor in screenshots</source>
+        <translation>Egérmutató megjelenítése a képernyőképeken</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="343"/>
+        <source>Include the current Windows mouse cursor in captured images</source>
+        <translation>A Windows aktuális egérmutatójának hozzáadása a rögzített képekhez</translation>
+    </message>
+    <message>
         <location filename="../../src/config/generalconf.cpp" line="339"/>
         <source>Show tray icon</source>
         <translation>Ikon megjelenítése a tálcán</translation>
@@ -2593,6 +2603,11 @@ Lehet, hogy meg kepp adnod egy &apos;\&apos; karaktert a &apos;#&apos; karakter 
         <translation>Gyorsbillentyűk</translation>
     </message>
     <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="51"/>
+        <source>On native Wayland, global shortcuts are controlled by the desktop environment. Configure the same key there to run 'flameshot gui'. Changes here apply immediately on X11/XWayland.</source>
+        <translation>Natív Wayland alatt a globális gyorsbillentyűket az asztali környezet kezeli. Ott állítsa be ugyanezt a billentyűt a „flameshot gui” futtatásához. Az itt végzett módosítások X11/XWayland alatt azonnal érvénybe lépnek.</translation>
+    </message>
+    <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="61"/>
         <source>Available shortcuts in the screen capture mode.</source>
         <translation>Képernyőfelvétel módban elérhető gyorsbillentyűk.</translation>
@@ -2715,10 +2730,11 @@ Lehet, hogy meg kepp adnod egy &apos;\&apos; karaktert a &apos;#&apos; karakter 
         <translation type="obsolete">Delete current tool</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="213"/>
-        <location filename="../../src/config/shortcutswidget.cpp" line="222"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="233"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="238"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="244"/>
         <source>Capture screen</source>
-        <translation type="unfinished">Képernyő rögzítése</translation>
+        <translation>Képernyő rögzítése</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="215"/>

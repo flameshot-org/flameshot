@@ -961,6 +961,16 @@ Please solve them manually in the configuration file.</source>
         <translation>نمایش آگاهی‌های میزکار</translation>
     </message>
     <message>
+        <location filename="../../src/config/generalconf.cpp" line="341"/>
+        <source>Show mouse cursor in screenshots</source>
+        <translation>نمایش نشانگر ماوس در نماگرفت‌ها</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="343"/>
+        <source>Include the current Windows mouse cursor in captured images</source>
+        <translation>افزودن نشانگر فعلی ماوس ویندوز به تصاویر گرفته‌شده</translation>
+    </message>
+    <message>
         <location filename="../../src/config/generalconf.cpp" line="339"/>
         <source>Show tray icon</source>
         <translation>نمایش آیکون در سینی</translation>
@@ -2559,6 +2569,11 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <translation>کلیدهای داغ</translation>
     </message>
     <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="51"/>
+        <source>On native Wayland, global shortcuts are controlled by the desktop environment. Configure the same key there to run 'flameshot gui'. Changes here apply immediately on X11/XWayland.</source>
+        <translation>در Wayland بومی، میان‌برهای سراسری توسط محیط میزکار کنترل می‌شوند. همان کلید را در آنجا برای اجرای «flameshot gui» تنظیم کنید. تغییرات اینجا در X11/XWayland بلافاصله اعمال می‌شوند.</translation>
+    </message>
+    <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="61"/>
         <source>Available shortcuts in the screen capture mode.</source>
         <translation>میان‌برهایی که در حالت نماگرفت از صفحه در دسترس هستند.</translation>
@@ -2711,10 +2726,11 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <translation type="vanished">حذف ابزار فعلی</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="213"/>
-        <location filename="../../src/config/shortcutswidget.cpp" line="222"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="233"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="238"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="244"/>
         <source>Capture screen</source>
-        <translation>نماگرفت از صفحه</translation>
+        <translation>گرفتن نماگرفت از صفحه</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="215"/>

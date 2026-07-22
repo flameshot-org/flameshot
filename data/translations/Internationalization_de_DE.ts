@@ -975,6 +975,16 @@ Bitte beseitige sie manuell in der Konfigurationsdatei.</translation>
         <translation>Desktopbenachrichtigungen anzeigen</translation>
     </message>
     <message>
+        <location filename="../../src/config/generalconf.cpp" line="341"/>
+        <source>Show mouse cursor in screenshots</source>
+        <translation>Mauszeiger in Bildschirmaufnahmen anzeigen</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="343"/>
+        <source>Include the current Windows mouse cursor in captured images</source>
+        <translation>Den aktuellen Windows-Mauszeiger in aufgenommene Bilder einfügen</translation>
+    </message>
+    <message>
         <location filename="../../src/config/generalconf.cpp" line="339"/>
         <source>Show tray icon</source>
         <translation>Taskleistensymbol zeigen</translation>
@@ -2590,6 +2600,11 @@ Eventuell muss das &apos;#&apos; Zeichen als &apos;\#FFF&apos; maskiert werden</
         <translation>Tastenkürzel</translation>
     </message>
     <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="51"/>
+        <source>On native Wayland, global shortcuts are controlled by the desktop environment. Configure the same key there to run 'flameshot gui'. Changes here apply immediately on X11/XWayland.</source>
+        <translation>Unter nativem Wayland werden globale Tastenkürzel von der Desktop-Umgebung verwaltet. Konfigurieren Sie dort dieselbe Taste zum Ausführen von „flameshot gui“. Änderungen hier werden unter X11/XWayland sofort wirksam.</translation>
+    </message>
+    <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="61"/>
         <source>Available shortcuts in the screen capture mode.</source>
         <translation>Verfügbare Tastenkürzel im Aufnahmemodus.</translation>
@@ -2742,8 +2757,9 @@ Eventuell muss das &apos;#&apos; Zeichen als &apos;\#FFF&apos; maskiert werden</
         <translation type="vanished">Aktuelles Werkzeug löschen</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="213"/>
-        <location filename="../../src/config/shortcutswidget.cpp" line="222"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="233"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="238"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="244"/>
         <source>Capture screen</source>
         <translation>Bildschirm aufnehmen</translation>
     </message>

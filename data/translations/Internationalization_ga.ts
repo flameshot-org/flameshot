@@ -963,6 +963,16 @@ Réitigh iad de láimh sa chomhad cumraíochta.</translation>
         <translation>Taispeáin fógraí deisce</translation>
     </message>
     <message>
+        <location filename="../../src/config/generalconf.cpp" line="341"/>
+        <source>Show mouse cursor in screenshots</source>
+        <translation>Taispeáin cúrsóir na luiche i ngabhálacha scáileáin</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="343"/>
+        <source>Include the current Windows mouse cursor in captured images</source>
+        <translation>Cuir cúrsóir reatha luiche Windows sna híomhánna gabhtha</translation>
+    </message>
+    <message>
         <location filename="../../src/config/generalconf.cpp" line="339"/>
         <source>Show tray icon</source>
         <translation>Taispeáin deilbhín tráidire</translation>
@@ -2566,6 +2576,11 @@ B&apos;fhéidir go mbeidh ort éalú ón gcomhartha &apos;#&apos; mar atá i &ap
         <translation>Eochracha Te</translation>
     </message>
     <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="51"/>
+        <source>On native Wayland, global shortcuts are controlled by the desktop environment. Configure the same key there to run 'flameshot gui'. Changes here apply immediately on X11/XWayland.</source>
+        <translation>Ar Wayland dúchasach, is é timpeallacht na deisce a rialaíonn aicearraí domhanda. Cumraigh an eochair chéanna ansin chun 'flameshot gui' a rith. Cuirtear athruithe anseo i bhfeidhm láithreach ar X11/XWayland.</translation>
+    </message>
+    <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="61"/>
         <source>Available shortcuts in the screen capture mode.</source>
         <translation>Aicearraí atá ar fáil sa mhodh gabhála scáileáin.</translation>
@@ -2718,8 +2733,9 @@ B&apos;fhéidir go mbeidh ort éalú ón gcomhartha &apos;#&apos; mar atá i &ap
         <translation type="vanished">Scrios uirlis reatha</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="213"/>
-        <location filename="../../src/config/shortcutswidget.cpp" line="222"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="233"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="238"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="244"/>
         <source>Capture screen</source>
         <translation>Gabháil an scáileán</translation>
     </message>

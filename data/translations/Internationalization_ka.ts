@@ -962,6 +962,16 @@ Please solve them manually in the configuration file.</translation>
         <translation type="unfinished">ცნობების ჩვენება სამუშაო მაგიდაზე</translation>
     </message>
     <message>
+        <location filename="../../src/config/generalconf.cpp" line="341"/>
+        <source>Show mouse cursor in screenshots</source>
+        <translation>ეკრანის სურათებში მაუსის კურსორის ჩვენება</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="343"/>
+        <source>Include the current Windows mouse cursor in captured images</source>
+        <translation>გადაღებულ სურათებში Windows-ის მიმდინარე მაუსის კურსორის ჩართვა</translation>
+    </message>
+    <message>
         <location filename="../../src/config/generalconf.cpp" line="339"/>
         <source>Show tray icon</source>
         <translation type="unfinished">ხატულის ჩვენება სისტემურ პანელზე</translation>
@@ -2532,6 +2542,11 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
         <translation>Hot Keys</translation>
     </message>
     <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="51"/>
+        <source>On native Wayland, global shortcuts are controlled by the desktop environment. Configure the same key there to run 'flameshot gui'. Changes here apply immediately on X11/XWayland.</source>
+        <translation>ნატიურ Wayland-ში გლობალურ მალსახმობებს სამუშაო მაგიდის გარემო მართავს. იქ იგივე ღილაკი დააყენეთ 'flameshot gui'-ის გასაშვებად. აქ შეტანილი ცვლილებები X11/XWayland-ში დაუყოვნებლივ ამოქმედდება.</translation>
+    </message>
+    <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="61"/>
         <source>Available shortcuts in the screen capture mode.</source>
         <translation type="unfinished">გადაღების რეჟიმში ხელმისაწვდომი მალსახმობები.</translation>
@@ -2684,10 +2699,11 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
         <translation type="obsolete">Delete current tool</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="213"/>
-        <location filename="../../src/config/shortcutswidget.cpp" line="222"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="233"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="238"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="244"/>
         <source>Capture screen</source>
-        <translation type="unfinished">Capture screen</translation>
+        <translation>ეკრანის გადაღება</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="215"/>

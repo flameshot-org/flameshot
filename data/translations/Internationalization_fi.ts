@@ -967,6 +967,16 @@ Ratkaise ne käsin muuttamalla asetustiedostoa.</translation>
         <translation>Näytä ilmoitukset</translation>
     </message>
     <message>
+        <location filename="../../src/config/generalconf.cpp" line="341"/>
+        <source>Show mouse cursor in screenshots</source>
+        <translation>Näytä hiiren osoitin kuvakaappauksissa</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="343"/>
+        <source>Include the current Windows mouse cursor in captured images</source>
+        <translation>Sisällytä Windowsin nykyinen hiiren osoitin kaapattuihin kuviin</translation>
+    </message>
+    <message>
         <location filename="../../src/config/generalconf.cpp" line="339"/>
         <source>Show tray icon</source>
         <translation>Näytä kuvake paneelissa</translation>
@@ -2541,6 +2551,11 @@ Sinun on ehkä vältettävä &quot;#&quot; merkkiä kuten &quot;\#FFF&quot;</tra
         <translation>Pikanäppäimet</translation>
     </message>
     <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="51"/>
+        <source>On native Wayland, global shortcuts are controlled by the desktop environment. Configure the same key there to run 'flameshot gui'. Changes here apply immediately on X11/XWayland.</source>
+        <translation>Natiivissa Waylandissa työpöytäympäristö hallitsee yleisiä pikanäppäimiä. Määritä siellä sama näppäin suorittamaan komento ”flameshot gui”. Tässä tehdyt muutokset tulevat heti voimaan X11/XWaylandissa.</translation>
+    </message>
+    <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="61"/>
         <source>Available shortcuts in the screen capture mode.</source>
         <translation>Saatavilla olevat pikanäppäimet kaappaustilassa.</translation>
@@ -2693,8 +2708,9 @@ Sinun on ehkä vältettävä &quot;#&quot; merkkiä kuten &quot;\#FFF&quot;</tra
         <translation type="vanished">Poista nykyinen työkalu</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="213"/>
-        <location filename="../../src/config/shortcutswidget.cpp" line="222"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="233"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="238"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="244"/>
         <source>Capture screen</source>
         <translation>Kaappaa näyttö</translation>
     </message>

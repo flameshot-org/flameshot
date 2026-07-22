@@ -1022,6 +1022,16 @@ Riešte ich ručne v konfiguračnom súbore.</translation>
         <translation>Zobraziť systémové upozornenia</translation>
     </message>
     <message>
+        <location filename="../../src/config/generalconf.cpp" line="341"/>
+        <source>Show mouse cursor in screenshots</source>
+        <translation>Zobraziť kurzor myši na snímkach obrazovky</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="343"/>
+        <source>Include the current Windows mouse cursor in captured images</source>
+        <translation>Zahrnúť aktuálny kurzor myši systému Windows do zachytených obrázkov</translation>
+    </message>
+    <message>
         <location filename="../../src/config/generalconf.cpp" line="339"/>
         <source>Show tray icon</source>
         <translation>Zobraziť stavovú ikonu</translation>
@@ -2640,6 +2650,11 @@ Možno budete musieť napísať pred &apos;#&apos; opačnú lomku, teda &apos;\#
         <translation>Klávesové skratky</translation>
     </message>
     <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="51"/>
+        <source>On native Wayland, global shortcuts are controlled by the desktop environment. Configure the same key there to run 'flameshot gui'. Changes here apply immediately on X11/XWayland.</source>
+        <translation>V natívnom Waylande spravuje globálne klávesové skratky desktopové prostredie. Nastavte v ňom rovnaký kláves na spustenie „flameshot gui“. Zmeny tu sa prejavia okamžite v X11/XWayland.</translation>
+    </message>
+    <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="61"/>
         <source>Available shortcuts in the screen capture mode.</source>
         <translation>Dostupné klávesové skratky v režime zachytávania obrazovky.</translation>
@@ -2792,8 +2807,9 @@ Možno budete musieť napísať pred &apos;#&apos; opačnú lomku, teda &apos;\#
         <translation type="vanished">Vymazať momentálny nástroj</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="213"/>
-        <location filename="../../src/config/shortcutswidget.cpp" line="222"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="233"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="238"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="244"/>
         <source>Capture screen</source>
         <translation>Zachytiť obrazovku</translation>
     </message>

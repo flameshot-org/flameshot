@@ -974,6 +974,16 @@ Los ze alstublieft handmatig op in het configuratiebestand.</translation>
         <translation>Bureaubladmeldingen tonen</translation>
     </message>
     <message>
+        <location filename="../../src/config/generalconf.cpp" line="341"/>
+        <source>Show mouse cursor in screenshots</source>
+        <translation>Muisaanwijzer weergeven in schermafbeeldingen</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="343"/>
+        <source>Include the current Windows mouse cursor in captured images</source>
+        <translation>De huidige Windows-muisaanwijzer opnemen in vastgelegde afbeeldingen</translation>
+    </message>
+    <message>
         <location filename="../../src/config/generalconf.cpp" line="339"/>
         <source>Show tray icon</source>
         <translation>Systeemvakpictogram tonen</translation>
@@ -2585,6 +2595,11 @@ Mogelijk moet je het &apos;#&apos;-teken insluiten. Voorbeeld: &apos;\#FFF&apos;
         <translation>Sneltoetsen</translation>
     </message>
     <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="51"/>
+        <source>On native Wayland, global shortcuts are controlled by the desktop environment. Configure the same key there to run 'flameshot gui'. Changes here apply immediately on X11/XWayland.</source>
+        <translation>Op native Wayland worden globale sneltoetsen beheerd door de desktopomgeving. Stel daar dezelfde toets in om ‘flameshot gui’ uit te voeren. Wijzigingen hier worden direct toegepast op X11/XWayland.</translation>
+    </message>
+    <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="61"/>
         <source>Available shortcuts in the screen capture mode.</source>
         <translation>Beschikbare sneltoetsen in de vastlegmodus.</translation>
@@ -2737,8 +2752,9 @@ Mogelijk moet je het &apos;#&apos;-teken insluiten. Voorbeeld: &apos;\#FFF&apos;
         <translation type="obsolete">Huidig gereedschap verwijderen</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="213"/>
-        <location filename="../../src/config/shortcutswidget.cpp" line="222"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="233"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="238"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="244"/>
         <source>Capture screen</source>
         <translation>Scherm vastleggen</translation>
     </message>

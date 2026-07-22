@@ -1014,6 +1014,16 @@ Mesedez, konpon itzazu eskuz konfigurazio fitxategian.</translation>
         <translation>Bistaratu mahaigaineko jakinarazpenak</translation>
     </message>
     <message>
+        <location filename="../../src/config/generalconf.cpp" line="341"/>
+        <source>Show mouse cursor in screenshots</source>
+        <translation>Erakutsi saguaren kurtsorea pantaila-argazkietan</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="343"/>
+        <source>Include the current Windows mouse cursor in captured images</source>
+        <translation>Sartu uneko Windows saguaren kurtsorea hartutako irudietan</translation>
+    </message>
+    <message>
         <location filename="../../src/config/generalconf.cpp" line="339"/>
         <source>Show tray icon</source>
         <translation>Bistaratu ikonoa erretiluan</translation>
@@ -2628,6 +2638,11 @@ Baliteke &apos;#&apos; karakterea ihes egin behar izatea, &apos;\#FFF&apos;n bez
         <translation>Laster-teklak</translation>
     </message>
     <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="51"/>
+        <source>On native Wayland, global shortcuts are controlled by the desktop environment. Configure the same key there to run 'flameshot gui'. Changes here apply immediately on X11/XWayland.</source>
+        <translation>Wayland natiboan, mahaigaineko inguruneak kontrolatzen ditu lasterbide globalak. Konfiguratu tekla bera han 'flameshot gui' exekutatzeko. Hemengo aldaketak berehala aplikatzen dira X11/XWayland-en.</translation>
+    </message>
+    <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="61"/>
         <source>Available shortcuts in the screen capture mode.</source>
         <translation>Argazki-hartze moduan erabili daitezken laster-teklak.</translation>
@@ -2780,8 +2795,9 @@ Baliteke &apos;#&apos; karakterea ihes egin behar izatea, &apos;\#FFF&apos;n bez
         <translation type="vanished">Ezabatu uneko tresna</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="213"/>
-        <location filename="../../src/config/shortcutswidget.cpp" line="222"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="233"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="238"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="244"/>
         <source>Capture screen</source>
         <translation>Egin pantailaren argazkia</translation>
     </message>

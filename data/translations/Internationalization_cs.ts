@@ -1022,6 +1022,16 @@ Vyřešte je, prosím, ručně v souboru s nastavením.</translation>
         <translation>Ukázat oznámení na ploše</translation>
     </message>
     <message>
+        <location filename="../../src/config/generalconf.cpp" line="341"/>
+        <source>Show mouse cursor in screenshots</source>
+        <translation>Zobrazit kurzor myši na snímcích obrazovky</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="343"/>
+        <source>Include the current Windows mouse cursor in captured images</source>
+        <translation>Zahrnout aktuální kurzor myši systému Windows do zachycených obrázků</translation>
+    </message>
+    <message>
         <location filename="../../src/config/generalconf.cpp" line="339"/>
         <source>Show tray icon</source>
         <translation>Ukázat ikonu v oznamovací oblasti panelu</translation>
@@ -2616,6 +2626,11 @@ Možná budete muset napsat před &apos;#&apos; opačné (obrácené) lomítko, 
         <translation>Klávesové zkratky</translation>
     </message>
     <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="51"/>
+        <source>On native Wayland, global shortcuts are controlled by the desktop environment. Configure the same key there to run 'flameshot gui'. Changes here apply immediately on X11/XWayland.</source>
+        <translation>V nativním Waylandu spravuje globální klávesové zkratky desktopové prostředí. Nastavte v něm stejnou klávesu pro spuštění „flameshot gui“. Změny zde se projeví okamžitě v X11/XWaylandu.</translation>
+    </message>
+    <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="61"/>
         <source>Available shortcuts in the screen capture mode.</source>
         <translation>Dostupné zkratky v režimu zachytávání obrazovky.</translation>
@@ -2768,10 +2783,11 @@ Možná budete muset napsat před &apos;#&apos; opačné (obrácené) lomítko, 
         <translation type="obsolete">Delete current tool</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="213"/>
-        <location filename="../../src/config/shortcutswidget.cpp" line="222"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="233"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="238"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="244"/>
         <source>Capture screen</source>
-        <translation type="unfinished">Zachytit obrazovku</translation>
+        <translation>Zachytit obrazovku</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="215"/>

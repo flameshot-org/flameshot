@@ -967,6 +967,16 @@ Please solve them manually in the configuration file.</source>
         <translation>Εμφάνιση ειδοποιήσεων στην επιφάνειας εργασίας</translation>
     </message>
     <message>
+        <location filename="../../src/config/generalconf.cpp" line="341"/>
+        <source>Show mouse cursor in screenshots</source>
+        <translation>Εμφάνιση του δείκτη του ποντικιού στα στιγμιότυπα οθόνης</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="343"/>
+        <source>Include the current Windows mouse cursor in captured images</source>
+        <translation>Συμπερίληψη του τρέχοντος δείκτη ποντικιού των Windows στις εικόνες που καταγράφονται</translation>
+    </message>
+    <message>
         <location filename="../../src/config/generalconf.cpp" line="339"/>
         <source>Show tray icon</source>
         <translation>Εμφάνιση εικονιδίου tray</translation>
@@ -2549,6 +2559,11 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <translation>Hot Keys</translation>
     </message>
     <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="51"/>
+        <source>On native Wayland, global shortcuts are controlled by the desktop environment. Configure the same key there to run 'flameshot gui'. Changes here apply immediately on X11/XWayland.</source>
+        <translation>Στο εγγενές Wayland, οι καθολικές συντομεύσεις ελέγχονται από το περιβάλλον επιφάνειας εργασίας. Ρυθμίστε εκεί το ίδιο πλήκτρο ώστε να εκτελεί το «flameshot gui». Οι αλλαγές εδώ εφαρμόζονται αμέσως σε X11/XWayland.</translation>
+    </message>
+    <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="61"/>
         <source>Available shortcuts in the screen capture mode.</source>
         <translation>Διαθέσιμες συντομεύσεις στη λειτουργία λήψης οθόνης.</translation>
@@ -2701,8 +2716,9 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <translation type="vanished">Διαγραφή τρέχοντος εργαλείου</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="213"/>
-        <location filename="../../src/config/shortcutswidget.cpp" line="222"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="233"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="238"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="244"/>
         <source>Capture screen</source>
         <translation>Καταγραφή οθόνης</translation>
     </message>

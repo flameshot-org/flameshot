@@ -982,6 +982,16 @@ Rozwiąż błędy ręcznie w pliku konfiguracyjnym.</translation>
         <translation>Pokaż powiadomienia ekranowe</translation>
     </message>
     <message>
+        <location filename="../../src/config/generalconf.cpp" line="341"/>
+        <source>Show mouse cursor in screenshots</source>
+        <translation>Pokaż kursor myszy na zrzutach ekranu</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="343"/>
+        <source>Include the current Windows mouse cursor in captured images</source>
+        <translation>Dołącz bieżący kursor myszy systemu Windows do przechwyconych obrazów</translation>
+    </message>
+    <message>
         <location filename="../../src/config/generalconf.cpp" line="339"/>
         <source>Show tray icon</source>
         <translation>Pokaż ikonę w centrum akcji</translation>
@@ -2584,6 +2594,11 @@ Może być konieczne opuszczenie znaku &apos;#&apos; jak np.: &apos;\#FFF&apos;<
         <translation>Skróty klawiszowe</translation>
     </message>
     <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="51"/>
+        <source>On native Wayland, global shortcuts are controlled by the desktop environment. Configure the same key there to run 'flameshot gui'. Changes here apply immediately on X11/XWayland.</source>
+        <translation>W natywnym środowisku Wayland globalnymi skrótami steruje środowisko graficzne. Ustaw w nim ten sam klawisz, aby uruchamiać „flameshot gui”. Zmiany wprowadzone tutaj są natychmiast stosowane w X11/XWayland.</translation>
+    </message>
+    <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="61"/>
         <source>Available shortcuts in the screen capture mode.</source>
         <translation>Dostępne skróty klawiszowe w trybie przechwytywania obrazu.</translation>
@@ -2736,8 +2751,9 @@ Może być konieczne opuszczenie znaku &apos;#&apos; jak np.: &apos;\#FFF&apos;<
         <translation type="vanished">Usuń bieżące narzędzie</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="213"/>
-        <location filename="../../src/config/shortcutswidget.cpp" line="222"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="233"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="238"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="244"/>
         <source>Capture screen</source>
         <translation>Przechwyć ekran</translation>
     </message>

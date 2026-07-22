@@ -953,6 +953,16 @@ Please solve them manually in the configuration file.</source>
         <translation type="unfinished">Mostra les notificacions d&apos;escriptori</translation>
     </message>
     <message>
+        <location filename="../../src/config/generalconf.cpp" line="341"/>
+        <source>Show mouse cursor in screenshots</source>
+        <translation>Onyesha kishale cha kipanya katika picha za skrini</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="343"/>
+        <source>Include the current Windows mouse cursor in captured images</source>
+        <translation>Jumuisha kishale cha sasa cha kipanya cha Windows katika picha zilizonaswa</translation>
+    </message>
+    <message>
         <location filename="../../src/config/generalconf.cpp" line="339"/>
         <source>Show tray icon</source>
         <translation type="unfinished">Mostra la icona en la barra de tasques</translation>
@@ -2462,6 +2472,11 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="51"/>
+        <source>On native Wayland, global shortcuts are controlled by the desktop environment. Configure the same key there to run 'flameshot gui'. Changes here apply immediately on X11/XWayland.</source>
+        <translation>Kwenye Wayland asilia, mikato ya kimataifa inadhibitiwa na mazingira ya eneo-kazi. Sanidi kitufe hicho hicho huko ili kuendesha 'flameshot gui'. Mabadiliko hapa yanatumika mara moja kwenye X11/XWayland.</translation>
+    </message>
+    <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="61"/>
         <source>Available shortcuts in the screen capture mode.</source>
         <translation type="unfinished">Dreceres disponibles en el mode de captura de pantalla.</translation>
@@ -2572,10 +2587,11 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="213"/>
-        <location filename="../../src/config/shortcutswidget.cpp" line="222"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="233"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="238"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="244"/>
         <source>Capture screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Nasa skrini</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="215"/>
