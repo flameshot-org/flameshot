@@ -741,6 +741,7 @@ QPixmap ScreenGrabber::cropToMonitor(const QPixmap& fullScreenshot,
     return cropped;
 }
 
+#if defined(Q_OS_WIN)
 QPixmap ScreenGrabber::windowsScreenshot(int wid)
 {
     const QList<QScreen*> screens = QGuiApplication::screens();
@@ -820,6 +821,7 @@ QPixmap ScreenGrabber::windowsScreenshot(int wid)
 
     return desktop;
 }
+#endif
 
 QPixmap ScreenGrabber::x11LegacyScreenshot()
 {

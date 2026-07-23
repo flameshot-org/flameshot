@@ -37,7 +37,9 @@ private:
     void adjustDevicePixelRatio(QPixmap& pixmap);
     QWidget* createMonitorPreviews(const QPixmap& fullScreenshot);
     QPixmap cropToMonitor(const QPixmap& fullScreenshot, int monitorIndex);
+#if defined(Q_OS_WIN)
     QPixmap windowsScreenshot(int wid);
+#endif
     QPixmap x11LegacyScreenshot();
 
     DesktopInfo m_info;
