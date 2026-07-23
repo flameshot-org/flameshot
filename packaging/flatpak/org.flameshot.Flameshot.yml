@@ -24,8 +24,9 @@ modules:
   - name: flameshot
     buildsystem: cmake-ninja
     config-opts:
-      - -DCMAKE_BUILD_TYPE=Release 
+      - -DCMAKE_BUILD_TYPE=Release
       - -DUSE_WAYLAND_CLIPBOARD=1
+      - -DFLAMESHOT_QHOTKEY_SOURCE_DIR=/run/build/flameshot/external/QHotkey
     sources:
       - type: git
         url: https://gitlab.com/mattbas/Qt-Color-Widgets.git
@@ -38,6 +39,11 @@ modules:
         commit: 3186a158f8e6565e89f5983b4028c892737844ff
         dest: external/KDSingleApplication
         
+      - type: git
+        url: https://github.com/flameshot-org/QHotkey.git
+        branch: master
+        dest: external/QHotkey
+
       - type: git
         url: https://github.com/flameshot-org/flameshot.git
         branch: master

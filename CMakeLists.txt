@@ -20,9 +20,16 @@ set(QT_DEFAULT_MAJOR_VERSION 6 CACHE STRING "")
 set(QT_VERSION_MAJOR 6 CACHE STRING "")
 #BUILD_SHARED_LIBS used by QHotkey and QtColorWidgets
 option(BUILD_SHARED_LIBS OFF)
-#QHOTKEY_INSTALL used by QHotkey; must be disabled on Windows
-if(WIN32)
-set(QHOTKEY_INSTALL OFF CACHE BOOL "qHotkey install")
+# QHotkey is embedded into Flameshot. Do not install it or build examples as
+# separate package artifacts on any platform.
+set(QHOTKEY_INSTALL OFF CACHE BOOL "Disable QHotkey install rules" FORCE)
+set(QHOTKEY_EXAMPLES OFF CACHE BOOL "Disable QHotkey examples" FORCE)
+
+# Older QHotkey revisions declare compatibility with CMake versions below 3.5.
+# CMake 4 requires the parent project to provide the policy floor explicitly.
+if(CMAKE_VERSION VERSION_GREATER_EQUAL "4.0")
+  set(CMAKE_POLICY_VERSION_MINIMUM 3.5 CACHE STRING
+      "Minimum policy version for bundled dependencies" FORCE)
 endif()
 
 #Needed due to linker error with QtColorWidget
@@ -141,12 +148,32 @@ include(cmake/StaticAnalyzers.cmake)
 option(BUILD_STATIC_LIBS ON)
 
 if(WIN32 OR APPLE OR CMAKE_SYSTEM_NAME STREQUAL "Linux")
-  FetchContent_Declare(
-    qHotKey
-    GIT_REPOSITORY https://github.com/flameshot-org/QHotkey
-    GIT_TAG master
-  )
-  FetchContent_MakeAvailable(QHotKey)
+  # Distribution builders commonly disable network access during CMake
+  # configuration. They can provide QHotkey as a pre-fetched source tree.
+  set(FLAMESHOT_QHOTKEY_SOURCE_DIR "" CACHE PATH
+      "Path to a pre-fetched QHotkey source tree")
+
+  if(FLAMESHOT_QHOTKEY_SOURCE_DIR)
+    if(NOT EXISTS "${FLAMESHOT_QHOTKEY_SOURCE_DIR}/CMakeLists.txt")
+      message(FATAL_ERROR
+              "FLAMESHOT_QHOTKEY_SOURCE_DIR does not contain CMakeLists.txt: "
+              "${FLAMESHOT_QHOTKEY_SOURCE_DIR}")
+    endif()
+    add_subdirectory("${FLAMESHOT_QHOTKEY_SOURCE_DIR}"
+                     "${CMAKE_BINARY_DIR}/_deps/qhotkey-build"
+                     EXCLUDE_FROM_ALL)
+  elseif(EXISTS "${CMAKE_SOURCE_DIR}/external/QHotkey/CMakeLists.txt")
+    add_subdirectory("${CMAKE_SOURCE_DIR}/external/QHotkey"
+                     "${CMAKE_BINARY_DIR}/_deps/qhotkey-build"
+                     EXCLUDE_FROM_ALL)
+  else()
+    FetchContent_Declare(
+      qHotKey
+      GIT_REPOSITORY https://github.com/flameshot-org/QHotkey
+      GIT_TAG master
+    )
+    FetchContent_MakeAvailable(QHotKey)
+  endif()
 endif()
 
 add_subdirectory(src)

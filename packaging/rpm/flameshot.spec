@@ -6,6 +6,7 @@ Summary: Powerful yet simple to use screenshot software
 License: GPL-3.0-or-later
 URL:     https://github.com/flameshot-org/flameshot
 Source0: %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
+Source1: https://github.com/flameshot-org/QHotkey/archive/refs/heads/master.tar.gz
 Vendor:  Flameshot
 
 BuildRequires: git
@@ -75,6 +76,10 @@ Features:
 
 %prep
 %autosetup -p1
+mkdir -p external
+rm -rf external/QHotkey external/QHotkey-master
+%{__tar} -xzf %{SOURCE1} -C external
+mv external/QHotkey-master external/QHotkey
 
 %build
 %if 0%{?suse_version}
