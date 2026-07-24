@@ -104,7 +104,9 @@ void ImgurUploader::deleteImage(const QString& fileName,
     Q_UNUSED(fileName)
     bool successful = QDesktopServices::openUrl(
       QUrl(QStringLiteral("https://imgur.com/delete/%1").arg(deleteToken)));
-    if (!successful) {
+    if (!successful && isVisible() && notification()) {
+        // Guarded: when invoked headless from a history row the widget is never
+        // shown and has no notification widget.
         notification()->showMessage(tr("Unable to open the URL."));
     }
 

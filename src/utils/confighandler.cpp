@@ -518,6 +518,11 @@ void ConfigHandler::setValue(const QString& key, const QVariant& value)
     }
 }
 
+void ConfigHandler::flush()
+{
+    m_settings.sync();
+}
+
 QVariant ConfigHandler::value(const QString& key) const
 {
     assertKeyRecognized(key);

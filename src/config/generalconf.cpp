@@ -716,6 +716,7 @@ void GeneralConf::initGDriveSettings()
     vboxLayout->addWidget(new QLabel(tr("OAuth Client Secret")));
     m_gdriveClientSecret = new QLineEdit(this);
     m_gdriveClientSecret->setStyleSheet(fieldStyle);
+    m_gdriveClientSecret->setEchoMode(QLineEdit::Password);
     m_gdriveClientSecret->setText(ConfigHandler().gdriveClientSecret());
     connect(m_gdriveClientSecret, &QLineEdit::editingFinished, this, [this]() {
         ConfigHandler().setGdriveClientSecret(m_gdriveClientSecret->text());
@@ -725,13 +726,14 @@ void GeneralConf::initGDriveSettings()
     // Default sharing visibility (U6 setting hosted here).
     vboxLayout->addWidget(new QLabel(tr("Default sharing")));
     m_gdriveDefaultVisibility = new QComboBox(this);
+    // "Specific people by email" is intentionally omitted here: it is a
+    // per-upload choice only (there is no default-recipients field), so it
+    // cannot be a meaningful persistent default.
     m_gdriveDefaultVisibility->addItem(
       tr("Anyone in your organization with the link"),
       QStringLiteral("domain"));
     m_gdriveDefaultVisibility->addItem(tr("Private (only you)"),
                                        QStringLiteral("private"));
-    m_gdriveDefaultVisibility->addItem(tr("Specific people by email"),
-                                       QStringLiteral("users"));
     m_gdriveDefaultVisibility->addItem(
       tr("Anyone on the internet with the link"), QStringLiteral("anyone"));
     const int defaultIndex = m_gdriveDefaultVisibility->findData(

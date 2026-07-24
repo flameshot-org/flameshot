@@ -351,6 +351,15 @@ void GDriveUploader::applySharing()
     }
 
     if (m_visibility == QStringLiteral("users")) {
+        if (m_recipients.isEmpty()) {
+            // e.g. a "users" default with upload-without-confirmation and no
+            // per-upload recipients: don't claim success with nobody shared.
+            m_sharingWarning =
+              tr("No recipients were specified, so the file stays private. "
+                 "The link still works for you.");
+            fetchLink();
+            return;
+        }
         m_recipientIndex = 0;
         applyNextRecipient();
         return;

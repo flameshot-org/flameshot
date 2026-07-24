@@ -187,6 +187,10 @@ public:
     QString shortcut(const QString& actionName);
     void setValue(const QString& key, const QVariant& value);
     QVariant value(const QString& key) const;
+    // Force pending changes to disk now. QSettings otherwise defers the write
+    // to its auto-save timer / destruction, so callers that must act on the
+    // written file (e.g. re-asserting owner-only permissions) flush first.
+    void flush();
     void remove(const QString& key);
     void resetValue(const QString& key);
 

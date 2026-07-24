@@ -55,6 +55,10 @@ UploadLineItem::UploadLineItem(QWidget* parent,
             return;
         }
 
+        // Guard against a second click spawning a duplicate async delete (and
+        // a leaked, waiter-attached uploader) while this one is in flight.
+        ui->deleteImage->setEnabled(false);
+
         ImgUploaderBase* imgUploaderBase =
           ImgUploaderManager(this).uploader(unpackFileName.type);
 
@@ -76,6 +80,7 @@ UploadLineItem::UploadLineItem(QWidget* parent,
                 this,
                 [=, this](const QString& error) {
                     imgUploaderBase->deleteLater();
+                    ui->deleteImage->setEnabled(true);
                     QMessageBox::warning(
                       this,
                       tr("Unable to delete screenshot"),

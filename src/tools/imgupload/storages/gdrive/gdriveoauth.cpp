@@ -98,8 +98,12 @@ void GDriveOAuth::detachWaiter()
         --m_waiters;
     }
     // The listener stops when the last waiter detaches -- but not on an
-    // individual widget's destruction while others still wait (KTD9).
-    if (m_waiters == 0 && m_flowActive) {
+    // individual widget's destruction while others still wait (KTD9). Only tear
+    // down during the browser-wait phase (listener active); an in-flight token
+    // exchange/refresh (listener already closed) is left to complete so
+    // m_flowActive stays set and a new request joins it rather than starting a
+    // second, overlapping flow.
+    if (m_waiters == 0 && m_flowActive && m_server != nullptr) {
         abortFlow();
     }
 }
@@ -145,6 +149,13 @@ void GDriveOAuth::startConsentFlow()
         return;
     }
 
+    // Defensively tear down any prior listener before starting a new one, so a
+    // superseded flow can never leave an orphaned QTcpServer bound.
+    if (m_server) {
+        m_server->close();
+        m_server->deleteLater();
+        m_server = nullptr;
+    }
     m_server = new QTcpServer(this);
     if (!m_server->listen(QHostAddress::LocalHost, 0)) {
         m_server->deleteLater();
@@ -300,6 +311,10 @@ void GDriveOAuth::exchangeAuthCode(const QString& code)
         if (!refresh.isEmpty()) {
             ConfigHandler config;
             config.setGdriveRefreshToken(refresh);
+            // Flush before chmod: QSettings defers the write, and its later
+            // QSaveFile rewrite would otherwise reset the file to umask
+            // permissions after the chmod, exposing the refresh token.
+            config.flush();
             reassertConfigPermissions(config.configFilePath());
         }
         m_codeVerifier.clear();
@@ -346,7 +361,12 @@ void GDriveOAuth::refreshAccessToken()
         if (err == QStringLiteral("invalid_grant")) {
             ConfigHandler().setGdriveRefreshToken(QStringLiteral(""));
             m_flowActive = false;
-            startConsentFlow();
+            // Only re-open interactive consent if a widget is still waiting;
+            // otherwise just clear the token and let the next upload restart it,
+            // rather than surprising the user with an unsolicited browser tab.
+            if (m_waiters > 0) {
+                startConsentFlow();
+            }
         } else {
             finishFailed(tr("Could not refresh the Google Drive session."));
         }
@@ -382,6 +402,7 @@ void GDriveOAuth::fetchAccountInfo()
             if (at >= 0) {
                 config.setGdriveAccountDomain(email.mid(at + 1));
             }
+            config.flush();
             reassertConfigPermissions(config.configFilePath());
         }
         // Account info is best-effort; the token is what gates the upload.
@@ -391,6 +412,13 @@ void GDriveOAuth::fetchAccountInfo()
 
 void GDriveOAuth::disconnectAccount()
 {
+    // Invalidate any in-flight consent first (clears state/verifier/listener),
+    // so completing its still-open browser tab cannot silently re-persist a
+    // token and undo the disconnect the user just performed (R16, KTD9).
+    if (m_flowActive) {
+        finishCanceled();
+    }
+
     ConfigHandler config;
     const QString refresh = config.gdriveRefreshToken();
     if (!refresh.isEmpty()) {
@@ -411,6 +439,7 @@ void GDriveOAuth::disconnectAccount()
     config.setGdriveFolderId(QStringLiteral(""));
     m_accessToken.clear();
     m_accessTokenExpiry = QDateTime();
+    config.flush();
     reassertConfigPermissions(config.configFilePath());
 }
 
