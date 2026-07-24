@@ -98,6 +98,7 @@
 - In-app screenshot editing.
 - DBus interface.
 - Upload to Imgur.
+- Upload to Google Drive (opt-in build; see [docs/google-drive-setup.md](docs/google-drive-setup.md)).
 
 ## Usage
 

@@ -3,6 +3,9 @@
 
 #include "generalconf.h"
 #include "utils/confighandler.h"
+#ifdef ENABLE_GDRIVE
+#include "tools/imgupload/storages/gdrive/gdriveoauth.h"
+#endif
 
 #include <QCheckBox>
 #include <QComboBox>
@@ -73,6 +76,9 @@ GeneralConf::GeneralConf(QWidget* parent)
 #ifdef ENABLE_IMGUR
     initUploadClientSecret();
 #endif
+#ifdef ENABLE_GDRIVE
+    initGDriveSettings();
+#endif
     initPredefinedColorPaletteLarge();
     initShowSelectionGeometry();
 
@@ -112,6 +118,20 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
     if (uploadServiceIndex >= 0) {
         m_uploadService->setCurrentIndex(uploadServiceIndex);
     }
+#endif
+#ifdef ENABLE_GDRIVE
+    m_gdriveClientId->setText(config.gdriveClientId());
+    m_gdriveClientSecret->setText(config.gdriveClientSecret());
+    int gdriveVisibilityIndex =
+      m_gdriveDefaultVisibility->findData(config.gdriveDefaultVisibility());
+    if (gdriveVisibilityIndex >= 0) {
+        m_gdriveDefaultVisibility->setCurrentIndex(gdriveVisibilityIndex);
+    }
+    const QString gdriveEmail = config.gdriveAccountEmail();
+    m_gdriveAccountLabel->setText(gdriveEmail.isEmpty()
+                                    ? tr("Not connected")
+                                    : tr("Connected as %1").arg(gdriveEmail));
+    m_gdriveDisconnect->setEnabled(!config.gdriveRefreshToken().isEmpty());
 #endif
 #if !defined(DISABLE_UPDATE_CHECKER)
     m_checkForUpdates->setChecked(config.checkForUpdates());
@@ -669,6 +689,80 @@ void GeneralConf::uploadClientKeyEdited()
 {
     ConfigHandler().setUploadClientSecret(m_uploadClientKey->text());
 }
+
+#ifdef ENABLE_GDRIVE
+void GeneralConf::initGDriveSettings()
+{
+    auto* box = new QGroupBox(tr("Google Drive"));
+    box->setFlat(true);
+    m_layout->addWidget(box);
+
+    auto* vboxLayout = new QVBoxLayout();
+    box->setLayout(vboxLayout);
+
+    const QString foreground = this->palette().windowText().color().name();
+    const QString fieldStyle = QStringLiteral("color: %1").arg(foreground);
+
+    // OAuth client credentials (org-registered; non-confidential).
+    vboxLayout->addWidget(new QLabel(tr("OAuth Client ID")));
+    m_gdriveClientId = new QLineEdit(this);
+    m_gdriveClientId->setStyleSheet(fieldStyle);
+    m_gdriveClientId->setText(ConfigHandler().gdriveClientId());
+    connect(m_gdriveClientId, &QLineEdit::editingFinished, this, [this]() {
+        ConfigHandler().setGdriveClientId(m_gdriveClientId->text());
+    });
+    vboxLayout->addWidget(m_gdriveClientId);
+
+    vboxLayout->addWidget(new QLabel(tr("OAuth Client Secret")));
+    m_gdriveClientSecret = new QLineEdit(this);
+    m_gdriveClientSecret->setStyleSheet(fieldStyle);
+    m_gdriveClientSecret->setText(ConfigHandler().gdriveClientSecret());
+    connect(m_gdriveClientSecret, &QLineEdit::editingFinished, this, [this]() {
+        ConfigHandler().setGdriveClientSecret(m_gdriveClientSecret->text());
+    });
+    vboxLayout->addWidget(m_gdriveClientSecret);
+
+    // Default sharing visibility (U6 setting hosted here).
+    vboxLayout->addWidget(new QLabel(tr("Default sharing")));
+    m_gdriveDefaultVisibility = new QComboBox(this);
+    m_gdriveDefaultVisibility->addItem(
+      tr("Anyone in your organization with the link"),
+      QStringLiteral("domain"));
+    m_gdriveDefaultVisibility->addItem(tr("Private (only you)"),
+                                       QStringLiteral("private"));
+    m_gdriveDefaultVisibility->addItem(tr("Specific people by email"),
+                                       QStringLiteral("users"));
+    m_gdriveDefaultVisibility->addItem(
+      tr("Anyone on the internet with the link"), QStringLiteral("anyone"));
+    const int defaultIndex = m_gdriveDefaultVisibility->findData(
+      ConfigHandler().gdriveDefaultVisibility());
+    if (defaultIndex >= 0) {
+        m_gdriveDefaultVisibility->setCurrentIndex(defaultIndex);
+    }
+    connect(
+      m_gdriveDefaultVisibility,
+      static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+      this,
+      [this](int index) {
+          ConfigHandler().setGdriveDefaultVisibility(
+            m_gdriveDefaultVisibility->itemData(index).toString());
+      });
+    vboxLayout->addWidget(m_gdriveDefaultVisibility);
+
+    // Connected account + disconnect (R16).
+    auto* accountLayout = new QHBoxLayout();
+    m_gdriveAccountLabel = new QLabel(this);
+    m_gdriveDisconnect = new QPushButton(tr("Disconnect"), this);
+    accountLayout->addWidget(m_gdriveAccountLabel);
+    accountLayout->addStretch();
+    accountLayout->addWidget(m_gdriveDisconnect);
+    vboxLayout->addLayout(accountLayout);
+    connect(m_gdriveDisconnect, &QPushButton::clicked, this, [this]() {
+        GDriveOAuth::instance()->disconnectAccount();
+        _updateComponents(false);
+    });
+}
+#endif
 
 void GeneralConf::uploadHistoryMaxChanged(int max)
 {

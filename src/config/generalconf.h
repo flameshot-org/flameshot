@@ -104,6 +104,9 @@ private:
     void initUseJpgForClipboard();
     void initUploadHistoryMax();
     void initUploadClientSecret();
+#ifdef ENABLE_GDRIVE
+    void initGDriveSettings();
+#endif
     void initSaveLastRegion();
     void initShowSelectionGeometry();
     void initJpegQuality();
@@ -149,6 +152,13 @@ private:
     QCheckBox* m_saveAfterCopy;
     QLineEdit* m_savePath;
     QLineEdit* m_uploadClientKey;
+#ifdef ENABLE_GDRIVE
+    QLineEdit* m_gdriveClientId;
+    QLineEdit* m_gdriveClientSecret;
+    QComboBox* m_gdriveDefaultVisibility;
+    QLabel* m_gdriveAccountLabel;
+    QPushButton* m_gdriveDisconnect;
+#endif
     QPushButton* m_changeSaveButton;
     QCheckBox* m_screenshotPathFixedCheck;
     QCheckBox* m_historyConfirmationToDelete;
