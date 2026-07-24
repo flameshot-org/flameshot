@@ -7,12 +7,11 @@ target_sources(flameshot PRIVATE exit/exittool.h exit/exittool.cpp)
 target_sources(flameshot PRIVATE sizeincrease/sizeincreasetool.h sizeincrease/sizeincreasetool.cpp)
 target_sources(flameshot PRIVATE sizedecrease/sizedecreasetool.h sizedecrease/sizedecreasetool.cpp)
 
-if (ENABLE_IMGUR)
+# Shared upload infrastructure: compiled when any upload backend is enabled.
+if (ENABLE_IMGUR OR ENABLE_GDRIVE)
 target_sources(
   flameshot
-        PRIVATE imgupload/storages/imgur/imguruploader.h
-        imgupload/storages/imgur/imguruploader.cpp
-        imgupload/storages/imguploaderbase.h
+        PRIVATE imgupload/storages/imguploaderbase.h
         imgupload/storages/imguploaderbase.cpp
         imgupload/imguploadertool.h
         imgupload/imguploadertool.cpp
@@ -20,6 +19,17 @@ target_sources(
         imgupload/imguploadermanager.cpp
 )
 endif()
+
+# Imgur-specific backend.
+if (ENABLE_IMGUR)
+target_sources(
+  flameshot
+        PRIVATE imgupload/storages/imgur/imguruploader.h
+        imgupload/storages/imgur/imguruploader.cpp
+)
+endif()
+
+# Google Drive-specific backend sources are added by U4 (OAuth) and U5 (uploader).
 target_sources(
   flameshot
   PRIVATE launcher/applaunchertool.h

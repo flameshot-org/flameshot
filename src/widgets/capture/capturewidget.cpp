@@ -344,7 +344,7 @@ void CaptureWidget::initButtons()
         for (auto* buttonList : { &allButtonTypes, &visibleButtonTypes }) {
             buttonList->removeOne(CaptureTool::TYPE_SAVE);
             buttonList->removeOne(CaptureTool::TYPE_COPY);
-#ifdef ENABLE_IMGUR
+#ifdef ENABLE_UPLOADER
             buttonList->removeOne(CaptureTool::TYPE_IMAGEUPLOADER);
 #endif
             buttonList->removeOne(CaptureTool::TYPE_OPEN_APP);

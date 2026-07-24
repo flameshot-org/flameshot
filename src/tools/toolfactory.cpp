@@ -8,7 +8,7 @@
 #include "tools/circlecount/circlecounttool.h"
 #include "tools/copy/copytool.h"
 #include "tools/exit/exittool.h"
-#ifdef ENABLE_IMGUR
+#ifdef ENABLE_UPLOADER
 #include "tools/imgupload/imguploadertool.h"
 #endif
 #include "tools/invert/inverttool.h"
@@ -51,7 +51,7 @@ CaptureTool* ToolFactory::CreateTool(CaptureTool::Type t, QObject* parent)
         if_TYPE_return_TOOL(TYPE_COPY, CopyTool);
         if_TYPE_return_TOOL(TYPE_SAVE, SaveTool);
         if_TYPE_return_TOOL(TYPE_EXIT, ExitTool);
-#ifdef ENABLE_IMGUR
+#ifdef ENABLE_UPLOADER
         if_TYPE_return_TOOL(TYPE_IMAGEUPLOADER, ImgUploaderTool);
 #endif
 #if !defined(Q_OS_MACOS)

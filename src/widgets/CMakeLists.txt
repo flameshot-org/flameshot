@@ -21,7 +21,7 @@ target_sources(
         capture/capturetoolobjects.h
 )
 
-if (ENABLE_IMGUR)
+if (ENABLE_IMGUR OR ENABLE_GDRIVE)
 target_sources(
     flameshot
     PRIVATE
@@ -48,7 +48,7 @@ target_sources(
         capture/capturetoolobjects.cpp
 )
 
-if (ENABLE_IMGUR)
+if (ENABLE_IMGUR OR ENABLE_GDRIVE)
 target_sources(
     flameshot
     PRIVATE

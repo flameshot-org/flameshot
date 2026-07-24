@@ -85,9 +85,21 @@ option(USE_LAUNCHER_ABSOLUTE_PATH "Use absolute path for the desktop launcher" O
 option(USE_WAYLAND_CLIPBOARD "USE KF Gui Wayland Clipboard" OFF)
 option(DISABLE_UPDATE_CHECKER "Disable check for updates" OFF)
 option(ENABLE_IMGUR "Enable Imgur Uploader" OFF)
+option(ENABLE_GDRIVE "Enable Google Drive Uploader" OFF)
 
 if(ENABLE_IMGUR)
   add_compile_definitions(ENABLE_IMGUR)
+endif()
+
+if(ENABLE_GDRIVE)
+  add_compile_definitions(ENABLE_GDRIVE)
+endif()
+
+# Backend-neutral gate for the shared upload infrastructure (tool type,
+# shortcuts, dialogs, history). Defined as 1 so it can be used both as
+# `#ifdef ENABLE_UPLOADER` and as a value inside `#if (... && ENABLE_UPLOADER)`.
+if(ENABLE_IMGUR OR ENABLE_GDRIVE)
+  add_compile_definitions(ENABLE_UPLOADER)
 endif()
 
 if(DISABLE_UPDATE_CHECKER)

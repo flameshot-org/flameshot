@@ -5,7 +5,9 @@
 #include "imguploadermanager.h"
 // TODO - remove this hard-code and create plugin manager in the future, you may
 // include other storage headers here
+#ifdef ENABLE_IMGUR
 #include "tools/imgupload/storages/imgur/imguruploader.h"
+#endif
 
 #include <QPixmap>
 #include <QWidget>
@@ -45,7 +47,10 @@ ImgUploaderBase* ImgUploaderManager::uploader(const QPixmap& capture,
     //    m_imgUploaderBase =
     //      (ImgUploaderBase*)(new ImgurUploader(capture, parent));
     //}
+    m_imgUploaderBase = nullptr;
+#ifdef ENABLE_IMGUR
     m_imgUploaderBase = (ImgUploaderBase*)(new ImgurUploader(capture, parent));
+#endif
     if (m_imgUploaderBase && !capture.isNull()) {
         m_imgUploaderBase->upload();
     }

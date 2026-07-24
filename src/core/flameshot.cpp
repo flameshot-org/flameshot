@@ -53,7 +53,7 @@ constexpr const char* visibleInDockProperty = "_visibleInDock";
 #include "widgets/capturelauncher.h"
 #include "widgets/infowindow.h"
 
-#ifdef ENABLE_IMGUR
+#ifdef ENABLE_UPLOADER
 #include "tools/imgupload/imguploadermanager.h"
 #include "tools/imgupload/storages/imguploaderbase.h"
 #include "widgets/imguploaddialog.h"
@@ -81,7 +81,7 @@ Flameshot::Flameshot()
 #if (defined(Q_OS_MACOS) || defined(Q_OS_WIN))
   , m_HotkeyScreenshotCapture(nullptr)
 #endif
-#if (defined(Q_OS_MACOS) && ENABLE_IMGUR)
+#if (defined(Q_OS_MACOS) && ENABLE_UPLOADER)
   , m_HotkeyScreenshotHistory(nullptr)
 #endif
 {
@@ -103,7 +103,7 @@ Flameshot::Flameshot()
                      qApp,
                      [this]() { gui(); });
 #endif
-#if (defined(Q_OS_MACOS) && ENABLE_IMGUR)
+#if (defined(Q_OS_MACOS) && ENABLE_UPLOADER)
     m_HotkeyScreenshotHistory = new QHotkey(
       QKeySequence(ConfigHandler().shortcut("SCREENSHOT_HISTORY")), true, this);
     QObject::connect(m_HotkeyScreenshotHistory,
@@ -296,7 +296,7 @@ void Flameshot::info()
     }
 }
 
-#ifdef ENABLE_IMGUR
+#ifdef ENABLE_UPLOADER
 void Flameshot::history()
 {
     static UploadHistory* historyWidget = nullptr;
@@ -490,7 +490,7 @@ void Flameshot::exportCapture(const QPixmap& capture,
         }
     }
 
-#ifdef ENABLE_IMGUR
+#ifdef ENABLE_UPLOADER
     if (tasks & CR::UPLOAD) {
         if (!ConfigHandler().uploadWithoutConfirmation()) {
             auto* dialog = new ImgUploadDialog();

@@ -15,7 +15,7 @@ class ConfigWindow;
 class InfoWindow;
 class CaptureLauncher;
 class QWidget;
-#ifdef ENABLE_IMGUR
+#ifdef ENABLE_UPLOADER
 class UploadHistory;
 #endif
 #if (defined(Q_OS_MACOS) || defined(Q_OS_WIN))
@@ -56,7 +56,7 @@ public slots:
 
     void info();
 
-#ifdef ENABLE_IMGUR
+#ifdef ENABLE_UPLOADER
     void history();
 #endif
 
@@ -105,7 +105,7 @@ private:
 #if (defined(Q_OS_MACOS) || defined(Q_OS_WIN))
     QHotkey* m_HotkeyScreenshotCapture;
 #endif
-#if (defined(Q_OS_MACOS) && ENABLE_IMGUR)
+#if (defined(Q_OS_MACOS) && ENABLE_UPLOADER)
     QHotkey* m_HotkeyScreenshotHistory;
 #endif
 };

@@ -63,11 +63,13 @@ GeneralConf::GeneralConf(QWidget* parent)
 #if defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)
     initUseX11LegacyScreenshot();
 #endif
-#ifdef ENABLE_IMGUR
+#ifdef ENABLE_UPLOADER
     initCopyAndCloseAfterUpload();
     initUploadWithoutConfirmation();
     initHistoryConfirmationToDelete();
     initUploadHistoryMax();
+#endif
+#ifdef ENABLE_IMGUR
     initUploadClientSecret();
 #endif
     initPredefinedColorPaletteLarge();
@@ -97,7 +99,7 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
     m_antialiasingPinZoom->setChecked(config.antialiasingPinZoom());
     m_useJpgForClipboard->setChecked(config.useJpgForClipboard());
     m_copyOnDoubleClick->setChecked(config.copyOnDoubleClick());
-#ifdef ENABLE_IMGUR
+#ifdef ENABLE_UPLOADER
     m_uploadWithoutConfirmation->setChecked(config.uploadWithoutConfirmation());
     m_copyURLAfterUpload->setChecked(config.copyURLAfterUpload());
     m_historyConfirmationToDelete->setChecked(
