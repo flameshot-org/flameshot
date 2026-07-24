@@ -125,7 +125,6 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
           grabber.grabEntireDesktop(ok, preSelectedMonitor);
         if (!ok) {
             // Error already logged in ScreenGrabber
-            m_screenGrabFailed = true;
             this->close();
         }
         m_context.origScreenshot = m_context.screenshot;
@@ -300,6 +299,9 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
     initQuitPrompt();
 
     updateCursor();
+
+    // From here on a close can hand its outcome straight to the owner.
+    m_constructing = false;
 }
 
 CaptureWidget::~CaptureWidget()
@@ -489,9 +491,18 @@ QPixmap CaptureWidget::pixmap()
     return m_context.selectedScreenshotArea();
 }
 
-bool CaptureWidget::screenGrabFailed() const
+bool CaptureWidget::hasPendingOutcome() const
 {
-    return m_screenGrabFailed;
+    return m_outcomePending;
+}
+
+void CaptureWidget::flushPendingOutcome()
+{
+    if (!m_outcomePending) {
+        return;
+    }
+    m_outcomePending = false;
+    emitCaptureOutcome();
 }
 
 // Finish whatever the current tool is doing, if there is a current active
@@ -650,12 +661,32 @@ void CaptureWidget::closeEvent(QCloseEvent* event)
 #endif
 
     QWidget::closeEvent(event);
-    if (!event->isAccepted()) {
+    if (event->isAccepted()) {
+        emitCaptureOutcome();
+    }
+}
+
+void CaptureWidget::emitCaptureOutcome()
+{
+    /* At most one hand-off per widget. The widget now outlives its own close —
+       teardown is deferred and Qt holds a pending deleteLater across the
+       export's nested modal loop — so close() can legitimately arrive again
+       before the widget dies: the GNOME workaround's safety-net timer and the
+       macOS window replacement both do it. Without this latch the second close
+       would run the whole export a second time. */
+    if (m_outcomeEmitted) {
         return;
     }
 
-    /* Every close funnels through here, so this is the single hand-off point to
-       the owner. Branch on the capture state before deriving anything: on the
+    if (m_constructing) {
+        /* Nothing is connected during our own constructor, so emitting here
+           would drop the outcome on the floor. Hold it for the owner. */
+        m_outcomePending = true;
+        return;
+    }
+    m_outcomeEmitted = true;
+
+    /* Branch on the capture state before deriving anything: on the
        constructor's self-close after a failed grab, initSelection() has not run
        yet and m_selection is still null. */
     if (!m_captureDone) {

@@ -54,9 +54,14 @@ public:
 
     QPixmap pixmap();
     void setCaptureToolObjects(const CaptureToolObjects& captureToolObjects);
-    // True when the constructor's screen grab failed and it closed itself. The
-    // owner reads this to abort instead of showing an empty overlay.
-    bool screenGrabFailed() const;
+    /* The close path can run from inside the constructor — a failed screen grab
+       closes itself, and accept-on-select with a preset region completes
+       immediately — which is before the owner has connected anything. The
+       outcome is held back in that case rather than emitted to nobody; the
+       owner flushes it once its connections exist, and skips showing a window
+       that has already finished. */
+    bool hasPendingOutcome() const;
+    void flushPendingOutcome();
 #if !defined(DISABLE_UPDATE_CHECKER)
     void showAppUpdateNotification(const QString& appLatestVersion,
                                    const QString& appLatestUrl);
@@ -124,6 +129,8 @@ protected:
     void closeEvent(QCloseEvent* event) override;
 
 private:
+    // Hands the capture outcome to the owner exactly once per widget.
+    void emitCaptureOutcome();
     void pushObjectsStateToUndoStack();
     void releaseActiveTool();
     void uncheckActiveTool();
@@ -244,5 +251,7 @@ private:
 
     bool m_clipboardWorkaroundDone{ false };
 
-    bool m_screenGrabFailed{ false };
+    bool m_constructing{ true };
+    bool m_outcomeEmitted{ false };
+    bool m_outcomePending{ false };
 };

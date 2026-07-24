@@ -8,9 +8,9 @@
 
 #include <QObject>
 #include <QPointer>
-#include <functional>
 #include <QVersionNumber>
 #include <QWindow>
+#include <functional>
 
 class ConfigWindow;
 class InfoWindow;

@@ -132,6 +132,11 @@ CaptureWidget* Flameshot::gui(const CaptureRequest& req)
     // to switch back to the Flameshot Desktop manually. It is not obvious and a
     // large number of users are confused and report a bug.
     if (m_captureWindow != nullptr) {
+        /* Replacing the window is not a failed capture, so cut its signals
+           before closing it — otherwise the close hands us an outcome for the
+           window being discarded and we would report "capture aborted" for a
+           capture the user is in the middle of restarting. */
+        m_captureWindow->disconnect(this);
         m_captureWindow->close();
         delete m_captureWindow;
         m_captureWindow = nullptr;
@@ -171,13 +176,14 @@ CaptureWidget* Flameshot::gui(const CaptureRequest& req)
                 this,
                 &Flameshot::onCaptureCancelled);
 
-        /* The constructor closes itself when the screen grab fails, which
-           happens before there is anything connected to hear it. Abort here
-           rather than showing an empty overlay. */
-        if (m_captureWindow->screenGrabFailed()) {
-            delete m_captureWindow;
-            m_captureWindow = nullptr;
-            emit captureFailed();
+        /* The capture can already be over before we got here: the constructor
+           closes itself when the screen grab fails, and accept-on-select with a
+           preset region completes as soon as the selection is installed. Both
+           happen before the connections above existed, so the widget held the
+           outcome back. Deliver it now and don't show a window that is done —
+           the handlers own the teardown from here. */
+        if (m_captureWindow->hasPendingOutcome()) {
+            m_captureWindow->flushPendingOutcome();
             return nullptr;
         }
 

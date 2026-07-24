@@ -186,6 +186,18 @@ expect "Accept on select" \
   without you accepting. The overlay does not linger and the export runs."
 cmd flameshot gui --clipboard --accept-on-select
 
+expect "Accept on select with a preset region" \
+  "No overlay appears at all and no selection is asked for: the region is
+  already set, so the capture completes immediately and the image lands on the
+  clipboard. Paste it to confirm. A silent no-op here — nothing copied, no
+  notification — means the completed capture was dropped instead of exported."
+cmd flameshot gui --clipboard --accept-on-select --region 400x300+0+0
+
+expect "Accept on select with the last region" \
+  "Same as the previous case, using the remembered region instead of an
+  explicit one. The capture completes with no overlay and the image is copied."
+cmd flameshot gui --clipboard --accept-on-select --last-region
+
 #   Cancellation and failure
 # ┗━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
@@ -216,6 +228,23 @@ expect_on "GNOME/WAYLAND" \
   until the compositor fetches the clipboard data, then closes on its own. The
   clipboard receives the image — paste it somewhere to confirm. The log mentions
   keeping the window alive until clipboard data is fetched."
+cmd flameshot gui --clipboard
+
+expect_on "GNOME/WAYLAND" \
+  "Clipboard workaround combined with a second task" \
+  "Make a selection and accept, with COPY *and* SAVE both requested. The
+  clipboard gets the image and the save dialog appears ONCE. Leave the save
+  dialog sitting open for several seconds before saving. A second save dialog
+  appearing behind the first, or the file being written twice, means the
+  capture was handed off to the export more than once — the workaround's
+  safety-net timer re-closing an already-completed window."
+cmd flameshot gui --clipboard --path /tmp/
+
+expect_on "GNOME/WAYLAND" \
+  "Clipboard workaround combined with an upload" \
+  "Same as above with COPY and upload: choose the upload tool with the
+  confirmation dialog enabled, and leave the dialog open for several seconds.
+  Exactly one confirmation dialog appears and exactly one upload happens."
 cmd flameshot gui --clipboard
 
 expect_on "MACOS" \
