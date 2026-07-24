@@ -83,6 +83,10 @@ public slots:
 private:
     Flameshot();
     bool resolveAnyConfigErrors();
+    void onCaptureCompleted(const QPixmap& capture,
+                            const QRect& geometry,
+                            const CaptureRequest& request);
+    void onCaptureCancelled();
 
     // class members
     static Origin m_origin;

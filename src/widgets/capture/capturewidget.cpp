@@ -98,7 +98,7 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
     connect(&m_xywhTimer, &QTimer::timeout, this, &CaptureWidget::xywhTick);
     // else xywhTick keeps triggering when not needed
     m_xywhTimer.setSingleShot(true);
-    setAttribute(Qt::WA_DeleteOnClose);
+    // No WA_DeleteOnClose: Flameshot owns this widget's teardown.
     setAttribute(Qt::WA_QuitOnClose, false);
     m_opacity = m_config.contrastOpacity();
     m_uiColor = m_config.uiColor();
@@ -315,21 +315,10 @@ CaptureWidget::~CaptureWidget()
         }
     }
 #endif
-    if (m_captureDone) {
-        auto lastRegion = m_selection->geometry();
-        const qreal scale = m_context.screenshot.devicePixelRatio();
-        lastRegion.setTop(lastRegion.top() * scale);
-        lastRegion.setBottom(lastRegion.bottom() * scale);
-        lastRegion.setLeft(lastRegion.left() * scale);
-        lastRegion.setRight(lastRegion.right() * scale);
-        setLastRegion(lastRegion);
-        QRect geometry(m_context.selection);
-        geometry.setTopLeft(geometry.topLeft() + m_context.widgetOffset);
-        Flameshot::instance()->exportCapture(
-          pixmap(), geometry, m_context.request);
-    } else {
-        emit Flameshot::instance()->captureFailed();
-    }
+    /* No capture-completion side effects here. Export and failure reporting are
+       driven from the close path (see closeEvent) by the window's owner, on a
+       clean event-loop turn — running them from this destructor nests a modal
+       loop and deferred deletes inside sendPostedEvents. */
 }
 
 void CaptureWidget::initButtons()

@@ -160,6 +160,17 @@ CaptureWidget* Flameshot::gui(const CaptureRequest& req)
 
         m_captureWindow = new CaptureWidget(req);
 
+        // This is the only CaptureWidget construction site, so connecting here
+        // means no capture window can exist without an owner to tear it down.
+        connect(m_captureWindow,
+                &CaptureWidget::captureCompleted,
+                this,
+                &Flameshot::onCaptureCompleted);
+        connect(m_captureWindow,
+                &CaptureWidget::captureCancelled,
+                this,
+                &Flameshot::onCaptureCancelled);
+
 #ifdef Q_OS_WIN
         m_captureWindow->show();
 #elif defined(Q_OS_MACOS)
@@ -179,6 +190,43 @@ CaptureWidget* Flameshot::gui(const CaptureRequest& req)
         emit captureFailed();
         return nullptr;
     }
+}
+
+void Flameshot::onCaptureCompleted(const QPixmap& capture,
+                                   const QRect& geometry,
+                                   const CaptureRequest& request)
+{
+    /* The signal arrives on the widget's close stack, which the event loop may
+       itself be running from a deferred-delete event. Running the export from
+       here would nest a modal dialog and post delete events inside that stack,
+       which is the re-entrancy that corrupts Qt's posted-event bookkeeping.
+       Hand off to a clean event-loop turn instead. */
+    QPointer<CaptureWidget> window = m_captureWindow;
+    QTimer::singleShot(0, this, [this, window, capture, geometry, request]() {
+        /* The widget may already be gone: on macOS gui() closes a pre-existing
+           capture window and deletes it immediately. */
+        if (window) {
+            window->deleteLater();
+        }
+
+        /* Schedule teardown before exporting, not after, so it holds on every
+           exit — a rejected confirmation dialog, an export early-return, an
+           unavailable uploader. Safe because the payload above is a copy; the
+           export never reads widget state. */
+        QRect selection(geometry);
+        exportCapture(capture, selection, request);
+    });
+}
+
+void Flameshot::onCaptureCancelled()
+{
+    QPointer<CaptureWidget> window = m_captureWindow;
+    QTimer::singleShot(0, this, [this, window]() {
+        if (window) {
+            window->deleteLater();
+        }
+        emit captureFailed();
+    });
 }
 
 void Flameshot::screen(CaptureRequest req, const int screenNumber)
