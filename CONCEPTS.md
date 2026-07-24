@@ -9,3 +9,5 @@ The backend-neutral subsystem that sends a captured screenshot to a remote desti
 
 ### Upload backend
 A concrete remote destination the Uploader can target. Flameshot has two — Imgur (an image host) and Google Drive (cloud file storage). Each backend is opt-in at build time and off by default, so a default build ships with no upload capability at all; enabling any backend also brings in the neutral Uploader machinery. Because the two backends are independent switches, a build may include one, both, or neither.
+
+A user's stored backend preference is not always the backend that actually handles an upload: if only one backend is compiled into a given build, that one is always the effective backend regardless of what the stored preference says. Anything that needs to know which backend is active should ask for that resolved value rather than reading the stored preference directly — the two can disagree.

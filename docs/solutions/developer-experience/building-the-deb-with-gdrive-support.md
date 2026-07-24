@@ -203,3 +203,8 @@ strings -a debian/flameshot/usr/bin/flameshot | grep -iE "drive|oauth"
   turns on (credential handling, not the build flag).
 - `CMakeLists.txt` (`ENABLE_GDRIVE`, `ENABLE_IMGUR`, `ENABLE_UPLOADER` options) — the
   source of truth for what each flag compiles in.
+- [../logic-errors/gdrive-visibility-ui-missing-on-drive-only-builds.md](../logic-errors/gdrive-visibility-ui-missing-on-drive-only-builds.md)
+  — a complementary failure mode: this doc is about Drive not being compiled in at
+  all; that one is about Drive being compiled in and working, but its sharing UI
+  hiding itself anyway due to a backend-resolution mismatch between `ImgUploadDialog`
+  and `ImgUploaderManager`.
