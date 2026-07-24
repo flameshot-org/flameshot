@@ -66,6 +66,7 @@ constexpr const char* visibleInDockProperty = "_visibleInDock";
 #include <QDesktopServices>
 #include <QFile>
 #include <QMessageBox>
+#include <QStringList>
 #include <QThread>
 #include <QTimer>
 #include <QUrl>
@@ -492,14 +493,26 @@ void Flameshot::exportCapture(const QPixmap& capture,
 
 #ifdef ENABLE_UPLOADER
     if (tasks & CR::UPLOAD) {
+        // Capture the per-upload Drive sharing selection before the dialog
+        // closes; reading it back off the closed dialog is a use-after-free
+        // race. When confirmation is skipped, the configured default applies.
+        QString uploadVisibility;
+        QStringList uploadRecipients;
         if (!ConfigHandler().uploadWithoutConfirmation()) {
             auto* dialog = new ImgUploadDialog();
             if (dialog->exec() == QDialog::Rejected) {
                 return;
             }
+            uploadVisibility = dialog->selectedVisibility();
+            uploadRecipients = dialog->recipients();
+            dialog->deleteLater();
         }
 
-        ImgUploaderBase* widget = ImgUploaderManager().uploader(capture);
+        ImgUploaderBase* widget = ImgUploaderManager().uploader(
+          capture, nullptr, uploadVisibility, uploadRecipients);
+        if (widget == nullptr) {
+            return;
+        }
         widget->show();
         widget->activateWindow();
         // NOTE: lambda can't capture 'this' because it might be destroyed later

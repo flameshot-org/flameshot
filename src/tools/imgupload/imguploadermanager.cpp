@@ -51,21 +51,49 @@ void ImgUploaderManager::init()
 #endif
 }
 
-ImgUploaderBase* ImgUploaderManager::uploader(const QPixmap& capture,
-                                              QWidget* parent)
+ImgUploaderBase* ImgUploaderManager::createUploader(const QPixmap& capture,
+                                                    QWidget* parent)
 {
-    m_imgUploaderBase = nullptr;
+    ImgUploaderBase* uploader = nullptr;
 #ifdef ENABLE_GDRIVE
     if (m_imgUploaderPlugin == QStringLiteral("gdrive")) {
-        m_imgUploaderBase =
-          (ImgUploaderBase*)(new GDriveUploader(capture, parent));
+        uploader = (ImgUploaderBase*)(new GDriveUploader(capture, parent));
     }
 #endif
 #ifdef ENABLE_IMGUR
-    if (m_imgUploaderBase == nullptr) {
-        m_imgUploaderBase =
-          (ImgUploaderBase*)(new ImgurUploader(capture, parent));
+    if (uploader == nullptr) {
+        uploader = (ImgUploaderBase*)(new ImgurUploader(capture, parent));
     }
+#endif
+    return uploader;
+}
+
+ImgUploaderBase* ImgUploaderManager::uploader(const QPixmap& capture,
+                                              QWidget* parent)
+{
+    m_imgUploaderBase = createUploader(capture, parent);
+    if (m_imgUploaderBase && !capture.isNull()) {
+        m_imgUploaderBase->upload();
+    }
+    return m_imgUploaderBase;
+}
+
+ImgUploaderBase* ImgUploaderManager::uploader(const QPixmap& capture,
+                                              QWidget* parent,
+                                              const QString& visibility,
+                                              const QStringList& recipients)
+{
+    m_imgUploaderBase = createUploader(capture, parent);
+#ifdef ENABLE_GDRIVE
+    if (auto* drive = qobject_cast<GDriveUploader*>(m_imgUploaderBase)) {
+        if (!visibility.isEmpty()) {
+            drive->setVisibility(visibility);
+        }
+        drive->setRecipients(recipients);
+    }
+#else
+    Q_UNUSED(visibility)
+    Q_UNUSED(recipients)
 #endif
     if (m_imgUploaderBase && !capture.isNull()) {
         m_imgUploaderBase->upload();
