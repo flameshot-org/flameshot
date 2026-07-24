@@ -34,6 +34,7 @@
 ImgUploaderBase::ImgUploaderBase(const QPixmap& capture, QWidget* parent)
   : QWidget(parent)
   , m_pixmap(capture)
+  , m_notification(nullptr)
 {
     setWindowTitle(tr("Upload image"));
     setWindowIcon(QIcon(GlobalValues::iconPath()));
