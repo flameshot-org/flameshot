@@ -1,0 +1,4 @@
+interface:
+  display_name: "CE Map Codebase"
+  short_description: "Map repository structure into CE docs"
+  default_prompt: "Map this codebase for future CE planning and work."
