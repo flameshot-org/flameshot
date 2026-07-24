@@ -12,7 +12,9 @@ shipped in the Flameshot binary.
   signed-in user's own My Drive.
 - Flameshot is confined by the least-privilege `drive.file` scope: it can only
   see and touch files it created. It cannot list or open anything else in your
-  Drive, and has no access to shared/Team Drives.
+  Drive, and has no access to shared/Team Drives. It additionally reads your
+  email address and organization domain (`openid`, `email`) purely to label the
+  connected account and to scope organization sharing.
 - Per-upload sharing visibility, with a configurable default:
   - Anyone in your organization with the link (the shipped default)
   - Private (only you)
@@ -32,8 +34,11 @@ This is a one-time setup, external to Flameshot.
    - Choose **Internal** user type. An Internal Workspace app skips Google's
      verification entirely and is not subject to the 7-day testing-mode
      refresh-token expiry.
-   - Add the scope `.../auth/drive.file`. This scope is classified
-     **non-sensitive**, so no restricted-scope verification is required.
+   - Add the scopes `.../auth/drive.file`, `openid`, and `email`. All three are
+     classified **non-sensitive**, so no restricted-scope verification is
+     required. The two sign-in scopes are what let Flameshot read the signed-in
+     address and the account's Workspace domain, which the "anyone in your
+     organization" sharing level needs; `drive.file` alone cannot supply them.
 4. Create credentials → **OAuth client ID** → application type
    **Desktop app**. Google issues a **client ID** and a **client secret**.
    Both are required for Desktop-type clients even though the flow also uses
@@ -58,6 +63,24 @@ Internal-only consent screen: they are not the secret to protect (see below).
 The **Google Drive** settings group shows the connected account and offers a
 **Disconnect** button, which clears the stored credentials (and revokes the
 refresh token server-side); the next upload re-initiates consent.
+
+### Upgrading from a build before the sign-in scopes
+
+Google never widens an existing authorization on refresh, so an account
+connected by an earlier Flameshot build holds a `drive.file`-only grant that can
+never learn your organization domain. The first upload after upgrading opens the
+consent screen once to pick up the added scopes; approve it and later uploads go
+back to being silent. Until then, "anyone in your organization" uploads fall
+back to private with a warning.
+
+If your consent screen offers the sign-in permission as an optional checkbox and
+you decline it, Flameshot keeps working but organization sharing stays
+unavailable — it will not re-prompt you on every upload. Reconnect the account
+to change that decision.
+
+A personal (non-Workspace) Google account has no organization domain at all.
+Organization sharing reports that explicitly and keeps the file private; the
+other three sharing levels are unaffected.
 
 ## Security notes — protect the refresh token
 

@@ -140,6 +140,10 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     OPTION("gdriveClientId"              ,String             ( ""            )),
     OPTION("gdriveClientSecret"          ,String             ( ""            )),
     OPTION("gdriveRefreshToken"          ,String             ( ""            )),
+    // The scope set the stored refresh token was requested under. A grant only
+    // ever widens through a fresh consent, so a mismatch against the scopes the
+    // running build asks for means one re-consent is due.
+    OPTION("gdriveGrantedScopes"         ,String             ( ""            )),
     OPTION("gdriveAccountEmail"          ,String             ( ""            )),
     OPTION("gdriveAccountDomain"         ,String             ( ""            )),
     OPTION("gdriveFolderId"              ,String             ( ""            )),

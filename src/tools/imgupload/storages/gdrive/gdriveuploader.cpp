@@ -325,11 +325,22 @@ void GDriveUploader::applySharing()
     }
 
     if (m_visibility == QStringLiteral("domain")) {
-        const QString domain = GDriveOAuth::instance()->accountDomain();
+        GDriveOAuth* oauth = GDriveOAuth::instance();
+        const QString domain = oauth->accountDomain();
         if (domain.isEmpty()) {
+            // A known account with no domain is a personal Google account: it
+            // has no organization, which is a different situation from never
+            // having learned the domain (sign-in permission declined).
             m_sharingWarning =
-              tr("Could not determine your organization's domain, so the "
-                 "file stays private. The link still works for you.");
+              oauth->accountEmail().isEmpty()
+                ? tr("Flameshot could not read your organization's domain "
+                     "because the sign-in permission was declined, so the file "
+                     "stays private. Reconnect the account in the settings to "
+                     "enable organization sharing. The link still works for "
+                     "you.")
+                : tr("This Google account is not part of an organization, so "
+                     "there is nobody to share with and the file stays "
+                     "private. The link still works for you.");
             fetchLink();
             return;
         }

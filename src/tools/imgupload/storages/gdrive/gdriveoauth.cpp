@@ -27,8 +27,14 @@ const char* kAuthEndpoint = "https://accounts.google.com/o/oauth2/v2/auth";
 const char* kTokenEndpoint = "https://oauth2.googleapis.com/token";
 const char* kRevokeEndpoint = "https://oauth2.googleapis.com/revoke";
 const char* kAboutEndpoint = "https://www.googleapis.com/drive/v3/about";
-// Least-privilege scope: app-created files only (R7, KD3).
-const char* kScope = "https://www.googleapis.com/auth/drive.file";
+// Least-privilege Drive scope -- app-created files only (R7, KD3) -- plus the
+// two OpenID Connect sign-in scopes. The identity scopes are what carry the
+// account email and the `hd` (hosted domain) claim that org sharing needs
+// (KTD6); Drive's own about.get cannot be relied on for the email under
+// drive.file alone. Both are non-sensitive, so the consent screen still needs
+// no verification.
+const char* kScope =
+  "https://www.googleapis.com/auth/drive.file openid email";
 constexpr int kConsentTimeoutMs = 180 * 1000; // ~3 minutes (KTD9)
 constexpr int kRequestTimeoutMs = 30 * 1000;
 
@@ -44,6 +50,30 @@ const char* kResponsePage =
   "<h2>Flameshot is now authorized.</h2>"
   "<p>You can close this tab and return to Flameshot.</p>"
   "</body></html>";
+
+/**
+ * Decode the claim set of a Google-issued ID token. Empty if the token is
+ * absent or malformed.
+ *
+ * The signature is deliberately not verified. The token arrives in the body of
+ * our own client-authenticated HTTPS POST to Google's token endpoint, which
+ * Google's guidance treats as establishing origin for a token received directly
+ * that way. Forging claims here would require owning that TLS channel -- which
+ * hands over the access token in the same response, so a spoofed `hd` buys an
+ * attacker nothing they could not already do with the token itself.
+ */
+QJsonObject idTokenClaims(const QString& idToken)
+{
+    // header.payload.signature; the claims are the unpadded base64url middle.
+    const QList<QByteArray> segments = idToken.toLatin1().split('.');
+    if (segments.size() != 3) {
+        return {};
+    }
+    return QJsonDocument::fromJson(
+             QByteArray::fromBase64(segments.at(1),
+                                    QByteArray::Base64UrlEncoding))
+      .object();
+}
 }
 
 GDriveOAuth* GDriveOAuth::instance()
@@ -123,7 +153,15 @@ void GDriveOAuth::requestAccessToken()
         return;
     }
 
-    if (!ConfigHandler().gdriveRefreshToken().isEmpty()) {
+    ConfigHandler config;
+    // A grant never gains a scope by being refreshed -- Google only widens one
+    // through a fresh consent. A refresh token stored under a scope set other
+    // than this build's must therefore be re-consented once, or the missing
+    // scope stays missing forever. The marker records what was *requested*,
+    // not what was granted, so a user who declines an optional scope at the
+    // granular consent screen is not re-prompted on every upload.
+    if (!config.gdriveRefreshToken().isEmpty() &&
+        config.gdriveGrantedScopes() == QString::fromLatin1(kScope)) {
         refreshAccessToken();
     } else {
         startConsentFlow();
@@ -318,20 +356,47 @@ void GDriveOAuth::exchangeAuthCode(const QString& code)
         m_accessToken = json.value(QStringLiteral("access_token")).toString();
         m_accessTokenExpiry = QDateTime::currentDateTimeUtc().addSecs(
           json.value(QStringLiteral("expires_in")).toInt(3600) - 60);
+        m_codeVerifier.clear();
+
+        // The ID token rides along in this same response, so the account email
+        // and the organization domain cost no extra request and no guesswork:
+        // `hd` is the account's Workspace domain verbatim. It is absent for a
+        // personal Google account, which correctly means "no organization to
+        // share with" rather than "lookup failed".
+        const QJsonObject claims =
+          idTokenClaims(json.value(QStringLiteral("id_token")).toString());
+        const QString email = claims.value(QStringLiteral("email")).toString();
+        const QString domain = claims.value(QStringLiteral("hd")).toString();
+
+        ConfigHandler config;
         const QString refresh =
           json.value(QStringLiteral("refresh_token")).toString();
         if (!refresh.isEmpty()) {
-            ConfigHandler config;
             config.setGdriveRefreshToken(refresh);
-            // Flush before chmod: QSettings defers the write, and its later
-            // QSaveFile rewrite would otherwise reset the file to umask
-            // permissions after the chmod, exposing the refresh token.
-            config.flush();
-            reassertConfigPermissions(config.configFilePath());
+            // Record the scope set this grant was requested under, so the next
+            // scope change re-consents exactly once (see requestAccessToken).
+            config.setGdriveGrantedScopes(QString::fromLatin1(kScope));
         }
-        m_codeVerifier.clear();
-        // Fetch account info once at authorization, then resolve.
-        fetchAccountInfo();
+        if (!email.isEmpty()) {
+            // Fresh consent is authoritative about which account is connected,
+            // including an empty domain for a personal account.
+            config.setGdriveAccountEmail(email);
+            config.setGdriveAccountDomain(domain);
+        }
+        // Flush before chmod: QSettings defers the write, and its later
+        // QSaveFile rewrite would otherwise reset the file to umask
+        // permissions after the chmod, exposing the refresh token.
+        config.flush();
+        reassertConfigPermissions(config.configFilePath());
+
+        if (email.isEmpty()) {
+            // No ID token, or the sign-in scopes were declined at the granular
+            // consent screen. Fall back to about.get, which may still carry the
+            // email; the upload itself does not depend on either.
+            fetchAccountInfo();
+            return;
+        }
+        finishGranted();
     });
 }
 
@@ -401,6 +466,12 @@ void GDriveOAuth::fetchAccountInfo()
     QNetworkReply* reply = m_net->get(request);
     connect(reply, &QNetworkReply::finished, this, [this, reply]() {
         reply->deleteLater();
+        if (reply->error() != QNetworkReply::NoError) {
+            // Best-effort fallback: the token, not the account info, is what
+            // gates the upload. Sharing degrades with an explicit warning.
+            finishGranted();
+            return;
+        }
         const QJsonObject json =
           QJsonDocument::fromJson(reply->readAll()).object();
         const QString email = json.value(QStringLiteral("user"))
@@ -410,6 +481,8 @@ void GDriveOAuth::fetchAccountInfo()
         if (!email.isEmpty()) {
             ConfigHandler config;
             config.setGdriveAccountEmail(email);
+            // Only reachable when the ID token carried no email, so there is no
+            // `hd` claim to prefer: fall back to the address's own domain.
             const int at = email.indexOf('@');
             if (at >= 0) {
                 config.setGdriveAccountDomain(email.mid(at + 1));
@@ -417,7 +490,6 @@ void GDriveOAuth::fetchAccountInfo()
             config.flush();
             reassertConfigPermissions(config.configFilePath());
         }
-        // Account info is best-effort; the token is what gates the upload.
         finishGranted();
     });
 }
@@ -446,6 +518,7 @@ void GDriveOAuth::disconnectAccount()
         connect(reply, &QNetworkReply::finished, reply, &QObject::deleteLater);
     }
     config.setGdriveRefreshToken(QStringLiteral(""));
+    config.setGdriveGrantedScopes(QStringLiteral(""));
     config.setGdriveAccountEmail(QStringLiteral(""));
     config.setGdriveAccountDomain(QStringLiteral(""));
     config.setGdriveFolderId(QStringLiteral(""));

@@ -141,6 +141,7 @@ public:
     CONFIG_GETTER_SETTER(gdriveClientId, setGdriveClientId, QString)
     CONFIG_GETTER_SETTER(gdriveClientSecret, setGdriveClientSecret, QString)
     CONFIG_GETTER_SETTER(gdriveRefreshToken, setGdriveRefreshToken, QString)
+    CONFIG_GETTER_SETTER(gdriveGrantedScopes, setGdriveGrantedScopes, QString)
     CONFIG_GETTER_SETTER(gdriveAccountEmail, setGdriveAccountEmail, QString)
     CONFIG_GETTER_SETTER(gdriveAccountDomain, setGdriveAccountDomain, QString)
     CONFIG_GETTER_SETTER(gdriveFolderId, setGdriveFolderId, QString)
