@@ -553,12 +553,12 @@ void GDriveUploader::deleteImage(const QString& fileName,
                   }
                   emit deleteOk();
               } else {
-                  const QString error =
-                    tr("Could not delete the file from Google Drive.");
-                  if (isVisible() && notification()) {
-                      notification()->showMessage(error);
-                  }
-                  emit deleteFail(error);
+                  // No message from here: the shared post-upload dialog reports
+                  // every delete failure on deleteFail, so a message here would
+                  // double up on this path while leaving the authorization
+                  // paths below silent (KTD4).
+                  emit deleteFail(
+                    tr("Could not delete the file from Google Drive."));
               }
           });
       },

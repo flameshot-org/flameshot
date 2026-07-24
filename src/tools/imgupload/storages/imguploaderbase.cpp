@@ -155,6 +155,34 @@ void ImgUploaderBase::showPostUploadDialog()
                      &QPushButton::clicked,
                      this,
                      &ImgUploaderBase::saveScreenshotToFilesystem);
+
+    // The delete outcomes are wired here, where the delete control is born, so
+    // each connection lives exactly as long as the control it serves. Wiring
+    // them inside the delete slot instead would stack a fresh pair on every
+    // retry after a failure, making the number of removal attempts depend on
+    // the user's click history (KTD2).
+    connect(this, &ImgUploaderBase::deleteOk, this, [this]() {
+        // The remote file is gone, so drop the local history entry through the
+        // one removal path both delete controls share. Gated on the backend's
+        // confirmation, never optimistic: a delete that fails keeps a
+        // recoverable entry (KD1).
+        History().remove(m_currentImageName);
+    });
+    connect(this,
+            &ImgUploaderBase::deleteFail,
+            this,
+            [this](const QString& error) {
+                // Backend-neutral failure feedback: every backend and every
+                // failure cause reports here, including the Drive
+                // authorization paths that were silent before (KTD4).
+                m_openDeleteUrlButton->setEnabled(true);
+                if (m_notification) {
+                    m_notification->showMessage(
+                      error.isEmpty()
+                        ? tr("The screenshot could not be deleted.")
+                        : error);
+                }
+            });
 }
 
 void ImgUploaderBase::openURL()
@@ -179,6 +207,11 @@ void ImgUploaderBase::copyImage()
 
 void ImgUploaderBase::deleteCurrentImage()
 {
+    // A delete can be asynchronous, so disable the control before dispatching:
+    // a second click must not start a parallel delete (R3). The failure handler
+    // re-enables it; on success the file is gone and it stays disabled.
+    m_openDeleteUrlButton->setEnabled(false);
+
     History history;
     HistoryFileName unpackFileName = history.unpackFileName(m_currentImageName);
     deleteImage(unpackFileName.file, unpackFileName.token);
