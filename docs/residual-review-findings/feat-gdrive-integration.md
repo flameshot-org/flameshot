@@ -34,6 +34,11 @@ committed locally only (no PR opened), per the user's choice.
 - **Finding:** The best-effort POST to Google's `/revoke` endpoint has no retry or user-facing signal if it fails; local credentials are still cleared (correct), but the user isn't told server-side revocation itself may not have happened.
 - **Why accepted:** Local disconnect is the primary guarantee; the docs already direct users to the Google account security page for definitive revocation after suspected exposure.
 
+### R-F. Drive API failures collapse into one opaque message — P2 (deferred, user's choice)
+- **Where:** `src/tools/imgupload/storages/gdrive/gdriveuploader.cpp` (`findOrCreateFolder`, and the same pattern in `createFolder`/`startResumableUpload`/`putBytes`/`fetchLink`); `gdriveoauth.cpp` `fetchAccountInfo` swallows its failure entirely as best-effort.
+- **Finding:** Every reply error becomes a fixed string — `"Could not access Google Drive."` — with the HTTP status and Google's `error.message` body discarded. A first-run failure (for example the Drive API not enabled on the Cloud project, a scope not granted, or a proxy blocking `www.googleapis.com`) is therefore indistinguishable from any other, and the user has no signal to act on. This came up in a real diagnosis: the message was reached *after* a fully successful OAuth consent and token exchange, but nothing in the UI or logs revealed which Drive call failed or why.
+- **Why deferred:** Surfacing the status/error body was offered alongside the loopback-response fix and the user scoped this session to the socket bug only. Left recorded rather than dropped. Future fix: include the HTTP status code and Google's `error.message` in the failure text (never the access token), and log `fetchAccountInfo`'s failure instead of silently continuing.
+
 ## Notes
 - The feature has **no automated test coverage** — the repo has no C++ test framework and the plan introduces none (Verification Contract: build matrix + manual acceptance). This is a plan-level accepted condition, not a review residual.
 - The plan's acceptance walkthrough (AE1–AE9) and failure-path drill require a real Google Workspace account, an org-registered Desktop OAuth client, and a browser; they must be executed by a human before merge.

@@ -222,6 +222,18 @@ void GDriveOAuth::onLoopbackConnection()
             socket->write(kResponsePage);
             socket->disconnectFromHost();
 
+            // The reply is only buffered at this point -- QTcpSocket flushes it
+            // from the event loop. nextPendingConnection() parented this socket
+            // to the listener, so any teardown of m_server (below on success,
+            // or from abortFlow() on timeout/cancel/a superseded flow) would
+            // delete the socket with the reply still queued. The browser then
+            // sees a closed connection with zero bytes and retries, only to
+            // find the listener already gone: connection refused instead of the
+            // success page. Take ownership here so the reply outlives the
+            // listener; the disconnected handler above frees it once the flush
+            // completes.
+            socket->setParent(this);
+
             // Parse "GET <target> HTTP/1.1"; extract the query string.
             const QList<QByteArray> parts = requestLine.split(' ');
             if (parts.size() < 2) {

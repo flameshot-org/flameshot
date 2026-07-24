@@ -82,10 +82,29 @@ echo "Record a verdict for every case: PASS, FAIL, or NOT EXERCISED."
 echo
 echo ">>> SECTION 1: upload confirmation dialog"
 echo "These cases need an uploader-enabled build. For the Google Drive cases you"
-echo "also need Drive selected as the upload destination and an account signed in."
+echo "also need Drive selected as the upload destination; the first case signs the"
+echo "account in, and the rest reuse it."
 echo "Open the flameshot configuration now and make sure 'Upload without"
 echo "confirmation' is DISABLED."
 wait_for_key
+
+expect "Drive first-time consent, browser redirect lands" \
+  "Run this case FIRST, on a disconnected account: open the flameshot
+  configuration, press 'Disconnect' under Google Drive, and close it. Then make
+  a selection and choose the upload tool, and confirm the dialog.
+
+  The system browser opens Google's consent page. Pick the account and grant
+  the permissions. The browser must then land on Flameshot's own page reading
+  'Flameshot is now authorized.'
+
+  A browser error instead of that page is a FAIL — ERR_CONNECTION_REFUSED or an
+  empty/'reset' response means the loopback listener was torn down with the
+  reply still buffered, so the reply never reached the browser and the retry hit
+  a closed port. Note that the upload itself can still succeed in that case, so
+  judge this case on the BROWSER page, not on the upload result.
+
+  Leave the account connected — the cases below need it."
+cmd command "$FLAMESHOT" gui
 
 expect "Drive upload, confirm" \
   "Make a selection and choose the upload tool. The overlay disappears, THEN
