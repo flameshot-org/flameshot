@@ -2,6 +2,7 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "imguploaddialog.h"
+#include "tools/imgupload/imguploadermanager.h"
 #include "utils/confighandler.h"
 #include "utils/globalvalues.h"
 
@@ -16,7 +17,12 @@
 
 ImgUploadDialog::ImgUploadDialog(QDialog* parent)
   : QDialog(parent)
-  , m_driveActive(ConfigHandler().uploadStorage() == QStringLiteral("gdrive"))
+  // Ask the same resolver the uploader itself uses (ImgUploaderManager),
+  // rather than re-deriving backend selection from the raw config value:
+  // on a build with only one backend compiled in, that backend is always
+  // the effective one regardless of what "uploadStorage" happens to hold.
+  , m_driveActive(ImgUploaderManager().uploaderPlugin() ==
+                  QStringLiteral("gdrive"))
   , m_visibility(nullptr)
   , m_recipientsLabel(nullptr)
   , m_recipients(nullptr)
