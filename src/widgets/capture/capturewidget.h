@@ -54,6 +54,9 @@ public:
 
     QPixmap pixmap();
     void setCaptureToolObjects(const CaptureToolObjects& captureToolObjects);
+    // True when the constructor's screen grab failed and it closed itself. The
+    // owner reads this to abort the capture instead of showing an empty overlay.
+    bool screenGrabFailed() const;
 #if !defined(DISABLE_UPDATE_CHECKER)
     void showAppUpdateNotification(const QString& appLatestVersion,
                                    const QString& appLatestUrl);
@@ -66,6 +69,14 @@ public slots:
 signals:
     void colorChanged(const QColor& c);
     void toolSizeChanged(int size);
+    /* Emitted from the close path once the capture is finished, carrying
+       everything the export needs by value so the owner never has to read
+       widget state back after teardown is scheduled. */
+    void captureCompleted(const QPixmap& capture,
+                          const QRect& geometry,
+                          const CaptureRequest& request);
+    // Emitted from the close path when the capture ends without completing.
+    void captureCancelled();
 
 private slots:
     void undo();
@@ -232,4 +243,6 @@ private:
     int m_gridSize{ 10 };
 
     bool m_clipboardWorkaroundDone{ false };
+
+    bool m_screenGrabFailed{ false };
 };

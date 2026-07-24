@@ -125,6 +125,7 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
           grabber.grabEntireDesktop(ok, preSelectedMonitor);
         if (!ok) {
             // Error already logged in ScreenGrabber
+            m_screenGrabFailed = true;
             this->close();
         }
         m_context.origScreenshot = m_context.screenshot;
@@ -499,6 +500,11 @@ QPixmap CaptureWidget::pixmap()
     return m_context.selectedScreenshotArea();
 }
 
+bool CaptureWidget::screenGrabFailed() const
+{
+    return m_screenGrabFailed;
+}
+
 // Finish whatever the current tool is doing, if there is a current active
 // tool.
 bool CaptureWidget::commitCurrentTool()
@@ -655,6 +661,29 @@ void CaptureWidget::closeEvent(QCloseEvent* event)
 #endif
 
     QWidget::closeEvent(event);
+    if (!event->isAccepted()) {
+        return;
+    }
+
+    /* Every close funnels through here, so this is the single hand-off point to
+       the owner. Branch on the capture state before deriving anything: on the
+       constructor's self-close after a failed grab, initSelection() has not run
+       yet and m_selection is still null. */
+    if (!m_captureDone) {
+        emit captureCancelled();
+        return;
+    }
+
+    auto lastRegion = m_selection->geometry();
+    const qreal scale = m_context.screenshot.devicePixelRatio();
+    lastRegion.setTop(lastRegion.top() * scale);
+    lastRegion.setBottom(lastRegion.bottom() * scale);
+    lastRegion.setLeft(lastRegion.left() * scale);
+    lastRegion.setRight(lastRegion.right() * scale);
+    setLastRegion(lastRegion);
+    QRect geometry(m_context.selection);
+    geometry.setTopLeft(geometry.topLeft() + m_context.widgetOffset);
+    emit captureCompleted(pixmap(), geometry, m_context.request);
 }
 
 void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
