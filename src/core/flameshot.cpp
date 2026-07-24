@@ -171,6 +171,16 @@ CaptureWidget* Flameshot::gui(const CaptureRequest& req)
                 this,
                 &Flameshot::onCaptureCancelled);
 
+        /* The constructor closes itself when the screen grab fails, which
+           happens before there is anything connected to hear it. Abort here
+           rather than showing an empty overlay. */
+        if (m_captureWindow->screenGrabFailed()) {
+            delete m_captureWindow;
+            m_captureWindow = nullptr;
+            emit captureFailed();
+            return nullptr;
+        }
+
 #ifdef Q_OS_WIN
         m_captureWindow->show();
 #elif defined(Q_OS_MACOS)
