@@ -551,19 +551,19 @@ void Flameshot::exportCapture(const QPixmap& capture,
 
 #ifdef ENABLE_UPLOADER
     if (tasks & CR::UPLOAD) {
-        // Capture the per-upload Drive sharing selection before the dialog
-        // closes; reading it back off the closed dialog is a use-after-free
-        // race. When confirmation is skipped, the configured default applies.
+        // Capture the per-upload Drive sharing selection. The dialog is
+        // block-scoped so it is guaranteed alive for these reads and destroyed
+        // deterministically afterwards. When confirmation is skipped, the
+        // configured default applies.
         QString uploadVisibility;
         QStringList uploadRecipients;
         if (!ConfigHandler().uploadWithoutConfirmation()) {
-            auto* dialog = new ImgUploadDialog();
-            if (dialog->exec() == QDialog::Rejected) {
+            ImgUploadDialog dialog;
+            if (dialog.exec() == QDialog::Rejected) {
                 return;
             }
-            uploadVisibility = dialog->selectedVisibility();
-            uploadRecipients = dialog->recipients();
-            dialog->deleteLater();
+            uploadVisibility = dialog.selectedVisibility();
+            uploadRecipients = dialog.recipients();
         }
 
         ImgUploaderBase* widget = ImgUploaderManager().uploader(
