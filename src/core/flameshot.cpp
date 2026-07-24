@@ -202,27 +202,36 @@ CaptureWidget* Flameshot::gui(const CaptureRequest& req)
     }
 }
 
+void Flameshot::scheduleCaptureTeardownThen(std::function<void()> then)
+{
+    /* Completion signals arrive on the capture widget's close stack, which the
+       event loop may itself be running from a deferred-delete event. Doing the
+       follow-up work here would nest a modal dialog and post delete events
+       inside that stack, which is the re-entrancy that corrupts Qt's
+       posted-event bookkeeping. Hand off to a clean event-loop turn instead. */
+    QPointer<CaptureWidget> window = m_captureWindow;
+    QTimer::singleShot(0, this, [window, then = std::move(then)]() {
+        /* Teardown is scheduled before the follow-up runs, not after, so it
+           holds however the follow-up ends: a rejected confirmation dialog, an
+           export early-return, an unavailable uploader. It stays deferred
+           rather than immediate because the macOS save path still looks the
+           live widget up through qApp->topLevelWidgets(). The widget may
+           already be gone: on macOS gui() closes a pre-existing capture window
+           and deletes it immediately. */
+        if (window) {
+            window->deleteLater();
+        }
+        then();
+    });
+}
+
 void Flameshot::onCaptureCompleted(const QPixmap& capture,
                                    const QRect& geometry,
                                    const CaptureRequest& request)
 {
-    /* The signal arrives on the widget's close stack, which the event loop may
-       itself be running from a deferred-delete event. Running the export from
-       here would nest a modal dialog and post delete events inside that stack,
-       which is the re-entrancy that corrupts Qt's posted-event bookkeeping.
-       Hand off to a clean event-loop turn instead. */
-    QPointer<CaptureWidget> window = m_captureWindow;
-    QTimer::singleShot(0, this, [this, window, capture, geometry, request]() {
-        /* The widget may already be gone: on macOS gui() closes a pre-existing
-           capture window and deletes it immediately. */
-        if (window) {
-            window->deleteLater();
-        }
-
-        /* Schedule teardown before exporting, not after, so it holds on every
-           exit — a rejected confirmation dialog, an export early-return, an
-           unavailable uploader. Safe because the payload above is a copy; the
-           export never reads widget state. */
+    /* The payload is carried by value, so the export never reads widget state
+       and does not care that teardown is already scheduled. */
+    scheduleCaptureTeardownThen([this, capture, geometry, request]() {
         QRect selection(geometry);
         exportCapture(capture, selection, request);
     });
@@ -230,13 +239,7 @@ void Flameshot::onCaptureCompleted(const QPixmap& capture,
 
 void Flameshot::onCaptureCancelled()
 {
-    QPointer<CaptureWidget> window = m_captureWindow;
-    QTimer::singleShot(0, this, [this, window]() {
-        if (window) {
-            window->deleteLater();
-        }
-        emit captureFailed();
-    });
+    scheduleCaptureTeardownThen([this]() { emit captureFailed(); });
 }
 
 void Flameshot::screen(CaptureRequest req, const int screenNumber)

@@ -8,6 +8,7 @@
 
 #include <QObject>
 #include <QPointer>
+#include <functional>
 #include <QVersionNumber>
 #include <QWindow>
 
@@ -83,6 +84,10 @@ public slots:
 private:
     Flameshot();
     bool resolveAnyConfigErrors();
+    /* Runs `then` on a clean event-loop turn, with the capture window's
+       teardown already scheduled. Both completion paths go through here so
+       teardown cannot be skipped by an early return in the follow-up. */
+    void scheduleCaptureTeardownThen(std::function<void()> then);
     void onCaptureCompleted(const QPixmap& capture,
                             const QRect& geometry,
                             const CaptureRequest& request);
