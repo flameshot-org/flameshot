@@ -298,8 +298,9 @@ void GDriveOAuth::exchangeAuthCode(const QString& code)
         const QString refresh =
           json.value(QStringLiteral("refresh_token")).toString();
         if (!refresh.isEmpty()) {
-            ConfigHandler().setGdriveRefreshToken(refresh);
-            reassertConfigPermissions();
+            ConfigHandler config;
+            config.setGdriveRefreshToken(refresh);
+            reassertConfigPermissions(config.configFilePath());
         }
         m_codeVerifier.clear();
         // Fetch account info once at authorization, then resolve.
@@ -381,7 +382,7 @@ void GDriveOAuth::fetchAccountInfo()
             if (at >= 0) {
                 config.setGdriveAccountDomain(email.mid(at + 1));
             }
-            reassertConfigPermissions();
+            reassertConfigPermissions(config.configFilePath());
         }
         // Account info is best-effort; the token is what gates the upload.
         finishGranted();
@@ -410,7 +411,7 @@ void GDriveOAuth::disconnectAccount()
     config.setGdriveFolderId(QStringLiteral(""));
     m_accessToken.clear();
     m_accessTokenExpiry = QDateTime();
-    reassertConfigPermissions();
+    reassertConfigPermissions(config.configFilePath());
 }
 
 void GDriveOAuth::abortFlow()
@@ -445,14 +446,14 @@ void GDriveOAuth::finishFailed(const QString& error)
     emit authFailed(error);
 }
 
-void GDriveOAuth::reassertConfigPermissions() const
+void GDriveOAuth::reassertConfigPermissions(const QString& path) const
 {
     // QSettings rewrites the whole file on each save, so owner-only permissions
     // must be re-asserted after every persist (rclone precedent; U4/U8).
-    const QString path = ConfigHandler().configFilePath();
-    if (!path.isEmpty() && QFile::exists(path)) {
-        QFile::setPermissions(path,
-                              QFile::ReadOwner | QFile::WriteOwner);
+    // setPermissions() no-ops harmlessly if the file does not exist, so no
+    // (racy) existence pre-check is needed.
+    if (!path.isEmpty()) {
+        QFile::setPermissions(path, QFile::ReadOwner | QFile::WriteOwner);
     }
 }
 

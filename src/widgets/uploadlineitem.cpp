@@ -64,12 +64,18 @@ UploadLineItem::UploadLineItem(QWidget* parent,
         // in which case the entry is kept and the user is told.
         connect(imgUploaderBase, &ImgUploaderBase::deleteOk, this, [=, this]() {
             removeCacheFile(fullFileName);
+            // The manager-created uploader has no parent and is never shown, so
+            // WA_DeleteOnClose never fires; reclaim it now that the async
+            // delete resolved. Do this before requestedDeletion(), which
+            // deletes this line item.
+            imgUploaderBase->deleteLater();
             emit requestedDeletion();
         });
         connect(imgUploaderBase,
                 &ImgUploaderBase::deleteFail,
                 this,
-                [this](const QString& error) {
+                [=, this](const QString& error) {
+                    imgUploaderBase->deleteLater();
                     QMessageBox::warning(
                       this,
                       tr("Unable to delete screenshot"),

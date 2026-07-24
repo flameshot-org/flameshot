@@ -1,6 +1,7 @@
 #include "history.h"
 #include "utils/confighandler.h"
 
+#include <QByteArray>
 #include <QDir>
 #include <QFile>
 #include <QProcessEnvironment>
@@ -103,6 +104,22 @@ const HistoryFileName& History::unpackFileName(const QString& fileNamePacked)
         m_unpackedFileName.file = unpackedFileName[0];
     }
     return m_unpackedFileName;
+}
+
+QString History::encodeDriveFileId(const QString& fileId)
+{
+    return QString::fromLatin1(fileId.toUtf8().toHex());
+}
+
+QString History::decodeDriveFileId(const QString& token)
+{
+    return QString::fromUtf8(QByteArray::fromHex(token.toUtf8()));
+}
+
+QString History::driveFileUrl(const QString& fileId)
+{
+    return QStringLiteral("https://drive.google.com/file/d/%1/view")
+      .arg(fileId);
 }
 
 const QString& History::packFileName(const QString& storageType,

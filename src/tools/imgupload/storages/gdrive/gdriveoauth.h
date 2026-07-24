@@ -84,7 +84,7 @@ private:
     void finishGranted();
     void finishCanceled();
     void finishFailed(const QString& error);
-    void reassertConfigPermissions() const;
+    void reassertConfigPermissions(const QString& path) const;
 
     static QByteArray randomUrlSafe(int bytes);
 

@@ -3,7 +3,6 @@
 #include "utils/history.h"
 #include "widgets/uploadlineitem.h"
 
-#include <QByteArray>
 #include <QDateTime>
 #include <QFileInfo>
 #include <QPixmap>
@@ -72,10 +71,7 @@ void UploadHistory::setEmptyMessage()
 static QString historyUrlForEntry(const HistoryFileName& entry)
 {
     if (entry.type == QStringLiteral("gdrive")) {
-        const QString fileId =
-          QString::fromUtf8(QByteArray::fromHex(entry.token.toUtf8()));
-        return QStringLiteral("https://drive.google.com/file/d/%1/view")
-          .arg(fileId);
+        return History::driveFileUrl(History::decodeDriveFileId(entry.token));
     }
     return QStringLiteral("https://imgur.com/") + entry.file;
 }

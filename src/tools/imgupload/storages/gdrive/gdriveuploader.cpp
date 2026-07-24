@@ -76,6 +76,42 @@ QNetworkRequest GDriveUploader::authorizedRequest(const QUrl& url) const
     return request;
 }
 
+void GDriveUploader::withAccessToken(std::function<void(const QString&)> onReady,
+                                     std::function<void()> onCanceled,
+                                     std::function<void(const QString&)> onFailed)
+{
+    GDriveOAuth* oauth = GDriveOAuth::instance();
+    m_waitingForAuth = true;
+    oauth->attachWaiter();
+
+    connect(oauth,
+            &GDriveOAuth::accessTokenReady,
+            this,
+            [this, oauth, onReady](const QString& token) {
+                disconnect(oauth, nullptr, this, nullptr);
+                m_waitingForAuth = false;
+                oauth->detachWaiter();
+                onReady(token);
+            });
+    connect(oauth, &GDriveOAuth::authCanceled, this, [this, oauth, onCanceled]() {
+        disconnect(oauth, nullptr, this, nullptr);
+        m_waitingForAuth = false;
+        oauth->detachWaiter();
+        onCanceled();
+    });
+    connect(oauth,
+            &GDriveOAuth::authFailed,
+            this,
+            [this, oauth, onFailed](const QString& error) {
+                disconnect(oauth, nullptr, this, nullptr);
+                m_waitingForAuth = false;
+                oauth->detachWaiter();
+                onFailed(error);
+            });
+
+    oauth->requestAccessToken();
+}
+
 void GDriveUploader::upload()
 {
     // Prepare the PNG bytes and target filename up front.
@@ -92,49 +128,27 @@ void GDriveUploader::upload()
     }
     connect(m_cancelButton, &QPushButton::clicked, this, &QWidget::close);
 
-    GDriveOAuth* oauth = GDriveOAuth::instance();
-    m_waitingForAuth = true;
-    oauth->attachWaiter();
-
-    connect(oauth,
-            &GDriveOAuth::accessTokenReady,
-            this,
-            [this, oauth](const QString& token) {
-                disconnect(oauth, nullptr, this, nullptr);
-                m_waitingForAuth = false;
-                oauth->detachWaiter();
-                if (m_cancelButton) {
-                    m_cancelButton->hide();
-                }
-                setInfoLabelText(tr("Uploading image…"));
-                m_token = token;
-                ensureFolder();
-            });
-    connect(oauth, &GDriveOAuth::authCanceled, this, [this, oauth]() {
-        disconnect(oauth, nullptr, this, nullptr);
-        m_waitingForAuth = false;
-        oauth->detachWaiter();
-        // User denial / cancel renders as a plain cancellation (KTD9).
-        if (spinner()) {
-            spinner()->deleteLater();
-        }
-        if (m_cancelButton) {
-            m_cancelButton->hide();
-        }
-        setInfoLabelText(tr("Upload canceled."));
-        new QShortcut(Qt::Key_Escape, this, SLOT(close()));
-    });
-    connect(oauth,
-            &GDriveOAuth::authFailed,
-            this,
-            [this, oauth](const QString& error) {
-                disconnect(oauth, nullptr, this, nullptr);
-                m_waitingForAuth = false;
-                oauth->detachWaiter();
-                fail(error);
-            });
-
-    oauth->requestAccessToken();
+    withAccessToken(
+      [this](const QString& token) {
+          if (m_cancelButton) {
+              m_cancelButton->hide();
+          }
+          setInfoLabelText(tr("Uploading image…"));
+          m_token = token;
+          ensureFolder();
+      },
+      [this]() {
+          // User denial / cancel renders as a plain cancellation (KTD9).
+          if (spinner()) {
+              spinner()->deleteLater();
+          }
+          if (m_cancelButton) {
+              m_cancelButton->hide();
+          }
+          setInfoLabelText(tr("Upload canceled."));
+          new QShortcut(Qt::Key_Escape, this, SLOT(close()));
+      },
+      [this](const QString& error) { fail(error); });
 }
 
 void GDriveUploader::ensureFolder()
@@ -423,8 +437,7 @@ void GDriveUploader::fetchLink()
         QString link =
           replyJson(reply).value(QStringLiteral("webViewLink")).toString();
         if (link.isEmpty()) {
-            link = QStringLiteral("https://drive.google.com/file/d/%1/view")
-                     .arg(m_fileId);
+            link = History::driveFileUrl(m_fileId);
         }
         setImageURL(QUrl(link));
         finalizeSuccess();
@@ -440,7 +453,7 @@ void GDriveUploader::finalizeSuccess()
     // Pack history with the Drive file ID hex-encoded in the token slot, since
     // raw IDs contain '-' (KTD8).
     History history;
-    const QString token = QString::fromLatin1(m_fileId.toUtf8().toHex());
+    const QString token = History::encodeDriveFileId(m_fileId);
     m_currentImageName = history.packFileName(
       QStringLiteral("gdrive"), token, m_fileName);
     history.save(pixmap(), m_currentImageName);
@@ -492,8 +505,7 @@ void GDriveUploader::deleteImage(const QString& fileName,
 {
     Q_UNUSED(fileName)
     // The Drive file ID is stored hex-encoded in the token slot (KTD8).
-    const QString fileId =
-      QString::fromUtf8(QByteArray::fromHex(deleteToken.toUtf8()));
+    const QString fileId = History::decodeDriveFileId(deleteToken);
     if (fileId.isEmpty()) {
         emit deleteFail(tr("This history entry has no Google Drive file ID."));
         return;
@@ -501,64 +513,38 @@ void GDriveUploader::deleteImage(const QString& fileName,
 
     // May run headless from a history row (no visible widget): a delete needing
     // re-auth triggers the same shared consent flow (KTD9).
-    GDriveOAuth* oauth = GDriveOAuth::instance();
-    m_waitingForAuth = true;
-    oauth->attachWaiter();
-
-    connect(oauth,
-            &GDriveOAuth::accessTokenReady,
-            this,
-            [this, oauth, fileId](const QString& token) {
-                disconnect(oauth, nullptr, this, nullptr);
-                m_waitingForAuth = false;
-                oauth->detachWaiter();
-                m_token = token;
-
-                QUrl url{ QStringLiteral("%1/%2").arg(
-                  QString::fromLatin1(kFilesEndpoint), fileId) };
-                QNetworkReply* reply =
-                  m_net->deleteResource(authorizedRequest(url));
-                connect(reply, &QNetworkReply::finished, this, [this, reply]() {
-                    reply->deleteLater();
-                    const int status =
-                      reply
-                        ->attribute(QNetworkRequest::HttpStatusCodeAttribute)
-                        .toInt();
-                    // 204 No Content on success; treat an already-gone file
-                    // (404) as deleted too.
-                    if (reply->error() == QNetworkReply::NoError ||
-                        status == 404) {
-                        if (isVisible() && notification()) {
-                            notification()->showMessage(
-                              tr("Screenshot deleted from Google Drive."));
-                        }
-                        emit deleteOk();
-                    } else {
-                        const QString error =
-                          tr("Could not delete the file from Google Drive.");
-                        if (isVisible() && notification()) {
-                            notification()->showMessage(error);
-                        }
-                        emit deleteFail(error);
-                    }
-                });
-            });
-    connect(oauth, &GDriveOAuth::authCanceled, this, [this, oauth]() {
-        disconnect(oauth, nullptr, this, nullptr);
-        m_waitingForAuth = false;
-        oauth->detachWaiter();
-        emit deleteFail(tr("Authorization was canceled; the file was not "
-                           "deleted."));
-    });
-    connect(oauth,
-            &GDriveOAuth::authFailed,
-            this,
-            [this, oauth](const QString& error) {
-                disconnect(oauth, nullptr, this, nullptr);
-                m_waitingForAuth = false;
-                oauth->detachWaiter();
-                emit deleteFail(error);
-            });
-
-    oauth->requestAccessToken();
+    withAccessToken(
+      [this, fileId](const QString& token) {
+          m_token = token;
+          QUrl url{ QStringLiteral("%1/%2").arg(
+            QString::fromLatin1(kFilesEndpoint), fileId) };
+          QNetworkReply* reply = m_net->deleteResource(authorizedRequest(url));
+          connect(reply, &QNetworkReply::finished, this, [this, reply]() {
+              reply->deleteLater();
+              const int status =
+                reply->attribute(QNetworkRequest::HttpStatusCodeAttribute)
+                  .toInt();
+              // 204 No Content on success; treat an already-gone file (404) as
+              // deleted too.
+              if (reply->error() == QNetworkReply::NoError || status == 404) {
+                  if (isVisible() && notification()) {
+                      notification()->showMessage(
+                        tr("Screenshot deleted from Google Drive."));
+                  }
+                  emit deleteOk();
+              } else {
+                  const QString error =
+                    tr("Could not delete the file from Google Drive.");
+                  if (isVisible() && notification()) {
+                      notification()->showMessage(error);
+                  }
+                  emit deleteFail(error);
+              }
+          });
+      },
+      [this]() {
+          emit deleteFail(
+            tr("Authorization was canceled; the file was not deleted."));
+      },
+      [this](const QString& error) { emit deleteFail(error); });
 }

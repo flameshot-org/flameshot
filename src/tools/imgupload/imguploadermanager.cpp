@@ -71,11 +71,7 @@ ImgUploaderBase* ImgUploaderManager::createUploader(const QPixmap& capture,
 ImgUploaderBase* ImgUploaderManager::uploader(const QPixmap& capture,
                                               QWidget* parent)
 {
-    m_imgUploaderBase = createUploader(capture, parent);
-    if (m_imgUploaderBase && !capture.isNull()) {
-        m_imgUploaderBase->upload();
-    }
-    return m_imgUploaderBase;
+    return uploader(capture, parent, QString(), QStringList());
 }
 
 ImgUploaderBase* ImgUploaderManager::uploader(const QPixmap& capture,

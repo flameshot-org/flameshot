@@ -44,6 +44,12 @@ public:
     void setRecipients(const QStringList& recipients);
 
 private:
+    // Acquire an access token via the shared OAuth service and resolve through
+    // exactly one callback, owning the attach/connect/disconnect/detach
+    // bookkeeping once for both the upload and delete flows.
+    void withAccessToken(std::function<void(const QString&)> onReady,
+                         std::function<void()> onCanceled,
+                         std::function<void(const QString&)> onFailed);
     void ensureFolder();
     void findOrCreateFolder();
     void createFolder();

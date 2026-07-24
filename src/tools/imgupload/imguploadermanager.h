@@ -8,8 +8,6 @@
 #include <QObject>
 #include <QStringList>
 
-#define IMG_UPLOADER_STORAGE_DEFAULT "imgur"
-
 class QPixmap;
 class QWidget;
 

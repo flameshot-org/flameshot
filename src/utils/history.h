@@ -26,6 +26,13 @@ public:
     const HistoryFileName& unpackFileName(const QString&);
     const QString& packFileName(const QString&, const QString&, const QString&);
 
+    // Drive file IDs contain '-', so they are stored hex-encoded in the packed
+    // token slot (KTD8). These helpers own that encoding and the reconstructed
+    // display URL, shared by the Drive uploader and the history view.
+    static QString encodeDriveFileId(const QString& fileId);
+    static QString decodeDriveFileId(const QString& token);
+    static QString driveFileUrl(const QString& fileId);
+
 private:
     QString m_historyPath;
     QList<QString> m_thumbs;
