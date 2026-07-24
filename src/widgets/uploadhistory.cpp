@@ -1,9 +1,9 @@
 #include "uploadhistory.h"
 #include "./ui_uploadhistory.h"
-#include "tools/imgupload/imguploadermanager.h"
 #include "utils/history.h"
 #include "widgets/uploadlineitem.h"
 
+#include <QByteArray>
 #include <QDateTime>
 #include <QFileInfo>
 #include <QPixmap>
@@ -64,6 +64,22 @@ void UploadHistory::setEmptyMessage()
     ui->historyContainer->addWidget(buttonEmpty);
 }
 
+// Build the shareable URL for a history entry from the entry's own stored
+// type, not from whichever backend happens to be active now. Drive links are
+// rebuilt from the hex-encoded file ID in the token slot; every other entry
+// (Imgur, or legacy entries with no type) keeps the Imgur base-URL + filename
+// shape they were displayed with before. (KTD8)
+static QString historyUrlForEntry(const HistoryFileName& entry)
+{
+    if (entry.type == QStringLiteral("gdrive")) {
+        const QString fileId =
+          QString::fromUtf8(QByteArray::fromHex(entry.token.toUtf8()));
+        return QStringLiteral("https://drive.google.com/file/d/%1/view")
+          .arg(fileId);
+    }
+    return QStringLiteral("https://imgur.com/") + entry.file;
+}
+
 void UploadHistory::addLine(const QString& path, const QString& fileName)
 {
     QString fullFileName = path + fileName;
@@ -71,7 +87,7 @@ void UploadHistory::addLine(const QString& path, const QString& fileName)
     History history;
     HistoryFileName unpackFileName = history.unpackFileName(fileName);
 
-    QString url = ImgUploaderManager(this).url() + unpackFileName.file;
+    QString url = historyUrlForEntry(unpackFileName);
 
     // load pixmap
     QPixmap pixmap;

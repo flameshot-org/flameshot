@@ -2,6 +2,7 @@
 #include "./ui_uploadlineitem.h"
 #include "core/flameshotdaemon.h"
 #include "tools/imgupload/imguploadermanager.h"
+#include "tools/imgupload/storages/imguploaderbase.h"
 #include "utils/confighandler.h"
 #include "utils/history.h"
 #include "widgets/notificationwidget.h"
@@ -56,10 +57,29 @@ UploadLineItem::UploadLineItem(QWidget* parent,
 
         ImgUploaderBase* imgUploaderBase =
           ImgUploaderManager(this).uploader(unpackFileName.type);
-        imgUploaderBase->deleteImage(unpackFileName.file, unpackFileName.token);
 
-        removeCacheFile(fullFileName);
-        emit requestedDeletion();
+        // Drop the local history entry only once the backend confirms the
+        // remote delete. Imgur emits deleteOk synchronously (unchanged
+        // behavior); an async API delete (Drive) may instead report failure,
+        // in which case the entry is kept and the user is told.
+        connect(imgUploaderBase, &ImgUploaderBase::deleteOk, this, [=, this]() {
+            removeCacheFile(fullFileName);
+            emit requestedDeletion();
+        });
+        connect(imgUploaderBase,
+                &ImgUploaderBase::deleteFail,
+                this,
+                [this](const QString& error) {
+                    QMessageBox::warning(
+                      this,
+                      tr("Unable to delete screenshot"),
+                      error.isEmpty()
+                        ? tr("The screenshot could not be deleted "
+                             "from the server.")
+                        : error);
+                });
+
+        imgUploaderBase->deleteImage(unpackFileName.file, unpackFileName.token);
     });
 }
 

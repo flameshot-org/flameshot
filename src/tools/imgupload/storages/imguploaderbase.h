@@ -38,6 +38,9 @@ public:
 signals:
     void uploadOk(const QUrl& url);
     void deleteOk();
+    // Emitted when an asynchronous delete could not be completed; carries a
+    // human-readable reason. Imgur's fire-and-forget delete never emits this.
+    void deleteFail(const QString& error);
 
 public slots:
     void showPostUploadDialog();

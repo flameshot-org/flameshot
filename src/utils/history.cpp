@@ -83,22 +83,24 @@ const HistoryFileName& History::unpackFileName(const QString& fileNamePacked)
         unpackedFileName = fileNamePacked.mid(nPathIndex + 1).split("-");
     }
 
-    switch (unpackedFileName.length()) {
-        case 3:
-            m_unpackedFileName.file = unpackedFileName[2];
-            m_unpackedFileName.token = unpackedFileName[1];
-            m_unpackedFileName.type = unpackedFileName[0];
-            break;
-        case 2:
-            m_unpackedFileName.file = unpackedFileName[1];
-            m_unpackedFileName.token = "";
-            m_unpackedFileName.type = unpackedFileName[0];
-            break;
-        default:
-            m_unpackedFileName.file = unpackedFileName[0];
-            m_unpackedFileName.token = "";
-            m_unpackedFileName.type = "";
-            break;
+    // KTD8: length-conditional unpack that no longer corrupts filenames that
+    // themselves contain '-' (e.g. dated filename patterns, or Drive file IDs).
+    //   >= 3 segments -> type, token, and the remainder rejoined as the file
+    //   == 2 segments -> type and file (empty token), as packFileName produces
+    //   == 1 segment  -> file only (legacy, no type/token)
+    const int segments = unpackedFileName.length();
+    if (segments >= 3) {
+        m_unpackedFileName.type = unpackedFileName[0];
+        m_unpackedFileName.token = unpackedFileName[1];
+        m_unpackedFileName.file = QStringList(unpackedFileName.mid(2)).join("-");
+    } else if (segments == 2) {
+        m_unpackedFileName.type = unpackedFileName[0];
+        m_unpackedFileName.token = "";
+        m_unpackedFileName.file = unpackedFileName[1];
+    } else {
+        m_unpackedFileName.type = "";
+        m_unpackedFileName.token = "";
+        m_unpackedFileName.file = unpackedFileName[0];
     }
     return m_unpackedFileName;
 }
