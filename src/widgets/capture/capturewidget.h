@@ -55,7 +55,7 @@ public:
     QPixmap pixmap();
     void setCaptureToolObjects(const CaptureToolObjects& captureToolObjects);
     // True when the constructor's screen grab failed and it closed itself. The
-    // owner reads this to abort the capture instead of showing an empty overlay.
+    // owner reads this to abort instead of showing an empty overlay.
     bool screenGrabFailed() const;
 #if !defined(DISABLE_UPDATE_CHECKER)
     void showAppUpdateNotification(const QString& appLatestVersion,

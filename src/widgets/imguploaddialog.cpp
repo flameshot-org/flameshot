@@ -21,8 +21,8 @@ ImgUploadDialog::ImgUploadDialog(QDialog* parent)
   , m_recipientsLabel(nullptr)
   , m_recipients(nullptr)
 {
-    // No WA_DeleteOnClose: callers read the selection back after exec() returns,
-    // so the dialog's lifetime belongs to whoever opened it.
+    // No WA_DeleteOnClose: callers read the selection back after exec()
+    // returns, so the dialog's lifetime belongs to whoever opened it.
     setMinimumSize(400, 120);
     setWindowIcon(QIcon(GlobalValues::iconPath()));
     setWindowTitle(tr("Upload Confirmation"));
