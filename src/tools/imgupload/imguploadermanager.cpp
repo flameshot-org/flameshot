@@ -3,10 +3,12 @@
 //
 
 #include "imguploadermanager.h"
-// TODO - remove this hard-code and create plugin manager in the future, you may
-// include other storage headers here
+#include "utils/confighandler.h"
 #ifdef ENABLE_IMGUR
 #include "tools/imgupload/storages/imgur/imguruploader.h"
+#endif
+#ifdef ENABLE_GDRIVE
+#include "tools/imgupload/storages/gdrive/gdriveuploader.h"
 #endif
 
 #include <QPixmap>
@@ -16,40 +18,54 @@ ImgUploaderManager::ImgUploaderManager(QObject* parent)
   : QObject(parent)
   , m_imgUploaderBase(nullptr)
 {
-    // TODO - implement ImgUploader for other Storages and selection among them
-    m_imgUploaderPlugin = IMG_UPLOADER_STORAGE_DEFAULT;
+    // Start from the configured backend; init() normalizes it against the
+    // backends actually compiled into this build.
+    m_imgUploaderPlugin = ConfigHandler().uploadStorage();
     init();
 }
 
 void ImgUploaderManager::init()
 {
-    // TODO - implement ImgUploader for other Storages and selection among them,
-    // example:
-    // if (uploaderPlugin().compare("s3") == 0) {
-    //    m_qstrUrl = ImgS3Settings().value("S3", "S3_URL").toString();
-    //} else {
-    //    m_qstrUrl = "https://imgur.com/";
-    //    m_imgUploaderPlugin = "imgur";
-    //}
-    m_urlString = "https://imgur.com/";
-    m_imgUploaderPlugin = "imgur";
+    // Resolve m_imgUploaderPlugin to a compiled-in backend. This must honor an
+    // explicitly requested plugin (the history-delete router sets it via the
+    // uploader(QString) overload) instead of unconditionally forcing "imgur",
+    // otherwise a Drive delete token would be handed to the Imgur backend.
+#ifdef ENABLE_GDRIVE
+    if (m_imgUploaderPlugin == QStringLiteral("gdrive")) {
+        m_urlString = QStringLiteral("https://drive.google.com/");
+        return;
+    }
+#endif
+#ifdef ENABLE_IMGUR
+    // Imgur is the default and the fallback for empty/unknown backend tags
+    // (legacy one-part entries have an empty type; two-part entries carry a
+    // type with an empty token).
+    m_imgUploaderPlugin = QStringLiteral("imgur");
+    m_urlString = QStringLiteral("https://imgur.com/");
+    return;
+#endif
+#ifdef ENABLE_GDRIVE
+    // Imgur is not compiled in: Google Drive is the only available backend.
+    m_imgUploaderPlugin = QStringLiteral("gdrive");
+    m_urlString = QStringLiteral("https://drive.google.com/");
+#endif
 }
 
 ImgUploaderBase* ImgUploaderManager::uploader(const QPixmap& capture,
                                               QWidget* parent)
 {
-    // TODO - implement ImgUploader for other Storages and selection among them,
-    // example:
-    // if (uploaderPlugin().compare("s3") == 0) {
-    //    m_imgUploaderBase =
-    //      (ImgUploaderBase*)(new ImgS3Uploader(capture, parent));
-    //} else {
-    //    m_imgUploaderBase =
-    //      (ImgUploaderBase*)(new ImgurUploader(capture, parent));
-    //}
     m_imgUploaderBase = nullptr;
+#ifdef ENABLE_GDRIVE
+    if (m_imgUploaderPlugin == QStringLiteral("gdrive")) {
+        m_imgUploaderBase =
+          (ImgUploaderBase*)(new GDriveUploader(capture, parent));
+    }
+#endif
 #ifdef ENABLE_IMGUR
-    m_imgUploaderBase = (ImgUploaderBase*)(new ImgurUploader(capture, parent));
+    if (m_imgUploaderBase == nullptr) {
+        m_imgUploaderBase =
+          (ImgUploaderBase*)(new ImgurUploader(capture, parent));
+    }
 #endif
     if (m_imgUploaderBase && !capture.isNull()) {
         m_imgUploaderBase->upload();

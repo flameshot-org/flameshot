@@ -100,6 +100,7 @@ private:
     void initSquareMagnifier();
     void initUndoLimit();
     void initUploadWithoutConfirmation();
+    void initUploadService();
     void initUseJpgForClipboard();
     void initUploadHistoryMax();
     void initUploadClientSecret();
@@ -155,6 +156,7 @@ private:
     QSpinBox* m_uploadHistoryMax;
     QSpinBox* m_undoLimit;
     QComboBox* m_setSaveAsFileExtension;
+    QComboBox* m_uploadService;
     QCheckBox* m_predefinedColorPaletteLarge;
     QCheckBox* m_showMagnifier;
     QCheckBox* m_squareMagnifier;

@@ -132,6 +132,10 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     // drawFontSize, remember to update ConfigHandler::toolSize
     OPTION("copyOnDoubleClick"           ,Bool               ( false         )),
     OPTION("uploadClientSecret"          ,String             ( "313baf0c7b4d3ff" )),
+    // Active upload backend ("imgur" or "gdrive"). Registered unconditionally
+    // (like the other upload keys) so config parsing is uniform across build
+    // flavors; the manager falls back to a compiled-in backend at runtime.
+    OPTION("uploadStorage"               ,String             ( "imgur"        )),
     OPTION("showSelectionGeometry"       , BoundedInt        ( 0, 5, 4       )),
     OPTION("showSelectionGeometryHideTime", LowerBoundedInt  ( 0, 3000       )),
     OPTION("jpegQuality"                 , BoundedInt        ( 0,100,75      )),

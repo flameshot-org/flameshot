@@ -64,6 +64,7 @@ GeneralConf::GeneralConf(QWidget* parent)
     initUseX11LegacyScreenshot();
 #endif
 #ifdef ENABLE_UPLOADER
+    initUploadService();
     initCopyAndCloseAfterUpload();
     initUploadWithoutConfirmation();
     initHistoryConfirmationToDelete();
@@ -106,6 +107,11 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
       config.historyConfirmationToDelete());
 
     m_uploadHistoryMax->setValue(config.uploadHistoryMax());
+
+    int uploadServiceIndex = m_uploadService->findData(config.uploadStorage());
+    if (uploadServiceIndex >= 0) {
+        m_uploadService->setCurrentIndex(uploadServiceIndex);
+    }
 #endif
 #if !defined(DISABLE_UPDATE_CHECKER)
     m_checkForUpdates->setChecked(config.checkForUpdates());
@@ -493,6 +499,41 @@ void GeneralConf::initCopyOnDoubleClick()
     connect(m_copyOnDoubleClick, &QCheckBox::clicked, [](bool checked) {
         ConfigHandler().setCopyOnDoubleClick(checked);
     });
+}
+
+void GeneralConf::initUploadService()
+{
+    auto* box = new QGroupBox(tr("Upload service"));
+    box->setFlat(true);
+    m_layout->addWidget(box);
+
+    auto* vboxLayout = new QVBoxLayout();
+    box->setLayout(vboxLayout);
+
+    m_uploadService = new QComboBox(this);
+    // List only the backends compiled into this build.
+#ifdef ENABLE_IMGUR
+    m_uploadService->addItem(tr("Imgur"), QStringLiteral("imgur"));
+#endif
+#ifdef ENABLE_GDRIVE
+    m_uploadService->addItem(tr("Google Drive"), QStringLiteral("gdrive"));
+#endif
+
+    int index = m_uploadService->findData(ConfigHandler().uploadStorage());
+    if (index >= 0) {
+        m_uploadService->setCurrentIndex(index);
+    }
+
+    connect(
+      m_uploadService,
+      static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+      this,
+      [this](int idx) {
+          ConfigHandler().setUploadStorage(
+            m_uploadService->itemData(idx).toString());
+      });
+
+    vboxLayout->addWidget(m_uploadService);
 }
 
 void GeneralConf::initCopyAndCloseAfterUpload()
