@@ -136,6 +136,15 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     // (like the other upload keys) so config parsing is uniform across build
     // flavors; the manager falls back to a compiled-in backend at runtime.
     OPTION("uploadStorage"               ,String             ( "imgur"        )),
+    // Google Drive backend keys (registered unconditionally).
+    OPTION("gdriveClientId"              ,String             ( ""            )),
+    OPTION("gdriveClientSecret"          ,String             ( ""            )),
+    OPTION("gdriveRefreshToken"          ,String             ( ""            )),
+    OPTION("gdriveAccountEmail"          ,String             ( ""            )),
+    OPTION("gdriveAccountDomain"         ,String             ( ""            )),
+    OPTION("gdriveFolderId"              ,String             ( ""            )),
+    // Default sharing visibility: domain | private | users | anyone.
+    OPTION("gdriveDefaultVisibility"     ,String             ( "domain"      )),
     OPTION("showSelectionGeometry"       , BoundedInt        ( 0, 5, 4       )),
     OPTION("showSelectionGeometryHideTime", LowerBoundedInt  ( 0, 3000       )),
     OPTION("jpegQuality"                 , BoundedInt        ( 0,100,75      )),

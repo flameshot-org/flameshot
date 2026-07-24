@@ -136,6 +136,17 @@ public:
     CONFIG_GETTER_SETTER(copyOnDoubleClick, setCopyOnDoubleClick, bool)
     CONFIG_GETTER_SETTER(uploadClientSecret, setUploadClientSecret, QString)
     CONFIG_GETTER_SETTER(uploadStorage, setUploadStorage, QString)
+    // Google Drive backend. Registered unconditionally like the other upload
+    // keys so config parsing stays uniform across build flavors.
+    CONFIG_GETTER_SETTER(gdriveClientId, setGdriveClientId, QString)
+    CONFIG_GETTER_SETTER(gdriveClientSecret, setGdriveClientSecret, QString)
+    CONFIG_GETTER_SETTER(gdriveRefreshToken, setGdriveRefreshToken, QString)
+    CONFIG_GETTER_SETTER(gdriveAccountEmail, setGdriveAccountEmail, QString)
+    CONFIG_GETTER_SETTER(gdriveAccountDomain, setGdriveAccountDomain, QString)
+    CONFIG_GETTER_SETTER(gdriveFolderId, setGdriveFolderId, QString)
+    CONFIG_GETTER_SETTER(gdriveDefaultVisibility,
+                         setGdriveDefaultVisibility,
+                         QString)
     CONFIG_GETTER_SETTER(saveLastRegion, setSaveLastRegion, bool)
     CONFIG_GETTER_SETTER(showSelectionGeometry, setShowSelectionGeometry, int)
     CONFIG_GETTER_SETTER(jpegQuality, setJpegQuality, int)

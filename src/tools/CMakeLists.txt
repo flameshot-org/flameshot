@@ -29,7 +29,14 @@ target_sources(
 )
 endif()
 
-# Google Drive-specific backend sources are added by U4 (OAuth) and U5 (uploader).
+# Google Drive-specific backend.
+if (ENABLE_GDRIVE)
+target_sources(
+  flameshot
+        PRIVATE imgupload/storages/gdrive/gdriveoauth.h
+        imgupload/storages/gdrive/gdriveoauth.cpp
+)
+endif()
 target_sources(
   flameshot
   PRIVATE launcher/applaunchertool.h
