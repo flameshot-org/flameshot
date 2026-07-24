@@ -53,6 +53,17 @@ void History::save(const QPixmap& pixmap, const QString& fileName)
     history();
 }
 
+void History::remove(const QString& fileNamePacked)
+{
+    if (fileNamePacked.isEmpty()) {
+        return;
+    }
+    QFile file(path() + fileNamePacked);
+    if (file.exists()) {
+        file.remove();
+    }
+}
+
 const QList<QString>& History::history()
 {
     QDir directory(path());

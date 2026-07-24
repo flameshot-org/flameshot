@@ -96,7 +96,7 @@ void UploadHistory::addLine(const QString& path, const QString& fileName)
       fileInfo.lastModified().toString("yyyy-MM-dd\nhh:mm:ss");
 
     auto* line = new UploadLineItem(
-      this, pixmap, lastModified, url, fullFileName, unpackFileName);
+      this, pixmap, lastModified, url, fileName, unpackFileName);
 
     connect(line, &UploadLineItem::requestedDeletion, this, [=, this]() {
         if (ui->historyContainer->count() <= 1) {

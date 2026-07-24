@@ -20,6 +20,10 @@ public:
     History();
 
     void save(const QPixmap&, const QString&);
+    // Remove one cached entry, named the same packed way save() names it (the
+    // shape packFileName produces and the uploaders retain). The single
+    // removal path both delete controls use; tolerates an absent file.
+    void remove(const QString& fileNamePacked);
     const QList<QString>& history();
     const QString& path();
 

@@ -8,24 +8,15 @@
 #include "widgets/notificationwidget.h"
 
 #include <QDesktopServices>
-#include <QFileInfo>
 #include <QMessageBox>
 #include <QUrl>
 #include <QWidget>
-
-void removeCacheFile(QString const& fullFileName)
-{
-    QFile file(fullFileName);
-    if (file.exists()) {
-        file.remove();
-    }
-}
 
 UploadLineItem::UploadLineItem(QWidget* parent,
                                QPixmap const& preview,
                                QString const& timestamp,
                                QString const& url,
-                               QString const& fullFileName,
+                               QString const& packedFileName,
                                HistoryFileName const& unpackFileName)
   : QWidget(parent)
   , ui(new Ui::UploadLineItem)
@@ -67,7 +58,7 @@ UploadLineItem::UploadLineItem(QWidget* parent,
         // behavior); an async API delete (Drive) may instead report failure,
         // in which case the entry is kept and the user is told.
         connect(imgUploaderBase, &ImgUploaderBase::deleteOk, this, [=, this]() {
-            removeCacheFile(fullFileName);
+            History().remove(packedFileName);
             // The manager-created uploader has no parent and is never shown, so
             // WA_DeleteOnClose never fires; reclaim it now that the async
             // delete resolved. Do this before requestedDeletion(), which
