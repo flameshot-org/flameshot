@@ -35,6 +35,8 @@ target_sources(
   flameshot
         PRIVATE imgupload/storages/gdrive/gdriveoauth.h
         imgupload/storages/gdrive/gdriveoauth.cpp
+        imgupload/storages/gdrive/gdrivedirectory.h
+        imgupload/storages/gdrive/gdrivedirectory.cpp
         imgupload/storages/gdrive/gdriveuploader.h
         imgupload/storages/gdrive/gdriveuploader.cpp
 )
