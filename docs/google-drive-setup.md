@@ -34,11 +34,37 @@ This is a one-time setup, external to Flameshot.
 
 1. Open the [Google Cloud console](https://console.cloud.google.com/) and
    create a project (or reuse one) inside your Workspace organization.
-2. Enable these APIs for that project
-   (*APIs & Services → Library → … → Enable*):
-   - **Google Drive API** — the uploads themselves.
-   - **People API** — suggesting people from your organization's directory.
-   - **Cloud Identity API** — suggesting the groups a user belongs to.
+2. Enable these three APIs for that project:
+
+   | API | Service name | What needs it |
+   |---|---|---|
+   | Google Drive API | `drive.googleapis.com` | The uploads themselves |
+   | People API | `people.googleapis.com` | Suggesting people from the directory |
+   | Cloud Identity API | `cloudidentity.googleapis.com` | Suggesting the user's groups |
+
+   Address them by service name rather than searching *APIs & Services →
+   Library*: a Library search for "identity" returns a page of similarly-named
+   APIs without necessarily listing this one, and **Cloud Identity SCIM API**
+   (`cloudidentityscim.googleapis.com`) is a different API that will not work.
+
+   ```bash
+   gcloud services enable drive.googleapis.com people.googleapis.com \
+     cloudidentity.googleapis.com --project=<PROJECT_ID>
+
+   # confirm
+   gcloud services list --enabled --project=<PROJECT_ID> \
+     | grep -E 'drive|people|cloudidentity'
+   ```
+
+   In the console, the equivalent is
+   `https://console.cloud.google.com/apis/library/<service-name>` or
+   `https://console.cloud.google.com/apis/enableflow?apiid=<service-name>`.
+
+   If enabling is refused: `PERMISSION_DENIED` on
+   `serviceusage.services.enable` means you need the **Service Usage Admin**
+   role on the project, while a policy or constraint error means an
+   organization policy restricts which services the project may enable — that
+   one needs an administrator rather than a different click.
 
    Only the Drive API is required for uploading. Without the other two,
    recipient suggestion finds nothing and the recipient field behaves like a
