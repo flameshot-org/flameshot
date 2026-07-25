@@ -168,21 +168,18 @@ void ImgUploaderBase::showPostUploadDialog()
         // recoverable entry (KD1).
         History().remove(m_currentImageName);
     });
-    connect(this,
-            &ImgUploaderBase::deleteFail,
-            this,
-            [this](const QString& error) {
-                // Backend-neutral failure feedback: every backend and every
-                // failure cause reports here, including the Drive
-                // authorization paths that were silent before (KTD4).
-                m_openDeleteUrlButton->setEnabled(true);
-                if (m_notification) {
-                    m_notification->showMessage(
-                      error.isEmpty()
-                        ? tr("The screenshot could not be deleted.")
-                        : error);
-                }
-            });
+    connect(
+      this, &ImgUploaderBase::deleteFail, this, [this](const QString& error) {
+          // Backend-neutral failure feedback: every backend and every
+          // failure cause reports here, including the Drive
+          // authorization paths that were silent before (KTD4).
+          m_openDeleteUrlButton->setEnabled(true);
+          if (m_notification) {
+              m_notification->showMessage(
+                error.isEmpty() ? tr("The screenshot could not be deleted.")
+                                : error);
+          }
+      });
 }
 
 void ImgUploaderBase::openURL()

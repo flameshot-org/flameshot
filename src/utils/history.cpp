@@ -104,7 +104,8 @@ const HistoryFileName& History::unpackFileName(const QString& fileNamePacked)
     if (segments >= 3) {
         m_unpackedFileName.type = unpackedFileName[0];
         m_unpackedFileName.token = unpackedFileName[1];
-        m_unpackedFileName.file = QStringList(unpackedFileName.mid(2)).join("-");
+        m_unpackedFileName.file =
+          QStringList(unpackedFileName.mid(2)).join("-");
     } else if (segments == 2) {
         m_unpackedFileName.type = unpackedFileName[0];
         m_unpackedFileName.token = "";

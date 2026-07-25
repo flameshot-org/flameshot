@@ -76,9 +76,10 @@ QNetworkRequest GDriveUploader::authorizedRequest(const QUrl& url) const
     return request;
 }
 
-void GDriveUploader::withAccessToken(std::function<void(const QString&)> onReady,
-                                     std::function<void()> onCanceled,
-                                     std::function<void(const QString&)> onFailed)
+void GDriveUploader::withAccessToken(
+  std::function<void(const QString&)> onReady,
+  std::function<void()> onCanceled,
+  std::function<void(const QString&)> onFailed)
 {
     GDriveOAuth* oauth = GDriveOAuth::instance();
     m_waitingForAuth = true;
@@ -93,12 +94,13 @@ void GDriveUploader::withAccessToken(std::function<void(const QString&)> onReady
                 oauth->detachWaiter();
                 onReady(token);
             });
-    connect(oauth, &GDriveOAuth::authCanceled, this, [this, oauth, onCanceled]() {
-        disconnect(oauth, nullptr, this, nullptr);
-        m_waitingForAuth = false;
-        oauth->detachWaiter();
-        onCanceled();
-    });
+    connect(
+      oauth, &GDriveOAuth::authCanceled, this, [this, oauth, onCanceled]() {
+          disconnect(oauth, nullptr, this, nullptr);
+          m_waitingForAuth = false;
+          oauth->detachWaiter();
+          onCanceled();
+      });
     connect(oauth,
             &GDriveOAuth::authFailed,
             this,
@@ -308,10 +310,10 @@ void GDriveUploader::applySharing()
     }
 
     if (m_visibility == QStringLiteral("anyone")) {
-        QJsonObject permission{ { QStringLiteral("type"),
-                                  QStringLiteral("anyone") },
-                                { QStringLiteral("role"),
-                                  QStringLiteral("reader") } };
+        QJsonObject permission{
+            { QStringLiteral("type"), QStringLiteral("anyone") },
+            { QStringLiteral("role"), QStringLiteral("reader") }
+        };
         postPermission(permission, [this](bool ok) {
             if (!ok) {
                 m_sharingWarning =
@@ -413,8 +415,7 @@ void GDriveUploader::applyNextRecipient()
                 if (!m_sharingWarning.isEmpty()) {
                     m_sharingWarning += QStringLiteral("\n");
                 }
-                m_sharingWarning +=
-                  tr("Could not share with %1.").arg(email);
+                m_sharingWarning += tr("Could not share with %1.").arg(email);
             }
             ++m_recipientIndex;
             applyNextRecipient();
@@ -444,11 +445,10 @@ void GDriveUploader::postPermission(const QJsonObject& permission,
 
 void GDriveUploader::fetchLink()
 {
-    QUrl url{ QStringLiteral("%1/%2").arg(
-      QString::fromLatin1(kFilesEndpoint), m_fileId) };
+    QUrl url{ QStringLiteral("%1/%2").arg(QString::fromLatin1(kFilesEndpoint),
+                                          m_fileId) };
     QUrlQuery query;
-    query.addQueryItem(QStringLiteral("fields"),
-                       QStringLiteral("webViewLink"));
+    query.addQueryItem(QStringLiteral("fields"), QStringLiteral("webViewLink"));
     url.setQuery(query);
 
     QNetworkReply* reply = m_net->get(authorizedRequest(url));
@@ -474,8 +474,8 @@ void GDriveUploader::finalizeSuccess()
     // raw IDs contain '-' (KTD8).
     History history;
     const QString token = History::encodeDriveFileId(m_fileId);
-    m_currentImageName = history.packFileName(
-      QStringLiteral("gdrive"), token, m_fileName);
+    m_currentImageName =
+      history.packFileName(QStringLiteral("gdrive"), token, m_fileName);
     history.save(pixmap(), m_currentImageName);
 
     emit uploadOk(imageURL());
