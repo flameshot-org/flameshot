@@ -31,10 +31,22 @@ const char* kAboutEndpoint = "https://www.googleapis.com/drive/v3/about";
 // two OpenID Connect sign-in scopes. The identity scopes are what carry the
 // account email and the `hd` (hosted domain) claim that org sharing needs
 // (KTD6); Drive's own about.get cannot be relied on for the email under
-// drive.file alone. Both are non-sensitive, so the consent screen still needs
-// no verification.
+// drive.file alone.
+//
+// The last two are read-only directory lookups that back recipient suggestion:
+// `directory.readonly` prefix-searches people in the organization, and
+// `cloud-identity.groups.readonly` reads the signed-in user's own group
+// memberships. Neither can write anything. `directory.readonly` is classified
+// sensitive, which is acceptable for an Internal-only app but is a change from
+// the earlier all-non-sensitive scope set (see docs/google-drive-setup.md).
+//
+// This is the single place the requested scope string is written. The marker
+// comparison in requestAccessToken() is an exact string match, so a second
+// spelling anywhere would re-consent on every startup forever.
 const char* kScope =
-  "https://www.googleapis.com/auth/drive.file openid email";
+  "https://www.googleapis.com/auth/drive.file openid email "
+  "https://www.googleapis.com/auth/directory.readonly "
+  "https://www.googleapis.com/auth/cloud-identity.groups.readonly";
 constexpr int kConsentTimeoutMs = 180 * 1000; // ~3 minutes (KTD9)
 constexpr int kRequestTimeoutMs = 30 * 1000;
 
@@ -90,6 +102,7 @@ GDriveOAuth::GDriveOAuth(QObject* parent)
   , m_flowActive(false)
   , m_waiters(0)
   , m_redirectPort(0)
+  , m_silentRefreshActive(false)
 {
     m_timeout->setSingleShot(true);
     connect(m_timeout, &QTimer::timeout, this, [this]() {
@@ -168,6 +181,104 @@ void GDriveOAuth::requestAccessToken()
     }
 }
 
+void GDriveOAuth::requestAccessTokenSilently(
+  std::function<void(const QString&)> done)
+{
+    if (!done) {
+        return;
+    }
+
+    // Reuse a still-valid in-memory token. Once the session's first upload has
+    // authorized, this is the branch every keystroke takes.
+    if (!m_accessToken.isEmpty() &&
+        m_accessTokenExpiry > QDateTime::currentDateTimeUtc()) {
+        done(m_accessToken);
+        return;
+    }
+
+    // Join a silent refresh already in flight instead of issuing a second one.
+    if (m_silentRefreshActive) {
+        m_silentWaiters.append(std::move(done));
+        return;
+    }
+
+    // Every remaining failure branch reports "no token" rather than escalating.
+    // This entry point must not reach startConsentFlow() on any path (KTD1):
+    // the recipient field is live while the user types, and the upload dialog
+    // is constructed before the upload that would otherwise have warmed the
+    // token, so an escalating lookup would open a browser window mid-share.
+    ConfigHandler config;
+    if (config.gdriveClientId().isEmpty() ||
+        config.gdriveClientSecret().isEmpty() ||
+        config.gdriveRefreshToken().isEmpty() ||
+        config.gdriveGrantedScopes() != QString::fromLatin1(kScope)) {
+        // No usable grant, or one stored under a narrower scope set that cannot
+        // carry the directory scopes. Only a fresh consent could widen it, and
+        // that is the upload path's business, not a lookup's.
+        done(QString());
+        return;
+    }
+    if (m_flowActive) {
+        // An interactive flow is running and its browser tab may sit open for
+        // minutes. Report unavailable now rather than queueing behind it; if it
+        // grants, the in-memory token above serves the next keystroke.
+        done(QString());
+        return;
+    }
+
+    m_silentWaiters.append(std::move(done));
+    m_silentRefreshActive = true;
+
+    QUrlQuery body;
+    body.addQueryItem(QStringLiteral("client_id"), config.gdriveClientId());
+    body.addQueryItem(QStringLiteral("client_secret"),
+                      config.gdriveClientSecret());
+    body.addQueryItem(QStringLiteral("refresh_token"),
+                      config.gdriveRefreshToken());
+    body.addQueryItem(QStringLiteral("grant_type"),
+                      QStringLiteral("refresh_token"));
+
+    QNetworkRequest request{ QUrl(QString::fromLatin1(kTokenEndpoint)) };
+    request.setHeader(QNetworkRequest::ContentTypeHeader,
+                      QStringLiteral("application/x-www-form-urlencoded"));
+    request.setTransferTimeout(kRequestTimeoutMs);
+
+    // Deliberately does not set m_flowActive: that flag arbitrates the single
+    // interactive flow, and a lookup must neither block an upload's consent nor
+    // make an upload think a flow it can join is already running.
+    QNetworkReply* reply =
+      m_net->post(request, body.toString(QUrl::FullyEncoded).toUtf8());
+    connect(reply, &QNetworkReply::finished, this, [this, reply]() {
+        reply->deleteLater();
+        const QJsonObject json =
+          QJsonDocument::fromJson(reply->readAll()).object();
+        if (json.contains(QStringLiteral("access_token"))) {
+            m_accessToken =
+              json.value(QStringLiteral("access_token")).toString();
+            m_accessTokenExpiry = QDateTime::currentDateTimeUtc().addSecs(
+              json.value(QStringLiteral("expires_in")).toInt(3600) - 60);
+            resolveSilentWaiters(m_accessToken);
+            return;
+        }
+        // Stored credentials are left untouched even on invalid_grant. A
+        // suggestion lookup is a passenger on the upload path's grant; the next
+        // upload runs the same refresh through requestAccessToken(), which owns
+        // clearing a dead token and re-consenting.
+        resolveSilentWaiters(QString());
+    });
+}
+
+void GDriveOAuth::resolveSilentWaiters(const QString& token)
+{
+    m_silentRefreshActive = false;
+    // Take the list first: a callback may request another token synchronously.
+    QList<std::function<void(const QString&)>> waiters;
+    waiters.swap(m_silentWaiters);
+    for (const std::function<void(const QString&)>& waiter : waiters) {
+        waiter(token);
+    }
+}
+
 void GDriveOAuth::startConsentFlow()
 {
     ConfigHandler config;
@@ -220,8 +331,7 @@ void GDriveOAuth::startConsentFlow()
     query.addQueryItem(
       QStringLiteral("redirect_uri"),
       QStringLiteral("http://127.0.0.1:%1").arg(m_redirectPort));
-    query.addQueryItem(QStringLiteral("response_type"),
-                       QStringLiteral("code"));
+    query.addQueryItem(QStringLiteral("response_type"), QStringLiteral("code"));
     query.addQueryItem(QStringLiteral("scope"), QString::fromLatin1(kScope));
     query.addQueryItem(QStringLiteral("code_challenge"),
                        QString::fromLatin1(challenge));
@@ -249,7 +359,8 @@ void GDriveOAuth::onLoopbackConnection()
 {
     while (m_server && m_server->hasPendingConnections()) {
         QTcpSocket* socket = m_server->nextPendingConnection();
-        connect(socket, &QTcpSocket::disconnected, socket, &QObject::deleteLater);
+        connect(
+          socket, &QTcpSocket::disconnected, socket, &QObject::deleteLater);
         connect(socket, &QTcpSocket::readyRead, this, [this, socket]() {
             const QByteArray data = socket->readAll();
             const int lineEnd = data.indexOf("\r\n");
@@ -291,8 +402,7 @@ void GDriveOAuth::onLoopbackConnection()
                 return;
             }
 
-            const QString error =
-              query.queryItemValue(QStringLiteral("error"));
+            const QString error = query.queryItemValue(QStringLiteral("error"));
             if (!error.isEmpty()) {
                 // User denial renders as a plain cancellation (KTD9).
                 if (error == QStringLiteral("access_denied")) {
@@ -389,6 +499,13 @@ void GDriveOAuth::exchangeAuthCode(const QString& code)
         config.flush();
         reassertConfigPermissions(config.configFilePath());
 
+        // A fresh consent always re-picks the account, so anything cached per
+        // account is now suspect -- announce it before any lookup can run
+        // against the new grant. Dropping a cache that happened to belong to
+        // the same account again is harmless; keeping one that belonged to the
+        // previous account is not.
+        emit accountChanged();
+
         if (email.isEmpty()) {
             // No ID token, or the sign-in scopes were declined at the granular
             // consent screen. Fall back to about.get, which may still carry the
@@ -439,8 +556,9 @@ void GDriveOAuth::refreshAccessToken()
             ConfigHandler().setGdriveRefreshToken(QStringLiteral(""));
             m_flowActive = false;
             // Only re-open interactive consent if a widget is still waiting;
-            // otherwise just clear the token and let the next upload restart it,
-            // rather than surprising the user with an unsolicited browser tab.
+            // otherwise just clear the token and let the next upload restart
+            // it, rather than surprising the user with an unsolicited browser
+            // tab.
             if (m_waiters > 0) {
                 startConsentFlow();
             }
@@ -459,8 +577,7 @@ void GDriveOAuth::fetchAccountInfo()
 
     QNetworkRequest request{ url };
     request.setRawHeader(
-      "Authorization",
-      QStringLiteral("Bearer %1").arg(m_accessToken).toUtf8());
+      "Authorization", QStringLiteral("Bearer %1").arg(m_accessToken).toUtf8());
     request.setTransferTimeout(kRequestTimeoutMs);
 
     QNetworkReply* reply = m_net->get(request);
@@ -526,6 +643,7 @@ void GDriveOAuth::disconnectAccount()
     m_accessTokenExpiry = QDateTime();
     config.flush();
     reassertConfigPermissions(config.configFilePath());
+    emit accountChanged();
 }
 
 void GDriveOAuth::abortFlow()

@@ -4,8 +4,10 @@
 #pragma once
 
 #include <QDateTime>
+#include <QList>
 #include <QObject>
 #include <QString>
+#include <functional>
 
 class QTcpServer;
 class QTcpSocket;
@@ -53,13 +55,30 @@ public:
      */
     void requestAccessToken();
 
+    /**
+     * Obtain an access token for a background lookup, or report that none can
+     * be had -- without ever opening a consent window (KTD1).
+     *
+     * `done` is invoked exactly once, with a valid token or with an empty
+     * string. Unlike requestAccessToken() this never escalates to interactive
+     * consent on any branch: recipient suggestion runs while the user is
+     * typing, and the dialog is constructed before the upload that would
+     * otherwise have warmed the token, so an escalating lookup would put a
+     * browser window in front of a user mid-share.
+     *
+     * `done` may run synchronously (in-memory token) or from the event loop
+     * (after a refresh). Callers must therefore outlive the call; the intended
+     * callers are the application-lifetime services in this directory.
+     */
+    void requestAccessTokenSilently(std::function<void(const QString&)> done);
+
     /** Register/unregister interest in a pending flow (listener lifetime). */
     void attachWaiter();
     void detachWaiter();
 
-    bool isConnected() const;         // a refresh token is stored
-    QString accountEmail() const;     // cached signed-in account
-    QString accountDomain() const;    // cached org domain (for domain sharing)
+    bool isConnected() const;      // a refresh token is stored
+    QString accountEmail() const;  // cached signed-in account
+    QString accountDomain() const; // cached org domain (for domain sharing)
 
     /**
      * Clear stored credentials and make a best-effort server-side revocation of
@@ -72,15 +91,24 @@ signals:
     void authCanceled();
     void authFailed(const QString& error);
 
+    /**
+     * The connected account was replaced or cleared: a fresh consent completed,
+     * or the account was disconnected. Anything cached per account (a group
+     * membership list, for instance) must be dropped, so the previous user's
+     * organization can never be offered to the next one.
+     */
+    void accountChanged();
+
 private:
     explicit GDriveOAuth(QObject* parent = nullptr);
 
     void startConsentFlow();
     void refreshAccessToken();
+    void resolveSilentWaiters(const QString& token);
     void exchangeAuthCode(const QString& code);
     void fetchAccountInfo(); // about.get -> email + domain, cached
     void onLoopbackConnection();
-    void abortFlow();        // stop listener + timer without emitting
+    void abortFlow(); // stop listener + timer without emitting
     void finishGranted();
     void finishCanceled();
     void finishFailed(const QString& error);
@@ -96,10 +124,15 @@ private:
     bool m_flowActive;
     int m_waiters;
     quint16 m_redirectPort;
-    QString m_state;         // single-use CSRF token for the pending flow
-    QString m_codeVerifier;  // PKCE verifier for the pending flow
+    QString m_state;        // single-use CSRF token for the pending flow
+    QString m_codeVerifier; // PKCE verifier for the pending flow
 
     // In-memory access token.
     QString m_accessToken;
     QDateTime m_accessTokenExpiry;
+
+    // Silent-refresh state, independent of the interactive flow above so a
+    // suggestion lookup can never disturb (or be disturbed by) an upload.
+    bool m_silentRefreshActive;
+    QList<std::function<void(const QString&)>> m_silentWaiters;
 };
