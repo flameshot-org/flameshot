@@ -30,6 +30,7 @@ target_sources(
         uploadhistory.h
         uploadlineitem.h
         imguploaddialog.h
+        recipientchipedit.h
 )
 endif()
 
@@ -55,6 +56,7 @@ target_sources(
         uploadhistory.cpp
         uploadlineitem.cpp
         imguploaddialog.cpp
+        recipientchipedit.cpp
 )
 endif()
 
