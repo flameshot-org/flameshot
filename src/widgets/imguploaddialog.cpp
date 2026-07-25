@@ -5,15 +5,22 @@
 #include "tools/imgupload/imguploadermanager.h"
 #include "utils/confighandler.h"
 #include "utils/globalvalues.h"
+#include "widgets/recipientchipedit.h"
 
 #include <QCheckBox>
 #include <QComboBox>
 #include <QDialogButtonBox>
 #include <QLabel>
-#include <QLineEdit>
 #include <QMessageBox>
-#include <QRegularExpression>
 #include <QVBoxLayout>
+
+// Only the Drive suggestion source is compile-guarded. This dialog is shared
+// infrastructure -- it is built whenever either upload backend is enabled -- so
+// a Drive type referenced unconditionally would break the Imgur-only build. The
+// chip field itself is backend-neutral and needs no guard (KTD4).
+#ifdef ENABLE_GDRIVE
+#include "tools/imgupload/storages/gdrive/gdrivedirectory.h"
+#endif
 
 ImgUploadDialog::ImgUploadDialog(QDialog* parent)
   : QDialog(parent)
@@ -41,46 +48,51 @@ ImgUploadDialog::ImgUploadDialog(QDialog* parent)
     // Per-upload visibility selector, only when Google Drive is active.
     if (m_driveActive) {
         m_visibility = new QComboBox(this);
-        m_visibility->addItem(
-          tr("Anyone in your organization with the link"),
-          QStringLiteral("domain"));
+        m_visibility->addItem(tr("Anyone in your organization with the link"),
+                              QStringLiteral("domain"));
         m_visibility->addItem(tr("Private (only you)"),
                               QStringLiteral("private"));
         m_visibility->addItem(tr("Specific people by email"),
                               QStringLiteral("users"));
         m_visibility->addItem(tr("Anyone on the internet with the link"),
                               QStringLiteral("anyone"));
-        const int defaultIndex = m_visibility->findData(
-          ConfigHandler().gdriveDefaultVisibility());
+        const int defaultIndex =
+          m_visibility->findData(ConfigHandler().gdriveDefaultVisibility());
         if (defaultIndex >= 0) {
             m_visibility->setCurrentIndex(defaultIndex);
         }
         layout->addWidget(m_visibility);
 
         m_recipientsLabel =
-          new QLabel(tr("Recipient emails (comma-separated):"), this);
-        m_recipients = new QLineEdit(this);
+          new QLabel(tr("Recipients (name, email address, or group):"), this);
+        m_recipients = new RecipientChipEdit(this);
+#ifdef ENABLE_GDRIVE
+        // The only Drive-specific line in this dialog. Without a source the
+        // field is still a working recipient field, which is also what a user
+        // who declined the directory scope gets (R11).
+        m_recipients->setSuggestionSource(GDriveDirectory::instance());
+#endif
         layout->addWidget(m_recipientsLabel);
         layout->addWidget(m_recipients);
 
         auto updateRecipientsVisibility = [this](int) {
-            const bool users = m_visibility->currentData().toString() ==
-                               QStringLiteral("users");
+            const bool users =
+              m_visibility->currentData().toString() == QStringLiteral("users");
             m_recipientsLabel->setVisible(users);
             m_recipients->setVisible(users);
         };
-        connect(
-          m_visibility,
-          static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
-          this,
-          updateRecipientsVisibility);
+        connect(m_visibility,
+                static_cast<void (QComboBox::*)(int)>(
+                  &QComboBox::currentIndexChanged),
+                this,
+                updateRecipientsVisibility);
         updateRecipientsVisibility(m_visibility->currentIndex());
     }
 
     buttonBox =
       new QDialogButtonBox(QDialogButtonBox::Yes | QDialogButtonBox::No);
-    connect(buttonBox, &QDialogButtonBox::accepted, this,
-            &ImgUploadDialog::onAccept);
+    connect(
+      buttonBox, &QDialogButtonBox::accepted, this, &ImgUploadDialog::onAccept);
     connect(buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
     layout->addWidget(buttonBox);
 
@@ -98,8 +110,19 @@ void ImgUploadDialog::onAccept()
     if (m_driveActive && m_visibility) {
         const QString level = m_visibility->currentData().toString();
         if (level == QStringLiteral("users")) {
-            const QStringList list = parseRecipients(m_recipients->text());
-            if (list.isEmpty()) {
+            // Text typed but not yet committed counts as a recipient:
+            // confirming the dialog must not wait on a lookup that may still be
+            // in flight (R8). Anything left over failed validation, and saying
+            // so beats dropping it -- an address discarded in silence is how a
+            // typo used to reach the upload and fail afterwards.
+            const QString leftover = m_recipients->commitPendingText();
+            if (!leftover.isEmpty()) {
+                m_uploadLabel->setText(tr("\"%1\" is not a valid email "
+                                          "address. Correct or remove it.")
+                                         .arg(leftover));
+                return;
+            }
+            if (m_recipients->addresses().isEmpty()) {
                 m_uploadLabel->setText(
                   tr("Enter at least one valid recipient email address."));
                 return;
@@ -122,25 +145,6 @@ void ImgUploadDialog::onAccept()
     accept();
 }
 
-QStringList ImgUploadDialog::parseRecipients(const QString& text)
-{
-    static const QRegularExpression separator(QStringLiteral("[,;\\s]+"));
-    static const QRegularExpression emailPattern(
-      QStringLiteral("^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$"));
-
-    QStringList valid;
-    const QStringList parts =
-      text.split(separator, Qt::SkipEmptyParts);
-    for (const QString& part : parts) {
-        const QString candidate = part.trimmed();
-        if (!candidate.isEmpty() &&
-            emailPattern.match(candidate).hasMatch()) {
-            valid.append(candidate);
-        }
-    }
-    return valid;
-}
-
 QString ImgUploadDialog::selectedVisibility() const
 {
     if (m_driveActive && m_visibility) {
@@ -153,7 +157,10 @@ QStringList ImgUploadDialog::recipients() const
 {
     if (m_driveActive && m_recipients &&
         selectedVisibility() == QStringLiteral("users")) {
-        return parseRecipients(m_recipients->text());
+        // Resolved primary addresses where a suggestion was picked, and the
+        // text as typed everywhere else -- which is what the uploader's
+        // per-recipient user-then-group retry still expects.
+        return m_recipients->addresses();
     }
     return QStringList();
 }

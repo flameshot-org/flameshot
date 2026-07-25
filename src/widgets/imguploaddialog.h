@@ -11,7 +11,7 @@ class QLabel;
 class QDialogButtonBox;
 class QVBoxLayout;
 class QComboBox;
-class QLineEdit;
+class RecipientChipEdit;
 
 class ImgUploadDialog : public QDialog
 {
@@ -28,7 +28,10 @@ private slots:
     void onAccept();
 
 private:
-    static QStringList parseRecipients(const QString& text);
+    // The recipient validator now lives with the field that applies it:
+    // RecipientChipEdit validates typed text with the same rule this dialog
+    // used before committing it as a chip, so there is one implementation
+    // rather than a wrapper here that nothing calls.
 
     QCheckBox* m_uploadWithoutConfirmation;
     QLabel* m_uploadLabel;
@@ -41,5 +44,5 @@ private:
     bool m_driveActive;
     QComboBox* m_visibility;
     QLabel* m_recipientsLabel;
-    QLineEdit* m_recipients;
+    RecipientChipEdit* m_recipients;
 };
