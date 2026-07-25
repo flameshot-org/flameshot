@@ -85,3 +85,6 @@ result-*
 
 # direnv
 .direnv
+
+# graphify
+graphify-out/cost.json
