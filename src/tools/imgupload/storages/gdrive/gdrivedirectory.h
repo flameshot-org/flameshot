@@ -46,7 +46,29 @@ private:
     void searchPeople(const QString& prefix);
     void abortPeopleSearch();
 
+    /**
+     * Fetch the signed-in user's direct group memberships once per process.
+     *
+     * The group call filters by member rather than by typed text, so it returns
+     * the whole membership list in one response and matching happens locally --
+     * only the people search is a live per-keystroke query (KD8).
+     *
+     * A dialog is constructed per capture, so a dialog-scoped cache would
+     * re-fetch on every screenshot. The list therefore lives here, beside the
+     * application-lifetime OAuth service, and is dropped when the account
+     * changes so the previous user's teams can never be offered to the next one
+     * (KTD5).
+     */
+    void ensureGroups();
+    void dropGroupCache();
+    QList<RecipientSuggestion> matchGroups(const QString& prefix) const;
+
+    /** Emit groups then people for the current prefix, whichever has arrived.
+     */
+    void emitCurrent();
+
     static QList<RecipientSuggestion> parsePeople(const QByteArray& payload);
+    static QList<RecipientSuggestion> parseGroups(const QByteArray& payload);
 
     QNetworkAccessManager* m_net;
     QTimer* m_debounce;
@@ -58,4 +80,16 @@ private:
     // The prefix the user is on now. Anything answering for a different prefix
     // is stale and dropped.
     QString m_prefix;
+
+    // The people result for m_prefix, kept so a group list arriving afterwards
+    // extends the suggestions rather than replacing them.
+    QList<RecipientSuggestion> m_people;
+
+    // Direct group memberships, matched locally. `m_groupsLoaded` covers a
+    // refusal too: a tenant that declines the call declines it every time, so
+    // one attempt per process is enough.
+    QList<RecipientSuggestion> m_groups;
+    bool m_groupsLoaded;
+    bool m_groupsFetching;
+    QNetworkReply* m_groupsReply;
 };
