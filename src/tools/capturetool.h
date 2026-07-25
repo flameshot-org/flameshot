@@ -88,7 +88,7 @@ public:
     {}
 
     // TODO unused
-    virtual void setCapture(const QPixmap& pixmap){};
+    virtual void setCapture(const QPixmap& pixmap) {};
 
     // Returns false when the tool is in an inconsistent state and shouldn't
     // be included in the tool undo/redo stack.
