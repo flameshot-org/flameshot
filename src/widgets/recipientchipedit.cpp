@@ -236,19 +236,23 @@ QString RecipientChipEdit::commitPendingText()
     return m_input->text().trimmed();
 }
 
-QStringList RecipientChipEdit::parseAddresses(const QString& text)
+bool RecipientChipEdit::commitText(const QString& text)
 {
-    static const QRegularExpression separator(QStringLiteral("[,;\\s]+"));
+    static const QRegularExpression whitespace(QStringLiteral("\\s+"));
 
-    QStringList valid;
-    const QStringList parts = text.split(separator, Qt::SkipEmptyParts);
+    const QStringList parts = text.split(whitespace, Qt::SkipEmptyParts);
+    if (parts.isEmpty()) {
+        return true; // nothing but whitespace: consumed, no chip
+    }
     for (const QString& part : parts) {
-        const QString candidate = part.trimmed();
-        if (isValidAddress(candidate)) {
-            valid.append(candidate);
+        if (!isValidAddress(part)) {
+            return false;
         }
     }
-    return valid;
+    for (const QString& part : parts) {
+        commitAddress(part);
+    }
+    return true;
 }
 
 bool RecipientChipEdit::isValidAddress(const QString& candidate)
@@ -317,16 +321,13 @@ void RecipientChipEdit::onTextEdited(const QString& text)
         return;
     }
 
-    const QString head = text.left(position).trimmed();
+    const QString head = text.left(position);
     const QString tail = text.mid(position + 1);
-    if (!head.isEmpty() && !isValidAddress(head)) {
+    if (!commitText(head)) {
         // Leave it exactly as typed. Nothing is dropped and nothing is
         // invented: silently discarding a malformed address is how a mistyped
         // recipient used to reach the upload unnoticed.
         return;
-    }
-    if (!head.isEmpty()) {
-        commitAddress(head);
     }
     setInputText(tail);
     // A pasted list arrives as one edit; keep consuming it entry by entry.
@@ -402,7 +403,6 @@ void RecipientChipEdit::addRecipient(const QString& displayName,
     layout()->addWidget(widget);
     layout()->addWidget(m_input);
     m_chips.append({ displayName, address, resolved, widget });
-    emit recipientsChanged();
 }
 
 void RecipientChipEdit::removeChip(QFrame* widget)
@@ -413,7 +413,6 @@ void RecipientChipEdit::removeChip(QFrame* widget)
             layout()->removeWidget(widget);
             widget->deleteLater();
             m_input->setFocus();
-            emit recipientsChanged();
             return;
         }
     }
@@ -432,6 +431,10 @@ QFrame* RecipientChipEdit::createChip(const QString& displayName,
 {
     auto* chip = new QFrame(this);
     chip->setFrameShape(QFrame::NoFrame);
+    // Named so the stylesheet below can target this frame alone. A bare
+    // `QFrame` selector would also match the QLabel inside it -- QLabel is a
+    // QFrame -- and draw a second rounded border around the text.
+    chip->setObjectName(QStringLiteral("recipientChip"));
 
     auto* row = new QHBoxLayout(chip);
     row->setContentsMargins(6, 1, 1, 1);
@@ -463,8 +466,8 @@ QFrame* RecipientChipEdit::createChip(const QString& displayName,
     const QColor border =
       resolved ? palette().color(QPalette::Mid) : unresolvedBorder();
     chip->setStyleSheet(
-      QStringLiteral("QFrame { border: 1px solid %1; border-radius: 7px; "
-                     "background-color: %2; }")
+      QStringLiteral("QFrame#recipientChip { border: 1px solid %1; "
+                     "border-radius: 7px; background-color: %2; }")
         .arg(border.name(), palette().color(QPalette::AlternateBase).name()));
     return chip;
 }

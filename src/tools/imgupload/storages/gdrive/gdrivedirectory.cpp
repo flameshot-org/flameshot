@@ -152,12 +152,18 @@ void GDriveDirectory::emitCurrent()
 
 void GDriveDirectory::searchPeople(const QString& prefix)
 {
+    const QString account = GDriveOAuth::instance()->accountEmail();
     // The silent token path only: a lookup that could open a consent window
     // would put a browser tab in front of a user who is mid-share (KTD1).
     GDriveOAuth::instance()->requestAccessTokenSilently(
-      [this, prefix](const QString& token) {
+      [this, prefix, account](const QString& token) {
           if (prefix != m_prefix) {
               return; // the user typed on while the token was being acquired
+          }
+          if (accountChangedSince(account)) {
+              // Never search one organization's directory on behalf of another.
+              emit suggestionsReady(prefix, QList<RecipientSuggestion>());
+              return;
           }
           if (token.isEmpty()) {
               emit suggestionsReady(prefix, QList<RecipientSuggestion>());
@@ -249,6 +255,14 @@ void GDriveDirectory::ensureGroups()
               m_groupsFetching = false;
               return;
           }
+          if (accountChangedSince(member)) {
+              // Disconnected or switched while the token was being acquired.
+              // Issuing this call now would fill the cache with the previous
+              // user's teams, which is exactly what dropping it on an account
+              // change exists to prevent (KTD5).
+              m_groupsFetching = false;
+              return;
+          }
 
           QUrl url{ QString::fromLatin1(kDirectGroupsEndpoint) };
           QUrlQuery query;
@@ -302,6 +316,11 @@ void GDriveDirectory::dropGroupCache()
     m_groups.clear();
     m_groupsLoaded = false;
     m_groupsFetching = false;
+}
+
+bool GDriveDirectory::accountChangedSince(const QString& account) const
+{
+    return account != GDriveOAuth::instance()->accountEmail();
 }
 
 QList<RecipientSuggestion> GDriveDirectory::matchGroups(

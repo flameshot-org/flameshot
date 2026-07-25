@@ -7,7 +7,6 @@
 #include <QList>
 #include <QString>
 #include <QStringList>
-#include <QVector>
 
 class QCompleter;
 class QLineEdit;
@@ -90,13 +89,8 @@ public:
      */
     QString commitPendingText();
 
-    /** Split `text` on separators and keep the parts that are valid addresses.
-     */
-    static QStringList parseAddresses(const QString& text);
+    /** The rule the old comma-separated field used, unchanged. */
     static bool isValidAddress(const QString& candidate);
-
-signals:
-    void recipientsChanged();
 
 protected:
     bool eventFilter(QObject* watched, QEvent* event) override;
@@ -118,6 +112,18 @@ private:
     void addRecipient(const QString& displayName,
                       const QString& address,
                       bool resolved);
+
+    /**
+     * Commit `text` as one or more recipients, all of it or none of it.
+     *
+     * Whitespace separates here even though it does not commit while typing:
+     * the field this replaces split on whitespace as well as commas, so a
+     * space-separated or newline-separated paste has to keep working.
+     * Committing all-or-nothing is what keeps that compatible with a typed name
+     * -- "Kate Austen" is two tokens and neither is an address, so nothing
+     * commits and the text stays where the user can see it.
+     */
+    bool commitText(const QString& text);
     void commitAddress(const QString& address);
     void removeChip(QFrame* widget);
     void removeLastChip();
@@ -139,5 +145,5 @@ private:
     // an activated row maps back to the address the directory reported rather
     // than to the label the user saw.
     QList<RecipientSuggestion> m_suggestions;
-    QVector<Chip> m_chips;
+    QList<Chip> m_chips;
 };

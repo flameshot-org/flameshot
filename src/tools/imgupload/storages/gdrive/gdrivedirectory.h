@@ -67,6 +67,20 @@ private:
      */
     void emitCurrent();
 
+    /**
+     * Has the connected account changed since a lookup was started for
+     * `account`?
+     *
+     * A token is acquired asynchronously, so a disconnect or an account switch
+     * can land between starting a lookup and issuing it. Without this check the
+     * lookup would go out under the previous account and its results -- another
+     * organization's directory, another user's groups -- would be offered to
+     * whoever is connected now (KTD5). An empty address compares equal to an
+     * empty one, so an account whose sign-in scopes were declined still gets
+     * suggestions.
+     */
+    bool accountChangedSince(const QString& account) const;
+
     static QList<RecipientSuggestion> parsePeople(const QByteArray& payload);
     static QList<RecipientSuggestion> parseGroups(const QByteArray& payload);
 
