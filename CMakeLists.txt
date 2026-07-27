@@ -166,6 +166,14 @@ if(WIN32)
   # Include all dynamically linked runtime libraries such as MSVCRxxx.dll
   include(InstallRequiredSystemLibraries)
 
+  option(DOWNLOAD_EXTERNAL_QT_PLUGINS "Download DLL plugins for AVIF and JPEG XL" ON)
+  if(DOWNLOAD_EXTERNAL_QT_PLUGINS)
+    file(DOWNLOAD https://github.com/novomesk/qt-avif-image-plugin/releases/download/v0.10.3/qavif6.dll ${CMAKE_BINARY_DIR}/imageformats/qavif6.dll)
+    file(DOWNLOAD https://github.com/novomesk/qt-jpegxl-image-plugin/releases/download/v0.8.3/qjpegxl6.dll ${CMAKE_BINARY_DIR}/imageformats/qjpegxl6.dll)
+    install(PROGRAMS ${CMAKE_BINARY_DIR}/imageformats/qavif6.dll ${CMAKE_BINARY_DIR}/imageformats/qjpegxl6.dll
+            DESTINATION ${CMAKE_INSTALL_BINDIR}/imageformats/)
+  endif()
+
   if(USE_PORTABLE_CONFIG)
     set(CPACK_PACKAGE_FILE_NAME "${PROJECT_NAME}-${PROJECT_VERSION}-win64")
     set(CPACK_GENERATOR ZIP)
