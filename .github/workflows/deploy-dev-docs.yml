@@ -2,7 +2,9 @@ name: Deploy developer docs
 
 on:
   push:
-    branches: [master, docs]
+    branches:
+      - master
+      - docs
     paths:
       - "src/**"
       - "docs/dev/**"
