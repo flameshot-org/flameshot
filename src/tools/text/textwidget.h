@@ -5,6 +5,9 @@
 
 #include <QTextEdit>
 
+class QEvent;
+class QKeyEvent;
+
 class TextWidget : public QTextEdit
 {
     Q_OBJECT
@@ -15,11 +18,14 @@ public:
     void setFont(const QFont& f);
 
 protected:
-    void showEvent(QShowEvent* e);
-    void resizeEvent(QResizeEvent* e);
+    bool event(QEvent* e) override;
+    void keyPressEvent(QKeyEvent* e) override;
+    void showEvent(QShowEvent* e) override;
+    void resizeEvent(QResizeEvent* e) override;
 
 signals:
     void textUpdated(const QString& s);
+    void editingFinished();
 
 public slots:
     void setTextColor(const QColor& c);
