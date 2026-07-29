@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="th">
+<TS version="2.1" language="ars">
 <context>
     <name>AbstractWidgetList</name>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="52"/>
         <source>Add New</source>
-        <translation>เพิ่มใหม่</translation>
+        <translation>أضف جديد</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="103"/>
         <source>Move Up</source>
-        <translation>ย้ายขึ้น</translation>
+        <translation>انقل لفوق</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="104"/>
         <source>Move Down</source>
-        <translation>ย้ายลง</translation>
+        <translation>انقل لتحت</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="105"/>
         <source>Remove</source>
-        <translation>ลบ</translation>
+        <translation>إزالة</translation>
     </message>
 </context>
 <context>
@@ -29,12 +29,12 @@
     <message>
         <location filename="../../src/tools/accept/accepttool.cpp" line="31"/>
         <source>Accept</source>
-        <translation>ยอมรับ</translation>
+        <translation>قبول</translation>
     </message>
     <message>
         <location filename="../../src/tools/accept/accepttool.cpp" line="41"/>
         <source>Accept the capture</source>
-        <translation>ยอมรับการจับภาพ</translation>
+        <translation>قبول اللقطة</translation>
     </message>
 </context>
 <context>
@@ -42,12 +42,12 @@
     <message>
         <location filename="../../src/tools/launcher/applaunchertool.cpp" line="23"/>
         <source>App Launcher</source>
-        <translation>ตัวเปิดแอป</translation>
+        <translation>مشغّل التطبيقات</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applaunchertool.cpp" line="33"/>
         <source>Choose an app to open the capture</source>
-        <translation>เลือกแอปเพื่อเปิดการจับภาพ</translation>
+        <translation>اختر تطبيق عشان تفتح اللقطة</translation>
     </message>
 </context>
 <context>
@@ -55,33 +55,33 @@
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="51"/>
         <source>Open With</source>
-        <translation>เปิดด้วย</translation>
+        <translation>افتح باستخدام</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="80"/>
         <source>Launch in terminal</source>
-        <translation>เปิดในเทอร์มินัล</translation>
+        <translation>شغّل في التيرمنال</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="81"/>
         <source>Keep open after selection</source>
-        <translation>เปิดต่อไปหลังจากเลือกแล้ว</translation>
+        <translation>خله مفتوح بعد التحديد</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="117"/>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="151"/>
         <source>Error</source>
-        <translation>ผิดพลาด</translation>
+        <translation>خطأ</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="151"/>
         <source>Unable to launch in terminal.</source>
-        <translation>ไม่สามารถเปิดในเทอร์มินัลได้</translation>
+        <translation>ما قدرنا نشغله في التيرمنال.</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="117"/>
         <source>Unable to write in</source>
-        <translation>ไม่สามารถเขียนได้</translation>
+        <translation>ما قدرنا نكتب في</translation>
     </message>
 </context>
 <context>
@@ -89,12 +89,12 @@
     <message>
         <location filename="../../src/tools/arrow/arrowtool.cpp" line="78"/>
         <source>Arrow</source>
-        <translation>ลูกศร</translation>
+        <translation>سهم</translation>
     </message>
     <message>
         <location filename="../../src/tools/arrow/arrowtool.cpp" line="88"/>
         <source>Set the Arrow as the paint tool</source>
-        <translation>ตั้งค่าลูกศรเป็นเครื่องมือระบายสี</translation>
+        <translation>خل السهم أداة للرسم</translation>
     </message>
 </context>
 <context>
@@ -117,89 +117,89 @@
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="32"/>
         <source>Rectangular Region</source>
-        <translation>บริเวณสี่เหลี่ยมผืนผ้า</translation>
+        <translation>منطقة مستطيلة</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="38"/>
         <source>Full Screen (Current Display)</source>
-        <translation>เต็มจอ (จอแสดงผลปัจจุบัน)</translation>
+        <translation>كامل الشاشة (الشاشة الحالية)</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="41"/>
         <source>Full Screen</source>
-        <translation>เต็มหน้าจอ</translation>
+        <translation>كامل الشاشة</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="46"/>
         <source>Monitor %1: %2 (%3x%4)</source>
-        <translation>หน้าจอ %1: %2 (%3x%4)</translation>
+        <translation>شاشة %1: %2 (%3x%4)</translation>
     </message>
     <message>
         <source>Full Screen (All Monitors)</source>
-        <translation type="vanished">เต็มจอ (ทุกจอ)</translation>
+        <translation type="vanished">Pantalla completa (tots els monitors)</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="71"/>
         <source>No Delay</source>
-        <translation>หน่วงเวลา</translation>
+        <translation>بدون تأخير</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="90"/>
         <source> second</source>
-        <translation> วินาที</translation>
+        <translation> ثانية</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="94"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="186"/>
         <location filename="../../src/widgets/capturelauncher.cpp" line="90"/>
         <source> seconds</source>
-        <translation> วินาที</translation>
+        <translation> ثواني</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="166"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="188"/>
         <source>Take new screenshot</source>
-        <translation>ถ่ายภาพหน้าจอใหม่</translation>
+        <translation>خذ لقطة جديدة</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="47"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="181"/>
         <source>Area:</source>
-        <translation>พื้นที่:</translation>
+        <translation>المنطقة:</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="14"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="179"/>
         <source>Capture Launcher</source>
-        <translation>เรียกใช้ตัวจับภาพ</translation>
+        <translation>مشغّل اللقطات</translation>
     </message>
     <message>
         <source>TextLabel</source>
-        <translation type="vanished">ป้ายข้อความ</translation>
+        <translation type="vanished">EtiquetaDeText</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="32"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="180"/>
         <source>Capture Mode</source>
-        <translation>โหมดจับภาพ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="64"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="183"/>
         <source>Delay:</source>
-        <translation>หน่วงเวลา:</translation>
+        <translation>التأخير:</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="71"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="184"/>
         <source>Monitor:</source>
-        <translation>หน้าจอ:</translation>
+        <translation>الشاشة:</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="87"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="185"/>
         <source>WxH+x+y</source>
-        <translation>กว้าง×สูง×ลึก×ยาว</translation>
+        <translation type="unfinished">WxH+x+y</translation>
     </message>
 </context>
 <context>
@@ -207,42 +207,42 @@
     <message>
         <source>Unable to capture screen</source>
         <translatorcomment>Impossible capturar la pantalla</translatorcomment>
-        <translation type="vanished">ไม่สามารถจับภาพหน้าจอได้</translation>
+        <translation type="vanished">Impossible capturar la pantalla</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="468"/>
         <source>Mouse</source>
-        <translation>เม้าส์</translation>
+        <translation>الماوس</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="468"/>
         <source>Select screenshot area</source>
-        <translation>เลือกพื้นที่จับภาพหน้าจอ</translation>
+        <translation>حدد منطقة اللقطة</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="482"/>
         <source>Mouse Wheel</source>
-        <translation>ล้อเลื่อนของเมาส์</translation>
+        <translation>عجلة الماوس</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="482"/>
         <source>Change tool size</source>
-        <translation>เปลี่ยนขนาดเครื่องมือ</translation>
+        <translation>تغيير حجم الأداة</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="483"/>
         <source>Right Click</source>
-        <translation>คลิกขวา</translation>
+        <translation>كليك يمين</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="483"/>
         <source>Show color picker</source>
-        <translation>แสดงตัวเลือกสี</translation>
+        <translation>أظهر منتقي الألوان</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="485"/>
         <source>Open side panel</source>
-        <translation>เปิดแผงด้านข้าง</translation>
+        <translation>افتح اللوحة الجانبية</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="486"/>
@@ -252,32 +252,32 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="486"/>
         <source>Exit</source>
-        <translation>ออก</translation>
+        <translation>خروج</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="527"/>
         <source>Quit Capture</source>
-        <translation>ออกจากการจับภาพ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="528"/>
         <source>Are you sure you want to quit capture?</source>
-        <translation>คุณแน่ใจหรือไม่ว่าต้องการยกเลิกการบันทึกภาพ?</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="533"/>
         <source>Do not show this again</source>
-        <translation>ไม่ต้องแสดงอีก</translation>
+        <translation>لا تظهر هذا مرة ثانية</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="777"/>
         <source>Flameshot has lost focus. Keyboard shortcuts won&apos;t work until you click somewhere.</source>
-        <translation>Flameshot เสียโฟกัส แป้นพิมพ์ลัดจะไม่ทำงานจนกว่าคุณจะคลิกที่ใดที่หนึ่ง</translation>
+        <translation>فليم شوت فقد التركيز. اختصارات الكيبورد ما راح تشتغل لين تضغط بأي مكان.</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="783"/>
         <source>Configuration error resolved. Launch `flameshot gui` again to apply it.</source>
-        <translation>ผิดพลาดในการกำหนดค่าที่แก้ไขแล้ว เปิด `flameshot gui` อีกครั้งเพื่อใช้งาน</translation>
+        <translation>انحل خطأ الإعدادات. شغّل flameshot gui مرة ثانية عشان يتطبق.</translation>
     </message>
     <message>
         <source>Select an area with the mouse, or press Esc to exit.
@@ -294,7 +294,7 @@ Premeu Espai per obrir el calaix lateral.</translation>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="1215"/>
         <source>Tool Settings</source>
-        <translation>ตั้งค่าเครื่องมือ</translation>
+        <translation>إعدادات الأداة</translation>
     </message>
 </context>
 <context>
@@ -302,12 +302,12 @@ Premeu Espai per obrir el calaix lateral.</translation>
     <message>
         <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="69"/>
         <source>Circle Counter</source>
-        <translation>วงกลม</translation>
+        <translation>عدّاد الدوائر</translation>
     </message>
     <message>
         <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="87"/>
         <source>Add an autoincrementing counter bubble</source>
-        <translation>เพิ่มตัวนับฟองแบบเพิ่มอัตโนมัติ</translation>
+        <translation>أضف فقاعة عداد تزيد تلقائياً</translation>
     </message>
 </context>
 <context>
@@ -315,12 +315,12 @@ Premeu Espai per obrir el calaix lateral.</translation>
     <message>
         <location filename="../../src/tools/circle/circletool.cpp" line="21"/>
         <source>Circle</source>
-        <translation>วงกลม</translation>
+        <translation>دائرة</translation>
     </message>
     <message>
         <location filename="../../src/tools/circle/circletool.cpp" line="31"/>
         <source>Set the Circle as the paint tool</source>
-        <translation>ตั้งวงกลมเป็นเครื่องมือระบายสี</translation>
+        <translation>خل الدائرة أداة للرسم</translation>
     </message>
 </context>
 <context>
@@ -329,55 +329,55 @@ Premeu Espai per obrir el calaix lateral.</translation>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="19"/>
         <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="312"/>
         <source>Select Color</source>
-        <translation>เลือกสี</translation>
+        <translation>اختر اللون</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="60"/>
         <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="313"/>
         <source>Saturation</source>
-        <translation>ความอิ่มตัว</translation>
+        <translation>التشبّع</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="67"/>
         <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="314"/>
         <source>Hue</source>
-        <translation>สีสัน</translation>
+        <translation>تدرج اللون</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="84"/>
         <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="315"/>
         <source>Hex</source>
-        <translation>Hex</translation>
+        <translation type="unfinished">Hex</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="91"/>
         <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="316"/>
         <source>Blue</source>
-        <translation>สีฟ้า</translation>
+        <translation>أزرق</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="128"/>
         <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="317"/>
         <source>Value</source>
-        <translation>ค่า</translation>
+        <translation>القيمة</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="135"/>
         <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="318"/>
         <source>Green</source>
-        <translation>สีเขียว</translation>
+        <translation>أخضر</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="142"/>
         <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="319"/>
         <source>Alpha</source>
-        <translation>อัลฟ่า</translation>
+        <translation>ألفا</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="149"/>
         <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="320"/>
         <source>Red</source>
-        <translation>สีแดง</translation>
+        <translation>أحمر</translation>
     </message>
 </context>
 <context>
@@ -385,42 +385,42 @@ Premeu Espai per obrir el calaix lateral.</translation>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="56"/>
         <source>Accept color</source>
-        <translation>ยอมรับสี</translation>
+        <translation>قبول اللون</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="56"/>
         <source>Enter or Left Click</source>
-        <translation>เข้าหรือคลิกซ้าย</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="57"/>
         <source>Precisely select color</source>
-        <translation>เลือกสีได้อย่างแม่นยำ</translation>
+        <translation>حدد اللون بدقة</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="57"/>
         <source>Hold Left Click</source>
-        <translation>คลิกซ้ายค้างไว้</translation>
+        <translation>علّق على كلك يسار</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="58"/>
         <source>Toggle magnifier</source>
-        <translation>สลับการขยาย</translation>
+        <translation>تشغيل/إيقاف المكبّر</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="58"/>
         <source>Space or Right Click</source>
-        <translation>วรรคหรือคลิกขวา</translation>
+        <translation>مسافة أو كلك يمين</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="59"/>
         <source>Cancel</source>
-        <translation>ยกเลิก</translation>
+        <translation>إلغاء</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="59"/>
         <source>Esc</source>
-        <translation>Esc</translation>
+        <translation type="unfinished">Esc</translation>
     </message>
 </context>
 <context>
@@ -428,68 +428,68 @@ Premeu Espai per obrir el calaix lateral.</translation>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="40"/>
         <source>Edit Preset:</source>
-        <translation>แก้ไขตั้งค่าล่วงหน้า:</translation>
+        <translation>تعديل الإعداد المسبق:</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="45"/>
         <source>Enter color to update preset</source>
-        <translation>ป้อนสีเพื่ออัปเดตค่าไว้ล่วงหน้า</translation>
+        <translation>أدخل اللون عشان تحدث الإعداد المسبق</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="65"/>
         <source>Update</source>
-        <translation>อัปเดต</translation>
+        <translation>تحديث</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="67"/>
         <source>Press button to update the selected preset</source>
-        <translation>กดปุ่มเพื่ออัพเดตค่าที่เลือกไว้ล่วงหน้า</translation>
+        <translation>اضغط الزر عشان تحدث الإعداد المسبق المحدد</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="74"/>
         <source>Delete</source>
-        <translation>ลบ</translation>
+        <translation>حذف</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="76"/>
         <source>Press button to delete the selected preset</source>
-        <translation>กดปุ่มเพื่อเลือกลบค่าที่ตั้งไว้ล่วงหน้า</translation>
+        <translation>اضغط الزر عشان تحذف الإعداد المسبق المحدد</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="90"/>
         <source>Add Preset:</source>
-        <translation>เพิ่มค่าที่ตั้งไว้ล่วงหน้า:</translation>
+        <translation>إضافة إعداد مسبق:</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="96"/>
         <source>Enter color manually or select it using the color-wheel</source>
-        <translation>ป้อนสีด้วยตนเองหรือเลือกโดยใช้วงล้อสี</translation>
+        <translation>أدخل اللون يدوياً أو اختره باستخدام عجلة الألوان</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="106"/>
         <source>Add</source>
-        <translation>เพิ่ม</translation>
+        <translation>إضافة</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="107"/>
         <source>Press button to add preset</source>
-        <translation>กดปุ่มเพื่อเพิ่มค่าที่ตั้งไว้ล่วงหน้า</translation>
+        <translation>اضغط الزر عشان تضيف إعداد مسبق</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="130"/>
         <location filename="../../src/config/colorpickereditor.cpp" line="147"/>
         <source>Error</source>
-        <translation>ผิดพลาด</translation>
+        <translation>خطأ</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="131"/>
         <source>Unable to add preset. Maximum limit reached.</source>
-        <translation>ไม่สามารถเพิ่มค่าที่ตั้งล่วงหน้าได้ เนื่องจากถึงขีดจำกัดสูงสุดแล้ว</translation>
+        <translation>ما قدرنا نضيف الإعداد المسبق. وصلت للحد الأقصى.</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="148"/>
         <source>Unable to remove preset. Minimum limit reached.</source>
-        <translation>ไม่สามารถลบค่าที่ตั้งล่วงหน้าได้ ถึงขีดจำกัดขั้นต่ำแล้ว</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -497,7 +497,7 @@ Premeu Espai per obrir el calaix lateral.</translation>
     <message>
         <location filename="../../src/config/configerrordetails.cpp" line="19"/>
         <source>Configuration errors</source>
-        <translation>การกำหนดค่าผิดพลาด</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -506,44 +506,40 @@ Premeu Espai per obrir el calaix lateral.</translation>
         <location filename="../../src/utils/confighandler.cpp" line="600"/>
         <source>Unrecognized setting: &apos;%1&apos;
 </source>
-        <translation>ตั้งค่าที่ไม่รู้จัก: &apos;%1&apos;
-</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="608"/>
         <source>Unrecognized shortcut name: &apos;%1&apos;.
 </source>
-        <translation>ชื่อทางลัดที่ไม่รู้จัก: &apos;%1&apos;
-</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="651"/>
         <source>Shortcut conflict: &apos;%1&apos; and &apos;%2&apos; have the same shortcut: %3
 </source>
-        <translation>ทางลัด: &apos;%1&apos; และ &apos;%2&apos; มีทางลัดเดียวกัน: %3
-</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="689"/>
         <source>Bad value in &apos;%1&apos;. Expected: %2
 </source>
-        <translation>ค่าไม่ถูกต้องใน &apos;%1&apos; คาดว่า: %2
-</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="738"/>
         <source>You have successfully resolved the configuration error.</source>
-        <translation>คุณได้แก้ไขข้อผิดพลาดในการกำหนดค่าสำเร็จแล้ว</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="761"/>
         <source>The configuration contains an error. Open configuration to resolve.</source>
-        <translation>กำหนดค่ามีข้อผิดพลาด เปิดกำหนดค่าเพื่อแก้ไข</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="816"/>
         <source>Bad config key &apos;%1&apos; in ConfigHandler. Please report this as a bug.</source>
-        <translation>คีย์การกำหนดค่า &apos;%1&apos; ใน ConfigHandler ไม่ถูกต้อง โปรดรายงานข้อผิดพลาด</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -551,56 +547,54 @@ Premeu Espai per obrir el calaix lateral.</translation>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="13"/>
         <source>Resolve configuration errors</source>
-        <translation>แก้ไขข้อผิดพลาดในการกำหนดค่า</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="49"/>
         <source>&lt;b&gt;You must resolve all errors before continuing:&lt;/b&gt;</source>
-        <translation>&lt;b&gt;คุณต้องแก้ไขข้อผิดพลาดทั้งหมดก่อนดำเนินการต่อ:&lt;/b&gt;</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="60"/>
         <source>Reset</source>
-        <translation>รีเซ็ต</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="62"/>
         <source>Reset to the default value.</source>
-        <translation>รีเซ็ตเป็นค่าเริ่มต้น</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="76"/>
         <source>Remove</source>
-        <translation>ลบ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="78"/>
         <source>Remove this setting.</source>
-        <translation>ลบการตั้งค่านี้</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="89"/>
         <source>Some keyboard shortcuts have conflicts.
 This will NOT prevent flameshot from starting.
 Please solve them manually in the configuration file.</source>
-        <translation>แป้นลัดบางปุ่มอาจมีปัญหาขัดแย้งกัน
-การดำเนินการนี้จะไม่ป้องกันไม่ให้ Flameshot เริ่มทำงาน
-แก้ไขปัญหาในไฟล์กำหนดค่า</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="111"/>
         <source>Resolve all</source>
-        <translation>แก้ไขทั้งหมด</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="112"/>
         <source>Resolve all listed errors.</source>
-        <translation>แก้ไขข้อผิดพลาดทั้งหมดที่ระบุไว้</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="124"/>
         <source>Details</source>
-        <translation>รายละเอียด</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -608,37 +602,37 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="39"/>
         <source>Configuration</source>
-        <translation>การกำหนดค่า</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="67"/>
         <source>Interface</source>
-        <translation>อินเทอร์เฟซ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="77"/>
         <source>Filename Editor</source>
-        <translation>แก้ไขชื่อไฟล์</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="58"/>
         <source>General</source>
-        <translation>ทั่วไป</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="86"/>
         <source>Shortcuts</source>
-        <translation>ทางลัด</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="119"/>
         <source>Resolve</source>
-        <translation>แก้ปัญหา</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="123"/>
         <source>&lt;b&gt;Configuration file has errors. Resolve them before continuing.&lt;/b&gt;</source>
-        <translation>&lt;b&gt;ไฟล์การกำหนดค่ามีข้อผิดพลาด โปรดแก้ไขก่อนดำเนินการต่อ&lt;/b&gt;</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -705,12 +699,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/copy/copytool.cpp" line="24"/>
         <source>Copy</source>
-        <translation>คัดลอก</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/copy/copytool.cpp" line="34"/>
         <source>Copy selection to clipboard</source>
-        <translation>คัดลอกที่เลือกไปยังคลิปบอร์ด</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Copy the selection into the clipboard</source>
@@ -729,12 +723,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/exit/exittool.cpp" line="24"/>
         <source>Exit</source>
-        <translation>ออก</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/exit/exittool.cpp" line="34"/>
         <source>Leave the capture screen</source>
-        <translation>ออกจากหน้าจอจับภาพ</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -742,32 +736,32 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="25"/>
         <source>Edit the name of your captures:</source>
-        <translation>แก้ไขชื่อการจับภาพของคุณ:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="29"/>
         <source>Edit:</source>
-        <translation>แก้ไข:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="31"/>
         <source>Preview:</source>
-        <translation>ตัวอย่าง:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="74"/>
         <source>Save</source>
-        <translation>บันทึก</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="77"/>
         <source>Saves the pattern</source>
-        <translation>บันทึกรูปแบบ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="79"/>
         <source>Restore</source>
-        <translation>คืนค่า</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Reset</source>
@@ -776,17 +770,17 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="82"/>
         <source>Restores the saved pattern</source>
-        <translation>คืนค่ารูปแบบที่บันทึกไว้</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="84"/>
         <source>Clear</source>
-        <translation>ล้าง</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="90"/>
         <source>Deletes the name</source>
-        <translation>ลบชื่อ</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -794,40 +788,40 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="122"/>
         <source>Error</source>
-        <translation>ผิดพลาด</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="122"/>
         <source>Unable to close active modal widgets</source>
-        <translation>ไม่สามารถปิดวิดเจ็ตโมดอลที่ใช้งานได้</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="441"/>
         <source>URL copied to clipboard.</source>
-        <translation>คัดลอก URL ไปยังคลิปบอร์ด</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>FlameshotDaemon</name>
     <message>
         <source>New version %1 is available</source>
-        <translation type="vanished">เวอร์ชันใหม่ %1 พร้อมให้บริการแล้ว</translation>
+        <translation type="vanished">Nova versió %1 disponible</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshotdaemon.cpp" line="272"/>
         <location filename="../../src/core/flameshotdaemon.cpp" line="436"/>
         <source>You have the latest version</source>
-        <translation>คุณมีเวอร์ชั่นล่าสุด</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/core/flameshotdaemon.cpp" line="445"/>
         <source>Failed to get information about the latest version.</source>
-        <translation>ไม่สามารถรับข้อมูลเกี่ยวกับเวอร์ชั่นล่าสุดได้</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/core/flameshotdaemon.cpp" line="468"/>
         <source>Unable to connect via DBus</source>
-        <translation>ไม่สามารถเชื่อมต่อผ่าน DBus ได้</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -903,7 +897,7 @@ Please solve them manually in the configuration file.</source>
         <location filename="../../src/config/generalconf.cpp" line="195"/>
         <location filename="../../src/config/generalconf.cpp" line="379"/>
         <source>Import</source>
-        <translation>นำเข้า</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="201"/>
@@ -911,38 +905,38 @@ Please solve them manually in the configuration file.</source>
         <location filename="../../src/config/generalconf.cpp" line="235"/>
         <location filename="../../src/config/generalconf.cpp" line="754"/>
         <source>Error</source>
-        <translation>ผิดพลาด</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="201"/>
         <source>Unable to read file.</source>
-        <translation>ไม่สามารถอ่านไฟล์ได้</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="210"/>
         <location filename="../../src/config/generalconf.cpp" line="235"/>
         <source>Unable to write file.</source>
-        <translation>ไม่สามารถเขียนไฟล์ได้</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="222"/>
         <source>Save File</source>
-        <translation>บันทึกไฟล์</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="244"/>
         <source>Confirm Reset</source>
-        <translation>ยืนยันการรีเซ็ต</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="245"/>
         <source>Are you sure you want to reset the configuration?</source>
-        <translation>คุณแน่ใจว่าต้องการรีเซ็ตการกำหนดค่าหรือไม่?</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="276"/>
         <source>Show help message</source>
-        <translation>แสดงข้อความช่วยเหลือ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Show the help message at the beginning in the capture mode.</source>
@@ -951,7 +945,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="301"/>
         <source>Show the side panel button</source>
-        <translation>แสดงแผงปุ่มด้านข้าง</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Show the side panel toggle button in the capture mode.</source>
@@ -960,12 +954,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="314"/>
         <source>Show desktop notifications</source>
-        <translation>แสดงแจ้งเตือนบนเดสก์ท็อป</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="339"/>
         <source>Show tray icon</source>
-        <translation>แสดงถาดไอคอน</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Show the systemtray icon</source>
@@ -974,32 +968,32 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="352"/>
         <source>Confirmation required to delete screenshot from the latest uploads</source>
-        <translation>จำเป็นต้องมีการยืนยันลบภาพหน้าจอจากการอัพโหลดล่าสุด</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="367"/>
         <source>Configuration File</source>
-        <translation>ไฟล์การกำหนดค่า</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="372"/>
         <source>Export</source>
-        <translation>ส่งออก</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="386"/>
         <source>Reset</source>
-        <translation>รีเซ็ต</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="397"/>
         <source>Automatic check for updates</source>
-        <translation>ตรวจสอบการอัปเดตอัตโนมัติ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="411"/>
         <source>Allow multiple flameshot GUI instances simultaneously</source>
-        <translation>อนุญาตให้มีอินสแตนซ์ GUI ของ Flameshot หลายรายการพร้อมกัน</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>This allows you to take screenshots of flameshot itself for example.</source>
@@ -1007,11 +1001,11 @@ Please solve them manually in the configuration file.</source>
     </message>
     <message>
         <source>Automatically close daemon when it is not needed</source>
-        <translation type="vanished">ปิด Daemon โดยอัตโนมัติเมื่อไม่จำเป็น</translation>
+        <translation type="vanished">Automatically close daemon when it is not needed</translation>
     </message>
     <message>
         <source>Launch at startup</source>
-        <translation type="vanished">เปิดเมื่อเริ่มต้น</translation>
+        <translation type="vanished">Llança a l&apos;inici</translation>
     </message>
     <message>
         <source>Launch Flameshot</source>
@@ -1020,17 +1014,17 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="448"/>
         <source>Show welcome message on launch</source>
-        <translation>แสดงข้อความต้อนรับเมื่อเปิดโปรแกรม</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="476"/>
         <source>Use large predefined color palette</source>
-        <translation>ใช้จานสีที่กำหนดไว้ล่วงหน้าขนาดใหญ่</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="500"/>
         <source>Copy URL after upload</source>
-        <translation>คัดลอก URL หลังจากอัพโหลด</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Copy URL and close window after upload</source>
@@ -1039,7 +1033,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="512"/>
         <source>Save image after copy</source>
-        <translation>บันทึกภาพหลังการคัดลอก</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Save image file after copying it</source>
@@ -1048,338 +1042,338 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="277"/>
         <source>Show the help message at the beginning in the capture mode</source>
-        <translation>แสดงข้อความช่วยเหลือในตอนเริ่มโปรแกรมในโหมดจับภาพ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="287"/>
         <source>Use last region for GUI mode</source>
-        <translation>ใช้ภูมิภาคสุดท้ายสำหรับโหมด GUI</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="289"/>
         <source>Use the last region as the default selection for the next screenshot in GUI mode</source>
-        <translation>ใช้ภูมิภาคสุดท้ายเป็นตัวเลือกเริ่มต้นสำหรับภาพหน้าจอถัดไปในโหมด GUI</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="303"/>
         <source>Show the side panel toggle button in the capture mode</source>
-        <translation>แสดงปุ่มสลับแผงด้านข้างในโหมดถ่ายภาพ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="315"/>
         <source>Enable desktop notifications</source>
-        <translation>เปิดใช้งานการแจ้งเตือนบนเดสก์ท็อป</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="326"/>
         <source>Show abort notifications</source>
-        <translation>แสดงการแจ้งเตือนการยกเลิก</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="327"/>
         <source>Enable abort notifications</source>
-        <translation>เปิดใช้งานการแจ้งเตือนยกเลิก</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="340"/>
         <source>Show icon in the system tray</source>
-        <translation>แสดงไอคอนในถาดระบบ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Use grim to capture screenshots</source>
-        <translation type="vanished">ใช้ Grim เพื่อจับภาพหน้าจอ</translation>
+        <translation type="vanished">Usa grim per a fer les captures de pantalla</translation>
     </message>
     <message>
         <source>Grim is a wayland only utility to capture screens based on the screencopy protocol. Generally only enable on minimal wayland window managers like sway, hyprland, etc.</source>
-        <translation type="vanished">Grim เป็นยูทิลิตี้สำหรับ Wayland เท่านั้น ที่ใช้ในการจับภาพหน้าจอโดยใช้โปรโตคอล screencopy โดยทั่วไปจะเปิดใช้งานเฉพาะบนตัวจัดการหน้าต่าง Wayland ขั้นต่ำ เช่น Sway, Hyprland เป็นต้น</translation>
+        <translation type="vanished">Grim és una utilitat només de wayland per capturar pantalles basades en el protocol de còpia de pantalla. En general, només s&apos;habilita en gestors de finestres minimalistes de wayland com sway, hyprland, etc.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="355"/>
         <source>Ask for confirmation to delete screenshot from the latest uploads</source>
-        <translation>ขอคำยืนยันการลบภาพหน้าจอจากการอัพโหลดล่าสุด</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="398"/>
         <source>Check for updates automatically</source>
-        <translation>ตรวจสอบการอัปเดตโดยอัตโนมัติ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="412"/>
         <source>This allows you to take screenshots of Flameshot itself for example</source>
-        <translation>สิ่งนี้ทำให้คุณสามารถจับภาพหน้าจอของ Flameshot ได้ ตัวอย่างเช่น</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Launch Flameshot daemon when computer is booted</source>
-        <translation type="vanished">เปิดใช้งาน Daemon Flameshot เมื่อบูตคอมพิวเตอร์แล้ว</translation>
+        <translation type="vanished">Launch Flameshot daemon when computer is booted</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="451"/>
         <source>Show the welcome message box in the middle of the screen while taking a screenshot</source>
-        <translation>แสดงกล่องข้อความต้อนรับตรงกลางหน้าจอขณะทำการจับภาพหน้าจอ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="478"/>
         <source>Use a large predefined color palette</source>
-        <translation>ใช้สีที่กำหนดไว้ล่วงหน้าขนาดใหญ่</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="488"/>
         <source>Copy on double click</source>
-        <translation>คัดลอกเมื่อดับเบิลคลิก</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Enable Copy on Double Click</source>
-        <translation type="vanished">เปิดใช้งานการคัดลอกเมื่อดับเบิลคลิก</translation>
+        <translation type="vanished">Enable Copy on Double Click</translation>
     </message>
     <message>
         <source>Copy URL and close window after uploading was successful</source>
-        <translation type="vanished">คัดลอก URL และปิดหน้าต่างหลังจากการอัพโหลดสำเร็จ</translation>
+        <translation type="vanished">Copy URL and close window after uploading was successful</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="424"/>
         <source>Automatically unload from memory when it is not needed</source>
-        <translation>ลบออกจากหน่วยความจำโดยอัตโนมัติเมื่อไม่จำเป็นต้องใช้งาน</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="425"/>
         <source>Automatically close daemon (background process) when it is not needed</source>
-        <translation>ปิดโปรแกรมพื้นหลัง (daemon) โดยอัตโนมัติเมื่อไม่จำเป็นต้องใช้งาน</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="436"/>
         <source>Launch in background at startup</source>
-        <translation>เปิดใช้งานในพื้นหลังเมื่อเริ่มต้นระบบ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="437"/>
         <source>Launch Flameshot daemon (background process) when computer is booted</source>
-        <translation>เรียกใช้โปรแกรม Flameshot daemon (กระบวนการทำงานเบื้องหลัง) เมื่อคอมพิวเตอร์เปิดเครื่อง</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="462"/>
         <source>Ask before quit capture</source>
-        <translation>ถามก่อนออกจากโหมดบันทึกภาพ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="465"/>
         <source>Show the confirmation prompt before ESC quit</source>
-        <translation>แสดงข้อความยืนยันก่อนกด ESC เพื่อออก</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="490"/>
         <source>Enable Copy to clipboard on Double Click</source>
-        <translation>เปิดใช้งานการคัดลอกไปยังคลิปบอร์ดเมื่อดับเบิ้ลคลิก</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="502"/>
         <source>Copy URL after uploading was successful</source>
-        <translation>คัดลอก URL หลังจากอัปโหลดสำเร็จแล้ว</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="514"/>
         <source>After copying the screenshot, save it to a file as well</source>
-        <translation>หลังจากคัดลอกภาพหน้าจอแล้ว ให้บันทึกลงในไฟล์ด้วย</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="521"/>
         <source>Save Path</source>
-        <translation>เส้นทางบันทึก</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="537"/>
         <source>Change...</source>
-        <translation>เปลี่ยน...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="545"/>
         <source>Use fixed path for screenshots to save</source>
-        <translation>ใช้เส้นทางคงที่สำหรับบันทึกภาพหน้าจอ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="557"/>
         <source>Preferred save file extension:</source>
-        <translation>นามสกุลไฟล์ที่ต้องการบันทึก:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="586"/>
         <source>Latest Uploads Max Size</source>
-        <translation>ขนาดสูงสุดของการอัพโหลดล่าสุด</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="608"/>
         <source>Imgur Application Client ID</source>
-        <translation>รหัสไคลเอนต์แอปพลิเคชัน Imgur</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="639"/>
         <source>Undo limit</source>
-        <translation>ยกเลิกการจำกัด</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="668"/>
         <source>Use JPG format for clipboard (PNG default)</source>
-        <translation>ใช้รูปแบบ JPG สำหรับคลิปบอร์ด (ค่าเริ่มต้นคือ PNG)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="675"/>
         <source>Use lossy JPG format for clipboard (lossless PNG default)</source>
-        <translation>ใช้ไฟล์ JPG ที่มีการบีบอัดข้อมูลบางส่วนสำหรับการคัดลอกลงคลิปบอร์ด (ค่าเริ่มต้นคือไฟล์ PNG ที่ไม่มีการบีบอัดข้อมูล)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="702"/>
         <source>Copy file path after save</source>
-        <translation>คัดลอกเส้นทางไฟล์หลังจากบันทึก</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="703"/>
         <source>Copy the file path to clipboard after the file is saved</source>
-        <translation>คัดลอกเส้นทางไฟล์ไปยังคลิปบอร์ดหลังจากบันทึกไฟล์แล้ว</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="714"/>
         <source>Anti-aliasing image when zoom the pinned image</source>
-        <translation>ลดรอยหยักของภาพเมื่อซูมภาพที่ปักหมุดไว้</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="716"/>
         <source>After zooming the pinned image, should the image get smoothened or stay pixelated</source>
-        <translation>หลังจากซูมภาพที่ปักหมุดแล้ว ภาพควรจะเรียบเนียนขึ้นหรือยังคงเป็นแบบพิกเซล</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="727"/>
         <location filename="../../src/config/generalconf.cpp" line="729"/>
         <source>Upload image without confirmation</source>
-        <translation>อัพโหลดรูปภาพโดยไม่ต้องยืนยัน</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="745"/>
         <source>Choose a Folder</source>
-        <translation>เลือกโฟลเดอร์</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="754"/>
         <source>Unable to write to directory.</source>
-        <translation>ไม่สามารถเขียนลงไดเร็กทอรีได้</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="763"/>
         <source>Show magnifier</source>
-        <translation>แสดงแว่นขยาย</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="764"/>
         <source>Enable a magnifier while selecting the screenshot area</source>
-        <translation>เปิดใช้งานแว่นขยายขณะเลือกพื้นที่ถ่ายภาพหน้าจอ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="775"/>
         <source>Square shaped magnifier</source>
-        <translation>แว่นขยายทรงสี่เหลี่ยม</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="776"/>
         <source>Make the magnifier to be square-shaped</source>
-        <translation>ทำแว่นขยายให้เป็นรูปสี่เหลี่ยมจัตุรัส</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="792"/>
         <source>Milliseconds before geometry display hides; 0 means do not hide</source>
-        <translation>มิลลิวินาทีก่อนที่การแสดงผลรูปทรงเรขาคณิตจะซ่อนลง; 0 หมายถึงไม่ซ่อน</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="795"/>
         <source>Set geometry display timeout (ms)</source>
-        <translation>ตั้งค่าระยะเวลาหมดเวลาการแสดงผลรูปทรงเรขาคณิต (มิลลิวินาที)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="803"/>
         <source>Selection Geometry Display</source>
-        <translation>เลือกการแสดงผลเรขาคณิต</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="810"/>
         <source>Display Location</source>
-        <translation>ตำแหน่งแสดงผล</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="813"/>
         <source>None</source>
-        <translation>เสร็จ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="814"/>
         <source>Top Left</source>
-        <translation>มุมบนซ้าย</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="816"/>
         <source>Top Right</source>
-        <translation>บนขวา</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="818"/>
         <source>Bottom Left</source>
-        <translation>ล่างซ้าย</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="820"/>
         <source>Bottom Right</source>
-        <translation>ล่างขวา</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="822"/>
         <source>Center</source>
-        <translation>กึ่งกลาง</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="847"/>
         <source>Quality range of 0-100; Higher number is better quality and larger file size</source>
-        <translation>ระดับคุณภาพอยู่ระหว่าง 0-100; ตัวเลขที่สูงกว่าหมายถึงคุณภาพที่ดีกว่าและขนาดไฟล์ที่ใหญ่กว่า</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="851"/>
         <source>JPEG Quality</source>
-        <translation>คุณภาพ JPEG</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="862"/>
         <source>Reverse arrow</source>
-        <translation>ลูกศรย้อนกลับ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="863"/>
         <source>Draw the arrow head first</source>
-        <translation>วาดหัวลูกศรก่อน</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="872"/>
         <source>Insecure Pixelate</source>
-        <translation>พิกเซลที่ไม่สมบูรณ์</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="874"/>
         <source>Draw the pixelation effect in an insecure but more asethetic way.</source>
-        <translation>วาดเอฟเฟ็กต์พิกเซลแตกในลักษณะที่ไม่มั่นคงแต่ดูสวยงามกว่า</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="929"/>
         <source>Capture active monitor (skip monitor selection)</source>
-        <translation>บันทึกภาพหน้าจอที่ใช้งานอยู่ (ข้ามขั้นตอนเลือกหน้าจอ)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="931"/>
         <source>Automatically capture the monitor where the cursor is located instead of showing the monitor selection dialog. This feature is not supported on Wayland.</source>
-        <translation>จับภาพหน้าจอที่เคอร์เซอร์อยู่โดยอัตโนมัติ แทนที่จะแสดงกล่องโต้ตอบเลือกหน้าจอ คุณสมบัตินี้ไม่รองรับบน Wayland</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="952"/>
         <source>Use legacy X11 screenshot method (deprecated)</source>
-        <translation>ใช้เมธอดการจับภาพหน้าจอแบบเดิมของ X11 (เลิกใช้แล้ว)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="954"/>
         <source>Bypass the freedesktop portal and use Qt&apos;s native X11 screen capture. Enable this if your window manager lacks xdg-desktop-portal (e.g. xmonad, i3). Only effective on X11; ignored on Wayland.</source>
-        <translation>ข้ามขั้นตอนการใช้งานพอร์ทัล freedesktop และใช้การจับภาพหน้าจอ X11 ดั้งเดิมของ Qt แทน เปิดใช้งานตัวเลือกนี้หากตัวจัดการหน้าต่างของคุณไม่มี xdg-desktop-portal (เช่น xmonad, i3) วิธีนี้ใช้ได้เฉพาะกับ X11 เท่านั้น จะไม่มีผลกับ Wayland</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1433,18 +1427,18 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/widgets/imguploaddialog.cpp" line="19"/>
         <source>Upload Confirmation</source>
-        <translation>ยืนยันการอัพโหลด</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/widgets/imguploaddialog.cpp" line="23"/>
         <source>Do you want to upload this capture?</source>
-        <translation>คุณต้องการอัพโหลดการถ่ายภาพนี้หรือไม่?</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/widgets/imguploaddialog.cpp" line="36"/>
         <location filename="../../src/widgets/imguploaddialog.cpp" line="37"/>
         <source>Upload without confirmation</source>
-        <translation>อัพโหลดโดยไม่ต้องยืนยัน</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1487,62 +1481,62 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="38"/>
         <source>Upload image</source>
-        <translation>อัพโหลดรูปภาพ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="50"/>
         <source>Uploading Image</source>
-        <translation>กำลังอัพโหลดรูปภาพ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="129"/>
         <source>Copy URL</source>
-        <translation>คัดลอก URL</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="130"/>
         <source>Open URL</source>
-        <translation>เปิด URL</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="131"/>
         <source>Delete image</source>
-        <translation>ลบรูปภาพ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="132"/>
         <source>Image to Clipboard.</source>
-        <translation>รูปภาพไปยังคลิปบอร์ด</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="133"/>
         <source>Save image</source>
-        <translation>บันทึกภาพ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="163"/>
         <source>Unable to open the URL.</source>
-        <translation>ไม่สามารถเปิด URL ได้</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="170"/>
         <source>URL copied to clipboard.</source>
-        <translation>คัดลอก URL ไปยังคลิปบอร์ดแล้ว</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="176"/>
         <source>Screenshot copied to clipboard.</source>
-        <translation>คัดลอกภาพหน้าจอไปยังคลิปบอร์ดแล้ว</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="190"/>
         <source>Unable to save the screenshot to disk.</source>
-        <translation>ไม่สามารถบันทึกภาพหน้าจอลงดิสก์ได้</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="193"/>
         <source>Screenshot saved.</source>
-        <translation>บันทึกภาพหน้าจอแล้ว</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1550,12 +1544,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/imgupload/imguploadertool.cpp" line="23"/>
         <source>Image Uploader</source>
-        <translation>อัพโหลดรูปภาพ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/imguploadertool.cpp" line="33"/>
         <source>Upload the selection</source>
-        <translation>อัพโหลดที่เลือก</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1587,7 +1581,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/imgupload/storages/imgur/imguruploader.cpp" line="108"/>
         <source>Unable to open the URL.</source>
-        <translation>ไม่สามารถเปิด URL ได้</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>URL copied to clipboard.</source>
@@ -1615,49 +1609,49 @@ Please solve them manually in the configuration file.</source>
         <location filename="../../src/widgets/infowindow.ui" line="14"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="116"/>
         <source>About</source>
-        <translation>เกี่ยวกับ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="26"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="117"/>
         <source>Icon</source>
-        <translation>ไอคอน</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="43"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="118"/>
         <source>License</source>
-        <translation>ใบอนุญาต</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="56"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="119"/>
         <source>GPLv3+</source>
-        <translation>GPLv3+</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="89"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="120"/>
         <source>Version</source>
-        <translation>เวอร์ชัน</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="102"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="121"/>
         <source>Flameshot v</source>
-        <translation>Flameshot v</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="115"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="122"/>
         <source>OS Info</source>
-        <translation>ข้อมูลระบบปฏิบัติการ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="128"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="123"/>
         <source>Copy Info</source>
-        <translation>คัดลอกข้อมูล</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Right Click</source>
@@ -1729,12 +1723,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/invert/inverttool.cpp" line="26"/>
         <source>Invert</source>
-        <translation>พลิกกลับ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/invert/inverttool.cpp" line="36"/>
         <source>Set Inverter as the paint tool</source>
-        <translation>ตั้งค่าอินเวอร์เตอร์เป็นเครื่องมือทาสี</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1742,12 +1736,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/line/linetool.cpp" line="23"/>
         <source>Line</source>
-        <translation>เส้น</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/line/linetool.cpp" line="33"/>
         <source>Set the Line as the paint tool</source>
-        <translation>ตั้งค่าเส้นเป็นเครื่องมือระบายสี</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1755,12 +1749,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/marker/markertool.cpp" line="24"/>
         <source>Marker</source>
-        <translation>เครื่องหมาย</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/marker/markertool.cpp" line="34"/>
         <source>Set the Marker as the paint tool</source>
-        <translation>ตั้งค่ามาร์กเกอร์เป็นเครื่องมือทาสี</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1769,8 +1763,7 @@ Please solve them manually in the configuration file.</source>
         <location filename="../../src/utils/monitorpreview.cpp" line="31"/>
         <source>Monitor %1: %2
 Click to select</source>
-        <translation>ตรวจสอบ %1: %2
-คลิกเพื่อเลือก</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1778,12 +1771,12 @@ Click to select</source>
     <message>
         <location filename="../../src/tools/move/movetool.cpp" line="24"/>
         <source>Move</source>
-        <translation>ย้าย</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/move/movetool.cpp" line="34"/>
         <source>Move the selection area</source>
-        <translation>ย้ายพื้นที่ที่เลือก</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1791,12 +1784,12 @@ Click to select</source>
     <message>
         <location filename="../../src/tools/pencil/penciltool.cpp" line="18"/>
         <source>Pencil</source>
-        <translation>ดินสอ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/pencil/penciltool.cpp" line="28"/>
         <source>Set the Pencil as the paint tool</source>
-        <translation>ตั้งดินสอเป็นเครื่องมือระบายสี</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1804,12 +1797,12 @@ Click to select</source>
     <message>
         <location filename="../../src/tools/pin/pintool.cpp" line="24"/>
         <source>Pin Tool</source>
-        <translation>ปักหมุด</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pintool.cpp" line="34"/>
         <source>Pin image on the desktop</source>
-        <translation>ปักหมุดภาพบนเดสก์ท็อป</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1817,42 +1810,42 @@ Click to select</source>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="282"/>
         <source>Context menu</source>
-        <translation>เมนูบริบท</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="284"/>
         <source>Copy to clipboard</source>
-        <translation>คัดลอกไปยังคลิปบอร์ด</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="291"/>
         <source>Save to file</source>
-        <translation>บันทึกลงในไฟล์</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="298"/>
         <source>Rotate Right</source>
-        <translation>หมุนไปทางขวา</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="303"/>
         <source>Rotate Left</source>
-        <translation>หมุนไปทางซ้าย</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="308"/>
         <source>Increase Opacity</source>
-        <translation>เพิ่มความทึบแสง</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="315"/>
         <source>Decrease Opacity</source>
-        <translation>ลดความทึบแสง</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="322"/>
         <source>Close</source>
-        <translation>ปิด</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1860,16 +1853,16 @@ Click to select</source>
     <message>
         <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="28"/>
         <source>Pixelate</source>
-        <translation>พิกเซล</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="38"/>
         <source>Set Pixelate as the paint tool.</source>
-        <translation>ตั้งค่า Pixelate เป็นเครื่องมือระบายสี</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Set Pixelate as the paint tool</source>
-        <translation type="vanished">ตั้งค่า Pixelate เป็นเครื่องมือระบายสี</translation>
+        <translation type="vanished">Estableix l&apos;eina de pixel·lament com a eina de dibuix</translation>
     </message>
 </context>
 <context>
@@ -1877,23 +1870,23 @@ Click to select</source>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/primaryinstancewidget.cpp" line="21"/>
         <source>Primary instance</source>
-        <translation>อินสแตนซ์หลัก</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/primaryinstancewidget.cpp" line="22"/>
         <source>&lt;b&gt;Primary instance.&lt;/b&gt; Messages received from secondaries:</source>
-        <translation>&lt;b&gt;อินสแตนซ์หลัก&lt;/b&gt; ข้อความที่ได้รับจากอินสแตนซ์รอง:</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>QHotkey</name>
     <message>
         <source>Failed to register %1. Error: %2</source>
-        <translation type="vanished">ไม่สามารถลงทะเบียน %1 ได้ ผิดพลาด: %2</translation>
+        <translation type="vanished">No s&apos;ha pogut registrar %1. Error: %2</translation>
     </message>
     <message>
         <source>Failed to unregister %1. Error: %2</source>
-        <translation type="vanished">ไม่สามารถยกเลิกการลงทะเบียน %1 ได้ ผิดพลาด: %2</translation>
+        <translation type="vanished">No s&apos;ha pogut desregistrar %1. Error: %2</translation>
     </message>
 </context>
 <context>
@@ -1903,22 +1896,22 @@ Click to select</source>
         <location filename="../../src/utils/screenshotsaver.cpp" line="206"/>
         <location filename="../../src/utils/screenshotsaver.cpp" line="270"/>
         <source>Capture saved to clipboard.</source>
-        <translation>บันทึกการจับภาพลงในคลิปบอร์ดแล้ว</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="190"/>
         <source>Error while saving to clipboard</source>
-        <translation>เกิดข้อผิดพลาดขณะบันทึกลงในคลิปบอร์ด</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="326"/>
         <source>Save screenshot</source>
-        <translation>บันทึกภาพหน้าจอ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="358"/>
         <source>Path copied to clipboard as </source>
-        <translation>เส้นทางที่คัดลอกไปยังคลิปบอร์ดเป็น </translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Saving canceled</source>
@@ -1935,57 +1928,57 @@ Click to select</source>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="369"/>
         <source>Save Error</source>
-        <translation>ผิดพลาดในการบันทึก</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="64"/>
         <location filename="../../src/utils/screenshotsaver.cpp" line="349"/>
         <source>Capture saved as </source>
-        <translation>จับภาพบันทึกไว้เป็น </translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="69"/>
         <location filename="../../src/utils/screenshotsaver.cpp" line="362"/>
         <source>Error trying to save as </source>
-        <translation>เกิดข้อผิดพลาดขณะพยายามบันทึกเป็น </translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="251"/>
         <source>Unable to connect via DBus</source>
-        <translation>ไม่สามารถเชื่อมต่อผ่าน DBus ได</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="268"/>
         <source>Powerful yet simple to use screenshot software.</source>
-        <translation>ซอฟต์แวร์จับภาพหน้าจออันทรงพลังและใช้งานง่าย</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="269"/>
         <source>See</source>
-        <translation>ดู</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Capture the entire desktop.</source>
-        <translation type="vanished">จับภาพเดสก์ท็อปทั้งหมด</translation>
+        <translation type="vanished">Captureu l&apos;escriptori sencer.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="275"/>
         <source>Open the capture launcher.</source>
-        <translation>เปิดตัวเรียกใช้งานการจับภาพ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="278"/>
         <source>Start a manual capture in GUI mode.</source>
-        <translation>เริ่มการจับภาพด้วยตนเองในโหมด GUI</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="280"/>
         <source>Configure</source>
-        <translation>กำหนดค่า</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Capture a single screen.</source>
-        <translation type="vanished">จับภาพหน้าจอเดียว</translation>
+        <translation type="vanished">Captura una sola pantalla.</translation>
     </message>
     <message>
         <source>Path where the capture will be saved</source>
@@ -1994,130 +1987,126 @@ Click to select</source>
     <message>
         <location filename="../../src/main.cpp" line="273"/>
         <source>Capture screenshot of all monitors at the same time.</source>
-        <translation>จับภาพหน้าจอทุกจอพร้อมกัน</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="283"/>
         <source>Capture a screenshot of the specified monitor.</source>
-        <translation>จับภาพหน้าจอของจอที่ระบุไว้</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="288"/>
         <source>Existing directory or new file to save to</source>
-        <translation>มีไดเร็กทอรีที่มีอยู่หรือไฟล์ใหม่ที่จะบันทึก</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="291"/>
         <source>Save the capture to the clipboard</source>
-        <translation>บันทึกภาพที่จับภาพไปยังคลิปบอร์ด</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="293"/>
         <source>Pin the capture to the screen</source>
-        <translation>ปักหมุดจับภาพลงบนหน้าจอ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Upload screenshot</source>
-        <translation type="vanished">อัพโหลดภาพหน้าจอ</translation>
+        <translation type="vanished">Puja la captura de pantalla</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="295"/>
         <source>Delay time in milliseconds</source>
-        <translation>หน่วงเวลาเป็นมิลลิวินาที</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="300"/>
         <source>Repeat screenshot with previously selected region</source>
-        <translation>ทำซ้ำภาพหน้าจอด้วยพื้นที่ที่เลือกไว้ก่อนหน้านี้</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="303"/>
         <source>Screenshot region to select</source>
-        <translation>ถ่ายภาพหน้าจอที่เลือก</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="306"/>
         <source>Set the filename pattern</source>
-        <translation>ตั้งค่ารูปแบบชื่อไฟล์</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="310"/>
         <source>Accept capture as soon as a selection is made</source>
-        <translation>จับภาพทันทีเมื่อมีการเลือก</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="312"/>
         <source>Enable or disable the trayicon</source>
-        <translation>เปิดใช้งานหรือปิดใช้งานไอคอนถาด</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="316"/>
         <source>Enable or disable run at startup</source>
-        <translation>เปิดใช้งานหรือปิดใช้งานอัตโนมัติเมื่อเริ่มต้นระบบ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="320"/>
         <source>Enable or disable the notifications</source>
-        <translation>เปิดใช้งานหรือปิดใช้งานการแจ้งเตือน</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="323"/>
         <source>Check the configuration for errors</source>
-        <translation>ตรวจสอบการกำหนดค่าเพื่อหาข้อผิดพลาด</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="326"/>
         <source>Show the help message in the capture mode</source>
-        <translation>แสดงข้อความช่วยเหลือในโหมดจับภาพ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="329"/>
         <source>Define the main UI color</source>
-        <translation>กำหนดสี UI หลัก</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="333"/>
         <source>Define the contrast UI color</source>
-        <translation>กำหนดสี UI คอนทราสต์</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="336"/>
         <source>Print raw PNG capture</source>
-        <translation>พิมพ์ภาพ PNG แบบ RAW</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="339"/>
         <source>Print geometry of the selection in the format WxH+X+Y. Does nothing if raw is specified</source>
-        <translation>พิมพ์รูปทรงเรขาคณิตของส่วนที่เลือกในรูปแบบ กว้าง x สูง + สูง x ยาว + ต่ำ</translation>
-    </message>
-    <message>
-        <source>Print geometry of the selection in the format W H X Y. Does nothing if raw is specified</source>
-        <translation type="vanished">พิมพ์รูปทรงเรขาคณิตของการเลือกในรูปแบบ W H X Y ไม่ดำเนินการใด ๆ หากระบุข้อมูลแบบ RAW</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="343"/>
         <source>Define the screen to capture (starting from 0)</source>
-        <translation>กำหนดหน้าจอที่จะจับภาพ (เริ่มจาก 0)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="349"/>
         <source>Interactively select and edit the screenshot region</source>
-        <translation>เลือกและแก้ไขขอบเขตการจับภาพหน้าจอแบบโต้ตอบ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="366"/>
         <source>Invalid delay, it must be a number greater than 0</source>
-        <translation>การหน่วงเวลาไม่ถูกต้อง ควรเป็นตัวเลขที่มากกว่า 0</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="369"/>
         <source>Invalid region, use &apos;WxH+X+Y&apos; or &apos;all&apos; or &apos;screen0/screen1/...&apos;.</source>
-        <translation>บริเวณไม่ถูกต้อง ใช้ &apos;WxH+X+Y&apos; หรือ &apos;all&apos; หรือ &apos;screen0/screen1/...&apos;</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="382"/>
         <source>Invalid path, must be an existing directory or a new file in an existing directory</source>
-        <translation>เส้นทางไม่ถูกต้อง ต้องเป็นไดเร็กทอรีที่มีอยู่หรือไฟล์ใหม่ในไดเร็กทอรีที่มีอยู่</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Define the screen to capture</source>
@@ -2126,12 +2115,12 @@ Click to select</source>
     <message>
         <location filename="../../src/main.cpp" line="344"/>
         <source>default: screen containing the cursor</source>
-        <translation>ค่าเริ่มต้น: หน้าจอที่มีเคอร์เซอร์</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="345"/>
         <source>Screen number</source>
-        <translation>หมายเลขหน้าจอ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="357"/>
@@ -2142,13 +2131,7 @@ Click to select</source>
 - #RRRRGGGGBBBB
 - Named colors like &apos;blue&apos; or &apos;red&apos;
 You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
-        <translation>สีไม่ถูกต้อง แฟล็กรองรับรูปแบบต่อไปนี้:
-- #RGB (R, G และ B แต่ละตัวเป็นเลขฐานสิบหกตัวเดียว)
-- #RRGGBB
-- #RRRGGGBBB
-- #RRRRGGGGBBBB
-- สีที่มีชื่อ เช่น &apos;สีน้ำเงิน&apos; หรือ &apos;สีแดง&apos;
-คุณอาจต้องใช้เครื่องหมาย escape &apos;#&apos; เช่น &apos;\#FFF&apos;</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Invalid delay, it must be higher than 0</source>
@@ -2157,7 +2140,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/main.cpp" line="368"/>
         <source>Invalid screen number, it must be non negative</source>
-        <translation>หมายเลขหน้าจอไม่ถูกต้อง จะต้องไม่เป็นลบ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Invalid path, it must be a real path in the system</source>
@@ -2166,27 +2149,27 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/main.cpp" line="395"/>
         <source>Invalid value, it must be defined as &apos;true&apos; or &apos;false&apos;</source>
-        <translation>ค่าไม่ถูกต้อง จะต้องกำหนดเป็น &apos;true&apos; หรือ &apos;false&apos;</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/openwithprogram.cpp" line="30"/>
         <source>Error</source>
-        <translation>ผิดพลาด</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/openwithprogram.cpp" line="31"/>
         <source>Unable to write in</source>
-        <translation>ไม่สามารถเขียนได้</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="168"/>
         <source>Requested screen exceeds screen count</source>
-        <translation>เกินจำนวนหน้าจอที่ร้องขอ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="418"/>
         <source>Full screen screenshot pinned to screen</source>
-        <translation>ภาพหน้าจอแบบเต็มจอถูกปักหมุดไว้บนหน้าจอ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>URL copied to clipboard.</source>
@@ -2195,45 +2178,45 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="54"/>
         <source>Options</source>
-        <translation>ตัวเลือก</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Arguments</source>
-        <translation type="vanished">ข้อโต้แย้ง</translation>
+        <translation type="vanished">Arguments</translation>
     </message>
     <message>
         <source>arguments</source>
-        <translation type="vanished">ข้อโต้แย้ง</translation>
+        <translation type="vanished">arguments</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="68"/>
         <source>Subcommands</source>
-        <translation>คำสั่งย่อย</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="328"/>
         <source>subcommands</source>
-        <translation>คำสั่งย่อย</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="329"/>
         <source>Usage</source>
-        <translation>ใช้ไป</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="329"/>
         <source>options</source>
-        <translation>ตัวเลือก</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="334"/>
         <source>Per default runs Flameshot in the background and adds a tray icon for configuration.</source>
-        <translation>ตามค่าเริ่มต้น Flameshot จะรันในพื้นหลังและเพิ่มไอคอนถาดสำหรับการกำหนดค่า</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="83"/>
         <source>Hello, I&apos;m here! Click icon in the tray to take a screenshot or click with a right button to see more options.</source>
-        <translation>สวัสดี ฉันอยู่ที่นี่! คลิกไอคอนในถาดเพื่อจับภาพหน้าจอหรือคลิกปุ่มขวาเพื่อดูตัวเลือกเพิ่มเติม</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Toggle side panel</source>
@@ -2286,27 +2269,27 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="208"/>
         <source>Quit capture</source>
-        <translation>ออกจากการจับภาพ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="224"/>
         <source>Screenshot history</source>
-        <translation>ประวัติการจับภาพหน้าจอ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="219"/>
         <source>Capture screen</source>
-        <translation>จับภาพหน้าจอ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="233"/>
         <source>Show color picker</source>
-        <translation>แสดงตัวเลือกสี</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="234"/>
         <source>Change the tool&apos;s size</source>
-        <translation>เปลี่ยนขนาดเครื่องมือ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Change the tool&apos;s thickness</source>
@@ -2318,12 +2301,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/rectangle/rectangletool.cpp" line="23"/>
         <source>Rectangle</source>
-        <translation>สี่เหลี่ยมผืนผ้า</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/rectangle/rectangletool.cpp" line="33"/>
         <source>Set the Rectangle as the paint tool</source>
-        <translation>ตั้งค่าสี่เหลี่ยมผืนผ้าเป็นเครื่องมือระบายสี</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2331,12 +2314,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/redo/redotool.cpp" line="24"/>
         <source>Redo</source>
-        <translation>ทำซ้ำ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/redo/redotool.cpp" line="34"/>
         <source>Redo the next modification</source>
-        <translation>ทำการแก้ไขครั้งต่อไปใหม่</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2344,12 +2327,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/save/savetool.cpp" line="24"/>
         <source>Save</source>
-        <translation>บันทึก</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/save/savetool.cpp" line="34"/>
         <source>Save screenshot to a file</source>
-        <translation>บันทึกภาพหน้าจอลงในไฟล์</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Save the capture</source>
@@ -2360,46 +2343,62 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <name>ScreenGrabber</name>
     <message>
         <source>Unable to detect desktop environment (GNOME? KDE? Sway? ...)</source>
-        <translation type="vanished">ไม่สามารถตรวจจับสภาพแวดล้อมเดสก์ท็อปได้ (GNOME? KDE? Sway? ...)</translation>
+        <translation type="vanished">Unable to detect desktop environment (GNOME? KDE? Sway? ...)</translation>
+    </message>
+    <message>
+        <source>The universal wayland screen capture adapter requires Grim as the screen capture component of wayland. If the screen capture component is missing, please install it!</source>
+        <translation type="vanished">L&apos;adaptador universal de captura de pantalla de wayland requereix Grim com a component de captura de pantalla del wayland. Si falta el component de captura de pantalla, instal·leu-lo!</translation>
+    </message>
+    <message>
+        <source>If the useGrimAdapter setting is not enabled, the dbus protocol will be used. It should be noted that using the dbus protocol under wayland is not recommended. It is recommended to enable the useGrimAdapter setting in flameshot.ini to activate the grim-based general wayland screenshot adapter</source>
+        <translation type="vanished">Si la configuració useGrimAdapter no està activada, s&apos;utilitzarà el protocol dbus. Cal tenir en compte que no es recomana l&apos;ús del protocol de dbus en el wayland. Es recomana habilitar l&apos;opció useGrimAdapter a flameshot.ini per activar l&apos;adaptador general de captura de pantalla Wayland basat en grim</translation>
+    </message>
+    <message>
+        <source>grim&apos;s screenshot component is implemented based on wlroots, it may not be used in GNOME or similar desktop environments</source>
+        <translation type="vanished">El component de captura de pantalla de grim s&apos;implementa en base a wlroots, no es pot utilitzar en el GNOME o en entorns d&apos;escriptori similars</translation>
+    </message>
+    <message>
+        <source>Unable to detect desktop environment (GNOME? KDE? Qile? Sway? ...)</source>
+        <translation type="vanished">No s&apos;ha pogut detectar l&apos;entorn d&apos;escriptori (GNOME? KDE? Qile? Sway? ...)</translation>
     </message>
     <message>
         <source>Hint: try setting the XDG_CURRENT_DESKTOP environment variable.</source>
-        <translation type="vanished">คำแนะนำ: ลองตั้งค่าตัวแปรสภาพแวดล้อม XDG_CURRENT_DESKTOP</translation>
+        <translation type="vanished">Pista: prova de configurar la variable d&apos;entorn XDG_CURRENT_DESKTOP.</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="61"/>
         <source>Could not locate the `org.freedesktop.portal.Desktop` service</source>
-        <translation>ไม่พบ `org.freedesktop.portal.Desktop`</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="109"/>
         <source>Screenshot portal timed out after 30 seconds</source>
-        <translation>พอร์ทัลจับภาพหน้าจอหมดเวลาหลังจาก 30 วินาที</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="132"/>
         <source>FreeDesktop portal screenshot size: %1x%2, DPR: %3</source>
-        <translation>ขนาดภาพหน้าจอพอร์ทัล FreeDesktop: %1x%2, DPR: %3</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="159"/>
         <source>Capture Active Monitor is not supported on Wayland due to Wayland security model.</source>
-        <translation>Capture Active Monitor ไม่ได้รับการสนับสนุนบน Wayland เนื่องจากรูปแบบความปลอดภัยของ Wayland</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="177"/>
         <source>Screenshot already in progress, please wait for the current screenshot to complete</source>
-        <translation>กำลังดำเนินการจับภาพหน้าจออยู่ โปรดรอจนกว่าการจับภาพหน้าจอจะเสร็จสมบูรณ์</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="202"/>
         <source>Screenshot cancelled</source>
-        <translation>ยกเลิกการจับภาพหน้าจอ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="218"/>
         <source>Unable to get current screen</source>
-        <translation>ไม่สามารถรับหน้าจอปัจจุบันได้</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="237"/>
@@ -2407,18 +2406,18 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <location filename="../../src/utils/screengrabber.cpp" line="299"/>
         <location filename="../../src/utils/screengrabber.cpp" line="304"/>
         <source>Unable to capture screen</source>
-        <translation>ไม่สามารถจับภาพหน้าจอได้</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="373"/>
         <source>=== All Screen Information ===</source>
-        <translation>=== ข้อมูลหน้าจอทั้งหมด ===</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="376"/>
         <location filename="../../src/utils/screengrabber.cpp" line="551"/>
         <source>Screen %1: %2</source>
-        <translation>หน้าจอ %1: %2</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="377"/>
@@ -2428,7 +2427,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="382"/>
         <source>  DPR: %1</source>
-        <translation type="unfinished">  DPR: %1</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="488"/>
@@ -2481,27 +2480,27 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="27"/>
         <source>&lt;b&gt;Secondary instance.&lt;/b&gt; Send message to primary:</source>
-        <translation>&lt;b&gt;อินสแตนซ์รอง&lt;/b&gt; ส่งข้อความไปยังอินสแตนซ์หลัก:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="29"/>
         <source>Type something here...</source>
-        <translation>พิมพ์ข้อความตรงนี้...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="31"/>
         <source>&amp;Send</source>
-        <translation>&amp;ส่ง</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="54"/>
         <source>Error sending message</source>
-        <translation>เกิดข้อผิดพลาดในการส่งข้อความ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="55"/>
         <source>The message &apos;%1&apos; could not be sent to the primary.</source>
-        <translation>ไม่สามารถส่งข้อความ &apos;%1&apos; ได้</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2509,12 +2508,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/selection/selectiontool.cpp" line="26"/>
         <source>Rectangular Selection</source>
-        <translation>เลือกรูปสี่เหลี่ยมผืนผ้า</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/selection/selectiontool.cpp" line="36"/>
         <source>Set Selection as the paint tool</source>
-        <translation>ตั้งค่าเป็นเครื่องมือระบายสี</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2522,28 +2521,28 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="20"/>
         <source>Set Shortcut</source>
-        <translation>ตั้งค่าทางลัด</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="26"/>
         <source>Enter new shortcut to change </source>
-        <translation>ป้อนทางลัดใหม่เพื่อเปลี่ยนแปลง </translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="40"/>
         <source>Press Esc to cancel or ⌘+Backspace to disable the keyboard shortcut.</source>
-        <translation>กด Esc เพื่อยกเลิกหรือ ⌘+Backspace เพื่อปิดใช้งานแป้นพิมพ์ลัด</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="44"/>
         <source>Press Esc to cancel or Backspace to disable the keyboard shortcut.</source>
-        <translation>กด Esc เพื่อยกเลิกหรือ ⌘+Backspace เพื่อปิดใช้งานแป้นพิมพ์ลัด</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="50"/>
         <location filename="../../src/config/setshortcutwidget.cpp" line="55"/>
         <source>Flameshot must be restarted for changes to take effect.</source>
-        <translation>ต้องรีสตาร์ท Flameshot เพื่อให้มีผลการเปลี่ยนแปลง</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2551,57 +2550,57 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="31"/>
         <source>Hot Keys</source>
-        <translation>คีย์ลัด</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="61"/>
         <source>Available shortcuts in the screen capture mode.</source>
-        <translation>ปุ่มลัดที่สามารถใช้งานได้ในโหมดจับภาพหน้าจอ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="72"/>
         <source>Description</source>
-        <translation>คำอธิบาย</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="72"/>
         <source>Key</source>
-        <translation>คีย์</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="175"/>
         <source>Left Double-click</source>
-        <translation>ดับเบิลคลิกซ้ายสองครั้ง</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="182"/>
         <source>Toggle side panel</source>
-        <translation>สลับแผงด้านข้าง</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="183"/>
         <source>Grab a color from the screen</source>
-        <translation>เลือกสีจากหน้าจอ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="184"/>
         <source>Resize selection left 1px</source>
-        <translation>ปรับขนาดที่เลือกด้านซ้าย 1px</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="185"/>
         <source>Resize selection right 1px</source>
-        <translation>ปรับขนาดการที่เลือกด้านขวา 1px</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="186"/>
         <source>Resize selection up 1px</source>
-        <translation>ปรับขนาดการที่เลือกขึ้น 1px</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="187"/>
         <source>Resize selection down 1px</source>
-        <translation>ปรับขนาดการที่เลือกลง 1px</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="189"/>
@@ -2626,32 +2625,32 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="196"/>
         <source>Select entire screen</source>
-        <translation>เลือกหน้าจอทั้งหมด</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="197"/>
         <source>Move selection left 1px</source>
-        <translation>เลื่อนที่เลือกไปทางซ้าย 1 พิกเซล</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="198"/>
         <source>Move selection right 1px</source>
-        <translation>เลื่อนที่เลือกไปทางขวา 1 พิกเซล</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="199"/>
         <source>Move selection up 1px</source>
-        <translation>เลื่อนที่เลือกขึ้น 1 พิกเซล</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="200"/>
         <source>Move selection down 1px</source>
-        <translation>เลื่อนที่เลือกลง 1 พิกเซล</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="201"/>
         <source>Commit text in text area</source>
-        <translation>ยืนยันข้อความในพื้นที่ข้อความ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="203"/>
@@ -2671,7 +2670,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="273"/>
         <source>Flameshot must be restarted for changes to take effect.</source>
-        <translation type="unfinished">ต้องรีสตาร์ท Flameshot เพื่อให้มีผลการเปลี่ยนแปลง</translation>
+        <translation type="unfinished">Flameshot s&apos;ha de reiniciar perquè els canvis tinguin efecte.</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="278"/>
@@ -2703,18 +2702,18 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     </message>
     <message>
         <source>Delete current tool</source>
-        <translation type="vanished">ลบเครื่องมือปัจจุบัน</translation>
+        <translation type="obsolete">Delete current tool</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="213"/>
         <location filename="../../src/config/shortcutswidget.cpp" line="222"/>
         <source>Capture screen</source>
-        <translation>จับภาพหน้าจอ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="215"/>
         <source>Screenshot history</source>
-        <translation>ประวัติการจับภาพหน้าจอ</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2734,17 +2733,17 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="37"/>
         <source>Active tool size: </source>
-        <translation>ขนาดเครื่องมือที่ใช้งาน: </translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="57"/>
         <source>Active Color: </source>
-        <translation>สีที่ใช้งาน: </translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="78"/>
         <source>Grab Color</source>
-        <translation>จับสีต่าง ๆ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="85"/>
@@ -2757,12 +2756,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/sizedecrease/sizedecreasetool.cpp" line="38"/>
         <source>Decrease Tool Size</source>
-        <translation>ลดขนาดเครื่องมือ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/sizedecrease/sizedecreasetool.cpp" line="48"/>
         <source>Decrease the size of the other tools</source>
-        <translation>ลดขนาดของเครื่องมืออื่น ๆ</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2770,23 +2769,23 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/sizeincrease/sizeincreasetool.cpp" line="38"/>
         <source>Increase Tool Size</source>
-        <translation>เพิ่มขนาดเครื่องมือ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/sizeincrease/sizeincreasetool.cpp" line="48"/>
         <source>Increase the size of the other tools</source>
-        <translation>เพิ่มขนาดของเครื่องมืออื่น ๆ</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>SizeIndicatorTool</name>
     <message>
         <source>Selection Size Indicator</source>
-        <translation type="vanished">ตัวระบุขนาดการเลือก</translation>
+        <translation type="vanished">Indicador de mida de selecció</translation>
     </message>
     <message>
         <source>Show X and Y dimensions of the selection</source>
-        <translation type="vanished">แสดงมิติ X และ Y ที่เลือก</translation>
+        <translation type="vanished">Show X and Y dimensions of the selection</translation>
     </message>
     <message>
         <source>Show the dimensions of the selection (X Y)</source>
@@ -2797,87 +2796,91 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <name>StrftimeChooserWidget</name>
     <message>
         <source>Century (00-99)</source>
-        <translation type="vanished">ศตวรรษ (00-99)</translation>
+        <translation type="vanished">Segle (00-99)</translation>
     </message>
     <message>
         <source>Year (00-99)</source>
-        <translation type="vanished">ปี (00-99)</translation>
+        <translation type="vanished">Any (00-99)</translation>
     </message>
     <message>
         <source>Year (2000)</source>
-        <translation type="vanished">ปี (2000)</translation>
+        <translation type="vanished">Any (2000)</translation>
     </message>
     <message>
         <source>Month Name (jan)</source>
-        <translation type="vanished">ชื่อเดือน (ม.ค.)</translation>
+        <translation type="vanished">Nom del mes (jul)</translation>
     </message>
     <message>
         <source>Month Name (january)</source>
-        <translation type="vanished">ชื่อเดือน (มกราคม)</translation>
+        <translation type="vanished">Nom del mes (juliol)</translation>
     </message>
     <message>
         <source>Month (01-12)</source>
-        <translation type="vanished">เดือน (01-12)</translation>
+        <translation type="vanished">Mes (01-12)</translation>
     </message>
     <message>
         <source>Week Day (1-7)</source>
-        <translation type="vanished">วันธรรมดา (1-7)</translation>
+        <translation type="vanished">Dia de la setmana (1-7)</translation>
     </message>
     <message>
         <source>Week (01-53)</source>
-        <translation type="vanished">สัปดาห์ (01-53)</translation>
+        <translation type="vanished">Setmana (01-53)</translation>
     </message>
     <message>
         <source>Day Name (mon)</source>
-        <translation type="vanished">ชื่อวัน (จันทร์)</translation>
+        <translation type="vanished">Nom del dia (dg)</translation>
     </message>
     <message>
         <source>Day Name (monday)</source>
-        <translation type="vanished">ชื่อวัน (วันจันทร์)</translation>
+        <translation type="vanished">Nom del dia (diumenge)</translation>
     </message>
     <message>
         <source>Day (01-31)</source>
-        <translation type="vanished">วันที่ (01-31)</translation>
+        <translation type="vanished">Dia (01-31)</translation>
     </message>
     <message>
         <source>Day of Month (1-31)</source>
-        <translation type="vanished">วันที่ (1-31)</translation>
+        <translation type="vanished">Dia del mes (1-31)</translation>
     </message>
     <message>
         <source>Day (001-366)</source>
-        <translation type="vanished">วัน (001-366)</translation>
+        <translation type="vanished">Dia (001-366)</translation>
     </message>
     <message>
         <source>Hour (00-23)</source>
-        <translation type="vanished">ชั่วโมง (00-23)</translation>
+        <translation type="vanished">Hora (00-23)</translation>
     </message>
     <message>
         <source>Hour (01-12)</source>
-        <translation type="vanished">ชั่วโมง (01-12)</translation>
+        <translation type="vanished">Hora (01-12)</translation>
     </message>
     <message>
         <source>Minute (00-59)</source>
-        <translation type="vanished">นาที (00-59)</translation>
+        <translation type="vanished">Minut (00-59)</translation>
     </message>
     <message>
         <source>Second (00-59)</source>
-        <translation type="vanished">วินาที (00-59)</translation>
+        <translation type="vanished">Segon (00-59)</translation>
     </message>
     <message>
         <source>Full Date (%m/%d/%y)</source>
-        <translation type="vanished">วันที่แบบเต็ม (%m/%d/%y)</translation>
+        <translation type="vanished">Data Completa (%m/%d/%y)</translation>
     </message>
     <message>
         <source>Full Date (%Y-%m-%d)</source>
-        <translation type="vanished">วันที่แบบเต็ม (%Y-%m-%d)</translation>
+        <translation type="vanished">Data Completa (%Y-%m-%d)</translation>
+    </message>
+    <message>
+        <source>Full Date (%d-%m-%Y)</source>
+        <translation type="vanished">Data Completa (%d-%m-%Y)</translation>
     </message>
     <message>
         <source>Time (%H-%M-%S)</source>
-        <translation type="vanished">เวลา (%H-%M-%S)</translation>
+        <translation type="vanished">Hora (%H-%M-%S)</translation>
     </message>
     <message>
         <source>Time (%H-%M)</source>
-        <translation type="vanished">เวลา (%H-%M)</translation>
+        <translation type="vanished">Hora (%H-%M)</translation>
     </message>
 </context>
 <context>
@@ -2890,7 +2893,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/utils/systemnotification.cpp" line="51"/>
         <source>Flameshot Info</source>
-        <translation>ข้อมูล Flameshot</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2898,37 +2901,37 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/text/textconfig.cpp" line="45"/>
         <source>StrikeOut</source>
-        <translation>สไตรค์เอาท์</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/text/textconfig.cpp" line="54"/>
         <source>Underline</source>
-        <translation>ขีดเส้นใต้</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/text/textconfig.cpp" line="63"/>
         <source>Bold</source>
-        <translation>ตัวหนา</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/text/textconfig.cpp" line="72"/>
         <source>Italic</source>
-        <translation>ตัวเอียง</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/text/textconfig.cpp" line="82"/>
         <source>Left Align</source>
-        <translation>ชิดซ้าย</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/text/textconfig.cpp" line="91"/>
         <source>Center Align</source>
-        <translation>จัดตำแหน่งให้ตรงกลาง</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/text/textconfig.cpp" line="100"/>
         <source>Right Align</source>
-        <translation>ชิดขวา</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2936,12 +2939,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/text/texttool.cpp" line="73"/>
         <source>Text</source>
-        <translation>ข้อความ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/text/texttool.cpp" line="97"/>
         <source>Add text to your capture</source>
-        <translation>เพิ่มข้อความลงในภาพของคุณ</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2949,28 +2952,28 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="112"/>
         <source>&amp;Take Screenshot</source>
-        <translation>&amp;ถ่ายภาพหน้าจอ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="133"/>
         <source>&amp;Open Launcher</source>
-        <translation>&amp;เปิดตัวเรียกใช้งาน</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="138"/>
         <source>&amp;Configuration</source>
-        <translation>&amp;กำหนดค่า</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="143"/>
         <source>&amp;About</source>
-        <translation>&amp;เกี่ยวกับ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="150"/>
         <location filename="../../src/widgets/trayicon.cpp" line="237"/>
         <source>Check for updates</source>
-        <translation>ตรวจสอบการอัปเดต</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="162"/>
@@ -2989,17 +2992,17 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     </message>
     <message>
         <source>New version %1 is available</source>
-        <translation type="vanished">เวอร์ชันใหม่ %1 พร้อมให้บริการแล้ว</translation>
+        <translation type="vanished">Nova versió %1 disponible</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="176"/>
         <source>&amp;Quit</source>
-        <translation>&amp;ออก</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="181"/>
         <source>&amp;Latest Uploads</source>
-        <translation>&amp;อัพโหลดล่าสุด</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="187"/>
@@ -3016,32 +3019,32 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="89"/>
         <source>Change the color moving the selectors and see the changes in the preview buttons.</source>
-        <translation>เปลี่ยนสีโดยการย้ายตัวเลือกและดูการเปลี่ยนแปลงในปุ่มแสดงตัวอย่าง</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="100"/>
         <source>Select a Button to modify it</source>
-        <translation>เลือกปุ่มเพื่อแก้ไข</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="110"/>
         <source>Main Color</source>
-        <translation>สีหลัก</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="114"/>
         <source>Click on this button to set the edition mode of the main color.</source>
-        <translation>คลิกที่ปุ่มนี้เพื่อตั้งค่าสีหลัก</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="125"/>
         <source>Contrast Color</source>
-        <translation>ความแตกต่างของสี</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="130"/>
         <source>Click on this button to set the edition mode of the contrast color.</source>
-        <translation>คลิกที่ปุ่มนี้เพื่อแก้ไขสีคอนทราสต์</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3049,12 +3052,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/undo/undotool.cpp" line="24"/>
         <source>Undo</source>
-        <translation>เลิกทำ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/undo/undotool.cpp" line="34"/>
         <source>Undo the last modification</source>
-        <translation>ย้อนกลับการแก้ไขครั้งล่าสุด</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3062,22 +3065,22 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/widgets/updatenotificationwidget.cpp" line="71"/>
         <source>New Flameshot version %1 is available</source>
-        <translation>Flameshot เวอร์ชันใหม่ %1 พร้อมให้บริการแล้ว</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/widgets/updatenotificationwidget.cpp" line="129"/>
         <source>Ignore</source>
-        <translation>ข้าม</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/widgets/updatenotificationwidget.cpp" line="137"/>
         <source>Later</source>
-        <translation>ภายหลัง</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/widgets/updatenotificationwidget.cpp" line="145"/>
         <source>Update</source>
-        <translation>อัปเดต</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3085,12 +3088,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/widgets/uploadhistory.ui" line="14"/>
         <source>Upload History</source>
-        <translation>ประวัติการอัพโหลด</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadhistory.cpp" line="60"/>
         <source>Screenshots history is empty</source>
-        <translation>ประวัติการจับภาพหน้าจอว่างเปล่า</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3098,32 +3101,32 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/widgets/uploadlineitem.ui" line="20"/>
         <source>Form</source>
-        <translation>ฟอร์ม</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadlineitem.ui" line="49"/>
         <source>TextLabel</source>
-        <translation>ป้ายข้อความ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadlineitem.ui" line="82"/>
         <source>Copy URL</source>
-        <translation>คัดลอก URL</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadlineitem.ui" line="95"/>
         <source>Open In Browser</source>
-        <translation>เปิดในเบราว์เซอร์</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadlineitem.cpp" line="50"/>
         <source>Confirm to delete</source>
-        <translation>ยืนยันการลบ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadlineitem.cpp" line="51"/>
         <source>Are you sure you want to delete a screenshot from the latest uploads and server?</source>
-        <translation>คุณแน่ใจหรือไม่ว่าต้องการลบภาพหน้าจอจากการอัพโหลดล่าสุด?</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3131,12 +3134,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/widgets/panel/utilitypanel.cpp" line="197"/>
         <source>Close</source>
-        <translation>ปิด</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/utilitypanel.cpp" line="207"/>
         <source>&lt;Empty&gt;</source>
-        <translation>&lt;ว่าง&gt;</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3144,27 +3147,27 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="44"/>
         <source>Opacity of area outside selection:</source>
-        <translation>ความทึบของพื้นที่นอกส่วนที่เลือก:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="73"/>
         <source>UI Color Editor</source>
-        <translation>ตัวแก้ไขสี UI</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="79"/>
         <source>Colorpicker Editor</source>
-        <translation>โปรแกรมแก้ไขตัวเลือกสี</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="84"/>
         <source>Button Selection</source>
-        <translation>เลือกปุ่ม</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="90"/>
         <source>Select All</source>
-        <translation>เลือกทั้งหมด</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="101"/>
@@ -3174,7 +3177,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="141"/>
         <source>Configuration</source>
-        <translation type="unfinished">การกำหนดค่า</translation>
+        <translation type="unfinished">Ajustaments</translation>
     </message>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="142"/>
@@ -3187,7 +3190,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.cpp" line="63"/>
         <source>Pick</source>
-        <translation>เลือก</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3195,7 +3198,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette.cpp" line="422"/>
         <source>Unnamed</source>
-        <translation>ไม่มีชื่อ</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3203,12 +3206,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_model.cpp" line="55"/>
         <source>Unnamed</source>
-        <translation>ไม่มีชื่อ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_model.cpp" line="130"/>
         <source>%1 (%2 colors)</source>
-        <translation>%1 (สี %2)</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3217,89 +3220,88 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="64"/>
         <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="231"/>
         <source>Open a new palette from file</source>
-        <translation>เปิดจานสีใหม่จากไฟล์</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="75"/>
         <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="234"/>
         <source>Create a new palette</source>
-        <translation>สร้างจานสีใหม่</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="86"/>
         <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="237"/>
         <source>Duplicate the current palette</source>
-        <translation>ทำซ้ำจานสีปัจจุบัน</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="170"/>
         <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="240"/>
         <source>Delete the current palette</source>
-        <translation>ลบจานสีปัจจุบัน</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="181"/>
         <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="243"/>
         <source>Revert changes to the current palette</source>
-        <translation>ย้อนกลับการเปลี่ยนแปลงไปยังจานสีปัจจุบัน</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="192"/>
         <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="246"/>
         <source>Save changes to the current palette</source>
-        <translation>บันทึกการเปลี่ยนแปลงไปยังจานสีปัจจุบัน</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="216"/>
         <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="249"/>
         <source>Add a color to the palette</source>
-        <translation>เพิ่มสีให้กับจานสี</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="227"/>
         <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="252"/>
         <source>Remove the selected color from the palette</source>
-        <translation>ลบสีที่เลือกออกจากจานสี</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="181"/>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="196"/>
         <source>New Palette</source>
-        <translation>จานสีใหม่</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="182"/>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="197"/>
         <source>Name</source>
-        <translation>ชื่อ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="223"/>
         <source>GIMP Palettes (*.gpl)</source>
-        <translation>จานสี GIMP (*.gpl)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="224"/>
         <source>Palette Image (%1)</source>
-        <translation>ภาพพาเลท (%1)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="225"/>
         <source>All Files (*)</source>
-        <translation>ไฟล์ทั้งหมด (*)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="226"/>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="239"/>
         <source>Open Palette</source>
-        <translation>เปิดจานสี</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="240"/>
         <source>Failed to load the palette file
 %1</source>
-        <translation>ไม่สามารถโหลดไฟล์จานสีได้
-%1</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3307,17 +3309,17 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_editor.cpp" line="321"/>
         <source>Add Color</source>
-        <translation>เพิ่มสี</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_editor.cpp" line="330"/>
         <source>Remove Color</source>
-        <translation>ลบสี</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_editor.cpp" line="338"/>
         <source>Edit Color...</source>
-        <translation>แก้ไขสี...</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3325,7 +3327,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_list_model.cpp" line="215"/>
         <source>%1 (%2 colors)</source>
-        <translation>%1 (สี %2)</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3333,12 +3335,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/swatch.cpp" line="855"/>
         <source>Clear Color</source>
-        <translation>เคลียร์สี</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/swatch.cpp" line="864"/>
         <source>%1 (%2)</source>
-        <translation>%1 (%2)</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

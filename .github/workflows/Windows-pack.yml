@@ -6,13 +6,13 @@ on:
       - master
       - fix*
     paths-ignore:
-      - 'README.md'
+      - '*.md'
       - 'LICENSE'
       - 'docs/**'
 
   pull_request:
     paths-ignore:
-      - 'README.md'
+      - '*.md'
       - 'LICENSE'
       - 'docs/**'
       - 'data/translations/*.ts'
