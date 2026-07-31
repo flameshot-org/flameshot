@@ -93,6 +93,7 @@ private:
     QCursor m_idleCentralCursor;
     bool m_ignoreMouse;
     bool m_mouseStartMove;
+    float m_aspectRatio;
 
     // naming convention for handles
     // T top, B bottom, R Right, L left
