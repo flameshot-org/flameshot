@@ -590,6 +590,10 @@ void ScreenGrabber::setHighlightedMonitorPreview(int previewIndex)
 
 bool ScreenGrabber::eventFilter(QObject* obj, QEvent* event)
 {
+    if (event->type() == QEvent::Close) {
+        cancelMonitorSelection();
+        return true;
+    }
     if (event->type() == QEvent::KeyPress) {
         QKeyEvent* keyEvent = static_cast<QKeyEvent*>(event);
         switch (keyEvent->key()) {
