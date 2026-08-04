@@ -2,6 +2,7 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "sidepanelwidget.h"
+#include "geometryeditlayoutwidget.h"
 #include "utils/colorutils.h"
 #include "utils/pathinfo.h"
 #include "widgets/panel/colorgrabwidget.h"
@@ -93,6 +94,13 @@ SidePanelWidget::SidePanelWidget(QPixmap* p, QWidget* parent)
     gridHBoxLayout->addWidget(m_gridSizeSpin);
     m_layout->addLayout(gridHBoxLayout);
 
+    m_geometryEditWidget = new GeometryEditLayoutWidget;
+    m_layout->addWidget(m_geometryEditWidget);
+    connect(m_geometryEditWidget,
+            &GeometryEditLayoutWidget::edited,
+            this,
+            &SidePanelWidget::geometryChangeRequested);
+
     // tool size sigslots
     connect(m_toolSizeSpin,
             static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged),
@@ -152,6 +160,11 @@ void SidePanelWidget::onToolSizeChanged(int t)
     m_toolSize = qBound(0, t, maxToolSize);
     m_toolSizeSlider->setValue(m_toolSize);
     m_toolSizeSpin->setValue(m_toolSize);
+}
+
+void SidePanelWidget::onGrabAreaChanged(QRect const& geometry)
+{
+    m_geometryEditWidget->update(geometry);
 }
 
 void SidePanelWidget::startColorGrab()
