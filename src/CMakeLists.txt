@@ -395,10 +395,67 @@ if (WIN32)
         list(APPEND WINDEPLOYQT_SEARCH_PATHS "${prefix}/bin")
     endforeach()
     list(APPEND WINDEPLOYQT_SEARCH_PATHS "$ENV{QTDIR}/bin")
-    
+
+    # The ARM64 Qt is a cross-compiled package and does NOT ship windeployqt.exe;
+    # the tool only exists in the x86_64 host Qt. We must therefore run the host
+    # windeployqt but point it at the ARM64 qtpaths via --qtpaths, otherwise it
+    # deploys the host's x64 Qt libraries.
+    if(CMAKE_GENERATOR_PLATFORM MATCHES "[Aa][Rr][Mm]64")
+        # Candidate ARM64 (target) Qt roots, as exported by install-qt-action.
+        # NOTE: the CMAKE_PREFIX_PATH *variable* is usually empty here (it is an
+        # environment variable), so QT_ROOT_DIR/QTDIR are the reliable sources.
+        # The env values use native backslashes, so normalise them first.
+        set(_arm64_qt_bins "")
+        foreach(_raw "$ENV{QT_ROOT_DIR}" "$ENV{QTDIR}" ${CMAKE_PREFIX_PATH})
+            if(_raw)
+                file(TO_CMAKE_PATH "${_raw}" _qt_root)
+                list(APPEND _arm64_qt_bins "${_qt_root}/bin")
+                # The host Qt (which has windeployqt.exe) is installed as a
+                # sibling of the target: …/msvc2022_64 next to …/msvc2022_arm64.
+                string(REPLACE "msvc2022_arm64" "msvc2022_64" _host_root "${_qt_root}")
+                list(APPEND WINDEPLOYQT_SEARCH_PATHS "${_host_root}/bin")
+            endif()
+        endforeach()
+        if(DEFINED ENV{QT_HOST_PATH})
+            file(TO_CMAKE_PATH "$ENV{QT_HOST_PATH}" _host_path)
+            list(APPEND WINDEPLOYQT_SEARCH_PATHS "${_host_path}/bin")
+        endif()
+
+        # The cross-compiled ARM64 package ships qtpaths as a .bat wrapper
+        # (qtpaths.bat) rather than an .exe, so find_program (which only resolves
+        # executables) cannot see it. Look for the wrapper explicitly, restricted
+        # to the ARM64 bins so we never pick up the host's x64 qtpaths. Pointing
+        # the host windeployqt at it via --qtpaths makes it deploy ARM64 libs.
+        foreach(_bin ${_arm64_qt_bins})
+            foreach(_name qtpaths6.bat qtpaths.bat qtpaths6.exe qtpaths.exe)
+                if(NOT WINDEPLOYQT_QTPATHS AND EXISTS "${_bin}/${_name}")
+                    set(WINDEPLOYQT_QTPATHS "${_bin}/${_name}")
+                endif()
+            endforeach()
+        endforeach()
+    endif()
+
     find_program(WINDEPLOYQT_EXE windeployqt.exe
         PATHS ${WINDEPLOYQT_SEARCH_PATHS}
     )
+
+    if(CMAKE_GENERATOR_PLATFORM MATCHES "[Aa][Rr][Mm]64")
+        if(WINDEPLOYQT_QTPATHS)
+            message(STATUS "windeployqt ARM64 target qtpaths: ${WINDEPLOYQT_QTPATHS}")
+            set(WINDEPLOYQT_QTPATHS_ARG --qtpaths "${WINDEPLOYQT_QTPATHS}")
+        else()
+            set(_arm64_bin_listing "")
+            foreach(_bin ${_arm64_qt_bins})
+                file(GLOB _g "${_bin}/qtpaths*" "${_bin}/*.bat")
+                list(APPEND _arm64_bin_listing ${_g})
+            endforeach()
+            message(FATAL_ERROR
+                "ARM64 build: could not locate the target qtpaths (.bat/.exe). "
+                "Without it windeployqt deploys x64 Qt libraries. Searched bins: "
+                "'${_arm64_qt_bins}'. qtpaths*/*.bat present there: "
+                "'${_arm64_bin_listing}'.")
+        endif()
+    endif()
 
     if(WINDEPLOYQT_EXE)
         message(STATUS "windeployqt found: ${WINDEPLOYQT_EXE}")
@@ -414,7 +471,7 @@ if (WIN32)
                 POST_BUILD
                 COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_BINARY_DIR}/windeployqt_stuff
                 COMMAND
-                ${WINDEPLOYQT_EXE} ${BINARIES_TYPE} --no-translations --compiler-runtime --no-system-d3d-compiler
+                ${WINDEPLOYQT_EXE} ${WINDEPLOYQT_QTPATHS_ARG} ${BINARIES_TYPE} --no-translations --compiler-runtime --no-system-d3d-compiler
                 --no-quick-import --dir ${CMAKE_BINARY_DIR}/windeployqt_stuff $<TARGET_FILE:flameshot>
                 # copy translations manually QM_FILES
                 COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/windeployqt_stuff/translations
