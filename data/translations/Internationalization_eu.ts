@@ -2745,7 +2745,7 @@ Baliteke &apos;#&apos; karakterea ihes egin behar izatea, &apos;\#FFF&apos;n bez
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="273"/>
         <source>Flameshot must be restarted for changes to take effect.</source>
-        <translation type="unfinished">Flameshot berrabiarazi behar da aldaketak eragina izan dezan.</translation>
+        <translation>Flameshot berrabiarazi behar da aldaketek eragina izan dezaten.</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="278"/>
@@ -3252,7 +3252,7 @@ Baliteke &apos;#&apos; karakterea ihes egin behar izatea, &apos;\#FFF&apos;n bez
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="141"/>
         <source>Configuration</source>
-        <translation type="unfinished">Ezarpenak</translation>
+        <translation>Ezarpenak</translation>
     </message>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="142"/>
