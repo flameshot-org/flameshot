@@ -1,0 +1,420 @@
+diff --git a/src/tools/CMakeLists.txt b/src/tools/CMakeLists.txt
+index ed8de18b..62d738f8 100644
+--- a/src/tools/CMakeLists.txt
++++ b/src/tools/CMakeLists.txt
+@@ -2,6 +2,7 @@ target_sources(flameshot PRIVATE arrow/arrowtool.h arrow/arrowtool.cpp)
+ target_sources(flameshot PRIVATE pixelate/pixelatetool.h pixelate/pixelatetool.cpp)
+ target_sources(flameshot PRIVATE circle/circletool.h circle/circletool.cpp)
+ target_sources(flameshot PRIVATE circlecount/circlecounttool.h circlecount/circlecounttool.cpp)
++target_sources(flameshot PRIVATE icon/icontool.h icon/icontool.cpp icon/iconconfig.h icon/iconconfig.cpp)
+ target_sources(flameshot PRIVATE copy/copytool.h copy/copytool.cpp)
+ target_sources(flameshot PRIVATE exit/exittool.h exit/exittool.cpp)
+ target_sources(flameshot PRIVATE sizeincrease/sizeincreasetool.h sizeincrease/sizeincreasetool.cpp)
+diff --git a/src/tools/capturetool.h b/src/tools/capturetool.h
+index daadcbba..eafc6a55 100644
+--- a/src/tools/capturetool.h
++++ b/src/tools/capturetool.h
+@@ -51,6 +51,7 @@ public:
+         TYPE_INVERT = 22,
+         TYPE_ACCEPT = 23,
+         TYPE_CANCEL = 24,
++        TYPE_ICON = 25,
+     };
+     Q_ENUM(Type);
+ 
+diff --git a/src/tools/icon/iconconfig.cpp b/src/tools/icon/iconconfig.cpp
+new file mode 100644
+index 00000000..1bcabde2
+--- /dev/null
++++ b/src/tools/icon/iconconfig.cpp
+@@ -0,0 +1,50 @@
++// SPDX-License-Identifier: GPL-3.0-or-later
++// SPDX-FileCopyrightText: 2026 Flameshot Contributors
++
++#include "iconconfig.h"
++
++#include <QComboBox>
++#include <QList>
++#include <QPair>
++#include <QVBoxLayout>
++#include <QtGlobal>
++
++IconConfig::IconConfig(QWidget* parent)
++  : QWidget(parent)
++  , m_layout(new QVBoxLayout(this))
++  , m_symbolCB(new QComboBox())
++{
++    const QList<QPair<QString, QString>> symbols = {
++        { tr("Check"), QStringLiteral("✓") },
++        { tr("Cross"), QStringLiteral("✕") },
++        { tr("Warning"), QStringLiteral("⚠") },
++        { tr("Info"), QStringLiteral("i") },
++        { tr("Question"), QStringLiteral("?") },
++        { tr("Star"), QStringLiteral("★") },
++        { tr("Heart"), QStringLiteral("♥") },
++        { tr("Arrow"), QStringLiteral("➜") },
++    };
++
++    for (const auto& symbol : symbols) {
++        m_symbolCB->addItem(QStringLiteral("%1  %2").arg(symbol.second, symbol.first),
++                            symbol.second);
++    }
++
++    connect(m_symbolCB,
++            qOverload<int>(&QComboBox::currentIndexChanged),
++            this,
++            [this](int index) {
++                emit symbolChanged(m_symbolCB->itemData(index).toString());
++            });
++
++    m_symbolCB->setToolTip(tr("Select an icon to add to the capture"));
++    m_layout->addWidget(m_symbolCB);
++}
++
++void IconConfig::setSymbol(const QString& symbol)
++{
++    const int index = m_symbolCB->findData(symbol);
++    if (index >= 0) {
++        m_symbolCB->setCurrentIndex(index);
++    }
++}
+diff --git a/src/tools/icon/iconconfig.h b/src/tools/icon/iconconfig.h
+new file mode 100644
+index 00000000..cda017cd
+--- /dev/null
++++ b/src/tools/icon/iconconfig.h
+@@ -0,0 +1,26 @@
++// SPDX-License-Identifier: GPL-3.0-or-later
++// SPDX-FileCopyrightText: 2026 Flameshot Contributors
++
++#pragma once
++
++#include <QString>
++#include <QWidget>
++
++class QComboBox;
++class QVBoxLayout;
++
++class IconConfig : public QWidget
++{
++    Q_OBJECT
++public:
++    explicit IconConfig(QWidget* parent = nullptr);
++
++    void setSymbol(const QString& symbol);
++
++signals:
++    void symbolChanged(const QString& symbol);
++
++private:
++    QVBoxLayout* m_layout;
++    QComboBox* m_symbolCB;
++};
+diff --git a/src/tools/icon/icontool.cpp b/src/tools/icon/icontool.cpp
+new file mode 100644
+index 00000000..cff2d706
+--- /dev/null
++++ b/src/tools/icon/icontool.cpp
+@@ -0,0 +1,188 @@
++// SPDX-License-Identifier: GPL-3.0-or-later
++// SPDX-FileCopyrightText: 2026 Flameshot Contributors
++
++#include "icontool.h"
++#include "tools/icon/iconconfig.h"
++
++#include <QFont>
++#include <QPainter>
++#include <algorithm>
++#include <cmath>
++
++namespace {
++constexpr int ICON_BASE_PIXEL_SIZE = 22;
++constexpr int ICON_SIZE_STEP = 4;
++constexpr int ICON_MIN_PIXEL_SIZE = 18;
++constexpr int ICON_PADDING = 6;
++}
++
++IconTool::IconTool(QObject* parent)
++  : AbstractTwoPointTool(parent)
++  , m_symbol(QStringLiteral("✓"))
++  , m_valid(false)
++{}
++
++IconTool::~IconTool()
++{
++    closeConfig();
++}
++
++void IconTool::closeConfig()
++{
++    if (!m_confW.isNull()) {
++        m_confW->hide();
++        delete m_confW;
++        m_confW = nullptr;
++    }
++}
++
++QIcon IconTool::icon(const QColor& background, bool inEditor) const
++{
++    Q_UNUSED(inEditor)
++    return QIcon(iconPath(background) + "image.svg");
++}
++
++QString IconTool::name() const
++{
++    return tr("Icon");
++}
++
++QString IconTool::description() const
++{
++    return tr("Add an icon to your capture");
++}
++
++QString IconTool::info()
++{
++    m_tempString = QStringLiteral("%1 - %2").arg(name(), m_symbol);
++    return m_tempString;
++}
++
++CaptureTool::Type IconTool::type() const
++{
++    return CaptureTool::TYPE_ICON;
++}
++
++bool IconTool::isValid() const
++{
++    return m_valid && !m_symbol.isEmpty();
++}
++
++QRect IconTool::mousePreviewRect(const CaptureContext& context) const
++{
++    const int pixelSize = ICON_BASE_PIXEL_SIZE + context.toolSize * ICON_SIZE_STEP;
++    QRect rect(0, 0, pixelSize + ICON_PADDING * 2, pixelSize + ICON_PADDING * 2);
++    rect.moveCenter(context.mousePos);
++    return rect;
++}
++
++QRect IconTool::boundingRect() const
++{
++    if (!isValid()) {
++        return {};
++    }
++    return iconRect();
++}
++
++QWidget* IconTool::configurationWidget()
++{
++    closeConfig();
++    m_confW = new IconConfig();
++    connect(m_confW,
++            &IconConfig::symbolChanged,
++            this,
++            &IconTool::updateSymbol);
++    m_confW->setSymbol(m_symbol);
++    return m_confW;
++}
++
++void IconTool::copyParams(const IconTool* from, IconTool* to)
++{
++    AbstractTwoPointTool::copyParams(from, to);
++    to->m_symbol = from->m_symbol;
++    to->m_valid = from->m_valid;
++}
++
++CaptureTool* IconTool::copy(QObject* parent)
++{
++    auto* tool = new IconTool(parent);
++    if (m_confW != nullptr) {
++        connect(m_confW,
++                &IconConfig::symbolChanged,
++                tool,
++                &IconTool::updateSymbol);
++    }
++    copyParams(this, tool);
++    return tool;
++}
++
++void IconTool::process(QPainter& painter, const QPixmap& pixmap)
++{
++    Q_UNUSED(pixmap)
++    if (!isValid()) {
++        return;
++    }
++    drawIcon(painter, iconRect());
++}
++
++void IconTool::paintMousePreview(QPainter& painter,
++                                 const CaptureContext& context)
++{
++    const int pixelSize = ICON_BASE_PIXEL_SIZE + context.toolSize * ICON_SIZE_STEP;
++    QRect rect(0, 0, pixelSize + ICON_PADDING * 2, pixelSize + ICON_PADDING * 2);
++    rect.moveCenter(context.mousePos);
++    drawIcon(painter, rect, 0.35);
++}
++
++void IconTool::drawStart(const CaptureContext& context)
++{
++    AbstractTwoPointTool::drawStart(context);
++    m_valid = true;
++}
++
++void IconTool::pressed(CaptureContext& context)
++{
++    Q_UNUSED(context)
++}
++
++void IconTool::updateSymbol(const QString& symbol)
++{
++    m_symbol = symbol;
++}
++
++int IconTool::iconPixelSize() const
++{
++    const QPoint delta = points().second - points().first;
++    const int draggedSize = static_cast<int>(std::lround(
++      std::sqrt(delta.x() * delta.x() + delta.y() * delta.y()) * 2.0));
++    const int configuredSize = ICON_BASE_PIXEL_SIZE + size() * ICON_SIZE_STEP;
++    return std::max({ ICON_MIN_PIXEL_SIZE, configuredSize, draggedSize });
++}
++
++QRect IconTool::iconRect() const
++{
++    const int pixelSize = iconPixelSize();
++    QRect rect(0, 0, pixelSize + ICON_PADDING * 2, pixelSize + ICON_PADDING * 2);
++    rect.moveCenter(points().first);
++    return rect;
++}
++
++void IconTool::drawIcon(QPainter& painter, const QRect& rect, qreal opacity)
++{
++    auto origPen = painter.pen();
++    auto origFont = painter.font();
++    auto origOpacity = painter.opacity();
++
++    QFont font = origFont;
++    font.setPixelSize(std::max(ICON_MIN_PIXEL_SIZE, rect.height() - ICON_PADDING * 2));
++    font.setBold(true);
++
++    painter.setOpacity(opacity);
++    painter.setFont(font);
++    painter.setPen(color());
++    painter.drawText(rect, Qt::AlignCenter, m_symbol);
++
++    painter.setOpacity(origOpacity);
++    painter.setFont(origFont);
++    painter.setPen(origPen);
++}
+diff --git a/src/tools/icon/icontool.h b/src/tools/icon/icontool.h
+new file mode 100644
+index 00000000..425b8d63
+--- /dev/null
++++ b/src/tools/icon/icontool.h
+@@ -0,0 +1,54 @@
++// SPDX-License-Identifier: GPL-3.0-or-later
++// SPDX-FileCopyrightText: 2026 Flameshot Contributors
++
++#pragma once
++
++#include "tools/abstracttwopointtool.h"
++
++#include <QPointer>
++
++class IconConfig;
++
++class IconTool : public AbstractTwoPointTool
++{
++    Q_OBJECT
++public:
++    explicit IconTool(QObject* parent = nullptr);
++    ~IconTool() override;
++
++    QIcon icon(const QColor& background, bool inEditor) const override;
++    QString name() const override;
++    QString description() const override;
++    QString info() override;
++    bool isValid() const override;
++    QRect mousePreviewRect(const CaptureContext& context) const override;
++    QRect boundingRect() const override;
++    QWidget* configurationWidget() override;
++
++    CaptureTool* copy(QObject* parent = nullptr) override;
++    void process(QPainter& painter, const QPixmap& pixmap) override;
++    void paintMousePreview(QPainter& painter,
++                           const CaptureContext& context) override;
++
++protected:
++    CaptureTool::Type type() const override;
++    void copyParams(const IconTool* from, IconTool* to);
++
++public slots:
++    void drawStart(const CaptureContext& context) override;
++    void pressed(CaptureContext& context) override;
++
++private slots:
++    void updateSymbol(const QString& symbol);
++
++private:
++    QRect iconRect() const;
++    int iconPixelSize() const;
++    void drawIcon(QPainter& painter, const QRect& rect, qreal opacity = 1.0);
++    void closeConfig();
++
++    QString m_symbol;
++    bool m_valid;
++    QPointer<IconConfig> m_confW;
++    QString m_tempString;
++};
+diff --git a/src/tools/toolfactory.cpp b/src/tools/toolfactory.cpp
+index 785c01f4..7a1d1663 100644
+--- a/src/tools/toolfactory.cpp
++++ b/src/tools/toolfactory.cpp
+@@ -11,6 +11,7 @@
+ #ifdef ENABLE_IMGUR
+ #include "tools/imgupload/imguploadertool.h"
+ #endif
++#include "tools/icon/icontool.h"
+ #include "tools/invert/inverttool.h"
+ #include "tools/launcher/applaunchertool.h"
+ #include "tools/line/linetool.h"
+@@ -66,6 +67,7 @@ CaptureTool* ToolFactory::CreateTool(CaptureTool::Type t, QObject* parent)
+         if_TYPE_return_TOOL(TYPE_SIZEDECREASE, SizeDecreaseTool);
+         if_TYPE_return_TOOL(TYPE_INVERT, InvertTool);
+         if_TYPE_return_TOOL(TYPE_ACCEPT, AcceptTool);
++        if_TYPE_return_TOOL(TYPE_ICON, IconTool);
+         default:
+             return nullptr;
+     }
+diff --git a/src/utils/confighandler.cpp b/src/utils/confighandler.cpp
+index 370d18af..958a952c 100644
+--- a/src/utils/confighandler.cpp
++++ b/src/utils/confighandler.cpp
+@@ -209,6 +209,7 @@ static QMap<QString, QSharedPointer<KeySequence>> recognizedShortcuts = {
+     SHORTCUT("TYPE_SIZEINCREASE"        ,                           ),
+     SHORTCUT("TYPE_SIZEDECREASE"        ,                           ),
+     SHORTCUT("TYPE_CIRCLECOUNT"         ,                           ),
++    SHORTCUT("TYPE_ICON"                ,                           ),
+ };
+ // clang-format on
+ 
+diff --git a/src/widgets/capture/capturetoolbutton.cpp b/src/widgets/capture/capturetoolbutton.cpp
+index 2a3eaaf9..6202803e 100644
+--- a/src/widgets/capture/capturetoolbutton.cpp
++++ b/src/widgets/capture/capturetoolbutton.cpp
+@@ -138,6 +138,7 @@ static std::map<CaptureTool::Type, int> buttonTypeOrder
+       { CaptureTool::TYPE_MARKER, 6 }, { CaptureTool::TYPE_TEXT, 7 },
+       { CaptureTool::TYPE_PIXELATE, 8 }, { CaptureTool::TYPE_INVERT, 9 },
+       { CaptureTool::TYPE_CIRCLECOUNT, 10 },
++      { CaptureTool::TYPE_ICON, 11 },
+       { CaptureTool::TYPE_MOVESELECTION, 12 }, { CaptureTool::TYPE_UNDO, 13 },
+       { CaptureTool::TYPE_REDO, 14 }, { CaptureTool::TYPE_COPY, 15 },
+       { CaptureTool::TYPE_SAVE, 16 },
+@@ -168,7 +169,8 @@ QList<CaptureTool::Type> CaptureToolButton::iterableButtonTypes = {
+     CaptureTool::TYPE_ARROW,         CaptureTool::TYPE_SELECTION,
+     CaptureTool::TYPE_RECTANGLE,     CaptureTool::TYPE_CIRCLE,
+     CaptureTool::TYPE_MARKER,        CaptureTool::TYPE_TEXT,
+-    CaptureTool::TYPE_CIRCLECOUNT,   CaptureTool::TYPE_PIXELATE,
++    CaptureTool::TYPE_CIRCLECOUNT,   CaptureTool::TYPE_ICON,
++    CaptureTool::TYPE_PIXELATE,
+     CaptureTool::TYPE_INVERT,        CaptureTool::TYPE_MOVESELECTION,
+     CaptureTool::TYPE_UNDO,          CaptureTool::TYPE_REDO,
+     CaptureTool::TYPE_COPY,          CaptureTool::TYPE_SAVE,
