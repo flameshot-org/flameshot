@@ -319,9 +319,20 @@ void ConfigHandler::setStartupLaunch(const bool start)
     QFile file(path + "Flameshot.desktop");
     if (start) {
         if (file.open(QIODevice::WriteOnly)) {
-            QByteArray data("[Desktop Entry]\nName=flameshot\nIcon=flameshot"
-                            "\nExec=flameshot\nTerminal=false\nType=Application"
-                            "\nX-GNOME-Autostart-enabled=true\n");
+            // When running as an AppImage, "flameshot" isn't on PATH and
+            // QCoreApplication::applicationFilePath() points at the
+            // temporary squashfs mount, which disappears once the AppImage
+            // exits. $APPIMAGE holds the path to the AppImage file itself.
+            QString exec = qEnvironmentVariable("APPIMAGE");
+            if (exec.isEmpty()) {
+                exec = "flameshot";
+            }
+            QByteArray data(QStringLiteral("[Desktop Entry]\nName=flameshot"
+                                           "\nIcon=flameshot\nExec=%1"
+                                           "\nTerminal=false\nType=Application"
+                                           "\nX-GNOME-Autostart-enabled=true\n")
+                              .arg(exec)
+                              .toUtf8());
             file.write(data);
         }
     } else {
