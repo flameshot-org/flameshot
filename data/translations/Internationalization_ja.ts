@@ -42,7 +42,7 @@
     <message>
         <location filename="../../src/tools/launcher/applaunchertool.cpp" line="23"/>
         <source>App Launcher</source>
-        <translation>アプリケーションランチャー</translation>
+        <translation>アプリケーション ランチャー</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applaunchertool.cpp" line="33"/>
@@ -171,7 +171,7 @@
         <location filename="../../src/widgets/capturelauncher.ui" line="14"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="179"/>
         <source>Capture Launcher</source>
-        <translation>キャプチャランチャー</translation>
+        <translation>キャプチャ ランチャー</translation>
     </message>
     <message>
         <source>TextLabel</source>
@@ -271,7 +271,7 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="777"/>
         <source>Flameshot has lost focus. Keyboard shortcuts won&apos;t work until you click somewhere.</source>
-        <translation>Flameshot のフォーカスが外れました。どこかをクリックするまでキーボードショートカットは動作しません。</translation>
+        <translation>Flameshot のフォーカスが外れました。どこかをクリックするまでキーボード ショートカットは動作しません。</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="783"/>
@@ -301,12 +301,12 @@ Enter を押すと画面をキャプチャー。
     <message>
         <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="69"/>
         <source>Circle Counter</source>
-        <translation>サークルカウンター</translation>
+        <translation>サークル カウンター</translation>
     </message>
     <message>
         <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="87"/>
         <source>Add an autoincrementing counter bubble</source>
-        <translation>自動インクリメントするカウンターバブルを追加</translation>
+        <translation>自動インクリメントするカウンター バブルを追加</translation>
     </message>
 </context>
 <context>
@@ -582,7 +582,7 @@ Enter を押すと画面をキャプチャー。
         <source>Some keyboard shortcuts have conflicts.
 This will NOT prevent flameshot from starting.
 Please solve them manually in the configuration file.</source>
-        <translation>一部のキーボードショートカットに競合があります。
+        <translation>一部のキーボード ショートカットに競合があります。
 これは Flameshot の起動を妨げるものではありません。
 設定ファイルで手動で解決してください。</translation>
     </message>
@@ -612,7 +612,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="67"/>
         <source>Interface</source>
-        <translation>インターフェース</translation>
+        <translation>インターフェイス</translation>
     </message>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="77"/>
@@ -794,7 +794,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="122"/>
         <source>Unable to close active modal widgets</source>
-        <translation>アクティブなモーダルウィジェットを閉じられません</translation>
+        <translation>アクティブなモーダル ウィジェットを閉じられません</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="441"/>
@@ -941,7 +941,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="276"/>
         <source>Show help message</source>
-        <translation>ヘルプメッセージを表示</translation>
+        <translation>ヘルプ メッセージを表示</translation>
     </message>
     <message>
         <source>Show the help message at the beginning in the capture mode.</source>
@@ -950,7 +950,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="301"/>
         <source>Show the side panel button</source>
-        <translation>サイドパネルボタンを表示</translation>
+        <translation>サイドパネル ボタンを表示</translation>
     </message>
     <message>
         <source>Show the side panel toggle button in the capture mode.</source>
@@ -964,7 +964,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="339"/>
         <source>Show tray icon</source>
-        <translation>トレイアイコンを表示</translation>
+        <translation>トレイ アイコンを表示</translation>
     </message>
     <message>
         <source>Show the systemtray icon</source>
@@ -1015,7 +1015,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="448"/>
         <source>Show welcome message on launch</source>
-        <translation>起動時にウェルカムメッセージを表示</translation>
+        <translation>起動時にウェルカム メッセージを表示</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="476"/>
@@ -1102,7 +1102,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="451"/>
         <source>Show the welcome message box in the middle of the screen while taking a screenshot</source>
-        <translation>スクリーンショット撮影中に画面中央にウェルカムメッセージボックスを表示</translation>
+        <translation>スクリーンショット撮影中に画面中央にウェルカム メッセージボックスを表示</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="478"/>
@@ -1140,7 +1140,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="437"/>
         <source>Launch Flameshot daemon (background process) when computer is booted</source>
-        <translation>コンピュータ起動時に Flameshot デーモン (バックグラウンドプロセス) を起動</translation>
+        <translation>コンピューター起動時に Flameshot デーモン (バックグラウンドプロセス) を起動</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="462"/>
@@ -1195,7 +1195,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="608"/>
         <source>Imgur Application Client ID</source>
-        <translation>Imgur アプリケーションクライアント ID</translation>
+        <translation>Imgur アプリケーション クライアント ID</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="639"/>
@@ -1215,12 +1215,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="702"/>
         <source>Copy file path after save</source>
-        <translation>保存後にファイルパスをコピー</translation>
+        <translation>保存後にファイル パスをコピー</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="703"/>
         <source>Copy the file path to clipboard after the file is saved</source>
-        <translation>ファイル保存後にファイルパスをクリップボードにコピー</translation>
+        <translation>ファイル保存後にファイル パスをクリップボードにコピー</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="714"/>
@@ -1351,7 +1351,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="929"/>
         <source>Capture active monitor (skip monitor selection)</source>
-        <translation>アクティブモニターをキャプチャ (モニター選択をスキップ)</translation>
+        <translation>アクティブ モニターをキャプチャ (モニター選択をスキップ)</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="931"/>
@@ -1366,7 +1366,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="954"/>
         <source>Bypass the freedesktop portal and use Qt&apos;s native X11 screen capture. Enable this if your window manager lacks xdg-desktop-portal (e.g. xmonad, i3). Only effective on X11; ignored on Wayland.</source>
-        <translation>freedesktop ポータルをバイパスし、Qt のネイティブ X11 画面キャプチャを使用します。ウィンドウマネージャに xdg-desktop-portal がない場合 (例 ：xmonad、i3) に有効にしてください。X11 でのみ有効で、Wayland では無視されます。</translation>
+        <translation>freedesktop ポータルをバイパスし、Qt のネイティブ X11 画面キャプチャを使用します。ウィンドウ マネージャーに xdg-desktop-portal がない場合 (例 ：xmonad、i3) に有効にしてください。X11 でのみ有効で、Wayland では無視されます。</translation>
     </message>
 </context>
 <context>
@@ -1948,7 +1948,7 @@ Click to select</source>
     <message>
         <location filename="../../src/main.cpp" line="268"/>
         <source>Powerful yet simple to use screenshot software.</source>
-        <translation>強力でありながら使いやすいスクリーンショットソフトウェア。</translation>
+        <translation>高機能なのに使いやすい、スクリーンショットソフトウェア。</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="269"/>
@@ -1962,7 +1962,7 @@ Click to select</source>
     <message>
         <location filename="../../src/main.cpp" line="275"/>
         <source>Open the capture launcher.</source>
-        <translation>キャプチャランチャーを開きます。</translation>
+        <translation>キャプチャ ランチャーを開きます。</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="278"/>
@@ -2059,7 +2059,7 @@ Click to select</source>
     <message>
         <location filename="../../src/main.cpp" line="326"/>
         <source>Show the help message in the capture mode</source>
-        <translation>キャプチャモードでヘルプメッセージを表示</translation>
+        <translation>キャプチャモードでヘルプ メッセージを表示</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="329"/>
@@ -2361,12 +2361,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="109"/>
         <source>Screenshot portal timed out after 30 seconds</source>
-        <translation>スクリーンショットポータルが 30秒後にタイムアウトしました</translation>
+        <translation>スクリーンショット ポータルが 30秒後にタイムアウトしました</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="132"/>
         <source>FreeDesktop portal screenshot size: %1x%2, DPR: %3</source>
-        <translation>FreeDesktop ポータルのスクリーンショットサイズ : %1x%2、DPR : %3</translation>
+        <translation>FreeDesktop ポータルのスクリーンショット サイズ : %1x%2、DPR : %3</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="159"/>
@@ -2430,7 +2430,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="509"/>
         <source>Screenshot scale factors: X=%1 Y=%2</source>
-        <translation>スクリーンショットスケール係数 : X=%1 Y=%2</translation>
+        <translation>スクリーンショット スケール係数 : X=%1 Y=%2</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="542"/>
@@ -2519,12 +2519,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="40"/>
         <source>Press Esc to cancel or ⌘+Backspace to disable the keyboard shortcut.</source>
-        <translation>Esc でキャンセル、⌘+Backspace でキーボードショートカットを無効にします。</translation>
+        <translation>Esc でキャンセル、⌘+Backspace でキーボード ショートカットを無効にします。</translation>
     </message>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="44"/>
         <source>Press Esc to cancel or Backspace to disable the keyboard shortcut.</source>
-        <translation>Esc でキャンセル、Backspace でキーボードショートカットを無効にします。</translation>
+        <translation>Esc でキャンセル、Backspace でキーボード ショートカットを無効にします。</translation>
     </message>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="50"/>
@@ -2653,7 +2653,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="268"/>
         <source>It seems, that Windows forces to open its screenshot tool when the &apos;Print Screen&apos; key is pressed. Would you like to disable this so that Flameshot can use the &apos;Print Screen&apos; key?</source>
-        <translation>Windowsは「Print Screen」キーが押されると、強制的にスクリーンショットツールを開くようです。Flameshot が「Print Screen」キーを使用できるように、これを無効にしますか？</translation>
+        <translation>Windows は「Print Screen」キーが押されると、強制的にスクリーンショット ツールを開くようです。Flameshot が「Print Screen」キーを使用できるように、これを無効にしますか？</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="273"/>
@@ -2680,7 +2680,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="321"/>
         <source>After registering, you can select Flameshot as the default screenshot application in Windows Settings.</source>
-        <translation>登録後、Windows の設定で Flameshot をデフォルトのスクリーンショットアプリケーションとして選択できます。</translation>
+        <translation>登録後、Windows の設定で Flameshot をデフォルトのスクリーンショット アプリケーションとして選択できます。</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="334"/>
@@ -2721,7 +2721,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="37"/>
         <source>Active tool size: </source>
-        <translation>アクティブなツールサイズ : </translation>
+        <translation>アクティブなツール サイズ : </translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="57"/>
@@ -2744,7 +2744,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/sizedecrease/sizedecreasetool.cpp" line="38"/>
         <source>Decrease Tool Size</source>
-        <translation>ツールサイズを縮小</translation>
+        <translation>ツール サイズを縮小</translation>
     </message>
     <message>
         <location filename="../../src/tools/sizedecrease/sizedecreasetool.cpp" line="48"/>
@@ -2757,7 +2757,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/sizeincrease/sizeincreasetool.cpp" line="38"/>
         <source>Increase Tool Size</source>
-        <translation>ツールサイズを拡大</translation>
+        <translation>ツール サイズを拡大</translation>
     </message>
     <message>
         <location filename="../../src/tools/sizeincrease/sizeincreasetool.cpp" line="48"/>
@@ -3003,7 +3003,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="89"/>
         <source>Change the color moving the selectors and see the changes in the preview buttons.</source>
-        <translation>セレクターを動かして色を変更し、プレビューボタンで変更を確認します。</translation>
+        <translation>セレクターを動かして色を変更し、プレビュー ボタンで変更を確認します。</translation>
     </message>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="100"/>
@@ -3023,7 +3023,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="125"/>
         <source>Contrast Color</source>
-        <translation>コントラストカラー</translation>
+        <translation>コントラスト カラー</translation>
     </message>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="130"/>
@@ -3136,12 +3136,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="73"/>
         <source>UI Color Editor</source>
-        <translation>UI カラーエディタ</translation>
+        <translation>UI カラー エディター</translation>
     </message>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="79"/>
         <source>Colorpicker Editor</source>
-        <translation>カラーピッカーエディタ</translation>
+        <translation>カラーピッカー エディター</translation>
     </message>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="84"/>
@@ -3285,7 +3285,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="240"/>
         <source>Failed to load the palette file
 %1</source>
-        <translation>パレットファイルの読み込みに失敗しました
+        <translation>パレット ファイルの読み込みに失敗しました
 %1</translation>
     </message>
 </context>
