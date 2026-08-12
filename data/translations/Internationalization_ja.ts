@@ -1948,7 +1948,7 @@ Click to select</source>
     <message>
         <location filename="../../src/main.cpp" line="268"/>
         <source>Powerful yet simple to use screenshot software.</source>
-        <translation>強力でありながら使いやすいスクリーンショット ソフトウェア。</translation>
+        <translation>高機能なのに使いやすい、スクリーンショットソフトウェア。</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="269"/>
