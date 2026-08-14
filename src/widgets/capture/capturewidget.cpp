@@ -211,14 +211,20 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
 
             // Force the native window to exist so setScreen() actually takes
             // effect. Without winId() this block was a silent no-op (window-
-            // Handle() returns null before the widget is shown) and on Wayland
-            // the compositor mapped the fullscreen capture window on the first
-            // output instead of the selected monitor. QWindow::setScreen()
-            // recreates the window on the target screen, which is the only
-            // reliable way to choose the monitor on Wayland.
+            // Handle() returns null before the widget is shown).
             winId();
             if (QWindow* handle = windowHandle()) {
                 handle->setScreen(selectedScreen);
+            }
+
+            // On Wayland the compositor ignores the position of regular
+            // windows and maps them on the monitor containing the pointer, so
+            // setScreen() alone is not enough. Fullscreen is the only window
+            // state where the requested output is honored (the compositor
+            // receives xdg_toplevel.set_fullscreen with the output), so ask
+            // for it here -- the widget covers the selected screen anyway.
+            if (DesktopInfo().waylandDetected()) {
+                setWindowState(windowState() | Qt::WindowFullScreen);
             }
         }
 #endif

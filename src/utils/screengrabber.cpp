@@ -22,6 +22,7 @@
 #include <QTimer>
 #include <QWidget>
 #include <QWindow>
+#include <QtAlgorithms>
 #include <algorithm>
 
 #ifdef FLAMESHOT_DEBUG_CAPTURE
@@ -247,24 +248,16 @@ QPixmap ScreenGrabber::selectMonitorAndCrop(const QPixmap& fullScreenshot,
         return cropToMonitor(fullScreenshot, 0);
     }
 
-    // Capture Active Monitor: auto-select monitor under cursor
-    if (ConfigHandler().captureActiveMonitor()) {
-        if (m_info.waylandDetected()) {
-            AbstractLogger::error()
-              << tr("Capture Active Monitor is not supported on Wayland due to "
-                    "Wayland security model.");
-            ok = false;
-            return QPixmap();
-        }
-
-        QGuiAppCurrentScreen screenFinder;
-        QScreen* cursorScreen = screenFinder.currentScreen();
-        int monitorIndex = screens.indexOf(cursorScreen);
+    // Skip the selection dialog and capture the monitor under the cursor
+    // directly (on X11 the cursor position is reliable, on Wayland it is
+    // recovered from the compositor's placement of a probe window).
+    QScreen* cursorScreen = cursorMonitor();
+    if (cursorScreen) {
+        const int monitorIndex = screens.indexOf(cursorScreen);
         if (monitorIndex >= 0) {
             m_selectedMonitor = monitorIndex;
             return cropToMonitor(fullScreenshot, monitorIndex);
         }
-        // Fall through to manual selection if screen lookup fails
     }
 
     if (m_monitorSelectionActive) {
@@ -278,7 +271,8 @@ QPixmap ScreenGrabber::selectMonitorAndCrop(const QPixmap& fullScreenshot,
     m_monitorSelectionActive = true;
     m_selectedMonitor = -1;
     m_userCancelled = false;
-    QWidget* container = createMonitorPreviews(fullScreenshot);
+    const QList<QWidget*> containers =
+      createMonitorPreviews(fullScreenshot, cursorScreen);
 
     // Wait for user to select a monitor
     QEventLoop loop;
@@ -286,7 +280,7 @@ QPixmap ScreenGrabber::selectMonitorAndCrop(const QPixmap& fullScreenshot,
     loop.exec();
     m_monitorSelectionLoop = nullptr;
 
-    delete container;
+    qDeleteAll(containers);
     m_monitorPreviews.clear();
     m_highlightedMonitorPreview = -1;
     m_monitorSelectionActive = false;
@@ -431,6 +425,34 @@ QRect ScreenGrabber::desktopGeometry()
 
 namespace {
 
+// Opaque surface for the compact picker on Wayland: paints the frozen desktop
+// of one monitor so the compact strip sits on top of a live-looking
+// background. Fullscreen windows cannot be translucent on GNOME Wayland (the
+// compositor composites them as opaque, so the transparent area renders
+// black), hence the desktop preview instead of a transparent window.
+class MonitorPickerSurface : public QWidget
+{
+public:
+    MonitorPickerSurface(const QPixmap& background,
+                         QWidget* parent = nullptr,
+                         Qt::WindowFlags flags = Qt::WindowFlags())
+      : QWidget(parent, flags)
+      , m_background(background)
+    {
+        setAttribute(Qt::WA_OpaquePaintEvent);
+    }
+
+protected:
+    void paintEvent(QPaintEvent*) override
+    {
+        QPainter painter(this);
+        painter.drawPixmap(0, 0, m_background);
+    }
+
+private:
+    QPixmap m_background;
+};
+
 #if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
 
 // Skip a `a{sv}` (string -> variant) dictionary on the QDBusArgument cursor.
@@ -497,9 +519,9 @@ void skipMonitorsArray(const QDBusArgument& arg)
     arg.endArray();
 }
 
-} // namespace
-
 #endif
+
+} // namespace
 
 QScreen* ScreenGrabber::reliablePrimaryScreen()
 {
@@ -584,6 +606,65 @@ QScreen* ScreenGrabber::reliablePrimaryScreen()
     return QGuiApplication::primaryScreen();
 }
 
+QScreen* ScreenGrabber::cursorMonitor()
+{
+#if defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)
+    if (!m_info.waylandDetected()) {
+        // On X11 the global cursor position is reliable.
+        return QGuiAppCurrentScreen().currentScreen();
+    }
+
+    // On Wayland the compositor only reports the pointer position to clients
+    // whose surface is under the pointer, so it cannot be queried before any
+    // window is mapped. However, compositors place new windows on the monitor
+    // containing the pointer (mutter: meta_backend_get_current_logical_monitor
+    // when the client does not request a position), so mapping a tiny
+    // invisible probe window reveals the pointer's monitor through the screen
+    // the compositor assigns to it.
+    QWidget probe(nullptr,
+                  Qt::Window | Qt::FramelessWindowHint |
+                    Qt::WindowStaysOnTopHint | Qt::Tool);
+    probe.setAttribute(Qt::WA_TranslucentBackground);
+    probe.setAttribute(Qt::WA_ShowWithoutActivating);
+    probe.setAttribute(Qt::WA_TransparentForMouseEvents);
+    probe.resize(1, 1);
+
+    QScreen* result = nullptr;
+    QEventLoop loop;
+    QTimer timeout;
+    timeout.setSingleShot(true);
+    timeout.setInterval(800);
+    QObject::connect(&timeout, &QTimer::timeout, &loop, &QEventLoop::quit);
+
+    probe.show();
+    if (QWindow* handle = probe.windowHandle()) {
+        QObject::connect(handle,
+                         &QWindow::screenChanged,
+                         &loop,
+                         [&result, &loop](QScreen* screen) {
+                             if (screen) {
+                                 result = screen;
+                                 loop.quit();
+                             }
+                         });
+    }
+    timeout.start();
+    loop.exec();
+    QScreen* probeScreen =
+      probe.windowHandle() ? probe.windowHandle()->screen() : nullptr;
+    probe.close();
+
+    // If the compositor placed the window on its initial screen, no
+    // screenChanged was emitted; the current screen is still the answer.
+    if (!result && probeScreen) {
+        result = probeScreen;
+    }
+    return result;
+#else
+    return nullptr;
+#endif
+}
+
 QScreen* ScreenGrabber::getSelectedScreen() const
 {
     const QList<QScreen*> screens = QGuiApplication::screens();
@@ -595,7 +676,9 @@ QScreen* ScreenGrabber::getSelectedScreen() const
     return screens[m_selectedMonitor];
 }
 
-QWidget* ScreenGrabber::createMonitorPreviews(const QPixmap& fullScreenshot)
+QList<QWidget*> ScreenGrabber::createMonitorPreviews(
+  const QPixmap& fullScreenshot,
+  QScreen* cursorScreen)
 {
     const QList<QScreen*> screens = QGuiApplication::screens();
     m_monitorPreviews.clear();
@@ -615,95 +698,117 @@ QWidget* ScreenGrabber::createMonitorPreviews(const QPixmap& fullScreenshot)
     }
 #endif
 
-    QWidget* monitorPreviews = new QWidget(
-      nullptr, Qt::Window | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
-    monitorPreviews->setAttribute(Qt::WA_TranslucentBackground);
-    monitorPreviews->setStyleSheet(
-      "QWidget { background-color: transparent; }");
-    monitorPreviews->installEventFilter(this); // For ESC key handling
-    monitorPreviews->setFocusPolicy(Qt::StrongFocus);
+    // A compact picker is shown at the bottom of every monitor.
+    //
+    // On Wayland the compositor ignores move()/setScreen() for regular
+    // windows (they are placed on the monitor containing the pointer), so each
+    // picker is shown FULLSCREEN -- the only state where the requested output
+    // is honored. Fullscreen windows are composited as opaque (transparency
+    // comes out black), so the picker paints the monitor's frozen desktop as
+    // its background and the compact strip sits on top of it.
+    //
+    // On X11 a small translucent window is moved to the bottom-center instead
+    // and clicks above the strip pass through to the desktop.
+    QList<QWidget*> pickers;
+    const bool wayland = m_info.waylandDetected();
 
-    QHBoxLayout* containerLayout = new QHBoxLayout(monitorPreviews);
-    containerLayout->setSpacing(20);
-    containerLayout->setContentsMargins(20, 20, 20, 20);
+    for (int screenIndex = 0; screenIndex < screens.size(); ++screenIndex) {
+        QScreen* pickerScreen = screens[screenIndex];
+        const QPixmap monitorShot = cropToMonitor(fullScreenshot, screenIndex);
 
-    // Build list of screen indices sorted by X position (left to right)
-    QList<int> sortedIndices;
-    for (int i = 0; i < screens.size(); ++i) {
-        sortedIndices.append(i);
-    }
-    std::sort(
-      sortedIndices.begin(), sortedIndices.end(), [&screens](int a, int b) {
-          return screens[a]->geometry().x() < screens[b]->geometry().x();
-      });
-
-    for (int i : sortedIndices) {
-        QScreen* screen = screens[i];
-
-        QPixmap cropped = cropToMonitor(fullScreenshot, i);
-        QPixmap thumbnail = cropped.scaled(
-          400, 250, Qt::KeepAspectRatio, Qt::SmoothTransformation);
-        thumbnail.setDevicePixelRatio(1.0);
-
-        MonitorPreview* preview =
-          new MonitorPreview(i, screen, thumbnail, monitorPreviews);
-
-        connect(preview,
-                &MonitorPreview::monitorSelected,
-                this,
-                [this](int index) { selectMonitor(index); });
-
-        m_monitorPreviews.append(preview);
-        containerLayout->addWidget(preview);
-    }
-
-    // Decide which monitor the selection dialog should appear on. On X11 the
-    // screen under the cursor is reliable, so follow the mouse. On Wayland the
-    // global cursor position is not exposed to clients and Qt's primaryScreen
-    // does not reflect the compositor's primary monitor, so use the monitor
-    // the desktop actually reports as primary (queried from mutter on GNOME).
-    QScreen* targetScreen = nullptr;
-    if (m_info.waylandDetected()) {
-        targetScreen = reliablePrimaryScreen();
-    } else {
-        targetScreen = QGuiAppCurrentScreen().currentScreen();
-        if (!targetScreen) {
-            targetScreen = QGuiApplication::primaryScreen();
+        QWidget* picker =
+          wayland
+            ? new MonitorPickerSurface(monitorShot,
+                                       nullptr,
+                                       Qt::Window | Qt::FramelessWindowHint |
+                                         Qt::WindowStaysOnTopHint)
+            : new QWidget(nullptr,
+                          Qt::Window | Qt::FramelessWindowHint |
+                            Qt::WindowStaysOnTopHint);
+        if (!wayland) {
+            picker->setAttribute(Qt::WA_TranslucentBackground);
+            picker->setStyleSheet("QWidget { background-color: transparent; }");
         }
-    }
+        // Remember which monitor this picker represents so a click on its
+        // background selects that monitor (Wayland fullscreen pickers receive
+        // all clicks; there is no input pass-through without a mask).
+        picker->setProperty("monitorIndex", screenIndex);
+        picker->installEventFilter(this); // For ESC / background click
+        picker->setFocusPolicy(Qt::StrongFocus);
 
-    int initialPreviewIndex = 0;
-    int currentMonitorIndex = targetScreen ? screens.indexOf(targetScreen) : -1;
-    int currentPreviewIndex = previewIndexForMonitor(currentMonitorIndex);
-    if (currentPreviewIndex >= 0) {
-        initialPreviewIndex = currentPreviewIndex;
-    }
-    setHighlightedMonitorPreview(initialPreviewIndex);
+        // Content is pinned to the bottom of the window.
+        QVBoxLayout* outerLayout = new QVBoxLayout(picker);
+        outerLayout->setContentsMargins(0, 0, 0, 12);
+        outerLayout->addStretch(1);
 
-    monitorPreviews->setLayout(containerLayout);
-    monitorPreviews->adjustSize();
+        QWidget* rowWidget = new QWidget(picker);
+        rowWidget->setAttribute(Qt::WA_TranslucentBackground);
+        rowWidget->setStyleSheet("QWidget { background-color: transparent; }");
+        QHBoxLayout* rowLayout = new QHBoxLayout(rowWidget);
+        rowLayout->setSpacing(10);
+        rowLayout->setContentsMargins(10, 0, 10, 0);
 
-    if (targetScreen) {
-        QRect screenGeometry = targetScreen->geometry();
-        QPoint center = screenGeometry.center();
-        monitorPreviews->move(center.x() - monitorPreviews->width() / 2,
-                              center.y() - monitorPreviews->height() / 2);
-        // Wayland compositors ignore move() entirely, so the only reliable way
-        // to choose which monitor a window maps to is to associate the native
-        // window with the target QScreen before showing it. winId() forces the
-        // native window to exist (windowHandle() is null before show), and
-        // QWindow::setScreen() recreates it on the target screen.
-        monitorPreviews->winId();
-        if (QWindow* previewWindow = monitorPreviews->windowHandle()) {
-            previewWindow->setScreen(targetScreen);
+        for (int i = 0; i < screens.size(); ++i) {
+            QPixmap cropped = cropToMonitor(fullScreenshot, i);
+            QPixmap thumbnail = cropped.scaled(
+              240, 150, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+            thumbnail.setDevicePixelRatio(1.0);
+
+            MonitorPreview* preview = new MonitorPreview(
+              i, screens[i], thumbnail, rowWidget, /*compact=*/true);
+
+            connect(preview,
+                    &MonitorPreview::monitorSelected,
+                    this,
+                    [this](int index) { selectMonitor(index); });
+
+            m_monitorPreviews.append(preview);
+            rowLayout->addWidget(preview);
         }
+        outerLayout->addWidget(rowWidget, 0, Qt::AlignHCenter);
+
+        // Associate the native window with the target screen first so that on
+        // Wayland the compositor maps it on the right output (winId() forces
+        // the native window to exist; QWindow::setScreen() recreates it there).
+        picker->winId();
+        if (QWindow* handle = picker->windowHandle()) {
+            handle->setScreen(pickerScreen);
+        }
+
+        const QRect screenGeom = pickerScreen->geometry();
+        if (wayland) {
+            picker->resize(screenGeom.size());
+            picker->layout()->activate();
+        } else {
+            picker->adjustSize();
+            picker->move(
+              screenGeom.x() + (screenGeom.width() - picker->width()) / 2,
+              screenGeom.y() + screenGeom.height() - picker->height() - 16);
+        }
+
+        pickers.append(picker);
     }
 
-    monitorPreviews->show();
-    monitorPreviews->raise();
-    monitorPreviews->activateWindow();
-    monitorPreviews->setFocus(Qt::ActiveWindowFocusReason);
-    return monitorPreviews;
+    // Highlight the monitor the pointer is on (the selection is skipped when
+    // it is known); fall back to the real primary monitor.
+    QScreen* initialScreen =
+      cursorScreen ? cursorScreen : reliablePrimaryScreen();
+    const int initialMonitorIndex =
+      initialScreen ? screens.indexOf(initialScreen) : -1;
+    setHighlightedMonitorPreview(initialMonitorIndex >= 0 ? initialMonitorIndex
+                                                          : 0);
+
+    for (QWidget* picker : pickers) {
+        if (wayland) {
+            picker->showFullScreen();
+        } else {
+            picker->show();
+        }
+        picker->raise();
+        picker->activateWindow();
+        picker->setFocus(Qt::ActiveWindowFocusReason);
+    }
+    return pickers;
 }
 
 void ScreenGrabber::cancelMonitorSelection()
@@ -721,36 +826,23 @@ void ScreenGrabber::moveHighlightedMonitorPreview(int offset)
         return;
     }
 
-    int nextPreviewIndex = m_highlightedMonitorPreview;
-    if (nextPreviewIndex < 0) {
-        nextPreviewIndex = 0;
+    int nextMonitorIndex = m_highlightedMonitorPreview;
+    if (nextMonitorIndex < 0) {
+        nextMonitorIndex = 0;
     } else {
-        nextPreviewIndex += offset;
+        nextMonitorIndex += offset;
     }
 
-    setHighlightedMonitorPreview(nextPreviewIndex);
-}
-
-int ScreenGrabber::previewIndexForMonitor(int monitorIndex) const
-{
-    for (int i = 0; i < m_monitorPreviews.size(); ++i) {
-        if (m_monitorPreviews[i]->monitorIndex() == monitorIndex) {
-            return i;
-        }
-    }
-
-    return -1;
+    setHighlightedMonitorPreview(nextMonitorIndex);
 }
 
 void ScreenGrabber::selectHighlightedMonitorPreview()
 {
-    if (m_highlightedMonitorPreview < 0 ||
-        m_highlightedMonitorPreview >= m_monitorPreviews.size()) {
+    if (m_highlightedMonitorPreview < 0) {
         return;
     }
 
-    selectMonitor(
-      m_monitorPreviews[m_highlightedMonitorPreview]->monitorIndex());
+    selectMonitor(m_highlightedMonitorPreview);
 }
 
 void ScreenGrabber::selectMonitor(int monitorIndex)
@@ -761,21 +853,23 @@ void ScreenGrabber::selectMonitor(int monitorIndex)
     }
 }
 
-void ScreenGrabber::setHighlightedMonitorPreview(int previewIndex)
+void ScreenGrabber::setHighlightedMonitorPreview(int monitorIndex)
 {
     if (m_monitorPreviews.isEmpty()) {
         m_highlightedMonitorPreview = -1;
         return;
     }
 
-    const int previewCount = m_monitorPreviews.size();
-    int normalizedIndex = previewIndex % previewCount;
+    const int monitorCount = QGuiApplication::screens().size();
+    int normalizedIndex = monitorIndex % monitorCount;
     if (normalizedIndex < 0) {
-        normalizedIndex += previewCount;
+        normalizedIndex += monitorCount;
     }
 
-    for (int i = 0; i < previewCount; ++i) {
-        m_monitorPreviews[i]->setSelected(i == normalizedIndex);
+    // Every picker window shows one preview per monitor, so highlight the
+    // matching preview in all of them.
+    for (MonitorPreview* preview : m_monitorPreviews) {
+        preview->setSelected(preview->monitorIndex() == normalizedIndex);
     }
     m_highlightedMonitorPreview = normalizedIndex;
 }
@@ -785,6 +879,21 @@ bool ScreenGrabber::eventFilter(QObject* obj, QEvent* event)
     if (event->type() == QEvent::Close) {
         cancelMonitorSelection();
         return true;
+    }
+    // A click on a picker's background selects the monitor that picker
+    // represents. This is how the Wayland compact pickers are operated: they
+    // are fullscreen windows (the only way to pin them to a monitor) and
+    // receive every click, since there is no input pass-through without a
+    // mask (masks render the unmasked area black on Wayland).
+    if (event->type() == QEvent::MouseButtonPress) {
+        QMouseEvent* mouseEvent = static_cast<QMouseEvent*>(event);
+        if (mouseEvent->button() == Qt::LeftButton) {
+            const int monitorIndex = obj->property("monitorIndex").toInt();
+            if (obj->property("monitorIndex").isValid()) {
+                selectMonitor(monitorIndex);
+                return true;
+            }
+        }
     }
     if (event->type() == QEvent::KeyPress) {
         QKeyEvent* keyEvent = static_cast<QKeyEvent*>(event);
@@ -811,7 +920,7 @@ bool ScreenGrabber::eventFilter(QObject* obj, QEvent* event)
                 if (keyEvent->key() >= Qt::Key_1 &&
                     keyEvent->key() <= Qt::Key_9) {
                     int monitorIndex = keyEvent->key() - Qt::Key_1;
-                    if (previewIndexForMonitor(monitorIndex) >= 0) {
+                    if (monitorIndex < QGuiApplication::screens().size()) {
                         selectMonitor(monitorIndex);
                     }
                     return true;

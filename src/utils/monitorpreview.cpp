@@ -13,18 +13,24 @@
 MonitorPreview::MonitorPreview(int monitorIndex,
                                QScreen* screen,
                                const QPixmap& thumbnail,
-                               QWidget* parent)
+                               QWidget* parent,
+                               bool compact)
   : QWidget(parent)
   , m_monitorIndex(monitorIndex)
   , m_selected(false)
   , m_mouseHovered(false)
+  , m_compact(compact)
   , m_imageLabel(nullptr)
   , m_keyLabel(nullptr)
   , m_textLabel(nullptr)
 {
+    const int margin = compact ? 6 : 10;
+    const int spacing = compact ? 6 : 10;
+    const int keyLabelSize = compact ? 22 : 28;
+
     QVBoxLayout* layout = new QVBoxLayout(this);
-    layout->setContentsMargins(10, 10, 10, 10);
-    layout->setSpacing(10);
+    layout->setContentsMargins(margin, margin, margin, margin);
+    layout->setSpacing(spacing);
 
     m_imageLabel = new QLabel(this);
     m_imageLabel->setAlignment(Qt::AlignCenter);
@@ -35,8 +41,8 @@ MonitorPreview::MonitorPreview(int monitorIndex,
         m_keyLabel =
           new QLabel(QString::number(m_monitorIndex + 1), m_imageLabel);
         m_keyLabel->setAlignment(Qt::AlignCenter);
-        m_keyLabel->setFixedSize(28, 28);
-        m_keyLabel->move(8, 8);
+        m_keyLabel->setFixedSize(keyLabelSize, keyLabelSize);
+        m_keyLabel->move(4, 4);
         m_keyLabel->raise();
         m_keyLabel->setAttribute(Qt::WA_TransparentForMouseEvents);
     }
@@ -97,13 +103,16 @@ void MonitorPreview::updateStyle()
     const int textAlpha = highlighted ? 220 : 200;
     const int borderAlpha = highlighted ? 255 : 0;
 
+    const int fontSize = m_compact ? 9 : 12;
+
     QString textStyle =
       QString("QLabel { color: white; background-color: rgba(%1, %2, %3, %4); "
-              "padding: 5px; font-size: 12pt; border-radius: 3px; }")
+              "padding: 4px; font-size: %5pt; border-radius: 3px; }")
         .arg(backgroundColor.red())
         .arg(backgroundColor.green())
         .arg(backgroundColor.blue())
-        .arg(textAlpha);
+        .arg(textAlpha)
+        .arg(fontSize);
     m_textLabel->setStyleSheet(textStyle);
 
     QString imageStyle =
