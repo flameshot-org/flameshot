@@ -299,7 +299,7 @@ Presiona Espacio para abrir el panel lateral.</translation>
 <context>
     <name>MonitorSwitchStrip</name>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="105"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="106"/>
         <source>Capture this monitor</source>
         <translation>Capturar este monitor</translation>
     </message>
