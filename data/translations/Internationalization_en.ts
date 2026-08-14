@@ -256,6 +256,9 @@
         <source>Tool Settings</source>
         <translation type="unfinished"></translation>
     </message>
+</context>
+<context>
+    <name>MonitorSwitchStrip</name>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="105"/>
         <source>Capture this monitor</source>

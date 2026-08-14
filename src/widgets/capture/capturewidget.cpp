@@ -70,6 +70,7 @@ namespace {
 // small translucent window moved to the bottom-center.
 class MonitorSwitchStrip : public MonitorPickerSurface
 {
+    Q_OBJECT
 public:
     MonitorSwitchStrip(const QPixmap& background,
                        const QPixmap& thumbnail,
@@ -2333,3 +2334,5 @@ void CaptureWidget::drawInactiveRegion(QPainter* painter)
     painter->setClipRegion(grey);
     painter->drawRect(-1, -1, rect().width() + 1, rect().height() + 1);
 }
+
+#include "capturewidget.moc"
