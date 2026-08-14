@@ -515,7 +515,8 @@ QScreen* ScreenGrabber::reliablePrimaryScreen()
           QStringLiteral("org.gnome.Mutter.DisplayConfig"),
           QStringLiteral("/org/gnome/Mutter/DisplayConfig"),
           QStringLiteral("org.gnome.Mutter.DisplayConfig"));
-        QDBusMessage msg = displayConfig.call(QStringLiteral("GetCurrentState"));
+        QDBusMessage msg =
+          displayConfig.call(QStringLiteral("GetCurrentState"));
         if (msg.type() == QDBusMessage::ReplyMessage) {
             const QList<QVariant>& replyArgs = msg.arguments();
             if (replyArgs.size() >= 3 &&
@@ -668,8 +669,7 @@ QWidget* ScreenGrabber::createMonitorPreviews(const QPixmap& fullScreenshot)
     }
 
     int initialPreviewIndex = 0;
-    int currentMonitorIndex = targetScreen ? screens.indexOf(targetScreen)
-                                           : -1;
+    int currentMonitorIndex = targetScreen ? screens.indexOf(targetScreen) : -1;
     int currentPreviewIndex = previewIndexForMonitor(currentMonitorIndex);
     if (currentPreviewIndex >= 0) {
         initialPreviewIndex = currentPreviewIndex;
