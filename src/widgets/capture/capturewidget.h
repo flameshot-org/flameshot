@@ -54,6 +54,8 @@ public:
 
     QPixmap pixmap();
     void setCaptureToolObjects(const CaptureToolObjects& captureToolObjects);
+    void createMonitorSwitchStrips();
+    void prepareForMonitorSwitch();
 #if !defined(DISABLE_UPDATE_CHECKER)
     void showAppUpdateNotification(const QString& appLatestVersion,
                                    const QString& appLatestUrl);
@@ -66,6 +68,14 @@ public slots:
 signals:
     void colorChanged(const QColor& c);
     void toolSizeChanged(int size);
+    // Emitted when the user clicks a "capture this monitor" strip on another
+    // monitor; the capture session is restarted on that monitor.
+    void monitorSwitchRequested(int monitorIndex);
+
+public slots:
+    // Switches this capture session to the given monitor: closes this widget
+    // and lets Flameshot start a fresh capture on that monitor.
+    void switchToMonitor(int monitorIndex);
 
 private slots:
     void undo();
@@ -232,4 +242,12 @@ private:
     int m_gridSize{ 10 };
 
     bool m_clipboardWorkaroundDone{ false };
+
+    // Monitor this capture is targeting (index into QGuiApplication::screens())
+    int m_selectedMonitorIndex{ -1 };
+    // True while handing the capture over to another monitor, so the
+    // destructor does not report a failed capture.
+    bool m_switchingMonitor{ false };
+    // The "capture this monitor" strips shown on the other monitors.
+    QList<QWidget*> m_monitorSwitchStrips;
 };

@@ -1,8 +1,9 @@
 # Required to generate MOC
 target_sources(
   flameshot
-  PRIVATE abstractlogger.h
+  PRIVATE          abstractlogger.h
           filenamehandler.h
+          monitorpickersurface.h
           screengrabber.h
           systemnotification.h
           valuehandler.h
@@ -14,6 +15,7 @@ target_sources(
   PRIVATE abstractlogger.cpp
           filenamehandler.cpp
           screengrabber.cpp
+          monitorpickersurface.cpp
           monitorpreview.cpp
           confighandler.cpp
           systemnotification.cpp

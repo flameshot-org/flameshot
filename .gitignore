@@ -82,3 +82,7 @@ result-*
 
 # direnv
 .direnv
+
+.atl
+.codegraph
+.freebuff

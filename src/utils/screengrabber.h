@@ -48,7 +48,16 @@ public:
     QScreen* cursorMonitor();
     int getSelectedMonitor() const { return m_selectedMonitor; }
     QScreen* getSelectedScreen() const;
+    // Full desktop pixmap captured by the last grabEntireDesktop() call. The
+    // capture UI uses it to build the per-monitor previews of the monitors
+    // that are not being captured.
+    const QPixmap& fullScreenshot() const { return fullScreenshotStorage(); }
     QPixmap selectMonitorAndCrop(const QPixmap& fullScreenshot, bool& ok);
+    QPixmap cropToMonitor(const QPixmap& fullScreenshot, int monitorIndex);
+    // Selects the monitor for the next grabEntireDesktop() call. Safe to call
+    // outside the monitor-selection loop: it only stores the monitor index and
+    // quits the loop if one is running.
+    void selectMonitor(int monitorIndex);
 
 protected:
     bool eventFilter(QObject* obj, QEvent* event) override;
@@ -58,17 +67,19 @@ private:
     QList<QWidget*> createMonitorPreviews(const QPixmap& fullScreenshot,
                                           QScreen* cursorScreen);
     void cancelMonitorSelection();
-    void selectMonitor(int monitorIndex);
     // m_highlightedMonitorPreview holds a monitor index (not a preview index)
     // because every picker window shows one preview per monitor.
     void setHighlightedMonitorPreview(int monitorIndex);
-    QPixmap cropToMonitor(const QPixmap& fullScreenshot, int monitorIndex);
     QPixmap windowsScreenshot(int wid);
     QPixmap x11LegacyScreenshot();
     QPixmap unixScreenshot(bool& ok);
 
     DesktopInfo m_info;
     QPixmap Screenshot;
+    // Storage for the last full desktop capture. Function-local static so the
+    // QPixmap is constructed after QGuiApplication exists (a global static
+    // would be built before main and crash).
+    static QPixmap& fullScreenshotStorage();
     int m_selectedMonitor;
     int m_highlightedMonitorPreview;
     QList<MonitorPreview*> m_monitorPreviews;

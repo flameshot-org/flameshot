@@ -3,6 +3,7 @@
 #include "core/qguiappcurrentscreen.h"
 #include "utils/abstractlogger.h"
 #include "utils/confighandler.h"
+#include "utils/monitorpickersurface.h"
 #include "utils/monitorpreview.h"
 #include "utils/systemnotification.h"
 
@@ -41,6 +42,12 @@
 #endif
 
 bool ScreenGrabber::m_monitorSelectionActive = false;
+
+QPixmap& ScreenGrabber::fullScreenshotStorage()
+{
+    static QPixmap shot;
+    return shot;
+}
 
 ScreenGrabber::ScreenGrabber(QObject* parent)
   : QObject(parent)
@@ -327,6 +334,9 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok, int preSelectedMonitor)
     if (!ok) {
         return QPixmap();
     }
+    // Keep the full desktop around so the capture UI can build the
+    // per-monitor previews of the monitors that are not being captured.
+    fullScreenshotStorage() = screenshot;
 #elif defined(Q_OS_WIN)
     screenshot = windowsScreenshot(wid);
 #endif
@@ -424,34 +434,6 @@ QRect ScreenGrabber::desktopGeometry()
 }
 
 namespace {
-
-// Opaque surface for the compact picker on Wayland: paints the frozen desktop
-// of one monitor so the compact strip sits on top of a live-looking
-// background. Fullscreen windows cannot be translucent on GNOME Wayland (the
-// compositor composites them as opaque, so the transparent area renders
-// black), hence the desktop preview instead of a transparent window.
-class MonitorPickerSurface : public QWidget
-{
-public:
-    MonitorPickerSurface(const QPixmap& background,
-                         QWidget* parent = nullptr,
-                         Qt::WindowFlags flags = Qt::WindowFlags())
-      : QWidget(parent, flags)
-      , m_background(background)
-    {
-        setAttribute(Qt::WA_OpaquePaintEvent);
-    }
-
-protected:
-    void paintEvent(QPaintEvent*) override
-    {
-        QPainter painter(this);
-        painter.drawPixmap(0, 0, m_background);
-    }
-
-private:
-    QPixmap m_background;
-};
 
 #if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
 
