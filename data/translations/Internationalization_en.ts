@@ -256,6 +256,11 @@
         <source>Tool Settings</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="105"/>
+        <source>Capture this monitor</source>
+        <translation>Capture this monitor</translation>
+    </message>
 </context>
 <context>
     <name>CircleCountTool</name>
@@ -1331,10 +1336,11 @@ Please solve them manually in the configuration file.</source>
 <context>
     <name>MonitorPreview</name>
     <message>
-        <location filename="../../src/utils/monitorpreview.cpp" line="31"/>
+        <location filename="../../src/utils/monitorpreview.cpp" line="38"/>
         <source>Monitor %1: %2
 Click to select</source>
-        <translation type="unfinished"></translation>
+        <translation>Monitor %1: %2
+Click to select</translation>
     </message>
 </context>
 <context>
