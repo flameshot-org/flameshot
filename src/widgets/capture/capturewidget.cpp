@@ -93,9 +93,9 @@ public:
         // theme; it is re-read for every session, so changing the UI color is
         // reflected the next time a capture starts.
         const QColor uiColor = ConfigHandler().uiColor();
-        const QColor textColor =
-          ColorUtils::colorIsDark(uiColor) ? QColor(Qt::white)
-                                           : QColor(Qt::black);
+        const QColor textColor = ColorUtils::colorIsDark(uiColor)
+                                   ? QColor(Qt::white)
+                                   : QColor(Qt::black);
         QLabel* caption = new QLabel(tr("Capture this monitor"), this);
         caption->setAlignment(Qt::AlignCenter);
         caption->setStyleSheet(
@@ -110,14 +110,12 @@ public:
 
         MonitorPreview* preview =
           new MonitorPreview(monitorIndex, screen, thumbnail, this, true);
-        connect(preview,
-                &MonitorPreview::monitorSelected,
-                this,
-                [this](int index) {
-                    if (m_onSwitch) {
-                        m_onSwitch(index);
-                    }
-                });
+        connect(
+          preview, &MonitorPreview::monitorSelected, this, [this](int index) {
+              if (m_onSwitch) {
+                  m_onSwitch(index);
+              }
+          });
         outer->addWidget(preview, 0, Qt::AlignHCenter);
     }
 
@@ -501,14 +499,12 @@ void CaptureWidget::createMonitorSwitchStrips()
           240, 150, Qt::KeepAspectRatio, Qt::SmoothTransformation);
         thumbnail.setDevicePixelRatio(1.0);
 
-        auto* strip =
-          new MonitorSwitchStrip(wayland ? monitorShot : QPixmap(),
-                                 thumbnail,
-                                 i,
-                                 target,
-                                 [this](int monitorIndex) {
-                                     switchToMonitor(monitorIndex);
-                                 });
+        auto* strip = new MonitorSwitchStrip(
+          wayland ? monitorShot : QPixmap(),
+          thumbnail,
+          i,
+          target,
+          [this](int monitorIndex) { switchToMonitor(monitorIndex); });
         m_monitorSwitchStrips.append(strip);
 
         // Pin the strip to its monitor: on Wayland only fullscreen honors the
