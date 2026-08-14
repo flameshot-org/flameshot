@@ -7,7 +7,6 @@
 #include "utils/systemnotification.h"
 
 #include <QApplication>
-#include <QDBusArgument>
 #include <QEventLoop>
 #include <QGuiApplication>
 #include <QHBoxLayout>
@@ -31,6 +30,7 @@
 
 #if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
 #include "request.h"
+#include <QDBusArgument>
 #include <QDBusInterface>
 #include <QDBusMessage>
 #include <QDBusReply>
@@ -431,6 +431,8 @@ QRect ScreenGrabber::desktopGeometry()
 
 namespace {
 
+#if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
+
 // Skip a `a{sv}` (string -> variant) dictionary on the QDBusArgument cursor.
 void skipVariantMap(const QDBusArgument& arg)
 {
@@ -496,6 +498,8 @@ void skipMonitorsArray(const QDBusArgument& arg)
 }
 
 } // namespace
+
+#endif
 
 QScreen* ScreenGrabber::reliablePrimaryScreen()
 {
