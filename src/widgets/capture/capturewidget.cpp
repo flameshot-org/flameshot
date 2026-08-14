@@ -16,6 +16,7 @@
 #include "core/qguiappcurrentscreen.h"
 #include "tools/copy/copytool.h"
 #include "utils/abstractlogger.h"
+#include "utils/colorutils.h"
 #include "utils/monitorpickersurface.h"
 #include "utils/monitorpreview.h"
 #include "utils/screengrabber.h"
@@ -88,13 +89,23 @@ public:
         outer->setContentsMargins(0, 0, 0, 14);
         outer->addStretch(1);
 
-        // "capturar este monitor" appears above the preview box
+        // Caption uses the configured UI color so it matches the Flameshot
+        // theme; it is re-read for every session, so changing the UI color is
+        // reflected the next time a capture starts.
+        const QColor uiColor = ConfigHandler().uiColor();
+        const QColor textColor =
+          ColorUtils::colorIsDark(uiColor) ? QColor(Qt::white)
+                                           : QColor(Qt::black);
         QLabel* caption = new QLabel(tr("Capture this monitor"), this);
         caption->setAlignment(Qt::AlignCenter);
         caption->setStyleSheet(
-          "QLabel { color: white; background-color: rgba(35,35,35,230); "
-          "padding: 6px 16px; font-size: 13pt; font-weight: bold; "
-          "border-radius: 6px; }");
+          QString("QLabel { color: %1; background-color: rgba(%2, %3, %4, "
+                  "230); padding: 6px 16px; font-size: 13pt; font-weight: "
+                  "bold; border-radius: 6px; }")
+            .arg(textColor.name())
+            .arg(uiColor.red())
+            .arg(uiColor.green())
+            .arg(uiColor.blue()));
         outer->addWidget(caption, 0, Qt::AlignHCenter);
 
         MonitorPreview* preview =
