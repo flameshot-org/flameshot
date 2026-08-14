@@ -7,6 +7,7 @@
 #include "utils/systemnotification.h"
 
 #include <QApplication>
+#include <QDBusArgument>
 #include <QEventLoop>
 #include <QGuiApplication>
 #include <QHBoxLayout>
@@ -18,8 +19,10 @@
 #include <QPixmap>
 #include <QProcess>
 #include <QScreen>
+#include <QStringList>
 #include <QTimer>
 #include <QWidget>
+#include <QWindow>
 #include <algorithm>
 
 #ifdef FLAMESHOT_DEBUG_CAPTURE
@@ -426,6 +429,156 @@ QRect ScreenGrabber::desktopGeometry()
     return geometry;
 }
 
+namespace {
+
+// Skip a `a{sv}` (string -> variant) dictionary on the QDBusArgument cursor.
+void skipVariantMap(const QDBusArgument& arg)
+{
+    arg.beginMap();
+    while (!arg.atEnd()) {
+        QString key;
+        QVariant value;
+        arg >> key >> value;
+        Q_UNUSED(key);
+        Q_UNUSED(value);
+    }
+    arg.endMap();
+}
+
+// Skip a single monitor mode struct: `(s i i d d ad a{sv})`.
+void skipMonitorMode(const QDBusArgument& arg)
+{
+    arg.beginStructure();
+    QString id;
+    int width, height;
+    double refreshRate, scale;
+    arg >> id >> width >> height >> refreshRate >> scale;
+    Q_UNUSED(id);
+    Q_UNUSED(width);
+    Q_UNUSED(height);
+    Q_UNUSED(refreshRate);
+    Q_UNUSED(scale);
+    arg.beginArray();
+    while (!arg.atEnd()) {
+        double s;
+        arg >> s;
+        Q_UNUSED(s);
+    }
+    arg.endArray();
+    skipVariantMap(arg);
+    arg.endStructure();
+}
+
+// Skip the monitors array `a((ssss)a((siiddada{sv}))a{sv})`; the primary
+// monitor is reported by the logical monitors array instead.
+void skipMonitorsArray(const QDBusArgument& arg)
+{
+    arg.beginArray();
+    while (!arg.atEnd()) {
+        arg.beginStructure();
+        QString connector, vendor, product, serial;
+        arg.beginStructure();
+        arg >> connector >> vendor >> product >> serial;
+        Q_UNUSED(connector);
+        Q_UNUSED(vendor);
+        Q_UNUSED(product);
+        Q_UNUSED(serial);
+        arg.endStructure();
+        arg.beginArray();
+        while (!arg.atEnd()) {
+            skipMonitorMode(arg);
+        }
+        arg.endArray();
+        skipVariantMap(arg);
+        arg.endStructure();
+    }
+    arg.endArray();
+}
+
+} // namespace
+
+QScreen* ScreenGrabber::reliablePrimaryScreen()
+{
+#if defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)
+    DesktopInfo info;
+    if (info.waylandDetected() && info.windowManager() == DesktopInfo::GNOME) {
+        // Qt's wayland plugin does not implement the wp_primary_output
+        // protocol, so QGuiApplication::primaryScreen() on GNOME Wayland
+        // returns the first wl_output advertised by the compositor (usually
+        // the built-in panel) instead of the monitor the user actually
+        // configured as primary. Ask mutter directly; it is the authoritative
+        // source for the primary monitor on GNOME.
+        // GetCurrentState returns a struct whose fields QDBusMessage exposes
+        // as separate arguments:
+        //   u, a((ssss)a((siiddada{sv}))a{sv}), a(iiduba(ssss)a{sv}), a{sv}
+        QDBusInterface displayConfig(
+          QStringLiteral("org.gnome.Mutter.DisplayConfig"),
+          QStringLiteral("/org/gnome/Mutter/DisplayConfig"),
+          QStringLiteral("org.gnome.Mutter.DisplayConfig"));
+        QDBusMessage msg = displayConfig.call(QStringLiteral("GetCurrentState"));
+        if (msg.type() == QDBusMessage::ReplyMessage) {
+            const QList<QVariant>& replyArgs = msg.arguments();
+            if (replyArgs.size() >= 3 &&
+                replyArgs.at(1).canConvert<QDBusArgument>() &&
+                replyArgs.at(2).canConvert<QDBusArgument>()) {
+                const QDBusArgument monitorsArg =
+                  replyArgs.at(1).value<QDBusArgument>();
+                skipMonitorsArray(monitorsArg);
+
+                // Find the primary logical monitor and the connector(s)
+                // mapped to it.
+                QString primaryConnector;
+                const QDBusArgument logicalArg =
+                  replyArgs.at(2).value<QDBusArgument>();
+                logicalArg.beginArray();
+                while (!logicalArg.atEnd() && primaryConnector.isEmpty()) {
+                    logicalArg.beginStructure();
+                    int x, y;
+                    double scale;
+                    uint transform;
+                    bool primary;
+                    logicalArg >> x >> y >> scale >> transform >> primary;
+                    Q_UNUSED(x);
+                    Q_UNUSED(y);
+                    Q_UNUSED(scale);
+                    Q_UNUSED(transform);
+                    QStringList connectors;
+                    logicalArg.beginArray();
+                    while (!logicalArg.atEnd()) {
+                        QString connector, vendor, product, serial;
+                        logicalArg.beginStructure();
+                        logicalArg >> connector >> vendor >> product >> serial;
+                        Q_UNUSED(connector);
+                        Q_UNUSED(vendor);
+                        Q_UNUSED(product);
+                        Q_UNUSED(serial);
+                        logicalArg.endStructure();
+                        connectors.append(connector);
+                    }
+                    logicalArg.endArray();
+                    skipVariantMap(logicalArg);
+                    logicalArg.endStructure();
+                    if (primary && !connectors.isEmpty()) {
+                        primaryConnector = connectors.first();
+                    }
+                }
+                logicalArg.endArray();
+
+                if (!primaryConnector.isEmpty()) {
+                    const QList<QScreen*> screens = QGuiApplication::screens();
+                    for (QScreen* screen : screens) {
+                        if (screen->name() == primaryConnector) {
+                            return screen;
+                        }
+                    }
+                }
+            }
+        }
+    }
+#endif
+    return QGuiApplication::primaryScreen();
+}
+
 QScreen* ScreenGrabber::getSelectedScreen() const
 {
     const QList<QScreen*> screens = QGuiApplication::screens();
@@ -499,9 +652,24 @@ QWidget* ScreenGrabber::createMonitorPreviews(const QPixmap& fullScreenshot)
         containerLayout->addWidget(preview);
     }
 
+    // Decide which monitor the selection dialog should appear on. On X11 the
+    // screen under the cursor is reliable, so follow the mouse. On Wayland the
+    // global cursor position is not exposed to clients and Qt's primaryScreen
+    // does not reflect the compositor's primary monitor, so use the monitor
+    // the desktop actually reports as primary (queried from mutter on GNOME).
+    QScreen* targetScreen = nullptr;
+    if (m_info.waylandDetected()) {
+        targetScreen = reliablePrimaryScreen();
+    } else {
+        targetScreen = QGuiAppCurrentScreen().currentScreen();
+        if (!targetScreen) {
+            targetScreen = QGuiApplication::primaryScreen();
+        }
+    }
+
     int initialPreviewIndex = 0;
-    QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
-    int currentMonitorIndex = screens.indexOf(currentScreen);
+    int currentMonitorIndex = targetScreen ? screens.indexOf(targetScreen)
+                                           : -1;
     int currentPreviewIndex = previewIndexForMonitor(currentMonitorIndex);
     if (currentPreviewIndex >= 0) {
         initialPreviewIndex = currentPreviewIndex;
@@ -511,11 +679,21 @@ QWidget* ScreenGrabber::createMonitorPreviews(const QPixmap& fullScreenshot)
     monitorPreviews->setLayout(containerLayout);
     monitorPreviews->adjustSize();
 
-    QScreen* primaryScreen = QGuiApplication::primaryScreen();
-    QRect screenGeometry = primaryScreen->geometry();
-    QPoint center = screenGeometry.center();
-    monitorPreviews->move(center.x() - monitorPreviews->width() / 2,
-                          center.y() - monitorPreviews->height() / 2);
+    if (targetScreen) {
+        QRect screenGeometry = targetScreen->geometry();
+        QPoint center = screenGeometry.center();
+        monitorPreviews->move(center.x() - monitorPreviews->width() / 2,
+                              center.y() - monitorPreviews->height() / 2);
+        // Wayland compositors ignore move() entirely, so the only reliable way
+        // to choose which monitor a window maps to is to associate the native
+        // window with the target QScreen before showing it. winId() forces the
+        // native window to exist (windowHandle() is null before show), and
+        // QWindow::setScreen() recreates it on the target screen.
+        monitorPreviews->winId();
+        if (QWindow* previewWindow = monitorPreviews->windowHandle()) {
+            previewWindow->setScreen(targetScreen);
+        }
+    }
 
     monitorPreviews->show();
     monitorPreviews->raise();
