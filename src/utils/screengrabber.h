@@ -58,8 +58,6 @@ private:
     QList<QWidget*> createMonitorPreviews(const QPixmap& fullScreenshot,
                                           QScreen* cursorScreen);
     void cancelMonitorSelection();
-    void moveHighlightedMonitorPreview(int offset);
-    void selectHighlightedMonitorPreview();
     void selectMonitor(int monitorIndex);
     // m_highlightedMonitorPreview holds a monitor index (not a preview index)
     // because every picker window shows one preview per monitor.

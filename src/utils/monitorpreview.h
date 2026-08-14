@@ -41,6 +41,5 @@ private:
     QColor m_uiColor;
     QColor m_contrastColor;
     QLabel* m_imageLabel;
-    QLabel* m_keyLabel;
     QLabel* m_textLabel;
 };

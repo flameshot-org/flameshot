@@ -820,31 +820,6 @@ void ScreenGrabber::cancelMonitorSelection()
     }
 }
 
-void ScreenGrabber::moveHighlightedMonitorPreview(int offset)
-{
-    if (m_monitorPreviews.isEmpty()) {
-        return;
-    }
-
-    int nextMonitorIndex = m_highlightedMonitorPreview;
-    if (nextMonitorIndex < 0) {
-        nextMonitorIndex = 0;
-    } else {
-        nextMonitorIndex += offset;
-    }
-
-    setHighlightedMonitorPreview(nextMonitorIndex);
-}
-
-void ScreenGrabber::selectHighlightedMonitorPreview()
-{
-    if (m_highlightedMonitorPreview < 0) {
-        return;
-    }
-
-    selectMonitor(m_highlightedMonitorPreview);
-}
-
 void ScreenGrabber::selectMonitor(int monitorIndex)
 {
     m_selectedMonitor = monitorIndex;
@@ -897,34 +872,9 @@ bool ScreenGrabber::eventFilter(QObject* obj, QEvent* event)
     }
     if (event->type() == QEvent::KeyPress) {
         QKeyEvent* keyEvent = static_cast<QKeyEvent*>(event);
-        switch (keyEvent->key()) {
-            case Qt::Key_Escape:
-                cancelMonitorSelection();
-                return true;
-            case Qt::Key_Left:
-            case Qt::Key_Up:
-            case Qt::Key_Backtab:
-                moveHighlightedMonitorPreview(-1);
-                return true;
-            case Qt::Key_Right:
-            case Qt::Key_Down:
-            case Qt::Key_Tab:
-                moveHighlightedMonitorPreview(1);
-                return true;
-            case Qt::Key_Return:
-            case Qt::Key_Enter:
-            case Qt::Key_Space:
-                selectHighlightedMonitorPreview();
-                return true;
-            default:
-                if (keyEvent->key() >= Qt::Key_1 &&
-                    keyEvent->key() <= Qt::Key_9) {
-                    int monitorIndex = keyEvent->key() - Qt::Key_1;
-                    if (monitorIndex < QGuiApplication::screens().size()) {
-                        selectMonitor(monitorIndex);
-                    }
-                    return true;
-                }
+        if (keyEvent->key() == Qt::Key_Escape) {
+            cancelMonitorSelection();
+            return true;
         }
     }
     return QObject::eventFilter(obj, event);
