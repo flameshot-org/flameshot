@@ -207,7 +207,13 @@ CaptureWidget* Flameshot::gui(const CaptureRequest& req)
         m_captureWindow->raise();
 #else
         m_captureWindow->showFullScreen();
-//        m_captureWindow->show(); // For CaptureWidget Debugging under Linux
+        // The window manager / compositor does not always hand keyboard focus
+        // to the freshly shown capture window (and the monitor-switch strips
+        // never should), so activate it explicitly. Otherwise the Escape
+        // shortcut stays dead until the first mouse press activates the
+        // window. No-op on Wayland, where the compositor decides focus.
+        m_captureWindow->activateWindow();
+        m_captureWindow->raise();
 #endif
         return m_captureWindow;
     } else {

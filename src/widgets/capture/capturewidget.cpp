@@ -79,11 +79,17 @@ public:
       : MonitorPickerSurface(background,
                              nullptr,
                              Qt::Window | Qt::FramelessWindowHint |
-                               Qt::WindowStaysOnTopHint)
+                               Qt::WindowStaysOnTopHint |
+                               Qt::WindowDoesNotAcceptFocus)
       , m_monitorIndex(monitorIndex)
       , m_onSwitch(std::move(onSwitch))
     {
         setFocusPolicy(Qt::StrongFocus);
+        // The strip is a helper surface: showing it must never steal keyboard
+        // focus from the capture widget, otherwise the Escape shortcut (and
+        // any other shortcut) stops working until the user clicks the capture
+        // area and activates the window manually.
+        setAttribute(Qt::WA_ShowWithoutActivating);
 
         QVBoxLayout* outer = new QVBoxLayout(this);
         outer->setContentsMargins(0, 0, 0, 14);
@@ -1951,7 +1957,15 @@ void CaptureWidget::initShortcuts()
                 this,
                 SLOT(selectAll()));
 
-    newShortcut(Qt::Key_Escape, this, SLOT(deleteToolWidgetOrClose()));
+    // Escape must work while any window of the capture session is focused.
+    // On Wayland the compositor hands keyboard focus to a single surface and
+    // the fullscreen monitor-switch strips on the other monitors can take it,
+    // which would otherwise leave a window-context shortcut dead until the
+    // user clicks the capture area. An application-scoped shortcut fires
+    // while any of the application's windows is active.
+    QShortcut* escapeShortcut =
+      new QShortcut(Qt::Key_Escape, this, SLOT(deleteToolWidgetOrClose()));
+    escapeShortcut->setContext(Qt::ApplicationShortcut);
 }
 
 void CaptureWidget::deleteCurrentTool()
