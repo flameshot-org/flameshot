@@ -19,6 +19,12 @@ source=()
 
 prepare() {
     cp -R "${startdir}/" "${srcdir}/${_pkgname}/"
+
+    # A build directory left over from working on the source tree is copied
+    # along with it, and its CMakeCache.txt still points at the original paths,
+    # which makes the cmake call in build() fail. The .git directory has to stay
+    # because pkgver() reads it.
+    rm -rf "${srcdir}/${_pkgname}/build"
 }
 
 pkgver() {
