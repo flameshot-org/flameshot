@@ -25,6 +25,7 @@
 #include <QWindow>
 #include <QtAlgorithms>
 #include <algorithm>
+#include <functional>
 
 #ifdef FLAMESHOT_DEBUG_CAPTURE
 #include <QDebug>
@@ -437,6 +438,31 @@ namespace {
 
 #if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
 
+// Quits the cursor-probe event loop as soon as the watched widget is
+// exposed. On Wayland the compositor assigns the output before mapping the
+// window, so by the time the Expose event arrives the window's screen is
+// final; waiting for QWindow::screenChanged alone costs the full timeout
+// whenever the compositor places the window on the screen Qt already
+// assigned it (e.g. the pointer is on the primary monitor).
+class ProbeExposeFilter : public QObject
+{
+public:
+    explicit ProbeExposeFilter(QObject* parent = nullptr)
+      : QObject(parent)
+    {}
+
+    std::function<void()> onExpose;
+
+protected:
+    bool eventFilter(QObject* watched, QEvent* event) override
+    {
+        if (event->type() == QEvent::Expose && onExpose) {
+            onExpose();
+        }
+        return QObject::eventFilter(watched, event);
+    }
+};
+
 // Skip a `a{sv}` (string -> variant) dictionary on the QDBusArgument cursor.
 void skipVariantMap(const QDBusArgument& arg)
 {
@@ -615,8 +641,27 @@ QScreen* ScreenGrabber::cursorMonitor()
     QEventLoop loop;
     QTimer timeout;
     timeout.setSingleShot(true);
-    timeout.setInterval(800);
+    // Backstop only: the loop normally exits when the probe window is
+    // exposed (or its screen changes), both of which happen within a frame
+    // or two of show(), so this is never reached on a healthy session.
+    timeout.setInterval(400);
     QObject::connect(&timeout, &QTimer::timeout, &loop, &QEventLoop::quit);
+
+    // Quit as soon as the probe is exposed: on Wayland the compositor
+    // assigns the output before mapping the window, so its screen is final
+    // by the time the Expose event arrives. Relying on screenChanged alone
+    // made PrtSc feel unresponsive (~1s) whenever the compositor placed the
+    // window on the screen Qt had already assigned it (e.g. the pointer is
+    // on the primary monitor): no screenChanged is emitted in that case and
+    // the loop waited out the full timeout.
+    ProbeExposeFilter exposeFilter(&probe);
+    exposeFilter.onExpose = [&loop]() {
+        // Defer the quit by one event-loop iteration so any screenChanged
+        // already queued for the same compositor round-trip is delivered
+        // first.
+        QTimer::singleShot(0, &loop, &QEventLoop::quit);
+    };
+    probe.installEventFilter(&exposeFilter);
 
     probe.show();
     if (QWindow* handle = probe.windowHandle()) {
