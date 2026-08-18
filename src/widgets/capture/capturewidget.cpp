@@ -16,6 +16,7 @@
 #include "core/qguiappcurrentscreen.h"
 #include "tools/copy/copytool.h"
 #include "utils/abstractlogger.h"
+#include "utils/desktopinfo.h"
 #include "utils/screengrabber.h"
 #include "utils/screenshotsaver.h"
 #include "widgets/capture/colorpicker.h"
@@ -98,6 +99,27 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
     connect(&m_xywhTimer, &QTimer::timeout, this, &CaptureWidget::xywhTick);
     // else xywhTick keeps triggering when not needed
     m_xywhTimer.setSingleShot(true);
+
+    // Auto-recover from focus lost to an external interruption (e.g. a
+    // notification popup stealing it) instead of just displaying "click
+    // somewhere" and waiting on the user. Only reclaims when some other
+    // *application* is active (qApp->activeWindow() == nullptr) - never
+    // fights our own dialogs (save-as picker, color picker, etc), which
+    // are legitimately active and simply aren't `this`.
+    //
+    // Under some window managers (e.g. xfwm4) activateWindow()/raise()
+    // don't reliably win on the first try - it's a timing race, not a
+    // hard block (evidenced by it sometimes succeeding immediately).
+    // Retrying frequently plays that race more times instead of trying
+    // to force a guaranteed win, which is worth the small overhead here
+    // since this timer only runs while a capture window is open.
+    connect(&m_focusReclaimTimer, &QTimer::timeout, this, [this]() {
+        if (!isActiveWindow() && qApp->activeWindow() == nullptr) {
+            raise();
+            activateWindow();
+        }
+    });
+    m_focusReclaimTimer.start(100);
     setAttribute(Qt::WA_DeleteOnClose);
     setAttribute(Qt::WA_QuitOnClose, false);
     m_opacity = m_config.contrastOpacity();
@@ -184,6 +206,14 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
         } else {
             // Note: Qt::BypassWindowManagerHint is removed to fix x11 gnome
             // crash. It's needed on Cosmic
+            //
+            // Tried swapping Qt::Tool for Qt::Window here to fix xfwm4
+            // withholding real input focus from utility windows (verified:
+            // it does fix keyboard shortcuts like Ctrl+E right after open),
+            // but it made window stacking/rendering intermittently unstable
+            // on xfwm4 (occasional crash, occasional render-behind). Kept
+            // as Qt::Tool - the known-stable configuration - until a fix
+            // that doesn't trade one bug for a worse one is found.
             setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint |
                            Qt::Tool);
         }
@@ -1952,13 +1982,23 @@ QList<QShortcut*> CaptureWidget::newShortcut(const QKeySequence& key,
 {
     QList<QShortcut*> shortcuts;
     QString strKey = key.toString();
+    // Qt::ApplicationShortcut instead of the default Qt::WindowShortcut:
+    // some window managers (e.g. xfwm4) never grant this overlay real
+    // X11 input focus even after activateWindow()/raise() (it stays
+    // visible and mouse-interactive, just not "active" per the WM), which
+    // makes WindowShortcut-scoped shortcuts silently never fire. This
+    // context only requires the application - not this specific window -
+    // to be the one receiving keyboard input.
     if (strKey.contains("Enter") || strKey.contains("Return")) {
         strKey.replace("Enter", "Return");
-        shortcuts << new QShortcut(strKey, parent, slot);
+        shortcuts << new QShortcut(
+          strKey, parent, slot, nullptr, Qt::ApplicationShortcut);
         strKey.replace("Return", "Enter");
-        shortcuts << new QShortcut(strKey, parent, slot);
+        shortcuts << new QShortcut(
+          strKey, parent, slot, nullptr, Qt::ApplicationShortcut);
     } else {
-        shortcuts << new QShortcut(key, parent, slot);
+        shortcuts << new QShortcut(
+          key, parent, slot, nullptr, Qt::ApplicationShortcut);
     }
     return shortcuts;
 }

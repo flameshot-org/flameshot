@@ -67,6 +67,7 @@ constexpr const char* visibleInDockProperty = "_visibleInDock";
 #include <QDesktopServices>
 #include <QFile>
 #include <QMessageBox>
+#include <QPointer>
 #include <QThread>
 #include <QTimer>
 #include <QUrl>
@@ -180,6 +181,29 @@ CaptureWidget* Flameshot::gui(const CaptureRequest& req)
 #else
         m_captureWindow->showFullScreen();
 //        m_captureWindow->show(); // For CaptureWidget Debugging under Linux
+        // Without this, window managers with focus-stealing prevention
+        // (e.g. xfwm4) can leave the overlay mapped but buried behind
+        // whatever already had focus - it flashes on screen then is
+        // invisible, and any later focus loss (e.g. a notification popup)
+        // is never reclaimed automatically. Mirrors the macOS branch above.
+        m_captureWindow->activateWindow();
+        m_captureWindow->raise();
+        // The WM's actual focus grant is asynchronous, so a keyboard
+        // shortcut pressed right after this call can still land before
+        // the window is truly active (Qt's WindowShortcut context requires
+        // isActiveWindow()). This is a timing race, not a hard block - it
+        // sometimes succeeds immediately - so a few staggered retries play
+        // that race more times instead of relying on a single attempt or
+        // solely on CaptureWidget's periodic reclaim timer.
+        QPointer<QWidget> captureWindow = m_captureWindow;
+        for (int delayMs : { 40, 100, 200, 400 }) {
+            QTimer::singleShot(delayMs, this, [captureWindow]() {
+                if (captureWindow && !captureWindow->isActiveWindow()) {
+                    captureWindow->activateWindow();
+                    captureWindow->raise();
+                }
+            });
+        }
 #endif
         return m_captureWindow;
     } else {

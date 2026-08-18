@@ -219,6 +219,11 @@ private:
     bool m_xywhDisplay;
     QTimer m_xywhTimer;
 
+    // Auto-reclaims focus lost to an external interruption (e.g. a
+    // notification popup) instead of just showing "click somewhere" and
+    // waiting - see CaptureWidget::CaptureWidget.
+    QTimer m_focusReclaimTimer;
+
     QUndoStack m_undoStack;
 
     bool m_existingObjectIsChanged;
