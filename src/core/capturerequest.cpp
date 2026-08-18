@@ -93,3 +93,13 @@ bool CaptureRequest::hasSelectedMonitor() const
 {
     return m_hasSelectedMonitor;
 }
+
+void CaptureRequest::setReuseStoredScreenshot(bool reuse)
+{
+    m_reuseStoredScreenshot = reuse;
+}
+
+bool CaptureRequest::reuseStoredScreenshot() const
+{
+    return m_reuseStoredScreenshot;
+}

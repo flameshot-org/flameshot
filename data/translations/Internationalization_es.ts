@@ -297,6 +297,14 @@ Presiona Espacio para abrir el panel lateral.</translation>
     </message>
 </context>
 <context>
+    <name>MonitorSwitchStrip</name>
+    <message>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="106"/>
+        <source>Capture this monitor</source>
+        <translation>Capturar este monitor</translation>
+    </message>
+</context>
+<context>
     <name>CircleCountTool</name>
     <message>
         <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="69"/>
@@ -1785,10 +1793,10 @@ Por favor, resuélvelos manualmente en el archivo de configuración.</translatio
 <context>
     <name>MonitorPreview</name>
     <message>
-        <location filename="../../src/utils/monitorpreview.cpp" line="31"/>
+        <location filename="../../src/utils/monitorpreview.cpp" line="38"/>
         <source>Monitor %1: %2
 Click to select</source>
-        <translation type="unfinished"></translation>
+        <translation>Haz clic para seleccionar</translation>
     </message>
 </context>
 <context>

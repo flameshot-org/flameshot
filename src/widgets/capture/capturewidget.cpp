@@ -16,6 +16,9 @@
 #include "core/qguiappcurrentscreen.h"
 #include "tools/copy/copytool.h"
 #include "utils/abstractlogger.h"
+#include "utils/colorutils.h"
+#include "utils/monitorpickersurface.h"
+#include "utils/monitorpreview.h"
 #include "utils/screengrabber.h"
 #include "utils/screenshotsaver.h"
 #include "widgets/capture/colorpicker.h"
@@ -30,14 +33,21 @@
 
 #include <QApplication>
 #include <QCheckBox>
+#include <QCoreApplication>
 #include <QDateTime>
 #include <QFontMetrics>
+#include <QHBoxLayout>
+#include <QLabel>
 #include <QMessageBox>
+#include <QMouseEvent>
 #include <QPaintEvent>
 #include <QPainter>
 #include <QScreen>
 #include <QShortcut>
+#include <QVBoxLayout>
 #include <QWindow>
+
+#include <functional>
 
 #if !defined(DISABLE_UPDATE_CHECKER)
 #include "widgets/updatenotificationwidget.h"
@@ -49,6 +59,93 @@ auto const MOUSE_WHEEL_TRESHOLD = 60;
 
 // CaptureWidget is the main component used to capture the screen. It contains
 // an area of selection with its respective buttons.
+
+namespace {
+
+// Compact "capture this monitor" strip shown on the monitors that are NOT
+// being captured. It shows the monitor's preview box with a caption above it;
+// clicking the strip (or the box) hands the capture over to that monitor.
+// On Wayland the strip is a fullscreen opaque surface painted with the
+// monitor's frozen desktop (fullscreen is the only way to pin it to that
+// monitor, and fullscreen windows cannot be translucent); on X11 it is a
+// small translucent window moved to the bottom-center.
+class MonitorSwitchStrip : public MonitorPickerSurface
+{
+public:
+    MonitorSwitchStrip(const QPixmap& background,
+                       const QPixmap& thumbnail,
+                       int monitorIndex,
+                       QScreen* screen,
+                       std::function<void(int)> onSwitch)
+      : MonitorPickerSurface(background,
+                             nullptr,
+                             Qt::Window | Qt::FramelessWindowHint |
+                               Qt::WindowStaysOnTopHint |
+                               Qt::WindowDoesNotAcceptFocus)
+      , m_monitorIndex(monitorIndex)
+      , m_onSwitch(std::move(onSwitch))
+    {
+        setFocusPolicy(Qt::StrongFocus);
+        // The strip is a helper surface: showing it must never steal keyboard
+        // focus from the capture widget, otherwise the Escape shortcut (and
+        // any other shortcut) stops working until the user clicks the capture
+        // area and activates the window manually.
+        setAttribute(Qt::WA_ShowWithoutActivating);
+
+        QVBoxLayout* outer = new QVBoxLayout(this);
+        outer->setContentsMargins(0, 0, 0, 14);
+        outer->addStretch(1);
+
+        // Caption uses the configured UI color so it matches the Flameshot
+        // theme; it is re-read for every session, so changing the UI color is
+        // reflected the next time a capture starts.
+        const QColor uiColor = ConfigHandler().uiColor();
+        const QColor textColor = ColorUtils::colorIsDark(uiColor)
+                                   ? QColor(Qt::white)
+                                   : QColor(Qt::black);
+        QLabel* caption =
+          new QLabel(QCoreApplication::translate("MonitorSwitchStrip",
+                                                 "Capture this monitor"),
+                     this);
+        caption->setAlignment(Qt::AlignCenter);
+        caption->setStyleSheet(
+          QString("QLabel { color: %1; background-color: rgba(%2, %3, %4, "
+                  "230); padding: 6px 16px; font-size: 13pt; font-weight: "
+                  "bold; border-radius: 6px; }")
+            .arg(textColor.name())
+            .arg(uiColor.red())
+            .arg(uiColor.green())
+            .arg(uiColor.blue()));
+        outer->addWidget(caption, 0, Qt::AlignHCenter);
+
+        MonitorPreview* preview =
+          new MonitorPreview(monitorIndex, screen, thumbnail, this, true);
+        connect(
+          preview, &MonitorPreview::monitorSelected, this, [this](int index) {
+              if (m_onSwitch) {
+                  m_onSwitch(index);
+              }
+          });
+        outer->addWidget(preview, 0, Qt::AlignHCenter);
+    }
+
+    int monitorIndex() const { return m_monitorIndex; }
+
+protected:
+    void mousePressEvent(QMouseEvent* event) override
+    {
+        if (event->button() == Qt::LeftButton && m_onSwitch) {
+            m_onSwitch(m_monitorIndex);
+            event->accept();
+        }
+    }
+
+private:
+    int m_monitorIndex;
+    std::function<void(int)> m_onSwitch;
+};
+
+} // namespace
 
 // enableSaveWindow
 
@@ -121,8 +218,25 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
         } else {
             preSelectedMonitor = -1;
         }
-        m_context.screenshot =
-          grabber.grabEntireDesktop(ok, preSelectedMonitor);
+        if (req.reuseStoredScreenshot() && preSelectedMonitor >= 0) {
+            // Reuse the clean full desktop captured when the session started.
+            // Taking a fresh screenshot while the previous capture session is
+            // still being torn down can capture the old UI (capture layout and
+            // monitor-switch strips) into the new widget's frozen background,
+            // which made the old session appear to stack on every switch.
+            grabber.selectMonitor(preSelectedMonitor);
+            const QPixmap stored = grabber.fullScreenshot();
+            if (!stored.isNull()) {
+                m_context.screenshot =
+                  grabber.cropToMonitor(stored, preSelectedMonitor);
+            } else {
+                m_context.screenshot =
+                  grabber.grabEntireDesktop(ok, preSelectedMonitor);
+            }
+        } else {
+            m_context.screenshot =
+              grabber.grabEntireDesktop(ok, preSelectedMonitor);
+        }
         if (!ok) {
             // Error already logged in ScreenGrabber
             this->close();
@@ -130,6 +244,7 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
         m_context.origScreenshot = m_context.screenshot;
 
         selectedScreen = grabber.getSelectedScreen();
+        m_selectedMonitorIndex = grabber.getSelectedMonitor();
 
 #if defined(Q_OS_WIN)
 #if !defined(FLAMESHOT_DEBUG_CAPTURE)
@@ -191,14 +306,41 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
 
         // Always display on the selected screen (not spanning entire desktop)
         if (selectedScreen == nullptr) {
+            // On X11 fall back to the monitor under the cursor. On Wayland the
+            // cursor position is not exposed to clients and Qt's primaryScreen
+            // is unreliable (see ScreenGrabber::reliablePrimaryScreen), so use
+            // the monitor the desktop reports as primary instead.
+            if (DesktopInfo().waylandDetected()) {
+                selectedScreen = ScreenGrabber::reliablePrimaryScreen();
+            } else {
+                selectedScreen = QGuiAppCurrentScreen().currentScreen();
+            }
+        }
+        if (selectedScreen == nullptr) {
             selectedScreen = QGuiApplication::primaryScreen();
         }
-        QRect screenGeom = selectedScreen->geometry();
-        move(screenGeom.topLeft());
-        resize(screenGeom.size());
+        if (selectedScreen) {
+            QRect screenGeom = selectedScreen->geometry();
+            move(screenGeom.topLeft());
+            resize(screenGeom.size());
 
-        if (selectedScreen != nullptr && windowHandle()) {
-            windowHandle()->setScreen(selectedScreen);
+            // Force the native window to exist so setScreen() actually takes
+            // effect. Without winId() this block was a silent no-op (window-
+            // Handle() returns null before the widget is shown).
+            winId();
+            if (QWindow* handle = windowHandle()) {
+                handle->setScreen(selectedScreen);
+            }
+
+            // On Wayland the compositor ignores the position of regular
+            // windows and maps them on the monitor containing the pointer, so
+            // setScreen() alone is not enough. Fullscreen is the only window
+            // state where the requested output is honored (the compositor
+            // receives xdg_toplevel.set_fullscreen with the output), so ask
+            // for it here -- the widget covers the selected screen anyway.
+            if (DesktopInfo().waylandDetected()) {
+                setWindowState(windowState() | Qt::WindowFullScreen);
+            }
         }
 #endif
     }
@@ -299,6 +441,11 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
     initQuitPrompt();
 
     updateCursor();
+
+    // Hybrid monitor switching: show a compact "capture this monitor" strip
+    // on every monitor that is not being captured; clicking one switches the
+    // capture session to that monitor.
+    createMonitorSwitchStrips();
 }
 
 CaptureWidget::~CaptureWidget()
@@ -314,7 +461,7 @@ CaptureWidget::~CaptureWidget()
         }
     }
 #endif
-    if (m_captureDone) {
+    if (m_captureDone && !m_switchingMonitor) {
         auto lastRegion = m_selection->geometry();
         const qreal scale = m_context.screenshot.devicePixelRatio();
         lastRegion.setTop(lastRegion.top() * scale);
@@ -326,8 +473,94 @@ CaptureWidget::~CaptureWidget()
         geometry.setTopLeft(geometry.topLeft() + m_context.widgetOffset);
         Flameshot::instance()->exportCapture(
           pixmap(), geometry, m_context.request);
-    } else {
+    } else if (!m_switchingMonitor) {
+        // Handing the session over to another monitor is not a failure.
         emit Flameshot::instance()->captureFailed();
+    }
+
+    qDeleteAll(m_monitorSwitchStrips);
+    m_monitorSwitchStrips.clear();
+}
+
+void CaptureWidget::createMonitorSwitchStrips()
+{
+#if defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)
+    if (m_context.request.captureMode() != CaptureRequest::GRAPHICAL_MODE) {
+        return;
+    }
+    const QList<QScreen*> screens = QGuiApplication::screens();
+    if (screens.size() < 2 || m_selectedMonitorIndex < 0) {
+        return;
+    }
+    ScreenGrabber grabber;
+    const QPixmap fullShot = grabber.fullScreenshot();
+    if (fullShot.isNull()) {
+        return;
+    }
+    const bool wayland = DesktopInfo().waylandDetected();
+
+    for (int i = 0; i < screens.size(); ++i) {
+        if (i == m_selectedMonitorIndex) {
+            continue;
+        }
+        QScreen* target = screens[i];
+        const QPixmap monitorShot = ScreenGrabber().cropToMonitor(fullShot, i);
+        QPixmap thumbnail = monitorShot.scaled(
+          240, 150, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+        thumbnail.setDevicePixelRatio(1.0);
+
+        auto* strip = new MonitorSwitchStrip(
+          wayland ? monitorShot : QPixmap(),
+          thumbnail,
+          i,
+          target,
+          [this](int monitorIndex) { switchToMonitor(monitorIndex); });
+        m_monitorSwitchStrips.append(strip);
+
+        // Pin the strip to its monitor: on Wayland only fullscreen honors the
+        // requested output, so the strip covers the monitor with its frozen
+        // desktop and the compact content at the bottom.
+        strip->winId();
+        if (QWindow* handle = strip->windowHandle()) {
+            handle->setScreen(target);
+        }
+        const QRect geom = target->geometry();
+        if (wayland) {
+            strip->resize(geom.size());
+            strip->layout()->activate();
+            strip->showFullScreen();
+        } else {
+            strip->adjustSize();
+            strip->move(geom.x() + (geom.width() - strip->width()) / 2,
+                        geom.y() + geom.height() - strip->height() - 16);
+            strip->show();
+        }
+        strip->raise();
+    }
+#endif
+}
+
+void CaptureWidget::switchToMonitor(int monitorIndex)
+{
+    if (m_switchingMonitor || monitorIndex < 0 ||
+        monitorIndex >= QGuiApplication::screens().size()) {
+        return;
+    }
+    prepareForMonitorSwitch();
+    emit monitorSwitchRequested(monitorIndex);
+    close();
+}
+
+void CaptureWidget::prepareForMonitorSwitch()
+{
+    m_switchingMonitor = true;
+    setEnabled(false);
+    hide();
+    for (QWidget* strip : m_monitorSwitchStrips) {
+        if (strip) {
+            strip->hide();
+            strip->close();
+        }
     }
 }
 
@@ -635,7 +868,7 @@ void CaptureWidget::closeEvent(QCloseEvent* event)
     const bool copyRequested =
       (m_context.request.tasks() & CaptureRequest::COPY);
 
-    if (m_captureDone && copyRequested) {
+    if (m_captureDone && copyRequested && !m_switchingMonitor) {
         DesktopInfo desktopInfo;
         const bool needGnomeWorkaround =
           desktopInfo.waylandDetected() &&
@@ -1728,7 +1961,15 @@ void CaptureWidget::initShortcuts()
                 this,
                 SLOT(selectAll()));
 
-    newShortcut(Qt::Key_Escape, this, SLOT(deleteToolWidgetOrClose()));
+    // Escape must work while any window of the capture session is focused.
+    // On Wayland the compositor hands keyboard focus to a single surface and
+    // the fullscreen monitor-switch strips on the other monitors can take it,
+    // which would otherwise leave a window-context shortcut dead until the
+    // user clicks the capture area. An application-scoped shortcut fires
+    // while any of the application's windows is active.
+    QShortcut* escapeShortcut =
+      new QShortcut(Qt::Key_Escape, this, SLOT(deleteToolWidgetOrClose()));
+    escapeShortcut->setContext(Qt::ApplicationShortcut);
 }
 
 void CaptureWidget::deleteCurrentTool()

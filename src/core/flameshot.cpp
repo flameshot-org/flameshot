@@ -167,6 +167,34 @@ CaptureWidget* Flameshot::gui(const CaptureRequest& req)
 
         m_captureWindow = new CaptureWidget(request);
 
+        // Hybrid monitor switching: the "capture this monitor" strips shown
+        // on the other monitors ask for a different target; close this
+        // session and start a fresh capture on the requested monitor once it
+        // is gone.
+        QObject::connect(
+          m_captureWindow,
+          &CaptureWidget::monitorSwitchRequested,
+          this,
+          [this](int monitorIndex) {
+              if (!m_captureWindow) {
+                  return;
+              }
+              CaptureWidget* old = m_captureWindow;
+              m_captureWindow = nullptr;
+              // Wait until the old widget is actually destroyed
+              // (its destructor deletes the monitor-switch
+              // strips) before starting a fresh capture, so the
+              // old windows are never left stacked behind the
+              // new ones.
+              QObject::connect(
+                old, &QObject::destroyed, this, [this, monitorIndex]() {
+                    CaptureRequest req(CaptureRequest::GRAPHICAL_MODE);
+                    req.setSelectedMonitor(monitorIndex);
+                    req.setReuseStoredScreenshot(true);
+                    gui(req);
+                });
+          });
+
 #ifdef Q_OS_WIN
         m_captureWindow->show();
 #elif defined(Q_OS_MACOS)
@@ -179,7 +207,13 @@ CaptureWidget* Flameshot::gui(const CaptureRequest& req)
         m_captureWindow->raise();
 #else
         m_captureWindow->showFullScreen();
-//        m_captureWindow->show(); // For CaptureWidget Debugging under Linux
+        // The window manager / compositor does not always hand keyboard focus
+        // to the freshly shown capture window (and the monitor-switch strips
+        // never should), so activate it explicitly. Otherwise the Escape
+        // shortcut stays dead until the first mouse press activates the
+        // window. No-op on Wayland, where the compositor decides focus.
+        m_captureWindow->activateWindow();
+        m_captureWindow->raise();
 #endif
         return m_captureWindow;
     } else {

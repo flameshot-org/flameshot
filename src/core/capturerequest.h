@@ -52,6 +52,8 @@ public:
     void setSelectedMonitor(int monitorIndex);
     int selectedMonitor() const;
     bool hasSelectedMonitor() const;
+    void setReuseStoredScreenshot(bool reuse);
+    bool reuseStoredScreenshot() const;
 
 private:
     CaptureMode m_mode;
@@ -62,6 +64,7 @@ private:
     QRect m_pinWindowGeometry, m_initialSelection;
     int m_selectedMonitor;
     bool m_hasSelectedMonitor;
+    bool m_reuseStoredScreenshot{ false };
 
     CaptureRequest() {}
 };
