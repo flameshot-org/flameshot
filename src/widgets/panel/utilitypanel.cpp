@@ -38,10 +38,13 @@ UtilityPanel::UtilityPanel(CaptureWidget* captureWidget)
     m_hideAnimation->setEasingCurve(QEasingCurve::InOutQuad);
     m_hideAnimation->setDuration(300);
 
-    connect(m_hideAnimation,
-            &QPropertyAnimation::finished,
-            m_internalPanel,
-            &QWidget::hide);
+    connect(m_hideAnimation, &QPropertyAnimation::finished, this, [this]() {
+        // Deferred to animation-finished rather than called synchronously
+        // from hide() - hiding the widget immediately after starting the
+        // animation cut it off before a single frame could render.
+        m_internalPanel->hide();
+        QWidget::hide();
+    });
 
 #if (defined(Q_OS_WIN) || defined(Q_OS_MACOS))
     move(0, 0);
@@ -106,8 +109,9 @@ void UtilityPanel::hide()
     m_hideAnimation->setStartValue(QRect(0, 0, width(), height()));
     m_hideAnimation->setEndValue(QRect(-width(), 0, 0, height()));
     m_hideAnimation->start();
-    m_internalPanel->hide();
-    QWidget::hide();
+    // The actual hide() calls happen once the animation finishes (see the
+    // constructor's connect) - doing it here too would hide the widget
+    // before the animation renders a single frame.
 }
 
 void UtilityPanel::toggle()
