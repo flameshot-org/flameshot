@@ -20,6 +20,7 @@
 #include "utils/filenamehandler.h"
 #include "utils/pathinfo.h"
 #include "utils/valuehandler.h"
+#include "utils/wheelfocusguard.h"
 
 #if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
 #include "core/flameshotdbusadapter.h"
@@ -180,6 +181,7 @@ void configureApp(bool gui, QTranslator& translator, QTranslator& qtTranslator)
 #else
         QApplication::setStyle(new StyleOverride);
 #endif
+        qApp->installEventFilter(new WheelFocusGuard(qApp));
     }
 
     auto app = QCoreApplication::instance();
