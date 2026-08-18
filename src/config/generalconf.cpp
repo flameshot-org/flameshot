@@ -101,6 +101,7 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
 #ifdef ENABLE_IMGUR
     m_uploadWithoutConfirmation->setChecked(config.uploadWithoutConfirmation());
     m_copyURLAfterUpload->setChecked(config.copyURLAfterUpload());
+    m_showPostUploadDialog->setChecked(config.showPostUploadDialog());
     m_historyConfirmationToDelete->setChecked(
       config.historyConfirmationToDelete());
 
@@ -506,6 +507,17 @@ void GeneralConf::initCopyAndCloseAfterUpload()
 
     connect(m_copyURLAfterUpload, &QCheckBox::clicked, [](bool checked) {
         ConfigHandler().setCopyURLAfterUpload(checked);
+    });
+
+    m_showPostUploadDialog =
+      new QCheckBox(tr("Show upload result window"), this);
+    m_showPostUploadDialog->setToolTip(
+      tr("Open a window with the image and link after every upload, "
+         "instead of just copying the link"));
+    m_scrollAreaLayout->addWidget(m_showPostUploadDialog);
+
+    connect(m_showPostUploadDialog, &QCheckBox::clicked, [](bool checked) {
+        ConfigHandler().setShowPostUploadDialog(checked);
     });
 }
 

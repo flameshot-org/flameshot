@@ -171,6 +171,9 @@ QList<CaptureTool::Type> CaptureToolButton::iterableButtonTypes = {
     // the Shortcuts tab lists entries in this exact array order.
     CaptureTool::TYPE_SAVE_LOCATION_1, CaptureTool::TYPE_SAVE_LOCATION_2,
     CaptureTool::TYPE_SAVE_LOCATION_3,
+#ifdef ENABLE_IMGUR
+    CaptureTool::TYPE_IMAGEUPLOADER,
+#endif
     CaptureTool::TYPE_PENCIL,        CaptureTool::TYPE_DRAWER,
     CaptureTool::TYPE_ARROW,         CaptureTool::TYPE_SELECTION,
     CaptureTool::TYPE_RECTANGLE,     CaptureTool::TYPE_CIRCLE,
@@ -180,9 +183,6 @@ QList<CaptureTool::Type> CaptureToolButton::iterableButtonTypes = {
     CaptureTool::TYPE_UNDO,          CaptureTool::TYPE_REDO,
     CaptureTool::TYPE_COPY,          CaptureTool::TYPE_SAVE,
     CaptureTool::TYPE_EXIT,
-#ifdef ENABLE_IMGUR
-    CaptureTool::TYPE_IMAGEUPLOADER,
-#endif
 #if !defined(Q_OS_MACOS)
     CaptureTool::TYPE_OPEN_APP,
 #endif

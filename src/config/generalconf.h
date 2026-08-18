@@ -144,6 +144,7 @@ private:
     QCheckBox* m_antialiasingPinZoom;
     QCheckBox* m_saveLastRegion;
     QCheckBox* m_uploadWithoutConfirmation;
+    QCheckBox* m_showPostUploadDialog;
     QPushButton* m_importButton;
     QPushButton* m_exportButton;
     QPushButton* m_resetButton;

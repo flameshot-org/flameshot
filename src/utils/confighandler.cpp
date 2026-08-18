@@ -104,6 +104,7 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     OPTION("savePathLocation1"           ,String             ( ""            )),
     OPTION("savePathLocation2"           ,String             ( ""            )),
     OPTION("savePathLocation3"           ,String             ( ""            )),
+    OPTION("showPostUploadDialog"        ,Bool               ( false         )),
     OPTION("saveAsFileExtension"         ,SaveFileExtension  (               )),
     OPTION("saveLastRegion"              ,Bool               ( false         )),
     OPTION("uploadHistoryMax"            ,LowerBoundedInt    ( 0, 25         )),
@@ -174,7 +175,7 @@ static QMap<QString, QSharedPointer<KeySequence>> recognizedShortcuts = {
     SHORTCUT("TYPE_EXIT"                ,   "Ctrl+Q"                ),
     SHORTCUT("TYPE_CANCEL"              ,   "Ctrl+Backspace"        ),
 #ifdef ENABLE_IMGUR
-    SHORTCUT("TYPE_IMAGEUPLOADER"       ,                           ),
+    SHORTCUT("TYPE_IMAGEUPLOADER"       ,   "Ctrl+D"                ),
 #endif
 #if !defined(Q_OS_MACOS)
     SHORTCUT("TYPE_OPEN_APP"            ,   "Ctrl+O"                ),

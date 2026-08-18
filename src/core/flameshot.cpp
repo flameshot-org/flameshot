@@ -519,7 +519,11 @@ void Flameshot::exportCapture(const QPixmap& capture,
                       FlameshotDaemon::copyToClipboard(
                         url.toString(), tr("URL copied to clipboard."));
                   }
+              }
+              if (ConfigHandler().showPostUploadDialog()) {
                   widget->showPostUploadDialog();
+              } else {
+                  widget->close();
               }
           });
     }
