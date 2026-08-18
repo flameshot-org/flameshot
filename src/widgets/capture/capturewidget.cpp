@@ -194,6 +194,13 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
             selectedScreen = QGuiApplication::primaryScreen();
         }
         QRect screenGeom = selectedScreen->geometry();
+        if (DesktopInfo().waylandDetected() &&
+            selectedScreen->devicePixelRatio() > 1.0 &&
+            screenGeom.size() == m_context.screenshot.size()) {
+            const qreal dpr = selectedScreen->devicePixelRatio();
+            screenGeom.setSize(QSize(qRound(screenGeom.width() / dpr),
+                                     qRound(screenGeom.height() / dpr)));
+        }
         move(screenGeom.topLeft());
         resize(screenGeom.size());
 
@@ -214,6 +221,12 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
             screenForAreas = QGuiApplication::primaryScreen();
         }
         QRect r = screenForAreas ? screenForAreas->geometry() : QRect();
+        if (screenForAreas && DesktopInfo().waylandDetected() &&
+            screenForAreas->devicePixelRatio() > 1.0 &&
+            r.size() == m_context.screenshot.size()) {
+            const qreal dpr = screenForAreas->devicePixelRatio();
+            r.setSize(QSize(qRound(r.width() / dpr), qRound(r.height() / dpr)));
+        }
         r.moveTo(0, 0);
         areas.append(r);
     } else {
