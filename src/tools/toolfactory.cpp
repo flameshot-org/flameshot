@@ -22,6 +22,7 @@
 #include "tools/rectangle/rectangletool.h"
 #include "tools/redo/redotool.h"
 #include "tools/save/savetool.h"
+#include "tools/savelocation/savelocationtool.h"
 #include "tools/selection/selectiontool.h"
 #include "tools/sizedecrease/sizedecreasetool.h"
 #include "tools/sizeincrease/sizeincreasetool.h"
@@ -66,6 +67,12 @@ CaptureTool* ToolFactory::CreateTool(CaptureTool::Type t, QObject* parent)
         if_TYPE_return_TOOL(TYPE_SIZEDECREASE, SizeDecreaseTool);
         if_TYPE_return_TOOL(TYPE_INVERT, InvertTool);
         if_TYPE_return_TOOL(TYPE_ACCEPT, AcceptTool);
+        case CaptureTool::TYPE_SAVE_LOCATION_1:
+            return new SaveLocationTool(1, parent);
+        case CaptureTool::TYPE_SAVE_LOCATION_2:
+            return new SaveLocationTool(2, parent);
+        case CaptureTool::TYPE_SAVE_LOCATION_3:
+            return new SaveLocationTool(3, parent);
         default:
             return nullptr;
     }

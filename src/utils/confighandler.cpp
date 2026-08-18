@@ -101,6 +101,9 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     OPTION("saveAfterCopy"               ,Bool               ( false         )),
     OPTION("savePath"                    ,ExistingDir        (               )),
     OPTION("savePathFixed"               ,Bool               ( false         )),
+    OPTION("savePathLocation1"           ,String             ( ""            )),
+    OPTION("savePathLocation2"           ,String             ( ""            )),
+    OPTION("savePathLocation3"           ,String             ( ""            )),
     OPTION("saveAsFileExtension"         ,SaveFileExtension  (               )),
     OPTION("saveLastRegion"              ,Bool               ( false         )),
     OPTION("uploadHistoryMax"            ,LowerBoundedInt    ( 0, 25         )),
@@ -210,6 +213,9 @@ static QMap<QString, QSharedPointer<KeySequence>> recognizedShortcuts = {
     SHORTCUT("TYPE_SIZEINCREASE"        ,                           ),
     SHORTCUT("TYPE_SIZEDECREASE"        ,                           ),
     SHORTCUT("TYPE_CIRCLECOUNT"         ,                           ),
+    SHORTCUT("TYPE_SAVE_LOCATION_1"     ,                           ),
+    SHORTCUT("TYPE_SAVE_LOCATION_2"     ,                           ),
+    SHORTCUT("TYPE_SAVE_LOCATION_3"     ,                           ),
 };
 // clang-format on
 

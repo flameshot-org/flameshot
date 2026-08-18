@@ -154,6 +154,9 @@ static std::map<CaptureTool::Type, int> buttonTypeOrder
 
       { CaptureTool::TYPE_SIZEINCREASE, 22 },
       { CaptureTool::TYPE_SIZEDECREASE, 23 },
+      { CaptureTool::TYPE_SAVE_LOCATION_1, 24 },
+      { CaptureTool::TYPE_SAVE_LOCATION_2, 25 },
+      { CaptureTool::TYPE_SAVE_LOCATION_3, 26 },
 };
 
 int CaptureToolButton::getPriorityByButton(CaptureTool::Type b)
@@ -164,6 +167,10 @@ int CaptureToolButton::getPriorityByButton(CaptureTool::Type b)
 }
 
 QList<CaptureTool::Type> CaptureToolButton::iterableButtonTypes = {
+    // Kept first so they're the top 3 rows in the Shortcuts tab list -
+    // the Shortcuts tab lists entries in this exact array order.
+    CaptureTool::TYPE_SAVE_LOCATION_1, CaptureTool::TYPE_SAVE_LOCATION_2,
+    CaptureTool::TYPE_SAVE_LOCATION_3,
     CaptureTool::TYPE_PENCIL,        CaptureTool::TYPE_DRAWER,
     CaptureTool::TYPE_ARROW,         CaptureTool::TYPE_SELECTION,
     CaptureTool::TYPE_RECTANGLE,     CaptureTool::TYPE_CIRCLE,

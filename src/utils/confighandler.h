@@ -75,6 +75,9 @@ public:
     CONFIG_GETTER_SETTER(userColors, setUserColors, QVector<QColor>);
     CONFIG_GETTER_SETTER(savePath, setSavePath, QString)
     CONFIG_GETTER_SETTER(savePathFixed, setSavePathFixed, bool)
+    CONFIG_GETTER_SETTER(savePathLocation1, setSavePathLocation1, QString)
+    CONFIG_GETTER_SETTER(savePathLocation2, setSavePathLocation2, QString)
+    CONFIG_GETTER_SETTER(savePathLocation3, setSavePathLocation3, QString)
     CONFIG_GETTER_SETTER(uiLanguage, setUiLanguage, QString)
     CONFIG_GETTER_SETTER(uiColor, setUiColor, QColor)
     CONFIG_GETTER_SETTER(contrastUiColor, setContrastUiColor, QColor)

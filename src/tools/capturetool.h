@@ -51,6 +51,9 @@ public:
         TYPE_INVERT = 22,
         TYPE_ACCEPT = 23,
         TYPE_CANCEL = 24,
+        TYPE_SAVE_LOCATION_1 = 25,
+        TYPE_SAVE_LOCATION_2 = 26,
+        TYPE_SAVE_LOCATION_3 = 27,
     };
     Q_ENUM(Type);
 

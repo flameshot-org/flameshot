@@ -49,6 +49,7 @@ private slots:
     void undoLimit(int limit);
     void saveAfterCopyChanged(bool checked);
     void changeSavePath();
+    void changeSaveLocation(int location);
     void importConfiguration();
     void exportFileConfiguration();
     void resetConfiguration();
@@ -88,6 +89,7 @@ private:
     void initHistoryConfirmationToDelete();
     void initPredefinedColorPaletteLarge();
     void initSaveAfterCopy();
+    void initSaveLocations();
     void initScrollArea();
     void initShowDesktopNotification();
     void initShowAbortNotification();
@@ -149,6 +151,12 @@ private:
     QLineEdit* m_savePath;
     QLineEdit* m_uploadClientKey;
     QPushButton* m_changeSaveButton;
+    QLineEdit* m_saveLocation1;
+    QLineEdit* m_saveLocation2;
+    QLineEdit* m_saveLocation3;
+    QPushButton* m_changeSaveLocation1Button;
+    QPushButton* m_changeSaveLocation2Button;
+    QPushButton* m_changeSaveLocation3Button;
     QCheckBox* m_screenshotPathFixedCheck;
     QCheckBox* m_historyConfirmationToDelete;
     QCheckBox* m_useJpgForClipboard;
