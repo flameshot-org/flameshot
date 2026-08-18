@@ -6,13 +6,11 @@
 #include <QObject>
 
 // QComboBox and QAbstractSpinBox react to the mouse wheel by default even
-// when they don't have focus, which hijacks scrolling anywhere these
-// widgets sit inside a QScrollArea (e.g. Configuration's General tab) -
-// the user ends up silently changing a setting instead of scrolling past
-// it. Installed once app-wide, this ignores wheel events on such widgets
-// while they're unfocused so the event bubbles up to the parent scroll
-// area instead; clicking into the widget first still allows scrolling to
-// change its value as usual.
+// when they don't have focus, so scrolling over one of these widgets
+// inside Configuration silently changes that setting instead of leaving
+// it alone. Installed once app-wide, this swallows wheel events on such
+// widgets while they're unfocused; clicking into the widget first still
+// allows scrolling to change its value as usual.
 class WheelFocusGuard : public QObject
 {
     Q_OBJECT
