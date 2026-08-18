@@ -20,6 +20,7 @@
 #include "utils/filenamehandler.h"
 #include "utils/pathinfo.h"
 #include "utils/valuehandler.h"
+#include "utils/wheelfocusguard.h"
 
 #if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
 #include "core/flameshotdbusadapter.h"
@@ -193,6 +194,7 @@ void configureApp(bool gui, QTranslator& translator, QTranslator& qtTranslator)
 #else
         QApplication::setStyle(new StyleOverride);
 #endif
+        qApp->installEventFilter(new WheelFocusGuard(qApp));
         // Deferred to the next event loop iteration: platform theme
         // integrations (e.g. qt6ct) inject their own app-wide stylesheet
         // shortly after startup, which would otherwise clobber this one.
