@@ -140,6 +140,9 @@ void saveToClipboardMime(const QPixmap& capture, const QString& imageType)
 #elif defined(USE_WAYLAND_CLIPBOARD)
         if (QGuiApplication::platformName() == "wayland") {
             mimeData->setImageData(formattedPixmap.toImage());
+            // Keep the encoded bytes alongside the Qt image data so Wayland
+            // clients that prefer the native image format can consume them.
+            mimeData->setData("image/" + imageType, array);
             mimeData->setData(QStringLiteral("x-kde-force-image-copy"),
                               QByteArray());
             KSystemClipboard::instance()->setMimeData(mimeData,
