@@ -191,14 +191,41 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
 
         // Always display on the selected screen (not spanning entire desktop)
         if (selectedScreen == nullptr) {
+            // On X11 fall back to the monitor under the cursor. On Wayland the
+            // cursor position is not exposed to clients and Qt's primaryScreen
+            // is unreliable (see ScreenGrabber::reliablePrimaryScreen), so use
+            // the monitor the desktop reports as primary instead.
+            if (DesktopInfo().waylandDetected()) {
+                selectedScreen = ScreenGrabber::reliablePrimaryScreen();
+            } else {
+                selectedScreen = QGuiAppCurrentScreen().currentScreen();
+            }
+        }
+        if (selectedScreen == nullptr) {
             selectedScreen = QGuiApplication::primaryScreen();
         }
-        QRect screenGeom = selectedScreen->geometry();
-        move(screenGeom.topLeft());
-        resize(screenGeom.size());
+        if (selectedScreen) {
+            QRect screenGeom = selectedScreen->geometry();
+            move(screenGeom.topLeft());
+            resize(screenGeom.size());
 
-        if (selectedScreen != nullptr && windowHandle()) {
-            windowHandle()->setScreen(selectedScreen);
+            // Force the native window to exist so setScreen() actually takes
+            // effect. Without winId() this block was a silent no-op (window-
+            // Handle() returns null before the widget is shown).
+            winId();
+            if (QWindow* handle = windowHandle()) {
+                handle->setScreen(selectedScreen);
+            }
+
+            // On Wayland the compositor ignores the position of regular
+            // windows and maps them on the monitor containing the pointer, so
+            // setScreen() alone is not enough. Fullscreen is the only window
+            // state where the requested output is honored (the compositor
+            // receives xdg_toplevel.set_fullscreen with the output), so ask
+            // for it here -- the widget covers the selected screen anyway.
+            if (DesktopInfo().waylandDetected()) {
+                setWindowState(windowState() | Qt::WindowFullScreen);
+            }
         }
 #endif
     }
