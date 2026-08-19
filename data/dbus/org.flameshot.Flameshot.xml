@@ -11,7 +11,8 @@
 
     <!--
         attachPin:
-        @data: Byte array containing the screenshot and geometry information.
+        @data: Byte array containing the screenshot, geometry information and
+        the screenshot's device pixel ratio.
 
         Attach a pinned screenshot widget to the daemon.
     -->
