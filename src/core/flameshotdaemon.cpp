@@ -11,8 +11,13 @@
 #include <QApplication>
 #include <QClipboard>
 #include <QIODevice>
+#include <QMimeData>
 #include <QPixmap>
 #include <QRect>
+
+#if defined(USE_WAYLAND_CLIPBOARD)
+#include <KSystemClipboard>
+#endif
 
 #if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
 #include <QDBusConnection>
@@ -354,6 +359,21 @@ void FlameshotDaemon::attachTextToClipboard(const QString& text,
     }
 
     m_hostingClipboard = true;
+
+#if defined(USE_WAYLAND_CLIPBOARD)
+    if (QGuiApplication::platformName() == "wayland") {
+        // The daemon has no focused surface, so a plain QClipboard write is
+        // silently dropped by the compositor. KSystemClipboard goes through
+        // the data-control protocol, which does not need focus. This is the
+        // same reason saveToClipboard() uses it for images.
+        auto* mimeData = new QMimeData();
+        mimeData->setText(text);
+        KSystemClipboard::instance()->setMimeData(mimeData,
+                                                  QClipboard::Clipboard);
+        return;
+    }
+#endif
+
     QClipboard* clipboard = QApplication::clipboard();
 
     clipboard->blockSignals(true);
