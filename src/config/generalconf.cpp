@@ -19,6 +19,7 @@
 #include <QSpinBox>
 #include <QStandardPaths>
 #include <QStringDecoder>
+#include <QStyle>
 #include <QVBoxLayout>
 
 GeneralConf::GeneralConf(QWidget* parent)
@@ -1007,11 +1008,20 @@ void GeneralConf::initReverseArrow()
 
 void GeneralConf::initInsecurePixelate()
 {
-    m_insecurePixelate = new QCheckBox(tr("Insecure Pixelate"), this);
-    m_insecurePixelate->setToolTip(
-      tr("Draw the pixelation effect in an insecure but more asethetic way."));
+    m_insecurePixelate = new QCheckBox(tr("Enable opacity blur"), this);
     m_insecurePixelate->setChecked(ConfigHandler().insecurePixelate());
-    m_scrollAreaLayout->addWidget(m_insecurePixelate);
+
+    auto* infoIcon = new QLabel(this);
+    infoIcon->setPixmap(
+      style()->standardIcon(QStyle::SP_MessageBoxInformation).pixmap(16, 16));
+    infoIcon->setToolTip(
+      QStringLiteral("<img src=':/img/app/blur-diff.png' width='400'>"));
+
+    auto* row = new QHBoxLayout();
+    row->addWidget(m_insecurePixelate);
+    row->addWidget(infoIcon);
+    row->addStretch();
+    m_scrollAreaLayout->addLayout(row);
 
     connect(m_insecurePixelate,
             &QCheckBox::clicked,
