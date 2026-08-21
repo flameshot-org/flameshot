@@ -7,6 +7,7 @@
 #include <QWidget>
 
 class QVBoxLayout;
+class QHBoxLayout;
 class QCheckBox;
 class QPushButton;
 class QLabel;
@@ -49,6 +50,7 @@ private slots:
     void undoLimit(int limit);
     void saveAfterCopyChanged(bool checked);
     void changeSavePath();
+    void changeSaveLocation(int location);
     void importConfiguration();
     void exportFileConfiguration();
     void resetConfiguration();
@@ -74,6 +76,13 @@ private slots:
 private:
     const QString chooseFolder(const QString& currentPath = "");
 
+    // Adds a titled, bordered QGroupBox to m_scrollAreaLayout and returns
+    // its inner layout. Callers temporarily reassign m_scrollAreaLayout to
+    // the result so existing initX() functions - which only ever call
+    // m_scrollAreaLayout->addWidget(...) - nest into the section without
+    // needing any changes themselves.
+    QVBoxLayout* pushGroupBox(const QString& title);
+
     void initAllowMultipleGuiInstances();
     void initAntialiasingPinZoom();
     void initAutoCloseIdleDaemon();
@@ -88,6 +97,7 @@ private:
     void initHistoryConfirmationToDelete();
     void initPredefinedColorPaletteLarge();
     void initSaveAfterCopy();
+    void initSaveLocations();
     void initScrollArea();
     void initShowDesktopNotification();
     void initShowAbortNotification();
@@ -101,7 +111,6 @@ private:
     void initUndoLimit();
     void initUploadWithoutConfirmation();
     void initUseJpgForClipboard();
-    void initUploadHistoryMax();
     void initUploadClientSecret();
     void initSaveLastRegion();
     void initShowSelectionGeometry();
@@ -142,6 +151,7 @@ private:
     QCheckBox* m_antialiasingPinZoom;
     QCheckBox* m_saveLastRegion;
     QCheckBox* m_uploadWithoutConfirmation;
+    QCheckBox* m_showPostUploadDialog;
     QPushButton* m_importButton;
     QPushButton* m_exportButton;
     QPushButton* m_resetButton;
@@ -149,6 +159,12 @@ private:
     QLineEdit* m_savePath;
     QLineEdit* m_uploadClientKey;
     QPushButton* m_changeSaveButton;
+    QLineEdit* m_saveLocation1;
+    QLineEdit* m_saveLocation2;
+    QLineEdit* m_saveLocation3;
+    QPushButton* m_changeSaveLocation1Button;
+    QPushButton* m_changeSaveLocation2Button;
+    QPushButton* m_changeSaveLocation3Button;
     QCheckBox* m_screenshotPathFixedCheck;
     QCheckBox* m_historyConfirmationToDelete;
     QCheckBox* m_useJpgForClipboard;

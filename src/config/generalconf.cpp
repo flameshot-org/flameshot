@@ -15,7 +15,6 @@
 #include <QMessageBox>
 #include <QPushButton>
 #include <QSettings>
-#include <QSizePolicy>
 #include <QSpinBox>
 #include <QStandardPaths>
 #include <QStringDecoder>
@@ -69,6 +68,11 @@ GeneralConf::GeneralConf(QWidget* parent)
         m_scrollAreaLayout = outer;
         group->activate();
     }
+    // Where screenshots end up is core to every capture, so the save
+    // settings (which also carry JPEG Quality now, folded into the Save
+    // Path box) rank above the general Options toggles below.
+    initSaveAfterCopy();
+    initSaveLocations();
     {
         QVBoxLayout* outer = m_scrollAreaLayout;
         QVBoxLayout* group = pushGroupBox(tr("Options"));
@@ -97,8 +101,8 @@ GeneralConf::GeneralConf(QWidget* parent)
         m_scrollAreaLayout = outer;
         group->activate();
     }
-    initSaveAfterCopy();
-    initSaveLocations();
+    // Fine-tuning knobs that are set once and rarely revisited - lowest
+    // priority, just above the Configuration File actions.
     initUndoLimit();
 #ifdef ENABLE_IMGUR
     initUploadClientSecret();
@@ -107,7 +111,6 @@ GeneralConf::GeneralConf(QWidget* parent)
 
     m_scrollAreaLayout->addStretch();
 
-    initJpegQuality();
     // this has to be at the end
     initConfigButtons();
     updateComponents();
@@ -318,26 +321,6 @@ QVBoxLayout* GeneralConf::pushGroupBox(const QString& title)
     box->setLayout(layout);
     m_scrollAreaLayout->addWidget(box);
     return layout;
-}
-
-QSpinBox* GeneralConf::pushCompactSpinBox(QHBoxLayout* row,
-                                         const QString& title,
-                                         int max)
-{
-    auto* box = new QGroupBox(title);
-    box->setFlat(true);
-    box->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Preferred);
-    auto* vboxLayout = new QVBoxLayout();
-    box->setLayout(vboxLayout);
-
-    auto* spin = new QSpinBox(this);
-    spin->setMaximum(max);
-    QString foreground = this->palette().windowText().color().name();
-    spin->setStyleSheet(QStringLiteral("color: %1").arg(foreground));
-    vboxLayout->addWidget(spin);
-
-    row->addWidget(box);
-    return spin;
 }
 
 void GeneralConf::initShowHelp()
@@ -652,6 +635,14 @@ void GeneralConf::initSaveAfterCopy()
 
     extensionLayout->addWidget(m_setSaveAsFileExtension);
     vboxLayout->addLayout(extensionLayout);
+
+    // JPEG Quality only matters for the save/upload/clipboard file format
+    // set above - nest it in this same box instead of leaving it as an
+    // unrelated floating row elsewhere in the tab.
+    QVBoxLayout* outer = m_scrollAreaLayout;
+    m_scrollAreaLayout = vboxLayout;
+    initJpegQuality();
+    m_scrollAreaLayout = outer;
 }
 
 void GeneralConf::historyConfirmationToDelete(bool checked)
@@ -692,29 +683,45 @@ void GeneralConf::uploadHistoryMaxChanged(int max)
 
 void GeneralConf::initUndoLimit()
 {
-    // Undo limit and (when built with Imgur) Latest Uploads Max Size are
-    // both a title + a single spinbox - lined up in one row via
-    // pushCompactSpinBox instead of each claiming a full-width section
-    // for one number field.
-    auto* row = new QHBoxLayout();
-    m_scrollAreaLayout->addLayout(row);
+    // One full-width titled box, matching every other section in this
+    // tab, instead of two mini boxes hugging their content on the left
+    // with dead space to the right.
+    auto* box = new QGroupBox(tr("Limits"));
+    box->setFlat(true);
+    m_scrollAreaLayout->addWidget(box);
 
-    m_undoLimit = pushCompactSpinBox(row, tr("Undo limit"), 999);
-    m_undoLimit->setMinimum(1);
+    auto* vboxLayout = new QVBoxLayout();
+    box->setLayout(vboxLayout);
+    QString foreground = this->palette().windowText().color().name();
+
+    auto* undoRow = new QHBoxLayout();
+    undoRow->addWidget(new QLabel(tr("Undo limit")));
+    m_undoLimit = new QSpinBox(this);
+    m_undoLimit->setRange(1, 999);
+    m_undoLimit->setStyleSheet(QStringLiteral("color: %1").arg(foreground));
+    undoRow->addWidget(m_undoLimit);
+    vboxLayout->addLayout(undoRow);
     connect(m_undoLimit,
             static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged),
             this,
             &GeneralConf::undoLimit);
 
 #ifdef ENABLE_IMGUR
-    m_uploadHistoryMax = pushCompactSpinBox(row, tr("Latest Uploads Max Size"), 50);
+    auto* uploadRow = new QHBoxLayout();
+    uploadRow->addWidget(new QLabel(tr("Latest Uploads Max Size")));
+    m_uploadHistoryMax = new QSpinBox(this);
+    m_uploadHistoryMax->setMaximum(50);
+    m_uploadHistoryMax->setStyleSheet(
+      QStringLiteral("color: %1").arg(foreground));
+    uploadRow->addWidget(m_uploadHistoryMax);
+    vboxLayout->addLayout(uploadRow);
     connect(m_uploadHistoryMax,
             static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged),
             this,
             &GeneralConf::uploadHistoryMaxChanged);
 #endif
 
-    row->addStretch();
+    vboxLayout->addStretch();
 }
 
 void GeneralConf::undoLimit(int limit)
@@ -929,8 +936,14 @@ void GeneralConf::initSquareMagnifier()
 
 void GeneralConf::initShowSelectionGeometry()
 {
-    auto* tobox = new QHBoxLayout();
+    auto* box = new QGroupBox(tr("Selection Geometry Display"));
+    box->setFlat(true);
+    m_scrollAreaLayout->addWidget(box);
 
+    auto* vboxLayout = new QVBoxLayout();
+    box->setLayout(vboxLayout);
+
+    auto* tobox = new QHBoxLayout();
     int timeout =
       ConfigHandler().value("showSelectionGeometryHideTime").toInt();
     m_xywhTimeout = new QSpinBox();
@@ -940,19 +953,12 @@ void GeneralConf::initShowSelectionGeometry()
     m_xywhTimeout->setValue(timeout);
     tobox->addWidget(m_xywhTimeout);
     tobox->addWidget(new QLabel(tr("Set geometry display timeout (ms)")));
-
-    m_scrollAreaLayout->addLayout(tobox);
+    vboxLayout->addLayout(tobox);
     connect(m_xywhTimeout,
             static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged),
             this,
             &GeneralConf::setSelGeoHideTime);
 
-    auto* box = new QGroupBox(tr("Selection Geometry Display"));
-    box->setFlat(true);
-    m_scrollAreaLayout->addWidget(box);
-
-    auto* vboxLayout = new QVBoxLayout();
-    box->setLayout(vboxLayout);
     auto* selGeoLayout = new QHBoxLayout();
     selGeoLayout->addWidget(new QLabel(tr("Display Location")));
     m_selectGeometryLocation = new QComboBox(this);
