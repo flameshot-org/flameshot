@@ -625,10 +625,10 @@ void CaptureWidget::uncheckActiveTool()
 void CaptureWidget::closeEvent(QCloseEvent* event)
 {
 #if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
-    /* GNOME copy problem workaround, copy
+    /* Wayland copy problem workaround: the copy
        operation seems to work only when there
        is a visible window to retrieve the
-       data from. On GNOME, the GUI should
+       data from. On GNOME and COSMIC, the GUI should
        handle the copy operation, not the
        daemon.
     */
@@ -637,17 +637,18 @@ void CaptureWidget::closeEvent(QCloseEvent* event)
 
     if (m_captureDone && copyRequested) {
         DesktopInfo desktopInfo;
-        const bool needGnomeWorkaround =
+        const bool needClipboardWorkaround =
           desktopInfo.waylandDetected() &&
-          desktopInfo.windowManager() == DesktopInfo::GNOME;
+          (desktopInfo.windowManager() == DesktopInfo::GNOME ||
+           desktopInfo.windowManager() == DesktopInfo::COSMIC);
 
-        if (needGnomeWorkaround && !m_clipboardWorkaroundDone) {
+        if (needClipboardWorkaround && !m_clipboardWorkaroundDone) {
             event->ignore();
             m_clipboardWorkaroundDone = true;
             m_context.request.removeTask(CaptureRequest::COPY);
             AbstractLogger::info()
-              << "GNOME Wayland detected; keeping capture window alive until "
-                 "clipboard data is fetched.";
+              << "GNOME/COSMIC Wayland detected; keeping capture window "
+                 "alive until clipboard data is fetched.";
             saveToClipboardGnomeWorkaround(pixmap(), this);
             return;
         }
