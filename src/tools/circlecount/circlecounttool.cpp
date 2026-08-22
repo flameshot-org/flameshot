@@ -3,6 +3,7 @@
 
 #include "circlecounttool.h"
 #include "utils/colorutils.h"
+#include "utils/confighandler.h"
 
 #include <QPainter>
 #include <QPainterPath>
@@ -134,10 +135,15 @@ void CircleCountTool::process(QPainter& painter, const QPixmap& pixmap)
         painter.drawPath(path);
     }
 
-    painter.setPen(contrastColor);
-    painter.setBrush(antiContrastColor);
-    painter.drawEllipse(
-      points().first, bubble_size + PADDING_VALUE, bubble_size + PADDING_VALUE);
+    if (ConfigHandler().drawCircleCounterOutline()) {
+        painter.setPen(contrastColor);
+        painter.setBrush(antiContrastColor);
+        painter.drawEllipse(points().first,
+                            bubble_size + PADDING_VALUE,
+                            bubble_size + PADDING_VALUE);
+    } else {
+        painter.setPen(Qt::NoPen);
+    }
     painter.setBrush(color());
     painter.drawEllipse(points().first, bubble_size, bubble_size);
     QRect textRect = QRect(points().first.x() - bubble_size / 2,
