@@ -256,7 +256,17 @@ def command_pack(arguments: argparse.Namespace) -> None:
     root = Path(arguments.directory).resolve()
     inspect_tree(root)
     manifest = validate_manifest(root)
-    output = Path(arguments.output or f"{manifest['id']}.flameshot-plugin").resolve()
+    output = (
+        Path(arguments.output).resolve()
+        if arguments.output
+        else root.parent / f"{manifest['id']}.flameshot-plugin"
+    )
+    try:
+        output.relative_to(root)
+    except ValueError:
+        pass
+    else:
+        raise PluginError("package output must be outside the plugin directory")
     if output.exists() and not arguments.force:
         raise PluginError(f"output already exists: {output} (use --force)")
     output.parent.mkdir(parents=True, exist_ok=True)

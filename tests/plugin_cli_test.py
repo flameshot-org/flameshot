@@ -43,10 +43,21 @@ def main():
             }
         )
         source = root / "org.example.cli-test"
-        package = root / "cli-test.flameshot-plugin"
+        package = root / "org.example.cli-test.flameshot-plugin"
         run([str(sdk), "create", "org.example.cli-test", str(source)], environment)
         run([str(sdk), "test", str(source)], environment)
-        run([str(sdk), "pack", str(source), "-o", str(package)], environment)
+        run([str(sdk), "pack", str(source)], environment)
+        run(
+            [
+                str(sdk),
+                "pack",
+                str(source),
+                "-o",
+                str(source / "invalid.flameshot-plugin"),
+            ],
+            environment,
+            expected=1,
+        )
         run([str(sdk), "validate", str(package)], environment)
 
         installed = run(
