@@ -572,3 +572,35 @@ QVariant Region::process(const QVariant& val)
 
     return QRect(x, y, w, h).normalized();
 }
+
+// DISABLED PLUGINS LIST
+
+bool DisabledPluginsList::check(const QVariant& val)
+{
+    return val.canConvert<QStringList>() || val.canConvert<QString>();
+}
+
+QVariant DisabledPluginsList::process(const QVariant& val)
+{
+    if (val.canConvert<QStringList>()) {
+        return val.toStringList();
+    }
+    if (val.canConvert<QString>()) {
+        QString str = val.toString().trimmed();
+        if (str.isEmpty()) {
+            return QStringList();
+        }
+        return QStringList() << str;
+    }
+    return QStringList();
+}
+
+QVariant DisabledPluginsList::fallback()
+{
+    return QStringList();
+}
+
+QString DisabledPluginsList::expected()
+{
+    return QStringLiteral("list of disabled plugin identifiers");
+}

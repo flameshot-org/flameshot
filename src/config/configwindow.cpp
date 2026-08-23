@@ -5,6 +5,7 @@
 #include "config/configresolver.h"
 #include "config/filenameeditor.h"
 #include "config/generalconf.h"
+#include "config/pluginconfigwidget.h"
 #include "config/shortcutswidget.h"
 #include "config/visualseditor.h"
 #include "utils/colorutils.h"
@@ -90,6 +91,15 @@ ConfigWindow::ConfigWindow(QWidget* parent)
     m_tabWidget->addTab(
       m_shortcutsTab, QIcon(modifier + "shortcut.svg"), tr("Shortcuts"));
 
+    // plugins
+    m_pluginsWidget = new PluginConfigWidget();
+    m_pluginsTab = new QWidget();
+    auto* pluginsLayout = new QVBoxLayout(m_pluginsTab);
+    m_pluginsTab->setLayout(pluginsLayout);
+    pluginsLayout->addWidget(m_pluginsWidget);
+    m_tabWidget->addTab(
+      m_pluginsTab, QIcon(modifier + "plugin.svg"), tr("Plugins"));
+
     // connect update sigslots
     connect(this,
             &ConfigWindow::updateChildren,
@@ -103,6 +113,10 @@ ConfigWindow::ConfigWindow(QWidget* parent)
             &ConfigWindow::updateChildren,
             m_generalConfig,
             &GeneralConf::updateComponents);
+    connect(this,
+            &ConfigWindow::updateChildren,
+            m_pluginsWidget,
+            &PluginConfigWidget::updateComponents);
 
     // Error indicator (this must come last)
     initErrorIndicator(m_visualsTab, m_visuals);

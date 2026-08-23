@@ -10,6 +10,7 @@ class ShortcutsWidget;
 class GeneralConf;
 class QFileSystemWatcher;
 class VisualsEditor;
+class PluginConfigWidget;
 class QWidget;
 
 class ConfigWindow : public QWidget
@@ -38,6 +39,9 @@ private:
 
     VisualsEditor* m_visuals;
     QWidget* m_visualsTab;
+
+    PluginConfigWidget* m_pluginsWidget;
+    QWidget* m_pluginsTab;
 
     void initErrorIndicator(QWidget* tab, QWidget* widget);
 };
