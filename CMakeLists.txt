@@ -10,6 +10,8 @@ project(
   flameshot
   VERSION ${FLAMESHOT_VERSION}
   LANGUAGES CXX)
+include(CTest)
+include(GNUInstallDirs)
 set(PROJECT_NAME_CAPITALIZED "Flameshot")
 
 include(FetchContent)
@@ -150,6 +152,21 @@ if(WIN32 OR APPLE)
 endif()
 
 add_subdirectory(src)
+if(BUILD_TESTING)
+  add_subdirectory(tests)
+endif()
+
+install(
+  PROGRAMS ${CMAKE_SOURCE_DIR}/sdk/flameshot-plugin
+  DESTINATION ${CMAKE_INSTALL_BINDIR})
+install(
+  DIRECTORY ${CMAKE_SOURCE_DIR}/sdk/schemas
+            ${CMAKE_SOURCE_DIR}/sdk/templates
+  DESTINATION ${CMAKE_INSTALL_DATADIR}/flameshot/sdk)
+install(
+  FILES ${CMAKE_SOURCE_DIR}/sdk/README.md
+  DESTINATION ${CMAKE_INSTALL_DATADIR}/doc/flameshot
+  RENAME plugin-sdk.md)
 
 # CPack
 set(CPACK_PACKAGE_VENDOR "flameshot-org")

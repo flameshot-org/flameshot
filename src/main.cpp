@@ -15,6 +15,7 @@
 #include "core/capturerequest.h"
 #include "core/flameshot.h"
 #include "core/flameshotdaemon.h"
+#include "plugins/pluginmanager.h"
 #include "utils/abstractlogger.h"
 #include "utils/confighandler.h"
 #include "utils/filenamehandler.h"
@@ -265,6 +266,13 @@ int main(int argc, char* argv[])
     new QCoreApplication(argc, argv);
     configureApp(false, translator, qtTranslator);
 
+    if (qApp->arguments().size() > 1 &&
+        qApp->arguments().at(1) == QLatin1String("plugins")) {
+        const int result = PluginManagerCli::run(qApp->arguments().mid(2));
+        delete QCoreApplication::instance();
+        return result;
+    }
+
     CommandLineParser parser;
     // Add description
     parser.setDescription(
@@ -281,6 +289,8 @@ int main(int argc, char* argv[])
       QObject::tr("Start a manual capture in GUI mode."));
     CommandArgument configArgument(QStringLiteral("config"),
                                    QObject::tr("Configure") + " flameshot.");
+    CommandArgument pluginsArgument(
+      QStringLiteral("plugins"), QObject::tr("Manage action plugins."));
     CommandArgument screenArgument(
       QStringLiteral("screen"),
       QObject::tr("Capture a screenshot of the specified monitor."));
@@ -419,6 +429,7 @@ int main(int argc, char* argv[])
     parser.AddArgument(fullArgument);
     parser.AddArgument(launcherArgument);
     parser.AddArgument(configArgument);
+    parser.AddArgument(pluginsArgument);
     auto helpOption = parser.addHelpOption();
     auto versionOption = parser.addVersionOption();
     parser.AddOptions({ pathOption,

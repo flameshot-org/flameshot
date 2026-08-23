@@ -12,6 +12,7 @@
 
 #define CONFIG_GROUP_GENERAL "General"
 #define CONFIG_GROUP_SHORTCUTS "Shortcuts"
+#define CONFIG_GROUP_PLUGINS "Plugins"
 
 class QFileSystemWatcher;
 class ValueHandler;
@@ -164,6 +165,11 @@ public:
     void setAllTheButtons();
     void setToolSize(CaptureTool::Type toolType, int size);
     int toolSize(CaptureTool::Type toolType);
+    bool pluginEnabled(const QString& pluginId, bool defaultValue) const;
+    void setPluginEnabled(const QString& pluginId, bool enabled);
+    QString pluginShortcut(const QString& pluginId,
+                           const QString& defaultValue) const;
+    void setPluginShortcut(const QString& pluginId, const QString& shortcut);
 
     // DEFAULTS
     QString filenamePatternDefault();

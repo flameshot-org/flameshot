@@ -15,6 +15,7 @@
 #include "core/flameshot.h"
 #include "core/qguiappcurrentscreen.h"
 #include "tools/copy/copytool.h"
+#include "tools/toolregistry.h"
 #include "utils/abstractlogger.h"
 #include "utils/screengrabber.h"
 #include "utils/screenshotsaver.h"
@@ -333,37 +334,57 @@ CaptureWidget::~CaptureWidget()
 
 void CaptureWidget::initButtons()
 {
-    auto allButtonTypes = CaptureToolButton::getIterableButtonTypes();
+    ToolRegistry registry;
+    for (const QString& error : registry.pluginErrors()) {
+        AbstractLogger::warning() << tr("Action plugin: %1").arg(error);
+    }
     auto visibleButtonTypes = m_config.buttons();
-    if ((m_context.request.tasks() == CaptureRequest::NO_TASK) ||
-        (m_context.request.tasks() == CaptureRequest::PRINT_GEOMETRY)) {
-        allButtonTypes.removeOne(CaptureTool::TYPE_ACCEPT);
+    const bool regularCapture =
+      (m_context.request.tasks() == CaptureRequest::NO_TASK) ||
+      (m_context.request.tasks() == CaptureRequest::PRINT_GEOMETRY);
+    if (regularCapture) {
         visibleButtonTypes.removeOne(CaptureTool::TYPE_ACCEPT);
     } else {
-        // Remove irrelevant buttons from both lists
-        for (auto* buttonList : { &allButtonTypes, &visibleButtonTypes }) {
-            buttonList->removeOne(CaptureTool::TYPE_SAVE);
-            buttonList->removeOne(CaptureTool::TYPE_COPY);
+        visibleButtonTypes.removeOne(CaptureTool::TYPE_SAVE);
+        visibleButtonTypes.removeOne(CaptureTool::TYPE_COPY);
 #ifdef ENABLE_IMGUR
-            buttonList->removeOne(CaptureTool::TYPE_IMAGEUPLOADER);
+        visibleButtonTypes.removeOne(CaptureTool::TYPE_IMAGEUPLOADER);
 #endif
-            buttonList->removeOne(CaptureTool::TYPE_OPEN_APP);
-            buttonList->removeOne(CaptureTool::TYPE_PIN);
-        }
+        visibleButtonTypes.removeOne(CaptureTool::TYPE_OPEN_APP);
+        visibleButtonTypes.removeOne(CaptureTool::TYPE_PIN);
     }
     QVector<CaptureToolButton*> vectorButtons;
 
-    // Add all buttons but hide those that were disabled in the Interface config
-    // This will allow keyboard shortcuts for those buttons to work
-    for (CaptureTool::Type t : allButtonTypes) {
-        auto* b = new CaptureToolButton(t, this);
+    // Create built-in and external tools through the same registry. Hidden
+    // entries are kept alive so their shortcuts can still be used.
+    for (const ToolDescriptor& descriptor : registry.tools()) {
+        const CaptureTool::Type type = descriptor.legacyType;
+        if (descriptor.isExternal() && !regularCapture) {
+            continue;
+        }
+        if (!descriptor.isExternal()) {
+            if (regularCapture && type == CaptureTool::TYPE_ACCEPT) {
+                continue;
+            }
+            if (!regularCapture && (type == CaptureTool::TYPE_SAVE ||
+                                    type == CaptureTool::TYPE_COPY ||
+#ifdef ENABLE_IMGUR
+                                    type == CaptureTool::TYPE_IMAGEUPLOADER ||
+#endif
+                                    type == CaptureTool::TYPE_OPEN_APP ||
+                                    type == CaptureTool::TYPE_PIN)) {
+                continue;
+            }
+        }
+
+        auto* b = new CaptureToolButton(descriptor, this);
         b->setColor(m_uiColor);
         b->hide();
         // must be enabled for SelectionWidget's eventFilter to work correctly
         b->setAttribute(Qt::WA_NoMousePropagation);
         makeChild(b);
 
-        switch (t) {
+        switch (type) {
             case CaptureTool::TYPE_UNDO:
             case CaptureTool::TYPE_REDO:
                 // nothing to do, just skip non-dynamic buttons with existing
@@ -371,8 +392,11 @@ void CaptureWidget::initButtons()
                 break;
             default:
                 // Set shortcuts for a tool
-                QString shortcut =
-                  ConfigHandler().shortcut(QVariant::fromValue(t).toString());
+                QString shortcut = descriptor.shortcut;
+                if (!descriptor.isExternal()) {
+                    shortcut = ConfigHandler().shortcut(
+                      QVariant::fromValue(type).toString());
+                }
                 if (!shortcut.isNull()) {
                     auto shortcuts = newShortcut(shortcut, this, nullptr);
                     for (auto* sc : shortcuts) {
@@ -384,14 +408,19 @@ void CaptureWidget::initButtons()
                 break;
         }
 
-        m_tools[t] = b->tool();
+        if (!descriptor.isExternal()) {
+            m_tools[type] = b->tool();
+        }
 
         connect(b->tool(),
                 &CaptureTool::requestAction,
                 this,
                 &CaptureWidget::handleToolSignal);
 
-        if (visibleButtonTypes.contains(t)) {
+        const bool visible = descriptor.isExternal()
+                               ? descriptor.toolbarVisible
+                               : visibleButtonTypes.contains(type);
+        if (visible) {
             connect(b,
                     &CaptureToolButton::pressedButtonLeftClick,
                     this,
