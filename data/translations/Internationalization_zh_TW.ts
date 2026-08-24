@@ -47,7 +47,7 @@
     <message>
         <location filename="../../src/tools/launcher/applaunchertool.cpp" line="33"/>
         <source>Choose an app to open the capture</source>
-        <translation>選擇一個程式打開此截圖</translation>
+        <translation>選擇一個程式開啟此截圖</translation>
     </message>
 </context>
 <context>
@@ -127,12 +127,12 @@
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="41"/>
         <source>Full Screen</source>
-        <translation type="unfinished"></translation>
+        <translation>全螢幕</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="46"/>
         <source>Monitor %1: %2 (%3x%4)</source>
-        <translation type="unfinished"></translation>
+        <translation>螢幕 %1：%2 (%3x%4)</translation>
     </message>
     <message>
         <source>Full Screen (All Monitors)</source>
@@ -193,7 +193,7 @@
         <location filename="../../src/widgets/capturelauncher.ui" line="71"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="184"/>
         <source>Monitor:</source>
-        <translation type="unfinished"></translation>
+        <translation>螢幕：</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="87"/>
@@ -256,12 +256,12 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="527"/>
         <source>Quit Capture</source>
-        <translation type="unfinished"></translation>
+        <translation>結束截圖</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="528"/>
         <source>Are you sure you want to quit capture?</source>
-        <translation type="unfinished"></translation>
+        <translation>您確定要結束截圖嗎？</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="533"/>
@@ -271,7 +271,7 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="777"/>
         <source>Flameshot has lost focus. Keyboard shortcuts won&apos;t work until you click somewhere.</source>
-        <translation>Flameshot 已失去焦點。鍵盤快捷鍵將不會起作用，除非你點選某處。</translation>
+        <translation>Flameshot 已失去焦點。在您點選某處之前，鍵盤快速鍵無法使用。</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="783"/>
@@ -512,14 +512,14 @@ Press Space to open the side panel.</source>
         <location filename="../../src/utils/confighandler.cpp" line="608"/>
         <source>Unrecognized shortcut name: &apos;%1&apos;.
 </source>
-        <translation>無法識別的快捷鍵名稱：&apos;%1&apos;.
+        <translation>無法識別的快速鍵名稱：&apos;%1&apos;。
 </translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="651"/>
         <source>Shortcut conflict: &apos;%1&apos; and &apos;%2&apos; have the same shortcut: %3
 </source>
-        <translation>快捷鍵衝突：&apos;%1&apos; 和 &apos;%2&apos; 有相同的快捷鍵：%3
+        <translation>快速鍵衝突：&apos;%1&apos; 和 &apos;%2&apos; 有相同的快速鍵：%3
 </translation>
     </message>
     <message>
@@ -582,9 +582,9 @@ Press Space to open the side panel.</source>
         <source>Some keyboard shortcuts have conflicts.
 This will NOT prevent flameshot from starting.
 Please solve them manually in the configuration file.</source>
-        <translation>部份鍵盤快捷鍵有衝突。
-這不會妨礙 flameshot 啟動。
-請在設定檔中手動排除它們。</translation>
+        <translation>部分鍵盤快速鍵有衝突。
+這不會妨礙 Flameshot 啟動。
+請在設定檔中手動排除。</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="111"/>
@@ -627,7 +627,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="86"/>
         <source>Shortcuts</source>
-        <translation>捷徑</translation>
+        <translation>快速鍵</translation>
     </message>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="119"/>
@@ -752,7 +752,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="74"/>
         <source>Save</source>
-        <translation>存檔</translation>
+        <translation>儲存</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="77"/>
@@ -822,7 +822,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/core/flameshotdaemon.cpp" line="468"/>
         <source>Unable to connect via DBus</source>
-        <translation>無法透過 DBus 進行連接</translation>
+        <translation>無法透過 DBus 進行連線</translation>
     </message>
 </context>
 <context>
@@ -937,7 +937,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="276"/>
         <source>Show help message</source>
-        <translation>顯示説明顯示説明</translation>
+        <translation>顯示說明訊息</translation>
     </message>
     <message>
         <source>Show the help message at the beginning in the capture mode.</source>
@@ -1039,22 +1039,22 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="277"/>
         <source>Show the help message at the beginning in the capture mode</source>
-        <translation>在擷取模式開始時顯示説明訊息</translation>
+        <translation>在截圖模式開始時顯示說明訊息</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="287"/>
         <source>Use last region for GUI mode</source>
-        <translation type="unfinished">使用上次的區域</translation>
+        <translation>在 GUI 模式中使用上次的選取區域</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="289"/>
         <source>Use the last region as the default selection for the next screenshot in GUI mode</source>
-        <translation type="unfinished">將上次的區域作為下一次截圖的預設選擇</translation>
+        <translation>在 GUI 模式中，下一次截圖預設使用上次的選取區域</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="303"/>
         <source>Show the side panel toggle button in the capture mode</source>
-        <translation>在擷取模式中顯示側邊欄切換按鈕</translation>
+        <translation>在截圖模式中顯示側邊欄切換按鈕</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="315"/>
@@ -1064,12 +1064,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="326"/>
         <source>Show abort notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>顯示中止通知</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="327"/>
         <source>Enable abort notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>啟用中止通知</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="340"/>
@@ -1121,42 +1121,42 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="424"/>
         <source>Automatically unload from memory when it is not needed</source>
-        <translation type="unfinished"></translation>
+        <translation>不需要時自動從記憶體移除</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="425"/>
         <source>Automatically close daemon (background process) when it is not needed</source>
-        <translation type="unfinished"></translation>
+        <translation>不需要時自動關閉常駐程式（背景處理程序）</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="436"/>
         <source>Launch in background at startup</source>
-        <translation type="unfinished"></translation>
+        <translation>開機時在背景啟動</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="437"/>
         <source>Launch Flameshot daemon (background process) when computer is booted</source>
-        <translation type="unfinished"></translation>
+        <translation>電腦開機時啟動 Flameshot 常駐程式（背景處理程序）</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="462"/>
         <source>Ask before quit capture</source>
-        <translation type="unfinished"></translation>
+        <translation>結束截圖前詢問</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="465"/>
         <source>Show the confirmation prompt before ESC quit</source>
-        <translation type="unfinished"></translation>
+        <translation>按 ESC 結束前顯示確認提示</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="490"/>
         <source>Enable Copy to clipboard on Double Click</source>
-        <translation type="unfinished"></translation>
+        <translation>啟用點選兩下複製到剪貼簿</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="502"/>
         <source>Copy URL after uploading was successful</source>
-        <translation type="unfinished"></translation>
+        <translation>上傳成功後複製網址</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="514"/>
@@ -1191,7 +1191,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="608"/>
         <source>Imgur Application Client ID</source>
-        <translation>Imgur 應用程式客戶端 ID</translation>
+        <translation>Imgur 應用程式 Client ID</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="639"/>
@@ -1206,7 +1206,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="675"/>
         <source>Use lossy JPG format for clipboard (lossless PNG default)</source>
-        <translation type="unfinished"></translation>
+        <translation>剪貼簿使用破壞性壓縮的 JPG 格式（預設為無損 PNG）</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="702"/>
@@ -1267,22 +1267,22 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="792"/>
         <source>Milliseconds before geometry display hides; 0 means do not hide</source>
-        <translation type="unfinished"></translation>
+        <translation>幾何資訊顯示隱藏前的毫秒數；0 代表不隱藏</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="795"/>
         <source>Set geometry display timeout (ms)</source>
-        <translation type="unfinished"></translation>
+        <translation>設定幾何資訊顯示逾時時間（毫秒）</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="803"/>
         <source>Selection Geometry Display</source>
-        <translation type="unfinished"></translation>
+        <translation>選取區域幾何資訊顯示</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="810"/>
         <source>Display Location</source>
-        <translation type="unfinished"></translation>
+        <translation>顯示位置</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="813"/>
@@ -1292,37 +1292,37 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="814"/>
         <source>Top Left</source>
-        <translation type="unfinished"></translation>
+        <translation>左上</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="816"/>
         <source>Top Right</source>
-        <translation type="unfinished"></translation>
+        <translation>右上</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="818"/>
         <source>Bottom Left</source>
-        <translation type="unfinished"></translation>
+        <translation>左下</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="820"/>
         <source>Bottom Right</source>
-        <translation type="unfinished"></translation>
+        <translation>右下</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="822"/>
         <source>Center</source>
-        <translation type="unfinished"></translation>
+        <translation>置中</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="847"/>
         <source>Quality range of 0-100; Higher number is better quality and larger file size</source>
-        <translation type="unfinished"></translation>
+        <translation>品質範圍 0-100；數值越高，品質越好但檔案越大</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="851"/>
         <source>JPEG Quality</source>
-        <translation type="unfinished"></translation>
+        <translation>JPEG 品質</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="862"/>
@@ -1332,37 +1332,37 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="863"/>
         <source>Draw the arrow head first</source>
-        <translation type="unfinished"></translation>
+        <translation>先繪製箭頭</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="872"/>
         <source>Insecure Pixelate</source>
-        <translation type="unfinished"></translation>
+        <translation>不安全的馬賽克</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="874"/>
         <source>Draw the pixelation effect in an insecure but more asethetic way.</source>
-        <translation type="unfinished"></translation>
+        <translation>以較不安全但更美觀的方式繪製馬賽克效果。</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="929"/>
         <source>Capture active monitor (skip monitor selection)</source>
-        <translation type="unfinished"></translation>
+        <translation>擷取使用中螢幕（略過螢幕選擇）</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="931"/>
         <source>Automatically capture the monitor where the cursor is located instead of showing the monitor selection dialog. This feature is not supported on Wayland.</source>
-        <translation type="unfinished"></translation>
+        <translation>自動擷取游標所在的螢幕，而不顯示螢幕選擇對話框。此功能在 Wayland 上不支援。</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="952"/>
         <source>Use legacy X11 screenshot method (deprecated)</source>
-        <translation type="unfinished"></translation>
+        <translation>使用舊版 X11 截圖方法（已棄用）</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="954"/>
         <source>Bypass the freedesktop portal and use Qt&apos;s native X11 screen capture. Enable this if your window manager lacks xdg-desktop-portal (e.g. xmonad, i3). Only effective on X11; ignored on Wayland.</source>
-        <translation type="unfinished"></translation>
+        <translation>繞過 freedesktop portal 並使用 Qt 原生 X11 螢幕截圖。若您的視窗管理員缺少 xdg-desktop-portal（例如 xmonad、i3），請啟用此選項。僅在 X11 上有效；在 Wayland 上會被忽略。</translation>
     </message>
 </context>
 <context>
@@ -1501,7 +1501,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="163"/>
         <source>Unable to open the URL.</source>
-        <translation>無法打開此連結。</translation>
+        <translation>無法開啟此連結。</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="170"/>
@@ -1566,7 +1566,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/imgupload/storages/imgur/imguruploader.cpp" line="108"/>
         <source>Unable to open the URL.</source>
-        <translation>無法打開此連結。</translation>
+        <translation>無法開啟此連結。</translation>
     </message>
     <message>
         <source>URL copied to clipboard.</source>
@@ -1748,7 +1748,8 @@ Please solve them manually in the configuration file.</source>
         <location filename="../../src/utils/monitorpreview.cpp" line="31"/>
         <source>Monitor %1: %2
 Click to select</source>
-        <translation type="unfinished"></translation>
+        <translation>螢幕 %1：%2
+點選以選擇</translation>
     </message>
 </context>
 <context>
@@ -1761,7 +1762,7 @@ Click to select</source>
     <message>
         <location filename="../../src/tools/move/movetool.cpp" line="34"/>
         <source>Move the selection area</source>
-        <translation>移動選擇區域</translation>
+        <translation>移動選取區域</translation>
     </message>
 </context>
 <context>
@@ -1795,7 +1796,7 @@ Click to select</source>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="282"/>
         <source>Context menu</source>
-        <translation>內文選單</translation>
+        <translation>快顯功能表</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="284"/>
@@ -1820,17 +1821,17 @@ Click to select</source>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="308"/>
         <source>Increase Opacity</source>
-        <translation type="unfinished"></translation>
+        <translation>提高不透明度</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="315"/>
         <source>Decrease Opacity</source>
-        <translation type="unfinished"></translation>
+        <translation>降低不透明度</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="322"/>
         <source>Close</source>
-        <translation type="unfinished">關閉</translation>
+        <translation>關閉</translation>
     </message>
 </context>
 <context>
@@ -1843,7 +1844,7 @@ Click to select</source>
     <message>
         <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="38"/>
         <source>Set Pixelate as the paint tool.</source>
-        <translation type="unfinished"></translation>
+        <translation>將馬賽克設為繪圖工具。</translation>
     </message>
     <message>
         <source>Set Pixelate as the paint tool</source>
@@ -1855,12 +1856,12 @@ Click to select</source>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/primaryinstancewidget.cpp" line="21"/>
         <source>Primary instance</source>
-        <translation type="unfinished"></translation>
+        <translation>主要執行個體</translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/primaryinstancewidget.cpp" line="22"/>
         <source>&lt;b&gt;Primary instance.&lt;/b&gt; Messages received from secondaries:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;主要執行個體。&lt;/b&gt;從次要執行個體接收到的訊息：</translation>
     </message>
 </context>
 <context>
@@ -1879,7 +1880,7 @@ Click to select</source>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="369"/>
         <source>Save Error</source>
-        <translation>存檔錯誤</translation>
+        <translation>儲存錯誤</translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="64"/>
@@ -1934,7 +1935,7 @@ Click to select</source>
     <message>
         <location filename="../../src/main.cpp" line="251"/>
         <source>Unable to connect via DBus</source>
-        <translation>無法透過 DBus 進行連接</translation>
+        <translation>無法透過 DBus 進行連線</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="268"/>
@@ -1976,12 +1977,12 @@ Click to select</source>
     <message>
         <location filename="../../src/main.cpp" line="273"/>
         <source>Capture screenshot of all monitors at the same time.</source>
-        <translation type="unfinished"></translation>
+        <translation>同時擷取所有螢幕的截圖。</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="283"/>
         <source>Capture a screenshot of the specified monitor.</source>
-        <translation type="unfinished"></translation>
+        <translation>擷取指定螢幕的截圖。</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="288"/>
@@ -2040,7 +2041,7 @@ Click to select</source>
     <message>
         <location filename="../../src/main.cpp" line="320"/>
         <source>Enable or disable the notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>啟用或停用通知</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="323"/>
@@ -2050,7 +2051,7 @@ Click to select</source>
     <message>
         <location filename="../../src/main.cpp" line="326"/>
         <source>Show the help message in the capture mode</source>
-        <translation>在擷取模式中顯示説明資訊</translation>
+        <translation>在截圖模式中顯示說明資訊</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="329"/>
@@ -2065,12 +2066,12 @@ Click to select</source>
     <message>
         <location filename="../../src/main.cpp" line="336"/>
         <source>Print raw PNG capture</source>
-        <translation>列印原始 PNG 截圖</translation>
+        <translation>輸出原始 PNG 截圖</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="339"/>
         <source>Print geometry of the selection in the format WxH+X+Y. Does nothing if raw is specified</source>
-        <translation>以 WxH+X+Y 格式列印選擇的幾何形狀。若指定了「原始」模式，則不進行任何動作</translation>
+        <translation>以 WxH+X+Y 格式輸出選取區域的幾何資訊。若指定了 raw，則不進行任何動作</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="343"/>
@@ -2080,7 +2081,7 @@ Click to select</source>
     <message>
         <location filename="../../src/main.cpp" line="349"/>
         <source>Interactively select and edit the screenshot region</source>
-        <translation type="unfinished"></translation>
+        <translation>以互動方式選取並編輯截圖區域</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="366"/>
@@ -2120,12 +2121,12 @@ Click to select</source>
 - #RRRRGGGGBBBB
 - Named colors like &apos;blue&apos; or &apos;red&apos;
 You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
-        <translation>無效的顏色，此標誌支援以下格式：
-- #RGB (R、G 和 B 的每一個都是單個十六進位制數字)
+        <translation>無效的顏色，此旗標支援以下格式：
+- #RGB (R、G 和 B 各為單一十六進位數字)
 - #RRGGBB
 - #RRRGGGBBB
 - #RRRRGGGGBBBB
-- 像 &apos;blue&apos; 或 &apos;red&apos; 這樣的命名顏色
+- 像 &apos;blue&apos; 或 &apos;red&apos; 這樣的具名顏色
 您可能需要像 &apos;\#FFF&apos; 這樣跳脫 &apos;#&apos; 符號</translation>
     </message>
     <message>
@@ -2135,7 +2136,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/main.cpp" line="368"/>
         <source>Invalid screen number, it must be non negative</source>
-        <translation>無效的螢幕編號，它必須是一個正整數</translation>
+        <translation>無效的螢幕編號，必須為非負整數</translation>
     </message>
     <message>
         <source>Invalid path, it must be a real path in the system</source>
@@ -2186,12 +2187,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="68"/>
         <source>Subcommands</source>
-        <translation type="unfinished"></translation>
+        <translation>子指令</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="328"/>
         <source>subcommands</source>
-        <translation type="unfinished"></translation>
+        <translation>子指令</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="329"/>
@@ -2264,12 +2265,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="208"/>
         <source>Quit capture</source>
-        <translation type="unfinished">結束擷取</translation>
+        <translation>結束截圖</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="224"/>
         <source>Screenshot history</source>
-        <translation>截圖紀錄</translation>
+        <translation>截圖記錄</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="219"/>
@@ -2351,37 +2352,37 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="61"/>
         <source>Could not locate the `org.freedesktop.portal.Desktop` service</source>
-        <translation type="unfinished"></translation>
+        <translation>找不到 `org.freedesktop.portal.Desktop` 服務</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="109"/>
         <source>Screenshot portal timed out after 30 seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>截圖 portal 在 30 秒後逾時</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="132"/>
         <source>FreeDesktop portal screenshot size: %1x%2, DPR: %3</source>
-        <translation type="unfinished"></translation>
+        <translation>FreeDesktop portal 截圖大小：%1x%2，DPR：%3</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="159"/>
         <source>Capture Active Monitor is not supported on Wayland due to Wayland security model.</source>
-        <translation type="unfinished"></translation>
+        <translation>由於 Wayland 的安全模型，在 Wayland 上不支援擷取使用中螢幕。</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="177"/>
         <source>Screenshot already in progress, please wait for the current screenshot to complete</source>
-        <translation type="unfinished"></translation>
+        <translation>截圖已在進行中，請等待目前的截圖完成</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="202"/>
         <source>Screenshot cancelled</source>
-        <translation type="unfinished"></translation>
+        <translation>已取消截圖</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="218"/>
         <source>Unable to get current screen</source>
-        <translation type="unfinished"></translation>
+        <translation>無法取得目前螢幕</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="237"/>
@@ -2394,63 +2395,63 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="373"/>
         <source>=== All Screen Information ===</source>
-        <translation type="unfinished"></translation>
+        <translation>=== 所有螢幕資訊 ===</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="376"/>
         <location filename="../../src/utils/screengrabber.cpp" line="551"/>
         <source>Screen %1: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>螢幕 %1：%2</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="377"/>
         <source>  Logical geometry: %1x%2+%3+%4</source>
-        <translation type="unfinished"></translation>
+        <translation>  邏輯幾何：%1x%2+%3+%4</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="382"/>
         <source>  DPR: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>  DPR：%1</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="488"/>
         <source>Total logical dimensions: %1x%2 (min: %3,%4)</source>
-        <translation type="unfinished"></translation>
+        <translation>總邏輯尺寸：%1x%2 (min: %3,%4)</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="493"/>
         <source>Screenshot dimensions: %1x%2</source>
-        <translation type="unfinished"></translation>
+        <translation>截圖尺寸：%1x%2</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="509"/>
         <source>Screenshot scale factors: X=%1 Y=%2</source>
-        <translation type="unfinished"></translation>
+        <translation>截圖縮放比例：X=%1 Y=%2</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="542"/>
         <source>Calculated crop position for mixed DPI: X=%1 Y=%2</source>
-        <translation type="unfinished"></translation>
+        <translation>混合 DPI 計算出的裁切位置：X=%1 Y=%2</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="552"/>
         <source>  Logical geometry: %1x%2+%3+%4 DPR: %5</source>
-        <translation type="unfinished"></translation>
+        <translation>  邏輯幾何：%1x%2+%3+%4 DPR：%5</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="558"/>
         <source>  Crop rect in screenshot: %1x%2+%3+%4</source>
-        <translation type="unfinished"></translation>
+        <translation>  截圖中的裁切矩形：%1x%2+%3+%4</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="571"/>
         <source>Crop rect is empty, returning full screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation>裁切矩形為空，傳回完整截圖</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="587"/>
         <source>Scaling screenshot to: %1 %2</source>
-        <translation type="unfinished"></translation>
+        <translation>將截圖縮放至：%1 %2</translation>
     </message>
 </context>
 <context>
@@ -2458,32 +2459,32 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="26"/>
         <source>Secondary instance</source>
-        <translation type="unfinished"></translation>
+        <translation>次要執行個體</translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="27"/>
         <source>&lt;b&gt;Secondary instance.&lt;/b&gt; Send message to primary:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;次要執行個體。&lt;/b&gt;傳送訊息至主要執行個體：</translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="29"/>
         <source>Type something here...</source>
-        <translation type="unfinished"></translation>
+        <translation>在此輸入內容...</translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="31"/>
         <source>&amp;Send</source>
-        <translation type="unfinished"></translation>
+        <translation>傳送(&amp;S)</translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="54"/>
         <source>Error sending message</source>
-        <translation type="unfinished"></translation>
+        <translation>傳送訊息時發生錯誤</translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="55"/>
         <source>The message &apos;%1&apos; could not be sent to the primary.</source>
-        <translation type="unfinished"></translation>
+        <translation>無法將訊息 &apos;%1&apos; 傳送至主要執行個體。</translation>
     </message>
 </context>
 <context>
@@ -2491,12 +2492,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/selection/selectiontool.cpp" line="26"/>
         <source>Rectangular Selection</source>
-        <translation>矩形選擇</translation>
+        <translation>矩形選取</translation>
     </message>
     <message>
         <location filename="../../src/tools/selection/selectiontool.cpp" line="36"/>
         <source>Set Selection as the paint tool</source>
-        <translation>選擇選取為繪圖工具</translation>
+        <translation>將選取工具設為繪圖工具</translation>
     </message>
 </context>
 <context>
@@ -2504,22 +2505,22 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="20"/>
         <source>Set Shortcut</source>
-        <translation>設定快捷鍵</translation>
+        <translation>設定快速鍵</translation>
     </message>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="26"/>
         <source>Enter new shortcut to change </source>
-        <translation>輸入新的快捷鍵以進行變更 </translation>
+        <translation>輸入新的快速鍵以進行變更 </translation>
     </message>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="40"/>
         <source>Press Esc to cancel or ⌘+Backspace to disable the keyboard shortcut.</source>
-        <translation>按下 Esc 以取消或按下 ⌘+Backspace 來停用鍵盤快捷鍵。</translation>
+        <translation>按下 Esc 以取消或按下 ⌘+Backspace 來停用鍵盤快速鍵。</translation>
     </message>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="44"/>
         <source>Press Esc to cancel or Backspace to disable the keyboard shortcut.</source>
-        <translation>按下 Esc 以取消或按下 Backspace 來停用鍵盤快捷鍵。</translation>
+        <translation>按下 Esc 以取消或按下 Backspace 來停用鍵盤快速鍵。</translation>
     </message>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="50"/>
@@ -2533,12 +2534,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="31"/>
         <source>Hot Keys</source>
-        <translation>熱鍵</translation>
+        <translation>快速鍵</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="61"/>
         <source>Available shortcuts in the screen capture mode.</source>
-        <translation>螢幕擷取模式中的可用快捷鍵。</translation>
+        <translation>螢幕截圖模式中的可用快速鍵。</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="72"/>
@@ -2563,47 +2564,47 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="183"/>
         <source>Grab a color from the screen</source>
-        <translation type="unfinished"></translation>
+        <translation>從螢幕選取顏色</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="184"/>
         <source>Resize selection left 1px</source>
-        <translation>將選擇區域向左調整 1px</translation>
+        <translation>將選取區域向左調整 1px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="185"/>
         <source>Resize selection right 1px</source>
-        <translation>將選擇區域向右調整 1px</translation>
+        <translation>將選取區域向右調整 1px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="186"/>
         <source>Resize selection up 1px</source>
-        <translation>將選擇區域向上調整 1px</translation>
+        <translation>將選取區域向上調整 1px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="187"/>
         <source>Resize selection down 1px</source>
-        <translation>將選擇區域向下調整 1px</translation>
+        <translation>將選取區域向下調整 1px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="189"/>
         <source>Symmetrically decrease width by 2px</source>
-        <translation type="unfinished"></translation>
+        <translation>對稱減少寬度 2px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="191"/>
         <source>Symmetrically increase width by 2px</source>
-        <translation type="unfinished"></translation>
+        <translation>對稱增加寬度 2px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="193"/>
         <source>Symmetrically increase height by 2px</source>
-        <translation type="unfinished"></translation>
+        <translation>對稱增加高度 2px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="195"/>
         <source>Symmetrically decrease height by 2px</source>
-        <translation type="unfinished"></translation>
+        <translation>對稱減少高度 2px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="196"/>
@@ -2613,22 +2614,22 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="197"/>
         <source>Move selection left 1px</source>
-        <translation>將選擇區域向左移動 1px</translation>
+        <translation>將選取區域向左移動 1px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="198"/>
         <source>Move selection right 1px</source>
-        <translation>將選擇區域向右移動 1px</translation>
+        <translation>將選取區域向右移動 1px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="199"/>
         <source>Move selection up 1px</source>
-        <translation>將選擇區域向上移動 1px</translation>
+        <translation>將選取區域向上移動 1px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="200"/>
         <source>Move selection down 1px</source>
-        <translation>將選擇區域向下移動 1px</translation>
+        <translation>將選取區域向下移動 1px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="201"/>
@@ -2638,50 +2639,50 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="203"/>
         <source>Delete selected drawn object</source>
-        <translation type="unfinished"></translation>
+        <translation>刪除選取的繪圖物件</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="204"/>
         <source>Cancel current selection</source>
-        <translation type="unfinished"></translation>
+        <translation>取消目前的選取</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="268"/>
         <source>It seems, that Windows forces to open its screenshot tool when the &apos;Print Screen&apos; key is pressed. Would you like to disable this so that Flameshot can use the &apos;Print Screen&apos; key?</source>
-        <translation type="unfinished"></translation>
+        <translation>Windows 似乎會在按下「Print Screen」鍵時強制開啟其內建的截圖工具。您是否要停用此行為，以便 Flameshot 可以使用「Print Screen」鍵？</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="273"/>
         <source>Flameshot must be restarted for changes to take effect.</source>
-        <translation type="unfinished">必須重新啟動 Flameshot 以使變更生效。</translation>
+        <translation>必須重新啟動 Flameshot 以使變更生效。</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="278"/>
         <source>No, don&apos;t ask again</source>
-        <translation type="unfinished"></translation>
+        <translation>否，不要再詢問</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="286"/>
         <location filename="../../src/config/shortcutswidget.cpp" line="333"/>
         <location filename="../../src/config/shortcutswidget.cpp" line="343"/>
         <source>The registry could not be changed!</source>
-        <translation type="unfinished"></translation>
+        <translation>無法變更登錄檔！</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="317"/>
         <source>Register Flameshot as MS-SCREENCLIP application (administrator privileges required)</source>
-        <translation type="unfinished"></translation>
+        <translation>將 Flameshot 註冊為 MS-SCREENCLIP 應用程式（需要系統管理員權限）</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="321"/>
         <source>After registering, you can select Flameshot as the default screenshot application in Windows Settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>註冊後，您可以在 Windows 設定中將 Flameshot 選為預設的截圖應用程式。</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="334"/>
         <location filename="../../src/config/shortcutswidget.cpp" line="344"/>
         <source>You may start Flameshot as administrator ONCE and try again!</source>
-        <translation type="unfinished"></translation>
+        <translation>您可以以系統管理員身分啟動 Flameshot 一次，然後再試一次！</translation>
     </message>
     <message>
         <source>Delete current tool</source>
@@ -2867,7 +2868,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/utils/systemnotification.cpp" line="43"/>
         <source>No DBus System Notification service found</source>
-        <translation type="unfinished"></translation>
+        <translation>找不到 DBus 系統通知服務</translation>
     </message>
     <message>
         <location filename="../../src/utils/systemnotification.cpp" line="51"/>
@@ -2923,7 +2924,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/text/texttool.cpp" line="97"/>
         <source>Add text to your capture</source>
-        <translation>在你的截圖中新增文字</translation>
+        <translation>在截圖中新增文字</translation>
     </message>
 </context>
 <context>
@@ -2931,22 +2932,22 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="112"/>
         <source>&amp;Take Screenshot</source>
-        <translation>&amp;進行截圖</translation>
+        <translation>進行截圖(&amp;T)</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="133"/>
         <source>&amp;Open Launcher</source>
-        <translation>&amp;開啟啟動器</translation>
+        <translation>開啟啟動器(&amp;L)</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="138"/>
         <source>&amp;Configuration</source>
-        <translation>&amp;設定</translation>
+        <translation>設定(&amp;C)</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="143"/>
         <source>&amp;About</source>
-        <translation>&amp;關於</translation>
+        <translation>關於(&amp;A)</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="150"/>
@@ -2957,17 +2958,17 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="162"/>
         <source>Download version %1</source>
-        <translation type="unfinished"></translation>
+        <translation>下載版本 %1</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="250"/>
         <source>Select Screen</source>
-        <translation type="unfinished"></translation>
+        <translation>選擇螢幕</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="266"/>
         <source>Monitor %1: %2 (%3x%4)</source>
-        <translation type="unfinished"></translation>
+        <translation>螢幕 %1：%2 (%3x%4)</translation>
     </message>
     <message>
         <source>New version %1 is available</source>
@@ -2976,17 +2977,17 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="176"/>
         <source>&amp;Quit</source>
-        <translation>&amp;結束</translation>
+        <translation>結束(&amp;Q)</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="181"/>
         <source>&amp;Latest Uploads</source>
-        <translation>&amp;最近上傳</translation>
+        <translation>最近上傳(&amp;U)</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="187"/>
         <source>&amp;Open Save Path</source>
-        <translation type="unfinished"></translation>
+        <translation>開啟儲存路徑(&amp;S)</translation>
     </message>
 </context>
 <context>
@@ -3067,12 +3068,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/widgets/uploadhistory.ui" line="14"/>
         <source>Upload History</source>
-        <translation>上傳歷史紀錄</translation>
+        <translation>上傳歷史記錄</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadhistory.cpp" line="60"/>
         <source>Screenshots history is empty</source>
-        <translation>無螢幕截圖歷史紀錄</translation>
+        <translation>無螢幕截圖歷史記錄</translation>
     </message>
 </context>
 <context>
@@ -3126,7 +3127,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="44"/>
         <source>Opacity of area outside selection:</source>
-        <translation>選擇區域以外的不透明度：</translation>
+        <translation>選取區域以外的不透明度：</translation>
     </message>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="73"/>
@@ -3151,17 +3152,17 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="101"/>
         <source>UI language</source>
-        <translation type="unfinished"></translation>
+        <translation>介面語言</translation>
     </message>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="141"/>
         <source>Configuration</source>
-        <translation type="unfinished">設定</translation>
+        <translation>設定</translation>
     </message>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="142"/>
         <source>Flameshot must be restarted to apply these changes!</source>
-        <translation type="unfinished"></translation>
+        <translation>必須重新啟動 Flameshot 以套用這些變更！</translation>
     </message>
 </context>
 <context>
