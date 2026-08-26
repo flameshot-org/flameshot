@@ -20,8 +20,6 @@ class QHBoxLayout;
 class QGraphicsDropShadowEffect;
 class QTimer;
 
-
-
 class OcrCanvas : public QWidget
 {
     Q_OBJECT
@@ -160,5 +158,3 @@ private:
     QPoint m_dragPosition;
     int m_currentFormatMode{ 0 };
 };
-
-

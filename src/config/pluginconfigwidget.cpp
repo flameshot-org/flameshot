@@ -67,7 +67,8 @@ void PluginConfigWidget::setupUi()
     m_pluginTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
     m_pluginTable->setAlternatingRowColors(true);
     m_pluginTable->setSizeAdjustPolicy(QAbstractScrollArea::AdjustIgnored);
-    m_pluginTable->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    m_pluginTable->setSizePolicy(QSizePolicy::Expanding,
+                                 QSizePolicy::Expanding);
     m_pluginTable->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
     m_pluginTable->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
     m_pluginTable->setMinimumHeight(180);
@@ -156,9 +157,9 @@ void PluginConfigWidget::populatePlugins()
     }
 
     if (plugins.isEmpty()) {
-        m_statusLabel->setText(
-          tr("No plugins discovered. Use 'Install Plugin...' or place plugin files "
-             "into the plugins folder."));
+        m_statusLabel->setText(tr("No plugins discovered. Use 'Install "
+                                  "Plugin...' or place plugin files "
+                                  "into the plugins folder."));
     } else {
         m_statusLabel->setText(
           tr("%1 plugin(s) found in search path.").arg(plugins.size()));
@@ -195,8 +196,8 @@ void PluginConfigWidget::installPlugin()
 
     QString errorMsg;
     if (PluginManager::instance()->installPlugin(filePath, &errorMsg)) {
-        m_statusLabel->setText(
-          tr("Successfully installed plugin: %1").arg(QFileInfo(filePath).fileName()));
+        m_statusLabel->setText(tr("Successfully installed plugin: %1")
+                                 .arg(QFileInfo(filePath).fileName()));
     } else {
         m_statusLabel->setText(tr("Installation failed: %1").arg(errorMsg));
     }
@@ -206,7 +207,8 @@ void PluginConfigWidget::removeSelectedPlugin()
 {
     int row = m_pluginTable->currentRow();
     if (row < 0) {
-        m_statusLabel->setText(tr("Please select a plugin from the table to remove."));
+        m_statusLabel->setText(
+          tr("Please select a plugin from the table to remove."));
         return;
     }
 

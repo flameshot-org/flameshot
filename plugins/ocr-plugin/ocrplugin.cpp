@@ -30,7 +30,9 @@ QString OcrPlugin::pluginAuthor() const
 
 QString OcrPlugin::pluginDescription() const
 {
-    return QStringLiteral("Extracts text and emojis from captured screenshots using Tesseract OCR with multi-language and interactive canvas support.");
+    return QStringLiteral(
+      "Extracts text and emojis from captured screenshots using Tesseract OCR "
+      "with multi-language and interactive canvas support.");
 }
 
 QIcon OcrPlugin::pluginIcon() const

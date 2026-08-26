@@ -34,8 +34,6 @@
 #include <QVBoxLayout>
 #include <QWheelEvent>
 
-
-
 // ============================================================================
 // OcrCanvas Implementation (Interactive Preview + Zoom + Highlights)
 // ============================================================================
@@ -220,7 +218,9 @@ void OcrCanvas::paintEvent(QPaintEvent*)
                 p.fillPath(path, QColor(255, 193, 7, 180));
                 p.strokePath(path, QPen(QColor(255, 235, 59), 2.5));
                 p.setPen(QColor(0, 0, 0));
-                p.setFont(QFont(QStringLiteral("sans-serif"), qMax(8, qRound(10 * m_zoomFactor)), QFont::Bold));
+                p.setFont(QFont(QStringLiteral("sans-serif"),
+                                qMax(8, qRound(10 * m_zoomFactor)),
+                                QFont::Bold));
                 p.drawText(cRect, Qt::AlignCenter, m_words.value(i));
             } else if (isSelected) {
                 // Vivid accent for selected words
@@ -239,10 +239,11 @@ void OcrCanvas::paintEvent(QPaintEvent*)
             } else {
                 // Subtle ambient box (dimmed when active search is filtering)
                 int alpha = (!m_filterQuery.isEmpty()) ? 10 : 25;
-                p.fillPath(
-                  path,
-                  QColor(
-                    baseColor.red(), baseColor.green(), baseColor.blue(), alpha));
+                p.fillPath(path,
+                           QColor(baseColor.red(),
+                                  baseColor.green(),
+                                  baseColor.blue(),
+                                  alpha));
                 p.strokePath(path,
                              QPen(QColor(baseColor.red(),
                                          baseColor.green(),
@@ -530,7 +531,8 @@ void OcrWidget::setupUi()
     headerLayout->setSpacing(10);
 
     auto* iconLabel = new QLabel(this);
-    iconLabel->setPixmap(QIcon(QStringLiteral(":/ocrplugin/icons/white_ocr.svg")).pixmap(20, 20));
+    iconLabel->setPixmap(
+      QIcon(QStringLiteral(":/ocrplugin/icons/white_ocr.svg")).pixmap(20, 20));
     headerLayout->addWidget(iconLabel);
 
     auto* titleLabel = new QLabel(tr("Text Recognition (OCR)"), this);
@@ -680,7 +682,12 @@ void OcrWidget::setupUi()
     m_codeBtn = new QPushButton(tr("💻 Code"), this);
     m_latexBtn = new QPushButton(tr("∑ LaTeX"), this);
 
-    for (auto* btn : { m_fmtBtn, m_lineBtn, m_singleBtn, m_tableBtn, m_codeBtn, m_latexBtn }) {
+    for (auto* btn : { m_fmtBtn,
+                       m_lineBtn,
+                       m_singleBtn,
+                       m_tableBtn,
+                       m_codeBtn,
+                       m_latexBtn }) {
         btn->setCheckable(true);
         btn->setObjectName(QStringLiteral("fmtBtn"));
         formatLayout->addWidget(btn);
@@ -688,18 +695,43 @@ void OcrWidget::setupUi()
     m_fmtBtn->setChecked(true);
 
     auto updateFormatSelection = [this](int mode, QPushButton* activeBtn) {
-        for (auto* btn : { m_fmtBtn, m_lineBtn, m_singleBtn, m_tableBtn, m_codeBtn, m_latexBtn }) {
+        for (auto* btn : { m_fmtBtn,
+                           m_lineBtn,
+                           m_singleBtn,
+                           m_tableBtn,
+                           m_codeBtn,
+                           m_latexBtn }) {
             btn->setChecked(btn == activeBtn);
         }
         setFormatMode(mode);
     };
 
-    connect(m_fmtBtn, &QPushButton::clicked, this, [this, updateFormatSelection]() { updateFormatSelection(0, m_fmtBtn); });
-    connect(m_lineBtn, &QPushButton::clicked, this, [this, updateFormatSelection]() { updateFormatSelection(1, m_lineBtn); });
-    connect(m_singleBtn, &QPushButton::clicked, this, [this, updateFormatSelection]() { updateFormatSelection(2, m_singleBtn); });
-    connect(m_tableBtn, &QPushButton::clicked, this, [this, updateFormatSelection]() { updateFormatSelection(3, m_tableBtn); });
-    connect(m_codeBtn, &QPushButton::clicked, this, [this, updateFormatSelection]() { updateFormatSelection(4, m_codeBtn); });
-    connect(m_latexBtn, &QPushButton::clicked, this, [this, updateFormatSelection]() { updateFormatSelection(5, m_latexBtn); });
+    connect(
+      m_fmtBtn, &QPushButton::clicked, this, [this, updateFormatSelection]() {
+          updateFormatSelection(0, m_fmtBtn);
+      });
+    connect(
+      m_lineBtn, &QPushButton::clicked, this, [this, updateFormatSelection]() {
+          updateFormatSelection(1, m_lineBtn);
+      });
+    connect(m_singleBtn,
+            &QPushButton::clicked,
+            this,
+            [this, updateFormatSelection]() {
+                updateFormatSelection(2, m_singleBtn);
+            });
+    connect(
+      m_tableBtn, &QPushButton::clicked, this, [this, updateFormatSelection]() {
+          updateFormatSelection(3, m_tableBtn);
+      });
+    connect(
+      m_codeBtn, &QPushButton::clicked, this, [this, updateFormatSelection]() {
+          updateFormatSelection(4, m_codeBtn);
+      });
+    connect(
+      m_latexBtn, &QPushButton::clicked, this, [this, updateFormatSelection]() {
+          updateFormatSelection(5, m_latexBtn);
+      });
 
     rightLayout->addLayout(formatLayout);
 
@@ -1070,7 +1102,9 @@ QString OcrWidget::formatAsMarkdownTable() const
         } else if (cleanLine.contains(QLatin1Char('\t'))) {
             cells = cleanLine.split(QLatin1Char('\t'), Qt::SkipEmptyParts);
         } else {
-            cells = cleanLine.split(QRegularExpression(QStringLiteral("\\s{2,}")), Qt::SkipEmptyParts);
+            cells =
+              cleanLine.split(QRegularExpression(QStringLiteral("\\s{2,}")),
+                              Qt::SkipEmptyParts);
         }
 
         for (int i = 0; i < cells.size(); ++i) {
@@ -1087,13 +1121,16 @@ QString OcrWidget::formatAsMarkdownTable() const
         tableData.clear();
         maxCols = 0;
         for (const QString& line : m_lines) {
-            QStringList cells = line.trimmed().split(QRegularExpression(QStringLiteral("\\s+")), Qt::SkipEmptyParts);
-            if (cells.size() > maxCols) maxCols = cells.size();
+            QStringList cells = line.trimmed().split(
+              QRegularExpression(QStringLiteral("\\s+")), Qt::SkipEmptyParts);
+            if (cells.size() > maxCols)
+                maxCols = cells.size();
             tableData.append(cells);
         }
     }
 
-    if (maxCols == 0) maxCols = 1;
+    if (maxCols == 0)
+        maxCols = 1;
 
     QVector<int> colWidths(maxCols, 3);
     for (const auto& row : tableData) {
@@ -1111,21 +1148,29 @@ QString OcrWidget::formatAsMarkdownTable() const
             QString val = c < tableData[0].size() ? tableData[0][c] : QString();
             headerCells.append(val.leftJustified(colWidths[c]));
         }
-        resultLines.append(QStringLiteral("| ") + headerCells.join(QStringLiteral(" | ")) + QStringLiteral(" |"));
+        resultLines.append(QStringLiteral("| ") +
+                           headerCells.join(QStringLiteral(" | ")) +
+                           QStringLiteral(" |"));
 
         QStringList divCells;
         for (int c = 0; c < maxCols; ++c) {
-            divCells.append(QString().fill(QLatin1Char('-'), qMax(3, colWidths[c])));
+            divCells.append(
+              QString().fill(QLatin1Char('-'), qMax(3, colWidths[c])));
         }
-        resultLines.append(QStringLiteral("| ") + divCells.join(QStringLiteral(" | ")) + QStringLiteral(" |"));
+        resultLines.append(QStringLiteral("| ") +
+                           divCells.join(QStringLiteral(" | ")) +
+                           QStringLiteral(" |"));
 
         for (int r = 1; r < tableData.size(); ++r) {
             QStringList dataCells;
             for (int c = 0; c < maxCols; ++c) {
-                QString val = c < tableData[r].size() ? tableData[r][c] : QString();
+                QString val =
+                  c < tableData[r].size() ? tableData[r][c] : QString();
                 dataCells.append(val.leftJustified(colWidths[c]));
             }
-            resultLines.append(QStringLiteral("| ") + dataCells.join(QStringLiteral(" | ")) + QStringLiteral(" |"));
+            resultLines.append(QStringLiteral("| ") +
+                               dataCells.join(QStringLiteral(" | ")) +
+                               QStringLiteral(" |"));
         }
     }
 
@@ -1136,21 +1181,28 @@ QString OcrWidget::formatAsCodeBlock() const
 {
     QString txt = m_fullText;
     QString lang;
-    if (txt.contains("def ") || txt.contains("import ") || txt.contains("print(")) {
+    if (txt.contains("def ") || txt.contains("import ") ||
+        txt.contains("print(")) {
         lang = QStringLiteral("python");
-    } else if (txt.contains("#include") || txt.contains("std::") || txt.contains("int main(")) {
+    } else if (txt.contains("#include") || txt.contains("std::") ||
+               txt.contains("int main(")) {
         lang = QStringLiteral("cpp");
-    } else if (txt.contains("function ") || txt.contains("const ") || txt.contains("let ") || txt.contains("console.log")) {
+    } else if (txt.contains("function ") || txt.contains("const ") ||
+               txt.contains("let ") || txt.contains("console.log")) {
         lang = QStringLiteral("javascript");
-    } else if (txt.contains("<html>") || txt.contains("<div>") || txt.contains("class=")) {
+    } else if (txt.contains("<html>") || txt.contains("<div>") ||
+               txt.contains("class=")) {
         lang = QStringLiteral("html");
-    } else if (txt.contains("SELECT ") || txt.contains("FROM ") || txt.contains("WHERE ")) {
+    } else if (txt.contains("SELECT ") || txt.contains("FROM ") ||
+               txt.contains("WHERE ")) {
         lang = QStringLiteral("sql");
-    } else if (txt.contains("curl ") || txt.contains("sudo ") || txt.contains("apt ")) {
+    } else if (txt.contains("curl ") || txt.contains("sudo ") ||
+               txt.contains("apt ")) {
         lang = QStringLiteral("bash");
     }
 
-    return QStringLiteral("```") + lang + QStringLiteral("\n") + txt + QStringLiteral("\n```");
+    return QStringLiteral("```") + lang + QStringLiteral("\n") + txt +
+           QStringLiteral("\n```");
 }
 
 QString OcrWidget::formatAsLatex() const
@@ -1158,7 +1210,8 @@ QString OcrWidget::formatAsLatex() const
     QString txt = m_fullText;
     bool looksLikeTable = false;
     for (const QString& line : m_lines) {
-        if (line.contains(QLatin1Char('|')) || line.contains(QRegularExpression(QStringLiteral("\\s{2,}")))) {
+        if (line.contains(QLatin1Char('|')) ||
+            line.contains(QRegularExpression(QStringLiteral("\\s{2,}")))) {
             looksLikeTable = true;
             break;
         }
@@ -1169,21 +1222,29 @@ QString OcrWidget::formatAsLatex() const
         int maxCols = 0;
         QVector<QStringList> rows;
         for (const QString& line : m_lines) {
-            QStringList cells = line.trimmed().split(QRegularExpression(QStringLiteral("\\s{2,}|\\||\t")), Qt::SkipEmptyParts);
-            if (cells.size() > maxCols) maxCols = cells.size();
+            QStringList cells = line.trimmed().split(
+              QRegularExpression(QStringLiteral("\\s{2,}|\\||\t")),
+              Qt::SkipEmptyParts);
+            if (cells.size() > maxCols)
+                maxCols = cells.size();
             rows.append(cells);
         }
-        if (maxCols == 0) maxCols = 1;
+        if (maxCols == 0)
+            maxCols = 1;
 
         QString colSpec = QString().fill(QLatin1Char('c'), maxCols);
-        result.append(QStringLiteral("\\begin{tabular}{|") + colSpec.split(QString(), Qt::SkipEmptyParts).join(QStringLiteral("|")) + QStringLiteral("|}"));
+        result.append(QStringLiteral("\\begin{tabular}{|") +
+                      colSpec.split(QString(), Qt::SkipEmptyParts)
+                        .join(QStringLiteral("|")) +
+                      QStringLiteral("|}"));
         result.append(QStringLiteral("\\hline"));
         for (const auto& r : rows) {
             QStringList padded;
             for (int c = 0; c < maxCols; ++c) {
                 padded.append(c < r.size() ? r[c].trimmed() : QString());
             }
-            result.append(padded.join(QStringLiteral(" & ")) + QStringLiteral(" \\\\ \\hline"));
+            result.append(padded.join(QStringLiteral(" & ")) +
+                          QStringLiteral(" \\\\ \\hline"));
         }
         result.append(QStringLiteral("\\end{tabular}"));
         return result.join(QStringLiteral("\n"));
@@ -1205,7 +1266,8 @@ QString OcrWidget::formatAsLatex() const
         mathTxt.replace(QStringLiteral("int"), QStringLiteral("\\int"));
         mathTxt.replace(QStringLiteral("inf"), QStringLiteral("\\infty"));
 
-        return QStringLiteral("\\begin{equation}\n") + mathTxt + QStringLiteral("\n\\end{equation}");
+        return QStringLiteral("\\begin{equation}\n") + mathTxt +
+               QStringLiteral("\n\\end{equation}");
     }
 }
 
@@ -1260,5 +1322,3 @@ void OcrWidget::keyPressEvent(QKeyEvent* event)
         QWidget::keyPressEvent(event);
     }
 }
-
-

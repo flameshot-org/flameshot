@@ -67,7 +67,8 @@ QStringList PluginManager::pluginSearchPaths() const
         paths.append(userDir);
     }
 
-    // 2b. AppDataLocation directory (~/.local/share/flameshot/flameshot/plugins)
+    // 2b. AppDataLocation directory
+    // (~/.local/share/flameshot/flameshot/plugins)
     QString appDataDir =
       QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) +
       QStringLiteral("/plugins");
@@ -281,11 +282,14 @@ void PluginManager::setPluginEnabled(const QString& id, bool enabled)
     ConfigHandler().setDisabledPlugins(m_disabledPluginIds);
 }
 
-bool PluginManager::installPlugin(const QString& sourceFilePath, QString* errorMsg)
+bool PluginManager::installPlugin(const QString& sourceFilePath,
+                                  QString* errorMsg)
 {
     QFileInfo srcInfo(sourceFilePath);
     if (!srcInfo.exists() || !srcInfo.isFile()) {
-        if (errorMsg) *errorMsg = tr("Plugin file does not exist: %1").arg(sourceFilePath);
+        if (errorMsg)
+            *errorMsg =
+              tr("Plugin file does not exist: %1").arg(sourceFilePath);
         return false;
     }
 
@@ -293,12 +297,15 @@ bool PluginManager::installPlugin(const QString& sourceFilePath, QString* errorM
     QPluginLoader testLoader(sourceFilePath);
     QObject* rootObj = testLoader.instance();
     if (!rootObj) {
-        if (errorMsg) *errorMsg = tr("Failed to load plugin: %1").arg(testLoader.errorString());
+        if (errorMsg)
+            *errorMsg =
+              tr("Failed to load plugin: %1").arg(testLoader.errorString());
         return false;
     }
     auto* plugin = qobject_cast<FlameshotPluginInterface*>(rootObj);
     if (!plugin) {
-        if (errorMsg) *errorMsg = tr("Library is not a valid Flameshot plugin.");
+        if (errorMsg)
+            *errorMsg = tr("Library is not a valid Flameshot plugin.");
         testLoader.unload();
         return false;
     }
@@ -313,13 +320,16 @@ bool PluginManager::installPlugin(const QString& sourceFilePath, QString* errorM
     }
 
     if (!QFile::copy(sourceFilePath, targetPath)) {
-        if (errorMsg) *errorMsg = tr("Failed to copy plugin to: %1").arg(targetPath);
+        if (errorMsg)
+            *errorMsg = tr("Failed to copy plugin to: %1").arg(targetPath);
         return false;
     }
 
-    QFile::setPermissions(targetPath, QFile::ReadOwner | QFile::WriteOwner | QFile::ExeOwner |
-                                      QFile::ReadGroup | QFile::ExeGroup |
-                                      QFile::ReadOther | QFile::ExeOther);
+    QFile::setPermissions(targetPath,
+                          QFile::ReadOwner | QFile::WriteOwner |
+                            QFile::ExeOwner | QFile::ReadGroup |
+                            QFile::ExeGroup | QFile::ReadOther |
+                            QFile::ExeOther);
 
     reloadPlugins();
     return true;
@@ -328,9 +338,11 @@ bool PluginManager::installPlugin(const QString& sourceFilePath, QString* errorM
 bool PluginManager::removePlugin(const QString& id, QString* errorMsg)
 {
     for (const auto& meta : m_plugins) {
-        if (meta.id == id || meta.name.compare(id, Qt::CaseInsensitive) == 0 || meta.fileName == id) {
+        if (meta.id == id || meta.name.compare(id, Qt::CaseInsensitive) == 0 ||
+            meta.fileName == id) {
             QString srcPath = meta.filePath;
-            QString disabledDir = userPluginsDirectory() + QStringLiteral("/disabled");
+            QString disabledDir =
+              userPluginsDirectory() + QStringLiteral("/disabled");
             QDir().mkpath(disabledDir);
             QString targetPath = disabledDir + QLatin1Char('/') + meta.fileName;
 
@@ -343,13 +355,17 @@ bool PluginManager::removePlugin(const QString& id, QString* errorMsg)
                 reloadPlugins();
                 return true;
             } else {
-                // If moving failed (e.g. read-only system plugin), disable via config
+                // If moving failed (e.g. read-only system plugin), disable via
+                // config
                 setPluginEnabled(meta.id, false);
-                if (errorMsg) *errorMsg = tr("Plugin disabled (file could not be moved).");
+                if (errorMsg)
+                    *errorMsg =
+                      tr("Plugin disabled (file could not be moved).");
                 return true;
             }
         }
     }
-    if (errorMsg) *errorMsg = tr("Plugin '%1' not found.").arg(id);
+    if (errorMsg)
+        *errorMsg = tr("Plugin '%1' not found.").arg(id);
     return false;
 }

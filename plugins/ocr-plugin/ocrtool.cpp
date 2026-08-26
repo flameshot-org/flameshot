@@ -2,9 +2,9 @@
 // SPDX-FileCopyrightText: 2026 Flameshot Contributors
 
 #include "ocrtool.h"
-#include "ocrwidget.h"
 #include "core/flameshot.h"
 #include "core/flameshotdaemon.h"
+#include "ocrwidget.h"
 #include "tools/capturecontext.h"
 #include "utils/abstractlogger.h"
 #include "utils/colorutils.h"
@@ -14,8 +14,8 @@
 #include <QFile>
 #include <QPainter>
 #include <QRegularExpression>
-#include <tesseract/baseapi.h>
 #include <leptonica/allheaders.h>
+#include <tesseract/baseapi.h>
 
 OcrTool::OcrTool(QObject* parent)
   : AbstractActionTool(parent)
@@ -69,7 +69,8 @@ void OcrTool::pressed(CaptureContext& context)
         return;
     }
 
-    // 1. High-quality smooth scaling (2.5x - 3.0x) to optimize character resolution for Tesseract LSTM
+    // 1. High-quality smooth scaling (2.5x - 3.0x) to optimize character
+    // resolution for Tesseract LSTM
     QImage srcImg = capture.toImage();
     const int origWidth = srcImg.width();
     const int origHeight = srcImg.height();
@@ -83,7 +84,8 @@ void OcrTool::pressed(CaptureContext& context)
 
     const int targetW = qMax(1, qRound(origWidth * scaleFactor));
     const int targetH = qMax(1, qRound(origHeight * scaleFactor));
-    QImage img = srcImg.scaled(targetW, targetH, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    QImage img = srcImg.scaled(
+      targetW, targetH, Qt::KeepAspectRatio, Qt::SmoothTransformation);
     img = img.convertToFormat(QImage::Format_Grayscale8);
 
     const int width = img.width();
@@ -98,13 +100,17 @@ void OcrTool::pressed(CaptureContext& context)
         for (int x = 0; x < width; ++x) {
             const uchar val = line[x];
             globalSum += val;
-            if (val < minVal) minVal = val;
-            if (val > maxVal) maxVal = val;
+            if (val < minVal)
+                minVal = val;
+            if (val > maxVal)
+                maxVal = val;
         }
     }
-    const bool isLightBg = (globalSum / (static_cast<long long>(width) * height)) > 127;
+    const bool isLightBg =
+      (globalSum / (static_cast<long long>(width) * height)) > 127;
 
-    // 3. Normalize grayscale contrast and invert dark mode while preserving anti-aliased subpixel edges
+    // 3. Normalize grayscale contrast and invert dark mode while preserving
+    // anti-aliased subpixel edges
     QImage procImg(width, height, QImage::Format_Grayscale8);
     const int range = qMax(1, maxVal - minVal);
 
@@ -164,7 +170,11 @@ void OcrTool::pressed(CaptureContext& context)
         api->SetVariable("preserve_interword_spaces", "1");
         api->SetPageSegMode(tesseract::PSM_AUTO);
 
-        api->SetImage(procImg.bits(), procImg.width(), procImg.height(), 1, procImg.bytesPerLine());
+        api->SetImage(procImg.bits(),
+                      procImg.width(),
+                      procImg.height(),
+                      1,
+                      procImg.bytesPerLine());
         api->Recognize(0);
 
         // Helper to detect colored UI emojis
@@ -178,7 +188,8 @@ void OcrTool::pressed(CaptureContext& context)
 
             int totalColored = 0, redCount = 0, yellowCount = 0, greenCount = 0;
             for (int y = r.y(); y <= r.bottom(); ++y) {
-                const QRgb* line = reinterpret_cast<const QRgb*>(srcImg.constScanLine(y));
+                const QRgb* line =
+                  reinterpret_cast<const QRgb*>(srcImg.constScanLine(y));
                 for (int x = r.x(); x <= r.right(); ++x) {
                     QColor c(line[x]);
                     if (c.hsvSaturation() >= 85 && c.value() >= 55) {
@@ -212,20 +223,28 @@ void OcrTool::pressed(CaptureContext& context)
                 QVector<QRect> curLineWordBoxes;
                 QStringList curLineWords;
                 int lx1 = 0, ly1 = 0, lx2 = 0, ly2 = 0;
-                ri->BoundingBox(tesseract::RIL_TEXTLINE, &lx1, &ly1, &lx2, &ly2);
+                ri->BoundingBox(
+                  tesseract::RIL_TEXTLINE, &lx1, &ly1, &lx2, &ly2);
 
                 do {
                     const char* wText = ri->GetUTF8Text(tesseract::RIL_WORD);
                     if (wText) {
                         QString wStr = QString::fromUtf8(wText).trimmed();
                         delete[] wText;
-                        wStr.replace(QRegularExpression(QStringLiteral("^[@©®¢¥~|](?=[A-Za-z\\p{L}])")), QString());
-                        wStr.replace(QRegularExpression(QStringLiteral("@(?=[0-9])")), QStringLiteral("0"));
-                        wStr.replace(QRegularExpression(QStringLiteral("(?<=[0-9])@")), QStringLiteral("0"));
+                        wStr.replace(QRegularExpression(QStringLiteral(
+                                       "^[@©®¢¥~|](?=[A-Za-z\\p{L}])")),
+                                     QString());
+                        wStr.replace(
+                          QRegularExpression(QStringLiteral("@(?=[0-9])")),
+                          QStringLiteral("0"));
+                        wStr.replace(
+                          QRegularExpression(QStringLiteral("(?<=[0-9])@")),
+                          QStringLiteral("0"));
                         wStr = wStr.trimmed();
 
                         int x1, y1, x2, y2;
-                        ri->BoundingBox(tesseract::RIL_WORD, &x1, &y1, &x2, &y2);
+                        ri->BoundingBox(
+                          tesseract::RIL_WORD, &x1, &y1, &x2, &y2);
                         int bx = qRound(x1 / scaleFactor);
                         int by = qRound(y1 / scaleFactor);
                         int bw = qMax(1, qRound((x2 - x1) / scaleFactor));
@@ -234,9 +253,12 @@ void OcrTool::pressed(CaptureContext& context)
 
                         QString emoji = detectEmojiInBox(wRect);
                         if (!emoji.isEmpty()) {
-                            if (wStr == QStringLiteral("Y") || wStr == QStringLiteral("の") ||
-                                wStr == QStringLiteral("ول") || wStr == QStringLiteral("J") ||
-                                wStr == QStringLiteral("4") || wStr == QStringLiteral("€") ||
+                            if (wStr == QStringLiteral("Y") ||
+                                wStr == QStringLiteral("の") ||
+                                wStr == QStringLiteral("ول") ||
+                                wStr == QStringLiteral("J") ||
+                                wStr == QStringLiteral("4") ||
+                                wStr == QStringLiteral("€") ||
                                 wStr == QStringLiteral("å")) {
                                 wStr = emoji;
                             }
@@ -249,7 +271,8 @@ void OcrTool::pressed(CaptureContext& context)
                             curLineWords.append(wStr);
                         }
                     }
-                } while (!ri->IsAtFinalElement(tesseract::RIL_TEXTLINE, tesseract::RIL_WORD) &&
+                } while (!ri->IsAtFinalElement(tesseract::RIL_TEXTLINE,
+                                               tesseract::RIL_WORD) &&
                          ri->Next(tesseract::RIL_WORD));
 
                 if (!curLineWords.isEmpty()) {
@@ -260,8 +283,10 @@ void OcrTool::pressed(CaptureContext& context)
                     lineBoxes.append(QRect(bx, by, bw, bh));
 
                     QString lStr = curLineWords.join(QStringLiteral(" "));
-                    lStr.replace(QRegularExpression(QStringLiteral("(^|\\n)[ওe◦o°*+•»›-]\\s+(?=[A-Za-z0-9\\p{L}#])")),
-                                 QStringLiteral("\\1• "));
+                    lStr.replace(
+                      QRegularExpression(QStringLiteral(
+                        "(^|\\n)[ওe◦o°*+•»›-]\\s+(?=[A-Za-z0-9\\p{L}#])")),
+                      QStringLiteral("\\1• "));
                     lines.append(lStr);
                 }
             } while (ri->Next(tesseract::RIL_TEXTLINE));

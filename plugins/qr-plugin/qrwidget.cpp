@@ -32,7 +32,8 @@ QrWidget::QrWidget(const QString& scannedContent,
   , m_toastTimer(new QTimer(this))
 {
     setWindowIcon(QIcon(QStringLiteral(":/qrplugin/icons/white_qr.svg")));
-    setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint | Qt::Dialog);
+    setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint |
+                   Qt::Dialog);
     setAttribute(Qt::WA_TranslucentBackground);
     setAttribute(Qt::WA_DeleteOnClose);
     setWindowTitle(tr("Flameshot QR & Barcode Scanner"));
@@ -73,19 +74,22 @@ void QrWidget::setupUi()
     headerLayout->setSpacing(10);
 
     auto* iconLabel = new QLabel(this);
-    iconLabel->setPixmap(QIcon(QStringLiteral(":/qrplugin/icons/white_qr.svg")).pixmap(20, 20));
+    iconLabel->setPixmap(
+      QIcon(QStringLiteral(":/qrplugin/icons/white_qr.svg")).pixmap(20, 20));
     headerLayout->addWidget(iconLabel);
 
     auto* titleLabel = new QLabel(tr("QR & Barcode Scanner"), this);
     titleLabel->setObjectName(QStringLiteral("titleLabel"));
     headerLayout->addWidget(titleLabel);
 
-    m_typeBadge = new QLabel(m_symbolType.isEmpty() ? tr("No Code Detected") : m_symbolType, this);
+    m_typeBadge = new QLabel(
+      m_symbolType.isEmpty() ? tr("No Code Detected") : m_symbolType, this);
     m_typeBadge->setObjectName(QStringLiteral("typeBadge"));
     headerLayout->addWidget(m_typeBadge);
 
     if (!m_content.isEmpty()) {
-        auto* charBadge = new QLabel(tr("%1 chars").arg(m_content.length()), this);
+        auto* charBadge =
+          new QLabel(tr("%1 chars").arg(m_content.length()), this);
         charBadge->setObjectName(QStringLiteral("typeBadge"));
         headerLayout->addWidget(charBadge);
     }
@@ -124,8 +128,8 @@ void QrWidget::setupUi()
     m_previewLabel->setFixedSize(200, 200);
     m_previewLabel->setAlignment(Qt::AlignCenter);
     if (!m_capturePixmap.isNull()) {
-        m_previewLabel->setPixmap(
-          m_capturePixmap.scaled(190, 190, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        m_previewLabel->setPixmap(m_capturePixmap.scaled(
+          190, 190, Qt::KeepAspectRatio, Qt::SmoothTransformation));
     }
     bodyLayout->addWidget(m_previewLabel);
 
@@ -139,7 +143,10 @@ void QrWidget::setupUi()
 
     m_textEdit = new QPlainTextEdit(this);
     m_textEdit->setObjectName(QStringLiteral("textEdit"));
-    m_textEdit->setPlainText(m_content.isEmpty() ? tr("No QR code or barcode was recognized in the selection.") : m_content);
+    m_textEdit->setPlainText(
+      m_content.isEmpty()
+        ? tr("No QR code or barcode was recognized in the selection.")
+        : m_content);
     rightLayout->addWidget(m_textEdit, 1);
 
     bodyLayout->addLayout(rightLayout, 1);
@@ -158,14 +165,17 @@ void QrWidget::setupUi()
     auto* copyImgBtn = new QPushButton(tr("🖼️ Copy Selection"), this);
     copyImgBtn->setObjectName(QStringLiteral("actionBtn"));
     copyImgBtn->setCursor(Qt::PointingHandCursor);
-    connect(copyImgBtn, &QPushButton::clicked, this, &QrWidget::copyCaptureImage);
+    connect(
+      copyImgBtn, &QPushButton::clicked, this, &QrWidget::copyCaptureImage);
     toolbarLayout->addWidget(copyImgBtn);
 
     m_openBtn = new QPushButton(tr("🔗 Open in Browser"), this);
     m_openBtn->setObjectName(QStringLiteral("openBtn"));
     m_openBtn->setCursor(Qt::PointingHandCursor);
-    bool isUrl = m_content.trimmed().startsWith(QStringLiteral("http://"), Qt::CaseInsensitive) ||
-                 m_content.trimmed().startsWith(QStringLiteral("https://"), Qt::CaseInsensitive);
+    bool isUrl = m_content.trimmed().startsWith(QStringLiteral("http://"),
+                                                Qt::CaseInsensitive) ||
+                 m_content.trimmed().startsWith(QStringLiteral("https://"),
+                                                Qt::CaseInsensitive);
     m_openBtn->setVisible(isUrl);
     connect(m_openBtn, &QPushButton::clicked, this, &QrWidget::openUrl);
     toolbarLayout->addWidget(m_openBtn);
@@ -193,90 +203,88 @@ void QrWidget::setupUi()
 void QrWidget::applyTheme()
 {
     setStyleSheet(
-      QStringLiteral(
-        "#mainContainer {"
-        "    background-color: #1e222b;"
-        "    border: 1px solid #333842;"
-        "    border-radius: 10px;"
-        "}"
-        "#titleLabel {"
-        "    color: #ffffff;"
-        "    font-size: 14px;"
-        "    font-weight: bold;"
-        "}"
-        "#typeBadge {"
-        "    color: #abb2bf;"
-        "    background-color: #282c34;"
-        "    border: 1px solid #3e4451;"
-        "    border-radius: 10px;"
-        "    padding: 2px 8px;"
-        "    font-size: 11px;"
-        "}"
-        "#subTitle {"
-        "    color: #abb2bf;"
-        "    font-size: 11px;"
-        "    font-weight: bold;"
-        "}"
-        "#closeBtn {"
-        "    background: transparent;"
-        "    color: #abb2bf;"
-        "    border: none;"
-        "    border-radius: 14px;"
-        "    font-size: 14px;"
-        "}"
-        "#closeBtn:hover {"
-        "    background-color: #e06c75;"
-        "    color: #ffffff;"
-        "}"
-        "#toastLabel {"
-        "    background-color: #98c379;"
-        "    color: #1e222b;"
-        "    font-weight: bold;"
-        "    font-size: 12px;"
-        "    padding: 4px 12px;"
-        "    border-radius: 6px;"
-        "}"
-        "#previewLabel {"
-        "    background-color: #16181d;"
-        "    border: 1px solid #333842;"
-        "    border-radius: 8px;"
-        "}"
-        "#textEdit {"
-        "    background-color: #21252b;"
-        "    color: #d7dae0;"
-        "    border: 1px solid #333842;"
-        "    border-radius: 6px;"
-        "    padding: 10px;"
-        "    font-size: 13px;"
-        "    line-height: 1.5;"
-        "}"
-        "#actionBtn, #doneBtn {"
-        "    background-color: #282c34;"
-        "    color: #d7dae0;"
-        "    border: 1px solid #3e4451;"
-        "    border-radius: 6px;"
-        "    padding: 6px 14px;"
-        "    font-size: 12px;"
-        "    font-weight: 500;"
-        "}"
-        "#actionBtn:hover, #doneBtn:hover {"
-        "    background-color: #3e4451;"
-        "    color: #ffffff;"
-        "    border: 1px solid #7400b8;"
-        "}"
-        "#openBtn {"
-        "    background-color: #7400b8;"
-        "    color: #ffffff;"
-        "    border: 1px solid rgba(255, 255, 255, 0.3);"
-        "    border-radius: 6px;"
-        "    padding: 6px 14px;"
-        "    font-size: 12px;"
-        "    font-weight: bold;"
-        "}"
-        "#openBtn:hover {"
-        "    background-color: #9b2226;"
-        "}"
-      ));
+      QStringLiteral("#mainContainer {"
+                     "    background-color: #1e222b;"
+                     "    border: 1px solid #333842;"
+                     "    border-radius: 10px;"
+                     "}"
+                     "#titleLabel {"
+                     "    color: #ffffff;"
+                     "    font-size: 14px;"
+                     "    font-weight: bold;"
+                     "}"
+                     "#typeBadge {"
+                     "    color: #abb2bf;"
+                     "    background-color: #282c34;"
+                     "    border: 1px solid #3e4451;"
+                     "    border-radius: 10px;"
+                     "    padding: 2px 8px;"
+                     "    font-size: 11px;"
+                     "}"
+                     "#subTitle {"
+                     "    color: #abb2bf;"
+                     "    font-size: 11px;"
+                     "    font-weight: bold;"
+                     "}"
+                     "#closeBtn {"
+                     "    background: transparent;"
+                     "    color: #abb2bf;"
+                     "    border: none;"
+                     "    border-radius: 14px;"
+                     "    font-size: 14px;"
+                     "}"
+                     "#closeBtn:hover {"
+                     "    background-color: #e06c75;"
+                     "    color: #ffffff;"
+                     "}"
+                     "#toastLabel {"
+                     "    background-color: #98c379;"
+                     "    color: #1e222b;"
+                     "    font-weight: bold;"
+                     "    font-size: 12px;"
+                     "    padding: 4px 12px;"
+                     "    border-radius: 6px;"
+                     "}"
+                     "#previewLabel {"
+                     "    background-color: #16181d;"
+                     "    border: 1px solid #333842;"
+                     "    border-radius: 8px;"
+                     "}"
+                     "#textEdit {"
+                     "    background-color: #21252b;"
+                     "    color: #d7dae0;"
+                     "    border: 1px solid #333842;"
+                     "    border-radius: 6px;"
+                     "    padding: 10px;"
+                     "    font-size: 13px;"
+                     "    line-height: 1.5;"
+                     "}"
+                     "#actionBtn, #doneBtn {"
+                     "    background-color: #282c34;"
+                     "    color: #d7dae0;"
+                     "    border: 1px solid #3e4451;"
+                     "    border-radius: 6px;"
+                     "    padding: 6px 14px;"
+                     "    font-size: 12px;"
+                     "    font-weight: 500;"
+                     "}"
+                     "#actionBtn:hover, #doneBtn:hover {"
+                     "    background-color: #3e4451;"
+                     "    color: #ffffff;"
+                     "    border: 1px solid #7400b8;"
+                     "}"
+                     "#openBtn {"
+                     "    background-color: #7400b8;"
+                     "    color: #ffffff;"
+                     "    border: 1px solid rgba(255, 255, 255, 0.3);"
+                     "    border-radius: 6px;"
+                     "    padding: 6px 14px;"
+                     "    font-size: 12px;"
+                     "    font-weight: bold;"
+                     "}"
+                     "#openBtn:hover {"
+                     "    background-color: #9b2226;"
+                     "}"));
 }
 
 void QrWidget::showToast(const QString& msg)
@@ -314,7 +322,8 @@ void QrWidget::mousePressEvent(QMouseEvent* event)
 {
     if (event->button() == Qt::LeftButton) {
         m_isDragging = true;
-        m_dragPos = event->globalPosition().toPoint() - frameGeometry().topLeft();
+        m_dragPos =
+          event->globalPosition().toPoint() - frameGeometry().topLeft();
     }
 }
 
@@ -335,7 +344,8 @@ void QrWidget::mouseReleaseEvent(QMouseEvent* event)
 void QrWidget::keyPressEvent(QKeyEvent* event)
 {
     if (event->key() == Qt::Key_Escape ||
-        (event->modifiers() & Qt::ControlModifier && event->key() == Qt::Key_Q)) {
+        (event->modifiers() & Qt::ControlModifier &&
+         event->key() == Qt::Key_Q)) {
         close();
     } else {
         QWidget::keyPressEvent(event);

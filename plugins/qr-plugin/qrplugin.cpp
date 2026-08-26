@@ -30,7 +30,8 @@ QString QrPlugin::pluginAuthor() const
 
 QString QrPlugin::pluginDescription() const
 {
-    return tr("Fast QR code and barcode scanner with 1-click URL navigation and clipboard copying.");
+    return tr("Fast QR code and barcode scanner with 1-click URL navigation "
+              "and clipboard copying.");
 }
 
 QIcon QrPlugin::pluginIcon() const

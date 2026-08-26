@@ -4,8 +4,8 @@
 #pragma once
 
 #include "tools/abstractactiontool.h"
-#include <tesseract/baseapi.h>
 #include <leptonica/allheaders.h>
+#include <tesseract/baseapi.h>
 
 class OcrTool : public AbstractActionTool
 {

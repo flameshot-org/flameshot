@@ -33,8 +33,8 @@ VisualsEditor::VisualsEditor(QWidget* parent)
 
     content->setObjectName("visualsContent");
     m_scrollArea->setObjectName("visualsScrollArea");
-    m_scrollArea->setStyleSheet(
-      "#visualsContent, #visualsScrollArea { background: transparent; border: 0px; }");
+    m_scrollArea->setStyleSheet("#visualsContent, #visualsScrollArea { "
+                                "background: transparent; border: 0px; }");
     m_scrollAreaLayout = new QVBoxLayout(content);
     m_scrollAreaLayout->setContentsMargins(0, 0, 10, 0);
 

@@ -6,7 +6,9 @@
 #include "plugins/flameshotplugininterface.h"
 #include <QObject>
 
-class QrPlugin : public QObject, public FlameshotPluginInterface
+class QrPlugin
+  : public QObject
+  , public FlameshotPluginInterface
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID FlameshotPluginInterface_iid)

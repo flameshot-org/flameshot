@@ -283,16 +283,15 @@ int main(int argc, char* argv[])
       QObject::tr("Start a manual capture in GUI mode."));
     CommandArgument configArgument(QStringLiteral("config"),
                                    QObject::tr("Configure") + " flameshot.");
-    CommandArgument pluginsArgument(QStringLiteral("plugins"),
-                                    QObject::tr("Configure flameshot plugins."));
+    CommandArgument pluginsArgument(
+      QStringLiteral("plugins"), QObject::tr("Configure flameshot plugins."));
     CommandArgument screenArgument(
       QStringLiteral("screen"),
       QObject::tr("Capture a screenshot of the specified monitor."));
 
     // Options
     CommandOption pluginsOption(
-      { "p", "plugins" },
-      QObject::tr("Open flameshot plugins configuration"));
+      { "p", "plugins" }, QObject::tr("Open flameshot plugins configuration"));
     CommandOption installPluginOption(
       QStringLiteral("install-plugin"),
       QObject::tr("Install a plugin from a .so file path"),
@@ -659,11 +658,15 @@ int main(int argc, char* argv[])
             QString path = parser.value(installPluginOption);
             QString err;
             if (PluginManager::instance()->installPlugin(path, &err)) {
-                QTextStream(stdout) << "Successfully installed plugin from: " << path << "\n";
-                QTextStream(stdout) << "Installed into: " << PluginManager::instance()->userPluginsDirectory() << "\n";
+                QTextStream(stdout)
+                  << "Successfully installed plugin from: " << path << "\n";
+                QTextStream(stdout)
+                  << "Installed into: "
+                  << PluginManager::instance()->userPluginsDirectory() << "\n";
                 goto finish;
             } else {
-                QTextStream(stderr) << "Failed to install plugin: " << err << "\n";
+                QTextStream(stderr)
+                  << "Failed to install plugin: " << err << "\n";
                 return 1;
             }
         }
@@ -671,10 +674,14 @@ int main(int argc, char* argv[])
             QString id = parser.value(removePluginOption);
             QString err;
             if (PluginManager::instance()->removePlugin(id, &err)) {
-                QTextStream(stdout) << "Plugin '" << id << "' moved to disabled directory (~/.local/share/flameshot/plugins/disabled/).\n";
+                QTextStream(stdout)
+                  << "Plugin '" << id
+                  << "' moved to disabled directory "
+                     "(~/.local/share/flameshot/plugins/disabled/).\n";
                 goto finish;
             } else {
-                QTextStream(stderr) << "Failed to remove plugin: " << err << "\n";
+                QTextStream(stderr)
+                  << "Failed to remove plugin: " << err << "\n";
                 return 1;
             }
         }
@@ -687,18 +694,24 @@ int main(int argc, char* argv[])
         if (parser.isSet(disablePluginOption)) {
             QString id = parser.value(disablePluginOption);
             PluginManager::instance()->setPluginEnabled(id, false);
-            QTextStream(stdout) << "Plugin '" << id << "' is now DISABLED (will not show in capture toolbar).\n";
+            QTextStream(stdout)
+              << "Plugin '" << id
+              << "' is now DISABLED (will not show in capture toolbar).\n";
             goto finish;
         }
         if (parser.isSet(listPluginsOption)) {
             const auto& list = PluginManager::instance()->plugins();
-            QTextStream(stdout) << "\nDiscovered Flameshot Plugins (" << list.size() << "):\n";
+            QTextStream(stdout)
+              << "\nDiscovered Flameshot Plugins (" << list.size() << "):\n";
             for (const auto& p : list) {
                 QString status = p.enabled ? "[✔ ENABLED ]" : "[  DISABLED]";
-                QTextStream(stdout) << "  " << status << " " << p.name << " (v" << p.version << " by " << p.author << ")\n";
+                QTextStream(stdout) << "  " << status << " " << p.name << " (v"
+                                    << p.version << " by " << p.author << ")\n";
                 QTextStream(stdout) << "               ID:   " << p.id << "\n";
-                QTextStream(stdout) << "               Path: " << p.filePath << "\n";
-                QTextStream(stdout) << "               Desc: " << p.description << "\n\n";
+                QTextStream(stdout)
+                  << "               Path: " << p.filePath << "\n";
+                QTextStream(stdout)
+                  << "               Desc: " << p.description << "\n\n";
             }
             goto finish;
         }
