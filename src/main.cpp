@@ -11,10 +11,12 @@
 
 #include "cli/commandlineparser.h"
 #include "config/cacheutils.h"
+#include "config/configwindow.h"
 #include "config/styleoverride.h"
 #include "core/capturerequest.h"
 #include "core/flameshot.h"
 #include "core/flameshotdaemon.h"
+#include "plugins/pluginmanager.h"
 #include "utils/abstractlogger.h"
 #include "utils/confighandler.h"
 #include "utils/filenamehandler.h"
@@ -281,11 +283,35 @@ int main(int argc, char* argv[])
       QObject::tr("Start a manual capture in GUI mode."));
     CommandArgument configArgument(QStringLiteral("config"),
                                    QObject::tr("Configure") + " flameshot.");
+    CommandArgument pluginsArgument(QStringLiteral("plugins"),
+                                    QObject::tr("Configure flameshot plugins."));
     CommandArgument screenArgument(
       QStringLiteral("screen"),
       QObject::tr("Capture a screenshot of the specified monitor."));
 
     // Options
+    CommandOption pluginsOption(
+      { "p", "plugins" },
+      QObject::tr("Open flameshot plugins configuration"));
+    CommandOption installPluginOption(
+      QStringLiteral("install-plugin"),
+      QObject::tr("Install a plugin from a .so file path"),
+      QStringLiteral("path"));
+    CommandOption removePluginOption(
+      QStringLiteral("remove-plugin"),
+      QObject::tr("Move a plugin to disabled directory"),
+      QStringLiteral("id"));
+    CommandOption enablePluginOption(
+      QStringLiteral("enable-plugin"),
+      QObject::tr("Enable a plugin by ID or name"),
+      QStringLiteral("id"));
+    CommandOption disablePluginOption(
+      QStringLiteral("disable-plugin"),
+      QObject::tr("Disable a plugin by ID or name"),
+      QStringLiteral("id"));
+    CommandOption listPluginsOption(
+      QStringLiteral("list-plugins"),
+      QObject::tr("List all discovered plugins and their status"));
     CommandOption pathOption(
       { "p", "path" },
       QObject::tr("Existing directory or new file to save to"),
@@ -419,8 +445,15 @@ int main(int argc, char* argv[])
     parser.AddArgument(fullArgument);
     parser.AddArgument(launcherArgument);
     parser.AddArgument(configArgument);
+    parser.AddArgument(pluginsArgument);
     auto helpOption = parser.addHelpOption();
     auto versionOption = parser.addVersionOption();
+    parser.AddOption(pluginsOption);
+    parser.AddOptions({ installPluginOption,
+                        removePluginOption,
+                        enablePluginOption,
+                        disablePluginOption,
+                        listPluginsOption });
     parser.AddOptions({ pathOption,
                         clipboardOption,
                         delayOption,
@@ -450,6 +483,7 @@ int main(int argc, char* argv[])
                         showHelpOption,
                         mainColorOption,
                         contrastColorOption,
+                        pluginsOption,
                         checkOption },
                       configArgument);
     // Parse
@@ -616,6 +650,66 @@ int main(int argc, char* argv[])
             delete qApp;
             return screenExitCode;
         }
+    } else if (parser.isSet(installPluginOption) ||
+               parser.isSet(removePluginOption) ||
+               parser.isSet(enablePluginOption) ||
+               parser.isSet(disablePluginOption) ||
+               parser.isSet(listPluginsOption)) {
+        if (parser.isSet(installPluginOption)) {
+            QString path = parser.value(installPluginOption);
+            QString err;
+            if (PluginManager::instance()->installPlugin(path, &err)) {
+                QTextStream(stdout) << "Successfully installed plugin from: " << path << "\n";
+                QTextStream(stdout) << "Installed into: " << PluginManager::instance()->userPluginsDirectory() << "\n";
+                goto finish;
+            } else {
+                QTextStream(stderr) << "Failed to install plugin: " << err << "\n";
+                return 1;
+            }
+        }
+        if (parser.isSet(removePluginOption)) {
+            QString id = parser.value(removePluginOption);
+            QString err;
+            if (PluginManager::instance()->removePlugin(id, &err)) {
+                QTextStream(stdout) << "Plugin '" << id << "' moved to disabled directory (~/.local/share/flameshot/plugins/disabled/).\n";
+                goto finish;
+            } else {
+                QTextStream(stderr) << "Failed to remove plugin: " << err << "\n";
+                return 1;
+            }
+        }
+        if (parser.isSet(enablePluginOption)) {
+            QString id = parser.value(enablePluginOption);
+            PluginManager::instance()->setPluginEnabled(id, true);
+            QTextStream(stdout) << "Plugin '" << id << "' is now ENABLED.\n";
+            goto finish;
+        }
+        if (parser.isSet(disablePluginOption)) {
+            QString id = parser.value(disablePluginOption);
+            PluginManager::instance()->setPluginEnabled(id, false);
+            QTextStream(stdout) << "Plugin '" << id << "' is now DISABLED (will not show in capture toolbar).\n";
+            goto finish;
+        }
+        if (parser.isSet(listPluginsOption)) {
+            const auto& list = PluginManager::instance()->plugins();
+            QTextStream(stdout) << "\nDiscovered Flameshot Plugins (" << list.size() << "):\n";
+            for (const auto& p : list) {
+                QString status = p.enabled ? "[✔ ENABLED ]" : "[  DISABLED]";
+                QTextStream(stdout) << "  " << status << " " << p.name << " (v" << p.version << " by " << p.author << ")\n";
+                QTextStream(stdout) << "               ID:   " << p.id << "\n";
+                QTextStream(stdout) << "               Path: " << p.filePath << "\n";
+                QTextStream(stdout) << "               Desc: " << p.description << "\n\n";
+            }
+            goto finish;
+        }
+    } else if (parser.isSet(pluginsArgument) ||
+               (parser.isSet(configArgument) && parser.isSet(pluginsOption)) ||
+               parser.isSet(pluginsOption)) { // PLUGINS
+        reinitializeAsQApplication(argc, argv, translator, qtTranslator);
+        QObject::connect(
+          qApp, &QApplication::lastWindowClosed, qApp, &QApplication::quit);
+        Flameshot::instance()->config(ConfigWindow::PluginsTab);
+        qApp->exec();
     } else if (parser.isSet(configArgument)) { // CONFIG
         bool autostart = parser.isSet(autostartOption);
         bool notification = parser.isSet(notificationOption);

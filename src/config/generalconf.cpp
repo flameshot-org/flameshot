@@ -260,7 +260,7 @@ void GeneralConf::initScrollArea()
     auto* content = new QWidget(m_scrollArea);
     m_scrollArea->setWidget(content);
     m_scrollArea->setWidgetResizable(true);
-    m_scrollArea->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Maximum);
+    m_scrollArea->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     m_scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
     content->setObjectName("content");

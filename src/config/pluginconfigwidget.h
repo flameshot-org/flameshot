@@ -22,6 +22,8 @@ public slots:
 private slots:
     void openPluginsFolder();
     void reloadPlugins();
+    void installPlugin();
+    void removeSelectedPlugin();
     void onPluginToggle(int row);
 
 private:
@@ -30,6 +32,8 @@ private:
 
     QTableWidget* m_pluginTable{ nullptr };
     QLabel* m_statusLabel{ nullptr };
+    QPushButton* m_installBtn{ nullptr };
+    QPushButton* m_removeBtn{ nullptr };
     QPushButton* m_openFolderBtn{ nullptr };
     QPushButton* m_reloadBtn{ nullptr };
 };

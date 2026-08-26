@@ -37,11 +37,11 @@ PluginManager::~PluginManager()
 QString PluginManager::userPluginsDirectory() const
 {
     QString base =
-      QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
+      QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation);
     if (base.isEmpty()) {
-        base = QDir::homePath() + QStringLiteral("/.local/share/flameshot");
+        base = QDir::homePath() + QStringLiteral("/.local/share");
     }
-    QString dirPath = base + QStringLiteral("/plugins");
+    QString dirPath = base + QStringLiteral("/flameshot/plugins");
     QDir().mkpath(dirPath);
     return dirPath;
 }
@@ -61,15 +61,32 @@ QStringList PluginManager::pluginSearchPaths() const
 #endif
     }
 
-    // 2. User directory (~/.local/share/flameshot/plugins or similar)
-    paths.append(userPluginsDirectory());
+    // 2. User directory (~/.local/share/flameshot/plugins)
+    QString userDir = userPluginsDirectory();
+    if (!paths.contains(userDir)) {
+        paths.append(userDir);
+    }
 
-    // 3. User config directory fallback
+    // 2b. AppDataLocation directory (~/.local/share/flameshot/flameshot/plugins)
+    QString appDataDir =
+      QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) +
+      QStringLiteral("/plugins");
+    if (!paths.contains(appDataDir)) {
+        paths.append(appDataDir);
+    }
+
+    // 3. User config directory fallback (~/.config/flameshot/plugins)
     QString configDir =
       QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation) +
       QStringLiteral("/plugins");
     if (!paths.contains(configDir)) {
         paths.append(configDir);
+    }
+    QString genericConfigDir =
+      QStandardPaths::writableLocation(QStandardPaths::GenericConfigLocation) +
+      QStringLiteral("/flameshot/plugins");
+    if (!paths.contains(genericConfigDir)) {
+        paths.append(genericConfigDir);
     }
 
     // 4. System-wide directories
@@ -80,12 +97,21 @@ QStringList PluginManager::pluginSearchPaths() const
         paths.append(sysPath);
     }
 #endif
+    paths.append(QStringLiteral("/usr/lib/flameshot/plugins"));
+    paths.append(QStringLiteral("/usr/local/lib/flameshot/plugins"));
 
     // 5. Binary relative directory
     QString appDir =
       QCoreApplication::applicationDirPath() + QStringLiteral("/plugins");
     if (!paths.contains(appDir)) {
         paths.append(appDir);
+    }
+
+    // 6. Source tree dev directory
+    QString devDir = QCoreApplication::applicationDirPath() +
+                     QStringLiteral("/../plugins/ocr-plugin/build");
+    if (QDir(devDir).exists() && !paths.contains(devDir)) {
+        paths.append(devDir);
     }
 
     return paths;
@@ -243,4 +269,87 @@ void PluginManager::setPluginEnabled(const QString& id, bool enabled)
             return;
         }
     }
+
+    // If plugin is not currently loaded in memory, update config list anyway
+    if (enabled) {
+        m_disabledPluginIds.removeAll(id);
+    } else {
+        if (!m_disabledPluginIds.contains(id)) {
+            m_disabledPluginIds.append(id);
+        }
+    }
+    ConfigHandler().setDisabledPlugins(m_disabledPluginIds);
+}
+
+bool PluginManager::installPlugin(const QString& sourceFilePath, QString* errorMsg)
+{
+    QFileInfo srcInfo(sourceFilePath);
+    if (!srcInfo.exists() || !srcInfo.isFile()) {
+        if (errorMsg) *errorMsg = tr("Plugin file does not exist: %1").arg(sourceFilePath);
+        return false;
+    }
+
+    // Verify it is a valid Flameshot plugin
+    QPluginLoader testLoader(sourceFilePath);
+    QObject* rootObj = testLoader.instance();
+    if (!rootObj) {
+        if (errorMsg) *errorMsg = tr("Failed to load plugin: %1").arg(testLoader.errorString());
+        return false;
+    }
+    auto* plugin = qobject_cast<FlameshotPluginInterface*>(rootObj);
+    if (!plugin) {
+        if (errorMsg) *errorMsg = tr("Library is not a valid Flameshot plugin.");
+        testLoader.unload();
+        return false;
+    }
+    testLoader.unload();
+
+    QString destDir = userPluginsDirectory();
+    QDir().mkpath(destDir);
+    QString targetPath = destDir + QLatin1Char('/') + srcInfo.fileName();
+
+    if (QFile::exists(targetPath)) {
+        QFile::remove(targetPath);
+    }
+
+    if (!QFile::copy(sourceFilePath, targetPath)) {
+        if (errorMsg) *errorMsg = tr("Failed to copy plugin to: %1").arg(targetPath);
+        return false;
+    }
+
+    QFile::setPermissions(targetPath, QFile::ReadOwner | QFile::WriteOwner | QFile::ExeOwner |
+                                      QFile::ReadGroup | QFile::ExeGroup |
+                                      QFile::ReadOther | QFile::ExeOther);
+
+    reloadPlugins();
+    return true;
+}
+
+bool PluginManager::removePlugin(const QString& id, QString* errorMsg)
+{
+    for (const auto& meta : m_plugins) {
+        if (meta.id == id || meta.name.compare(id, Qt::CaseInsensitive) == 0 || meta.fileName == id) {
+            QString srcPath = meta.filePath;
+            QString disabledDir = userPluginsDirectory() + QStringLiteral("/disabled");
+            QDir().mkpath(disabledDir);
+            QString targetPath = disabledDir + QLatin1Char('/') + meta.fileName;
+
+            if (QFile::exists(targetPath)) {
+                QFile::remove(targetPath);
+            }
+
+            // Move the file into disabled/ without deleting it
+            if (QFile::rename(srcPath, targetPath)) {
+                reloadPlugins();
+                return true;
+            } else {
+                // If moving failed (e.g. read-only system plugin), disable via config
+                setPluginEnabled(meta.id, false);
+                if (errorMsg) *errorMsg = tr("Plugin disabled (file could not be moved).");
+                return true;
+            }
+        }
+    }
+    if (errorMsg) *errorMsg = tr("Plugin '%1' not found.").arg(id);
+    return false;
 }

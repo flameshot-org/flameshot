@@ -6,6 +6,8 @@
 
 #include <QCheckBox>
 #include <QDesktopServices>
+#include <QFileDialog>
+#include <QFileInfo>
 #include <QHBoxLayout>
 #include <QHeaderView>
 #include <QLabel>
@@ -64,7 +66,12 @@ void PluginConfigWidget::setupUi()
     m_pluginTable->setSelectionBehavior(QAbstractItemView::SelectRows);
     m_pluginTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
     m_pluginTable->setAlternatingRowColors(true);
-    mainLayout->addWidget(m_pluginTable);
+    m_pluginTable->setSizeAdjustPolicy(QAbstractScrollArea::AdjustIgnored);
+    m_pluginTable->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    m_pluginTable->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+    m_pluginTable->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+    m_pluginTable->setMinimumHeight(180);
+    mainLayout->addWidget(m_pluginTable, 1);
 
     // Status label
     m_statusLabel = new QLabel(this);
@@ -72,6 +79,21 @@ void PluginConfigWidget::setupUi()
 
     // Bottom action buttons
     auto* btnLayout = new QHBoxLayout();
+
+    m_installBtn = new QPushButton(tr("➕ Install Plugin..."), this);
+    connect(m_installBtn,
+            &QPushButton::clicked,
+            this,
+            &PluginConfigWidget::installPlugin);
+    btnLayout->addWidget(m_installBtn);
+
+    m_removeBtn = new QPushButton(tr("🚫 Move to Disabled"), this);
+    connect(m_removeBtn,
+            &QPushButton::clicked,
+            this,
+            &PluginConfigWidget::removeSelectedPlugin);
+    btnLayout->addWidget(m_removeBtn);
+
     m_openFolderBtn = new QPushButton(tr("Open Plugins Folder"), this);
     connect(m_openFolderBtn,
             &QPushButton::clicked,
@@ -117,6 +139,7 @@ void PluginConfigWidget::populatePlugins()
 
         // Name with icon
         auto* nameItem = new QTableWidgetItem(meta.name);
+        nameItem->setData(Qt::UserRole, meta.id);
         if (!meta.icon.isNull()) {
             nameItem->setIcon(meta.icon);
         }
@@ -134,7 +157,7 @@ void PluginConfigWidget::populatePlugins()
 
     if (plugins.isEmpty()) {
         m_statusLabel->setText(
-          tr("No plugins discovered. Place plugin (.so / .dll / .dylib) files "
+          tr("No plugins discovered. Use 'Install Plugin...' or place plugin files "
              "into the plugins folder."));
     } else {
         m_statusLabel->setText(
@@ -156,6 +179,50 @@ void PluginConfigWidget::openPluginsFolder()
 void PluginConfigWidget::reloadPlugins()
 {
     PluginManager::instance()->reloadPlugins();
+}
+
+void PluginConfigWidget::installPlugin()
+{
+    QString filePath = QFileDialog::getOpenFileName(
+      this,
+      tr("Select Flameshot Plugin Library"),
+      QString(),
+      tr("Flameshot Plugins (*.so *.dll *.dylib);;All Files (*)"));
+
+    if (filePath.isEmpty()) {
+        return;
+    }
+
+    QString errorMsg;
+    if (PluginManager::instance()->installPlugin(filePath, &errorMsg)) {
+        m_statusLabel->setText(
+          tr("Successfully installed plugin: %1").arg(QFileInfo(filePath).fileName()));
+    } else {
+        m_statusLabel->setText(tr("Installation failed: %1").arg(errorMsg));
+    }
+}
+
+void PluginConfigWidget::removeSelectedPlugin()
+{
+    int row = m_pluginTable->currentRow();
+    if (row < 0) {
+        m_statusLabel->setText(tr("Please select a plugin from the table to remove."));
+        return;
+    }
+
+    auto* item = m_pluginTable->item(row, 1);
+    if (!item) {
+        return;
+    }
+
+    QString id = item->data(Qt::UserRole).toString();
+    QString errorMsg;
+    if (PluginManager::instance()->removePlugin(id, &errorMsg)) {
+        m_statusLabel->setText(
+          tr("Plugin '%1' moved to disabled directory.").arg(item->text()));
+    } else {
+        m_statusLabel->setText(tr("Failed to remove plugin: %1").arg(errorMsg));
+    }
 }
 
 void PluginConfigWidget::onPluginToggle(int row)

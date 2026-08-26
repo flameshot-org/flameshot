@@ -77,6 +77,8 @@ endif ()
 
 add_executable(Flameshot::flameshot ALIAS flameshot)
 
+set_target_properties(flameshot PROPERTIES ENABLE_EXPORTS TRUE)
+
 if(FLAMESHOT_ICON)
   target_compile_definitions(flameshot PUBLIC FLAMESHOT_ICON="${FLAMESHOT_ICON}")
 endif()

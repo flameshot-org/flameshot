@@ -47,6 +47,9 @@ public:
     bool isPluginEnabled(const QString& id) const;
     void setPluginEnabled(const QString& id, bool enabled);
 
+    bool installPlugin(const QString& sourceFilePath, QString* errorMsg = nullptr);
+    bool removePlugin(const QString& id, QString* errorMsg = nullptr);
+
     QString userPluginsDirectory() const;
     QStringList pluginSearchPaths() const;
 

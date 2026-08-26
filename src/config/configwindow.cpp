@@ -16,9 +16,11 @@
 #include <QApplication>
 #include <QDialogButtonBox>
 #include <QFileSystemWatcher>
+#include <QGuiApplication>
 #include <QIcon>
 #include <QKeyEvent>
 #include <QLabel>
+#include <QScreen>
 #include <QSizePolicy>
 #include <QTabBar>
 #include <QTextStream>
@@ -26,7 +28,7 @@
 
 // ConfigWindow contains the menus where you can configure the application
 
-ConfigWindow::ConfigWindow(QWidget* parent)
+ConfigWindow::ConfigWindow(QWidget* parent, TabIndex initialTab)
   : QWidget(parent)
 {
     // We wrap QTabWidget in a QWidget because of a Qt bug
@@ -123,6 +125,26 @@ ConfigWindow::ConfigWindow(QWidget* parent)
     initErrorIndicator(m_filenameEditorTab, m_filenameEditor);
     initErrorIndicator(m_generalConfigTab, m_generalConfig);
     initErrorIndicator(m_shortcutsTab, m_shortcuts);
+
+    m_tabWidget->setCurrentIndex(static_cast<int>(initialTab));
+    setMinimumSize(480, 320);
+
+    QScreen* screen = QGuiApplication::primaryScreen();
+    if (screen) {
+        QRect avail = screen->availableGeometry();
+        int targetWidth = qBound(480, 740, avail.width() - 60);
+        int targetHeight = qBound(320, 500, avail.height() - 80);
+        resize(targetWidth, targetHeight);
+        move(avail.x() + (avail.width() - targetWidth) / 2,
+             avail.y() + (avail.height() - targetHeight) / 2);
+    }
+}
+
+void ConfigWindow::setCurrentTab(TabIndex tab)
+{
+    if (m_tabWidget) {
+        m_tabWidget->setCurrentIndex(static_cast<int>(tab));
+    }
 }
 
 void ConfigWindow::keyPressEvent(QKeyEvent* e)
