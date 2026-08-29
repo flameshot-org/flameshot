@@ -22,6 +22,7 @@ target_sources(
           globalvalues.cpp
           desktopfileparse.cpp
           desktopinfo.cpp
+          guimutex.cpp
           pathinfo.cpp
           colorutils.cpp
           history.cpp

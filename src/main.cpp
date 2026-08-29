@@ -18,6 +18,7 @@
 #include "utils/abstractlogger.h"
 #include "utils/confighandler.h"
 #include "utils/filenamehandler.h"
+#include "utils/guimutex.h"
 #include "utils/pathinfo.h"
 #include "utils/valuehandler.h"
 
@@ -31,7 +32,6 @@
 #include <QDir>
 #include <QLibraryInfo>
 #include <QNetworkProxyFactory>
-#include <QSharedMemory>
 #include <QTimer>
 #include <QTranslator>
 
@@ -90,23 +90,6 @@ int requestCaptureAndWait(const CaptureRequest& req)
         qApp->exit(E_ABORTED);
     });
     return qApp->exec();
-}
-
-QSharedMemory* guiMutexLock()
-{
-    QString key = "org.flameshot.Flameshot-" APP_VERSION;
-    auto* shm = new QSharedMemory(key);
-#ifdef Q_OS_UNIX
-    // Destroy shared memory if the last instance crashed on Unix
-    shm->attach();
-    delete shm;
-    shm = new QSharedMemory(key);
-#endif
-    if (!shm->create(1)) {
-        delete shm;
-        return nullptr;
-    }
-    return shm;
 }
 
 void configureTranslation(QTranslator& translator, QTranslator& qtTranslator)
@@ -472,15 +455,13 @@ int main(int argc, char* argv[])
         // Prevent multiple instances of 'flameshot gui' from running if not
         // configured to do so.
         if (!ConfigHandler().allowMultipleGuiInstances()) {
-            auto* mutex = guiMutexLock();
-            if (!mutex) {
+            if (!guiMutexLock()) {
                 return 1;
             }
-            QObject::connect(
-              qApp, &QCoreApplication::aboutToQuit, qApp, [mutex]() {
-                  mutex->detach();
-                  delete mutex;
-              });
+            QObject::connect(qApp,
+                             &QCoreApplication::aboutToQuit,
+                             qApp,
+                             &releasePendingGuiMutex);
         }
 
         // Option values

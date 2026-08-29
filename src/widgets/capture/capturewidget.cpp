@@ -16,6 +16,7 @@
 #include "core/qguiappcurrentscreen.h"
 #include "tools/copy/copytool.h"
 #include "utils/abstractlogger.h"
+#include "utils/guimutex.h"
 #include "utils/screengrabber.h"
 #include "utils/screenshotsaver.h"
 #include "widgets/capture/colorpicker.h"
@@ -649,6 +650,11 @@ void CaptureWidget::closeEvent(QCloseEvent* event)
             AbstractLogger::info()
               << "GNOME/COSMIC Wayland detected; keeping capture window "
                  "alive until clipboard data is fetched.";
+            // The capture itself is done at this point; only the clipboard
+            // handoff remains. Release the single-instance lock now rather
+            // than at process exit, so a new 'flameshot gui' invocation
+            // isn't rejected while this one lingers to serve the clipboard.
+            releasePendingGuiMutex();
             saveToClipboardGnomeWorkaround(pixmap(), this);
             return;
         }
