@@ -127,12 +127,12 @@
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="41"/>
         <source>Full Screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Pantaila osoa</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="46"/>
         <source>Monitor %1: %2 (%3x%4)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 monitorea : %2 (%3x%4)</translation>
     </message>
     <message>
         <source>Full Screen (All Monitors)</source>
@@ -193,7 +193,7 @@
         <location filename="../../src/widgets/capturelauncher.ui" line="71"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="184"/>
         <source>Monitor:</source>
-        <translation type="unfinished"></translation>
+        <translation>Monitorea:</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="87"/>
@@ -1411,22 +1411,22 @@ Mesedez, konpon itzazu eskuz konfigurazio fitxategian.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="929"/>
         <source>Capture active monitor (skip monitor selection)</source>
-        <translation type="unfinished"></translation>
+        <translation>Egin aktibo dagoen monitorearen argazkia (monitorea hautatu gabe)</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="931"/>
         <source>Automatically capture the monitor where the cursor is located instead of showing the monitor selection dialog. This feature is not supported on Wayland.</source>
-        <translation type="unfinished"></translation>
+        <translation>Egin automatikoki kurtsorea dagoen monitorearen argazkia, hautatzeko elkarrizketa-koadroa erakutsi beharrean. Funtzio hau ez da onartzen Wayland-en.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="952"/>
         <source>Use legacy X11 screenshot method (deprecated)</source>
-        <translation type="unfinished"></translation>
+        <translation>Erabili antzinako X11 pantaila-argazki metodoa (zaharkitua)</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="954"/>
         <source>Bypass the freedesktop portal and use Qt&apos;s native X11 screen capture. Enable this if your window manager lacks xdg-desktop-portal (e.g. xmonad, i3). Only effective on X11; ignored on Wayland.</source>
-        <translation type="unfinished"></translation>
+        <translation>Saihestu freedesktop ataria eta erabili Qt-en jatorrizko X11 pantaila-argazkia. Gaitu hau zure leiho-kudeatzaileak xdg-desktop-portal ez badu (adibidez, xmonad, i3). X11n bakarrik eraginkorra; Wayland-en ez.</translation>
     </message>
 </context>
 <context>
@@ -1824,7 +1824,8 @@ Mesedez, konpon itzazu eskuz konfigurazio fitxategian.</translation>
         <location filename="../../src/utils/monitorpreview.cpp" line="31"/>
         <source>Monitor %1: %2
 Click to select</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 monitorea: %2
+Egin klik hautatzeko</translation>
     </message>
 </context>
 <context>
@@ -2156,7 +2157,7 @@ Click to select</source>
     <message>
         <location filename="../../src/main.cpp" line="349"/>
         <source>Interactively select and edit the screenshot region</source>
-        <translation type="unfinished"></translation>
+        <translation>Aukeratu eta editatu interaktiboki pantaila-argazkiaren area</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="366"/>
@@ -2443,37 +2444,37 @@ Baliteke &apos;#&apos; karakterea ihes egin behar izatea, &apos;\#FFF&apos;n bez
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="61"/>
         <source>Could not locate the `org.freedesktop.portal.Desktop` service</source>
-        <translation type="unfinished"></translation>
+        <translation>Ezin izan da aurkitu `org.freedesktop.portal.Desktop` zerbitzua</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="109"/>
         <source>Screenshot portal timed out after 30 seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>Pantaila-argazkien ataria denboraz kanpo 30 segundo igaro ondoren</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="132"/>
         <source>FreeDesktop portal screenshot size: %1x%2, DPR: %3</source>
-        <translation type="unfinished"></translation>
+        <translation>FreeDesktop atariaren pantaila-argazkiaren tamaina: %1x%2, DPR: %3</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="159"/>
         <source>Capture Active Monitor is not supported on Wayland due to Wayland security model.</source>
-        <translation type="unfinished"></translation>
+        <translation>Capture Active Monitor ez da Wayland-en onartzen Wayland segurtasun-ereduagatik.</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="177"/>
         <source>Screenshot already in progress, please wait for the current screenshot to complete</source>
-        <translation type="unfinished"></translation>
+        <translation>Pantaila-argazkia dagoeneko abian da. Itxaron uneko pantaila-argazkia amaitu arte</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="202"/>
         <source>Screenshot cancelled</source>
-        <translation type="unfinished"></translation>
+        <translation>Pantaila-argazkia bertan behera utzi da</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="218"/>
         <source>Unable to get current screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Ezin izan da pantaila argazkia egin</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="237"/>
@@ -2486,63 +2487,63 @@ Baliteke &apos;#&apos; karakterea ihes egin behar izatea, &apos;\#FFF&apos;n bez
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="373"/>
         <source>=== All Screen Information ===</source>
-        <translation type="unfinished"></translation>
+        <translation>=== Pantailaren informazio guztia ===</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="376"/>
         <location filename="../../src/utils/screengrabber.cpp" line="551"/>
         <source>Screen %1: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 pantaila : %2</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="377"/>
         <source>  Logical geometry: %1x%2+%3+%4</source>
-        <translation type="unfinished"></translation>
+        <translation>  Geometria logikoa: %1x%2+%3+%4</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="382"/>
         <source>  DPR: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>  Gailuaren pixel erlazioa: %1</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="488"/>
         <source>Total logical dimensions: %1x%2 (min: %3,%4)</source>
-        <translation type="unfinished"></translation>
+        <translation>Dimentsio logikoak guztira: %1x%2 (min: %3,%4)</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="493"/>
         <source>Screenshot dimensions: %1x%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Pantaila argazkiaren tamaina: %1x%2</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="509"/>
         <source>Screenshot scale factors: X=%1 Y=%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Pantaila argazkiaren eskala faktorea: X=%1 Y=%2</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="542"/>
         <source>Calculated crop position for mixed DPI: X=%1 Y=%2</source>
-        <translation type="unfinished"></translation>
+        <translation>DPI mistorako ebaketa-posizio kalkulatua: X=%1 Y=%2</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="552"/>
         <source>  Logical geometry: %1x%2+%3+%4 DPR: %5</source>
-        <translation type="unfinished"></translation>
+        <translation>  Geometria logikoa: %1x%2+%3+%4 DPR: %5</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="558"/>
         <source>  Crop rect in screenshot: %1x%2+%3+%4</source>
-        <translation type="unfinished"></translation>
+        <translation>  Moztu zuzen pantaila argazkian: %1x%2+%3+%4</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="571"/>
         <source>Crop rect is empty, returning full screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Ebaketa zuzena hutsik dago, pantaila-argazki osoa itzultzen du</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="587"/>
         <source>Scaling screenshot to: %1 %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Pantaila argazkia eskalatzen: %1 %2</translation>
     </message>
 </context>
 <context>
@@ -2740,7 +2741,7 @@ Baliteke &apos;#&apos; karakterea ihes egin behar izatea, &apos;\#FFF&apos;n bez
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="268"/>
         <source>It seems, that Windows forces to open its screenshot tool when the &apos;Print Screen&apos; key is pressed. Would you like to disable this so that Flameshot can use the &apos;Print Screen&apos; key?</source>
-        <translation type="unfinished"></translation>
+        <translation>Badirudi Windows-ek pantaila-argazkiaren tresna irekitzera behartzen duela &apos;Inprimatu pantaila&apos; tekla sakatzen denean. Hau desgaitu nahi duzu Flameshot-ek &apos;Inprimatu pantaila&apos; tekla erabil dezan?</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="273"/>
@@ -2750,30 +2751,30 @@ Baliteke &apos;#&apos; karakterea ihes egin behar izatea, &apos;\#FFF&apos;n bez
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="278"/>
         <source>No, don&apos;t ask again</source>
-        <translation type="unfinished"></translation>
+        <translation>Ez eta ez galdetu berriro</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="286"/>
         <location filename="../../src/config/shortcutswidget.cpp" line="333"/>
         <location filename="../../src/config/shortcutswidget.cpp" line="343"/>
         <source>The registry could not be changed!</source>
-        <translation type="unfinished"></translation>
+        <translation>Erregistroa ezin da aldatu!</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="317"/>
         <source>Register Flameshot as MS-SCREENCLIP application (administrator privileges required)</source>
-        <translation type="unfinished"></translation>
+        <translation>Erregistratu Flameshot MS-SCREENCLIP aplikazio gisa (administratzaile pribilegioak behar dira)</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="321"/>
         <source>After registering, you can select Flameshot as the default screenshot application in Windows Settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>Erregistratu ondoren, Flameshot hauta dezakezu pantaila-argazkiaren aplikazio lehenetsi gisa Windows ezarpenetan.</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="334"/>
         <location filename="../../src/config/shortcutswidget.cpp" line="344"/>
         <source>You may start Flameshot as administrator ONCE and try again!</source>
-        <translation type="unfinished"></translation>
+        <translation>Flameshot administratzaile gisa BEHIN abiatu eta saiatu berriro!</translation>
     </message>
     <message>
         <source>Delete current tool</source>
@@ -2963,7 +2964,7 @@ Baliteke &apos;#&apos; karakterea ihes egin behar izatea, &apos;\#FFF&apos;n bez
     <message>
         <location filename="../../src/utils/systemnotification.cpp" line="43"/>
         <source>No DBus System Notification service found</source>
-        <translation type="unfinished"></translation>
+        <translation>Ez da aurkitu DBus sistemaren jakinarazpen zerbitzurik</translation>
     </message>
     <message>
         <location filename="../../src/utils/systemnotification.cpp" line="51"/>
@@ -3053,17 +3054,17 @@ Baliteke &apos;#&apos; karakterea ihes egin behar izatea, &apos;\#FFF&apos;n bez
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="162"/>
         <source>Download version %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Deskargatu % 1 bertsioa</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="250"/>
         <source>Select Screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Hautatu pantaila</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="266"/>
         <source>Monitor %1: %2 (%3x%4)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 monitorea: %2 (%3x%4)</translation>
     </message>
     <message>
         <source>New version %1 is available</source>
@@ -3247,7 +3248,7 @@ Baliteke &apos;#&apos; karakterea ihes egin behar izatea, &apos;\#FFF&apos;n bez
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="101"/>
         <source>UI language</source>
-        <translation type="unfinished"></translation>
+        <translation>Interfazearen hizkuntza</translation>
     </message>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="141"/>
@@ -3257,7 +3258,7 @@ Baliteke &apos;#&apos; karakterea ihes egin behar izatea, &apos;\#FFF&apos;n bez
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="142"/>
         <source>Flameshot must be restarted to apply these changes!</source>
-        <translation type="unfinished"></translation>
+        <translation>Flameshot berrabiarazi behar da aldaketa hauek aplikatzeko!</translation>
     </message>
 </context>
 <context>
