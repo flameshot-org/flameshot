@@ -1391,7 +1391,8 @@ void CaptureWidget::initSelection()
                 m_captureDone = true;
                 close();
             }
-            m_buttonHandler->updatePosition(m_selection->geometry());
+            m_buttonHandler->updatePosition(m_selection->geometry(),
+                                            m_selection->toolbarAnchor());
             m_buttonHandler->show();
         } else {
             m_buttonHandler->hide();
