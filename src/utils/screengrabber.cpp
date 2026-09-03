@@ -870,26 +870,29 @@ QPixmap ScreenGrabber::x11LegacyScreenshot()
         return p;
     }
 
-    // Composite all screens using logical geometry.
-    // On i3 (tested) DPR is uniform so we don't need the per-screen
-    // physical pixel math that the Windows backend does. Not sure if this is
-    // true for other DE's like xmonad.
-    QRect totalGeom;
+    // Composite in device pixels. On xcb the virtual-desktop layout uses native
+    // offsets while each screen reports a logical size, so scaling the united
+    // geometry by one ratio inflates and misplaces it. grabWindow(0) returns the
+    // device-pixel pixmap and geometry().topLeft() is the native offset, so draw
+    // each pixmap at its native offset using its own size.
+    QRect totalRect;
+    QList<QPair<QRect, QPixmap>> grabs;
+    grabs.reserve(screens.size());
     for (QScreen* s : screens) {
-        totalGeom = totalGeom.united(s->geometry());
+        QPixmap p = s->grabWindow(0);
+        p.setDevicePixelRatio(1.0);
+        QRect r(s->geometry().topLeft(), p.size());
+        grabs.append({ r, p });
+        totalRect = totalRect.united(r);
     }
 
-    qreal dpr = screens.first()->devicePixelRatio();
-    QPixmap desktop(qRound(totalGeom.width() * dpr),
-                    qRound(totalGeom.height() * dpr));
-    desktop.setDevicePixelRatio(dpr);
+    QPixmap desktop(totalRect.size());
+    desktop.setDevicePixelRatio(1.0);
     desktop.fill(Qt::black);
 
     QPainter painter(&desktop);
-    for (QScreen* s : screens) {
-        QPixmap p = s->grabWindow(0);
-        QPoint offset = s->geometry().topLeft() - totalGeom.topLeft();
-        painter.drawPixmap(offset, p);
+    for (const auto& g : grabs) {
+        painter.drawPixmap(g.first.topLeft() - totalRect.topLeft(), g.second);
     }
     painter.end();
 
