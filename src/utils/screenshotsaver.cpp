@@ -238,6 +238,11 @@ private:
             return;
         m_notified = true;
         AbstractLogger::info() << QObject::tr("Capture saved to clipboard.");
+        QPointer<QWidget> guard = m_owner;
+        QTimer::singleShot(0, [guard]() {
+            if (guard)
+                guard->close();
+        });
     }
 
     QImage m_image;
@@ -253,31 +258,10 @@ bool saveToClipboardGnomeWorkaround(const QPixmap& pixmap, QWidget* keepAlive)
 
     keepAlive->hide();
 
-    // Close once something else takes clipboard ownership, rather than
-    // after the first read: some paste consumers probe the clipboard
-    // (e.g. checking available types) before issuing the real fetch, and
-    // closing on that first read would cut them off before it arrives.
-    // dataChanged also fires for our own setMimeData() call above (the
-    // Wayland clipboard claim is confirmed asynchronously by the
-    // compositor), so we only close once the clipboard's current data is
-    // no longer ours, rather than closing on the first emission.
-    QObject::connect(clipboard,
-                     &QClipboard::dataChanged,
-                     keepAlive,
-                     [clipboard, mimeData, keepAlive]() {
-                         if (clipboard->mimeData() == mimeData)
-                             return;
-                         if (keepAlive)
-                             keepAlive->close();
-                     });
-
-    // Safety net: force close if nothing ever fetches the data. GNOME's
-    // mutter grabs clipboard offers eagerly on copy, so 500ms was enough
-    // there, but compositors that fetch lazily (e.g. COSMIC) only request
-    // the data once the user actually pastes, which can take much longer.
-    QTimer::singleShot(30000, keepAlive, [keepAlive]() {
-        qWarning() << "Clipboard workaround timed out, compositor did not "
-                      "request clipboard data within 30s. Force closing.";
+    // Safety net: force close after 500ms if compositor never fetches
+    QTimer::singleShot(500, keepAlive, [keepAlive]() {
+        qWarning() << "GNOME workaround timed out, compositor did not request "
+                      "clipboard data within 500ms. Force closing.";
         if (keepAlive)
             keepAlive->close();
     });
