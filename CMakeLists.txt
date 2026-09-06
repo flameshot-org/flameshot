@@ -28,6 +28,21 @@ endif()
 #Needed due to linker error with QtColorWidget
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
+# Control Flow Guard, an MSVC exploit mitigation that validates the target of
+# every indirect call at runtime. Set here, above the add_subdirectory() calls
+# below, so that it also covers the vendored dependencies that get compiled
+# into the executables.
+#
+# Both flags are needed and they do different jobs: /guard:cf instruments the
+# code, and /GUARD:CF marks the image. The mark is the part that matters most,
+# because CFG is a per-process policy read from the main image at process
+# creation -- an unmarked flameshot.exe leaves CFG off for the whole process,
+# including the checks already compiled into the Windows DLLs it loads. Setting
+# only the compile flag would pay the cost and gain nothing.
+if(MSVC)
+  add_compile_options(/guard:cf)
+  add_link_options(/GUARD:CF)
+endif()
 
 # Dependency can be fetched via flatpak builder
 if(EXISTS "${CMAKE_SOURCE_DIR}/external/Qt-Color-Widgets/CMakeLists.txt")
