@@ -173,6 +173,9 @@ static QMap<QString, QSharedPointer<KeySequence>> recognizedShortcuts = {
 #ifdef ENABLE_IMGUR
     SHORTCUT("TYPE_IMAGEUPLOADER"       ,                           ),
 #endif
+    // Legacy key from the first action-plugin prototype. External tools now
+    // keep shortcuts under Plugins/<id>/shortcut.
+    SHORTCUT("TYPE_PLUGIN"              ,                           ),
 #if !defined(Q_OS_MACOS)
     SHORTCUT("TYPE_OPEN_APP"            ,   "Ctrl+O"                ),
 #endif
@@ -398,6 +401,41 @@ int ConfigHandler::toolSize(CaptureTool::Type toolType)
         // All other tools are sharing the same size
         return drawThickness();
     }
+}
+
+bool ConfigHandler::pluginEnabled(const QString& pluginId,
+                                  bool defaultValue) const
+{
+    return m_settings
+      .value(QStringLiteral(CONFIG_GROUP_PLUGINS "/%1/enabled").arg(pluginId),
+             defaultValue)
+      .toBool();
+}
+
+void ConfigHandler::setPluginEnabled(const QString& pluginId, bool enabled)
+{
+    m_skipNextErrorCheck = true;
+    m_settings.setValue(
+      QStringLiteral(CONFIG_GROUP_PLUGINS "/%1/enabled").arg(pluginId),
+      enabled);
+}
+
+QString ConfigHandler::pluginShortcut(const QString& pluginId,
+                                      const QString& defaultValue) const
+{
+    return m_settings
+      .value(QStringLiteral(CONFIG_GROUP_PLUGINS "/%1/shortcut").arg(pluginId),
+             defaultValue)
+      .toString();
+}
+
+void ConfigHandler::setPluginShortcut(const QString& pluginId,
+                                      const QString& shortcut)
+{
+    m_skipNextErrorCheck = true;
+    m_settings.setValue(
+      QStringLiteral(CONFIG_GROUP_PLUGINS "/%1/shortcut").arg(pluginId),
+      shortcut);
 }
 
 // DEFAULTS

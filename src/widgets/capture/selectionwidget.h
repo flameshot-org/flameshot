@@ -37,6 +37,7 @@ public:
     void setGeometry(const QRect& r);
     QRect geometry() const;
     QRect fullGeometry() const;
+    QPoint toolbarAnchor() const;
 
     QRect rect() const;
 
@@ -89,6 +90,8 @@ private:
     QPoint m_handleOffset;
 
     QPoint m_dragStartPos;
+    QPoint m_toolbarAnchor;
+    bool m_hasToolbarAnchor = false;
     SideType m_activeSide;
     QCursor m_idleCentralCursor;
     bool m_ignoreMouse;
