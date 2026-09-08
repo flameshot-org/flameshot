@@ -166,8 +166,20 @@ if(WIN32)
   # Include all dynamically linked runtime libraries such as MSVCRxxx.dll
   include(InstallRequiredSystemLibraries)
 
+  # Determine the packaging architecture so that x64 and ARM64 artifacts are
+  # named distinctly and the WiX installer targets the correct platform.
+  # CMAKE_GENERATOR_PLATFORM is "x64" or "ARM64" when building with the
+  # Visual Studio generator and the "-A" option.
+  if(CMAKE_GENERATOR_PLATFORM MATCHES "[Aa][Rr][Mm]64")
+    set(FLAMESHOT_PACKAGE_ARCH "arm64")
+  else()
+    set(FLAMESHOT_PACKAGE_ARCH "win64")
+  endif()
+  # Drives the default <name>-<version>-<system> file name used by CPack.
+  set(CPACK_SYSTEM_NAME "${FLAMESHOT_PACKAGE_ARCH}")
+
   if(USE_PORTABLE_CONFIG)
-    set(CPACK_PACKAGE_FILE_NAME "${PROJECT_NAME}-${PROJECT_VERSION}-win64")
+    set(CPACK_PACKAGE_FILE_NAME "${PROJECT_NAME}-${PROJECT_VERSION}-${FLAMESHOT_PACKAGE_ARCH}")
     set(CPACK_GENERATOR ZIP)
 
   else()
@@ -193,6 +205,14 @@ if(WIN32)
     set(CPACK_RESOURCE_FILE_README "${CMAKE_SOURCE_DIR}/README.md")
 
     set(CPACK_WIX_UPGRADE_GUID "26D8062A-66D9-48D9-8924-42090FB9B3F9")
+
+    # Mark the .msi with the correct target platform (requires CMake >= 3.24).
+    # Without this, an ARM64 build would be packaged as an x64 installer.
+    if(FLAMESHOT_PACKAGE_ARCH STREQUAL "arm64")
+      set(CPACK_WIX_ARCHITECTURE "arm64")
+    else()
+      set(CPACK_WIX_ARCHITECTURE "x64")
+    endif()
   endif()
 elseif(APPLE)
   set(CPACK_INCLUDE_TOPLEVEL_DIRECTORY 0)
