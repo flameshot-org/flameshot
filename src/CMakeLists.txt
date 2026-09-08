@@ -230,6 +230,8 @@ if (APPLE)
     target_link_libraries(
             flameshot
             qhotkey
+            "-framework CoreGraphics"
+            "-framework CoreFoundation"
     )
 endif ()
 

@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include <QColorSpace>
 #include <QWidget>
 
 class QLabel;
@@ -17,6 +18,7 @@ class PinWidget : public QWidget
 public:
     explicit PinWidget(const QPixmap& pixmap,
                        const QRect& geometry,
+                       const QColorSpace& colorSpace = {},
                        QWidget* parent = nullptr);
 
 protected:
@@ -43,6 +45,7 @@ private:
     void decreaseOpacity();
 
     QPixmap m_pixmap;
+    QColorSpace m_colorSpace;
     QVBoxLayout* m_layout;
     QLabel* m_label;
     QGraphicsDropShadowEffect* m_shadowEffect;
