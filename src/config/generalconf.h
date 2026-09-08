@@ -7,6 +7,7 @@
 #include <QWidget>
 
 class QVBoxLayout;
+class QHBoxLayout;
 class QCheckBox;
 class QPushButton;
 class QLabel;
@@ -74,6 +75,20 @@ private slots:
 private:
     const QString chooseFolder(const QString& currentPath = "");
 
+    // Adds a titled, bordered QGroupBox to m_scrollAreaLayout and returns
+    // its inner layout. Callers temporarily reassign m_scrollAreaLayout to
+    // the result so existing initX() functions - which only ever call
+    // m_scrollAreaLayout->addWidget(...) - nest into the section without
+    // needing any changes themselves.
+    QVBoxLayout* pushGroupBox(const QString& title);
+    // A small titled QGroupBox holding one QSpinBox, sized to its content
+    // (not full-width) and appended into `row` - used to line up Undo
+    // limit and Latest Uploads Max Size side by side instead of each
+    // eating a full-width row for a single number field.
+    QSpinBox* pushCompactSpinBox(QHBoxLayout* row,
+                                 const QString& title,
+                                 int max);
+
     void initAllowMultipleGuiInstances();
     void initAntialiasingPinZoom();
     void initAutoCloseIdleDaemon();
@@ -101,7 +116,6 @@ private:
     void initUndoLimit();
     void initUploadWithoutConfirmation();
     void initUseJpgForClipboard();
-    void initUploadHistoryMax();
     void initUploadClientSecret();
     void initSaveLastRegion();
     void initShowSelectionGeometry();

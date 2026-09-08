@@ -28,27 +28,47 @@ GeneralConf::GeneralConf(QWidget* parent)
 {
     m_layout = new QVBoxLayout(this);
     m_layout->setAlignment(Qt::AlignTop);
+    m_layout->setSpacing(10);
 
     // Scroll area adapts the size of the content on small screens.
     // It must be initialized before the checkboxes.
     initScrollArea();
 
-    initAutostart();
-    initAutoCloseIdleDaemon();
-    initShowTrayIcon();
-    initShowDesktopNotification();
-    initShowAbortNotification();
+    {
+        QVBoxLayout* outer = m_scrollAreaLayout;
+        QVBoxLayout* group = pushGroupBox(tr("Startup"));
+        m_scrollAreaLayout = group;
+        initAutostart();
+        initAutoCloseIdleDaemon();
+        initShowTrayIcon();
+        m_scrollAreaLayout = outer;
+        // Forces this group's size hint to be recomputed right away, with
+        // all 3 checkboxes already added - otherwise a QGroupBox
+        // populated after being placed inside a resizable QScrollArea can
+        // end up sized (and clipped) as if it only ever held its first
+        // child.
+        group->activate();
+    }
+    {
+        QVBoxLayout* outer = m_scrollAreaLayout;
+        QVBoxLayout* group = pushGroupBox(tr("Notifications & Behavior"));
+        m_scrollAreaLayout = group;
+        initShowDesktopNotification();
+        initShowAbortNotification();
 #if !defined(DISABLE_UPDATE_CHECKER)
-    initCheckForUpdates();
+        initCheckForUpdates();
 #endif
-    initShowStartupLaunchMessage();
-    initShowQuitPrompt();
-    initAllowMultipleGuiInstances();
-    initSaveLastRegion();
-    initShowHelp();
-    initShowSidePanelButton();
-    initUseJpgForClipboard();
-    initCopyOnDoubleClick();
+        initShowStartupLaunchMessage();
+        initShowQuitPrompt();
+        initAllowMultipleGuiInstances();
+        initSaveLastRegion();
+        initShowHelp();
+        initShowSidePanelButton();
+        initUseJpgForClipboard();
+        initCopyOnDoubleClick();
+        m_scrollAreaLayout = outer;
+        group->activate();
+    }
     initSaveAfterCopy();
     initCopyPathAfterSave();
     initAntialiasingPinZoom();
@@ -67,13 +87,12 @@ GeneralConf::GeneralConf(QWidget* parent)
     initCopyAndCloseAfterUpload();
     initUploadWithoutConfirmation();
     initHistoryConfirmationToDelete();
-    initUploadHistoryMax();
     initUploadClientSecret();
 #endif
     initPredefinedColorPaletteLarge();
     initShowSelectionGeometry();
 
-    m_layout->addStretch();
+    m_scrollAreaLayout->addStretch();
 
     initShowMagnifier();
     initSquareMagnifier();
@@ -255,12 +274,16 @@ void GeneralConf::resetConfiguration()
 void GeneralConf::initScrollArea()
 {
     m_scrollArea = new QScrollArea(this);
+    // m_layout (this widget's own top-level layout) holds ONLY the scroll
+    // area - every section (Startup, Save Path, Shortcuts locations, all
+    // of it) is added to m_scrollAreaLayout below, not m_layout, so the
+    // whole tab scrolls as one unit instead of the dialog growing to fit
+    // all of it unconditionally.
     m_layout->addWidget(m_scrollArea);
 
     auto* content = new QWidget(m_scrollArea);
     m_scrollArea->setWidget(content);
     m_scrollArea->setWidgetResizable(true);
-    m_scrollArea->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Maximum);
     m_scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
     content->setObjectName("content");
@@ -269,6 +292,38 @@ void GeneralConf::initScrollArea()
       "#content, #scrollArea { background: transparent; border: 0px; }");
     m_scrollAreaLayout = new QVBoxLayout(content);
     m_scrollAreaLayout->setContentsMargins(0, 0, 20, 0);
+    m_scrollAreaLayout->setSpacing(10);
+}
+
+QVBoxLayout* GeneralConf::pushGroupBox(const QString& title)
+{
+    auto* box = new QGroupBox(title);
+    box->setFlat(true);
+    auto* layout = new QVBoxLayout();
+    layout->setSpacing(8);
+    box->setLayout(layout);
+    m_scrollAreaLayout->addWidget(box);
+    return layout;
+}
+
+QSpinBox* GeneralConf::pushCompactSpinBox(QHBoxLayout* row,
+                                         const QString& title,
+                                         int max)
+{
+    auto* box = new QGroupBox(title);
+    box->setFlat(true);
+    box->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Preferred);
+    auto* vboxLayout = new QVBoxLayout();
+    box->setLayout(vboxLayout);
+
+    auto* spin = new QSpinBox(this);
+    spin->setMaximum(max);
+    QString foreground = this->palette().windowText().color().name();
+    spin->setStyleSheet(QStringLiteral("color: %1").arg(foreground));
+    vboxLayout->addWidget(spin);
+
+    row->addWidget(box);
+    return spin;
 }
 
 void GeneralConf::initShowHelp()
@@ -365,7 +420,7 @@ void GeneralConf::initConfigButtons()
     auto* box = new QGroupBox(tr("Configuration File"));
     box->setFlat(true);
     box->setLayout(buttonLayout);
-    m_layout->addWidget(box);
+    m_scrollAreaLayout->addWidget(box);
 
     m_exportButton = new QPushButton(tr("Export"));
     buttonLayout->addWidget(m_exportButton);
@@ -518,7 +573,7 @@ void GeneralConf::initSaveAfterCopy()
 
     auto* box = new QGroupBox(tr("Save Path"));
     box->setFlat(true);
-    m_layout->addWidget(box);
+    m_scrollAreaLayout->addWidget(box);
 
     auto* vboxLayout = new QVBoxLayout();
     box->setLayout(vboxLayout);
@@ -579,33 +634,11 @@ void GeneralConf::historyConfirmationToDelete(bool checked)
     ConfigHandler().setHistoryConfirmationToDelete(checked);
 }
 
-void GeneralConf::initUploadHistoryMax()
-{
-    auto* box = new QGroupBox(tr("Latest Uploads Max Size"));
-    box->setFlat(true);
-    m_layout->addWidget(box);
-
-    auto* vboxLayout = new QVBoxLayout();
-    box->setLayout(vboxLayout);
-
-    m_uploadHistoryMax = new QSpinBox(this);
-    m_uploadHistoryMax->setMaximum(50);
-    QString foreground = this->palette().windowText().color().name();
-    m_uploadHistoryMax->setStyleSheet(
-      QStringLiteral("color: %1").arg(foreground));
-
-    connect(m_uploadHistoryMax,
-            static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged),
-            this,
-            &GeneralConf::uploadHistoryMaxChanged);
-    vboxLayout->addWidget(m_uploadHistoryMax);
-}
-
 void GeneralConf::initUploadClientSecret()
 {
     auto* box = new QGroupBox(tr("Imgur Application Client ID"));
     box->setFlat(true);
-    m_layout->addWidget(box);
+    m_scrollAreaLayout->addWidget(box);
 
     auto* vboxLayout = new QVBoxLayout();
     box->setLayout(vboxLayout);
@@ -634,25 +667,29 @@ void GeneralConf::uploadHistoryMaxChanged(int max)
 
 void GeneralConf::initUndoLimit()
 {
-    auto* box = new QGroupBox(tr("Undo limit"));
-    box->setFlat(true);
-    m_layout->addWidget(box);
+    // Undo limit and (when built with Imgur) Latest Uploads Max Size are
+    // both a title + a single spinbox - lined up in one row via
+    // pushCompactSpinBox instead of each claiming a full-width section
+    // for one number field.
+    auto* row = new QHBoxLayout();
+    m_scrollAreaLayout->addLayout(row);
 
-    auto* vboxLayout = new QVBoxLayout();
-    box->setLayout(vboxLayout);
-
-    m_undoLimit = new QSpinBox(this);
+    m_undoLimit = pushCompactSpinBox(row, tr("Undo limit"), 999);
     m_undoLimit->setMinimum(1);
-    m_undoLimit->setMaximum(999);
-    QString foreground = this->palette().windowText().color().name();
-    m_undoLimit->setStyleSheet(QStringLiteral("color: %1").arg(foreground));
-
     connect(m_undoLimit,
             static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged),
             this,
             &GeneralConf::undoLimit);
 
-    vboxLayout->addWidget(m_undoLimit);
+#ifdef ENABLE_IMGUR
+    m_uploadHistoryMax = pushCompactSpinBox(row, tr("Latest Uploads Max Size"), 50);
+    connect(m_uploadHistoryMax,
+            static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged),
+            this,
+            &GeneralConf::uploadHistoryMaxChanged);
+#endif
+
+    row->addStretch();
 }
 
 void GeneralConf::undoLimit(int limit)
@@ -800,7 +837,7 @@ void GeneralConf::initShowSelectionGeometry()
 
     auto* box = new QGroupBox(tr("Selection Geometry Display"));
     box->setFlat(true);
-    m_layout->addWidget(box);
+    m_scrollAreaLayout->addWidget(box);
 
     auto* vboxLayout = new QVBoxLayout();
     box->setLayout(vboxLayout);
