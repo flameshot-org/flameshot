@@ -58,6 +58,7 @@ private slots:
     void setSaveAsFileExtension(const QString& extension);
     void setGeometryLocation(int index);
     void setSelGeoHideTime(int v);
+    void setShowSelectionHandles(bool checked);
     void setJpegQuality(int v);
     void setReverseArrow(bool checked);
     void setInsecurePixelate(bool checked);
@@ -160,6 +161,7 @@ private:
     QCheckBox* m_squareMagnifier;
     QCheckBox* m_copyOnDoubleClick;
     QCheckBox* m_showSelectionGeometry;
+    QCheckBox* m_showSelectionHandles;
     QComboBox* m_selectGeometryLocation;
     QSpinBox* m_xywhTimeout;
     QSpinBox* m_jpegQuality;
