@@ -2,8 +2,10 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "textwidget.h"
+#include "utils/colorutils.h"
 
 #include <QEvent>
+#include <QGraphicsDropShadowEffect>
 #include <QKeyEvent>
 
 TextWidget::TextWidget(QWidget* parent)
@@ -73,9 +75,31 @@ void TextWidget::setAlignment(Qt::AlignmentFlag alignment)
 }
 void TextWidget::setTextColor(const QColor& c)
 {
+    m_textColor = c;
     QString s(
       QStringLiteral("TextWidget { background: transparent; color: %1; }"));
     setStyleSheet(s.arg(c.name()));
+    if (m_shadowEffect) {
+        m_shadowEffect->setColor(QColor(0, 0, 0, 200));
+    }
+}
+
+void TextWidget::setShadow(bool shadow)
+{
+    if (shadow) {
+        if (!m_shadowEffect) {
+            m_shadowEffect = new QGraphicsDropShadowEffect(this);
+            m_shadowEffect->setBlurRadius(4);
+            m_shadowEffect->setOffset(1.5, 1.5);
+            setGraphicsEffect(m_shadowEffect);
+        }
+        m_shadowEffect->setColor(QColor(0, 0, 0, 200));
+        m_shadowEffect->setEnabled(true);
+    } else {
+        if (m_shadowEffect) {
+            m_shadowEffect->setEnabled(false);
+        }
+    }
 }
 
 void TextWidget::adjustSize()

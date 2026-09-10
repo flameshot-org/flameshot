@@ -25,6 +25,7 @@
         <file>img/material/black/format-text.svg</file>
         <file>img/material/black/format_bold.svg</file>
         <file>img/material/black/format_italic.svg</file>
+        <file>img/material/black/format_shadow.svg</file>
         <file>img/material/black/format_strikethrough.svg</file>
         <file>img/material/black/format_underlined.svg</file>
         <file>img/material/black/graphics.svg</file>
@@ -68,6 +69,7 @@
         <file>img/material/white/format-text.svg</file>
         <file>img/material/white/format_bold.svg</file>
         <file>img/material/white/format_italic.svg</file>
+        <file>img/material/white/format_shadow.svg</file>
         <file>img/material/white/format_strikethrough.svg</file>
         <file>img/material/white/format_underlined.svg</file>
         <file>img/material/white/graphics.svg</file>

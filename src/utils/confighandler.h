@@ -93,6 +93,7 @@ public:
     CONFIG_GETTER_SETTER(disabledTrayIcon, setDisabledTrayIcon, bool)
     CONFIG_GETTER_SETTER(drawThickness, setDrawThickness, int)
     CONFIG_GETTER_SETTER(drawFontSize, setDrawFontSize, int)
+    CONFIG_GETTER_SETTER(drawTextShadow, setDrawTextShadow, bool)
     CONFIG_GETTER_SETTER(drawCircleCounterSize, setDrawCircleCounterSize, int)
     CONFIG_GETTER_SETTER(drawPixelateSize, setDrawPixelateSize, int)
     CONFIG_GETTER_SETTER(drawRectangleSize, setDrawRectangleSize, int)

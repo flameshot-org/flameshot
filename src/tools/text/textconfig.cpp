@@ -19,6 +19,7 @@ TextConfig::TextConfig(QWidget* parent)
   , m_underlineButton(nullptr)
   , m_weightButton(nullptr)
   , m_italicButton(nullptr)
+  , m_shadowButton(nullptr)
   , m_leftAlignButton(nullptr)
   , m_centerAlignButton(nullptr)
   , m_rightAlignButton(nullptr)
@@ -70,6 +71,16 @@ TextConfig::TextConfig(QWidget* parent)
             this,
             &TextConfig::fontItalicChanged);
     m_italicButton->setToolTip(tr("Italic"));
+
+    m_shadowButton = new QPushButton(QIcon(iconPrefix + "format_shadow.svg"),
+                                     QLatin1String(""));
+    m_shadowButton->setCheckable(true);
+    connect(m_shadowButton,
+            &QPushButton::clicked,
+            this,
+            &TextConfig::fontShadowChanged);
+    m_shadowButton->setToolTip(tr("Shadow"));
+
     auto* modifiersLayout = new QHBoxLayout();
 
     m_leftAlignButton =
@@ -109,6 +120,7 @@ TextConfig::TextConfig(QWidget* parent)
     modifiersLayout->addWidget(m_underlineButton);
     modifiersLayout->addWidget(m_weightButton);
     modifiersLayout->addWidget(m_italicButton);
+    modifiersLayout->addWidget(m_shadowButton);
     m_layout->addLayout(modifiersLayout);
     m_layout->addLayout(alignmentLayout);
 }
@@ -138,6 +150,11 @@ void TextConfig::setWeight(const int weight)
 void TextConfig::setItalic(const bool italic)
 {
     m_italicButton->setChecked(italic);
+}
+
+void TextConfig::setShadow(const bool shadow)
+{
+    m_shadowButton->setChecked(shadow);
 }
 
 void TextConfig::weightButtonPressed(const bool weight)
