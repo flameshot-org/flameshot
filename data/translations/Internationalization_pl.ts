@@ -457,12 +457,12 @@ Spacja, aby pokazać panel boczny.</translation>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="90"/>
         <source>Add Preset:</source>
-        <translation>Add Preset:</translation>
+        <translation>Dodaj kolor:</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="96"/>
         <source>Enter color manually or select it using the color-wheel</source>
-        <translation>Enter color manually or select it using the color-wheel</translation>
+        <translation>Wprowadź kolor ręcznie lub wybierz go za pomocą koła barw</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="106"/>
@@ -472,7 +472,7 @@ Spacja, aby pokazać panel boczny.</translation>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="107"/>
         <source>Press button to add preset</source>
-        <translation>Press button to add preset</translation>
+        <translation>Naciśnij przycisk, aby dodać kolor</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="130"/>
@@ -483,12 +483,12 @@ Spacja, aby pokazać panel boczny.</translation>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="131"/>
         <source>Unable to add preset. Maximum limit reached.</source>
-        <translation>Unable to add preset. Maximum limit reached.</translation>
+        <translation>Nie można dodać koloru. Osiągnięto limit maksymalny.</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="148"/>
         <source>Unable to remove preset. Minimum limit reached.</source>
-        <translation>Unable to remove preset. Minimum limit reached.</translation>
+        <translation>Nie można usunąć koloru. Osiągnięto limit minimalny.</translation>
     </message>
 </context>
 <context>
@@ -1013,7 +1013,7 @@ Rozwiąż błędy ręcznie w pliku konfiguracyjnym.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="397"/>
         <source>Automatic check for updates</source>
-        <translation>Automatycznie sprawdzaj aktualizacje</translation>
+        <translation>Automatyczne sprawdzanie aktualizacji</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="411"/>
@@ -1067,27 +1067,27 @@ Rozwiąż błędy ręcznie w pliku konfiguracyjnym.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="277"/>
         <source>Show the help message at the beginning in the capture mode</source>
-        <translation>Show the help message at the beginning in the capture mode</translation>
+        <translation>Wyświetlaj komunikat pomocy na początku w trybie przechwytywania</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="287"/>
         <source>Use last region for GUI mode</source>
-        <translation type="unfinished">Use last region for GUI mode</translation>
+        <translation>Użyj ostatniego obszaru w trybie GUI</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="289"/>
         <source>Use the last region as the default selection for the next screenshot in GUI mode</source>
-        <translation type="unfinished">Use the last region as the default selection for the next screenshot in GUI mode</translation>
+        <translation>Użyj ostatniego obszaru jako domyślnego zaznaczenia dla następnego zrzutu ekranu w trybie GUI</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="303"/>
         <source>Show the side panel toggle button in the capture mode</source>
-        <translation>Show the side panel toggle button in the capture mode</translation>
+        <translation>Wyświetlaj przycisk przełączania panelu bocznego w trybie przechwytywania</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="315"/>
         <source>Enable desktop notifications</source>
-        <translation>Enable desktop notifications</translation>
+        <translation>Włącz powiadomienia pulpitu</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="326"/>
@@ -1102,7 +1102,7 @@ Rozwiąż błędy ręcznie w pliku konfiguracyjnym.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="340"/>
         <source>Show icon in the system tray</source>
-        <translation>Show icon in the system tray</translation>
+        <translation>Pokaż ikonę w zasobniku systemowym</translation>
     </message>
     <message>
         <source>Use grim to capture screenshots</source>
@@ -1115,17 +1115,17 @@ Rozwiąż błędy ręcznie w pliku konfiguracyjnym.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="355"/>
         <source>Ask for confirmation to delete screenshot from the latest uploads</source>
-        <translation>Ask for confirmation to delete screenshot from the latest uploads</translation>
+        <translation>Pytaj o potwierdzenie usunięcia zrzutu ekranu z ostatnich przesłanych plików</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="398"/>
         <source>Check for updates automatically</source>
-        <translation>Check for updates automatically</translation>
+        <translation>Sprawdzaj aktualizacje automatycznie</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="412"/>
         <source>This allows you to take screenshots of Flameshot itself for example</source>
-        <translation>This allows you to take screenshots of Flameshot itself for example</translation>
+        <translation>Umożliwia to na przykład wykonanie zrzutu ekranu samego programu Flameshot</translation>
     </message>
     <message>
         <source>Launch Flameshot daemon when computer is booted</source>
@@ -1134,17 +1134,17 @@ Rozwiąż błędy ręcznie w pliku konfiguracyjnym.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="451"/>
         <source>Show the welcome message box in the middle of the screen while taking a screenshot</source>
-        <translation>Show the welcome message box in the middle of the screen while taking a screenshot</translation>
+        <translation>Wyświetlaj okno komunikatu powitalnego na środku ekranu podczas wykonywania zrzutu ekranu</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="478"/>
         <source>Use a large predefined color palette</source>
-        <translation>Use a large predefined color palette</translation>
+        <translation>Użyj dużej, predefiniowanej palety kolorów</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="488"/>
         <source>Copy on double click</source>
-        <translation>Copy on double click</translation>
+        <translation>Kopiuj po dwukrotnym kliknięciu</translation>
     </message>
     <message>
         <source>Enable Copy on Double Click</source>
@@ -1197,7 +1197,7 @@ Rozwiąż błędy ręcznie w pliku konfiguracyjnym.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="514"/>
         <source>After copying the screenshot, save it to a file as well</source>
-        <translation>After copying the screenshot, save it to a file as well</translation>
+        <translation>Po skopiowaniu zrzutu ekranu zapisz go również do pliku</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="521"/>
@@ -1227,7 +1227,7 @@ Rozwiąż błędy ręcznie w pliku konfiguracyjnym.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="608"/>
         <source>Imgur Application Client ID</source>
-        <translation>Imgur Application Client ID</translation>
+        <translation>Identyfikator klienta aplikacji Imgur</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="639"/>
@@ -1252,7 +1252,7 @@ Rozwiąż błędy ręcznie w pliku konfiguracyjnym.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="703"/>
         <source>Copy the file path to clipboard after the file is saved</source>
-        <translation>Copy the file path to clipboard after the file is saved</translation>
+        <translation>Kopiuj ścieżkę pliku do schowka po zapisaniu pliku</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="714"/>
@@ -1283,22 +1283,22 @@ Rozwiąż błędy ręcznie w pliku konfiguracyjnym.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="763"/>
         <source>Show magnifier</source>
-        <translation>Show magnifier</translation>
+        <translation>Pokaż lupę</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="764"/>
         <source>Enable a magnifier while selecting the screenshot area</source>
-        <translation>Enable a magnifier while selecting the screenshot area</translation>
+        <translation>Włącz lupę podczas zaznaczania obszaru zrzutu ekranu</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="775"/>
         <source>Square shaped magnifier</source>
-        <translation>Square shaped magnifier</translation>
+        <translation>Kwadratowa lupa</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="776"/>
         <source>Make the magnifier to be square-shaped</source>
-        <translation>Make the magnifier to be square-shaped</translation>
+        <translation>Zmienia kształt lupy na kwadratowy</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="792"/>
@@ -1313,12 +1313,12 @@ Rozwiąż błędy ręcznie w pliku konfiguracyjnym.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="803"/>
         <source>Selection Geometry Display</source>
-        <translation type="unfinished"></translation>
+        <translation>Wyświetlenie geometrii zaznaczenia</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="810"/>
         <source>Display Location</source>
-        <translation type="unfinished"></translation>
+        <translation>Pozycja wyświetlenia</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="813"/>
@@ -1328,22 +1328,22 @@ Rozwiąż błędy ręcznie w pliku konfiguracyjnym.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="814"/>
         <source>Top Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Lewy górny róg</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="816"/>
         <source>Top Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Prawy górny róg</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="818"/>
         <source>Bottom Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Lewy dolny róg</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="820"/>
         <source>Bottom Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Prawy dolny róg</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="822"/>
@@ -1353,7 +1353,7 @@ Rozwiąż błędy ręcznie w pliku konfiguracyjnym.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="847"/>
         <source>Quality range of 0-100; Higher number is better quality and larger file size</source>
-        <translation type="unfinished"></translation>
+        <translation>Zakres jakości: 0-100; Wyższa wartość to lepsza jakość i większy rozmiar pliku</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="851"/>
@@ -1363,22 +1363,22 @@ Rozwiąż błędy ręcznie w pliku konfiguracyjnym.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="862"/>
         <source>Reverse arrow</source>
-        <translation type="unfinished"></translation>
+        <translation>Odwróć strzałkę</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="863"/>
         <source>Draw the arrow head first</source>
-        <translation type="unfinished"></translation>
+        <translation>Grot strzałki umieszczany na początku rysowania</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="872"/>
         <source>Insecure Pixelate</source>
-        <translation type="unfinished"></translation>
+        <translation>Niebezpieczna (odwracalna) pikselizacja</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="874"/>
         <source>Draw the pixelation effect in an insecure but more asethetic way.</source>
-        <translation type="unfinished"></translation>
+        <translation>Rysuj efekt pikselizacji w mniej bezpieczny, lecz bardziej estetyczny sposób.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="929"/>
@@ -1388,17 +1388,17 @@ Rozwiąż błędy ręcznie w pliku konfiguracyjnym.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="931"/>
         <source>Automatically capture the monitor where the cursor is located instead of showing the monitor selection dialog. This feature is not supported on Wayland.</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatycznie przechwytuje monitor ze wskaźnikiem myszy, pomijając okno wyboru monitora. Funkcja nie jest obsługiwana w Wayland.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="952"/>
         <source>Use legacy X11 screenshot method (deprecated)</source>
-        <translation type="unfinished"></translation>
+        <translation>Użyj starszej metody zrzutów ekranu X11 (wycofywane)</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="954"/>
         <source>Bypass the freedesktop portal and use Qt&apos;s native X11 screen capture. Enable this if your window manager lacks xdg-desktop-portal (e.g. xmonad, i3). Only effective on X11; ignored on Wayland.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pomija portal freedesktop i wymusza natywne przechwytywanie ekranu X11 w Qt. Przydatne, gdy menedżer okien nie posiada xdg-desktop-portal (np. xmonad, i3). Działa tylko w X11; ignorowane w Wayland.</translation>
     </message>
 </context>
 <context>
@@ -1556,12 +1556,12 @@ Rozwiąż błędy ręcznie w pliku konfiguracyjnym.</translation>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="190"/>
         <source>Unable to save the screenshot to disk.</source>
-        <translation>Unable to save the screenshot to disk.</translation>
+        <translation>Nie można zapisać zrzutu ekranu na dysku.</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="193"/>
         <source>Screenshot saved.</source>
-        <translation>Screenshot saved.</translation>
+        <translation>Zapisano zrzut ekranu.</translation>
     </message>
 </context>
 <context>
@@ -1646,7 +1646,7 @@ Rozwiąż błędy ręcznie w pliku konfiguracyjnym.</translation>
         <location filename="../../src/widgets/infowindow.ui" line="43"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="118"/>
         <source>License</source>
-        <translation>License</translation>
+        <translation>Licencja</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="56"/>
@@ -1676,7 +1676,7 @@ Rozwiąż błędy ręcznie w pliku konfiguracyjnym.</translation>
         <location filename="../../src/widgets/infowindow.ui" line="128"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="123"/>
         <source>Copy Info</source>
-        <translation>Copy Info</translation>
+        <translation>Kopiuj informacje</translation>
     </message>
     <message>
         <source>SPACEBAR</source>
@@ -1796,7 +1796,8 @@ Rozwiąż błędy ręcznie w pliku konfiguracyjnym.</translation>
         <location filename="../../src/utils/monitorpreview.cpp" line="31"/>
         <source>Monitor %1: %2
 Click to select</source>
-        <translation type="unfinished"></translation>
+        <translation>Monitor %1: %2
+Kliknij, aby wybrać</translation>
     </message>
 </context>
 <context>
@@ -1853,32 +1854,32 @@ Click to select</source>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="291"/>
         <source>Save to file</source>
-        <translation>Save to file</translation>
+        <translation>Zapisz do pliku</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="298"/>
         <source>Rotate Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Obróć w prawo</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="303"/>
         <source>Rotate Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Obróć w lewo</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="308"/>
         <source>Increase Opacity</source>
-        <translation type="unfinished"></translation>
+        <translation>Zwiększ krycie</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="315"/>
         <source>Decrease Opacity</source>
-        <translation type="unfinished"></translation>
+        <translation>Zmniejsz krycie</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="322"/>
         <source>Close</source>
-        <translation type="unfinished">Zamknij</translation>
+        <translation>Zamknij</translation>
     </message>
 </context>
 <context>
@@ -1891,7 +1892,7 @@ Click to select</source>
     <message>
         <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="38"/>
         <source>Set Pixelate as the paint tool.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wybierz pikselizację jako narzędzie rysowania.</translation>
     </message>
     <message>
         <source>Set Pixelate as the paint tool</source>
@@ -1903,12 +1904,12 @@ Click to select</source>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/primaryinstancewidget.cpp" line="21"/>
         <source>Primary instance</source>
-        <translation type="unfinished"></translation>
+        <translation>Instancja główna</translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/primaryinstancewidget.cpp" line="22"/>
         <source>&lt;b&gt;Primary instance.&lt;/b&gt; Messages received from secondaries:</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Instancja główna.&lt;/b&gt; Wiadomości otrzymane z instancji drugorzędnych:</translation>
     </message>
 </context>
 <context>
@@ -2024,12 +2025,12 @@ Click to select</source>
     <message>
         <location filename="../../src/main.cpp" line="273"/>
         <source>Capture screenshot of all monitors at the same time.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zrób zrzut ekranu ze wszystkich monitorów jednocześnie.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="283"/>
         <source>Capture a screenshot of the specified monitor.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zrób zrzut ekranu określonego monitora.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="288"/>
@@ -2058,7 +2059,7 @@ Click to select</source>
     <message>
         <location filename="../../src/main.cpp" line="300"/>
         <source>Repeat screenshot with previously selected region</source>
-        <translation>Repeat screenshot with previously selected region</translation>
+        <translation>Powtórz zrzut ekranu z poprzednio zaznaczonym obszarem</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="303"/>
@@ -2128,7 +2129,7 @@ Click to select</source>
     <message>
         <location filename="../../src/main.cpp" line="349"/>
         <source>Interactively select and edit the screenshot region</source>
-        <translation type="unfinished"></translation>
+        <translation>Interaktywnie wybierz i edytuj obszar zrzutu ekranu</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="366"/>
@@ -2207,7 +2208,7 @@ Może być konieczne opuszczenie znaku &apos;#&apos; jak np.: &apos;\#FFF&apos;<
     <message>
         <location filename="../../src/core/flameshot.cpp" line="168"/>
         <source>Requested screen exceeds screen count</source>
-        <translation>Requested screen exceeds screen count</translation>
+        <translation>Żądany ekran przekracza liczbę ekranów</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="418"/>
@@ -2234,12 +2235,12 @@ Może być konieczne opuszczenie znaku &apos;#&apos; jak np.: &apos;\#FFF&apos;<
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="68"/>
         <source>Subcommands</source>
-        <translation type="unfinished"></translation>
+        <translation>Podpolecenia</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="328"/>
         <source>subcommands</source>
-        <translation type="unfinished"></translation>
+        <translation>podpolecenia</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="329"/>
@@ -2399,37 +2400,37 @@ Może być konieczne opuszczenie znaku &apos;#&apos; jak np.: &apos;\#FFF&apos;<
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="61"/>
         <source>Could not locate the `org.freedesktop.portal.Desktop` service</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie udało się odnaleźć usługi `org.freedesktop.portal.Desktop`</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="109"/>
         <source>Screenshot portal timed out after 30 seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>Upłynął limit czasu portalu zrzutów ekranu (30 sekund)</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="132"/>
         <source>FreeDesktop portal screenshot size: %1x%2, DPR: %3</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozmiar zrzutu ekranu portalu FreeDesktop: %1x%2, DPR: %3</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="159"/>
         <source>Capture Active Monitor is not supported on Wayland due to Wayland security model.</source>
-        <translation type="unfinished"></translation>
+        <translation>Przechwytywanie aktywnego monitora nie jest obsługiwane w Wayland z powodu modelu zabezpieczeń Wayland.</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="177"/>
         <source>Screenshot already in progress, please wait for the current screenshot to complete</source>
-        <translation type="unfinished"></translation>
+        <translation>Zrzut ekranu jest już w toku, poczekaj na zakończenie bieżącego zrzutu</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="202"/>
         <source>Screenshot cancelled</source>
-        <translation type="unfinished"></translation>
+        <translation>Anulowano zrzut ekranu</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="218"/>
         <source>Unable to get current screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie można pobrać bieżącego ekranu</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="237"/>
@@ -2442,63 +2443,63 @@ Może być konieczne opuszczenie znaku &apos;#&apos; jak np.: &apos;\#FFF&apos;<
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="373"/>
         <source>=== All Screen Information ===</source>
-        <translation type="unfinished"></translation>
+        <translation>=== Informacje o wszystkich ekranach ===</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="376"/>
         <location filename="../../src/utils/screengrabber.cpp" line="551"/>
         <source>Screen %1: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Ekran %1: %2</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="377"/>
         <source>  Logical geometry: %1x%2+%3+%4</source>
-        <translation type="unfinished"></translation>
+        <translation>  Geometria logiczna: %1x%2+%3+%4</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="382"/>
         <source>  DPR: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>  DPR: %1</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="488"/>
         <source>Total logical dimensions: %1x%2 (min: %3,%4)</source>
-        <translation type="unfinished"></translation>
+        <translation>Całkowite wymiary logiczne: %1x%2 (min: %3,%4)</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="493"/>
         <source>Screenshot dimensions: %1x%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Wymiary zrzutu ekranu: %1x%2</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="509"/>
         <source>Screenshot scale factors: X=%1 Y=%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Współczynniki skalowania zrzutu ekranu: X=%1 Y=%2</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="542"/>
         <source>Calculated crop position for mixed DPI: X=%1 Y=%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Obliczona pozycja przycięcia dla mieszanego DPI: X=%1 Y=%2</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="552"/>
         <source>  Logical geometry: %1x%2+%3+%4 DPR: %5</source>
-        <translation type="unfinished"></translation>
+        <translation>  Geometria logiczna: %1x%2+%3+%4 DPR: %5</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="558"/>
         <source>  Crop rect in screenshot: %1x%2+%3+%4</source>
-        <translation type="unfinished"></translation>
+        <translation>  Prostokąt przycięcia na zrzucie ekranu: %1x%2+%3+%4</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="571"/>
         <source>Crop rect is empty, returning full screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Prostokąt przycięcia jest pusty, zwrócono pełny zrzut ekranu</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="587"/>
         <source>Scaling screenshot to: %1 %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Skalowanie zrzutu ekranu do: %1 %2</translation>
     </message>
 </context>
 <context>
@@ -2506,32 +2507,32 @@ Może być konieczne opuszczenie znaku &apos;#&apos; jak np.: &apos;\#FFF&apos;<
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="26"/>
         <source>Secondary instance</source>
-        <translation type="unfinished"></translation>
+        <translation>Druga instancja</translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="27"/>
         <source>&lt;b&gt;Secondary instance.&lt;/b&gt; Send message to primary:</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Druga instancja.&lt;/b&gt; Wysłano wiadomość do instancji głównej:</translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="29"/>
         <source>Type something here...</source>
-        <translation type="unfinished"></translation>
+        <translation>Wpisz tekst tutaj...</translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="31"/>
         <source>&amp;Send</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Send (Wyślij)</translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="54"/>
         <source>Error sending message</source>
-        <translation type="unfinished"></translation>
+        <translation>Błąd wysyłania wiadomości</translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="55"/>
         <source>The message &apos;%1&apos; could not be sent to the primary.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wiadomość &apos;%1&apos; nie mogła zostać wysłana do instancji głównej.</translation>
     </message>
 </context>
 <context>
@@ -2601,7 +2602,7 @@ Może być konieczne opuszczenie znaku &apos;#&apos; jak np.: &apos;\#FFF&apos;<
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="175"/>
         <source>Left Double-click</source>
-        <translation>Left Double-click</translation>
+        <translation>Dwukrotne kliknięcie lewym przyciskiem myszy</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="182"/>
@@ -2611,7 +2612,7 @@ Może być konieczne opuszczenie znaku &apos;#&apos; jak np.: &apos;\#FFF&apos;<
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="183"/>
         <source>Grab a color from the screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Pobierz kolor z ekranu</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="184"/>
@@ -2636,22 +2637,22 @@ Może być konieczne opuszczenie znaku &apos;#&apos; jak np.: &apos;\#FFF&apos;<
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="189"/>
         <source>Symmetrically decrease width by 2px</source>
-        <translation type="unfinished"></translation>
+        <translation>Symetryczne zmniejszenie szerokości o 2px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="191"/>
         <source>Symmetrically increase width by 2px</source>
-        <translation type="unfinished"></translation>
+        <translation>Symetryczne zwiększenie szerokości o 2px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="193"/>
         <source>Symmetrically increase height by 2px</source>
-        <translation type="unfinished"></translation>
+        <translation>Symetryczne zwiększenie wysokości o 2px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="195"/>
         <source>Symmetrically decrease height by 2px</source>
-        <translation type="unfinished"></translation>
+        <translation>Symetryczne zmniejszenie wysokości o 2px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="196"/>
@@ -2686,50 +2687,50 @@ Może być konieczne opuszczenie znaku &apos;#&apos; jak np.: &apos;\#FFF&apos;<
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="203"/>
         <source>Delete selected drawn object</source>
-        <translation type="unfinished"></translation>
+        <translation>Usuń zaznaczony narysowany obiekt</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="204"/>
         <source>Cancel current selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Anuluj bieżące zaznaczenie</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="268"/>
         <source>It seems, that Windows forces to open its screenshot tool when the &apos;Print Screen&apos; key is pressed. Would you like to disable this so that Flameshot can use the &apos;Print Screen&apos; key?</source>
-        <translation type="unfinished"></translation>
+        <translation>System Windows domyślnie przechwytuje naciśnięcie klawisza &apos;Print Screen&apos; i uruchamia wbudowane narzędzie do zrzutów ekranu. Czy chcesz to wyłączyć, aby Flameshot mógł korzystać z klawisza &apos;Print Screen&apos;?</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="273"/>
         <source>Flameshot must be restarted for changes to take effect.</source>
-        <translation type="unfinished">Flameshot musi zostać uruchomiony ponownie, by zmiany miały efekt.</translation>
+        <translation>Flameshot musi zostać uruchomiony ponownie, by zmiany miały efekt.</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="278"/>
         <source>No, don&apos;t ask again</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie, nie pytaj ponownie</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="286"/>
         <location filename="../../src/config/shortcutswidget.cpp" line="333"/>
         <location filename="../../src/config/shortcutswidget.cpp" line="343"/>
         <source>The registry could not be changed!</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie udało się zmodyfikować rejestru!</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="317"/>
         <source>Register Flameshot as MS-SCREENCLIP application (administrator privileges required)</source>
-        <translation type="unfinished"></translation>
+        <translation>Zarejestruj Flameshot jako aplikację MS-SCREENCLIP (wymagane uprawnienia administratora)</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="321"/>
         <source>After registering, you can select Flameshot as the default screenshot application in Windows Settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>Po zarejestrowaniu możesz wybrać Flameshot jako domyślną aplikację do zrzutów ekranu w Ustawieniach systemu Windows.</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="334"/>
         <location filename="../../src/config/shortcutswidget.cpp" line="344"/>
         <source>You may start Flameshot as administrator ONCE and try again!</source>
-        <translation type="unfinished"></translation>
+        <translation>Uruchom Flameshot jednorazowo z uprawnieniami administratora i spróbuj ponownie!</translation>
     </message>
     <message>
         <source>Delete current tool</source>
@@ -2779,7 +2780,7 @@ Może być konieczne opuszczenie znaku &apos;#&apos; jak np.: &apos;\#FFF&apos;<
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="85"/>
         <source>Display grid</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokaż siatkę</translation>
     </message>
 </context>
 <context>
@@ -2915,7 +2916,7 @@ Może być konieczne opuszczenie znaku &apos;#&apos; jak np.: &apos;\#FFF&apos;<
     <message>
         <location filename="../../src/utils/systemnotification.cpp" line="43"/>
         <source>No DBus System Notification service found</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie znaleziono usługi powiadomień systemowych DBus</translation>
     </message>
     <message>
         <location filename="../../src/utils/systemnotification.cpp" line="51"/>
@@ -3005,17 +3006,17 @@ Może być konieczne opuszczenie znaku &apos;#&apos; jak np.: &apos;\#FFF&apos;<
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="162"/>
         <source>Download version %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Pobierz wersję %1</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="250"/>
         <source>Select Screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Wybierz ekran</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="266"/>
         <source>Monitor %1: %2 (%3x%4)</source>
-        <translation type="unfinished"></translation>
+        <translation>Monitor %1: %2 (%3x%4)</translation>
     </message>
     <message>
         <source>New version %1 is available</source>
@@ -3034,7 +3035,7 @@ Może być konieczne opuszczenie znaku &apos;#&apos; jak np.: &apos;\#FFF&apos;<
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="187"/>
         <source>&amp;Open Save Path</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Otwórz ścieżkę zapisu</translation>
     </message>
 </context>
 <context>
@@ -3115,7 +3116,7 @@ Może być konieczne opuszczenie znaku &apos;#&apos; jak np.: &apos;\#FFF&apos;<
     <message>
         <location filename="../../src/widgets/uploadhistory.ui" line="14"/>
         <source>Upload History</source>
-        <translation>Upload History</translation>
+        <translation>Historia przesyłania</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadhistory.cpp" line="60"/>
@@ -3133,7 +3134,7 @@ Może być konieczne opuszczenie znaku &apos;#&apos; jak np.: &apos;\#FFF&apos;<
     <message>
         <location filename="../../src/widgets/uploadlineitem.ui" line="49"/>
         <source>TextLabel</source>
-        <translation>TextLabel</translation>
+        <translation>Etykieta tekstowa</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadlineitem.ui" line="82"/>
@@ -3184,7 +3185,7 @@ Może być konieczne opuszczenie znaku &apos;#&apos; jak np.: &apos;\#FFF&apos;<
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="79"/>
         <source>Colorpicker Editor</source>
-        <translation>Colorpicker Editor</translation>
+        <translation>Edytor palety kolorów</translation>
     </message>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="84"/>
@@ -3199,17 +3200,17 @@ Może być konieczne opuszczenie znaku &apos;#&apos; jak np.: &apos;\#FFF&apos;<
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="101"/>
         <source>UI language</source>
-        <translation type="unfinished"></translation>
+        <translation>Język programu</translation>
     </message>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="141"/>
         <source>Configuration</source>
-        <translation type="unfinished">Konfiguracja</translation>
+        <translation>Konfiguracja</translation>
     </message>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="142"/>
         <source>Flameshot must be restarted to apply these changes!</source>
-        <translation type="unfinished"></translation>
+        <translation>Należy ponownie uruchomić program Flameshot, aby zastosować te zmiany!</translation>
     </message>
 </context>
 <context>
