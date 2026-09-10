@@ -79,6 +79,7 @@ GeneralConf::GeneralConf(QWidget* parent)
     initSquareMagnifier();
     initJpegQuality();
     initReverseArrow();
+    initDrawTextShadow();
     // this has to be at the end
     initConfigButtons();
     updateComponents();
@@ -113,6 +114,7 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
     m_squareMagnifier->setChecked(config.squareMagnifier());
     m_saveLastRegion->setChecked(config.saveLastRegion());
     m_reverseArrow->setChecked(config.reverseArrow());
+    m_drawTextShadow->setChecked(config.drawTextShadow());
     m_autoCloseIdleDaemon->setChecked(config.autoCloseIdleDaemon());
     m_predefinedColorPaletteLarge->setChecked(
       config.predefinedColorPaletteLarge());
@@ -918,6 +920,26 @@ void GeneralConf::setReverseArrow(bool checked)
 void GeneralConf::setInsecurePixelate(bool checked)
 {
     ConfigHandler().setInsecurePixelate(checked);
+}
+
+void GeneralConf::initDrawTextShadow()
+{
+    m_drawTextShadow = new QCheckBox(tr("Text tool shadow"), this);
+    m_drawTextShadow->setToolTip(
+      tr("Draw a shadow under text to improve readability against contrasting "
+         "backgrounds."));
+    m_drawTextShadow->setChecked(ConfigHandler().drawTextShadow());
+    m_scrollAreaLayout->addWidget(m_drawTextShadow);
+
+    connect(m_drawTextShadow,
+            &QCheckBox::clicked,
+            this,
+            &GeneralConf::setDrawTextShadow);
+}
+
+void GeneralConf::setDrawTextShadow(bool checked)
+{
+    ConfigHandler().setDrawTextShadow(checked);
 }
 
 #if !defined(Q_OS_MACOS)

@@ -65,6 +65,7 @@ private slots:
     void updateFontStrikeOut(bool strikeout);
     void updateFontWeight(QFont::Weight weight);
     void updateFontItalic(bool italic);
+    void updateFontShadow(bool shadow);
     void updateAlignment(Qt::AlignmentFlag alignment);
 
 private:
@@ -72,6 +73,7 @@ private:
 
     QFont m_font;
     Qt::AlignmentFlag m_alignment;
+    bool m_shadow;
     QString m_text;
     QString m_textOld;
     int m_size;

@@ -117,6 +117,7 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     // drawThickness shared by Pencil, Line, Arrow, Rectangular Selection, Circle
     OPTION("drawThickness"               ,LowerBoundedInt    ( 1, 3          )),
     OPTION("drawFontSize"                ,LowerBoundedInt    ( 1, 8          )),
+    OPTION("drawTextShadow"              ,Bool               ( true          )),
     OPTION("drawCircleCounterSize"       ,LowerBoundedInt    ( 1, 1          )),
     OPTION("drawPixelateSize"            ,LowerBoundedInt    ( 1, 2          )),
     OPTION("drawRectangleSize"           ,LowerBoundedInt    ( 1, 1          )),
@@ -234,7 +235,7 @@ ConfigHandler::ConfigHandler()
         QObject::connect(m_configWatcher.data(),
                          &QFileSystemWatcher::fileChanged,
                          [](const QString& fileName) {
-                             emit getInstance()->fileChanged();
+                             emit getInstance() -> fileChanged();
 
                              if (QFile(fileName).exists()) {
                                  m_configWatcher->addPath(fileName);
@@ -734,12 +735,12 @@ void ConfigHandler::setErrorState(bool error) const
     if (!hadError && m_hasError) {
         QString msg = errorMessage();
         AbstractLogger::error() << msg;
-        emit getInstance()->error();
+        emit getInstance() -> error();
     } else if (hadError && !m_hasError) {
         auto msg =
           tr("You have successfully resolved the configuration error.");
         AbstractLogger::info() << msg;
-        emit getInstance()->errorResolved();
+        emit getInstance() -> errorResolved();
     }
 }
 

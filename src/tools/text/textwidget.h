@@ -7,6 +7,7 @@
 
 class QEvent;
 class QKeyEvent;
+class QGraphicsDropShadowEffect;
 
 class TextWidget : public QTextEdit
 {
@@ -30,6 +31,7 @@ signals:
 public slots:
     void setTextColor(const QColor& c);
     void setAlignment(Qt::AlignmentFlag alignment);
+    void setShadow(bool shadow);
 
 private slots:
     void emitTextUpdated();
@@ -37,4 +39,6 @@ private slots:
 private:
     QSize m_baseSize;
     QSize m_minSize;
+    QGraphicsDropShadowEffect* m_shadowEffect = nullptr;
+    QColor m_textColor = Qt::black;
 };
