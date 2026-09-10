@@ -111,6 +111,72 @@ QString ShowSaveFileDialog(const QString& title, const QString& directory)
     }
 }
 
+namespace {
+void notifyAndMaybeSaveAfterCopy(const QPixmap& capture)
+{
+    // If we are able to properly save the file, save the file and copy to
+    // clipboard.
+    if ((ConfigHandler().saveAfterCopy()) &&
+        (!ConfigHandler().savePath().isEmpty())) {
+        saveToFilesystem(capture,
+                         ConfigHandler().savePath(),
+                         QObject::tr("Capture saved to clipboard."));
+    } else {
+        AbstractLogger() << QObject::tr("Capture saved to clipboard.");
+    }
+}
+} // namespace
+
+bool tryCopyToWaylandClipboard(const QPixmap& capture)
+{
+#if defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)
+    if (QGuiApplication::platformName() != "wayland" ||
+        qEnvironmentVariableIntValue("FLAMESHOT_USE_WL_COPY") != 1) {
+        return false;
+    }
+    const QString executable = QStandardPaths::findExecutable("wl-copy");
+    if (executable.isEmpty()) {
+        return false;
+    }
+
+    // Encode once, without a DBus QPixmap round trip or lazy re-encoding for
+    // every clipboard reader. The temporary file is private and is removed
+    // after wl-copy has read it and forked its persistent clipboard owner.
+    QTemporaryFile file;
+    if (!file.open()) {
+        return false;
+    }
+    const bool jpeg = ConfigHandler().useJpgForClipboard();
+    QImageWriter writer(&file, jpeg ? "JPEG" : "PNG");
+    if (jpeg) {
+        writer.setQuality(ConfigHandler().jpegQuality());
+    } else {
+        writer.setCompression(20); // PNG zlib level 1; still lossless.
+    }
+    if (!writer.write(capture.toImage()) || !file.flush()) {
+        return false;
+    }
+    QProcess process;
+    process.setStandardInputFile(file.fileName());
+    process.start(executable, { "--type", jpeg ? "image/jpeg" : "image/png" });
+    if (!process.waitForFinished(3000) ||
+        process.exitStatus() != QProcess::NormalExit ||
+        process.exitCode() != 0) {
+        if (process.state() != QProcess::NotRunning) {
+            process.kill();
+            process.waitForFinished();
+        }
+        qWarning() << "wl-copy failed; using the regular clipboard backend";
+        return false;
+    }
+    notifyAndMaybeSaveAfterCopy(capture);
+    return true;
+#else
+    Q_UNUSED(capture)
+    return false;
+#endif
+}
+
 void saveToClipboardMime(const QPixmap& capture, const QString& imageType)
 {
     QByteArray array;
@@ -163,16 +229,7 @@ void saveToClipboardMime(const QPixmap& capture, const QString& imageType)
 // dbus, the application freezes.
 void saveToClipboard(const QPixmap& capture)
 {
-    // If we are able to properly save the file, save the file and copy to
-    // clipboard.
-    if ((ConfigHandler().saveAfterCopy()) &&
-        (!ConfigHandler().savePath().isEmpty())) {
-        saveToFilesystem(capture,
-                         ConfigHandler().savePath(),
-                         QObject::tr("Capture saved to clipboard."));
-    } else {
-        AbstractLogger() << QObject::tr("Capture saved to clipboard.");
-    }
+    notifyAndMaybeSaveAfterCopy(capture);
 #if defined(Q_OS_MACOS)
     // On macOS, setPixmap uses lazy clipboard which fails when the
     // process exits ("Cannot keep promise"). Always use serialized bytes.

@@ -37,6 +37,46 @@ hl.window_rule({
 ```
 
 
+## Optional faster capture and clipboard backends
+
+On compositors supported by `grim` and `wl-clipboard`, these opt-in backends
+avoid PNG compression before the editor opens and repeated image encoding
+during clipboard transfers:
+
+```sh
+FLAMESHOT_USE_GRIM=1 FLAMESHOT_USE_WL_COPY=1 flameshot gui
+```
+
+Install `grim` and `wl-clipboard` first. The normal editor stays available:
+select a region, annotate it, and press **Ctrl+C**. `--raw` is not needed.
+You can enable either backend independently. To apply the settings to captures
+started from the tray, start the Flameshot tray process with the same variables.
+
+`FLAMESHOT_USE_GRIM=1` captures an uncompressed PPM image at grim's default
+desktop scale, then uses the normal monitor selection and mixed-DPI cropping.
+If grim is missing, fails, or takes longer than three seconds, Flameshot falls
+back to the screenshot portal. PPM uses more temporary memory than compressed
+PNG; it does not reduce pixel quality. This option requires a compositor that
+implements the screen-capture protocols supported by grim.
+
+`FLAMESHOT_USE_WL_COPY=1` encodes the finished image once and gives it to
+`wl-copy`. PNG uses fast, lossless compression; the JPEG clipboard preference
+and save-after-copy setting are respected. The helper serves subsequent paste
+requests independently of Flameshot. A private temporary file is removed after
+the helper consumes it. If the helper cannot complete successfully within three
+seconds, Flameshot uses its existing clipboard backend. Compositor support for
+`wl-copy` is required; the default backends are unchanged when the variables
+are unset.
+
+For a repeatable Hyprland 0.55+ desktop test, run
+`python3 tests/wayland_performance.py build/src/flameshot --fast`.
+The test opens an 800x500 selection, sends Ctrl+C, validates PNG/JPEG dimensions,
+and checks repeated pastes after Flameshot exits. It replaces the clipboard
+and uses your current clipboard-format and save-after-copy preferences.
+Omit `--fast` for a baseline, use `--screen 1` to test a second monitor,
+`--cancel` to check Escape, and `--fail-tool grim` or `--fail-tool wl-copy`
+with `--fast` to test the fallback paths.
+
 # Sway and wlroots support
 Flameshot currently supports Sway and other wlroots based Wayland compositors through [xdg-desktop-portal-wlr](https://github.com/emersion/xdg-desktop-portal-wlr). However, due to the way dbus works, there may be some extra steps required for the integration to work properly.
 
@@ -130,4 +170,3 @@ riverctl float-filter-add "flameshot"
 Otherwise, Flameshot will not take all of the screen and tiles its window instead like a normal application.
 
 #### For more information, please refer to https://github.com/emersion/xdg-desktop-portal-wlr/wiki/%22It-doesn't-work%22-Troubleshooting-Checklist
-

@@ -158,6 +158,9 @@ void FlameshotDaemon::createPin(const QPixmap& capture, QRect geometry)
 
 void FlameshotDaemon::copyToClipboard(const QPixmap& capture)
 {
+    if (tryCopyToWaylandClipboard(capture)) {
+        return;
+    }
     if (instance()) {
         instance()->attachScreenshotToClipboard(capture);
         return;

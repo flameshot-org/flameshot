@@ -18,6 +18,7 @@
 #include <QPixmap>
 #include <QProcess>
 #include <QScreen>
+#include <QStandardPaths>
 #include <QTimer>
 #include <QWidget>
 #include <algorithm>
@@ -190,6 +191,32 @@ QPixmap ScreenGrabber::unixScreenshot(bool& ok)
 {
 #if defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)
     QPixmap screenshot;
+
+    // Opt-in for wlroots compositors: avoid PNG compression on the
+    // capture path. grim keeps the same logical desktop layout as the portal,
+    // so mixed-DPI cropping below remains unchanged. Other desktops and a
+    // failed grim invocation continue through the normal portal backend.
+    if (m_info.waylandDetected() &&
+        qEnvironmentVariableIntValue("FLAMESHOT_USE_GRIM") == 1) {
+        const QString grim = QStandardPaths::findExecutable("grim");
+        if (!grim.isEmpty()) {
+            QProcess process;
+            process.start(grim, { "-t", "ppm", "-" });
+            if (process.waitForFinished(3000) &&
+                process.exitStatus() == QProcess::NormalExit &&
+                process.exitCode() == 0 &&
+                screenshot.loadFromData(process.readAllStandardOutput(),
+                                        "PPM")) {
+                ok = true;
+                return screenshot;
+            }
+            if (process.state() != QProcess::NotRunning) {
+                process.kill();
+                process.waitForFinished();
+            }
+            qWarning() << "Direct grim capture failed; using screenshot portal";
+        }
+    }
 
     if (!m_info.waylandDetected() && ConfigHandler().useX11LegacyScreenshot()) {
         screenshot = x11LegacyScreenshot();
