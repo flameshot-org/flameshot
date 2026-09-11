@@ -79,6 +79,7 @@ GeneralConf::GeneralConf(QWidget* parent)
     initSquareMagnifier();
     initJpegQuality();
     initReverseArrow();
+    initDrawCircleCounterOutline();
     // this has to be at the end
     initConfigButtons();
     updateComponents();
@@ -113,6 +114,7 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
     m_squareMagnifier->setChecked(config.squareMagnifier());
     m_saveLastRegion->setChecked(config.saveLastRegion());
     m_reverseArrow->setChecked(config.reverseArrow());
+    m_drawCircleCounterOutline->setChecked(config.drawCircleCounterOutline());
     m_autoCloseIdleDaemon->setChecked(config.autoCloseIdleDaemon());
     m_predefinedColorPaletteLarge->setChecked(
       config.predefinedColorPaletteLarge());
@@ -863,6 +865,20 @@ void GeneralConf::initReverseArrow()
 
     connect(
       m_reverseArrow, &QCheckBox::clicked, this, &GeneralConf::setReverseArrow);
+}
+
+void GeneralConf::initDrawCircleCounterOutline()
+{
+    m_drawCircleCounterOutline =
+      new QCheckBox(tr("Draw outline around circle counter"), this);
+    m_drawCircleCounterOutline->setToolTip(
+      tr("Draw a contrasting ring around the counter bubble so it stays "
+         "visible on any background"));
+    m_scrollAreaLayout->addWidget(m_drawCircleCounterOutline);
+
+    connect(m_drawCircleCounterOutline, &QCheckBox::clicked, [](bool checked) {
+        ConfigHandler().setDrawCircleCounterOutline(checked);
+    });
 }
 
 void GeneralConf::initInsecurePixelate()
