@@ -386,7 +386,7 @@ There are packages available in the repository of some Linux distributions:
 ```
 brew tap flameshot-org/flameshot
 brew trust --cask flameshot-org/flameshot/flameshot-org-flameshot
-brew install  flameshot-org-flameshot
+brew install flameshot-org/flameshot/flameshot-org-flameshot
 ```
 
 **Note** that because of macOS security features, you may not be able to open flameshot when installed using brew.
