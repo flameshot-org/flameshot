@@ -15,6 +15,7 @@ class ColorGrabWidget;
 class QColorPickingEventFilter;
 class QSlider;
 class QCheckBox;
+class GeometryEditLayoutWidget;
 
 constexpr int maxToolSize = 50;
 constexpr int minSliderWidth = 100;
@@ -36,9 +37,11 @@ signals:
     void hidePanel();
     void displayGridChanged(bool display);
     void gridSizeChanged(int size);
+    void geometryChangeRequested(QRect const& geometry);
 
 public slots:
     void onToolSizeChanged(int tool);
+    void onGrabAreaChanged(QRect const& geometry);
     void onColorChanged(const QColor& color);
     void startColorGrab();
 
@@ -68,4 +71,5 @@ private:
     int m_toolSize{};
     QCheckBox* m_gridCheck{ nullptr };
     QSpinBox* m_gridSizeSpin{ nullptr };
+    GeometryEditLayoutWidget* m_geometryEditWidget;
 };
