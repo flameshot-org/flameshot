@@ -131,10 +131,12 @@ void FlameshotDaemon::start()
     }
 }
 
-void FlameshotDaemon::createPin(const QPixmap& capture, QRect geometry)
+void FlameshotDaemon::createPin(const QPixmap& capture,
+                                QRect geometry,
+                                const QColorSpace& colorSpace)
 {
     if (instance()) {
-        instance()->attachPin(capture, geometry);
+        instance()->attachPin(capture, geometry, colorSpace);
         return;
     }
 
@@ -156,10 +158,11 @@ void FlameshotDaemon::createPin(const QPixmap& capture, QRect geometry)
 #endif
 }
 
-void FlameshotDaemon::copyToClipboard(const QPixmap& capture)
+void FlameshotDaemon::copyToClipboard(const QPixmap& capture,
+                                      const QColorSpace& colorSpace)
 {
     if (instance()) {
-        instance()->attachScreenshotToClipboard(capture);
+        instance()->attachScreenshotToClipboard(capture, colorSpace);
         return;
     }
 
@@ -319,9 +322,11 @@ void FlameshotDaemon::quitIfIdle()
 
 // SERVICE METHODS
 
-void FlameshotDaemon::attachPin(const QPixmap& pixmap, QRect geometry)
+void FlameshotDaemon::attachPin(const QPixmap& pixmap,
+                                QRect geometry,
+                                const QColorSpace& colorSpace)
 {
-    auto* pinWidget = new PinWidget(pixmap, geometry);
+    auto* pinWidget = new PinWidget(pixmap, geometry, colorSpace);
     m_widgets.append(pinWidget);
     connect(pinWidget, &QObject::destroyed, this, [=, this]() {
         m_widgets.removeOne(pinWidget);
@@ -332,7 +337,8 @@ void FlameshotDaemon::attachPin(const QPixmap& pixmap, QRect geometry)
     pinWidget->activateWindow();
 }
 
-void FlameshotDaemon::attachScreenshotToClipboard(const QPixmap& pixmap)
+void FlameshotDaemon::attachScreenshotToClipboard(const QPixmap& pixmap,
+                                                  const QColorSpace& colorSpace)
 {
     m_hostingClipboard = true;
     QClipboard* clipboard = QApplication::clipboard();
@@ -340,7 +346,7 @@ void FlameshotDaemon::attachScreenshotToClipboard(const QPixmap& pixmap)
     // This variable is necessary because the signal doesn't get blocked on
     // windows for some reason
     m_clipboardSignalBlocked = true;
-    saveToClipboard(pixmap);
+    saveToClipboard(pixmap, colorSpace);
     clipboard->blockSignals(false);
 }
 
