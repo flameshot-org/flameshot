@@ -104,6 +104,34 @@ QString ShowSaveFileDialog(const QString& title, const QString& directory)
       QMimeDatabase().mimeTypeForFile("image." + suffix).name();
     dialog.selectMimeTypeFilter(defaultMimeType);
     dialog.setDefaultSuffix(suffix);
+    // Follow the format picked in the file type dropdown: use its suffix
+    // when the typed name has none, and swap the extension of a name that
+    // already has one (the Qt dialog does this itself, GTK's does not).
+    QObject::connect(&dialog,
+                     &QFileDialog::filterSelected,
+                     &dialog,
+                     [&dialog](const QString&) {
+                         QString newSuffix =
+                           QMimeDatabase()
+                             .mimeTypeForName(dialog.selectedMimeTypeFilter())
+                             .preferredSuffix();
+                         if (newSuffix.isEmpty()) {
+                             return;
+                         }
+                         dialog.setDefaultSuffix(newSuffix);
+                         QStringList files = dialog.selectedFiles();
+                         if (files.isEmpty()) {
+                             return;
+                         }
+                         QFileInfo info(files.constFirst());
+                         QString oldSuffix = info.suffix().toLower();
+                         if (oldSuffix != newSuffix &&
+                             QImageWriter::supportedImageFormats().contains(
+                               oldSuffix.toLatin1())) {
+                             dialog.selectFile(info.dir().filePath(
+                               info.completeBaseName() + "." + newSuffix));
+                         }
+                     });
     if (dialog.exec() == QDialog::Accepted) {
         return dialog.selectedFiles().constFirst();
     } else {
