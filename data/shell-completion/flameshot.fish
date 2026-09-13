@@ -67,7 +67,7 @@ end
 ###############
 
 # define the subcommands
-set -l SUBCOMMANDS gui screen full launcher config
+set -l SUBCOMMANDS gui screen full launcher config plugins
 
 # No subcommand
 complete -c flameshot                                                                                        --no-files --arguments "$SUBCOMMANDS" --condition __flameshot_no_positional_args 
@@ -121,3 +121,8 @@ __flameshot_complete config --long-option "maincolor"      --short-option "m" --
 __flameshot_complete config --long-option "contrastcolor"  --short-option "k" --description "Define the contrast UI color (hexadecimal)" --require-parameter --no-files 
 __flameshot_complete config --long-option "check"                             --description "Check the configuration for errors"                             --no-files
 __flameshot_complete config --long-option "help"           --short-option "h" --description "Show the available arguments"                                   --no-files
+
+# PLUGINS command
+__flameshot_complete plugins --no-files --arguments "list install enable disable remove doctor roots"
+complete -c flameshot -n '__fish_seen_subcommand_from plugins; and __fish_seen_subcommand_from install' --force-files
+complete -c flameshot -n '__fish_seen_subcommand_from plugins; and __fish_seen_subcommand_from enable disable remove' --no-files --arguments '(flameshot plugins list 2>/dev/null | string replace -r "^(enabled|disabled) +([^[:space:]]+).*$" "$2")'

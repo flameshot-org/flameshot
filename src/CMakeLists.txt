@@ -111,6 +111,7 @@ add_subdirectory(config)
 add_subdirectory(core)
 add_subdirectory(utils)
 add_subdirectory(widgets)
+add_subdirectory(plugins)
 add_subdirectory(tools)
 
 

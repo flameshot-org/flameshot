@@ -1,0 +1,3 @@
+#!/bin/sh
+bytes=$(wc -c)
+printf '{"protocol_version":1,"status":"success","result":{"type":"notification","title":"@PLUGIN_NAME@","text":"Received %s PNG bytes"}}\n' "$bytes"

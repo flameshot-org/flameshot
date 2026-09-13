@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://flameshot.org/schemas/action-plugin-manifest-v1.json",
+  "title": "Flameshot action plugin manifest, API 1",
+  "type": "object",
+  "required": ["api_version", "type", "id", "name", "command"],
+  "properties": {
+    "api_version": { "const": 1 },
+    "type": { "const": "action" },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)+$"
+    },
+    "name": { "type": "string", "minLength": 1 },
+    "description": { "type": "string" },
+    "icon": { "type": "string", "minLength": 1 },
+    "toolbar": {
+      "type": "object",
+      "properties": {
+        "visible": { "type": "boolean" },
+        "order": { "type": "integer", "minimum": 0, "maximum": 100000 },
+        "shortcut": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "command": {
+      "type": "object",
+      "required": ["executable"],
+      "properties": {
+        "executable": { "type": "string", "minLength": 1 },
+        "arguments": { "type": "array", "items": { "type": "string" } },
+        "input": { "const": "png-stdin" },
+        "output": { "enum": ["none", "clipboard-text", "json"] },
+        "timeout_ms": { "type": "integer", "minimum": 1000, "maximum": 300000 }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

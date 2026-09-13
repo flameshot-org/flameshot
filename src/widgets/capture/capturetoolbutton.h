@@ -11,6 +11,7 @@
 
 class QWidget;
 class QPropertyAnimation;
+struct ToolDescriptor;
 
 class CaptureToolButton : public CaptureButton
 {
@@ -18,6 +19,8 @@ class CaptureToolButton : public CaptureButton
 
 public:
     explicit CaptureToolButton(const CaptureTool::Type,
+                               QWidget* parent = nullptr);
+    explicit CaptureToolButton(const ToolDescriptor& descriptor,
                                QWidget* parent = nullptr);
     ~CaptureToolButton();
 
@@ -28,15 +31,13 @@ public:
     QString description() const;
     QIcon icon() const;
     CaptureTool* tool() const;
+    QString toolId() const;
 
     void setColor(const QColor& c);
     void animatedShow();
 
 protected:
     void mousePressEvent(QMouseEvent* e) override;
-    static QList<CaptureTool::Type> iterableButtonTypes;
-
-    CaptureTool* m_tool;
 
 signals:
     void pressedButtonLeftClick(CaptureToolButton*);
@@ -45,6 +46,10 @@ signals:
 private:
     CaptureToolButton(QWidget* parent = nullptr);
     CaptureTool::Type m_buttonType;
+    QString m_toolId;
+    QString m_shortcut;
+    bool m_external;
+    CaptureTool* m_tool;
 
     QPropertyAnimation* m_emergeAnimation;
 
