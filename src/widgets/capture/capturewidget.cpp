@@ -191,14 +191,35 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
 
         // Always display on the selected screen (not spanning entire desktop)
         if (selectedScreen == nullptr) {
+            // On X11 fall back to the monitor under the cursor. On Wayland the
+            // cursor position is not exposed to clients and Qt's primaryScreen
+            // is unreliable (see ScreenGrabber::reliablePrimaryScreen), so use
+            // the monitor the desktop reports as primary instead.
+            if (DesktopInfo().waylandDetected()) {
+                selectedScreen = ScreenGrabber::reliablePrimaryScreen();
+            } else {
+                selectedScreen = QGuiAppCurrentScreen().currentScreen();
+            }
+        }
+        if (selectedScreen == nullptr) {
             selectedScreen = QGuiApplication::primaryScreen();
         }
-        QRect screenGeom = selectedScreen->geometry();
-        move(screenGeom.topLeft());
-        resize(screenGeom.size());
+        if (selectedScreen) {
+            QRect screenGeom = selectedScreen->geometry();
+            move(screenGeom.topLeft());
+            resize(screenGeom.size());
 
-        if (selectedScreen != nullptr && windowHandle()) {
-            windowHandle()->setScreen(selectedScreen);
+            // Force the native window to exist so setScreen() actually takes
+            // effect. Without winId() this block was a silent no-op (window-
+            // Handle() returns null before the widget is shown) and on Wayland
+            // the compositor mapped the fullscreen capture window on the first
+            // output instead of the selected monitor. QWindow::setScreen()
+            // recreates the window on the target screen, which is the only
+            // reliable way to choose the monitor on Wayland.
+            winId();
+            if (QWindow* handle = windowHandle()) {
+                handle->setScreen(selectedScreen);
+            }
         }
 #endif
     }
