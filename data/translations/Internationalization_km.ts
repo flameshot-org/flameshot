@@ -6,22 +6,22 @@
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="52"/>
         <source>Add New</source>
-        <translation type="unfinished"></translation>
+        <translation>បន្ថែមថ្មី</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="103"/>
         <source>Move Up</source>
-        <translation type="unfinished"></translation>
+        <translation>ផ្លាស់ឡើងលើ</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="104"/>
         <source>Move Down</source>
-        <translation type="unfinished"></translation>
+        <translation>ផ្លាស់ចុះក្រោម</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="105"/>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>លុបចេញ</translation>
     </message>
 </context>
 <context>
@@ -29,12 +29,12 @@
     <message>
         <location filename="../../src/tools/accept/accepttool.cpp" line="31"/>
         <source>Accept</source>
-        <translation type="unfinished"></translation>
+        <translation>ទទួលយក</translation>
     </message>
     <message>
         <location filename="../../src/tools/accept/accepttool.cpp" line="41"/>
         <source>Accept the capture</source>
-        <translation type="unfinished"></translation>
+        <translation>ទទួលយករូបភាពថត</translation>
     </message>
 </context>
 <context>
@@ -42,12 +42,12 @@
     <message>
         <location filename="../../src/tools/launcher/applaunchertool.cpp" line="23"/>
         <source>App Launcher</source>
-        <translation type="unfinished"></translation>
+        <translation>កម្មវិធីបើកកម្មវិធី</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applaunchertool.cpp" line="33"/>
         <source>Choose an app to open the capture</source>
-        <translation type="unfinished"></translation>
+        <translation>ជ្រើសកម្មវិធីដើម្បីបើករូបភាពថត</translation>
     </message>
 </context>
 <context>
@@ -55,33 +55,33 @@
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="50"/>
         <source>Open With</source>
-        <translation type="unfinished"></translation>
+        <translation>បើកជាមួយ</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="79"/>
         <source>Launch in terminal</source>
-        <translation type="unfinished"></translation>
+        <translation>បើកក្នុង Terminal</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="80"/>
         <source>Keep open after selection</source>
-        <translation type="unfinished"></translation>
+        <translation>បន្តបើកបន្ទាប់ពីជ្រើសរើស</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="116"/>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="150"/>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>កំហុស</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="150"/>
         <source>Unable to launch in terminal.</source>
-        <translation type="unfinished"></translation>
+        <translation>មិនអាចបើកក្នុង Terminal បានទេ។</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="116"/>
         <source>Unable to write in</source>
-        <translation type="unfinished"></translation>
+        <translation>មិនអាចសរសេរទៅក្នុង</translation>
     </message>
 </context>
 <context>
@@ -89,12 +89,12 @@
     <message>
         <location filename="../../src/tools/arrow/arrowtool.cpp" line="77"/>
         <source>Arrow</source>
-        <translation type="unfinished"></translation>
+        <translation>ព្រួញ</translation>
     </message>
     <message>
         <location filename="../../src/tools/arrow/arrowtool.cpp" line="87"/>
         <source>Set the Arrow as the paint tool</source>
-        <translation type="unfinished"></translation>
+        <translation>កំណត់ព្រួញជាឧបករណ៍គូរ</translation>
     </message>
 </context>
 <context>
@@ -117,76 +117,76 @@
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="33"/>
         <source>Rectangular Region</source>
-        <translation type="unfinished"></translation>
+        <translation>តំបន់ចតុកោណ</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="39"/>
         <source>Full Screen (Current Display)</source>
-        <translation type="unfinished"></translation>
+        <translation>អេក្រង់ពេញ (អេក្រង់បច្ចុប្បន្ន)</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="42"/>
         <source>Full Screen (All Monitors)</source>
-        <translation type="unfinished"></translation>
+        <translation>អេក្រង់ពេញ (ម៉ូនីទ័រទាំងអស់)</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="45"/>
         <source>No Delay</source>
-        <translation type="unfinished"></translation>
+        <translation>គ្មានការពន្យារ</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="53"/>
         <source> second</source>
-        <translation type="unfinished"></translation>
+        <translation> វិនាទី</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="100"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="184"/>
         <location filename="../../src/widgets/capturelauncher.cpp" line="53"/>
         <source> seconds</source>
-        <translation type="unfinished"></translation>
+        <translation> វិនាទី</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="165"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="185"/>
         <source>Take new screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation>ថតរូបអេក្រង់ថ្មី</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="66"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="180"/>
         <source>Area:</source>
-        <translation type="unfinished"></translation>
+        <translation>តំបន់៖</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="14"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="177"/>
         <source>Capture Launcher</source>
-        <translation type="unfinished"></translation>
+        <translation>កម្មវិធីចាប់ផ្តើមថតអេក្រង់</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="34"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="178"/>
         <source>TextLabel</source>
-        <translation type="unfinished"></translation>
+        <translation>ស្លាកអក្សរ</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="51"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="179"/>
         <source>Capture Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>របៀបថតអេក្រង់</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="80"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="182"/>
         <source>Delay:</source>
-        <translation type="unfinished"></translation>
+        <translation>ការពន្យារ៖</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="93"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="183"/>
         <source>WxH+x+y</source>
-        <translation type="unfinished"></translation>
+        <translation>WxH+x+y</translation>
     </message>
 </context>
 <context>
@@ -195,77 +195,77 @@
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="112"/>
         <source>Unable to capture screen</source>
         <translatorcomment>Impossible capturar la pantalla</translatorcomment>
-        <translation type="unfinished"></translation>
+        <translation>មិនអាចថតអេក្រង់បានទេ</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="456"/>
         <source>Mouse</source>
-        <translation type="unfinished"></translation>
+        <translation>កណ្ដុរ</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="456"/>
         <source>Select screenshot area</source>
-        <translation type="unfinished"></translation>
+        <translation>ជ្រើសតំបន់ថតរូបអេក្រង់</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="470"/>
         <source>Mouse Wheel</source>
-        <translation type="unfinished"></translation>
+        <translation>កង់កណ្ដុរ</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="470"/>
         <source>Change tool size</source>
-        <translation type="unfinished"></translation>
+        <translation>ផ្លាស់ប្តូរទំហំ ឧបករណ៍</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="471"/>
         <source>Right Click</source>
-        <translation type="unfinished"></translation>
+        <translation>ចុចខាងស្តាំ</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="471"/>
         <source>Show color picker</source>
-        <translation type="unfinished"></translation>
+        <translation>បង្ហាញឧបករណ៍ជ្រើសពណ៌</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="473"/>
         <source>Open side panel</source>
-        <translation type="unfinished"></translation>
+        <translation>បើកផ្ទាំងចំហៀង</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="474"/>
         <source>Esc</source>
-        <translation type="unfinished"></translation>
+        <translation>Esc</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="474"/>
         <source>Exit</source>
-        <translation type="unfinished"></translation>
+        <translation>ចាកចេញ</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="515"/>
         <source>Quit Capture</source>
-        <translation type="unfinished"></translation>
+        <translation>ចាកចេញពីការថត</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="516"/>
         <source>Are you sure you want to quit capture?</source>
-        <translation type="unfinished"></translation>
+        <translation>តើអ្នកប្រាកដជាចង់ចាកចេញពីការថតឬ?</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="521"/>
         <source>Do not show this again</source>
-        <translation type="unfinished"></translation>
+        <translation>មិនបង្ហាញវាម្តងទៀត</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="727"/>
         <source>Flameshot has lost focus. Keyboard shortcuts won&apos;t work until you click somewhere.</source>
-        <translation type="unfinished"></translation>
+        <translation>Flameshot បាត់ការផ្តោតអារម្មណ៍។ គ្រាប់ចុចផ្លូវកាត់នឹងមិនដំណើរការទេ រហូតដល់អ្នកចុចកន្លែងណាមួយ។</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="733"/>
         <source>Configuration error resolved. Launch `flameshot gui` again to apply it.</source>
-        <translation type="unfinished"></translation>
+        <translation>កំហុសកំណត់រចនាសម្ព័ន្ធត្រូវបានដោះស្រាយ។ បើក `flameshot gui` ម្តងទៀតដើម្បីអនុវត្តវា។</translation>
     </message>
     <message>
         <source>Select an area with the mouse, or press Esc to exit.
@@ -282,7 +282,7 @@ Premeu Espai per obrir el calaix lateral.</translation>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="1167"/>
         <source>Tool Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>ការកំណត់ឧបករណ៍</translation>
     </message>
 </context>
 <context>
@@ -290,12 +290,12 @@ Premeu Espai per obrir el calaix lateral.</translation>
     <message>
         <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="68"/>
         <source>Circle Counter</source>
-        <translation type="unfinished"></translation>
+        <translation>ឧបករណ៍រាប់រង្វង់</translation>
     </message>
     <message>
         <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="86"/>
         <source>Add an autoincrementing counter bubble</source>
-        <translation type="unfinished"></translation>
+        <translation>បន្ថែមពពុះរាប់ដែលបង្កើនស្វ័យប្រវត្តិ</translation>
     </message>
 </context>
 <context>
@@ -303,12 +303,12 @@ Premeu Espai per obrir el calaix lateral.</translation>
     <message>
         <location filename="../../src/tools/circle/circletool.cpp" line="20"/>
         <source>Circle</source>
-        <translation type="unfinished"></translation>
+        <translation>រង្វង់</translation>
     </message>
     <message>
         <location filename="../../src/tools/circle/circletool.cpp" line="30"/>
         <source>Set the Circle as the paint tool</source>
-        <translation type="unfinished"></translation>
+        <translation>កំណត់រង្វង់ជាឧបករណ៍គូរ</translation>
     </message>
 </context>
 <context>
@@ -317,55 +317,55 @@ Premeu Espai per obrir el calaix lateral.</translation>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="19"/>
         <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="312"/>
         <source>Select Color</source>
-        <translation type="unfinished"></translation>
+        <translation>ជ្រើសពណ៌</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="60"/>
         <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="313"/>
         <source>Saturation</source>
-        <translation type="unfinished"></translation>
+        <translation>ភាពឆ្អែតពណ៌</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="67"/>
         <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="314"/>
         <source>Hue</source>
-        <translation type="unfinished"></translation>
+        <translation>ពណ៌ (Hue)</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="84"/>
         <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="315"/>
         <source>Hex</source>
-        <translation type="unfinished"></translation>
+        <translation>Hex</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="91"/>
         <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="316"/>
         <source>Blue</source>
-        <translation type="unfinished"></translation>
+        <translation>ខៀវ</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="128"/>
         <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="317"/>
         <source>Value</source>
-        <translation type="unfinished"></translation>
+        <translation>តម្លៃ</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="135"/>
         <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="318"/>
         <source>Green</source>
-        <translation type="unfinished"></translation>
+        <translation>បៃតង</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="142"/>
         <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="319"/>
         <source>Alpha</source>
-        <translation type="unfinished"></translation>
+        <translation>អាល់ហ្វា</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.ui" line="149"/>
         <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_dialog.h" line="320"/>
         <source>Red</source>
-        <translation type="unfinished"></translation>
+        <translation>ក្រហម</translation>
     </message>
 </context>
 <context>
@@ -373,42 +373,42 @@ Premeu Espai per obrir el calaix lateral.</translation>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="58"/>
         <source>Accept color</source>
-        <translation type="unfinished"></translation>
+        <translation>ទទួលយកពណ៌</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="58"/>
         <source>Enter or Left Click</source>
-        <translation type="unfinished"></translation>
+        <translation>ចុច Enter ឬចុចខាងឆ្វេង</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="59"/>
         <source>Precisely select color</source>
-        <translation type="unfinished"></translation>
+        <translation>ជ្រើសពណ៌យ៉ាងជាក់លាក់</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="59"/>
         <source>Hold Left Click</source>
-        <translation type="unfinished"></translation>
+        <translation>ចុចខាងឆ្វេងឲ្យជាប់</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="60"/>
         <source>Toggle magnifier</source>
-        <translation type="unfinished"></translation>
+        <translation>បើក/បិទកែវពង្រីក</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="60"/>
         <source>Space or Right Click</source>
-        <translation type="unfinished"></translation>
+        <translation>ចុច Space ឬចុចខាងស្តាំ</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="61"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>បោះបង់</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="61"/>
         <source>Esc</source>
-        <translation type="unfinished"></translation>
+        <translation>Esc</translation>
     </message>
 </context>
 <context>
@@ -416,68 +416,68 @@ Premeu Espai per obrir el calaix lateral.</translation>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="40"/>
         <source>Edit Preset:</source>
-        <translation type="unfinished"></translation>
+        <translation>កែសម្រួលការកំណត់ជាមុន៖</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="45"/>
         <source>Enter color to update preset</source>
-        <translation type="unfinished"></translation>
+        <translation>បញ្ចូលពណ៌ដើម្បីធ្វើបច្ចុប្បន្នភាពការកំណត់ជាមុន</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="65"/>
         <source>Update</source>
-        <translation type="unfinished"></translation>
+        <translation>ធ្វើបច្ចុប្បន្នភាព</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="67"/>
         <source>Press button to update the selected preset</source>
-        <translation type="unfinished"></translation>
+        <translation>ចុចប៊ូតុងដើម្បីធ្វើបច្ចុប្បន្នភាពការកំណត់ជាមុនដែលបានជ្រើស</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="74"/>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>លុប</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="76"/>
         <source>Press button to delete the selected preset</source>
-        <translation type="unfinished"></translation>
+        <translation>ចុចប៊ូតុងដើម្បីលុបការកំណត់ជាមុនដែលបានជ្រើស</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="90"/>
         <source>Add Preset:</source>
-        <translation type="unfinished"></translation>
+        <translation>បន្ថែមការកំណត់ជាមុន៖</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="96"/>
         <source>Enter color manually or select it using the color-wheel</source>
-        <translation type="unfinished"></translation>
+        <translation>បញ្ចូលពណ៌ដោយដៃ ឬជ្រើសវាដោយប្រើកង់ពណ៌</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="106"/>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>បន្ថែម</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="107"/>
         <source>Press button to add preset</source>
-        <translation type="unfinished"></translation>
+        <translation>ចុចប៊ូតុងដើម្បីបន្ថែមការកំណត់ជាមុន</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="130"/>
         <location filename="../../src/config/colorpickereditor.cpp" line="147"/>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>កំហុស</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="131"/>
         <source>Unable to add preset. Maximum limit reached.</source>
-        <translation type="unfinished"></translation>
+        <translation>មិនអាចបន្ថែមការកំណត់ជាមុនបានទេ។ ដល់ដែនកំណត់អតិបរមា។</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="148"/>
         <source>Unable to remove preset. Minimum limit reached.</source>
-        <translation type="unfinished"></translation>
+        <translation>មិនអាចលុបការកំណត់ជាមុនបានទេ។ ដល់ដែនកំណត់អប្បបរមា។</translation>
     </message>
 </context>
 <context>
@@ -485,7 +485,7 @@ Premeu Espai per obrir el calaix lateral.</translation>
     <message>
         <location filename="../../src/config/configerrordetails.cpp" line="20"/>
         <source>Configuration errors</source>
-        <translation type="unfinished"></translation>
+        <translation>កំហុសកំណត់រចនាសម្ព័ន្ធ</translation>
     </message>
 </context>
 <context>
@@ -494,40 +494,44 @@ Premeu Espai per obrir el calaix lateral.</translation>
         <location filename="../../src/utils/confighandler.cpp" line="579"/>
         <source>Unrecognized setting: &apos;%1&apos;
 </source>
-        <translation type="unfinished"></translation>
+        <translation>ការកំណត់មិនស្គាល់៖ &apos;%1&apos;
+</translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="587"/>
         <source>Unrecognized shortcut name: &apos;%1&apos;.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>ឈ្មោះគ្រាប់ចុចផ្លូវកាត់មិនស្គាល់៖ &apos;%1&apos;។
+</translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="630"/>
         <source>Shortcut conflict: &apos;%1&apos; and &apos;%2&apos; have the same shortcut: %3
 </source>
-        <translation type="unfinished"></translation>
+        <translation>ការប៉ះទង្គិចគ្រាប់ចុចផ្លូវកាត់៖ &apos;%1&apos; និង &apos;%2&apos; មានគ្រាប់ចុចដូចគ្នា៖ %3
+</translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="668"/>
         <source>Bad value in &apos;%1&apos;. Expected: %2
 </source>
-        <translation type="unfinished"></translation>
+        <translation>តម្លៃមិនត្រឹមត្រូវក្នុង &apos;%1&apos;។ រំពឹង៖ %2
+</translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="717"/>
         <source>You have successfully resolved the configuration error.</source>
-        <translation type="unfinished"></translation>
+        <translation>អ្នកបានដោះស្រាយកំហុសកំណត់រចនាសម្ព័ន្ធដោយជោគជ័យ។</translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="740"/>
         <source>The configuration contains an error. Open configuration to resolve.</source>
-        <translation type="unfinished"></translation>
+        <translation>ការកំណត់រចនាសម្ព័ន្ធមានកំហុស។ បើកការកំណត់ដើម្បីដោះស្រាយ។</translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="794"/>
         <source>Bad config key &apos;%1&apos; in ConfigHandler. Please report this as a bug.</source>
-        <translation type="unfinished"></translation>
+        <translation>សោកំណត់មិនត្រឹមត្រូវ &apos;%1&apos; ក្នុង ConfigHandler។ សូមរាយការណ៍ជាកំហុស (bug)។</translation>
     </message>
 </context>
 <context>
@@ -535,54 +539,56 @@ Premeu Espai per obrir el calaix lateral.</translation>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="14"/>
         <source>Resolve configuration errors</source>
-        <translation type="unfinished"></translation>
+        <translation>ដោះស្រាយកំហុសកំណត់រចនាសម្ព័ន្ធ</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="50"/>
         <source>&lt;b&gt;You must resolve all errors before continuing:&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;អ្នកត្រូវដោះស្រាយកំហុសទាំងអស់មុនពេលបន្ត៖&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="61"/>
         <source>Reset</source>
-        <translation type="unfinished"></translation>
+        <translation>កំណត់ឡើងវិញ</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="63"/>
         <source>Reset to the default value.</source>
-        <translation type="unfinished"></translation>
+        <translation>កំណត់ឡើងវិញទៅតម្លៃលំនាំដើម។</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="77"/>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>លុបចេញ</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="79"/>
         <source>Remove this setting.</source>
-        <translation type="unfinished"></translation>
+        <translation>លុបការកំណត់នេះ។</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="90"/>
         <source>Some keyboard shortcuts have conflicts.
 This will NOT prevent flameshot from starting.
 Please solve them manually in the configuration file.</source>
-        <translation type="unfinished"></translation>
+        <translation>គ្រាប់ចុចខ្លះមានការប៉ះទង្គិចគ្នា។
+វានឹងមិនរារាំង Flameshot ពីការចាប់ផ្តើមទេ។
+សូមដោះស្រាយដោយដៃក្នុងឯកសារកំណត់រចនាសម្ព័ន្ធ។</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="112"/>
         <source>Resolve all</source>
-        <translation type="unfinished"></translation>
+        <translation>ដោះស្រាយទាំងអស់</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="113"/>
         <source>Resolve all listed errors.</source>
-        <translation type="unfinished"></translation>
+        <translation>ដោះស្រាយកំហុសដែលបានរាយទាំងអស់។</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="125"/>
         <source>Details</source>
-        <translation type="unfinished"></translation>
+        <translation>ព័ត៌មានលម្អិត</translation>
     </message>
 </context>
 <context>
@@ -590,37 +596,37 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="40"/>
         <source>Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>ការកំណត់រចនាសម្ព័ន្ធ</translation>
     </message>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="68"/>
         <source>Interface</source>
-        <translation type="unfinished"></translation>
+        <translation>ចំណុចប្រទាក់</translation>
     </message>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="78"/>
         <source>Filename Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>កម្មវិធីកែឈ្មោះឯកសារ</translation>
     </message>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="59"/>
         <source>General</source>
-        <translation type="unfinished"></translation>
+        <translation>ទូទៅ</translation>
     </message>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="87"/>
         <source>Shortcuts</source>
-        <translation type="unfinished"></translation>
+        <translation>គ្រាប់ចុចផ្លូវកាត់</translation>
     </message>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="120"/>
         <source>Resolve</source>
-        <translation type="unfinished"></translation>
+        <translation>ដោះស្រាយ</translation>
     </message>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="124"/>
         <source>&lt;b&gt;Configuration file has errors. Resolve them before continuing.&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;ឯកសារកំណត់រចនាសម្ព័ន្ធមានកំហុស។ សូមដោះស្រាយវាមុនពេលបន្ត។&lt;/b&gt;</translation>
     </message>
 </context>
 <context>
@@ -687,12 +693,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/copy/copytool.cpp" line="24"/>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>ចម្លង</translation>
     </message>
     <message>
         <location filename="../../src/tools/copy/copytool.cpp" line="34"/>
         <source>Copy selection to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>ចម្លងតំបន់ជ្រើសរើសទៅក្ដារម្ជុលខ្ទាស់</translation>
     </message>
     <message>
         <source>Copy the selection into the clipboard</source>
@@ -711,12 +717,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/exit/exittool.cpp" line="23"/>
         <source>Exit</source>
-        <translation type="unfinished"></translation>
+        <translation>ចាកចេញ</translation>
     </message>
     <message>
         <location filename="../../src/tools/exit/exittool.cpp" line="33"/>
         <source>Leave the capture screen</source>
-        <translation type="unfinished"></translation>
+        <translation>ចាកចេញពីអេក្រង់ថត</translation>
     </message>
 </context>
 <context>
@@ -724,32 +730,32 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="24"/>
         <source>Edit the name of your captures:</source>
-        <translation type="unfinished"></translation>
+        <translation>កែសម្រួលឈ្មោះរូបថតអេក្រង់របស់អ្នក៖</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="28"/>
         <source>Edit:</source>
-        <translation type="unfinished"></translation>
+        <translation>កែសម្រួល៖</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="30"/>
         <source>Preview:</source>
-        <translation type="unfinished"></translation>
+        <translation>មើលជាមុន៖</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="73"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>រក្សាទុក</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="76"/>
         <source>Saves the pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>រក្សាទុកលំនាំ</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="78"/>
         <source>Restore</source>
-        <translation type="unfinished"></translation>
+        <translation>ស្តារឡើងវិញ</translation>
     </message>
     <message>
         <source>Reset</source>
@@ -758,17 +764,17 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="81"/>
         <source>Restores the saved pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>ស្តារលំនាំដែលបានរក្សាទុកឡើងវិញ</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="83"/>
         <source>Clear</source>
-        <translation type="unfinished"></translation>
+        <translation>សម្អាត</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="89"/>
         <source>Deletes the name</source>
-        <translation type="unfinished"></translation>
+        <translation>លុបឈ្មោះ</translation>
     </message>
 </context>
 <context>
@@ -776,17 +782,17 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="119"/>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>កំហុស</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="119"/>
         <source>Unable to close active modal widgets</source>
-        <translation type="unfinished"></translation>
+        <translation>មិនអាចបិទផ្ទាំង modal សកម្មបានទេ</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="431"/>
         <source>URL copied to clipboard.</source>
-        <translation type="unfinished"></translation>
+        <translation>បានចម្លង URL ទៅក្ដារម្ជុលខ្ទាស់។</translation>
     </message>
 </context>
 <context>
@@ -794,22 +800,22 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/core/flameshotdaemon.cpp" line="407"/>
         <source>New version %1 is available</source>
-        <translation type="unfinished"></translation>
+        <translation>មានកំណែថ្មី %1</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshotdaemon.cpp" line="413"/>
         <source>You have the latest version</source>
-        <translation type="unfinished"></translation>
+        <translation>អ្នកមានកំណែចុងក្រោយបំផុតហើយ</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshotdaemon.cpp" line="422"/>
         <source>Failed to get information about the latest version.</source>
-        <translation type="unfinished"></translation>
+        <translation>បរាជ័យក្នុងការទទួលព័ត៌មានអំពីកំណែចុងក្រោយបំផុត។</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshotdaemon.cpp" line="445"/>
         <source>Unable to connect via DBus</source>
-        <translation type="unfinished"></translation>
+        <translation>មិនអាចភ្ជាប់តាម DBus បានទេ</translation>
     </message>
 </context>
 <context>
@@ -885,7 +891,7 @@ Please solve them manually in the configuration file.</source>
         <location filename="../../src/config/generalconf.cpp" line="192"/>
         <location filename="../../src/config/generalconf.cpp" line="394"/>
         <source>Import</source>
-        <translation type="unfinished"></translation>
+        <translation>នាំចូល</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="198"/>
@@ -893,38 +899,38 @@ Please solve them manually in the configuration file.</source>
         <location filename="../../src/config/generalconf.cpp" line="232"/>
         <location filename="../../src/config/generalconf.cpp" line="763"/>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>កំហុស</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="198"/>
         <source>Unable to read file.</source>
-        <translation type="unfinished"></translation>
+        <translation>មិនអាចអានឯកសារបានទេ។</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="207"/>
         <location filename="../../src/config/generalconf.cpp" line="232"/>
         <source>Unable to write file.</source>
-        <translation type="unfinished"></translation>
+        <translation>មិនអាចសរសេរឯកសារបានទេ។</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="219"/>
         <source>Save File</source>
-        <translation type="unfinished"></translation>
+        <translation>រក្សាទុកឯកសារ</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="241"/>
         <source>Confirm Reset</source>
-        <translation type="unfinished"></translation>
+        <translation>បញ្ជាក់ការកំណត់ឡើងវិញ</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="242"/>
         <source>Are you sure you want to reset the configuration?</source>
-        <translation type="unfinished"></translation>
+        <translation>តើអ្នកប្រាកដជាចង់កំណត់ការកំណត់រចនាសម្ព័ន្ធឡើងវិញឬ?</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="273"/>
         <source>Show help message</source>
-        <translation type="unfinished"></translation>
+        <translation>បង្ហាញសារជំនួយ</translation>
     </message>
     <message>
         <source>Show the help message at the beginning in the capture mode.</source>
@@ -933,7 +939,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="298"/>
         <source>Show the side panel button</source>
-        <translation type="unfinished"></translation>
+        <translation>បង្ហាញប៊ូតុងផ្ទាំងចំហៀង</translation>
     </message>
     <message>
         <source>Show the side panel toggle button in the capture mode.</source>
@@ -942,12 +948,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="311"/>
         <source>Show desktop notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>បង្ហាញការជូនដំណឹងលើផ្ទៃតុ</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="336"/>
         <source>Show tray icon</source>
-        <translation type="unfinished"></translation>
+        <translation>បង្ហាញរូបតំណាងថាសប្រព័ន្ធ</translation>
     </message>
     <message>
         <source>Show the systemtray icon</source>
@@ -956,32 +962,32 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="367"/>
         <source>Confirmation required to delete screenshot from the latest uploads</source>
-        <translation type="unfinished"></translation>
+        <translation>ត្រូវការការបញ្ជាក់ដើម្បីលុបរូបថតអេក្រង់ពីការផ្ទុកឡើងថ្មីៗ</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="382"/>
         <source>Configuration File</source>
-        <translation type="unfinished"></translation>
+        <translation>ឯកសារកំណត់រចនាសម្ព័ន្ធ</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="387"/>
         <source>Export</source>
-        <translation type="unfinished"></translation>
+        <translation>នាំចេញ</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="401"/>
         <source>Reset</source>
-        <translation type="unfinished"></translation>
+        <translation>កំណត់ឡើងវិញ</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="412"/>
         <source>Automatic check for updates</source>
-        <translation type="unfinished"></translation>
+        <translation>ពិនិត្យធ្វើបច្ចុប្បន្នភាពដោយស្វ័យប្រវត្តិ</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="426"/>
         <source>Allow multiple flameshot GUI instances simultaneously</source>
-        <translation type="unfinished"></translation>
+        <translation>អនុញ្ញាតឱ្យដំណើរការ Flameshot GUI ច្រើនក្នុងពេលតែមួយ</translation>
     </message>
     <message>
         <source>This allows you to take screenshots of flameshot itself for example.</source>
@@ -1002,17 +1008,17 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="463"/>
         <source>Show welcome message on launch</source>
-        <translation type="unfinished"></translation>
+        <translation>បង្ហាញសារស្វាគមន៍ពេលចាប់ផ្តើម</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="491"/>
         <source>Use large predefined color palette</source>
-        <translation type="unfinished"></translation>
+        <translation>ប្រើបញ្ជីពណ៌ស្រាប់ដែលមានពណ៌ច្រើន</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="515"/>
         <source>Copy URL after upload</source>
-        <translation type="unfinished"></translation>
+        <translation>ចម្លង URL បន្ទាប់ពី upload ឡើង</translation>
     </message>
     <message>
         <source>Copy URL and close window after upload</source>
@@ -1021,7 +1027,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="527"/>
         <source>Save image after copy</source>
-        <translation type="unfinished"></translation>
+        <translation>រក្សាទុករូបភាពបន្ទាប់ពីចម្លង</translation>
     </message>
     <message>
         <source>Save image file after copying it</source>
@@ -1030,67 +1036,67 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="274"/>
         <source>Show the help message at the beginning in the capture mode</source>
-        <translation type="unfinished"></translation>
+        <translation>បង្ហាញសារជំនួយនៅដើមរបៀបថតអេក្រង់</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="284"/>
         <source>Use last region for GUI mode</source>
-        <translation type="unfinished"></translation>
+        <translation>ប្រើតំបន់ចុងក្រោយសម្រាប់របៀប GUI</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="286"/>
         <source>Use the last region as the default selection for the next screenshot in GUI mode</source>
-        <translation type="unfinished"></translation>
+        <translation>ប្រើតំបន់ចុងក្រោយជាការជ្រើសរើសលំនាំដើមសម្រាប់រូបថតអេក្រង់បន្ទាប់ក្នុងរបៀប GUI</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="300"/>
         <source>Show the side panel toggle button in the capture mode</source>
-        <translation type="unfinished"></translation>
+        <translation>បង្ហាញប៊ូតុងបើក/បិទផ្ទាំងចំហៀងក្នុងរបៀបថតអេក្រង់</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="312"/>
         <source>Enable desktop notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>បើកការជូនដំណឹងលើផ្ទៃតុ</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="323"/>
         <source>Show abort notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>បង្ហាញការជូនដំណឹងបោះបង់</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="324"/>
         <source>Enable abort notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>បើកការជូនដំណឹងបោះបង់</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="337"/>
         <source>Show icon in the system tray</source>
-        <translation type="unfinished"></translation>
+        <translation>បង្ហាញរូបតំណាងក្នុងថាសប្រព័ន្ធ</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="350"/>
         <source>Use grim to capture screenshots</source>
-        <translation type="unfinished"></translation>
+        <translation>ប្រើ grim ដើម្បីថតរូបអេក្រង់</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="352"/>
         <source>Grim is a wayland only utility to capture screens based on the screencopy protocol. Generally only enable on minimal wayland window managers like sway, hyprland, etc.</source>
-        <translation type="unfinished"></translation>
+        <translation>Grim គឺជាឧបករណ៍សម្រាប់ Wayland តែប៉ុណ្ណោះ ដើម្បីថតអេក្រង់ដោយផ្អែកលើពិធីការ screencopy។ ជាធម្មតាគួរបើកតែលើ Wayland window managers តិចតួចដូចជា sway, hyprland ។ល។</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="370"/>
         <source>Ask for confirmation to delete screenshot from the latest uploads</source>
-        <translation type="unfinished"></translation>
+        <translation>សួរបញ្ជាក់ដើម្បីលុបរូបថតអេក្រង់ពីការផ្ទុកឡើងថ្មីៗ</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="413"/>
         <source>Check for updates automatically</source>
-        <translation type="unfinished"></translation>
+        <translation>ពិនិត្យធ្វើបច្ចុប្បន្នភាពដោយស្វ័យប្រវត្តិ</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="427"/>
         <source>This allows you to take screenshots of Flameshot itself for example</source>
-        <translation type="unfinished"></translation>
+        <translation>វាអនុញ្ញាតឱ្យអ្នកថតរូបអេក្រង់របស់ Flameshot ខ្លួនឯងជាឧទាហរណ៍</translation>
     </message>
     <message>
         <source>Launch Flameshot daemon when computer is booted</source>
@@ -1099,17 +1105,17 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="466"/>
         <source>Show the welcome message box in the middle of the screen while taking a screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation>បង្ហាញប្រអប់សារស្វាគមន៍នៅកណ្តាលអេក្រង់ពេលកំពុងថតរូបអេក្រង់</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="493"/>
         <source>Use a large predefined color palette</source>
-        <translation type="unfinished"></translation>
+        <translation>ប្រើក្ដារពណ៌ដែលបានកំណត់ជាមុនធំ</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="503"/>
         <source>Copy on double click</source>
-        <translation type="unfinished"></translation>
+        <translation>ចម្លងពេលចុចទ្វេដង</translation>
     </message>
     <message>
         <source>Enable Copy on Double Click</source>
@@ -1122,228 +1128,228 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="439"/>
         <source>Automatically unload from memory when it is not needed</source>
-        <translation type="unfinished"></translation>
+        <translation>ដកចេញពីអង្គចងចាំដោយស្វ័យប្រវត្តិនៅពេលមិនចាំបាច់</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="440"/>
         <source>Automatically close daemon (background process) when it is not needed</source>
-        <translation type="unfinished"></translation>
+        <translation>បិទដេម៉ុន (ដំណើរការផ្ទៃខាងក្រោយ) ដោយស្វ័យប្រវត្តិនៅពេលមិនចាំបាច់</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="451"/>
         <source>Launch in background at startup</source>
-        <translation type="unfinished"></translation>
+        <translation>ចាប់ផ្តើមផ្ទៃខាងក្រោយពេលបើកប្រព័ន្ធ</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="452"/>
         <source>Launch Flameshot daemon (background process) when computer is booted</source>
-        <translation type="unfinished"></translation>
+        <translation>ចាប់ផ្តើមដេម៉ុន Flameshot (ដំណើរការផ្ទៃខាងក្រោយ) នៅពេលកុំព្យូទ័រចាប់ផ្តើម</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="477"/>
         <source>Ask before quit capture</source>
-        <translation type="unfinished"></translation>
+        <translation>សួរមុនពេលចាកចេញពីការថត</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="480"/>
         <source>Show the confirmation prompt before ESC quit</source>
-        <translation type="unfinished"></translation>
+        <translation>បង្ហាញការបញ្ជាក់មុនពេលចាកចេញដោយ ESC</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="505"/>
         <source>Enable Copy to clipboard on Double Click</source>
-        <translation type="unfinished"></translation>
+        <translation>បើកការចម្លងទៅក្ដារម្ជុលខ្ទាស់ពេល Double Click</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="517"/>
         <source>Copy URL after uploading was successful</source>
-        <translation type="unfinished"></translation>
+        <translation>ចម្លង URL បន្ទាប់ពីផ្ទុកឡើងបានជោគជ័យ</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="529"/>
         <source>After copying the screenshot, save it to a file as well</source>
-        <translation type="unfinished"></translation>
+        <translation>បន្ទាប់ពីចម្លងរូបថតអេក្រង់ សូមរក្សាទុកវាទៅឯកសារផងដែរ</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="536"/>
         <source>Save Path</source>
-        <translation type="unfinished"></translation>
+        <translation>ផ្លូវរក្សាទុក</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="552"/>
         <source>Change...</source>
-        <translation type="unfinished"></translation>
+        <translation>ផ្លាស់ប្តូរ...</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="560"/>
         <source>Use fixed path for screenshots to save</source>
-        <translation type="unfinished"></translation>
+        <translation>ប្រើផ្លូវថេរសម្រាប់រក្សាទុករូបថតអេក្រង់</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="572"/>
         <source>Preferred save file extension:</source>
-        <translation type="unfinished"></translation>
+        <translation>កន្ទុយឯកសារដែលចូលចិត្តសម្រាប់រក្សាទុក៖</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="601"/>
         <source>Latest Uploads Max Size</source>
-        <translation type="unfinished"></translation>
+        <translation>ទំហំអតិបរមានៃការផ្ទុកឡើងថ្មីៗ</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="623"/>
         <source>Imgur Application Client ID</source>
-        <translation type="unfinished"></translation>
+        <translation>ID អតិថិជនកម្មវិធី Imgur</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="654"/>
         <source>Undo limit</source>
-        <translation type="unfinished"></translation>
+        <translation>ដែនកំណត់មិនធ្វើវិញ</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="683"/>
         <source>Use JPG format for clipboard (PNG default)</source>
-        <translation type="unfinished"></translation>
+        <translation>ប្រើទម្រង់ JPG សម្រាប់ក្ដារម្ជុលខ្ទាស់ (លំនាំដើម PNG)</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="685"/>
         <source>Use lossy JPG format for clipboard (lossless PNG default)</source>
-        <translation type="unfinished"></translation>
+        <translation>ប្រើទម្រង់ JPG បាត់បង់គុណភាពសម្រាប់ក្ដារម្ជុលខ្ទាស់ (លំនាំដើម PNG គ្មានបាត់បង់)</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="711"/>
         <source>Copy file path after save</source>
-        <translation type="unfinished"></translation>
+        <translation>ចម្លងផ្លូវឯកសារបន្ទាប់ពីរក្សាទុក</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="712"/>
         <source>Copy the file path to clipboard after the file is saved</source>
-        <translation type="unfinished"></translation>
+        <translation>ចម្លងផ្លូវឯកសារទៅក្ដារម្ជុលខ្ទាស់បន្ទាប់ពីរក្សាទុកឯកសារ</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="723"/>
         <source>Anti-aliasing image when zoom the pinned image</source>
-        <translation type="unfinished"></translation>
+        <translation>បំបាត់ការធ្វើឱ្យរលោង (Anti-aliasing) នៅពេលពង្រីករូបភាពដែលបានខ្ទាស់</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="725"/>
         <source>After zooming the pinned image, should the image get smoothened or stay pixelated</source>
-        <translation type="unfinished"></translation>
+        <translation>បន្ទាប់ពីពង្រីករូបភាពដែលបានខ្ទាស់, តើរូបភាពគួរ រលោង ឬនៅជាភីកសែលដដែល</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="736"/>
         <location filename="../../src/config/generalconf.cpp" line="738"/>
         <source>Upload image without confirmation</source>
-        <translation type="unfinished"></translation>
+        <translation>ផ្ទុករូបភាពឡើងដោយគ្មានការបញ្ជាក់</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="754"/>
         <source>Choose a Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>ជ្រើសរើសថត</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="763"/>
         <source>Unable to write to directory.</source>
-        <translation type="unfinished"></translation>
+        <translation>មិនអាចសរសេរទៅថតបានទេ។</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="772"/>
         <source>Show magnifier</source>
-        <translation type="unfinished"></translation>
+        <translation>បង្ហាញកែវពង្រីក</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="773"/>
         <source>Enable a magnifier while selecting the screenshot area</source>
-        <translation type="unfinished"></translation>
+        <translation>បើកកែវពង្រីកពេលជ្រើសតំបន់ថតរូបអេក្រង់</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="784"/>
         <source>Square shaped magnifier</source>
-        <translation type="unfinished"></translation>
+        <translation>កែវពង្រីករាងការ៉េ</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="785"/>
         <source>Make the magnifier to be square-shaped</source>
-        <translation type="unfinished"></translation>
+        <translation>ធ្វើឱ្យកែវពង្រីកមានរាងការ៉េ</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="801"/>
         <source>Milliseconds before geometry display hides; 0 means do not hide</source>
-        <translation type="unfinished"></translation>
+        <translation>មិល្លីវិនាទីមុនពេលការបង្ហាញធរណីមាត្រលាក់; 0 មានន័យថាមិនលាក់</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="804"/>
         <source>Set geometry display timeout (ms)</source>
-        <translation type="unfinished"></translation>
+        <translation>កំណត់ពេលអស់កំណត់នៃការបង្ហាញធរណីមាត្រ (ms)</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="812"/>
         <source>Selection Geometry Display</source>
-        <translation type="unfinished"></translation>
+        <translation>ការបង្ហាញធរណីមាត្រជ្រើសរើស</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="819"/>
         <source>Display Location</source>
-        <translation type="unfinished"></translation>
+        <translation>ទីតាំងបង្ហាញ</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="822"/>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>គ្មាន</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="823"/>
         <source>Top Left</source>
-        <translation type="unfinished"></translation>
+        <translation>ខាងឆ្វេងខាងលើ</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="825"/>
         <source>Top Right</source>
-        <translation type="unfinished"></translation>
+        <translation>ខាងស្តាំខាងលើ</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="827"/>
         <source>Bottom Left</source>
-        <translation type="unfinished"></translation>
+        <translation>ខាងឆ្វេងខាងក្រោម</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="829"/>
         <source>Bottom Right</source>
-        <translation type="unfinished"></translation>
+        <translation>ខាងស្តាំខាងក្រោម</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="831"/>
         <source>Center</source>
-        <translation type="unfinished"></translation>
+        <translation>កណ្តាល</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="856"/>
         <source>Quality range of 0-100; Higher number is better quality and larger file size</source>
-        <translation type="unfinished"></translation>
+        <translation>ជួរគុណភាព 0-100; លេខខ្ពស់ជាងគឺគុណភាពល្អជាង និងទំហំឯកសារធំជាង</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="860"/>
         <source>JPEG Quality</source>
-        <translation type="unfinished"></translation>
+        <translation>គុណភាព JPEG</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="871"/>
         <source>Reverse arrow</source>
-        <translation type="unfinished"></translation>
+        <translation>ព្រួញបញ្ច្រាស</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="872"/>
         <source>Draw the arrow head first</source>
-        <translation type="unfinished"></translation>
+        <translation>គូរក្បាលព្រួញមុន</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="881"/>
         <source>Insecure Pixelate</source>
-        <translation type="unfinished"></translation>
+        <translation>ធ្វើឱ្យជាភីកសែលដោយមិនសុវត្ថិភាព</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="883"/>
         <source>Draw the pixelation effect in an insecure but more asethetic way.</source>
-        <translation type="unfinished"></translation>
+        <translation>គូរបែបផែនភីកសែលក្នុងលក្ខណៈមិនសុវត្ថិភាព ប៉ុន្តែមើលទៅស្អាតជាង។</translation>
     </message>
 </context>
 <context>
@@ -1397,18 +1403,18 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/widgets/imguploaddialog.cpp" line="18"/>
         <source>Upload Confirmation</source>
-        <translation type="unfinished"></translation>
+        <translation>ការបញ្ជាក់ការផ្ទុកឡើង</translation>
     </message>
     <message>
         <location filename="../../src/widgets/imguploaddialog.cpp" line="22"/>
         <source>Do you want to upload this capture?</source>
-        <translation type="unfinished"></translation>
+        <translation>តើអ្នកចង់ផ្ទុករូបភាពថតនេះឡើងឬ?</translation>
     </message>
     <message>
         <location filename="../../src/widgets/imguploaddialog.cpp" line="35"/>
         <location filename="../../src/widgets/imguploaddialog.cpp" line="36"/>
         <source>Upload without confirmation</source>
-        <translation type="unfinished"></translation>
+        <translation>ផ្ទុកឡើងដោយគ្មានការបញ្ជាក់</translation>
     </message>
 </context>
 <context>
@@ -1451,62 +1457,62 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="37"/>
         <source>Upload image</source>
-        <translation type="unfinished"></translation>
+        <translation>ផ្ទុករូបភាពឡើង</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="49"/>
         <source>Uploading Image</source>
-        <translation type="unfinished"></translation>
+        <translation>កំពុងផ្ទុករូបភាពឡើង</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="128"/>
         <source>Copy URL</source>
-        <translation type="unfinished"></translation>
+        <translation>ចម្លង URL</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="129"/>
         <source>Open URL</source>
-        <translation type="unfinished"></translation>
+        <translation>បើក URL</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="130"/>
         <source>Delete image</source>
-        <translation type="unfinished"></translation>
+        <translation>លុបរូបភាព</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="131"/>
         <source>Image to Clipboard.</source>
-        <translation type="unfinished"></translation>
+        <translation>រូបភាពទៅក្ដារម្ជុលខ្ទាស់។</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="132"/>
         <source>Save image</source>
-        <translation type="unfinished"></translation>
+        <translation>រក្សាទុករូបភាព</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="162"/>
         <source>Unable to open the URL.</source>
-        <translation type="unfinished"></translation>
+        <translation>មិនអាចបើក URL បានទេ។</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="169"/>
         <source>URL copied to clipboard.</source>
-        <translation type="unfinished"></translation>
+        <translation>បានចម្លង URL ទៅក្ដារម្ជុលខ្ទាស់។</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="175"/>
         <source>Screenshot copied to clipboard.</source>
-        <translation type="unfinished"></translation>
+        <translation>បានចម្លងរូបថតអេក្រង់ទៅក្ដារម្ជុលខ្ទាស់។</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="189"/>
         <source>Unable to save the screenshot to disk.</source>
-        <translation type="unfinished"></translation>
+        <translation>មិនអាចរក្សាទុករូបថតអេក្រង់ទៅថាសបានទេ។</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="192"/>
         <source>Screenshot saved.</source>
-        <translation type="unfinished"></translation>
+        <translation>បានរក្សាទុករូបថតអេក្រង់។</translation>
     </message>
 </context>
 <context>
@@ -1514,12 +1520,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/imgupload/imguploadertool.cpp" line="23"/>
         <source>Image Uploader</source>
-        <translation type="unfinished"></translation>
+        <translation>កម្មវិធីផ្ទុករូបភាពឡើង</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/imguploadertool.cpp" line="33"/>
         <source>Upload the selection</source>
-        <translation type="unfinished"></translation>
+        <translation>ផ្ទុកតំបន់ជ្រើសរើសឡើង</translation>
     </message>
 </context>
 <context>
@@ -1551,7 +1557,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/imgupload/storages/imgur/imguruploader.cpp" line="107"/>
         <source>Unable to open the URL.</source>
-        <translation type="unfinished"></translation>
+        <translation>មិនអាចបើក URL បានទេ។</translation>
     </message>
     <message>
         <source>URL copied to clipboard.</source>
@@ -1579,49 +1585,49 @@ Please solve them manually in the configuration file.</source>
         <location filename="../../src/widgets/infowindow.ui" line="14"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="116"/>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation>អំពី</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="26"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="117"/>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>រូបតំណាង</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="43"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="118"/>
         <source>License</source>
-        <translation type="unfinished"></translation>
+        <translation>អាជ្ញាបណ្ណ</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="56"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="119"/>
         <source>GPLv3+</source>
-        <translation type="unfinished"></translation>
+        <translation>GPLv3+</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="89"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="120"/>
         <source>Version</source>
-        <translation type="unfinished"></translation>
+        <translation>កំណែ</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="102"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="121"/>
         <source>Flameshot v</source>
-        <translation type="unfinished"></translation>
+        <translation>Flameshot v</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="115"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="122"/>
         <source>OS Info</source>
-        <translation type="unfinished"></translation>
+        <translation>ព័ត៌មាន OS</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="128"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="123"/>
         <source>Copy Info</source>
-        <translation type="unfinished"></translation>
+        <translation>ចម្លងព័ត៌មាន</translation>
     </message>
     <message>
         <source>Right Click</source>
@@ -1693,12 +1699,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/invert/inverttool.cpp" line="25"/>
         <source>Invert</source>
-        <translation type="unfinished"></translation>
+        <translation>បញ្ច្រាស</translation>
     </message>
     <message>
         <location filename="../../src/tools/invert/inverttool.cpp" line="35"/>
         <source>Set Inverter as the paint tool</source>
-        <translation type="unfinished"></translation>
+        <translation>កំណត់ឧបករណ៍បញ្ច្រាសជាឧបករណ៍គូរ</translation>
     </message>
 </context>
 <context>
@@ -1706,12 +1712,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/line/linetool.cpp" line="22"/>
         <source>Line</source>
-        <translation type="unfinished"></translation>
+        <translation>បន្ទាត់</translation>
     </message>
     <message>
         <location filename="../../src/tools/line/linetool.cpp" line="32"/>
         <source>Set the Line as the paint tool</source>
-        <translation type="unfinished"></translation>
+        <translation>កំណត់បន្ទាត់ជាឧបករណ៍គូរ</translation>
     </message>
 </context>
 <context>
@@ -1719,12 +1725,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/marker/markertool.cpp" line="23"/>
         <source>Marker</source>
-        <translation type="unfinished"></translation>
+        <translation>សញ្ញាសម្គាល់</translation>
     </message>
     <message>
         <location filename="../../src/tools/marker/markertool.cpp" line="33"/>
         <source>Set the Marker as the paint tool</source>
-        <translation type="unfinished"></translation>
+        <translation>កំណត់សញ្ញាសម្គាល់ជាឧបករណ៍គូរ</translation>
     </message>
 </context>
 <context>
@@ -1732,12 +1738,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/move/movetool.cpp" line="23"/>
         <source>Move</source>
-        <translation type="unfinished"></translation>
+        <translation>ផ្លាស់ទី</translation>
     </message>
     <message>
         <location filename="../../src/tools/move/movetool.cpp" line="33"/>
         <source>Move the selection area</source>
-        <translation type="unfinished"></translation>
+        <translation>ផ្លាស់ទីតំបន់ជ្រើសរើស</translation>
     </message>
 </context>
 <context>
@@ -1745,12 +1751,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/pencil/penciltool.cpp" line="18"/>
         <source>Pencil</source>
-        <translation type="unfinished"></translation>
+        <translation>ខ្មៅដៃ</translation>
     </message>
     <message>
         <location filename="../../src/tools/pencil/penciltool.cpp" line="28"/>
         <source>Set the Pencil as the paint tool</source>
-        <translation type="unfinished"></translation>
+        <translation>កំណត់ខ្មៅដៃជាឧបករណ៍គូរ</translation>
     </message>
 </context>
 <context>
@@ -1758,12 +1764,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/pin/pintool.cpp" line="25"/>
         <source>Pin Tool</source>
-        <translation type="unfinished"></translation>
+        <translation>ឧបករណ៍ខ្ទាស់</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pintool.cpp" line="35"/>
         <source>Pin image on the desktop</source>
-        <translation type="unfinished"></translation>
+        <translation>ខ្ទាស់រូបភាពលើផ្ទៃតុ</translation>
     </message>
 </context>
 <context>
@@ -1771,42 +1777,42 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="282"/>
         <source>Context menu</source>
-        <translation type="unfinished"></translation>
+        <translation>ម៉ឺនុយបរិបទ</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="284"/>
         <source>Copy to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>ចម្លងទៅក្ដារម្ជុលខ្ទាស់</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="291"/>
         <source>Save to file</source>
-        <translation type="unfinished"></translation>
+        <translation>រក្សាទុកទៅឯកសារ</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="298"/>
         <source>Rotate Right</source>
-        <translation type="unfinished"></translation>
+        <translation>បង្វិលទៅស្តាំ</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="303"/>
         <source>Rotate Left</source>
-        <translation type="unfinished"></translation>
+        <translation>បង្វិលទៅឆ្វេង</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="308"/>
         <source>Increase Opacity</source>
-        <translation type="unfinished"></translation>
+        <translation>បង្កើនភាពស្រអាប់</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="315"/>
         <source>Decrease Opacity</source>
-        <translation type="unfinished"></translation>
+        <translation>បន្ថយភាពស្រអាប់</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="322"/>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>បិទ</translation>
     </message>
 </context>
 <context>
@@ -1814,12 +1820,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="27"/>
         <source>Pixelate</source>
-        <translation type="unfinished"></translation>
+        <translation>ធ្វើឱ្យជាភីកសែល</translation>
     </message>
     <message>
         <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="37"/>
         <source>Set Pixelate as the paint tool.</source>
-        <translation type="unfinished"></translation>
+        <translation>កំណត់ឧបករណ៍ធ្វើឱ្យជាភីកសែលជាឧបករណ៍គូរ។</translation>
     </message>
     <message>
         <source>Set Pixelate as the paint tool</source>
@@ -1831,12 +1837,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/primaryinstancewidget.cpp" line="21"/>
         <source>Primary instance</source>
-        <translation type="unfinished"></translation>
+        <translation>អង្គភាពចម្បង</translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/primaryinstancewidget.cpp" line="22"/>
         <source>&lt;b&gt;Primary instance.&lt;/b&gt; Messages received from secondaries:</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;អង្គភាពចម្បង។&lt;/b&gt; សារដែលទទួលបានពីអង្គភាពបន្ទាប់បន្សំ៖</translation>
     </message>
 </context>
 <context>
@@ -1856,22 +1862,22 @@ Please solve them manually in the configuration file.</source>
         <location filename="../../src/utils/screenshotsaver.cpp" line="196"/>
         <location filename="../../src/utils/screenshotsaver.cpp" line="198"/>
         <source>Capture saved to clipboard.</source>
-        <translation type="unfinished"></translation>
+        <translation>បានរក្សាទុករូបភាពថតទៅក្ដារម្ជុលខ្ទាស់។</translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="182"/>
         <source>Error while saving to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>កំហុសពេលរក្សាទុកទៅក្ដារម្ជុលខ្ទាស់</translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="244"/>
         <source>Save screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation>រក្សាទុករូបថតអេក្រង់</translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="275"/>
         <source>Path copied to clipboard as </source>
-        <translation type="unfinished"></translation>
+        <translation>បានចម្លងផ្លូវទៅក្ដារម្ជុលខ្ទាស់ជា </translation>
     </message>
     <message>
         <source>Saving canceled</source>
@@ -1888,34 +1894,34 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="286"/>
         <source>Save Error</source>
-        <translation type="unfinished"></translation>
+        <translation>កំហុសរក្សាទុក</translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="62"/>
         <location filename="../../src/utils/screenshotsaver.cpp" line="267"/>
         <source>Capture saved as </source>
-        <translation type="unfinished"></translation>
+        <translation>បានរក្សាទុករូបភាពថតជា </translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="66"/>
         <location filename="../../src/utils/screenshotsaver.cpp" line="279"/>
         <source>Error trying to save as </source>
-        <translation type="unfinished"></translation>
+        <translation>កំហុសពេលព្យាយាមរក្សាទុកជា </translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="220"/>
         <source>Unable to connect via DBus</source>
-        <translation type="unfinished"></translation>
+        <translation>មិនអាចភ្ជាប់តាម DBus បានទេ</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="237"/>
         <source>Powerful yet simple to use screenshot software.</source>
-        <translation type="unfinished"></translation>
+        <translation>កម្មវិធីថតរូបអេក្រង់ដ៏មានឥទ្ធិពល ប៉ុន្តែងាយស្រួលប្រើ។</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="238"/>
         <source>See</source>
-        <translation type="unfinished"></translation>
+        <translation>មើល</translation>
     </message>
     <message>
         <source>Capture the entire desktop.</source>
@@ -1924,17 +1930,17 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/main.cpp" line="244"/>
         <source>Open the capture launcher.</source>
-        <translation type="unfinished"></translation>
+        <translation>បើកកម្មវិធីចាប់ផ្តើមថតអេក្រង់។</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="247"/>
         <source>Start a manual capture in GUI mode.</source>
-        <translation type="unfinished"></translation>
+        <translation>ចាប់ផ្តើមថតដោយដៃក្នុងរបៀប GUI។</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="249"/>
         <source>Configure</source>
-        <translation type="unfinished"></translation>
+        <translation>កំណត់រចនាសម្ព័ន្ធ</translation>
     </message>
     <message>
         <source>Capture a single screen.</source>
@@ -1947,122 +1953,122 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/main.cpp" line="242"/>
         <source>Capture screenshot of all monitors at the same time.</source>
-        <translation type="unfinished"></translation>
+        <translation>ថតរូបអេក្រង់របស់ម៉ូនីទ័រទាំងអស់ក្នុងពេលតែមួយ។</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="252"/>
         <source>Capture a screenshot of the specified monitor.</source>
-        <translation type="unfinished"></translation>
+        <translation>ថតរូបអេក្រង់របស់ម៉ូនីទ័រដែលបានកំណត់។</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="257"/>
         <source>Existing directory or new file to save to</source>
-        <translation type="unfinished"></translation>
+        <translation>ថតដែលមានស្រាប់ ឬឯកសារថ្មីសម្រាប់រក្សាទុក</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="260"/>
         <source>Save the capture to the clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>រក្សាទុករូបភាពថតទៅក្ដារម្ជុលខ្ទាស់</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="262"/>
         <source>Pin the capture to the screen</source>
-        <translation type="unfinished"></translation>
+        <translation>ខ្ទាស់រូបភាពថតលើអេក្រង់</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="264"/>
         <source>Upload screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation>ផ្ទុករូបថតអេក្រង់ឡើង</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="266"/>
         <source>Delay time in milliseconds</source>
-        <translation type="unfinished"></translation>
+        <translation>ពេលពន្យារគិតជាមិល្លីវិនាទី</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="271"/>
         <source>Repeat screenshot with previously selected region</source>
-        <translation type="unfinished"></translation>
+        <translation>ថតរូបអេក្រង់ម្តងទៀតជាមួយតំបន់ដែលបានជ្រើសពីមុន</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="274"/>
         <source>Screenshot region to select</source>
-        <translation type="unfinished"></translation>
+        <translation>តំបន់រូបថតអេក្រង់ត្រូវជ្រើស</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="277"/>
         <source>Set the filename pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>កំណត់លំនាំឈ្មោះឯកសារ</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="281"/>
         <source>Accept capture as soon as a selection is made</source>
-        <translation type="unfinished"></translation>
+        <translation>ទទួលយករូបភាពថតភ្លាមៗនៅពេលជ្រើសរើសរួច</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="283"/>
         <source>Enable or disable the trayicon</source>
-        <translation type="unfinished"></translation>
+        <translation>បើក ឬបិទរូបតំណាងថាសប្រព័ន្ធ</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="287"/>
         <source>Enable or disable run at startup</source>
-        <translation type="unfinished"></translation>
+        <translation>បើក ឬបិទការដំណើរការពេលចាប់ផ្តើម</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="291"/>
         <source>Enable or disable the notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>បើក ឬបិទការជូនដំណឹង</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="294"/>
         <source>Check the configuration for errors</source>
-        <translation type="unfinished"></translation>
+        <translation>ពិនិត្យកំហុសក្នុងការកំណត់រចនាសម្ព័ន្ធ</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="297"/>
         <source>Show the help message in the capture mode</source>
-        <translation type="unfinished"></translation>
+        <translation>បង្ហាញសារជំនួយក្នុងរបៀបថតអេក្រង់</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="300"/>
         <source>Define the main UI color</source>
-        <translation type="unfinished"></translation>
+        <translation>កំណត់ពណ៌ UI ចម្បង</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="304"/>
         <source>Define the contrast UI color</source>
-        <translation type="unfinished"></translation>
+        <translation>កំណត់ពណ៌ UI ផ្ទុយ</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="307"/>
         <source>Print raw PNG capture</source>
-        <translation type="unfinished"></translation>
+        <translation>បោះពុម្ពរូបភាពថត PNG ដើម</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="310"/>
         <source>Print geometry of the selection in the format WxH+X+Y. Does nothing if raw is specified</source>
-        <translation type="unfinished"></translation>
+        <translation>បោះពុម្ពធរណីមាត្រនៃតំបន់ជ្រើសរើសក្នុងទម្រង់ WxH+X+Y។ មិនធ្វើអ្វីទេប្រសិនបើបានកំណត់ raw</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="314"/>
         <source>Define the screen to capture (starting from 0)</source>
-        <translation type="unfinished"></translation>
+        <translation>កំណត់អេក្រង់ត្រូវថត (ចាប់ផ្តើមពី 0)</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="334"/>
         <source>Invalid delay, it must be a number greater than 0</source>
-        <translation type="unfinished"></translation>
+        <translation>ការពន្យារមិនត្រឹមត្រូវ ត្រូវតែជាលេខធំជាង 0</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="337"/>
         <source>Invalid region, use &apos;WxH+X+Y&apos; or &apos;all&apos; or &apos;screen0/screen1/...&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>តំបន់មិនត្រឹមត្រូវ សូមប្រើ &apos;WxH+X+Y&apos; ឬ &apos;all&apos; ឬ &apos;screen0/screen1/...&apos;។</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="350"/>
         <source>Invalid path, must be an existing directory or a new file in an existing directory</source>
-        <translation type="unfinished"></translation>
+        <translation>ផ្លូវមិនត្រឹមត្រូវ ត្រូវតែជាថតដែលមានស្រាប់ ឬឯកសារថ្មីក្នុងថតដែលមានស្រាប់</translation>
     </message>
     <message>
         <source>Define the screen to capture</source>
@@ -2071,12 +2077,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/main.cpp" line="315"/>
         <source>default: screen containing the cursor</source>
-        <translation type="unfinished"></translation>
+        <translation>លំនាំដើម៖ អេក្រង់ដែលមានទស្សន៍ទ្រនិច</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="316"/>
         <source>Screen number</source>
-        <translation type="unfinished"></translation>
+        <translation>លេខអេក្រង់</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="325"/>
@@ -2087,7 +2093,13 @@ Please solve them manually in the configuration file.</source>
 - #RRRRGGGGBBBB
 - Named colors like &apos;blue&apos; or &apos;red&apos;
 You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>ពណ៌មិនត្រឹមត្រូវ ទង់នេះគាំទ្រទម្រង់ដូចខាងក្រោម៖
+- #RGB (R, G, និង B នីមួយៗជាលេខហិកសាដប់មួយ)
+- #RRGGBB
+- #RRRGGGBBB
+- #RRRRGGGGBBBB
+- ពណ៌មានឈ្មោះដូចជា &apos;blue&apos; ឬ &apos;red&apos;
+អ្នកអាចត្រូវការបំពេញសញ្ញា &apos;#&apos; ដូចជា &apos;\#FFF&apos;</translation>
     </message>
     <message>
         <source>Invalid delay, it must be higher than 0</source>
@@ -2096,7 +2108,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/main.cpp" line="336"/>
         <source>Invalid screen number, it must be non negative</source>
-        <translation type="unfinished"></translation>
+        <translation>លេខអេក្រង់មិនត្រឹមត្រូវ ត្រូវតែមិនអវិជ្ជមាន</translation>
     </message>
     <message>
         <source>Invalid path, it must be a real path in the system</source>
@@ -2105,27 +2117,27 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/main.cpp" line="363"/>
         <source>Invalid value, it must be defined as &apos;true&apos; or &apos;false&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>តម្លៃមិនត្រឹមត្រូវ ត្រូវតែកំណត់ជា &apos;true&apos; ឬ &apos;false&apos;</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/openwithprogram.cpp" line="30"/>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>កំហុស</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/openwithprogram.cpp" line="31"/>
         <source>Unable to write in</source>
-        <translation type="unfinished"></translation>
+        <translation>មិនអាចសរសេរទៅក្នុង</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="156"/>
         <source>Requested screen exceeds screen count</source>
-        <translation type="unfinished"></translation>
+        <translation>អេក្រង់ដែលបានស្នើលើសពីចំនួនអេក្រង់</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="408"/>
         <source>Full screen screenshot pinned to screen</source>
-        <translation type="unfinished"></translation>
+        <translation>រូបថតអេក្រង់ពេញបានខ្ទាស់លើអេក្រង់</translation>
     </message>
     <message>
         <source>URL copied to clipboard.</source>
@@ -2134,7 +2146,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="54"/>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>ជម្រើស</translation>
     </message>
     <message>
         <source>Arguments</source>
@@ -2147,32 +2159,32 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="68"/>
         <source>Subcommands</source>
-        <translation type="unfinished"></translation>
+        <translation>ពាក្យបញ្ជារង</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="328"/>
         <source>subcommands</source>
-        <translation type="unfinished"></translation>
+        <translation>ពាក្យបញ្ជារង</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="329"/>
         <source>Usage</source>
-        <translation type="unfinished"></translation>
+        <translation>របៀបប្រើ</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="329"/>
         <source>options</source>
-        <translation type="unfinished"></translation>
+        <translation>ជម្រើស</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="334"/>
         <source>Per default runs Flameshot in the background and adds a tray icon for configuration.</source>
-        <translation type="unfinished"></translation>
+        <translation>តាមលំនាំដើម ដំណើរការ Flameshot នៅផ្ទៃខាងក្រោយ និងបន្ថែមរូបតំណាងថាសសម្រាប់ការកំណត់រចនាសម្ព័ន្ធ។</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="71"/>
         <source>Hello, I&apos;m here! Click icon in the tray to take a screenshot or click with a right button to see more options.</source>
-        <translation type="unfinished"></translation>
+        <translation>សួស្តី ខ្ញុំនៅទីនេះ! ចុចរូបតំណាងក្នុងថាសដើម្បីថតរូបអេក្រង់ ឬចុចកណ្ដុរខាងស្តាំដើម្បីមើលជម្រើសបន្ថែម។</translation>
     </message>
     <message>
         <source>Toggle side panel</source>
@@ -2225,27 +2237,27 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="195"/>
         <source>Quit capture</source>
-        <translation type="unfinished"></translation>
+        <translation>ចាកចេញពីការថត</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="207"/>
         <source>Screenshot history</source>
-        <translation type="unfinished"></translation>
+        <translation>ប្រវត្តិរូបថតអេក្រង់</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="211"/>
         <source>Capture screen</source>
-        <translation type="unfinished"></translation>
+        <translation>ថតអេក្រង់</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="218"/>
         <source>Show color picker</source>
-        <translation type="unfinished"></translation>
+        <translation>បង្ហាញឧបករណ៍ជ្រើសពណ៌</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="219"/>
         <source>Change the tool&apos;s size</source>
-        <translation type="unfinished"></translation>
+        <translation>ផ្លាស់ប្តូរទំហំរបស់ឧបករណ៍</translation>
     </message>
     <message>
         <source>Change the tool&apos;s thickness</source>
@@ -2257,12 +2269,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/rectangle/rectangletool.cpp" line="22"/>
         <source>Rectangle</source>
-        <translation type="unfinished"></translation>
+        <translation>ចតុកោណ</translation>
     </message>
     <message>
         <location filename="../../src/tools/rectangle/rectangletool.cpp" line="32"/>
         <source>Set the Rectangle as the paint tool</source>
-        <translation type="unfinished"></translation>
+        <translation>កំណត់ចតុកោណជាឧបករណ៍គូរ</translation>
     </message>
 </context>
 <context>
@@ -2270,12 +2282,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/redo/redotool.cpp" line="23"/>
         <source>Redo</source>
-        <translation type="unfinished"></translation>
+        <translation>ធ្វើឡើងវិញ</translation>
     </message>
     <message>
         <location filename="../../src/tools/redo/redotool.cpp" line="33"/>
         <source>Redo the next modification</source>
-        <translation type="unfinished"></translation>
+        <translation>ធ្វើការកែប្រែបន្ទាប់ឡើងវិញ</translation>
     </message>
 </context>
 <context>
@@ -2283,12 +2295,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/save/savetool.cpp" line="24"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>រក្សាទុក</translation>
     </message>
     <message>
         <location filename="../../src/tools/save/savetool.cpp" line="34"/>
         <source>Save screenshot to a file</source>
-        <translation type="unfinished"></translation>
+        <translation>រក្សាទុករូបថតអេក្រង់ទៅឯកសារ</translation>
     </message>
     <message>
         <source>Save the capture</source>
@@ -2304,32 +2316,32 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="53"/>
         <source>The universal wayland screen capture adapter requires Grim as the screen capture component of wayland. If the screen capture component is missing, please install it!</source>
-        <translation type="unfinished"></translation>
+        <translation>អាដាប់ទ័រថតអេក្រង់ Wayland ជាសកលត្រូវការ Grim ជាសមាសភាគថតអេក្រង់សម្រាប់ Wayland។ ប្រសិនបើខ្វះសមាសភាគថតអេក្រង់ សូមដំឡើងវា!</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="171"/>
         <source>If the useGrimAdapter setting is not enabled, the dbus protocol will be used. It should be noted that using the dbus protocol under wayland is not recommended. It is recommended to enable the useGrimAdapter setting in flameshot.ini to activate the grim-based general wayland screenshot adapter</source>
-        <translation type="unfinished"></translation>
+        <translation>ប្រសិនបើការកំណត់ useGrimAdapter មិនត្រូវបានបើក ពិធីការ dbus នឹងត្រូវប្រើ។ គួរកត់សម្គាល់ថាការប្រើពិធីការ dbus នៅក្រោម Wayland មិនត្រូវបានណែនាំទេ។ គួរបើកការកំណត់ useGrimAdapter ក្នុង flameshot.ini ដើម្បីបើកអាដាប់ទ័រថតអេក្រង់ Wayland ទូទៅដែលផ្អែកលើ grim</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="182"/>
         <source>grim&apos;s screenshot component is implemented based on wlroots, it may not be used in GNOME or similar desktop environments</source>
-        <translation type="unfinished"></translation>
+        <translation>សមាសភាគថតអេក្រង់របស់ grim ត្រូវបានអនុវត្តដោយផ្អែកលើ wlroots វាប្រហែលជាមិនអាចប្រើក្នុង GNOME ឬបរិស្ថានផ្ទៃតុស្រដៀងគ្នាបានទេ</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="194"/>
         <source>Unable to detect desktop environment (GNOME? KDE? Qile? Sway? ...)</source>
-        <translation type="unfinished"></translation>
+        <translation>មិនអាចរកឃើញបរិស្ថានផ្ទៃតុ (GNOME? KDE? Qile? Sway? ...) បានទេ</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="197"/>
         <source>Hint: try setting the XDG_CURRENT_DESKTOP environment variable.</source>
-        <translation type="unfinished"></translation>
+        <translation>គន្លឹះ៖ សូមព្យាយាមកំណត់អថេរបរិស្ថាន XDG_CURRENT_DESKTOP។</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="202"/>
         <source>Unable to capture screen</source>
-        <translation type="unfinished"></translation>
+        <translation>មិនអាចថតអេក្រង់បានទេ</translation>
     </message>
 </context>
 <context>
@@ -2337,32 +2349,32 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="26"/>
         <source>Secondary instance</source>
-        <translation type="unfinished"></translation>
+        <translation>អង្គភាពបន្ទាប់បន្សំ</translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="27"/>
         <source>&lt;b&gt;Secondary instance.&lt;/b&gt; Send message to primary:</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;អង្គភាពបន្ទាប់បន្សំ។&lt;/b&gt; ផ្ញើសារទៅអង្គភាពចម្បង៖</translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="29"/>
         <source>Type something here...</source>
-        <translation type="unfinished"></translation>
+        <translation>វាយអ្វីមួយនៅទីនេះ...</translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="31"/>
         <source>&amp;Send</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;ផ្ញើ</translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="54"/>
         <source>Error sending message</source>
-        <translation type="unfinished"></translation>
+        <translation>កំហុសក្នុងការផ្ញើសារ</translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="55"/>
         <source>The message &apos;%1&apos; could not be sent to the primary.</source>
-        <translation type="unfinished"></translation>
+        <translation>សារ &apos;%1&apos; មិនអាចផ្ញើទៅអង្គភាពចម្បងបានទេ។</translation>
     </message>
 </context>
 <context>
@@ -2370,12 +2382,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/selection/selectiontool.cpp" line="25"/>
         <source>Rectangular Selection</source>
-        <translation type="unfinished"></translation>
+        <translation>ការជ្រើសរើសចតុកោណ</translation>
     </message>
     <message>
         <location filename="../../src/tools/selection/selectiontool.cpp" line="35"/>
         <source>Set Selection as the paint tool</source>
-        <translation type="unfinished"></translation>
+        <translation>កំណត់ការជ្រើសរើសជាឧបករណ៍គូរ</translation>
     </message>
 </context>
 <context>
@@ -2383,28 +2395,28 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="18"/>
         <source>Set Shortcut</source>
-        <translation type="unfinished"></translation>
+        <translation>កំណត់គ្រាប់ចុចផ្លូវកាត់</translation>
     </message>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="24"/>
         <source>Enter new shortcut to change </source>
-        <translation type="unfinished"></translation>
+        <translation>បញ្ចូលគ្រាប់ចុចផ្លូវកាត់ថ្មីដើម្បីផ្លាស់ប្តូរ </translation>
     </message>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="38"/>
         <source>Press Esc to cancel or ⌘+Backspace to disable the keyboard shortcut.</source>
-        <translation type="unfinished"></translation>
+        <translation>ចុច Esc ដើម្បីបោះបង់ ឬ ⌘+Backspace ដើម្បីបិទគ្រាប់ចុចផ្លូវកាត់។</translation>
     </message>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="42"/>
         <source>Press Esc to cancel or Backspace to disable the keyboard shortcut.</source>
-        <translation type="unfinished"></translation>
+        <translation>ចុច Esc ដើម្បីបោះបង់ ឬ Backspace ដើម្បីបិទគ្រាប់ចុចផ្លូវកាត់។</translation>
     </message>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="48"/>
         <location filename="../../src/config/setshortcutwidget.cpp" line="53"/>
         <source>Flameshot must be restarted for changes to take effect.</source>
-        <translation type="unfinished"></translation>
+        <translation>ត្រូវចាប់ផ្តើម Flameshot ឡើងវិញដើម្បីឱ្យការផ្លាស់ប្តូរមានប្រសិទ្ធភាព។</translation>
     </message>
 </context>
 <context>
@@ -2412,117 +2424,117 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="27"/>
         <source>Hot Keys</source>
-        <translation type="unfinished"></translation>
+        <translation>គ្រាប់ចុចផ្លូវកាត់</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="48"/>
         <source>Available shortcuts in the screen capture mode.</source>
-        <translation type="unfinished"></translation>
+        <translation>គ្រាប់ចុចផ្លូវកាត់ដែលអាចប្រើបានក្នុងរបៀបថតអេក្រង់។</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="59"/>
         <source>Description</source>
-        <translation type="unfinished"></translation>
+        <translation>ការពិពណ៌នា</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="59"/>
         <source>Key</source>
-        <translation type="unfinished"></translation>
+        <translation>គ្រាប់ចុច</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="162"/>
         <source>Left Double-click</source>
-        <translation type="unfinished"></translation>
+        <translation>ចុចទ្វេដងខាងឆ្វេង</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="169"/>
         <source>Toggle side panel</source>
-        <translation type="unfinished"></translation>
+        <translation>បើក/បិទផ្ទាំងចំហៀង</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="170"/>
         <source>Grab a color from the screen</source>
-        <translation type="unfinished"></translation>
+        <translation>ចាប់យកពណ៌ពីអេក្រង់</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="171"/>
         <source>Resize selection left 1px</source>
-        <translation type="unfinished"></translation>
+        <translation>ប្តូរទំហំជ្រើសរើសទៅឆ្វេង 1px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="172"/>
         <source>Resize selection right 1px</source>
-        <translation type="unfinished"></translation>
+        <translation>ប្តូរទំហំជ្រើសរើសទៅស្តាំ 1px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="173"/>
         <source>Resize selection up 1px</source>
-        <translation type="unfinished"></translation>
+        <translation>ប្តូរទំហំជ្រើសរើសឡើងលើ 1px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="174"/>
         <source>Resize selection down 1px</source>
-        <translation type="unfinished"></translation>
+        <translation>ប្តូរទំហំជ្រើសរើសចុះក្រោម 1px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="176"/>
         <source>Symmetrically decrease width by 2px</source>
-        <translation type="unfinished"></translation>
+        <translation>បន្ថយទទឹងស៊ីមេទ្រី 2px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="178"/>
         <source>Symmetrically increase width by 2px</source>
-        <translation type="unfinished"></translation>
+        <translation>បង្កើនទទឹងស៊ីមេទ្រី 2px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="180"/>
         <source>Symmetrically increase height by 2px</source>
-        <translation type="unfinished"></translation>
+        <translation>បង្កើនកម្ពស់ស៊ីមេទ្រី 2px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="182"/>
         <source>Symmetrically decrease height by 2px</source>
-        <translation type="unfinished"></translation>
+        <translation>បន្ថយកម្ពស់ស៊ីមេទ្រី 2px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="183"/>
         <source>Select entire screen</source>
-        <translation type="unfinished"></translation>
+        <translation>ជ្រើសអេក្រង់ទាំងមូល</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="184"/>
         <source>Move selection left 1px</source>
-        <translation type="unfinished"></translation>
+        <translation>ផ្លាស់ទីជ្រើសរើសទៅឆ្វេង 1px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="185"/>
         <source>Move selection right 1px</source>
-        <translation type="unfinished"></translation>
+        <translation>ផ្លាស់ទីជ្រើសរើសទៅស្តាំ 1px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="186"/>
         <source>Move selection up 1px</source>
-        <translation type="unfinished"></translation>
+        <translation>ផ្លាស់ទីជ្រើសរើសឡើងលើ 1px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="187"/>
         <source>Move selection down 1px</source>
-        <translation type="unfinished"></translation>
+        <translation>ផ្លាស់ទីជ្រើសរើសចុះក្រោម 1px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="188"/>
         <source>Commit text in text area</source>
-        <translation type="unfinished"></translation>
+        <translation>បញ្ជាក់អក្សរក្នុងតំបន់អក្សរ</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="190"/>
         <source>Delete selected drawn object</source>
-        <translation type="unfinished"></translation>
+        <translation>លុបវត្ថុគូរដែលបានជ្រើស</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="191"/>
         <source>Cancel current selection</source>
-        <translation type="unfinished"></translation>
+        <translation>បោះបង់ការជ្រើសរើសបច្ចុប្បន្ន</translation>
     </message>
     <message>
         <source>Delete current tool</source>
@@ -2531,12 +2543,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="200"/>
         <source>Capture screen</source>
-        <translation type="unfinished"></translation>
+        <translation>ថតអេក្រង់</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="202"/>
         <source>Screenshot history</source>
-        <translation type="unfinished"></translation>
+        <translation>ប្រវត្តិរូបថតអេក្រង់</translation>
     </message>
 </context>
 <context>
@@ -2556,22 +2568,22 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="37"/>
         <source>Active tool size: </source>
-        <translation type="unfinished"></translation>
+        <translation>ទំហំឧបករណ៍សកម្ម៖ </translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="57"/>
         <source>Active Color: </source>
-        <translation type="unfinished"></translation>
+        <translation>ពណ៌សកម្ម៖ </translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="78"/>
         <source>Grab Color</source>
-        <translation type="unfinished"></translation>
+        <translation>ចាប់យកពណ៌</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="85"/>
         <source>Display grid</source>
-        <translation type="unfinished"></translation>
+        <translation>បង្ហាញក្រឡាចត្រង្គ</translation>
     </message>
 </context>
 <context>
@@ -2579,12 +2591,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/sizedecrease/sizedecreasetool.cpp" line="37"/>
         <source>Decrease Tool Size</source>
-        <translation type="unfinished"></translation>
+        <translation>បន្ថយទំហំឧបករណ៍</translation>
     </message>
     <message>
         <location filename="../../src/tools/sizedecrease/sizedecreasetool.cpp" line="47"/>
         <source>Decrease the size of the other tools</source>
-        <translation type="unfinished"></translation>
+        <translation>បន្ថយទំហំឧបករណ៍ផ្សេងទៀត</translation>
     </message>
 </context>
 <context>
@@ -2592,12 +2604,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/sizeincrease/sizeincreasetool.cpp" line="37"/>
         <source>Increase Tool Size</source>
-        <translation type="unfinished"></translation>
+        <translation>បង្កើនទំហំឧបករណ៍</translation>
     </message>
     <message>
         <location filename="../../src/tools/sizeincrease/sizeincreasetool.cpp" line="47"/>
         <source>Increase the size of the other tools</source>
-        <translation type="unfinished"></translation>
+        <translation>បង្កើនទំហំឧបករណ៍ផ្សេងទៀត</translation>
     </message>
 </context>
 <context>
@@ -2620,112 +2632,112 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="43"/>
         <source>Century (00-99)</source>
-        <translation type="unfinished"></translation>
+        <translation>សតវត្ស (00-99)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="44"/>
         <source>Year (00-99)</source>
-        <translation type="unfinished"></translation>
+        <translation>ឆ្នាំ (00-99)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="45"/>
         <source>Year (2000)</source>
-        <translation type="unfinished"></translation>
+        <translation>ឆ្នាំ (2000)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="48"/>
         <source>Month Name (jan)</source>
-        <translation type="unfinished"></translation>
+        <translation>ឈ្មោះខែ (jan)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="49"/>
         <source>Month Name (january)</source>
-        <translation type="unfinished"></translation>
+        <translation>ឈ្មោះខែ (january)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="51"/>
         <source>Month (01-12)</source>
-        <translation type="unfinished"></translation>
+        <translation>ខែ (01-12)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="52"/>
         <source>Week Day (1-7)</source>
-        <translation type="unfinished"></translation>
+        <translation>ថ្ងៃក្នុងសប្តាហ៍ (1-7)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="53"/>
         <source>Week (01-53)</source>
-        <translation type="unfinished"></translation>
+        <translation>សប្តាហ៍ (01-53)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="56"/>
         <source>Day Name (mon)</source>
-        <translation type="unfinished"></translation>
+        <translation>ឈ្មោះថ្ងៃ (mon)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="57"/>
         <source>Day Name (monday)</source>
-        <translation type="unfinished"></translation>
+        <translation>ឈ្មោះថ្ងៃ (monday)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="59"/>
         <source>Day (01-31)</source>
-        <translation type="unfinished"></translation>
+        <translation>ថ្ងៃ (01-31)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="60"/>
         <source>Day of Month (1-31)</source>
-        <translation type="unfinished"></translation>
+        <translation>ថ្ងៃក្នុងខែ (1-31)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="61"/>
         <source>Day (001-366)</source>
-        <translation type="unfinished"></translation>
+        <translation>ថ្ងៃ (001-366)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="67"/>
         <source>Hour (00-23)</source>
-        <translation type="unfinished"></translation>
+        <translation>ម៉ោង (00-23)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="68"/>
         <source>Hour (01-12)</source>
-        <translation type="unfinished"></translation>
+        <translation>ម៉ោង (01-12)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="69"/>
         <source>Minute (00-59)</source>
-        <translation type="unfinished"></translation>
+        <translation>នាទី (00-59)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="70"/>
         <source>Second (00-59)</source>
-        <translation type="unfinished"></translation>
+        <translation>វិនាទី (00-59)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="73"/>
         <source>Full Date (%m/%d/%y)</source>
-        <translation type="unfinished"></translation>
+        <translation>កាលបរិច្ឆេទពេញ (%m/%d/%y)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="75"/>
         <source>Full Date (%Y-%m-%d)</source>
-        <translation type="unfinished"></translation>
+        <translation>កាលបរិច្ឆេទពេញ (%Y-%m-%d)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="76"/>
         <source>Full Date (%d-%m-%Y)</source>
-        <translation type="unfinished"></translation>
+        <translation>កាលបរិច្ឆេទពេញ (%d-%m-%Y)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="64"/>
         <source>Time (%H-%M-%S)</source>
-        <translation type="unfinished"></translation>
+        <translation>ពេលវេលា (%H-%M-%S)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="65"/>
         <source>Time (%H-%M)</source>
-        <translation type="unfinished"></translation>
+        <translation>ពេលវេលា (%H-%M)</translation>
     </message>
 </context>
 <context>
@@ -2733,7 +2745,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/utils/systemnotification.cpp" line="42"/>
         <source>Flameshot Info</source>
-        <translation type="unfinished"></translation>
+        <translation>ព័ត៌មាន Flameshot</translation>
     </message>
 </context>
 <context>
@@ -2741,37 +2753,37 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/text/textconfig.cpp" line="44"/>
         <source>StrikeOut</source>
-        <translation type="unfinished"></translation>
+        <translation>ឆូតកណ្តាល</translation>
     </message>
     <message>
         <location filename="../../src/tools/text/textconfig.cpp" line="53"/>
         <source>Underline</source>
-        <translation type="unfinished"></translation>
+        <translation>គូសបន្ទាត់ក្រោម</translation>
     </message>
     <message>
         <location filename="../../src/tools/text/textconfig.cpp" line="62"/>
         <source>Bold</source>
-        <translation type="unfinished"></translation>
+        <translation>ដិត</translation>
     </message>
     <message>
         <location filename="../../src/tools/text/textconfig.cpp" line="71"/>
         <source>Italic</source>
-        <translation type="unfinished"></translation>
+        <translation>ផ្អៀង</translation>
     </message>
     <message>
         <location filename="../../src/tools/text/textconfig.cpp" line="81"/>
         <source>Left Align</source>
-        <translation type="unfinished"></translation>
+        <translation>តម្រឹមឆ្វេង</translation>
     </message>
     <message>
         <location filename="../../src/tools/text/textconfig.cpp" line="90"/>
         <source>Center Align</source>
-        <translation type="unfinished"></translation>
+        <translation>តម្រឹមកណ្តាល</translation>
     </message>
     <message>
         <location filename="../../src/tools/text/textconfig.cpp" line="99"/>
         <source>Right Align</source>
-        <translation type="unfinished"></translation>
+        <translation>តម្រឹមស្តាំ</translation>
     </message>
 </context>
 <context>
@@ -2779,12 +2791,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/text/texttool.cpp" line="73"/>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation>អក្សរ</translation>
     </message>
     <message>
         <location filename="../../src/tools/text/texttool.cpp" line="97"/>
         <source>Add text to your capture</source>
-        <translation type="unfinished"></translation>
+        <translation>បន្ថែមអក្សរទៅរូបភាពថតរបស់អ្នក</translation>
     </message>
 </context>
 <context>
@@ -2792,47 +2804,47 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="100"/>
         <source>&amp;Take Screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;ថតរូបអេក្រង់</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="118"/>
         <source>&amp;Open Launcher</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;បើកកម្មវិធីចាប់ផ្តើម</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="123"/>
         <source>&amp;Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;ការកំណត់រចនាសម្ព័ន្ធ</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="128"/>
         <source>&amp;About</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;អំពី</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="133"/>
         <source>Check for updates</source>
-        <translation type="unfinished"></translation>
+        <translation>ពិនិត្យធ្វើបច្ចុប្បន្នភាព</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="144"/>
         <source>New version %1 is available</source>
-        <translation type="unfinished"></translation>
+        <translation>មានកំណែថ្មី %1</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="149"/>
         <source>&amp;Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;ចាកចេញ</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="154"/>
         <source>&amp;Latest Uploads</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;ការផ្ទុកឡើងថ្មីៗ</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="160"/>
         <source>&amp;Open Save Path</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;បើកផ្លូវរក្សាទុក</translation>
     </message>
 </context>
 <context>
@@ -2844,32 +2856,32 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="88"/>
         <source>Change the color moving the selectors and see the changes in the preview buttons.</source>
-        <translation type="unfinished"></translation>
+        <translation>ផ្លាស់ប្តូរពណ៌ដោយផ្លាស់ទីឧបករណ៍ជ្រើស ហើយមើលការផ្លាស់ប្តូរនៅក្នុងប៊ូតុងមើលជាមុន។</translation>
     </message>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="99"/>
         <source>Select a Button to modify it</source>
-        <translation type="unfinished"></translation>
+        <translation>ជ្រើសប៊ូតុងដើម្បីកែសម្រួលវា</translation>
     </message>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="109"/>
         <source>Main Color</source>
-        <translation type="unfinished"></translation>
+        <translation>ពណ៌ចម្បង</translation>
     </message>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="113"/>
         <source>Click on this button to set the edition mode of the main color.</source>
-        <translation type="unfinished"></translation>
+        <translation>ចុចលើប៊ូតុងនេះដើម្បីកំណត់របៀបកែសម្រួលពណ៌ចម្បង។</translation>
     </message>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="124"/>
         <source>Contrast Color</source>
-        <translation type="unfinished"></translation>
+        <translation>ពណ៌ផ្ទុយ</translation>
     </message>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="129"/>
         <source>Click on this button to set the edition mode of the contrast color.</source>
-        <translation type="unfinished"></translation>
+        <translation>ចុចលើប៊ូតុងនេះដើម្បីកំណត់របៀបកែសម្រួលពណ៌ផ្ទុយ។</translation>
     </message>
 </context>
 <context>
@@ -2877,12 +2889,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/undo/undotool.cpp" line="23"/>
         <source>Undo</source>
-        <translation type="unfinished"></translation>
+        <translation>មិនធ្វើវិញ</translation>
     </message>
     <message>
         <location filename="../../src/tools/undo/undotool.cpp" line="33"/>
         <source>Undo the last modification</source>
-        <translation type="unfinished"></translation>
+        <translation>មិនធ្វើការកែប្រែចុងក្រោយវិញ</translation>
     </message>
 </context>
 <context>
@@ -2890,22 +2902,22 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/widgets/updatenotificationwidget.cpp" line="70"/>
         <source>New Flameshot version %1 is available</source>
-        <translation type="unfinished"></translation>
+        <translation>មានកំណែ Flameshot ថ្មី %1</translation>
     </message>
     <message>
         <location filename="../../src/widgets/updatenotificationwidget.cpp" line="123"/>
         <source>Ignore</source>
-        <translation type="unfinished"></translation>
+        <translation>មិនអើពើ</translation>
     </message>
     <message>
         <location filename="../../src/widgets/updatenotificationwidget.cpp" line="131"/>
         <source>Later</source>
-        <translation type="unfinished"></translation>
+        <translation>ពេលក្រោយ</translation>
     </message>
     <message>
         <location filename="../../src/widgets/updatenotificationwidget.cpp" line="139"/>
         <source>Update</source>
-        <translation type="unfinished"></translation>
+        <translation>ធ្វើបច្ចុប្បន្នភាព</translation>
     </message>
 </context>
 <context>
@@ -2913,12 +2925,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/widgets/uploadhistory.ui" line="14"/>
         <source>Upload History</source>
-        <translation type="unfinished"></translation>
+        <translation>ប្រវត្តិការផ្ទុកឡើង</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadhistory.cpp" line="60"/>
         <source>Screenshots history is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>ប្រវត្តិរូបថតអេក្រង់ទទេ</translation>
     </message>
 </context>
 <context>
@@ -2926,32 +2938,32 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/widgets/uploadlineitem.ui" line="20"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>ទម្រង់</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadlineitem.ui" line="49"/>
         <source>TextLabel</source>
-        <translation type="unfinished"></translation>
+        <translation>ស្លាកអក្សរ</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadlineitem.ui" line="82"/>
         <source>Copy URL</source>
-        <translation type="unfinished"></translation>
+        <translation>ចម្លង URL</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadlineitem.ui" line="95"/>
         <source>Open In Browser</source>
-        <translation type="unfinished"></translation>
+        <translation>បើកក្នុងកម្មវិធីរុករក</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadlineitem.cpp" line="50"/>
         <source>Confirm to delete</source>
-        <translation type="unfinished"></translation>
+        <translation>បញ្ជាក់ដើម្បីលុប</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadlineitem.cpp" line="51"/>
         <source>Are you sure you want to delete a screenshot from the latest uploads and server?</source>
-        <translation type="unfinished"></translation>
+        <translation>តើអ្នកប្រាកដជាចង់លុបរូបថតអេក្រង់ពីការផ្ទុកឡើងថ្មីៗ និងម៉ាស៊ីនមេឬ?</translation>
     </message>
 </context>
 <context>
@@ -2959,12 +2971,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/widgets/panel/utilitypanel.cpp" line="196"/>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>បិទ</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/utilitypanel.cpp" line="206"/>
         <source>&lt;Empty&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;ទទេ&gt;</translation>
     </message>
 </context>
 <context>
@@ -2972,27 +2984,27 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="41"/>
         <source>Opacity of area outside selection:</source>
-        <translation type="unfinished"></translation>
+        <translation>ភាពស្រអាប់នៃតំបន់ខាងក្រៅការជ្រើសរើស៖</translation>
     </message>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="68"/>
         <source>UI Color Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>កម្មវិធីកែពណ៌ UI</translation>
     </message>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="74"/>
         <source>Colorpicker Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>កម្មវិធីកែឧបករណ៍ជ្រើសពណ៌</translation>
     </message>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="79"/>
         <source>Button Selection</source>
-        <translation type="unfinished"></translation>
+        <translation>ការជ្រើសប៊ូតុង</translation>
     </message>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="85"/>
         <source>Select All</source>
-        <translation type="unfinished"></translation>
+        <translation>ជ្រើសទាំងអស់</translation>
     </message>
 </context>
 <context>
@@ -3000,7 +3012,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_dialog.cpp" line="63"/>
         <source>Pick</source>
-        <translation type="unfinished"></translation>
+        <translation>ជ្រើស</translation>
     </message>
 </context>
 <context>
@@ -3008,7 +3020,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette.cpp" line="417"/>
         <source>Unnamed</source>
-        <translation type="unfinished"></translation>
+        <translation>គ្មានឈ្មោះ</translation>
     </message>
 </context>
 <context>
@@ -3016,12 +3028,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_model.cpp" line="55"/>
         <source>Unnamed</source>
-        <translation type="unfinished"></translation>
+        <translation>គ្មានឈ្មោះ</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_model.cpp" line="130"/>
         <source>%1 (%2 colors)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 (%2 ពណ៌)</translation>
     </message>
 </context>
 <context>
@@ -3030,88 +3042,89 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="64"/>
         <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="231"/>
         <source>Open a new palette from file</source>
-        <translation type="unfinished"></translation>
+        <translation>បើកក្ដារពណ៌ថ្មីពីឯកសារ</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="75"/>
         <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="234"/>
         <source>Create a new palette</source>
-        <translation type="unfinished"></translation>
+        <translation>បង្កើតក្ដារពណ៌ថ្មី</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="86"/>
         <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="237"/>
         <source>Duplicate the current palette</source>
-        <translation type="unfinished"></translation>
+        <translation>ចម្លងក្ដារពណ៌បច្ចុប្បន្ន</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="170"/>
         <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="240"/>
         <source>Delete the current palette</source>
-        <translation type="unfinished"></translation>
+        <translation>លុបក្ដារពណ៌បច្ចុប្បន្ន</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="181"/>
         <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="243"/>
         <source>Revert changes to the current palette</source>
-        <translation type="unfinished"></translation>
+        <translation>ត្រឡប់ការផ្លាស់ប្តូរទៅក្ដារពណ៌បច្ចុប្បន្ន</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="192"/>
         <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="246"/>
         <source>Save changes to the current palette</source>
-        <translation type="unfinished"></translation>
+        <translation>រក្សាទុកការផ្លាស់ប្តូរទៅក្ដារពណ៌បច្ចុប្បន្ន</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="216"/>
         <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="249"/>
         <source>Add a color to the palette</source>
-        <translation type="unfinished"></translation>
+        <translation>បន្ថែមពណ៌ទៅក្ដារពណ៌</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.ui" line="227"/>
         <location filename="../../build/_deps/qtcolorwidgets-build/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="252"/>
         <source>Remove the selected color from the palette</source>
-        <translation type="unfinished"></translation>
+        <translation>លុបពណ៌ដែលបានជ្រើសចេញពីក្ដារពណ៌</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="181"/>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="196"/>
         <source>New Palette</source>
-        <translation type="unfinished"></translation>
+        <translation>ក្ដារពណ៌ថ្មី</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="182"/>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="197"/>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>ឈ្មោះ</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="223"/>
         <source>GIMP Palettes (*.gpl)</source>
-        <translation type="unfinished"></translation>
+        <translation>ក្ដារពណ៌ GIMP (*.gpl)</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="224"/>
         <source>Palette Image (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>រូបភាពក្ដារពណ៌ (%1)</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="225"/>
         <source>All Files (*)</source>
-        <translation type="unfinished"></translation>
+        <translation>ឯកសារទាំងអស់ (*)</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="226"/>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="239"/>
         <source>Open Palette</source>
-        <translation type="unfinished"></translation>
+        <translation>បើកក្ដារពណ៌</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/color_palette_widget.cpp" line="240"/>
         <source>Failed to load the palette file
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>បរាជ័យក្នុងការផ្ទុកឯកសារក្ដារពណ៌
+%1</translation>
     </message>
 </context>
 <context>
@@ -3119,17 +3132,17 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_editor.cpp" line="321"/>
         <source>Add Color</source>
-        <translation type="unfinished"></translation>
+        <translation>បន្ថែមពណ៌</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_editor.cpp" line="330"/>
         <source>Remove Color</source>
-        <translation type="unfinished"></translation>
+        <translation>លុបពណ៌</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_editor.cpp" line="338"/>
         <source>Edit Color...</source>
-        <translation type="unfinished"></translation>
+        <translation>កែសម្រួលពណ៌...</translation>
     </message>
 </context>
 <context>
@@ -3137,7 +3150,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/gradient_list_model.cpp" line="215"/>
         <source>%1 (%2 colors)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 (%2 ពណ៌)</translation>
     </message>
 </context>
 <context>
@@ -3145,12 +3158,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/swatch.cpp" line="855"/>
         <source>Clear Color</source>
-        <translation type="unfinished"></translation>
+        <translation>សម្អាតពណ៌</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/swatch.cpp" line="864"/>
         <source>%1 (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 (%2)</translation>
     </message>
 </context>
 </TS>
