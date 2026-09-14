@@ -7,6 +7,7 @@
 
 #include "utils/confighandler.h"
 #include "utils/colorutils.h"
+#include "capturebutton.h"
 
 #include <QApplication>
 #include <QClipboard>
@@ -33,9 +34,12 @@ QrResultWidget::QrResultWidget(QWidget* parent)
     setWindowFlags(Qt::Widget);
     setAttribute(Qt::WA_StyledBackground, true);
 
+    setMinimumWidth(280);
+    setMaximumWidth(360);
+
     // --- build UI ---
     auto* rootLayout = new QVBoxLayout(this);
-    rootLayout->setContentsMargins(10, 8, 10, 10);
+    rootLayout->setContentsMargins(12, 10, 12, 12);
     rootLayout->setSpacing(6);
 
     // Title row: type label + close button
@@ -61,7 +65,8 @@ QrResultWidget::QrResultWidget(QWidget* parent)
     m_contentLabel->setObjectName(QStringLiteral("contentLabel"));
     m_contentLabel->setWordWrap(true);
     m_contentLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
-    m_contentLabel->setMaximumWidth(300);
+    m_contentLabel->setMinimumWidth(250);
+    m_contentLabel->setMaximumWidth(330);
     rootLayout->addWidget(m_contentLabel);
 
     // Action buttons row
@@ -129,8 +134,9 @@ void QrResultWidget::showResult(const QString& content, const QRect& selectionGe
     applyStyleSheet();
 
     // Size to content then position
+    setMinimumWidth(280);
+    setMaximumWidth(360);
     adjustSize();
-    setMaximumWidth(320);
 
     positionRelativeToSelection(selectionGeometry);
     show();
@@ -347,38 +353,93 @@ void QrResultWidget::positionRelativeToSelection(const QRect& selection)
         }
     }
 
-    const int margin = 10;
-    const int w      = width()  > 0 ? width()  : 320;
-    const int h      = height() > 0 ? height() : 200;
+    // Determine the area occupied by the selection AND all visible toolbar buttons
+    QRect excludedArea = selection;
+    QRegion buttonsRegion;
+    if (parentWidget()) {
+        const auto buttons = parentWidget()->findChildren<CaptureButton*>();
+        for (const auto* btn : buttons) {
+            if (btn->isVisible()) {
+                const QRect btnGeom = btn->geometry().adjusted(-2, -2, 2, 2);
+                excludedArea = excludedArea.united(btnGeom);
+                buttonsRegion += btnGeom;
+            }
+        }
+    }
 
-    // Priority: right → left → below → above
-    QRect rightPos(selection.right() + margin, selection.top(), w, h);
-    if (availableBounds.contains(rightPos)) {
+    const int margin = 12;
+    const int w = qMax(width(), 280);
+    const int h = qMax(height(), 120);
+    resize(w, h);
+
+    // Candidate 1: Right of all buttons
+    QRect rightPos(excludedArea.right() + margin, selection.top(), w, h);
+    if (rightPos.bottom() > availableBounds.bottom()) {
+        rightPos.moveBottom(availableBounds.bottom() - margin);
+    }
+    if (rightPos.top() < availableBounds.top()) {
+        rightPos.moveTop(availableBounds.top() + margin);
+    }
+    if (availableBounds.contains(rightPos) && !rightPos.intersects(excludedArea)) {
         move(rightPos.topLeft());
         return;
     }
 
-    QRect leftPos(selection.left() - w - margin, selection.top(), w, h);
-    if (availableBounds.contains(leftPos)) {
+    // Candidate 2: Left of all buttons
+    QRect leftPos(excludedArea.left() - w - margin, selection.top(), w, h);
+    if (leftPos.bottom() > availableBounds.bottom()) {
+        leftPos.moveBottom(availableBounds.bottom() - margin);
+    }
+    if (leftPos.top() < availableBounds.top()) {
+        leftPos.moveTop(availableBounds.top() + margin);
+    }
+    if (availableBounds.contains(leftPos) && !leftPos.intersects(excludedArea)) {
         move(leftPos.topLeft());
         return;
     }
 
-    QRect belowPos(selection.left(), selection.bottom() + margin, w, h);
-    if (availableBounds.contains(belowPos)) {
+    // Candidate 3: Below all buttons
+    QRect belowPos(selection.left(), excludedArea.bottom() + margin, w, h);
+    if (belowPos.right() > availableBounds.right()) {
+        belowPos.moveRight(availableBounds.right() - margin);
+    }
+    if (belowPos.left() < availableBounds.left()) {
+        belowPos.moveLeft(availableBounds.left() + margin);
+    }
+    if (availableBounds.contains(belowPos) && !belowPos.intersects(excludedArea)) {
         move(belowPos.topLeft());
         return;
     }
 
-    QRect abovePos(selection.left(), selection.top() - h - margin, w, h);
-    if (availableBounds.contains(abovePos)) {
+    // Candidate 4: Above all buttons
+    QRect abovePos(selection.left(), excludedArea.top() - h - margin, w, h);
+    if (abovePos.right() > availableBounds.right()) {
+        abovePos.moveRight(availableBounds.right() - margin);
+    }
+    if (abovePos.left() < availableBounds.left()) {
+        abovePos.moveLeft(availableBounds.left() + margin);
+    }
+    if (availableBounds.contains(abovePos) && !abovePos.intersects(excludedArea)) {
         move(abovePos.topLeft());
         return;
     }
 
-    // Fallback: clamp inside availableBounds near selection
-    int x = qBound(availableBounds.left(), selection.left(), qMax(availableBounds.left(), availableBounds.right() - w));
-    int y = qBound(availableBounds.top(), selection.top(), qMax(availableBounds.top(), availableBounds.bottom() - h));
+    // Candidate 5: If selection is large and outside space is constrained, place inside selection
+    if (selection.width() >= w + 2 * margin && selection.height() >= h + 2 * margin) {
+        QRect insidePos(selection.left() + margin, selection.top() + margin, w, h);
+        if (!buttonsRegion.intersects(insidePos)) {
+            move(insidePos.topLeft());
+            return;
+        }
+    }
+
+    // Fallback: clamp inside availableBounds
+    int x = qBound(availableBounds.left() + margin,
+                   excludedArea.right() + margin,
+                   qMax(availableBounds.left() + margin, availableBounds.right() - w - margin));
+    int y = qBound(availableBounds.top() + margin,
+                   selection.top(),
+                   qMax(availableBounds.top() + margin, availableBounds.bottom() - h - margin));
     move(x, y);
 }
 
