@@ -43,6 +43,13 @@
 #include "widgets/updatenotificationwidget.h"
 #endif
 
+#ifdef ENABLE_QR_DECODER
+#include "utils/qrdecoder.h"
+#include "widgets/capture/qrresultwidget.h"
+#include <QFutureWatcher>
+#include <QtConcurrent/QtConcurrent>
+#endif
+
 #define MOUSE_DISTANCE_TO_START_MOVING 3
 
 auto const MOUSE_WHEEL_TRESHOLD = 60;
@@ -237,6 +244,13 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
     m_colorPicker = new ColorPicker(this);
     // Init notification widget
     m_notifierBox = new NotifierBox(this);
+#ifdef ENABLE_QR_DECODER
+    m_qrResultWidget = new QrResultWidget(this);
+    connect(m_qrResultWidget,
+            &QrResultWidget::dismissed,
+            this,
+            [this]() { m_qrResultWidget->hideResult(); });
+#endif
     initPanel();
 
     // TODO: Make it more clear why this has moved. In Qt6 some timing related
@@ -1350,6 +1364,12 @@ void CaptureWidget::initSelection()
         m_context.selection = extendedRect(constrainedToCaptureArea);
 
         m_buttonHandler->hide();
+#ifdef ENABLE_QR_DECODER
+        // Selection is being dragged/resized, hide a stale result panel
+        if (m_qrResultWidget) {
+            m_qrResultWidget->hideResult();
+        }
+#endif
         updateCursor();
         updateSizeIndicator();
         OverlayMessage::pop();
@@ -1364,8 +1384,17 @@ void CaptureWidget::initSelection()
             }
             m_buttonHandler->updatePosition(m_selection->geometry());
             m_buttonHandler->show();
+#ifdef ENABLE_QR_DECODER
+            // Selection finalized, auto-detect a QR code in the area
+            checkForQrCode();
+#endif
         } else {
             m_buttonHandler->hide();
+#ifdef ENABLE_QR_DECODER
+            if (m_qrResultWidget) {
+                m_qrResultWidget->hideResult();
+            }
+#endif
         }
     });
     connect(m_selection, &SelectionWidget::visibilityChanged, this, [this]() {
@@ -1387,6 +1416,52 @@ void CaptureWidget::initSelection()
         emit m_selection->geometrySettled();
     }
 }
+
+#ifdef ENABLE_QR_DECODER
+void CaptureWidget::checkForQrCode()
+{
+    if (!m_selection || !m_selection->isVisible()) {
+        return;
+    }
+
+    const QRect selectionGeometry = m_selection->geometry();
+    if (selectionGeometry.width() < 21 || selectionGeometry.height() < 21) {
+        // Too small to contain a valid QR code (version-1 QR is 21x21 modules)
+        return;
+    }
+
+    const QPixmap selectedArea = m_context.selectedScreenshotArea();
+    if (selectedArea.isNull()) {
+        return;
+    }
+
+    // Run the actual decoding on a worker thread so the UI thread is never
+    // blocked, then marshal the result back through a watcher.
+    QFutureWatcher<QrDecodeResult>* watcher =
+      new QFutureWatcher<QrDecodeResult>(this);
+    connect(watcher,
+            &QFutureWatcher<QrDecodeResult>::finished,
+            this,
+            [this, watcher, selectionGeometry]() {
+                const QrDecodeResult result = watcher->result();
+                watcher->deleteLater();
+
+                // Discard stale results: only show when the selection is still
+                // visible and its geometry matches the one that was scanned.
+                if (!m_selection || !m_selection->isVisible() ||
+                    m_selection->geometry() != selectionGeometry) {
+                    return;
+                }
+
+                if (result.found && m_qrResultWidget) {
+                    m_qrResultWidget->showResult(result.content,
+                                                 selectionGeometry);
+                }
+            });
+    watcher->setFuture(
+      QtConcurrent::run([selectedArea]() { return QrDecoder::decode(selectedArea); }));
+}
+#endif
 
 void CaptureWidget::setState(CaptureToolButton* b)
 {
