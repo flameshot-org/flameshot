@@ -30,7 +30,9 @@ target_sources(
 if (ENABLE_QR_DECODER)
   target_sources(
     flameshot
-    PRIVATE qrresultwidget.h
+    PRIVATE qrcontroller.h
+            qrcontroller.cpp
+            qrresultwidget.h
             qrresultwidget.cpp
   )
 endif()

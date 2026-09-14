@@ -42,7 +42,7 @@ class UpdateNotificationWidget;
 class UtilityPanel;
 class SidePanelWidget;
 #ifdef ENABLE_QR_DECODER
-class QrResultWidget;
+class QrController;
 #endif
 
 class CaptureWidget : public QWidget
@@ -237,7 +237,6 @@ private:
     bool m_clipboardWorkaroundDone{ false };
 
 #ifdef ENABLE_QR_DECODER
-    QrResultWidget* m_qrResultWidget;
-    void checkForQrCode();
+    QrController* m_qrController{ nullptr };
 #endif
 };

@@ -44,15 +44,7 @@
 #endif
 
 #ifdef ENABLE_QR_DECODER
-#include "utils/qrdecoder.h"
-#include "widgets/capture/qrresultwidget.h"
-#include <QFutureWatcher>
-#include <QtConcurrent/QtConcurrent>
-
-// Maximum time (in ms) a QR decode may take before the result is discarded.
-// Decoding normally finishes in well under a second; this only guards against
-// pathological inputs so the capture UI never lingers on a slow scan.
-static constexpr int QR_DECODE_TIMEOUT_MS = 5000;
+#include "widgets/capture/qrcontroller.h"
 #endif
 
 #define MOUSE_DISTANCE_TO_START_MOVING 3
@@ -250,11 +242,7 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
     // Init notification widget
     m_notifierBox = new NotifierBox(this);
 #ifdef ENABLE_QR_DECODER
-    m_qrResultWidget = new QrResultWidget(this);
-    connect(m_qrResultWidget,
-            &QrResultWidget::dismissed,
-            this,
-            [this]() { m_qrResultWidget->hideResult(); });
+    m_qrController = new QrController(this);
 #endif
     initPanel();
 
@@ -595,8 +583,8 @@ void CaptureWidget::deleteToolWidgetOrClose()
     } else if (m_colorPicker && m_colorPicker->isVisible()) {
         m_colorPicker->hide();
 #ifdef ENABLE_QR_DECODER
-    } else if (m_qrResultWidget && m_qrResultWidget->isVisible()) {
-        m_qrResultWidget->hideResult();
+    } else if (m_qrController && m_qrController->handleEscape()) {
+        return;
 #endif
     } else {
         // close CaptureWidget
@@ -908,9 +896,8 @@ void CaptureWidget::mousePressEvent(QMouseEvent* e)
         return;
     }
 #ifdef ENABLE_QR_DECODER
-    if (m_qrResultWidget && m_qrResultWidget->isVisible() &&
-        !m_qrResultWidget->geometry().contains(e->pos())) {
-        m_qrResultWidget->hideResult();
+    if (m_qrController) {
+        m_qrController->handleMousePress(e->pos());
     }
 #endif
     // reset object selection if capture area selection is active
@@ -1380,9 +1367,8 @@ void CaptureWidget::initSelection()
 
         m_buttonHandler->hide();
 #ifdef ENABLE_QR_DECODER
-        // Selection is being dragged/resized, hide a stale result panel
-        if (m_qrResultWidget) {
-            m_qrResultWidget->hideResult();
+        if (m_qrController) {
+            m_qrController->handleSelectionDragging();
         }
 #endif
         updateCursor();
@@ -1400,14 +1386,16 @@ void CaptureWidget::initSelection()
             m_buttonHandler->updatePosition(m_selection->geometry());
             m_buttonHandler->show();
 #ifdef ENABLE_QR_DECODER
-            // Selection finalized, auto-detect a QR code in the area
-            checkForQrCode();
+            if (m_qrController) {
+                m_qrController->handleSelectionSettled(
+                  m_selection->geometry(), m_context.selectedScreenshotArea());
+            }
 #endif
         } else {
             m_buttonHandler->hide();
 #ifdef ENABLE_QR_DECODER
-            if (m_qrResultWidget) {
-                m_qrResultWidget->hideResult();
+            if (m_qrController) {
+                m_qrController->handleSelectionHidden();
             }
 #endif
         }
@@ -1415,8 +1403,8 @@ void CaptureWidget::initSelection()
     connect(m_selection, &SelectionWidget::visibilityChanged, this, [this]() {
         if (!m_selection->isVisible()) {
 #ifdef ENABLE_QR_DECODER
-            if (m_qrResultWidget) {
-                m_qrResultWidget->hideResult();
+            if (m_qrController) {
+                m_qrController->handleSelectionHidden();
             }
 #endif
             if (!m_helpMessage.isEmpty()) {
@@ -1439,66 +1427,7 @@ void CaptureWidget::initSelection()
     }
 }
 
-#ifdef ENABLE_QR_DECODER
-void CaptureWidget::checkForQrCode()
-{
-    if (!ConfigHandler().enableQrCode()) {
-        return;
-    }
 
-    if (!m_selection || !m_selection->isVisible()) {
-        return;
-    }
-
-    const QRect selectionGeometry = m_selection->geometry();
-    if (selectionGeometry.width() < 21 || selectionGeometry.height() < 21) {
-        // Too small to contain a valid QR code (version-1 QR is 21x21 modules)
-        return;
-    }
-
-    const QPixmap selectedArea = m_context.selectedScreenshotArea();
-    if (selectedArea.isNull()) {
-        return;
-    }
-
-    // Run the actual decoding on a worker thread so the UI thread is never
-    // blocked, then marshal the result back through a watcher.
-    QFutureWatcher<QrDecodeResult>* watcher =
-      new QFutureWatcher<QrDecodeResult>(this);
-
-    // Watchdog: decode is expected to complete in well under a second. If it
-    // ever runs away (pathological image), discard any eventual result so the
-    // capture UI never lingers on a stale scan.
-    QTimer* watchdog = new QTimer(watcher);
-    watchdog->setSingleShot(true);
-    watchdog->setInterval(QR_DECODE_TIMEOUT_MS);
-    connect(watchdog, &QTimer::timeout, watcher, &QObject::deleteLater);
-    watchdog->start();
-
-    connect(watcher,
-            &QFutureWatcher<QrDecodeResult>::finished,
-            this,
-            [this, watcher, watchdog, selectionGeometry]() {
-                const QrDecodeResult result = watcher->result();
-                watchdog->stop();
-                watcher->deleteLater();
-
-                // Discard stale results: only show when the selection is still
-                // visible and its geometry matches the one that was scanned.
-                if (!m_selection || !m_selection->isVisible() ||
-                    m_selection->geometry() != selectionGeometry) {
-                    return;
-                }
-
-                if (result.found && m_qrResultWidget) {
-                    m_qrResultWidget->showResult(result.content,
-                                                 selectionGeometry);
-                }
-            });
-    watcher->setFuture(
-      QtConcurrent::run([selectedArea]() { return QrDecoder::decode(selectedArea); }));
-}
-#endif
 
 void CaptureWidget::setState(CaptureToolButton* b)
 {
