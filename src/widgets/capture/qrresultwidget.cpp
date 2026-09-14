@@ -7,6 +7,7 @@
 
 #include "utils/confighandler.h"
 #include "utils/colorutils.h"
+#include "utils/globalvalues.h"
 #include "capturebutton.h"
 
 #include <QApplication>
@@ -353,27 +354,45 @@ void QrResultWidget::positionRelativeToSelection(const QRect& selection)
         }
     }
 
-    // Determine the area occupied by the selection AND all visible toolbar buttons
+    const int baseSize = GlobalValues::buttonBaseSize();
+    const int separator = qMax(4, baseSize / 4);
+    const int extendedSize = baseSize + separator;
+
+    // Determine the area occupied by the selection AND all toolbar buttons.
+    // Note: CaptureToolButton animates its size using m_emergeAnimation starting from (0,0),
+    // so btn->width() or btn->size() during animation can be smaller than baseSize.
+    // We must use baseSize to guarantee we account for the final settled button bounds.
     QRect excludedArea = selection;
     QRegion buttonsRegion;
     if (parentWidget()) {
         const auto buttons = parentWidget()->findChildren<CaptureButton*>();
         for (const auto* btn : buttons) {
-            if (btn->isVisible()) {
-                const QRect btnGeom = btn->geometry().adjusted(-2, -2, 2, 2);
-                excludedArea = excludedArea.united(btnGeom);
-                buttonsRegion += btnGeom;
+            if (btn != nullptr && (btn->isVisible() || (btn->pos() != QPoint(0, 0) && btn->pos() != selection.topLeft()))) {
+                const int btnW = qMax(btn->width(), baseSize);
+                const int btnH = qMax(btn->height(), baseSize);
+                const QRect btnGeom(btn->x(), btn->y(), btnW, btnH);
+                const QRect paddedGeom = btnGeom.adjusted(-4, -4, 4, 4);
+                excludedArea = excludedArea.united(paddedGeom);
+                buttonsRegion += paddedGeom;
             }
         }
     }
 
-    const int margin = 12;
+    // Flameshot places tool buttons on the right side of selection if space permits.
+    // If the selection height is small, it wraps buttons into two columns.
+    int estimatedRightButtonsWidth = extendedSize;
+    if (selection.height() < extendedSize * 6) {
+        estimatedRightButtonsWidth = extendedSize * 2;
+    }
+
+    const int margin = 20;
     const int w = qMax(width(), 280);
     const int h = qMax(height(), 120);
     resize(w, h);
 
-    // Candidate 1: Right of all buttons
-    QRect rightPos(excludedArea.right() + margin, selection.top(), w, h);
+    // Candidate 1: Right of all buttons (ensuring generous clearance to the right)
+    const int rightX = qMax(excludedArea.right() + margin, selection.right() + estimatedRightButtonsWidth + margin);
+    QRect rightPos(rightX, selection.top(), w, h);
     if (rightPos.bottom() > availableBounds.bottom()) {
         rightPos.moveBottom(availableBounds.bottom() - margin);
     }
@@ -386,7 +405,8 @@ void QrResultWidget::positionRelativeToSelection(const QRect& selection)
     }
 
     // Candidate 2: Left of all buttons
-    QRect leftPos(excludedArea.left() - w - margin, selection.top(), w, h);
+    const int leftX = qMin(excludedArea.left() - w - margin, selection.left() - estimatedRightButtonsWidth - w - margin);
+    QRect leftPos(leftX, selection.top(), w, h);
     if (leftPos.bottom() > availableBounds.bottom()) {
         leftPos.moveBottom(availableBounds.bottom() - margin);
     }
@@ -399,7 +419,8 @@ void QrResultWidget::positionRelativeToSelection(const QRect& selection)
     }
 
     // Candidate 3: Below all buttons
-    QRect belowPos(selection.left(), excludedArea.bottom() + margin, w, h);
+    const int bottomY = qMax(excludedArea.bottom() + margin, selection.bottom() + extendedSize + margin);
+    QRect belowPos(selection.left(), bottomY, w, h);
     if (belowPos.right() > availableBounds.right()) {
         belowPos.moveRight(availableBounds.right() - margin);
     }
@@ -412,7 +433,8 @@ void QrResultWidget::positionRelativeToSelection(const QRect& selection)
     }
 
     // Candidate 4: Above all buttons
-    QRect abovePos(selection.left(), excludedArea.top() - h - margin, w, h);
+    const int topY = qMin(excludedArea.top() - h - margin, selection.top() - extendedSize - h - margin);
+    QRect abovePos(selection.left(), topY, w, h);
     if (abovePos.right() > availableBounds.right()) {
         abovePos.moveRight(availableBounds.right() - margin);
     }
@@ -435,7 +457,7 @@ void QrResultWidget::positionRelativeToSelection(const QRect& selection)
 
     // Fallback: clamp inside availableBounds
     int x = qBound(availableBounds.left() + margin,
-                   excludedArea.right() + margin,
+                   rightX,
                    qMax(availableBounds.left() + margin, availableBounds.right() - w - margin));
     int y = qBound(availableBounds.top() + margin,
                    selection.top(),
