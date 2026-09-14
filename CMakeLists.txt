@@ -9,7 +9,7 @@ set(GIT_API_URL "https://api.github.com/repos/flameshot-org/flameshot/releases/l
 project(
   flameshot
   VERSION ${FLAMESHOT_VERSION}
-  LANGUAGES CXX)
+  LANGUAGES C CXX) # C required by ZXing-cpp subproject
 set(PROJECT_NAME_CAPITALIZED "Flameshot")
 
 include(FetchContent)
@@ -130,6 +130,36 @@ if(USE_KDSINGLEAPPLICATION)
     endif()
   else()
     find_package(KDSingleApplication-qt6 REQUIRED)
+  endif()
+endif()
+
+# QR Code decoder library (ZXing-cpp)
+option(ENABLE_QR_DECODER "Enable QR code detection in screenshots" ON)
+
+if(ENABLE_QR_DECODER)
+  add_compile_definitions(ENABLE_QR_DECODER)
+
+  FetchContent_Declare(
+    zxingcpp
+    GIT_REPOSITORY https://github.com/nu-book/zxing-cpp.git
+    GIT_TAG v2.2.1  # pin versi stabil
+  )
+
+  # ZXing-cpp build options
+  set(ZXING_READERS ON CACHE BOOL "" FORCE)
+  set(ZXING_WRITERS OFF CACHE BOOL "" FORCE)
+  set(ZXING_EXAMPLES OFF CACHE BOOL "" FORCE)
+  set(ZXING_APP OFF CACHE BOOL "" FORCE)
+  set(BUILD_TESTING OFF CACHE BOOL "" FORCE)
+
+  if(WIN32)
+    FetchContent_GetProperties(zxingcpp)
+    if(NOT zxingcpp_POPULATED)
+      FetchContent_Populate(zxingcpp)
+      add_subdirectory(${zxingcpp_SOURCE_DIR} ${zxingcpp_BINARY_DIR} EXCLUDE_FROM_ALL)
+    endif()
+  else()
+    FetchContent_MakeAvailable(zxingcpp)
   endif()
 endif()
 

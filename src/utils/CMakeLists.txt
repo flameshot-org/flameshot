@@ -42,3 +42,11 @@ IF (WIN32)
     PRIVATE winlnkfileparse.cpp
   )
 ENDIF()
+
+if (ENABLE_QR_DECODER)
+  target_sources(
+    flameshot
+    PRIVATE qrdecoder.h
+            qrdecoder.cpp
+  )
+endif()

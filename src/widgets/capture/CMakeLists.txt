@@ -26,3 +26,13 @@ target_sources(
         selectionwidget.cpp
         magnifierwidget.cpp
         modificationcommand.cpp)
+
+if (ENABLE_QR_DECODER)
+  target_sources(
+    flameshot
+    PRIVATE qrcontroller.h
+            qrcontroller.cpp
+            qrresultwidget.h
+            qrresultwidget.cpp
+  )
+endif()

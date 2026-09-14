@@ -19,6 +19,15 @@ find_package(
 )
 endif()
 
+if (ENABLE_QR_DECODER)
+find_package(
+        Qt${QT_VERSION_MAJOR}
+        CONFIG
+        REQUIRED
+        Concurrent
+)
+endif()
+
 if (USE_WAYLAND_CLIPBOARD)
     find_package(KF6GuiAddons)
 endif()
@@ -193,6 +202,14 @@ if (UNIX)
 target_link_libraries(
         flameshot
         Qt${QT_VERSION_MAJOR}::DBus
+)
+endif()
+
+if (ENABLE_QR_DECODER)
+target_link_libraries(
+        flameshot
+        ZXing::ZXing
+        Qt${QT_VERSION_MAJOR}::Concurrent
 )
 endif()
 
