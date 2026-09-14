@@ -9,7 +9,7 @@ set(GIT_API_URL "https://api.github.com/repos/flameshot-org/flameshot/releases/l
 project(
   flameshot
   VERSION ${FLAMESHOT_VERSION}
-  LANGUAGES CXX)
+  LANGUAGES C CXX) # C required by ZXing-cpp subproject
 set(PROJECT_NAME_CAPITALIZED "Flameshot")
 
 include(FetchContent)

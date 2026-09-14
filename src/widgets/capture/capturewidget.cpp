@@ -48,6 +48,11 @@
 #include "widgets/capture/qrresultwidget.h"
 #include <QFutureWatcher>
 #include <QtConcurrent/QtConcurrent>
+
+// Maximum time (in ms) a QR decode may take before the result is discarded.
+// Decoding normally finishes in well under a second; this only guards against
+// pathological inputs so the capture UI never lingers on a slow scan.
+static constexpr int QR_DECODE_TIMEOUT_MS = 5000;
 #endif
 
 #define MOUSE_DISTANCE_TO_START_MOVING 3
@@ -589,6 +594,10 @@ void CaptureWidget::deleteToolWidgetOrClose()
         m_toolWidget = nullptr;
     } else if (m_colorPicker && m_colorPicker->isVisible()) {
         m_colorPicker->hide();
+#ifdef ENABLE_QR_DECODER
+    } else if (m_qrResultWidget && m_qrResultWidget->isVisible()) {
+        m_qrResultWidget->hideResult();
+#endif
     } else {
         // close CaptureWidget
         if (m_config.showQuitPrompt()) {
@@ -898,6 +907,12 @@ void CaptureWidget::mousePressEvent(QMouseEvent* e)
         updateCursor();
         return;
     }
+#ifdef ENABLE_QR_DECODER
+    if (m_qrResultWidget && m_qrResultWidget->isVisible() &&
+        !m_qrResultWidget->geometry().contains(e->pos())) {
+        m_qrResultWidget->hideResult();
+    }
+#endif
     // reset object selection if capture area selection is active
     if (m_selection->getMouseSide(e->pos()) != SelectionWidget::CENTER) {
         m_panel->setActiveLayer(-1);
@@ -1398,8 +1413,15 @@ void CaptureWidget::initSelection()
         }
     });
     connect(m_selection, &SelectionWidget::visibilityChanged, this, [this]() {
-        if (!m_selection->isVisible() && !m_helpMessage.isEmpty()) {
-            OverlayMessage::push(m_helpMessage);
+        if (!m_selection->isVisible()) {
+#ifdef ENABLE_QR_DECODER
+            if (m_qrResultWidget) {
+                m_qrResultWidget->hideResult();
+            }
+#endif
+            if (!m_helpMessage.isEmpty()) {
+                OverlayMessage::push(m_helpMessage);
+            }
         }
     });
     if (!initialSelection.isNull()) {
@@ -1439,11 +1461,22 @@ void CaptureWidget::checkForQrCode()
     // blocked, then marshal the result back through a watcher.
     QFutureWatcher<QrDecodeResult>* watcher =
       new QFutureWatcher<QrDecodeResult>(this);
+
+    // Watchdog: decode is expected to complete in well under a second. If it
+    // ever runs away (pathological image), discard any eventual result so the
+    // capture UI never lingers on a stale scan.
+    QTimer* watchdog = new QTimer(watcher);
+    watchdog->setSingleShot(true);
+    watchdog->setInterval(QR_DECODE_TIMEOUT_MS);
+    connect(watchdog, &QTimer::timeout, watcher, &QObject::deleteLater);
+    watchdog->start();
+
     connect(watcher,
             &QFutureWatcher<QrDecodeResult>::finished,
             this,
-            [this, watcher, selectionGeometry]() {
+            [this, watcher, watchdog, selectionGeometry]() {
                 const QrDecodeResult result = watcher->result();
+                watchdog->stop();
                 watcher->deleteLater();
 
                 // Discard stale results: only show when the selection is still

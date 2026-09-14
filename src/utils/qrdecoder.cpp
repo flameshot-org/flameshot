@@ -15,9 +15,32 @@
 #include <ImageView.h>
 #include <BarcodeFormat.h>
 
+#include <exception>
+
+// Minimum size of a version-1 QR code in modules (21x21). A region smaller
+// than this can never contain a scannable QR code, so it is skipped early to
+// avoid wasting a background decode.
+static constexpr int MIN_QR_MODULES = 21;
+
 // ---------------------------------------------------------------------------
 // Internal helpers
 // ---------------------------------------------------------------------------
+
+/**
+ * Validate a QImage before handing it to ZXing. Returns false for null images,
+ * images too small to hold a QR code, or images ZXing cannot be handed.
+ */
+static bool prepareImage(QImage& out, const QImage& image)
+{
+    if (image.isNull() || image.width() < MIN_QR_MODULES ||
+        image.height() < MIN_QR_MODULES) {
+        return false;
+    }
+
+    // Ensure the image is in a contiguous RGB888 format that ZXing can handle.
+    out = image.convertToFormat(QImage::Format_RGB888);
+    return !out.isNull() && out.constBits() != nullptr;
+}
 
 /**
  * Convert a QImage into a ZXing::ImageView. The QImage must stay alive for
@@ -56,12 +79,10 @@ static QPolygonF toPolygon(const ZXing::Position& pos)
 
 QrDecodeResult QrDecoder::decode(const QImage& image)
 {
-    if (image.isNull()) {
+    QImage rgb;
+    if (!prepareImage(rgb, image)) {
         return {};
     }
-
-    // Ensure the image is in a contiguous RGB888 format that ZXing can handle.
-    QImage rgb = image.convertToFormat(QImage::Format_RGB888);
 
     ZXing::ReaderOptions opts;
     // Restrict to QR code only for performance; can be expanded later.
@@ -69,18 +90,26 @@ QrDecodeResult QrDecoder::decode(const QImage& image)
     opts.setTryHarder(true);
     opts.setTryRotate(true);
 
-    ZXing::Result result = ZXing::ReadBarcode(toImageView(rgb), opts);
+    try {
+        ZXing::Result result = ZXing::ReadBarcode(toImageView(rgb), opts);
 
-    if (!result.isValid()) {
+        if (!result.isValid()) {
+            return {};
+        }
+
+        QrDecodeResult r;
+        r.found   = true;
+        r.content = QString::fromStdString(result.text());
+        r.format  = QString::fromStdString(ZXing::ToString(result.format()));
+        r.position = toPolygon(result.position());
+        return r;
+    } catch (const std::exception&) {
+        // Corrupted or unexpected input must never escape: decode() runs on a
+        // worker thread where a stray exception would terminate the process.
+        return {};
+    } catch (...) {
         return {};
     }
-
-    QrDecodeResult r;
-    r.found   = true;
-    r.content = QString::fromStdString(result.text());
-    r.format  = QString::fromStdString(ZXing::ToString(result.format()));
-    r.position = toPolygon(result.position());
-    return r;
 }
 
 QrDecodeResult QrDecoder::decode(const QPixmap& pixmap)
@@ -99,7 +128,10 @@ QList<QrDecodeResult> QrDecoder::decodeAll(const QPixmap& pixmap)
         return results;
     }
 
-    QImage rgb = pixmap.toImage().convertToFormat(QImage::Format_RGB888);
+    QImage rgb;
+    if (!prepareImage(rgb, pixmap.toImage())) {
+        return results;
+    }
 
     ZXing::ReaderOptions opts;
     opts.setFormats(ZXing::BarcodeFormat::QRCode);
@@ -107,17 +139,23 @@ QList<QrDecodeResult> QrDecoder::decodeAll(const QPixmap& pixmap)
     opts.setTryRotate(true);
     opts.setMaxNumberOfSymbols(10);
 
-    ZXing::Results zResults = ZXing::ReadBarcodes(toImageView(rgb), opts);
+    try {
+        ZXing::Results zResults = ZXing::ReadBarcodes(toImageView(rgb), opts);
 
-    for (const auto& res : zResults) {
-        if (res.isValid()) {
-            QrDecodeResult r;
-            r.found    = true;
-            r.content  = QString::fromStdString(res.text());
-            r.format   = QString::fromStdString(ZXing::ToString(res.format()));
-            r.position = toPolygon(res.position());
-            results.append(r);
+        for (const auto& res : zResults) {
+            if (res.isValid()) {
+                QrDecodeResult r;
+                r.found    = true;
+                r.content  = QString::fromStdString(res.text());
+                r.format   = QString::fromStdString(ZXing::ToString(res.format()));
+                r.position = toPolygon(res.position());
+                results.append(r);
+            }
         }
+    } catch (const std::exception&) {
+        return {};
+    } catch (...) {
+        return {};
     }
 
     return results;

@@ -323,29 +323,56 @@ void QrResultWidget::updateButtons()
 
 void QrResultWidget::positionRelativeToSelection(const QRect& selection)
 {
-    const QRect screen = parentWidget()
-                             ? parentWidget()->screen()->availableGeometry()
-                             : QRect(0, 0, 1920, 1080);
+    QRect availableBounds = parentWidget() ? parentWidget()->rect() : QRect(0, 0, 1920, 1080);
+
+    // If multi-monitor setup, constrain available bounds to the specific screen where selection sits
+    if (parentWidget()) {
+        const QPoint globalCenter = parentWidget()->mapToGlobal(selection.center());
+        QScreen* targetScreen = QGuiApplication::screenAt(globalCenter);
+        if (!targetScreen) {
+            targetScreen = parentWidget()->screen();
+        }
+        if (targetScreen) {
+            const QRect screenGeom = targetScreen->availableGeometry();
+            const QPoint localTopLeft = parentWidget()->mapFromGlobal(screenGeom.topLeft());
+            const QRect localScreen(localTopLeft, screenGeom.size());
+            availableBounds = availableBounds.intersected(localScreen);
+        }
+    }
 
     const int margin = 10;
     const int w      = width()  > 0 ? width()  : 320;
     const int h      = height() > 0 ? height() : 200;
 
-    // Priority: right → left → below → above → overlap
+    // Priority: right → left → below → above
     QRect rightPos(selection.right() + margin, selection.top(), w, h);
-    if (screen.contains(rightPos)) { move(rightPos.topLeft()); return; }
+    if (availableBounds.contains(rightPos)) {
+        move(rightPos.topLeft());
+        return;
+    }
 
     QRect leftPos(selection.left() - w - margin, selection.top(), w, h);
-    if (screen.contains(leftPos)) { move(leftPos.topLeft()); return; }
+    if (availableBounds.contains(leftPos)) {
+        move(leftPos.topLeft());
+        return;
+    }
 
     QRect belowPos(selection.left(), selection.bottom() + margin, w, h);
-    if (screen.contains(belowPos)) { move(belowPos.topLeft()); return; }
+    if (availableBounds.contains(belowPos)) {
+        move(belowPos.topLeft());
+        return;
+    }
 
     QRect abovePos(selection.left(), selection.top() - h - margin, w, h);
-    if (screen.contains(abovePos)) { move(abovePos.topLeft()); return; }
+    if (availableBounds.contains(abovePos)) {
+        move(abovePos.topLeft());
+        return;
+    }
 
-    // Fallback: overlay top-left of selection
-    move(selection.topLeft());
+    // Fallback: clamp inside availableBounds near selection
+    int x = qBound(availableBounds.left(), selection.left(), qMax(availableBounds.left(), availableBounds.right() - w));
+    int y = qBound(availableBounds.top(), selection.top(), qMax(availableBounds.top(), availableBounds.bottom() - h));
+    move(x, y);
 }
 
 void QrResultWidget::applyStyleSheet()
