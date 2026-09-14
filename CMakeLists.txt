@@ -133,6 +133,36 @@ if(USE_KDSINGLEAPPLICATION)
   endif()
 endif()
 
+# QR Code decoder library (ZXing-cpp)
+option(ENABLE_QR_DECODER "Enable QR code detection in screenshots" ON)
+
+if(ENABLE_QR_DECODER)
+  add_compile_definitions(ENABLE_QR_DECODER)
+
+  FetchContent_Declare(
+    zxingcpp
+    GIT_REPOSITORY https://github.com/nu-book/zxing-cpp.git
+    GIT_TAG v2.2.1  # pin versi stabil
+  )
+
+  # ZXing-cpp build options
+  set(ZXING_READERS ON CACHE BOOL "" FORCE)
+  set(ZXING_WRITERS OFF CACHE BOOL "" FORCE)
+  set(ZXING_EXAMPLES OFF CACHE BOOL "" FORCE)
+  set(ZXING_APP OFF CACHE BOOL "" FORCE)
+  set(BUILD_TESTING OFF CACHE BOOL "" FORCE)
+
+  if(WIN32)
+    FetchContent_GetProperties(zxingcpp)
+    if(NOT zxingcpp_POPULATED)
+      FetchContent_Populate(zxingcpp)
+      add_subdirectory(${zxingcpp_SOURCE_DIR} ${zxingcpp_BINARY_DIR} EXCLUDE_FROM_ALL)
+    endif()
+  else()
+    FetchContent_MakeAvailable(zxingcpp)
+  endif()
+endif()
+
 # allow for static analysis options (include after kdsingleApplication because
 # of potential conflict if ENABLE_QT_DEPRECATION_CHECK is used)
 include(cmake/StaticAnalyzers.cmake)
