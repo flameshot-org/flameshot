@@ -27,6 +27,13 @@ QrController::QrController(QWidget* parent)
             &QrResultWidget::dismissed,
             this,
             &QrController::hideResult);
+    connect(m_resultWidget,
+            &QrResultWidget::openUrlRequested,
+            this,
+            [this](const QUrl&) {
+                hideResult();
+                emit requestCloseCapture();
+            });
 }
 
 void QrController::handleSelectionSettled(const QRect& geometry,

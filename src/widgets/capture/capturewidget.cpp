@@ -243,6 +243,10 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
     m_notifierBox = new NotifierBox(this);
 #ifdef ENABLE_QR_DECODER
     m_qrController = new QrController(this);
+    connect(m_qrController, &QrController::requestCloseCapture, this, [this]() {
+        m_captureDone = true;
+        close();
+    });
 #endif
     initPanel();
 

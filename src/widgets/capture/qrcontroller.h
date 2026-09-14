@@ -63,6 +63,13 @@ public:
      */
     void hideResult();
 
+signals:
+    /**
+     * Emitted when a QR action (such as opening URL in browser) completes
+     * the capture session and requests closing the capture overlay.
+     */
+    void requestCloseCapture();
+
 private:
     QWidget* m_parentWidget;
     QrResultWidget* m_resultWidget;

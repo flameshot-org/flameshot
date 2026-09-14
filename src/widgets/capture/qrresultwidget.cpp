@@ -66,18 +66,25 @@ QrResultWidget::QrResultWidget(QWidget* parent)
 
     // Action buttons row
     auto* btnRow = new QHBoxLayout();
-    btnRow->setSpacing(6);
+    btnRow->setSpacing(8);
+    btnRow->setContentsMargins(0, 4, 0, 0);
 
     m_copyButton = new QPushButton(tr("📋 Copy"), this);
     m_copyButton->setObjectName(QStringLiteral("copyButton"));
     m_copyButton->setCursor(Qt::PointingHandCursor);
+    m_copyButton->setMinimumHeight(28);
+    m_copyButton->setMinimumWidth(80);
     btnRow->addWidget(m_copyButton);
 
     m_openButton = new QPushButton(tr("🌐 Open"), this);
     m_openButton->setObjectName(QStringLiteral("openButton"));
     m_openButton->setCursor(Qt::PointingHandCursor);
+    m_openButton->setMinimumHeight(28);
+    m_openButton->setMinimumWidth(80);
     m_openButton->setVisible(false); // shown only for URL/EMAIL/PHONE
     btnRow->addWidget(m_openButton);
+
+    btnRow->addStretch(1);
 
     rootLayout->addLayout(btnRow);
 
@@ -378,14 +385,20 @@ void QrResultWidget::positionRelativeToSelection(const QRect& selection)
 void QrResultWidget::applyStyleSheet()
 {
     const QColor uiColor = ConfigHandler().uiColor();
-    const QColor textColor = ColorUtils::colorIsDark(uiColor) ? Qt::white : Qt::black;
-    const QString uiHex  = uiColor.name();
-    const QString txtHex = textColor.name();
-    // Slightly lighter background for the panel
     const QColor bgColor = uiColor.lighter(170);
-    const QString bgHex  = bgColor.name();
+    const QColor textColor = ColorUtils::colorIsDark(bgColor) ? Qt::white : Qt::black;
+    const QColor btnTextColor = ColorUtils::colorIsDark(uiColor) ? Qt::white : Qt::black;
     const QColor borderColor = uiColor.darker(120);
+    const QColor hoverColor = uiColor.lighter(118);
+    const QColor pressedColor = uiColor.darker(115);
+
+    const QString bgHex      = bgColor.name();
+    const QString uiHex      = uiColor.name();
+    const QString txtHex     = textColor.name();
     const QString borderHex  = borderColor.name();
+    const QString btnTxtHex  = btnTextColor.name();
+    const QString hoverHex   = hoverColor.name();
+    const QString pressedHex = pressedColor.name();
 
     setStyleSheet(QStringLiteral(R"(
         QrResultWidget {
@@ -399,39 +412,43 @@ void QrResultWidget::applyStyleSheet()
             color: %2;
         }
         QLabel#contentLabel {
-            background-color: rgba(0,0,0,0.07);
+            background-color: rgba(0, 0, 0, 0.08);
             border: 1px solid %4;
             border-radius: 4px;
-            padding: 6px;
+            padding: 6px 8px;
             font-family: monospace;
             font-size: 11px;
             color: %3;
         }
-        QPushButton {
-            padding: 4px 10px;
-            border-radius: 4px;
-            font-size: 11px;
-        }
         QPushButton#copyButton, QPushButton#openButton {
-            background-color: %5;
-            color: %2;
+            background-color: %2;
+            color: %5;
             border: 1px solid %4;
+            border-radius: 4px;
+            padding: 4px 12px;
+            font-size: 11px;
+            font-weight: bold;
         }
         QPushButton#copyButton:hover, QPushButton#openButton:hover {
-            background-color: %4;
+            background-color: %6;
+            color: %5;
+        }
+        QPushButton#copyButton:pressed, QPushButton#openButton:pressed {
+            background-color: %7;
+            color: %5;
         }
         QPushButton#closeButton {
             background-color: transparent;
             border: none;
-            font-size: 12px;
+            border-radius: 11px;
+            font-size: 13px;
             color: %3;
         }
         QPushButton#closeButton:hover {
-            background-color: rgba(0,0,0,0.12);
-            border-radius: 3px;
+            background-color: rgba(0, 0, 0, 0.15);
         }
     )")
-    .arg(bgHex, uiHex, txtHex, borderHex, uiColor.name()));
+    .arg(bgHex, uiHex, txtHex, borderHex, btnTxtHex, hoverHex, pressedHex));
 }
 
 #endif // ENABLE_QR_DECODER
