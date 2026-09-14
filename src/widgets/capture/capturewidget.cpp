@@ -1442,6 +1442,10 @@ void CaptureWidget::initSelection()
 #ifdef ENABLE_QR_DECODER
 void CaptureWidget::checkForQrCode()
 {
+    if (!ConfigHandler().enableQrCode()) {
+        return;
+    }
+
     if (!m_selection || !m_selection->isVisible()) {
         return;
     }

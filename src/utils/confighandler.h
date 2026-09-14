@@ -126,6 +126,9 @@ public:
 #if defined(Q_OS_MACOS)
     CONFIG_GETTER_SETTER(useNativeFullscreen, setUseNativeFullscreen, bool)
 #endif
+#if defined(ENABLE_QR_DECODER)
+    CONFIG_GETTER_SETTER(enableQrCode, setEnableQrCode, bool)
+#endif
     CONFIG_GETTER_SETTER(uploadWithoutConfirmation,
                          setUploadWithoutConfirmation,
                          bool)
