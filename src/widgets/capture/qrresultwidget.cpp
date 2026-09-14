@@ -69,14 +69,14 @@ QrResultWidget::QrResultWidget(QWidget* parent)
     btnRow->setSpacing(8);
     btnRow->setContentsMargins(0, 4, 0, 0);
 
-    m_copyButton = new QPushButton(tr("📋 Copy"), this);
+    m_copyButton = new QPushButton(tr("Copy"), this);
     m_copyButton->setObjectName(QStringLiteral("copyButton"));
     m_copyButton->setCursor(Qt::PointingHandCursor);
     m_copyButton->setMinimumHeight(28);
     m_copyButton->setMinimumWidth(80);
     btnRow->addWidget(m_copyButton);
 
-    m_openButton = new QPushButton(tr("🌐 Open"), this);
+    m_openButton = new QPushButton(tr("Open"), this);
     m_openButton->setObjectName(QStringLiteral("openButton"));
     m_openButton->setCursor(Qt::PointingHandCursor);
     m_openButton->setMinimumHeight(28);
@@ -118,7 +118,7 @@ void QrResultWidget::showResult(const QString& content, const QRect& selectionGe
     m_contentType = detectContentType(content);
 
     // Update labels
-    m_typeLabel->setText(QStringLiteral("🔍 QR: ") + contentTypeLabel(m_contentType));
+    m_typeLabel->setText(QStringLiteral("QR: ") + contentTypeLabel(m_contentType));
     m_contentLabel->setText(formatContent(content, m_contentType));
     m_contentLabel->setToolTip(content);
 
@@ -157,9 +157,9 @@ void QrResultWidget::onCopyClicked()
     emit copyRequested(m_rawContent);
 
     // Brief visual feedback: change button text then restore
-    m_copyButton->setText(tr("✓ Copied!"));
+    m_copyButton->setText(tr("Copied!"));
     QTimer::singleShot(1500, this, [this]() {
-        m_copyButton->setText(tr("📋 Copy"));
+        m_copyButton->setText(tr("Copy"));
     });
 }
 
@@ -320,11 +320,11 @@ void QrResultWidget::updateButtons()
     m_openButton->setVisible(showOpen);
 
     if (m_contentType == QrContentType::URL) {
-        m_openButton->setText(tr("🌐 Open"));
+        m_openButton->setText(tr("Open"));
     } else if (m_contentType == QrContentType::EMAIL) {
-        m_openButton->setText(tr("✉ Mail"));
+        m_openButton->setText(tr("Mail"));
     } else if (m_contentType == QrContentType::PHONE) {
-        m_openButton->setText(tr("📞 Call"));
+        m_openButton->setText(tr("Call"));
     }
 }
 

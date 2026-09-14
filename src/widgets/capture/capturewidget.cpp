@@ -245,7 +245,11 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
     m_qrController = new QrController(this);
     connect(m_qrController, &QrController::requestCloseCapture, this, [this]() {
         m_captureDone = true;
+        hide();
         close();
+        QTimer::singleShot(50, qApp, []() {
+            qApp->exit(0);
+        });
     });
 #endif
     initPanel();
