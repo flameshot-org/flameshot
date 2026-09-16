@@ -108,6 +108,7 @@ private:
     void initJpegQuality();
     void initReverseArrow();
     void initDrawCircleCounterOutline();
+    void initCircleCountStartValue();
     void initInsecurePixelate();
 #if !defined(Q_OS_MACOS)
     void initCaptureActiveMonitor();
@@ -166,6 +167,7 @@ private:
     QSpinBox* m_jpegQuality;
     QCheckBox* m_reverseArrow;
     QCheckBox* m_drawCircleCounterOutline;
+    QSpinBox* m_circleCountStartValue;
     QCheckBox* m_insecurePixelate;
 #if !defined(Q_OS_MACOS)
     QCheckBox* m_captureActiveMonitor;

@@ -97,6 +97,7 @@ public:
     CONFIG_GETTER_SETTER(drawCircleCounterOutline,
                          setDrawCircleCounterOutline,
                          bool)
+    CONFIG_GETTER_SETTER(circleCountStartValue, setCircleCountStartValue, int)
     CONFIG_GETTER_SETTER(drawPixelateSize, setDrawPixelateSize, int)
     CONFIG_GETTER_SETTER(drawRectangleSize, setDrawRectangleSize, int)
     CONFIG_GETTER_SETTER(drawMarkerSize, setDrawMarkerSize, int)

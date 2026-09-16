@@ -119,6 +119,7 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     OPTION("drawFontSize"                ,LowerBoundedInt    ( 1, 8          )),
     OPTION("drawCircleCounterSize"       ,LowerBoundedInt    ( 1, 1          )),
     OPTION("drawCircleCounterOutline"    ,Bool               ( true          )),
+    OPTION("circleCountStartValue"       ,LowerBoundedInt    ( 1, 1          )),
     OPTION("drawPixelateSize"            ,LowerBoundedInt    ( 1, 2          )),
     OPTION("drawRectangleSize"           ,LowerBoundedInt    ( 1, 1          )),
     OPTION("drawMarkerSize"              ,LowerBoundedInt    ( 1, 5          )),

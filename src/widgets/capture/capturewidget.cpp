@@ -83,7 +83,7 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
 
 {
     m_undoStack.setUndoLimit(ConfigHandler().undoLimit());
-    m_context.circleCount = 1;
+    m_context.circleCount = ConfigHandler().circleCountStartValue();
 
     // Base config of the widget
     m_eventFilter = new HoverEventFilter(this);

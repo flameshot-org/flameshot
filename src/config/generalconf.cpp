@@ -80,6 +80,7 @@ GeneralConf::GeneralConf(QWidget* parent)
     initJpegQuality();
     initReverseArrow();
     initDrawCircleCounterOutline();
+    initCircleCountStartValue();
     // this has to be at the end
     initConfigButtons();
     updateComponents();
@@ -879,6 +880,32 @@ void GeneralConf::initDrawCircleCounterOutline()
     connect(m_drawCircleCounterOutline, &QCheckBox::clicked, [](bool checked) {
         ConfigHandler().setDrawCircleCounterOutline(checked);
     });
+}
+
+void GeneralConf::initCircleCountStartValue()
+{
+    auto* box = new QGroupBox(tr("Counter tool start value"));
+    box->setFlat(true);
+    m_layout->addWidget(box);
+
+    auto* vboxLayout = new QVBoxLayout();
+    box->setLayout(vboxLayout);
+
+    m_circleCountStartValue = new QSpinBox(this);
+    m_circleCountStartValue->setMinimum(1);
+    m_circleCountStartValue->setMaximum(999);
+    m_circleCountStartValue->setValue(ConfigHandler().circleCountStartValue());
+    QString foreground = this->palette().windowText().color().name();
+    m_circleCountStartValue->setStyleSheet(
+      QStringLiteral("color: %1").arg(foreground));
+
+    connect(m_circleCountStartValue,
+            static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged),
+            [](int value) {
+                ConfigHandler().setCircleCountStartValue(value);
+            });
+
+    vboxLayout->addWidget(m_circleCountStartValue);
 }
 
 void GeneralConf::initInsecurePixelate()
