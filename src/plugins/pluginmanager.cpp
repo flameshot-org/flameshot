@@ -108,12 +108,8 @@ QStringList PluginManager::pluginSearchPaths() const
         paths.append(appDir);
     }
 
-    // 6. Source tree dev directory
-    QString devDir = QCoreApplication::applicationDirPath() +
-                     QStringLiteral("/../plugins/ocr-plugin/build");
-    if (QDir(devDir).exists() && !paths.contains(devDir)) {
-        paths.append(devDir);
-    }
+    // Developers can set FLAMESHOT_PLUGIN_PATH to include local build
+    // directories (e.g. plugins/ocr-plugin/build) without hardcoding paths.
 
     return paths;
 }
