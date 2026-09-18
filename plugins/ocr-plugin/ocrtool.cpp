@@ -152,10 +152,25 @@ void OcrTool::pressed(CaptureContext& context)
     }
     QByteArray langBytes = activeLangs.join(QStringLiteral("+")).toUtf8();
 
+    // Show wait cursor — Tesseract Init + Recognize blocks the UI thread
+    QApplication::setOverrideCursor(Qt::WaitCursor);
+
     auto* api = new tesseract::TessBaseAPI();
     int initStatus = api->Init(nullptr, langBytes.constData());
     if (initStatus != 0) {
         initStatus = api->Init(nullptr, "eng");
+    }
+
+    if (initStatus != 0) {
+        // Both init attempts failed — clean up and bail out
+        delete api;
+        QApplication::restoreOverrideCursor();
+        AbstractLogger::error()
+          << QObject::tr(
+               "OCR: Failed to initialize Tesseract. Is tesseract-ocr and "
+               "its language data (eng.traineddata) installed?");
+        emit requestAction(REQ_CLOSE_GUI);
+        return;
     }
 
     QVector<QRect> lineBoxes;
@@ -163,19 +178,18 @@ void OcrTool::pressed(CaptureContext& context)
     QVector<QRect> wordBoxes;
     QStringList words;
 
-    if (initStatus == 0) {
-        api->SetVariable("load_system_dawg", "0");
-        api->SetVariable("load_freq_dawg", "0");
-        api->SetVariable("user_defined_dpi", "300");
-        api->SetVariable("preserve_interword_spaces", "1");
-        api->SetPageSegMode(tesseract::PSM_AUTO);
+    api->SetVariable("load_system_dawg", "0");
+    api->SetVariable("load_freq_dawg", "0");
+    api->SetVariable("user_defined_dpi", "300");
+    api->SetVariable("preserve_interword_spaces", "1");
+    api->SetPageSegMode(tesseract::PSM_AUTO);
 
-        api->SetImage(procImg.bits(),
-                      procImg.width(),
-                      procImg.height(),
-                      1,
-                      procImg.bytesPerLine());
-        api->Recognize(0);
+    api->SetImage(procImg.bits(),
+                  procImg.width(),
+                  procImg.height(),
+                  1,
+                  procImg.bytesPerLine());
+    api->Recognize(0);
 
         // Helper to detect colored UI emojis
         auto detectEmojiInBox = [&](const QRect& bBox) -> QString {
@@ -294,9 +308,12 @@ void OcrTool::pressed(CaptureContext& context)
 
         api->End();
         delete api;
-    }
 
     QString result = lines.join(QStringLiteral("\n"));
+
+    // Scan done — restore normal cursor
+    QApplication::restoreOverrideCursor();
+
     if (!result.isEmpty()) {
         QApplication::clipboard()->setText(result);
         AbstractLogger::info()

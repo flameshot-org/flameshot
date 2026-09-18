@@ -118,6 +118,8 @@ void QrTool::pressed(CaptureContext& context)
 
     QString scannedData;
     QString symbolTypeName = QStringLiteral("QR Code");
+    QStringList allScannedData;
+    QStringList allSymbolTypes;
 
     zbar_image_scanner_t* scanner = zbar_image_scanner_create();
     if (scanner) {
@@ -139,22 +141,29 @@ void QrTool::pressed(CaptureContext& context)
                 if (syms) {
                     const zbar_symbol_t* sym =
                       zbar_symbol_set_first_symbol(syms);
-                    if (sym) {
+                    while (sym) {
                         const char* data = zbar_symbol_get_data(sym);
                         if (data) {
-                            scannedData = QString::fromUtf8(data);
+                            allScannedData.append(QString::fromUtf8(data));
                         }
                         int stype = zbar_symbol_get_type(sym);
                         const char* sname = zbar_get_symbol_name(stype);
-                        if (sname) {
-                            symbolTypeName = QString::fromLatin1(sname);
-                        }
+                        allSymbolTypes.append(
+                          sname ? QString::fromLatin1(sname)
+                                : QStringLiteral("QR Code"));
+                        sym = zbar_symbol_next(sym);
                     }
                 }
             }
             zbar_image_destroy(image);
         }
         zbar_image_scanner_destroy(scanner);
+    }
+
+    // Use first result for clipboard / single display; pass all to widget
+    if (!allScannedData.isEmpty()) {
+        scannedData = allScannedData.first();
+        symbolTypeName = allSymbolTypes.first();
     }
 
     if (!scannedData.isEmpty()) {

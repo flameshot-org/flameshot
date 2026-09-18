@@ -113,7 +113,7 @@ private slots:
     void searchWeb();
     void translateText();
     void saveToFile();
-    void pinScreenshot();
+
     void showToast(const QString& message);
     void onSearchTextChanged(const QString& text);
     void setFormatMode(int mode);

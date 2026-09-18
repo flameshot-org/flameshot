@@ -45,7 +45,10 @@ QrWidget::QrWidget(const QString& scannedContent,
     new QShortcut(QKeySequence(Qt::Key_Escape), this, SLOT(close()));
     new QShortcut(QKeySequence(Qt::CTRL | Qt::Key_Q), this, SLOT(close()));
 
-    QScreen* screen = QGuiApplication::primaryScreen();
+    QScreen* screen = QGuiApplication::screenAt(QCursor::pos());
+    if (!screen) {
+        screen = QGuiApplication::primaryScreen();
+    }
     QRect screenGeom = screen ? screen->geometry() : QRect(0, 0, 1920, 1080);
     int targetW = 620;
     int targetH = 380;

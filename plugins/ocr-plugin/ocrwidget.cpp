@@ -499,7 +499,10 @@ OcrWidget::OcrWidget(const QPixmap& pixmap,
     new QShortcut(QKeySequence(Qt::CTRL | Qt::Key_S), this, SLOT(saveToFile()));
 
     // Center on screen or near capture geometry
-    QScreen* screen = QGuiApplication::primaryScreen();
+    QScreen* screen = QGuiApplication::screenAt(QCursor::pos());
+    if (!screen) {
+        screen = QGuiApplication::primaryScreen();
+    }
     QRect screenGeom = screen ? screen->geometry() : QRect(0, 0, 1920, 1080);
     int targetW = qBound(700, qRound(screenGeom.width() * 0.58), 1150);
     int targetH = qBound(480, qRound(screenGeom.height() * 0.58), 780);
@@ -786,12 +789,6 @@ void OcrWidget::setupUi()
     connect(saveBtn, &QPushButton::clicked, this, &OcrWidget::saveToFile);
     toolbarLayout->addWidget(saveBtn);
 
-    auto* pinBtn = new QPushButton(tr("📌 Pin"), this);
-    pinBtn->setObjectName(QStringLiteral("actionBtn"));
-    pinBtn->setCursor(Qt::PointingHandCursor);
-    pinBtn->setToolTip(tr("Pin image to desktop"));
-    connect(pinBtn, &QPushButton::clicked, this, &OcrWidget::pinScreenshot);
-    toolbarLayout->addWidget(pinBtn);
 
     toolbarLayout->addStretch();
 
@@ -1071,11 +1068,6 @@ void OcrWidget::saveToFile()
             showToast(tr("Saved to %1").arg(QFileInfo(fileName).fileName()));
         }
     }
-}
-
-void OcrWidget::pinScreenshot()
-{
-    close();
 }
 
 void OcrWidget::onSearchTextChanged(const QString& text)

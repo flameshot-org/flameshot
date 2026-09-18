@@ -22,9 +22,29 @@ target_include_directories(qrplugin PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/../../src
 )
 
+find_library(ZBAR_LIB
+    NAMES zbar libzbar.so.0
+    HINTS
+        /usr/lib
+        /usr/lib/x86_64-linux-gnu
+        /usr/local/lib
+        /lib/x86_64-linux-gnu
+        /usr/lib/aarch64-linux-gnu
+        /usr/lib/arm-linux-gnueabihf
+)
+
+if(NOT ZBAR_LIB)
+    message(FATAL_ERROR
+        "libzbar not found. Install it with:\n"
+        "  Debian/Ubuntu: sudo apt install libzbar-dev\n"
+        "  Fedora:        sudo dnf install zbar-devel\n"
+        "  Arch:          sudo pacman -S zbar\n"
+        "  macOS:         brew install zbar")
+endif()
+
 target_link_libraries(qrplugin PRIVATE
     Qt6::Core
     Qt6::Gui
     Qt6::Widgets
-    /lib/x86_64-linux-gnu/libzbar.so.0
+    ${ZBAR_LIB}
 )
