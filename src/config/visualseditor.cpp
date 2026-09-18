@@ -9,15 +9,35 @@
 #include "utils/confighandler.h"
 
 #include <QDirIterator>
+#include <QGroupBox>
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QMessageBox>
+#include <QPushButton>
+#include <QScrollArea>
 
 VisualsEditor::VisualsEditor(QWidget* parent)
   : QWidget(parent)
 {
-    m_layout = new QVBoxLayout();
-    setLayout(m_layout);
+    m_layout = new QVBoxLayout(this);
+    m_layout->setContentsMargins(0, 0, 0, 0);
+
+    m_scrollArea = new QScrollArea(this);
+    m_layout->addWidget(m_scrollArea);
+
+    auto* content = new QWidget(m_scrollArea);
+    m_scrollArea->setWidget(content);
+    m_scrollArea->setWidgetResizable(true);
+    m_scrollArea->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    m_scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+
+    content->setObjectName("visualsContent");
+    m_scrollArea->setObjectName("visualsScrollArea");
+    m_scrollArea->setStyleSheet("#visualsContent, #visualsScrollArea { "
+                                "background: transparent; border: 0px; }");
+    m_scrollAreaLayout = new QVBoxLayout(content);
+    m_scrollAreaLayout->setContentsMargins(0, 0, 10, 0);
+
     initWidgets();
 }
 
@@ -51,8 +71,8 @@ void VisualsEditor::initOpacitySlider()
                 ConfigHandler().setContrastOpacity(
                   opacitySlider->mappedValue(0, 255));
             });
-    m_layout->addWidget(label);
-    m_layout->addLayout(localLayout);
+    m_scrollAreaLayout->addWidget(label);
+    m_scrollAreaLayout->addLayout(localLayout);
 
     int opacity = ConfigHandler().contrastOpacity();
     m_opacitySlider->setMapedValue(0, opacity, 255);
@@ -63,7 +83,7 @@ void VisualsEditor::initWidgets()
     initTranslations();
 
     m_tabWidget = new QTabWidget();
-    m_layout->addWidget(m_tabWidget);
+    m_scrollAreaLayout->addWidget(m_tabWidget);
 
     m_colorEditor = new UIcolorEditor();
     m_colorEditorTab = new QWidget();
@@ -84,7 +104,7 @@ void VisualsEditor::initWidgets()
     boxButtons->setTitle(tr("Button Selection"));
     auto* listLayout = new QVBoxLayout(boxButtons);
     m_buttonList = new ButtonListView();
-    m_layout->addWidget(boxButtons);
+    m_scrollAreaLayout->addWidget(boxButtons);
     listLayout->addWidget(m_buttonList);
 
     auto* setAllButtons = new QPushButton(tr("Select All"));
@@ -144,5 +164,5 @@ void VisualsEditor::initTranslations()
 
     localLayout->addWidget(m_selectTranslation);
     localLayout->addStretch();
-    m_layout->addLayout(localLayout);
+    m_scrollAreaLayout->addLayout(localLayout);
 }

@@ -60,6 +60,7 @@
   - [Usage on Windows](#usage-on-windows)
   - [Usage on Hyprland / Sway / wlroots](#usage-on-hyprland--sway--wlroots)
   - [Usage on minimal X11 window managers](#usage-on-minimal-x11-window-managers)
+  - [Plugin Architecture & Extensions](#plugin-architecture--extensions)
   - [CLI configuration](#cli-configuration)
   - [Config file](#config-file)
 - [Keyboard Shortcuts](#keyboard-shortcuts)
@@ -96,6 +97,7 @@
 - Customizable appearance.
 - Easy to use.
 - In-app screenshot editing.
+- Dynamic plugin system (OCR text extraction, QR & Barcode scanning, custom extensions).
 - DBus interface.
 - Upload to Imgur.
 
@@ -171,6 +173,55 @@ Please [refer to this document](docs/UsageHyprlandSwayWlroots.md) for detailed i
 ### Usage on minimal X11 window managers
 
 On minimal X11 window managers (i3, dwm, xmonad, bspwm, ...), capturing may fail because no portal backend implements the Screenshot interface (errors such as *"Could not locate the org.freedesktop.portal.Desktop service"* or *"Screenshot portal timed out"*). Please [refer to this document](docs/UsageX11MinimalWM.md) for the fix (enabling the legacy X11 capture).
+
+### Plugin Architecture & Extensions
+
+Flameshot features a modular C++/Qt plugin architecture (`FlameshotPluginInterface`) that allows adding new tools, analysis engines, and cloud integrations dynamically without recompiling the core application.
+
+#### Bundled Plugins
+
+1. **Text Recognition (OCR)** (`plugins/ocr-plugin`):
+   - High-accuracy multi-language OCR using Tesseract LSTM.
+   - Interactive visual canvas with **live word search highlighting** and bounding boxes.
+   - Format conversion: **Formatted Text**, **Markdown Tables** (`| Col 1 | Col 2 |`), **Code Blocks**, and **LaTeX** math/table expressions (`\begin{tabular}`, `\begin{equation}`).
+   - Automatic desktop notifications and clipboard copying.
+
+2. **QR & Barcode Scanner** (`plugins/qr-plugin`):
+   - Fast QR code and barcode scanning (EAN-13, Code 128, DataMatrix, UPC, etc.) via `zbar`.
+   - 1-click **Open in Browser** for scanned URLs, clipboard copying, and payload inspection.
+
+#### Managing Plugins via GUI
+
+Open the Flameshot Plugins configuration tab:
+
+```shell
+flameshot --plugins
+# or
+flameshot -p
+```
+
+- **Install Plugin**: Click `➕ Install Plugin...` to select any compiled `.so` / `.dll` / `.dylib` library.
+- **Enable / Disable**: Toggle the `[✔]` checkbox in the plugins table to activate or deactivate a tool from the capture toolbar in real-time.
+- **Move to Disabled**: Click `🚫 Move to Disabled` to remove a plugin from active tools without deleting the file (safely moved to `~/.local/share/flameshot/plugins/disabled/`).
+
+#### Managing Plugins via CLI
+
+```shell
+# List all discovered plugins and their status
+flameshot --list-plugins
+
+# Install a plugin library
+flameshot --install-plugin /path/to/plugin.so
+
+# Disable a plugin (deactivates from capture toolbar without moving file)
+flameshot --disable-plugin org.flameshot.plugin.qr
+
+# Re-enable a plugin
+flameshot --enable-plugin org.flameshot.plugin.qr
+
+# Move a plugin to the disabled directory
+flameshot --remove-plugin org.flameshot.plugin.qr
+```
 
 ### CLI configuration
 

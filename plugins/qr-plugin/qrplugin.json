@@ -1,0 +1,6 @@
+{
+    "name": "QR & Barcode Scanner / Generator",
+    "version": "1.0.0",
+    "author": "Sniper Ravan",
+    "description": "Scans QR codes and barcodes from captured regions and generates custom QR codes."
+}
