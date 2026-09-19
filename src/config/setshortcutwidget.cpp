@@ -45,7 +45,9 @@ SetShortcutDialog::SetShortcutDialog(QDialog* parent,
 #endif
 
     auto restartMessageAdded = false;
-    if (shortcutName == "TAKE_SCREENSHOT" && restartMessageAdded == false) {
+    if ((shortcutName == "TAKE_SCREENSHOT" ||
+         shortcutName == "TAKE_SCREENSHOT_INSTANT") &&
+        restartMessageAdded == false) {
         msg +=
           "\n" + tr("Flameshot must be restarted for changes to take effect.");
         restartMessageAdded = true;
