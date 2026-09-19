@@ -83,7 +83,6 @@ private slots:
     void handleButtonRightClick(CaptureToolButton* b);
     void setDrawColor(const QColor& c);
     void onToolSizeChanged(int size);
-    void onToolSizeSettled(int size);
     void updateActiveLayer(int layer);
     void onMoveCaptureToolUp(int captureToolIndex);
     void onMoveCaptureToolDown(int captureToolIndex);
