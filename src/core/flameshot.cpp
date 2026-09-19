@@ -81,6 +81,7 @@ Flameshot::Flameshot()
   , m_captureWindow(nullptr)
 #if (defined(Q_OS_MACOS) || defined(Q_OS_WIN))
   , m_HotkeyScreenshotCapture(nullptr)
+  , m_HotkeyScreenshotCaptureInstant(nullptr)
 #endif
 #if (defined(Q_OS_MACOS) && ENABLE_IMGUR)
   , m_HotkeyScreenshotHistory(nullptr)
@@ -103,6 +104,17 @@ Flameshot::Flameshot()
                      &QHotkey::activated,
                      qApp,
                      [this]() { gui(); });
+    m_HotkeyScreenshotCaptureInstant = new QHotkey(
+      QKeySequence(ConfigHandler().shortcut("TAKE_SCREENSHOT_INSTANT")),
+      true,
+      this);
+    QObject::connect(
+      m_HotkeyScreenshotCaptureInstant, &QHotkey::activated, qApp, [this]() {
+          CaptureRequest req(CaptureRequest::GRAPHICAL_MODE);
+          req.addTask(CaptureRequest::COPY);
+          req.addTask(CaptureRequest::ACCEPT_ON_SELECT);
+          gui(req);
+      });
 #endif
 #if (defined(Q_OS_MACOS) && ENABLE_IMGUR)
     m_HotkeyScreenshotHistory = new QHotkey(
