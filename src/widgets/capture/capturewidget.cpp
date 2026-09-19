@@ -263,7 +263,6 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
         updateCursor();
         m_toolSizeByKeyboard = 0;
         onToolSizeChanged(m_context.toolSize);
-        onToolSizeSettled(m_context.toolSize);
     });
 
     m_config.checkAndHandleError();
@@ -1520,6 +1519,17 @@ void CaptureWidget::onToolSizeChanged(int t)
 {
 
     m_context.toolSize = t;
+
+    // Persist the new size straight away. This was previously deferred until
+    // the NotifierBox finished hiding, which meant a size set from the side
+    // panel was never saved at all, since that path never shows the notifier,
+    // and a size set with the wheel or the keyboard was lost whenever the
+    // capture was completed before the notifier's timeout had elapsed.
+    const CaptureTool::Type toolType = activeButtonToolType();
+    if (toolType != CaptureTool::NONE) {
+        m_config.setToolSize(toolType, t);
+    }
+
     CaptureTool* tool = activeButtonTool();
     if (tool && tool->showMousePreview()) {
         setCursor(Qt::BlankCursor);
@@ -1546,11 +1556,6 @@ void CaptureWidget::onToolSizeChanged(int t)
 
     // Force a repaint to prevent artifacting
     this->repaint();
-}
-
-void CaptureWidget::onToolSizeSettled(int size)
-{
-    m_config.setToolSize(activeButtonToolType(), size);
 }
 
 void CaptureWidget::setDrawColor(const QColor& c)
