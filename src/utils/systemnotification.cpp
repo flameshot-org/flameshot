@@ -1,6 +1,7 @@
 #include "systemnotification.h"
 #include "utils/abstractlogger.h"
 #include "utils/confighandler.h"
+#include "utils/filemanagerutils.h"
 
 #include <QApplication>
 #include <QDesktopServices>
@@ -72,15 +73,23 @@ SystemNotification* SystemNotification::actionHandler()
 
 void SystemNotification::onActionInvoked(uint id, const QString& actionKey)
 {
-    if (actionKey == QLatin1String("default")) {
-        auto it = s_pendingPaths.find(id);
-        if (it != s_pendingPaths.end()) {
-            QDesktopServices::openUrl(QUrl::fromLocalFile(it.value()));
-            s_pendingPaths.erase(it);
-            if (s_pendingPaths.isEmpty() && s_exitOnLastAction) {
-                qApp->exit();
-            }
-        }
+    if (actionKey != QLatin1String("default") &&
+        actionKey != QLatin1String("flameshot-open-folder")) {
+        return;
+    }
+    auto it = s_pendingPaths.find(id);
+    if (it == s_pendingPaths.end()) {
+        return;
+    }
+    const QString path = it.value();
+    s_pendingPaths.erase(it);
+    if (actionKey == QLatin1String("flameshot-open-folder")) {
+        FileManagerUtils::revealFile(path);
+    } else {
+        QDesktopServices::openUrl(QUrl::fromLocalFile(path));
+    }
+    if (s_pendingPaths.isEmpty() && s_exitOnLastAction) {
+        qApp->exit();
     }
 }
 
@@ -94,8 +103,7 @@ void SystemNotification::setExitOnLastAction(bool exit)
     s_exitOnLastAction = exit;
 }
 
-void SystemNotification::registerNotificationPath(uint id,
-                                                    const QString& path)
+void SystemNotification::registerNotificationPath(uint id, const QString& path)
 {
     actionHandler();
     s_pendingPaths[id] = path;
@@ -167,6 +175,9 @@ void SystemNotification::sendMessage(const QString& text,
               QStringList({ fullPath.toString() });
             // makes the notification body clickable (freedesktop spec)
             actions << QStringLiteral("default") << QString();
+            // adds a button that reveals the file in the file manager
+            actions << QStringLiteral("flameshot-open-folder")
+                    << tr("Open Folder");
         }
 
         args << (qAppName())                 // appname
@@ -184,25 +195,25 @@ void SystemNotification::sendMessage(const QString& text,
         // timeout (~25s) after every capture, freezing further captures until
         // it returned.
         if (m_interface != nullptr) {
-            QDBusPendingCall call =
-              m_interface->asyncCallWithArgumentList(QStringLiteral("Notify"),
-                                                    args);
+            QDBusPendingCall call = m_interface->asyncCallWithArgumentList(
+              QStringLiteral("Notify"), args);
             if (!savePath.isEmpty()) {
                 // The notification id assigned by the server arrives with the
                 // reply; remember it so the persistent action handler can map
                 // a later ActionInvoked signal back to this file.
                 auto* watcher = new QDBusPendingCallWatcher(call);
-                connect(watcher,
-                        &QDBusPendingCallWatcher::finished,
-                        actionHandler(),
-                        [savePath](QDBusPendingCallWatcher* watcher) {
-                            QDBusPendingReply<uint> reply = *watcher;
-                            if (reply.isValid()) {
-                                SystemNotification::s_pendingPaths[reply.value()] =
-                                  savePath;
-                            }
-                            watcher->deleteLater();
-                        });
+                connect(
+                  watcher,
+                  &QDBusPendingCallWatcher::finished,
+                  actionHandler(),
+                  [savePath](QDBusPendingCallWatcher* watcher) {
+                      QDBusPendingReply<uint> reply = *watcher;
+                      if (reply.isValid()) {
+                          SystemNotification::s_pendingPaths[reply.value()] =
+                            savePath;
+                      }
+                      watcher->deleteLater();
+                  });
             }
         }
     }

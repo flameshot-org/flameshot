@@ -34,7 +34,7 @@ void FlameshotDBusAdapter::attachPin(const QByteArray& data)
 }
 
 void FlameshotDBusAdapter::registerNotificationPath(uint id,
-                                                      const QString& path)
+                                                    const QString& path)
 {
     SystemNotification::registerNotificationPath(id, path);
 }
@@ -42,8 +42,7 @@ void FlameshotDBusAdapter::registerNotificationPath(uint id,
 void FlameshotDBusAdapter::showSaveNotification(const QString& path)
 {
     SystemNotification sysNotif;
-    sysNotif.sendMessage(
-      QObject::tr("Capture saved as ") + path,
-      QObject::tr("Flameshot Info"),
-      path);
+    sysNotif.sendMessage(QObject::tr("Capture saved as ") + path,
+                         QObject::tr("Flameshot Info"),
+                         path);
 }
