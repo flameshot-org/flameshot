@@ -65,11 +65,29 @@ static int setup_unix_signal_handlers()
 }
 #endif
 
+// Guards the capture GUI against overlapping 'flameshot gui' invocations.
+// Released as soon as a capture is finished: the process may outlive the
+// capture widget (notification click wait, hosted widgets) and must not
+// block new screenshots during that time.
+static QSharedMemory* s_guiMutex = nullptr;
+
+static void releaseGuiMutex()
+{
+    if (s_guiMutex != nullptr) {
+        s_guiMutex->detach();
+        delete s_guiMutex;
+        s_guiMutex = nullptr;
+    }
+}
+
 int requestCaptureAndWait(const CaptureRequest& req)
 {
     Flameshot* flameshot = Flameshot::instance();
     flameshot->requestCapture(req);
     QObject::connect(flameshot, &Flameshot::captureTaken, [&](const QPixmap&) {
+        // The capture GUI is finished; new invocations must not be blocked
+        // while this process may still be waiting for a notification click.
+        releaseGuiMutex();
 #if defined(Q_OS_MACOS)
         // Only useful on MacOS because each instance hosts its own widgets
         if (!FlameshotDaemon::isThisInstanceHostingWidgets()) {
@@ -528,15 +546,13 @@ int main(int argc, char* argv[])
         // Prevent multiple instances of 'flameshot gui' from running if not
         // configured to do so.
         if (!ConfigHandler().allowMultipleGuiInstances()) {
-            auto* mutex = guiMutexLock();
-            if (!mutex) {
+            s_guiMutex = guiMutexLock();
+            if (!s_guiMutex) {
                 return 1;
             }
-            QObject::connect(
-              qApp, &QCoreApplication::aboutToQuit, qApp, [mutex]() {
-                  mutex->detach();
-                  delete mutex;
-              });
+            QObject::connect(qApp, &QCoreApplication::aboutToQuit, qApp, []() {
+                releaseGuiMutex();
+            });
         }
 
         // Option values
