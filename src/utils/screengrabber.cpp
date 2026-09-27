@@ -36,6 +36,10 @@
 #include <QUuid>
 #endif
 
+#if defined(Q_OS_WIN)
+#include "utils/windowshdrcapture.h"
+#endif
+
 bool ScreenGrabber::m_monitorSelectionActive = false;
 
 ScreenGrabber::ScreenGrabber(QObject* parent)
@@ -404,6 +408,18 @@ QPixmap ScreenGrabber::grabScreen(QScreen* screen, bool& ok)
     p = grabEntireDesktop(ok, screenIndex);
 #else
     ok = true;
+#if defined(Q_OS_WIN)
+    // The HDR capture always covers the whole monitor. grabWindow() takes
+    // coordinates relative to the screen, so this request covers the whole
+    // monitor only when the screen's geometry starts at (0,0); other screens
+    // keep the existing GDI request unchanged.
+    if (geometry.topLeft().isNull()) {
+        QPixmap hdrPixmap = WindowsHdrCapture::grabScreen(screen);
+        if (!hdrPixmap.isNull()) {
+            return hdrPixmap;
+        }
+    }
+#endif
     return screen->grabWindow(
       0, geometry.x(), geometry.y(), geometry.width(), geometry.height());
 #endif
@@ -802,7 +818,19 @@ QPixmap ScreenGrabber::windowsScreenshot(int wid)
         QRect screenGeom = screen->geometry();
         qreal screenDpr = screen->devicePixelRatio();
 
-        QPixmap screenPixmap = screen->grabWindow(wid);
+        QPixmap screenPixmap;
+#if defined(Q_OS_WIN)
+        // GDI collapses an HDR desktop to 8 bits before Flameshot sees it, so
+        // monitors in HDR mode are captured as FP16 through Desktop
+        // Duplication and converted to SDR by Flameshot. A null pixmap (SDR
+        // monitor, or any failure) keeps the GDI capture below.
+        if (wid == 0) {
+            screenPixmap = WindowsHdrCapture::grabScreen(screen);
+        }
+#endif
+        if (screenPixmap.isNull()) {
+            screenPixmap = screen->grabWindow(wid);
+        }
         screenPixmap.setDevicePixelRatio(1.0);
 
         int logicalX = screenGeom.x() - minLogicalX;
