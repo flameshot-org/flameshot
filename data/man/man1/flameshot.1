@@ -45,7 +45,7 @@ command as provided by
 package.
 .PP
 \fBflameshot\fP is a screenshot tool that aims to be powerful yet simple-to-use.
-Its notable features include customizable appearance, in-app screenshot editing,
+Its notable features include a customizable appearance, in-app screenshot editing,
 D-Bus interface, tray icon support, experimental GNOME/KDE Wayland support,
 integration with Imgur and support for both GUI and CLI interface.
 .PP
@@ -55,23 +55,23 @@ https://github.com/flameshot-org/flameshot
 .\"----------------------------------------------------------------------------
 .SH "SUBCOMMANDS"
 .PP
-Per default without subcommands, \fBflameshot\fR runs the Flameshot in the background and adds a tray icon for configuration. Note that it will not take a screenshot unless you define one of the modes though the subcommands. There are various subcommands that can be used to use flameshot in different modes:
+Per default without subcommands, \fBflameshot\fR runs Flameshot in the background and adds a tray icon for configuration. Note that it will not take a screenshot unless you define one of the modes though the subcommands. There are various subcommands that can be used to use flameshot in different modes:
 .
 .TP
 .B gui
-Running Flameshot in \fBgui\fR mode would let the user to select the region from which the screenshot should be taken and then allow them to annotate the screenshot.
+Running Flameshot in \fBgui\fR mode would let the user select the region from which the screenshot should be taken and then allow them to annotate the screenshot.
 .
 .TP
 .B full
-Takes screenshot of all monitors at the same time
+Takes a screenshot of all monitors at the same time
 .
 .TP
 .B screen
-Takes screenshot of the specified monitor.
+Takes a screenshot of the specified monitor.
 .
 .TP
 .SH launcher
-Does not accept any arguments, it will just opens the launcher window
+Does not accept any arguments, it will just open the launcher window
 .
 .TP
 .SH config
@@ -109,7 +109,7 @@ Valid for subcommands: config
 .PP
 \-c, \-\-clipboard
 .RS 4
-Save the capture to the clipboard
+Save the captured screenshot to the clipboard
 .br
 Valid for subcommands: full, gui, screen
 .RE
@@ -149,7 +149,7 @@ Valid for subcommands: config
 .PP
 \-h, \-\-help
 .RS 4
-Show a brief help message and list the arguments the valid arguments for that subcommand
+Show a brief help message and list the valid arguments for that subcommand
 .br
 Valid for subcommands: config, full, gui, launcher, screen
 .RE
@@ -173,7 +173,7 @@ Valid for subcommands: config
 .PP
 \-n, \-\-notifications
 .RS 4
-Enable or disable the notifications
+Enable or disable notifications
 .br
 Valid for subcommands: config
 .RE
