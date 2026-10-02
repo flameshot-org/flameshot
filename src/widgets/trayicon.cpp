@@ -27,13 +27,7 @@ TrayIcon::TrayIcon(QObject* parent)
 
     setToolTip(QStringLiteral("Flameshot"));
 #if defined(Q_OS_MACOS)
-    // Because of the following issues on MacOS "Catalina":
-    // https://bugreports.qt.io/browse/QTBUG-86393
-    // https://developer.apple.com/forums/thread/126072
     auto currentMacOsVersion = QOperatingSystemVersion::current();
-    if (currentMacOsVersion >= QOperatingSystemVersion::MacOSBigSur) {
-        setContextMenu(m_menu);
-    }
 #else
     setContextMenu(m_menu);
 #endif
@@ -49,19 +43,34 @@ TrayIcon::TrayIcon(QObject* parent)
     setIcon(icon);
 
 #if defined(Q_OS_MACOS)
-    if (currentMacOsVersion < QOperatingSystemVersion::MacOSBigSur) {
-        // Because of the following issues on MacOS "Catalina":
-        // https://bugreports.qt.io/browse/QTBUG-86393
-        // https://developer.apple.com/forums/thread/126072
-        auto trayIconActivated = [this](QSystemTrayIcon::ActivationReason r) {
-            if (m_menu->isVisible()) {
-                m_menu->hide();
-            } else {
-                m_menu->popup(QCursor::pos());
-            }
-        };
-        connect(this, &QSystemTrayIcon::activated, this, trayIconActivated);
-    }
+    // Do not call setContextMenu() on any macOS version. Qt 6.11 assigns that
+    // menu to NSStatusItem and, from NSMenuDidBeginTrackingNotification, calls
+    // -[NSEvent clickCount]. On macOS 26+ the status item opens through
+    // NSSceneStatusItem, and that notification runs while the current event is
+    // a KitDefined event. AppKit asserts and the process SIGABRTs. The same
+    // manual popup was already required before Big Sur (QTBUG-86393).
+    connect(this,
+            &QSystemTrayIcon::activated,
+            this,
+            [this](QSystemTrayIcon::ActivationReason reason) {
+                if (reason != QSystemTrayIcon::Trigger &&
+                    reason != QSystemTrayIcon::Context) {
+                    return;
+                }
+                if (m_menu->isVisible()) {
+                    m_menu->hide();
+                    return;
+                }
+                // The status-item action is delivered on mouse-down. Opening
+                // the menu inside that handler lets the matching mouse-up
+                // dismiss it.
+                const QPoint pos = QCursor::pos();
+                QTimer::singleShot(0, this, [this, pos]() {
+                    if (!m_menu->isVisible()) {
+                        m_menu->popup(pos);
+                    }
+                });
+            });
 #else
     connect(this, &TrayIcon::activated, this, [this](ActivationReason r) {
         if (r == Trigger) {

@@ -28,5 +28,10 @@
     <true/>
     <key>LSUIElement</key>
     <true/>
+    <!-- Menu-bar agent: do not quit when no windows are open. -->
+    <key>NSSupportsAutomaticTermination</key>
+    <false/>
+    <key>NSSupportsSuddenTermination</key>
+    <false/>
 </dict>
 </plist>
