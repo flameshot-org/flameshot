@@ -177,7 +177,9 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
 #else
 // Call cmake with -DFLAMESHOT_DEBUG_CAPTURE=ON to enable easier debugging
 #if !defined(FLAMESHOT_DEBUG_CAPTURE)
-        if (DesktopInfo().waylandDetected()) {
+        // An X11 window manager clamps a fullscreen window to one output;
+        // bypassing it is the only way to span the whole virtual desktop.
+        if (DesktopInfo().waylandDetected() || grabber.allMonitorsSelected()) {
             setWindowFlags(Qt::BypassWindowManagerHint |
                            Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint |
                            Qt::Tool);
@@ -189,11 +191,15 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
         }
 #endif
 
-        // Always display on the selected screen (not spanning entire desktop)
-        if (selectedScreen == nullptr) {
-            selectedScreen = QGuiApplication::primaryScreen();
+        QRect screenGeom;
+        if (grabber.allMonitorsSelected()) {
+            screenGeom = QGuiApplication::primaryScreen()->virtualGeometry();
+        } else {
+            if (selectedScreen == nullptr) {
+                selectedScreen = QGuiApplication::primaryScreen();
+            }
+            screenGeom = selectedScreen->geometry();
         }
-        QRect screenGeom = selectedScreen->geometry();
         move(screenGeom.topLeft());
         resize(screenGeom.size());
 
@@ -204,7 +210,16 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
     }
 
     QVector<QRect> areas;
-    if (m_context.fullscreen) {
+    if (m_context.fullscreen && grabber.allMonitorsSelected()) {
+        // One region per monitor keeps the toolbar from straddling a bezel
+        const QPoint origin =
+          QGuiApplication::primaryScreen()->virtualGeometry().topLeft();
+        for (QScreen* const screen : QGuiApplication::screens()) {
+            QRect r = screen->geometry();
+            r.moveTopLeft(r.topLeft() - origin);
+            areas.append(r);
+        }
+    } else if (m_context.fullscreen) {
         // Always display on a single screen, normalized to (0, 0)
         QScreen* screenForAreas = selectedScreen;
         if (!screenForAreas) {

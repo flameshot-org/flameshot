@@ -69,6 +69,7 @@ private slots:
 #endif
 #if defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)
     void useX11LegacyScreenshotChanged(bool checked);
+    void captureAllMonitorsChanged(bool checked);
 #endif
 
 private:
@@ -117,6 +118,7 @@ private:
 #endif
 #if defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)
     void initUseX11LegacyScreenshot();
+    void initCaptureAllMonitors();
 #endif
 
     void _updateComponents(bool allowEmptySavePath);
@@ -175,5 +177,6 @@ private:
 #endif
 #if defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)
     QCheckBox* m_useX11LegacyScreenshot;
+    QCheckBox* m_captureAllMonitors;
 #endif
 };

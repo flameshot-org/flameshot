@@ -5,6 +5,7 @@
 #include "core/qguiappcurrentscreen.h"
 #include "utils/confighandler.h"
 #include "utils/globalvalues.h"
+#include "utils/screengrabber.h"
 
 #include <QApplication>
 #include <QGuiApplication>
@@ -274,6 +275,15 @@ void TrayIcon::initScreenMenu()
             // Wait and hide the menu
             QTimer::singleShot(
               100, this, [this, i]() { startGuiCaptureOnScreen(i); });
+        });
+    }
+
+    if (ScreenGrabber::allMonitorsSupported()) {
+        QAction* allAction = m_screenMenu->addAction(tr("All monitors"));
+        connect(allAction, &QAction::triggered, this, [this]() {
+            QTimer::singleShot(100, this, [this]() {
+                startGuiCaptureOnScreen(ScreenGrabber::ALL_MONITORS);
+            });
         });
     }
 #endif

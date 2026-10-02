@@ -7,6 +7,7 @@
 #include "core/flameshot.h"
 #include "core/qguiappcurrentscreen.h"
 #include "utils/globalvalues.h"
+#include "utils/screengrabber.h"
 #include "utils/screenshotsaver.h"
 
 #include <QGuiApplication>
@@ -49,6 +50,10 @@ CaptureLauncher::CaptureLauncher(QDialog* parent)
                                 .arg(geom.width())
                                 .arg(geom.height());
         ui->monitorSelection->addItem(monitorText, i);
+    }
+    if (screens.size() > 1 && ScreenGrabber::allMonitorsSupported()) {
+        ui->monitorSelection->addItem(tr("All monitors"),
+                                      ScreenGrabber::ALL_MONITORS);
     }
     // Select current screen by default
     QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();

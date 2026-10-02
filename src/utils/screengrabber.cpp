@@ -244,6 +244,18 @@ QPixmap ScreenGrabber::selectMonitorAndCrop(const QPixmap& fullScreenshot,
         return cropToMonitor(fullScreenshot, 0);
     }
 
+#if defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)
+    if (ConfigHandler().captureAllMonitors()) {
+        if (allMonitorsSupported()) {
+            return selectAllMonitors(fullScreenshot, ok);
+        }
+        // A session switch (X11 -> Wayland) must not lock the user out
+        AbstractLogger::warning()
+          << tr("Capture all monitors is not available in this session, "
+                "falling back to monitor selection.");
+    }
+#endif
+
     // Capture Active Monitor: auto-select monitor under cursor
     if (ConfigHandler().captureActiveMonitor()) {
         if (m_info.waylandDetected()) {
@@ -288,6 +300,9 @@ QPixmap ScreenGrabber::selectMonitorAndCrop(const QPixmap& fullScreenshot,
     m_highlightedMonitorPreview = -1;
     m_monitorSelectionActive = false;
 
+    if (m_selectedMonitor == ALL_MONITORS) {
+        return selectAllMonitors(fullScreenshot, ok);
+    }
     if (m_selectedMonitor >= 0) {
         return cropToMonitor(fullScreenshot, m_selectedMonitor);
     } else {
@@ -298,6 +313,62 @@ QPixmap ScreenGrabber::selectMonitorAndCrop(const QPixmap& fullScreenshot,
         return fullScreenshot;
     }
 #endif
+}
+
+bool ScreenGrabber::allMonitorsSupported()
+{
+#if defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)
+    // A Wayland compositor never lets one surface span several outputs, and
+    // a single pixmap has a single devicePixelRatio, so mixed DPR is out.
+    if (DesktopInfo().waylandDetected()) {
+        return false;
+    }
+    const QList<QScreen*> screens = QGuiApplication::screens();
+    if (screens.isEmpty()) {
+        return false;
+    }
+    const qreal dpr = screens.first()->devicePixelRatio();
+    for (QScreen* s : screens) {
+        if (!qFuzzyCompare(s->devicePixelRatio(), dpr)) {
+            return false;
+        }
+    }
+    return true;
+#else
+    return false;
+#endif
+}
+
+QPixmap ScreenGrabber::selectAllMonitors(const QPixmap& fullScreenshot,
+                                         bool& ok)
+{
+    if (!allMonitorsSupported()) {
+        AbstractLogger::error()
+          << tr("Capturing all monitors at once requires X11 and the same "
+                "scale factor on every monitor.");
+        ok = false;
+        return QPixmap();
+    }
+    // The portal returns physical pixels with DPR 1; derive the DPR so the
+    // logical size matches the virtual desktop the capture widget covers.
+    const QRect logical = QGuiApplication::primaryScreen()->virtualGeometry();
+    const qreal scaleX = (qreal)fullScreenshot.width() / logical.width();
+    const qreal scaleY = (qreal)fullScreenshot.height() / logical.height();
+    if (qAbs(scaleX - scaleY) > 0.01) {
+        AbstractLogger::error()
+          << tr("Captured image (%1x%2) does not match the virtual desktop "
+                "(%3x%4).")
+               .arg(fullScreenshot.width())
+               .arg(fullScreenshot.height())
+               .arg(logical.width())
+               .arg(logical.height());
+        ok = false;
+        return QPixmap();
+    }
+    m_selectedMonitor = ALL_MONITORS;
+    QPixmap desktop = fullScreenshot;
+    desktop.setDevicePixelRatio(scaleX);
+    return desktop;
 }
 
 QPixmap ScreenGrabber::grabEntireDesktop(bool& ok, int preSelectedMonitor)
@@ -333,6 +404,10 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok, int preSelectedMonitor)
 #elif defined(Q_OS_WIN)
     screenshot = windowsScreenshot(wid);
 #endif
+
+    if (preSelectedMonitor == ALL_MONITORS) {
+        return selectAllMonitors(screenshot, ok);
+    }
 
     // If monitor was pre-selected skip UI and crop directly
     if (preSelectedMonitor >= 0) {
@@ -499,6 +574,20 @@ QWidget* ScreenGrabber::createMonitorPreviews(const QPixmap& fullScreenshot)
         containerLayout->addWidget(preview);
     }
 
+    if (allMonitorsSupported()) {
+        QPixmap thumbnail = fullScreenshot.scaled(
+          400, 250, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+        thumbnail.setDevicePixelRatio(1.0);
+        MonitorPreview* preview =
+          new MonitorPreview(ALL_MONITORS, nullptr, thumbnail, monitorPreviews);
+        connect(preview,
+                &MonitorPreview::monitorSelected,
+                this,
+                [this](int index) { selectMonitor(index); });
+        m_monitorPreviews.append(preview);
+        containerLayout->addWidget(preview);
+    }
+
     int initialPreviewIndex = 0;
     QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
     int currentMonitorIndex = screens.indexOf(currentScreen);
@@ -624,6 +713,11 @@ bool ScreenGrabber::eventFilter(QObject* obj, QEvent* event)
             case Qt::Key_Enter:
             case Qt::Key_Space:
                 selectHighlightedMonitorPreview();
+                return true;
+            case Qt::Key_0:
+                if (previewIndexForMonitor(ALL_MONITORS) >= 0) {
+                    selectMonitor(ALL_MONITORS);
+                }
                 return true;
             default:
                 if (keyEvent->key() >= Qt::Key_1 &&

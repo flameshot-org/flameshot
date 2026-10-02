@@ -26,6 +26,13 @@ public:
         Unavailable,
         Failed
     };
+    // Monitor index meaning "the whole virtual desktop as one image"
+    static constexpr int ALL_MONITORS = -2;
+    static bool allMonitorsSupported();
+    bool allMonitorsSelected() const
+    {
+        return m_selectedMonitor == ALL_MONITORS;
+    }
     QPixmap grabEntireDesktop(bool& ok, int preSelectedMonitor = -1);
     QPixmap grabFullDesktop(bool& ok);
     QRect screenGeometry(QScreen* screen);
@@ -50,6 +57,7 @@ private:
     void selectMonitor(int monitorIndex);
     void setHighlightedMonitorPreview(int previewIndex);
     QPixmap cropToMonitor(const QPixmap& fullScreenshot, int monitorIndex);
+    QPixmap selectAllMonitors(const QPixmap& fullScreenshot, bool& ok);
     QPixmap windowsScreenshot(int wid);
     QPixmap x11LegacyScreenshot();
     QPixmap unixScreenshot(bool& ok);
