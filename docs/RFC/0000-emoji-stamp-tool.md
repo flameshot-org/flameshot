@@ -69,7 +69,7 @@ The panel holds a search field, a category list and a scrollable grid.
 
 ### Editing
 
-Double-clicking a placed emoji reopens the picker, and the next pick replaces it. This is the gesture that already edits a text box, and it goes through the same undo path.
+Selecting a placed emoji, on the capture or in the layer list, shows the picker in the side panel. A pick replaces the selected emoji. Several picks in a row count as one change, so one Ctrl+Z brings back the original. The keyboard stays on the canvas, so arrow keys still move the selected emoji.
 
 ### Shortcut
 
@@ -87,7 +87,8 @@ Drawing asks for Noto Color Emoji, then Apple Color Emoji, then Segoe UI Emoji. 
 
 * One new directory, `src/tools/emoji/`, with the tool and its picker split the way the text tool splits `TextTool` and `TextConfig`.
 * The usual registration points for a new tool: the tool factory, both button lists, the shortcut table and the resource file.
-* Three small changes in `CaptureWidget`. Double-click editing accepts the emoji type next to the text type. Selecting the tool opens the side panel. Leaving a layer that is being edited from the panel releases it.
+* A few changes in `CaptureWidget`. Selecting the tool opens the side panel. Selecting a placed emoji shows the picker, and a pick goes through the undo handling that resizing a selected object already uses.
+* `undo()` and `redo()` now record a pending change of the selected object before they run. Without this, Ctrl+Z right after resizing a selected object skipped the resize and undid the action before it. Replacing an emoji would have inherited the same defect.
 
 <br>
 
