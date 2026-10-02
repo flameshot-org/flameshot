@@ -174,6 +174,13 @@ target_sources(
         ${QM_FILES}
         main.cpp)
 
+if (APPLE)
+    # Ship the compiled translations inside the app bundle so they are
+    # included before the bundle is signed.
+    set_source_files_properties(${QM_FILES} PROPERTIES
+        MACOSX_PACKAGE_LOCATION "Resources/translations")
+endif ()
+
 
 target_include_directories(flameshot PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/>  # src/
