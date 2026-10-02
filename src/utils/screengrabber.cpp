@@ -26,6 +26,67 @@
 #include <QDebug>
 #endif
 
+#if defined(Q_OS_MACOS)
+#include <CoreGraphics/CoreGraphics.h>
+
+namespace {
+bool pixmapLooksBlank(const QPixmap& px)
+{
+    if (px.isNull() || px.width() <= 0 || px.height() <= 0) {
+        return true;
+    }
+    // Downscale heavily — we only need a blackness signal.
+    const QImage img =
+      px.toImage().scaled(64, 64, Qt::IgnoreAspectRatio, Qt::FastTransformation);
+    if (img.isNull()) {
+        return true;
+    }
+    qint64 sum = 0;
+    int nearBlack = 0;
+    const int n = img.width() * img.height();
+    for (int y = 0; y < img.height(); ++y) {
+        for (int x = 0; x < img.width(); ++x) {
+            const QRgb c = img.pixel(x, y);
+            const int r = qRed(c), g = qGreen(c), b = qBlue(c);
+            sum += r + g + b;
+            if (r < 8 && g < 8 && b < 8) {
+                ++nearBlack;
+            }
+        }
+    }
+    const double mean = double(sum) / (3.0 * n);
+    const double frac = double(nearBlack) / n;
+    return frac > 0.95 && mean < 5.0;
+}
+
+void ensureMacScreenRecordingOrWarn(const QPixmap& px)
+{
+    const bool preflight = CGPreflightScreenCaptureAccess();
+    if (!preflight) {
+        CGRequestScreenCaptureAccess();
+    }
+    if (!pixmapLooksBlank(px)) {
+        return;
+    }
+    // Black frame almost always means TCC is denying this binary (new ad-hoc
+    // signature / stale Screen Recording entry). Point the user at the fix.
+    AbstractLogger::error()
+      << QObject::tr(
+           "macOS returned a blank capture. Open System Settings → Privacy & "
+           "Security → Screen Recording, remove Flameshot, then re-enable it "
+           "and restart Flameshot.");
+    if (!preflight || !CGPreflightScreenCaptureAccess()) {
+        // Best-effort: open the Screen Recording pane.
+        QProcess::startDetached(
+          "open",
+          { "x-apple.systempreferences:com.apple.preference.security?Privacy_"
+            "ScreenCapture" });
+    }
+}
+} // namespace
+#endif
+
+
 #if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
 #include "request.h"
 #include <QDBusInterface>
@@ -307,6 +368,10 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok, int preSelectedMonitor)
     QPixmap screenshot;
 
 #if defined(Q_OS_MACOS)
+    // grabWindow(0, x, y, ...) treats x/y as offsets inside that screen's
+    // root window — NOT desktop-absolute geometry. Passing screen->geometry()
+    // (e.g. an ultrawide at x=-1787) captures outside the buffer and returns
+    // a black pixmap. Always grab the full screen locally.
     QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
     if (!currentScreen) {
         AbstractLogger::error() << tr("Unable to get current screen");
@@ -319,10 +384,9 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok, int preSelectedMonitor)
         ok = false;
         return QPixmap();
     }
-    const QRect geom = currentScreen->geometry();
-    screenshot = currentScreen->grabWindow(
-      wid, geom.x(), geom.y(), geom.width(), geom.height());
+    screenshot = currentScreen->grabWindow(wid);
     screenshot.setDevicePixelRatio(currentScreen->devicePixelRatio());
+    ensureMacScreenRecordingOrWarn(screenshot);
     return screenshot;
 
 #elif defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)
@@ -374,6 +438,7 @@ QPixmap ScreenGrabber::grabFullDesktop(bool& ok)
         painter.drawPixmap(offset, p);
     }
     painter.end();
+    ensureMacScreenRecordingOrWarn(screenshot);
 #elif defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)
     screenshot = unixScreenshot(ok);
 #elif defined(Q_OS_WIN)
@@ -402,6 +467,15 @@ QPixmap ScreenGrabber::grabScreen(QScreen* screen, bool& ok)
     int screenIndex = screens.indexOf(screen);
 
     p = grabEntireDesktop(ok, screenIndex);
+#elif defined(Q_OS_MACOS)
+    // Same as grabEntireDesktop: offsets must be screen-local, so grab full
+    // screen. (Windows keeps the geometry-based path below.)
+    Q_UNUSED(geometry);
+    ok = true;
+    p = screen->grabWindow(0);
+    p.setDevicePixelRatio(screen->devicePixelRatio());
+    ensureMacScreenRecordingOrWarn(p);
+    return p;
 #else
     ok = true;
     return screen->grabWindow(

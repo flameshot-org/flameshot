@@ -28,6 +28,8 @@
     <true/>
     <key>LSUIElement</key>
     <true/>
+    <key>NSScreenCaptureUsageDescription</key>
+    <string>Flameshot needs Screen Recording permission to capture your screen.</string>
     <!-- Menu-bar agent: do not quit when no windows are open. -->
     <key>NSSupportsAutomaticTermination</key>
     <false/>
