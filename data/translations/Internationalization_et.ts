@@ -94,7 +94,7 @@
     <message>
         <location filename="../../src/tools/arrow/arrowtool.cpp" line="88"/>
         <source>Set the Arrow as the paint tool</source>
-        <translation>Määra nool joonistustarvikuks</translation>
+        <translation>Kasuta noolt joonistustarvikuna</translation>
     </message>
 </context>
 <context>
@@ -302,7 +302,7 @@ Premeu Espai per obrir el calaix lateral.</translation>
     <message>
         <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="69"/>
         <source>Circle Counter</source>
-        <translation type="unfinished"></translation>
+        <translation>Ümmargune loendur</translation>
     </message>
     <message>
         <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="87"/>
@@ -320,7 +320,7 @@ Premeu Espai per obrir el calaix lateral.</translation>
     <message>
         <location filename="../../src/tools/circle/circletool.cpp" line="31"/>
         <source>Set the Circle as the paint tool</source>
-        <translation>Määra ring joonistustarvikuks</translation>
+        <translation>Kasuta ringi joonistustarvikuna</translation>
     </message>
 </context>
 <context>
@@ -410,7 +410,7 @@ Premeu Espai per obrir el calaix lateral.</translation>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="58"/>
         <source>Space or Right Click</source>
-        <translation type="unfinished"></translation>
+        <translation>Tühikuklahv või parem hiireklõps</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="59"/>
@@ -1063,7 +1063,7 @@ Palun lahenda vead käsitsi seadistusfailis.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="303"/>
         <source>Show the side panel toggle button in the capture mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Näita hõiverežiimis külgriba sisse- või väljalülitamise nuppu</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="315"/>
@@ -1130,7 +1130,7 @@ Palun lahenda vead käsitsi seadistusfailis.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="424"/>
         <source>Automatically unload from memory when it is not needed</source>
-        <translation type="unfinished"></translation>
+        <translation>Eemalda rakendus mälust niipea, kui seda seal enam vaja pole</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="425"/>
@@ -1165,7 +1165,7 @@ Palun lahenda vead käsitsi seadistusfailis.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="502"/>
         <source>Copy URL after uploading was successful</source>
-        <translation type="unfinished"></translation>
+        <translation>Peale üleslaadimise õnnestumist kopeeri võrguaadress</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="514"/>
@@ -1726,7 +1726,7 @@ Palun lahenda vead käsitsi seadistusfailis.</translation>
     <message>
         <location filename="../../src/tools/invert/inverttool.cpp" line="36"/>
         <source>Set Inverter as the paint tool</source>
-        <translation>Määra inverter joonistustarvikuks</translation>
+        <translation>Kasuta inverterit joonistustarvikuna</translation>
     </message>
 </context>
 <context>
@@ -1739,7 +1739,7 @@ Palun lahenda vead käsitsi seadistusfailis.</translation>
     <message>
         <location filename="../../src/tools/line/linetool.cpp" line="33"/>
         <source>Set the Line as the paint tool</source>
-        <translation>Määra joon joonistustarvikuks</translation>
+        <translation>Kasuta joont joonistustarvikuna</translation>
     </message>
 </context>
 <context>
@@ -1752,7 +1752,7 @@ Palun lahenda vead käsitsi seadistusfailis.</translation>
     <message>
         <location filename="../../src/tools/marker/markertool.cpp" line="34"/>
         <source>Set the Marker as the paint tool</source>
-        <translation>Määra marker joonistustarvikuks</translation>
+        <translation>Kasuta markervildikat joonistustarvikuna</translation>
     </message>
 </context>
 <context>
@@ -1788,7 +1788,7 @@ Valimiseks klõpsa</translation>
     <message>
         <location filename="../../src/tools/pencil/penciltool.cpp" line="28"/>
         <source>Set the Pencil as the paint tool</source>
-        <translation>Määra pliiats joonistustarvikuks</translation>
+        <translation>Kasuta pliiatsit joonistustarvikuna</translation>
     </message>
 </context>
 <context>
@@ -1857,7 +1857,7 @@ Valimiseks klõpsa</translation>
     <message>
         <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="38"/>
         <source>Set Pixelate as the paint tool.</source>
-        <translation>Määra pikseldaja joonistustarvikuks.</translation>
+        <translation>Kasuta pikseldajat joonistustarvikuna.</translation>
     </message>
     <message>
         <source>Set Pixelate as the paint tool</source>
@@ -2296,12 +2296,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/rectangle/rectangletool.cpp" line="23"/>
         <source>Rectangle</source>
-        <translation type="unfinished"></translation>
+        <translation>Ristkülik</translation>
     </message>
     <message>
         <location filename="../../src/tools/rectangle/rectangletool.cpp" line="33"/>
         <source>Set the Rectangle as the paint tool</source>
-        <translation>Määra ristkülik joonistustarvikuks</translation>
+        <translation>Kasuta ristkülikut joonistustarvikuna</translation>
     </message>
 </context>
 <context>
@@ -2309,7 +2309,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/redo/redotool.cpp" line="24"/>
         <source>Redo</source>
-        <translation type="unfinished"></translation>
+        <translation>Korda tegevust</translation>
     </message>
     <message>
         <location filename="../../src/tools/redo/redotool.cpp" line="34"/>
@@ -2368,12 +2368,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="202"/>
         <source>Screenshot cancelled</source>
-        <translation type="unfinished"></translation>
+        <translation>Ekraanitõmmise tegemine on katkestatud</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="218"/>
         <source>Unable to get current screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Praegu kasutatava ekraani tuvastamine ei õnnestu</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="237"/>
@@ -2386,18 +2386,18 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="373"/>
         <source>=== All Screen Information ===</source>
-        <translation type="unfinished"></translation>
+        <translation>=== Kõikide ekraanide teave ===</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="376"/>
         <location filename="../../src/utils/screengrabber.cpp" line="551"/>
         <source>Screen %1: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Ekraan %1: %2</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="377"/>
         <source>  Logical geometry: %1x%2+%3+%4</source>
-        <translation type="unfinished"></translation>
+        <translation>  Loogiline geomeetria: %1x%2+%3+%4</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="382"/>
@@ -2407,12 +2407,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="488"/>
         <source>Total logical dimensions: %1x%2 (min: %3,%4)</source>
-        <translation type="unfinished"></translation>
+        <translation>Loogilised mõõdud kokku: %1x%2 (min: %3,%4)</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="493"/>
         <source>Screenshot dimensions: %1x%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Ekraanitõmmise mõõdud: %1x%2</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="509"/>
@@ -2460,17 +2460,17 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="29"/>
         <source>Type something here...</source>
-        <translation type="unfinished"></translation>
+        <translation>Kirjuta siia midagi…</translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="31"/>
         <source>&amp;Send</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Saada</translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="54"/>
         <source>Error sending message</source>
-        <translation type="unfinished"></translation>
+        <translation>Viga sõnumi saatmisel</translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="55"/>
@@ -2488,7 +2488,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/selection/selectiontool.cpp" line="36"/>
         <source>Set Selection as the paint tool</source>
-        <translation>Määra valikuvidin joonistustarvikuks</translation>
+        <translation>Kasuta valikukasti joonistustarvikuna</translation>
     </message>
 </context>
 <context>
@@ -2496,7 +2496,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="20"/>
         <source>Set Shortcut</source>
-        <translation type="unfinished"></translation>
+        <translation>Seadista kiirklahv</translation>
     </message>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="26"/>
@@ -3000,7 +3000,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="110"/>
         <source>Main Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Põhivärv</translation>
     </message>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="114"/>
@@ -3010,7 +3010,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="125"/>
         <source>Contrast Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontrastvärv</translation>
     </message>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="130"/>
@@ -3023,7 +3023,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/undo/undotool.cpp" line="24"/>
         <source>Undo</source>
-        <translation type="unfinished"></translation>
+        <translation>Võta tegevus tagasi</translation>
     </message>
     <message>
         <location filename="../../src/tools/undo/undotool.cpp" line="34"/>
@@ -3059,7 +3059,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/widgets/uploadhistory.ui" line="14"/>
         <source>Upload History</source>
-        <translation type="unfinished"></translation>
+        <translation>Laadi ajalugu üles</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadhistory.cpp" line="60"/>

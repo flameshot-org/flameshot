@@ -121,6 +121,19 @@ void configureTranslation(QTranslator& translator, QTranslator& qtTranslator)
                               QStringLiteral("Internationalization"),
                               QStringLiteral("_"),
                               path);
+            if (!foundTranslation) {
+                // Neither the exact locale nor the bare language is shipped
+                // (it_CH with only it_IT available): take any translation
+                // of the same language rather than falling back to English.
+                QString language = QLocale().name().section('_', 0, 0);
+                QStringList sameLanguage = QDir(path).entryList(
+                  { QStringLiteral("Internationalization_%1_*.qm")
+                      .arg(language) },
+                  QDir::Files);
+                foundTranslation =
+                  !sameLanguage.isEmpty() &&
+                  translator.load(sameLanguage.constFirst(), path);
+            }
         } else {
             // Load language from settings
             foundTranslation =

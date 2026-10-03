@@ -4,13 +4,13 @@
 #pragma once
 
 #include "core/capturerequest.h"
+#include "widgets/capture/capturewidget.h"
 
 #include <QObject>
 #include <QPointer>
 #include <QVersionNumber>
 #include <QWindow>
 
-class CaptureWidget;
 class ConfigWindow;
 class InfoWindow;
 class CaptureLauncher;

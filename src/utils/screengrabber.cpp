@@ -29,6 +29,7 @@
 #if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
 #include "request.h"
 #include <QDBusInterface>
+#include <QDBusMessage>
 #include <QDBusReply>
 #include <QDir>
 #include <QUrl>
@@ -40,6 +41,7 @@ bool ScreenGrabber::m_monitorSelectionActive = false;
 ScreenGrabber::ScreenGrabber(QObject* parent)
   : QObject(parent)
   , m_selectedMonitor(-1)
+  , m_highlightedMonitorPreview(-1)
   , m_monitorSelectionLoop(nullptr)
   , m_userCancelled(false)
 {
@@ -49,7 +51,9 @@ ScreenGrabber::ScreenGrabber(QObject* parent)
     QImageReader::setAllocationLimit(1024);
 }
 
-void ScreenGrabber::freeDesktopPortal(bool& ok, QPixmap& res)
+ScreenGrabber::PortalStatus ScreenGrabber::freeDesktopPortal(
+  QPixmap& res,
+  QString& errorDetail)
 {
 
 #if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
@@ -57,10 +61,9 @@ void ScreenGrabber::freeDesktopPortal(bool& ok, QPixmap& res)
     auto service = QStringLiteral("org.freedesktop.portal.Desktop");
 
     if (!connectionInterface->isServiceRegistered(service)) {
-        ok = false;
-        AbstractLogger::error() << tr(
-          "Could not locate the `org.freedesktop.portal.Desktop` service");
-        return;
+        errorDetail =
+          tr("Could not locate the `org.freedesktop.portal.Desktop` service");
+        return PortalStatus::Unavailable;
     }
 
     QDBusInterface screenshotInterface(
@@ -101,12 +104,13 @@ void ScreenGrabber::freeDesktopPortal(bool& ok, QPixmap& res)
     QMetaObject::Connection conn = QObject::connect(
       request, &org::freedesktop::portal::Request::Response, onPortalResponse);
 
+    bool timedOut = false;
     QTimer timeout;
     timeout.setSingleShot(true);
-    timeout.setInterval(30000); // 30 second timeout
-    QObject::connect(&timeout, &QTimer::timeout, &loop, [&loop, this]() {
-        AbstractLogger::error()
-          << tr("Screenshot portal timed out after 30 seconds");
+    timeout.setInterval(15000); // 15 second timeout
+
+    QObject::connect(&timeout, &QTimer::timeout, &loop, [&loop, &timedOut]() {
+        timedOut = true;
         loop.quit();
     });
     timeout.start();
@@ -130,11 +134,23 @@ void ScreenGrabber::freeDesktopPortal(bool& ok, QPixmap& res)
           QStringLiteral("x11:0x%1").arg(parentDummy.winId(), 0, 16);
     }
 
-    screenshotInterface.call(
+    QDBusMessage reply = screenshotInterface.call(
       QStringLiteral("Screenshot"),
       parentWindow,
       QMap<QString, QVariant>({ { "handle_token", QVariant(token) },
                                 { "interactive", QVariant(false) } }));
+
+    if (reply.type() == QDBusMessage::ErrorMessage) {
+        // No backend provides org.freedesktop.portal.Screenshot (or the
+        // portal rejected the request outright); the Response signal will
+        // never arrive, so fail now instead of waiting for the timeout.
+        QObject::disconnect(conn);
+        request->deleteLater();
+        errorDetail =
+          tr("The `org.freedesktop.portal.Screenshot` request failed: %1")
+            .arg(reply.errorMessage());
+        return PortalStatus::Unavailable;
+    }
 
     loop.exec();
     timeout.stop();
@@ -142,9 +158,18 @@ void ScreenGrabber::freeDesktopPortal(bool& ok, QPixmap& res)
     request->Close().waitForFinished();
     request->deleteLater();
 
+    if (timedOut) {
+        errorDetail =
+          tr("The xdg-desktop-portal backend did not respond "
+             "If you are on wayland make sure an xdg-desktop-portal backend "
+             "for your desktop is "
+             "installed and properly configured.\n \n"
+             "If on X11 enable Legacy X11 method in the General Settings");
+        return PortalStatus::Failed;
+    }
+
     if (res.isNull()) {
-        ok = false;
-        return;
+        return PortalStatus::Failed;
     }
 
 #ifdef FLAMESHOT_DEBUG_CAPTURE
@@ -153,6 +178,53 @@ void ScreenGrabber::freeDesktopPortal(bool& ok, QPixmap& res)
                   .arg(res.height())
                   .arg(res.devicePixelRatio());
 #endif
+    return PortalStatus::Success;
+#else
+    Q_UNUSED(res)
+    Q_UNUSED(errorDetail)
+    return PortalStatus::Failed;
+#endif
+}
+
+QPixmap ScreenGrabber::unixScreenshot(bool& ok)
+{
+#if defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)
+    QPixmap screenshot;
+
+    if (!m_info.waylandDetected() && ConfigHandler().useX11LegacyScreenshot()) {
+        screenshot = x11LegacyScreenshot();
+        ok = !screenshot.isNull();
+        if (!ok) {
+            AbstractLogger::error() << tr("Unable to capture screen");
+        }
+        return screenshot;
+    }
+
+    QString portalError;
+    const PortalStatus status = freeDesktopPortal(screenshot, portalError);
+    ok = status == PortalStatus::Success;
+
+    if (status == PortalStatus::Unavailable && !m_info.waylandDetected()) {
+        // The portal cannot take screenshots here, which is common on X11
+        // window managers such as i3 or XMonad, so take the native X11
+        // grab instead.
+        AbstractLogger::info(AbstractLogger::Stderr | AbstractLogger::LogFile)
+          << tr("Screenshot portal unavailable, using direct X11 capture");
+        screenshot = x11LegacyScreenshot();
+        ok = !screenshot.isNull();
+    }
+
+    if (!ok) {
+        if (!portalError.isEmpty()) {
+            AbstractLogger::error() << portalError;
+        }
+        AbstractLogger::error() << tr("Unable to capture screen");
+    }
+
+    return screenshot;
+#else
+    ok = false;
+    return QPixmap();
 #endif
 }
 
@@ -165,6 +237,7 @@ QPixmap ScreenGrabber::selectMonitorAndCrop(const QPixmap& fullScreenshot,
     // Only screenshot the monitor where the tray activated the screenshot
     return cropToMonitor(fullScreenshot, 0);
 #else
+
     // If there's only one monitor, skip selection
     const QList<QScreen*> screens = QGuiApplication::screens();
     if (screens.size() == 1) {
@@ -211,6 +284,8 @@ QPixmap ScreenGrabber::selectMonitorAndCrop(const QPixmap& fullScreenshot,
     m_monitorSelectionLoop = nullptr;
 
     delete container;
+    m_monitorPreviews.clear();
+    m_highlightedMonitorPreview = -1;
     m_monitorSelectionActive = false;
 
     if (m_selectedMonitor >= 0) {
@@ -238,6 +313,12 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok, int preSelectedMonitor)
         ok = false;
         return QPixmap();
     }
+    m_selectedMonitor = QGuiApplication::screens().indexOf(currentScreen);
+    if (m_selectedMonitor < 0) {
+        AbstractLogger::error() << tr("Unable to get current screen");
+        ok = false;
+        return QPixmap();
+    }
     const QRect geom = currentScreen->geometry();
     screenshot = currentScreen->grabWindow(
       wid, geom.x(), geom.y(), geom.width(), geom.height());
@@ -245,23 +326,9 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok, int preSelectedMonitor)
     return screenshot;
 
 #elif defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)
-    if (!m_info.waylandDetected() && ConfigHandler().useX11LegacyScreenshot()) {
-        qWarning() << "Using deprecated legacy X11 screenshot method. "
-                      "Consider installing xdg-desktop-portal for your "
-                      "desktop. Future versions of Flameshot may remove the "
-                      "option to use the legacy method.";
-        screenshot = x11LegacyScreenshot();
-        ok = !screenshot.isNull();
-        if (!ok) {
-            AbstractLogger::error() << tr("Unable to capture screen");
-            return QPixmap();
-        }
-    } else {
-        freeDesktopPortal(ok, screenshot);
-        if (!ok) {
-            AbstractLogger::error() << tr("Unable to capture screen");
-            return QPixmap();
-        }
+    screenshot = unixScreenshot(ok);
+    if (!ok) {
+        return QPixmap();
     }
 #elif defined(Q_OS_WIN)
     screenshot = windowsScreenshot(wid);
@@ -308,21 +375,7 @@ QPixmap ScreenGrabber::grabFullDesktop(bool& ok)
     }
     painter.end();
 #elif defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)
-    if (!m_info.waylandDetected() && ConfigHandler().useX11LegacyScreenshot()) {
-        qWarning() << "Using deprecated legacy X11 screenshot method. "
-                      "Consider installing xdg-desktop-portal for your "
-                      "desktop.";
-        screenshot = x11LegacyScreenshot();
-        ok = !screenshot.isNull();
-        if (!ok) {
-            AbstractLogger::error() << tr("Unable to capture screen");
-        }
-    } else {
-        freeDesktopPortal(ok, screenshot);
-        if (!ok) {
-            AbstractLogger::error() << tr("Unable to capture screen");
-        }
-    }
+    screenshot = unixScreenshot(ok);
 #elif defined(Q_OS_WIN)
     screenshot = windowsScreenshot(0);
 #endif
@@ -387,6 +440,8 @@ QScreen* ScreenGrabber::getSelectedScreen() const
 QWidget* ScreenGrabber::createMonitorPreviews(const QPixmap& fullScreenshot)
 {
     const QList<QScreen*> screens = QGuiApplication::screens();
+    m_monitorPreviews.clear();
+    m_highlightedMonitorPreview = -1;
 
 #ifdef FLAMESHOT_DEBUG_CAPTURE
     qDebug() << tr("=== All Screen Information ===");
@@ -435,16 +490,23 @@ QWidget* ScreenGrabber::createMonitorPreviews(const QPixmap& fullScreenshot)
         MonitorPreview* preview =
           new MonitorPreview(i, screen, thumbnail, monitorPreviews);
 
-        connect(
-          preview, &MonitorPreview::monitorSelected, this, [this](int index) {
-              m_selectedMonitor = index;
-              if (m_monitorSelectionLoop) {
-                  m_monitorSelectionLoop->quit();
-              }
-          });
+        connect(preview,
+                &MonitorPreview::monitorSelected,
+                this,
+                [this](int index) { selectMonitor(index); });
 
+        m_monitorPreviews.append(preview);
         containerLayout->addWidget(preview);
     }
+
+    int initialPreviewIndex = 0;
+    QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
+    int currentMonitorIndex = screens.indexOf(currentScreen);
+    int currentPreviewIndex = previewIndexForMonitor(currentMonitorIndex);
+    if (currentPreviewIndex >= 0) {
+        initialPreviewIndex = currentPreviewIndex;
+    }
+    setHighlightedMonitorPreview(initialPreviewIndex);
 
     monitorPreviews->setLayout(containerLayout);
     monitorPreviews->adjustSize();
@@ -456,21 +518,122 @@ QWidget* ScreenGrabber::createMonitorPreviews(const QPixmap& fullScreenshot)
                           center.y() - monitorPreviews->height() / 2);
 
     monitorPreviews->show();
+    monitorPreviews->raise();
+    monitorPreviews->activateWindow();
+    monitorPreviews->setFocus(Qt::ActiveWindowFocusReason);
     return monitorPreviews;
+}
+
+void ScreenGrabber::cancelMonitorSelection()
+{
+    m_selectedMonitor = -1;
+    m_userCancelled = true;
+    if (m_monitorSelectionLoop) {
+        m_monitorSelectionLoop->quit();
+    }
+}
+
+void ScreenGrabber::moveHighlightedMonitorPreview(int offset)
+{
+    if (m_monitorPreviews.isEmpty()) {
+        return;
+    }
+
+    int nextPreviewIndex = m_highlightedMonitorPreview;
+    if (nextPreviewIndex < 0) {
+        nextPreviewIndex = 0;
+    } else {
+        nextPreviewIndex += offset;
+    }
+
+    setHighlightedMonitorPreview(nextPreviewIndex);
+}
+
+int ScreenGrabber::previewIndexForMonitor(int monitorIndex) const
+{
+    for (int i = 0; i < m_monitorPreviews.size(); ++i) {
+        if (m_monitorPreviews[i]->monitorIndex() == monitorIndex) {
+            return i;
+        }
+    }
+
+    return -1;
+}
+
+void ScreenGrabber::selectHighlightedMonitorPreview()
+{
+    if (m_highlightedMonitorPreview < 0 ||
+        m_highlightedMonitorPreview >= m_monitorPreviews.size()) {
+        return;
+    }
+
+    selectMonitor(
+      m_monitorPreviews[m_highlightedMonitorPreview]->monitorIndex());
+}
+
+void ScreenGrabber::selectMonitor(int monitorIndex)
+{
+    m_selectedMonitor = monitorIndex;
+    if (m_monitorSelectionLoop) {
+        m_monitorSelectionLoop->quit();
+    }
+}
+
+void ScreenGrabber::setHighlightedMonitorPreview(int previewIndex)
+{
+    if (m_monitorPreviews.isEmpty()) {
+        m_highlightedMonitorPreview = -1;
+        return;
+    }
+
+    const int previewCount = m_monitorPreviews.size();
+    int normalizedIndex = previewIndex % previewCount;
+    if (normalizedIndex < 0) {
+        normalizedIndex += previewCount;
+    }
+
+    for (int i = 0; i < previewCount; ++i) {
+        m_monitorPreviews[i]->setSelected(i == normalizedIndex);
+    }
+    m_highlightedMonitorPreview = normalizedIndex;
 }
 
 bool ScreenGrabber::eventFilter(QObject* obj, QEvent* event)
 {
+    if (event->type() == QEvent::Close) {
+        cancelMonitorSelection();
+        return true;
+    }
     if (event->type() == QEvent::KeyPress) {
         QKeyEvent* keyEvent = static_cast<QKeyEvent*>(event);
-        if (keyEvent->key() == Qt::Key_Escape) {
-            // User cancelled selection
-            m_selectedMonitor = -1;
-            m_userCancelled = true;
-            if (m_monitorSelectionLoop) {
-                m_monitorSelectionLoop->quit();
-            }
-            return true;
+        switch (keyEvent->key()) {
+            case Qt::Key_Escape:
+                cancelMonitorSelection();
+                return true;
+            case Qt::Key_Left:
+            case Qt::Key_Up:
+            case Qt::Key_Backtab:
+                moveHighlightedMonitorPreview(-1);
+                return true;
+            case Qt::Key_Right:
+            case Qt::Key_Down:
+            case Qt::Key_Tab:
+                moveHighlightedMonitorPreview(1);
+                return true;
+            case Qt::Key_Return:
+            case Qt::Key_Enter:
+            case Qt::Key_Space:
+                selectHighlightedMonitorPreview();
+                return true;
+            default:
+                if (keyEvent->key() >= Qt::Key_1 &&
+                    keyEvent->key() <= Qt::Key_9) {
+                    int monitorIndex = keyEvent->key() - Qt::Key_1;
+                    if (previewIndexForMonitor(monitorIndex) >= 0) {
+                        selectMonitor(monitorIndex);
+                    }
+                    return true;
+                }
         }
     }
     return QObject::eventFilter(obj, event);
@@ -489,8 +652,8 @@ QPixmap ScreenGrabber::cropToMonitor(const QPixmap& fullScreenshot,
     qreal targetDpr = targetScreen->devicePixelRatio();
 
     // Calculate total logical dimensions and minimum coordinates
-    int minX = 0, minY = 0;
-    int maxX = 0, maxY = 0;
+    int minX = INT_MAX, minY = INT_MAX;
+    int maxX = INT_MIN, maxY = INT_MIN;
 
     for (QScreen* screen : screens) {
         QRect geo = screen->geometry();

@@ -78,7 +78,9 @@ public:
         // increase tool size for all tools
         REQ_INCREASE_TOOL_SIZE,
         // decrease tool size for all tools
-        REQ_DECREASE_TOOL_SIZE
+        REQ_DECREASE_TOOL_SIZE,
+        // Commit the active tool.
+        REQ_COMMIT_CURRENT_TOOL
     };
 
     explicit CaptureTool(QObject* parent = nullptr)
@@ -105,6 +107,12 @@ public:
         return {};
     };
     virtual QRect boundingRect() const = 0;
+    virtual bool handleMouseWheelEvent(int delta,
+                                       bool adjustmentButtonPressed,
+                                       CaptureContext& context)
+    {
+        return false;
+    }
 
     // The icon of the tool.
     // inEditor is true when the icon is requested inside the editor

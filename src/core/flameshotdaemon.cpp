@@ -39,6 +39,26 @@
 #include "core/globalshortcutfilter.h"
 #endif
 
+namespace {
+/**
+ * @brief Read a pin message written by FlameshotDaemon::createPin.
+ *
+ * A QPixmap loses its device pixel ratio when it goes through a QDataStream,
+ * so it travels next to the pixmap and is restored here. Without it the pin is
+ * laid out in device pixels and comes out too big on a scaled screen. Messages
+ * from an older flameshot don't carry it, in which case the pixmap keeps the
+ * ratio it was created with.
+ */
+void readPin(QDataStream& stream, QPixmap& pixmap, QRect& geometry)
+{
+    qreal devicePixelRatio = 0;
+    stream >> pixmap >> geometry >> devicePixelRatio;
+    if (stream.status() == QDataStream::Ok && devicePixelRatio > 0) {
+        pixmap.setDevicePixelRatio(devicePixelRatio);
+    }
+}
+}
+
 /**
  * @brief A way of accessing the flameshot daemon both from the daemon itself,
  * and from subcommands.
@@ -121,13 +141,15 @@ void FlameshotDaemon::createPin(const QPixmap& capture, QRect geometry)
     QByteArray data;
     QDataStream stream(&data, QIODevice::WriteOnly);
 
+    // A QPixmap loses its device pixel ratio when streamed, so send it along.
 #if defined(USE_KDSINGLEAPPLICATION) &&                                        \
   (defined(Q_OS_MACOS) || defined(Q_OS_WIN))
     auto kdsa = KDSingleApplication(QStringLiteral("org.flameshot.Flameshot"));
-    stream << QStringLiteral("attachPin") << capture << geometry;
+    stream << QStringLiteral("attachPin") << capture << geometry
+           << capture.devicePixelRatio();
     kdsa.sendMessage(data);
 #else
-    stream << capture << geometry;
+    stream << capture << geometry << capture.devicePixelRatio();
     QDBusMessage m = createMethodCall(QStringLiteral("attachPin"));
     m << data;
     call(m);
@@ -330,8 +352,7 @@ void FlameshotDaemon::attachPin(const QByteArray& data)
     QPixmap pixmap;
     QRect geometry;
 
-    stream >> pixmap;
-    stream >> geometry;
+    readPin(stream, pixmap, geometry);
 
     attachPin(pixmap, geometry);
 }
@@ -474,7 +495,7 @@ void FlameshotDaemon::messageReceivedFromSecondaryInstance(
     if (methodCall == QStringLiteral("attachPin")) {
         QPixmap capture;
         QRect geometry;
-        stream >> capture >> geometry;
+        readPin(stream, capture, geometry);
         // qDebug() << "Pixmap:" << capture;
         // qDebug() << "Geometry:" << geometry;
         if (!capture.isNull()) {

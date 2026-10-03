@@ -3,13 +3,13 @@ name: test-clang-format
 on:
   push:
     paths-ignore:
-      - 'README.md'
+      - '*.md'
       - 'LICENSE'
       - 'docs/**'
       - 'data/translations/*.ts'
   pull_request:
     paths-ignore:
-      - 'README.md'
+      - '*.md'
       - 'LICENSE'
       - 'docs/**'
       - 'data/translations/*.ts'

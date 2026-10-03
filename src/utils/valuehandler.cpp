@@ -545,25 +545,14 @@ QVariant Region::process(const QVariant& val)
 
     QString str = val.toString();
 
-    if (str == "all") {
-        return ScreenGrabber().desktopGeometry();
-    } else if (str.startsWith("screen")) {
-        bool ok;
-        int number = str.mid(6).toInt(&ok);
-        if (!ok || number < 0) {
-            return {};
-        }
-        return ScreenGrabber().screenGeometry(qApp->screens()[number]);
-    }
-
     static const QRegularExpression regex(
-      "(-{,1}\\d+)"   // number (any sign)
+      "(-?\\d+)"      // number (any sign)
       "[x,\\.\\s]"    // separator ('x', ',', '.', or whitespace)
-      "(-{,1}\\d+)"   // number (any sign)
+      "(-?\\d+)"      // number (any sign)
       "[\\+,\\.\\s]*" // separator ('+',',', '.', or whitespace)
-      "(-{,1}\\d+)"   // number (non-negative)
+      "(-?\\d+)"      // number (non-negative)
       "[\\+,\\.\\s]*" // separator ('+', ',', '.', or whitespace)
-      "(-{,1}\\d+)"   // number (non-negative)
+      "(-?\\d+)"      // number (non-negative)
     );
 
     if (!regex.match(str).hasMatch()) {

@@ -118,6 +118,7 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     OPTION("drawThickness"               ,LowerBoundedInt    ( 1, 3          )),
     OPTION("drawFontSize"                ,LowerBoundedInt    ( 1, 8          )),
     OPTION("drawCircleCounterSize"       ,LowerBoundedInt    ( 1, 1          )),
+    OPTION("drawCircleCounterOutline"    ,Bool               ( true          )),
     OPTION("drawPixelateSize"            ,LowerBoundedInt    ( 1, 2          )),
     OPTION("drawRectangleSize"           ,LowerBoundedInt    ( 1, 1          )),
     OPTION("drawMarkerSize"              ,LowerBoundedInt    ( 1, 5          )),
@@ -136,6 +137,7 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     OPTION("showSelectionGeometryHideTime", LowerBoundedInt  ( 0, 3000       )),
     OPTION("jpegQuality"                 , BoundedInt        ( 0,100,75      )),
     OPTION("reverseArrow"                ,Bool               ( false         )),
+    OPTION("arrowStyle"                  ,BoundedInt         ( 0, 1, 0       )),
     OPTION("insecurePixelate"            ,Bool               ( false         )),
 #if defined(Q_OS_WIN)
     // Not visible on settings dialog

@@ -42,6 +42,7 @@ constexpr const char* visibleInDockProperty = "_visibleInDock";
 #include <CoreGraphics/CoreGraphics.h>
 #endif
 
+#include "config/cacheutils.h"
 #include "config/configresolver.h"
 #include "config/configwindow.h"
 #include "core/qguiappcurrentscreen.h"
@@ -125,6 +126,13 @@ CaptureWidget* Flameshot::gui(const CaptureRequest& req)
         return nullptr;
     }
 
+    CaptureRequest request = req;
+    if (request.captureMode() == CaptureRequest::GRAPHICAL_MODE &&
+        request.initialSelection().isNull() &&
+        ConfigHandler().saveLastRegion()) {
+        request.setInitialSelection(getLastRegion());
+    }
+
 #if defined(Q_OS_MACOS)
     // This is required on MacOS because of Mission Control. If you'll switch to
     // another Desktop you cannot take a new screenshot from the tray, you have
@@ -157,7 +165,7 @@ CaptureWidget* Flameshot::gui(const CaptureRequest& req)
             return nullptr;
         }
 
-        m_captureWindow = new CaptureWidget(req);
+        m_captureWindow = new CaptureWidget(request);
 
 #ifdef Q_OS_WIN
         m_captureWindow->show();

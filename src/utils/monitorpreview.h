@@ -20,6 +20,7 @@ public:
                    QWidget* parent = nullptr);
 
     int monitorIndex() const { return m_monitorIndex; }
+    void setSelected(bool selected);
 
 signals:
     void monitorSelected(int index);
@@ -30,8 +31,14 @@ protected:
     void leaveEvent(QEvent* event) override;
 
 private:
+    void updateStyle();
+
     int m_monitorIndex;
+    bool m_selected;
+    bool m_mouseHovered;
     QColor m_uiColor;
     QColor m_contrastColor;
+    QLabel* m_imageLabel;
+    QLabel* m_keyLabel;
     QLabel* m_textLabel;
 };

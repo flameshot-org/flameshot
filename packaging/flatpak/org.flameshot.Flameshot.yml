@@ -1,6 +1,6 @@
 app-id: org.flameshot.Flameshot
 runtime: org.kde.Platform
-runtime-version: '6.9'
+runtime-version: '6.10'
 sdk: org.kde.Sdk
 command: flameshot
 finish-args:
@@ -29,18 +29,20 @@ modules:
     sources:
       - type: git
         url: https://gitlab.com/mattbas/Qt-Color-Widgets.git
-        commit: 352bc8f99bf2174d5724ee70623427aa31ddc26a
+        commit: 5d52e907e50dc88cf969b41cea44665ff6c475b1
         dest: external/Qt-Color-Widgets
 
       - type: git
         url: https://github.com/KDAB/KDSingleApplication.git
         tag: v1.2.0
+        commit: 3186a158f8e6565e89f5983b4028c892737844ff
         dest: external/KDSingleApplication
-
+        
       - type: git
         url: https://github.com/flameshot-org/flameshot.git
         branch: master
-        #tag: v13.0.0
+        # tag: v14.0.0
+        # commit: e408812d77ff1835957f85796c4cf737466bd69d
 
     cleanup:
       - /share/bash-completion

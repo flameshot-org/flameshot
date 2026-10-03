@@ -79,6 +79,7 @@ GeneralConf::GeneralConf(QWidget* parent)
     initSquareMagnifier();
     initJpegQuality();
     initReverseArrow();
+    initDrawCircleCounterOutline();
     // this has to be at the end
     initConfigButtons();
     updateComponents();
@@ -113,6 +114,7 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
     m_squareMagnifier->setChecked(config.squareMagnifier());
     m_saveLastRegion->setChecked(config.saveLastRegion());
     m_reverseArrow->setChecked(config.reverseArrow());
+    m_drawCircleCounterOutline->setChecked(config.drawCircleCounterOutline());
     m_autoCloseIdleDaemon->setChecked(config.autoCloseIdleDaemon());
     m_predefinedColorPaletteLarge->setChecked(
       config.predefinedColorPaletteLarge());
@@ -865,6 +867,20 @@ void GeneralConf::initReverseArrow()
       m_reverseArrow, &QCheckBox::clicked, this, &GeneralConf::setReverseArrow);
 }
 
+void GeneralConf::initDrawCircleCounterOutline()
+{
+    m_drawCircleCounterOutline =
+      new QCheckBox(tr("Draw outline around circle counter"), this);
+    m_drawCircleCounterOutline->setToolTip(
+      tr("Draw a contrasting ring around the counter bubble so it stays "
+         "visible on any background"));
+    m_scrollAreaLayout->addWidget(m_drawCircleCounterOutline);
+
+    connect(m_drawCircleCounterOutline, &QCheckBox::clicked, [](bool checked) {
+        ConfigHandler().setDrawCircleCounterOutline(checked);
+    });
+}
+
 void GeneralConf::initInsecurePixelate()
 {
     m_insecurePixelate = new QCheckBox(tr("Insecure Pixelate"), this);
@@ -924,11 +940,12 @@ void GeneralConf::setInsecurePixelate(bool checked)
 void GeneralConf::initCaptureActiveMonitor()
 {
     m_captureActiveMonitor = new QCheckBox(
-      tr("Capture active monitor (skip monitor selection)"), this);
+      tr("Capture active monitor in X11 and Windows (skip monitor selection)"),
+      this);
     m_captureActiveMonitor->setToolTip(
       tr("Automatically capture the monitor where the cursor is located "
          "instead of showing the monitor selection dialog. "
-         "This feature is not supported on Wayland."));
+         "This feature is not supported on macOS and Wayland."));
     m_scrollAreaLayout->addWidget(m_captureActiveMonitor);
 
     connect(m_captureActiveMonitor,
@@ -970,7 +987,7 @@ void GeneralConf::useNativeFullscreenChanged(bool checked)
 void GeneralConf::initUseX11LegacyScreenshot()
 {
     m_useX11LegacyScreenshot =
-      new QCheckBox(tr("Use legacy X11 screenshot method (deprecated)"), this);
+      new QCheckBox(tr("Use legacy X11 screenshot method"), this);
     m_useX11LegacyScreenshot->setToolTip(
       tr("Bypass the freedesktop portal and use Qt's native X11 screen "
          "capture. Enable this if your window manager lacks "

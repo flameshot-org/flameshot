@@ -108,6 +108,12 @@ QWidget* TextTool::widget()
     m_widget->setText(m_text);
     m_widget->selectAll();
     connect(m_widget, &TextWidget::textUpdated, this, &TextTool::updateText);
+    connect(
+      m_widget,
+      &TextWidget::editingFinished,
+      this,
+      [this]() { emit requestAction(REQ_COMMIT_CURRENT_TOOL); },
+      Qt::QueuedConnection);
     return m_widget;
 }
 

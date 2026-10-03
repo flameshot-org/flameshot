@@ -107,6 +107,7 @@ private:
     void initShowSelectionGeometry();
     void initJpegQuality();
     void initReverseArrow();
+    void initDrawCircleCounterOutline();
     void initInsecurePixelate();
 #if !defined(Q_OS_MACOS)
     void initCaptureActiveMonitor();
@@ -164,6 +165,7 @@ private:
     QSpinBox* m_xywhTimeout;
     QSpinBox* m_jpegQuality;
     QCheckBox* m_reverseArrow;
+    QCheckBox* m_drawCircleCounterOutline;
     QCheckBox* m_insecurePixelate;
 #if !defined(Q_OS_MACOS)
     QCheckBox* m_captureActiveMonitor;

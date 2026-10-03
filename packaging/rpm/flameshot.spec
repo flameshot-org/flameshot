@@ -44,7 +44,11 @@ Requires: hicolor-icon-theme
 %if 0%{?suse_version}
 Requires: qt6-svg
 %else
+%if 0%{?fedora} || 0%{?rhel}
+Requires: qt6-qtsvg%{?_isa}
+%else
 Requires: qt6-svg%{?_isa}
+%endif
 %endif
 
 %if 0%{?suse_version}
@@ -140,6 +144,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_mandir}/man1/%{name}.1*
 
 %changelog
+* Sat Sep 12 2026 Jeremy Borgman <borgman.jeremy@pm.me> - 15.0.rc1
+- Beta for 15 release
+
 * Mon May 18 2026 Jeremy Borgman <borgman.jeremy@pm.me> - 14.0.rc2
 - Beta for 14 release
 

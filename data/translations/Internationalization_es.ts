@@ -193,7 +193,7 @@
         <location filename="../../src/widgets/capturelauncher.ui" line="71"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="184"/>
         <source>Monitor:</source>
-        <translation type="unfinished">Monitor:</translation>
+        <translation>Monitor:</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="87"/>
@@ -1304,7 +1304,7 @@ Por favor, resuélvelos manualmente en el archivo de configuración.</translatio
     <message>
         <location filename="../../src/config/generalconf.cpp" line="795"/>
         <source>Set geometry display timeout (ms)</source>
-        <translation type="unfinished">Tiempo antes de ocultar la geometría (ms)</translation>
+        <translation>Establecer tiempo de visualización de geometría (ms)</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="803"/>
