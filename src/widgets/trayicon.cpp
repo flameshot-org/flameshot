@@ -47,12 +47,18 @@ TrayIcon::TrayIcon(QObject* parent)
     // Older macOS versions already needed the manual popup workaround, and the
     // native NSStatusItem menu path can abort on newer macOS versions after a
     // capture has completed.
-    auto trayIconActivated = [this](QSystemTrayIcon::ActivationReason r) {
+    auto trayIconActivated = [this](QSystemTrayIcon::ActivationReason) {
         if (m_menu->isVisible()) {
             m_menu->hide();
-        } else {
-            m_menu->popup(QCursor::pos());
+            return;
         }
+        // Popping up inside the click handler lets the pending mouse-up
+        // dismiss the menu right away.
+        QTimer::singleShot(0, this, [this]() {
+            QRect iconRect = geometry();
+            m_menu->popup(iconRect.isValid() ? iconRect.bottomLeft()
+                                             : QCursor::pos());
+        });
     };
     connect(this, &QSystemTrayIcon::activated, this, trayIconActivated);
 #else
