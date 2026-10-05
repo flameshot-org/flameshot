@@ -55,7 +55,7 @@ A new tool, "Emoji", sits in the toolbar right after the circle counter.
 
 ### Placing
 
-Selecting the tool opens the side panel on the picker. The chosen emoji follows the cursor as a half transparent preview, and a click stamps it. The mouse wheel sets the size on the same scale as the circle counter bubble. A stamp is a regular layer, so it can be selected, moved, deleted, undone and redone.
+Selecting the tool opens the side panel on the picker. The chosen emoji follows the cursor as a half transparent preview, and a click stamps it. The mouse wheel sets the size on the same scale as the circle counter bubble. The size is remembered on its own, like the marker and circle counter sizes, so resizing an emoji leaves the stroke width of the pencil, line and arrow tools alone. A stamp is a regular layer, so it can be selected, moved, deleted, undone and redone.
 
 ### Picker
 
@@ -87,6 +87,7 @@ Drawing asks for Noto Color Emoji, then Apple Color Emoji, then Segoe UI Emoji. 
 
 * One new directory, `src/tools/emoji/`, with the tool and its picker split the way the text tool splits `TextTool` and `TextConfig`.
 * The usual registration points for a new tool: the tool factory, both button lists, the shortcut table and the resource file.
+* One new setting, `drawEmojiSize`, next to the other per-tool sizes in `ConfigHandler`.
 * A few changes in `CaptureWidget`. Selecting the tool opens the side panel. Selecting a placed emoji shows the picker, and a pick goes through the undo handling that resizing a selected object already uses.
 * `undo()` and `redo()` now record a pending change of the selected object before they run. Without this, Ctrl+Z right after resizing a selected object skipped the resize and undid the action before it. Replacing an emoji would have inherited the same defect.
 
