@@ -69,6 +69,7 @@ public:
     static Origin origin();
     void setExternalWidget(bool b);
     bool haveExternalWidget();
+    bool hasCaptureWindow() const;
 
 signals:
     void captureTaken(QPixmap p);
