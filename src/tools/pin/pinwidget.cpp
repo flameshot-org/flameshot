@@ -44,7 +44,7 @@ PinWidget::PinWidget(const QPixmap& pixmap,
     ConfigHandler conf;
     m_baseColor = conf.uiColor();
     m_hoverColor = conf.contrastUiColor();
-
+    QString closePinnedCatureShorcut = conf.shortcut("TYPE_CLOSE_PIN_CAPTURES");
     m_layout->setContentsMargins(MARGIN, MARGIN, MARGIN, MARGIN);
 
     m_shadowEffect->setColor(m_baseColor);
@@ -56,7 +56,7 @@ PinWidget::PinWidget(const QPixmap& pixmap,
     m_label->setPixmap(m_pixmap);
     m_layout->addWidget(m_label);
 
-    new QShortcut(QKeySequence(Qt::CTRL | Qt::Key_Q), this, SLOT(close()));
+    new QShortcut(QKeySequence(closePinnedCatureShorcut), this, SLOT(close()));
     new QShortcut(Qt::Key_Escape, this, SLOT(close()));
 
     qreal devicePixelRatio = 1;
@@ -139,11 +139,6 @@ void PinWidget::enterEvent(QEnterEvent*)
 void PinWidget::leaveEvent(QEvent*)
 {
     m_shadowEffect->setColor(m_baseColor);
-}
-
-void PinWidget::mouseDoubleClickEvent(QMouseEvent*)
-{
-    closePin();
 }
 
 void PinWidget::mousePressEvent(QMouseEvent* e)
