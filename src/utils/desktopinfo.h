@@ -21,7 +21,7 @@ public:
         HYPRLAND
     };
 
-    bool waylandDetected();
+    bool waylandDetected() const;
     WM windowManager();
 
 private:

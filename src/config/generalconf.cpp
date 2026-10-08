@@ -946,7 +946,8 @@ void GeneralConf::initCaptureActiveMonitor()
       this);
     m_captureActiveMonitor->setToolTip(
       tr("Automatically capture the monitor where the cursor is located "
-         "instead of showing the monitor selection dialog. "
+         "instead of showing the monitor selection dialog, unless "
+         "\"Capture all monitors\" is enabled and available. "
          "This feature is not supported on macOS and Wayland."));
     m_scrollAreaLayout->addWidget(m_captureActiveMonitor);
 
@@ -1016,8 +1017,9 @@ void GeneralConf::initCaptureAllMonitors()
     m_captureAllMonitors->setToolTip(
       tr("Open the editor over the whole virtual desktop so a selection can "
          "span several monitors. Requires X11 and the same scale factor on "
-         "every monitor; takes precedence over \"Capture active monitor\". "
-         "Not supported on Wayland."));
+         "every monitor; otherwise the active monitor is captured if "
+         "\"Capture active monitor\" is enabled, else the monitor selection "
+         "dialog is shown. Not supported on Wayland."));
     m_scrollAreaLayout->addWidget(m_captureAllMonitors);
 
     connect(m_captureAllMonitors,

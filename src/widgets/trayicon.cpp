@@ -3,6 +3,7 @@
 #include "core/flameshot.h"
 #include "core/flameshotdaemon.h"
 #include "core/qguiappcurrentscreen.h"
+#include "utils/abstractlogger.h"
 #include "utils/confighandler.h"
 #include "utils/globalvalues.h"
 #include "utils/screengrabber.h"
@@ -278,11 +279,19 @@ void TrayIcon::initScreenMenu()
         });
     }
 
-    if (ScreenGrabber::allMonitorsSupported()) {
+    if (ScreenGrabber().allMonitorsSupported()) {
         QAction* allAction = m_screenMenu->addAction(tr("All monitors"));
         connect(allAction, &QAction::triggered, this, [this]() {
             QTimer::singleShot(100, this, [this]() {
-                startGuiCaptureOnScreen(ScreenGrabber::ALL_MONITORS);
+                // Monitors may have changed since the menu was built
+                if (ScreenGrabber().allMonitorsSupported()) {
+                    startGuiCaptureOnScreen(ScreenGrabber::ALL_MONITORS);
+                } else {
+                    AbstractLogger::warning()
+                      << tr("Capture all monitors is no longer available, "
+                            "starting a normal capture.");
+                    startGuiCapture();
+                }
             });
         });
     }

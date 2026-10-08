@@ -51,7 +51,7 @@ CaptureLauncher::CaptureLauncher(QDialog* parent)
                                 .arg(geom.height());
         ui->monitorSelection->addItem(monitorText, i);
     }
-    if (screens.size() > 1 && ScreenGrabber::allMonitorsSupported()) {
+    if (ScreenGrabber().allMonitorsSupported()) {
         ui->monitorSelection->addItem(tr("All monitors"),
                                       ScreenGrabber::ALL_MONITORS);
     }

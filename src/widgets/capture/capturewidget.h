@@ -111,6 +111,7 @@ protected:
     void moveEvent(QMoveEvent* moveEvent) override;
     void changeEvent(QEvent* changeEvent) override;
     void closeEvent(QCloseEvent* event) override;
+    bool eventFilter(QObject* obj, QEvent* event) override;
 
 private:
     void pushObjectsStateToUndoStack();
@@ -172,6 +173,8 @@ private:
     // Outside selection opacity
     int m_opacity;
     int m_toolSizeByKeyboard;
+    // One rect per monitor, widget-local; a single rect unless spanning all
+    QVector<QRect> m_screenAreas;
 
     // utility flags
     bool m_mouseIsClicked;

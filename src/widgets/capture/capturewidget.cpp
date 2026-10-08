@@ -175,14 +175,18 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
         resize(currentScreen->size());
 // LINUX
 #else
+        const bool spansAllMonitors = grabber.allMonitorsSelected();
 // Call cmake with -DFLAMESHOT_DEBUG_CAPTURE=ON to enable easier debugging
 #if !defined(FLAMESHOT_DEBUG_CAPTURE)
         // An X11 window manager clamps a fullscreen window to one output;
         // bypassing it is the only way to span the whole virtual desktop.
-        if (DesktopInfo().waylandDetected() || grabber.allMonitorsSelected()) {
+        if (DesktopInfo().waylandDetected() || spansAllMonitors) {
             setWindowFlags(Qt::BypassWindowManagerHint |
                            Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint |
                            Qt::Tool);
+            if (spansAllMonitors) {
+                qApp->installEventFilter(this); // see eventFilter()
+            }
         } else {
             // Note: Qt::BypassWindowManagerHint is removed to fix x11 gnome
             // crash. It's needed on Cosmic
@@ -191,13 +195,9 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
         }
 #endif
 
-        QRect screenGeom;
-        if (grabber.allMonitorsSelected()) {
-            screenGeom = QGuiApplication::primaryScreen()->virtualGeometry();
-        } else {
-            if (selectedScreen == nullptr) {
-                selectedScreen = QGuiApplication::primaryScreen();
-            }
+        QRect screenGeom = grabber.selectedGeometry();
+        if (screenGeom.isNull()) {
+            selectedScreen = QGuiApplication::primaryScreen();
             screenGeom = selectedScreen->geometry();
         }
         move(screenGeom.topLeft());
@@ -212,8 +212,7 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
     QVector<QRect> areas;
     if (m_context.fullscreen && grabber.allMonitorsSelected()) {
         // One region per monitor keeps the toolbar from straddling a bezel
-        const QPoint origin =
-          QGuiApplication::primaryScreen()->virtualGeometry().topLeft();
+        const QPoint origin = grabber.selectedGeometry().topLeft();
         for (QScreen* const screen : QGuiApplication::screens()) {
             QRect r = screen->geometry();
             r.moveTopLeft(r.topLeft() - origin);
@@ -235,6 +234,7 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
         areas.append(rect());
     }
 
+    m_screenAreas = areas;
     m_buttonHandler = new ButtonHandler(this);
     m_buttonHandler->updateScreenRegions(areas);
     m_buttonHandler->hide();
@@ -302,8 +302,12 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
 
     // OverlayMessage is a child widget, so use widget-local coordinates
     // In fullscreen mode, use the normalized area; otherwise use widget rect
-    QRect overlayArea =
-      m_context.fullscreen && !areas.isEmpty() ? areas.first() : rect();
+    QRect overlayArea = rect();
+    if (m_context.fullscreen && !areas.isEmpty()) {
+        const int current = QGuiApplication::screens().indexOf(
+          QGuiAppCurrentScreen().currentScreen());
+        overlayArea = areas.value(current, areas.first());
+    }
     OverlayMessage::init(this, overlayArea);
 
     if (m_config.showHelp()) {
@@ -1195,6 +1199,19 @@ void CaptureWidget::resizeEvent(QResizeEvent* e)
     }
 }
 
+bool CaptureWidget::eventFilter(QObject* obj, QEvent* event)
+{
+    // The WM ignores an override-redirect window, so a click anywhere in it
+    // must request the keyboard focus itself
+    if (event->type() == QEvent::MouseButtonPress && !isActiveWindow()) {
+        auto* widget = qobject_cast<QWidget*>(obj);
+        if (widget && widget->window() == this) {
+            activateWindow();
+        }
+    }
+    return QWidget::eventFilter(obj, event);
+}
+
 void CaptureWidget::moveEvent(QMoveEvent* e)
 {
     QWidget::moveEvent(e);
@@ -1228,7 +1245,15 @@ void CaptureWidget::initPanel()
     // Use widget-local coordinates (rect()) for all child widgets
     // Child widgets use parent-relative coordinate system, not global screen
     // coords
+    // The panel hugs the left edge: keep it on the top-left monitor
     QRect panelRect = rect();
+    bool found = false;
+    for (const QRect& area : m_screenAreas) {
+        if (area.x() == 0 && (!found || area.y() < panelRect.y())) {
+            panelRect = area;
+            found = true;
+        }
+    }
 
     if (ConfigHandler().showSidePanelButton()) {
         auto* panelToggleButton =
