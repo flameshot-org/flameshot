@@ -52,6 +52,7 @@ GeneralConf::GeneralConf(QWidget* parent)
     initSaveAfterCopy();
     initCopyPathAfterSave();
     initAntialiasingPinZoom();
+    initPinShadow();
     initUndoLimit();
     initInsecurePixelate();
 #if !defined(Q_OS_MACOS)
@@ -96,6 +97,7 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
     m_saveAfterCopy->setChecked(config.saveAfterCopy());
     m_copyPathAfterSave->setChecked(config.copyPathAfterSave());
     m_antialiasingPinZoom->setChecked(config.antialiasingPinZoom());
+    m_pinShadow->setChecked(config.pinShadow());
     m_useJpgForClipboard->setChecked(config.useJpgForClipboard());
     m_copyOnDoubleClick->setChecked(config.copyOnDoubleClick());
 #ifdef ENABLE_IMGUR
@@ -718,6 +720,18 @@ void GeneralConf::initAntialiasingPinZoom()
     m_scrollAreaLayout->addWidget(m_antialiasingPinZoom);
     connect(m_antialiasingPinZoom, &QCheckBox::clicked, [](bool checked) {
         ConfigHandler().setAntialiasingPinZoom(checked);
+    });
+}
+
+void GeneralConf::initPinShadow()
+{
+    m_pinShadow =
+      new QCheckBox(tr("Show drop shadow around the pinned image"), this);
+    m_pinShadow->setToolTip(tr("Show or hide the drop shadow around the "
+                               "pinned image"));
+    m_scrollAreaLayout->addWidget(m_pinShadow);
+    connect(m_pinShadow, &QCheckBox::clicked, [](bool checked) {
+        ConfigHandler().setPinShadow(checked);
     });
 }
 

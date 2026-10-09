@@ -122,6 +122,7 @@ public:
     CONFIG_GETTER_SETTER(copyPathAfterSave, setCopyPathAfterSave, bool)
     CONFIG_GETTER_SETTER(saveAsFileExtension, setSaveAsFileExtension, QString)
     CONFIG_GETTER_SETTER(antialiasingPinZoom, setAntialiasingPinZoom, bool)
+    CONFIG_GETTER_SETTER(pinShadow, setPinShadow, bool)
     CONFIG_GETTER_SETTER(useJpgForClipboard, setUseJpgForClipboard, bool)
 #if defined(Q_OS_MACOS)
     CONFIG_GETTER_SETTER(useNativeFullscreen, setUseNativeFullscreen, bool)

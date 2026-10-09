@@ -51,6 +51,7 @@ PinWidget::PinWidget(const QPixmap& pixmap,
     m_shadowEffect->setBlurRadius(BLUR_RADIUS);
     m_shadowEffect->setOffset(0, 0);
     setGraphicsEffect(m_shadowEffect);
+    m_shadowEffect->setEnabled(conf.pinShadow());
     setWindowOpacity(m_opacity);
 
     m_label->setPixmap(m_pixmap);
@@ -91,6 +92,11 @@ PinWidget::PinWidget(const QPixmap& pixmap,
             &QWidget::customContextMenuRequested,
             this,
             &PinWidget::showContextMenu);
+
+    connect(
+      ConfigHandler::getInstance(), &ConfigHandler::fileChanged, this, [this] {
+          m_shadowEffect->setEnabled(ConfigHandler().pinShadow());
+      });
 }
 
 void PinWidget::closePin()
