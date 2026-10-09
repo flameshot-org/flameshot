@@ -200,6 +200,7 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
         if (selectedScreen != nullptr && windowHandle()) {
             windowHandle()->setScreen(selectedScreen);
         }
+        m_selectedScreen = selectedScreen;
 #endif
     }
 
@@ -1184,6 +1185,13 @@ void CaptureWidget::moveEvent(QMoveEvent* e)
 {
     QWidget::moveEvent(e);
     m_context.widgetOffset = mapToGlobal(QPoint(0, 0));
+#if defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)
+    // If a compositor moved the window to the wrong screen, move it back
+    if (m_context.fullscreen && m_selectedScreen &&
+        geometry().topLeft() != m_selectedScreen->geometry().topLeft()) {
+        move(m_selectedScreen->geometry().topLeft());
+    }
+#endif
 }
 
 void CaptureWidget::changeEvent(QEvent* e)

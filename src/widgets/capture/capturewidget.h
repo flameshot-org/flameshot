@@ -30,6 +30,7 @@ class QLabel;
 class QPaintEvent;
 class QResizeEvent;
 class QMouseEvent;
+class QScreen;
 class QShortcut;
 class QNetworkAccessManager;
 class QNetworkReply;
@@ -163,6 +164,7 @@ private:
 
     // Context information
     CaptureContext m_context;
+    QScreen* m_selectedScreen = nullptr;
 
     // Main ui color
     QColor m_uiColor;
