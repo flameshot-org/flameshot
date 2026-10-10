@@ -109,6 +109,9 @@ jobs:
       - name: Compile
         run: |
           cmake --build "${DIR_BUILD}"
+          mkdir -p "${DIR_BUILD}/src/flameshot.app/Contents/MacOS/translations"
+          cp "${DIR_BUILD}/src/Internationalization_"*.qm "${DIR_BUILD}/src/flameshot.app/Contents/MacOS/translations/"
+          ls -la "${DIR_BUILD}/src/flameshot.app/Contents/MacOS/translations/"
 
       - name: Inspect resulting executable
         run: |
