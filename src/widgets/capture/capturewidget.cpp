@@ -43,6 +43,10 @@
 #include "widgets/updatenotificationwidget.h"
 #endif
 
+#ifdef ENABLE_QR_DECODER
+#include "widgets/capture/qrcontroller.h"
+#endif
+
 #define MOUSE_DISTANCE_TO_START_MOVING 3
 
 auto const MOUSE_WHEEL_TRESHOLD = 60;
@@ -238,6 +242,17 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
     m_colorPicker = new ColorPicker(this);
     // Init notification widget
     m_notifierBox = new NotifierBox(this);
+#ifdef ENABLE_QR_DECODER
+    m_qrController = new QrController(this);
+    connect(m_qrController, &QrController::requestCloseCapture, this, [this]() {
+        m_captureDone = true;
+        hide();
+        close();
+        QTimer::singleShot(50, qApp, []() {
+            qApp->exit(0);
+        });
+    });
+#endif
     initPanel();
 
     // TODO: Make it more clear why this has moved. In Qt6 some timing related
@@ -576,6 +591,10 @@ void CaptureWidget::deleteToolWidgetOrClose()
         m_toolWidget = nullptr;
     } else if (m_colorPicker && m_colorPicker->isVisible()) {
         m_colorPicker->hide();
+#ifdef ENABLE_QR_DECODER
+    } else if (m_qrController && m_qrController->handleEscape()) {
+        return;
+#endif
     } else {
         // close CaptureWidget
         if (m_config.showQuitPrompt()) {
@@ -885,6 +904,11 @@ void CaptureWidget::mousePressEvent(QMouseEvent* e)
         updateCursor();
         return;
     }
+#ifdef ENABLE_QR_DECODER
+    if (m_qrController) {
+        m_qrController->handleMousePress(e->pos());
+    }
+#endif
     // reset object selection if capture area selection is active
     if (m_selection->getMouseSide(e->pos()) != SelectionWidget::CENTER) {
         m_panel->setActiveLayer(-1);
@@ -1358,6 +1382,11 @@ void CaptureWidget::initSelection()
         m_context.selection = extendedRect(constrainedToCaptureArea);
 
         m_buttonHandler->hide();
+#ifdef ENABLE_QR_DECODER
+        if (m_qrController) {
+            m_qrController->handleSelectionDragging();
+        }
+#endif
         updateCursor();
         updateSizeIndicator();
         OverlayMessage::pop();
@@ -1372,13 +1401,31 @@ void CaptureWidget::initSelection()
             }
             m_buttonHandler->updatePosition(m_selection->geometry());
             m_buttonHandler->show();
+#ifdef ENABLE_QR_DECODER
+            if (m_qrController) {
+                m_qrController->handleSelectionSettled(
+                  m_selection->geometry(), m_context.selectedScreenshotArea());
+            }
+#endif
         } else {
             m_buttonHandler->hide();
+#ifdef ENABLE_QR_DECODER
+            if (m_qrController) {
+                m_qrController->handleSelectionHidden();
+            }
+#endif
         }
     });
     connect(m_selection, &SelectionWidget::visibilityChanged, this, [this]() {
-        if (!m_selection->isVisible() && !m_helpMessage.isEmpty()) {
-            OverlayMessage::push(m_helpMessage);
+        if (!m_selection->isVisible()) {
+#ifdef ENABLE_QR_DECODER
+            if (m_qrController) {
+                m_qrController->handleSelectionHidden();
+            }
+#endif
+            if (!m_helpMessage.isEmpty()) {
+                OverlayMessage::push(m_helpMessage);
+            }
         }
     });
     if (!initialSelection.isNull()) {
@@ -1395,6 +1442,8 @@ void CaptureWidget::initSelection()
         emit m_selection->geometrySettled();
     }
 }
+
+
 
 void CaptureWidget::setState(CaptureToolButton* b)
 {
