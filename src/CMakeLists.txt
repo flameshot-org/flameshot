@@ -261,6 +261,9 @@ if (WIN32)
     target_link_libraries(
             flameshot
             qhotkey
+            # Desktop Duplication capture of HDR monitors
+            d3d11
+            dxgi
     )
 endif ()
 
