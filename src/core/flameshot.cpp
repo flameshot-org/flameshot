@@ -49,6 +49,7 @@ constexpr const char* visibleInDockProperty = "_visibleInDock";
 #include "utils/abstractlogger.h"
 #include "utils/confighandler.h"
 #include "utils/screengrabber.h"
+#include "utils/colorprofileprovider.h"
 #include "utils/screenshotsaver.h"
 #include "widgets/capture/capturewidget.h"
 #include "widgets/capturelauncher.h"
@@ -197,11 +198,13 @@ void Flameshot::screen(CaptureRequest req, const int screenNumber)
     bool ok = false;
     QPixmap p;
     QRect geometry;
+    QColorSpace colorSpace;
 
     if (screenNumber < 0) {
         ScreenGrabber grabber;
         p = grabber.grabEntireDesktop(ok);
         if (ok) {
+            colorSpace = grabber.colorSpace();
             QScreen* selectedScreen = grabber.getSelectedScreen();
             if (selectedScreen) {
                 geometry = ScreenGrabber().screenGeometry(selectedScreen);
@@ -216,8 +219,10 @@ void Flameshot::screen(CaptureRequest req, const int screenNumber)
     } else {
         // Specific screen number provided - use grabScreen to bypass selector
         QScreen* screen = qApp->screens()[screenNumber];
-        p = ScreenGrabber().grabScreen(screen, ok);
+        ScreenGrabber grabber;
+        p = grabber.grabScreen(screen, ok);
         if (ok) {
+            colorSpace = grabber.colorSpace();
             geometry = ScreenGrabber().screenGeometry(screen);
         }
     }
@@ -236,7 +241,7 @@ void Flameshot::screen(CaptureRequest req, const int screenNumber)
             // change geometry for pin task
             req.addPinTask(region);
         }
-        exportCapture(p, geometry, req);
+        exportCapture(p, geometry, req, colorSpace);
     } else {
         emit captureFailed();
     }
@@ -249,10 +254,11 @@ void Flameshot::full(const CaptureRequest& req)
     }
 
     bool ok = true;
-    QPixmap p(ScreenGrabber().grabFullDesktop(ok));
+    ScreenGrabber grabber;
+    QPixmap p(grabber.grabFullDesktop(ok));
     if (ok) {
         QRect selection; // `flameshot full` does not support region selection
-        exportCapture(p, selection, req);
+        exportCapture(p, selection, req, grabber.colorSpace());
     } else {
         emit captureFailed();
     }
@@ -456,7 +462,8 @@ void Flameshot::requestCapture(const CaptureRequest& request)
 
 void Flameshot::exportCapture(const QPixmap& capture,
                               QRect& selection,
-                              const CaptureRequest& req)
+                              const CaptureRequest& req,
+                              const QColorSpace& colorSpace)
 {
     using CR = CaptureRequest;
     int tasks = req.tasks(), mode = req.captureMode();
@@ -471,7 +478,12 @@ void Flameshot::exportCapture(const QPixmap& capture,
     if (tasks & CR::PRINT_RAW) {
         QByteArray byteArray;
         QBuffer buffer(&byteArray);
-        capture.save(&buffer, "PNG");
+        if (colorSpace.isValid()) {
+            ColorProfileProvider::tagged(capture, colorSpace)
+              .save(&buffer, "PNG");
+        } else {
+            capture.save(&buffer, "PNG");
+        }
         if (QFile file; file.open(stdout, QIODevice::WriteOnly)) {
             file.write(byteArray);
             file.close();
@@ -480,18 +492,18 @@ void Flameshot::exportCapture(const QPixmap& capture,
 
     if (tasks & CR::SAVE) {
         if (req.path().isEmpty()) {
-            saveToFilesystemGUI(capture);
+            saveToFilesystemGUI(capture, colorSpace);
         } else {
-            saveToFilesystem(capture, path);
+            saveToFilesystem(capture, path, "", colorSpace);
         }
     }
 
     if (tasks & CR::COPY) {
-        FlameshotDaemon::copyToClipboard(capture);
+        FlameshotDaemon::copyToClipboard(capture, colorSpace);
     }
 
     if (tasks & CR::PIN) {
-        FlameshotDaemon::createPin(capture, selection);
+        FlameshotDaemon::createPin(capture, selection, colorSpace);
         if (mode == CR::SCREEN_MODE || mode == CR::FULLSCREEN_MODE) {
             AbstractLogger::info()
               << QObject::tr("Full screen screenshot pinned to screen");

@@ -27,9 +27,11 @@ constexpr qreal MIN_SIZE = 100.0;
 
 PinWidget::PinWidget(const QPixmap& pixmap,
                      const QRect& geometry,
+                     const QColorSpace& colorSpace,
                      QWidget* parent)
   : QWidget(parent)
   , m_pixmap(pixmap)
+  , m_colorSpace(colorSpace)
   , m_layout(new QVBoxLayout(this))
   , m_label(new QLabel())
   , m_shadowEffect(new QGraphicsDropShadowEffect(this))
@@ -328,11 +330,11 @@ void PinWidget::showContextMenu(const QPoint& pos)
 
 void PinWidget::copyToClipboard()
 {
-    saveToClipboard(m_pixmap);
+    saveToClipboard(m_pixmap, m_colorSpace);
 }
 void PinWidget::saveToFile()
 {
     hide();
-    saveToFilesystemGUI(m_pixmap);
+    saveToFilesystemGUI(m_pixmap, m_colorSpace);
     show();
 }
