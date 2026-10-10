@@ -67,7 +67,7 @@ Takes a screenshot of all monitors at the same time
 .
 .TP
 .B screen
-Takes a screenshot of the specified monitor.
+Takes a screenshot of the specified monitor (or of all monitors, see captureAllMonitors).
 .
 .TP
 .SH launcher
@@ -181,7 +181,7 @@ Valid for subcommands: config
 .PP
 \-n, \-\-number <Screen number>
 .RS 4
-Define the screen to capture (starting from 0), default: screen containing the cursor
+Define the screen to capture (starting from 0), default: the monitor selector, or the active monitor / all monitors when captureActiveMonitor / captureAllMonitors is set
 .br
 Valid for subcommands: screen
 .RE

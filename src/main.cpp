@@ -296,7 +296,8 @@ int main(int argc, char* argv[])
                                    QObject::tr("Configure") + " flameshot.");
     CommandArgument screenArgument(
       QStringLiteral("screen"),
-      QObject::tr("Capture a screenshot of the specified monitor."));
+      QObject::tr("Capture a screenshot of the specified monitor "
+                  "(or of all monitors, see captureAllMonitors)."));
 
     // Options
     CommandOption pathOption(
@@ -357,7 +358,10 @@ int main(int argc, char* argv[])
     CommandOption screenNumberOption(
       { "n", "number" },
       QObject::tr("Define the screen to capture (starting from 0)") + ",\n" +
-        QObject::tr("default: screen containing the cursor"),
+        QObject::tr("default: the monitor selector, or the active monitor / "
+                    "all monitors") +
+        "\n" +
+        QObject::tr("when captureActiveMonitor / captureAllMonitors is set"),
       QObject::tr("Screen number"),
       QStringLiteral("-1"));
     CommandOption editOption(

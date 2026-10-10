@@ -202,12 +202,8 @@ void Flameshot::screen(CaptureRequest req, const int screenNumber)
         ScreenGrabber grabber;
         p = grabber.grabEntireDesktop(ok);
         if (ok) {
-            QScreen* selectedScreen = grabber.getSelectedScreen();
-            if (selectedScreen) {
-                geometry = ScreenGrabber().screenGeometry(selectedScreen);
-            } else {
-                ok = false;
-            }
+            geometry = grabber.selectedGeometry();
+            ok = !geometry.isNull();
         }
     } else if (screenNumber >= qApp->screens().count()) {
         AbstractLogger() << QObject::tr(

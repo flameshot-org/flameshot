@@ -229,7 +229,8 @@ QPixmap ScreenGrabber::unixScreenshot(bool& ok)
 }
 
 QPixmap ScreenGrabber::selectMonitorAndCrop(const QPixmap& fullScreenshot,
-                                            bool& ok)
+                                            bool& ok,
+                                            bool allMonitors)
 {
     ok = true;
 #if defined(Q_OS_MACOS)
@@ -243,6 +244,19 @@ QPixmap ScreenGrabber::selectMonitorAndCrop(const QPixmap& fullScreenshot,
     if (screens.size() == 1) {
         return cropToMonitor(fullScreenshot, 0);
     }
+
+#if defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)
+    if (allMonitors || ConfigHandler().captureAllMonitors()) {
+        QPixmap desktop = cropToAllMonitors(fullScreenshot, ok);
+        if (ok) {
+            return desktop;
+        }
+        ok = true; // the selection below reuses the out-parameter
+        AbstractLogger::warning()
+          << tr("Capture all monitors is not available, falling back to "
+                "the default monitor selection.");
+    }
+#endif
 
     // Capture Active Monitor: auto-select monitor under cursor
     if (ConfigHandler().captureActiveMonitor()) {
@@ -288,6 +302,14 @@ QPixmap ScreenGrabber::selectMonitorAndCrop(const QPixmap& fullScreenshot,
     m_highlightedMonitorPreview = -1;
     m_monitorSelectionActive = false;
 
+    if (m_selectedMonitor == ALL_MONITORS) {
+        QPixmap desktop = cropToAllMonitors(fullScreenshot, ok);
+        if (!ok) {
+            AbstractLogger::warning()
+              << tr("Capture all monitors is not available.");
+        }
+        return desktop;
+    }
     if (m_selectedMonitor >= 0) {
         return cropToMonitor(fullScreenshot, m_selectedMonitor);
     } else {
@@ -298,6 +320,71 @@ QPixmap ScreenGrabber::selectMonitorAndCrop(const QPixmap& fullScreenshot,
         return fullScreenshot;
     }
 #endif
+}
+
+bool ScreenGrabber::allMonitorsSupported() const
+{
+#if defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)
+    // A Wayland surface cannot span outputs; a pixmap has a single DPR
+    if (m_info.waylandDetected()) {
+        return false;
+    }
+    const QList<QScreen*> screens = QGuiApplication::screens();
+    if (screens.isEmpty()) {
+        return false;
+    }
+    const qreal dpr = screens.first()->devicePixelRatio();
+    return std::all_of(screens.cbegin(), screens.cend(), [dpr](QScreen* s) {
+        return qFuzzyCompare(s->devicePixelRatio(), dpr);
+    });
+#else
+    return false;
+#endif
+}
+
+QRect ScreenGrabber::selectedGeometry() const
+{
+    if (allMonitorsSelected()) {
+        QScreen* primary = QGuiApplication::primaryScreen();
+        return primary ? primary->virtualGeometry() : QRect();
+    }
+    QScreen* screen = getSelectedScreen();
+    return screen ? screenGeometry(screen) : QRect();
+}
+
+QPixmap ScreenGrabber::cropToAllMonitors(const QPixmap& fullScreenshot,
+                                         bool& ok)
+{
+    // A failed attempt must not leave the picker's choice behind
+    m_selectedMonitor = -1;
+    ok = false;
+    if (!allMonitorsSupported()) {
+        return QPixmap();
+    }
+    const QRect logical = QGuiApplication::primaryScreen()->virtualGeometry();
+    if (fullScreenshot.isNull() || logical.isEmpty()) {
+        return QPixmap();
+    }
+    // The grab is in physical pixels with DPR 1; the DPR is what maps it
+    // onto the logical virtual desktop the capture widget covers.
+    const qreal scaleX = (qreal)fullScreenshot.width() / logical.width();
+    const qreal scaleY = (qreal)fullScreenshot.height() / logical.height();
+    const qreal tolerance = 0.01;
+    if (qAbs(scaleX - scaleY) > tolerance) {
+        AbstractLogger::info()
+          << tr("Captured image (%1x%2) does not match the virtual desktop "
+                "(%3x%4).")
+               .arg(fullScreenshot.width())
+               .arg(fullScreenshot.height())
+               .arg(logical.width())
+               .arg(logical.height());
+        return QPixmap();
+    }
+    ok = true;
+    m_selectedMonitor = ALL_MONITORS;
+    QPixmap desktop = fullScreenshot;
+    desktop.setDevicePixelRatio(scaleX);
+    return desktop;
 }
 
 QPixmap ScreenGrabber::grabEntireDesktop(bool& ok, int preSelectedMonitor)
@@ -333,6 +420,10 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok, int preSelectedMonitor)
 #elif defined(Q_OS_WIN)
     screenshot = windowsScreenshot(wid);
 #endif
+
+    if (preSelectedMonitor == ALL_MONITORS) {
+        return selectMonitorAndCrop(screenshot, ok, true);
+    }
 
     // If monitor was pre-selected skip UI and crop directly
     if (preSelectedMonitor >= 0) {
@@ -383,7 +474,7 @@ QPixmap ScreenGrabber::grabFullDesktop(bool& ok)
     return screenshot;
 }
 
-QRect ScreenGrabber::screenGeometry(QScreen* screen)
+QRect ScreenGrabber::screenGeometry(QScreen* screen) const
 {
     QRect geometry = screen->geometry();
     if (m_info.waylandDetected()) {
@@ -479,24 +570,27 @@ QWidget* ScreenGrabber::createMonitorPreviews(const QPixmap& fullScreenshot)
           return screens[a]->geometry().x() < screens[b]->geometry().x();
       });
 
-    for (int i : sortedIndices) {
-        QScreen* screen = screens[i];
-
-        QPixmap cropped = cropToMonitor(fullScreenshot, i);
-        QPixmap thumbnail = cropped.scaled(
+    auto addPreview = [&](int index, QScreen* screen, const QPixmap& source) {
+        QPixmap thumbnail = source.scaled(
           400, 250, Qt::KeepAspectRatio, Qt::SmoothTransformation);
         thumbnail.setDevicePixelRatio(1.0);
 
         MonitorPreview* preview =
-          new MonitorPreview(i, screen, thumbnail, monitorPreviews);
-
+          new MonitorPreview(index, screen, thumbnail, monitorPreviews);
         connect(preview,
                 &MonitorPreview::monitorSelected,
                 this,
-                [this](int index) { selectMonitor(index); });
+                [this](int selected) { selectMonitor(selected); });
 
         m_monitorPreviews.append(preview);
         containerLayout->addWidget(preview);
+    };
+
+    for (int i : sortedIndices) {
+        addPreview(i, screens[i], cropToMonitor(fullScreenshot, i));
+    }
+    if (allMonitorsSupported()) {
+        addPreview(ALL_MONITORS, nullptr, fullScreenshot);
     }
 
     int initialPreviewIndex = 0;
@@ -624,6 +718,11 @@ bool ScreenGrabber::eventFilter(QObject* obj, QEvent* event)
             case Qt::Key_Enter:
             case Qt::Key_Space:
                 selectHighlightedMonitorPreview();
+                return true;
+            case Qt::Key_0:
+                if (previewIndexForMonitor(ALL_MONITORS) >= 0) {
+                    selectMonitor(ALL_MONITORS);
+                }
                 return true;
             default:
                 if (keyEvent->key() >= Qt::Key_1 &&
