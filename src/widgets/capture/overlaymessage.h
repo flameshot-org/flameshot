@@ -21,12 +21,15 @@ class OverlayMessage : public QLabel
 {
 public:
     OverlayMessage() = delete;
+    ~OverlayMessage() override;
 
     static void init(QWidget* parent, const QRect& targetArea);
     static void push(const QString& msg);
     static void pop();
     static void setVisibility(bool visible);
     static OverlayMessage* instance();
+    /// Route subsequent messages to this overlay, when several exist.
+    static void setActive(OverlayMessage* message);
 
     static void pushKeyMap(const QList<QPair<QString, QString>>& map);
     static QString compileFromKeyMap(const QList<QPair<QString, QString>>& map);

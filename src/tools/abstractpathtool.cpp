@@ -3,6 +3,7 @@
 
 #include "abstractpathtool.h"
 
+#include <algorithm>
 #include <cmath>
 
 AbstractPathTool::AbstractPathTool(QObject* parent)
@@ -151,4 +152,56 @@ const QPoint* AbstractPathTool::pos()
     m_pos.setX(x);
     m_pos.setY(y);
     return &m_pos;
+}
+
+QRect AbstractPathTool::pointsBox() const
+{
+    if (m_points.isEmpty()) {
+        return {};
+    }
+    QPoint topLeft = m_points.first();
+    QPoint bottomRight = m_points.first();
+    for (const QPoint& p : m_points) {
+        topLeft = { std::min(topLeft.x(), p.x()),
+                    std::min(topLeft.y(), p.y()) };
+        bottomRight = { std::max(bottomRight.x(), p.x()),
+                        std::max(bottomRight.y(), p.y()) };
+    }
+    return { topLeft, bottomRight };
+}
+
+ResizeHandles::Handle AbstractPathTool::handleAt(const QPoint& pos,
+                                                 int tolerance) const
+{
+    return ResizeHandles::handleAt(pointsBox(), pos, tolerance);
+}
+
+void AbstractPathTool::beginHandleDrag(ResizeHandles::Handle handle)
+{
+    m_dragHandle = handle;
+    m_dragStartPoints = m_points;
+    m_dragStartBox = pointsBox();
+}
+
+void AbstractPathTool::dragHandle(const QPoint& pos)
+{
+    m_points = ResizeHandles::stretched(
+      m_dragStartPoints, m_dragStartBox, m_dragHandle, pos);
+}
+
+void AbstractPathTool::drawObjectSelection(QPainter& painter)
+{
+    const QRect box = pointsBox();
+    QVector<QPoint> centers;
+    for (auto h : { ResizeHandles::TopLeft,
+                    ResizeHandles::Top,
+                    ResizeHandles::TopRight,
+                    ResizeHandles::Right,
+                    ResizeHandles::BottomRight,
+                    ResizeHandles::Bottom,
+                    ResizeHandles::BottomLeft,
+                    ResizeHandles::Left }) {
+        centers.append(ResizeHandles::handleCenter(box, h));
+    }
+    drawHandles(painter, centers);
 }

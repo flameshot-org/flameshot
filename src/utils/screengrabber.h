@@ -26,6 +26,20 @@ public:
         Unavailable,
         Failed
     };
+    /// Holds one full-desktop grab so several CaptureWidgets built in a row
+    /// share it instead of each hitting the screenshot portal. Scoped to the
+    /// construction of those widgets, not to the capture session: once every
+    /// widget owns its crop, nothing needs the uncropped pixmap again.
+    class SessionCache
+    {
+    public:
+        explicit SessionCache(const QPixmap& fullDesktop);
+        ~SessionCache();
+        Q_DISABLE_COPY(SessionCache)
+    };
+    static bool hasSessionPixmap();
+    static QPixmap sessionPixmap();
+
     QPixmap grabEntireDesktop(bool& ok, int preSelectedMonitor = -1);
     QPixmap grabFullDesktop(bool& ok);
     QRect screenGeometry(QScreen* screen);
@@ -62,4 +76,7 @@ private:
     QEventLoop* m_monitorSelectionLoop;
     bool m_userCancelled;
     static bool m_monitorSelectionActive;
+    // Heap-allocated: a static QPixmap would be constructed before
+    // QGuiApplication exists, which Qt forbids.
+    static QPixmap* m_sessionPixmap;
 };

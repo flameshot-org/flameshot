@@ -153,13 +153,20 @@ public:
                          bool)
 #endif
 #if !defined(Q_OS_MACOS)
+    // DEPRECATED: migrated to monitorSelectionMode. Kept recognized so that
+    // existing config files do not trip the unrecognized-setting check.
     CONFIG_GETTER_SETTER(captureActiveMonitor, setCaptureActiveMonitor, bool)
+    CONFIG_GETTER_SETTER(monitorSelectionMode, setMonitorSelectionMode, int)
 #endif
 #if defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)
     CONFIG_GETTER_SETTER(useX11LegacyScreenshot,
                          setUseX11LegacyScreenshot,
                          bool)
 #endif
+
+    /// One-shot rewrite of settings whose key or type changed between
+    /// releases. Safe to call repeatedly; does nothing once migrated.
+    void migrateLegacyOptions();
 
     // SPECIAL CASES
     bool startupLaunch();

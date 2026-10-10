@@ -14,6 +14,7 @@
 #include "tools/capturecontext.h"
 #include "tools/capturetool.h"
 #include "utils/confighandler.h"
+#include "utils/resizehandles.h"
 #include "widgets/capture/buttonhandler.h"
 #include "widgets/capture/capturetoolbutton.h"
 #include "widgets/capture/capturetoolobjects.h"
@@ -42,6 +43,7 @@ class UpdateNotificationWidget;
 #endif
 class UtilityPanel;
 class SidePanelWidget;
+class OverlayMessage;
 
 class CaptureWidget : public QWidget
 {
@@ -60,6 +62,28 @@ public:
                                    const QString& appLatestUrl);
 #endif
 
+    /// Monitor this widget was built for, or -1 when none was pre-selected.
+    int monitorIndex() const;
+
+    /// Suppress the captureFailed() this widget emits on destruction. Used for
+    /// the widgets discarded once the user commits to another display; without
+    /// it each one would abort the whole application.
+    void discardSilently();
+
+    /// Only the armed widget shows the help overlay and magnifier; the others
+    /// dim harder, so the display the pointer is on is obvious.
+    void setArmed(bool armed);
+    bool isArmed() const { return m_armed; }
+
+    /// Make this widget's shortcuts fire from any window of the application
+    /// when @p active, and not at all otherwise. Wayland keeps keyboard focus
+    /// on whichever display had it, so keys must reach the armed one some
+    /// other way. Exactly one widget may be active: two application-wide
+    /// copies of a key are ambiguous and neither fires.
+    void setSharedShortcutsActive(bool active);
+    /// Back to shortcuts that fire only while this window has focus.
+    void restoreWindowShortcuts();
+
 public slots:
     bool commitCurrentTool();
     void deleteToolWidgetOrClose();
@@ -67,6 +91,10 @@ public slots:
 signals:
     void colorChanged(const QColor& c);
     void toolSizeChanged(int size);
+    /// The pointer moved onto this widget's display.
+    void pointerEnteredMonitor(int monitorIndex);
+    /// First press: the user committed to this display.
+    void editingStarted(int monitorIndex);
 
 private slots:
     void undo();
@@ -101,6 +129,7 @@ public:
 
 protected:
     void paintEvent(QPaintEvent* paintEvent) override;
+    void enterEvent(QEnterEvent* enterEvent) override;
     void mousePressEvent(QMouseEvent* mouseEvent) override;
     void mouseMoveEvent(QMouseEvent* mouseEvent) override;
     void mouseReleaseEvent(QMouseEvent* mouseEvent) override;
@@ -130,6 +159,7 @@ private:
     void initQuitPrompt();
     void updateSizeIndicator();
     void updateCursor();
+    ResizeHandles::Handle resizeHandleAt(const QPoint& pos);
     void updateSelectionState();
     void updateTool(CaptureTool* tool);
     void updateLayersPanel();
@@ -184,6 +214,15 @@ private:
     bool m_adjustmentButtonPressed;
     bool m_configError;
     bool m_configErrorResolved;
+    bool m_discardSilently = false;
+    bool m_armed = true;
+    // The selection was hidden by un-arming and is shown again on arming.
+    bool m_selectionHiddenWhileUnarmed = false;
+    int m_armedOpacity = 0;
+    // This widget's own overlay, and the "Tool Settings" toggle, both hidden
+    // while the display is unarmed.
+    OverlayMessage* m_overlay = nullptr;
+    QWidget* m_panelToggleButton = nullptr;
 
 #if !defined(DISABLE_UPDATE_CHECKER)
     UpdateNotificationWidget* m_updateNotificationWidget;
@@ -228,6 +267,12 @@ private:
     // For start moving after more than X offset
     QPoint m_startMovePos;
     bool m_startMove;
+
+    // Resize handle being dragged, and the object it belongs to. Delete or
+    // undo mid-drag replaces the object; the drag then stays cancelled until
+    // the button is released.
+    ResizeHandles::Handle m_resizeHandle{ ResizeHandles::None };
+    QPointer<CaptureTool> m_resizeTool;
 
     // Grid
     bool m_displayGrid{ false };

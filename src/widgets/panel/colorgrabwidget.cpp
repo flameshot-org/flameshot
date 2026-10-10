@@ -1,5 +1,6 @@
 #include "colorgrabwidget.h"
 #include "core/qguiappcurrentscreen.h"
+#include "utils/dprscaling.h"
 #include "widgets/capture/overlaymessage.h"
 #include "widgets/panel/sidepanelwidget.h"
 
@@ -22,9 +23,14 @@
 // NOTE: WIDTH1(2) should be divisible by ZOOM1(2) for best precision.
 //       WIDTH1 should be odd so the cursor can be centered on a pixel.
 
-ColorGrabWidget::ColorGrabWidget(QPixmap* p, QWidget* parent)
+ColorGrabWidget::ColorGrabWidget(QPixmap* p,
+                                 const QPoint& pixmapOrigin,
+                                 qreal displayScale,
+                                 QWidget* parent)
   : QWidget(parent)
   , m_pixmap(p)
+  , m_pixmapOrigin(pixmapOrigin)
+  , m_displayScale(displayScale > 0 ? displayScale : 1.0)
   , m_mousePressReceived(false)
   , m_extraZoomActive(false)
   , m_magnifierActive(false)
@@ -101,9 +107,10 @@ bool ColorGrabWidget::eventFilter(QObject*, QEvent* event)
         }
 
         // Hide overlay message when cursor is over it
-        OverlayMessage* overlayMsg = OverlayMessage::instance();
-        overlayMsg->setVisibility(
-          !overlayMsg->geometry().contains(cursorPos()));
+        if (OverlayMessage* overlayMsg = OverlayMessage::instance()) {
+            overlayMsg->setVisibility(
+              !overlayMsg->geometry().contains(cursorPos()));
+        }
 
         m_color = getColorAtPoint(cursorPos());
         emit colorUpdated(m_color);
@@ -155,25 +162,34 @@ QPoint ColorGrabWidget::cursorPos() const
     return QCursor::pos(QGuiAppCurrentScreen().currentScreen());
 }
 
+QPoint ColorGrabWidget::toPixmap(const QPoint& global) const
+{
+    // The ratio is the capture's own, not the screen's: where a compositor
+    // scales fractionally Qt rounds the screen's up and the two disagree.
+    return DprScaling::toPixmapPoint(
+      global, m_pixmapOrigin, m_pixmap->devicePixelRatio());
+}
+
 /// @note The point is in screen coordinates.
 QColor ColorGrabWidget::getColorAtPoint(const QPoint& p) const
 {
-    if (m_extraZoomActive && geometry().contains(p)) {
-        QPoint point = mapFromGlobal(p);
-        // we divide coordinate-wise to avoid rounding to nearest
-        return m_previewImage.pixel(
-          QPoint(point.x() / ZOOM2, point.y() / ZOOM2));
+    if (m_extraZoomActive && geometry().contains(p) &&
+        !m_previewImage.isNull()) {
+        const QPoint point = mapFromGlobal(p);
+        // Scale by the preview's own size rather than a fixed zoom: it holds a
+        // different number of pixels per display. Divided coordinate-wise to
+        // avoid rounding to nearest, and bounded because a client cannot place
+        // its own window on Wayland, so geometry() and mapFromGlobal() can
+        // disagree and put the result outside the image.
+        const int x = qBound(0,
+                             point.x() * m_previewImage.width() / width(),
+                             m_previewImage.width() - 1);
+        const int y = qBound(0,
+                             point.y() * m_previewImage.height() / height(),
+                             m_previewImage.height() - 1);
+        return m_previewImage.pixel(x, y);
     }
-    QPoint point = p;
-#if defined(Q_OS_MACOS)
-    QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
-    if (currentScreen) {
-        point = QPoint((p.x() - currentScreen->geometry().x()) *
-                         currentScreen->devicePixelRatio(),
-                       (p.y() - currentScreen->geometry().y()) *
-                         currentScreen->devicePixelRatio());
-    }
-#endif
+    const QPoint point = toPixmap(p);
     QPixmap pixel = m_pixmap->copy(QRect(point, point));
     return pixel.toImage().pixel(0, 0);
 }
@@ -205,24 +221,17 @@ void ColorGrabWidget::updateWidget()
     // Set window size and move its center to the mouse cursor
     QRect rect(0, 0, width, width);
 
-    auto realCursorPos = cursorPos();
-    auto adjustedCursorPos = realCursorPos;
-
-#if defined(Q_OS_MACOS)
-    QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
-    if (currentScreen) {
-        adjustedCursorPos =
-          QPoint((realCursorPos.x() - currentScreen->geometry().x()) *
-                   currentScreen->devicePixelRatio(),
-                 (realCursorPos.y() - currentScreen->geometry().y()) *
-                   currentScreen->devicePixelRatio());
-    }
-#endif
+    const QPoint adjustedCursorPos = toPixmap(cursorPos());
 
     rect.moveCenter(cursorPos());
     setGeometry(rect);
-    // Store a pixmap containing the zoomed-in section around the cursor
-    QRect sourceRect(0, 0, width / zoom, width / zoom);
+    // Store a pixmap containing the zoomed-in section around the cursor.
+    // The span covers width/zoom pixels as the display renders them, so a
+    // denser display magnifies further; that is then converted into however
+    // many captured pixels cover the same area.
+    const int sourceSize = DprScaling::toDevicePixels(
+      width / zoom / m_displayScale, m_pixmap->devicePixelRatio());
+    QRect sourceRect(0, 0, sourceSize, sourceSize);
     sourceRect.moveCenter(adjustedCursorPos);
     m_previewImage = m_pixmap->copy(sourceRect).toImage();
     // Repaint
