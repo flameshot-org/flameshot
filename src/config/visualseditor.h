@@ -9,6 +9,7 @@
 
 class ExtendedSlider;
 class QVBoxLayout;
+class QScrollArea;
 class ButtonListView;
 class UIcolorEditor;
 class ColorPickerEditor;
@@ -24,6 +25,8 @@ public slots:
 
 private:
     QVBoxLayout* m_layout;
+    QScrollArea* m_scrollArea;
+    QVBoxLayout* m_scrollAreaLayout;
 
     QTabWidget* m_tabWidget;
 

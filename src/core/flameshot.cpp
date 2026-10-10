@@ -273,24 +273,32 @@ void Flameshot::launcher()
 #endif
 }
 
-void Flameshot::config()
+void Flameshot::config(int tabIndex)
 {
     if (!resolveAnyConfigErrors()) {
         return;
     }
 
     if (m_configWindow == nullptr) {
-        m_configWindow = new ConfigWindow();
+        m_configWindow = new ConfigWindow(
+          nullptr, static_cast<ConfigWindow::TabIndex>(tabIndex));
         m_configWindow->show();
         // Call show() first, otherwise the correct geometry cannot be fetched
         // for centering the window on the screen
         QRect position = m_configWindow->frameGeometry();
         QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
-        position.moveCenter(currentScreen->availableGeometry().center());
-        m_configWindow->move(position.topLeft());
+        if (currentScreen) {
+            position.moveCenter(currentScreen->availableGeometry().center());
+            m_configWindow->move(position.topLeft());
+        }
 #if defined(Q_OS_MACOS)
         showDockIcon(m_configWindow);
 #endif
+    } else {
+        m_configWindow->setCurrentTab(
+          static_cast<ConfigWindow::TabIndex>(tabIndex));
+        m_configWindow->raise();
+        m_configWindow->activateWindow();
     }
 }
 
