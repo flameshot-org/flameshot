@@ -39,6 +39,10 @@
 #include "core/globalshortcutfilter.h"
 #endif
 
+#if defined(Q_OS_MACOS)
+#include <objc/message.h>
+#endif
+
 namespace {
 /**
  * @brief Read a pin message written by FlameshotDaemon::createPin.
@@ -57,6 +61,30 @@ void readPin(QDataStream& stream, QPixmap& pixmap, QRect& geometry)
         pixmap.setDevicePixelRatio(devicePixelRatio);
     }
 }
+
+#if defined(Q_OS_MACOS)
+// Hold one disable for the life of the process. AppKit balances its own
+// "No windows open yet" disable/enable pairs; this extra count keeps a
+// windowless menu-bar agent ineligible for TAL termination after a capture
+// window closes. The matching Info.plist keys opt out as well.
+void disableMacAutomaticTermination()
+{
+    auto send = reinterpret_cast<id (*)(id, SEL)>(objc_msgSend);
+    id processInfo = send(reinterpret_cast<id>(objc_getClass("NSProcessInfo")),
+                          sel_registerName("processInfo"));
+    auto nsString =
+      reinterpret_cast<id (*)(id, SEL, const char*)>(objc_msgSend);
+    id reason = nsString(reinterpret_cast<id>(objc_getClass("NSString")),
+                         sel_registerName("stringWithUTF8String:"),
+                         "Flameshot menu bar agent");
+    auto disableWithReason =
+      reinterpret_cast<void (*)(id, SEL, id)>(objc_msgSend);
+    disableWithReason(
+      processInfo, sel_registerName("disableAutomaticTermination:"), reason);
+    auto disableSudden = reinterpret_cast<void (*)(id, SEL)>(objc_msgSend);
+    disableSudden(processInfo, sel_registerName("disableSuddenTermination"));
+}
+#endif
 }
 
 /**
@@ -71,7 +99,8 @@ void readPin(QDataStream& stream, QPixmap& pixmap, QRect& geometry)
  *   quits.
  *
  * If the `autoCloseIdleDaemon` option is true, the daemon will close as soon as
- * it is not needed to host pinned screenshots and the clipboard.
+ * it is not needed to host pinned screenshots and the clipboard. On macOS this
+ * option is ignored: the menu-bar agent must stay resident (no D-Bus activator).
  *
  * Both the daemon and non-daemon flameshot processes use the same public API,
  * which is implemented as static methods. In the daemon process, this class is
@@ -104,14 +133,26 @@ FlameshotDaemon::FlameshotDaemon()
           quitIfIdle();
       });
 
+    // autoCloseIdleDaemon is a Linux D-Bus concept: the daemon can exit when
+    // idle because D-Bus will relaunch it. macOS has no equivalent activator
+    // for the LSUIElement menu-bar agent, so always persist there. Tray Quit
+    // still calls QCoreApplication::quit explicitly.
+#if defined(Q_OS_MACOS)
+    m_persist = true;
+#else
     m_persist = !ConfigHandler().autoCloseIdleDaemon();
+#endif
     connect(ConfigHandler::getInstance(),
             &ConfigHandler::fileChanged,
             this,
             [this]() {
                 ConfigHandler config;
                 enableTrayIcon(!config.disabledTrayIcon());
+#if defined(Q_OS_MACOS)
+                m_persist = true;
+#else
                 m_persist = !config.autoCloseIdleDaemon();
+#endif
             });
 
 #if !defined(DISABLE_UPDATE_CHECKER)
@@ -128,6 +169,9 @@ void FlameshotDaemon::start()
         // Tray icon needs FlameshotDaemon::instance() to be non-null
         m_instance->initTrayIcon();
         qApp->setQuitOnLastWindowClosed(false);
+#if defined(Q_OS_MACOS)
+        disableMacAutomaticTermination();
+#endif
     }
 }
 
@@ -310,6 +354,11 @@ FlameshotDaemon* FlameshotDaemon::instance()
 void FlameshotDaemon::quitIfIdle()
 {
     if (m_persist) {
+        return;
+    }
+    // CaptureWidget is not tracked in m_widgets (pins only). Do not tear down
+    // the process while a capture UI is open.
+    if (Flameshot::instance()->hasCaptureWindow()) {
         return;
     }
     if (!m_hostingClipboard && m_widgets.isEmpty()) {

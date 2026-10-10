@@ -539,5 +539,10 @@ bool Flameshot::haveExternalWidget()
     return m_haveExternalWidget;
 }
 
+bool Flameshot::hasCaptureWindow() const
+{
+    return m_captureWindow != nullptr;
+}
+
 // STATIC ATTRIBUTES
 Flameshot::Origin Flameshot::m_origin = Flameshot::DAEMON;
