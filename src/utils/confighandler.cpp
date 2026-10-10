@@ -377,8 +377,10 @@ void ConfigHandler::setToolSize(CaptureTool::Type toolType, int size)
         setDrawPixelateSize(size);
     } else if (toolType == CaptureTool::TYPE_CIRCLECOUNT) {
         setDrawCircleCounterSize(size);
-    } else if (toolType != CaptureTool::NONE) {
-        // All other tools are sharing the same size
+    } else {
+        // All other tools are sharing the same size. CaptureTool::NONE lands
+        // here too: no tool button is active, but the size still belongs to
+        // the shared bucket, which is what toolSize() returns for NONE.
         setDrawThickness(size);
     }
 }
