@@ -16,6 +16,7 @@
 #include "core/qguiappcurrentscreen.h"
 #include "tools/copy/copytool.h"
 #include "utils/abstractlogger.h"
+#include "utils/dprscaling.h"
 #include "utils/screengrabber.h"
 #include "utils/screenshotsaver.h"
 #include "widgets/capture/colorpicker.h"
@@ -37,6 +38,7 @@
 #include <QPainter>
 #include <QScreen>
 #include <QShortcut>
+#include <QSignalBlocker>
 #include <QWindow>
 
 #if !defined(DISABLE_UPDATE_CHECKER)
@@ -275,7 +277,9 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
       ConfigHandler::getInstance(), &ConfigHandler::error, this, [=, this]() {
           m_configError = true;
           m_configErrorResolved = false;
-          OverlayMessage::instance()->update();
+          if (auto* overlay = OverlayMessage::instance()) {
+              overlay->update();
+          }
       });
     connect(ConfigHandler::getInstance(),
             &ConfigHandler::errorResolved,
@@ -283,7 +287,9 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
             [=, this]() {
                 m_configError = false;
                 m_configErrorResolved = true;
-                OverlayMessage::instance()->update();
+                if (auto* overlay = OverlayMessage::instance()) {
+                    overlay->update();
+                }
             });
 
     // OverlayMessage is a child widget, so use widget-local coordinates
@@ -291,6 +297,7 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
     QRect overlayArea =
       m_context.fullscreen && !areas.isEmpty() ? areas.first() : rect();
     OverlayMessage::init(this, overlayArea);
+    m_overlay = OverlayMessage::instance();
 
     if (m_config.showHelp()) {
         initHelpMessage();
@@ -327,9 +334,107 @@ CaptureWidget::~CaptureWidget()
         geometry.setTopLeft(geometry.topLeft() + m_context.widgetOffset);
         Flameshot::instance()->exportCapture(
           pixmap(), geometry, m_context.request);
-    } else {
+    } else if (!m_discardSilently) {
         emit Flameshot::instance()->captureFailed();
     }
+}
+
+int CaptureWidget::monitorIndex() const
+{
+    return m_context.request.hasSelectedMonitor()
+             ? m_context.request.selectedMonitor()
+             : -1;
+}
+
+void CaptureWidget::discardSilently()
+{
+    m_discardSilently = true;
+}
+
+void CaptureWidget::setSharedShortcutsActive(bool active)
+{
+    for (auto* shortcut :
+         findChildren<QShortcut*>(Qt::FindDirectChildrenOnly)) {
+        shortcut->setContext(Qt::ApplicationShortcut);
+        shortcut->setEnabled(active);
+    }
+}
+
+void CaptureWidget::restoreWindowShortcuts()
+{
+    for (auto* shortcut :
+         findChildren<QShortcut*>(Qt::FindDirectChildrenOnly)) {
+        shortcut->setContext(Qt::WindowShortcut);
+        shortcut->setEnabled(true);
+    }
+}
+
+void CaptureWidget::setArmed(bool armed)
+{
+    if (m_armed == armed) {
+        return;
+    }
+    m_armed = armed;
+
+    // An unarmed display shows its screenshot untouched -- no shading and no
+    // chrome -- so only the display under the pointer looks like capture mode.
+    if (armed) {
+        m_opacity = m_armedOpacity;
+    } else {
+        m_armedOpacity = m_opacity;
+        m_opacity = 0;
+    }
+
+    if (m_magnifier) {
+        m_magnifier->setVisible(armed && m_config.showMagnifier());
+    }
+    if (m_panelToggleButton) {
+        m_panelToggleButton->setVisible(armed);
+    }
+    if (m_selection) {
+        // Signals blocked: visibilityChanged would push the help message onto
+        // the shared overlay, which may belong to another display.
+        const QSignalBlocker blocker(m_selection);
+        if (!armed && m_selection->isVisibleTo(this)) {
+            m_selection->hide();
+            m_selectionHiddenWhileUnarmed = true;
+        } else if (armed && m_selectionHiddenWhileUnarmed) {
+            m_selection->show();
+            m_selectionHiddenWhileUnarmed = false;
+        }
+    }
+
+    if (!armed) {
+        if (m_panel) {
+            m_panel->hide();
+        }
+        if (m_buttonHandler) {
+            m_buttonHandler->hide();
+        }
+    } else if (m_buttonHandler && m_selection &&
+               m_selection->isVisibleTo(this)) {
+        // Not via geometrySettled: that would also run ACCEPT_ON_SELECT
+        // before the user has selected anything.
+        m_buttonHandler->updatePosition(m_selection->geometry());
+        m_buttonHandler->show();
+    }
+
+    if (armed) {
+        OverlayMessage::setActive(m_overlay);
+        OverlayMessage::setVisibility(m_config.showHelp());
+    } else if (m_overlay) {
+        // Hidden directly rather than through the static accessor, which acts
+        // on whichever display is active -- possibly not this one.
+        m_overlay->setVisible(false);
+    }
+
+    update();
+}
+
+void CaptureWidget::enterEvent(QEnterEvent* event)
+{
+    emit pointerEnteredMonitor(monitorIndex());
+    QWidget::enterEvent(event);
 }
 
 void CaptureWidget::initButtons()
@@ -876,6 +981,10 @@ int CaptureWidget::selectToolItemAtPos(const QPoint& pos)
 
 void CaptureWidget::mousePressEvent(QMouseEvent* e)
 {
+    // Before anything else: the press is what commits the user to this
+    // display, and it is authoritative even if an Enter was dropped.
+    emit editingStarted(monitorIndex());
+
     activateWindow();
     m_startMove = false;
     m_startMovePos = QPoint();
@@ -1242,6 +1351,7 @@ void CaptureWidget::initPanel()
                                 panelRect.y() + panelRect.height() / 2 -
                                   panelToggleButton->width() / 2);
 #endif
+        m_panelToggleButton = panelToggleButton;
         panelToggleButton->setCursor(Qt::ArrowCursor);
         (new DraggableWidgetMaker(this))->makeDraggable(panelToggleButton);
         connect(panelToggleButton,
@@ -1274,7 +1384,19 @@ void CaptureWidget::initPanel()
             this,
             &CaptureWidget::onMoveCaptureToolDown);
 
-    m_sidePanel = new SidePanelWidget(&m_context.screenshot, this);
+    // This widget covers exactly the area the screenshot was taken from, so its
+    // own top-left is that area's origin on the desktop. Looked up by geometry
+    // rather than through screen(), which runs before the window exists here
+    // and can answer with the primary display instead of this one.
+    const QPoint captureOrigin = geometry().topLeft();
+    const QScreen* captureScreen = QGuiApplication::screenAt(captureOrigin);
+    // The rendering density sets how far the magnifier zooms; it is not how the
+    // capture is sampled, which follows the pixmap's own ratio.
+    const qreal displayScale =
+      captureScreen != nullptr ? captureScreen->devicePixelRatio() : qreal(1.0);
+
+    m_sidePanel = new SidePanelWidget(
+      &m_context.screenshot, captureOrigin, displayScale, this);
     connect(m_sidePanel,
             &SidePanelWidget::colorChanged,
             this,
@@ -2058,11 +2180,8 @@ QRect CaptureWidget::extendedSelection() const
 
 QRect CaptureWidget::extendedRect(const QRect& r) const
 {
-    auto devicePixelRatio = m_context.screenshot.devicePixelRatio();
-    return { static_cast<int>(r.left() * devicePixelRatio),
-             static_cast<int>(r.top() * devicePixelRatio),
-             static_cast<int>(r.width() * devicePixelRatio),
-             static_cast<int>(r.height() * devicePixelRatio) };
+    return DprScaling::toDevicePixels(r,
+                                      m_context.screenshot.devicePixelRatio());
 }
 
 QRect CaptureWidget::paddedUpdateRect(const QRect& r) const

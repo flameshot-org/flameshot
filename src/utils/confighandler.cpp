@@ -147,6 +147,9 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     // Auto-select the monitor under the cursor instead of showing
     // the monitor selection UI. Not supported on Wayland.
     OPTION("captureActiveMonitor"         ,Bool               ( false         )),
+    // 0 = pick a monitor first, 1 = start on the monitor under the cursor and
+    // follow it until editing begins. Defaults to 1.
+    OPTION("monitorSelectionMode"         ,BoundedInt         ( 0, 1, 1       )),
 #endif
 #if defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)
     // Bypass freedesktop portal and use Qt's native X11
@@ -493,6 +496,29 @@ QString ConfigHandler::shortcut(const QString& actionName)
         m_settings.endGroup();
     }
     return shortcut;
+}
+
+void ConfigHandler::migrateLegacyOptions()
+{
+#if !defined(Q_OS_MACOS)
+    const QString legacy = QStringLiteral("captureActiveMonitor");
+    const QString current = QStringLiteral("monitorSelectionMode");
+
+    // captureActiveMonitor became one value of monitorSelectionMode. Note the
+    // contains() check: an explicitly written false is a deliberate opt-out
+    // and has to survive the new default of 1, whereas an absent key should
+    // simply pick up that default.
+    if (m_settings.contains(legacy) && !m_settings.contains(current)) {
+        const bool followedCursor =
+          m_settings.value(legacy).toString() == QLatin1String("true");
+        // Written straight to QSettings: the public setValue() refuses while
+        // the config is in an error state, which a stale key can itself cause.
+        m_skipNextErrorCheck = true;
+        m_settings.setValue(current, followedCursor ? 1 : 0);
+        m_settings.remove(legacy);
+        m_settings.sync();
+    }
+#endif
 }
 
 void ConfigHandler::setValue(const QString& key, const QVariant& value)
