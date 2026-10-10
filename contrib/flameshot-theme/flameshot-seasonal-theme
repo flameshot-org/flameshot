@@ -1,0 +1,23 @@
+#!/bin/bash
+# Auto-applies the seasonal Flameshot theme for the current month, mirroring
+# nicitaacom/14_portfolio's THEME_MONTHS schedule:
+#   11        -> halloween
+#   12, 1     -> new-year
+#   otherwise -> green (default)
+set -euo pipefail
+
+MONTH=$(date +%-m)
+
+case "$MONTH" in
+    11) THEME="halloween" ;;
+    12|1) THEME="new-year" ;;
+    *) THEME="green" ;;
+esac
+
+CURRENT_MARKER="$HOME/.local/share/flameshot-theme/.current"
+if [ -f "$CURRENT_MARKER" ] && [ "$(cat "$CURRENT_MARKER")" = "$THEME" ]; then
+    exit 0
+fi
+
+"$HOME/.local/bin/flameshot-theme" "$THEME"
+echo "$THEME" > "$CURRENT_MARKER"
