@@ -34,6 +34,65 @@
 #include <qmimedatabase.h>
 #if defined(Q_OS_MACOS)
 #include "widgets/capture/capturewidget.h"
+#include <QUtiMimeConverter>
+
+namespace {
+// Qt has no native pasteboard mapping for image/png or image/jpeg, so it
+// publishes them under com.trolltech.anymime.*, which only Qt apps can read.
+// This converter exposes the encoded bytes as public.png / public.jpeg.
+class EncodedImageUtiConverter : public QUtiMimeConverter
+{
+public:
+    QString utiForMime(const QString& mime) const override
+    {
+        if (mime == QLatin1String("image/png")) {
+            return QStringLiteral("public.png");
+        }
+        if (mime == QLatin1String("image/jpeg")) {
+            return QStringLiteral("public.jpeg");
+        }
+        return {};
+    }
+
+    QString mimeForUti(const QString& uti) const override
+    {
+        if (uti == QLatin1String("public.png")) {
+            return QStringLiteral("image/png");
+        }
+        if (uti == QLatin1String("public.jpeg")) {
+            return QStringLiteral("image/jpeg");
+        }
+        return {};
+    }
+
+    QList<QByteArray> convertFromMime(const QString& mime,
+                                      const QVariant& data,
+                                      const QString& uti) const override
+    {
+        if (!canConvert(mime, uti)) {
+            return {};
+        }
+        return { data.toByteArray() };
+    }
+
+    QVariant convertToMime(const QString& mime,
+                           const QList<QByteArray>& data,
+                           const QString& uti) const override
+    {
+        if (!canConvert(mime, uti) || data.isEmpty()) {
+            return {};
+        }
+        return data.first();
+    }
+};
+
+// Converters must be created after QGuiApplication; the instance registers
+// itself globally and lives for the rest of the process.
+void ensureEncodedImageUtiConverter()
+{
+    static EncodedImageUtiConverter converter;
+}
+} // namespace
 #endif
 
 bool saveToFilesystem(const QPixmap& capture,
@@ -131,11 +190,12 @@ void saveToClipboardMime(const QPixmap& capture, const QString& imageType)
         auto* mimeData = new QMimeData();
 
 #if defined(Q_OS_MACOS)
-        // setImageData provides the image in a native pasteboard format
-        // (public.tiff) that macOS can always access. Also include the
-        // original format bytes for apps that prefer PNG/JPEG.
-        mimeData->setImageData(formattedPixmap.toImage());
+        // Publish the encoded bytes first (as public.png / public.jpeg) so
+        // apps pick them over TIFF, then setImageData for a public.tiff
+        // fallback that macOS can always access.
+        ensureEncodedImageUtiConverter();
         mimeData->setData("image/" + imageType, array);
+        mimeData->setImageData(formattedPixmap.toImage());
         QApplication::clipboard()->setMimeData(mimeData);
 #elif defined(USE_WAYLAND_CLIPBOARD)
         if (QGuiApplication::platformName() == "wayland") {
