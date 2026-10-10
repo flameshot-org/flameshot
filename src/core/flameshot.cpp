@@ -37,6 +37,23 @@ void setActivationPolicyAccessory()
 
 constexpr const char* visibleInDockProperty = "_visibleInDock";
 
+// NSMainMenuWindowLevel (24) + 2: above the menu bar, its status items and
+// the Dock, but below pop-up menus so Qt menus remain visible.
+constexpr long captureWindowLevel = 26;
+
+// Qt::WindowStaysOnTopHint maps to NSFloatingWindowLevel, which is below the
+// menu bar and the Dock, so they would cover parts of the capture overlay.
+void raiseAboveMenuBar(QWidget* widget)
+{
+    auto getWindow = reinterpret_cast<id (*)(id, SEL)>(objc_msgSend);
+    auto setLevel = reinterpret_cast<void (*)(id, SEL, long)>(objc_msgSend);
+    auto nsView = reinterpret_cast<id>(widget->winId());
+    id nsWindow = getWindow(nsView, sel_registerName("window"));
+    if (nsWindow != nullptr) {
+        setLevel(nsWindow, sel_registerName("setLevel:"), captureWindowLevel);
+    }
+}
+
 } // namespace
 
 #include <CoreGraphics/CoreGraphics.h>
@@ -174,6 +191,7 @@ CaptureWidget* Flameshot::gui(const CaptureRequest& req)
             m_captureWindow->showFullScreen();
         } else {
             m_captureWindow->show();
+            raiseAboveMenuBar(m_captureWindow);
         }
         m_captureWindow->activateWindow();
         m_captureWindow->raise();
