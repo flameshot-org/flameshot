@@ -7,6 +7,7 @@
 #include "config/generalconf.h"
 #include "config/shortcutswidget.h"
 #include "config/visualseditor.h"
+#include "core/qguiappcurrentscreen.h"
 #include "utils/colorutils.h"
 #include "utils/confighandler.h"
 #include "utils/globalvalues.h"
@@ -18,6 +19,7 @@
 #include <QIcon>
 #include <QKeyEvent>
 #include <QLabel>
+#include <QScreen>
 #include <QSizePolicy>
 #include <QTabBar>
 #include <QTextStream>
@@ -109,6 +111,18 @@ ConfigWindow::ConfigWindow(QWidget* parent)
     initErrorIndicator(m_filenameEditorTab, m_filenameEditor);
     initErrorIndicator(m_generalConfigTab, m_generalConfig);
     initErrorIndicator(m_shortcutsTab, m_shortcuts);
+
+    // Cap the window to roughly half the screen height (50vh) - with no
+    // limit here, tabs whose content doesn't fit in a QScrollArea let the
+    // window grow to fit every setting and can end up taller than the
+    // screen. Each tab's own scroll area (see GeneralConf) handles
+    // overflow once the window itself stops growing.
+    QScreen* screen = QGuiAppCurrentScreen().currentScreen();
+    if (screen) {
+        int maxHeight = screen->availableGeometry().height() / 2;
+        setMaximumHeight(maxHeight);
+        resize(width(), maxHeight);
+    }
 }
 
 void ConfigWindow::keyPressEvent(QKeyEvent* e)
