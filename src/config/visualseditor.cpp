@@ -6,12 +6,16 @@
 #include "config/colorpickereditor.h"
 #include "config/extendedslider.h"
 #include "config/uicoloreditor.h"
+#include "plugins/pluginmanager.h"
 #include "utils/confighandler.h"
 
 #include <QDirIterator>
+#include <QFileDialog>
+#include <QGroupBox>
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QMessageBox>
+#include <QPushButton>
 
 VisualsEditor::VisualsEditor(QWidget* parent)
   : QWidget(parent)
@@ -87,12 +91,64 @@ void VisualsEditor::initWidgets()
     m_layout->addWidget(boxButtons);
     listLayout->addWidget(m_buttonList);
 
+    auto* buttonActions = new QHBoxLayout();
     auto* setAllButtons = new QPushButton(tr("Select All"));
     connect(setAllButtons,
             &QPushButton::clicked,
             m_buttonList,
             &ButtonListView::selectAll);
-    listLayout->addWidget(setAllButtons);
+    buttonActions->addWidget(setAllButtons);
+
+    auto* installPlugin = new QPushButton(tr("Install Plugin…"));
+    connect(installPlugin, &QPushButton::clicked, this, [this]() {
+        const QString package = QFileDialog::getOpenFileName(
+          this,
+          tr("Install Flameshot Plugin"),
+          {},
+          tr("Flameshot plugins (*.flameshot-plugin);;All files (*)"));
+        if (package.isEmpty()) {
+            return;
+        }
+        const PluginManagerResult result = PluginManager::install(package);
+        if (result.success) {
+            m_buttonList->reload();
+            QMessageBox::information(
+              this, tr("Plugin installed"), result.message);
+        } else {
+            QMessageBox::warning(
+              this, tr("Plugin installation failed"), result.message);
+        }
+    });
+    buttonActions->addWidget(installPlugin);
+
+    auto* removePlugin = new QPushButton(tr("Remove Plugin"));
+    connect(removePlugin, &QPushButton::clicked, this, [this]() {
+        const QString pluginId = m_buttonList->selectedExternalPluginId();
+        if (pluginId.isEmpty()) {
+            QMessageBox::information(
+              this,
+              tr("Remove Plugin"),
+              tr("Select an installed plugin first."));
+            return;
+        }
+        if (QMessageBox::question(
+              this,
+              tr("Remove Plugin"),
+              tr("Remove plugin %1?").arg(pluginId)) != QMessageBox::Yes) {
+            return;
+        }
+        const PluginManagerResult result = PluginManager::remove(pluginId);
+        if (result.success) {
+            m_buttonList->reload();
+            QMessageBox::information(
+              this, tr("Plugin removed"), result.message);
+        } else {
+            QMessageBox::warning(
+              this, tr("Plugin removal failed"), result.message);
+        }
+    });
+    buttonActions->addWidget(removePlugin);
+    listLayout->addLayout(buttonActions);
 }
 
 void VisualsEditor::initTranslations()

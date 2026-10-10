@@ -32,7 +32,7 @@ public:
     void updateScreenRegions(const QRect& rect);
 
 public slots:
-    void updatePosition(const QRect& selection);
+    void updatePosition(const QRect& selection, const QPoint& anchor);
     void hide();
     void show();
 
@@ -72,8 +72,12 @@ private:
     void resetRegionTrack();
     void updateBlockedSides();
     void expandSelection();
-    void positionButtonsInside(int index);
+    void positionButtonsInside(int index, QVector<QPoint>& positions);
     void ensureSelectionMinimumSize();
-    void moveButtonsToPoints(const QVector<QPoint>& points, int& index);
+    void appendButtonPositions(const QVector<QPoint>& points,
+                               QVector<QPoint>& positions,
+                               int& index);
+    void assignButtonsToPositions(const QVector<QPoint>& positions,
+                                  const QPoint& anchor);
     void adjustHorizontalCenter(QPoint& center);
 };

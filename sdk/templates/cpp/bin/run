@@ -1,0 +1,8 @@
+#!/bin/sh
+root=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
+binary="$root/build/flameshot-plugin"
+if [ ! -x "$binary" ]; then
+  printf 'Build this plugin first: cmake -S . -B build && cmake --build build\n' >&2
+  exit 127
+fi
+exec "$binary" "$@"

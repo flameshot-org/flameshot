@@ -2,7 +2,7 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "buttonlistview.h"
-#include "tools/toolfactory.h"
+#include "tools/toolregistry.h"
 #include "utils/confighandler.h"
 
 #include <QListWidgetItem>
@@ -21,14 +21,13 @@ ButtonListView::ButtonListView(QWidget* parent)
 
 void ButtonListView::initButtonList()
 {
-    ToolFactory factory;
-    auto listTypes = CaptureToolButton::getIterableButtonTypes();
+    ToolRegistry registry;
 
-    for (const CaptureTool::Type t : listTypes) {
-        CaptureTool* tool = factory.CreateTool(t);
-
-        // add element to the local map
-        m_buttonTypeByName.insert(tool->name(), t);
+    for (const ToolDescriptor& descriptor : registry.tools()) {
+        CaptureTool* tool = ToolRegistry::createTool(descriptor);
+        if (!tool) {
+            continue;
+        }
 
         // init the menu option
         auto* m_buttonItem = new QListWidgetItem(this);
@@ -44,13 +43,27 @@ void ButtonListView::initButtonList()
 
         m_buttonItem->setText(tool->name());
         m_buttonItem->setToolTip(tool->description());
-        tool->deleteLater();
+        m_buttonItem->setData(Qt::UserRole, descriptor.id);
+        m_buttonItem->setData(Qt::UserRole + 1, descriptor.isExternal());
+        m_buttonItem->setData(Qt::UserRole + 2,
+                              static_cast<int>(descriptor.legacyType));
+        m_buttonItem->setData(Qt::UserRole + 3, descriptor.toolbarVisible);
+        delete tool;
     }
 }
 
 void ButtonListView::updateActiveButtons(QListWidgetItem* item)
 {
-    CaptureTool::Type bType = m_buttonTypeByName[item->text()];
+    const QString toolId = item->data(Qt::UserRole).toString();
+    const bool external = item->data(Qt::UserRole + 1).toBool();
+    if (external) {
+        ConfigHandler().setPluginEnabled(toolId,
+                                         item->checkState() == Qt::Checked);
+        return;
+    }
+
+    const auto bType =
+      static_cast<CaptureTool::Type>(item->data(Qt::UserRole + 2).toInt());
     if (item->checkState() == Qt::Checked) {
         // Refactored to avoid external sort: insert into the correct position
         using bt = CaptureTool::Type;
@@ -82,17 +95,45 @@ void ButtonListView::selectAll()
     for (int i = 0; i < this->count(); ++i) {
         QListWidgetItem* item = this->item(i);
         item->setCheckState(Qt::Checked);
+        if (item->data(Qt::UserRole + 1).toBool()) {
+            ConfigHandler().setPluginEnabled(
+              item->data(Qt::UserRole).toString(), true);
+        }
     }
+}
+
+void ButtonListView::reload()
+{
+    clear();
+    initButtonList();
+    updateComponents();
+}
+
+QString ButtonListView::selectedExternalPluginId() const
+{
+    const QListWidgetItem* selected = currentItem();
+    if (!selected || !selected->data(Qt::UserRole + 1).toBool()) {
+        return {};
+    }
+    return selected->data(Qt::UserRole).toString();
 }
 
 void ButtonListView::updateComponents()
 {
     m_listButtons = ConfigHandler().buttons();
-    auto listTypes = CaptureToolButton::getIterableButtonTypes();
     for (int i = 0; i < this->count(); ++i) {
         QListWidgetItem* item = this->item(i);
-        auto elem = static_cast<CaptureTool::Type>(listTypes.at(i));
-        if (m_listButtons.contains(elem)) {
+        bool enabled;
+        if (item->data(Qt::UserRole + 1).toBool()) {
+            enabled = ConfigHandler().pluginEnabled(
+              item->data(Qt::UserRole).toString(),
+              item->data(Qt::UserRole + 3).toBool());
+        } else {
+            const auto type = static_cast<CaptureTool::Type>(
+              item->data(Qt::UserRole + 2).toInt());
+            enabled = m_listButtons.contains(type);
+        }
+        if (enabled) {
             item->setCheckState(Qt::Checked);
         } else {
             item->setCheckState(Qt::Unchecked);

@@ -4,6 +4,7 @@
 #include "capturetoolbutton.h"
 #include "tools/capturetool.h"
 #include "tools/toolfactory.h"
+#include "tools/toolregistry.h"
 #include "utils/confighandler.h"
 #include "utils/globalvalues.h"
 
@@ -19,7 +20,23 @@
 CaptureToolButton::CaptureToolButton(const CaptureTool::Type t, QWidget* parent)
   : CaptureButton(parent)
   , m_buttonType(t)
+  , m_toolId(ToolRegistry::builtInId(t))
+  , m_external(false)
   , m_tool(nullptr)
+  , m_emergeAnimation(nullptr)
+{
+    initButton();
+    updateIcon();
+}
+
+CaptureToolButton::CaptureToolButton(const ToolDescriptor& descriptor,
+                                     QWidget* parent)
+  : CaptureButton(parent)
+  , m_buttonType(descriptor.legacyType)
+  , m_toolId(descriptor.id)
+  , m_shortcut(descriptor.shortcut)
+  , m_external(descriptor.isExternal())
+  , m_tool(ToolRegistry::createTool(descriptor, this))
   , m_emergeAnimation(nullptr)
 {
     initButton();
@@ -40,11 +57,9 @@ CaptureToolButton::~CaptureToolButton()
 
 void CaptureToolButton::initButton()
 {
-    if (m_tool) {
-        delete m_tool;
-        m_tool = nullptr;
+    if (!m_tool) {
+        m_tool = ToolFactory().CreateTool(m_buttonType, this);
     }
-    m_tool = ToolFactory().CreateTool(m_buttonType, this);
 
     resize(GlobalValues::buttonBaseSize(), GlobalValues::buttonBaseSize());
     setMask(QRegion(QRect(-1,
@@ -55,8 +70,11 @@ void CaptureToolButton::initButton()
 
     // Set a tooltip showing a shortcut in parentheses (if there is a shortcut)
     QString tooltip = m_tool->description();
-    QString shortcut =
-      ConfigHandler().shortcut(QVariant::fromValue(m_buttonType).toString());
+    QString shortcut = m_shortcut;
+    if (!m_external && shortcut.isNull()) {
+        shortcut = ConfigHandler().shortcut(
+          QVariant::fromValue(m_buttonType).toString());
+    }
     if (m_buttonType == CaptureTool::TYPE_COPY &&
         ConfigHandler().copyOnDoubleClick()) {
         tooltip += QStringLiteral(" (%1Left Double-Click)")
@@ -83,7 +101,7 @@ void CaptureToolButton::updateIcon()
 
 const QList<CaptureTool::Type>& CaptureToolButton::getIterableButtonTypes()
 {
-    return iterableButtonTypes;
+    return ToolRegistry::builtInTypes();
 }
 
 // get icon returns the icon for the type of button
@@ -94,7 +112,11 @@ QIcon CaptureToolButton::icon() const
 
 void CaptureToolButton::mousePressEvent(QMouseEvent* e)
 {
-    activateWindow();
+    const bool closesWindowOnPress = m_tool && m_tool->closeOnButtonPressed();
+    if (QGuiApplication::platformName() != QLatin1String("wayland") ||
+        !closesWindowOnPress) {
+        activateWindow();
+    }
     if (e->button() == Qt::LeftButton) {
         emit pressedButtonLeftClick(this);
         emit pressed();
@@ -121,6 +143,11 @@ CaptureTool* CaptureToolButton::tool() const
     return m_tool;
 }
 
+QString CaptureToolButton::toolId() const
+{
+    return m_toolId;
+}
+
 void CaptureToolButton::setColor(const QColor& c)
 {
     m_mainColor = c;
@@ -130,55 +157,7 @@ void CaptureToolButton::setColor(const QColor& c)
 
 QColor CaptureToolButton::m_mainColor;
 
-static std::map<CaptureTool::Type, int> buttonTypeOrder
-{
-    { CaptureTool::TYPE_PENCIL, 0 }, { CaptureTool::TYPE_DRAWER, 1 },
-      { CaptureTool::TYPE_ARROW, 2 }, { CaptureTool::TYPE_SELECTION, 3 },
-      { CaptureTool::TYPE_RECTANGLE, 4 }, { CaptureTool::TYPE_CIRCLE, 5 },
-      { CaptureTool::TYPE_MARKER, 6 }, { CaptureTool::TYPE_TEXT, 7 },
-      { CaptureTool::TYPE_PIXELATE, 8 }, { CaptureTool::TYPE_INVERT, 9 },
-      { CaptureTool::TYPE_CIRCLECOUNT, 10 },
-      { CaptureTool::TYPE_MOVESELECTION, 12 }, { CaptureTool::TYPE_UNDO, 13 },
-      { CaptureTool::TYPE_REDO, 14 }, { CaptureTool::TYPE_COPY, 15 },
-      { CaptureTool::TYPE_SAVE, 16 },
-#ifdef ENABLE_IMGUR
-      { CaptureTool::TYPE_IMAGEUPLOADER, 17 },
-#endif
-      { CaptureTool::TYPE_ACCEPT, 18 },
-#if !defined(Q_OS_MACOS)
-      { CaptureTool::TYPE_OPEN_APP, 19 }, { CaptureTool::TYPE_EXIT, 20 },
-      { CaptureTool::TYPE_PIN, 21 },
-#else
-      { CaptureTool::TYPE_EXIT, 19 }, { CaptureTool::TYPE_PIN, 20 },
-#endif
-
-      { CaptureTool::TYPE_SIZEINCREASE, 22 },
-      { CaptureTool::TYPE_SIZEDECREASE, 23 },
-};
-
 int CaptureToolButton::getPriorityByButton(CaptureTool::Type b)
 {
-    auto it = buttonTypeOrder.find(b);
-    return it == buttonTypeOrder.cend() ? (int)buttonTypeOrder.size()
-                                        : it->second;
+    return ToolRegistry::builtInPriority(b);
 }
-
-QList<CaptureTool::Type> CaptureToolButton::iterableButtonTypes = {
-    CaptureTool::TYPE_PENCIL,        CaptureTool::TYPE_DRAWER,
-    CaptureTool::TYPE_ARROW,         CaptureTool::TYPE_SELECTION,
-    CaptureTool::TYPE_RECTANGLE,     CaptureTool::TYPE_CIRCLE,
-    CaptureTool::TYPE_MARKER,        CaptureTool::TYPE_TEXT,
-    CaptureTool::TYPE_CIRCLECOUNT,   CaptureTool::TYPE_PIXELATE,
-    CaptureTool::TYPE_INVERT,        CaptureTool::TYPE_MOVESELECTION,
-    CaptureTool::TYPE_UNDO,          CaptureTool::TYPE_REDO,
-    CaptureTool::TYPE_COPY,          CaptureTool::TYPE_SAVE,
-    CaptureTool::TYPE_EXIT,
-#ifdef ENABLE_IMGUR
-    CaptureTool::TYPE_IMAGEUPLOADER,
-#endif
-#if !defined(Q_OS_MACOS)
-    CaptureTool::TYPE_OPEN_APP,
-#endif
-    CaptureTool::TYPE_PIN,           CaptureTool::TYPE_SIZEINCREASE,
-    CaptureTool::TYPE_SIZEDECREASE,  CaptureTool::TYPE_ACCEPT,
-};

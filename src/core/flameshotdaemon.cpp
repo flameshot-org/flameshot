@@ -12,7 +12,9 @@
 #include <QClipboard>
 #include <QIODevice>
 #include <QPixmap>
+#include <QProcess>
 #include <QRect>
+#include <QStandardPaths>
 
 #if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
 #include <QDBusConnection>
@@ -372,6 +374,31 @@ void FlameshotDaemon::attachTextToClipboard(const QString& text,
     // Must send notification before clipboard modification on linux
     if (!notification.isEmpty()) {
         AbstractLogger::info() << notification;
+    }
+
+    // A background Wayland client has no recent input serial and therefore
+    // cannot reliably acquire clipboard ownership through QClipboard. Let the
+    // compositor-aware helper serve text when it is available.
+    if (QApplication::platformName() == QLatin1String("wayland")) {
+        const QString wlCopy =
+          QStandardPaths::findExecutable(QStringLiteral("wl-copy"));
+        if (!wlCopy.isEmpty()) {
+            QProcess process;
+            process.start(wlCopy,
+                          { QStringLiteral("--type"),
+                            QStringLiteral("text/plain;charset=utf-8") });
+            if (process.waitForStarted(1000)) {
+                process.write(text.toUtf8());
+                process.closeWriteChannel();
+                if (process.waitForFinished(3000) &&
+                    process.exitStatus() == QProcess::NormalExit &&
+                    process.exitCode() == 0) {
+                    return;
+                }
+            }
+            AbstractLogger::warning()
+              << tr("Could not copy text with wl-copy; falling back to Qt.");
+        }
     }
 
     m_hostingClipboard = true;

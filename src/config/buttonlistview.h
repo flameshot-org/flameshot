@@ -12,8 +12,12 @@ public:
     explicit ButtonListView(QWidget* parent = nullptr);
 
 public slots:
+    void reload();
     void selectAll();
     void updateComponents();
+
+public:
+    QString selectedExternalPluginId() const;
 
 private slots:
     void reverseItemCheck(QListWidgetItem*);
@@ -23,7 +27,6 @@ protected:
 
 private:
     QList<CaptureTool::Type> m_listButtons;
-    QMap<QString, CaptureTool::Type> m_buttonTypeByName;
 
     void updateActiveButtons(QListWidgetItem*);
 };
