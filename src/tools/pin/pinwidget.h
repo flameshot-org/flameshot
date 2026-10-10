@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include <QTimer>
 #include <QWidget>
 
 class QLabel;
@@ -28,13 +29,15 @@ protected:
     void leaveEvent(QEvent*) override;
 
     bool event(QEvent* event) override;
-    void paintEvent(QPaintEvent* event) override;
 
 private:
     bool gestureEvent(QGestureEvent* event);
     bool scrollEvent(QWheelEvent* e);
     void pinchTriggered(QPinchGesture*);
     void closePin();
+    void updatePixmap();
+    void renderPixmap(Qt::TransformationMode mode);
+    void finishZoom();
 
     void rotateLeft();
     void rotateRight();
@@ -42,7 +45,9 @@ private:
     void increaseOpacity();
     void decreaseOpacity();
 
+    const QPixmap m_originalPixmap;
     QPixmap m_pixmap;
+    QSize m_displaySize;
     QVBoxLayout* m_layout;
     QLabel* m_label;
     QGraphicsDropShadowEffect* m_shadowEffect;
@@ -53,7 +58,8 @@ private:
     qreal m_opacity{ 1 };
     unsigned int m_rotateFactor{ 0 };
     qreal m_currentStepScaleFactor{ 1 };
-    bool m_sizeChanged{ false };
+    QTimer m_updateTimer;
+    QTimer m_qualityTimer;
 
 private slots:
     void showContextMenu(const QPoint& pos);
