@@ -158,8 +158,8 @@ Check out the About window to see all available shortcuts in the graphical captu
 
 ### Usage on Windows
 
-On Windows, `flameshot.exe` will behave as expected for all supported command-line arguments, 
-but it will not output any text to the console. This is problematic if, for example, you are 
+On Windows, `flameshot.exe` will behave as expected for all supported command-line arguments,
+but it will not output any text to the console. This is problematic if, for example, you are
 running `flameshot.exe -h`.
 
 If you require console output, run `flameshot-cli.exe` instead. `flameshot-cli.exe` is a minimal wrapper around `flameshot.exe` that ensures all stdout is captured and output to the console.
@@ -233,7 +233,7 @@ These shortcuts are available in GUI mode:
 | <kbd>Ctrl</kbd> + <kbd>Q</kbd>                                            | Leave the capture screen                                         |
 | <kbd>Ctrl</kbd> + <kbd>O</kbd>                                            | Choose an app to open the capture                                |
 | <kbd>Ctrl</kbd> + <kbd>Return</kbd>                                            | Commit text in text area|
-| <kbd>Ctrl</kbd> + <kbd>Backspace</kbd>                                    | Cancel current selection                                       | 
+| <kbd>Ctrl</kbd> + <kbd>Backspace</kbd>                                    | Cancel current selection                                       |
 | <kbd>Return</kbd>                                             | Upload the selection to Imgur                                      |
 | <kbd>Spacebar</kbd>                                                       | Toggle visibility of sidebar with options of the selected tool, color picker for the drawing color and history menu |
 | <kbd>G</kbd>                                                       | Starts the color picker |
@@ -297,11 +297,11 @@ Steps for using the configuration:
 To use Flameshot instead of the default screenshot application in Gnome we need to remove the binding on <kbd>Prt Sc</kbd> key, and then create a new binding for `flameshot gui` ([adapted](https://askubuntu.com/posts/1039949/revisions) from [Pavel's answer on AskUbuntu](https://askubuntu.com/revisions/1036473/1)).
 
 1. Remove the binding on <kbd>Prt Sc</kbd>:
-  
+
    Go to _Settings_ > _Keyboard_ > _View and Customise Shortcuts_ > _Screenshots_ > _Take a screenshot interactively_ and press `backspace`
 
 2. Add custom binding on <kbd>Prt Sc</kbd>:
-  
+
    Go to _Settings_ > _Keyboard_ > _View and Customise Shortcuts_ > _Custom shortcuts_ and press the '+' button at the bottom.
 
 3. Name the command as you like it, e.g. `flameshot`. And in the command insert `/usr/bin/flameshot gui` or `flatpak run org.flameshot.Flameshot gui` if installed via flatpak.
@@ -342,7 +342,7 @@ Now every time you press <kbd>Prt Sc</kbd> it will start Flameshot GUI instead o
 
 - Press <kbd>Enter</kbd> or <kbd>Ctrl</kbd> + <kbd>C</kbd> when you are in a capture mode and you don't have an active selection and the whole desktop will be copied to your clipboard. Pressing <kbd>Ctrl</kbd> + <kbd>S</kbd> will save your capture to a file. Check the [Shortcuts](#keyboard-shortcuts) for more information.
 
-- Flameshot works best with a desktop environment that includes D-Bus. See this [article](https://wiki.archlinux.org/index.php/Flameshot#Troubleshooting) for tips on using Flameshot in a minimal window manager (dwm, i3, xmonad, etc).
+- Flameshot works best with a desktop environment that includes D-Bus. See this [article](https://wiki.archlinux.org/title/Flameshot#Troubleshooting) for tips on using Flameshot in a minimal window manager (dwm, i3, xmonad, etc).
 
 - In order to speed up the first launch of Flameshot (D-Bus init of the app can be slow), consider starting the application automatically on boot.
     - Quick tip: If you don't have Flameshot to autostart at boot and you want to set keyboard shortcut, use the following as the command for the keybinding:
@@ -415,7 +415,7 @@ After following all those steps above, `flameshot` will open without problems in
 
 ### Tray icon
 
-**Note** that for the Flameshot icon to appear in your tray area, you should have a systray software installed. This is especially true for users who use minimal [window managers](https://wiki.archlinux.org/index.php/window_manager) such as [dwm](https://dwm.suckless.org/). In some [Desktop Environment](https://wiki.archlinux.org/index.php/Desktop_environment) installations (e.g Gnome), the systray might be missing and you can install an application or plugin (e.g [Gnome shell extension](https://extensions.gnome.org/extension/1503/tray-icons/)) to add the systray to your setup. It has been [reported](https://github.com/flameshot-org/flameshot/issues/1009#issuecomment-700781081)) that icon of some software, including Flameshot, does not show in [gnome-shell-extension-appindicator](https://github.com/ubuntu/gnome-shell-extension-appindicator).
+**Note** that for the Flameshot icon to appear in your tray area, you should have a systray software installed. This is especially true for users who use minimal [window managers](https://wiki.archlinux.org/title/window_manager) such as [dwm](https://dwm.suckless.org/). In some [Desktop Environment](https://wiki.archlinux.org/title/Desktop_environment) installations (e.g Gnome), the systray might be missing and you can install an application or plugin (e.g [Gnome shell extension](https://extensions.gnome.org/extension/1503/tray-icons/)) to add the systray to your setup. It has been [reported](https://github.com/flameshot-org/flameshot/issues/1009#issuecomment-700781081)) that icon of some software, including Flameshot, does not show in [gnome-shell-extension-appindicator](https://github.com/ubuntu/gnome-shell-extension-appindicator).
 
 
 Alternatively, in case you don't want to have a systray, you can always call Flameshot from the terminal. See [Usage section](#usage).
