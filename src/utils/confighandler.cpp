@@ -211,7 +211,7 @@ static QMap<QString, QSharedPointer<KeySequence>> recognizedShortcuts = {
     SHORTCUT("TYPE_SIZEINCREASE"        ,                           ),
     SHORTCUT("TYPE_SIZEDECREASE"        ,                           ),
     SHORTCUT("TYPE_CIRCLECOUNT"         ,                           ),
-SHORTCUT("TYPE_CLOSE_PIN_CAPTURES"      ,   "Ctrl+Q"                ),
+    SHORTCUT("TYPE_CLOSE_ACTIVE_PIN_WINDOW"      ,   "Ctrl+Q"                ),
 };
 // clang-format on
 
