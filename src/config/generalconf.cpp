@@ -711,10 +711,10 @@ void GeneralConf::initCopyPathAfterSave()
 void GeneralConf::initAntialiasingPinZoom()
 {
     m_antialiasingPinZoom =
-      new QCheckBox(tr("Anti-aliasing image when zoom the pinned image"), this);
+      new QCheckBox(tr("Smooth previews while zooming a pinned image"), this);
     m_antialiasingPinZoom->setToolTip(
-      tr("After zooming the pinned image, should the image get smoothened or "
-         "stay pixelated"));
+      tr("Smooth the image during zooming. After zooming stops, the image is "
+         "always rendered smoothly from the full-resolution source."));
     m_scrollAreaLayout->addWidget(m_antialiasingPinZoom);
     connect(m_antialiasingPinZoom, &QCheckBox::clicked, [](bool checked) {
         ConfigHandler().setAntialiasingPinZoom(checked);
