@@ -202,7 +202,8 @@ void ShortcutsWidget::loadShortcuts()
     appendShortcut("TYPE_DELETE_CURRENT_TOOL",
                    tr("Delete selected drawn object"));
     appendShortcut("TYPE_CANCEL", tr("Cancel current selection"));
-
+    appendShortcut("TYPE_CLOSE_ACTIVE_PIN_WINDOW",
+                   tr("Close Active Pinned Window"));
     // non-editable shortcuts have an empty shortcut name
 
     m_shortcuts << (QStringList() << "" << QObject::tr("Quit capture")

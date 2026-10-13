@@ -20,7 +20,6 @@ public:
                        QWidget* parent = nullptr);
 
 protected:
-    void mouseDoubleClickEvent(QMouseEvent*) override;
     void mousePressEvent(QMouseEvent*) override;
     void mouseMoveEvent(QMouseEvent*) override;
     void keyPressEvent(QKeyEvent*) override;
