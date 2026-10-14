@@ -117,7 +117,7 @@
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="32"/>
         <source>Rectangular Region</source>
-        <translation>方形区域</translation>
+        <translation>矩形区域</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="38"/>
@@ -456,7 +456,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="74"/>
         <source>Delete</source>
-        <translation>刪除</translation>
+        <translation>删除</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="76"/>
@@ -759,7 +759,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="29"/>
         <source>Edit:</source>
-        <translation>编辑器:</translation>
+        <translation>编辑：</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="31"/>
@@ -1353,7 +1353,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="795"/>
         <source>Set geometry display timeout (ms)</source>
-        <translation>设置几何显示时间(毫秒）</translation>
+        <translation>设置几何显示时间（毫秒）</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="803"/>
@@ -1418,7 +1418,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="872"/>
         <source>Insecure Pixelate</source>
-        <translation>不安全Pixelate</translation>
+        <translation>不安全的像素化</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="874"/>
@@ -1946,7 +1946,7 @@ Click to select</source>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/primaryinstancewidget.cpp" line="22"/>
         <source>&lt;b&gt;Primary instance.&lt;/b&gt; Messages received from secondaries:</source>
-        <translation>&lt;b&gt;主要实例。&lt;/b&gt;从secondary收到的消息：</translation>
+        <translation>&lt;b&gt;主实例。&lt;/b&gt;从次级实例收到的消息：</translation>
     </message>
 </context>
 <context>
@@ -2565,7 +2565,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="27"/>
         <source>&lt;b&gt;Secondary instance.&lt;/b&gt; Send message to primary:</source>
-        <translation>&lt;b&gt;第二个例子。&lt;/b&gt;发送消息到主服务器：</translation>
+        <translation>&lt;b&gt;次级实例。&lt;/b&gt;发送消息给主实例：</translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="29"/>
@@ -2575,7 +2575,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="31"/>
         <source>&amp;Send</source>
-        <translation>发送（&amp; S）</translation>
+        <translation>发送(&amp;S)</translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="54"/>
@@ -2585,7 +2585,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="55"/>
         <source>The message &apos;%1&apos; could not be sent to the primary.</source>
-        <translation>无法将邮件&apos;%1&apos;发送到主服务器。</translation>
+        <translation>无法将消息“%1”发送给主实例。</translation>
     </message>
 </context>
 <context>
@@ -2715,7 +2715,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="197"/>
         <source>Move selection left 1px</source>
-        <translation>将选区向左调整 1px</translation>
+        <translation>将选区向左移动 1px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="198"/>
@@ -3011,7 +3011,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/text/textconfig.cpp" line="91"/>
         <source>Center Align</source>
-        <translation>中心对齐</translation>
+        <translation>居中对齐</translation>
     </message>
     <message>
         <location filename="../../src/tools/text/textconfig.cpp" line="100"/>
@@ -3137,12 +3137,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/undo/undotool.cpp" line="24"/>
         <source>Undo</source>
-        <translation>撤消</translation>
+        <translation>撤销</translation>
     </message>
     <message>
         <location filename="../../src/tools/undo/undotool.cpp" line="34"/>
         <source>Undo the last modification</source>
-        <translation>撤消上次修改</translation>
+        <translation>撤销上次修改</translation>
     </message>
 </context>
 <context>
