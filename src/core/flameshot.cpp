@@ -45,6 +45,7 @@ constexpr const char* visibleInDockProperty = "_visibleInDock";
 #include "config/cacheutils.h"
 #include "config/configresolver.h"
 #include "config/configwindow.h"
+#include "config/generalconf.h"
 #include "core/qguiappcurrentscreen.h"
 #include "utils/abstractlogger.h"
 #include "utils/confighandler.h"
@@ -66,6 +67,7 @@ constexpr const char* visibleInDockProperty = "_visibleInDock";
 #include <QDebug>
 #include <QDesktopServices>
 #include <QFile>
+#include <QGuiApplication>
 #include <QMessageBox>
 #include <QThread>
 #include <QTimer>
@@ -145,7 +147,9 @@ CaptureWidget* Flameshot::gui(const CaptureRequest& req)
     }
 #endif
 
-    if (nullptr == m_captureWindow) {
+    // A multi-display session has no single window until a display is armed,
+    // and loses the one it had when another display is latched.
+    if (nullptr == m_captureWindow && nullptr == m_captureSession) {
         // TODO is this unnecessary now?
         int timeout = 5000; // 5 seconds
         const int delay = 100;
@@ -164,6 +168,34 @@ CaptureWidget* Flameshot::gui(const CaptureRequest& req)
               nullptr, tr("Error"), tr("Unable to close active modal widgets"));
             return nullptr;
         }
+
+#if !defined(Q_OS_MACOS)
+        // "Capture the display under the cursor": cover every display at once
+        // and let pointer focus decide which one is active. macOS keeps the
+        // single-window path; it is untested for N fullscreen windows.
+        if (ConfigHandler().monitorSelectionMode() ==
+              GeneralConf::monitor_selection_follow_cursor &&
+            QGuiApplication::screens().size() > 1 &&
+            !request.hasSelectedMonitor()) {
+            auto* session = new MultiMonitorCaptureSession(this);
+            if (session->start(request)) {
+                m_captureSession = session;
+                m_captureWindow = session->armedWidget();
+                connect(session,
+                        &MultiMonitorCaptureSession::armedChanged,
+                        this,
+                        [this](CaptureWidget* armed) {
+                            if (armed) {
+                                m_captureWindow = armed;
+                            }
+                        });
+                return m_captureWindow;
+            }
+            delete session;
+            emit captureFailed();
+            return nullptr;
+        }
+#endif
 
         m_captureWindow = new CaptureWidget(request);
 
