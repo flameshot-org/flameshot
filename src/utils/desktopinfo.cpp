@@ -17,7 +17,7 @@ DesktopInfo::DesktopInfo()
     DESKTOP_SESSION = e.value(QStringLiteral("DESKTOP_SESSION"));
 }
 
-bool DesktopInfo::waylandDetected()
+bool DesktopInfo::waylandDetected() const
 {
     return XDG_SESSION_TYPE == QLatin1String("wayland") ||
            WAYLAND_DISPLAY.contains(QLatin1String("wayland"),

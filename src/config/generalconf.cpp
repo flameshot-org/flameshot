@@ -62,6 +62,7 @@ GeneralConf::GeneralConf(QWidget* parent)
 #endif
 #if defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)
     initUseX11LegacyScreenshot();
+    initCaptureAllMonitors();
 #endif
 #ifdef ENABLE_IMGUR
     initCopyAndCloseAfterUpload();
@@ -137,6 +138,7 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
 #endif
 #if defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)
     m_useX11LegacyScreenshot->setChecked(config.useX11LegacyScreenshot());
+    m_captureAllMonitors->setChecked(config.captureAllMonitors());
 #endif
 }
 
@@ -944,7 +946,8 @@ void GeneralConf::initCaptureActiveMonitor()
       this);
     m_captureActiveMonitor->setToolTip(
       tr("Automatically capture the monitor where the cursor is located "
-         "instead of showing the monitor selection dialog. "
+         "instead of showing the monitor selection dialog, unless "
+         "\"Capture all monitors\" is enabled and available. "
          "This feature is not supported on macOS and Wayland."));
     m_scrollAreaLayout->addWidget(m_captureActiveMonitor);
 
@@ -1004,5 +1007,29 @@ void GeneralConf::initUseX11LegacyScreenshot()
 void GeneralConf::useX11LegacyScreenshotChanged(bool checked)
 {
     ConfigHandler().setUseX11LegacyScreenshot(checked);
+}
+
+void GeneralConf::initCaptureAllMonitors()
+{
+    m_captureAllMonitors = new QCheckBox(
+      tr("Capture all monitors as one image on X11 (skip monitor selection)"),
+      this);
+    m_captureAllMonitors->setToolTip(
+      tr("Open the editor over the whole virtual desktop so a selection can "
+         "span several monitors. Requires X11 and the same scale factor on "
+         "every monitor; otherwise the active monitor is captured if "
+         "\"Capture active monitor\" is enabled, else the monitor selection "
+         "dialog is shown. Not supported on Wayland."));
+    m_scrollAreaLayout->addWidget(m_captureAllMonitors);
+
+    connect(m_captureAllMonitors,
+            &QCheckBox::clicked,
+            this,
+            &GeneralConf::captureAllMonitorsChanged);
+}
+
+void GeneralConf::captureAllMonitorsChanged(bool checked)
+{
+    ConfigHandler().setCaptureAllMonitors(checked);
 }
 #endif

@@ -26,16 +26,28 @@ public:
         Unavailable,
         Failed
     };
+    // Monitor index meaning "the whole virtual desktop as one image"
+    static constexpr int ALL_MONITORS = -2;
+    static_assert(ALL_MONITORS < -1, "-1 already means no monitor selected");
+    bool allMonitorsSupported() const;
+    bool allMonitorsSelected() const
+    {
+        return m_selectedMonitor == ALL_MONITORS;
+    }
+    // Logical rect the capture widget must cover for the selected
+    // monitor(s); null when nothing is selected
+    QRect selectedGeometry() const;
     QPixmap grabEntireDesktop(bool& ok, int preSelectedMonitor = -1);
     QPixmap grabFullDesktop(bool& ok);
-    QRect screenGeometry(QScreen* screen);
+    QRect screenGeometry(QScreen* screen) const;
     QPixmap grabScreen(QScreen* screenNumber, bool& ok);
     PortalStatus freeDesktopPortal(QPixmap& res, QString& errorDetail);
     QRect desktopGeometry();
-    QRect logicalDesktopGeometry();
     int getSelectedMonitor() const { return m_selectedMonitor; }
     QScreen* getSelectedScreen() const;
-    QPixmap selectMonitorAndCrop(const QPixmap& fullScreenshot, bool& ok);
+    QPixmap selectMonitorAndCrop(const QPixmap& fullScreenshot,
+                                 bool& ok,
+                                 bool allMonitors = false);
 
 protected:
     bool eventFilter(QObject* obj, QEvent* event) override;
@@ -50,6 +62,7 @@ private:
     void selectMonitor(int monitorIndex);
     void setHighlightedMonitorPreview(int previewIndex);
     QPixmap cropToMonitor(const QPixmap& fullScreenshot, int monitorIndex);
+    QPixmap cropToAllMonitors(const QPixmap& fullScreenshot, bool& ok);
     QPixmap windowsScreenshot(int wid);
     QPixmap x11LegacyScreenshot();
     QPixmap unixScreenshot(bool& ok);

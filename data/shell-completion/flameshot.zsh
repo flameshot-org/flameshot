@@ -38,7 +38,7 @@ _flameshot_gui() {
 # screen
 
 _flameshot_screen_opts=(
-    {-n,--number}'[Define the screen to capture (starting from 0). Default: screen containing the cursor]'
+    {-n,--number}'[Define the screen to capture (starting from 0). Default: the monitor selector, or the active monitor / all monitors when captureActiveMonitor / captureAllMonitors is set]'
     {-e,--edit}'[Interactively select and edit the screenshot region]'
     {-p,--path}'[Existing directory or new file to save to]':dir:_files
     {-c,--clipboard}'[Save the capture to the clipboard]'

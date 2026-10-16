@@ -60,6 +60,7 @@
   - [Usage on Windows](#usage-on-windows)
   - [Usage on Hyprland / Sway / wlroots](#usage-on-hyprland--sway--wlroots)
   - [Usage on minimal X11 window managers](#usage-on-minimal-x11-window-managers)
+  - [Capturing all monitors as one image (X11)](#capturing-all-monitors-as-one-image-x11)
   - [CLI configuration](#cli-configuration)
   - [Config file](#config-file)
 - [Keyboard Shortcuts](#keyboard-shortcuts)
@@ -171,6 +172,10 @@ Please [refer to this document](docs/UsageHyprlandSwayWlroots.md) for detailed i
 ### Usage on minimal X11 window managers
 
 On minimal X11 window managers (i3, dwm, xmonad, bspwm, ...), capturing may fail because no portal backend implements the Screenshot interface (errors such as *"Could not locate the org.freedesktop.portal.Desktop service"* or *"Screenshot portal timed out"*). Please [refer to this document](docs/UsageX11MinimalWM.md) for the fix (enabling the legacy X11 capture).
+
+### Capturing all monitors as one image (X11)
+
+To edit all monitors as one image on X11, so a selection can span several of them, set `captureAllMonitors=true` or pick "All monitors" in the monitor selector (key `0`). It needs the same scale factor on every monitor and is not available on Wayland.
 
 ### CLI configuration
 

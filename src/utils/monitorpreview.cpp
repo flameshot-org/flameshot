@@ -4,6 +4,7 @@
 #include "monitorpreview.h"
 #include "utils/colorutils.h"
 #include "utils/confighandler.h"
+#include "utils/screengrabber.h"
 
 #include <QLabel>
 #include <QMouseEvent>
@@ -31,9 +32,11 @@ MonitorPreview::MonitorPreview(int monitorIndex,
     m_imageLabel->setPixmap(thumbnail);
     m_imageLabel->setScaledContents(false);
 
-    if (m_monitorIndex < 9) {
-        m_keyLabel =
-          new QLabel(QString::number(m_monitorIndex + 1), m_imageLabel);
+    const bool allMonitors = m_monitorIndex == ScreenGrabber::ALL_MONITORS;
+    if (allMonitors || m_monitorIndex < 9) {
+        const QString key = allMonitors ? QStringLiteral("0")
+                                        : QString::number(m_monitorIndex + 1);
+        m_keyLabel = new QLabel(key, m_imageLabel);
         m_keyLabel->setAlignment(Qt::AlignCenter);
         m_keyLabel->setFixedSize(28, 28);
         m_keyLabel->move(8, 8);
@@ -41,13 +44,18 @@ MonitorPreview::MonitorPreview(int monitorIndex,
         m_keyLabel->setAttribute(Qt::WA_TransparentForMouseEvents);
     }
 
-    const QString labelText =
-      m_monitorIndex < 9 ? tr("Monitor %1: %2\nClick or press %1 to select")
-                             .arg(m_monitorIndex + 1)
-                             .arg(screen->name())
-                         : tr("Monitor %1: %2\nClick to select")
-                             .arg(m_monitorIndex + 1)
-                             .arg(screen->name());
+    QString labelText;
+    if (allMonitors) {
+        labelText = tr("All monitors\nClick or press 0 to select");
+    } else if (m_monitorIndex < 9) {
+        labelText = tr("Monitor %1: %2\nClick or press %1 to select")
+                      .arg(m_monitorIndex + 1)
+                      .arg(screen->name());
+    } else {
+        labelText = tr("Monitor %1: %2\nClick to select")
+                      .arg(m_monitorIndex + 1)
+                      .arg(screen->name());
+    }
     m_textLabel = new QLabel(labelText, this);
     m_textLabel->setAlignment(Qt::AlignCenter);
 
