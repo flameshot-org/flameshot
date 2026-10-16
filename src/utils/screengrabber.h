@@ -33,6 +33,13 @@ public:
     PortalStatus freeDesktopPortal(QPixmap& res, QString& errorDetail);
     QRect desktopGeometry();
     QRect logicalDesktopGeometry();
+    // Returns the monitor the user actually configured as primary. On GNOME
+    // Wayland QGuiApplication::primaryScreen() is unreliable (Qt's wayland
+    // plugin does not implement the wp_primary_output protocol, so it reports
+    // the first wl_output instead), therefore the real primary is queried
+    // from mutter. Falls back to QGuiApplication::primaryScreen() everywhere
+    // else.
+    static QScreen* reliablePrimaryScreen();
     int getSelectedMonitor() const { return m_selectedMonitor; }
     QScreen* getSelectedScreen() const;
     QPixmap selectMonitorAndCrop(const QPixmap& fullScreenshot, bool& ok);
