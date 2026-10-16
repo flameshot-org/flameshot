@@ -1279,6 +1279,13 @@ void CaptureWidget::initPanel()
             this,
             &CaptureWidget::setDrawColor);
     connect(m_sidePanel,
+            &SidePanelWidget::geometryChangeRequested,
+            this,
+            [this](QRect const& geometry) {
+                if (m_selection)
+                    m_selection->setGeometry(geometry);
+            });
+    connect(m_sidePanel,
             &SidePanelWidget::toolSizeChanged,
             this,
             &CaptureWidget::onToolSizeChanged);
@@ -1360,6 +1367,7 @@ void CaptureWidget::initSelection()
         updateCursor();
         updateSizeIndicator();
         OverlayMessage::pop();
+        m_sidePanel->onGrabAreaChanged(m_context.selection);
     });
     connect(m_selection, &SelectionWidget::geometrySettled, this, [this]() {
         if (m_selection->isVisibleTo(this)) {
