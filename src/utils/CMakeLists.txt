@@ -24,6 +24,7 @@ target_sources(
           desktopinfo.cpp
           pathinfo.cpp
           colorutils.cpp
+          colorprofileprovider.cpp
           history.cpp
           strfparse.cpp
 )

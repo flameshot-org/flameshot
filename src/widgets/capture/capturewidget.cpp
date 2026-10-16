@@ -128,6 +128,7 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
             this->close();
         }
         m_context.origScreenshot = m_context.screenshot;
+        m_context.colorSpace = grabber.colorSpace();
 
         selectedScreen = grabber.getSelectedScreen();
 
@@ -325,7 +326,7 @@ CaptureWidget::~CaptureWidget()
         QRect geometry(m_context.selection);
         geometry.setTopLeft(geometry.topLeft() + m_context.widgetOffset);
         Flameshot::instance()->exportCapture(
-          pixmap(), geometry, m_context.request);
+          pixmap(), geometry, m_context.request, m_context.colorSpace);
     } else {
         emit Flameshot::instance()->captureFailed();
     }
