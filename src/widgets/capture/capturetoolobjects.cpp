@@ -66,6 +66,11 @@ int CaptureToolObjects::find(const QPoint& pos, QSize captureSize)
     if (m_captureToolObjects.empty()) {
         return -1;
     }
+    // Tool objects can be modified in place (moved, resized, recolored, ...)
+    // without going through append()/insert()/removeAt(), which are the only
+    // places that invalidate the cache. The rendered images are therefore
+    // only valid for the duration of a single find() run.
+    m_imageCache.clear();
     QPixmap pixmap(captureSize);
     pixmap.fill(Qt::transparent);
     QPainter painter(&pixmap);
@@ -88,10 +93,7 @@ int CaptureToolObjects::findWithRadius(QPainter& painter,
 {
     int index = m_captureToolObjects.size() - 1;
     bool useCache = true;
-    m_imageCache.clear();
     if (m_imageCache.size() != m_captureToolObjects.size() && index >= 0) {
-        // TODO - is not optimal and cache will be used just after first tool
-        // object selecting
         m_imageCache.clear();
         useCache = false;
     }
