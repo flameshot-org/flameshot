@@ -55,7 +55,7 @@ GeneralConf::GeneralConf(QWidget* parent)
     initUndoLimit();
     initInsecurePixelate();
 #if !defined(Q_OS_MACOS)
-    initCaptureActiveMonitor();
+    initMonitorSelectionMode();
 #endif
 #if defined(Q_OS_MACOS)
     initUseNativeFullscreen();
@@ -130,7 +130,8 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
     m_showTray->setChecked(!config.disabledTrayIcon());
 
 #if !defined(Q_OS_MACOS)
-    m_captureActiveMonitor->setChecked(config.captureActiveMonitor());
+    m_monitorSelectionMode->setCurrentIndex(
+      m_monitorSelectionMode->findData(config.monitorSelectionMode()));
 #endif
 #if defined(Q_OS_MACOS)
     m_useNativeFullscreen->setChecked(config.useNativeFullscreen());
@@ -937,26 +938,45 @@ void GeneralConf::setInsecurePixelate(bool checked)
 }
 
 #if !defined(Q_OS_MACOS)
-void GeneralConf::initCaptureActiveMonitor()
+void GeneralConf::initMonitorSelectionMode()
 {
-    m_captureActiveMonitor = new QCheckBox(
-      tr("Capture active monitor in X11 and Windows (skip monitor selection)"),
-      this);
-    m_captureActiveMonitor->setToolTip(
-      tr("Automatically capture the monitor where the cursor is located "
-         "instead of showing the monitor selection dialog. "
-         "This feature is not supported on macOS and Wayland."));
-    m_scrollAreaLayout->addWidget(m_captureActiveMonitor);
+    auto* box = new QGroupBox(tr("Multiple Displays"));
+    box->setFlat(true);
+    m_scrollAreaLayout->addWidget(box);
 
-    connect(m_captureActiveMonitor,
-            &QCheckBox::clicked,
+    auto* vboxLayout = new QVBoxLayout();
+    box->setLayout(vboxLayout);
+
+    auto* rowLayout = new QHBoxLayout();
+    rowLayout->addWidget(new QLabel(tr("When capturing")));
+
+    m_monitorSelectionMode = new QComboBox(this);
+    m_monitorSelectionMode->addItem(tr("Ask which display to capture"),
+                                    GeneralConf::monitor_selection_picker);
+    m_monitorSelectionMode->addItem(
+      tr("Capture the display under the cursor"),
+      GeneralConf::monitor_selection_follow_cursor);
+    m_monitorSelectionMode->setToolTip(
+      tr("\"Ask\" shows a picker first. \"Under the cursor\" starts straight "
+         "away on the display the pointer is on, and follows the pointer to "
+         "another display until you begin selecting."));
+
+    m_monitorSelectionMode->setCurrentIndex(
+      m_monitorSelectionMode->findData(ConfigHandler().monitorSelectionMode()));
+
+    connect(m_monitorSelectionMode,
+            &QComboBox::currentIndexChanged,
             this,
-            &GeneralConf::captureActiveMonitorChanged);
+            &GeneralConf::setMonitorSelectionMode);
+
+    rowLayout->addWidget(m_monitorSelectionMode);
+    vboxLayout->addLayout(rowLayout);
 }
 
-void GeneralConf::captureActiveMonitorChanged(bool checked)
+void GeneralConf::setMonitorSelectionMode(int index)
 {
-    ConfigHandler().setCaptureActiveMonitor(checked);
+    ConfigHandler().setValue(QStringLiteral("monitorSelectionMode"),
+                             m_monitorSelectionMode->itemData(index));
 }
 #endif
 
