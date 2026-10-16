@@ -10,6 +10,13 @@
 #include <exception>
 #include <locale>
 
+namespace {
+// Replaces the directory separators entered in the filename pattern while it is
+// formatted, to tell them apart from the slashes produced by strftime
+// expansions such as %D (ASCII unit separator, not expected in a pattern)
+const QChar PATTERN_DIR_SEPARATOR(0x1F);
+} // namespace
+
 FileNameHandler::FileNameHandler(QObject* parent)
   : QObject(parent)
 {
@@ -41,13 +48,40 @@ QString FileNameHandler::parseFilename(const QString& name)
         res.chop(1);
     }
 
-    res =
-      QString::fromStdString(strfparse::format_time_string(name.toStdString()));
+    // directory separators may be '/', and also '\' on Windows
+    QString pattern = QDir::fromNativeSeparators(name);
+    // Directory patterns must stay relative to the save directory. This also
+    // rejects root-relative ("\dir") and drive-relative ("C:dir\") Windows
+    // paths. Only patterns with a separator are checked, so filename-only
+    // patterns such as "C:%F" keep working as before.
+    if (pattern.contains('/') && !QDir::isRelativePath(pattern)) {
+        return {};
+    }
+    if (pattern.endsWith('/')) {
+        // only directories are given, use the default file name inside them
+        pattern += ConfigHandler().filenamePatternDefault();
+    }
 
-    // add the parsed pattern in a correct format for the filesystem
-    res = res.replace(QLatin1String("/"), QStringLiteral("⁄"))
-            .replace(QLatin1String(":"), QLatin1String("-"));
-    return res;
+    // format the whole pattern at once so all its parts share the same time
+    pattern.replace('/', PATTERN_DIR_SEPARATOR);
+    res = QString::fromStdString(
+      strfparse::format_time_string(pattern.toStdString()));
+
+    // add the parsed pattern in a correct format for the filesystem, as a path
+    // relative to the save directory. Separators produced by the specifiers are
+    // part of a name and get sanitized.
+    QStringList parts;
+    for (QString part : res.split(PATTERN_DIR_SEPARATOR, Qt::SkipEmptyParts)) {
+        part = QDir::fromNativeSeparators(part)
+                 .replace(QLatin1String("/"), QStringLiteral("⁄"))
+                 .replace(QLatin1String(":"), QLatin1String("-"));
+        if (part == QLatin1String(".") || part == QLatin1String("..")) {
+            // not a name, and ".." would leave the save directory
+            return {};
+        }
+        parts << part;
+    }
+    return parts.join('/');
 }
 
 /**
@@ -60,7 +94,10 @@ QString FileNameHandler::parseFilename(const QString& name)
  * suffix matching the specified `format`.
  * @note
  * - If `path` points to a directory, the file name will be generated from the
- *   formatted file name from the user configuration
+ *   formatted file name from the user configuration, which may place it in
+ *   subdirectories of `path` that do not exist yet. If that pattern is invalid
+ *   (an absolute path, or with "." or ".." parts), an error is logged and an
+ *   empty string is returned.
  * - If `path` points to a file, its suffix will be changed to match `format`
  * - If `format` is not given, the suffix will remain untouched, unless `path`
  *   has no suffix, in which case it will be given the "png" suffix
@@ -78,7 +115,15 @@ QString FileNameHandler::properScreenshotPath(QString path,
 
     if (info.isDir()) {
         // path is a directory => generate filename from configured pattern
-        path = QDir(QDir(path).absolutePath() + "/" + parsedPattern()).path();
+        QString name = parsedPattern();
+        if (name.isEmpty()) {
+            AbstractLogger::error()
+              << tr("Invalid filename pattern '%1': it must be a relative "
+                    "path without '.' or '..' parts")
+                   .arg(ConfigHandler().filenamePattern());
+            return {};
+        }
+        path = QDir(QDir(path).absolutePath() + "/" + name).path();
     } else {
         // path points to a file => strip it of its suffix for now
         path = QDir(info.dir().absolutePath() + "/" + info.completeBaseName())
