@@ -76,6 +76,7 @@ private:
 
     void initAllowMultipleGuiInstances();
     void initAntialiasingPinZoom();
+    void initPinShadow();
     void initAutoCloseIdleDaemon();
     void initAutostart();
 #if !defined(DISABLE_UPDATE_CHECKER)
@@ -141,6 +142,7 @@ private:
     QCheckBox* m_copyURLAfterUpload;
     QCheckBox* m_copyPathAfterSave;
     QCheckBox* m_antialiasingPinZoom;
+    QCheckBox* m_pinShadow;
     QCheckBox* m_saveLastRegion;
     QCheckBox* m_uploadWithoutConfirmation;
     QPushButton* m_importButton;
