@@ -80,7 +80,9 @@ public:
         // decrease tool size for all tools
         REQ_DECREASE_TOOL_SIZE,
         // Commit the active tool.
-        REQ_COMMIT_CURRENT_TOOL
+        REQ_COMMIT_CURRENT_TOOL,
+        // External Widget with ALT modifier
+        REQ_ADD_EXTERNAL_WIDGETS_ALT
     };
 
     explicit CaptureTool(QObject* parent = nullptr)
@@ -132,6 +134,7 @@ public:
     // If the type is TYPE_EXTERNAL_WIDGET it is created outside as an
     // individual widget.
     virtual QWidget* widget() { return nullptr; }
+    virtual QWidget* widget(bool alt) { return widget(); }
     // When the tool is selected this method is called and the widget is added
     // to the configuration panel inside the main widget.
     virtual QWidget* configurationWidget() { return nullptr; }

@@ -139,6 +139,9 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     OPTION("reverseArrow"                ,Bool               ( false         )),
     OPTION("arrowStyle"                  ,BoundedInt         ( 0, 1, 0       )),
     OPTION("insecurePixelate"            ,Bool               ( false         )),
+    OPTION("extPgm"                     ,String             ( ""                )),
+    OPTION("useDefaultExtPgmOnAlt"      ,Bool                ( true             )),
+    OPTION("extPgmTerminal"             ,Bool               ( false              )),
 #if defined(Q_OS_WIN)
     // Not visible on settings dialog
     OPTION("ignorePrntScrForcesSnipping" ,Bool               ( false         )),

@@ -38,6 +38,11 @@ QWidget* AppLauncher::widget()
     return new AppLauncherWidget(capture);
 }
 
+QWidget* AppLauncher::widget(bool alt)
+{
+    return new AppLauncherWidget(capture, alt);
+}
+
 CaptureTool* AppLauncher::copy(QObject* parent)
 {
     return new AppLauncher(parent);
@@ -47,6 +52,9 @@ void AppLauncher::pressed(CaptureContext& context)
 {
     capture = context.selectedScreenshotArea();
     emit requestAction(REQ_CAPTURE_DONE_OK);
-    emit requestAction(REQ_ADD_EXTERNAL_WIDGETS);
+    if (context.mouseModifiers & Qt::AltModifier) {
+        emit requestAction(REQ_ADD_EXTERNAL_WIDGETS_ALT);
+    } else
+        emit requestAction(REQ_ADD_EXTERNAL_WIDGETS);
     emit requestAction(REQ_CLOSE_GUI);
 }
