@@ -109,6 +109,7 @@ private:
     void initReverseArrow();
     void initDrawCircleCounterOutline();
     void initInsecurePixelate();
+    void initExtPgm();
 #if !defined(Q_OS_MACOS)
     void initCaptureActiveMonitor();
 #endif
@@ -160,13 +161,14 @@ private:
     QCheckBox* m_showMagnifier;
     QCheckBox* m_squareMagnifier;
     QCheckBox* m_copyOnDoubleClick;
-    QCheckBox* m_showSelectionGeometry;
     QComboBox* m_selectGeometryLocation;
     QSpinBox* m_xywhTimeout;
     QSpinBox* m_jpegQuality;
     QCheckBox* m_reverseArrow;
     QCheckBox* m_drawCircleCounterOutline;
     QCheckBox* m_insecurePixelate;
+    QCheckBox* m_useExtPgm;
+    QCheckBox* m_useExtPgmTerm;
 #if !defined(Q_OS_MACOS)
     QCheckBox* m_captureActiveMonitor;
 #endif
