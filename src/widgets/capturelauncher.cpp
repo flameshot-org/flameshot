@@ -117,11 +117,13 @@ CaptureLauncher::CaptureLauncher(QDialog* parent)
                 }
             });
 
-    auto lastRegion = getLastRegion();
-    ui->screenshotX->setText(QString::number(lastRegion.x()));
-    ui->screenshotY->setText(QString::number(lastRegion.y()));
-    ui->screenshotWidth->setText(QString::number(lastRegion.width()));
-    ui->screenshotHeight->setText(QString::number(lastRegion.height()));
+    loadLastRegion();
+    // Keep the region inputs in sync with the last accepted selection, also
+    // for captures started outside the launcher (tray icon, `flameshot gui`)
+    connect(Flameshot::instance(),
+            &Flameshot::captureTaken,
+            this,
+            &CaptureLauncher::loadLastRegion);
 
     ui->screenshotWidth->setMaximumWidth(70);
     ui->screenshotHeight->setMaximumWidth(70);
@@ -177,6 +179,15 @@ void CaptureLauncher::startCapture()
 
     connectCaptureSlots();
     Flameshot::instance()->requestCapture(req);
+}
+
+void CaptureLauncher::loadLastRegion()
+{
+    auto lastRegion = getLastRegion();
+    ui->screenshotX->setText(QString::number(lastRegion.x()));
+    ui->screenshotY->setText(QString::number(lastRegion.y()));
+    ui->screenshotWidth->setText(QString::number(lastRegion.width()));
+    ui->screenshotHeight->setText(QString::number(lastRegion.height()));
 }
 
 void CaptureLauncher::connectCaptureSlots() const
