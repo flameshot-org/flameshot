@@ -78,6 +78,18 @@ bool saveToFilesystem(const QPixmap& capture,
     return okay;
 }
 
+static void saveImageAfterCopy(const QPixmap& capture,
+                               const QString& messagePrefix)
+{
+    ConfigHandler config;
+    const QString savePath = config.savePath();
+    if (config.saveAfterCopy() && !savePath.isEmpty()) {
+        saveToFilesystem(capture, savePath, messagePrefix);
+    } else if (!messagePrefix.isEmpty()) {
+        AbstractLogger() << messagePrefix;
+    }
+}
+
 QString ShowSaveFileDialog(const QString& title, const QString& directory)
 {
     QFileDialog dialog(nullptr, title, directory);
@@ -165,14 +177,8 @@ void saveToClipboard(const QPixmap& capture)
 {
     // If we are able to properly save the file, save the file and copy to
     // clipboard.
-    if ((ConfigHandler().saveAfterCopy()) &&
-        (!ConfigHandler().savePath().isEmpty())) {
-        saveToFilesystem(capture,
-                         ConfigHandler().savePath(),
-                         QObject::tr("Capture saved to clipboard."));
-    } else {
-        AbstractLogger() << QObject::tr("Capture saved to clipboard.");
-    }
+    saveImageAfterCopy(capture,
+                       QObject::tr("Capture saved to clipboard."));
 #if defined(Q_OS_MACOS)
     // On macOS, setPixmap uses lazy clipboard which fails when the
     // process exits ("Cannot keep promise"). Always use serialized bytes.
@@ -252,6 +258,9 @@ private:
 
 bool saveToClipboardGnomeWorkaround(const QPixmap& pixmap, QWidget* keepAlive)
 {
+    // The watcher reports clipboard success when data is requested.
+    saveImageAfterCopy(pixmap, QString());
+
     auto* mimeData = new ClipboardWatcherMimeData(pixmap.toImage(), keepAlive);
     QClipboard* clipboard = QGuiApplication::clipboard();
     clipboard->setMimeData(mimeData);
