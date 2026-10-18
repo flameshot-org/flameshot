@@ -26,13 +26,16 @@ class AppLauncherWidget : public QWidget
 {
     Q_OBJECT
 public:
-    explicit AppLauncherWidget(const QPixmap& p,
-                               bool alt = false,
-                               QWidget* parent = nullptr);
+    explicit AppLauncherWidget(const QPixmap& p, QWidget* parent = nullptr);
+
+    // Can be called without creating an instance of AppLauncherWidget
+    static void launchCmd(const QPixmap& p,
+                          const QString& command,
+                          bool inTerminal,
+                          const QString& existingFilePath = QString());
 
 private slots:
     void launch(const QModelIndex& index);
-    void launchCmd(QString& command, bool inTerminal);
     void checkboxClicked(const bool enabled);
     void searchChanged(const QString& text);
 

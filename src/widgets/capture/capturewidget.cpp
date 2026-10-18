@@ -1492,14 +1492,16 @@ void CaptureWidget::handleToolSignal(CaptureTool::Request r)
             } else {
                 QWidget* w;
                 if (r == CaptureTool::REQ_ADD_EXTERNAL_WIDGETS_ALT)
-                    w = m_activeTool->widget();
+                    w = m_activeTool->widget(false);
                 else
                     w = m_activeTool->widget(true);
 
-                w->setAttribute(Qt::WA_DeleteOnClose);
-                w->activateWindow();
-                w->show();
-                Flameshot::instance()->setExternalWidget(true);
+                if (w) {
+                    w->setAttribute(Qt::WA_DeleteOnClose);
+                    w->activateWindow();
+                    w->show();
+                    Flameshot::instance()->setExternalWidget(true);
+                }
             }
             break;
         case CaptureTool::REQ_INCREASE_TOOL_SIZE:

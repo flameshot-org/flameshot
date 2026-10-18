@@ -17,7 +17,6 @@ public:
     QString name() const override;
     QString description() const override;
 
-    QWidget* widget() override;
     QWidget* widget(bool alt = false) override;
 
     CaptureTool* copy(QObject* parent = nullptr) override;
