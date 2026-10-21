@@ -5,6 +5,7 @@
 
 #include <algorithm>
 #include <ctime>
+#include <iterator>
 #include <map>
 #include <sstream>
 
