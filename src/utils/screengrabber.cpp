@@ -2,6 +2,7 @@
 #include "screengrabber.h"
 #include "core/qguiappcurrentscreen.h"
 #include "utils/abstractlogger.h"
+#include "utils/colorprofileprovider.h"
 #include "utils/confighandler.h"
 #include "utils/monitorpreview.h"
 #include "utils/systemnotification.h"
@@ -323,6 +324,7 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok, int preSelectedMonitor)
     screenshot = currentScreen->grabWindow(
       wid, geom.x(), geom.y(), geom.width(), geom.height());
     screenshot.setDevicePixelRatio(currentScreen->devicePixelRatio());
+    m_colorSpace = ColorProfileProvider::forScreen(currentScreen);
     return screenshot;
 
 #elif defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)
@@ -352,7 +354,14 @@ QPixmap ScreenGrabber::grabFullDesktop(bool& ok)
     QPixmap screenshot;
 
 #if defined(Q_OS_MACOS)
-    // On macOS, composite all screens into a single pixmap.
+    // On macOS, composite all screens into a single pixmap. Screens may have
+    // different color profiles, but the composite can carry only one. Convert
+    // each screen into a common target space (the primary display's) before
+    // compositing, then tag the result with that target so every region is
+    // correct — not just the primary one.
+    const QColorSpace target =
+      ColorProfileProvider::forScreen(QGuiApplication::primaryScreen());
+    m_colorSpace = target;
     const QList<QScreen*> screens = QGuiApplication::screens();
     QRect totalGeom;
     for (QScreen* s : screens) {
@@ -371,6 +380,14 @@ QPixmap ScreenGrabber::grabFullDesktop(bool& ok)
         QRect geom = s->geometry();
         QPixmap p = s->grabWindow(0);
         QPoint offset = geom.topLeft() - totalGeom.topLeft();
+        // Only screens whose profile differs from the target need a real
+        // (per-pixel) conversion; matching screens are drawn as-is.
+        const QColorSpace src = ColorProfileProvider::forScreen(s);
+        if (target.isValid() && src.isValid() && src != target) {
+            QImage img = p.toImage();
+            img.setColorSpace(src);
+            p = QPixmap::fromImage(img.convertedToColorSpace(target));
+        }
         painter.drawPixmap(offset, p);
     }
     painter.end();
@@ -404,6 +421,7 @@ QPixmap ScreenGrabber::grabScreen(QScreen* screen, bool& ok)
     p = grabEntireDesktop(ok, screenIndex);
 #else
     ok = true;
+    m_colorSpace = ColorProfileProvider::forScreen(screen);
     return screen->grabWindow(
       0, geometry.x(), geometry.y(), geometry.width(), geometry.height());
 #endif
