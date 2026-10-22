@@ -30,6 +30,7 @@ private:
 
 private slots:
     void startCapture();
+    void loadLastRegion();
     void onCaptureTaken(QPixmap const& p);
     void onCaptureFailed();
 };
