@@ -8,6 +8,7 @@
 #include "config/uicoloreditor.h"
 #include "utils/confighandler.h"
 
+#include <QCompleter>
 #include <QDirIterator>
 #include <QHBoxLayout>
 #include <QLabel>
@@ -100,6 +101,17 @@ void VisualsEditor::initTranslations()
     auto* localLayout = new QHBoxLayout();
     localLayout->addWidget(new QLabel(tr("UI language")));
     m_selectTranslation = new QComboBox(this);
+    // The translation list is long enough to overflow the screen as a
+    // plain dropdown, so make it editable with a filtering completer -
+    // typing narrows the popup instead of showing every item at once.
+    m_selectTranslation->setEditable(true);
+    m_selectTranslation->setInsertPolicy(QComboBox::NoInsert);
+    m_selectTranslation->completer()->setCompletionMode(
+      QCompleter::PopupCompletion);
+    m_selectTranslation->completer()->setFilterMode(Qt::MatchContains);
+    m_selectTranslation->completer()->setCaseSensitivity(
+      Qt::CaseInsensitive);
+    m_selectTranslation->setMaxVisibleItems(12);
 
     QStringList translations;
     QString tmpFilename;
@@ -130,8 +142,12 @@ void VisualsEditor::initTranslations()
     m_selectTranslation->setCurrentIndex(
       m_selectTranslation->findText(language));
 
+    // textActivated only fires once the user has actually picked an item
+    // (popup click, or Enter on a completed match) - unlike
+    // currentTextChanged, which the now-editable/filterable combobox would
+    // otherwise emit on every keystroke while typing to search.
     connect(m_selectTranslation,
-            &QComboBox::currentTextChanged,
+            &QComboBox::textActivated,
             this,
             [this](const QString& text) {
                 ConfigHandler().setUiLanguage(text);
