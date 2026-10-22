@@ -1,0 +1,15 @@
+{
+  "api_version": 1,
+  "type": "action",
+  "id": "@PLUGIN_ID@",
+  "name": "@PLUGIN_NAME@",
+  "description": "A Rust action plugin",
+  "toolbar": { "visible": true, "order": 1000 },
+  "command": {
+    "executable": "./bin/run",
+    "arguments": [],
+    "input": "png-stdin",
+    "output": "json",
+    "timeout_ms": 30000
+  }
+}

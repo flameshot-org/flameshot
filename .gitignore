@@ -43,6 +43,8 @@ CMakeLists.txt.user
 
 # python
 venv/*
+__pycache__/
+*.py[cod]
 
 # Created by https://www.gitignore.io/api/snapcraft
 
