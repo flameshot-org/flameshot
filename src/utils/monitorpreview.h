@@ -17,7 +17,8 @@ public:
     MonitorPreview(int monitorIndex,
                    QScreen* screen,
                    const QPixmap& thumbnail,
-                   QWidget* parent = nullptr);
+                   QWidget* parent = nullptr,
+                   bool compact = false);
 
     int monitorIndex() const { return m_monitorIndex; }
     void setSelected(bool selected);
@@ -36,9 +37,9 @@ private:
     int m_monitorIndex;
     bool m_selected;
     bool m_mouseHovered;
+    bool m_compact;
     QColor m_uiColor;
     QColor m_contrastColor;
     QLabel* m_imageLabel;
-    QLabel* m_keyLabel;
     QLabel* m_textLabel;
 };
