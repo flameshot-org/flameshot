@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/qrplugin">
+        <file>icons/white_qr.svg</file>
+        <file>icons/black_qr.svg</file>
+    </qresource>
+</RCC>

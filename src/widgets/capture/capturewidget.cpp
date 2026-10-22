@@ -14,6 +14,7 @@
 #include "config/generalconf.h"
 #include "core/flameshot.h"
 #include "core/qguiappcurrentscreen.h"
+#include "plugins/pluginmanager.h"
 #include "tools/copy/copytool.h"
 #include "utils/abstractlogger.h"
 #include "utils/screengrabber.h"
@@ -327,7 +328,7 @@ CaptureWidget::~CaptureWidget()
         Flameshot::instance()->exportCapture(
           pixmap(), geometry, m_context.request);
     } else {
-        emit Flameshot::instance()->captureFailed();
+        emit Flameshot::instance() -> captureFailed();
     }
 }
 
@@ -407,6 +408,39 @@ void CaptureWidget::initButtons()
             vectorButtons << b;
         }
     }
+
+    // Add dynamic buttons from active plugins
+    auto pluginTools = PluginManager::instance()->createPluginTools(this);
+    for (CaptureTool* pTool : pluginTools) {
+        if (!pTool) {
+            continue;
+        }
+        auto* b = new CaptureToolButton(pTool, this);
+        b->setColor(m_uiColor);
+        b->hide();
+        b->setAttribute(Qt::WA_NoMousePropagation);
+        makeChild(b);
+
+        connect(pTool,
+                &CaptureTool::requestAction,
+                this,
+                &CaptureWidget::handleToolSignal);
+
+        connect(b,
+                &CaptureToolButton::pressedButtonLeftClick,
+                this,
+                &CaptureWidget::handleButtonLeftClick);
+
+        if (pTool->isSelectable()) {
+            connect(b,
+                    &CaptureToolButton::pressedButtonRightClick,
+                    this,
+                    &CaptureWidget::handleButtonRightClick);
+        }
+
+        vectorButtons << b;
+    }
+
     m_buttonHandler->setButtons(vectorButtons);
 }
 
