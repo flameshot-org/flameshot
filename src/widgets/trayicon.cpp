@@ -283,7 +283,11 @@ void TrayIcon::startGuiCapture()
 {
     auto* widget = Flameshot::instance()->gui();
 #if !defined(DISABLE_UPDATE_CHECKER)
-    FlameshotDaemon::instance()->showUpdateNotificationIfAvailable(widget);
+    // Null when the capture failed, or when it spans every display and none
+    // is armed yet.
+    if (widget) {
+        FlameshotDaemon::instance()->showUpdateNotificationIfAvailable(widget);
+    }
 #endif
 }
 
