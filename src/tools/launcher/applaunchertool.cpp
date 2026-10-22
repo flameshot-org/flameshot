@@ -3,6 +3,7 @@
 
 #include "applaunchertool.h"
 #include "tools/launcher/applauncherwidget.h"
+#include "utils/confighandler.h"
 
 AppLauncher::AppLauncher(QObject* parent)
   : AbstractActionTool(parent)
@@ -33,8 +34,21 @@ QString AppLauncher::description() const
     return tr("Choose an app to open the capture");
 }
 
-QWidget* AppLauncher::widget()
+QWidget* AppLauncher::widget(bool alt)
 {
+    QString cmd = ConfigHandler().extPgm();
+
+    bool isDefault =
+      ConfigHandler().useDefaultExtPgmOnAlt() != alt && !cmd.isEmpty();
+
+    if (isDefault) {
+        // Launches the default program directly without creating the open with
+        // widget
+        AppLauncherWidget::launchCmd(
+          capture, cmd, ConfigHandler().extPgmTerminal());
+        return nullptr;
+    }
+
     return new AppLauncherWidget(capture);
 }
 
@@ -47,6 +61,9 @@ void AppLauncher::pressed(CaptureContext& context)
 {
     capture = context.selectedScreenshotArea();
     emit requestAction(REQ_CAPTURE_DONE_OK);
-    emit requestAction(REQ_ADD_EXTERNAL_WIDGETS);
+    if (context.mouseModifiers & Qt::AltModifier) {
+        emit requestAction(REQ_ADD_EXTERNAL_WIDGETS_ALT);
+    } else
+        emit requestAction(REQ_ADD_EXTERNAL_WIDGETS);
     emit requestAction(REQ_CLOSE_GUI);
 }

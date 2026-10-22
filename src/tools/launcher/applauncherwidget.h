@@ -28,6 +28,12 @@ class AppLauncherWidget : public QWidget
 public:
     explicit AppLauncherWidget(const QPixmap& p, QWidget* parent = nullptr);
 
+    // Can be called without creating an instance of AppLauncherWidget
+    static void launchCmd(const QPixmap& p,
+                          const QString& command,
+                          bool inTerminal,
+                          const QString& existingFilePath = QString());
+
 private slots:
     void launch(const QModelIndex& index);
     void checkboxClicked(const bool enabled);
@@ -50,6 +56,7 @@ private:
     QTemporaryFile* m_tempFile = nullptr;
     bool m_keepOpen;
     QMap<QString, QVector<DesktopAppData>> m_appsMap;
+    QCheckBox* m_setAsDefaultCheckbox;
     QCheckBox* m_keepOpenCheckbox;
     QCheckBox* m_terminalCheckbox;
     QVBoxLayout* m_layout;

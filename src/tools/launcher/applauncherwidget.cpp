@@ -81,6 +81,8 @@ AppLauncherWidget::AppLauncherWidget(const QPixmap& p, QWidget* parent)
 
     m_terminalCheckbox = new QCheckBox(tr("Launch in terminal"), this);
     m_keepOpenCheckbox = new QCheckBox(tr("Keep open after selection"), this);
+    m_setAsDefaultCheckbox = new QCheckBox(
+      tr("Set as default application for subsequent launches"), this);
     m_keepOpenCheckbox->setChecked(ConfigHandler().keepOpenAppLauncher());
     connect(m_keepOpenCheckbox,
             &QCheckBox::clicked,
@@ -105,6 +107,7 @@ AppLauncherWidget::AppLauncherWidget(const QPixmap& p, QWidget* parent)
     m_layout->addWidget(m_lineEdit);
     m_layout->addWidget(m_keepOpenCheckbox);
     m_layout->addWidget(m_terminalCheckbox);
+    m_layout->addWidget(m_setAsDefaultCheckbox);
     m_lineEdit->setFocus();
 }
 
@@ -131,10 +134,62 @@ void AppLauncherWidget::launch(const QModelIndex& index)
             return;
         }
     }
+
+    QString command = index.data(Qt::UserRole).toString();
+    bool inTerminal =
+      index.data(Qt::UserRole + 1).toBool() || m_terminalCheckbox->isChecked();
+    if (m_setAsDefaultCheckbox->isChecked()) {
+        ConfigHandler().setExtPgm(command);
+        ConfigHandler().setExtPgmTerminal(inTerminal);
+        // we assume if we are setting the default program we also want to use
+        // it
+        ConfigHandler().setUseDefaultExtPgmOnAlt(true);
+    }
+
+    launchCmd(m_pixmap, command, inTerminal, m_tempFile->fileName());
+
+    if (!m_keepOpen) {
+        close();
+    }
+}
+
+// Responsible for launching the program and handling temp file creation if
+// called directly
+void AppLauncherWidget::launchCmd(const QPixmap& p,
+                                  const QString& command,
+                                  bool inTerminal,
+                                  const QString& existingFilePath)
+{
+    QString tempFilePath = existingFilePath;
+    // When opening using a default program there isn't an existing file path
+    // Doing the same as in launch() to create a temporary file
+    if (tempFilePath.isEmpty()) {
+        auto* tempFile =
+          new QTemporaryFile(QDir::tempPath() + "/" +
+                             FileNameHandler().parsedPattern() + "_XXXXXX.png");
+        tempFile->setAutoRemove(false);
+        if (!tempFile->open()) {
+            QMessageBox::about(nullptr,
+                               tr("Error"),
+                               tr("Unable to write in") + QDir::tempPath());
+            delete tempFile;
+            return;
+        }
+        tempFile->close();
+        bool ok = p.save(tempFile->fileName());
+        if (!ok) {
+            QMessageBox::about(nullptr,
+                               tr("Error"),
+                               tr("Unable to write in") + QDir::tempPath());
+            delete tempFile;
+            return;
+        }
+        tempFilePath = tempFile->fileName();
+        delete tempFile;
+    }
+
     // Heuristically, if there is a % in the command we assume it is the file
     // name slot
-    QString command = index.data(Qt::UserRole).toString();
-    const QString tempFilePath = m_tempFile->fileName();
 #if defined(Q_OS_WIN)
     // Do not split on Windows, since file path can contain spaces
     // and % is not used in lnk files
@@ -156,22 +211,17 @@ void AppLauncherWidget::launch(const QModelIndex& index)
         prog_args.append(tempFilePath); // were no replacements
     }
     QString app_name = prog_args.at(0);
-    bool inTerminal =
-      index.data(Qt::UserRole + 1).toBool() || m_terminalCheckbox->isChecked();
     if (inTerminal) {
         bool ok = TerminalLauncher::launchDetached(prog_args);
         if (!ok) {
             QMessageBox::about(
-              this, tr("Error"), tr("Unable to launch in terminal."));
+              nullptr, tr("Error"), tr("Unable to launch in terminal."));
         }
     } else {
         QFileInfo fi(tempFilePath);
         QString workingDir = fi.absolutePath();
         prog_args.removeAt(0); // strip program name out
         QProcess::startDetached(app_name, prog_args, workingDir);
-    }
-    if (!m_keepOpen) {
-        close();
     }
 }
 
