@@ -23,6 +23,13 @@
 #include <QTextStream>
 #include <QVBoxLayout>
 
+#if defined(Q_OS_WIN)
+#include <QEvent>
+#include <QTimer>
+#include <QWindow>
+#include <windows.h>
+#endif
+
 // ConfigWindow contains the menus where you can configure the application
 
 ConfigWindow::ConfigWindow(QWidget* parent)
@@ -110,6 +117,46 @@ ConfigWindow::ConfigWindow(QWidget* parent)
     initErrorIndicator(m_generalConfigTab, m_generalConfig);
     initErrorIndicator(m_shortcutsTab, m_shortcuts);
 }
+
+#if defined(Q_OS_WIN)
+bool ConfigWindow::event(QEvent* e)
+{
+    bool checkGeometry =
+      e->type() == QEvent::Show || e->type() == QEvent::WindowStateChange;
+#if QT_VERSION >= QT_VERSION_CHECK(6, 6, 0)
+    checkGeometry |= e->type() == QEvent::DevicePixelRatioChange;
+#endif
+    const bool handled = QWidget::event(e);
+    if (checkGeometry) {
+        // Qt processes the native DPI resize after sending the change event.
+        QTimer::singleShot(0, this, [this]() {
+            if (!isVisible() || !windowHandle()) {
+                return;
+            }
+
+            RECT client;
+            if (!GetClientRect(reinterpret_cast<HWND>(windowHandle()->winId()),
+                               &client)) {
+                return;
+            }
+            const qreal dpr = windowHandle()->devicePixelRatio();
+            const QSize clientSize(qRound((client.right - client.left) / dpr),
+                                   qRound((client.bottom - client.top) / dpr));
+            const bool normalWindow =
+              !(windowState() & (Qt::WindowMinimized | Qt::WindowMaximized |
+                                 Qt::WindowFullScreen));
+            if (normalWindow && size() != clientSize) {
+                resize(clientSize);
+            }
+            if (m_tabWidget->geometry() != layout()->contentsRect()) {
+                layout()->invalidate();
+                layout()->activate();
+            }
+        });
+    }
+    return handled;
+}
+#endif
 
 void ConfigWindow::keyPressEvent(QKeyEvent* e)
 {
