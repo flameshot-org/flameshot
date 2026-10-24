@@ -76,7 +76,7 @@
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="151"/>
         <source>Unable to launch in terminal.</source>
-        <translation>לא ניתן לשגר במסוף.</translation>
+        <translation>לא ניתן להפעיל במסוף.</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="117"/>
@@ -127,12 +127,12 @@
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="41"/>
         <source>Full Screen</source>
-        <translation type="unfinished"></translation>
+        <translation>מסך מלא</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="46"/>
         <source>Monitor %1: %2 (%3x%4)</source>
-        <translation type="unfinished"></translation>
+        <translation>צג %1: %2 (%3x%4)</translation>
     </message>
     <message>
         <source>Full Screen (All Monitors)</source>
@@ -187,13 +187,13 @@
         <location filename="../../src/widgets/capturelauncher.ui" line="64"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="183"/>
         <source>Delay:</source>
-        <translation>אזור:</translation>
+        <translation>השהיה:</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="71"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="184"/>
         <source>Monitor:</source>
-        <translation type="unfinished"></translation>
+        <translation>צג:</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="87"/>
@@ -405,7 +405,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="58"/>
         <source>Toggle magnifier</source>
-        <translation>מחלף זכוכית מגדלת</translation>
+        <translation>הצג או הסתר את זכוכית המגדלת</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="58"/>
@@ -616,7 +616,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="39"/>
         <source>Configuration</source>
-        <translation>תצור</translation>
+        <translation>תצורה</translation>
     </message>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="67"/>
@@ -807,7 +807,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="122"/>
         <source>Unable to close active modal widgets</source>
-        <translation>לא ניתן לסגור ווידג&apos;טים מודאליים</translation>
+        <translation>לא ניתן לסגור ווידג&apos;טים מודאליים פעילים</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="441"/>
@@ -1007,7 +1007,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="411"/>
         <source>Allow multiple flameshot GUI instances simultaneously</source>
-        <translation>אפשור ריבוי אדגמי flameshot GUI בה־בעת</translation>
+        <translation>אפשר הרצת כמה מופעים של flameshot GUI בו־זמנית</translation>
     </message>
     <message>
         <source>This allows you to take screenshots of flameshot itself for example.</source>
@@ -1071,7 +1071,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="303"/>
         <source>Show the side panel toggle button in the capture mode</source>
-        <translation>הצגת לחצן מחלף חלונית צד, במצב לכידה</translation>
+        <translation>הצגת הלחצן להצגה או הסתרה של חלונית הצד במצב לכידה</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="315"/>
@@ -1267,7 +1267,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="754"/>
         <source>Unable to write to directory.</source>
-        <translation>לא ניתן לכתוב למחיצה.</translation>
+        <translation>לא ניתן לכתוב לתיקייה.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="763"/>
@@ -1357,37 +1357,37 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="863"/>
         <source>Draw the arrow head first</source>
-        <translation>ציור ראש ה החץ תחילה</translation>
+        <translation>ציור ראש החץ תחילה</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="872"/>
         <source>Insecure Pixelate</source>
-        <translation type="unfinished"></translation>
+        <translation>פיקסליזציה לא מאובטחת</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="874"/>
         <source>Draw the pixelation effect in an insecure but more asethetic way.</source>
-        <translation type="unfinished"></translation>
+        <translation>צייר את אפקט הפיקסליזציה בצורה לא מאובטחת אך אסתטית יותר.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="929"/>
         <source>Capture active monitor (skip monitor selection)</source>
-        <translation type="unfinished"></translation>
+        <translation>לכוד את הצג הפעיל (דלג על בחירת צג)</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="931"/>
         <source>Automatically capture the monitor where the cursor is located instead of showing the monitor selection dialog. This feature is not supported on Wayland.</source>
-        <translation type="unfinished"></translation>
+        <translation>לכידה אוטומטית של הצג שבו נמצא סמן העכבר במקום הצגת חלונית בחירת הצג. התכונה הזאת לא נתמכת ב-Wayland.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="952"/>
         <source>Use legacy X11 screenshot method (deprecated)</source>
-        <translation type="unfinished"></translation>
+        <translation>השתמש בשיטת צילום המסך של X11 (הוצאה משימוש)</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="954"/>
         <source>Bypass the freedesktop portal and use Qt&apos;s native X11 screen capture. Enable this if your window manager lacks xdg-desktop-portal (e.g. xmonad, i3). Only effective on X11; ignored on Wayland.</source>
-        <translation type="unfinished"></translation>
+        <translation>עקוף את פורטל freedesktop והשתמש בלכידת המסך המקורית של Qt ב-X11. הפעל את האפשרות הזאת אם במנהל החלונות שלך אין xdg-desktop-portal (למשל xmonad או i3). האפשרות פועלת רק ב-X11 ומתעלמים ממנה ב-Wayland.</translation>
     </message>
 </context>
 <context>
@@ -1777,7 +1777,8 @@ Please solve them manually in the configuration file.</source>
         <location filename="../../src/utils/monitorpreview.cpp" line="31"/>
         <source>Monitor %1: %2
 Click to select</source>
-        <translation type="unfinished"></translation>
+        <translation>צג %1: %2
+לחץ כדי לבחור</translation>
     </message>
 </context>
 <context>
@@ -1884,12 +1885,12 @@ Click to select</source>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/primaryinstancewidget.cpp" line="21"/>
         <source>Primary instance</source>
-        <translation type="unfinished"></translation>
+        <translation>מופע ראשי</translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/primaryinstancewidget.cpp" line="22"/>
         <source>&lt;b&gt;Primary instance.&lt;/b&gt; Messages received from secondaries:</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;מופע ראשי.&lt;/b&gt; הודעות שהתקבלו ממופעים משניים:</translation>
     </message>
 </context>
 <context>
@@ -2006,7 +2007,7 @@ Click to select</source>
     <message>
         <location filename="../../src/main.cpp" line="283"/>
         <source>Capture a screenshot of the specified monitor.</source>
-        <translation>צילום מסך בצג שצויין.</translation>
+        <translation>צילום מסך בצג שצוין.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="288"/>
@@ -2105,7 +2106,7 @@ Click to select</source>
     <message>
         <location filename="../../src/main.cpp" line="349"/>
         <source>Interactively select and edit the screenshot region</source>
-        <translation type="unfinished"></translation>
+        <translation>בחר וערוך את אזור צילום המסך באופן אינטראקטיבי</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="366"/>
@@ -2392,37 +2393,37 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="61"/>
         <source>Could not locate the `org.freedesktop.portal.Desktop` service</source>
-        <translation type="unfinished"></translation>
+        <translation>לא נמצא השירות `org.freedesktop.portal.Desktop`</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="109"/>
         <source>Screenshot portal timed out after 30 seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>פורטל צילום המסך לא הגיב תוך 30 שניות</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="132"/>
         <source>FreeDesktop portal screenshot size: %1x%2, DPR: %3</source>
-        <translation type="unfinished"></translation>
+        <translation>גודל צילום המסך דרך פורטל FreeDesktop: %1x%2, DPR: %3</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="159"/>
         <source>Capture Active Monitor is not supported on Wayland due to Wayland security model.</source>
-        <translation type="unfinished"></translation>
+        <translation>לכידת הצג הפעיל לא נתמכת ב-Wayland בגלל מודל האבטחה של Wayland.</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="177"/>
         <source>Screenshot already in progress, please wait for the current screenshot to complete</source>
-        <translation type="unfinished"></translation>
+        <translation>צילום מסך כבר מתבצע. אנא המתן עד לסיום הצילום הנוכחי</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="202"/>
         <source>Screenshot cancelled</source>
-        <translation type="unfinished"></translation>
+        <translation>צילום המסך בוטל</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="218"/>
         <source>Unable to get current screen</source>
-        <translation type="unfinished"></translation>
+        <translation>לא ניתן לזהות את הצג הנוכחי</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="237"/>
@@ -2435,63 +2436,63 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="373"/>
         <source>=== All Screen Information ===</source>
-        <translation type="unfinished"></translation>
+        <translation>=== פרטי כל הצגים ===</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="376"/>
         <location filename="../../src/utils/screengrabber.cpp" line="551"/>
         <source>Screen %1: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>צג %1: %2</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="377"/>
         <source>  Logical geometry: %1x%2+%3+%4</source>
-        <translation type="unfinished"></translation>
+        <translation>  גאומטריה לוגית: %1x%2+%3+%4</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="382"/>
         <source>  DPR: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>  DPR: %1</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="488"/>
         <source>Total logical dimensions: %1x%2 (min: %3,%4)</source>
-        <translation type="unfinished"></translation>
+        <translation>מידות לוגיות כוללות: %1x%2 (מינימום: %3,%4)</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="493"/>
         <source>Screenshot dimensions: %1x%2</source>
-        <translation type="unfinished"></translation>
+        <translation>מידות צילום המסך: %1x%2</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="509"/>
         <source>Screenshot scale factors: X=%1 Y=%2</source>
-        <translation type="unfinished"></translation>
+        <translation>גורמי קנה מידה של צילום המסך: X=%1 Y=%2</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="542"/>
         <source>Calculated crop position for mixed DPI: X=%1 Y=%2</source>
-        <translation type="unfinished"></translation>
+        <translation>מיקום החיתוך שחושב עבור DPI מעורב: X=%1 Y=%2</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="552"/>
         <source>  Logical geometry: %1x%2+%3+%4 DPR: %5</source>
-        <translation type="unfinished"></translation>
+        <translation>  גאומטריה לוגית: %1x%2+%3+%4 DPR: %5</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="558"/>
         <source>  Crop rect in screenshot: %1x%2+%3+%4</source>
-        <translation type="unfinished"></translation>
+        <translation>  מלבן החיתוך בצילום המסך: %1x%2+%3+%4</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="571"/>
         <source>Crop rect is empty, returning full screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation>מלבן החיתוך ריק, לכן מוחזר צילום המסך המלא</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="587"/>
         <source>Scaling screenshot to: %1 %2</source>
-        <translation type="unfinished"></translation>
+        <translation>שינוי גודל צילום המסך ל-%1 %2</translation>
     </message>
 </context>
 <context>
@@ -2499,32 +2500,32 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="26"/>
         <source>Secondary instance</source>
-        <translation type="unfinished"></translation>
+        <translation>מופע משני</translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="27"/>
         <source>&lt;b&gt;Secondary instance.&lt;/b&gt; Send message to primary:</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;מופע משני.&lt;/b&gt; שלח הודעה למופע הראשי:</translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="29"/>
         <source>Type something here...</source>
-        <translation type="unfinished"></translation>
+        <translation>הקלד משהו כאן...</translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="31"/>
         <source>&amp;Send</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;שלח</translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="54"/>
         <source>Error sending message</source>
-        <translation type="unfinished"></translation>
+        <translation>שגיאה בשליחת ההודעה</translation>
     </message>
     <message>
         <location filename="../../build/_deps/kdsingleapplication-src/examples/widgetsingleapplication/secondaryinstancewidget.cpp" line="55"/>
         <source>The message &apos;%1&apos; could not be sent to the primary.</source>
-        <translation type="unfinished"></translation>
+        <translation>את ההודעה &apos;%1&apos; לא היה אפשר לשלוח למופע הראשי.</translation>
     </message>
 </context>
 <context>
@@ -2599,12 +2600,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="182"/>
         <source>Toggle side panel</source>
-        <translation>מחלף סרגל־צד</translation>
+        <translation>הצג או הסתר את סרגל הצד</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="183"/>
         <source>Grab a color from the screen</source>
-        <translation type="unfinished"></translation>
+        <translation>דגום צבע מהמסך</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="184"/>
@@ -2689,40 +2690,40 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="268"/>
         <source>It seems, that Windows forces to open its screenshot tool when the &apos;Print Screen&apos; key is pressed. Would you like to disable this so that Flameshot can use the &apos;Print Screen&apos; key?</source>
-        <translation type="unfinished"></translation>
+        <translation>נראה ש-Windows פותחת את כלי צילום המסך שלה כשלוחצים על המקש &apos;Print Screen&apos;. האם תרצה להשבית את האפשרות הזאת כדי ש-Flameshot יוכל להשתמש במקש &apos;Print Screen&apos;?</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="273"/>
         <source>Flameshot must be restarted for changes to take effect.</source>
-        <translation type="unfinished">נא לאתחל את Flameshot כדי שהשינויים ייכנסו לתוקף.</translation>
+        <translation>חובה להפעיל מחדש את Flameshot כדי שהשינויים ייכנסו לתוקף.</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="278"/>
         <source>No, don&apos;t ask again</source>
-        <translation type="unfinished"></translation>
+        <translation>לא, אל תשאל שוב</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="286"/>
         <location filename="../../src/config/shortcutswidget.cpp" line="333"/>
         <location filename="../../src/config/shortcutswidget.cpp" line="343"/>
         <source>The registry could not be changed!</source>
-        <translation type="unfinished"></translation>
+        <translation>לא ניתן לשנות את הרישום של Windows!</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="317"/>
         <source>Register Flameshot as MS-SCREENCLIP application (administrator privileges required)</source>
-        <translation type="unfinished"></translation>
+        <translation>רשום את Flameshot כיישום MS-SCREENCLIP (נדרשות הרשאות מנהל מערכת)</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="321"/>
         <source>After registering, you can select Flameshot as the default screenshot application in Windows Settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>אחרי הרישום, תוכל לבחור ב-Flameshot כיישום ברירת המחדל לצילום מסך בהגדרות Windows.</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="334"/>
         <location filename="../../src/config/shortcutswidget.cpp" line="344"/>
         <source>You may start Flameshot as administrator ONCE and try again!</source>
-        <translation type="unfinished"></translation>
+        <translation>תוכל להפעיל את Flameshot פעם אחת כמנהל מערכת ולנסות שוב!</translation>
     </message>
     <message>
         <source>Delete current tool</source>
@@ -2908,7 +2909,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/utils/systemnotification.cpp" line="43"/>
         <source>No DBus System Notification service found</source>
-        <translation type="unfinished"></translation>
+        <translation>לא נמצא שירות התראות מערכת ב-DBus</translation>
     </message>
     <message>
         <location filename="../../src/utils/systemnotification.cpp" line="51"/>
@@ -2998,17 +2999,17 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="162"/>
         <source>Download version %1</source>
-        <translation type="unfinished"></translation>
+        <translation>הורד גרסה %1</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="250"/>
         <source>Select Screen</source>
-        <translation type="unfinished"></translation>
+        <translation>בחר מסך</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="266"/>
         <source>Monitor %1: %2 (%3x%4)</source>
-        <translation type="unfinished"></translation>
+        <translation>צג %1: %2 (%3x%4)</translation>
     </message>
     <message>
         <source>New version %1 is available</source>
@@ -3192,17 +3193,17 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="101"/>
         <source>UI language</source>
-        <translation type="unfinished"></translation>
+        <translation>שפת הממשק</translation>
     </message>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="141"/>
         <source>Configuration</source>
-        <translation type="unfinished">תצור</translation>
+        <translation>תצורה</translation>
     </message>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="142"/>
         <source>Flameshot must be restarted to apply these changes!</source>
-        <translation type="unfinished"></translation>
+        <translation>חובה להפעיל מחדש את Flameshot כדי להחיל את השינויים!</translation>
     </message>
 </context>
 <context>
