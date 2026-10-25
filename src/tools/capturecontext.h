@@ -33,8 +33,6 @@ struct CaptureContext
     // Mode of the capture widget
     bool fullscreen;
     CaptureRequest request = CaptureRequest::GRAPHICAL_MODE;
-    // mouse modifiers
-    Qt::KeyboardModifiers mouseModifiers = Qt::NoModifier;
 
     QPixmap selectedScreenshotArea() const;
 };

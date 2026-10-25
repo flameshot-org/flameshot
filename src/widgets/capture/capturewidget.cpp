@@ -1414,7 +1414,6 @@ void CaptureWidget::setState(CaptureToolButton* b)
         // The tool is active during the pressed().
         // This must be done in order to handle tool requests correctly.
         m_activeTool = b->tool();
-        m_context.mouseModifiers = b->mouseModifier;
         m_activeTool->pressed(m_context);
         m_activeTool = backup;
     }
@@ -1486,22 +1485,14 @@ void CaptureWidget::handleToolSignal(CaptureTool::Request r)
             }
             break;
         case CaptureTool::REQ_ADD_EXTERNAL_WIDGETS:
-        case CaptureTool::REQ_ADD_EXTERNAL_WIDGETS_ALT:
             if (!m_activeTool) {
                 break;
             } else {
-                QWidget* w;
-                if (r == CaptureTool::REQ_ADD_EXTERNAL_WIDGETS_ALT)
-                    w = m_activeTool->widget(false);
-                else
-                    w = m_activeTool->widget(true);
-
-                if (w) {
-                    w->setAttribute(Qt::WA_DeleteOnClose);
-                    w->activateWindow();
-                    w->show();
-                    Flameshot::instance()->setExternalWidget(true);
-                }
+                QWidget* w = m_activeTool->widget();
+                w->setAttribute(Qt::WA_DeleteOnClose);
+                w->activateWindow();
+                w->show();
+                Flameshot::instance()->setExternalWidget(true);
             }
             break;
         case CaptureTool::REQ_INCREASE_TOOL_SIZE:
