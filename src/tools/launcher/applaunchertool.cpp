@@ -4,6 +4,7 @@
 #include "applaunchertool.h"
 #include "tools/launcher/applauncherwidget.h"
 #include "utils/confighandler.h"
+#include <QApplication>
 
 AppLauncher::AppLauncher(QObject* parent)
   : AbstractActionTool(parent)
@@ -31,24 +32,14 @@ CaptureTool::Type AppLauncher::type() const
 
 QString AppLauncher::description() const
 {
+    if (!ConfigHandler().defaultApp().isEmpty()) {
+        return tr("Open with default app (Alt+Click to choose app)");
+    }
     return tr("Choose an app to open the capture");
 }
 
-QWidget* AppLauncher::widget(bool alt)
+QWidget* AppLauncher::widget()
 {
-    QString cmd = ConfigHandler().extPgm();
-
-    bool isDefault =
-      ConfigHandler().useDefaultExtPgmOnAlt() != alt && !cmd.isEmpty();
-
-    if (isDefault) {
-        // Launches the default program directly without creating the open with
-        // widget
-        AppLauncherWidget::launchCmd(
-          capture, cmd, ConfigHandler().extPgmTerminal());
-        return nullptr;
-    }
-
     return new AppLauncherWidget(capture);
 }
 
@@ -61,9 +52,15 @@ void AppLauncher::pressed(CaptureContext& context)
 {
     capture = context.selectedScreenshotArea();
     emit requestAction(REQ_CAPTURE_DONE_OK);
-    if (context.mouseModifiers & Qt::AltModifier) {
-        emit requestAction(REQ_ADD_EXTERNAL_WIDGETS_ALT);
-    } else
+
+    QString defaultApp = ConfigHandler().defaultApp();
+    bool altPressed = qApp->keyboardModifiers().testFlag(Qt::AltModifier);
+
+    if (!defaultApp.isEmpty() && !altPressed) {
+        AppLauncherWidget::launchWithCommand(
+          capture, defaultApp, ConfigHandler().defaultAppInTerminal());
+    } else {
         emit requestAction(REQ_ADD_EXTERNAL_WIDGETS);
+    }
     emit requestAction(REQ_CLOSE_GUI);
 }

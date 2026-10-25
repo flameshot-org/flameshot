@@ -28,7 +28,6 @@ public:
     QString description() const;
     QIcon icon() const;
     CaptureTool* tool() const;
-    Qt::KeyboardModifiers mouseModifier = Qt::NoModifier;
 
     void setColor(const QColor& c);
     void animatedShow();

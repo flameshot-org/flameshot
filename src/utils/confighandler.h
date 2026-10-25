@@ -145,11 +145,10 @@ public:
     CONFIG_GETTER_SETTER(arrowStyle, setArrowStyle, int)
     CONFIG_GETTER_SETTER(insecurePixelate, setInsecurePixelate, bool)
     CONFIG_GETTER_SETTER(showSelectionGeometryHideTime,
-                         setShowSelectionGeometryHideTime,
+                         showSelectionGeometryHideTime,
                          int)
-    CONFIG_GETTER_SETTER(useDefaultExtPgmOnAlt, setUseDefaultExtPgmOnAlt, bool)
-    CONFIG_GETTER_SETTER(extPgm, setExtPgm, QString)
-    CONFIG_GETTER_SETTER(extPgmTerminal, setExtPgmTerminal, bool)
+    CONFIG_GETTER_SETTER(defaultApp, setDefaultApp, QString)
+    CONFIG_GETTER_SETTER(defaultAppInTerminal, setDefaultAppInTerminal, bool)
 
 #if defined(Q_OS_WIN)
     CONFIG_GETTER_SETTER(ignorePrntScrForcesSnipping,

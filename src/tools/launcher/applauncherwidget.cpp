@@ -81,8 +81,10 @@ AppLauncherWidget::AppLauncherWidget(const QPixmap& p, QWidget* parent)
 
     m_terminalCheckbox = new QCheckBox(tr("Launch in terminal"), this);
     m_keepOpenCheckbox = new QCheckBox(tr("Keep open after selection"), this);
-    m_setAsDefaultCheckbox = new QCheckBox(
-      tr("Set as default application for subsequent launches"), this);
+    m_setAsDefaultCheckbox =
+      new QCheckBox(tr("Set as default application (Alt+Click tool button to "
+                       "choose another app)"),
+                    this);
     m_keepOpenCheckbox->setChecked(ConfigHandler().keepOpenAppLauncher());
     connect(m_keepOpenCheckbox,
             &QCheckBox::clicked,
@@ -139,14 +141,11 @@ void AppLauncherWidget::launch(const QModelIndex& index)
     bool inTerminal =
       index.data(Qt::UserRole + 1).toBool() || m_terminalCheckbox->isChecked();
     if (m_setAsDefaultCheckbox->isChecked()) {
-        ConfigHandler().setExtPgm(command);
-        ConfigHandler().setExtPgmTerminal(inTerminal);
-        // we assume if we are setting the default program we also want to use
-        // it
-        ConfigHandler().setUseDefaultExtPgmOnAlt(true);
+        ConfigHandler().setDefaultApp(command);
+        ConfigHandler().setDefaultAppInTerminal(inTerminal);
     }
 
-    launchCmd(m_pixmap, command, inTerminal, m_tempFile->fileName());
+    launchWithCommand(m_pixmap, command, inTerminal, m_tempFile->fileName());
 
     if (!m_keepOpen) {
         close();
@@ -155,14 +154,14 @@ void AppLauncherWidget::launch(const QModelIndex& index)
 
 // Responsible for launching the program and handling temp file creation if
 // called directly
-void AppLauncherWidget::launchCmd(const QPixmap& p,
-                                  const QString& command,
-                                  bool inTerminal,
-                                  const QString& existingFilePath)
+void AppLauncherWidget::launchWithCommand(const QPixmap& p,
+                                          const QString& command,
+                                          bool inTerminal,
+                                          const QString& existingFilePath)
 {
     QString tempFilePath = existingFilePath;
     // When opening using a default program there isn't an existing file path
-    // Doing the same as in launch() to create a temporary file
+    // creates a temporary file
     if (tempFilePath.isEmpty()) {
         auto* tempFile =
           new QTemporaryFile(QDir::tempPath() + "/" +

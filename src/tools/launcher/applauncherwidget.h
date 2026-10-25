@@ -29,10 +29,10 @@ public:
     explicit AppLauncherWidget(const QPixmap& p, QWidget* parent = nullptr);
 
     // Can be called without creating an instance of AppLauncherWidget
-    static void launchCmd(const QPixmap& p,
-                          const QString& command,
-                          bool inTerminal,
-                          const QString& existingFilePath = QString());
+    static void launchWithCommand(const QPixmap& p,
+                                  const QString& command,
+                                  bool inTerminal,
+                                  const QString& existingFilePath = QString());
 
 private slots:
     void launch(const QModelIndex& index);
