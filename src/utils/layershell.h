@@ -9,6 +9,6 @@ class QWidget;
 namespace LayerShell {
 
 bool available();
-void makeOverlay(QWidget* widget, QScreen* screen);
+bool makeOverlay(QWidget* widget, QScreen* screen);
 
 } // namespace

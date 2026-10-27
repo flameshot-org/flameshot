@@ -204,8 +204,7 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
         m_selectedScreen = selectedScreen;
 #if !defined(FLAMESHOT_DEBUG_CAPTURE)
         if (LayerShell::available()) {
-            LayerShell::makeOverlay(this, selectedScreen);
-            m_layerSurface = true;
+            m_layerSurface = LayerShell::makeOverlay(this, selectedScreen);
         }
 #endif
 #endif

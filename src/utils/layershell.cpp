@@ -6,6 +6,7 @@
 #include <QtGlobal>
 
 #if defined(USE_LAYER_SHELL)
+#include "utils/abstractlogger.h"
 #include <LayerShellQt/Window>
 #include <QGuiApplication>
 #include <QWidget>
@@ -40,14 +41,31 @@ bool compositorHasLayerShell()
     }
     wl_display* display = app->display();
     wl_event_queue* queue = wl_display_create_queue(display);
+    if (queue == nullptr) {
+        return false;
+    }
     auto* wrapper = static_cast<wl_display*>(wl_proxy_create_wrapper(display));
+    if (wrapper == nullptr) {
+        wl_event_queue_destroy(queue);
+        return false;
+    }
     wl_proxy_set_queue(reinterpret_cast<wl_proxy*>(wrapper), queue);
     wl_registry* registry = wl_display_get_registry(wrapper);
     wl_proxy_wrapper_destroy(wrapper);
+    if (registry == nullptr) {
+        wl_event_queue_destroy(queue);
+        return false;
+    }
 
     bool found = false;
     wl_registry_add_listener(registry, &registryListener, &found);
-    wl_display_roundtrip_queue(display, queue);
+    if (wl_display_roundtrip_queue(display, queue) < 0) {
+        AbstractLogger::warning(AbstractLogger::Stderr |
+                                AbstractLogger::LogFile)
+          << QStringLiteral("Could not query the Wayland compositor for "
+                            "layer-shell support");
+        found = false;
+    }
     wl_registry_destroy(registry);
     wl_event_queue_destroy(queue);
     return found;
@@ -66,12 +84,22 @@ bool LayerShell::available()
 #endif
 }
 
-void LayerShell::makeOverlay(QWidget* widget, QScreen* screen)
+bool LayerShell::makeOverlay(QWidget* widget, QScreen* screen)
 {
 #if defined(USE_LAYER_SHELL)
     using LayerWindow = LayerShellQt::Window;
+    if (widget == nullptr) {
+        return false;
+    }
     widget->winId();
-    LayerWindow* layer = LayerWindow::get(widget->windowHandle());
+    QWindow* handle = widget->windowHandle();
+    if (handle == nullptr) {
+        return false;
+    }
+    LayerWindow* layer = LayerWindow::get(handle);
+    if (layer == nullptr) {
+        return false;
+    }
     layer->setScope(QStringLiteral("flameshot"));
     layer->setLayer(LayerWindow::LayerOverlay);
     layer->setAnchors(
@@ -83,8 +111,10 @@ void LayerShell::makeOverlay(QWidget* widget, QScreen* screen)
     if (screen != nullptr) {
         layer->setScreen(screen);
     }
+    return true;
 #else
     Q_UNUSED(widget)
     Q_UNUSED(screen)
+    return false;
 #endif
 }
