@@ -25,3 +25,21 @@ public slots:
     void drawStart(const CaptureContext& context) override;
     void pressed(CaptureContext& context) override;
 };
+
+// Draws a solid white background with an outline in the selected tool color.
+class WhiteBackgroundRectangleTool : public RectangleTool
+{
+    Q_OBJECT
+public:
+    explicit WhiteBackgroundRectangleTool(QObject* parent = nullptr);
+
+    QIcon icon(const QColor& background, bool inEditor) const override;
+    QString name() const override;
+    QString description() const override;
+
+    CaptureTool* copy(QObject* parent = nullptr) override;
+    void process(QPainter& painter, const QPixmap& pixmap) override;
+
+protected:
+    CaptureTool::Type type() const override;
+};
