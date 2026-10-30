@@ -1,3 +1,9 @@
+flameshot (15.0.rc2-1) unstable; urgency=medium
+
+  * Release for v15.0.rc2
+
+ -- Jeremy Borgman <borgman.jeremy@pm.me>  Fri, 30 Oct 2026 15:51:24 -0500
+
 flameshot (15.0.rc1-1) unstable; urgency=medium
 
   * Release for v15.0.0
