@@ -6,6 +6,7 @@ target_sources(
           screengrabber.h
           systemnotification.h
           valuehandler.h
+          windowpicker.h
           strfparse.h
 )
 
@@ -25,6 +26,7 @@ target_sources(
           pathinfo.cpp
           colorutils.cpp
           history.cpp
+          windowpicker.cpp
           strfparse.cpp
 )
 
