@@ -53,6 +53,9 @@ void OverlayMessage::push(const QString& msg)
 
 void OverlayMessage::pop()
 {
+    if (m_instance->m_messageStack.size() == 1 && m_instance->isHidden()) {
+        return;
+    }
     if (m_instance->m_messageStack.size() > 1) {
         m_instance->m_messageStack.pop();
     }
@@ -63,8 +66,12 @@ void OverlayMessage::pop()
 
 void OverlayMessage::setVisibility(bool visible)
 {
-    m_instance->updateGeometry();
-    m_instance->setVisible(visible);
+    if (visible) {
+        m_instance->updateGeometry();
+    }
+    if (m_instance->isHidden() == visible) {
+        m_instance->setVisible(visible);
+    }
 }
 
 OverlayMessage* OverlayMessage::instance()
