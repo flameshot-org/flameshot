@@ -18,6 +18,8 @@ class ConfigWindow : public QWidget
 public:
     explicit ConfigWindow(QWidget* parent = nullptr);
 
+    void fitToScreen(const QRect& availableGeometry);
+
 signals:
     void updateChildren();
 
@@ -25,7 +27,10 @@ protected:
     void keyPressEvent(QKeyEvent*);
 
 private:
+    class TabScrollArea;
+
     QTabWidget* m_tabWidget;
+    QList<TabScrollArea*> m_scrollAreas;
 
     FileNameEditor* m_filenameEditor;
     QWidget* m_filenameEditorTab;

@@ -283,9 +283,10 @@ void Flameshot::config()
         m_configWindow = new ConfigWindow();
         m_configWindow->show();
         // Call show() first, otherwise the correct geometry cannot be fetched
-        // for centering the window on the screen
-        QRect position = m_configWindow->frameGeometry();
+        // for fitting and centering the window on the screen
         QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
+        m_configWindow->fitToScreen(currentScreen->availableGeometry());
+        QRect position = m_configWindow->frameGeometry();
         position.moveCenter(currentScreen->availableGeometry().center());
         m_configWindow->move(position.topLeft());
 #if defined(Q_OS_MACOS)
