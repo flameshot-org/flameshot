@@ -94,7 +94,13 @@ QIcon CaptureToolButton::icon() const
 
 void CaptureToolButton::mousePressEvent(QMouseEvent* e)
 {
-    activateWindow();
+    // Focus workaround (#1958). On Wayland the click already focuses the
+    // window, and activateWindow() requests an activation token; the Copy
+    // button closes the window before it is used, leaving GNOME's busy cursor
+    // up until its 15 s timeout.
+    if (QGuiApplication::platformName() != QLatin1String("wayland")) {
+        activateWindow();
+    }
     if (e->button() == Qt::LeftButton) {
         emit pressedButtonLeftClick(this);
         emit pressed();

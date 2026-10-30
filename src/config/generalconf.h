@@ -28,6 +28,11 @@ public:
         xywh_bottom_right = 4,
         xywh_center = 5
     };
+    enum monitor_selection_mode
+    {
+        monitor_selection_picker = 0,
+        monitor_selection_follow_cursor = 1
+    };
 
 public slots:
     void updateComponents();
@@ -62,7 +67,7 @@ private slots:
     void setReverseArrow(bool checked);
     void setInsecurePixelate(bool checked);
 #if !defined(Q_OS_MACOS)
-    void captureActiveMonitorChanged(bool checked);
+    void setMonitorSelectionMode(int index);
 #endif
 #if defined(Q_OS_MACOS)
     void useNativeFullscreenChanged(bool checked);
@@ -110,7 +115,7 @@ private:
     void initDrawCircleCounterOutline();
     void initInsecurePixelate();
 #if !defined(Q_OS_MACOS)
-    void initCaptureActiveMonitor();
+    void initMonitorSelectionMode();
 #endif
 #if defined(Q_OS_MACOS)
     void initUseNativeFullscreen();
@@ -168,7 +173,7 @@ private:
     QCheckBox* m_drawCircleCounterOutline;
     QCheckBox* m_insecurePixelate;
 #if !defined(Q_OS_MACOS)
-    QCheckBox* m_captureActiveMonitor;
+    QComboBox* m_monitorSelectionMode;
 #endif
 #if defined(Q_OS_MACOS)
     QCheckBox* m_useNativeFullscreen;
