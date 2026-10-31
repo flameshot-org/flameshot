@@ -46,6 +46,7 @@ void AbstractTwoPointTool::copyParams(const AbstractTwoPointTool* from,
     to->m_padding = from->m_padding;
     to->m_supportsOrthogonalAdj = from->m_supportsOrthogonalAdj;
     to->m_supportsDiagonalAdj = from->m_supportsDiagonalAdj;
+    to->m_resizeMode = from->m_resizeMode;
 }
 
 bool AbstractTwoPointTool::isValid() const
@@ -184,4 +185,65 @@ void AbstractTwoPointTool::move(const QPoint& pos)
 const QPoint* AbstractTwoPointTool::pos()
 {
     return &m_points.first;
+}
+
+ResizeHandles::Handle AbstractTwoPointTool::handleAt(const QPoint& pos,
+                                                     int tolerance) const
+{
+    switch (m_resizeMode) {
+        case ResizeMode::Box:
+            return ResizeHandles::handleAt(
+              ResizeHandles::boxOf(m_points.first, m_points.second),
+              pos,
+              tolerance);
+        case ResizeMode::Ends:
+            return ResizeHandles::endpointAt(
+              m_points.first, m_points.second, pos, tolerance);
+        case ResizeMode::None:
+            break;
+    }
+    return ResizeHandles::None;
+}
+
+void AbstractTwoPointTool::beginHandleDrag(ResizeHandles::Handle handle)
+{
+    m_dragHandle = handle;
+    m_dragStart = m_points;
+}
+
+void AbstractTwoPointTool::dragHandle(const QPoint& pos)
+{
+    if (m_resizeMode == ResizeMode::Box) {
+        const QRect box = ResizeHandles::resized(
+          ResizeHandles::boxOf(m_dragStart.first, m_dragStart.second),
+          m_dragHandle,
+          pos);
+        m_points = { box.topLeft(), box.bottomRight() };
+    } else if (m_resizeMode == ResizeMode::Ends) {
+        m_points = ResizeHandles::movedEndpoint(
+          m_dragStart.first, m_dragStart.second, m_dragHandle, pos);
+    }
+}
+
+void AbstractTwoPointTool::drawObjectSelection(QPainter& painter)
+{
+    if (m_resizeMode == ResizeMode::Box) {
+        const QRect box = ResizeHandles::boxOf(m_points.first, m_points.second);
+        QVector<QPoint> centers;
+        for (auto h : { ResizeHandles::TopLeft,
+                        ResizeHandles::Top,
+                        ResizeHandles::TopRight,
+                        ResizeHandles::Right,
+                        ResizeHandles::BottomRight,
+                        ResizeHandles::Bottom,
+                        ResizeHandles::BottomLeft,
+                        ResizeHandles::Left }) {
+            centers.append(ResizeHandles::handleCenter(box, h));
+        }
+        drawHandles(painter, centers);
+    } else if (m_resizeMode == ResizeMode::Ends) {
+        drawHandles(painter, { m_points.first, m_points.second });
+    } else {
+        CaptureTool::drawObjectSelection(painter);
+    }
 }
