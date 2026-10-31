@@ -344,6 +344,8 @@ Now every time you press <kbd>Prt Sc</kbd> it will start Flameshot GUI instead o
 
 - Flameshot works best with a desktop environment that includes D-Bus. See this [article](https://wiki.archlinux.org/title/Flameshot#Troubleshooting) for tips on using Flameshot in a minimal window manager (dwm, i3, xmonad, etc).
 
+- On i3, the X11 capture overlay bypasses window management so taking a screenshot does not toggle fullscreen on the captured window. Other X11 window managers retain the managed overlay.
+
 - In order to speed up the first launch of Flameshot (D-Bus init of the app can be slow), consider starting the application automatically on boot.
     - Quick tip: If you don't have Flameshot to autostart at boot and you want to set keyboard shortcut, use the following as the command for the keybinding:
     ```sh
@@ -545,6 +547,14 @@ cmake -S . -B "$BUILD_DIR" \
 ```
 
 When the `cmake --build` command has completed you can launch Flameshot from the `project_folder/build/src` folder.
+
+The i3 X11 fullscreen regression check runs in an isolated Xvfb session:
+
+```shell
+tests/test_i3_fullscreen_overlay.sh "$BUILD_DIR/src/flameshot"
+```
+
+It requires Xvfb, i3, i3-msg, ps, xterm, xdotool, xprop, xwininfo, jq, and file.
 
 ### Install
 

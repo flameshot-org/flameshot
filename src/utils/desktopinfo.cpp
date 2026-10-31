@@ -28,6 +28,9 @@ DesktopInfo::WM DesktopInfo::windowManager()
 {
     DesktopInfo::WM res = DesktopInfo::OTHER;
     QStringList desktops = XDG_CURRENT_DESKTOP.split(QChar(':'));
+    if (desktops.contains(QLatin1String("i3"))) {
+        return DesktopInfo::I3;
+    }
     for (auto& desktop : desktops) {
         if (desktop.contains(QLatin1String("GNOME"), Qt::CaseInsensitive)) {
             return DesktopInfo::GNOME;
