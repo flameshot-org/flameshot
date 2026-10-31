@@ -18,10 +18,58 @@
 #include <QIcon>
 #include <QKeyEvent>
 #include <QLabel>
+#include <QScrollArea>
 #include <QSizePolicy>
 #include <QTabBar>
 #include <QTextStream>
 #include <QVBoxLayout>
+
+// Scroll area for tab content that cannot scroll by itself. It takes the size
+// hints and size policy of its content, so the window is sized exactly as
+// without it, until fitToScreen() enables scrolling because the window does
+// not fit on the screen. Then it reports QScrollArea's own minimum size.
+class ConfigWindow::TabScrollArea : public QScrollArea
+{
+public:
+    explicit TabScrollArea(QWidget* content)
+    {
+        setWidget(content);
+        setWidgetResizable(true);
+        setFrameShape(QFrame::NoFrame);
+        setFocusPolicy(Qt::NoFocus);
+        setSizePolicy(content->sizePolicy());
+        // Keep the tab pane background, like unwrapped content
+        viewport()->setAutoFillBackground(false);
+        content->setAutoFillBackground(false);
+    }
+
+    void enableScrolling()
+    {
+        m_scrolling = true;
+        updateGeometry();
+    }
+
+    QSize sizeHint() const override { return widget()->sizeHint(); }
+    QSize minimumSizeHint() const override
+    {
+        return m_scrolling ? QScrollArea::minimumSizeHint()
+                           : widget()->minimumSizeHint();
+    }
+
+protected:
+    bool event(QEvent* e) override
+    {
+        // QScrollArea does not propagate size changes of its content, so the
+        // window would no longer grow with it
+        if (e->type() == QEvent::LayoutRequest) {
+            updateGeometry();
+        }
+        return QScrollArea::event(e);
+    }
+
+private:
+    bool m_scrolling = false;
+};
 
 // ConfigWindow contains the menus where you can configure the application
 
@@ -67,7 +115,8 @@ ConfigWindow::ConfigWindow(QWidget* parent)
     m_visualsTab = new QWidget();
     auto* visualsLayout = new QVBoxLayout(m_visualsTab);
     m_visualsTab->setLayout(visualsLayout);
-    visualsLayout->addWidget(m_visuals);
+    m_scrollAreas.append(new TabScrollArea(m_visuals));
+    visualsLayout->addWidget(m_scrollAreas.last());
     m_tabWidget->addTab(
       m_visualsTab, QIcon(modifier + "graphics.svg"), tr("Interface"));
 
@@ -76,7 +125,8 @@ ConfigWindow::ConfigWindow(QWidget* parent)
     m_filenameEditorTab = new QWidget();
     auto* filenameEditorLayout = new QVBoxLayout(m_filenameEditorTab);
     m_filenameEditorTab->setLayout(filenameEditorLayout);
-    filenameEditorLayout->addWidget(m_filenameEditor);
+    m_scrollAreas.append(new TabScrollArea(m_filenameEditor));
+    filenameEditorLayout->addWidget(m_scrollAreas.last());
     m_tabWidget->addTab(m_filenameEditorTab,
                         QIcon(modifier + "name_edition.svg"),
                         tr("Filename Editor"));
@@ -109,6 +159,27 @@ ConfigWindow::ConfigWindow(QWidget* parent)
     initErrorIndicator(m_filenameEditorTab, m_filenameEditor);
     initErrorIndicator(m_generalConfigTab, m_generalConfig);
     initErrorIndicator(m_shortcutsTab, m_shortcuts);
+}
+
+void ConfigWindow::fitToScreen(const QRect& availableGeometry)
+{
+    // Must be called after show(), when the frame size is known
+    const QSize frame = frameGeometry().size() - size();
+    const QSize maxSize = availableGeometry.size() - frame;
+    if (width() <= maxSize.width() && height() <= maxSize.height()) {
+        return;
+    }
+    // The window is at least as large as the largest tab, which can exceed
+    // small or High DPI screens. Let the tabs that cannot scroll by
+    // themselves scroll, which lowers the layout's minimum size, and shrink
+    // the window to fit.
+    for (auto* scrollArea : m_scrollAreas) {
+        scrollArea->enableScrolling();
+    }
+    // Apply the smaller minimum size now instead of on the next layout pass
+    m_tabWidget->updateGeometry();
+    layout()->activate();
+    resize(size().boundedTo(maxSize));
 }
 
 void ConfigWindow::keyPressEvent(QKeyEvent* e)
