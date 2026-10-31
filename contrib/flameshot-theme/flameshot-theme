@@ -1,0 +1,69 @@
+#!/bin/bash
+# Swaps Flameshot's accent colors using palette files derived from the
+# "Crazy Mechanics" design system (nicitaacom/14_portfolio), same swap
+# mechanism as github-desktop-accent: a marked config file per theme,
+# applied by patching known keys in place.
+#
+#   flameshot-theme <name>      apply a theme (see --list)
+#   flameshot-theme --list      show available themes
+#   flameshot-theme --revert    back to the default (crazy-mechanics)
+set -euo pipefail
+
+THEME_DIR="$HOME/.local/share/flameshot-theme"
+INI="$HOME/.config/flameshot/flameshot.ini"
+
+if [ "${1:-}" = "--list" ]; then
+    ls "$THEME_DIR"/*.conf 2>/dev/null | xargs -n1 basename | sed 's/\.conf$//'
+    exit 0
+fi
+
+if [ "${1:-}" = "--revert" ]; then
+    NAME="crazy-mechanics"
+else
+    NAME="${1:?usage: flameshot-theme <name>|--list|--revert}"
+fi
+
+CONF="$THEME_DIR/$NAME.conf"
+[ -f "$CONF" ] || { echo "no such theme: $NAME (see: flameshot-theme --list)" >&2; exit 1; }
+
+# shellcheck disable=SC1090
+source "$CONF"
+
+QSS="$THEME_DIR/$NAME.qss"
+if [ -f "$QSS" ]; then
+    cp "$QSS" "$THEME_DIR/current.qss"
+else
+    rm -f "$THEME_DIR/current.qss"
+fi
+
+python3 - "$INI" "$MAIN" "$CONTRAST" "$DRAW" "$USER_COLORS" <<'PY'
+import sys
+ini, main, contrast, draw, user_colors = sys.argv[1:6]
+keys = {"uiColor": main, "contrastUiColor": contrast, "drawColor": draw, "userColors": user_colors}
+
+lines = open(ini, encoding="utf-8").read().splitlines()
+seen = set()
+out = []
+for line in lines:
+    k = line.split("=", 1)[0]
+    if k in keys:
+        out.append(f"{k}={keys[k]}")
+        seen.add(k)
+    else:
+        out.append(line)
+idx = out.index("[General]") + 1
+for k, v in keys.items():
+    if k not in seen:
+        out.insert(idx, f"{k}={v}")
+open(ini, "w", encoding="utf-8").write("\n".join(out) + "\n")
+PY
+
+pkill flameshot 2>/dev/null || true
+sleep 0.3
+setsid /usr/local/bin/flameshot >/dev/null 2>&1 &
+disown
+# Give the daemon a moment to finish starting before this script (and its
+# process group) exits - otherwise it can get reaped mid-startup.
+sleep 1.5
+
+echo "applied theme: $NAME (main=$MAIN contrast=$CONTRAST)"
