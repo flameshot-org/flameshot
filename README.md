@@ -520,6 +520,7 @@ brew install cmake
 After installing all the dependencies, Flameshot can be built.
 
 #### Installation/build dir
+
 For the translations to be loaded correctly, the build process needs to be aware of where you want
 to install Flameshot.
 
@@ -551,6 +552,7 @@ When the `cmake --build` command has completed you can launch Flameshot from the
 Note that if you install from source, there _is no_ uninstaller, so consider installing to a custom directory.
 
 #### To install into a custom directory
+
 Make sure you are using cmake `>= 3.29` and build Flameshot with `$CMAKE_INSTALL_PREFIX` set to the
 installation directory. If this is not done, the translations won't be found when using a custom directory.
 Then, run the following:
@@ -564,6 +566,7 @@ cmake --install "$BUILD_DIR"
 ```
 
 #### To install to the default install directory
+
 ```bash
 # You may need to run this with privileges
 cmake --install "$BUILD_DIR"
