@@ -42,6 +42,9 @@ class UpdateNotificationWidget;
 #endif
 class UtilityPanel;
 class SidePanelWidget;
+#ifdef ENABLE_QR_DECODER
+class QrController;
+#endif
 
 class CaptureWidget : public QWidget
 {
@@ -233,4 +236,8 @@ private:
     int m_gridSize{ 10 };
 
     bool m_clipboardWorkaroundDone{ false };
+
+#ifdef ENABLE_QR_DECODER
+    QrController* m_qrController{ nullptr };
+#endif
 };

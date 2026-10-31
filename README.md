@@ -96,6 +96,7 @@
 - Customizable appearance.
 - Easy to use.
 - In-app screenshot editing.
+- Automatic QR code scanner & content parser.
 - DBus interface.
 - Upload to Imgur.
 
