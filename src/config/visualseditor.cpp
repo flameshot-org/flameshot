@@ -109,8 +109,7 @@ void VisualsEditor::initTranslations()
     m_selectTranslation->completer()->setCompletionMode(
       QCompleter::PopupCompletion);
     m_selectTranslation->completer()->setFilterMode(Qt::MatchContains);
-    m_selectTranslation->completer()->setCaseSensitivity(
-      Qt::CaseInsensitive);
+    m_selectTranslation->completer()->setCaseSensitivity(Qt::CaseInsensitive);
     m_selectTranslation->setMaxVisibleItems(12);
 
     QStringList translations;
