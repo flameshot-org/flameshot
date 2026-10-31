@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include <QTimer>
 #include <QWidget>
 
 class QPropertyAnimation;
@@ -10,6 +11,7 @@ class QPropertyAnimation;
 class SelectionWidget : public QWidget
 {
     Q_OBJECT
+    Q_PROPERTY(QRect selectionGeometry READ geometry WRITE setGeometry)
 public:
     enum SideType
     {
@@ -28,7 +30,7 @@ public:
     explicit SelectionWidget(QColor c, QWidget* parent = nullptr);
 
     SideType getMouseSide(const QPoint& mousePos) const;
-    QVector<QRect> handlerAreas();
+    QVector<QRect> handlerAreas() const;
 
     void setIgnoreMouse(bool ignore);
     void setIdleCentralCursor(const QCursor& cursor);
@@ -47,8 +49,6 @@ protected:
     void parentMouseMoveEvent(QMouseEvent* e);
 
     void paintEvent(QPaintEvent*) override;
-    void resizeEvent(QResizeEvent*) override;
-    void moveEvent(QMoveEvent*) override;
 
     void showEvent(QShowEvent*) override;
     void hideEvent(QHideEvent*) override;
@@ -81,8 +81,11 @@ private:
     void updateAreas();
     void updateCursor();
     void setGeometryByKeyboard(const QRect& r);
+    QRegion paintRegion() const;
 
     QPropertyAnimation* m_animation;
+    QTimer m_settleTimer;
+    QRect m_selectionGeometry;
 
     QColor m_color;
     QPoint m_areaOffset;

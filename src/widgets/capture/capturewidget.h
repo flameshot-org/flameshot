@@ -15,6 +15,7 @@
 #include "tools/capturetool.h"
 #include "utils/confighandler.h"
 #include "widgets/capture/buttonhandler.h"
+#include "widgets/capture/capturebackground.h"
 #include "widgets/capture/capturetoolbutton.h"
 #include "widgets/capture/capturetoolobjects.h"
 #include "widgets/capture/magnifierwidget.h"
@@ -113,6 +114,7 @@ protected:
     void closeEvent(QCloseEvent* event) override;
 
 private:
+    friend class CaptureWidgetTest;
     void pushObjectsStateToUndoStack();
     void releaseActiveTool();
     void uncheckActiveTool();
@@ -128,6 +130,9 @@ private:
     void initHelpMessage();
     void initQuitPrompt();
     void updateSizeIndicator();
+    void updateSelectionGeometry();
+    void refreshSelectionUi();
+    QRect selectionGeometryLabelRect(const QString& text) const;
     void updateCursor();
     void updateSelectionState();
     void updateTool(CaptureTool* tool);
@@ -148,7 +153,7 @@ private:
     QRect paddedUpdateRect(const QRect& r) const;
     void drawErrorMessage(const QString& msg, QPainter* painter);
     void drawInactiveRegion(QPainter* painter);
-    void drawToolsData(bool drawSelection = true);
+    void drawToolsData(bool drawSelection = true, bool movingObject = false);
     void drawObjectSelection();
 
     void processPixmapWithTool(QPixmap* pixmap, CaptureTool* tool);
@@ -164,6 +169,11 @@ private:
     // Context information
     CaptureContext m_context;
     QScreen* m_selectedScreen = nullptr;
+    CaptureBackground m_background;
+    QPixmap m_dragBackground;
+    int m_dragToolIndex = -1;
+    QRect m_lastSelectionRect;
+    QTimer m_selectionUiTimer;
 
     // Main ui color
     QColor m_uiColor;
@@ -218,6 +228,8 @@ private:
 
     // XYWH display position and timer
     bool m_xywhDisplay;
+    QRect m_xywhRect;
+    QString m_xywhText;
     QTimer m_xywhTimer;
 
     QUndoStack m_undoStack;
