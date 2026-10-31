@@ -10,6 +10,7 @@ on:
 
 jobs:
   build-and-deploy:
+    if: github.repository == 'flameshot-org/flameshot'
     runs-on: ubuntu-22.04
     steps:
       - name: Install dependencies
