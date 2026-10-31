@@ -91,6 +91,37 @@ _flameshot_config() {
 }
 
 
+# plugins
+
+_flameshot_plugins() {
+    local -a plugin_commands
+    plugin_commands=(
+        'list:List discovered plugins'
+        'install:Install a plugin package'
+        'enable:Enable a plugin'
+        'disable:Disable a plugin'
+        'remove:Remove a user plugin'
+        'doctor:Validate plugin discovery'
+        'roots:Print plugin search roots'
+    )
+    _arguments '1:plugin command:->plugin-command' '*:argument:->plugin-argument'
+    case "$state" in
+        (plugin-command)
+            _describe -t commands 'plugin commands' plugin_commands
+        ;;
+        (plugin-argument)
+            if [[ $words[2] == install ]]; then
+                _files -g '*.flameshot-plugin'
+            elif [[ $words[2] == enable || $words[2] == disable || $words[2] == remove ]]; then
+                local -a plugins
+                plugins=(${(f)"$(flameshot plugins list 2>/dev/null | awk '{print $2}')"})
+                _describe -t plugins 'plugins' plugins
+            fi
+        ;;
+    esac
+}
+
+
 # Main handle
 _flameshot() {
     local curcontext="$curcontext" ret=1
@@ -102,6 +133,7 @@ _flameshot() {
         "full:Capture the entire desktop (all monitors)"
         "launcher:Open the capture launcher"
         "config:Configure Flameshot"
+        "plugins:Manage action plugins"
     )
 
     _arguments -C -s -S -n \
@@ -129,6 +161,9 @@ _flameshot() {
             ;;
             (config)
                 _flameshot_config && ret=0
+            ;;
+            (plugins)
+                _flameshot_plugins && ret=0
             ;;
             (*)
                 _default && ret=0

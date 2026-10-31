@@ -7,6 +7,9 @@
 #include <QPoint>
 #include <QScreen>
 
+#include <algorithm>
+#include <numeric>
+
 // ButtonHandler is a handler for every active button. It makes easier to
 // manipulate the buttons as a unit.
 
@@ -67,7 +70,7 @@ size_t ButtonHandler::size() const
 // selection area. Ignores the sides blocked by the end of the screen.
 // When the selection is too small, it works on a virtual selection with
 // the original in the center.
-void ButtonHandler::updatePosition(const QRect& selection)
+void ButtonHandler::updatePosition(const QRect& selection, const QPoint& anchor)
 {
     resetRegionTrack();
     const int vecLength = m_vectorButtons.size();
@@ -80,13 +83,18 @@ void ButtonHandler::updatePosition(const QRect& selection)
     ensureSelectionMinimumSize();
     // Indicates the actual button to be moved
     int elemIndicator = 0;
+    // Collect the available slots before assigning buttons. This keeps the
+    // existing screen-edge layout while allowing primary actions to follow
+    // the pointer.
+    QVector<QPoint> buttonPositions;
+    buttonPositions.reserve(vecLength);
 
     while (elemIndicator < vecLength) {
 
         // Add them inside the area when there is no more space
         if (m_allSidesBlocked) {
             m_selection = selection;
-            positionButtonsInside(elemIndicator);
+            positionButtonsInside(elemIndicator, buttonPositions);
             break; // the while
         }
         // Number of buttons per row column
@@ -119,9 +127,10 @@ void ButtonHandler::updatePosition(const QRect& selection)
                 adjustHorizontalCenter(center);
             }
             // ElemIndicator, elemsAtCorners
-            QVector<QPoint> positions =
+            const QVector<QPoint> sidePositions =
               horizontalPoints(center, addCounter, true);
-            moveButtonsToPoints(positions, elemIndicator);
+            appendButtonPositions(
+              sidePositions, buttonPositions, elemIndicator);
         }
         // Add buttons to the right side of the selection
         if (!m_blockedRight && elemIndicator < vecLength) {
@@ -130,9 +139,10 @@ void ButtonHandler::updatePosition(const QRect& selection)
 
             QPoint center = QPoint(m_selection.right() + m_separator,
                                    m_selection.center().y());
-            QVector<QPoint> positions =
+            const QVector<QPoint> sidePositions =
               verticalPoints(center, addCounter, false);
-            moveButtonsToPoints(positions, elemIndicator);
+            appendButtonPositions(
+              sidePositions, buttonPositions, elemIndicator);
         }
         // Add buttons at the top of the selection
         if (!m_blockedTop && elemIndicator < vecLength) {
@@ -143,9 +153,10 @@ void ButtonHandler::updatePosition(const QRect& selection)
             if (addCounter == 1 + buttonsPerRow) {
                 adjustHorizontalCenter(center);
             }
-            QVector<QPoint> positions =
+            const QVector<QPoint> sidePositions =
               horizontalPoints(center, addCounter, false);
-            moveButtonsToPoints(positions, elemIndicator);
+            appendButtonPositions(
+              sidePositions, buttonPositions, elemIndicator);
         }
         // Add buttons to the left side of the selection
         if (!m_blockedLeft && elemIndicator < vecLength) {
@@ -154,9 +165,10 @@ void ButtonHandler::updatePosition(const QRect& selection)
 
             QPoint center = QPoint(m_selection.left() - m_buttonExtendedSize,
                                    m_selection.center().y());
-            QVector<QPoint> positions =
+            const QVector<QPoint> sidePositions =
               verticalPoints(center, addCounter, true);
-            moveButtonsToPoints(positions, elemIndicator);
+            appendButtonPositions(
+              sidePositions, buttonPositions, elemIndicator);
         }
         // If there are elements for the next cycle, increase the size of the
         // base area
@@ -165,6 +177,8 @@ void ButtonHandler::updatePosition(const QRect& selection)
         }
         updateBlockedSides();
     }
+
+    assignButtonsToPositions(buttonPositions, anchor);
 }
 
 int ButtonHandler::calculateShift(int elements, bool reverse) const
@@ -289,7 +303,7 @@ void ButtonHandler::expandSelection()
     m_selection = intersectWithAreas(m_selection);
 }
 
-void ButtonHandler::positionButtonsInside(int index)
+void ButtonHandler::positionButtonsInside(int index, QVector<QPoint>& positions)
 {
     // Position the buttons in the botton-center of the main but inside of the
     // selection.
@@ -305,8 +319,9 @@ void ButtonHandler::positionButtonsInside(int index)
     while (m_vectorButtons.size() > index) {
         int addCounter = buttonsPerRow;
         addCounter = qBound(0, addCounter, m_vectorButtons.size() - index);
-        QVector<QPoint> positions = horizontalPoints(center, addCounter, true);
-        moveButtonsToPoints(positions, index);
+        const QVector<QPoint> rowPositions =
+          horizontalPoints(center, addCounter, true);
+        appendButtonPositions(rowPositions, positions, index);
         center.setY(center.y() - m_buttonExtendedSize);
     }
 
@@ -334,13 +349,93 @@ void ButtonHandler::ensureSelectionMinimumSize()
     }
 }
 
-void ButtonHandler::moveButtonsToPoints(const QVector<QPoint>& points,
-                                        int& index)
+void ButtonHandler::appendButtonPositions(const QVector<QPoint>& points,
+                                          QVector<QPoint>& positions,
+                                          int& index)
 {
     for (const QPoint& p : points) {
-        auto* button = m_vectorButtons[index];
-        button->move(p);
+        positions.append(p);
         ++index;
+    }
+}
+
+void ButtonHandler::assignButtonsToPositions(const QVector<QPoint>& positions,
+                                             const QPoint& anchor)
+{
+    if (positions.isEmpty()) {
+        return;
+    }
+
+    QVector<CaptureToolButton*> primaryButtons;
+    QVector<CaptureToolButton*> remainingButtons;
+    primaryButtons.reserve(m_vectorButtons.size());
+    remainingButtons.reserve(m_vectorButtons.size());
+
+    const auto primaryRank = [](const CaptureToolButton* button) {
+        switch (button->tool()->type()) {
+            case CaptureTool::TYPE_COPY:
+            case CaptureTool::TYPE_ACCEPT:
+                return 0;
+            case CaptureTool::TYPE_SAVE:
+                return 1;
+            case CaptureTool::TYPE_PIN:
+                return 2;
+            case CaptureTool::TYPE_PLUGIN:
+                return 3;
+            default:
+                return -1;
+        }
+    };
+
+    for (CaptureToolButton* button : m_vectorButtons) {
+        if (primaryRank(button) >= 0) {
+            primaryButtons.append(button);
+        } else {
+            remainingButtons.append(button);
+        }
+    }
+    std::stable_sort(primaryButtons.begin(),
+                     primaryButtons.end(),
+                     [&primaryRank](const CaptureToolButton* left,
+                                    const CaptureToolButton* right) {
+                         return primaryRank(left) < primaryRank(right);
+                     });
+
+    // The first primary action gets the slot whose center is closest to the
+    // release point, followed by the other primary actions.
+    QVector<int> positionsByDistance(positions.size());
+    std::iota(positionsByDistance.begin(), positionsByDistance.end(), 0);
+    const QPoint buttonCenterOffset(m_buttonBaseSize / 2, m_buttonBaseSize / 2);
+    const auto distanceSquared = [&](int positionIndex) {
+        const QPoint delta =
+          positions[positionIndex] + buttonCenterOffset - anchor;
+        return static_cast<qint64>(delta.x()) * delta.x() +
+               static_cast<qint64>(delta.y()) * delta.y();
+    };
+    std::stable_sort(positionsByDistance.begin(),
+                     positionsByDistance.end(),
+                     [&distanceSquared](int left, int right) {
+                         return distanceSquared(left) < distanceSquared(right);
+                     });
+
+    QVector<bool> usedPositions(positions.size(), false);
+    int primaryIndex = 0;
+    for (; primaryIndex < primaryButtons.size() &&
+           primaryIndex < positionsByDistance.size();
+         ++primaryIndex) {
+        const int positionIndex = positionsByDistance[primaryIndex];
+        primaryButtons[primaryIndex]->move(positions[positionIndex]);
+        usedPositions[positionIndex] = true;
+    }
+
+    int remainingIndex = 0;
+    for (int positionIndex = 0; positionIndex < positions.size() &&
+                                remainingIndex < remainingButtons.size();
+         ++positionIndex) {
+        if (!usedPositions[positionIndex]) {
+            remainingButtons[remainingIndex]->move(positions[positionIndex]);
+            ++remainingIndex;
+        }
     }
 }
 
@@ -373,15 +468,15 @@ bool ButtonHandler::contains(const QPoint& p) const
     if (m_vectorButtons.isEmpty()) {
         return false;
     }
-    QPoint first(m_vectorButtons.first()->pos());
-    QPoint last(m_vectorButtons.last()->pos());
-    bool firstIsTopLeft = (first.x() <= last.x() && first.y() <= last.y());
-    QPoint topLeft = firstIsTopLeft ? first : last;
-    QPoint bottonRight = firstIsTopLeft ? last : first;
-    topLeft += QPoint(-m_separator, -m_separator);
-    bottonRight += QPoint(m_buttonExtendedSize, m_buttonExtendedSize);
-    QRegion r(QRect(topLeft, bottonRight).normalized());
-    return r.contains(p);
+
+    QRegion buttonRegion;
+    const QSize hitArea(m_buttonExtendedSize, m_buttonExtendedSize);
+    for (const CaptureToolButton* button : m_vectorButtons) {
+        const QPoint topLeft =
+          button->pos() - QPoint(m_separator, m_separator);
+        buttonRegion += QRect(topLeft, hitArea);
+    }
+    return buttonRegion.contains(p);
 }
 
 void ButtonHandler::updateScreenRegions(const QVector<QRect>& rects)
