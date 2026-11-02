@@ -97,6 +97,9 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
 #if defined(Q_OS_MACOS)
     OPTION("useNativeFullscreen"         ,Bool               ( false         )),
 #endif
+#if defined(ENABLE_QR_DECODER)
+    OPTION("enableQrCode"                ,Bool               ( true          )),
+#endif
     OPTION("uploadWithoutConfirmation"   ,Bool               ( false         )),
     OPTION("saveAfterCopy"               ,Bool               ( false         )),
     OPTION("savePath"                    ,ExistingDir        (               )),
