@@ -1230,7 +1230,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="425"/>
         <source>Automatically close daemon (background process) when it is not needed</source>
-        <translation>Автоматично закривати демон (фоновий процес), коли він не потрібен</translation>
+        <translation>Автоматично закривати фоновий процес, коли він не потрібен</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="436"/>
@@ -1240,7 +1240,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="437"/>
         <source>Launch Flameshot daemon (background process) when computer is booted</source>
-        <translation>Запускати демон Flameshot (фоновий процес) під час завантаження комп’ютера</translation>
+        <translation>Запускати Flameshot у фоні під час завантаження комп’ютера</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="462"/>
