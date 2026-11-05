@@ -42,6 +42,17 @@ void ColorPickerWidget::paintEvent(QPaintEvent* e)
     }
 }
 
+void ColorPickerWidget::renderPicker(QPainter& painter)
+{
+    painter.save();
+    painter.setRenderHint(QPainter::Antialiasing);
+    painter.setPen(QColor(Qt::black));
+    for (int i = 0; i < m_colorAreaList.size(); ++i) {
+        repaint(i, painter);
+    }
+    painter.restore();
+}
+
 void ColorPickerWidget::repaint(int i, QPainter& painter)
 {
     // draw the highlight when we have to draw the selected color

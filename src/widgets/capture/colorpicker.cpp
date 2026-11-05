@@ -1,4 +1,4 @@
-﻿// SPDX-License-Identifier: GPL-3.0-or-later
+// SPDX-License-Identifier: GPL-3.0-or-later
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "colorpicker.h"
@@ -27,25 +27,44 @@ void ColorPicker::setNewColor()
     emit colorSelected(m_colorList.at(m_selectedIndex));
 }
 
-void ColorPicker::mouseMoveEvent(QMouseEvent* e)
+void ColorPicker::setMultiMonitor(bool enable)
+{
+    m_multiMonitor = enable;
+}
+
+void ColorPicker::updateHoverPosition(const QPoint& pos)
 {
     for (int i = 0; i < m_colorList.size(); ++i) {
-        if (m_colorAreaList.at(i).contains(e->pos())) {
-            m_selectedIndex = i;
-            update(m_colorAreaList.at(i) + QMargins(10, 10, 10, 10));
-            update(m_colorAreaList.at(m_lastIndex) + QMargins(10, 10, 10, 10));
-            m_lastIndex = i;
+        if (m_colorAreaList.at(i).contains(pos)) {
+            if (m_selectedIndex != i) {
+                m_selectedIndex = i;
+                update(m_colorAreaList.at(i) + QMargins(10, 10, 10, 10));
+                update(m_colorAreaList.at(m_lastIndex) +
+                       QMargins(10, 10, 10, 10));
+                m_lastIndex = i;
+                emit selectionChanged();
+            }
             break;
         }
     }
 }
 
+void ColorPicker::mouseMoveEvent(QMouseEvent* e)
+{
+    updateHoverPosition(e->pos());
+    e->accept();
+}
+
 void ColorPicker::showEvent(QShowEvent* event)
 {
-    grabMouse();
+    if (!m_multiMonitor) {
+        grabMouse();
+    }
 }
 
 void ColorPicker::hideEvent(QHideEvent* event)
 {
-    releaseMouse();
+    if (!m_multiMonitor) {
+        releaseMouse();
+    }
 }

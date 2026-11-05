@@ -28,7 +28,8 @@ public:
     explicit SelectionWidget(QColor c, QWidget* parent = nullptr);
 
     SideType getMouseSide(const QPoint& mousePos) const;
-    QVector<QRect> handlerAreas();
+    QVector<QRect> handlerAreas() const;
+    void renderSelection(QPainter& painter) const;
 
     void setIgnoreMouse(bool ignore);
     void setIdleCentralCursor(const QCursor& cursor);
@@ -89,10 +90,12 @@ private:
     QPoint m_handleOffset;
 
     QPoint m_dragStartPos;
+    QPoint m_lastMousePos;
     SideType m_activeSide;
     QCursor m_idleCentralCursor;
     bool m_ignoreMouse;
     bool m_mouseStartMove;
+    bool m_hasMousePos;
     float m_aspectRatio;
 
     // naming convention for handles

@@ -62,6 +62,7 @@ GeneralConf::GeneralConf(QWidget* parent)
 #endif
 #if defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)
     initUseX11LegacyScreenshot();
+    initCaptureAllMonitors();
 #endif
 #ifdef ENABLE_IMGUR
     initCopyAndCloseAfterUpload();
@@ -137,6 +138,7 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
 #endif
 #if defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)
     m_useX11LegacyScreenshot->setChecked(config.useX11LegacyScreenshot());
+    m_captureAllMonitors->setChecked(config.captureAllMonitors());
 #endif
 }
 
@@ -1004,5 +1006,26 @@ void GeneralConf::initUseX11LegacyScreenshot()
 void GeneralConf::useX11LegacyScreenshotChanged(bool checked)
 {
     ConfigHandler().setUseX11LegacyScreenshot(checked);
+}
+
+void GeneralConf::initCaptureAllMonitors()
+{
+    m_captureAllMonitors =
+      new QCheckBox(tr("Capture all monitors as one selection"), this);
+    m_captureAllMonitors->setToolTip(
+      tr("Open a coordinated overlay on every monitor so you can drag a "
+         "single selection across monitors in GUI mode on Wayland and X11. "
+         "When disabled, the standard per-monitor selection is used."));
+    m_scrollAreaLayout->addWidget(m_captureAllMonitors);
+
+    connect(m_captureAllMonitors,
+            &QCheckBox::clicked,
+            this,
+            &GeneralConf::captureAllMonitorsChanged);
+}
+
+void GeneralConf::captureAllMonitorsChanged(bool checked)
+{
+    ConfigHandler().setCaptureAllMonitors(checked);
 }
 #endif
