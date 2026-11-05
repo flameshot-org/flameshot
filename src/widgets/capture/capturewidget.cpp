@@ -657,6 +657,65 @@ void CaptureWidget::closeEvent(QCloseEvent* event)
     QWidget::closeEvent(event);
 }
 
+// The label goes outside the selection, so it never covers what is being
+// selected. It takes the first place that fits on the screen and isn't under
+// the tool buttons, preferring the side chosen in the settings. It only goes
+// inside when nothing else fits, such as with a fullscreen selection.
+QPoint CaptureWidget::selectionLabelPosition(const QRect& selection,
+                                             const QSize& label) const
+{
+    const auto position = static_cast<GeneralConf::xywh_position>(
+      ConfigHandler().showSelectionGeometry());
+    const int w = label.width();
+    const int h = label.height();
+    const int gap = 3;
+    const bool preferLeft = position == GeneralConf::xywh_top_left ||
+                            position == GeneralConf::xywh_bottom_left;
+    const bool preferTop = position == GeneralConf::xywh_top_left ||
+                           position == GeneralConf::xywh_top_right;
+
+    if (position == GeneralConf::xywh_center) {
+        return { selection.left() + (selection.width() - w) / 2,
+                 selection.top() + (selection.height() - h) / 2 };
+    }
+
+    const int alignedX =
+      preferLeft ? selection.left() : selection.right() - w + 1;
+    const QPoint above(alignedX, selection.top() - h - gap);
+    const QPoint below(alignedX, selection.bottom() + gap + 1);
+    const int alignedY =
+      preferTop ? selection.top() : selection.bottom() - h + 1;
+    const QPoint left(selection.left() - w - gap, alignedY);
+    const QPoint right(selection.right() + gap + 1, alignedY);
+
+    const QPoint candidates[] = { preferTop ? above : below,
+                                  preferTop ? below : above,
+                                  preferLeft ? left : right,
+                                  preferLeft ? right : left };
+    const bool buttons = m_buttonHandler && m_buttonHandler->isVisible();
+    const QPoint* firstOnScreen = nullptr;
+    for (const QPoint& candidate : candidates) {
+        const QRect box(candidate, label);
+        if (!rect().contains(box)) {
+            continue;
+        }
+        if (!firstOnScreen) {
+            firstOnScreen = &candidate;
+        }
+        if (!buttons || !(m_buttonHandler->contains(box.topLeft()) ||
+                          m_buttonHandler->contains(box.topRight()) ||
+                          m_buttonHandler->contains(box.bottomLeft()) ||
+                          m_buttonHandler->contains(box.bottomRight()))) {
+            return candidate;
+        }
+    }
+    if (firstOnScreen) {
+        return *firstOnScreen;
+    }
+    return { preferLeft ? selection.left() : selection.right() - w,
+             preferTop ? selection.top() : selection.bottom() - h };
+}
+
 void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
 {
     Q_UNUSED(paintEvent)
@@ -683,66 +742,6 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
         save = true;
     }
     painter.drawPixmap(0, 0, m_context.screenshot);
-    if (m_selection && m_xywhDisplay) {
-        const QRect& selection = m_selection->geometry().normalized();
-        const qreal scale = m_context.screenshot.devicePixelRatio();
-        QRect xybox;
-        QFontMetrics fm = painter.fontMetrics();
-
-        QString xy =
-          QString("%1x%2+%3+%4")
-            .arg(QString::number(static_cast<int>(selection.width() * scale)),
-                 QString::number(static_cast<int>(selection.height() * scale)),
-                 QString::number(static_cast<int>(selection.left() * scale)),
-                 QString::number(static_cast<int>(selection.top() * scale)));
-
-        xybox = fm.boundingRect(xy);
-        // the small numbers here are just margins so the text doesn't
-        // smack right up to the box; they aren't critical and the box
-        // size itself is tied to the font metrics
-        xybox.adjust(0, 0, 10, 12);
-        // in anticipation of making the position adjustable
-        int x0, y0;
-        // Move these to header
-
-        switch (position) {
-            case GeneralConf::xywh_top_left:
-                x0 = selection.left();
-                y0 = selection.top();
-                break;
-            case GeneralConf::xywh_bottom_left:
-                x0 = selection.left();
-                y0 = selection.bottom() - xybox.height();
-                break;
-            case GeneralConf::xywh_top_right:
-                x0 = selection.right() - xybox.width();
-                y0 = selection.top();
-                break;
-            case GeneralConf::xywh_bottom_right:
-                x0 = selection.right() - xybox.width();
-                y0 = selection.bottom() - xybox.height();
-                break;
-            case GeneralConf::xywh_center:
-            default:
-                x0 = selection.left() + (selection.width() - xybox.width()) / 2;
-                y0 =
-                  selection.top() + (selection.height() - xybox.height()) / 2;
-        }
-
-        QColor uicolor = ConfigHandler().uiColor();
-        uicolor.setAlpha(200);
-        painter.fillRect(
-          x0, y0, xybox.width(), xybox.height(), QBrush(uicolor));
-        painter.setPen(ColorUtils::colorIsDark(uicolor) ? Qt::white
-                                                        : Qt::black);
-        painter.drawText(x0,
-                         y0,
-                         xybox.width(),
-                         xybox.height(),
-                         Qt::AlignVCenter | Qt::AlignHCenter,
-                         xy);
-    }
-
     if (m_displayGrid) {
         QColor uicolor = ConfigHandler().uiColor();
         uicolor.setAlpha(100);
@@ -777,6 +776,47 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
         painter.restore();
     // draw inactive region
     drawInactiveRegion(&painter);
+
+    // After the inactive region, which would darken the label outside the
+    // selection
+    painter.save();
+    painter.setClipping(false);
+    if (m_selection && m_xywhDisplay) {
+        const QRect& selection = m_selection->geometry().normalized();
+        const qreal scale = m_context.screenshot.devicePixelRatio();
+        QRect xybox;
+        QFontMetrics fm = painter.fontMetrics();
+
+        QString xy =
+          QString("%1x%2+%3+%4")
+            .arg(QString::number(static_cast<int>(selection.width() * scale)),
+                 QString::number(static_cast<int>(selection.height() * scale)),
+                 QString::number(static_cast<int>(selection.left() * scale)),
+                 QString::number(static_cast<int>(selection.top() * scale)));
+
+        xybox = fm.boundingRect(xy);
+        // the small numbers here are just margins so the text doesn't
+        // smack right up to the box; they aren't critical and the box
+        // size itself is tied to the font metrics
+        xybox.adjust(0, 0, 10, 12);
+        const QPoint labelPos = selectionLabelPosition(selection, xybox.size());
+        const int x0 = labelPos.x();
+        const int y0 = labelPos.y();
+
+        QColor uicolor = ConfigHandler().uiColor();
+        uicolor.setAlpha(200);
+        painter.fillRect(
+          x0, y0, xybox.width(), xybox.height(), QBrush(uicolor));
+        painter.setPen(ColorUtils::colorIsDark(uicolor) ? Qt::white
+                                                        : Qt::black);
+        painter.drawText(x0,
+                         y0,
+                         xybox.width(),
+                         xybox.height(),
+                         Qt::AlignVCenter | Qt::AlignHCenter,
+                         xy);
+    }
+    painter.restore();
 
     if (!isActiveWindow()) {
         drawErrorMessage(
@@ -1371,6 +1411,8 @@ void CaptureWidget::initSelection()
             }
             m_buttonHandler->updatePosition(m_selection->geometry());
             m_buttonHandler->show();
+            // The selection size label stays clear of the buttons
+            update();
         } else {
             m_buttonHandler->hide();
         }
