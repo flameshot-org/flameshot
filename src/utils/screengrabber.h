@@ -29,6 +29,7 @@ public:
     QPixmap grabEntireDesktop(bool& ok, int preSelectedMonitor = -1);
     QPixmap grabFullDesktop(bool& ok);
     QRect screenGeometry(QScreen* screen);
+    QRect screenLogicalGeometry(QScreen* screen);
     QPixmap grabScreen(QScreen* screenNumber, bool& ok);
     PortalStatus freeDesktopPortal(QPixmap& res, QString& errorDetail);
     QRect desktopGeometry();

@@ -184,21 +184,27 @@ CaptureWidget* Flameshot::gui(const CaptureRequest& req)
 
         m_captureWindow = new CaptureWidget(request);
 
+        if (!m_captureWindow->isClosing()) {
 #ifdef Q_OS_WIN
-        m_captureWindow->show();
-#elif defined(Q_OS_MACOS)
-        if (ConfigHandler().useNativeFullscreen()) {
-            m_captureWindow->showFullScreen();
-        } else {
             m_captureWindow->show();
-            raiseAboveMenuBar(m_captureWindow);
-        }
-        m_captureWindow->activateWindow();
-        m_captureWindow->raise();
+#elif defined(Q_OS_MACOS)
+            if (ConfigHandler().useNativeFullscreen()) {
+                m_captureWindow->showFullScreen();
+            } else {
+                m_captureWindow->show();
+                raiseAboveMenuBar(m_captureWindow);
+            }
+            m_captureWindow->activateWindow();
+            m_captureWindow->raise();
 #else
-        m_captureWindow->showFullScreen();
+            if (m_captureWindow->isMultiMonitor()) {
+                m_captureWindow->show();
+            } else {
+                m_captureWindow->showFullScreen();
+            }
 //        m_captureWindow->show(); // For CaptureWidget Debugging under Linux
 #endif
+        }
         return m_captureWindow;
     } else {
         emit captureFailed();
