@@ -98,6 +98,12 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
     connect(&m_xywhTimer, &QTimer::timeout, this, &CaptureWidget::xywhTick);
     // else xywhTick keeps triggering when not needed
     m_xywhTimer.setSingleShot(true);
+    m_selectionUiTimer.setSingleShot(true);
+    m_selectionUiTimer.setInterval(0);
+    connect(&m_selectionUiTimer,
+            &QTimer::timeout,
+            this,
+            &CaptureWidget::refreshSelectionUi);
     setAttribute(Qt::WA_DeleteOnClose);
     setAttribute(Qt::WA_QuitOnClose, false);
     m_opacity = m_config.contrastOpacity();
@@ -299,6 +305,9 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
     initQuitPrompt();
 
     updateCursor();
+    if (!req.initialSelection().isNull()) {
+        emit m_selection->geometrySettled();
+    }
 }
 
 CaptureWidget::~CaptureWidget()
@@ -436,19 +445,20 @@ void CaptureWidget::handleButtonLeftClick(CaptureToolButton* b)
 void CaptureWidget::xywhTick()
 {
     m_xywhDisplay = false;
-    update();
+    update(m_xywhRect);
+    m_xywhRect = {};
 }
 
 void CaptureWidget::onDisplayGridChanged(bool display)
 {
     m_displayGrid = display;
-    repaint();
+    update();
 }
 
 void CaptureWidget::onGridSizeChanged(int size)
 {
     m_gridSize = size;
-    repaint();
+    update();
 }
 
 void CaptureWidget::startColorGrab()
@@ -460,12 +470,58 @@ void CaptureWidget::startColorGrab()
 
 void CaptureWidget::showxywh()
 {
+    const QRect oldRect = m_xywhRect;
     m_xywhDisplay = true;
-    update();
+    const QRect selection = m_selection->geometry().normalized();
+    const qreal scale = m_context.screenshot.devicePixelRatio();
+    m_xywhText = QStringLiteral("%1x%2+%3+%4")
+                   .arg(static_cast<int>(selection.width() * scale))
+                   .arg(static_cast<int>(selection.height() * scale))
+                   .arg(static_cast<int>(selection.left() * scale))
+                   .arg(static_cast<int>(selection.top() * scale));
+    m_xywhRect = selectionGeometryLabelRect(m_xywhText);
+    update(QRegion(oldRect) | QRegion(m_xywhRect));
     int timeout = m_config.showSelectionGeometryHideTime();
     if (timeout != 0) {
         m_xywhTimer.start(timeout);
     }
+}
+
+QRect CaptureWidget::selectionGeometryLabelRect(const QString& text) const
+{
+    const QRect selection = m_selection->geometry().normalized();
+    QRect xybox = QFontMetrics(font()).boundingRect(text);
+    const auto position = static_cast<GeneralConf::xywh_position>(
+      ConfigHandler().showSelectionGeometry());
+    // the small numbers here are just margins so the text doesn't
+    // smack right up to the box; they aren't critical and the box
+    // size itself is tied to the font metrics
+    xybox.adjust(0, 0, 10, 12);
+    int x0, y0;
+    switch (position) {
+        case GeneralConf::xywh_top_left:
+            x0 = selection.left();
+            y0 = selection.top();
+            break;
+        case GeneralConf::xywh_bottom_left:
+            x0 = selection.left();
+            y0 = selection.bottom() - xybox.height();
+            break;
+        case GeneralConf::xywh_top_right:
+            x0 = selection.right() - xybox.width();
+            y0 = selection.top();
+            break;
+        case GeneralConf::xywh_bottom_right:
+            x0 = selection.right() - xybox.width();
+            y0 = selection.bottom() - xybox.height();
+            break;
+        case GeneralConf::xywh_center:
+        default:
+            x0 = selection.left() + (selection.width() - xybox.width()) / 2;
+            y0 = selection.top() + (selection.height() - xybox.height()) / 2;
+    }
+
+    return QRect(x0, y0, xybox.width(), xybox.height());
 }
 
 void CaptureWidget::initHelpMessage()
@@ -664,8 +720,6 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
     if (!painter.isActive()) {
         return;
     }
-    GeneralConf::xywh_position position =
-      static_cast<GeneralConf::xywh_position>(m_config.showSelectionGeometry());
     /* QPainter::save and restore is somewhat costly so we try to guess
        if we need to do it here. What that means is that if you add
        anything to the paintEvent and want to save/restore you should
@@ -682,65 +736,24 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
         painter.save();
         save = true;
     }
-    painter.drawPixmap(0, 0, m_context.screenshot);
+    const bool cachedBackground = m_captureToolObjects.size() == 0 &&
+                                  !m_activeTool && !m_displayGrid &&
+                                  !(m_previewEnabled && activeButtonTool() &&
+                                    activeButtonTool()->showMousePreview());
+    if (cachedBackground) {
+        const QRegion bright =
+          QRegion(m_lastSelectionRect) | QRegion(m_xywhRect);
+        m_background.paint(painter, m_context.screenshot, bright, m_opacity);
+    } else {
+        painter.drawPixmap(0, 0, m_context.screenshot);
+    }
     if (m_selection && m_xywhDisplay) {
-        const QRect& selection = m_selection->geometry().normalized();
-        const qreal scale = m_context.screenshot.devicePixelRatio();
-        QRect xybox;
-        QFontMetrics fm = painter.fontMetrics();
-
-        QString xy =
-          QString("%1x%2+%3+%4")
-            .arg(QString::number(static_cast<int>(selection.width() * scale)),
-                 QString::number(static_cast<int>(selection.height() * scale)),
-                 QString::number(static_cast<int>(selection.left() * scale)),
-                 QString::number(static_cast<int>(selection.top() * scale)));
-
-        xybox = fm.boundingRect(xy);
-        // the small numbers here are just margins so the text doesn't
-        // smack right up to the box; they aren't critical and the box
-        // size itself is tied to the font metrics
-        xybox.adjust(0, 0, 10, 12);
-        // in anticipation of making the position adjustable
-        int x0, y0;
-        // Move these to header
-
-        switch (position) {
-            case GeneralConf::xywh_top_left:
-                x0 = selection.left();
-                y0 = selection.top();
-                break;
-            case GeneralConf::xywh_bottom_left:
-                x0 = selection.left();
-                y0 = selection.bottom() - xybox.height();
-                break;
-            case GeneralConf::xywh_top_right:
-                x0 = selection.right() - xybox.width();
-                y0 = selection.top();
-                break;
-            case GeneralConf::xywh_bottom_right:
-                x0 = selection.right() - xybox.width();
-                y0 = selection.bottom() - xybox.height();
-                break;
-            case GeneralConf::xywh_center:
-            default:
-                x0 = selection.left() + (selection.width() - xybox.width()) / 2;
-                y0 =
-                  selection.top() + (selection.height() - xybox.height()) / 2;
-        }
-
-        QColor uicolor = ConfigHandler().uiColor();
+        QColor uicolor = m_uiColor;
         uicolor.setAlpha(200);
-        painter.fillRect(
-          x0, y0, xybox.width(), xybox.height(), QBrush(uicolor));
+        painter.fillRect(m_xywhRect, uicolor);
         painter.setPen(ColorUtils::colorIsDark(uicolor) ? Qt::white
                                                         : Qt::black);
-        painter.drawText(x0,
-                         y0,
-                         xybox.width(),
-                         xybox.height(),
-                         Qt::AlignVCenter | Qt::AlignHCenter,
-                         xy);
+        painter.drawText(m_xywhRect, Qt::AlignCenter, m_xywhText);
     }
 
     if (m_displayGrid) {
@@ -775,8 +788,13 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
     }
     if (save)
         painter.restore();
-    // draw inactive region
+    // The cached background is already dimmed except underneath the label.
+    painter.save();
+    if (cachedBackground) {
+        painter.setClipRegion(QRegion(m_xywhRect), Qt::IntersectClip);
+    }
     drawInactiveRegion(&painter);
+    painter.restore();
 
     if (!isActiveWindow()) {
         drawErrorMessage(
@@ -955,8 +973,8 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
 {
     if (m_magnifier) {
         if (!m_activeButton) {
+            m_magnifier->setCursorPosition(e->pos());
             m_magnifier->show();
-            m_magnifier->update();
         } else {
             m_magnifier->hide();
         }
@@ -999,7 +1017,7 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
             // ensure selection outline is updated too
             update(paddedUpdateRect(activeTool->boundingRect()));
             activeTool->move(e->pos() - m_activeToolOffsetToMouseOnStart);
-            drawToolsData();
+            drawToolsData(true, true);
         }
     } else if (m_activeTool) {
         // drawing with a tool
@@ -1058,6 +1076,8 @@ void CaptureWidget::mouseReleaseEvent(QMouseEvent* e)
     }
     m_mouseIsClicked = false;
     m_activeToolIsMoved = false;
+    m_dragBackground = {};
+    m_dragToolIndex = -1;
 
     updateSelectionState();
     updateCursor();
@@ -1351,17 +1371,17 @@ void CaptureWidget::initSelection()
     // Be mindful of the order of statements, so that slots are called properly
     m_selection = new SelectionWidget(m_uiColor, this);
     QRect initialSelection = m_context.request.initialSelection();
-    connect(m_selection, &SelectionWidget::geometryChanged, this, [this]() {
-        QRect constrainedToCaptureArea =
-          m_selection->geometry().intersected(rect());
-        m_context.selection = extendedRect(constrainedToCaptureArea);
-
-        m_buttonHandler->hide();
-        updateCursor();
-        updateSizeIndicator();
-        OverlayMessage::pop();
-    });
+    connect(m_selection,
+            &SelectionWidget::geometryChanged,
+            this,
+            &CaptureWidget::updateSelectionGeometry);
     connect(m_selection, &SelectionWidget::geometrySettled, this, [this]() {
+        // Flush pending UI work before showing the toolbar or accepting a
+        // capture.
+        if (m_selectionUiTimer.isActive()) {
+            m_selectionUiTimer.stop();
+            refreshSelectionUi();
+        }
         if (m_selection->isVisibleTo(this)) {
             auto& req = m_context.request;
             if (req.tasks() & CaptureRequest::ACCEPT_ON_SELECT) {
@@ -1376,6 +1396,15 @@ void CaptureWidget::initSelection()
         }
     });
     connect(m_selection, &SelectionWidget::visibilityChanged, this, [this]() {
+        const QRect visibleSelection =
+          m_selection->isVisibleTo(this)
+            ? m_selection->geometry().normalized().intersected(rect())
+            : QRect();
+        // Showing the capture window also sends a child show event. An initial
+        // selection has already settled; do not hide its toolbar again.
+        if (visibleSelection != m_lastSelectionRect) {
+            updateSelectionGeometry();
+        }
         if (!m_selection->isVisible() && !m_helpMessage.isEmpty()) {
             OverlayMessage::push(m_helpMessage);
         }
@@ -1390,8 +1419,7 @@ void CaptureWidget::initSelection()
     m_selection->setGeometry(initialSelection);
     m_selection->setVisible(!initialSelection.isNull());
     if (!initialSelection.isNull()) {
-        m_context.selection = extendedRect(m_selection->geometry());
-        emit m_selection->geometrySettled();
+        updateSelectionGeometry();
     }
 }
 
@@ -1751,6 +1779,35 @@ void CaptureWidget::deleteCurrentTool()
     }
 }
 
+void CaptureWidget::updateSelectionGeometry()
+{
+    const QRect selection =
+      m_selection->isVisibleTo(this)
+        ? m_selection->geometry().normalized().intersected(rect())
+        : QRect();
+    update(QRegion(m_lastSelectionRect).xored(selection));
+    m_lastSelectionRect = selection;
+    m_context.selection = extendedRect(selection);
+    // The selection and export coordinates stay synchronous. Repeated pointer
+    // events only need one label/toolbar refresh when the event loop catches
+    // up.
+    if (!m_selectionUiTimer.isActive()) {
+        m_selectionUiTimer.start();
+    }
+}
+
+void CaptureWidget::refreshSelectionUi()
+{
+    m_buttonHandler->hide();
+    updateCursor();
+    if (m_selection->isVisibleTo(this)) {
+        updateSizeIndicator();
+        OverlayMessage::pop();
+    } else {
+        xywhTick();
+    }
+}
+
 void CaptureWidget::updateSizeIndicator()
 {
     if (m_config.showSelectionGeometry()) {
@@ -1758,8 +1815,12 @@ void CaptureWidget::updateSizeIndicator()
     }
     if (m_sizeIndButton) {
         const QRect& selection = extendedSelection();
-        m_sizeIndButton->setText(
-          QStringLiteral("%1\n%2").arg(selection.width(), selection.height()));
+        const QString text = QStringLiteral("%1\n%2")
+                               .arg(selection.width())
+                               .arg(selection.height());
+        if (m_sizeIndButton->text() != text) {
+            m_sizeIndButton->setText(text);
+        }
     }
 }
 
@@ -1859,14 +1920,33 @@ void CaptureWidget::pushToolToStack()
     }
 }
 
-void CaptureWidget::drawToolsData(bool drawSelection)
+void CaptureWidget::drawToolsData(bool drawSelection, bool movingObject)
 {
-    // TODO refactor this for performance. The objects should not all be updated
-    // at once every time
+    const auto tools = m_captureToolObjects.captureToolObjects();
+    const int movingIndex = movingObject ? m_panel->activeLayerIndex() : -1;
+    int first = 0;
     QPixmap pixmapItem = m_context.origScreenshot;
-    for (const auto& toolItem : m_captureToolObjects.captureToolObjects()) {
-        processPixmapWithTool(&pixmapItem, toolItem);
-        update(paddedUpdateRect(toolItem->boundingRect()));
+    if (movingIndex >= 0 && movingIndex < tools.size()) {
+        if (m_dragBackground.isNull() || m_dragToolIndex != movingIndex) {
+            m_dragBackground = m_context.origScreenshot;
+            for (int i = 0; i < movingIndex; ++i) {
+                processPixmapWithTool(&m_dragBackground, tools.at(i));
+            }
+            m_dragToolIndex = movingIndex;
+        }
+        pixmapItem = m_dragBackground;
+        first = movingIndex;
+    } else {
+        // Edits, reordering, undo and redo invalidate the gesture's prefix.
+        m_dragBackground = {};
+        m_dragToolIndex = -1;
+    }
+    // Always replay the moving object AND all later layers: blur/pixelation
+    // depend on the image underneath, even when their own geometry is
+    // unchanged.
+    for (int i = first; i < tools.size(); ++i) {
+        processPixmapWithTool(&pixmapItem, tools.at(i));
+        update(paddedUpdateRect(tools.at(i)->boundingRect()));
     }
 
     m_context.screenshot = pixmapItem;
@@ -2103,6 +2183,6 @@ void CaptureWidget::drawInactiveRegion(QPainter* painter)
     QRegion grey(rect());
     grey = grey.subtracted(r);
 
-    painter->setClipRegion(grey);
+    painter->setClipRegion(grey, Qt::IntersectClip);
     painter->drawRect(-1, -1, rect().width() + 1, rect().height() + 1);
 }
