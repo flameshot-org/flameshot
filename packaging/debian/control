@@ -34,6 +34,8 @@ Depends:
  libqt6network6 (>= 6.2.4~),
  libqt6widgets6 (>= 6.2.4~),
  libqt6svg6 (>= 6.2.4~),
+ python3,
+ tar,
 Recommends:
  xdg-desktop-portal-gtk | xdg-desktop-portal-gnome | xdg-desktop-portal-kde | xdg-desktop-portal-wlr,
  grim,
