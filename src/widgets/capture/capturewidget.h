@@ -54,6 +54,9 @@ public:
     ~CaptureWidget();
 
     QPixmap pixmap();
+    // True when the screen grab failed or the user cancelled the monitor
+    // selection; the widget has then already closed itself.
+    bool grabFailed() const { return m_grabFailed; }
     void setCaptureToolObjects(const CaptureToolObjects& captureToolObjects);
 #if !defined(DISABLE_UPDATE_CHECKER)
     void showAppUpdateNotification(const QString& appLatestVersion,
@@ -179,6 +182,7 @@ private:
     bool m_newSelection;
     bool m_movingSelection;
     bool m_captureDone;
+    bool m_grabFailed = false;
     bool m_previewEnabled;
     bool m_adjustmentButtonPressed;
     bool m_configError;

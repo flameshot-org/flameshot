@@ -125,6 +125,7 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
           grabber.grabEntireDesktop(ok, preSelectedMonitor);
         if (!ok) {
             // Error already logged in ScreenGrabber
+            m_grabFailed = true;
             this->close();
         }
         m_context.origScreenshot = m_context.screenshot;
