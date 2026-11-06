@@ -3,6 +3,8 @@
 
 #include "applaunchertool.h"
 #include "tools/launcher/applauncherwidget.h"
+#include "utils/confighandler.h"
+#include <QApplication>
 
 AppLauncher::AppLauncher(QObject* parent)
   : AbstractActionTool(parent)
@@ -30,6 +32,9 @@ CaptureTool::Type AppLauncher::type() const
 
 QString AppLauncher::description() const
 {
+    if (!ConfigHandler().defaultApp().isEmpty()) {
+        return tr("Open with default app (Alt+Click to choose app)");
+    }
     return tr("Choose an app to open the capture");
 }
 
@@ -47,6 +52,15 @@ void AppLauncher::pressed(CaptureContext& context)
 {
     capture = context.selectedScreenshotArea();
     emit requestAction(REQ_CAPTURE_DONE_OK);
-    emit requestAction(REQ_ADD_EXTERNAL_WIDGETS);
+
+    QString defaultApp = ConfigHandler().defaultApp();
+    bool altPressed = qApp->keyboardModifiers().testFlag(Qt::AltModifier);
+
+    if (!defaultApp.isEmpty() && !altPressed) {
+        AppLauncherWidget::launchWithCommand(
+          capture, defaultApp, ConfigHandler().defaultAppInTerminal());
+    } else {
+        emit requestAction(REQ_ADD_EXTERNAL_WIDGETS);
+    }
     emit requestAction(REQ_CLOSE_GUI);
 }
