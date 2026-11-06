@@ -26,7 +26,7 @@ env:
 jobs:
   windows-pack:
     name: VS 2022 ${{ matrix.config.arch }}-${{ matrix.type }}
-    runs-on: windows-2022
+    runs-on: ${{ matrix.config.runner }}
     env:
       VCINSTALLDIR: C:/Program Files/Microsoft Visual Studio/2022/Enterprise/VC
       # 2025.02.14
@@ -41,11 +41,21 @@ jobs:
         config:
           - {
             arch: x64,
+            runner: windows-2022,
             generator: "-G'Visual Studio 17 2022' -A x64",
             vcpkg_triplet: x64-windows,
             qt_arch: win64_msvc2022_64,
             qt_arch_install: msvc2022_64,
             pak_arch: win64
+          }
+          - {
+            arch: arm64,
+            runner: windows-11-arm,
+            generator: "-G'Visual Studio 17 2022' -A ARM64",
+            vcpkg_triplet: arm64-windows,
+            qt_arch: win64_msvc2022_arm64_cross_compiled,
+            qt_arch_install: msvc2022_arm64,
+            pak_arch: arm64
           }
         type: [portable, installer]
     steps:
@@ -106,6 +116,11 @@ jobs:
           version: ${{ matrix.qt_ver }}
           cache: 'true'
           cache-key-prefix: install-qt-action-${{ matrix.qt_ver }}
+          # Force the x86_64 "windows" host repository: the ARM64 Qt libraries
+          # are only published there as the cross-compiled package, not under
+          # the auto-detected "windows_arm64" host. --autodesktop (default)
+          # pulls the matching x64 host tools, which run under emulation.
+          host: 'windows'
           target:  ${{ matrix.qt_target }}
           arch: ${{ matrix.config.qt_arch }}
           modules: 'qtimageformats'
@@ -125,6 +140,20 @@ jobs:
         working-directory: build
         shell: pwsh
         run: cmake --build . --config Release
+
+      - name: Install WiX (Windows ARM64)
+        # windows-2022 ships WiX 3 preinstalled, but the windows-11-arm image
+        # does not. CPack's WIX generator needs candle/light (WiX v3); fetch the
+        # official binaries and add them to PATH. The x86 tools run under
+        # emulation on ARM64.
+        if: matrix.config.arch == 'arm64' && matrix.type == 'installer'
+        shell: pwsh
+        run: |
+          $zip = "$env:RUNNER_TEMP\wix314-binaries.zip"
+          $dest = "$env:RUNNER_TEMP\wix"
+          Invoke-WebRequest -Uri "https://github.com/wixtoolset/wix3/releases/download/wix3141rtm/wix314-binaries.zip" -OutFile $zip
+          Expand-Archive -Path $zip -DestinationPath $dest -Force
+          Add-Content -Path $env:GITHUB_PATH -Value $dest
 
       - name: CPack
         working-directory: build
