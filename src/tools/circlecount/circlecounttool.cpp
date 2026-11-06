@@ -18,7 +18,9 @@ int const MAX_COUNTER = 999;
 CircleCountTool::CircleCountTool(QObject* parent)
   : AbstractTwoPointTool(parent)
   , m_valid(false)
-{}
+{
+    m_resizeMode = ResizeMode::Ends;
+}
 
 QIcon CircleCountTool::icon(const QColor& background, bool inEditor) const
 {
@@ -65,6 +67,30 @@ QRect CircleCountTool::boundingRect() const
              line_pos_min_y,
              line_pos_max_x - line_pos_min_x,
              line_pos_max_y - line_pos_min_y };
+}
+
+bool CircleCountTool::hasPointer() const
+{
+    return QLineF(points().first, points().second).length() >
+           size() + THICKNESS_OFFSET;
+}
+
+// Only the pointer's tip has a handle: the bubble itself is moved, not resized.
+ResizeHandles::Handle CircleCountTool::handleAt(const QPoint& pos,
+                                                int tolerance) const
+{
+    if (hasPointer() && QLineF(pos, points().second).length() <= tolerance) {
+        return ResizeHandles::End;
+    }
+    return ResizeHandles::None;
+}
+
+void CircleCountTool::drawObjectSelection(QPainter& painter)
+{
+    CaptureTool::drawObjectSelection(painter);
+    if (hasPointer()) {
+        drawHandles(painter, { points().second });
+    }
 }
 
 QString CircleCountTool::name() const
