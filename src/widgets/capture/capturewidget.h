@@ -128,6 +128,8 @@ private:
     void initHelpMessage();
     void initQuitPrompt();
     void updateSizeIndicator();
+    QPoint selectionLabelPosition(const QRect& selection,
+                                  const QSize& label) const;
     void updateCursor();
     void updateSelectionState();
     void updateTool(CaptureTool* tool);
