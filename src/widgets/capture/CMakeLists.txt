@@ -5,6 +5,7 @@ target_sources(
         capturebutton.h
         capturetoolbutton.h
         capturewidget.h
+        multimonitorcapturesession.h
         colorpicker.h
         hovereventfilter.h
         overlaymessage.h
@@ -19,6 +20,7 @@ target_sources(
         capturebutton.cpp
         capturetoolbutton.cpp
         capturewidget.cpp
+        multimonitorcapturesession.cpp
         colorpicker.cpp
         hovereventfilter.cpp
         overlaymessage.cpp

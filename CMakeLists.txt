@@ -157,6 +157,14 @@ endif()
 
 add_subdirectory(src)
 
+# Named FLAMESHOT_BUILD_TESTS rather than BUILD_TESTING, which belongs to
+# CMake's own CTest module. Off by default so packagers are unaffected.
+option(FLAMESHOT_BUILD_TESTS "Build unit tests" OFF)
+if(FLAMESHOT_BUILD_TESTS)
+  enable_testing()
+  add_subdirectory(tests)
+endif()
+
 # CPack
 set(CPACK_PACKAGE_VENDOR "flameshot-org")
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Powerful yet simple to use screenshot software.")
