@@ -875,7 +875,11 @@ int CaptureWidget::selectToolItemAtPos(const QPoint& pos)
 
 void CaptureWidget::mousePressEvent(QMouseEvent* e)
 {
-    activateWindow();
+    // See CaptureToolButton::mousePressEvent: only request activation when
+    // needed, so a click right before closing leaves no pending startup.
+    if (!isActiveWindow()) {
+        activateWindow();
+    }
     m_startMove = false;
     m_startMovePos = QPoint();
     m_mousePressedPos = e->pos();
