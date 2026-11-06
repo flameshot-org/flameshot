@@ -7,6 +7,7 @@
 #include "utils/globalvalues.h"
 #include "utils/screenshotsaver.h"
 
+#include <QApplication>
 #include <QGraphicsDropShadowEffect>
 #include <QGraphicsOpacityEffect>
 #include <QLabel>
@@ -145,13 +146,44 @@ void PinWidget::leaveEvent(QEvent*)
 
 void PinWidget::mousePressEvent(QMouseEvent* e)
 {
-    if (QWindow* window = windowHandle(); window != nullptr) {
-        window->startSystemMove();
-        return;
+    // Don't hand the pointer to the window manager right away: on Wayland a
+    // system move grabs the pointer until the button is released, which
+    // swallows clicks and double clicks. Start it once the mouse moves.
+    if (e->button() == Qt::LeftButton) {
+        m_movePending = true;
+        m_pressPosition = e->globalPosition();
     }
 }
 
-void PinWidget::mouseMoveEvent(QMouseEvent* e) {}
+void PinWidget::mouseMoveEvent(QMouseEvent* e)
+{
+    if (!m_movePending || !(e->buttons() & Qt::LeftButton)) {
+        return;
+    }
+    const QPointF distance = e->globalPosition() - m_pressPosition;
+    if (distance.manhattanLength() < QApplication::startDragDistance()) {
+        return;
+    }
+    m_movePending = false;
+    if (QWindow* window = windowHandle(); window != nullptr) {
+        window->startSystemMove();
+    }
+}
+
+void PinWidget::mouseReleaseEvent(QMouseEvent* e)
+{
+    if (e->button() == Qt::LeftButton) {
+        m_movePending = false;
+    }
+}
+
+void PinWidget::mouseDoubleClickEvent(QMouseEvent* e)
+{
+    if (e->button() == Qt::LeftButton &&
+        ConfigHandler().closePinOnDoubleClick()) {
+        closePin();
+    }
+}
 
 void PinWidget::keyPressEvent(QKeyEvent* event)
 {
