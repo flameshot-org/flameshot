@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include <QPoint>
 #include <QWidget>
 
 class QLabel;
@@ -22,6 +23,7 @@ public:
 protected:
     void mousePressEvent(QMouseEvent*) override;
     void mouseMoveEvent(QMouseEvent*) override;
+    void showEvent(QShowEvent*) override;
     void keyPressEvent(QKeyEvent*) override;
     void enterEvent(QEnterEvent*) override;
     void leaveEvent(QEvent*) override;
@@ -34,6 +36,7 @@ private:
     bool scrollEvent(QWheelEvent* e);
     void pinchTriggered(QPinchGesture*);
     void closePin();
+    void placeWithKWin();
 
     void rotateLeft();
     void rotateRight();
@@ -53,6 +56,9 @@ private:
     unsigned int m_rotateFactor{ 0 };
     qreal m_currentStepScaleFactor{ 1 };
     bool m_sizeChanged{ false };
+    // Where the pin should appear, in logical coordinates
+    QPoint m_initialPosition;
+    bool m_initialPlacementDone{ false };
 
 private slots:
     void showContextMenu(const QPoint& pos);
