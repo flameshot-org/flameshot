@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/ocrplugin">
+        <file>icons/black_ocr.svg</file>
+        <file>icons/white_ocr.svg</file>
+    </qresource>
+</RCC>
