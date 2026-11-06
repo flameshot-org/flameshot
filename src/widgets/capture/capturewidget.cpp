@@ -544,7 +544,11 @@ void CaptureWidget::initQuitPrompt()
     m_quitPrompt->show();
     QRect position = m_quitPrompt->frameGeometry();
     QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
-    position.moveCenter(currentScreen->availableGeometry().center());
+    // The prompt is a child of the capture widget, so move() takes
+    // coordinates relative to it. The screen geometry is global, which only
+    // matches when the capture widget starts at the global origin.
+    position.moveCenter(
+      mapFromGlobal(currentScreen->availableGeometry().center()));
     m_quitPrompt->move(position.topLeft());
     m_quitPrompt->hide();
 
