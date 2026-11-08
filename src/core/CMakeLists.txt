@@ -30,3 +30,12 @@ endif ()
 if (WIN32)
     target_sources(flameshot PRIVATE globalshortcutfilter.h globalshortcutfilter.cpp)
 endif ()
+
+if (APPLE)
+    target_sources(flameshot PRIVATE
+        macoscapturekeepalive.h
+        macoscapturekeepalive.mm
+    )
+    # Weak-link: ScreenCaptureKit is missing below macOS 12.3
+    target_link_libraries(flameshot "-weak_framework ScreenCaptureKit" "-framework Foundation")
+endif ()

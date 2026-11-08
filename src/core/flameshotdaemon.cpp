@@ -1,4 +1,7 @@
 #include "flameshotdaemon.h"
+#if defined(Q_OS_MACOS)
+#include "core/macoscapturekeepalive.h"
+#endif
 #include "core/flameshot.h"
 #include "tools/pin/pinwidget.h"
 #include "utils/abstractlogger.h"
@@ -104,6 +107,11 @@ FlameshotDaemon::FlameshotDaemon()
           quitIfIdle();
       });
 
+#if defined(Q_OS_MACOS)
+    // Stop replayd idling out, which makes macOS re-show the
+    // "bypass the system private window picker" prompt.
+    startScreenCaptureKeepAlive(this);
+#endif
     m_persist = !ConfigHandler().autoCloseIdleDaemon();
     connect(ConfigHandler::getInstance(),
             &ConfigHandler::fileChanged,
