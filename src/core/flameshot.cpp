@@ -530,45 +530,7 @@ void Flameshot::recordGif(const QRect& region,
         overlay = new GifRecordingOverlay(region);
         m_gifOverlay = overlay;
         widget->setInteractive(true);
-
-        connect(widget,
-                &GifRecordingWidget::toolSelected,
-                overlay,
-                &GifRecordingOverlay::setTool);
-        connect(widget,
-                &GifRecordingWidget::undoRequested,
-                overlay,
-                &GifRecordingOverlay::undo);
-        connect(widget,
-                &GifRecordingWidget::clearRequested,
-                overlay,
-                &GifRecordingOverlay::clear);
-        connect(widget,
-                &GifRecordingWidget::colorChanged,
-                overlay,
-                &GifRecordingOverlay::setDrawingColor);
-        connect(widget,
-                &GifRecordingWidget::widthChanged,
-                overlay,
-                &GifRecordingOverlay::setDrawingWidth);
-        connect(overlay,
-                &GifRecordingOverlay::toolFinished,
-                widget,
-                &GifRecordingWidget::clearToolSelection);
-        connect(overlay,
-                &GifRecordingOverlay::repainted,
-                widget,
-                [widget]() { widget->raise(); });
-        connect(overlay,
-                &GifRecordingOverlay::textInputRequested,
-                this,
-                [widget, overlay](const QPoint& pos) {
-                    const QString text = widget->textInput();
-                    if (!text.isEmpty()) {
-                        overlay->addText(pos, text);
-                    }
-                    overlay->finishTool();
-                });
+        setupGifOverlay(overlay, widget, region);
 
         overlay->setDrawingColor(ConfigHandler().drawColor());
         overlay->setDrawingWidth(ConfigHandler().drawThickness());
@@ -687,6 +649,80 @@ void Flameshot::recordGif(const QRect& region,
     }
     widget->show();
     recorder->start();
+}
+
+void Flameshot::setupGifOverlay(GifRecordingOverlay* overlay,
+                                GifRecordingWidget* widget,
+                                const QRect& region)
+{
+    connect(widget,
+            &GifRecordingWidget::toolSelected,
+            overlay,
+            &GifRecordingOverlay::setTool);
+    connect(widget,
+            &GifRecordingWidget::undoRequested,
+            overlay,
+            &GifRecordingOverlay::undo);
+    connect(widget,
+            &GifRecordingWidget::clearRequested,
+            overlay,
+            &GifRecordingOverlay::clear);
+    connect(widget,
+            &GifRecordingWidget::colorChanged,
+            overlay,
+            &GifRecordingOverlay::setDrawingColor);
+    connect(widget,
+            &GifRecordingWidget::widthChanged,
+            overlay,
+            &GifRecordingOverlay::setDrawingWidth);
+    connect(overlay,
+            &GifRecordingOverlay::toolFinished,
+            widget,
+            &GifRecordingWidget::clearToolSelection);
+    connect(overlay,
+            &GifRecordingOverlay::textInputRequested,
+            this,
+            [widget, overlay](const QPoint& pos) {
+                const QString text = widget->textInput();
+                if (!text.isEmpty()) {
+                    overlay->addText(pos, text);
+                }
+                overlay->finishTool();
+                overlay->requestRecreate();
+            });
+    connect(overlay,
+            &GifRecordingOverlay::recreateRequested,
+            this,
+            [this, widget, region]() {
+                QTimer::singleShot(0, this, [this, widget, region]() {
+                    recreateGifOverlay(widget, region);
+                });
+            });
+}
+
+void Flameshot::recreateGifOverlay(GifRecordingWidget* widget,
+                                   const QRect& region)
+{
+    if (m_gifOverlay == nullptr) {
+        return;
+    }
+
+    auto* old = m_gifOverlay;
+    const QVector<GifRecordingOverlay::Stroke> strokes = old->strokes();
+    const QColor color = old->drawingColor();
+    const int width = old->drawingWidth();
+
+    disconnect(widget, nullptr, old, nullptr);
+    delete old;
+
+    auto* fresh = new GifRecordingOverlay(region);
+    fresh->setStrokes(strokes);
+    fresh->setDrawingColor(color);
+    fresh->setDrawingWidth(width);
+    m_gifOverlay = fresh;
+    setupGifOverlay(fresh, widget, region);
+    fresh->show();
+    widget->raise();
 }
 
 void Flameshot::exportCapture(const QPixmap& capture,

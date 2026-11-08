@@ -94,6 +94,10 @@ public slots:
 private:
     Flameshot();
     bool resolveAnyConfigErrors();
+    void setupGifOverlay(GifRecordingOverlay* overlay,
+                         GifRecordingWidget* widget,
+                         const QRect& region);
+    void recreateGifOverlay(GifRecordingWidget* widget, const QRect& region);
 
     // class members
     static Origin m_origin;

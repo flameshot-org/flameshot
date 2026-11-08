@@ -73,6 +73,12 @@ void GifRecordingOverlay::setDrawingWidth(int width)
     m_width = qBound(1, width, 30);
 }
 
+void GifRecordingOverlay::setStrokes(const QVector<Stroke>& strokes)
+{
+    m_strokes = strokes;
+    update();
+}
+
 void GifRecordingOverlay::setTool(GifDrawingTool tool)
 {
     if (m_drawing) {
@@ -110,7 +116,7 @@ void GifRecordingOverlay::undo()
 {
     if (!m_strokes.isEmpty()) {
         m_strokes.removeLast();
-        forceRepaint();
+        emit recreateRequested();
     }
 }
 
@@ -120,7 +126,7 @@ void GifRecordingOverlay::clear()
     m_current = Stroke();
     m_drawing = false;
     m_numberCounter = 0;
-    forceRepaint();
+    emit recreateRequested();
 }
 
 void GifRecordingOverlay::addText(const QPoint& pos, const QString& text)
@@ -301,24 +307,9 @@ void GifRecordingOverlay::setInputTransparent(bool transparent)
     setAttribute(Qt::WA_TransparentForMouseEvents, transparent);
 }
 
-void GifRecordingOverlay::forceRepaint()
+void GifRecordingOverlay::requestRecreate()
 {
-    const bool wasTransparent = m_inputTransparent;
-    if (wasTransparent) {
-        setInputTransparent(false);
-    }
-
-    // A shaped, translucent override window may keep its last texture in the
-    // compositor. A tiny resize forces a reconfigure and a fresh composite.
-    const QSize oldSize = size();
-    resize(oldSize.width() + 1, oldSize.height());
-    resize(oldSize);
-    repaint();
-
-    if (wasTransparent) {
-        QTimer::singleShot(100, this, [this]() { setInputTransparent(true); });
-    }
-    emit repainted();
+    emit recreateRequested();
 }
 
 void GifRecordingOverlay::paintEvent(QPaintEvent* event)

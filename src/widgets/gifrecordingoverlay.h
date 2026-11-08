@@ -33,12 +33,24 @@ class GifRecordingOverlay : public QWidget
     Q_OBJECT
 
 public:
+    struct Stroke
+    {
+        GifDrawingTool tool = GifDrawingTool::NoTool;
+        QVector<QPointF> points;
+        QColor color;
+        int width = 1;
+        QString text;
+        int number = 0;
+    };
+
     explicit GifRecordingOverlay(const QRect& region,
                                  QWidget* parent = nullptr);
     ~GifRecordingOverlay() override;
 
     void setDrawingColor(const QColor& color);
     void setDrawingWidth(int width);
+    QVector<Stroke> strokes() const { return m_strokes; }
+    void setStrokes(const QVector<Stroke>& strokes);
 
     QColor drawingColor() const { return m_color; }
     int drawingWidth() const { return m_width; }
@@ -49,13 +61,15 @@ public slots:
     void undo();
     void clear();
     void addText(const QPoint& pos, const QString& text);
+    void requestRecreate();
 
 signals:
     // Emitted when the current stroke/tool is finished and the overlay is
     // click-through again.
     void toolFinished();
-    // Emitted after an undo/clear forced the overlay to recomposite.
-    void repainted();
+    // Emitted when the overlay window must be recreated to force the
+    // compositor to repaint it (undo, clear, text placement).
+    void recreateRequested();
     // Emitted when the user clicks with the text tool. The text itself is
     // requested by the owner, so a modal dialog can be shown while the
     // recorder is paused.
@@ -71,18 +85,7 @@ protected:
     void hideEvent(QHideEvent* event) override;
 
 private:
-    struct Stroke
-    {
-        GifDrawingTool tool = GifDrawingTool::NoTool;
-        QVector<QPointF> points;
-        QColor color;
-        int width = 1;
-        QString text;
-        int number = 0;
-    };
-
     void setInputTransparent(bool transparent);
-    void forceRepaint();
     void commitStroke();
     void drawStroke(QPainter& painter, const Stroke& stroke) const;
     void drawArrow(QPainter& painter,
