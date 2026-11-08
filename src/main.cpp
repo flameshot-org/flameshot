@@ -442,7 +442,8 @@ int main(int argc, char* argv[])
                         rawImageOption,
                         selectionOption,
                         pinOption,
-                        acceptOnSelectOption },
+                        acceptOnSelectOption,
+                        screenNumberOption },
                       guiArgument);
     parser.AddOptions({ screenNumberOption,
                         editOption,
