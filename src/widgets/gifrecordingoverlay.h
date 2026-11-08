@@ -6,6 +6,7 @@
 #include "gifdrawingtool.h"
 
 #include <QColor>
+#include <QImage>
 #include <QPointF>
 #include <QRect>
 #include <QVector>
@@ -51,6 +52,15 @@ public:
     void setDrawingWidth(int width);
     QVector<Stroke> strokes() const { return m_strokes; }
     void setStrokes(const QVector<Stroke>& strokes);
+
+    // Renders the current strokes to a transparent image the size of the
+    // recorded region. Used by GifRecorder to composite drawings into frames
+    // independently of the compositor.
+    QImage renderToImage() const;
+    // The overlay may be hidden for the duration of a screen grab only when
+    // no tool is active and no stroke is in progress.
+    bool canBeHiddenForCapture() const;
+    void setCaptureHidden(bool hidden);
 
     QColor drawingColor() const { return m_color; }
     int drawingWidth() const { return m_width; }
@@ -103,6 +113,7 @@ private:
     int m_numberCounter = 0;
     bool m_inputTransparent = false;
     bool m_applyingInputFlag = false;
+    bool m_captureHidden = false;
     GifRecordingBorder* m_border = nullptr;
 };
 

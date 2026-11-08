@@ -4,11 +4,14 @@
 #pragma once
 
 #include <QElapsedTimer>
+#include <QImage>
 #include <QObject>
 #include <QRect>
 #include <QSize>
 #include <QString>
 #include <QTimer>
+
+#include <functional>
 
 class GifEncoder;
 class QImage;
@@ -34,6 +37,18 @@ public:
 
     QSize outputSize() const { return m_outputSize; }
     bool isRecording() const;
+
+    using OverlayImageProvider = std::function<QImage()>;
+    using OverlayVisibilityChecker = std::function<bool()>;
+    using OverlayVisibilitySetter = std::function<void(bool)>;
+
+    // Optional drawing overlay composited into every frame. The visibility
+    // callbacks let the recorder hide the overlay while the desktop is
+    // grabbed, so the overlay itself (and compositor ghosts) never end up in
+    // the recording.
+    void setOverlayProvider(OverlayImageProvider image,
+                            OverlayVisibilityChecker canHide,
+                            OverlayVisibilitySetter setHidden);
 
 public slots:
     // Starts recording after a short delay, so that the capture widget can be
@@ -93,4 +108,8 @@ private:
 
     GifEncoder* m_encoder;
     QString m_tempPath;
+
+    OverlayImageProvider m_overlayImage;
+    OverlayVisibilityChecker m_overlayCanHide;
+    OverlayVisibilitySetter m_overlaySetHidden;
 };

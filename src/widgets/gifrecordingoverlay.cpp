@@ -79,6 +79,42 @@ void GifRecordingOverlay::setStrokes(const QVector<Stroke>& strokes)
     update();
 }
 
+QImage GifRecordingOverlay::renderToImage() const
+{
+    QImage image(size(), QImage::Format_ARGB32_Premultiplied);
+    image.fill(Qt::transparent);
+
+    QPainter painter(&image);
+    painter.setRenderHint(QPainter::Antialiasing, true);
+    painter.setRenderHint(QPainter::SmoothPixmapTransform, true);
+    for (const Stroke& stroke : m_strokes) {
+        drawStroke(painter, stroke);
+    }
+    if (m_drawing) {
+        drawStroke(painter, m_current);
+    }
+    painter.end();
+    return image;
+}
+
+bool GifRecordingOverlay::canBeHiddenForCapture() const
+{
+    return m_tool == GifDrawingTool::NoTool && !m_drawing;
+}
+
+void GifRecordingOverlay::setCaptureHidden(bool hidden)
+{
+    if (m_captureHidden == hidden) {
+        return;
+    }
+    m_captureHidden = hidden;
+    if (hidden) {
+        QWidget::hide();
+    } else {
+        QWidget::show();
+    }
+}
+
 void GifRecordingOverlay::setTool(GifDrawingTool tool)
 {
     if (m_drawing) {
@@ -249,6 +285,15 @@ void GifRecordingOverlay::showEvent(QShowEvent* event)
 {
     QWidget::showEvent(event);
 
+    if (m_captureHidden) {
+        // Hidden only for the duration of a screen grab; keep the recording
+        // border visible and do not touch the input state.
+        if (m_border) {
+            m_border->show();
+        }
+        return;
+    }
+
     if (m_border) {
         m_border->show();
         m_border->raise();
@@ -276,7 +321,7 @@ void GifRecordingOverlay::showEvent(QShowEvent* event)
 
 void GifRecordingOverlay::hideEvent(QHideEvent* event)
 {
-    if (m_border) {
+    if (!m_captureHidden && m_border) {
         m_border->hide();
     }
     QWidget::hideEvent(event);

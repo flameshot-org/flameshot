@@ -17,6 +17,8 @@
 #include <QStandardPaths>
 #include <QTemporaryFile>
 
+#include <utility>
+
 namespace {
 constexpr int kStartDelayMs = 200;
 constexpr int kMaxFailedGrabs = 3;
@@ -75,6 +77,15 @@ GifRecorder::~GifRecorder()
 bool GifRecorder::isRecording() const
 {
     return m_state == State::Recording;
+}
+
+void GifRecorder::setOverlayProvider(OverlayImageProvider image,
+                                     OverlayVisibilityChecker canHide,
+                                     OverlayVisibilitySetter setHidden)
+{
+    m_overlayImage = std::move(image);
+    m_overlayCanHide = std::move(canHide);
+    m_overlaySetHidden = std::move(setHidden);
 }
 
 void GifRecorder::start()
@@ -185,6 +196,14 @@ bool GifRecorder::grabFrame(QImage& frame, QString& error)
     painter.setRenderHint(QPainter::SmoothPixmapTransform, true);
     bool captured = false;
 
+    // Hide the drawing overlay while the desktop is grabbed, so its window
+    // (and any stale compositor texture) never ends up in the frame. The
+    // drawings are composited separately from the overlay model below.
+    const bool hideOverlay = m_overlayCanHide && m_overlayCanHide();
+    if (hideOverlay && m_overlaySetHidden) {
+        m_overlaySetHidden(true);
+    }
+
     DesktopInfo desktopInfo;
     const bool wayland = desktopInfo.waylandDetected();
     if (wayland && !m_waylandWarningShown) {
@@ -267,6 +286,20 @@ bool GifRecorder::grabFrame(QImage& frame, QString& error)
           qRound(intersection.height() * m_scale));
         painter.drawPixmap(target, pixmap, source);
         captured = true;
+    }
+
+    if (hideOverlay && m_overlaySetHidden) {
+        m_overlaySetHidden(false);
+    }
+
+    if (m_overlayImage) {
+        const QImage overlay = m_overlayImage();
+        if (!overlay.isNull()) {
+            painter.drawImage(
+              QRectF(0, 0, m_outputSize.width(), m_outputSize.height()),
+              overlay,
+              QRectF(0, 0, overlay.width(), overlay.height()));
+        }
     }
 
     painter.end();

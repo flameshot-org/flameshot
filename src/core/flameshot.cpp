@@ -90,6 +90,7 @@ void raiseAboveMenuBar(QWidget* widget)
 #include <QDir>
 #include <QFile>
 #include <QFileInfo>
+#include <QImage>
 #include <QMessageBox>
 #include <QScreen>
 #include <QStandardPaths>
@@ -534,6 +535,20 @@ void Flameshot::recordGif(const QRect& region,
 
         overlay->setDrawingColor(ConfigHandler().drawColor());
         overlay->setDrawingWidth(ConfigHandler().drawThickness());
+
+        recorder->setOverlayProvider(
+          [this]() {
+              return m_gifOverlay ? m_gifOverlay->renderToImage() : QImage();
+          },
+          [this]() {
+              return m_gifOverlay != nullptr &&
+                     m_gifOverlay->canBeHiddenForCapture();
+          },
+          [this](bool hidden) {
+              if (m_gifOverlay != nullptr) {
+                  m_gifOverlay->setCaptureHidden(hidden);
+              }
+          });
     }
 
     auto cleanup = [this, recorder]() {
