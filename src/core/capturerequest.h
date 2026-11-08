@@ -15,6 +15,7 @@ public:
         FULLSCREEN_MODE,
         GRAPHICAL_MODE,
         SCREEN_MODE,
+        GIF_MODE,
     };
 
     enum ExportTask
@@ -27,6 +28,7 @@ public:
         PIN = 16,
         UPLOAD = 32,
         ACCEPT_ON_SELECT = 64,
+        GIF = 128,
     };
 
     CaptureRequest(CaptureMode mode,
@@ -53,6 +55,10 @@ public:
     int selectedMonitor() const;
     bool hasSelectedMonitor() const;
 
+    void setGifRegion(const QRect& region);
+    QRect gifRegion() const;
+    bool hasGifRegion() const;
+
 private:
     CaptureMode m_mode;
     uint m_delay;
@@ -62,6 +68,8 @@ private:
     QRect m_pinWindowGeometry, m_initialSelection;
     int m_selectedMonitor;
     bool m_hasSelectedMonitor;
+    QRect m_gifRegion;
+    bool m_hasGifRegion = false;
 
     CaptureRequest() {}
 };

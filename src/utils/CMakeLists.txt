@@ -7,6 +7,8 @@ target_sources(
           systemnotification.h
           valuehandler.h
           strfparse.h
+          gifrecorder.h
+          x11rootgrab.h
 )
 
 target_sources(
@@ -26,6 +28,9 @@ target_sources(
           colorutils.cpp
           history.cpp
           strfparse.cpp
+          gifencoder.cpp
+          gifrecorder.cpp
+          x11rootgrab.cpp
 )
 
 IF (UNIX AND NOT APPLE)

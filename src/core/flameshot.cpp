@@ -65,10 +65,15 @@ void raiseAboveMenuBar(QWidget* widget)
 #include "core/qguiappcurrentscreen.h"
 #include "utils/abstractlogger.h"
 #include "utils/confighandler.h"
+#include "utils/desktopinfo.h"
+#include "utils/filenamehandler.h"
+#include "utils/gifrecorder.h"
 #include "utils/screengrabber.h"
 #include "utils/screenshotsaver.h"
 #include "widgets/capture/capturewidget.h"
 #include "widgets/capturelauncher.h"
+#include "widgets/gifrecordingoverlay.h"
+#include "widgets/gifrecordingwidget.h"
 #include "widgets/infowindow.h"
 
 #ifdef ENABLE_IMGUR
@@ -82,8 +87,12 @@ void raiseAboveMenuBar(QWidget* widget)
 #include <QBuffer>
 #include <QDebug>
 #include <QDesktopServices>
+#include <QDir>
 #include <QFile>
+#include <QFileInfo>
 #include <QMessageBox>
+#include <QScreen>
+#include <QStandardPaths>
 #include <QThread>
 #include <QTimer>
 #include <QUrl>
@@ -466,10 +475,218 @@ void Flameshot::requestCapture(const CaptureRequest& request)
               request.delay(), this, [this, request]() { gui(request); });
             break;
         }
+        case CaptureRequest::GIF_MODE: {
+            QTimer::singleShot(request.delay(), this, [this, request]() {
+                recordGif(request.gifRegion(),
+                          request.path(),
+                          ConfigHandler().gifFps(),
+                          ConfigHandler().gifDuration(),
+                          ConfigHandler().gifLoop(),
+                          ConfigHandler().gifMaxWidth());
+            });
+            break;
+        }
         default:
             emit captureFailed();
             break;
     }
+}
+
+void Flameshot::recordGif(const QRect& region,
+                          const QString& path,
+                          int fps,
+                          int durationSeconds,
+                          int loopCount,
+                          int maxWidth,
+                          bool interactive)
+{
+    if (m_gifRecorder != nullptr) {
+        AbstractLogger::error()
+          << tr("A GIF recording is already in progress.");
+        emit captureFailed();
+        return;
+    }
+    if (region.isEmpty()) {
+        AbstractLogger::error() << tr("There is no region to record.");
+        emit captureFailed();
+        return;
+    }
+
+    fps = qBound(1, fps, 50);
+    durationSeconds = qMax(0, durationSeconds);
+    loopCount = qMax(0, loopCount);
+    maxWidth = qMax(0, maxWidth);
+
+    auto* recorder =
+      new GifRecorder(region, fps, durationSeconds, loopCount, maxWidth, this);
+    auto* widget = new GifRecordingWidget(region, durationSeconds);
+    widget->setFps(fps);
+    m_gifRecorder = recorder;
+    m_gifWidget = widget;
+
+    GifRecordingOverlay* overlay = nullptr;
+    const bool useOverlay = interactive && !DesktopInfo().waylandDetected();
+    if (useOverlay) {
+        overlay = new GifRecordingOverlay(region);
+        m_gifOverlay = overlay;
+        widget->setInteractive(true);
+
+        connect(widget,
+                &GifRecordingWidget::toolSelected,
+                overlay,
+                &GifRecordingOverlay::setTool);
+        connect(widget,
+                &GifRecordingWidget::undoRequested,
+                overlay,
+                &GifRecordingOverlay::undo);
+        connect(widget,
+                &GifRecordingWidget::clearRequested,
+                overlay,
+                &GifRecordingOverlay::clear);
+        connect(widget,
+                &GifRecordingWidget::colorChanged,
+                overlay,
+                &GifRecordingOverlay::setDrawingColor);
+        connect(widget,
+                &GifRecordingWidget::widthChanged,
+                overlay,
+                &GifRecordingOverlay::setDrawingWidth);
+        connect(overlay,
+                &GifRecordingOverlay::toolFinished,
+                widget,
+                &GifRecordingWidget::clearToolSelection);
+        connect(overlay,
+                &GifRecordingOverlay::repainted,
+                widget,
+                [widget]() { widget->raise(); });
+        connect(overlay,
+                &GifRecordingOverlay::textInputRequested,
+                this,
+                [widget, overlay](const QPoint& pos) {
+                    const QString text = widget->textInput();
+                    if (!text.isEmpty()) {
+                        overlay->addText(pos, text);
+                    }
+                    overlay->finishTool();
+                });
+
+        overlay->setDrawingColor(ConfigHandler().drawColor());
+        overlay->setDrawingWidth(ConfigHandler().drawThickness());
+    }
+
+    auto cleanup = [this, recorder]() {
+        if (m_gifOverlay != nullptr) {
+            m_gifOverlay->hide();
+            m_gifOverlay->deleteLater();
+            m_gifOverlay = nullptr;
+        }
+        if (m_gifWidget != nullptr) {
+            m_gifWidget->hide();
+            m_gifWidget->deleteLater();
+            m_gifWidget = nullptr;
+        }
+        if (m_gifRecorder == recorder) {
+            m_gifRecorder = nullptr;
+        }
+        recorder->deleteLater();
+    };
+
+    connect(widget,
+            &GifRecordingWidget::stopRequested,
+            recorder,
+            &GifRecorder::stop);
+    connect(widget,
+            &GifRecordingWidget::cancelRequested,
+            recorder,
+            &GifRecorder::cancel);
+    connect(widget,
+            &GifRecordingWidget::fpsChanged,
+            recorder,
+            &GifRecorder::setFps);
+    connect(recorder,
+            &GifRecorder::progress,
+            widget,
+            &GifRecordingWidget::setElapsed);
+
+    connect(recorder,
+            &GifRecorder::finished,
+            this,
+            [this, path, cleanup](const QString& tempFilePath,
+                                  int frameCount) {
+                if (frameCount <= 0) {
+                    AbstractLogger::error() << tr("No frames were recorded.");
+                    QFile::remove(tempFilePath);
+                    cleanup();
+                    emit captureFailed();
+                    return;
+                }
+
+                if (m_gifWidget != nullptr) {
+                    m_gifWidget->hide();
+                }
+                if (m_gifOverlay != nullptr) {
+                    m_gifOverlay->hide();
+                }
+
+                QString destination = path;
+                bool interactive = destination.isEmpty();
+                if (interactive && ConfigHandler().savePathFixed()) {
+                    destination = ConfigHandler().savePath();
+                    interactive = destination.isEmpty();
+                }
+                if (interactive) {
+                    QString directory = ConfigHandler().savePath();
+                    if (directory.isEmpty() || !QDir(directory).exists() ||
+                        !QFileInfo(directory).isWritable()) {
+                        directory = QStandardPaths::writableLocation(
+                          QStandardPaths::PicturesLocation);
+                    }
+                    const QString suggestion =
+                      FileNameHandler().properScreenshotPath(
+                        directory, QStringLiteral("gif"));
+                    destination = ShowGifSaveFileDialog(suggestion);
+                    if (destination.isEmpty()) {
+                        QFile::remove(tempFilePath);
+                        AbstractLogger::info()
+                          << tr("GIF recording discarded.");
+                        cleanup();
+                        emit captureFailed();
+                        return;
+                    }
+                }
+
+                const bool saved =
+                  saveGifToFilesystem(tempFilePath, destination);
+                cleanup();
+                if (saved) {
+                    emit captureTaken(QPixmap());
+                } else {
+                    emit captureFailed();
+                }
+            });
+
+    connect(recorder,
+            &GifRecorder::failed,
+            this,
+            [this, cleanup](const QString& error) {
+                AbstractLogger::error() << error;
+                cleanup();
+                emit captureFailed();
+            });
+
+    connect(recorder,
+            &GifRecorder::cancelled,
+            this,
+            [this, cleanup]() {
+                cleanup();
+                emit captureFailed();
+            });
+
+    if (overlay != nullptr) {
+        overlay->show();
+    }
+    widget->show();
+    recorder->start();
 }
 
 void Flameshot::exportCapture(const QPixmap& capture,
@@ -479,6 +696,19 @@ void Flameshot::exportCapture(const QPixmap& capture,
     using CR = CaptureRequest;
     int tasks = req.tasks(), mode = req.captureMode();
     QString path = req.path();
+
+    if (tasks & CR::GIF) {
+        const QRect region =
+          req.hasGifRegion() ? req.gifRegion() : selection;
+        recordGif(region,
+                  path,
+                  ConfigHandler().gifFps(),
+                  ConfigHandler().gifDuration(),
+                  ConfigHandler().gifLoop(),
+                  ConfigHandler().gifMaxWidth(),
+                  true);
+        return;
+    }
 
     if (tasks & CR::PRINT_GEOMETRY) {
         QTextStream(stdout)

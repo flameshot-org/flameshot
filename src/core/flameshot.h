@@ -14,6 +14,9 @@
 class ConfigWindow;
 class InfoWindow;
 class CaptureLauncher;
+class GifRecorder;
+class GifRecordingWidget;
+class GifRecordingOverlay;
 class QWidget;
 #ifdef ENABLE_IMGUR
 class UploadHistory;
@@ -62,6 +65,14 @@ public slots:
 
     void openSavePath();
 
+    void recordGif(const QRect& region,
+                   const QString& path = QString(),
+                   int fps = 10,
+                   int durationSeconds = 0,
+                   int loopCount = 0,
+                   int maxWidth = 1280,
+                   bool interactive = false);
+
     QVersionNumber getVersion();
 
 public:
@@ -92,6 +103,9 @@ private:
     QPointer<InfoWindow> m_infoWindow;
     QPointer<CaptureLauncher> m_launcherWindow;
     QPointer<ConfigWindow> m_configWindow;
+    GifRecorder* m_gifRecorder = nullptr;
+    GifRecordingWidget* m_gifWidget = nullptr;
+    GifRecordingOverlay* m_gifOverlay = nullptr;
 
 #if defined(Q_OS_MACOS)
 public:
