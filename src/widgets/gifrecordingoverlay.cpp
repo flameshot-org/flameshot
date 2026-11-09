@@ -16,25 +16,74 @@
 #include <QPen>
 #include <QShortcut>
 #include <QShowEvent>
-#include <QTimer>
 
 #include <cmath>
 
 #if defined(FLAMESHOT_HAVE_X11)
 #include <X11/Xatom.h>
 #include <X11/Xlib.h>
+#include <X11/extensions/shape.h>
 #endif
 
 namespace {
 constexpr double kPi = 3.14159265358979323846;
+
+#if defined(FLAMESHOT_HAVE_X11)
+// Sets the X11 input shape for a window. An empty input shape makes the
+// window ignore all mouse input (clicks pass through to the windows below),
+// while a full shape makes it receive input again. Only ShapeInput is
+// touched, so rendering and the compositor's bounding shape stay intact.
+void setX11InputShape(WId window, bool acceptInput)
+{
+    Display* display = XOpenDisplay(nullptr);
+    if (!display) {
+        return;
+    }
+
+    if (acceptInput) {
+        XWindowAttributes attributes;
+        if (!XGetWindowAttributes(
+              display, static_cast<Window>(window), &attributes)) {
+            XCloseDisplay(display);
+            return;
+        }
+        XRectangle rect;
+        rect.x = 0;
+        rect.y = 0;
+        rect.width = static_cast<unsigned short>(qMax(1, attributes.width));
+        rect.height = static_cast<unsigned short>(qMax(1, attributes.height));
+        XShapeCombineRectangles(display,
+                                static_cast<Window>(window),
+                                ShapeInput,
+                                0,
+                                0,
+                                &rect,
+                                1,
+                                ShapeSet,
+                                Unsorted);
+    } else {
+        XShapeCombineRectangles(display,
+                                static_cast<Window>(window),
+                                ShapeInput,
+                                0,
+                                0,
+                                nullptr,
+                                0,
+                                ShapeSet,
+                                Unsorted);
+    }
+    XFlush(display);
+    XCloseDisplay(display);
 }
+#endif
+} // namespace
 
 GifRecordingOverlay::GifRecordingOverlay(const QRect& region, QWidget* parent)
   : QWidget(parent)
   , m_region(region)
 {
     setWindowFlags(Qt::Tool | Qt::FramelessWindowHint |
-                   Qt::WindowStaysOnTopHint);
+                   Qt::WindowStaysOnTopHint | Qt::WindowDoesNotAcceptFocus);
     setAttribute(Qt::WA_TranslucentBackground);
     setAttribute(Qt::WA_NoSystemBackground);
     setAttribute(Qt::WA_ShowWithoutActivating, true);
@@ -129,11 +178,9 @@ void GifRecordingOverlay::setTool(GifDrawingTool tool)
         setCursor(Qt::CrossCursor);
         setInputTransparent(false);
         raise();
-        // The text tool is typed in the panel, so do not steal keyboard
-        // focus from the panel's text field.
-        if (tool != GifDrawingTool::Text) {
-            activateWindow();
-        }
+        // The overlay deliberately never accepts keyboard focus
+        // (Qt::WindowDoesNotAcceptFocus), so the panel keeps focus for Ctrl+Z
+        // and for the text field. Mouse drawing does not need focus.
     }
 }
 
@@ -315,7 +362,7 @@ void GifRecordingOverlay::showEvent(QShowEvent* event)
 
     // winId() is valid now; make the canvas click-through by default.
     if (!m_applyingInputFlag) {
-        QTimer::singleShot(0, this, [this]() { setInputTransparent(true); });
+        applyInputShape();
     }
 }
 
@@ -333,23 +380,30 @@ void GifRecordingOverlay::setInputTransparent(bool transparent)
         return;
     }
     m_inputTransparent = transparent;
+    applyInputShape();
+}
 
+void GifRecordingOverlay::applyInputShape()
+{
 #if defined(FLAMESHOT_HAVE_X11)
     if (QGuiApplication::platformName() == QLatin1String("xcb")) {
-        if (isVisible()) {
-            // Let Qt manage the input shape. The old raw XShape code made
-            // Mutter treat the window as shaped and keep stale pixels after
-            // an undo.
-            m_applyingInputFlag = true;
-            setWindowFlag(Qt::WindowTransparentForInput, transparent);
-            show();
-            m_applyingInputFlag = false;
-        }
+        // Make sure the native window exists, then change only its input
+        // shape. The bounding shape is left untouched and the window is not
+        // recreated: both caused flicker or stale pixels on Mutter.
+        winId();
+        setX11InputShape(winId(), !m_inputTransparent);
         return;
     }
 #endif
 
-    setAttribute(Qt::WA_TransparentForMouseEvents, transparent);
+    const bool wasVisible = isVisible();
+    m_applyingInputFlag = true;
+    setWindowFlag(Qt::WindowTransparentForInput, m_inputTransparent);
+    setAttribute(Qt::WA_TransparentForMouseEvents, m_inputTransparent);
+    if (wasVisible) {
+        show();
+    }
+    m_applyingInputFlag = false;
 }
 
 void GifRecordingOverlay::requestRecreate()
@@ -503,12 +557,26 @@ GifRecordingBorder::GifRecordingBorder(const QRect& region, QWidget* parent)
 {
     constexpr int margin = 4;
     setWindowFlags(Qt::Tool | Qt::FramelessWindowHint |
-                   Qt::WindowStaysOnTopHint);
+                   Qt::WindowStaysOnTopHint | Qt::WindowDoesNotAcceptFocus);
     setAttribute(Qt::WA_TranslucentBackground);
     setAttribute(Qt::WA_NoSystemBackground);
     setAttribute(Qt::WA_TransparentForMouseEvents);
     setAttribute(Qt::WA_ShowWithoutActivating);
     setGeometry(region.adjusted(-margin, -margin, margin, margin));
+}
+
+void GifRecordingBorder::showEvent(QShowEvent* event)
+{
+    QWidget::showEvent(event);
+
+#if defined(FLAMESHOT_HAVE_X11)
+    if (QGuiApplication::platformName() == QLatin1String("xcb")) {
+        // The border is purely visual: always give it an empty input shape so
+        // clicks near the recorded region pass through to the desktop.
+        winId();
+        setX11InputShape(winId(), false);
+    }
+#endif
 }
 
 void GifRecordingBorder::paintEvent(QPaintEvent* event)

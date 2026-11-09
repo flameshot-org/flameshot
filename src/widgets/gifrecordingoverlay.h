@@ -96,6 +96,7 @@ protected:
 
 private:
     void setInputTransparent(bool transparent);
+    void applyInputShape();
     void commitStroke();
     void drawStroke(QPainter& painter, const Stroke& stroke) const;
     void drawArrow(QPainter& painter,
@@ -111,7 +112,7 @@ private:
     QColor m_color = Qt::red;
     int m_width = 3;
     int m_numberCounter = 0;
-    bool m_inputTransparent = false;
+    bool m_inputTransparent = true;
     bool m_applyingInputFlag = false;
     bool m_captureHidden = false;
     GifRecordingBorder* m_border = nullptr;
@@ -130,4 +131,5 @@ public:
 
 protected:
     void paintEvent(QPaintEvent* event) override;
+    void showEvent(QShowEvent* event) override;
 };
