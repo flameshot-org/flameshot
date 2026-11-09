@@ -517,6 +517,7 @@ void Flameshot::recordGif(const QRect& region,
     durationSeconds = qMax(0, durationSeconds);
     loopCount = qMax(0, loopCount);
     maxWidth = qMax(0, maxWidth);
+    m_hasGifTextPos = false;
 
     auto* recorder =
       new GifRecorder(region, fps, durationSeconds, loopCount, maxWidth, this);
@@ -536,6 +537,32 @@ void Flameshot::recordGif(const QRect& region,
         overlay->setDrawingColor(ConfigHandler().drawColor());
         overlay->setDrawingWidth(ConfigHandler().drawThickness());
 
+        connect(widget,
+                &GifRecordingWidget::toolSelected,
+                this,
+                [this](GifDrawingTool) { m_hasGifTextPos = false; });
+        connect(widget,
+                &GifRecordingWidget::textSubmitted,
+                this,
+                [this, widget]() {
+                    if (m_gifOverlay == nullptr) {
+                        return;
+                    }
+                    const QString text = widget->textInput();
+                    if (text.isEmpty()) {
+                        return;
+                    }
+                    const QPoint pos =
+                      m_hasGifTextPos
+                        ? m_gifTextPos
+                        : QPoint(m_gifOverlay->width() / 2,
+                                 m_gifOverlay->height() / 2);
+                    m_gifOverlay->addText(pos, text);
+                    m_gifOverlay->finishTool();
+                    m_gifOverlay->requestRecreate();
+                    m_hasGifTextPos = false;
+                });
+
         recorder->setOverlayProvider(
           [this]() {
               return m_gifOverlay ? m_gifOverlay->renderToImage() : QImage();
@@ -552,6 +579,7 @@ void Flameshot::recordGif(const QRect& region,
     }
 
     auto cleanup = [this, recorder]() {
+        m_hasGifTextPos = false;
         if (m_gifOverlay != nullptr) {
             m_gifOverlay->hide();
             m_gifOverlay->deleteLater();
@@ -697,13 +725,23 @@ void Flameshot::setupGifOverlay(GifRecordingOverlay* overlay,
     connect(overlay,
             &GifRecordingOverlay::textInputRequested,
             this,
-            [widget, overlay](const QPoint& pos) {
+            [this, widget, overlay](const QPoint& pos) {
+                m_gifTextPos = pos;
+                m_hasGifTextPos = true;
+
                 const QString text = widget->textInput();
-                if (!text.isEmpty()) {
-                    overlay->addText(pos, text);
+                if (text.isEmpty()) {
+                    // The user clicked the screen before typing anything.
+                    // Keep the text tool active and put the keyboard focus
+                    // back into the text field instead of cancelling the tool.
+                    widget->focusTextInput();
+                    return;
                 }
+
+                overlay->addText(pos, text);
                 overlay->finishTool();
                 overlay->requestRecreate();
+                m_hasGifTextPos = false;
             });
     connect(overlay,
             &GifRecordingOverlay::recreateRequested,

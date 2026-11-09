@@ -38,6 +38,7 @@ public:
     void clearToolSelection();
     void setFps(int fps);
     QString textInput() const;
+    void focusTextInput();
 
 signals:
     void stopRequested();
@@ -48,6 +49,7 @@ signals:
     void colorChanged(const QColor& color);
     void widthChanged(int width);
     void fpsChanged(int fps);
+    void textSubmitted();
 
 protected:
     void keyPressEvent(QKeyEvent* event) override;

@@ -195,19 +195,21 @@ GifRecordingWidget::GifRecordingWidget(const QRect& region,
             this,
             [this](int id) {
                 const auto tool = static_cast<GifDrawingTool>(id);
-                if (m_textEdit) {
-                    if (tool == GifDrawingTool::Text) {
-                        m_textEdit->show();
-                        QTimer::singleShot(0, m_textEdit, [this]() {
-                            m_textEdit->setFocus(Qt::OtherFocusReason);
-                            m_textEdit->selectAll();
-                        });
-                    } else {
-                        m_textEdit->hide();
-                    }
+                if (m_textEdit && tool != GifDrawingTool::Text) {
+                    m_textEdit->hide();
                 }
+                // Let the overlay switch its input mode first, then focus the
+                // panel. Otherwise raising/shaping the overlay can steal the
+                // focus that was just given to the text field.
                 emit toolSelected(tool);
+                if (tool == GifDrawingTool::Text) {
+                    focusTextInput();
+                }
             });
+    connect(m_textEdit,
+            &QLineEdit::returnPressed,
+            this,
+            &GifRecordingWidget::textSubmitted);
     connect(m_colorButton, &QPushButton::clicked, this, [this]() {
         const QColor color =
           QColorDialog::getColor(m_color, this, tr("Drawing color"));
@@ -292,6 +294,33 @@ void GifRecordingWidget::clearToolSelection()
 QString GifRecordingWidget::textInput() const
 {
     return m_textEdit ? m_textEdit->text() : QString();
+}
+
+void GifRecordingWidget::focusTextInput()
+{
+    if (!m_textEdit) {
+        return;
+    }
+
+    m_textEdit->show();
+    adjustSize();
+    placeNearRegion(m_region);
+
+    // The drawing overlay never accepts keyboard focus, but the panel must be
+    // the active window for the user to be able to type. Do it again on the
+    // next event-loop iteration in case the window manager applies the
+    // activation asynchronously.
+    activateWindow();
+    raise();
+    m_textEdit->setFocus(Qt::OtherFocusReason);
+    m_textEdit->selectAll();
+
+    QTimer::singleShot(50, m_textEdit, [this]() {
+        activateWindow();
+        raise();
+        m_textEdit->setFocus(Qt::OtherFocusReason);
+        m_textEdit->selectAll();
+    });
 }
 
 void GifRecordingWidget::setFps(int fps)

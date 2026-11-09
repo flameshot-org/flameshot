@@ -110,6 +110,8 @@ private:
     GifRecorder* m_gifRecorder = nullptr;
     GifRecordingWidget* m_gifWidget = nullptr;
     GifRecordingOverlay* m_gifOverlay = nullptr;
+    QPoint m_gifTextPos;
+    bool m_hasGifTextPos = false;
 
 #if defined(Q_OS_MACOS)
 public:
