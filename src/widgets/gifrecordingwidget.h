@@ -39,6 +39,10 @@ public:
     void setFps(int fps);
     QString textInput() const;
     void focusTextInput();
+    // Places the panel completely outside the captured region. If the region
+    // leaves no room on the screen, returns a smaller region and places the
+    // panel outside it, so the control panel never appears in the GIF.
+    QRect fitOutsideRegion(const QRect& region);
 
 signals:
     void stopRequested();
@@ -56,7 +60,7 @@ protected:
     void closeEvent(QCloseEvent* event) override;
 
 private:
-    void placeNearRegion(const QRect& region);
+    bool placeNearRegion(const QRect& region);
     QString formatDuration(qint64 milliseconds) const;
     void updateColorButton();
     void updateHint();
@@ -65,6 +69,7 @@ private:
     QLabel* m_hintLabel;
     int m_durationSeconds;
     QRect m_region;
+    QSize m_reservedSize;
     bool m_interactive = false;
 
     QWidget* m_toolsRow = nullptr;

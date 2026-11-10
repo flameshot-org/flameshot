@@ -519,20 +519,23 @@ void Flameshot::recordGif(const QRect& region,
     maxWidth = qMax(0, maxWidth);
     m_hasGifTextPos = false;
 
-    auto* recorder =
-      new GifRecorder(region, fps, durationSeconds, loopCount, maxWidth, this);
+    const bool useOverlay = interactive && !DesktopInfo().waylandDetected();
+
     auto* widget = new GifRecordingWidget(region, durationSeconds);
     widget->setFps(fps);
+    widget->setInteractive(useOverlay);
+    const QRect recordRegion = widget->fitOutsideRegion(region);
+
+    auto* recorder = new GifRecorder(
+      recordRegion, fps, durationSeconds, loopCount, maxWidth, this);
     m_gifRecorder = recorder;
     m_gifWidget = widget;
 
     GifRecordingOverlay* overlay = nullptr;
-    const bool useOverlay = interactive && !DesktopInfo().waylandDetected();
     if (useOverlay) {
-        overlay = new GifRecordingOverlay(region);
+        overlay = new GifRecordingOverlay(recordRegion);
         m_gifOverlay = overlay;
-        widget->setInteractive(true);
-        setupGifOverlay(overlay, widget, region);
+        setupGifOverlay(overlay, widget, recordRegion);
 
         overlay->setDrawingColor(ConfigHandler().drawColor());
         overlay->setDrawingWidth(ConfigHandler().drawThickness());

@@ -30,6 +30,8 @@
 #include <QToolButton>
 #include <QVBoxLayout>
 
+#include <algorithm>
+
 GifRecordingWidget::GifRecordingWidget(const QRect& region,
                                        int durationSeconds,
                                        QWidget* parent)
@@ -370,7 +372,7 @@ QString GifRecordingWidget::formatDuration(qint64 milliseconds) const
       .arg(totalSeconds % 60, 2, 10, QLatin1Char('0'));
 }
 
-void GifRecordingWidget::placeNearRegion(const QRect& region)
+QRect GifRecordingWidget::fitOutsideRegion(const QRect& region)
 {
     QScreen* screen = QGuiApplication::screenAt(region.center());
     if (!screen) {
@@ -385,10 +387,99 @@ void GifRecordingWidget::placeNearRegion(const QRect& region)
         available = x11RootGeometry();
     }
     if (available.isEmpty()) {
-        return;
+        m_region = region;
+        return region;
     }
 
+    // Reserve room for the text field as well: it is shown on demand and makes
+    // the panel taller. The reservation keeps that later growth outside the
+    // recorded region too.
     const QSize panelSize = size();
+    const int extraHeight = m_interactive ? 40 : 0;
+    m_reservedSize = QSize(panelSize.width(), panelSize.height() + extraHeight);
+
+    if (placeNearRegion(region)) {
+        return region;
+    }
+
+    // The selected region leaves no room for the panel. Shrink it on the side
+    // that loses the least area, then place the panel outside the result.
+    constexpr int gap = 8;
+    QList<QRect> candidates;
+
+    {
+        QRect candidate = region;
+        candidate.setBottom(qMin(
+          region.bottom(),
+          available.bottom() - m_reservedSize.height() - gap));
+        if (candidate.height() >= 1) {
+            candidates.append(candidate);
+        }
+    }
+    {
+        QRect candidate = region;
+        candidate.setTop(qMax(
+          region.top(), available.top() + m_reservedSize.height() + gap));
+        if (candidate.height() >= 1) {
+            candidates.append(candidate);
+        }
+    }
+    {
+        QRect candidate = region;
+        candidate.setRight(qMin(
+          region.right(),
+          available.right() - m_reservedSize.width() - gap));
+        if (candidate.width() >= 1) {
+            candidates.append(candidate);
+        }
+    }
+    {
+        QRect candidate = region;
+        candidate.setLeft(qMax(
+          region.left(), available.left() + m_reservedSize.width() + gap));
+        if (candidate.width() >= 1) {
+            candidates.append(candidate);
+        }
+    }
+
+    std::sort(candidates.begin(),
+              candidates.end(),
+              [](const QRect& a, const QRect& b) {
+                  return a.width() * a.height() > b.width() * b.height();
+              });
+    for (const QRect& candidate : candidates) {
+        if (placeNearRegion(candidate)) {
+            return candidate;
+        }
+    }
+
+    // Extremely small screens can leave no room at all. Keep the selected
+    // region; this is the only case where the panel may overlap it.
+    placeNearRegion(region);
+    return region;
+}
+
+bool GifRecordingWidget::placeNearRegion(const QRect& region)
+{
+    m_region = region;
+
+    QScreen* screen = QGuiApplication::screenAt(region.center());
+    if (!screen) {
+        screen = QGuiApplication::primaryScreen();
+    }
+
+    QRect available;
+    if (screen) {
+        available = screen->availableGeometry();
+    } else {
+        // XRandR may expose no monitors on virtual/remote displays.
+        available = x11RootGeometry();
+    }
+    if (available.isEmpty()) {
+        return false;
+    }
+
+    const QSize panelSize = m_reservedSize.isValid() ? m_reservedSize : size();
     constexpr int gap = 8;
 
     const QList<QPoint> candidates = {
@@ -406,7 +497,7 @@ void GifRecordingWidget::placeNearRegion(const QRect& region)
         const QRect candidate(point, panelSize);
         if (available.contains(candidate) && !candidate.intersects(region)) {
             move(candidate.topLeft());
-            return;
+            return true;
         }
     }
 
@@ -424,8 +515,10 @@ void GifRecordingWidget::placeNearRegion(const QRect& region)
           QPoint(otherAvailable.right() - panelSize.width() + 1 - gap,
                  otherAvailable.bottom() - panelSize.height() + 1 - gap),
           panelSize);
-        move(candidate.topLeft());
-        return;
+        if (otherAvailable.contains(candidate)) {
+            move(candidate.topLeft());
+            return true;
+        }
     }
 
     // The region covers the whole available area: keep the panel inside it,
@@ -441,6 +534,7 @@ void GifRecordingWidget::placeNearRegion(const QRect& region)
                             fallback.top(),
                             available.bottom() - panelSize.height() + 1));
     move(fallback.topLeft());
+    return false;
 }
 
 void GifRecordingWidget::keyPressEvent(QKeyEvent* event)
