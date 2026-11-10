@@ -44,5 +44,21 @@
       <arg name="notification" type="s" direction="in"/>
     </method>
 
+    <!--
+        showSavedNotification:
+        @filePath: Full path of the saved file.
+        @message: Notification body.
+        @title: Notification summary.
+
+        Show a clickable notification that opens the folder of the saved file.
+        Used by short-lived capture processes; the daemon owns the notification
+        so that it can receive ActionInvoked after the capture process exits.
+    -->
+    <method name="showSavedNotification">
+      <arg name="filePath" type="s" direction="in"/>
+      <arg name="message" type="s" direction="in"/>
+      <arg name="title" type="s" direction="in"/>
+    </method>
+
   </interface>
 </node>

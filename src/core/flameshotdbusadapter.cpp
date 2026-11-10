@@ -31,3 +31,12 @@ void FlameshotDBusAdapter::attachPin(const QByteArray& data)
 {
     FlameshotDaemon::instance()->attachPin(data);
 }
+
+void FlameshotDBusAdapter::showSavedNotification(const QString& filePath,
+                                                 const QString& message,
+                                                 const QString& title)
+{
+    // Inside the daemon instance() is not null, so the static method shows the
+    // notification through the long-lived SystemNotification.
+    FlameshotDaemon::showSavedNotification(filePath, message, title);
+}
