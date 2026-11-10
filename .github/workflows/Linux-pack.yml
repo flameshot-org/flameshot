@@ -360,7 +360,7 @@ jobs:
       - name: Install Dependencies
         run: |
           sudo apt-get -y -qq update
-          sudo apt-get -y --no-install-recommends install fuse cmake extra-cmake-modules build-essential qt6-base-dev qt6-tools-dev qt6-tools-dev-tools libqt6svg6-dev qt6-l10n-tools qt6-wayland libgl-dev appstream hicolor-icon-theme openssl ca-certificates jq
+          sudo apt-get -y --no-install-recommends install fuse cmake extra-cmake-modules build-essential qt6-base-dev qt6-tools-dev qt6-tools-dev-tools libqt6svg6-dev qt6-l10n-tools qt6-wayland libgl-dev libxcb1-dev pkg-config appstream hicolor-icon-theme openssl ca-certificates jq
 
       - name: Download linuxdeploy
         run: |

@@ -39,6 +39,8 @@ parts:
     build-packages:
       - libxkbcommon-dev
       - libproxy-dev
+      - libxcb1-dev
+      - pkg-config
     cmake-parameters:
       - -DFLAMESHOT_ICON=/snap/flameshot/current/usr/share/icons/hicolor/scalable/apps/flameshot.svg
       - -DCMAKE_INSTALL_PREFIX=/usr

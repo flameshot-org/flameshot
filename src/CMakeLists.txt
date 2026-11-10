@@ -223,6 +223,8 @@ if (USE_WAYLAND_CLIPBOARD)
 endif()
 
 if (APPLE)
+    find_library(APPLICATION_SERVICES_FRAMEWORK ApplicationServices REQUIRED)
+    find_library(CORE_GRAPHICS_FRAMEWORK CoreGraphics REQUIRED)
     set_target_properties(flameshot PROPERTIES
         MACOSX_BUNDLE TRUE
         MACOSX_BUNDLE_BUNDLE_NAME "Flameshot"
@@ -237,6 +239,8 @@ if (APPLE)
     target_link_libraries(
             flameshot
             qhotkey
+            ${APPLICATION_SERVICES_FRAMEWORK}
+            ${CORE_GRAPHICS_FRAMEWORK}
     )
 endif ()
 
@@ -268,6 +272,10 @@ if (WIN32)
     target_link_libraries(
             flameshot
             qhotkey
+            dwmapi
+            ole32
+            oleacc
+            uiautomationcore
     )
 endif ()
 

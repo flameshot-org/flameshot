@@ -18,6 +18,7 @@
 #include "utils/abstractlogger.h"
 #include "utils/confighandler.h"
 #include "utils/filenamehandler.h"
+#include "utils/inputtrace.h"
 #include "utils/pathinfo.h"
 #include "utils/valuehandler.h"
 
@@ -240,6 +241,9 @@ int main(int argc, char* argv[])
 
         if (!kdsa.isPrimaryInstance() &&
             !ConfigHandler().allowMultipleGuiInstances()) {
+            InputTrace::write(
+              QStringLiteral("secondary instance, exiting; another Flameshot "
+                             "is already running"));
             return 0; // Quit
         }
 #endif

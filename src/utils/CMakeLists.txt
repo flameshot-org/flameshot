@@ -7,6 +7,7 @@ target_sources(
           systemnotification.h
           valuehandler.h
           strfparse.h
+          inputtrace.h
 )
 
 target_sources(
@@ -26,6 +27,7 @@ target_sources(
           colorutils.cpp
           history.cpp
           strfparse.cpp
+          inputtrace.cpp
 )
 
 IF (UNIX AND NOT APPLE)
@@ -40,5 +42,7 @@ IF (WIN32)
   target_sources(
     flameshot
     PRIVATE winlnkfileparse.cpp
+            windowsforeground.h
+            windowsforeground.cpp
   )
 ENDIF()
