@@ -5,6 +5,7 @@
 
 #include <QEvent>
 #include <QKeyEvent>
+#include <QKeySequence>
 
 TextWidget::TextWidget(QWidget* parent)
   : QTextEdit(parent)
@@ -21,7 +22,14 @@ bool TextWidget::event(QEvent* e)
 {
     if (e->type() == QEvent::ShortcutOverride) {
         auto* keyEvent = static_cast<QKeyEvent*>(e);
-        if (keyEvent->key() == Qt::Key_Escape) {
+        // QTextEdit doesn't claim the word and line deletion keys here, so
+        // without this Ctrl+Backspace triggers the "Cancel current
+        // selection" shortcut instead of deleting the previous word.
+        if (keyEvent->key() == Qt::Key_Escape ||
+            keyEvent->matches(QKeySequence::DeleteStartOfWord) ||
+            keyEvent->matches(QKeySequence::DeleteEndOfWord) ||
+            keyEvent->matches(QKeySequence::DeleteEndOfLine) ||
+            keyEvent->matches(QKeySequence::DeleteCompleteLine)) {
             keyEvent->accept();
             return true;
         }
