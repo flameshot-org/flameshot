@@ -113,6 +113,9 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
     m_showMagnifier->setChecked(config.showMagnifier());
     m_squareMagnifier->setChecked(config.squareMagnifier());
     m_saveLastRegion->setChecked(config.saveLastRegion());
+    m_ignoreWholeScreenLastRegion->setChecked(
+      config.ignoreWholeScreenLastRegion());
+    m_ignoreWholeScreenLastRegion->setEnabled(config.saveLastRegion());
     m_reverseArrow->setChecked(config.reverseArrow());
     m_drawCircleCounterOutline->setChecked(config.drawCircleCounterOutline());
     m_autoCloseIdleDaemon->setChecked(config.autoCloseIdleDaemon());
@@ -148,6 +151,12 @@ void GeneralConf::updateComponents()
 void GeneralConf::saveLastRegion(bool checked)
 {
     ConfigHandler().setSaveLastRegion(checked);
+    m_ignoreWholeScreenLastRegion->setEnabled(checked);
+}
+
+void GeneralConf::ignoreWholeScreenLastRegion(bool checked)
+{
+    ConfigHandler().setIgnoreWholeScreenLastRegion(checked);
 }
 
 void GeneralConf::showHelpChanged(bool checked)
@@ -296,6 +305,18 @@ void GeneralConf::initSaveLastRegion()
             &QCheckBox::clicked,
             this,
             &GeneralConf::saveLastRegion);
+
+    m_ignoreWholeScreenLastRegion = new QCheckBox(
+      tr("Ignore last region when it covers the whole screen"), this);
+    m_ignoreWholeScreenLastRegion->setToolTip(
+      tr("Start with no selection if the last region was the entire screen, "
+         "so a new region can be drawn right away"));
+    m_scrollAreaLayout->addWidget(m_ignoreWholeScreenLastRegion);
+
+    connect(m_ignoreWholeScreenLastRegion,
+            &QCheckBox::clicked,
+            this,
+            &GeneralConf::ignoreWholeScreenLastRegion);
 }
 
 void GeneralConf::initShowSidePanelButton()
