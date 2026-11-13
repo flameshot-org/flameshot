@@ -26,7 +26,13 @@ class SidePanelWidget : public QWidget
     friend class QColorPickingEventFilter;
 
 public:
-    explicit SidePanelWidget(QPixmap* p, QWidget* parent = nullptr);
+    /// @param pixmapOrigin logical top-left of the area `p` was captured from
+    /// @param displayScale the display's rendering scale
+    /// Both are passed on to the colour grabber.
+    explicit SidePanelWidget(QPixmap* p,
+                             const QPoint& pixmapOrigin,
+                             qreal displayScale,
+                             QWidget* parent = nullptr);
 
 signals:
     void colorChanged(const QColor& color);
@@ -61,6 +67,8 @@ private:
     QLabel* m_colorLabel;
     QLineEdit* m_colorHex;
     QPixmap* m_pixmap;
+    QPoint m_pixmapOrigin;
+    qreal m_displayScale;
     QColor m_color;
     QColor m_revertColor;
     QSpinBox* m_toolSizeSpin;

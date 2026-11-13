@@ -198,6 +198,7 @@ void configureApp(bool gui, QTranslator& translator, QTranslator& qtTranslator)
     auto app = QCoreApplication::instance();
     app->setAttribute(Qt::AA_DontCreateNativeWidgetSiblings, true);
     configureTranslation(translator, qtTranslator);
+    ConfigHandler().migrateLegacyOptions();
 }
 
 // TODO find a way so we don't have to do this

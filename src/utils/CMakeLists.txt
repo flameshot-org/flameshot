@@ -14,6 +14,9 @@ target_sources(
   PRIVATE abstractlogger.cpp
           filenamehandler.cpp
           screengrabber.cpp
+          monitorfocus.cpp
+          dprscaling.cpp
+          resizehandles.cpp
           monitorpreview.cpp
           confighandler.cpp
           systemnotification.cpp

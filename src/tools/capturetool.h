@@ -6,6 +6,7 @@
 #include "tools/capturecontext.h"
 #include "utils/colorutils.h"
 #include "utils/pathinfo.h"
+#include "utils/resizehandles.h"
 
 #include <QIcon>
 #include <QPainter>
@@ -167,6 +168,21 @@ public:
     virtual void move(const QPoint& pos) { Q_UNUSED(pos) };
     virtual const QPoint* pos() { return nullptr; };
 
+    // Resize handles of a selected object. A drag starts with
+    // beginHandleDrag, and each dragHandle is relative to that start.
+    virtual ResizeHandles::Handle handleAt(const QPoint& pos,
+                                           int tolerance) const
+    {
+        Q_UNUSED(pos)
+        Q_UNUSED(tolerance)
+        return ResizeHandles::None;
+    }
+    virtual void beginHandleDrag(ResizeHandles::Handle handle)
+    {
+        Q_UNUSED(handle)
+    }
+    virtual void dragHandle(const QPoint& pos) { Q_UNUSED(pos) }
+
 signals:
     void requestAction(Request r);
 
@@ -180,6 +196,19 @@ protected:
     {
         return ColorUtils::colorIsDark(c) ? PathInfo::whiteIconPath()
                                           : PathInfo::blackIconPath();
+    }
+
+    void drawHandles(QPainter& painter, const QVector<QPoint>& centers)
+    {
+        const int radius = 5;
+        painter.save();
+        painter.setRenderHint(QPainter::Antialiasing);
+        painter.setPen(QPen(Qt::white, 1.5));
+        painter.setBrush(QColor(0x1e, 0x6f, 0xe8));
+        for (const QPoint& c : centers) {
+            painter.drawEllipse(c, radius, radius);
+        }
+        painter.restore();
     }
 
     void drawObjectSelectionRect(QPainter& painter, QRect rect)
