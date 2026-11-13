@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include <QPointF>
 #include <QWidget>
 
 class QLabel;
@@ -22,6 +23,8 @@ public:
 protected:
     void mousePressEvent(QMouseEvent*) override;
     void mouseMoveEvent(QMouseEvent*) override;
+    void mouseReleaseEvent(QMouseEvent*) override;
+    void mouseDoubleClickEvent(QMouseEvent*) override;
     void keyPressEvent(QKeyEvent*) override;
     void enterEvent(QEnterEvent*) override;
     void leaveEvent(QEvent*) override;
@@ -53,6 +56,9 @@ private:
     unsigned int m_rotateFactor{ 0 };
     qreal m_currentStepScaleFactor{ 1 };
     bool m_sizeChanged{ false };
+    // Left button pressed, a system move starts once the mouse moves
+    bool m_movePending{ false };
+    QPointF m_pressPosition;
 
 private slots:
     void showContextMenu(const QPoint& pos);

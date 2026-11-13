@@ -52,6 +52,7 @@ GeneralConf::GeneralConf(QWidget* parent)
     initSaveAfterCopy();
     initCopyPathAfterSave();
     initAntialiasingPinZoom();
+    initClosePinOnDoubleClick();
     initUndoLimit();
     initInsecurePixelate();
 #if !defined(Q_OS_MACOS)
@@ -96,6 +97,7 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
     m_saveAfterCopy->setChecked(config.saveAfterCopy());
     m_copyPathAfterSave->setChecked(config.copyPathAfterSave());
     m_antialiasingPinZoom->setChecked(config.antialiasingPinZoom());
+    m_closePinOnDoubleClick->setChecked(config.closePinOnDoubleClick());
     m_useJpgForClipboard->setChecked(config.useJpgForClipboard());
     m_copyOnDoubleClick->setChecked(config.copyOnDoubleClick());
 #ifdef ENABLE_IMGUR
@@ -718,6 +720,19 @@ void GeneralConf::initAntialiasingPinZoom()
     m_scrollAreaLayout->addWidget(m_antialiasingPinZoom);
     connect(m_antialiasingPinZoom, &QCheckBox::clicked, [](bool checked) {
         ConfigHandler().setAntialiasingPinZoom(checked);
+    });
+}
+
+void GeneralConf::initClosePinOnDoubleClick()
+{
+    m_closePinOnDoubleClick =
+      new QCheckBox(tr("Close pinned images with a double click"), this);
+    m_closePinOnDoubleClick->setToolTip(
+      tr("Double clicking a pinned image closes it, in addition to the "
+         "\"Close Active Pinned Window\" shortcut"));
+    m_scrollAreaLayout->addWidget(m_closePinOnDoubleClick);
+    connect(m_closePinOnDoubleClick, &QCheckBox::clicked, [](bool checked) {
+        ConfigHandler().setClosePinOnDoubleClick(checked);
     });
 }
 
