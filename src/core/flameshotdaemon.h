@@ -2,6 +2,7 @@
 
 #include <QByteArray>
 #include <QObject>
+#include <QString>
 
 #if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
 #include <QtDBus/QDBusAbstractAdaptor>
@@ -13,6 +14,7 @@ class QDBusMessage;
 class QDBusConnection;
 class TrayIcon;
 class CaptureWidget;
+class SystemNotification;
 
 #if !defined(DISABLE_UPDATE_CHECKER)
 class QNetworkAccessManager;
@@ -31,11 +33,16 @@ public:
     static void copyToClipboard(const QString& text,
                                 const QString& notification = "");
     static bool isThisInstanceHostingWidgets();
+    static void showSavedNotification(const QString& filePath,
+                                      const QString& message,
+                                      const QString& title);
 
     void sendTrayNotification(
       const QString& text,
       const QString& title = QStringLiteral("Flameshot Info"),
-      const int timeout = 5000);
+      const int timeout = 5000,
+      const QString& filePath = {});
+    QString lastNotificationPath() const;
 
 #if defined(USE_KDSINGLEAPPLICATION) &&                                        \
   (defined(Q_OS_MACOS) || defined(Q_OS_WIN))
@@ -83,6 +90,8 @@ private:
     bool m_clipboardSignalBlocked;
     QList<QWidget*> m_widgets;
     TrayIcon* m_trayIcon;
+    SystemNotification* m_notifications;
+    QString m_lastNotificationPath;
 
 #if !defined(DISABLE_UPDATE_CHECKER)
     QString m_appLatestUrl;

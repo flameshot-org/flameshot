@@ -1,4 +1,5 @@
 #include "abstractlogger.h"
+#include "core/flameshotdaemon.h"
 #include "utils/systemnotification.h"
 
 #include <QFileInfo>
@@ -48,8 +49,18 @@ AbstractLogger AbstractLogger::error(int targets)
 AbstractLogger& AbstractLogger::sendMessage(const QString& msg, Channel channel)
 {
     if (m_targets & Notification) {
-        SystemNotification().sendMessage(
-          msg, messageHeader(channel, Notification), m_notificationPath);
+        if (!m_notificationPath.isEmpty()) {
+            // Saved-file notifications are owned by the daemon so that the
+            // notification stays clickable after this short-lived process
+            // exits.
+            FlameshotDaemon::showSavedNotification(
+              m_notificationPath, msg, messageHeader(channel, Notification));
+        } else {
+            // Explicit empty path: the two-argument overload would treat
+            // the header as a save path.
+            SystemNotification().sendMessage(
+              msg, messageHeader(channel, Notification), QString());
+        }
     }
     if (!m_textStreams.isEmpty()) {
         for (auto* stream : m_textStreams) {

@@ -7,6 +7,8 @@
 #include "utils/globalvalues.h"
 
 #include <QApplication>
+#include <QDesktopServices>
+#include <QFileInfo>
 #include <QGuiApplication>
 #include <QMenu>
 #include <QScreen>
@@ -76,6 +78,20 @@ TrayIcon::TrayIcon(QObject* parent)
 #endif
 
     show(); // TODO needed?
+
+    // On platforms where the tray notification is clickable, open the folder
+    // of the last saved file.
+    connect(this, &QSystemTrayIcon::messageClicked, this, [this]() {
+        auto* daemon = FlameshotDaemon::instance();
+        if (daemon == nullptr) {
+            return;
+        }
+        const QString path = daemon->lastNotificationPath();
+        if (!path.isEmpty()) {
+            QDesktopServices::openUrl(
+              QUrl::fromLocalFile(QFileInfo(path).absolutePath()));
+        }
+    });
 
     if (ConfigHandler().showStartupLaunchMessage()) {
         showMessage(

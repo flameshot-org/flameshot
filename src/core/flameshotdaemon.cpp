@@ -5,6 +5,7 @@
 #include "utils/confighandler.h"
 #include "utils/globalvalues.h"
 #include "utils/screenshotsaver.h"
+#include "utils/systemnotification.h"
 #include "widgets/capture/capturewidget.h"
 #include "widgets/trayicon.h"
 
@@ -16,7 +17,9 @@
 
 #if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
 #include <QDBusConnection>
+#include <QDBusConnectionInterface>
 #include <QDBusMessage>
+#include <QDBusReply>
 #endif
 
 #if !defined(DISABLE_UPDATE_CHECKER)
@@ -88,6 +91,7 @@ FlameshotDaemon::FlameshotDaemon()
   , m_hostingClipboard(false)
   , m_clipboardSignalBlocked(false)
   , m_trayIcon(nullptr)
+  , m_notifications(nullptr)
 #if !defined(DISABLE_UPDATE_CHECKER)
   , m_appLatestVersion(QStringLiteral(APP_VERSION).replace("v", ""))
   , m_showManualCheckAppUpdateStatus(false)
@@ -105,6 +109,7 @@ FlameshotDaemon::FlameshotDaemon()
       });
 
     m_persist = !ConfigHandler().autoCloseIdleDaemon();
+    m_notifications = new SystemNotification(this);
     connect(ConfigHandler::getInstance(),
             &ConfigHandler::fileChanged,
             this,
@@ -213,12 +218,90 @@ bool FlameshotDaemon::isThisInstanceHostingWidgets()
 
 void FlameshotDaemon::sendTrayNotification(const QString& text,
                                            const QString& title,
-                                           const int timeout)
+                                           const int timeout,
+                                           const QString& filePath)
 {
+    if (!filePath.isEmpty()) {
+        m_lastNotificationPath = filePath;
+    }
     if (m_trayIcon) {
         m_trayIcon->showMessage(
           title, text, QIcon(GlobalValues::iconPath()), timeout);
     }
+}
+
+QString FlameshotDaemon::lastNotificationPath() const
+{
+    return m_lastNotificationPath;
+}
+
+/**
+ * @brief Show a "file saved" notification that opens the file's folder when
+ * clicked.
+ *
+ * The notification must be owned by a long-lived process, because the
+ * notification server delivers ActionInvoked to the process that sent Notify.
+ * A `flameshot gui`/`full`/`screen` process exits right after the capture, so
+ * in that case the daemon is asked to show the notification instead.
+ */
+void FlameshotDaemon::showSavedNotification(const QString& filePath,
+                                            const QString& message,
+                                            const QString& title)
+{
+    if (!ConfigHandler().showDesktopNotification()) {
+        return;
+    }
+
+    if (filePath.isEmpty()) {
+        return;
+    }
+
+    if (instance()) {
+        // We are inside the daemon: the notification and its ActionInvoked
+        // subscription live as long as the daemon does.
+        instance()->m_notifications->sendMessage(message, title, filePath);
+        return;
+    }
+
+#if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
+    QDBusConnection bus = QDBusConnection::sessionBus();
+    if (!bus.isConnected()) {
+        SystemNotification().sendMessage(message, title, filePath);
+        return;
+    }
+
+    const QString service = QStringLiteral("org.flameshot.Flameshot");
+    QDBusConnectionInterface* connectionInterface = bus.interface();
+    bool registered = connectionInterface != nullptr &&
+                      connectionInterface->isServiceRegistered(service);
+    if (!registered && connectionInterface != nullptr) {
+        // D-Bus activation starts the daemon if the service file is installed.
+        QDBusReply<void> reply = connectionInterface->startService(service);
+        registered = reply.isValid();
+    }
+
+    if (registered) {
+        QDBusMessage m =
+          createMethodCall(QStringLiteral("showSavedNotification"));
+        m << filePath << message << title;
+        bus.call(m, QDBus::NoBlock);
+        return;
+    }
+
+    // The daemon is unavailable (e.g. a development build without the D-Bus
+    // service file): still inform the user, without clickable actions.
+    SystemNotification().sendMessage(message, title, filePath);
+#else
+    QMetaObject::invokeMethod(
+      qApp,
+      [message, title, filePath]() {
+          if (FlameshotDaemon::instance()) {
+              FlameshotDaemon::instance()->sendTrayNotification(
+                message, title, 5000, filePath);
+          }
+      },
+      Qt::QueuedConnection);
+#endif
 }
 
 #if !defined(DISABLE_UPDATE_CHECKER)
