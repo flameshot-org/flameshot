@@ -11,11 +11,17 @@ class ColorPicker : public ColorPickerWidget
 public:
     explicit ColorPicker(QWidget* parent = nullptr);
     void setNewColor();
+    void setMultiMonitor(bool enable);
+    void updateHoverPosition(const QPoint& pos);
 signals:
     void colorSelected(QColor c);
+    void selectionChanged();
 
 protected:
     void showEvent(QShowEvent* event) override;
     void hideEvent(QHideEvent* event) override;
     void mouseMoveEvent(QMouseEvent* e) override;
+
+private:
+    bool m_multiMonitor{ false };
 };

@@ -42,10 +42,13 @@ class UpdateNotificationWidget;
 #endif
 class UtilityPanel;
 class SidePanelWidget;
+class OrientablePushButton;
+class ScreenOverlay;
 
 class CaptureWidget : public QWidget
 {
     Q_OBJECT
+    friend class ScreenOverlay;
 
 public:
     explicit CaptureWidget(const CaptureRequest& req,
@@ -53,6 +56,8 @@ public:
                            QWidget* parent = nullptr);
     ~CaptureWidget();
 
+    bool isMultiMonitor() const { return m_multiMonitor; }
+    bool isClosing() const { return m_closing; }
     QPixmap pixmap();
     void setCaptureToolObjects(const CaptureToolObjects& captureToolObjects);
 #if !defined(DISABLE_UPDATE_CHECKER)
@@ -110,7 +115,10 @@ protected:
     void resizeEvent(QResizeEvent* resizeEvent) override;
     void moveEvent(QMoveEvent* moveEvent) override;
     void changeEvent(QEvent* changeEvent) override;
+    void showEvent(QShowEvent* event) override;
+    void hideEvent(QHideEvent* event) override;
     void closeEvent(QCloseEvent* event) override;
+    bool eventFilter(QObject* obj, QEvent* event) override;
 
 private:
     void pushObjectsStateToUndoStack();
@@ -146,7 +154,23 @@ private:
     QRect extendedSelection() const;
     QRect extendedRect(const QRect& r) const;
     QRect paddedUpdateRect(const QRect& r) const;
-    void drawErrorMessage(const QString& msg, QPainter* painter);
+    void paintCanvas(QPainter& painter, const QRect& viewBounds);
+    void paintScreenOverlay(ScreenOverlay* overlay, QPaintEvent* paintEvent);
+    void forwardOverlayMouseEvent(ScreenOverlay* overlay, QMouseEvent* event);
+    void updateCanvas(const QRect& r = QRect());
+    void repaintCanvas();
+    ScreenOverlay* primaryOverlay() const;
+    ScreenOverlay* overlayAtCanvasPos(const QPoint& pos) const;
+    ScreenOverlay* overlayForRect(const QRect& r) const;
+    ScreenOverlay* overlayForParent(QWidget* parent) const;
+    void syncButtonsToOverlays();
+    void syncPanelToOverlay(ScreenOverlay* host);
+    void onOverlayResized(ScreenOverlay* overlay);
+    QRect toolWidgetCanvasRect() const;
+    QRect colorPickerCanvasRect() const;
+    void drawErrorMessage(const QString& msg,
+                          QPainter* painter,
+                          const QRect& bounds);
     void drawInactiveRegion(QPainter* painter);
     void drawToolsData(bool drawSelection = true);
     void drawObjectSelection();
@@ -185,7 +209,7 @@ private:
     bool m_configErrorResolved;
 
 #if !defined(DISABLE_UPDATE_CHECKER)
-    UpdateNotificationWidget* m_updateNotificationWidget;
+    UpdateNotificationWidget* m_updateNotificationWidget{ nullptr };
 #endif
     quint64 m_lastMouseWheel;
     QPointer<CaptureToolButton> m_sizeIndButton;
@@ -196,15 +220,15 @@ private:
     QPointer<QWidget> m_toolWidget;
     QPointer<QMessageBox> m_quitPrompt;
 
-    ButtonHandler* m_buttonHandler;
-    UtilityPanel* m_panel;
-    SidePanelWidget* m_sidePanel;
-    ColorPicker* m_colorPicker;
+    ButtonHandler* m_buttonHandler{ nullptr };
+    UtilityPanel* m_panel{ nullptr };
+    SidePanelWidget* m_sidePanel{ nullptr };
+    ColorPicker* m_colorPicker{ nullptr };
     ConfigHandler m_config;
-    NotifierBox* m_notifierBox;
-    HoverEventFilter* m_eventFilter;
-    SelectionWidget* m_selection;
-    MagnifierWidget* m_magnifier;
+    NotifierBox* m_notifierBox{ nullptr };
+    HoverEventFilter* m_eventFilter{ nullptr };
+    SelectionWidget* m_selection{ nullptr };
+    MagnifierWidget* m_magnifier{ nullptr };
     QString m_helpMessage;
 
     SelectionWidget::SideType m_mouseOverHandle;
@@ -233,4 +257,19 @@ private:
     int m_gridSize{ 10 };
 
     bool m_clipboardWorkaroundDone{ false };
+    bool m_multiMonitor{ false };
+    bool m_closing{ false };
+    bool m_forwardingOverlayEvent{ false };
+    QRect m_desktopGeometry;
+    QVector<ScreenOverlay*> m_overlays;
+    QVector<CaptureToolButton*> m_toolbarButtons;
+    QPointer<OrientablePushButton> m_panelToggleButton;
+    bool m_panelButtonPressing{ false };
+    bool m_panelButtonDragging{ false };
+    bool m_panelButtonMoved{ false };
+    QPoint m_panelButtonGrabOffset;
+    QPoint m_panelButtonCanvasPos;
+    QPoint m_panelButtonPressCanvasPos;
+    QPixmap m_panelButtonDragPixmap;
+    QRect m_prevToolWidgetCanvasRect;
 };

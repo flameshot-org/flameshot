@@ -393,6 +393,25 @@ QRect ScreenGrabber::screenGeometry(QScreen* screen)
     return geometry;
 }
 
+QRect ScreenGrabber::screenLogicalGeometry(QScreen* screen)
+{
+    if (!screen) {
+        return {};
+    }
+    QRect scrRect = screen->geometry();
+    if (QGuiApplication::platformName() == QLatin1String("xcb")) {
+        // On X11 (xcb), QScreen::geometry().size() is device-independent,
+        // whereas topLeft() is in native X11 root window pixels.
+        // On Wayland, both topLeft() and size() are device-independent.
+        const qreal dpr = screen->devicePixelRatio();
+        if (!qFuzzyCompare(dpr, 1.0) && dpr > 0.0) {
+            scrRect.moveTopLeft(
+              QPoint(qRound(scrRect.x() / dpr), qRound(scrRect.y() / dpr)));
+        }
+    }
+    return scrRect;
+}
+
 QPixmap ScreenGrabber::grabScreen(QScreen* screen, bool& ok)
 {
     QPixmap p;
@@ -422,6 +441,15 @@ QRect ScreenGrabber::desktopGeometry()
         scrRect.moveTo(QPointF(scrRect.x() / dpr, scrRect.y() / dpr).toPoint());
 #endif
         geometry = geometry.united(scrRect);
+    }
+    return geometry;
+}
+
+QRect ScreenGrabber::logicalDesktopGeometry()
+{
+    QRect geometry;
+    for (QScreen* const screen : QGuiApplication::screens()) {
+        geometry = geometry.united(screenLogicalGeometry(screen));
     }
     return geometry;
 }
@@ -874,21 +902,23 @@ QPixmap ScreenGrabber::x11LegacyScreenshot()
     // On i3 (tested) DPR is uniform so we don't need the per-screen
     // physical pixel math that the Windows backend does. Not sure if this is
     // true for other DE's like xmonad.
-    QRect totalGeom;
-    for (QScreen* s : screens) {
-        totalGeom = totalGeom.united(s->geometry());
-    }
+    QRect totalGeom = logicalDesktopGeometry();
 
-    qreal dpr = screens.first()->devicePixelRatio();
-    QPixmap desktop(qRound(totalGeom.width() * dpr),
-                    qRound(totalGeom.height() * dpr));
-    desktop.setDevicePixelRatio(dpr);
+    qreal maxDpr = 1.0;
+    for (QScreen* s : screens) {
+        maxDpr = qMax(maxDpr, s->devicePixelRatio());
+    }
+    QPixmap desktop(qRound(totalGeom.width() * maxDpr),
+                    qRound(totalGeom.height() * maxDpr));
+    desktop.setDevicePixelRatio(maxDpr);
     desktop.fill(Qt::black);
 
     QPainter painter(&desktop);
     for (QScreen* s : screens) {
         QPixmap p = s->grabWindow(0);
-        QPoint offset = s->geometry().topLeft() - totalGeom.topLeft();
+        p.setDevicePixelRatio(s->devicePixelRatio());
+        QPoint offset =
+          screenLogicalGeometry(s).topLeft() - totalGeom.topLeft();
         painter.drawPixmap(offset, p);
     }
     painter.end();
