@@ -112,11 +112,13 @@ void AppLauncherWidget::launch(const QModelIndex& index)
 {
     if (!m_tempFile || !QFileInfo(m_tempFile->fileName()).isReadable()) {
         delete m_tempFile;
-        // _XXXXXX is how Qt temporary files are mocked before substitution
-        m_tempFile = new QTemporaryFile(QDir::tempPath() + "/" +
-                                          FileNameHandler().parsedPattern() +
-                                          "_XXXXXX.png",
-                                        this);
+        // _XXXXXX is how Qt temporary files are mocked before substitution.
+        // Subdirectories from the filename pattern are not used here.
+        m_tempFile = new QTemporaryFile(
+          QDir::tempPath() + "/" +
+            QFileInfo(FileNameHandler().parsedPattern()).fileName() +
+            "_XXXXXX.png",
+          this);
         m_tempFile->setAutoRemove(false);
         if (!m_tempFile->open()) {
             QMessageBox::about(
