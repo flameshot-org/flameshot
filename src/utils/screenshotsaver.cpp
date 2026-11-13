@@ -2,6 +2,7 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "screenshotsaver.h"
+#include "core/flameshot.h"
 #include "core/flameshotdaemon.h"
 #include "utils/abstractlogger.h"
 #include "utils/confighandler.h"
@@ -295,6 +296,7 @@ protected:
     QStringList formats() const override
     {
         return { QStringLiteral("image/png"),
+                 QStringLiteral("image/bmp"),
                  QStringLiteral("application/x-qt-image") };
     }
 
@@ -305,11 +307,15 @@ protected:
             notifyOwner();
             return QVariant::fromValue(m_image);
         }
-        if (mimeType == QLatin1String("image/png")) {
+        if (mimeType == QLatin1String("image/png") ||
+            mimeType == QLatin1String("image/bmp")) {
             QByteArray ba;
             QBuffer buffer(&ba);
             buffer.open(QIODevice::WriteOnly);
-            m_image.save(&buffer, "PNG");
+            const char* format =
+              mimeType == QLatin1String("image/bmp") ? "BMP" : "PNG";
+            if (!m_image.save(&buffer, format))
+                return {};
             notifyOwner();
             return ba;
         }
@@ -342,7 +348,32 @@ bool saveToClipboardGnomeWorkaround(const QPixmap& pixmap, QWidget* keepAlive)
 {
     auto* mimeData = new ClipboardWatcherMimeData(pixmap.toImage(), keepAlive);
     QClipboard* clipboard = QGuiApplication::clipboard();
+    // Mutter retains only its preferred image format after the owner exits.
+    // Keep the native clipboard source alive so BMP remains available too.
+    const bool alreadyHoldingClipboard =
+      qApp->property("flameshotClipboardOwner").toBool();
+    const bool quitOnLastWindowClosed = qApp->quitOnLastWindowClosed();
+    qApp->setProperty("flameshotClipboardOwner", true);
+    qApp->setQuitOnLastWindowClosed(false);
     clipboard->setMimeData(mimeData);
+    if (!alreadyHoldingClipboard) {
+        auto* lifetime = new QObject(qApp);
+        QObject::connect(
+          clipboard,
+          &QClipboard::dataChanged,
+          lifetime,
+          [clipboard, lifetime, quitOnLastWindowClosed]() {
+              if (clipboard->ownsClipboard())
+                  return;
+              QObject::disconnect(clipboard, nullptr, lifetime, nullptr);
+              lifetime->deleteLater();
+              qApp->setProperty("flameshotClipboardOwner", false);
+              qApp->setQuitOnLastWindowClosed(quitOnLastWindowClosed);
+              if (FlameshotDaemon::instance() == nullptr &&
+                  !Flameshot::instance()->haveExternalWidget())
+                  qApp->quit();
+          });
+    }
 
     keepAlive->hide();
 

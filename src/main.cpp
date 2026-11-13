@@ -75,7 +75,9 @@ int requestCaptureAndWait(const CaptureRequest& req)
         }
 #else
         // if this instance is not daemon, make sure it exit after caputre finish
-        if (FlameshotDaemon::instance() == nullptr && !Flameshot::instance()->haveExternalWidget()) {
+        if (FlameshotDaemon::instance() == nullptr &&
+            !Flameshot::instance()->haveExternalWidget() &&
+            !qApp->property("flameshotClipboardOwner").toBool()) {
             qApp->exit(E_OK);
         }
 #endif
@@ -489,9 +491,19 @@ int main(int argc, char* argv[])
             if (!mutex) {
                 return 1;
             }
+            QObject::connect(Flameshot::instance(),
+                             &Flameshot::captureTaken,
+                             qApp,
+                             [mutex](const QPixmap&) {
+                                 // Clipboard ownership may outlive the capture
+                                 // window.
+                                 if (mutex->isAttached())
+                                     mutex->detach();
+                             });
             QObject::connect(
               qApp, &QCoreApplication::aboutToQuit, qApp, [mutex]() {
-                  mutex->detach();
+                  if (mutex->isAttached())
+                      mutex->detach();
                   delete mutex;
               });
         }
