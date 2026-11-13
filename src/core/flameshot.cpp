@@ -183,6 +183,12 @@ CaptureWidget* Flameshot::gui(const CaptureRequest& req)
         }
 
         m_captureWindow = new CaptureWidget(request);
+        if (m_captureWindow->grabFailed()) {
+            // It already closed itself. Showing it anyway only flashes a
+            // window and, on Wayland, leaves activation requests that are
+            // never used (GNOME then keeps a busy cursor for ~15 s).
+            return nullptr;
+        }
 
 #ifdef Q_OS_WIN
         m_captureWindow->show();

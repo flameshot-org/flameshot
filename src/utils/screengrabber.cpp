@@ -37,6 +37,7 @@
 #endif
 
 bool ScreenGrabber::m_monitorSelectionActive = false;
+QPointer<QWidget> ScreenGrabber::m_monitorSelectionWidget;
 
 ScreenGrabber::ScreenGrabber(QObject* parent)
   : QObject(parent)
@@ -268,6 +269,13 @@ QPixmap ScreenGrabber::selectMonitorAndCrop(const QPixmap& fullScreenshot,
         AbstractLogger::error()
           << tr("Screenshot already in progress, please wait for the current "
                 "screenshot to complete");
+        // Bring the open selection back. On Wayland this also uses the
+        // activation token the caller may have received (e.g. from the tray),
+        // which would otherwise stay pending and keep a busy cursor.
+        if (m_monitorSelectionWidget) {
+            m_monitorSelectionWidget->raise();
+            m_monitorSelectionWidget->activateWindow();
+        }
         ok = false;
         return QPixmap();
     }
@@ -276,6 +284,7 @@ QPixmap ScreenGrabber::selectMonitorAndCrop(const QPixmap& fullScreenshot,
     m_selectedMonitor = -1;
     m_userCancelled = false;
     QWidget* container = createMonitorPreviews(fullScreenshot);
+    m_monitorSelectionWidget = container;
 
     // Wait for user to select a monitor
     QEventLoop loop;
