@@ -31,9 +31,13 @@
 #include <QDBusInterface>
 #include <QDBusMessage>
 #include <QDBusReply>
+#include <QDBusUnixFileDescriptor>
 #include <QDir>
 #include <QUrl>
 #include <QUuid>
+#include <fcntl.h>
+#include <poll.h>
+#include <unistd.h>
 #endif
 
 bool ScreenGrabber::m_monitorSelectionActive = false;
@@ -186,10 +190,94 @@ ScreenGrabber::PortalStatus ScreenGrabber::freeDesktopPortal(
 #endif
 }
 
+// Takes the screenshot directly from KWin. KWin hands over the raw pixels,
+// while the portal has them encoded to a PNG file that has to be read back,
+// which is about ten times slower. Needs X-KDE-DBUS-Restricted-Interfaces in
+// the desktop file of this executable, otherwise this returns a null pixmap and
+// the caller uses the portal.
+QPixmap ScreenGrabber::kwinScreenshot()
+{
+#if defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)
+    int fds[2];
+    if (pipe2(fds, O_CLOEXEC) != 0) {
+        return QPixmap();
+    }
+    QDBusMessage reply;
+    {
+        QDBusMessage call = QDBusMessage::createMethodCall(
+          QStringLiteral("org.kde.KWin"),
+          QStringLiteral("/org/kde/KWin/ScreenShot2"),
+          QStringLiteral("org.kde.KWin.ScreenShot2"),
+          QStringLiteral("CaptureWorkspace"));
+        const QVariantMap options{
+            { QStringLiteral("native-resolution"), true },
+            { QStringLiteral("include-cursor"), false },
+        };
+        call << options << QVariant::fromValue(QDBusUnixFileDescriptor(fds[1]));
+        reply = QDBusConnection::sessionBus().call(call, QDBus::Block, 3000);
+    }
+    // Every copy of the write end is closed now, except the one KWin writes to
+    close(fds[1]);
+
+    QPixmap result;
+    if (reply.type() == QDBusMessage::ReplyMessage &&
+        !reply.arguments().isEmpty()) {
+        const QVariantMap info =
+          qdbus_cast<QVariantMap>(reply.arguments().constFirst());
+        const int width = info.value(QStringLiteral("width")).toInt();
+        const int height = info.value(QStringLiteral("height")).toInt();
+        const int stride = info.value(QStringLiteral("stride")).toInt();
+        const auto format = static_cast<QImage::Format>(
+          info.value(QStringLiteral("format")).toInt());
+        const qsizetype size = qsizetype(stride) * height;
+
+        QByteArray pixels(size, Qt::Uninitialized);
+        qsizetype received = 0;
+        fcntl(fds[0], F_SETFL, O_NONBLOCK);
+        pollfd pfd{ fds[0], POLLIN, 0 };
+        while (received < size && poll(&pfd, 1, 3000) > 0) {
+            const ssize_t n =
+              read(fds[0], pixels.data() + received, size - received);
+            if (n <= 0) {
+                break;
+            }
+            received += n;
+        }
+        if (size > 0 && received == size) {
+            QImage image(reinterpret_cast<const uchar*>(pixels.constData()),
+                         width,
+                         height,
+                         stride,
+                         format);
+            // A screen has no transparency, ignore any leftover alpha
+            if (format == QImage::Format_ARGB32_Premultiplied ||
+                format == QImage::Format_ARGB32) {
+                image.reinterpretAsFormat(QImage::Format_RGB32);
+            }
+            // copy(): the pixmap would otherwise keep pointing into pixels
+            result = QPixmap::fromImage(image.copy());
+        }
+    }
+    close(fds[0]);
+    return result;
+#else
+    return QPixmap();
+#endif
+}
+
 QPixmap ScreenGrabber::unixScreenshot(bool& ok)
 {
 #if defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)
     QPixmap screenshot;
+
+    if (m_info.waylandDetected() &&
+        m_info.windowManager() == DesktopInfo::KDE) {
+        screenshot = kwinScreenshot();
+        if (!screenshot.isNull()) {
+            ok = true;
+            return screenshot;
+        }
+    }
 
     if (!m_info.waylandDetected() && ConfigHandler().useX11LegacyScreenshot()) {
         screenshot = x11LegacyScreenshot();

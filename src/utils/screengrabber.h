@@ -53,6 +53,7 @@ private:
     QPixmap windowsScreenshot(int wid);
     QPixmap x11LegacyScreenshot();
     QPixmap unixScreenshot(bool& ok);
+    QPixmap kwinScreenshot();
 
     DesktopInfo m_info;
     QPixmap Screenshot;
