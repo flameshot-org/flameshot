@@ -11,6 +11,7 @@ target_sources(
           extendedslider.cpp
           filenameeditor.cpp
           generalconf.cpp
+          pluginconfigwidget.cpp
           setshortcutwidget.cpp
           shortcutswidget.cpp
           strftimechooserwidget.cpp

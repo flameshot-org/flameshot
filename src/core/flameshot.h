@@ -52,7 +52,7 @@ public slots:
     void screen(CaptureRequest req, int const screenNumber = -1);
     void full(const CaptureRequest& req);
     void launcher();
-    void config();
+    void config(int tabIndex = 0);
 
     void info();
 

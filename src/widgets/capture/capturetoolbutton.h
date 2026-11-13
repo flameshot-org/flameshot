@@ -19,6 +19,8 @@ class CaptureToolButton : public CaptureButton
 public:
     explicit CaptureToolButton(const CaptureTool::Type,
                                QWidget* parent = nullptr);
+    explicit CaptureToolButton(CaptureTool* customTool,
+                               QWidget* parent = nullptr);
     ~CaptureToolButton();
 
     static const QList<CaptureTool::Type>& getIterableButtonTypes();
