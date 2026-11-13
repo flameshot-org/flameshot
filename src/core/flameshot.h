@@ -5,6 +5,7 @@
 
 #include "core/capturerequest.h"
 #include "widgets/capture/capturewidget.h"
+#include "widgets/capture/multimonitorcapturesession.h"
 
 #include <QObject>
 #include <QPointer>
@@ -89,6 +90,7 @@ private:
     bool m_haveExternalWidget;
 
     QPointer<CaptureWidget> m_captureWindow;
+    QPointer<MultiMonitorCaptureSession> m_captureSession;
     QPointer<InfoWindow> m_infoWindow;
     QPointer<CaptureLauncher> m_launcherWindow;
     QPointer<ConfigWindow> m_configWindow;

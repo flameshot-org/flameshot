@@ -20,10 +20,15 @@
 #include <QScreen>
 #endif
 
-SidePanelWidget::SidePanelWidget(QPixmap* p, QWidget* parent)
+SidePanelWidget::SidePanelWidget(QPixmap* p,
+                                 const QPoint& pixmapOrigin,
+                                 qreal displayScale,
+                                 QWidget* parent)
   : QWidget(parent)
   , m_layout(new QVBoxLayout(this))
   , m_pixmap(p)
+  , m_pixmapOrigin(pixmapOrigin)
+  , m_displayScale(displayScale)
 {
 
     if (parent != nullptr) {
@@ -157,7 +162,8 @@ void SidePanelWidget::onToolSizeChanged(int t)
 void SidePanelWidget::startColorGrab()
 {
     m_revertColor = m_color;
-    m_colorGrabber = new ColorGrabWidget(m_pixmap);
+    m_colorGrabber =
+      new ColorGrabWidget(m_pixmap, m_pixmapOrigin, m_displayScale);
     connect(m_colorGrabber,
             &ColorGrabWidget::colorUpdated,
             this,
