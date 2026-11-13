@@ -6,6 +6,7 @@
 #include "core/qguiappcurrentscreen.h"
 #include "tools/capturetool.h"
 #include "tools/toolfactory.h"
+#include "tools/toolregistry.h"
 #include "utils/globalvalues.h"
 
 #include <QCheckBox>
@@ -151,7 +152,16 @@ void ShortcutsWidget::onShortcutCellClicked(int row, int col)
                 shortcutValue = QKeySequence("");
             }
 #endif
-            if (m_config.setShortcut(shortcutName, shortcutValue.toString())) {
+            bool updated;
+            if (shortcutName.startsWith("PLUGIN:")) {
+                m_config.setPluginShortcut(shortcutName.mid(7),
+                                           shortcutValue.toString());
+                updated = true;
+            } else {
+                updated =
+                  m_config.setShortcut(shortcutName, shortcutValue.toString());
+            }
+            if (updated) {
                 populateInfoTable();
             }
         }
@@ -175,6 +185,21 @@ void ShortcutsWidget::loadShortcuts()
                                               << tr("Left Double-click"));
             }
         }
+        delete tool;
+    }
+
+    ToolRegistry registry;
+    for (const ToolDescriptor& descriptor : registry.tools()) {
+        if (!descriptor.isExternal()) {
+            continue;
+        }
+        CaptureTool* tool = ToolRegistry::createTool(descriptor);
+        if (!tool) {
+            continue;
+        }
+        m_shortcuts << (QStringList()
+                        << QStringLiteral("PLUGIN:") + descriptor.id
+                        << tool->description() << descriptor.shortcut);
         delete tool;
     }
 

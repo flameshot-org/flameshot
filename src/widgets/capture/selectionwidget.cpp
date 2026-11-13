@@ -149,6 +149,11 @@ QRect SelectionWidget::fullGeometry() const
     return QWidget::geometry();
 }
 
+QPoint SelectionWidget::toolbarAnchor() const
+{
+    return m_hasToolbarAnchor ? m_toolbarAnchor : geometry().bottomRight();
+}
+
 QRect SelectionWidget::rect() const
 {
     return QWidget::rect() - QMargins(MARGIN, MARGIN, MARGIN, MARGIN);
@@ -184,6 +189,11 @@ void SelectionWidget::parentMousePressEvent(QMouseEvent* e)
 
 void SelectionWidget::parentMouseReleaseEvent(QMouseEvent* e)
 {
+    if (e->button() == Qt::LeftButton) {
+        m_toolbarAnchor = e->pos();
+        m_hasToolbarAnchor = true;
+    }
+
     // released outside of the selection area
     if (!getMouseSide(e->pos())) {
         hide();

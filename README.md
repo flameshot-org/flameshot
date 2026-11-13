@@ -85,6 +85,7 @@
     - [Arch](#arch)
   - [Build](#build)
   - [Install](#install)
+- [Action Plugin SDK (experimental)](#action-plugin-sdk-experimental)
 - [License](#license)
 - [Privacy Policy](#privacy-policy)
 - [Code Signing Policy](#code-signing-policy)
@@ -572,6 +573,13 @@ cmake --install "$BUILD_DIR"
 ### FAQ
 
 <https://flameshot.org/docs/guide/faq/>
+
+## Action Plugin SDK (experimental)
+
+The experimental action-plugin platform lets external programs process a
+selected screenshot and return clipboard text or a desktop notification. Start
+with the beginner-friendly [SDK tutorial](sdk/README.md), or read the complete
+[action-plugin API reference](docs/action-plugins.md).
 
 ## License
 
