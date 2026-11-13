@@ -15,6 +15,7 @@
 #include "core/capturerequest.h"
 #include "core/flameshot.h"
 #include "core/flameshotdaemon.h"
+#include "core/qguiappcurrentscreen.h"
 #include "utils/abstractlogger.h"
 #include "utils/confighandler.h"
 #include "utils/filenamehandler.h"
@@ -29,8 +30,10 @@
 
 #include <QApplication>
 #include <QDir>
+#include <QGuiApplication>
 #include <QLibraryInfo>
 #include <QNetworkProxyFactory>
+#include <QScreen>
 #include <QSharedMemory>
 #include <QTimer>
 #include <QTranslator>
@@ -297,6 +300,9 @@ int main(int argc, char* argv[])
     CommandArgument screenArgument(
       QStringLiteral("screen"),
       QObject::tr("Capture a screenshot of the specified monitor."));
+    CommandArgument gifArgument(
+      QStringLiteral("gif"),
+      QObject::tr("Record an animated GIF of the screen or a region."));
 
     // Options
     CommandOption pathOption(
@@ -363,6 +369,25 @@ int main(int argc, char* argv[])
     CommandOption editOption(
       { "e", "edit" },
       QObject::tr("Interactively select and edit the screenshot region"));
+    CommandOption durationOption(
+      "duration",
+      QObject::tr("GIF recording duration in seconds (0 = stop manually)"),
+      QObject::tr("seconds"),
+      QStringLiteral("10"));
+    CommandOption gifFpsOption("fps",
+                               QObject::tr("GIF recording frame rate"),
+                               QObject::tr("fps"),
+                               QStringLiteral("10"));
+    CommandOption gifLoopOption(
+      "loop",
+      QObject::tr("How many times the GIF repeats (0 = forever)"),
+      QObject::tr("count"),
+      QStringLiteral("0"));
+    CommandOption gifMaxWidthOption(
+      "max-width",
+      QObject::tr("Maximum width of the GIF in pixels (0 = keep original)"),
+      QObject::tr("pixels"),
+      QStringLiteral("1280"));
 
     // Add checkers
     auto colorChecker = [](const QString& colorCode) -> bool {
@@ -389,10 +414,24 @@ int main(int argc, char* argv[])
         int value = delayValue.toInt(&ok);
         return ok && value >= 0;
     };
+    auto fpsChecker = [](const QString& fpsValue) -> bool {
+        bool ok;
+        int value = fpsValue.toInt(&ok);
+        return ok && value >= 1 && value <= 50;
+    };
     auto regionChecker = [](const QString& region) -> bool {
         Region valueHandler;
         return valueHandler.check(region);
     };
+
+    const QString durationErr = QObject::tr(
+      "Invalid duration, it must be a non-negative number of seconds");
+    const QString fpsErr =
+      QObject::tr("Invalid frame rate, it must be a number between 1 and 50");
+    const QString loopErr = QObject::tr(
+      "Invalid loop count, it must be a non-negative number");
+    const QString maxWidthErr = QObject::tr(
+      "Invalid maximum width, it must be a non-negative number");
 
     const QString pathErr =
       QObject::tr("Invalid path, must be an existing directory or a new file "
@@ -425,11 +464,16 @@ int main(int argc, char* argv[])
     notificationOption.addChecker(booleanChecker, booleanErr);
     showHelpOption.addChecker(booleanChecker, booleanErr);
     screenNumberOption.addChecker(numericChecker, numberErr);
+    durationOption.addChecker(numericChecker, durationErr);
+    gifFpsOption.addChecker(fpsChecker, fpsErr);
+    gifLoopOption.addChecker(numericChecker, loopErr);
+    gifMaxWidthOption.addChecker(numericChecker, maxWidthErr);
 
     // Relationships
     parser.AddArgument(guiArgument);
     parser.AddArgument(screenArgument);
     parser.AddArgument(fullArgument);
+    parser.AddArgument(gifArgument);
     parser.AddArgument(launcherArgument);
     parser.AddArgument(configArgument);
     auto helpOption = parser.addHelpOption();
@@ -456,6 +500,15 @@ int main(int argc, char* argv[])
     parser.AddOptions(
       { pathOption, clipboardOption, delayOption, rawImageOption },
       fullArgument);
+    parser.AddOptions({ pathOption,
+                        regionOption,
+                        screenNumberOption,
+                        delayOption,
+                        durationOption,
+                        gifFpsOption,
+                        gifLoopOption,
+                        gifMaxWidthOption },
+                      gifArgument);
     parser.AddOptions({ autostartOption,
                         notificationOption,
                         filenameOption,
@@ -629,6 +682,67 @@ int main(int argc, char* argv[])
             delete qApp;
             return screenExitCode;
         }
+    } else if (parser.isSet(gifArgument)) { // GIF
+        reinitializeAsQApplication(argc, argv, translator, qtTranslator);
+
+        QString path = parser.value(pathOption);
+        if (!path.isEmpty()) {
+            path = QDir(path).absolutePath();
+        }
+        const int delay = parser.value(delayOption).toInt();
+        const int duration = parser.value(durationOption).toInt();
+        const int fps = parser.value(gifFpsOption).toInt();
+        const int loop = parser.value(gifLoopOption).toInt();
+        const int maxWidth = parser.value(gifMaxWidthOption).toInt();
+        const QString region = parser.value(regionOption);
+        const QString screenNumberStr = parser.value(screenNumberOption);
+        const int screenNumber = screenNumberStr.startsWith(QLatin1String("-"))
+                                   ? -1
+                                   : screenNumberStr.toInt();
+
+        QRect regionRect;
+        if (!region.isEmpty()) {
+            regionRect = Region().value(region).toRect();
+            if (regionRect.isEmpty()) {
+                AbstractLogger::error()
+                  << QObject::tr("Invalid GIF recording region.");
+                delete qApp;
+                return 1;
+            }
+        } else {
+            QScreen* screen = nullptr;
+            if (screenNumber >= 0 && screenNumber < qApp->screens().size()) {
+                screen = qApp->screens().at(screenNumber);
+            } else {
+                screen = QGuiAppCurrentScreen().currentScreen();
+            }
+            if (!screen) {
+                screen = QGuiApplication::primaryScreen();
+            }
+            if (!screen) {
+                AbstractLogger::error()
+                  << QObject::tr("Unable to determine the screen to record.");
+                delete qApp;
+                return 1;
+            }
+            regionRect = screen->geometry();
+        }
+
+        QObject::connect(Flameshot::instance(),
+                         &Flameshot::captureTaken,
+                         []() { qApp->exit(E_OK); });
+        QObject::connect(Flameshot::instance(),
+                         &Flameshot::captureFailed,
+                         []() { qApp->exit(E_ABORTED); });
+
+        QTimer::singleShot(delay, qApp, [=]() {
+            Flameshot::instance()->recordGif(
+              regionRect, path, fps, duration, loop, maxWidth);
+        });
+
+        const int gifExitCode = qApp->exec();
+        delete qApp;
+        return gifExitCode;
     } else if (parser.isSet(configArgument)) { // CONFIG
         bool autostart = parser.isSet(autostartOption);
         bool notification = parser.isSet(notificationOption);

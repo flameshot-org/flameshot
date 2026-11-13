@@ -136,6 +136,11 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     OPTION("showSelectionGeometry"       , BoundedInt        ( 0, 5, 4       )),
     OPTION("showSelectionGeometryHideTime", LowerBoundedInt  ( 0, 3000       )),
     OPTION("jpegQuality"                 , BoundedInt        ( 0,100,75      )),
+    // Animated GIF recording
+    OPTION("gifFps"                      , BoundedInt        ( 1, 50, 10   )),
+    OPTION("gifDuration"                 , LowerBoundedInt   ( 0, 0        )),
+    OPTION("gifLoop"                     , LowerBoundedInt   ( 0, 0        )),
+    OPTION("gifMaxWidth"                 , LowerBoundedInt   ( 0, 1280     )),
     OPTION("reverseArrow"                ,Bool               ( false         )),
     OPTION("arrowStyle"                  ,BoundedInt         ( 0, 1, 0       )),
     OPTION("insecurePixelate"            ,Bool               ( false         )),
@@ -211,6 +216,7 @@ static QMap<QString, QSharedPointer<KeySequence>> recognizedShortcuts = {
     SHORTCUT("TYPE_SIZEINCREASE"        ,                           ),
     SHORTCUT("TYPE_SIZEDECREASE"        ,                           ),
     SHORTCUT("TYPE_CIRCLECOUNT"         ,                           ),
+    SHORTCUT("TYPE_GIF"                 ,                           ),
     SHORTCUT("TYPE_CLOSE_ACTIVE_PIN_WINDOW"      ,   "Ctrl+Q"                ),
 };
 // clang-format on

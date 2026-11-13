@@ -198,6 +198,75 @@ QString ShowSaveFileDialog(const QString& title, const QString& directory)
     }
 }
 
+QString ShowGifSaveFileDialog(const QString& defaultFilePath)
+{
+    QFileDialog dialog(
+      nullptr, QObject::tr("Save GIF animation"), defaultFilePath);
+    dialog.setAcceptMode(QFileDialog::AcceptSave);
+    dialog.setFileMode(QFileDialog::AnyFile);
+    dialog.setNameFilter(QObject::tr("GIF animation (*.gif)"));
+    dialog.setDefaultSuffix(QStringLiteral("gif"));
+
+    if (dialog.exec() == QDialog::Accepted) {
+        return dialog.selectedFiles().constFirst();
+    }
+    return {};
+}
+
+bool saveGifToFilesystem(const QString& tempFilePath, const QString& path)
+{
+    if (!QFileInfo::exists(tempFilePath)) {
+        AbstractLogger::error() << QObject::tr("The recorded GIF is missing");
+        return false;
+    }
+
+    const QString completePath =
+      FileNameHandler().properScreenshotPath(path, QStringLiteral("gif"));
+    bool okay = false;
+
+    if (completePath == tempFilePath) {
+        okay = true;
+    } else if (QFile::rename(tempFilePath, completePath)) {
+        okay = true;
+    } else {
+        QFile tempFile(tempFilePath);
+        if (tempFile.copy(completePath)) {
+            tempFile.remove();
+            okay = true;
+        }
+    }
+
+    if (okay) {
+#if defined(Q_OS_UNIX)
+        // QTemporaryFile creates the file with 0600 permissions; make the
+        // saved GIF readable like a regular screenshot.
+        QFile::setPermissions(completePath,
+                              QFile::ReadOwner | QFile::WriteOwner |
+                                QFile::ReadGroup | QFile::ReadOther);
+#endif
+        const QString pathNoFile =
+          completePath.left(completePath.lastIndexOf(QLatin1Char('/')));
+        ConfigHandler().setSavePath(pathNoFile);
+
+        AbstractLogger::info().attachNotificationPath(completePath)
+          << QObject::tr("GIF saved as ") + completePath;
+
+        if (ConfigHandler().copyPathAfterSave()) {
+            QString printablePath = completePath;
+#ifdef Q_OS_WIN
+            printablePath.replace('/', '\\');
+#endif
+            FlameshotDaemon::copyToClipboard(
+              printablePath,
+              QObject::tr("Path copied to clipboard as ") + printablePath);
+        }
+    } else {
+        AbstractLogger::error()
+          << QObject::tr("Error trying to save as ") + completePath;
+    }
+    return okay;
+}
+
 void saveToClipboardMime(const QPixmap& capture, const QString& imageType)
 {
     QByteArray array;
