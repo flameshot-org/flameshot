@@ -420,8 +420,8 @@ void GeneralConf::initAllowMultipleGuiInstances()
 
 void GeneralConf::initAutoCloseIdleDaemon()
 {
-    m_autoCloseIdleDaemon = new QCheckBox(
-      tr("Automatically unload from memory when it is not needed"), this);
+    m_autoCloseIdleDaemon =
+      new QCheckBox(tr("Close flameshot when idle"), this);
     m_autoCloseIdleDaemon->setToolTip(tr(
       "Automatically close daemon (background process) when it is not needed"));
     m_scrollAreaLayout->addWidget(m_autoCloseIdleDaemon);
