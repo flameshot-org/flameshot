@@ -12,6 +12,8 @@ project(
   LANGUAGES CXX)
 set(PROJECT_NAME_CAPITALIZED "Flameshot")
 
+option(FLAMESHOT_BUILD_TESTS "Build the unit tests (needs Qt Test)" OFF)
+
 include(FetchContent)
 #Must be set before fetching external content!
 #QT_DEFAULT_MAJOR_VERSION used by QHotkey
@@ -156,6 +158,10 @@ if(WIN32 OR APPLE)
 endif()
 
 add_subdirectory(src)
+if(FLAMESHOT_BUILD_TESTS)
+  enable_testing()
+  add_subdirectory(tests)
+endif()
 
 # CPack
 set(CPACK_PACKAGE_VENDOR "flameshot-org")

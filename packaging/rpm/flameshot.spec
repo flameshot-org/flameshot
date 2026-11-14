@@ -31,6 +31,7 @@ BuildRequires: cmake(Qt6LinguistTools) >= 6.2.4
 BuildRequires: cmake(Qt6Network) >= 6.2.4
 BuildRequires: cmake(Qt6Svg) >= 6.2.4
 BuildRequires: cmake(Qt6Widgets) >= 6.2.4
+BuildRequires: pkgconfig(xcb)
 
 %if 0%{?fedora} || 0%{?suse_version} >= 1550 || (0%{?rhel} >= 10 && (0%{?centos} || 0%{?epel}))
 %global wayland_clipboard ON
