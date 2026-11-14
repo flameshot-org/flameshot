@@ -74,13 +74,16 @@ QString FileNameHandler::properScreenshotPath(QString path,
                                               const QString& format)
 {
     QFileInfo info(path);
-    QString suffix = info.suffix();
+    QString suffix;
 
     if (info.isDir()) {
-        // path is a directory => generate filename from configured pattern
+        // path is a directory => generate filename from configured pattern.
+        // The directory's own name must not contribute a suffix: a directory
+        // called "shots.v2" would otherwise yield "<pattern>.v2".
         path = QDir(QDir(path).absolutePath() + "/" + parsedPattern()).path();
     } else {
         // path points to a file => strip it of its suffix for now
+        suffix = info.suffix();
         path = QDir(info.dir().absolutePath() + "/" + info.completeBaseName())
                  .path();
     }
