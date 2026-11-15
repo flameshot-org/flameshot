@@ -757,23 +757,38 @@ QPixmap ScreenGrabber::cropToMonitor(const QPixmap& fullScreenshot,
     QPixmap cropped = fullScreenshot.copy(cropRect);
 
 #if defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)
-    // Linux: May need rescaling if scale factors don't match
-    if (qAbs(screenshotScaleX - targetDpr) > 0.01) {
-        int targetPhysicalWidth = qRound(targetGeometry.width() * targetDpr);
-        int targetPhysicalHeight = qRound(targetGeometry.height() * targetDpr);
-        cropped = cropped.scaled(targetPhysicalWidth,
-                                 targetPhysicalHeight,
+    // Linux: the portal returns the whole desktop at a single scale (the
+    // highest monitor scale), so the crop has that scale, which is not
+    // necessarily the monitor's own.
+    //
+    // QScreen::devicePixelRatio() doesn't reliably give the monitor's scale
+    // either: with fractional scaling on Wayland it reports the integer
+    // wl_output scale, rounded up (e.g. 2 for a 1.25 monitor). It is never
+    // lower than the real scale, though, so:
+    //  - if it is lower than the crop's scale, the monitor really has a lower
+    //    scale and the portal enlarged it, so shrink it back to native size;
+    //  - otherwise keep the pixels as they are, because enlarging them only
+    //    blurs the capture.
+    qreal croppedDpr = screenshotScaleX;
+    if (targetDpr < screenshotScaleX - 0.01) {
+        cropped = cropped.scaled(qRound(targetGeometry.width() * targetDpr),
+                                 qRound(targetGeometry.height() * targetDpr),
                                  Qt::IgnoreAspectRatio,
                                  Qt::SmoothTransformation);
-#ifdef FLAMESHOT_DEBUG_CAPTURE
-        qDebug() << tr("Scaling screenshot to: %1 %2")
-                      .arg(targetPhysicalWidth)
-                      .arg(targetPhysicalHeight);
-#endif
+        croppedDpr = targetDpr;
     }
+    cropped.setDevicePixelRatio(croppedDpr);
+#ifdef FLAMESHOT_DEBUG_CAPTURE
+    qDebug() << tr("Screenshot DPR: %1 (screen reports %2), size %3x%4")
+                  .arg(croppedDpr)
+                  .arg(targetDpr)
+                  .arg(cropped.width())
+                  .arg(cropped.height());
 #endif
+#else
     // Cropped region should be at target monitor's native DPR
     cropped.setDevicePixelRatio(targetDpr);
+#endif
 
     return cropped;
 }
