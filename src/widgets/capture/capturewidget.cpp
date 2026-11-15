@@ -925,13 +925,13 @@ void CaptureWidget::mouseDoubleClickEvent(QMouseEvent* event)
         // Start object editing
         auto activeTool = m_captureToolObjects.at(activeLayerIndex);
         if (activeTool && activeTool->type() == CaptureTool::TYPE_TEXT) {
-            m_activeTool = activeTool;
+            updateLayersPanel();
+            m_activeTool = m_captureToolObjects.at(activeLayerIndex);
             m_mouseIsClicked = false;
             m_context.mousePos = *m_activeTool->pos();
             m_captureToolObjectsBackup = m_captureToolObjects;
             m_activeTool->setEditMode(true);
             drawToolsData();
-            updateLayersPanel();
             handleToolSignal(CaptureTool::REQ_ADD_CHILD_WIDGET);
             if (!m_activeTool.isNull()) {
                 m_panel->setToolWidget(m_activeTool->configurationWidget());
