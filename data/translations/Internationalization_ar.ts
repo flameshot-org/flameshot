@@ -6,22 +6,22 @@
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="52"/>
         <source>Add New</source>
-        <translation type="unfinished"></translation>
+        <translation>أضافة جديد</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="103"/>
         <source>Move Up</source>
-        <translation type="unfinished"></translation>
+        <translation>تحريك للأعلى</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="104"/>
         <source>Move Down</source>
-        <translation type="unfinished"></translation>
+        <translation>تحريك للأسفل</translation>
     </message>
     <message>
         <location filename="../../build/_deps/qtcolorwidgets-src/src/QtColorWidgets/abstract_widget_list.cpp" line="105"/>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>إزالة</translation>
     </message>
 </context>
 <context>
@@ -29,12 +29,12 @@
     <message>
         <location filename="../../src/tools/accept/accepttool.cpp" line="31"/>
         <source>Accept</source>
-        <translation type="unfinished"></translation>
+        <translation>يوافق</translation>
     </message>
     <message>
         <location filename="../../src/tools/accept/accepttool.cpp" line="41"/>
         <source>Accept the capture</source>
-        <translation type="unfinished"></translation>
+        <translation>اعتماد اللقطة</translation>
     </message>
 </context>
 <context>
@@ -42,12 +42,12 @@
     <message>
         <location filename="../../src/tools/launcher/applaunchertool.cpp" line="23"/>
         <source>App Launcher</source>
-        <translation type="unfinished"></translation>
+        <translation>بدأ التطبيق</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applaunchertool.cpp" line="33"/>
         <source>Choose an app to open the capture</source>
-        <translation type="unfinished"></translation>
+        <translation>اختر تطبيقاً لفتح اللقطة</translation>
     </message>
 </context>
 <context>
@@ -55,33 +55,33 @@
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="50"/>
         <source>Open With</source>
-        <translation type="unfinished"></translation>
+        <translation>فتح باستخدام</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="79"/>
         <source>Launch in terminal</source>
-        <translation type="unfinished"></translation>
+        <translation>تشغيل في الطرفية</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="80"/>
         <source>Keep open after selection</source>
-        <translation type="unfinished"></translation>
+        <translation>ترك النافذة مفتوحة بعد الاختيار</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="116"/>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="150"/>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>خطأ</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="150"/>
         <source>Unable to launch in terminal.</source>
-        <translation type="unfinished"></translation>
+        <translation>تعذر التشغيل في الطرفية</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="116"/>
         <source>Unable to write in</source>
-        <translation type="unfinished"></translation>
+        <translation>عذرت الكتابة داخل</translation>
     </message>
 </context>
 <context>
@@ -89,12 +89,12 @@
     <message>
         <location filename="../../src/tools/arrow/arrowtool.cpp" line="77"/>
         <source>Arrow</source>
-        <translation type="unfinished"></translation>
+        <translation>سهم</translation>
     </message>
     <message>
         <location filename="../../src/tools/arrow/arrowtool.cpp" line="87"/>
         <source>Set the Arrow as the paint tool</source>
-        <translation type="unfinished"></translation>
+        <translation>تعيين السهم كأداة للرسم</translation>
     </message>
 </context>
 <context>
@@ -117,70 +117,70 @@
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="33"/>
         <source>Rectangular Region</source>
-        <translation type="unfinished"></translation>
+        <translation>تحديد مستطيل</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="39"/>
         <source>Full Screen (Current Display)</source>
-        <translation type="unfinished"></translation>
+        <translation>ملء الشاشة</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="42"/>
         <source>Full Screen (All Monitors)</source>
-        <translation type="unfinished"></translation>
+        <translation>ملء الشاشة (جميع الشاشات)</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="45"/>
         <source>No Delay</source>
-        <translation type="unfinished"></translation>
+        <translation>التقاط فوري</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="53"/>
         <source> second</source>
-        <translation type="unfinished"></translation>
+        <translation> ثانية</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="100"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="184"/>
         <location filename="../../src/widgets/capturelauncher.cpp" line="53"/>
         <source> seconds</source>
-        <translation type="unfinished"></translation>
+        <translation> ثوانٍ</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="165"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="185"/>
         <source>Take new screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation>التقاط صورة جديدة للشاشة</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="66"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="180"/>
         <source>Area:</source>
-        <translation type="unfinished"></translation>
+        <translation>النطاق</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="14"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="177"/>
         <source>Capture Launcher</source>
-        <translation type="unfinished"></translation>
+        <translation>مشغّل الالتقاط</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="34"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="178"/>
         <source>TextLabel</source>
-        <translation type="unfinished"></translation>
+        <translation>عنوان نصي</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="51"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="179"/>
         <source>Capture Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>وضع الالتقاط</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="80"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="182"/>
         <source>Delay:</source>
-        <translation type="unfinished"></translation>
+        <translation>التأخير:</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="93"/>
@@ -195,77 +195,77 @@
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="112"/>
         <source>Unable to capture screen</source>
         <translatorcomment>Impossible capturar la pantalla</translatorcomment>
-        <translation type="unfinished"></translation>
+        <translation>تعذر التقاط الشاشة</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="456"/>
         <source>Mouse</source>
-        <translation type="unfinished"></translation>
+        <translation>الماوس</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="456"/>
         <source>Select screenshot area</source>
-        <translation type="unfinished"></translation>
+        <translation>تحديد منطقة لقطة الشاشة&quot;</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="470"/>
         <source>Mouse Wheel</source>
-        <translation type="unfinished">Roda del ratolí</translation>
+        <translation>بكرة الماوس</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="470"/>
         <source>Change tool size</source>
-        <translation type="unfinished"></translation>
+        <translation>تغيير حجم الأداة</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="471"/>
         <source>Right Click</source>
-        <translation type="unfinished">Clic dret</translation>
+        <translation>النقر بالزر الأيمن</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="471"/>
         <source>Show color picker</source>
-        <translation type="unfinished">Mostra el selector de color</translation>
+        <translation>عرض لوحة اختيارالألوان</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="473"/>
         <source>Open side panel</source>
-        <translation type="unfinished"></translation>
+        <translation>إظهار الشريط الجانبي</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="474"/>
         <source>Esc</source>
-        <translation type="unfinished"></translation>
+        <translation>إلغاء</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="474"/>
         <source>Exit</source>
-        <translation type="unfinished">Surt</translation>
+        <translation>خروج</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="515"/>
         <source>Quit Capture</source>
-        <translation type="unfinished"></translation>
+        <translation>إنهاء الالتقاط</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="516"/>
         <source>Are you sure you want to quit capture?</source>
-        <translation type="unfinished"></translation>
+        <translation>هل أنت متأكد أنك تريد إنهاء</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="521"/>
         <source>Do not show this again</source>
-        <translation type="unfinished"></translation>
+        <translation>لا تُظهر هذا مرة أخرى</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="727"/>
         <source>Flameshot has lost focus. Keyboard shortcuts won&apos;t work until you click somewhere.</source>
-        <translation type="unfinished"></translation>
+        <translation>فقد البرنامج التركيز لن تعمل اختصارات لوحة المفاتيح حتى تنقر في أي مكان أخر.</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="733"/>
         <source>Configuration error resolved. Launch `flameshot gui` again to apply it.</source>
-        <translation type="unfinished"></translation>
+        <translation>تم حل خطأ الإعدادات. قم بتشغيل flameshot gui مرة أخرى لتطبيقه</translation>
     </message>
     <message>
         <source>Select an area with the mouse, or press Esc to exit.
@@ -282,7 +282,7 @@ Premeu Espai per obrir el calaix lateral.</translation>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="1167"/>
         <source>Tool Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>خيارات الأداة</translation>
     </message>
 </context>
 <context>
@@ -290,12 +290,12 @@ Premeu Espai per obrir el calaix lateral.</translation>
     <message>
         <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="68"/>
         <source>Circle Counter</source>
-        <translation type="unfinished"></translation>
+        <translation>عداد الدوائر</translation>
     </message>
     <message>
         <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="86"/>
         <source>Add an autoincrementing counter bubble</source>
-        <translation type="unfinished"></translation>
+        <translation>إضافة دائرة ترقيم تتزايد تلقائياً</translation>
     </message>
 </context>
 <context>
