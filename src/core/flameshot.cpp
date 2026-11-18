@@ -84,14 +84,27 @@ void raiseAboveMenuBar(QWidget* widget)
 #include <QDesktopServices>
 #include <QFile>
 #include <QMessageBox>
+#include <QScreen>
 #include <QThread>
 #include <QTimer>
 #include <QUrl>
 #include <QVersionNumber>
 
-#if defined(Q_OS_MACOS)
-#include <QScreen>
-#endif
+namespace {
+
+bool coversWholeScreen(const QRect& region)
+{
+    for (const QScreen* screen : QGuiApplication::screens()) {
+        const QRect screenRect(
+          QPoint(0, 0), screen->geometry().size() * screen->devicePixelRatio());
+        if (region.contains(screenRect.adjusted(1, 1, -1, -1))) {
+            return true;
+        }
+    }
+    return false;
+}
+
+} // namespace
 
 Flameshot::Flameshot()
   : m_haveExternalWidget(false)
@@ -147,7 +160,11 @@ CaptureWidget* Flameshot::gui(const CaptureRequest& req)
     if (request.captureMode() == CaptureRequest::GRAPHICAL_MODE &&
         request.initialSelection().isNull() &&
         ConfigHandler().saveLastRegion()) {
-        request.setInitialSelection(getLastRegion());
+        const QRect lastRegion = getLastRegion();
+        if (!ConfigHandler().ignoreWholeScreenLastRegion() ||
+            !coversWholeScreen(lastRegion)) {
+            request.setInitialSelection(lastRegion);
+        }
     }
 
 #if defined(Q_OS_MACOS)
