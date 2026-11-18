@@ -1,6 +1,6 @@
 # Hyprland support
 
-Flameshot works out of the box with very little configuration on Hyprland, as long as [`xdg-desktop-portal-hyprland`](https://wiki.hypr.land/Hypr-Ecosystem/xdg-desktop-portal-hyprland/) is installed and running.
+Flameshot works out of the box with very little configuration on Hyprland, as long as [`xdg-desktop-portal-hyprland`](https://wiki.hypr.land/hypr-ecosystem/user/xdg-desktop-portal-hyprland/) is installed and running.
 
 Below is a simple setup that you can use as a starting point:
 
