@@ -755,10 +755,16 @@ QPixmap ScreenGrabber::cropToMonitor(const QPixmap& fullScreenshot,
     }
 
     QPixmap cropped = fullScreenshot.copy(cropRect);
+    qreal croppedDpr = targetDpr;
 
 #if defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)
-    // Linux: May need rescaling if scale factors don't match
-    if (qAbs(screenshotScaleX - targetDpr) > 0.01) {
+    if (m_info.waylandDetected()) {
+        // The portal has already rasterized the desktop. On Wayland,
+        // QScreen's DPR can be an integer even with fractional scaling.
+        // Preserve the portal's pixels and describe their actual scale
+        // instead of resampling them to QScreen's DPR.
+        croppedDpr = screenshotScaleX;
+    } else if (qAbs(screenshotScaleX - targetDpr) > 0.01) {
         int targetPhysicalWidth = qRound(targetGeometry.width() * targetDpr);
         int targetPhysicalHeight = qRound(targetGeometry.height() * targetDpr);
         cropped = cropped.scaled(targetPhysicalWidth,
@@ -772,8 +778,7 @@ QPixmap ScreenGrabber::cropToMonitor(const QPixmap& fullScreenshot,
 #endif
     }
 #endif
-    // Cropped region should be at target monitor's native DPR
-    cropped.setDevicePixelRatio(targetDpr);
+    cropped.setDevicePixelRatio(croppedDpr);
 
     return cropped;
 }
