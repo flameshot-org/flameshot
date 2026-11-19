@@ -16,6 +16,7 @@
 #include "core/qguiappcurrentscreen.h"
 #include "tools/copy/copytool.h"
 #include "utils/abstractlogger.h"
+#include "utils/layershell.h"
 #include "utils/screengrabber.h"
 #include "utils/screenshotsaver.h"
 #include "widgets/capture/colorpicker.h"
@@ -201,6 +202,11 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
             windowHandle()->setScreen(selectedScreen);
         }
         m_selectedScreen = selectedScreen;
+#if !defined(FLAMESHOT_DEBUG_CAPTURE)
+        if (LayerShell::available()) {
+            m_layerSurface = LayerShell::makeOverlay(this, selectedScreen);
+        }
+#endif
 #endif
     }
 
@@ -299,6 +305,11 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
     initQuitPrompt();
 
     updateCursor();
+}
+
+bool CaptureWidget::isLayerSurface() const
+{
+    return m_layerSurface;
 }
 
 CaptureWidget::~CaptureWidget()
@@ -1186,7 +1197,7 @@ void CaptureWidget::moveEvent(QMoveEvent* e)
     m_context.widgetOffset = mapToGlobal(QPoint(0, 0));
 #if defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)
     // If a compositor moved the window to the wrong screen, move it back
-    if (m_context.fullscreen && m_selectedScreen &&
+    if (m_context.fullscreen && m_selectedScreen && !m_layerSurface &&
         geometry().topLeft() != m_selectedScreen->geometry().topLeft()) {
         move(m_selectedScreen->geometry().topLeft());
     }
