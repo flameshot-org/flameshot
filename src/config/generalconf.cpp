@@ -257,12 +257,12 @@ void GeneralConf::resetConfiguration()
 void GeneralConf::initScrollArea()
 {
     m_scrollArea = new QScrollArea(this);
-    m_layout->addWidget(m_scrollArea);
+    m_layout->addWidget(m_scrollArea, 1);
 
     auto* content = new QWidget(m_scrollArea);
     m_scrollArea->setWidget(content);
     m_scrollArea->setWidgetResizable(true);
-    m_scrollArea->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Maximum);
+    m_scrollArea->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Expanding);
     m_scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
     content->setObjectName("content");
@@ -270,6 +270,7 @@ void GeneralConf::initScrollArea()
     m_scrollArea->setStyleSheet(
       "#content, #scrollArea { background: transparent; border: 0px; }");
     m_scrollAreaLayout = new QVBoxLayout(content);
+    m_scrollAreaLayout->setAlignment(Qt::AlignTop);
     m_scrollAreaLayout->setContentsMargins(0, 0, 20, 0);
 }
 
