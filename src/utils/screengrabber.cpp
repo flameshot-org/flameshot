@@ -1,12 +1,16 @@
 
 #include "screengrabber.h"
+#include "config/generalconf.h"
 #include "core/qguiappcurrentscreen.h"
 #include "utils/abstractlogger.h"
 #include "utils/confighandler.h"
+#include "utils/dprscaling.h"
+#include "utils/monitorfocus.h"
 #include "utils/monitorpreview.h"
 #include "utils/systemnotification.h"
 
 #include <QApplication>
+#include <QCursor>
 #include <QEventLoop>
 #include <QGuiApplication>
 #include <QHBoxLayout>
@@ -37,6 +41,29 @@
 #endif
 
 bool ScreenGrabber::m_monitorSelectionActive = false;
+QPixmap* ScreenGrabber::m_sessionPixmap = nullptr;
+
+ScreenGrabber::SessionCache::SessionCache(const QPixmap& fullDesktop)
+{
+    delete ScreenGrabber::m_sessionPixmap;
+    ScreenGrabber::m_sessionPixmap = new QPixmap(fullDesktop);
+}
+
+ScreenGrabber::SessionCache::~SessionCache()
+{
+    delete ScreenGrabber::m_sessionPixmap;
+    ScreenGrabber::m_sessionPixmap = nullptr;
+}
+
+bool ScreenGrabber::hasSessionPixmap()
+{
+    return m_sessionPixmap != nullptr && !m_sessionPixmap->isNull();
+}
+
+QPixmap ScreenGrabber::sessionPixmap()
+{
+    return m_sessionPixmap != nullptr ? *m_sessionPixmap : QPixmap();
+}
 
 ScreenGrabber::ScreenGrabber(QObject* parent)
   : QObject(parent)
@@ -244,24 +271,27 @@ QPixmap ScreenGrabber::selectMonitorAndCrop(const QPixmap& fullScreenshot,
         return cropToMonitor(fullScreenshot, 0);
     }
 
-    // Capture Active Monitor: auto-select monitor under cursor
-    if (ConfigHandler().captureActiveMonitor()) {
-        if (m_info.waylandDetected()) {
-            AbstractLogger::error()
-              << tr("Capture Active Monitor is not supported on Wayland due to "
-                    "Wayland security model.");
-            ok = false;
-            return QPixmap();
+    // The interactive capture follows the cursor with
+    // MultiMonitorCaptureSession and never gets here; a one-shot capture
+    // (`flameshot screen`) does, and honours the same setting.
+    {
+        std::optional<QPoint> cursorPos;
+        if (!m_info.waylandDetected()) {
+            cursorPos = QCursor::pos();
         }
-
-        QGuiAppCurrentScreen screenFinder;
-        QScreen* cursorScreen = screenFinder.currentScreen();
-        int monitorIndex = screens.indexOf(cursorScreen);
-        if (monitorIndex >= 0) {
-            m_selectedMonitor = monitorIndex;
-            return cropToMonitor(fullScreenshot, monitorIndex);
+        QVector<QRect> geometries;
+        for (QScreen* screen : screens) {
+            geometries.append(screen->geometry());
         }
-        // Fall through to manual selection if screen lookup fails
+        const int monitor = MonitorFocus::monitorWithoutPicker(
+          ConfigHandler().monitorSelectionMode() ==
+            GeneralConf::monitor_selection_follow_cursor,
+          cursorPos,
+          geometries);
+        if (monitor >= 0) {
+            m_selectedMonitor = monitor;
+            return cropToMonitor(fullScreenshot, monitor);
+        }
     }
 
     if (m_monitorSelectionActive) {
@@ -326,12 +356,16 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok, int preSelectedMonitor)
     return screenshot;
 
 #elif defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)
-    screenshot = unixScreenshot(ok);
-    if (!ok) {
-        return QPixmap();
+    if (hasSessionPixmap()) {
+        screenshot = sessionPixmap();
+    } else {
+        screenshot = unixScreenshot(ok);
+        if (!ok) {
+            return QPixmap();
+        }
     }
 #elif defined(Q_OS_WIN)
-    screenshot = windowsScreenshot(wid);
+    screenshot = hasSessionPixmap() ? sessionPixmap() : windowsScreenshot(wid);
 #endif
 
     // If monitor was pre-selected skip UI and crop directly
@@ -757,23 +791,26 @@ QPixmap ScreenGrabber::cropToMonitor(const QPixmap& fullScreenshot,
     QPixmap cropped = fullScreenshot.copy(cropRect);
 
 #if defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)
-    // Linux: May need rescaling if scale factors don't match
-    if (qAbs(screenshotScaleX - targetDpr) > 0.01) {
-        int targetPhysicalWidth = qRound(targetGeometry.width() * targetDpr);
-        int targetPhysicalHeight = qRound(targetGeometry.height() * targetDpr);
-        cropped = cropped.scaled(targetPhysicalWidth,
-                                 targetPhysicalHeight,
-                                 Qt::IgnoreAspectRatio,
-                                 Qt::SmoothTransformation);
+    // The portal composites every monitor at one scale, which need not be the
+    // one Qt reports for this monitor. Keep the pixels it captured rather than
+    // stretching them to match that figure.
+    const DprScaling::Fit fit =
+      DprScaling::fitCrop(cropped.size(), targetGeometry.size(), targetDpr);
+
+    if (fit.size != cropped.size()) {
+        cropped = cropped.scaled(
+          fit.size, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
 #ifdef FLAMESHOT_DEBUG_CAPTURE
         qDebug() << tr("Scaling screenshot to: %1 %2")
-                      .arg(targetPhysicalWidth)
-                      .arg(targetPhysicalHeight);
+                      .arg(fit.size.width())
+                      .arg(fit.size.height());
 #endif
     }
-#endif
+    cropped.setDevicePixelRatio(fit.dpr);
+#else
     // Cropped region should be at target monitor's native DPR
     cropped.setDevicePixelRatio(targetDpr);
+#endif
 
     return cropped;
 }

@@ -133,6 +133,7 @@ ArrowTool::ArrowTool(QObject* parent)
     setPadding(ArrowWidth / 2);
     m_supportsOrthogonalAdj = true;
     m_supportsDiagonalAdj = true;
+    m_resizeMode = ResizeMode::Ends;
 }
 
 QIcon ArrowTool::icon(const QColor& background, bool inEditor) const
