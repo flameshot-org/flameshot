@@ -37,6 +37,17 @@ StrftimeChooserWidget::StrftimeChooserWidget(QWidget* parent)
         }
     }
 
+    // Not a strftime variable: the separator that creates subfolders
+    auto* subfolderButton = new QPushButton(tr("Subfolder (/)"), this);
+    subfolderButton->setToolTip(tr("Insert a subfolder separator"));
+    subfolderButton->setSizePolicy(QSizePolicy::Expanding,
+                                   QSizePolicy::Expanding);
+    subfolderButton->setMinimumHeight(25);
+    layout->addWidget(subfolderButton, row, col);
+    connect(subfolderButton, &QPushButton::clicked, this, [this]() {
+        emit variableEmitted(QStringLiteral("/"));
+    });
+
     setLayout(layout);
 }
 
