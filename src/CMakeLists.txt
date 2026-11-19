@@ -222,6 +222,17 @@ if (USE_WAYLAND_CLIPBOARD)
   target_link_libraries(flameshot KF6::GuiAddons)
 endif()
 
+if (UNIX AND NOT APPLE)
+    # Window rectangle lookup for single-click selection (X11)
+    find_library(XCB_LIBRARY NAMES xcb REQUIRED)
+    target_link_libraries(flameshot ${XCB_LIBRARY})
+endif()
+
+if (WIN32)
+    # Window rectangle lookup for single-click selection
+    target_link_libraries(flameshot dwmapi user32)
+endif()
+
 if (APPLE)
     set_target_properties(flameshot PROPERTIES
         MACOSX_BUNDLE TRUE
