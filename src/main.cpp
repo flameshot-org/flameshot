@@ -19,15 +19,18 @@
 #include "utils/confighandler.h"
 #include "utils/filenamehandler.h"
 #include "utils/pathinfo.h"
+#include "utils/systemnotification.h"
 #include "utils/valuehandler.h"
 
 #if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
 #include "core/flameshotdbusadapter.h"
 #include <QDBusConnection>
+#include <QDBusConnectionInterface>
 #include <QDBusMessage>
 #endif
 
 #include <QApplication>
+#include <QDebug>
 #include <QDir>
 #include <QLibraryInfo>
 #include <QNetworkProxyFactory>
@@ -63,20 +66,89 @@ static int setup_unix_signal_handlers()
 }
 #endif
 
+// Guards the capture GUI against overlapping 'flameshot gui' invocations.
+// Released as soon as a capture is finished: the process may outlive the
+// capture widget (notification click wait, hosted widgets) and must not
+// block new screenshots during that time.
+static QSharedMemory* s_guiMutex = nullptr;
+
+static void releaseGuiMutex()
+{
+    if (s_guiMutex != nullptr) {
+        s_guiMutex->detach();
+        delete s_guiMutex;
+        s_guiMutex = nullptr;
+    }
+}
+
 int requestCaptureAndWait(const CaptureRequest& req)
 {
     Flameshot* flameshot = Flameshot::instance();
     flameshot->requestCapture(req);
     QObject::connect(flameshot, &Flameshot::captureTaken, [&](const QPixmap&) {
+        // The capture GUI is finished; new invocations must not be blocked
+        // while this process may still be waiting for a notification click.
+        releaseGuiMutex();
 #if defined(Q_OS_MACOS)
         // Only useful on MacOS because each instance hosts its own widgets
         if (!FlameshotDaemon::isThisInstanceHostingWidgets()) {
             qApp->exit(0);
         }
 #else
-        // if this instance is not daemon, make sure it exit after caputre finish
-        if (FlameshotDaemon::instance() == nullptr && !Flameshot::instance()->haveExternalWidget()) {
+        if (FlameshotDaemon::instance() == nullptr &&
+            !Flameshot::instance()->haveExternalWidget()) {
+#if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
+            auto pendingDaemon =
+              SystemNotification::takePendingDaemonNotifications();
+            if (!pendingDaemon.isEmpty()) {
+                bool delegated = false;
+                auto bus = QDBusConnection::sessionBus();
+                if (bus.isConnected() &&
+                    bus.interface()->isServiceRegistered(
+                      QStringLiteral("org.flameshot.Flameshot"))) {
+                    QDBusMessage msg = QDBusMessage::createMethodCall(
+                      QStringLiteral("org.flameshot.Flameshot"),
+                      QStringLiteral("/"),
+                      QLatin1String(""),
+                      QStringLiteral("showSaveNotification"));
+                    delegated = true;
+                    for (const auto& path : pendingDaemon) {
+                        QDBusMessage m = msg;
+                        m << path;
+                        // A blocking call verifies that the daemon actually
+                        // implements showSaveNotification. An older daemon
+                        // (not restarted after a package upgrade) answers
+                        // UnknownMethod; anything but a reply message must
+                        // reach the local fallback below instead of
+                        // silently losing the notification.
+                        QDBusMessage reply = bus.call(m, QDBus::Block, 3000);
+                        if (reply.type() != QDBusMessage::ReplyMessage) {
+                            qDebug() << "Delegating the save notification to "
+                                        "the daemon failed:"
+                                     << reply.errorMessage();
+                            delegated = false;
+                            break;
+                        }
+                    }
+                }
+                if (delegated) {
+                    qApp->exit(E_OK);
+                } else {
+                    // Fallback: send notification ourselves and wait
+                    SystemNotification sysNotif;
+                    for (const auto& path : pendingDaemon) {
+                        sysNotif.sendMessage(
+                          QObject::tr("Capture saved as ") + path, path);
+                    }
+                    SystemNotification::setExitOnLastAction(true);
+                    QTimer::singleShot(10000, qApp, &QCoreApplication::quit);
+                }
+            } else {
+                qApp->exit(E_OK);
+            }
+#else
             qApp->exit(E_OK);
+#endif
         }
 #endif
     });
@@ -485,15 +557,13 @@ int main(int argc, char* argv[])
         // Prevent multiple instances of 'flameshot gui' from running if not
         // configured to do so.
         if (!ConfigHandler().allowMultipleGuiInstances()) {
-            auto* mutex = guiMutexLock();
-            if (!mutex) {
+            s_guiMutex = guiMutexLock();
+            if (!s_guiMutex) {
                 return 1;
             }
-            QObject::connect(
-              qApp, &QCoreApplication::aboutToQuit, qApp, [mutex]() {
-                  mutex->detach();
-                  delete mutex;
-              });
+            QObject::connect(qApp, &QCoreApplication::aboutToQuit, qApp, []() {
+                releaseGuiMutex();
+            });
         }
 
         // Option values

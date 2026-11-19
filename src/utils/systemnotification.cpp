@@ -1,14 +1,18 @@
 #include "systemnotification.h"
 #include "utils/abstractlogger.h"
 #include "utils/confighandler.h"
+#include "utils/filemanagerutils.h"
 
 #include <QApplication>
+#include <QDesktopServices>
 #include <QUrl>
 #if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
 #include <QDBusConnection>
 #include <QDBusConnectionInterface>
 #include <QDBusInterface>
 #include <QDBusMessage>
+#include <QDBusPendingCallWatcher>
+#include <QDBusPendingReply>
 #else
 #include "core/flameshotdaemon.h"
 #endif
@@ -45,6 +49,94 @@ SystemNotification::SystemNotification(QObject* parent)
 #endif
 }
 
+QMap<uint, QString> SystemNotification::s_pendingPaths;
+QStringList SystemNotification::s_pendingDaemonNotifications;
+bool SystemNotification::s_exitOnLastAction = false;
+
+SystemNotification* SystemNotification::actionHandler()
+{
+    static SystemNotification* handler = [] {
+        auto* h = new SystemNotification(qApp);
+#if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
+        QDBusConnection::sessionBus().connect(
+          QStringLiteral("org.freedesktop.Notifications"),
+          QStringLiteral("/org/freedesktop/Notifications"),
+          QStringLiteral("org.freedesktop.Notifications"),
+          QStringLiteral("ActionInvoked"),
+          h,
+          SLOT(onActionInvoked(uint, QString)));
+#endif
+        return h;
+    }();
+    return handler;
+}
+
+void SystemNotification::onActionInvoked(uint id, const QString& actionKey)
+{
+    if (actionKey != QLatin1String("default") &&
+        actionKey != QLatin1String("flameshot-open-folder")) {
+        return;
+    }
+    auto it = s_pendingPaths.find(id);
+    if (it == s_pendingPaths.end()) {
+        return;
+    }
+    const QString path = it.value();
+    s_pendingPaths.erase(it);
+    if (actionKey == QLatin1String("flameshot-open-folder")) {
+        FileManagerUtils::revealFile(path);
+    } else {
+        QDesktopServices::openUrl(QUrl::fromLocalFile(path));
+    }
+    if (s_pendingPaths.isEmpty() && s_exitOnLastAction) {
+        qApp->exit();
+    }
+}
+
+bool SystemNotification::hasPendingPaths()
+{
+    return !s_pendingPaths.isEmpty();
+}
+
+void SystemNotification::setExitOnLastAction(bool exit)
+{
+    s_exitOnLastAction = exit;
+}
+
+void SystemNotification::registerNotificationPath(uint id, const QString& path)
+{
+    actionHandler();
+    s_pendingPaths[id] = path;
+}
+
+void SystemNotification::registerNotificationPath(
+  const QMap<uint, QString>& paths)
+{
+    actionHandler();
+    for (auto it = paths.cbegin(); it != paths.cend(); ++it) {
+        s_pendingPaths.insert(it.key(), it.value());
+    }
+}
+
+QMap<uint, QString> SystemNotification::takePendingPaths()
+{
+    auto paths = s_pendingPaths;
+    s_pendingPaths.clear();
+    return paths;
+}
+
+void SystemNotification::addPendingDaemonNotification(const QString& path)
+{
+    s_pendingDaemonNotifications.append(path);
+}
+
+QStringList SystemNotification::takePendingDaemonNotifications()
+{
+    auto paths = s_pendingDaemonNotifications;
+    s_pendingDaemonNotifications.clear();
+    return paths;
+}
+
 void SystemNotification::sendMessage(const QString& text,
                                      const QString& savePath)
 {
@@ -75,11 +167,17 @@ void SystemNotification::sendMessage(const QString& text,
     if (nullptr != m_interface && m_interface->isValid()) {
         QList<QVariant> args;
         QVariantMap hintsMap;
+        QStringList actions;
         if (!savePath.isEmpty()) {
             QUrl fullPath = QUrl::fromLocalFile(savePath);
             // allows the notification to be dragged and dropped
             hintsMap[QStringLiteral("x-kde-urls")] =
               QStringList({ fullPath.toString() });
+            // makes the notification body clickable (freedesktop spec)
+            actions << QStringLiteral("default") << QString();
+            // adds a button that reveals the file in the file manager
+            actions << QStringLiteral("flameshot-open-folder")
+                    << tr("Open Folder");
         }
 
         args << (qAppName())                 // appname
@@ -87,7 +185,7 @@ void SystemNotification::sendMessage(const QString& text,
              << FLAMESHOT_ICON               // icon
              << title                        // summary
              << text                         // body
-             << QStringList()                // actions
+             << actions                      // actions
              << hintsMap                     // hints
              << timeout;                     // timeout
         // Fire-and-forget: an asynchronous call never blocks the event loop,
@@ -97,8 +195,26 @@ void SystemNotification::sendMessage(const QString& text,
         // timeout (~25s) after every capture, freezing further captures until
         // it returned.
         if (m_interface != nullptr) {
-            m_interface->asyncCallWithArgumentList(QStringLiteral("Notify"),
-                                                   args);
+            QDBusPendingCall call = m_interface->asyncCallWithArgumentList(
+              QStringLiteral("Notify"), args);
+            if (!savePath.isEmpty()) {
+                // The notification id assigned by the server arrives with the
+                // reply; remember it so the persistent action handler can map
+                // a later ActionInvoked signal back to this file.
+                auto* watcher = new QDBusPendingCallWatcher(call);
+                connect(
+                  watcher,
+                  &QDBusPendingCallWatcher::finished,
+                  actionHandler(),
+                  [savePath](QDBusPendingCallWatcher* watcher) {
+                      QDBusPendingReply<uint> reply = *watcher;
+                      if (reply.isValid()) {
+                          SystemNotification::s_pendingPaths[reply.value()] =
+                            savePath;
+                      }
+                      watcher->deleteLater();
+                  });
+            }
         }
     }
 #endif
