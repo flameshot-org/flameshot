@@ -65,6 +65,8 @@ void raiseAboveMenuBar(QWidget* widget)
 #include "core/qguiappcurrentscreen.h"
 #include "utils/abstractlogger.h"
 #include "utils/confighandler.h"
+#include "utils/globalvalues.h"
+#include "utils/inputtrace.h"
 #include "utils/screengrabber.h"
 #include "utils/screenshotsaver.h"
 #include "widgets/capture/capturewidget.h"
@@ -91,6 +93,20 @@ void raiseAboveMenuBar(QWidget* widget)
 
 #if defined(Q_OS_MACOS)
 #include <QScreen>
+#endif
+
+#if defined(Q_OS_WIN)
+#include "utils/windowsforeground.h"
+
+namespace {
+void bringToFront(QWidget* window)
+{
+    const bool front = WindowsForeground::take(window->winId());
+    InputTrace::write(QStringLiteral("overlay front=%1 %2")
+                        .arg(front)
+                        .arg(WindowsForeground::describe()));
+}
+}
 #endif
 
 Flameshot::Flameshot()
@@ -139,6 +155,12 @@ Flameshot* Flameshot::instance()
 
 CaptureWidget* Flameshot::gui(const CaptureRequest& req)
 {
+    if (InputTrace::enabled()) {
+        InputTrace::write(QStringLiteral("capture %1 exe=%2 pid=%3")
+                            .arg(GlobalValues::versionInfo().simplified())
+                            .arg(QCoreApplication::applicationFilePath())
+                            .arg(QCoreApplication::applicationPid()));
+    }
     if (!resolveAnyConfigErrors()) {
         return nullptr;
     }
@@ -186,6 +208,18 @@ CaptureWidget* Flameshot::gui(const CaptureRequest& req)
 
 #ifdef Q_OS_WIN
         m_captureWindow->show();
+        // Windows may refuse to bring the overlay to the front, in which case
+        // keys such as Escape would go to another application.
+        bringToFront(m_captureWindow);
+        QTimer::singleShot(150, m_captureWindow, [this]() {
+            bringToFront(m_captureWindow);
+            m_captureWindow->update();
+        });
+        QTimer::singleShot(1000, m_captureWindow, [this]() {
+            InputTrace::write(QStringLiteral("overlay after 1s foreground=%1")
+                                .arg(WindowsForeground::isForeground(
+                                  m_captureWindow->winId())));
+        });
 #elif defined(Q_OS_MACOS)
         if (ConfigHandler().useNativeFullscreen()) {
             m_captureWindow->showFullScreen();

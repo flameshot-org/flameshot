@@ -115,6 +115,7 @@ private:
 #if defined(Q_OS_MACOS)
     void initUseNativeFullscreen();
 #endif
+    void initSmartRegionDetection();
 #if defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)
     void initUseX11LegacyScreenshot();
 #endif
@@ -173,6 +174,9 @@ private:
 #if defined(Q_OS_MACOS)
     QCheckBox* m_useNativeFullscreen;
 #endif
+    // Null when the platform has no smart region backend.
+    QCheckBox* m_smartRegionDetection = nullptr;
+    QPushButton* m_smartRegionAccessibilityButton = nullptr;
 #if defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)
     QCheckBox* m_useX11LegacyScreenshot;
 #endif

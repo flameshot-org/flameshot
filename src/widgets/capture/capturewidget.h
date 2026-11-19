@@ -19,6 +19,7 @@
 #include "widgets/capture/capturetoolobjects.h"
 #include "widgets/capture/magnifierwidget.h"
 #include "widgets/capture/selectionwidget.h"
+#include "widgets/capture/smartregiondetector.h"
 
 #include <QMessageBox>
 #include <QPointer>
@@ -36,6 +37,7 @@ class QNetworkAccessManager;
 class QNetworkReply;
 class ColorPicker;
 class NotifierBox;
+class SmartRegionController;
 class HoverEventFilter;
 #if !defined(DISABLE_UPDATE_CHECKER)
 class UpdateNotificationWidget;
@@ -100,6 +102,11 @@ public:
 
 protected:
     void paintEvent(QPaintEvent* paintEvent) override;
+#if defined(Q_OS_WIN)
+    bool nativeEvent(const QByteArray& eventType,
+                     void* message,
+                     qintptr* result) override;
+#endif
     void mousePressEvent(QMouseEvent* mouseEvent) override;
     void mouseMoveEvent(QMouseEvent* mouseEvent) override;
     void mouseReleaseEvent(QMouseEvent* mouseEvent) override;
@@ -123,6 +130,7 @@ private:
     void initContext(bool fullscreen, const CaptureRequest& req);
     void initPanel();
     void initSelection();
+    void initSmartRegion();
     void initShortcuts();
     void initButtons();
     void initHelpMessage();
@@ -148,6 +156,7 @@ private:
     QRect paddedUpdateRect(const QRect& r) const;
     void drawErrorMessage(const QString& msg, QPainter* painter);
     void drawInactiveRegion(QPainter* painter);
+    void drawSmartRegion(QPainter* painter);
     void drawToolsData(bool drawSelection = true);
     void drawObjectSelection();
 
@@ -157,6 +166,10 @@ private:
     CaptureTool::Type activeButtonToolType() const;
 
     QPoint snapToGrid(const QPoint& point) const;
+
+    bool smartRegionActive() const;
+    QRect smartRegionInWidget() const;
+    QRect globalToWidget(const QRect& globalRect) const;
 
     ////////////////////////////////////////
     // Class members
@@ -188,6 +201,11 @@ private:
     UpdateNotificationWidget* m_updateNotificationWidget;
 #endif
     quint64 m_lastMouseWheel;
+    // Null unless smart region selection is enabled and supported.
+    SmartRegionController* m_smartRegion = nullptr;
+#if defined(Q_OS_WIN)
+    TouchpadScrollTracker m_touchpadScroll;
+#endif
     QPointer<CaptureToolButton> m_sizeIndButton;
     // Last pressed button
     QPointer<CaptureToolButton> m_activeButton;

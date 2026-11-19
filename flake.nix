@@ -49,6 +49,7 @@
             with pkgs;
             [
               cmake
+              pkg-config
               qt6.qttools
               qt6.wrapQtAppsHook
               makeBinaryWrapper
@@ -64,7 +65,8 @@
             qt6.qtsvg
             qt6.qtwayland
             kdePackages.kguiaddons
-          ];
+          ]
+          ++ lib.optionals stdenv.hostPlatform.isLinux [ xorg.libxcb ];
 
           flameshot = pkgs.stdenv.mkDerivation {
             pname = "flameshot";

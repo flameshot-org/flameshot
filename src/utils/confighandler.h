@@ -126,6 +126,7 @@ public:
 #if defined(Q_OS_MACOS)
     CONFIG_GETTER_SETTER(useNativeFullscreen, setUseNativeFullscreen, bool)
 #endif
+    CONFIG_GETTER_SETTER(smartRegionDetection, setSmartRegionDetection, bool)
     CONFIG_GETTER_SETTER(uploadWithoutConfirmation,
                          setUploadWithoutConfirmation,
                          bool)
