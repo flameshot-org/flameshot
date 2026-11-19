@@ -104,6 +104,7 @@ private:
 
 #if (defined(Q_OS_MACOS) || defined(Q_OS_WIN))
     QHotkey* m_HotkeyScreenshotCapture;
+    QHotkey* m_HotkeyScreenshotCaptureInstant;
 #endif
 #if (defined(Q_OS_MACOS) && ENABLE_IMGUR)
     QHotkey* m_HotkeyScreenshotHistory;
