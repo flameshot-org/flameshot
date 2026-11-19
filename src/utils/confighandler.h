@@ -147,6 +147,9 @@ public:
     CONFIG_GETTER_SETTER(showSelectionGeometryHideTime,
                          showSelectionGeometryHideTime,
                          int)
+    CONFIG_GETTER_SETTER(defaultApp, setDefaultApp, QString)
+    CONFIG_GETTER_SETTER(defaultAppInTerminal, setDefaultAppInTerminal, bool)
+
 #if defined(Q_OS_WIN)
     CONFIG_GETTER_SETTER(ignorePrntScrForcesSnipping,
                          setIgnorePrntScrForcesSnipping,
