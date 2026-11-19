@@ -1,0 +1,20 @@
+{
+  "api_version": 1,
+  "type": "action",
+  "id": "org.flameshot.tesseract-ocr",
+  "name": "Tesseract OCR",
+  "description": "Recognize German and English text and copy it to the clipboard",
+  "icon": "ocr.svg",
+  "toolbar": {
+    "visible": true,
+    "order": 175,
+    "shortcut": "Ctrl+Shift+O"
+  },
+  "command": {
+    "executable": "./run.py",
+    "arguments": ["-l", "deu+eng", "--psm", "6"],
+    "input": "png-stdin",
+    "output": "json",
+    "timeout_ms": 30000
+  }
+}

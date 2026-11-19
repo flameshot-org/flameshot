@@ -6,18 +6,31 @@
 
 
 _flameshot() {
-	local prev cur cmd gui_opts full_opts config_opts
+	local prev cur cmd gui_opts full_opts config_opts screen_opts plugin_opts
 	COMPREPLY=()
 
 	prev="${COMP_WORDS[COMP_CWORD-1]}"
 	cur="${COMP_WORDS[COMP_CWORD]}"
-	cmd="gui full config launcher screen"
+	cmd="gui full config launcher screen plugins"
+	plugin_opts="list install enable disable remove doctor roots"
 	screen_opts="--number -n --edit -e --path -p --clipboard -c --delay -d --region --raw -r --pin --help"
 	gui_opts="--path -p --clipboard -c --delay -d --region --last-region --raw -r --print-geometry -g --pin --accept-on-select -s --help"
 	full_opts="--path -p --clipboard -c --delay -d --raw -r --help"
 	config_opts="--autostart -a --filename -f --notifications -n --trayicon -t --showhelp -s --maincolor -m --contrastcolor -k --check"
 
 	case "${prev}" in
+		plugins)
+			COMPREPLY=( $(compgen -W "$plugin_opts" -- "${cur}") )
+			return 0
+			;;
+		install)
+			_filedir 'flameshot-plugin'
+			return 0
+			;;
+		enable|disable|remove)
+			COMPREPLY=( $(compgen -W "$(flameshot plugins list 2>/dev/null | awk '{print $2}')" -- "${cur}") )
+			return 0
+			;;
 		launcher)
 			return 0
 			;;

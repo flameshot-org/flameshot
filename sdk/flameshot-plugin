@@ -1,0 +1,389 @@
+#!/usr/bin/env python3
+"""Developer tools for Flameshot action plugins (API version 1)."""
+
+from __future__ import annotations
+
+import argparse
+import base64
+import gzip
+import io
+import json
+import os
+from pathlib import Path, PurePosixPath
+import re
+import shutil
+import stat
+import subprocess
+import sys
+import tarfile
+import tempfile
+
+
+API_VERSION = 1
+MAX_PACKAGE_SIZE = 32 * 1024 * 1024
+MAX_INSTALLED_SIZE = 64 * 1024 * 1024
+MAX_FILES = 1000
+PLUGIN_ID = re.compile(r"^[a-z0-9]+(?:[._-][a-z0-9]+)+$")
+PNG_1X1 = base64.b64decode(
+    "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk"
+    "/w8AAusB9Y9Z4S0AAAAASUVORK5CYII="
+)
+
+
+class PluginError(Exception):
+    pass
+
+
+def read_json(path: Path) -> dict:
+    try:
+        value = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, UnicodeError, json.JSONDecodeError) as error:
+        raise PluginError(f"cannot read {path}: {error}") from error
+    if not isinstance(value, dict):
+        raise PluginError(f"{path}: JSON root must be an object")
+    return value
+
+
+def safe_relative(name: str) -> bool:
+    path = PurePosixPath(name)
+    return (
+        bool(name)
+        and not path.is_absolute()
+        and ".." not in path.parts
+        and "\0" not in name
+        and "\n" not in name
+        and "\r" not in name
+    )
+
+
+def validate_manifest(root: Path) -> dict:
+    manifest_path = root / "metadata.json"
+    manifest = read_json(manifest_path)
+    if manifest.get("api_version") != API_VERSION:
+        raise PluginError("metadata.json: api_version must be 1")
+    if manifest.get("type") != "action":
+        raise PluginError("metadata.json: type must be 'action'")
+    plugin_id = manifest.get("id")
+    if not isinstance(plugin_id, str) or not PLUGIN_ID.fullmatch(plugin_id):
+        raise PluginError("metadata.json: invalid plugin id")
+    if not isinstance(manifest.get("name"), str) or not manifest["name"].strip():
+        raise PluginError("metadata.json: name is required")
+
+    command = manifest.get("command")
+    if not isinstance(command, dict):
+        raise PluginError("metadata.json: command object is required")
+    executable = command.get("executable")
+    if not isinstance(executable, str) or not executable:
+        raise PluginError("metadata.json: command.executable is required")
+    executable_path = Path(executable)
+    if executable_path.is_absolute():
+        resolved_executable = executable_path
+    elif "/" in executable or "\\" in executable:
+        if not safe_relative(executable.replace("\\", "/")):
+            raise PluginError("metadata.json: unsafe executable path")
+        resolved_executable = root / executable
+    else:
+        local_executable = root / executable
+        resolved_executable = (
+            local_executable
+            if local_executable.exists()
+            else Path(shutil.which(executable) or "")
+        )
+    if not str(resolved_executable) or not resolved_executable.is_file():
+        raise PluginError(f"metadata.json: executable was not found: {executable}")
+    if not os.access(resolved_executable, os.X_OK):
+        raise PluginError(f"metadata.json: executable is not executable: {executable}")
+
+    arguments = command.get("arguments", [])
+    if not isinstance(arguments, list) or not all(
+        isinstance(value, str) for value in arguments
+    ):
+        raise PluginError("metadata.json: command.arguments must contain strings")
+    if command.get("input", "png-stdin") != "png-stdin":
+        raise PluginError("metadata.json: only png-stdin input is supported")
+    if command.get("output", "none") not in {"none", "clipboard-text", "json"}:
+        raise PluginError("metadata.json: unsupported command.output")
+    timeout = command.get("timeout_ms", 30000)
+    if not isinstance(timeout, int) or not 1000 <= timeout <= 300000:
+        raise PluginError("metadata.json: timeout_ms must be between 1000 and 300000")
+
+    toolbar = manifest.get("toolbar", {})
+    if not isinstance(toolbar, dict):
+        raise PluginError("metadata.json: toolbar must be an object")
+    order = toolbar.get("order", 1000)
+    if not isinstance(order, int) or not 0 <= order <= 100000:
+        raise PluginError("metadata.json: toolbar.order must be between 0 and 100000")
+    icon = manifest.get("icon")
+    if icon is not None:
+        if not isinstance(icon, str) or not safe_relative(icon.replace("\\", "/")):
+            raise PluginError("metadata.json: invalid icon path")
+        if not (root / icon).is_file():
+            raise PluginError(f"metadata.json: icon was not found: {icon}")
+    return manifest
+
+
+def inspect_tree(root: Path) -> None:
+    total_size = 0
+    file_count = 0
+    for path in sorted(root.rglob("*")):
+        relative = path.relative_to(root).as_posix()
+        if not safe_relative(relative) or path.is_symlink():
+            raise PluginError(f"unsafe plugin entry: {relative}")
+        if not path.is_file() and not path.is_dir():
+            raise PluginError(f"unsupported plugin entry: {relative}")
+        if path.is_file():
+            total_size += path.stat().st_size
+            file_count += 1
+            if total_size > MAX_INSTALLED_SIZE or file_count > MAX_FILES:
+                raise PluginError("plugin exceeds the file or size limit")
+
+
+def inspect_package(package: Path, extract_to: Path | None = None) -> None:
+    if not package.is_file() or package.stat().st_size > MAX_PACKAGE_SIZE:
+        raise PluginError("package is missing or exceeds 32 MiB")
+    total_size = 0
+    file_count = 0
+    try:
+        with tarfile.open(package, "r:*") as archive:
+            for member in archive.getmembers():
+                if not safe_relative(member.name):
+                    raise PluginError(f"unsafe package entry: {member.name}")
+                if not member.isfile() and not member.isdir():
+                    raise PluginError(f"unsupported package entry: {member.name}")
+                if member.isfile():
+                    total_size += member.size
+                    file_count += 1
+                if total_size > MAX_INSTALLED_SIZE or file_count > MAX_FILES:
+                    raise PluginError("package exceeds the file or size limit")
+                if extract_to is not None:
+                    destination = extract_to / member.name
+                    if member.isdir():
+                        destination.mkdir(parents=True, exist_ok=True)
+                    else:
+                        destination.parent.mkdir(parents=True, exist_ok=True)
+                        source = archive.extractfile(member)
+                        if source is None:
+                            raise PluginError(f"cannot read package entry: {member.name}")
+                        with source, destination.open("wb") as output:
+                            shutil.copyfileobj(source, output)
+                        destination.chmod(member.mode & 0o777)
+    except (OSError, tarfile.TarError) as error:
+        raise PluginError(f"cannot read package: {error}") from error
+
+
+def validate_result(value: object) -> None:
+    if not isinstance(value, dict):
+        raise PluginError("plugin result must be a JSON object")
+    if value.get("protocol_version") != API_VERSION:
+        raise PluginError("result.protocol_version must be 1")
+    status_value = value.get("status")
+    if status_value == "error":
+        if not isinstance(value.get("message"), str):
+            raise PluginError("error result requires a message")
+        return
+    if status_value != "success":
+        raise PluginError("result.status must be 'success' or 'error'")
+    result = value.get("result")
+    if not isinstance(result, dict) or result.get("type") not in {
+        "clipboard-text",
+        "notification",
+        "none",
+    }:
+        raise PluginError("unsupported or missing result.type")
+    result_type = result["type"]
+    if result_type == "clipboard-text" and not isinstance(result.get("text"), str):
+        raise PluginError("clipboard-text result requires text")
+    if result_type == "notification" and not isinstance(result.get("text"), str):
+        raise PluginError("notification result requires text")
+
+
+def resolve_plugin_root(path: Path) -> tuple[Path, tempfile.TemporaryDirectory | None]:
+    if path.is_dir():
+        return path.resolve(), None
+    temporary = tempfile.TemporaryDirectory(prefix="flameshot-plugin-")
+    root = Path(temporary.name)
+    inspect_package(path.resolve(), root)
+    return root, temporary
+
+
+def command_validate(arguments: argparse.Namespace) -> None:
+    root, temporary = resolve_plugin_root(Path(arguments.source))
+    try:
+        inspect_tree(root)
+        manifest = validate_manifest(root)
+    finally:
+        if temporary:
+            temporary.cleanup()
+    print(f"valid: {manifest['id']} (API {manifest['api_version']})")
+
+
+def template_root() -> Path:
+    script = Path(__file__).resolve()
+    candidates = [
+        script.parent / "templates",
+        script.parent.parent / "share" / "flameshot" / "sdk" / "templates",
+    ]
+    for candidate in candidates:
+        if candidate.is_dir():
+            return candidate
+    raise PluginError("SDK templates were not found")
+
+
+def command_create(arguments: argparse.Namespace) -> None:
+    if not PLUGIN_ID.fullmatch(arguments.plugin_id):
+        raise PluginError("plugin id must look like org.example.my-plugin")
+    destination = Path(arguments.directory or arguments.plugin_id)
+    if destination.exists():
+        raise PluginError(f"destination already exists: {destination}")
+    source = template_root() / arguments.language
+    if not source.is_dir():
+        raise PluginError(f"unknown template: {arguments.language}")
+    shutil.copytree(source, destination)
+    display_name = arguments.name or arguments.plugin_id.rsplit(".", 1)[-1].replace("-", " ").title()
+    for path in destination.rglob("*"):
+        if path.is_file():
+            content = path.read_text(encoding="utf-8")
+            content = content.replace("@PLUGIN_ID@", arguments.plugin_id)
+            content = content.replace("@PLUGIN_NAME@", display_name)
+            path.write_text(content, encoding="utf-8")
+        if path.parent.name == "bin" and path.is_file():
+            path.chmod(path.stat().st_mode | stat.S_IXUSR | stat.S_IXGRP | stat.S_IXOTH)
+    validate_manifest(destination)
+    print(f"created {arguments.plugin_id} in {destination}")
+
+
+def command_pack(arguments: argparse.Namespace) -> None:
+    root = Path(arguments.directory).resolve()
+    inspect_tree(root)
+    manifest = validate_manifest(root)
+    output = (
+        Path(arguments.output).resolve()
+        if arguments.output
+        else root.parent / f"{manifest['id']}.flameshot-plugin"
+    )
+    try:
+        output.relative_to(root)
+    except ValueError:
+        pass
+    else:
+        raise PluginError("package output must be outside the plugin directory")
+    if output.exists() and not arguments.force:
+        raise PluginError(f"output already exists: {output} (use --force)")
+    output.parent.mkdir(parents=True, exist_ok=True)
+    with output.open("wb") as raw_output:
+        with gzip.GzipFile(filename="", mode="wb", fileobj=raw_output, mtime=0) as compressed:
+            with tarfile.open(fileobj=compressed, mode="w") as archive:
+                for path in [root, *sorted(root.rglob("*"))]:
+                    if path == root:
+                        continue
+                    relative = path.relative_to(root).as_posix()
+                    info = archive.gettarinfo(str(path), relative)
+                    info.uid = info.gid = 0
+                    info.uname = info.gname = ""
+                    info.mtime = 0
+                    if path.is_file():
+                        with path.open("rb") as source:
+                            archive.addfile(info, source)
+                    else:
+                        archive.addfile(info)
+    inspect_package(output)
+    print(f"packed {manifest['id']} -> {output}")
+
+
+def command_test(arguments: argparse.Namespace) -> None:
+    root = Path(arguments.directory).resolve()
+    inspect_tree(root)
+    manifest = validate_manifest(root)
+    command = manifest["command"]
+    executable_value = command["executable"]
+    executable = Path(executable_value)
+    if not executable.is_absolute() and ("/" in executable_value or "\\" in executable_value):
+        executable = root / executable
+    elif not executable.is_absolute():
+        local = root / executable
+        executable = local if local.exists() else Path(shutil.which(executable_value) or executable_value)
+    image = Path(arguments.image).read_bytes() if arguments.image else PNG_1X1
+    environment = os.environ.copy()
+    environment.update(
+        {
+            "FLAMESHOT_PLUGIN_API_VERSION": "1",
+            "FLAMESHOT_PLUGIN_ID": manifest["id"],
+            "FLAMESHOT_PLUGIN_CONFIG_DIR": str(
+                Path(os.environ.get("XDG_CONFIG_HOME", Path.home() / ".config"))
+                / "flameshot"
+                / "plugins"
+                / manifest["id"]
+            ),
+        }
+    )
+    try:
+        completed = subprocess.run(
+            [str(executable), *command.get("arguments", [])],
+            cwd=root,
+            input=image,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            timeout=command.get("timeout_ms", 30000) / 1000,
+            env=environment,
+            check=False,
+        )
+    except (OSError, subprocess.TimeoutExpired) as error:
+        raise PluginError(f"plugin execution failed: {error}") from error
+    if completed.returncode != 0:
+        detail = completed.stderr.decode("utf-8", errors="replace").strip()
+        raise PluginError(f"plugin exited with {completed.returncode}: {detail}")
+    output_mode = command.get("output", "none")
+    if output_mode == "json":
+        try:
+            result = json.loads(completed.stdout)
+        except json.JSONDecodeError as error:
+            raise PluginError(f"invalid result JSON: {error}") from error
+        validate_result(result)
+        print(json.dumps(result, ensure_ascii=False, indent=2))
+    elif output_mode == "clipboard-text":
+        print(completed.stdout.decode("utf-8", errors="replace"))
+    else:
+        print("plugin completed successfully")
+
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(prog="flameshot-plugin")
+    parser.add_argument("--version", action="version", version="%(prog)s 1")
+    commands = parser.add_subparsers(dest="command", required=True)
+
+    create = commands.add_parser("create", help="create a plugin from a template")
+    create.add_argument("plugin_id")
+    create.add_argument("directory", nargs="?")
+    create.add_argument("--language", choices=("shell", "python", "rust", "cpp"), default="python")
+    create.add_argument("--name")
+    create.set_defaults(function=command_create)
+
+    validate = commands.add_parser("validate", help="validate a directory or package")
+    validate.add_argument("source")
+    validate.set_defaults(function=command_validate)
+
+    pack = commands.add_parser("pack", help="build a .flameshot-plugin package")
+    pack.add_argument("directory")
+    pack.add_argument("-o", "--output")
+    pack.add_argument("--force", action="store_true")
+    pack.set_defaults(function=command_pack)
+
+    test = commands.add_parser("test", help="run a plugin with PNG input")
+    test.add_argument("directory")
+    test.add_argument("--image")
+    test.set_defaults(function=command_test)
+    return parser
+
+
+def main() -> int:
+    try:
+        arguments = build_parser().parse_args()
+        arguments.function(arguments)
+        return 0
+    except PluginError as error:
+        print(f"error: {error}", file=sys.stderr)
+        return 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
