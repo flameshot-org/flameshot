@@ -93,6 +93,7 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     OPTION("copyURLAfterUpload"          ,Bool               ( true          )),
     OPTION("copyPathAfterSave"           ,Bool               ( false         )),
     OPTION("antialiasingPinZoom"         ,Bool               ( true          )),
+    OPTION("pinShadow"                   ,Bool               ( true          )),
     OPTION("useJpgForClipboard"          ,Bool               ( false         )),
 #if defined(Q_OS_MACOS)
     OPTION("useNativeFullscreen"         ,Bool               ( false         )),
