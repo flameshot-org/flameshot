@@ -51,6 +51,7 @@ public:
         TYPE_INVERT = 22,
         TYPE_ACCEPT = 23,
         TYPE_CANCEL = 24,
+        TYPE_WHITE_BACKGROUND_RECTANGLE = 25,
     };
     Q_ENUM(Type);
 

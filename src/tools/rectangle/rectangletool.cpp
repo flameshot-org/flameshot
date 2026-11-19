@@ -78,3 +78,56 @@ void RectangleTool::pressed(CaptureContext& context)
 {
     Q_UNUSED(context)
 }
+
+WhiteBackgroundRectangleTool::WhiteBackgroundRectangleTool(QObject* parent)
+  : RectangleTool(parent)
+{}
+
+QIcon WhiteBackgroundRectangleTool::icon(const QColor& background,
+                                         bool inEditor) const
+{
+    Q_UNUSED(background)
+    Q_UNUSED(inEditor)
+    QPixmap iconPixmap(24, 24);
+    iconPixmap.fill(Qt::transparent);
+    QPainter painter(&iconPixmap);
+    painter.setPen(QPen(Qt::red, 2));
+    painter.setBrush(Qt::white);
+    painter.drawRect(QRect(3, 3, 18, 18));
+    return QIcon(iconPixmap);
+}
+
+QString WhiteBackgroundRectangleTool::name() const
+{
+    return tr("White background rectangle");
+}
+
+QString WhiteBackgroundRectangleTool::description() const
+{
+    return tr("Draw an opaque white rectangle with a colored outline");
+}
+
+CaptureTool::Type WhiteBackgroundRectangleTool::type() const
+{
+    return CaptureTool::TYPE_WHITE_BACKGROUND_RECTANGLE;
+}
+
+CaptureTool* WhiteBackgroundRectangleTool::copy(QObject* parent)
+{
+    auto* tool = new WhiteBackgroundRectangleTool(parent);
+    copyParams(this, tool);
+    return tool;
+}
+
+void WhiteBackgroundRectangleTool::process(QPainter& painter,
+                                           const QPixmap& pixmap)
+{
+    Q_UNUSED(pixmap)
+    painter.save();
+    painter.setRenderHint(QPainter::Antialiasing, false);
+    painter.setPen(
+      QPen(color(), 2, Qt::SolidLine, Qt::SquareCap, Qt::MiterJoin));
+    painter.setBrush(Qt::white);
+    painter.drawRect(QRect(points().first, points().second).normalized());
+    painter.restore();
+}
