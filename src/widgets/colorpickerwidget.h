@@ -15,6 +15,7 @@ public:
     static const QVector<QColor>& getDefaultLargeColorPalette();
     void updateWidget();
     void updateSelection(int index);
+    void renderPicker(QPainter& painter);
 
 protected:
     void paintEvent(QPaintEvent* event) override;

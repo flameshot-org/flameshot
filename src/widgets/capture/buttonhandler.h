@@ -70,6 +70,7 @@ private:
     // aux methods
     void init();
     void resetRegionTrack();
+    void updatePositionMultiScreen(const QRect& selection);
     void updateBlockedSides();
     void expandSelection();
     void positionButtonsInside(int index);

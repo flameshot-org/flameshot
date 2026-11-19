@@ -20,6 +20,7 @@ SelectionWidget::SelectionWidget(QColor c, QWidget* parent)
   , m_color(std::move(c))
   , m_activeSide(NO_SIDE)
   , m_ignoreMouse(false)
+  , m_hasMousePos(false)
   , m_aspectRatio(1)
 {
     // prevents this widget from consuming CaptureToolButton mouse events
@@ -80,12 +81,30 @@ SelectionWidget::SideType SelectionWidget::getMouseSide(
     }
 }
 
-QVector<QRect> SelectionWidget::handlerAreas()
+QVector<QRect> SelectionWidget::handlerAreas() const
 {
     QVector<QRect> areas;
     areas << m_TLHandle << m_TRHandle << m_BLHandle << m_BRHandle << m_LHandle
           << m_THandle << m_RHandle << m_BHandle;
     return areas;
+}
+
+void SelectionWidget::renderSelection(QPainter& painter) const
+{
+    if (!isVisible()) {
+        return;
+    }
+    painter.save();
+    painter.translate(fullGeometry().topLeft());
+    painter.setPen(m_color);
+    painter.setBrush(Qt::NoBrush);
+    painter.drawRect(rect() + QMargins(0, 0, -1, -1));
+    painter.setRenderHint(QPainter::Antialiasing);
+    painter.setBrush(m_color);
+    for (const auto& rectangle : handlerAreas()) {
+        painter.drawEllipse(rectangle);
+    }
+    painter.restore();
 }
 
 // helper function
@@ -171,6 +190,8 @@ bool SelectionWidget::eventFilter(QObject* obj, QEvent* event)
 
 void SelectionWidget::parentMousePressEvent(QMouseEvent* e)
 {
+    m_lastMousePos = e->pos();
+    m_hasMousePos = true;
     if (e->button() != Qt::LeftButton) {
         return;
     }
@@ -184,6 +205,8 @@ void SelectionWidget::parentMousePressEvent(QMouseEvent* e)
 
 void SelectionWidget::parentMouseReleaseEvent(QMouseEvent* e)
 {
+    m_lastMousePos = e->pos();
+    m_hasMousePos = true;
     // released outside of the selection area
     if (!getMouseSide(e->pos())) {
         hide();
@@ -196,6 +219,8 @@ void SelectionWidget::parentMouseReleaseEvent(QMouseEvent* e)
 
 void SelectionWidget::parentMouseMoveEvent(QMouseEvent* e)
 {
+    m_lastMousePos = e->pos();
+    m_hasMousePos = true;
     updateCursor();
 
     if (e->buttons() != Qt::LeftButton) {
@@ -514,7 +539,10 @@ void SelectionWidget::updateCursor()
 {
     SideType mouseSide = m_activeSide;
     if (!m_activeSide) {
-        mouseSide = getMouseSide(parentWidget()->mapFromGlobal(QCursor::pos()));
+        const QPoint mousePos =
+          m_hasMousePos ? m_lastMousePos
+                        : parentWidget()->mapFromGlobal(QCursor::pos());
+        mouseSide = getMouseSide(mousePos);
     }
 
     switch (mouseSide) {

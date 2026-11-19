@@ -16,53 +16,77 @@ MagnifierWidget::MagnifierWidget(const QPixmap& p,
                                  bool isSquare,
                                  QWidget* parent)
   : QWidget(parent)
+  , m_devicePixelRatio(p.devicePixelRatio() > 0.0 ? p.devicePixelRatio() : 1.0)
+  , m_square(isSquare)
   , m_color(c)
   , m_borderColor(c)
   , m_screenshot(p)
-  , m_square(isSquare)
 {
     setFixedSize(parent->width(), parent->height());
     setAttribute(Qt::WA_TransparentForMouseEvents);
     m_color.setAlpha(130);
+    m_screenshot.setDevicePixelRatio(1.0);
     // add padding for circular magnifier
-    QImage padded(p.width() + 2 * m_magPixels,
-                  p.height() + 2 * m_magPixels,
+    QImage padded(m_screenshot.width() + 2 * m_magPixels,
+                  m_screenshot.height() + 2 * m_magPixels,
                   QImage::Format_ARGB32);
     padded.fill(Qt::black);
     QPainter painter(&padded);
-    painter.drawPixmap(m_magPixels, m_magPixels, p);
+    painter.drawPixmap(m_magPixels, m_magPixels, m_screenshot);
     m_paddedScreenshot.convertFromImage(padded);
 }
+
+void MagnifierWidget::setCursorPos(const QPoint& pos)
+{
+    m_cursorPos = pos;
+    m_hasCursorPos = true;
+}
+
+void MagnifierWidget::renderAt(QPainter& painter,
+                               const QPoint& cursorPos,
+                               const QRect& bounds)
+{
+    painter.save();
+    if (m_square) {
+        drawMagnifier(painter, cursorPos, bounds);
+    } else {
+        drawMagnifierCircle(painter, cursorPos, bounds);
+    }
+    painter.restore();
+}
+
 void MagnifierWidget::paintEvent(QPaintEvent*)
 {
     QPainter p(this);
     if (!p.isActive()) {
         return;
     }
-    if (m_square) {
-        drawMagnifier(p);
-    } else {
-        drawMagnifierCircle(p);
-    }
+    const QPoint pos =
+      m_hasCursorPos ? m_cursorPos : QWidget::mapFromGlobal(QCursor::pos());
+    renderAt(p, pos, rect());
 }
 
-void MagnifierWidget::drawMagnifierCircle(QPainter& painter)
+void MagnifierWidget::drawMagnifierCircle(QPainter& painter,
+                                          const QPoint& cursorPos,
+                                          const QRect& bounds)
 {
-    auto relativeCursor = QCursor::pos();
-    auto translated = QWidget::mapFromGlobal(relativeCursor);
-    auto x = translated.x() + m_magPixels;
-    auto y = translated.y() + m_magPixels;
+    auto x = cursorPos.x() + m_magPixels;
+    auto y = cursorPos.y() + m_magPixels;
 
-    int magX = static_cast<int>(x * m_devicePixelRatio - m_magPixels);
-    int magY = static_cast<int>(y * m_devicePixelRatio - m_magPixels);
+    int magX = qBound(0,
+                      qRound(cursorPos.x() * m_devicePixelRatio),
+                      qMax(0, m_paddedScreenshot.width() - m_pixels));
+    int magY = qBound(0,
+                      qRound(cursorPos.y() * m_devicePixelRatio),
+                      qMax(0, m_paddedScreenshot.height() - m_pixels));
     QRectF magniRect(magX, magY, m_pixels, m_pixels);
 
     qreal drawPosX = x + m_magOffset + m_pixels * magZoom / 2;
-    if (drawPosX > width() - m_pixels * magZoom / 2) {
+    if (drawPosX > bounds.right() - m_pixels * magZoom / 2) {
         drawPosX = x - m_magOffset - m_pixels * magZoom / 2;
     }
     qreal drawPosY = y + m_magOffset + m_pixels * magZoom / 2;
-    if (drawPosY > height() - m_pixels * magZoom / 2) {
+    if (drawPosY > bounds.bottom() - m_pixels * magZoom / 2) {
         drawPosY = y - m_magOffset - m_pixels * magZoom / 2;
     }
     QPointF drawPos(drawPosX, drawPosY);
@@ -104,32 +128,32 @@ void MagnifierWidget::drawMagnifierCircle(QPainter& painter)
       drawPos, m_pixels * magZoom / 2, m_pixels * magZoom / 2);
 }
 // https://invent.kde.org/graphics/spectacle/-/blob/master/src/QuickEditor/QuickEditor.cpp#L841
-void MagnifierWidget::drawMagnifier(QPainter& painter)
+void MagnifierWidget::drawMagnifier(QPainter& painter,
+                                    const QPoint& cursorPos,
+                                    const QRect& bounds)
 {
-    auto relativeCursor = QCursor::pos();
-    auto translated = QWidget::mapFromGlobal(relativeCursor);
-    auto x = translated.x();
-    auto y = translated.y();
+    auto x = cursorPos.x();
+    auto y = cursorPos.y();
 
-    int magX = static_cast<int>(x * m_devicePixelRatio - m_magPixels);
+    int magX = qRound(x * m_devicePixelRatio) - m_magPixels;
     int offsetX = 0;
     if (magX < 0) {
         offsetX = magX;
         magX = 0;
     } else {
-        const int maxX = m_screenshot.width() - m_pixels;
+        const int maxX = qMax(0, m_screenshot.width() - m_pixels);
         if (magX > maxX) {
             offsetX = magX - maxX;
             magX = maxX;
         }
     }
-    int magY = static_cast<int>(y * m_devicePixelRatio - m_magPixels);
+    int magY = qRound(y * m_devicePixelRatio) - m_magPixels;
     int offsetY = 0;
     if (magY < 0) {
         offsetY = magY;
         magY = 0;
     } else {
-        const int maxY = m_screenshot.height() - m_pixels;
+        const int maxY = qMax(0, m_screenshot.height() - m_pixels);
         if (magY > maxY) {
             offsetY = magY - maxY;
             magY = maxY;
@@ -138,11 +162,11 @@ void MagnifierWidget::drawMagnifier(QPainter& painter)
     QRectF magniRect(magX, magY, m_pixels, m_pixels);
 
     qreal drawPosX = x + m_magOffset + m_pixels * magZoom / 2;
-    if (drawPosX > width() - m_pixels * magZoom / 2) {
+    if (drawPosX > bounds.right() - m_pixels * magZoom / 2) {
         drawPosX = x - m_magOffset - m_pixels * magZoom / 2;
     }
     qreal drawPosY = y + m_magOffset + m_pixels * magZoom / 2;
-    if (drawPosY > height() - m_pixels * magZoom / 2) {
+    if (drawPosY > bounds.bottom() - m_pixels * magZoom / 2) {
         drawPosY = y - m_magOffset - m_pixels * magZoom / 2;
     }
     QPointF drawPos(drawPosX, drawPosY);
