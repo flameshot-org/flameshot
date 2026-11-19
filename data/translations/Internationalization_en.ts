@@ -2197,6 +2197,11 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <source>Flameshot Info</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="../../src/utils/systemnotification.cpp" line="81"/>
+        <source>Open folder</source>
+        <translation>Open folder</translation>
+    </message>
 </context>
 <context>
     <name>TextConfig</name>
