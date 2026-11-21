@@ -18,7 +18,9 @@ class CaptureToolButton : public CaptureButton
 
 public:
     explicit CaptureToolButton(const CaptureTool::Type,
-                               QWidget* parent = nullptr);
+                               QWidget* parent = nullptr,
+                               const QColor& color = QColor(),
+                               bool inheritedStyle = false);
     ~CaptureToolButton();
 
     static const QList<CaptureTool::Type>& getIterableButtonTypes();
@@ -30,6 +32,7 @@ public:
     CaptureTool* tool() const;
 
     void setColor(const QColor& c);
+    void setInheritedColor(const QColor& c);
     void animatedShow();
 
 protected:
@@ -47,8 +50,6 @@ private:
     CaptureTool::Type m_buttonType;
 
     QPropertyAnimation* m_emergeAnimation;
-
-    static QColor m_mainColor;
 
     void initButton();
     void updateIcon();

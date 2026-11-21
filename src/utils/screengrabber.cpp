@@ -26,6 +26,10 @@
 #include <QDebug>
 #endif
 
+#ifdef Q_OS_WIN
+#include <qt_windows.h>
+#endif
+
 #if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
 #include "request.h"
 #include <QDBusInterface>
@@ -331,6 +335,36 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok, int preSelectedMonitor)
         return QPixmap();
     }
 #elif defined(Q_OS_WIN)
+    const QList<QScreen*> screens = QGuiApplication::screens();
+    if (screens.isEmpty()) {
+        AbstractLogger::error() << tr("Unable to capture screen");
+        ok = false;
+        return QPixmap();
+    }
+
+    int targetMonitor = -1;
+    if (preSelectedMonitor >= 0 && preSelectedMonitor < screens.size()) {
+        targetMonitor = preSelectedMonitor;
+    } else if (screens.size() == 1) {
+        targetMonitor = 0;
+    } else if (ConfigHandler().captureActiveMonitor()) {
+        QGuiAppCurrentScreen screenFinder;
+        QScreen* cursorScreen = screenFinder.currentScreen();
+        const int idx = screens.indexOf(cursorScreen);
+        if (idx >= 0) {
+            targetMonitor = idx;
+        }
+    }
+
+    if (targetMonitor >= 0) {
+        QScreen* targetScreen = screens[targetMonitor];
+        m_selectedMonitor = targetMonitor;
+        screenshot = targetScreen->grabWindow(wid);
+        screenshot.setDevicePixelRatio(targetScreen->devicePixelRatio());
+        ok = !screenshot.isNull();
+        return screenshot;
+    }
+
     screenshot = windowsScreenshot(wid);
 #endif
 
@@ -521,6 +555,30 @@ QWidget* ScreenGrabber::createMonitorPreviews(const QPixmap& fullScreenshot)
     monitorPreviews->raise();
     monitorPreviews->activateWindow();
     monitorPreviews->setFocus(Qt::ActiveWindowFocusReason);
+#ifdef Q_OS_WIN
+    if (HWND hwnd = reinterpret_cast<HWND>(monitorPreviews->winId())) {
+        if (GetForegroundWindow() == hwnd || SetForegroundWindow(hwnd)) {
+            SetActiveWindow(hwnd);
+            SetFocus(hwnd);
+        } else {
+            HWND fgHwnd = GetForegroundWindow();
+            DWORD fgThread =
+              fgHwnd ? GetWindowThreadProcessId(fgHwnd, nullptr) : 0;
+            DWORD curThread = GetCurrentThreadId();
+            const BOOL attached =
+              (fgThread && fgThread != curThread)
+                ? AttachThreadInput(curThread, fgThread, TRUE)
+                : FALSE;
+            BringWindowToTop(hwnd);
+            SetForegroundWindow(hwnd);
+            SetActiveWindow(hwnd);
+            SetFocus(hwnd);
+            if (attached) {
+                AttachThreadInput(curThread, fgThread, FALSE);
+            }
+        }
+    }
+#endif
     return monitorPreviews;
 }
 
@@ -781,6 +839,15 @@ QPixmap ScreenGrabber::cropToMonitor(const QPixmap& fullScreenshot,
 QPixmap ScreenGrabber::windowsScreenshot(int wid)
 {
     const QList<QScreen*> screens = QGuiApplication::screens();
+    if (screens.isEmpty()) {
+        return QPixmap();
+    }
+    if (screens.size() == 1) {
+        QScreen* s = screens.first();
+        QPixmap p = s->grabWindow(wid);
+        p.setDevicePixelRatio(s->devicePixelRatio());
+        return p;
+    }
     QRect geometry = desktopGeometry();
 
     int canvasWidth = 0;

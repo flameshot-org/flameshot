@@ -24,6 +24,14 @@ TrayIcon::TrayIcon(QObject* parent)
 {
     initMenu();
     initScreenMenu();
+#ifndef Q_OS_MACOS
+    connect(qGuiApp, &QGuiApplication::screenAdded, this, [this](QScreen*) {
+        initScreenMenu();
+    });
+    connect(qGuiApp, &QGuiApplication::screenRemoved, this, [this](QScreen*) {
+        initScreenMenu();
+    });
+#endif
 
     setToolTip(QStringLiteral("Flameshot"));
 #if defined(Q_OS_MACOS)
@@ -123,11 +131,12 @@ void TrayIcon::initMenu()
             // the QMenu)
             QTimer::singleShot(400, this, [this]() { startGuiCapture(); });
         }
+#elif defined(Q_OS_WIN)
+        // Briefly allow the popup QMenu to close before grabbing the screen
+        QTimer::singleShot(60, this, [this]() { startGuiCapture(); });
 #else
-    // Wait 400 ms to hide the QMenu
-    QTimer::singleShot(400, this, [this]() {
-        startGuiCapture();
-    });
+        // Wait 400 ms to hide the QMenu
+        QTimer::singleShot(400, this, [this]() { startGuiCapture(); });
 #endif
     });
     m_launcherAction = new QAction(tr("&Open Launcher"), this);
@@ -244,21 +253,26 @@ void TrayIcon::initScreenMenu()
 #ifndef Q_OS_MACOS
     const QList<QScreen*> screens = QGuiApplication::screens();
     if (screens.size() <= 1) {
+        if (m_screenMenu) {
+            m_screenMenu->clear();
+            m_screenMenu->menuAction()->setVisible(false);
+        }
         return;
     }
 
-    m_screenMenu = new QMenu(tr("Select Screen"));
-
-    QList<QAction*> actions = m_menu->actions();
-    int index = actions.indexOf(m_launcherAction);
-    if (index >= 0 && index + 1 < actions.size()) {
-        m_menu->insertMenu(actions[index + 1], m_screenMenu);
+    if (!m_screenMenu) {
+        m_screenMenu = new QMenu(tr("Select Screen"), m_menu);
+        QList<QAction*> actions = m_menu->actions();
+        int index = actions.indexOf(m_launcherAction);
+        if (index >= 0 && index + 1 < actions.size()) {
+            m_menu->insertMenu(actions[index + 1], m_screenMenu);
+        } else {
+            m_menu->addMenu(m_screenMenu);
+        }
     } else {
-        m_menu->addMenu(m_screenMenu);
+        m_screenMenu->clear();
+        m_screenMenu->menuAction()->setVisible(true);
     }
-
-    QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
-    int currentIndex = screens.indexOf(currentScreen);
 
     for (int i = 0; i < screens.size(); ++i) {
         QScreen* screen = screens[i];
@@ -271,9 +285,14 @@ void TrayIcon::initScreenMenu()
 
         QAction* screenAction = m_screenMenu->addAction(screenDescription);
         connect(screenAction, &QAction::triggered, this, [this, i]() {
-            // Wait and hide the menu
+        // Wait and hide the menu
+#ifdef Q_OS_WIN
+            QTimer::singleShot(
+              60, this, [this, i]() { startGuiCaptureOnScreen(i); });
+#else
             QTimer::singleShot(
               100, this, [this, i]() { startGuiCaptureOnScreen(i); });
+#endif
         });
     }
 #endif
@@ -283,13 +302,19 @@ void TrayIcon::startGuiCapture()
 {
     auto* widget = Flameshot::instance()->gui();
 #if !defined(DISABLE_UPDATE_CHECKER)
-    FlameshotDaemon::instance()->showUpdateNotificationIfAvailable(widget);
+    if (widget) {
+        FlameshotDaemon::instance()->showUpdateNotificationIfAvailable(widget);
+    }
 #endif
 }
 
 void TrayIcon::startGuiCaptureOnScreen(int screenIndex)
 {
+#ifdef Q_OS_WIN
+    CaptureRequest req(CaptureRequest::GRAPHICAL_MODE, 0);
+#else
     CaptureRequest req(CaptureRequest::GRAPHICAL_MODE, 400);
+#endif
     req.setSelectedMonitor(screenIndex);
     Flameshot::instance()->requestCapture(req);
 }

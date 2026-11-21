@@ -9,6 +9,7 @@
 #include <QImageWriter>
 #include <QKeySequence>
 #include <QRegularExpression>
+#include <QSet>
 #include <QStandardPaths>
 #include <QVariant>
 #include <memory>
@@ -491,11 +492,25 @@ bool SaveFileExtension::check(const QVariant& val)
         extension.remove(0, 1);
     }
 
-    QStringList imageFormatList;
-    for (const auto& imageFormat : QImageWriter::supportedImageFormats())
-        imageFormatList.append(imageFormat);
+    // Fast-path Qt's built-in formats so config validation does not force
+    // synchronous loading of all imageformats/*.dll plugins on the GUI thread.
+    if (extension == QLatin1String("png") ||
+        extension == QLatin1String("bmp") ||
+        extension == QLatin1String("ppm") ||
+        extension == QLatin1String("xbm") ||
+        extension == QLatin1String("xpm")) {
+        return true;
+    }
 
-    if (!imageFormatList.contains(extension)) {
+    static const QSet<QByteArray> supportedFormats = []() {
+        QSet<QByteArray> formats;
+        for (const auto& imageFormat : QImageWriter::supportedImageFormats()) {
+            formats.insert(imageFormat);
+        }
+        return formats;
+    }();
+
+    if (!supportedFormats.contains(extension.toLatin1())) {
         return false;
     }
 

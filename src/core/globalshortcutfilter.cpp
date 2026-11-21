@@ -6,16 +6,30 @@
 
 #include <qt_windows.h>
 
+#if !defined(MOD_NOREPEAT)
+#define MOD_NOREPEAT 0x4000
+#endif
+
 GlobalShortcutFilter::GlobalShortcutFilter(QObject* parent)
   : QObject(parent)
 {
     // Forced Print Screen
-    if (RegisterHotKey(NULL, 1, 0, VK_SNAPSHOT)) {
-        // ok - capture screen
-    }
+    m_printScreenRegistered =
+      RegisterHotKey(NULL, 1, MOD_NOREPEAT, VK_SNAPSHOT) ||
+      RegisterHotKey(NULL, 1, 0, VK_SNAPSHOT);
 
-    if (RegisterHotKey(NULL, 2, MOD_SHIFT, VK_SNAPSHOT)) {
-        // ok - show screenshots history
+    m_shiftPrintScreenRegistered =
+      RegisterHotKey(NULL, 2, MOD_SHIFT | MOD_NOREPEAT, VK_SNAPSHOT) ||
+      RegisterHotKey(NULL, 2, MOD_SHIFT, VK_SNAPSHOT);
+}
+
+GlobalShortcutFilter::~GlobalShortcutFilter()
+{
+    if (m_printScreenRegistered) {
+        UnregisterHotKey(NULL, 1);
+    }
+    if (m_shiftPrintScreenRegistered) {
+        UnregisterHotKey(NULL, 2);
     }
 }
 

@@ -13,6 +13,7 @@
 #include <QIODevice>
 #include <QPixmap>
 #include <QRect>
+#include <memory>
 
 #if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
 #include <QDBusConnection>
@@ -25,6 +26,7 @@
 #include <QJsonObject>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
+#include <QThread>
 #include <QTimer>
 #include <QUrl>
 #endif
@@ -91,7 +93,12 @@ FlameshotDaemon::FlameshotDaemon()
 #if !defined(DISABLE_UPDATE_CHECKER)
   , m_appLatestVersion(QStringLiteral(APP_VERSION).replace("v", ""))
   , m_showManualCheckAppUpdateStatus(false)
-  , m_networkCheckUpdates(nullptr)
+  , m_updateCheckInProgress(false)
+  , m_updateCheckTimer(nullptr)
+  , m_updateCheckThread(nullptr)
+#endif
+#ifdef Q_OS_WIN
+  , m_nativeFilter(nullptr)
 #endif
 {
     connect(
@@ -115,10 +122,52 @@ FlameshotDaemon::FlameshotDaemon()
             });
 
 #if !defined(DISABLE_UPDATE_CHECKER)
+    m_updateCheckTimer = new QTimer(this);
+    m_updateCheckTimer->setInterval(1000 * 60 * 60 * 24);
+    connect(m_updateCheckTimer, &QTimer::timeout, this, [this]() {
+        if (ConfigHandler().checkForUpdates()) {
+            getLatestAvailableVersion();
+        }
+    });
+    m_updateCheckTimer->start();
+
     if (ConfigHandler().checkForUpdates()) {
-        getLatestAvailableVersion();
+        // Defer startup update check so proxy/network/TLS init cannot stall
+        // the GUI thread during startup, first hotkey, or tray menu opening.
+        QTimer::singleShot(3000, this, [this]() {
+            if (ConfigHandler().checkForUpdates()) {
+                getLatestAvailableVersion();
+            }
+        });
     }
 #endif
+}
+
+FlameshotDaemon::~FlameshotDaemon()
+{
+#if !defined(DISABLE_UPDATE_CHECKER)
+    if (m_updateCheckThread) {
+        QThread* thread = m_updateCheckThread;
+        m_updateCheckThread = nullptr;
+        disconnect(thread, nullptr, this, nullptr);
+        thread->quit();
+        thread->wait(1500);
+    }
+#endif
+#ifdef Q_OS_WIN
+    if (qApp && m_nativeFilter) {
+        qApp->removeNativeEventFilter(m_nativeFilter);
+        m_nativeFilter = nullptr;
+    }
+#endif
+    if (m_trayIcon) {
+        m_trayIcon->hide();
+        delete m_trayIcon;
+        m_trayIcon = nullptr;
+    }
+    if (m_instance == this) {
+        m_instance = nullptr;
+    }
 }
 
 void FlameshotDaemon::start()
@@ -128,6 +177,12 @@ void FlameshotDaemon::start()
         // Tray icon needs FlameshotDaemon::instance() to be non-null
         m_instance->initTrayIcon();
         qApp->setQuitOnLastWindowClosed(false);
+        connect(qApp, &QCoreApplication::aboutToQuit, m_instance, []() {
+            if (m_instance) {
+                delete m_instance;
+                m_instance = nullptr;
+            }
+        });
     }
 }
 
@@ -233,24 +288,65 @@ void FlameshotDaemon::showUpdateNotificationIfAvailable(CaptureWidget* widget)
 
 void FlameshotDaemon::getLatestAvailableVersion()
 {
-    // This features is required for MacOS and Windows user and for Linux users
-    // who installed Flameshot not from the repository.
-    QNetworkRequest requestCheckUpdates(QUrl(FLAMESHOT_APP_VERSION_URL));
-    if (nullptr == m_networkCheckUpdates) {
-        m_networkCheckUpdates = new QNetworkAccessManager(this);
-        connect(m_networkCheckUpdates,
-                &QNetworkAccessManager::finished,
-                this,
-                &FlameshotDaemon::handleReplyCheckUpdates);
+    if (m_updateCheckInProgress) {
+        return;
     }
-    m_networkCheckUpdates->get(requestCheckUpdates);
+    m_updateCheckInProgress = true;
 
-    // check for updates each 24 hours
-    QTimer::singleShot(1000 * 60 * 60 * 24, [this]() {
-        if (ConfigHandler().checkForUpdates()) {
-            this->getLatestAvailableVersion();
+    struct UpdateCheckResult
+    {
+        bool completed = false;
+        bool ok = false;
+        QString errorString;
+        QByteArray payload;
+    };
+
+    // Run update check (and synchronous Windows WPAD/proxy resolution) on a
+    // dedicated worker thread so the main GUI thread is never stalled.
+    auto result = std::make_shared<UpdateCheckResult>();
+    auto* thread = new QThread();
+    auto* worker = new QObject();
+    worker->moveToThread(thread);
+    m_updateCheckThread = thread;
+
+    connect(thread, &QThread::started, worker, [worker, result]() {
+        auto* nam = new QNetworkAccessManager(worker);
+        QNetworkRequest requestCheckUpdates(QUrl(FLAMESHOT_APP_VERSION_URL));
+        QNetworkReply* reply = nam->get(requestCheckUpdates);
+        connect(
+          reply, &QNetworkReply::finished, worker, [worker, reply, result]() {
+              result->ok = (reply->error() == QNetworkReply::NoError);
+              result->errorString = reply->errorString();
+              result->payload = result->ok ? reply->readAll() : QByteArray();
+              result->completed = true;
+              reply->deleteLater();
+              worker->deleteLater();
+          });
+    });
+
+    connect(worker,
+            &QObject::destroyed,
+            thread,
+            &QThread::quit,
+            Qt::DirectConnection);
+    connect(thread, &QThread::finished, this, [this, thread, result]() {
+        if (m_updateCheckThread == thread) {
+            m_updateCheckInProgress = false;
+            m_updateCheckThread = nullptr;
+        }
+        if (result->completed) {
+            handleReplyCheckUpdates(
+              result->ok, result->errorString, result->payload);
         }
     });
+    connect(thread, &QThread::finished, worker, &QObject::deleteLater);
+    connect(thread, &QThread::finished, thread, &QObject::deleteLater);
+    if (qApp) {
+        connect(qApp, &QCoreApplication::aboutToQuit, thread, [thread]() {
+            thread->quit();
+        });
+    }
+    thread->start();
 }
 
 void FlameshotDaemon::checkForUpdates()
@@ -391,8 +487,8 @@ void FlameshotDaemon::initTrayIcon()
         enableTrayIcon(true);
     }
 #if defined(Q_OS_WIN)
-    GlobalShortcutFilter* nativeFilter = new GlobalShortcutFilter(this);
-    qApp->installNativeEventFilter(nativeFilter);
+    m_nativeFilter = new GlobalShortcutFilter(this);
+    qApp->installNativeEventFilter(m_nativeFilter);
 #endif
 }
 
@@ -400,26 +496,27 @@ void FlameshotDaemon::enableTrayIcon(bool enable)
 {
     if (enable) {
         if (m_trayIcon == nullptr) {
-            m_trayIcon = new TrayIcon();
-        } else {
+            m_trayIcon = new TrayIcon(this);
+        } else if (!m_trayIcon->isVisible()) {
             m_trayIcon->show();
-            return;
         }
-    } else if (m_trayIcon) {
+    } else if (m_trayIcon && m_trayIcon->isVisible()) {
         m_trayIcon->hide();
     }
 }
 
 #if !defined(DISABLE_UPDATE_CHECKER)
-void FlameshotDaemon::handleReplyCheckUpdates(QNetworkReply* reply)
+void FlameshotDaemon::handleReplyCheckUpdates(bool ok,
+                                              const QString& errorString,
+                                              const QByteArray& payload)
 {
     if (!ConfigHandler().checkForUpdates() &&
         !m_showManualCheckAppUpdateStatus) {
         return;
     }
 
-    if (reply->error() == QNetworkReply::NoError) {
-        QJsonDocument response = QJsonDocument::fromJson(reply->readAll());
+    if (ok) {
+        QJsonDocument response = QJsonDocument::fromJson(payload);
         QJsonObject json = response.object();
         m_appLatestVersion = json["tag_name"].toString().replace("v", "");
 
@@ -437,7 +534,7 @@ void FlameshotDaemon::handleReplyCheckUpdates(QNetworkReply* reply)
         }
     } else {
         qWarning() << "Failed to get information about the latest version. "
-                   << reply->errorString();
+                   << errorString;
         if (m_showManualCheckAppUpdateStatus) {
             if (FlameshotDaemon::instance()) {
                 FlameshotDaemon::instance()->sendTrayNotification(

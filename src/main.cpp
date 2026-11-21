@@ -228,7 +228,6 @@ int main(int argc, char* argv[])
     // no arguments, just launch Flameshot
     if (argc == 1) {
         QApplication app(argc, argv);
-        configureTranslation(translator, qtTranslator);
 
 #ifdef USE_KDSINGLEAPPLICATION
 #ifdef Q_OS_UNIX
