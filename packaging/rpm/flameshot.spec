@@ -40,6 +40,8 @@ BuildRequires:  kf6-kguiaddons-devel >= 6.7.0
 %endif
 
 Requires: hicolor-icon-theme
+Requires: python3
+Requires: tar
 
 %if 0%{?suse_version}
 Requires: qt6-svg
@@ -132,6 +134,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %dir %{_datadir}/bash-completion/completions
 %dir %{_datadir}/zsh/site-functions
 %{_bindir}/%{name}
+%{_bindir}/%{name}-plugin
+%{_datadir}/%{name}/sdk
+%{_datadir}/doc/%{name}/plugin-sdk.md
 %{_datadir}/applications/org.flameshot.Flameshot.desktop
 %{_datadir}/metainfo/org.flameshot.Flameshot.metainfo.xml
 %{_datadir}/bash-completion/completions/%{name}
