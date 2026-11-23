@@ -27,7 +27,9 @@ ButtonHandler::ButtonHandler(QObject* parent)
 void ButtonHandler::hide()
 {
     for (CaptureToolButton* b : m_vectorButtons) {
-        b->hide();
+        if (!b->isHidden()) {
+            b->hide();
+        }
     }
 }
 
