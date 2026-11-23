@@ -142,6 +142,7 @@ private:
                                   const char* slot);
 
     void setToolSize(int size);
+    void selectWindowAt(const QPoint& pos);
 
     QRect extendedSelection() const;
     QRect extendedRect(const QRect& r) const;
