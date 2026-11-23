@@ -519,6 +519,21 @@ brew install cmake
 
 After installing all the dependencies, Flameshot can be built.
 
+#### Optional Imgur uploads
+
+Imgur uploading is disabled by default in Flameshot. If you want to use it, you can enable it when building Flameshot from source.
+
+To do this, add `-DENABLE_IMGUR=ON` to the CMake command.
+
+For example:
+
+```shell
+cmake -S . -B build -DENABLE_IMGUR=ON
+cmake --build build
+```
+
+This builds Flameshot with Imgur uploading enabled. If you already have Flameshot installed, you'll need to build it again with this option to use the feature.
+
 #### Installation/build dir
 For the translations to be loaded correctly, the build process needs to be aware of where you want
 to install Flameshot.
