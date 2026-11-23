@@ -35,6 +35,7 @@ public slots:
 private slots:
     void showHelpChanged(bool checked);
     void saveLastRegion(bool checked);
+    void ignoreWholeScreenLastRegion(bool checked);
     void showSidePanelButtonChanged(bool checked);
     void showDesktopNotificationChanged(bool checked);
     void showAbortNotificationChanged(bool checked);
@@ -142,6 +143,7 @@ private:
     QCheckBox* m_copyPathAfterSave;
     QCheckBox* m_antialiasingPinZoom;
     QCheckBox* m_saveLastRegion;
+    QCheckBox* m_ignoreWholeScreenLastRegion;
     QCheckBox* m_uploadWithoutConfirmation;
     QPushButton* m_importButton;
     QPushButton* m_exportButton;
