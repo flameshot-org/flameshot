@@ -39,9 +39,18 @@ QScreen* QGuiAppCurrentScreen::currentScreen(const QPoint& pos)
     }
 #endif
     if (!m_currentScreen) {
-        qCritical("Unable to get current screen, starting to use primary "
-                  "screen. It may be a cause of logical error and working with "
-                  "a wrong screen.");
+        // Wayland gives a client no global cursor position, so screenAt()
+        // returning nothing is the normal case there rather than a fault, and
+        // the primary screen is the intended fallback. Reporting it as
+        // critical on every call buries real errors -- a capture opens one
+        // window per display, each asking several times.
+        static const bool waylandSession =
+          QGuiApplication::platformName() == QLatin1String("wayland");
+        if (!waylandSession) {
+            qCritical("Unable to get current screen, starting to use primary "
+                      "screen. It may be a cause of logical error and working "
+                      "with a wrong screen.");
+        }
         m_currentScreen = qGuiApp->primaryScreen();
     }
     return m_currentScreen;
