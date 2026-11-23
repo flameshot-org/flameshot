@@ -34,6 +34,11 @@ echo ">> If the destination is a directory, the file name is generated from strf
 "$flameshot" screen -p ./
 
 sleep 2
+mkdir dotted.dir
+echo ">> A dot in the directory name must not be used as the file suffix (png is used)"
+"$flameshot" screen -p /tmp/flameshot_path_test/dotted.dir
+
+sleep 2
 echo ">> If the output file has no suffix, it will be added (png)"
 "$flameshot" screen -p /tmp/flameshot_path_test/without_suffix
 
