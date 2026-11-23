@@ -16,6 +16,9 @@ target_sources(
         loadspinner.h
         notificationwidget.h
         orientablepushbutton.h
+        gifdrawingtool.h
+        gifrecordingoverlay.h
+        gifrecordingwidget.h
 
         colorpickerwidget.h
         capture/capturetoolobjects.h
@@ -45,6 +48,8 @@ target_sources(
         notificationwidget.cpp
         orientablepushbutton.cpp
         colorpickerwidget.cpp
+        gifrecordingoverlay.cpp
+        gifrecordingwidget.cpp
         capture/capturetoolobjects.cpp
 )
 

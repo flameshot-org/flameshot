@@ -93,3 +93,19 @@ bool CaptureRequest::hasSelectedMonitor() const
 {
     return m_hasSelectedMonitor;
 }
+
+void CaptureRequest::setGifRegion(const QRect& region)
+{
+    m_gifRegion = region;
+    m_hasGifRegion = true;
+}
+
+QRect CaptureRequest::gifRegion() const
+{
+    return m_gifRegion;
+}
+
+bool CaptureRequest::hasGifRegion() const
+{
+    return m_hasGifRegion;
+}

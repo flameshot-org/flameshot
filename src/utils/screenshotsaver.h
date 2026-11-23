@@ -12,6 +12,8 @@ bool saveToFilesystem(const QPixmap& capture,
                       const QString& path,
                       const QString& messagePrefix = "");
 QString ShowSaveFileDialog(const QString& title, const QString& directory);
+QString ShowGifSaveFileDialog(const QString& defaultFilePath);
+bool saveGifToFilesystem(const QString& tempFilePath, const QString& path);
 void saveToClipboardMime(const QPixmap& capture, const QString& imageType);
 void saveToClipboard(const QPixmap& capture);
 // GNOME Wayland: keeps the widget alive until clipboard data is fetched

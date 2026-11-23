@@ -68,6 +68,9 @@ CaptureLauncher::CaptureLauncher(QDialog* parent)
     }
 #endif
 
+    ui->captureType->insertItem(
+      3, tr("GIF Animation"), CaptureRequest::GIF_MODE);
+
     ui->delayTime->setSpecialValueText(tr("No Delay"));
     ui->launchButton->setFocus();
 
@@ -102,7 +105,10 @@ CaptureLauncher::CaptureLauncher(QDialog* parent)
             [this]() {
                 auto mode = static_cast<CaptureRequest::CaptureMode>(
                   ui->captureType->currentData().toInt());
-                if (mode == CaptureRequest::CaptureMode::GRAPHICAL_MODE) {
+                const bool needsRegion =
+                  mode == CaptureRequest::CaptureMode::GRAPHICAL_MODE ||
+                  mode == CaptureRequest::CaptureMode::GIF_MODE;
+                if (needsRegion) {
                     ui->sizeLabel->show();
                     ui->screenshotX->show();
                     ui->screenshotY->show();
@@ -115,6 +121,10 @@ CaptureLauncher::CaptureLauncher(QDialog* parent)
                     ui->screenshotWidth->hide();
                     ui->screenshotHeight->hide();
                 }
+                ui->launchButton->setText(
+                  mode == CaptureRequest::CaptureMode::GIF_MODE
+                    ? tr("Start recording")
+                    : tr("Take new screenshot"));
             });
 
     loadLastRegion();
@@ -163,19 +173,50 @@ void CaptureLauncher::startCapture()
     CaptureRequest req(
       mode, additionalDelayToHideUI + delaySeconds * secondsToMilliseconds);
 
+    int selectedMonitor = -1;
+#ifndef Q_OS_MACOS
+    selectedMonitor = ui->monitorSelection->currentData().toInt();
+#endif
+
     if (mode == CaptureRequest::CaptureMode::GRAPHICAL_MODE) {
         req.setInitialSelection(QRect(ui->screenshotX->text().toInt(),
                                       ui->screenshotY->text().toInt(),
                                       ui->screenshotWidth->text().toInt(),
                                       ui->screenshotHeight->text().toInt()));
+    } else if (mode == CaptureRequest::CaptureMode::GIF_MODE) {
+        const QList<QScreen*> screens = QGuiApplication::screens();
+        QScreen* screen = nullptr;
+        if (selectedMonitor >= 0 && selectedMonitor < screens.size()) {
+            screen = screens.at(selectedMonitor);
+        }
+        if (!screen) {
+            screen = QGuiAppCurrentScreen().currentScreen();
+        }
+        if (!screen) {
+            screen = QGuiApplication::primaryScreen();
+        }
+
+        QRect region(ui->screenshotX->text().toInt(),
+                     ui->screenshotY->text().toInt(),
+                     ui->screenshotWidth->text().toInt(),
+                     ui->screenshotHeight->text().toInt());
+        if (screen) {
+            const QRect screenGeometry = screen->geometry();
+            const QRect screenRect(QPoint(0, 0), screenGeometry.size());
+            if (region.width() <= 0 || region.height() <= 0) {
+                region = screenRect;
+            } else {
+                region = region.intersected(screenRect);
+            }
+            if (region.isEmpty()) {
+                region = screenRect;
+            }
+            region.translate(screenGeometry.topLeft());
+        }
+        req.setGifRegion(region);
     }
 
-#ifndef Q_OS_MACOS
-    int selectedMonitor = ui->monitorSelection->currentData().toInt();
     req.setSelectedMonitor(selectedMonitor);
-#else
-    req.setSelectedMonitor(-1);
-#endif
 
     connectCaptureSlots();
     Flameshot::instance()->requestCapture(req);
