@@ -44,6 +44,8 @@ CaptureTool* ToolFactory::CreateTool(CaptureTool::Type t, QObject* parent)
         if_TYPE_return_TOOL(TYPE_ARROW, ArrowTool);
         if_TYPE_return_TOOL(TYPE_SELECTION, SelectionTool);
         if_TYPE_return_TOOL(TYPE_RECTANGLE, RectangleTool);
+        if_TYPE_return_TOOL(TYPE_WHITE_BACKGROUND_RECTANGLE,
+                            WhiteBackgroundRectangleTool);
         if_TYPE_return_TOOL(TYPE_CIRCLE, CircleTool);
         if_TYPE_return_TOOL(TYPE_MARKER, MarkerTool);
         if_TYPE_return_TOOL(TYPE_MOVESELECTION, MoveTool);
