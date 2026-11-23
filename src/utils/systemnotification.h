@@ -3,7 +3,9 @@
 
 #pragma once
 
+#include <QHash>
 #include <QObject>
+#include <QString>
 
 class QDBusInterface;
 
@@ -20,6 +22,19 @@ public:
                      const QString& savePath,
                      const int timeout = 5000);
 
+#if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
+private slots:
+    void onActionInvoked(uint id, const QString& actionKey);
+    void onNotificationClosed(uint id, uint reason);
+
 private:
+    void ensureInterface();
+    void queryCapabilities();
+
     QDBusInterface* m_interface;
+    QHash<uint, QString> m_pendingFolders;
+    bool m_supportsActions = true;
+    bool m_capabilitiesRequested = false;
+    bool m_signalsConnected = false;
+#endif
 };

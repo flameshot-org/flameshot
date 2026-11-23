@@ -3096,6 +3096,11 @@ You can find me in the system tray.</source>
         <source>Flameshot Info</source>
         <translation>Уведомление Flameshot</translation>
     </message>
+    <message>
+        <location filename="../../src/utils/systemnotification.cpp" line="81"/>
+        <source>Open folder</source>
+        <translation>Открыть папку</translation>
+    </message>
 </context>
 <context>
     <name>TextConfig</name>
