@@ -11,6 +11,8 @@ Build-Depends:
  qt6-svg-dev (>= 6.2.4~) | libqt6svg6-dev (>= 6.2.4~),
  qt6-l10n-tools (>= 6.2.4~),
  libgl-dev,
+ libxcb1-dev,
+ pkgconf,
 Rules-Requires-Root: no
 Standards-Version: 4.7.2
 Homepage: https://flameshot.org/

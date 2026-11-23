@@ -3,9 +3,11 @@
 
 #include "generalconf.h"
 #include "utils/confighandler.h"
+#include "widgets/capture/smartregiondetector.h"
 
 #include <QCheckBox>
 #include <QComboBox>
+#include <QDesktopServices>
 #include <QFile>
 #include <QFileDialog>
 #include <QGroupBox>
@@ -19,6 +21,7 @@
 #include <QSpinBox>
 #include <QStandardPaths>
 #include <QStringDecoder>
+#include <QUrl>
 #include <QVBoxLayout>
 
 GeneralConf::GeneralConf(QWidget* parent)
@@ -60,6 +63,7 @@ GeneralConf::GeneralConf(QWidget* parent)
 #if defined(Q_OS_MACOS)
     initUseNativeFullscreen();
 #endif
+    initSmartRegionDetection();
 #if defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)
     initUseX11LegacyScreenshot();
 #endif
@@ -135,6 +139,13 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
 #if defined(Q_OS_MACOS)
     m_useNativeFullscreen->setChecked(config.useNativeFullscreen());
 #endif
+    if (m_smartRegionDetection) {
+        m_smartRegionDetection->setChecked(config.smartRegionDetection());
+    }
+    if (m_smartRegionAccessibilityButton) {
+        m_smartRegionAccessibilityButton->setEnabled(
+          config.smartRegionDetection());
+    }
 #if defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)
     m_useX11LegacyScreenshot->setChecked(config.useX11LegacyScreenshot());
 #endif
@@ -982,6 +993,50 @@ void GeneralConf::useNativeFullscreenChanged(bool checked)
     ConfigHandler().setUseNativeFullscreen(checked);
 }
 #endif
+
+void GeneralConf::initSmartRegionDetection()
+{
+    if (!SmartRegionDetector::isSupported()) {
+        return;
+    }
+
+    m_smartRegionDetection =
+      new QCheckBox(tr("Enable smart region selection"), this);
+    m_smartRegionDetection->setToolTip(
+      tr("Hover over a window or interface element and click to select it. "
+         "Scroll up to select its parent, or down to go back toward the "
+         "element under the pointer. Dragging still selects a custom area."));
+    m_scrollAreaLayout->addWidget(m_smartRegionDetection);
+    connect(m_smartRegionDetection, &QCheckBox::clicked, this, [this](bool on) {
+        ConfigHandler().setSmartRegionDetection(on);
+        if (m_smartRegionAccessibilityButton) {
+            m_smartRegionAccessibilityButton->setEnabled(on);
+        }
+    });
+
+#if defined(Q_OS_MACOS)
+    m_smartRegionAccessibilityButton =
+      new QPushButton(tr("Grant Accessibility Access..."), this);
+    m_smartRegionAccessibilityButton->setToolTip(
+      tr("Smart region selection needs the macOS Accessibility permission to "
+         "detect interface elements inside windows. Whole windows are "
+         "detected without it."));
+    m_scrollAreaLayout->addWidget(m_smartRegionAccessibilityButton);
+    connect(
+      m_smartRegionAccessibilityButton, &QPushButton::clicked, this, []() {
+          if (macOsAccessibilityTrusted()) {
+              return;
+          }
+          // macOS only prompts when Flameshot has no entry yet. An entry left
+          // by an earlier build looks enabled but no longer applies, so also
+          // open the settings page where it can be removed and added again.
+          requestMacOsAccessibilityPermission();
+          QDesktopServices::openUrl(QUrl(
+            QStringLiteral("x-apple.systempreferences:com.apple.preference."
+                           "security?Privacy_Accessibility")));
+      });
+#endif
+}
 
 #if defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)
 void GeneralConf::initUseX11LegacyScreenshot()

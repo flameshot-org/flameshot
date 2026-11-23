@@ -16,6 +16,7 @@
 #include "core/qguiappcurrentscreen.h"
 #include "tools/copy/copytool.h"
 #include "utils/abstractlogger.h"
+#include "utils/inputtrace.h"
 #include "utils/screengrabber.h"
 #include "utils/screenshotsaver.h"
 #include "widgets/capture/colorpicker.h"
@@ -23,10 +24,14 @@
 #include "widgets/capture/modificationcommand.h"
 #include "widgets/capture/notifierbox.h"
 #include "widgets/capture/overlaymessage.h"
+#include "widgets/capture/smartregioncontroller.h"
 #include "widgets/draggablewidgetmaker.h"
 #include "widgets/orientablepushbutton.h"
 #include "widgets/panel/sidepanelwidget.h"
 #include "widgets/panel/utilitypanel.h"
+#if defined(Q_OS_WIN)
+#include "utils/windowsforeground.h"
+#endif
 
 #include <QApplication>
 #include <QCheckBox>
@@ -228,6 +233,7 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
     initButtons();
     initSelection(); // button handler must be initialized before
     initShortcuts(); // must be called after initSelection
+    initSmartRegion();
     // init magnify
     if (m_config.showMagnifier()) {
         m_magnifier = new MagnifierWidget(
@@ -471,7 +477,21 @@ void CaptureWidget::showxywh()
 void CaptureWidget::initHelpMessage()
 {
     QList<QPair<QString, QString>> keyMap;
-    keyMap << std::pair(tr("Mouse"), tr("Select screenshot area"));
+    if (m_smartRegion) {
+        keyMap << std::pair(
+          tr("Mouse"), tr("Click a detected region or drag a custom area"));
+        keyMap << std::pair(tr("Mouse Wheel"),
+                            tr("Scroll up for parent, down for child"));
+#if defined(Q_OS_MACOS)
+        if (!m_smartRegion->elementDetectionAvailable()) {
+            keyMap << std::pair(
+              tr("Accessibility"),
+              tr("Enable in General settings to detect UI elements"));
+        }
+#endif
+    } else {
+        keyMap << std::pair(tr("Mouse"), tr("Select screenshot area"));
+    }
     using CT = CaptureTool;
     for (auto toolType : { CT::TYPE_ACCEPT, CT::TYPE_SAVE, CT::TYPE_COPY }) {
         if (!m_tools.contains(toolType)) {
@@ -485,7 +505,9 @@ void CaptureWidget::initHelpMessage()
             keyMap << std::pair(shortcut, tool->description());
         }
     }
-    keyMap << std::pair(tr("Mouse Wheel"), tr("Change tool size"));
+    keyMap << std::pair(tr("Mouse Wheel"),
+                        m_smartRegion ? tr("Change tool size after selection")
+                                      : tr("Change tool size"));
     keyMap << std::pair(tr("Right Click"), tr("Show color picker"));
     keyMap << std::pair(ConfigHandler().shortcut("TYPE_TOGGLE_PANEL"),
                         tr("Open side panel"));
@@ -777,8 +799,15 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
         painter.restore();
     // draw inactive region
     drawInactiveRegion(&painter);
+    drawSmartRegion(&painter);
 
-    if (!isActiveWindow()) {
+    bool hasKeyboard = isActiveWindow();
+#if defined(Q_OS_WIN)
+    // Qt reports the window as active even when Windows has refused to bring
+    // it to the front and keys go to another application.
+    hasKeyboard = hasKeyboard && WindowsForeground::isForeground(winId());
+#endif
+    if (!hasKeyboard) {
         drawErrorMessage(
           tr("Flameshot has lost focus. Keyboard shortcuts won't "
              "work until you click somewhere."),
@@ -794,6 +823,10 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
 
 void CaptureWidget::showColorPicker(const QPoint& pos)
 {
+    // The click that confirms the color must not select a region.
+    if (m_smartRegion) {
+        m_smartRegion->clear();
+    }
     // Try to select new object if current pos out of active object
     auto toolItem = activeToolObject();
     if (!toolItem || (toolItem && !toolItem->boundingRect().contains(pos))) {
@@ -896,6 +929,10 @@ void CaptureWidget::mousePressEvent(QMouseEvent* e)
         return;
     } else if (e->button() == Qt::LeftButton) {
         m_mouseIsClicked = true;
+        if (m_smartRegion) {
+            // The press chose the highlighted region; keep it until release.
+            m_smartRegion->suspend();
+        }
 
         // Click using a tool excluding tool MOVE
         if (startDrawObjectTool(m_mousePressedPos)) {
@@ -964,6 +1001,11 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
 
     m_context.mousePos = e->pos();
     if (e->buttons() != Qt::LeftButton) {
+        if (smartRegionActive()) {
+            m_smartRegion->pointerMoved(mapToGlobal(e->pos()));
+        } else if (m_smartRegion) {
+            m_smartRegion->clear();
+        }
         updateTool(activeButtonTool());
         updateCursor();
         return;
@@ -1132,8 +1174,68 @@ void CaptureWidget::keyReleaseEvent(QKeyEvent* e)
     }
 }
 
+#if defined(Q_OS_WIN)
+bool CaptureWidget::nativeEvent(const QByteArray& eventType,
+                                void* message,
+                                qintptr* result)
+{
+    // Called with the native message before Qt delivers the wheel event.
+    if (m_touchpadScroll.handleMessage(message)) {
+        // Repaint the focus warning, which depends on the foreground window.
+        update();
+    }
+    return QWidget::nativeEvent(eventType, message, result);
+}
+#endif
+
 void CaptureWidget::wheelEvent(QWheelEvent* e)
 {
+    // Before a selection exists, the wheel walks the detected regions and
+    // must not change the tool size.
+    if (m_smartRegion && !m_selection->isVisible()) {
+        if (!smartRegionActive()) {
+            e->accept();
+            return;
+        }
+        m_smartRegion->pointerMoved(mapToGlobal(e->position().toPoint()));
+        // pixelDelta() is precise on touchpads; angleDelta() covers wheels.
+        int delta = e->pixelDelta().y();
+        if (delta == 0) {
+            delta = e->angleDelta().y();
+        }
+        // With natural scrolling the delta is inverted. Normalize it so that
+        // pushing up always selects the parent.
+        bool natural = e->inverted();
+        bool continuous = qAbs(e->angleDelta().y()) < MOUSE_WHEEL_TRESHOLD;
+#if defined(Q_OS_WIN)
+        natural = natural || m_touchpadScroll.naturalScroll();
+        // A fast swipe sends large deltas but is still a stream of events.
+        continuous = continuous || m_touchpadScroll.fromTouchpad();
+#endif
+        if (natural) {
+            delta = -delta;
+        }
+        const QRect before = m_smartRegion->current();
+        m_smartRegion->step(delta, continuous);
+        if (InputTrace::enabled()) {
+            const QRect after = m_smartRegion->current();
+            InputTrace::write(
+              QStringLiteral("step angle=%1 inverted=%2 natural=%3 delta=%4 "
+                             "continuous=%5 dir=%6")
+                .arg(e->angleDelta().y())
+                .arg(e->inverted())
+                .arg(natural)
+                .arg(delta)
+                .arg(continuous)
+                .arg(after == before          ? QStringLiteral("none")
+                     : after.contains(before) ? QStringLiteral("parent")
+                                              : QStringLiteral("child")));
+        }
+        m_notifierBox->hide();
+        e->accept();
+        return;
+    }
+
     /* Mouse scroll usually gives value 120, not more or less, just how many
      * times.
      * Touchpad gives the value 2 or more (usually 2-8), it doesn't give
@@ -1178,6 +1280,9 @@ void CaptureWidget::resizeEvent(QResizeEvent* e)
         m_panel->setFixedHeight(height());
         m_buttonHandler->updateScreenRegions(rect());
     }
+    if (m_smartRegion) {
+        m_selection->setClickSelectionCandidate(smartRegionInWidget());
+    }
 }
 
 void CaptureWidget::moveEvent(QMoveEvent* e)
@@ -1191,6 +1296,11 @@ void CaptureWidget::moveEvent(QMoveEvent* e)
         move(m_selectedScreen->geometry().topLeft());
     }
 #endif
+    // The highlighted region is in global coordinates, the click target in
+    // widget coordinates.
+    if (m_smartRegion) {
+        m_selection->setClickSelectionCandidate(smartRegionInWidget());
+    }
 }
 
 void CaptureWidget::changeEvent(QEvent* e)
@@ -1376,6 +1486,12 @@ void CaptureWidget::initSelection()
         }
     });
     connect(m_selection, &SelectionWidget::visibilityChanged, this, [this]() {
+        if (m_smartRegion) {
+            m_smartRegion->clear();
+            if (smartRegionActive()) {
+                m_smartRegion->pointerMoved(QCursor::pos());
+            }
+        }
         if (!m_selection->isVisible() && !m_helpMessage.isEmpty()) {
             OverlayMessage::push(m_helpMessage);
         }
@@ -1393,6 +1509,56 @@ void CaptureWidget::initSelection()
         m_context.selection = extendedRect(m_selection->geometry());
         emit m_selection->geometrySettled();
     }
+}
+
+void CaptureWidget::initSmartRegion()
+{
+    if (!m_config.smartRegionDetection()) {
+        return;
+    }
+    auto detector = SmartRegionDetector::create();
+    if (!detector) {
+        return;
+    }
+    detector->snapshotWindows();
+    m_smartRegion = new SmartRegionController(std::move(detector), this);
+#if defined(Q_OS_WIN)
+    m_touchpadScroll.enable();
+#endif
+    connect(m_smartRegion,
+            &SmartRegionController::currentChanged,
+            this,
+            [this](const QRect& previous, const QRect& current) {
+                const QRect region = globalToWidget(current);
+                // What is highlighted is exactly what a click selects.
+                m_selection->setClickSelectionCandidate(region);
+                update(paddedUpdateRect(globalToWidget(previous))
+                         .united(paddedUpdateRect(region)));
+            });
+    // Not needed when a region was passed on the command line.
+    if (smartRegionActive()) {
+        m_smartRegion->pointerMoved(QCursor::pos());
+    }
+}
+
+bool CaptureWidget::smartRegionActive() const
+{
+    return m_smartRegion && !m_selection->isVisible() && !m_activeButton &&
+           !m_activeTool && !(m_colorPicker && m_colorPicker->isVisible());
+}
+
+QRect CaptureWidget::smartRegionInWidget() const
+{
+    return m_smartRegion ? globalToWidget(m_smartRegion->current()) : QRect();
+}
+
+QRect CaptureWidget::globalToWidget(const QRect& globalRect) const
+{
+    if (globalRect.isNull()) {
+        return {};
+    }
+    return QRect(mapFromGlobal(globalRect.topLeft()), globalRect.size())
+      .intersected(rect());
 }
 
 void CaptureWidget::setState(CaptureToolButton* b)
@@ -2094,15 +2260,32 @@ void CaptureWidget::drawErrorMessage(const QString& msg, QPainter* painter)
 
 void CaptureWidget::drawInactiveRegion(QPainter* painter)
 {
+    painter->save();
     QColor overlayColor(0, 0, 0, m_opacity);
     painter->setBrush(overlayColor);
     QRect r;
     if (m_selection->isVisible()) {
         r = m_selection->geometry().normalized();
+    } else {
+        r = smartRegionInWidget();
     }
     QRegion grey(rect());
     grey = grey.subtracted(r);
 
     painter->setClipRegion(grey);
     painter->drawRect(-1, -1, rect().width() + 1, rect().height() + 1);
+    painter->restore();
+}
+
+void CaptureWidget::drawSmartRegion(QPainter* painter)
+{
+    const QRect region = smartRegionInWidget();
+    if (region.isEmpty() || m_selection->isVisible()) {
+        return;
+    }
+    painter->save();
+    painter->setBrush(Qt::NoBrush);
+    painter->setPen(QPen(m_uiColor, 2));
+    painter->drawRect(region.adjusted(1, 1, -2, -2));
+    painter->restore();
 }
