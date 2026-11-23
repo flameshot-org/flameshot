@@ -758,7 +758,16 @@ QPixmap ScreenGrabber::cropToMonitor(const QPixmap& fullScreenshot,
 
 #if defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)
     // Linux: May need rescaling if scale factors don't match
-    if (qAbs(screenshotScaleX - targetDpr) > 0.01) {
+    // GNOME Wayland's portal image uses the same native-coordinate canvas as
+    // QScreen::geometry() on Qt 6.2. In that case the cropped pixels are
+    // already native resolution; upscaling them by DPR creates a 4x-area
+    // image and limits interaction to the visible top-left quarter.
+    const bool nativeWaylandCanvas =
+      m_info.waylandDetected() &&
+      m_info.windowManager() == DesktopInfo::GNOME &&
+      qAbs(screenshotScaleX - 1.0) < 0.01 &&
+      qAbs(screenshotScaleY - 1.0) < 0.01;
+    if (!nativeWaylandCanvas && qAbs(screenshotScaleX - targetDpr) > 0.01) {
         int targetPhysicalWidth = qRound(targetGeometry.width() * targetDpr);
         int targetPhysicalHeight = qRound(targetGeometry.height() * targetDpr);
         cropped = cropped.scaled(targetPhysicalWidth,
