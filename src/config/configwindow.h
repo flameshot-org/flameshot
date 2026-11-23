@@ -22,6 +22,9 @@ signals:
     void updateChildren();
 
 protected:
+#if defined(Q_OS_WIN)
+    bool event(QEvent*) override;
+#endif
     void keyPressEvent(QKeyEvent*);
 
 private:
