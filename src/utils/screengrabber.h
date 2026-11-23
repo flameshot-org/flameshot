@@ -9,6 +9,7 @@
 #include <QList>
 #include <QObject>
 #include <QPixmap>
+#include <QPointer>
 #include <QScreen>
 
 class QEventLoop;
@@ -62,4 +63,5 @@ private:
     QEventLoop* m_monitorSelectionLoop;
     bool m_userCancelled;
     static bool m_monitorSelectionActive;
+    static QPointer<QWidget> m_monitorSelectionWidget;
 };

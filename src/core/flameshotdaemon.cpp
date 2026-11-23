@@ -224,7 +224,7 @@ void FlameshotDaemon::sendTrayNotification(const QString& text,
 #if !defined(DISABLE_UPDATE_CHECKER)
 void FlameshotDaemon::showUpdateNotificationIfAvailable(CaptureWidget* widget)
 {
-    if (!m_appLatestUrl.isEmpty() &&
+    if (widget != nullptr && !m_appLatestUrl.isEmpty() &&
         ConfigHandler().ignoreUpdateToVersion().compare(m_appLatestVersion) <
           0) {
         widget->showAppUpdateNotification(m_appLatestVersion, m_appLatestUrl);

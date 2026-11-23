@@ -94,7 +94,13 @@ QIcon CaptureToolButton::icon() const
 
 void CaptureToolButton::mousePressEvent(QMouseEvent* e)
 {
-    activateWindow();
+    // On Wayland every activation request makes the compositor register a
+    // pending startup (GNOME shows a busy cursor) until the window uses it.
+    // Buttons such as copy, save or accept close the window right away, so
+    // the request is orphaned and the cursor stays busy until it times out.
+    if (!isActiveWindow()) {
+        activateWindow();
+    }
     if (e->button() == Qt::LeftButton) {
         emit pressedButtonLeftClick(this);
         emit pressed();
