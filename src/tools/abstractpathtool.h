@@ -20,6 +20,11 @@ public:
     void move(const QPoint& mousePos) override;
     const QPoint* pos() override;
     int size() const override { return m_thickness; };
+    ResizeHandles::Handle handleAt(const QPoint& pos,
+                                   int tolerance) const override;
+    void beginHandleDrag(ResizeHandles::Handle handle) override;
+    void dragHandle(const QPoint& pos) override;
+    void drawObjectSelection(QPainter& painter) override;
 
 public slots:
     void drawEnd(const QPoint& p) override;
@@ -40,5 +45,11 @@ protected:
     QPoint m_pos;
 
 private:
+    // The points' own bounds, without the stroke's thickness
+    QRect pointsBox() const;
+
     int m_thickness;
+    ResizeHandles::Handle m_dragHandle = ResizeHandles::None;
+    QVector<QPoint> m_dragStartPoints;
+    QRect m_dragStartBox;
 };

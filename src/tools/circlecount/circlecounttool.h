@@ -25,6 +25,9 @@ public:
     void paintMousePreview(QPainter& painter,
                            const CaptureContext& context) override;
     bool handleMouseWheelEvent(int, bool, CaptureContext& ctx) override;
+    ResizeHandles::Handle handleAt(const QPoint& pos,
+                                   int tolerance) const override;
+    void drawObjectSelection(QPainter& painter) override;
 
 protected:
     CaptureTool::Type type() const override;
@@ -35,6 +38,8 @@ public slots:
     void pressed(CaptureContext& context) override;
 
 private:
+    bool hasPointer() const;
+
     QString m_tempString;
     bool m_valid;
 };

@@ -19,6 +19,11 @@ public:
     QRect boundingRect() const override;
     void move(const QPoint& pos) override;
     const QPoint* pos() override;
+    ResizeHandles::Handle handleAt(const QPoint& pos,
+                                   int tolerance) const override;
+    void beginHandleDrag(ResizeHandles::Handle handle) override;
+    void dragHandle(const QPoint& pos) override;
+    void drawObjectSelection(QPainter& painter) override;
     int size() const override { return m_thickness; };
     const QColor& color() { return m_color; };
     const QPair<QPoint, QPoint> points() const { return m_points; };
@@ -51,4 +56,17 @@ protected:
     // use m_padding to extend the area of the backup
     bool m_supportsOrthogonalAdj = false;
     bool m_supportsDiagonalAdj = false;
+    // Handles shown when selected: 8 on the box the two points span, or one
+    // on each point.
+    enum class ResizeMode
+    {
+        None,
+        Box,
+        Ends
+    };
+    ResizeMode m_resizeMode = ResizeMode::None;
+
+private:
+    ResizeHandles::Handle m_dragHandle = ResizeHandles::None;
+    QPair<QPoint, QPoint> m_dragStart;
 };
