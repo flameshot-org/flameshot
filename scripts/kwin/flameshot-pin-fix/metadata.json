@@ -1,0 +1,9 @@
+{
+    "KPlugin": {
+        "Description": "Keep flameshot pin windows always on top and off the taskbar",
+        "Id": "flameshot-pin-fix",
+        "License": "GPL-3.0",
+        "Name": "Flameshot Pin Fix",
+        "Version": "1.0"
+    }
+}
