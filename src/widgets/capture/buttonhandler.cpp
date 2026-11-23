@@ -74,6 +74,10 @@ void ButtonHandler::updatePosition(const QRect& selection)
     if (vecLength == 0) {
         return;
     }
+    if (m_screenRegions.size() > 1) {
+        updatePositionMultiScreen(selection);
+        return;
+    }
     // Copy of the selection area for internal modifications
     m_selection = intersectWithAreas(selection);
     updateBlockedSides();
@@ -244,6 +248,294 @@ void ButtonHandler::init()
 void ButtonHandler::resetRegionTrack()
 {
     m_buttonsAreInside = false;
+}
+
+void ButtonHandler::updatePositionMultiScreen(const QRect& selection)
+{
+    const int vecLength = m_vectorButtons.size();
+    const int extension = m_separator * 2 + m_buttonBaseSize;
+
+    QRegion screenRegion;
+    for (const QRect& r : m_screenRegions) {
+        screenRegion += r;
+    }
+    const QRect totalBounds = screenRegion.boundingRect();
+
+    QRect outer = selection;
+    if (outer.width() < m_buttonBaseSize) {
+        int newX = outer.x() - (m_buttonBaseSize - outer.width()) / 2;
+        if (!totalBounds.isEmpty()) {
+            newX = qBound(totalBounds.left(),
+                          newX,
+                          qMax(totalBounds.left(),
+                               totalBounds.right() + 1 - m_buttonBaseSize));
+        }
+        outer.setX(newX);
+        outer.setWidth(m_buttonBaseSize);
+    }
+    if (outer.height() < m_buttonBaseSize) {
+        int newY = outer.y() - (m_buttonBaseSize - outer.height()) / 2;
+        if (!totalBounds.isEmpty()) {
+            newY = qBound(totalBounds.top(),
+                          newY,
+                          qMax(totalBounds.top(),
+                               totalBounds.bottom() + 1 - m_buttonBaseSize));
+        }
+        outer.setY(newY);
+        outer.setHeight(m_buttonBaseSize);
+    }
+
+    auto screenSelectionArea = [&](const QRect& r) -> qint64 {
+        const QRect inter = selection.intersected(r);
+        return inter.isEmpty()
+                 ? 0
+                 : static_cast<qint64>(inter.width()) * inter.height();
+    };
+
+    QRect preferredScreen;
+    qint64 bestPreferredArea = 0;
+    for (const QRect& r : m_screenRegions) {
+        const qint64 area = screenSelectionArea(r);
+        if (area > bestPreferredArea) {
+            bestPreferredArea = area;
+            preferredScreen = r;
+        }
+    }
+
+    struct HorizontalPlacement
+    {
+        bool valid = false;
+        int rowY = 0;
+        int x1 = 0;
+        int x2 = 0;
+        bool canExtendLeft = false;
+        bool canExtendRight = false;
+        int buttonsPerRow = 0;
+    };
+
+    struct VerticalPlacement
+    {
+        bool valid = false;
+        int colX = 0;
+        int y1 = 0;
+        int y2 = 0;
+        int buttonsPerCol = 0;
+    };
+
+    auto findHorizontal = [&](bool isBottom,
+                              bool onlyPreferred) -> HorizontalPlacement {
+        HorizontalPlacement best;
+        qint64 bestScreenArea = -1;
+        int bestSpan = 0;
+        for (const QRect& r : m_screenRegions) {
+            if (onlyPreferred && r != preferredScreen) {
+                continue;
+            }
+            const int rowY =
+              isBottom
+                ? qMax(outer.bottom() + m_separator, r.top() + m_separator)
+                : qMin(outer.top() - m_buttonExtendedSize,
+                       r.bottom() + 1 - m_buttonExtendedSize);
+            const bool adjacent =
+              isBottom ? (rowY <= outer.bottom() + extension)
+                       : (rowY + m_buttonBaseSize >= outer.top() - extension);
+            const bool fitsVertically =
+              isBottom
+                ? (rowY >= r.top() &&
+                   rowY + m_buttonBaseSize + m_separator - 1 <= r.bottom())
+                : (rowY >= r.top() + m_separator &&
+                   rowY + m_buttonBaseSize - 1 <= r.bottom());
+            if (!adjacent || !fitsVertically) {
+                continue;
+            }
+            const int x1 = qMax(outer.left(), r.left());
+            const int x2 = qMin(outer.right(), r.right());
+            const int span = x2 - x1 + 1;
+            const qint64 area = screenSelectionArea(r);
+            if (span >= m_buttonBaseSize &&
+                (area > bestScreenArea ||
+                 (area == bestScreenArea && span > bestSpan))) {
+                bestScreenArea = area;
+                bestSpan = span;
+                best.valid = true;
+                best.rowY = rowY;
+                best.x1 = x1;
+                best.x2 = x2;
+                best.canExtendLeft =
+                  (x1 == outer.left()) && (x1 - extension >= r.left());
+                best.canExtendRight =
+                  (x2 == outer.right()) && (x2 + extension <= r.right());
+                best.buttonsPerRow =
+                  (span + m_separator) / m_buttonExtendedSize;
+            }
+        }
+        return best;
+    };
+
+    auto findVertical = [&](bool isRight,
+                            bool onlyPreferred) -> VerticalPlacement {
+        VerticalPlacement best;
+        qint64 bestScreenArea = -1;
+        int bestSpan = 0;
+        for (const QRect& r : m_screenRegions) {
+            if (onlyPreferred && r != preferredScreen) {
+                continue;
+            }
+            const int colX =
+              isRight
+                ? qMax(outer.right() + m_separator, r.left() + m_separator)
+                : qMin(outer.left() - m_buttonExtendedSize,
+                       r.right() + 1 - m_buttonExtendedSize);
+            const bool adjacent =
+              isRight ? (colX <= outer.right() + extension)
+                      : (colX + m_buttonBaseSize >= outer.left() - extension);
+            const bool fitsHorizontally =
+              isRight ? (colX >= r.left() &&
+                         colX + m_buttonBaseSize + m_separator - 1 <= r.right())
+                      : (colX >= r.left() + m_separator &&
+                         colX + m_buttonBaseSize - 1 <= r.right());
+            if (!adjacent || !fitsHorizontally) {
+                continue;
+            }
+            const int y1 = qMax(outer.top(), r.top());
+            const int y2 = qMin(outer.bottom(), r.bottom());
+            const int span = y2 - y1 + 1;
+            const qint64 area = screenSelectionArea(r);
+            if (span >= m_buttonBaseSize &&
+                (area > bestScreenArea ||
+                 (area == bestScreenArea && span > bestSpan))) {
+                bestScreenArea = area;
+                bestSpan = span;
+                best.valid = true;
+                best.colX = colX;
+                best.y1 = y1;
+                best.y2 = y2;
+                best.buttonsPerCol =
+                  (span + m_separator) / m_buttonExtendedSize;
+            }
+        }
+        return best;
+    };
+
+    int elemIndicator = 0;
+    auto runPass = [&](bool onlyPreferred) {
+        while (elemIndicator < vecLength) {
+            const HorizontalPlacement bottom =
+              findHorizontal(true, onlyPreferred);
+            const VerticalPlacement right = findVertical(true, onlyPreferred);
+            const HorizontalPlacement top =
+              findHorizontal(false, onlyPreferred);
+            const VerticalPlacement left = findVertical(false, onlyPreferred);
+
+            if (!bottom.valid && !right.valid && !top.valid && !left.valid) {
+                break;
+            }
+
+            const int startIndicator = elemIndicator;
+            const int perimeterCapacity =
+              (bottom.valid ? bottom.buttonsPerRow : 0) +
+              (top.valid ? top.buttonsPerRow : 0) +
+              (right.valid ? right.buttonsPerCol : 0) +
+              (left.valid ? left.buttonsPerCol : 0);
+            const int extraButtons =
+              (vecLength - elemIndicator) - perimeterCapacity;
+            int elemsAtCorners = extraButtons > 4 ? 4 : qMax(0, extraButtons);
+
+            const int maxExtraTop =
+              top.valid
+                ? ((top.canExtendLeft ? 1 : 0) + (top.canExtendRight ? 1 : 0))
+                : 0;
+            const int elemCornersTop = qBound(0, elemsAtCorners, maxExtraTop);
+            elemsAtCorners -= elemCornersTop;
+
+            const int maxExtraBottom = bottom.valid
+                                         ? ((bottom.canExtendLeft ? 1 : 0) +
+                                            (bottom.canExtendRight ? 1 : 0))
+                                         : 0;
+            const int elemCornersBottom =
+              qBound(0, elemsAtCorners, maxExtraBottom);
+
+            QRect nextOuter = outer;
+
+            if (bottom.valid && elemIndicator < vecLength) {
+                int addCounter = bottom.buttonsPerRow + elemCornersBottom;
+                addCounter = qBound(0, addCounter, vecLength - elemIndicator);
+                if (addCounter > 0) {
+                    QPoint center((bottom.x1 + bottom.x2) / 2, bottom.rowY);
+                    if (addCounter == 1 + bottom.buttonsPerRow) {
+                        if (!bottom.canExtendLeft) {
+                            center.setX(center.x() + m_buttonExtendedSize / 2);
+                        } else if (!bottom.canExtendRight) {
+                            center.setX(center.x() - m_buttonExtendedSize / 2);
+                        }
+                    }
+                    moveButtonsToPoints(
+                      horizontalPoints(center, addCounter, true),
+                      elemIndicator);
+                    nextOuter.setBottom(
+                      qMax(nextOuter.bottom(), bottom.rowY + m_buttonBaseSize));
+                }
+            }
+
+            if (right.valid && elemIndicator < vecLength) {
+                int addCounter =
+                  qBound(0, right.buttonsPerCol, vecLength - elemIndicator);
+                if (addCounter > 0) {
+                    QPoint center(right.colX, (right.y1 + right.y2) / 2);
+                    moveButtonsToPoints(
+                      verticalPoints(center, addCounter, false), elemIndicator);
+                    nextOuter.setRight(
+                      qMax(nextOuter.right(), right.colX + m_buttonBaseSize));
+                }
+            }
+
+            if (top.valid && elemIndicator < vecLength) {
+                int addCounter = top.buttonsPerRow + elemCornersTop;
+                addCounter = qBound(0, addCounter, vecLength - elemIndicator);
+                if (addCounter > 0) {
+                    QPoint center((top.x1 + top.x2) / 2, top.rowY);
+                    if (addCounter == 1 + top.buttonsPerRow) {
+                        if (!top.canExtendLeft) {
+                            center.setX(center.x() + m_buttonExtendedSize / 2);
+                        } else if (!top.canExtendRight) {
+                            center.setX(center.x() - m_buttonExtendedSize / 2);
+                        }
+                    }
+                    moveButtonsToPoints(
+                      horizontalPoints(center, addCounter, false),
+                      elemIndicator);
+                    nextOuter.setTop(qMin(nextOuter.top(), top.rowY));
+                }
+            }
+
+            if (left.valid && elemIndicator < vecLength) {
+                int addCounter =
+                  qBound(0, left.buttonsPerCol, vecLength - elemIndicator);
+                if (addCounter > 0) {
+                    QPoint center(left.colX, (left.y1 + left.y2) / 2);
+                    moveButtonsToPoints(
+                      verticalPoints(center, addCounter, true), elemIndicator);
+                    nextOuter.setLeft(qMin(nextOuter.left(), left.colX));
+                }
+            }
+
+            if (elemIndicator == startIndicator) {
+                break;
+            }
+            outer = nextOuter;
+        }
+    };
+
+    if (!preferredScreen.isEmpty()) {
+        runPass(true);
+    }
+    if (elemIndicator < vecLength) {
+        runPass(false);
+    }
+    if (elemIndicator < vecLength) {
+        m_selection = selection;
+        positionButtonsInside(elemIndicator);
+    }
 }
 
 void ButtonHandler::updateBlockedSides()

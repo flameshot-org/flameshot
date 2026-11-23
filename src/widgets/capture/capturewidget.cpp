@@ -37,7 +37,10 @@
 #include <QPainter>
 #include <QScreen>
 #include <QShortcut>
+#include <QTextEdit>
 #include <QWindow>
+#include <limits>
+#include <utility>
 
 #if !defined(DISABLE_UPDATE_CHECKER)
 #include "widgets/updatenotificationwidget.h"
@@ -46,6 +49,173 @@
 #define MOUSE_DISTANCE_TO_START_MOVING 3
 
 auto const MOUSE_WHEEL_TRESHOLD = 60;
+
+class ScreenOverlay : public QWidget
+{
+public:
+    ScreenOverlay(CaptureWidget* controller,
+                  QScreen* screen,
+                  const QRect& logicalGeom,
+                  const QPoint& canvasOffset)
+      : QWidget(nullptr)
+      , m_controller(controller)
+      , m_screen(screen)
+      , m_logicalGeom(logicalGeom)
+      , m_canvasOffset(canvasOffset)
+    {
+        setAttribute(Qt::WA_QuitOnClose, false);
+#if !defined(FLAMESHOT_DEBUG_CAPTURE)
+        if (DesktopInfo().waylandDetected()) {
+            setWindowFlags(Qt::Window | Qt::FramelessWindowHint |
+                           Qt::NoDropShadowWindowHint |
+                           Qt::WindowStaysOnTopHint);
+        } else {
+            setWindowFlags(Qt::Tool | Qt::FramelessWindowHint |
+                           Qt::NoDropShadowWindowHint |
+                           Qt::WindowStaysOnTopHint);
+        }
+#endif
+        setWindowState(Qt::WindowFullScreen);
+        setMouseTracking(true);
+        setFocusPolicy(Qt::StrongFocus);
+        syncWithScreen();
+        if (m_screen) {
+            QObject::connect(
+              m_screen, &QScreen::geometryChanged, this, [this](const QRect&) {
+                  if (m_screen) {
+                      m_logicalGeom =
+                        ScreenGrabber().screenLogicalGeometry(m_screen);
+                      syncWithScreen();
+                  }
+              });
+        }
+    }
+
+    QScreen* targetScreen() const { return m_screen; }
+    QPoint canvasOffset() const { return m_canvasOffset; }
+    QRect canvasRect() const { return QRect(m_canvasOffset, size()); }
+
+    void syncWithScreen()
+    {
+        if (!m_screen) {
+            return;
+        }
+        winId();
+        if (QWindow* wh = windowHandle()) {
+            if (wh->screen() != m_screen) {
+                wh->setScreen(m_screen);
+            }
+            if (!m_screenConn) {
+                m_screenConn = QObject::connect(
+                  wh, &QWindow::screenChanged, this, [this](QScreen* s) {
+                      if (m_screen && s != m_screen && windowHandle()) {
+                          windowHandle()->setScreen(m_screen);
+                          setFixedSize(m_logicalGeom.size());
+                          setGeometry(m_logicalGeom);
+                      }
+                  });
+            }
+        }
+        setFixedSize(m_logicalGeom.size());
+        setGeometry(m_logicalGeom);
+    }
+
+protected:
+    void paintEvent(QPaintEvent* e) override
+    {
+        if (m_controller && !m_controller->m_closing) {
+            m_controller->paintScreenOverlay(this, e);
+        }
+    }
+
+    void mousePressEvent(QMouseEvent* e) override
+    {
+        activateWindow();
+        if (m_controller && !m_controller->m_closing) {
+            m_controller->forwardOverlayMouseEvent(this, e);
+        }
+        e->accept();
+    }
+
+    void mouseMoveEvent(QMouseEvent* e) override
+    {
+        if (m_controller && !m_controller->m_closing) {
+            m_controller->forwardOverlayMouseEvent(this, e);
+        }
+        e->accept();
+    }
+
+    void mouseReleaseEvent(QMouseEvent* e) override
+    {
+        if (m_controller && !m_controller->m_closing) {
+            m_controller->forwardOverlayMouseEvent(this, e);
+        }
+        e->accept();
+    }
+
+    void mouseDoubleClickEvent(QMouseEvent* e) override
+    {
+        if (m_controller && !m_controller->m_closing) {
+            m_controller->forwardOverlayMouseEvent(this, e);
+        }
+        e->accept();
+    }
+
+    void wheelEvent(QWheelEvent* e) override
+    {
+        if (m_controller && !m_controller->m_closing) {
+            m_controller->wheelEvent(e);
+        }
+    }
+
+    void keyPressEvent(QKeyEvent* e) override
+    {
+        if (m_controller && !m_controller->m_closing) {
+            m_controller->keyPressEvent(e);
+        }
+    }
+
+    void keyReleaseEvent(QKeyEvent* e) override
+    {
+        if (m_controller && !m_controller->m_closing) {
+            m_controller->keyReleaseEvent(e);
+        }
+    }
+
+    void changeEvent(QEvent* e) override
+    {
+        QWidget::changeEvent(e);
+        if (e->type() == QEvent::ActivationChange && m_controller &&
+            !m_controller->m_closing) {
+            m_controller->updateCanvas();
+        }
+    }
+
+    void resizeEvent(QResizeEvent* e) override
+    {
+        QWidget::resizeEvent(e);
+        if (m_controller && !m_controller->m_closing) {
+            m_controller->onOverlayResized(this);
+        }
+    }
+
+    void closeEvent(QCloseEvent* e) override
+    {
+        if (m_controller && !m_controller->m_closing) {
+            e->ignore();
+            m_controller->close();
+            return;
+        }
+        QWidget::closeEvent(e);
+    }
+
+private:
+    QPointer<CaptureWidget> m_controller;
+    QPointer<QScreen> m_screen;
+    QRect m_logicalGeom;
+    QPoint m_canvasOffset;
+    QMetaObject::Connection m_screenConn;
+};
 
 // CaptureWidget is the main component used to capture the screen. It contains
 // an area of selection with its respective buttons.
@@ -58,6 +228,8 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
   : QWidget(parent)
   , m_toolSizeByKeyboard(0)
   , m_mouseIsClicked(false)
+  , m_newSelection(false)
+  , m_movingSelection(false)
   , m_captureDone(false)
   , m_previewEnabled(true)
   , m_adjustmentButtonPressed(false)
@@ -71,9 +243,12 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
   , m_activeTool(nullptr)
   , m_activeToolIsMoved(false)
   , m_toolWidget(nullptr)
+  , m_buttonHandler(nullptr)
   , m_panel(nullptr)
   , m_sidePanel(nullptr)
   , m_colorPicker(nullptr)
+  , m_notifierBox(nullptr)
+  , m_eventFilter(nullptr)
   , m_selection(nullptr)
   , m_magnifier(nullptr)
   , m_xywhDisplay(false)
@@ -113,7 +288,38 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
     // Top left of the whole set of screens
     QPoint topLeft(0, 0);
 #endif
-    if (fullScreen) {
+#if defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)
+    m_multiMonitor = fullScreen && !req.hasSelectedMonitor() &&
+                     m_config.captureAllMonitors() &&
+                     QGuiApplication::screens().size() > 1;
+#endif
+    if (m_multiMonitor) {
+        setAttribute(Qt::WA_DontShowOnScreen, true);
+        bool ok = true;
+        m_context.screenshot = grabber.grabFullDesktop(ok);
+        m_desktopGeometry = grabber.logicalDesktopGeometry();
+        if (!ok || m_context.screenshot.isNull() ||
+            m_desktopGeometry.isEmpty()) {
+            m_closing = true;
+            this->close();
+        } else {
+            const qreal dpr = static_cast<qreal>(m_context.screenshot.width()) /
+                              static_cast<qreal>(m_desktopGeometry.width());
+            m_context.screenshot.setDevicePixelRatio(dpr > 0.0 ? dpr : 1.0);
+            m_context.origScreenshot = m_context.screenshot;
+            resize(m_desktopGeometry.size());
+            m_context.widgetOffset = m_desktopGeometry.topLeft();
+
+            const QList<QScreen*> screens = QGuiApplication::screens();
+            for (QScreen* screen : screens) {
+                const QRect screenGeom = grabber.screenLogicalGeometry(screen);
+                const QPoint offset =
+                  screenGeom.topLeft() - m_desktopGeometry.topLeft();
+                m_overlays.append(
+                  new ScreenOverlay(this, screen, screenGeom, offset));
+            }
+        }
+    } else if (fullScreen) {
         bool ok = true;
         int preSelectedMonitor;
         if (req.hasSelectedMonitor()) {
@@ -125,6 +331,7 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
           grabber.grabEntireDesktop(ok, preSelectedMonitor);
         if (!ok) {
             // Error already logged in ScreenGrabber
+            m_closing = true;
             this->close();
         }
         m_context.origScreenshot = m_context.screenshot;
@@ -205,7 +412,14 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
     }
 
     QVector<QRect> areas;
-    if (m_context.fullscreen) {
+    if (m_multiMonitor) {
+        for (ScreenOverlay* overlay : m_overlays) {
+            areas.append(overlay->canvasRect());
+        }
+        if (areas.isEmpty()) {
+            areas.append(rect());
+        }
+    } else if (m_context.fullscreen) {
         // Always display on a single screen, normalized to (0, 0)
         QScreen* screenForAreas = selectedScreen;
         if (!screenForAreas) {
@@ -229,13 +443,19 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
     initSelection(); // button handler must be initialized before
     initShortcuts(); // must be called after initSelection
     // init magnify
-    if (m_config.showMagnifier()) {
+    if (m_config.showMagnifier() && !m_closing) {
         m_magnifier = new MagnifierWidget(
           m_context.screenshot, m_uiColor, m_config.squareMagnifier(), this);
     }
 
     // Init color picker
     m_colorPicker = new ColorPicker(this);
+    m_colorPicker->setMultiMonitor(m_multiMonitor);
+    connect(m_colorPicker, &ColorPicker::selectionChanged, this, [this]() {
+        if (m_multiMonitor && m_colorPicker && m_colorPicker->isVisible()) {
+            updateCanvas(colorPickerCanvasRect());
+        }
+    });
     // Init notification widget
     m_notifierBox = new NotifierBox(this);
     initPanel();
@@ -247,7 +467,9 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
             &ColorPicker::colorSelected,
             this,
             [this](const QColor& c) {
-                m_context.mousePos = mapFromGlobal(QCursor::pos());
+                if (!m_multiMonitor) {
+                    m_context.mousePos = mapFromGlobal(QCursor::pos());
+                }
                 setDrawColor(c);
             });
     m_colorPicker->hide();
@@ -287,9 +509,17 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
 
     // OverlayMessage is a child widget, so use widget-local coordinates
     // In fullscreen mode, use the normalized area; otherwise use widget rect
-    QRect overlayArea =
-      m_context.fullscreen && !areas.isEmpty() ? areas.first() : rect();
-    OverlayMessage::init(this, overlayArea);
+    if (m_multiMonitor) {
+        if (ScreenOverlay* primary = primaryOverlay()) {
+            OverlayMessage::init(primary, primary->rect());
+        } else {
+            OverlayMessage::init(this, rect());
+        }
+    } else {
+        QRect overlayArea =
+          m_context.fullscreen && !areas.isEmpty() ? areas.first() : rect();
+        OverlayMessage::init(this, overlayArea);
+    }
 
     if (m_config.showHelp()) {
         initHelpMessage();
@@ -329,6 +559,16 @@ CaptureWidget::~CaptureWidget()
     } else {
         emit Flameshot::instance()->captureFailed();
     }
+
+    m_closing = true;
+    if (m_notifierBox) {
+        disconnect(m_notifierBox, nullptr, this, nullptr);
+    }
+    if (m_eventFilter) {
+        disconnect(m_eventFilter, nullptr, this, nullptr);
+    }
+    const auto overlays = std::exchange(m_overlays, {});
+    qDeleteAll(overlays);
 }
 
 void CaptureWidget::initButtons()
@@ -407,6 +647,7 @@ void CaptureWidget::initButtons()
             vectorButtons << b;
         }
     }
+    m_toolbarButtons = vectorButtons;
     m_buttonHandler->setButtons(vectorButtons);
 }
 
@@ -421,6 +662,13 @@ void CaptureWidget::handleButtonRightClick(CaptureToolButton* b)
         setState(b);
     }
     if (!m_panel->isVisible()) {
+        if (m_multiMonitor) {
+            ScreenOverlay* host = overlayForParent(b->parentWidget());
+            if (!host) {
+                host = overlayAtCanvasPos(m_context.mousePos);
+            }
+            syncPanelToOverlay(host);
+        }
         m_panel->show();
     }
 }
@@ -436,19 +684,19 @@ void CaptureWidget::handleButtonLeftClick(CaptureToolButton* b)
 void CaptureWidget::xywhTick()
 {
     m_xywhDisplay = false;
-    update();
+    updateCanvas();
 }
 
 void CaptureWidget::onDisplayGridChanged(bool display)
 {
     m_displayGrid = display;
-    repaint();
+    repaintCanvas();
 }
 
 void CaptureWidget::onGridSizeChanged(int size)
 {
     m_gridSize = size;
-    repaint();
+    repaintCanvas();
 }
 
 void CaptureWidget::startColorGrab()
@@ -461,7 +709,7 @@ void CaptureWidget::startColorGrab()
 void CaptureWidget::showxywh()
 {
     m_xywhDisplay = true;
-    update();
+    updateCanvas();
     int timeout = m_config.showSelectionGeometryHideTime();
     if (timeout != 0) {
         m_xywhTimer.start(timeout);
@@ -504,6 +752,7 @@ QPixmap CaptureWidget::pixmap()
 bool CaptureWidget::commitCurrentTool()
 {
     if (m_activeTool) {
+        const QRect twRect = toolWidgetCanvasRect();
         processPixmapWithTool(&m_context.screenshot, m_activeTool);
         if (m_activeTool->isValid() && !m_activeTool->editMode() &&
             m_toolWidget) {
@@ -513,6 +762,9 @@ bool CaptureWidget::commitCurrentTool()
             m_toolWidget->update();
         }
         releaseActiveTool();
+        if (m_multiMonitor && !twRect.isEmpty()) {
+            updateCanvas(twRect);
+        }
         return true;
     }
     return false;
@@ -521,7 +773,12 @@ bool CaptureWidget::commitCurrentTool()
 void CaptureWidget::initQuitPrompt()
 {
     m_quitPrompt = new QMessageBox;
-    makeChild(m_quitPrompt);
+    if (m_multiMonitor && primaryOverlay()) {
+        m_quitPrompt->setParent(primaryOverlay(), Qt::Dialog);
+        m_quitPrompt->installEventFilter(m_eventFilter);
+    } else {
+        makeChild(m_quitPrompt);
+    }
 
     QString baseSheet = "QDialog { background-color: %1; }"
                         "QLabel, QCheckBox { color: %2 }"
@@ -570,11 +827,19 @@ void CaptureWidget::deleteToolWidgetOrClose()
         m_panel->hide();
     } else if (m_toolWidget) {
         // delete toolWidget if exists
+        const QRect twRect = toolWidgetCanvasRect();
         m_toolWidget->hide();
         delete m_toolWidget;
         m_toolWidget = nullptr;
+        if (m_multiMonitor && !twRect.isEmpty()) {
+            updateCanvas(twRect);
+        }
     } else if (m_colorPicker && m_colorPicker->isVisible()) {
+        const QRect cpRect = colorPickerCanvasRect();
         m_colorPicker->hide();
+        if (m_multiMonitor && !cpRect.isEmpty()) {
+            updateCanvas(cpRect);
+        }
     } else {
         // close CaptureWidget
         if (m_config.showQuitPrompt()) {
@@ -604,9 +869,13 @@ void CaptureWidget::releaseActiveTool()
         m_activeTool = nullptr;
     }
     if (m_toolWidget) {
+        const QRect twRect = toolWidgetCanvasRect();
         m_toolWidget->hide();
         delete m_toolWidget;
         m_toolWidget = nullptr;
+        if (m_multiMonitor && !twRect.isEmpty()) {
+            updateCanvas(twRect);
+        }
     }
 }
 
@@ -620,6 +889,31 @@ void CaptureWidget::uncheckActiveTool()
     releaseActiveTool();
     updateSelectionState();
     updateCursor();
+}
+
+void CaptureWidget::showEvent(QShowEvent* event)
+{
+    QWidget::showEvent(event);
+    if (m_multiMonitor && !m_closing) {
+        for (ScreenOverlay* overlay : m_overlays) {
+            overlay->syncWithScreen();
+            overlay->showFullScreen();
+        }
+        if (ScreenOverlay* primary = primaryOverlay()) {
+            primary->raise();
+            primary->activateWindow();
+        }
+    }
+}
+
+void CaptureWidget::hideEvent(QHideEvent* event)
+{
+    if (m_multiMonitor) {
+        for (ScreenOverlay* overlay : m_overlays) {
+            overlay->hide();
+        }
+    }
+    QWidget::hideEvent(event);
 }
 
 void CaptureWidget::closeEvent(QCloseEvent* event)
@@ -654,16 +948,86 @@ void CaptureWidget::closeEvent(QCloseEvent* event)
     }
 #endif
 
+    m_closing = true;
+    if (m_notifierBox) {
+        disconnect(m_notifierBox, nullptr, this, nullptr);
+    }
+    for (ScreenOverlay* overlay : m_overlays) {
+        overlay->hide();
+    }
+    for (ScreenOverlay* overlay : m_overlays) {
+        overlay->close();
+    }
     QWidget::closeEvent(event);
 }
 
 void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
 {
     Q_UNUSED(paintEvent)
+    if (m_multiMonitor) {
+        return;
+    }
     QPainter painter(this);
     if (!painter.isActive()) {
         return;
     }
+    paintCanvas(painter, rect());
+}
+
+void CaptureWidget::paintScreenOverlay(ScreenOverlay* overlay,
+                                       QPaintEvent* paintEvent)
+{
+    QPainter painter(overlay);
+    if (!painter.isActive()) {
+        return;
+    }
+    painter.fillRect(paintEvent->rect(), Qt::black);
+    painter.save();
+    painter.translate(-overlay->canvasOffset());
+    paintCanvas(painter, overlay->canvasRect());
+    if (m_selection) {
+        m_selection->renderSelection(painter);
+    }
+    if (m_toolWidget && m_toolWidget->isVisible() &&
+        m_toolWidget->parentWidget() != overlay) {
+        const QRect twRect = toolWidgetCanvasRect();
+        if (overlay->canvasRect().intersects(twRect)) {
+            painter.save();
+            painter.translate(twRect.topLeft());
+            m_toolWidget->render(
+              &painter, QPoint(), QRegion(), QWidget::DrawChildren);
+            painter.restore();
+        }
+    }
+    if (m_colorPicker && m_colorPicker->isVisible() &&
+        m_colorPicker->parentWidget() != overlay) {
+        const QRect cpRect = colorPickerCanvasRect();
+        if (overlay->canvasRect().intersects(cpRect)) {
+            painter.save();
+            painter.translate(cpRect.topLeft());
+            m_colorPicker->renderPicker(painter);
+            painter.restore();
+        }
+    }
+    if (m_panelButtonDragging && m_panelToggleButton &&
+        m_panelToggleButton->parentWidget() != overlay &&
+        !m_panelButtonDragPixmap.isNull()) {
+        const QRect btnRect(m_panelButtonCanvasPos,
+                            m_panelToggleButton->size());
+        if (overlay->canvasRect().intersects(btnRect)) {
+            painter.drawPixmap(m_panelButtonCanvasPos, m_panelButtonDragPixmap);
+        }
+    }
+    if (m_magnifier && !m_activeButton &&
+        overlay->canvasRect().contains(m_context.mousePos)) {
+        m_magnifier->renderAt(
+          painter, m_context.mousePos, overlay->canvasRect());
+    }
+    painter.restore();
+}
+
+void CaptureWidget::paintCanvas(QPainter& painter, const QRect& viewBounds)
+{
     GeneralConf::xywh_position position =
       static_cast<GeneralConf::xywh_position>(m_config.showSelectionGeometry());
     /* QPainter::save and restore is somewhat costly so we try to guess
@@ -673,14 +1037,21 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
        any of the conditions that current trigger it you'll need to change here,
        too
     */
+    const bool smoothScale =
+      m_multiMonitor && !qFuzzyCompare(painter.device()->devicePixelRatioF(),
+                                       m_context.screenshot.devicePixelRatio());
     bool save = false;
-    if (m_xywhDisplay ||                           // clause 1: xywh display
+    if (smoothScale ||                             // mixed-DPI smoothing
+        m_xywhDisplay ||                           // clause 1: xywh display
         m_displayGrid ||                           // clause 2: display grid
         (m_activeTool && m_mouseIsClicked) ||      // clause 3: tool/click
         (m_previewEnabled && activeButtonTool() && // clause 4: mouse preview
          m_activeButton->tool()->showMousePreview())) {
         painter.save();
         save = true;
+    }
+    if (smoothScale) {
+        painter.setRenderHint(QPainter::SmoothPixmapTransform, true);
     }
     painter.drawPixmap(0, 0, m_context.screenshot);
     if (m_selection && m_xywhDisplay) {
@@ -750,10 +1121,14 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
         painter.setBrush(QBrush(uicolor));
 
         const auto scale{ m_context.screenshot.devicePixelRatio() };
-        auto topLeft = mapToGlobal(m_context.selection.topLeft() / scale);
+        const QPoint selTopLeft = m_context.selection.topLeft() / scale;
+        QPoint topLeft = m_multiMonitor
+                           ? (selTopLeft + m_desktopGeometry.topLeft())
+                           : mapToGlobal(selTopLeft);
         topLeft.rx() -= topLeft.x() % m_gridSize;
         topLeft.ry() -= topLeft.y() % m_gridSize;
-        topLeft = mapFromGlobal(topLeft);
+        topLeft = m_multiMonitor ? (topLeft - m_desktopGeometry.topLeft())
+                                 : mapFromGlobal(topLeft);
 
         const auto step{ m_gridSize / scale };
         const auto radius{ 1 * scale };
@@ -778,17 +1153,22 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
     // draw inactive region
     drawInactiveRegion(&painter);
 
-    if (!isActiveWindow()) {
+    const bool hasFocus = m_multiMonitor
+                            ? (QApplication::activeWindow() != nullptr)
+                            : isActiveWindow();
+    if (!hasFocus) {
         drawErrorMessage(
           tr("Flameshot has lost focus. Keyboard shortcuts won't "
              "work until you click somewhere."),
-          &painter);
+          &painter,
+          viewBounds);
     } else if (m_configError) {
-        drawErrorMessage(ConfigHandler().errorMessage(), &painter);
+        drawErrorMessage(ConfigHandler().errorMessage(), &painter, viewBounds);
     } else if (m_configErrorResolved) {
         drawErrorMessage(tr("Configuration error resolved. Launch `flameshot "
                             "gui` again to apply it."),
-                         &painter);
+                         &painter,
+                         viewBounds);
     }
 }
 
@@ -806,10 +1186,23 @@ void CaptureWidget::showColorPicker(const QPoint& pos)
     }
 
     // Call color picker
-    m_colorPicker->move(pos.x() - m_colorPicker->width() / 2,
-                        pos.y() - m_colorPicker->height() / 2);
+    const QRect prevCpRect = colorPickerCanvasRect();
+    QPoint pickerPos = pos;
+    if (m_multiMonitor) {
+        if (ScreenOverlay* host = overlayAtCanvasPos(pos)) {
+            if (m_colorPicker->parentWidget() != host) {
+                m_colorPicker->setParent(host);
+            }
+            pickerPos = pos - host->canvasOffset();
+        }
+    }
+    m_colorPicker->move(pickerPos.x() - m_colorPicker->width() / 2,
+                        pickerPos.y() - m_colorPicker->height() / 2);
     m_colorPicker->raise();
     m_colorPicker->show();
+    if (m_multiMonitor) {
+        updateCanvas(prevCpRect.united(colorPickerCanvasRect()));
+    }
 }
 
 bool CaptureWidget::startDrawObjectTool(const QPoint& pos)
@@ -875,13 +1268,20 @@ int CaptureWidget::selectToolItemAtPos(const QPoint& pos)
 
 void CaptureWidget::mousePressEvent(QMouseEvent* e)
 {
-    activateWindow();
+    if (!m_multiMonitor) {
+        activateWindow();
+    }
     m_startMove = false;
     m_startMovePos = QPoint();
     m_mousePressedPos = e->pos();
     m_activeToolOffsetToMouseOnStart = QPoint();
     if (m_colorPicker->isVisible()) {
         updateCursor();
+        return;
+    }
+    if (m_multiMonitor && m_toolWidget &&
+        toolWidgetCanvasRect().contains(e->pos())) {
+        m_toolWidget->setFocus();
         return;
     }
     // reset object selection if capture area selection is active
@@ -906,7 +1306,7 @@ void CaptureWidget::mousePressEvent(QMouseEvent* e)
 
     // Commit current tool if it has edit widget and mouse click is outside
     // of it
-    if (m_toolWidget && !m_toolWidget->geometry().contains(e->pos())) {
+    if (m_toolWidget && !toolWidgetCanvasRect().contains(e->pos())) {
         commitCurrentTool();
         m_panel->setToolWidget(nullptr);
         drawToolsData();
@@ -954,15 +1354,35 @@ void CaptureWidget::mouseDoubleClickEvent(QMouseEvent* event)
 void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
 {
     if (m_magnifier) {
+        m_magnifier->setCursorPos(e->pos());
         if (!m_activeButton) {
             m_magnifier->show();
-            m_magnifier->update();
+            if (m_multiMonitor) {
+                updateCanvas();
+            } else {
+                m_magnifier->update();
+            }
         } else {
-            m_magnifier->hide();
+            if (m_magnifier->isVisible()) {
+                m_magnifier->hide();
+                if (m_multiMonitor) {
+                    updateCanvas();
+                }
+            }
         }
     }
 
     m_context.mousePos = e->pos();
+    if (m_multiMonitor && m_colorPicker && m_colorPicker->isVisible()) {
+        const QRect cpCanvas = colorPickerCanvasRect();
+        m_colorPicker->updateHoverPosition(m_context.mousePos -
+                                           cpCanvas.topLeft());
+    }
+    if (m_multiMonitor && m_toolWidget &&
+        toolWidgetCanvasRect().contains(e->pos()) &&
+        (e->buttons() & Qt::LeftButton)) {
+        return;
+    }
     if (e->buttons() != Qt::LeftButton) {
         updateTool(activeButtonTool());
         updateCursor();
@@ -997,7 +1417,7 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
             m_activeToolIsMoved = true;
             // update the old region of the selection, margins are added to
             // ensure selection outline is updated too
-            update(paddedUpdateRect(activeTool->boundingRect()));
+            updateCanvas(paddedUpdateRect(activeTool->boundingRect()));
             activeTool->move(e->pos() - m_activeToolOffsetToMouseOnStart);
             drawToolsData();
         }
@@ -1006,16 +1426,33 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
         if (m_adjustmentButtonPressed) {
             m_activeTool->drawMoveWithAdjustment(e->pos());
         } else {
-            m_activeTool->drawMove(m_displayGrid ? snapToGrid(e->pos())
-                                                 : e->pos());
+            QPoint drawPos = m_displayGrid ? snapToGrid(e->pos()) : e->pos();
+            if (m_multiMonitor && m_toolWidget) {
+                if (ScreenOverlay* host = overlayAtCanvasPos(drawPos)) {
+                    if (m_toolWidget->parentWidget() != host) {
+                        m_toolWidget->setParent(host);
+                        m_toolWidget->show();
+                        m_toolWidget->setFocus();
+                    }
+                    drawPos -= host->canvasOffset();
+                }
+            }
+            m_activeTool->drawMove(drawPos);
         }
         // update drawing object
         updateTool(m_activeTool);
         // Hides the buttons under the mouse. If the mouse leaves, it shows
         // them.
         if (m_buttonHandler->buttonsAreInside()) {
+            QPoint buttonMousePos = m_context.mousePos;
+            if (m_multiMonitor && !m_toolbarButtons.isEmpty()) {
+                if (ScreenOverlay* host = overlayForParent(
+                      m_toolbarButtons.first()->parentWidget())) {
+                    buttonMousePos -= host->canvasOffset();
+                }
+            }
             const bool containsMouse =
-              m_buttonHandler->contains(m_context.mousePos);
+              m_buttonHandler->contains(buttonMousePos);
             if (containsMouse) {
                 m_buttonHandler->hide();
             } else if (m_selection->isVisible()) {
@@ -1029,6 +1466,7 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
 void CaptureWidget::mouseReleaseEvent(QMouseEvent* e)
 {
     if (e->button() == Qt::LeftButton && m_colorPicker->isVisible()) {
+        const QRect cpRect = colorPickerCanvasRect();
         // Color picker
         if (m_colorPicker->isVisible() && m_panel->activeLayerIndex() >= 0 &&
             m_context.color.isValid()) {
@@ -1036,8 +1474,12 @@ void CaptureWidget::mouseReleaseEvent(QMouseEvent* e)
         }
         m_colorPicker->setNewColor();
         m_colorPicker->hide();
+        if (m_multiMonitor && !cpRect.isEmpty()) {
+            updateCanvas(cpRect);
+        }
         if (!m_context.color.isValid()) {
             m_context.color = ConfigHandler().drawColor();
+            syncPanelToOverlay(overlayAtCanvasPos(m_context.mousePos));
             m_panel->show();
         }
     } else if (m_mouseIsClicked) {
@@ -1075,18 +1517,27 @@ void CaptureWidget::setToolSize(int size)
     m_context.toolSize = qBound(1, size, maxToolSize);
     updateTool(activeButtonTool());
 
-    QScreen* topLeftScreen = QGuiAppCurrentScreen().currentScreen();
-    QPoint topLeft(0, 0);
-    if (topLeftScreen) {
-        topLeft = topLeftScreen->geometry().topLeft();
-    } else {
-        QScreen* primary = QGuiApplication::primaryScreen();
-        if (primary) {
-            topLeft = primary->geometry().topLeft();
-        }
-    }
     int offset = m_notifierBox->width() / 4;
-    m_notifierBox->move(mapFromGlobal(topLeft) + QPoint(offset, offset));
+    if (m_multiMonitor) {
+        if (ScreenOverlay* host = overlayAtCanvasPos(m_context.mousePos)) {
+            if (m_notifierBox->parentWidget() != host) {
+                m_notifierBox->setParent(host);
+            }
+            m_notifierBox->move(offset, offset);
+        }
+    } else {
+        QScreen* topLeftScreen = QGuiAppCurrentScreen().currentScreen();
+        QPoint topLeft(0, 0);
+        if (topLeftScreen) {
+            topLeft = topLeftScreen->geometry().topLeft();
+        } else {
+            QScreen* primary = QGuiApplication::primaryScreen();
+            if (primary) {
+                topLeft = primary->geometry().topLeft();
+            }
+        }
+        m_notifierBox->move(mapFromGlobal(topLeft) + QPoint(offset, offset));
+    }
     m_notifierBox->showMessage(QString::number(m_context.toolSize));
 
     if (m_context.toolSize != oldSize) {
@@ -1148,7 +1599,7 @@ void CaptureWidget::wheelEvent(QWheelEvent* e)
         if (activeButtonTool() &&
             activeButtonTool()->handleMouseWheelEvent(
               delta, m_adjustmentButtonPressed, m_context)) {
-            this->repaint();
+            repaintCanvas();
             return;
         }
         toolSizeOffset = delta;
@@ -1173,6 +1624,10 @@ void CaptureWidget::wheelEvent(QWheelEvent* e)
 void CaptureWidget::resizeEvent(QResizeEvent* e)
 {
     QWidget::resizeEvent(e);
+    if (m_multiMonitor) {
+        m_context.widgetOffset = m_desktopGeometry.topLeft();
+        return;
+    }
     m_context.widgetOffset = mapToGlobal(QPoint(0, 0));
     if (!m_context.fullscreen) {
         m_panel->setFixedHeight(height());
@@ -1183,6 +1638,10 @@ void CaptureWidget::resizeEvent(QResizeEvent* e)
 void CaptureWidget::moveEvent(QMoveEvent* e)
 {
     QWidget::moveEvent(e);
+    if (m_multiMonitor) {
+        m_context.widgetOffset = m_desktopGeometry.topLeft();
+        return;
+    }
     m_context.widgetOffset = mapToGlobal(QPoint(0, 0));
 #if defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)
     // If a compositor moved the window to the wrong screen, move it back
@@ -1199,7 +1658,7 @@ void CaptureWidget::changeEvent(QEvent* e)
         QPoint bottomRight = rect().bottomRight();
         // Update the message in the bottom right corner. A rough estimate is
         // used for the update rect
-        update(QRect(bottomRight - QPoint(1000, 200), bottomRight));
+        updateCanvas(QRect(bottomRight - QPoint(1000, 200), bottomRight));
     }
 }
 
@@ -1220,38 +1679,52 @@ void CaptureWidget::initPanel()
     // Use widget-local coordinates (rect()) for all child widgets
     // Child widgets use parent-relative coordinate system, not global screen
     // coords
-    QRect panelRect = rect();
+    QWidget* panelHost = this;
+    if (m_multiMonitor) {
+        if (ScreenOverlay* primary = primaryOverlay()) {
+            panelHost = primary;
+        }
+    }
+    QRect panelRect = panelHost->rect();
 
     if (ConfigHandler().showSidePanelButton()) {
-        auto* panelToggleButton =
-          new OrientablePushButton(tr("Tool Settings"), this);
-        makeChild(panelToggleButton);
-        panelToggleButton->setColor(m_uiColor);
-        panelToggleButton->setOrientation(
+        m_panelToggleButton =
+          new OrientablePushButton(tr("Tool Settings"), panelHost);
+        m_panelToggleButton->installEventFilter(m_eventFilter);
+        m_panelToggleButton->setColor(m_uiColor);
+        m_panelToggleButton->setOrientation(
           OrientablePushButton::VerticalBottomToTop);
+        m_panelToggleButton->adjustSize();
 #if defined(Q_OS_MACOS)
-        panelToggleButton->move(
-          0,
-          static_cast<int>(panelRect.height() / 2) -
-            static_cast<int>(panelToggleButton->width() / 2));
+        m_panelToggleButton->move(
+          0, (panelRect.height() - m_panelToggleButton->height()) / 2);
 #else
         // panelRect is already adjusted for DPR, so centering calculations work
         // correctly
-        panelToggleButton->move(panelRect.x(),
-                                panelRect.y() + panelRect.height() / 2 -
-                                  panelToggleButton->width() / 2);
+        m_panelToggleButton->move(
+          panelRect.x(),
+          panelRect.y() +
+            (panelRect.height() - m_panelToggleButton->height()) / 2);
 #endif
-        panelToggleButton->setCursor(Qt::ArrowCursor);
-        (new DraggableWidgetMaker(this))->makeDraggable(panelToggleButton);
-        connect(panelToggleButton,
+        m_panelToggleButton->setCursor(Qt::ArrowCursor);
+        if (m_multiMonitor) {
+            m_panelToggleButton->installEventFilter(this);
+        } else {
+            (new DraggableWidgetMaker(this))
+              ->makeDraggable(m_panelToggleButton);
+        }
+        connect(m_panelToggleButton,
                 &QPushButton::clicked,
                 this,
                 &CaptureWidget::togglePanel);
     }
 
     m_panel = new UtilityPanel(this);
+    if (panelHost != this) {
+        m_panel->setParent(panelHost);
+    }
     m_panel->hide();
-    makeChild(m_panel);
+    m_panel->installEventFilter(m_eventFilter);
 #if defined(Q_OS_MACOS)
     m_panel->setFixedWidth(static_cast<int>(m_colorPicker->width() * 1.5));
     m_panel->setFixedHeight(height());
@@ -1319,13 +1792,27 @@ void CaptureWidget::initPanel()
 void CaptureWidget::showAppUpdateNotification(const QString& appLatestVersion,
                                               const QString& appLatestUrl)
 {
-    if (!ConfigHandler().checkForUpdates()) {
+    if (m_closing || !ConfigHandler().checkForUpdates()) {
         // option check for updates disabled
         return;
     }
+    QWidget* host = this;
+    if (m_multiMonitor) {
+        if (ScreenOverlay* primary = primaryOverlay()) {
+            host = primary;
+        }
+    }
     if (nullptr == m_updateNotificationWidget) {
         m_updateNotificationWidget =
-          new UpdateNotificationWidget(this, appLatestVersion, appLatestUrl);
+          new UpdateNotificationWidget(host, appLatestVersion, appLatestUrl);
+    }
+    if (m_multiMonitor && host != this) {
+        int ax = (host->width() - m_updateNotificationWidget->width()) / 2;
+        m_updateNotificationWidget->setParent(host);
+        m_updateNotificationWidget->installEventFilter(m_eventFilter);
+        m_updateNotificationWidget->move(ax, 0);
+        m_updateNotificationWidget->show();
+        return;
     }
 #if defined(Q_OS_MACOS)
     int ax = (width() - m_updateNotificationWidget->width()) / 2;
@@ -1360,6 +1847,9 @@ void CaptureWidget::initSelection()
         updateCursor();
         updateSizeIndicator();
         OverlayMessage::pop();
+        if (m_multiMonitor) {
+            updateCanvas();
+        }
     });
     connect(m_selection, &SelectionWidget::geometrySettled, this, [this]() {
         if (m_selection->isVisibleTo(this)) {
@@ -1370,6 +1860,9 @@ void CaptureWidget::initSelection()
                 close();
             }
             m_buttonHandler->updatePosition(m_selection->geometry());
+            if (m_multiMonitor) {
+                syncButtonsToOverlays();
+            }
             m_buttonHandler->show();
         } else {
             m_buttonHandler->hide();
@@ -1378,6 +1871,9 @@ void CaptureWidget::initSelection()
     connect(m_selection, &SelectionWidget::visibilityChanged, this, [this]() {
         if (!m_selection->isVisible() && !m_helpMessage.isEmpty()) {
             OverlayMessage::push(m_helpMessage);
+        }
+        if (m_multiMonitor) {
+            updateCanvas();
         }
     });
     if (!initialSelection.isNull()) {
@@ -1472,16 +1968,58 @@ void CaptureWidget::handleToolSignal(CaptureTool::Request r)
                 break;
             }
             if (m_toolWidget) {
+                const QRect oldTwRect = toolWidgetCanvasRect();
                 m_toolWidget->hide();
                 delete m_toolWidget;
                 m_toolWidget = nullptr;
+                if (m_multiMonitor && !oldTwRect.isEmpty()) {
+                    updateCanvas(oldTwRect);
+                }
             }
             m_toolWidget = m_activeTool->widget();
             if (m_toolWidget) {
-                makeChild(m_toolWidget);
-                m_toolWidget->move(m_context.mousePos);
+                if (m_multiMonitor) {
+                    if (ScreenOverlay* host =
+                          overlayAtCanvasPos(m_context.mousePos)) {
+                        m_toolWidget->setParent(host);
+                        m_toolWidget->installEventFilter(m_eventFilter);
+                        m_toolWidget->move(m_context.mousePos -
+                                           host->canvasOffset());
+                        host->activateWindow();
+                    } else {
+                        makeChild(m_toolWidget);
+                        m_toolWidget->move(m_context.mousePos);
+                    }
+                    m_prevToolWidgetCanvasRect = toolWidgetCanvasRect();
+                    m_toolWidget->installEventFilter(this);
+                    if (auto* edit = qobject_cast<QTextEdit*>(m_toolWidget)) {
+                        connect(edit, &QTextEdit::textChanged, this, [this]() {
+                            if (m_multiMonitor) {
+                                const QRect currentRect =
+                                  toolWidgetCanvasRect();
+                                updateCanvas(m_prevToolWidgetCanvasRect.united(
+                                  currentRect));
+                                m_prevToolWidgetCanvasRect = currentRect;
+                            }
+                        });
+                        connect(edit,
+                                &QTextEdit::cursorPositionChanged,
+                                this,
+                                [this]() {
+                                    if (m_multiMonitor) {
+                                        updateCanvas(toolWidgetCanvasRect());
+                                    }
+                                });
+                    }
+                } else {
+                    makeChild(m_toolWidget);
+                    m_toolWidget->move(m_context.mousePos);
+                }
                 m_toolWidget->show();
                 m_toolWidget->setFocus();
+                if (m_multiMonitor) {
+                    updateCanvas(toolWidgetCanvasRect());
+                }
             }
             break;
         case CaptureTool::REQ_ADD_EXTERNAL_WIDGETS:
@@ -1538,6 +2076,11 @@ void CaptureWidget::onToolSizeChanged(int t)
     CaptureTool* tool = activeButtonTool();
     if (tool && tool->showMousePreview()) {
         setCursor(Qt::BlankCursor);
+        if (m_multiMonitor) {
+            for (ScreenOverlay* overlay : m_overlays) {
+                overlay->setCursor(Qt::BlankCursor);
+            }
+        }
         tool->onSizeChanged(t);
     }
 
@@ -1560,7 +2103,7 @@ void CaptureWidget::onToolSizeChanged(int t)
     }
 
     // Force a repaint to prevent artifacting
-    this->repaint();
+    repaintCanvas();
 }
 
 void CaptureWidget::setDrawColor(const QColor& c)
@@ -1643,7 +2186,7 @@ void CaptureWidget::removeToolObject(int index)
         const CaptureTool::Type currentToolType =
           m_captureToolObjects.at(index)->type();
         m_captureToolObjectsBackup = m_captureToolObjects;
-        update(
+        updateCanvas(
           paddedUpdateRect(m_captureToolObjects.at(index)->boundingRect()));
         if (currentToolType == CaptureTool::TYPE_CIRCLECOUNT) {
             int removedCircleCount = m_captureToolObjects.at(index)->count();
@@ -1765,18 +2308,25 @@ void CaptureWidget::updateSizeIndicator()
 
 void CaptureWidget::updateCursor()
 {
+    const QPoint mousePos =
+      m_multiMonitor ? m_context.mousePos : mapFromGlobal(QCursor::pos());
     if (m_colorPicker && m_colorPicker->isVisible()) {
         setCursor(Qt::ArrowCursor);
     } else if (m_activeButton != nullptr &&
                activeButtonToolType() != CaptureTool::TYPE_MOVESELECTION) {
         setCursor(Qt::CrossCursor);
-    } else if (m_selection->getMouseSide(mapFromGlobal(QCursor::pos())) !=
+    } else if (m_selection->getMouseSide(mousePos) !=
                SelectionWidget::NO_SIDE) {
         setCursor(m_selection->cursor());
     } else if (activeButtonToolType() == CaptureTool::TYPE_MOVESELECTION) {
         setCursor(Qt::OpenHandCursor);
     } else {
         setCursor(Qt::CrossCursor);
+    }
+    if (m_multiMonitor) {
+        for (ScreenOverlay* overlay : m_overlays) {
+            overlay->setCursor(cursor());
+        }
     }
 }
 
@@ -1813,10 +2363,10 @@ void CaptureWidget::updateTool(CaptureTool* tool)
     QRect toolObjectRect = paddedUpdateRect(tool->boundingRect());
 
     // old rects are united with current rects to handle sudden mouse movement
-    update(previewRect);
-    update(toolObjectRect);
-    update(oldPreviewRect);
-    update(oldToolObjectRect);
+    updateCanvas(previewRect);
+    updateCanvas(toolObjectRect);
+    updateCanvas(oldPreviewRect);
+    updateCanvas(oldToolObjectRect);
 
     oldPreviewRect = previewRect;
     oldToolObjectRect = toolObjectRect;
@@ -1866,12 +2416,15 @@ void CaptureWidget::drawToolsData(bool drawSelection)
     QPixmap pixmapItem = m_context.origScreenshot;
     for (const auto& toolItem : m_captureToolObjects.captureToolObjects()) {
         processPixmapWithTool(&pixmapItem, toolItem);
-        update(paddedUpdateRect(toolItem->boundingRect()));
+        updateCanvas(paddedUpdateRect(toolItem->boundingRect()));
     }
 
     m_context.screenshot = pixmapItem;
     if (drawSelection) {
         drawObjectSelection();
+    }
+    if (m_multiMonitor) {
+        updateCanvas();
     }
 }
 
@@ -1888,6 +2441,7 @@ void CaptureWidget::drawObjectSelection()
         if (activeToolObject() && m_activeButton) {
             uncheckActiveTool();
         }
+        updateCanvas(paddedUpdateRect(toolItem->boundingRect()));
     }
 }
 
@@ -1917,14 +2471,14 @@ CaptureTool::Type CaptureWidget::activeButtonToolType() const
 
 QPoint CaptureWidget::snapToGrid(const QPoint& point) const
 {
-    QPoint snapPoint = mapToGlobal(point);
-
-    const auto scale{ m_context.screenshot.devicePixelRatio() };
+    QPoint snapPoint = m_multiMonitor ? (point + m_desktopGeometry.topLeft())
+                                      : mapToGlobal(point);
 
     snapPoint.setX((qRound(snapPoint.x() / double(m_gridSize)) * m_gridSize));
     snapPoint.setY((qRound(snapPoint.y() / double(m_gridSize)) * m_gridSize));
 
-    return mapFromGlobal(snapPoint);
+    return m_multiMonitor ? (snapPoint - m_desktopGeometry.topLeft())
+                          : mapFromGlobal(snapPoint);
 }
 
 QPointer<CaptureTool> CaptureWidget::activeToolObject()
@@ -1961,31 +2515,64 @@ QList<QShortcut*> CaptureWidget::newShortcut(const QKeySequence& key,
                                              const char* slot)
 {
     QList<QShortcut*> shortcuts;
+    QList<QKeySequence> seqs;
     QString strKey = key.toString();
     if (strKey.contains("Enter") || strKey.contains("Return")) {
         strKey.replace("Enter", "Return");
-        shortcuts << new QShortcut(strKey, parent, slot);
+        seqs << QKeySequence(strKey);
         strKey.replace("Return", "Enter");
-        shortcuts << new QShortcut(strKey, parent, slot);
+        seqs << QKeySequence(strKey);
     } else {
-        shortcuts << new QShortcut(key, parent, slot);
+        seqs << key;
+    }
+
+    if (m_multiMonitor && !m_overlays.isEmpty()) {
+        for (const QKeySequence& seq : seqs) {
+            for (ScreenOverlay* overlay : m_overlays) {
+                auto* sc = new QShortcut(seq, overlay);
+                if (slot) {
+                    connect(sc, SIGNAL(activated()), parent, slot);
+                }
+                shortcuts << sc;
+            }
+        }
+    } else {
+        for (const QKeySequence& seq : seqs) {
+            shortcuts << new QShortcut(seq, parent, slot);
+        }
     }
     return shortcuts;
 }
 
 void CaptureWidget::togglePanel()
 {
+    if (m_multiMonitor && !m_panel->isVisible()) {
+        ScreenOverlay* host = nullptr;
+        if (sender() == m_panelToggleButton && m_panelToggleButton) {
+            host = overlayForParent(m_panelToggleButton->parentWidget());
+        }
+        if (!host) {
+            host = overlayAtCanvasPos(m_context.mousePos);
+        }
+        syncPanelToOverlay(host);
+    }
     m_panel->toggle();
 }
 
 void CaptureWidget::childEnter()
 {
+    if (m_closing) {
+        return;
+    }
     m_previewEnabled = false;
     updateTool(activeButtonTool());
 }
 
 void CaptureWidget::childLeave()
 {
+    if (m_closing) {
+        return;
+    }
     m_previewEnabled = true;
     updateTool(activeButtonTool());
 }
@@ -2026,7 +2613,7 @@ void CaptureWidget::redo()
     drawToolsData();
     m_undoStack.redo();
     drawToolsData();
-    update();
+    updateCanvas();
     updateLayersPanel();
 
     restoreCircleCountState();
@@ -2061,10 +2648,10 @@ QRect CaptureWidget::extendedSelection() const
 QRect CaptureWidget::extendedRect(const QRect& r) const
 {
     auto devicePixelRatio = m_context.screenshot.devicePixelRatio();
-    return { static_cast<int>(r.left() * devicePixelRatio),
-             static_cast<int>(r.top() * devicePixelRatio),
-             static_cast<int>(r.width() * devicePixelRatio),
-             static_cast<int>(r.height() * devicePixelRatio) };
+    return { qRound(r.left() * devicePixelRatio),
+             qRound(r.top() * devicePixelRatio),
+             qRound(r.width() * devicePixelRatio),
+             qRound(r.height() * devicePixelRatio) };
 }
 
 QRect CaptureWidget::paddedUpdateRect(const QRect& r) const
@@ -2076,16 +2663,23 @@ QRect CaptureWidget::paddedUpdateRect(const QRect& r) const
     }
 }
 
-void CaptureWidget::drawErrorMessage(const QString& msg, QPainter* painter)
+void CaptureWidget::drawErrorMessage(const QString& msg,
+                                     QPainter* painter,
+                                     const QRect& bounds)
 {
     auto textRect = painter->fontMetrics().boundingRect(msg);
     int w = textRect.width(), h = textRect.height();
     textRect = {
-        size().width() - w - 10, size().height() - h - 5, w + 100, h + 100
+        bounds.x() + bounds.width() - w - 10,
+        bounds.y() + bounds.height() - h - 5,
+        w + 100,
+        h + 100,
     };
-    QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
+    const QPoint cursorPos =
+      m_multiMonitor ? m_context.mousePos
+                     : QCursor::pos(QGuiAppCurrentScreen().currentScreen());
 
-    if (!textRect.contains(QCursor::pos(currentScreen))) {
+    if (!textRect.contains(cursorPos)) {
         QColor textColor(Qt::white);
         painter->setPen(textColor);
         painter->drawText(textRect, msg);
@@ -2094,6 +2688,7 @@ void CaptureWidget::drawErrorMessage(const QString& msg, QPainter* painter)
 
 void CaptureWidget::drawInactiveRegion(QPainter* painter)
 {
+    painter->save();
     QColor overlayColor(0, 0, 0, m_opacity);
     painter->setBrush(overlayColor);
     QRect r;
@@ -2103,6 +2698,385 @@ void CaptureWidget::drawInactiveRegion(QPainter* painter)
     QRegion grey(rect());
     grey = grey.subtracted(r);
 
-    painter->setClipRegion(grey);
+    painter->setClipRegion(grey, Qt::IntersectClip);
     painter->drawRect(-1, -1, rect().width() + 1, rect().height() + 1);
+    painter->restore();
+}
+
+void CaptureWidget::forwardOverlayMouseEvent(ScreenOverlay* overlay,
+                                             QMouseEvent* event)
+{
+    if (m_forwardingOverlayEvent || m_closing) {
+        return;
+    }
+    m_forwardingOverlayEvent = true;
+
+    const QPointF rawCanvas =
+      event->position() + QPointF(overlay->canvasOffset());
+    const QPointF canvasPos(
+      qBound(0.0, rawCanvas.x(), qMax(0.0, static_cast<qreal>(width() - 1))),
+      qBound(0.0, rawCanvas.y(), qMax(0.0, static_cast<qreal>(height() - 1))));
+    const QPointF globalPos = canvasPos + QPointF(m_desktopGeometry.topLeft());
+
+    QMouseEvent mapped(event->type(),
+                       canvasPos,
+                       canvasPos,
+                       globalPos,
+                       event->button(),
+                       event->buttons(),
+                       event->modifiers(),
+                       event->pointingDevice());
+    QCoreApplication::sendEvent(this, &mapped);
+    m_forwardingOverlayEvent = false;
+}
+
+void CaptureWidget::updateCanvas(const QRect& r)
+{
+    if (m_closing) {
+        return;
+    }
+    if (!m_multiMonitor) {
+        if (r.isNull()) {
+            update();
+        } else {
+            update(r);
+        }
+        return;
+    }
+    for (ScreenOverlay* overlay : m_overlays) {
+        if (r.isNull()) {
+            overlay->update();
+        } else {
+            const QRect local = r.translated(-overlay->canvasOffset())
+                                  .intersected(overlay->rect());
+            if (!local.isEmpty()) {
+                overlay->update(local);
+            }
+        }
+    }
+}
+
+void CaptureWidget::repaintCanvas()
+{
+    if (m_closing) {
+        return;
+    }
+    if (!m_multiMonitor) {
+        repaint();
+        return;
+    }
+    for (ScreenOverlay* overlay : m_overlays) {
+        overlay->repaint();
+    }
+}
+
+ScreenOverlay* CaptureWidget::primaryOverlay() const
+{
+    if (m_overlays.isEmpty()) {
+        return nullptr;
+    }
+    QScreen* primary = QGuiApplication::primaryScreen();
+    for (ScreenOverlay* overlay : m_overlays) {
+        if (overlay->targetScreen() == primary) {
+            return overlay;
+        }
+    }
+    return m_overlays.first();
+}
+
+ScreenOverlay* CaptureWidget::overlayAtCanvasPos(const QPoint& pos) const
+{
+    if (m_overlays.isEmpty()) {
+        return nullptr;
+    }
+    for (ScreenOverlay* overlay : m_overlays) {
+        if (overlay->canvasRect().contains(pos)) {
+            return overlay;
+        }
+    }
+    ScreenOverlay* best = m_overlays.first();
+    qint64 bestDistSq = std::numeric_limits<qint64>::max();
+    for (ScreenOverlay* overlay : m_overlays) {
+        const QRect r = overlay->canvasRect();
+        qint64 dx = 0;
+        if (pos.x() < r.left()) {
+            dx = r.left() - pos.x();
+        } else if (pos.x() > r.right()) {
+            dx = pos.x() - r.right();
+        }
+        qint64 dy = 0;
+        if (pos.y() < r.top()) {
+            dy = r.top() - pos.y();
+        } else if (pos.y() > r.bottom()) {
+            dy = pos.y() - r.bottom();
+        }
+        const qint64 distSq = dx * dx + dy * dy;
+        if (distSq < bestDistSq) {
+            bestDistSq = distSq;
+            best = overlay;
+        }
+    }
+    return best;
+}
+
+ScreenOverlay* CaptureWidget::overlayForRect(const QRect& r) const
+{
+    if (m_overlays.isEmpty()) {
+        return nullptr;
+    }
+    ScreenOverlay* best = nullptr;
+    qint64 bestArea = 0;
+    const QRect norm = r.normalized();
+    for (ScreenOverlay* overlay : m_overlays) {
+        const QRect inter = overlay->canvasRect().intersected(norm);
+        if (!inter.isEmpty()) {
+            const qint64 area =
+              static_cast<qint64>(inter.width()) * inter.height();
+            if (area > bestArea) {
+                bestArea = area;
+                best = overlay;
+            }
+        }
+    }
+    return best ? best : overlayAtCanvasPos(norm.center());
+}
+
+ScreenOverlay* CaptureWidget::overlayForParent(QWidget* parent) const
+{
+    for (ScreenOverlay* overlay : m_overlays) {
+        if (overlay == parent) {
+            return overlay;
+        }
+    }
+    return nullptr;
+}
+
+void CaptureWidget::syncButtonsToOverlays()
+{
+    if (!m_multiMonitor) {
+        return;
+    }
+    for (CaptureToolButton* b : m_toolbarButtons) {
+        const QPoint canvasPos = b->pos();
+        const QPoint center =
+          canvasPos + QPoint(b->width() / 2, b->height() / 2);
+        ScreenOverlay* host = overlayAtCanvasPos(center);
+        if (!host) {
+            continue;
+        }
+        if (b->parentWidget() != host) {
+            const bool wasVisible = b->isVisible();
+            b->setParent(host);
+            if (wasVisible) {
+                b->show();
+            }
+        }
+        b->move(canvasPos - host->canvasOffset());
+    }
+}
+
+void CaptureWidget::syncPanelToOverlay(ScreenOverlay* host)
+{
+    if (!m_multiMonitor || !m_panel || !host) {
+        return;
+    }
+    if (m_panel->parentWidget() != host) {
+        m_panel->setParent(host);
+    }
+    m_panel->setGeometry(
+      0, 0, static_cast<int>(m_colorPicker->width() * 1.5), host->height());
+    m_panel->raise();
+    host->activateWindow();
+}
+
+void CaptureWidget::onOverlayResized(ScreenOverlay* overlay)
+{
+    if (!m_multiMonitor || !overlay) {
+        return;
+    }
+    if (m_buttonHandler && !m_overlays.isEmpty()) {
+        QVector<QRect> areas;
+        areas.reserve(m_overlays.size());
+        for (ScreenOverlay* ov : m_overlays) {
+            areas.append(ov->canvasRect());
+        }
+        m_buttonHandler->updateScreenRegions(areas);
+    }
+    if (m_panelToggleButton && !m_panelButtonMoved &&
+        m_panelToggleButton->parentWidget() == overlay) {
+        m_panelToggleButton->adjustSize();
+        m_panelToggleButton->move(
+          0, (overlay->height() - m_panelToggleButton->height()) / 2);
+    }
+    if (m_panel && m_colorPicker && m_panel->parentWidget() == overlay) {
+        m_panel->setGeometry(0,
+                             0,
+                             static_cast<int>(m_colorPicker->width() * 1.5),
+                             overlay->height());
+    }
+}
+
+bool CaptureWidget::eventFilter(QObject* obj, QEvent* event)
+{
+    if (m_multiMonitor && m_toolWidget && obj == m_toolWidget) {
+        switch (event->type()) {
+            case QEvent::Resize:
+            case QEvent::Move: {
+                const QRect currentRect = toolWidgetCanvasRect();
+                updateCanvas(m_prevToolWidgetCanvasRect.united(currentRect));
+                m_prevToolWidgetCanvasRect = currentRect;
+                break;
+            }
+            default:
+                break;
+        }
+    }
+    if (m_multiMonitor && m_panelToggleButton && obj == m_panelToggleButton) {
+        switch (event->type()) {
+            case QEvent::MouseButtonPress: {
+                auto* me = static_cast<QMouseEvent*>(event);
+                m_panelButtonPressing = false;
+                m_panelButtonDragging = false;
+                if (me->button() == Qt::LeftButton) {
+                    if (ScreenOverlay* host = overlayForParent(
+                          m_panelToggleButton->parentWidget())) {
+                        host->activateWindow();
+                        m_panelButtonPressing = true;
+                        m_panelButtonGrabOffset = me->position().toPoint();
+                        m_panelButtonCanvasPos =
+                          host->canvasOffset() + m_panelToggleButton->pos();
+                        m_panelButtonPressCanvasPos =
+                          m_panelButtonCanvasPos + m_panelButtonGrabOffset;
+                    }
+                }
+                break;
+            }
+            case QEvent::MouseMove: {
+                if (m_panelButtonPressing) {
+                    auto* me = static_cast<QMouseEvent*>(event);
+                    if (ScreenOverlay* host = overlayForParent(
+                          m_panelToggleButton->parentWidget())) {
+                        const QPoint cursorCanvasPos =
+                          host->canvasOffset() + m_panelToggleButton->pos() +
+                          me->position().toPoint();
+                        m_context.mousePos = cursorCanvasPos;
+                        if (!m_panelButtonDragging &&
+                            (cursorCanvasPos - m_panelButtonPressCanvasPos)
+                                .manhattanLength() > 3) {
+                            m_panelButtonDragging = true;
+                            m_panelButtonMoved = true;
+                            m_panelButtonDragPixmap =
+                              m_panelToggleButton->grab();
+                        }
+                        if (m_panelButtonDragging) {
+                            const QSize btnSize = m_panelToggleButton->size();
+                            const QRect oldRect(m_panelButtonCanvasPos,
+                                                btnSize);
+                            QPoint newPos =
+                              cursorCanvasPos - m_panelButtonGrabOffset;
+                            newPos.setX(
+                              qBound(0,
+                                     newPos.x(),
+                                     qMax(0, width() - btnSize.width())));
+                            newPos.setY(
+                              qBound(0,
+                                     newPos.y(),
+                                     qMax(0, height() - btnSize.height())));
+                            m_panelButtonCanvasPos = newPos;
+                            m_panelToggleButton->move(newPos -
+                                                      host->canvasOffset());
+                            const QRect newRect(m_panelButtonCanvasPos,
+                                                btnSize);
+                            updateCanvas(
+                              oldRect.united(newRect).adjusted(-8, -8, 8, 8));
+                        }
+                    }
+                }
+                break;
+            }
+            case QEvent::MouseButtonRelease: {
+                if (m_panelButtonPressing) {
+                    m_panelButtonPressing = false;
+                    if (m_panelButtonDragging) {
+                        m_panelButtonDragging = false;
+                        m_panelButtonDragPixmap = QPixmap();
+                        const QSize btnSize = m_panelToggleButton->size();
+                        const QPoint center =
+                          m_panelButtonCanvasPos +
+                          QPoint(btnSize.width() / 2, btnSize.height() / 2);
+                        if (ScreenOverlay* targetHost =
+                              overlayAtCanvasPos(center)) {
+                            const QRect hr = targetHost->canvasRect();
+                            m_panelButtonCanvasPos.setX(
+                              qBound(hr.left(),
+                                     m_panelButtonCanvasPos.x(),
+                                     qMax(hr.left(),
+                                          hr.right() + 1 - btnSize.width())));
+                            m_panelButtonCanvasPos.setY(
+                              qBound(hr.top(),
+                                     m_panelButtonCanvasPos.y(),
+                                     qMax(hr.top(),
+                                          hr.bottom() + 1 - btnSize.height())));
+                            if (m_panelToggleButton->parentWidget() !=
+                                targetHost) {
+                                m_panelToggleButton->setParent(targetHost);
+                            }
+                            m_panelToggleButton->move(
+                              m_panelButtonCanvasPos -
+                              targetHost->canvasOffset());
+                            m_panelToggleButton->setDown(false);
+                            m_panelToggleButton->show();
+                            m_panelToggleButton->raise();
+                            if (m_panel && m_panel->isVisible() &&
+                                m_panel->parentWidget() == targetHost) {
+                                m_panel->raise();
+                            }
+                            targetHost->activateWindow();
+                        }
+                        updateCanvas();
+                        event->ignore();
+                        return true;
+                    }
+                }
+                break;
+            }
+            default:
+                break;
+        }
+    }
+    return QWidget::eventFilter(obj, event);
+}
+
+QRect CaptureWidget::toolWidgetCanvasRect() const
+{
+    if (!m_toolWidget) {
+        return {};
+    }
+    QRect geom = m_toolWidget->geometry();
+    if (m_multiMonitor) {
+        for (ScreenOverlay* overlay : m_overlays) {
+            if (m_toolWidget->parentWidget() == overlay) {
+                geom.translate(overlay->canvasOffset());
+                break;
+            }
+        }
+    }
+    return geom;
+}
+
+QRect CaptureWidget::colorPickerCanvasRect() const
+{
+    if (!m_colorPicker) {
+        return {};
+    }
+    QRect geom = m_colorPicker->geometry();
+    if (m_multiMonitor) {
+        for (ScreenOverlay* overlay : m_overlays) {
+            if (m_colorPicker->parentWidget() == overlay) {
+                geom.translate(overlay->canvasOffset());
+                break;
+            }
+        }
+    }
+    return geom;
 }
