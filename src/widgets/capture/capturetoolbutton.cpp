@@ -8,6 +8,8 @@
 #include "utils/globalvalues.h"
 
 #include <QApplication>
+#include <QCoreApplication>
+#include <QHash>
 #include <QIcon>
 #include <QMouseEvent>
 #include <QPropertyAnimation>
@@ -16,12 +18,40 @@
 // Button represents a single button of the capture widget, it can enable
 // multiple functionality.
 
-CaptureToolButton::CaptureToolButton(const CaptureTool::Type t, QWidget* parent)
+namespace {
+QHash<quint64, QIcon>& toolIconCache()
+{
+    static QHash<quint64, QIcon> cache;
+    static const bool registered = []() {
+        if (qApp) {
+            QObject::connect(qApp, &QCoreApplication::aboutToQuit, []() {
+                toolIconCache().clear();
+            });
+        }
+        qAddPostRoutine([]() { toolIconCache().clear(); });
+        return true;
+    }();
+    Q_UNUSED(registered)
+    return cache;
+}
+} // namespace
+
+CaptureToolButton::CaptureToolButton(const CaptureTool::Type t,
+                                     QWidget* parent,
+                                     const QColor& color,
+                                     bool inheritedStyle)
   : CaptureButton(parent)
   , m_buttonType(t)
   , m_tool(nullptr)
   , m_emergeAnimation(nullptr)
 {
+    if (color.isValid()) {
+        if (inheritedStyle) {
+            CaptureButton::setInheritedColor(color);
+        } else {
+            CaptureButton::setColor(color);
+        }
+    }
     initButton();
     updateIcon();
 }
@@ -73,6 +103,9 @@ void CaptureToolButton::initButton()
     m_emergeAnimation->setStartValue(QSize(0, 0));
     m_emergeAnimation->setEndValue(
       QSize(GlobalValues::buttonBaseSize(), GlobalValues::buttonBaseSize()));
+    connect(m_emergeAnimation, &QPropertyAnimation::finished, this, [this]() {
+        setIconSize(size() * 0.6);
+    });
 }
 
 void CaptureToolButton::updateIcon()
@@ -89,7 +122,18 @@ const QList<CaptureTool::Type>& CaptureToolButton::getIterableButtonTypes()
 // get icon returns the icon for the type of button
 QIcon CaptureToolButton::icon() const
 {
-    return m_tool->icon(m_mainColor, true);
+    const bool isDark = ColorUtils::colorIsDark(m_color);
+    const quint64 key =
+      (static_cast<quint64>(static_cast<int>(m_buttonType)) << 1) |
+      (isDark ? 1ULL : 0ULL);
+    auto& cache = toolIconCache();
+    auto it = cache.constFind(key);
+    if (it != cache.constEnd()) {
+        return it.value();
+    }
+    QIcon ic = m_tool->icon(m_color, true);
+    cache.insert(key, ic);
+    return ic;
 }
 
 void CaptureToolButton::mousePressEvent(QMouseEvent* e)
@@ -109,10 +153,6 @@ void CaptureToolButton::animatedShow()
     if (!isVisible()) {
         show();
         m_emergeAnimation->start();
-        connect(m_emergeAnimation,
-                &QPropertyAnimation::finished,
-                this,
-                [this]() { updateIcon(); });
     }
 }
 
@@ -123,12 +163,25 @@ CaptureTool* CaptureToolButton::tool() const
 
 void CaptureToolButton::setColor(const QColor& c)
 {
-    m_mainColor = c;
+    const bool themeChanged =
+      ColorUtils::colorIsDark(m_color) != ColorUtils::colorIsDark(c) ||
+      QPushButton::icon().isNull();
     CaptureButton::setColor(c);
-    updateIcon();
+    if (themeChanged) {
+        updateIcon();
+    }
 }
 
-QColor CaptureToolButton::m_mainColor;
+void CaptureToolButton::setInheritedColor(const QColor& c)
+{
+    const bool themeChanged =
+      ColorUtils::colorIsDark(m_color) != ColorUtils::colorIsDark(c) ||
+      QPushButton::icon().isNull();
+    CaptureButton::setInheritedColor(c);
+    if (themeChanged) {
+        updateIcon();
+    }
+}
 
 static std::map<CaptureTool::Type, int> buttonTypeOrder
 {

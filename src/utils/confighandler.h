@@ -204,8 +204,6 @@ signals:
     void fileChanged() const;
 
 private:
-    mutable QSettings m_settings;
-
     static bool m_hasError, m_errorCheckPending, m_skipNextErrorCheck;
     static QSharedPointer<QFileSystemWatcher> m_configWatcher;
 

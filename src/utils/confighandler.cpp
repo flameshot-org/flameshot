@@ -9,13 +9,18 @@
 #include <QCoreApplication>
 #include <QDebug>
 #include <QDir>
+#include <QElapsedTimer>
 #include <QFile>
 #include <QFileSystemWatcher>
+#include <QHash>
 #include <QKeySequence>
 #include <QMap>
 #include <QSharedPointer>
 #include <QStandardPaths>
+#include <QThread>
+#include <QTimer>
 #include <QVector>
+#include <memory>
 #include <stdexcept>
 
 #if defined(Q_OS_MACOS)
@@ -217,16 +222,157 @@ static QMap<QString, QSharedPointer<KeySequence>> recognizedShortcuts = {
 
 // CLASS CONFIGHANDLER
 
-ConfigHandler::ConfigHandler()
+namespace {
+struct SharedConfigState
+{
+    QHash<QString, QVariant> rawCache;
+    QHash<QString, QVariant> processedCache;
+    QHash<QString, QString> shortcutCache;
+    QHash<QString, QVariant> explicitShortcuts;
+    QHash<QString, QVariant> pendingWrites;
+    QSet<QString> pendingRemovals;
+    QString cachedFilePath;
+    QTimer* syncTimer{ nullptr };
+    QElapsedTimer lastSelfSync;
+    bool cacheLoaded{ false };
+    bool validatedUnrecognizedClean{ false };
+    bool validatedSemanticsClean{ false };
+    bool validatedConflictsClean{ false };
+    bool lastConflictsOk{ true };
+    bool pendingClearAll{ false };
+    bool expectSelfWrite{ false };
+};
+
+SharedConfigState& sharedState()
+{
+    static SharedConfigState state;
+    return state;
+}
+
+std::unique_ptr<QSettings> makeSettings()
+{
 #ifndef USE_PORTABLE_CONFIG
-  : m_settings(QSettings::IniFormat,
-               QSettings::UserScope,
-               qApp->organizationName(),
-               qApp->applicationName())
+    return std::make_unique<QSettings>(QSettings::IniFormat,
+                                       QSettings::UserScope,
+                                       qApp->organizationName(),
+                                       qApp->applicationName());
 #else
-  : m_settings(qApp->applicationDirPath() + "/flameshot.ini",
-               QSettings::IniFormat)
+    return std::make_unique<QSettings>(qApp->applicationDirPath() +
+                                         QStringLiteral("/flameshot.ini"),
+                                       QSettings::IniFormat);
 #endif
+}
+
+void invalidateCache()
+{
+    auto& state = sharedState();
+    state.cacheLoaded = false;
+    state.validatedUnrecognizedClean = false;
+    state.validatedSemanticsClean = false;
+    state.validatedConflictsClean = false;
+    state.rawCache.clear();
+    state.processedCache.clear();
+    state.shortcutCache.clear();
+    state.explicitShortcuts.clear();
+}
+
+void ensureCacheLoaded()
+{
+    auto& state = sharedState();
+    if (state.cacheLoaded) {
+        return;
+    }
+    state.rawCache.clear();
+    state.processedCache.clear();
+    state.shortcutCache.clear();
+    state.explicitShortcuts.clear();
+
+    if (qApp) {
+        auto settings = makeSettings();
+        if (state.cachedFilePath.isEmpty()) {
+            state.cachedFilePath = settings->fileName();
+        }
+        const QStringList keys = settings->allKeys();
+        for (const QString& key : keys) {
+            const QVariant val = settings->value(key);
+            state.rawCache.insert(key, val);
+            if (key.startsWith(QStringLiteral(CONFIG_GROUP_SHORTCUTS "/"))) {
+                state.explicitShortcuts.insert(key, val);
+            }
+        }
+    }
+    state.cacheLoaded = true;
+}
+
+void flushSync(bool suppressReload)
+{
+    auto& state = sharedState();
+    if (state.syncTimer) {
+        state.syncTimer->stop();
+    }
+    if (!state.pendingClearAll && state.pendingRemovals.isEmpty() &&
+        state.pendingWrites.isEmpty()) {
+        return;
+    }
+    if (!qApp) {
+        return;
+    }
+
+    auto settings = makeSettings();
+    if (state.pendingClearAll) {
+        for (const QString& key : settings->allKeys()) {
+            if (!key.startsWith(QStringLiteral(CONFIG_GROUP_SHORTCUTS "/"))) {
+                settings->remove(key);
+            }
+        }
+        state.pendingClearAll = false;
+    }
+    for (const QString& key : state.pendingRemovals) {
+        settings->remove(key);
+    }
+    state.pendingRemovals.clear();
+    for (auto it = state.pendingWrites.constBegin();
+         it != state.pendingWrites.constEnd();
+         ++it) {
+        settings->setValue(it.key(), it.value());
+    }
+    state.pendingWrites.clear();
+
+    state.expectSelfWrite = suppressReload;
+    if (suppressReload) {
+        state.lastSelfSync.start();
+    }
+    settings->sync();
+}
+
+void scheduleSync()
+{
+    auto& state = sharedState();
+    if (!qApp || !QThread::currentThread() ||
+        QThread::currentThread()->loopLevel() == 0) {
+        flushSync(true);
+        return;
+    }
+    if (!state.syncTimer) {
+        auto* timer = new QTimer(qApp);
+        timer->setSingleShot(true);
+        timer->setInterval(150);
+        QObject::connect(
+          timer, &QTimer::timeout, timer, []() { flushSync(true); });
+        QObject::connect(timer, &QObject::destroyed, []() {
+            sharedState().syncTimer = nullptr;
+            flushSync(false);
+        });
+        QObject::connect(qApp, &QCoreApplication::aboutToQuit, timer, []() {
+            flushSync(false);
+        });
+        state.syncTimer = timer;
+    }
+    state.syncTimer->start();
+}
+} // namespace
+
+ConfigHandler::ConfigHandler()
 {
     static bool firstInitialization = true;
     if (firstInitialization) {
@@ -236,12 +382,22 @@ ConfigHandler::ConfigHandler()
         QObject::connect(m_configWatcher.data(),
                          &QFileSystemWatcher::fileChanged,
                          [](const QString& fileName) {
+                             auto& state = sharedState();
+                             const bool wasSelfWrite =
+                               state.expectSelfWrite &&
+                               state.lastSelfSync.isValid() &&
+                               state.lastSelfSync.elapsed() < 200;
+                             state.expectSelfWrite = false;
+                             if (!wasSelfWrite) {
+                                 invalidateCache();
+                             }
+
                              emit getInstance()->fileChanged();
 
                              if (QFile(fileName).exists()) {
                                  m_configWatcher->addPath(fileName);
                              }
-                             if (m_skipNextErrorCheck) {
+                             if (m_skipNextErrorCheck || wasSelfWrite) {
                                  m_skipNextErrorCheck = false;
                                  return;
                              }
@@ -413,19 +569,40 @@ QString ConfigHandler::filenamePatternDefault()
 
 void ConfigHandler::setDefaultSettings()
 {
-    for (const auto& key : m_settings.allKeys()) {
-        if (isShortcut(key)) {
-            // Do not reset Shortcuts
-            continue;
+    auto& state = sharedState();
+    ensureCacheLoaded();
+
+    const QString shortcutPrefix = QStringLiteral(CONFIG_GROUP_SHORTCUTS "/");
+    for (auto it = state.rawCache.begin(); it != state.rawCache.end();) {
+        if (!it.key().startsWith(shortcutPrefix)) {
+            state.processedCache.remove(it.key());
+            it = state.rawCache.erase(it);
+        } else {
+            ++it;
         }
-        m_settings.remove(key);
     }
-    m_settings.sync();
+    for (auto it = state.pendingWrites.begin();
+         it != state.pendingWrites.end();) {
+        if (!it.key().startsWith(shortcutPrefix)) {
+            it = state.pendingWrites.erase(it);
+        } else {
+            ++it;
+        }
+    }
+    state.pendingClearAll = true;
+    state.validatedUnrecognizedClean = false;
+    state.validatedSemanticsClean = false;
+    m_skipNextErrorCheck = false;
+    flushSync(false);
 }
 
 QString ConfigHandler::configFilePath() const
 {
-    return m_settings.fileName();
+    auto& state = sharedState();
+    if (state.cachedFilePath.isEmpty() && qApp) {
+        state.cachedFilePath = makeSettings()->fileName();
+    }
+    return state.cachedFilePath;
 }
 
 // GENERIC GETTERS AND SETTERS
@@ -449,52 +626,76 @@ bool ConfigHandler::setShortcut(const QString& actionName,
     }
 
     bool errorFlag = false;
+    const QString fullKey =
+      QStringLiteral(CONFIG_GROUP_SHORTCUTS "/") + actionName;
 
-    m_settings.beginGroup(CONFIG_GROUP_SHORTCUTS);
     if (shortcut.isEmpty()) {
-        setValue(actionName, "");
+        setValue(fullKey, QString());
     } else if (reservedShortcuts.contains(QKeySequence(shortcut))) {
         // do not allow to set reserved shortcuts
         errorFlag = true;
     } else {
-        errorFlag = false;
+        auto& state = sharedState();
+        ensureCacheLoaded();
+
         // Make no difference for Return and Enter keys
-        QString newShortcut = KeySequence().value(shortcut).toString();
-        for (auto& otherAction : m_settings.allKeys()) {
-            if (actionName == otherAction) {
+        const QString newShortcut = KeySequence().value(shortcut).toString();
+        for (auto it = state.explicitShortcuts.constBegin();
+             it != state.explicitShortcuts.constEnd();
+             ++it) {
+            if (it.key() == fullKey) {
                 continue;
             }
-            QString existingShortcut =
-              KeySequence().value(m_settings.value(otherAction)).toString();
+            const QString existingShortcut =
+              KeySequence().value(it.value()).toString();
             if (newShortcut == existingShortcut) {
                 errorFlag = true;
-                goto done;
+                break;
             }
         }
-        m_settings.setValue(actionName, KeySequence().value(shortcut));
+        if (!errorFlag) {
+            const QVariant encoded = KeySequence().value(shortcut);
+            m_skipNextErrorCheck = true;
+            state.rawCache.insert(fullKey, encoded);
+            state.processedCache.remove(fullKey);
+            state.explicitShortcuts.insert(fullKey, encoded);
+            state.shortcutCache.clear();
+            state.validatedConflictsClean = false;
+            state.pendingRemovals.remove(fullKey);
+            state.pendingWrites.insert(fullKey, encoded);
+            scheduleSync();
+        }
     }
-done:
-    m_settings.endGroup();
     return !errorFlag;
 }
 
 QString ConfigHandler::shortcut(const QString& actionName)
 {
-    QString setting = CONFIG_GROUP_SHORTCUTS "/" + actionName;
+    auto& state = sharedState();
+    ensureCacheLoaded();
+
+    auto cachedIt = state.shortcutCache.constFind(actionName);
+    if (cachedIt != state.shortcutCache.constEnd()) {
+        return cachedIt.value();
+    }
+
+    const QString setting =
+      QStringLiteral(CONFIG_GROUP_SHORTCUTS "/") + actionName;
     QString shortcut = value(setting).toString();
-    if (!m_settings.contains(setting)) {
+    if (!state.rawCache.contains(setting)) {
         // The action uses a shortcut that is a flameshot default
         // (not set explicitly by user)
-        m_settings.beginGroup(CONFIG_GROUP_SHORTCUTS);
-        for (auto& otherAction : m_settings.allKeys()) {
-            if (m_settings.value(otherAction) == shortcut) {
+        for (auto it = state.explicitShortcuts.constBegin();
+             it != state.explicitShortcuts.constEnd();
+             ++it) {
+            if (it.value().toString() == shortcut) {
                 // We found an explicit shortcut - it will take precedence
-                m_settings.endGroup();
-                return {};
+                shortcut.clear();
+                break;
             }
         }
-        m_settings.endGroup();
     }
+    state.shortcutCache.insert(actionName, shortcut);
     return shortcut;
 }
 
@@ -502,10 +703,22 @@ void ConfigHandler::setValue(const QString& key, const QVariant& value)
 {
     assertKeyRecognized(key);
     if (!hasError()) {
+        auto& state = sharedState();
+        ensureCacheLoaded();
+
         // don't let the file watcher initiate another error check
         m_skipNextErrorCheck = true;
         auto val = valueHandler(key)->representation(value);
-        m_settings.setValue(key, val);
+        state.rawCache.insert(key, val);
+        state.processedCache.remove(key);
+        if (isShortcut(key)) {
+            state.explicitShortcuts.insert(key, val);
+            state.shortcutCache.clear();
+            state.validatedConflictsClean = false;
+        }
+        state.pendingRemovals.remove(key);
+        state.pendingWrites.insert(key, val);
+        scheduleSync();
     }
 }
 
@@ -513,8 +726,17 @@ QVariant ConfigHandler::value(const QString& key) const
 {
     assertKeyRecognized(key);
 
-    auto val = m_settings.value(key);
+    auto& state = sharedState();
+    ensureCacheLoaded();
 
+    if (!m_hasError) {
+        auto it = state.processedCache.constFind(key);
+        if (it != state.processedCache.constEnd()) {
+            return it.value();
+        }
+    }
+
+    const QVariant val = state.rawCache.value(key);
     auto handler = valueHandler(key);
 
     // Check the value for semantic errors
@@ -525,17 +747,50 @@ QVariant ConfigHandler::value(const QString& key) const
         return handler->fallback();
     }
 
-    return handler->value(val);
+    const QVariant processed = handler->value(val);
+    state.processedCache.insert(key, processed);
+    return processed;
 }
 
 void ConfigHandler::remove(const QString& key)
 {
-    m_settings.remove(key);
+    auto& state = sharedState();
+    ensureCacheLoaded();
+
+    state.rawCache.remove(key);
+    state.processedCache.remove(key);
+    if (isShortcut(key)) {
+        state.explicitShortcuts.remove(key);
+        state.shortcutCache.clear();
+        state.validatedConflictsClean = false;
+    }
+    state.validatedUnrecognizedClean = false;
+    state.validatedSemanticsClean = false;
+    state.pendingWrites.remove(key);
+    state.pendingRemovals.insert(key);
+    m_skipNextErrorCheck = false;
+    flushSync(false);
 }
 
 void ConfigHandler::resetValue(const QString& key)
 {
-    m_settings.setValue(key, valueHandler(key)->fallback());
+    auto& state = sharedState();
+    ensureCacheLoaded();
+
+    const QVariant fb = valueHandler(key)->fallback();
+    state.rawCache.insert(key, fb);
+    state.processedCache.remove(key);
+    if (isShortcut(key)) {
+        state.explicitShortcuts.insert(key, fb);
+        state.shortcutCache.clear();
+        state.validatedConflictsClean = false;
+    }
+    state.validatedUnrecognizedClean = false;
+    state.validatedSemanticsClean = false;
+    state.pendingRemovals.remove(key);
+    state.pendingWrites.insert(key, fb);
+    m_skipNextErrorCheck = false;
+    flushSync(false);
 }
 
 QSet<QString>& ConfigHandler::recognizedGeneralOptions()
@@ -558,11 +813,17 @@ QSet<QString>& ConfigHandler::recognizedShortcutNames()
  */
 QSet<QString> ConfigHandler::keysFromGroup(const QString& group) const
 {
+    auto& state = sharedState();
+    ensureCacheLoaded();
+
     QSet<QString> keys;
-    for (const QString& key : m_settings.allKeys()) {
+    const QString prefix = group + "/";
+    for (auto it = state.rawCache.constBegin(); it != state.rawCache.constEnd();
+         ++it) {
+        const QString& key = it.key();
         if (group == CONFIG_GROUP_GENERAL && !key.contains('/')) {
             keys.insert(key);
-        } else if (key.startsWith(group + "/")) {
+        } else if (key.startsWith(prefix)) {
             keys.insert(baseName(key));
         }
     }
@@ -588,6 +849,13 @@ bool ConfigHandler::checkForErrors(AbstractLogger* log) const
 bool ConfigHandler::checkUnrecognizedSettings(AbstractLogger* log,
                                               QList<QString>* offenders) const
 {
+    auto& state = sharedState();
+    ensureCacheLoaded();
+    if (log == nullptr && offenders == nullptr &&
+        state.validatedUnrecognizedClean) {
+        return true;
+    }
+
     // sort the config keys by group
     QSet<QString> generalKeys = keysFromGroup(CONFIG_GROUP_GENERAL),
                   shortcutKeys = keysFromGroup(CONFIG_GROUP_SHORTCUTS),
@@ -600,6 +868,9 @@ bool ConfigHandler::checkUnrecognizedSettings(AbstractLogger* log,
 
     // what is left are the unrecognized keys - hopefully empty
     bool ok = generalKeys.isEmpty() && shortcutKeys.isEmpty();
+    if (ok) {
+        state.validatedUnrecognizedClean = true;
+    }
     if (log != nullptr || offenders != nullptr) {
         for (const QString& key : generalKeys) {
             if (log) {
@@ -631,37 +902,50 @@ bool ConfigHandler::checkUnrecognizedSettings(AbstractLogger* log,
  */
 bool ConfigHandler::checkShortcutConflicts(AbstractLogger* log) const
 {
+    auto& state = sharedState();
+    ensureCacheLoaded();
+    if (log == nullptr && state.validatedConflictsClean) {
+        return state.lastConflictsOk;
+    }
+
     bool ok = true;
-    m_settings.beginGroup(CONFIG_GROUP_SHORTCUTS);
-    QStringList shortcuts = m_settings.allKeys();
+    QStringList shortcuts;
+    shortcuts.reserve(state.explicitShortcuts.size());
+    for (auto it = state.explicitShortcuts.constBegin();
+         it != state.explicitShortcuts.constEnd();
+         ++it) {
+        shortcuts.append(it.key());
+    }
     QStringList reportedInLog;
     for (auto key1 = shortcuts.begin(); key1 != shortcuts.end(); ++key1) {
         for (auto key2 = key1 + 1; key2 != shortcuts.end(); ++key2) {
             // values stored in variables are useful when running debugger
-            QString value1 = m_settings.value(*key1).toString(),
-                    value2 = m_settings.value(*key2).toString();
+            QString value1 = state.explicitShortcuts.value(*key1).toString(),
+                    value2 = state.explicitShortcuts.value(*key2).toString();
             // The check will pass if:
             // - one shortcut is empty (the action doesn't use a shortcut)
-            // - or one of the settings is not found in m_settings, i.e.
-            //   user wants to use flameshot's default shortcut for the action
+            // - or one of the settings is not found in cache
             // - or the shortcuts for both actions are different
-            if (!(value1.isEmpty() || !m_settings.contains(*key1) ||
-                  !m_settings.contains(*key2) || value1 != value2)) {
+            if (!(value1.isEmpty() || value1 != value2)) {
                 ok = false;
                 if (log == nullptr) {
                     break;
-                } else if (!reportedInLog.contains(*key1) && // No duplicate
-                           !reportedInLog.contains(*key2)) { // log entries
-                    reportedInLog.append(*key1);
-                    reportedInLog.append(*key2);
+                }
+                const QString name1 = baseName(*key1);
+                const QString name2 = baseName(*key2);
+                if (!reportedInLog.contains(name1) && // No duplicate
+                    !reportedInLog.contains(name2)) { // log entries
+                    reportedInLog.append(name1);
+                    reportedInLog.append(name2);
                     *log << tr("Shortcut conflict: '%1' and '%2' "
                                "have the same shortcut: %3\n")
-                              .arg(*key1, *key2, value1);
+                              .arg(name1, name2, value1);
                 }
             }
         }
     }
-    m_settings.endGroup();
+    state.validatedConflictsClean = true;
+    state.lastConflictsOk = ok;
     return ok;
 }
 
@@ -674,16 +958,24 @@ bool ConfigHandler::checkShortcutConflicts(AbstractLogger* log) const
 bool ConfigHandler::checkSemantics(AbstractLogger* log,
                                    QList<QString>* offenders) const
 {
-    QStringList allKeys = m_settings.allKeys();
+    auto& state = sharedState();
+    ensureCacheLoaded();
+    if (log == nullptr && offenders == nullptr &&
+        state.validatedSemanticsClean) {
+        return true;
+    }
+
     bool ok = true;
-    for (const QString& key : allKeys) {
+    for (auto it = state.rawCache.constBegin(); it != state.rawCache.constEnd();
+         ++it) {
+        const QString& key = it.key();
         // Test if the key is recognized
         if (!recognizedGeneralOptions().contains(key) &&
             (!isShortcut(key) ||
              !recognizedShortcutNames().contains(baseName(key)))) {
             continue;
         }
-        QVariant val = m_settings.value(key);
+        const QVariant& val = it.value();
         auto valueHandler = this->valueHandler(key);
         if (val.isValid() && !valueHandler->check(val)) {
             // Key does not pass the check
@@ -700,6 +992,9 @@ bool ConfigHandler::checkSemantics(AbstractLogger* log,
             }
         }
     }
+    if (ok) {
+        state.validatedSemanticsClean = true;
+    }
     return ok;
 }
 
@@ -713,7 +1008,7 @@ bool ConfigHandler::checkSemantics(AbstractLogger* log,
  */
 void ConfigHandler::checkAndHandleError() const
 {
-    if (!QFile(m_settings.fileName()).exists()) {
+    if (!QFile(configFilePath()).exists()) {
         setErrorState(false);
     } else {
         setErrorState(!checkForErrors());
@@ -770,7 +1065,11 @@ QString ConfigHandler::errorMessage() const
 
 void ConfigHandler::ensureFileWatched() const
 {
-    QFile file(m_settings.fileName());
+    const QString path = configFilePath();
+    if (path.isEmpty()) {
+        return;
+    }
+    QFile file(path);
     if (!file.exists()) {
         if (file.open(QFileDevice::WriteOnly)) {
             file.close();
@@ -779,7 +1078,7 @@ void ConfigHandler::ensureFileWatched() const
     if (m_configWatcher != nullptr && m_configWatcher->files().isEmpty() &&
         qApp != nullptr // ensures that the organization name can be accessed
     ) {
-        m_configWatcher->addPath(m_settings.fileName());
+        m_configWatcher->addPath(path);
     }
 }
 
@@ -831,8 +1130,7 @@ void ConfigHandler::assertKeyRecognized(const QString& key) const
 
 bool ConfigHandler::isShortcut(const QString& key) const
 {
-    return m_settings.group() == QStringLiteral(CONFIG_GROUP_SHORTCUTS) ||
-           key.startsWith(QStringLiteral(CONFIG_GROUP_SHORTCUTS "/"));
+    return key.startsWith(QStringLiteral(CONFIG_GROUP_SHORTCUTS "/"));
 }
 
 QString ConfigHandler::baseName(const QString& key) const

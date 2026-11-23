@@ -2,6 +2,7 @@
 
 #include <QByteArray>
 #include <QObject>
+#include <QPointer>
 
 #if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
 #include <QtDBus/QDBusAbstractAdaptor>
@@ -15,15 +16,20 @@ class TrayIcon;
 class CaptureWidget;
 
 #if !defined(DISABLE_UPDATE_CHECKER)
-class QNetworkAccessManager;
-class QNetworkReply;
+class QThread;
+class QTimer;
 class QVersionNumber;
+#endif
+
+#ifdef Q_OS_WIN
+class GlobalShortcutFilter;
 #endif
 
 class FlameshotDaemon : public QObject
 {
     Q_OBJECT
 public:
+    ~FlameshotDaemon() override;
     static void start();
     static FlameshotDaemon* instance();
     static void createPin(const QPixmap& capture, QRect geometry);
@@ -52,7 +58,9 @@ public slots:
     void getLatestAvailableVersion();
 
 private slots:
-    void handleReplyCheckUpdates(QNetworkReply* reply);
+    void handleReplyCheckUpdates(bool ok,
+                                 const QString& errorString,
+                                 const QByteArray& payload);
 
 signals:
     void newVersionAvailable(QVersionNumber version);
@@ -88,7 +96,12 @@ private:
     QString m_appLatestUrl;
     QString m_appLatestVersion;
     bool m_showManualCheckAppUpdateStatus;
-    QNetworkAccessManager* m_networkCheckUpdates;
+    bool m_updateCheckInProgress;
+    QTimer* m_updateCheckTimer;
+    QThread* m_updateCheckThread;
+#endif
+#ifdef Q_OS_WIN
+    GlobalShortcutFilter* m_nativeFilter;
 #endif
 
     static FlameshotDaemon* m_instance;

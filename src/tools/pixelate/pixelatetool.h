@@ -5,6 +5,8 @@
 
 #include "tools/abstracttwopointtool.h"
 
+#include <QImage>
+
 class PixelateTool : public AbstractTwoPointTool
 {
     Q_OBJECT
@@ -27,4 +29,11 @@ protected:
 
 public slots:
     void pressed(CaptureContext& context) override;
+
+private:
+    QImage m_cachedImage;
+    QRect m_cachedSelectionScaled;
+    int m_cachedSize{ -1 };
+    bool m_cachedInsecure{ false };
+    qint64 m_cachedPixmapKey{ 0 };
 };

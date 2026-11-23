@@ -18,13 +18,17 @@ public:
                   QWidget* parent = nullptr);
 
     static QString globalStyleSheet();
+    static QString styleSheetForColor(const QColor& c);
 
     QString styleSheet() const;
 
     void setColor(const QColor& c);
+    void setInheritedColor(const QColor& c);
+    const QColor& color() const { return m_color; }
+
+protected:
+    QColor m_color;
 
 private:
-    static QColor m_mainColor;
-
     void init();
 };

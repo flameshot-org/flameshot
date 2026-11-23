@@ -3,9 +3,8 @@
 
 #include "capturebutton.h"
 #include "utils/colorutils.h"
+#include "utils/confighandler.h"
 #include "utils/globalvalues.h"
-
-#include <QGraphicsDropShadowEffect>
 
 CaptureButton::CaptureButton(QWidget* parent)
   : QPushButton(parent)
@@ -31,23 +30,16 @@ void CaptureButton::init()
 {
     setCursor(Qt::ArrowCursor);
     setFocusPolicy(Qt::NoFocus);
-
-    auto* dsEffect = new QGraphicsDropShadowEffect(this);
-    dsEffect->setBlurRadius(5);
-    dsEffect->setOffset(0);
-    dsEffect->setColor(QColor(Qt::black));
-
-    setGraphicsEffect(dsEffect);
 }
 
 QString CaptureButton::globalStyleSheet()
 {
-    return CaptureButton(nullptr).styleSheet();
+    return styleSheetForColor(ConfigHandler().uiColor());
 }
 
-QString CaptureButton::styleSheet() const
+QString CaptureButton::styleSheetForColor(const QColor& c)
 {
-    QString baseSheet = "CaptureButton { border: none;"
+    QString baseSheet = "CaptureButton { border: 1px solid rgba(0, 0, 0, 90);"
                         "padding: 3px 8px;"
                         "background-color: %1; color: %4 }"
                         "CaptureToolButton { border-radius: %3;"
@@ -56,20 +48,34 @@ QString CaptureButton::styleSheet() const
                         "CaptureButton:pressed:!hover { "
                         "background-color: %1; }";
     // define color when mouse is hovering
-    QColor contrast = ColorUtils::contrastColor(m_mainColor);
+    QColor contrast = ColorUtils::contrastColor(c);
     // foreground color
-    QColor color = ColorUtils::colorIsDark(m_mainColor) ? Qt::white : Qt::black;
+    QColor color = ColorUtils::colorIsDark(c) ? Qt::white : Qt::black;
 
-    return baseSheet.arg(m_mainColor.name(),
+    return baseSheet.arg(c.name(),
                          contrast.name(),
                          QString::number(GlobalValues::buttonBaseSize() / 2),
                          color.name());
 }
 
-void CaptureButton::setColor(const QColor& c)
+QString CaptureButton::styleSheet() const
 {
-    m_mainColor = c;
-    setStyleSheet(styleSheet());
+    return styleSheetForColor(m_color);
 }
 
-QColor CaptureButton::m_mainColor;
+void CaptureButton::setColor(const QColor& c)
+{
+    if (m_color == c && !QPushButton::styleSheet().isEmpty()) {
+        return;
+    }
+    m_color = c;
+    setStyleSheet(styleSheetForColor(c));
+}
+
+void CaptureButton::setInheritedColor(const QColor& c)
+{
+    m_color = c;
+    if (!QPushButton::styleSheet().isEmpty()) {
+        setStyleSheet(QString());
+    }
+}

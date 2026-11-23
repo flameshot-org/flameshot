@@ -53,6 +53,8 @@ public:
                            QWidget* parent = nullptr);
     ~CaptureWidget();
 
+    bool isCaptureValid() const { return m_captureValid; }
+
     QPixmap pixmap();
     void setCaptureToolObjects(const CaptureToolObjects& captureToolObjects);
 #if !defined(DISABLE_UPDATE_CHECKER)
@@ -121,7 +123,9 @@ private:
     bool startDrawObjectTool(const QPoint& pos);
     QPointer<CaptureTool> activeToolObject();
     void initContext(bool fullscreen, const CaptureRequest& req);
-    void initPanel();
+    void initPanelToggleButton();
+    void ensurePanel();
+    void setActiveLayerIndex(int layer);
     void initSelection();
     void initShortcuts();
     void initButtons();
@@ -147,7 +151,7 @@ private:
     QRect extendedRect(const QRect& r) const;
     QRect paddedUpdateRect(const QRect& r) const;
     void drawErrorMessage(const QString& msg, QPainter* painter);
-    void drawInactiveRegion(QPainter* painter);
+    void drawInactiveRegion(QPainter* painter, const QRect& clipRect);
     void drawToolsData(bool drawSelection = true);
     void drawObjectSelection();
 
@@ -172,7 +176,9 @@ private:
 
     // Outside selection opacity
     int m_opacity;
+    int m_xywhPosition{ 0 };
     int m_toolSizeByKeyboard;
+    int m_activeLayerIndex{ -1 };
 
     // utility flags
     bool m_mouseIsClicked;
@@ -223,6 +229,7 @@ private:
     QUndoStack m_undoStack;
 
     bool m_existingObjectIsChanged;
+    bool m_captureValid{ true };
 
     // For start moving after more than X offset
     QPoint m_startMovePos;

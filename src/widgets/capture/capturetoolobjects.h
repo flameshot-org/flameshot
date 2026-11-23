@@ -23,12 +23,6 @@ public:
     CaptureToolObjects& operator=(const CaptureToolObjects& other);
 
 private:
-    int findWithRadius(QPainter& painter,
-                       QPixmap& pixmap,
-                       const QPoint& pos,
-                       int radius = 0);
-
     // class members
     QList<QPointer<CaptureTool>> m_captureToolObjects;
-    QVector<QImage> m_imageCache;
 };
