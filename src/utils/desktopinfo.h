@@ -18,7 +18,8 @@ public:
         OTHER,
         QTILE,
         WLROOTS,
-        HYPRLAND
+        HYPRLAND,
+        I3
     };
 
     bool waylandDetected();
