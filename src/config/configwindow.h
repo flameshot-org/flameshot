@@ -10,13 +10,25 @@ class ShortcutsWidget;
 class GeneralConf;
 class QFileSystemWatcher;
 class VisualsEditor;
+class PluginConfigWidget;
 class QWidget;
 
 class ConfigWindow : public QWidget
 {
     Q_OBJECT
 public:
-    explicit ConfigWindow(QWidget* parent = nullptr);
+    enum TabIndex
+    {
+        GeneralTab = 0,
+        VisualsTab = 1,
+        FilenameTab = 2,
+        ShortcutsTab = 3,
+        PluginsTab = 4
+    };
+
+    explicit ConfigWindow(QWidget* parent = nullptr,
+                          TabIndex initialTab = GeneralTab);
+    void setCurrentTab(TabIndex tab);
 
 signals:
     void updateChildren();
@@ -38,6 +50,9 @@ private:
 
     VisualsEditor* m_visuals;
     QWidget* m_visualsTab;
+
+    PluginConfigWidget* m_pluginsWidget;
+    QWidget* m_pluginsTab;
 
     void initErrorIndicator(QWidget* tab, QWidget* widget);
 };

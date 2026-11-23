@@ -221,3 +221,12 @@ public:
 private:
     QVariant process(const QVariant& val) override;
 };
+
+class DisabledPluginsList : public ValueHandler
+{
+public:
+    bool check(const QVariant& val) override;
+    QVariant process(const QVariant& val) override;
+    QVariant fallback() override;
+    QString expected() override;
+};

@@ -5,6 +5,7 @@
 #include "config/configresolver.h"
 #include "config/filenameeditor.h"
 #include "config/generalconf.h"
+#include "config/pluginconfigwidget.h"
 #include "config/shortcutswidget.h"
 #include "config/visualseditor.h"
 #include "utils/colorutils.h"
@@ -15,9 +16,11 @@
 #include <QApplication>
 #include <QDialogButtonBox>
 #include <QFileSystemWatcher>
+#include <QGuiApplication>
 #include <QIcon>
 #include <QKeyEvent>
 #include <QLabel>
+#include <QScreen>
 #include <QSizePolicy>
 #include <QTabBar>
 #include <QTextStream>
@@ -25,7 +28,7 @@
 
 // ConfigWindow contains the menus where you can configure the application
 
-ConfigWindow::ConfigWindow(QWidget* parent)
+ConfigWindow::ConfigWindow(QWidget* parent, TabIndex initialTab)
   : QWidget(parent)
 {
     // We wrap QTabWidget in a QWidget because of a Qt bug
@@ -90,6 +93,15 @@ ConfigWindow::ConfigWindow(QWidget* parent)
     m_tabWidget->addTab(
       m_shortcutsTab, QIcon(modifier + "shortcut.svg"), tr("Shortcuts"));
 
+    // plugins
+    m_pluginsWidget = new PluginConfigWidget();
+    m_pluginsTab = new QWidget();
+    auto* pluginsLayout = new QVBoxLayout(m_pluginsTab);
+    m_pluginsTab->setLayout(pluginsLayout);
+    pluginsLayout->addWidget(m_pluginsWidget);
+    m_tabWidget->addTab(
+      m_pluginsTab, QIcon(modifier + "plugin.svg"), tr("Plugins"));
+
     // connect update sigslots
     connect(this,
             &ConfigWindow::updateChildren,
@@ -103,12 +115,36 @@ ConfigWindow::ConfigWindow(QWidget* parent)
             &ConfigWindow::updateChildren,
             m_generalConfig,
             &GeneralConf::updateComponents);
+    connect(this,
+            &ConfigWindow::updateChildren,
+            m_pluginsWidget,
+            &PluginConfigWidget::updateComponents);
 
     // Error indicator (this must come last)
     initErrorIndicator(m_visualsTab, m_visuals);
     initErrorIndicator(m_filenameEditorTab, m_filenameEditor);
     initErrorIndicator(m_generalConfigTab, m_generalConfig);
     initErrorIndicator(m_shortcutsTab, m_shortcuts);
+
+    m_tabWidget->setCurrentIndex(static_cast<int>(initialTab));
+    setMinimumSize(480, 320);
+
+    QScreen* screen = QGuiApplication::primaryScreen();
+    if (screen) {
+        QRect avail = screen->availableGeometry();
+        int targetWidth = qBound(480, 740, avail.width() - 60);
+        int targetHeight = qBound(320, 500, avail.height() - 80);
+        resize(targetWidth, targetHeight);
+        move(avail.x() + (avail.width() - targetWidth) / 2,
+             avail.y() + (avail.height() - targetHeight) / 2);
+    }
+}
+
+void ConfigWindow::setCurrentTab(TabIndex tab)
+{
+    if (m_tabWidget) {
+        m_tabWidget->setCurrentIndex(static_cast<int>(tab));
+    }
 }
 
 void ConfigWindow::keyPressEvent(QKeyEvent* e)
