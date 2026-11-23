@@ -26,6 +26,7 @@ target_sources(
           colorutils.cpp
           history.cpp
           strfparse.cpp
+          filemanagerutils.cpp
 )
 
 IF (UNIX AND NOT APPLE)
