@@ -442,7 +442,8 @@ int main(int argc, char* argv[])
                         rawImageOption,
                         selectionOption,
                         pinOption,
-                        acceptOnSelectOption },
+                        acceptOnSelectOption,
+                        screenNumberOption },
                       guiArgument);
     parser.AddOptions({ screenNumberOption,
                         editOption,
@@ -509,6 +510,9 @@ int main(int argc, char* argv[])
         bool printGeometry = parser.isSet(selectionOption);
         bool pin = parser.isSet(pinOption);
         bool acceptOnSelect = parser.isSet(acceptOnSelectOption);
+        QString numberStr = parser.value(screenNumberOption);
+        int screenNumber =
+          numberStr.startsWith(QLatin1String("-")) ? -1 : numberStr.toInt();
         CaptureRequest req(CaptureRequest::GRAPHICAL_MODE, delay, path);
         if (!region.isEmpty()) {
             auto selectionRegion = Region().value(region).toRect();
@@ -537,6 +541,9 @@ int main(int argc, char* argv[])
                 !pin) {
                 req.addSaveTask();
             }
+        }
+        if (screenNumber >= 0) {
+            req.setSelectedMonitor(screenNumber);
         }
         int guiExitCode = requestCaptureAndWait(req);
         delete qApp;
