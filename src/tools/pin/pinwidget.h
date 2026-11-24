@@ -58,4 +58,5 @@ private slots:
     void showContextMenu(const QPoint& pos);
     void copyToClipboard();
     void saveToFile();
+    void setShadowEnabled(bool enabled);
 };
