@@ -38,6 +38,45 @@
 
 bool ScreenGrabber::m_monitorSelectionActive = false;
 
+namespace {
+
+QSize physicalCanvasSize(const QList<QScreen*>& screens)
+{
+    int canvasWidth = 0;
+    int canvasHeight = 0;
+
+    for (QScreen* screen : screens) {
+        const QRect screenGeom = screen->geometry();
+        const qreal screenDpr = screen->devicePixelRatio();
+
+        int physicalX = 0;
+        int physicalY = 0;
+
+        for (QScreen* otherScreen : screens) {
+            const QRect otherGeom = otherScreen->geometry();
+            const qreal otherDpr = otherScreen->devicePixelRatio();
+
+            if (otherGeom.x() + otherGeom.width() <= screenGeom.x()) {
+                physicalX += qRound(otherGeom.width() * otherDpr);
+            }
+
+            if (otherGeom.y() + otherGeom.height() <= screenGeom.y()) {
+                physicalY += qRound(otherGeom.height() * otherDpr);
+            }
+        }
+
+        const int physicalWidth = qRound(screenGeom.width() * screenDpr);
+        const int physicalHeight = qRound(screenGeom.height() * screenDpr);
+
+        canvasWidth = qMax(canvasWidth, physicalX + physicalWidth);
+        canvasHeight = qMax(canvasHeight, physicalY + physicalHeight);
+    }
+
+    return QSize(canvasWidth, canvasHeight);
+}
+
+} // namespace
+
 ScreenGrabber::ScreenGrabber(QObject* parent)
   : QObject(parent)
   , m_selectedMonitor(-1)
@@ -426,6 +465,32 @@ QRect ScreenGrabber::desktopGeometry()
     return geometry;
 }
 
+QRect ScreenGrabber::logicalDesktopGeometry()
+{
+    QRect geometry;
+    for (QScreen* const screen : QGuiApplication::screens()) {
+        geometry = geometry.united(screen->geometry());
+    }
+    return geometry;
+}
+
+void ScreenGrabber::adjustDevicePixelRatio(QPixmap& pixmap,
+                                           const QRect& logicalGeometry)
+{
+    // The portal image is device pixels. QScreen::devicePixelRatio() does not
+    // match that image under Wayland fractional scaling (QTBUG-135612).
+    // Resampling the capture to Qt's ratio changes the preview resolution
+    // (flameshot-org/flameshot#564). Keep the captured pixels and report the
+    // ratio that maps them onto this monitor's logical geometry.
+    const int logicalHeight = logicalGeometry.height();
+    if (pixmap.isNull() || logicalHeight <= 0) {
+        return;
+    }
+    const qreal imageDpr =
+      static_cast<qreal>(pixmap.height()) / static_cast<qreal>(logicalHeight);
+    pixmap.setDevicePixelRatio(imageDpr > 0.0 ? imageDpr : 1.0);
+}
+
 QScreen* ScreenGrabber::getSelectedScreen() const
 {
     const QList<QScreen*> screens = QGuiApplication::screens();
@@ -649,22 +714,13 @@ QPixmap ScreenGrabber::cropToMonitor(const QPixmap& fullScreenshot,
 
     QScreen* targetScreen = screens[monitorIndex];
     QRect targetGeometry = targetScreen->geometry();
-    qreal targetDpr = targetScreen->devicePixelRatio();
+    const qreal targetDpr = targetScreen->devicePixelRatio();
 
-    // Calculate total logical dimensions and minimum coordinates
-    int minX = INT_MAX, minY = INT_MAX;
-    int maxX = INT_MIN, maxY = INT_MIN;
-
-    for (QScreen* screen : screens) {
-        QRect geo = screen->geometry();
-        minX = qMin(minX, geo.x());
-        minY = qMin(minY, geo.y());
-        maxX = qMax(maxX, geo.x() + geo.width());
-        maxY = qMax(maxY, geo.y() + geo.height());
-    }
-
-    int totalLogicalWidth = maxX - minX;
-    int totalLogicalHeight = maxY - minY;
+    const QRect logicalDesktop = logicalDesktopGeometry();
+    const int minX = logicalDesktop.x();
+    const int minY = logicalDesktop.y();
+    const int totalLogicalWidth = logicalDesktop.width();
+    const int totalLogicalHeight = logicalDesktop.height();
 
 #ifdef FLAMESHOT_DEBUG_CAPTURE
     qDebug() << tr("Total logical dimensions: %1x%2 (min: %3,%4)")
@@ -680,23 +736,59 @@ QPixmap ScreenGrabber::cropToMonitor(const QPixmap& fullScreenshot,
     int cropX, cropY, cropWidth, cropHeight;
 
 #if defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)
-    // Linux (both X11 and Wayland via freedesktop portal):
-    // Use logical coordinate-based cropping since portal returns full
-    // desktop
-    qreal screenshotScaleX = (qreal)fullScreenshot.width() / totalLogicalWidth;
-    qreal screenshotScaleY =
-      (qreal)fullScreenshot.height() / totalLogicalHeight;
+    const QSize physicalCanvas = physicalCanvasSize(screens);
+    const QSize screenshotSize = fullScreenshot.size();
+    const QSize logicalSize(totalLogicalWidth, totalLogicalHeight);
+
+    const auto sizeMatches = [](const QSize& a, const QSize& b) {
+        return qAbs(a.width() - b.width()) <= 2 &&
+               qAbs(a.height() - b.height()) <= 2;
+    };
+
+    if (sizeMatches(screenshotSize, physicalCanvas)) {
+        // Mixed-DPI portal image: each output uses its own scale in device
+        // pixels. A single desktop-wide scale factor is wrong here.
+        cropX = 0;
+        cropY = 0;
+
+        for (QScreen* screen : screens) {
+            QRect geom = screen->geometry();
+            qreal dpr = screen->devicePixelRatio();
+
+            if (geom.x() + geom.width() <= targetGeometry.x()) {
+                cropX += qRound(geom.width() * dpr);
+            }
+
+            if (geom.y() + geom.height() <= targetGeometry.y()) {
+                cropY += qRound(geom.height() * dpr);
+            }
+        }
+
+        cropWidth = qRound(targetGeometry.width() * targetDpr);
+        cropHeight = qRound(targetGeometry.height() * targetDpr);
+    } else if (sizeMatches(screenshotSize, logicalSize)) {
+        cropX = targetGeometry.x() - minX;
+        cropY = targetGeometry.y() - minY;
+        cropWidth = targetGeometry.width();
+        cropHeight = targetGeometry.height();
+    } else {
+        // Fallback for compositors that return an unexpected buffer size
+        const qreal screenshotScaleX =
+          static_cast<qreal>(fullScreenshot.width()) / totalLogicalWidth;
+        const qreal screenshotScaleY =
+          static_cast<qreal>(fullScreenshot.height()) / totalLogicalHeight;
 
 #ifdef FLAMESHOT_DEBUG_CAPTURE
-    qDebug() << tr("Screenshot scale factors: X=%1 Y=%2")
-                  .arg(screenshotScaleX)
-                  .arg(screenshotScaleY);
+        qDebug() << tr("Screenshot scale factors: X=%1 Y=%2")
+                      .arg(screenshotScaleX)
+                      .arg(screenshotScaleY);
 #endif
 
-    cropX = qRound((targetGeometry.x() - minX) * screenshotScaleX);
-    cropY = qRound((targetGeometry.y() - minY) * screenshotScaleY);
-    cropWidth = qRound(targetGeometry.width() * screenshotScaleX);
-    cropHeight = qRound(targetGeometry.height() * screenshotScaleY);
+        cropX = qRound((targetGeometry.x() - minX) * screenshotScaleX);
+        cropY = qRound((targetGeometry.y() - minY) * screenshotScaleY);
+        cropWidth = qRound(targetGeometry.width() * screenshotScaleX);
+        cropHeight = qRound(targetGeometry.height() * screenshotScaleY);
+    }
 #else
     // Windows: Calculate physical pixel positions for mixed DPI
     cropX = 0;
@@ -757,23 +849,16 @@ QPixmap ScreenGrabber::cropToMonitor(const QPixmap& fullScreenshot,
     QPixmap cropped = fullScreenshot.copy(cropRect);
 
 #if defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)
-    // Linux: May need rescaling if scale factors don't match
-    if (qAbs(screenshotScaleX - targetDpr) > 0.01) {
-        int targetPhysicalWidth = qRound(targetGeometry.width() * targetDpr);
-        int targetPhysicalHeight = qRound(targetGeometry.height() * targetDpr);
-        cropped = cropped.scaled(targetPhysicalWidth,
-                                 targetPhysicalHeight,
-                                 Qt::IgnoreAspectRatio,
-                                 Qt::SmoothTransformation);
-#ifdef FLAMESHOT_DEBUG_CAPTURE
-        qDebug() << tr("Scaling screenshot to: %1 %2")
-                      .arg(targetPhysicalWidth)
-                      .arg(targetPhysicalHeight);
-#endif
+    if (qAbs(fullScreenshot.width() - totalLogicalWidth) <= 2 &&
+        qAbs(fullScreenshot.height() - totalLogicalHeight) <= 2) {
+        cropped.setDevicePixelRatio(1.0);
+    } else {
+        adjustDevicePixelRatio(cropped, targetGeometry);
     }
-#endif
+#else
     // Cropped region should be at target monitor's native DPR
     cropped.setDevicePixelRatio(targetDpr);
+#endif
 
     return cropped;
 }
