@@ -42,7 +42,7 @@ QString FileNameHandler::parseFilename(const QString& name)
     }
 
     res =
-      QString::fromStdString(strfparse::format_time_string(name.toStdString()));
+      QString::fromStdString(strfparse::format_time_string(res.toStdString()));
 
     // add the parsed pattern in a correct format for the filesystem
     res = res.replace(QLatin1String("/"), QStringLiteral("⁄"))
