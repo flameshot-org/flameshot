@@ -41,7 +41,7 @@ protected:
     bool eventFilter(QObject* obj, QEvent* event) override;
 
 private:
-    void adjustDevicePixelRatio(QPixmap& pixmap);
+    void adjustDevicePixelRatio(QPixmap& pixmap, const QRect& logicalGeometry);
     QWidget* createMonitorPreviews(const QPixmap& fullScreenshot);
     void cancelMonitorSelection();
     void moveHighlightedMonitorPreview(int offset);

@@ -196,8 +196,13 @@ CaptureWidget* Flameshot::gui(const CaptureRequest& req)
         m_captureWindow->activateWindow();
         m_captureWindow->raise();
 #else
-        m_captureWindow->showFullScreen();
-//        m_captureWindow->show(); // For CaptureWidget Debugging under Linux
+        // CaptureWidget already sizes the overlay to one monitor.
+        // showFullScreen() asks the compositor for a fullscreen mode and on
+        // Wayland with mixed DPI or fractional scaling the output resolution
+        // can change until the capture closes (issues #564, #3444).
+        m_captureWindow->show();
+        m_captureWindow->activateWindow();
+        m_captureWindow->raise();
 #endif
         return m_captureWindow;
     } else {

@@ -194,12 +194,16 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
             selectedScreen = QGuiApplication::primaryScreen();
         }
         QRect screenGeom = selectedScreen->geometry();
-        move(screenGeom.topLeft());
-        resize(screenGeom.size());
-
-        if (selectedScreen != nullptr && windowHandle()) {
-            windowHandle()->setScreen(selectedScreen);
+        // The native window does not exist yet, so windowHandle() is null and
+        // setScreen() used to be skipped. showFullScreen() then mapped the
+        // surface on Qt's default output. On a scaled or mixed-DPI desktop the
+        // compositor applies that output's scale, and the resolution appears
+        // to change until the capture closes.
+        create();
+        if (QWindow* handle = windowHandle()) {
+            handle->setScreen(selectedScreen);
         }
+        setGeometry(screenGeom);
         m_selectedScreen = selectedScreen;
 #endif
     }
