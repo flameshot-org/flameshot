@@ -480,7 +480,7 @@ void Flameshot::exportCapture(const QPixmap& capture,
     int tasks = req.tasks(), mode = req.captureMode();
     QString path = req.path();
 
-    if (tasks & CR::PRINT_GEOMETRY) {
+    if ((tasks & CR::PRINT_GEOMETRY) && !(tasks & CR::PRINT_RAW)) {
         QTextStream(stdout)
           << selection.width() << "x" << selection.height() << "+"
           << selection.x() << "+" << selection.y() << "\n";
