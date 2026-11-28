@@ -43,6 +43,8 @@ parts:
       - -DFLAMESHOT_ICON=/snap/flameshot/current/usr/share/icons/hicolor/scalable/apps/flameshot.svg
       - -DCMAKE_INSTALL_PREFIX=/usr
       - -DUSE_WAYLAND_CLIPBOARD=1
+      - -DUSE_MONOCHROME_ICON=1
+      - -DDISABLE_UPDATE_CHECKER=1
     override-build: |
       craftctl default
       sed -i 's|^Icon=.*|Icon=${SNAP}/usr/share/icons/hicolor/scalable/apps/org.flameshot.Flameshot.svg|' ${CRAFT_PART_INSTALL}/usr/share/applications/org.flameshot.Flameshot.desktop
